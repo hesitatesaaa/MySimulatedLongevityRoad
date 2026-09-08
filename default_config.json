@@ -1,0 +1,224 @@
+{
+  "ConfigItems": [
+    {
+      "Id": "MCLSL_config_enable_death_announcements",
+      "Name": "启用修士死亡公告",
+      "Description": "记录全部修士死亡；只有达到最低境界且符合对应专项开关时，才在世界顶部显示。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableDeathAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_breakthrough_failure_announcements",
+      "Name": "显示破境失败记录",
+      "Description": "控制仙道破境失败是否写入玄黄仙录；金丹以下默认不入录，收藏角色除外。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableBreakthroughFailureAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_yuanying_breakthrough_announcements",
+      "Name": "启用元婴突破公告",
+      "Description": "角色成就元婴时在世界顶部显示公告；关闭后仍写入玄黄仙录。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableYuanYingBreakthroughAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_huashen_breakthrough_announcements",
+      "Name": "启用化神突破公告",
+      "Description": "角色成就化神时在世界顶部显示公告；关闭后仍写入玄黄仙录。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableHuaShenBreakthroughAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_world_soul_announcements",
+      "Name": "启用天地之魄诞生公告",
+      "Description": "天地之魄显化时在世界顶部显示争魄公告；关闭后仍会写入玄黄仙录纪事。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableWorldSoulAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_world_adventures",
+      "Name": "启用遗迹游历",
+      "Description": "启用宗门遗迹显世、年度探索、贡献值奖励与遗迹死亡。不会创建新的宗门国家。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableWorldAdventuresCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_faction_commissions",
+      "Name": "显示仙盟五老委托公告",
+      "Description": "只控制万仙盟与五老会委托是否写入世界纪事；委托本身始终运行。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableFactionCommissionsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_ancient_lineage_announcements",
+      "Name": "显示仙道传承公告",
+      "Description": "控制仙道法脉兴盛等传承消息是否写入公告与纪事；传承数据本身仍会记录。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:EnableAncientLineageAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_pioneer_announcements",
+      "Name": "显示新法初传提示",
+      "Description": "新法开始萌芽时显示一次顶部提示；关闭后仍可在玄黄仙录查看时代状态。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnablePioneerAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_minor_world_announcements",
+      "Name": "显示日常天地异象",
+      "Description": "显示灵气汇聚、地火涌动、星石坠落等日常异象提示；关闭后事件与奖励仍正常发生。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:EnableMinorWorldAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_ruin_birth_announcements",
+      "Name": "显示遗迹秘境显世提示",
+      "Description": "遗府、秘境与宗门遗迹出现时显示顶部提示；关闭后仍会进入玄黄仙录并可正常探索。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableRuinBirthAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_resource_birth_announcements",
+      "Name": "显示天地资源出现提示",
+      "Description": "洞天与天地异变出现时显示顶部提示；元婴、化神突破公告仍由各自开关控制。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableResourceBirthAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_faction_policy_announcements",
+      "Name": "显示仙盟五老施政提示",
+      "Description": "万仙盟或五老会改变施政方略时显示顶部提示；势力影响与委托仍正常结算。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableFactionPolicyAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_survival_announcements",
+      "Name": "显示洞天避劫提示",
+      "Description": "元婴借洞天避过死劫时显示顶部提示；关闭后保命与洞天损耗仍正常生效。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableSurvivalAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_transmission_year",
+      "Name": "传法变世年份",
+      "Description": "控制仙道纪元持续年数；到年后进入传法变世。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1000,
+      "MinIntVal": 1000,
+      "MaxIntVal": 3000,
+      "StepIntVal": 50,
+      "Callback": "MclslConfig:TransmissionYearCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_ruin_death_announcements",
+      "Name": "启用遗迹/遗府死亡公告",
+      "Description": "控制修士死于宗门遗迹、遗府或秘境探索时是否显示世界顶部公告；仍需达到死亡公告最低境界。关闭后只写入玄黄仙录。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:EnableRuinDeathAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_death_popup_min_realm",
+      "Name": "死亡顶部公告最低境界",
+      "Description": "设置修士死亡进入世界顶部公告的最低境界：最低只能设为3金丹；4元婴、5化神、6合道、7长生。炼气与筑基死亡绝不公告。",
+      "Type": "INT_SLIDER",
+      "IntVal": 3,
+      "MinIntVal": 3,
+      "MaxIntVal": 7,
+      "StepIntVal": 1,
+      "Callback": "MclslConfig:DeathPopupMinRealmCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_huanzhen",
+      "Name": "启用还真回溯",
+      "Description": "允许拥有还真特质的角色建立安全锚点并在死亡后回溯。关闭时只保留特质与档案，不创建锚点。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:EnableHuanzhenCallBack"
+    },
+    {
+      "Id": "MCLSL_config_huanzhen_anchor_interval",
+      "Name": "还真锚点间隔",
+      "Description": "两次自动建立还真锚点之间至少相隔的世界年份。数值越大，外部锚点文件越少。",
+      "Type": "INT_SLIDER",
+      "IntVal": 100,
+      "MinIntVal": 25,
+      "MaxIntVal": 500,
+      "StepIntVal": 25,
+      "Callback": "MclslConfig:HuanzhenAnchorIntervalCallBack"
+    },
+    {
+      "Id": "MCLSL_config_huanzhen_safety_gap",
+      "Name": "还真安全间隔",
+      "Description": "回溯后再次建立锚点前的最低安全年份，避免短时间连续回环。",
+      "Type": "INT_SLIDER",
+      "IntVal": 40,
+      "MinIntVal": 10,
+      "MaxIntVal": 200,
+      "StepIntVal": 10,
+      "Callback": "MclslConfig:HuanzhenSafetyGapCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_yuanying",
+      "Name": "元婴自动收藏",
+      "Description": "角色成就元婴时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectYuanYingCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_huashen",
+      "Name": "化神自动收藏",
+      "Description": "角色成就化神时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectHuaShenCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_hedao",
+      "Name": "合道自动收藏",
+      "Description": "角色成就合道时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectHeDaoCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_changsheng",
+      "Name": "长生自动收藏",
+      "Description": "角色证得长生时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectChangShengCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_pure_root",
+      "Name": "纯一灵根自动收藏",
+      "Description": "角色获得纯一灵根时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectPureRootCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_heaven_root",
+      "Name": "天赐灵根自动收藏",
+      "Description": "角色获得天赐灵根时自动加入收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectHeavenRootCallBack"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "我的模拟长生路",
+  "author": "溪上翁",
+  "version": "0.1.4",
+  "description": "还真一世，计较千年，岂是一人一念可证之；仙路无尽，长生未必是生！",
+
+  "iconPath": "icon.png",
+  "targetGameBuild": 115,
+  "GUID": "MY_SIMULATED_LONGEVITY_ROAD"
+}
