@@ -18,7 +18,7 @@ internal static class MclslCodexTabCatalog
         T("秘境", "ui/Icons/ZongMenYiJi"),
         T("仙法不可同修", "ui/Icons/TianDiZhiLi"),
         T("修士生死", "ui/Icons/SiWang"),
-        T("还真空间", "ui/Icons/HuanZhenEntrance"),
+        T("还真轮回", "ui/Icons/HuanZhen"),
         T("世界纪事", "ui/Icons/XuanHuangXianLu")
     };
 
@@ -34,7 +34,6 @@ internal static class MclslCodexTabCatalog
         T("秘境", "ui/Icons/ZongMenYiJi"),
         T("遗府", "ui/Icons/ZongMenYiJi"),
         T("天地观悟", "ui/Icons/TianDiZhiPo"),
-        T("还真空间", "ui/Icons/HuanZhenEntrance"),
         T("仙道纪事", "ui/Icons/XuanHuangXianLu")
     };
 

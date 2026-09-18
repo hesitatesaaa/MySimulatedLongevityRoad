@@ -14,6 +14,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 {
     private static MclslCodexWindow _instance;
     private bool _visible;
+    private bool _standaloneHuanzhenSpace;
     private bool _pauseCaptured;
     private float _savedTimeScale = 1f;
     private bool _savedConfigPaused;
@@ -55,6 +56,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
         _instance._snapshot = MclslCodexSnapshot.Build();
         _instance._rect = FitRect();
+        _instance._standaloneHuanzhenSpace = false;
         _instance._visible = true;
         _instance.enabled = true;
         CreateOverlayBlocker();
@@ -63,15 +65,21 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     internal static void ShowHuanzhenSpace()
     {
-        Show();
-        MclslCodexTab[] tabs = ActiveTabs();
-        for (int i = 0; i < tabs.Length; i++)
+        if (_instance == null)
         {
-            if (!string.Equals(tabs[i].Title, "还真空间", StringComparison.Ordinal)) continue;
-            _instance._tab = i;
-            _instance._scroll = Vector2.zero;
-            break;
+            GameObject host = new("MclslCodexWindow");
+            DontDestroyOnLoad(host);
+            _instance = host.AddComponent<MclslCodexWindow>();
         }
+        MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
+        _instance._snapshot = MclslCodexSnapshot.Build();
+        _instance._rect = FitRect();
+        _instance._standaloneHuanzhenSpace = true;
+        _instance._scroll = Vector2.zero;
+        _instance._visible = true;
+        _instance.enabled = true;
+        CreateOverlayBlocker();
+        _instance.ApplyCodexPause();
     }
 
     private void Update()
@@ -98,7 +106,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.window = _windowStyle;
             GUI.color = Color.white;
             GUI.backgroundColor = Color.white;
-            _rect = GUI.Window(781203, _rect, DrawWindow, "玄黄仙录");
+            _rect = GUI.Window(781203, _rect, DrawWindow, _standaloneHuanzhenSpace ? "还真空间" : "玄黄仙录");
         }
         finally
         {
@@ -117,10 +125,21 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.label = _labelStyle;
             GUI.skin.button = _buttonStyle;
             GUILayout.Space(18f);
-            DrawTabRow();
-            GUILayout.Space(9f);
+            if (_standaloneHuanzhenSpace)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("×", GUILayout.Width(45f), GUILayout.Height(42f))) CloseWindow();
+                GUILayout.EndHorizontal();
+            }
+            else
+            {
+                DrawTabRow();
+                GUILayout.Space(9f);
+            }
             _scroll = GUILayout.BeginScrollView(_scroll);
-            DrawPage();
+            if (_standaloneHuanzhenSpace) DrawHuanzhenSpace();
+            else DrawPage();
             GUILayout.EndScrollView();
             GUI.DragWindow();
         }
@@ -319,7 +338,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawDeaths(run);
                 break;
             case 11:
-                DrawHuanzhen();
+                DrawHuanzhenReincarnation();
                 break;
             case 12:
                 DrawWorldEvents(run);
@@ -362,9 +381,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawAncientEventsFromSnapshot("山河观悟", _snapshot.AncientWorldSoulObservationEvents, "暂无高境仙修观悟山河道痕的记录。");
                 break;
             case 10:
-                DrawHuanzhen();
-                break;
-            case 11:
                 DrawAncientEvents(run);
                 break;
             default:
@@ -1190,7 +1206,31 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUI.backgroundColor = Color.white;
     }
 
-    private void DrawHuanzhen()
+    private void DrawHuanzhenReincarnation()
+    {
+        DrawPageHeader("还真轮回", "记录此世唯一还真持有者、时间锚点与生死回溯；还真空间请从模组功能页的独立入口进入。");
+        MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
+        GUILayout.BeginHorizontal();
+        DrawOverviewPill("功能状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(210));
+        DrawOverviewPill("持有者", Blank(state.HostName), "#FFD37A", GUILayout.Width(210));
+        DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(170));
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        GUILayout.Space(8);
+        DrawInfoCard("当前绑定", "#CFC7B2", () =>
+        {
+            GUILayout.Label("最近锚点：" + (state.LastAnchorYear < 0 ? "无" : state.LastAnchorYear + "年"));
+            GUILayout.Label("最近回溯：" + (state.LastRestoreYear < 0 ? "无" : state.LastRestoreYear + "年"));
+            if (state.PendingRestore?.Active == true)
+            {
+                GUILayout.Label("待回载：" + state.PendingRestore.DeathYear + "年 → " + state.PendingRestore.AnchorYear + "年");
+                GUILayout.Label("加载尝试：" + state.PendingRestore.LoadAttempts + "/3");
+            }
+        });
+        DrawHuanzhenAnchorsAndHistory();
+    }
+
+    private void DrawHuanzhenSpace()
     {
         DrawPageHeader("还真空间", "唯一持有者以安全锚点回溯生死，也可消耗灵蕴投影诸界、推演另一种道途。空间推演不会载入第二张地图。\n");
         MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
@@ -1291,6 +1331,11 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             }
         }
 
+        DrawHuanzhenAnchorsAndHistory();
+    }
+
+    private void DrawHuanzhenAnchorsAndHistory()
+    {
         DrawPageHeader("滚动锚点", "");
         if (_snapshot.HuanzhenAnchorsSorted.Count == 0) GUILayout.Label("当前没有可用还真锚点。");
         else
