@@ -145,9 +145,9 @@
     {
       "Id": "MCLSL_config_enable_huanzhen",
       "Name": "启用还真回溯",
-      "Description": "允许拥有还真特质的角色建立安全锚点并在死亡后回溯。关闭时只保留特质与档案，不创建锚点。",
+      "Description": "启用后，还真会在本世第5至20个可处理年份间随机择一名合格小人作为唯一持有者，并建立安全锚点、开启还真空间与死亡回溯。关闭时只保留已有特质与档案。",
       "Type": "SWITCH",
-      "BoolVal": false,
+      "BoolVal": true,
       "Callback": "MclslConfig:EnableHuanzhenCallBack"
     },
     {

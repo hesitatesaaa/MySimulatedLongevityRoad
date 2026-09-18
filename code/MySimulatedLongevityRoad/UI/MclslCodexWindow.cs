@@ -26,6 +26,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private Vector2 _scroll;
     private string _deathRealmFilter = MclslEventCatalog.All;
     private int _ruinViewMode;
+    private string _huanzhenActionMessage = string.Empty;
     private string _kingdomDetailName = string.Empty;
     private string _kingdomRealmFilter = MclslEventCatalog.All;
     private Rect _rect = new(60f, 60f, 1600f, 1230f);
@@ -58,6 +59,19 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _instance.enabled = true;
         CreateOverlayBlocker();
         _instance.ApplyCodexPause();
+    }
+
+    internal static void ShowHuanzhenSpace()
+    {
+        Show();
+        MclslCodexTab[] tabs = ActiveTabs();
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if (!string.Equals(tabs[i].Title, "还真空间", StringComparison.Ordinal)) continue;
+            _instance._tab = i;
+            _instance._scroll = Vector2.zero;
+            break;
+        }
     }
 
     private void Update()
@@ -346,6 +360,12 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 break;
             case 9:
                 DrawAncientEventsFromSnapshot("山河观悟", _snapshot.AncientWorldSoulObservationEvents, "暂无高境仙修观悟山河道痕的记录。");
+                break;
+            case 10:
+                DrawHuanzhen();
+                break;
+            case 11:
+                DrawAncientEvents(run);
                 break;
             default:
                 DrawAncientEvents(run);
@@ -1172,11 +1192,13 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void DrawHuanzhen()
     {
-        DrawPageHeader("还真轮回", "此世还真未降临。");
+        DrawPageHeader("还真空间", "唯一持有者以安全锚点回溯生死，也可消耗灵蕴投影诸界、推演另一种道途。空间推演不会载入第二张地图。\n");
         MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
         GUILayout.BeginHorizontal();
         DrawOverviewPill("功能状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(210));
         DrawOverviewPill("持有者", Blank(state.HostName), "#FFD37A", GUILayout.Width(210));
+        DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "/100", "#69E6DD", GUILayout.Width(170));
+        DrawOverviewPill("万界推演", state.TotalSimulations.ToString(), "#9CD7FF", GUILayout.Width(170));
         DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(170));
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -1185,7 +1207,89 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             GUILayout.Label("最近锚点：" + (state.LastAnchorYear < 0 ? "无" : state.LastAnchorYear + "年"));
             GUILayout.Label("最近回溯：" + (state.LastRestoreYear < 0 ? "无" : state.LastRestoreYear + "年"));
+            if (state.PendingRestore?.Active == true)
+            {
+                GUILayout.Label("待回载：" + state.PendingRestore.DeathYear + "年 → " + state.PendingRestore.AnchorYear + "年");
+                GUILayout.Label("加载尝试：" + state.PendingRestore.LoadAttempts + "/3");
+            }
         });
+
+        DrawPageHeader("前世遗产", "每次成功回到锚点都会封存一份死前快照。每份前世档案有3个携带槽：五类修行遗产和每个特征都各占1槽，已经选择的项目不能重复领取。");
+        if (state.Legacies == null || state.Legacies.Count == 0) GUILayout.Label("尚无前世档案；第一次成功还真后即可在此选择。");
+        else
+        {
+            for (int i = state.Legacies.Count - 1; i >= 0; i--)
+            {
+                MclslHuanzhenLegacyRecord legacy = state.Legacies[i];
+                if (legacy?.Snapshot == null) continue;
+                int used = legacy.ClaimedChoices?.Count ?? 0;
+                DrawInfoCard(legacy.DeathYear + "年陨落｜" + Blank(legacy.HostName), "#D8C778", () =>
+                {
+                    GUILayout.BeginHorizontal();
+                    DrawTag(MclslRealmIds.Display(legacy.RealmId), "#FFD37A");
+                    DrawTag("回到 " + legacy.AnchorYear + "年", "#9CD7FF");
+                    DrawTag("携带槽 " + used + "/" + legacy.CarryLimit, used >= legacy.CarryLimit ? "#FF8877" : "#A7E08A");
+                    GUILayout.FlexibleSpace();
+                    GUILayout.EndHorizontal();
+                    GUILayout.BeginHorizontal();
+                    DrawLegacyCategoryButton(legacy, "cultivation", "修为根基");
+                    DrawLegacyCategoryButton(legacy, "technique", "功法道统");
+                    DrawLegacyCategoryButton(legacy, "treasures", "突破造物");
+                    DrawLegacyCategoryButton(legacy, "dao", "天地道果");
+                    DrawLegacyCategoryButton(legacy, "resources", "资源心境");
+                    GUILayout.FlexibleSpace();
+                    GUILayout.EndHorizontal();
+                    if (legacy.Snapshot.TraitIds != null && legacy.Snapshot.TraitIds.Count > 0)
+                    {
+                        GUILayout.Label("前世特征（逐项选择）：");
+                        GUILayout.BeginHorizontal();
+                        int column = 0;
+                        foreach (string traitId in legacy.Snapshot.TraitIds)
+                        {
+                            DrawLegacyTraitButton(legacy, traitId);
+                            if (++column % 5 != 0) continue;
+                            GUILayout.EndHorizontal();
+                            GUILayout.BeginHorizontal();
+                        }
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                    }
+                });
+            }
+        }
+        if (!string.IsNullOrWhiteSpace(_huanzhenActionMessage)) GUILayout.Label(_huanzhenActionMessage);
+
+        DrawPageHeader("万界模拟器", "从轮回空间与分支世界模拟中提炼为轻量推演：不复制地图、不切换存档，只保存有上限的结果摘要。每次消耗20灵蕴，冷却20年。");
+        DrawInfoCard("推演台", "#69E6DD", () =>
+        {
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("推演一次万界", GUILayout.Width(220), GUILayout.Height(38)))
+            {
+                bool success = MclslHuanzhenSystem.TryRunSpaceSimulation(out string result);
+                _huanzhenActionMessage = result;
+                if (success) _snapshot = MclslCodexSnapshot.Build();
+            }
+            GUILayout.Label(string.IsNullOrWhiteSpace(_huanzhenActionMessage) ? "需唯一持有者与至少一个安全锚点。" : _huanzhenActionMessage);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        });
+        if (state.Simulations != null && state.Simulations.Count > 0)
+        {
+            for (int i = state.Simulations.Count - 1; i >= Math.Max(0, state.Simulations.Count - 8); i--)
+            {
+                MclslHuanzhenSimulationRecord simulation = state.Simulations[i];
+                if (simulation == null) continue;
+                DrawInfoCard(simulation.Year + "年｜" + Blank(simulation.WorldName), "#77C9E8", () =>
+                {
+                    GUILayout.BeginHorizontal();
+                    DrawTag("评价 " + simulation.Score, "#B7A7FF");
+                    DrawTag(simulation.Reward, "#FFD37A");
+                    GUILayout.FlexibleSpace();
+                    GUILayout.EndHorizontal();
+                    GUILayout.Label(simulation.Outcome);
+                });
+            }
+        }
 
         DrawPageHeader("滚动锚点", "");
         if (_snapshot.HuanzhenAnchorsSorted.Count == 0) GUILayout.Label("当前没有可用还真锚点。");
@@ -1215,6 +1319,35 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                     GUILayout.Label(history.Result);
                 });
         }
+    }
+
+    private void DrawLegacyCategoryButton(MclslHuanzhenLegacyRecord legacy, string category, string title)
+    {
+        string choice = "category:" + category;
+        bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
+        bool oldEnabled = GUI.enabled;
+        GUI.enabled = oldEnabled && !claimed && (legacy.ClaimedChoices?.Count ?? 0) < legacy.CarryLimit;
+        if (GUILayout.Button(claimed ? "已取·" + title : title, GUILayout.Height(34), GUILayout.Width(150)))
+        {
+            MclslHuanzhenSystem.TryClaimLegacyCategory(legacy.Id, category, out _huanzhenActionMessage);
+            _snapshot = MclslCodexSnapshot.Build();
+        }
+        GUI.enabled = oldEnabled;
+    }
+
+    private void DrawLegacyTraitButton(MclslHuanzhenLegacyRecord legacy, string traitId)
+    {
+        string choice = "trait:" + traitId;
+        bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
+        bool oldEnabled = GUI.enabled;
+        GUI.enabled = oldEnabled && !claimed && (legacy.ClaimedChoices?.Count ?? 0) < legacy.CarryLimit;
+        string name = MclslHuanzhenSystem.TraitDisplayNameById(traitId);
+        if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
+        {
+            MclslHuanzhenSystem.TryClaimLegacyTrait(legacy.Id, traitId, out _huanzhenActionMessage);
+            _snapshot = MclslCodexSnapshot.Build();
+        }
+        GUI.enabled = oldEnabled;
     }
 
     private static void DrawResourceRules()

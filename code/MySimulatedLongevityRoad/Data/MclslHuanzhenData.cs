@@ -14,14 +14,44 @@ internal sealed class MclslHuanzhenExternalState
     public int LastRestoreYear { get; set; } = -1;
     public int ConsecutiveLoopDeaths { get; set; }
     public int AnchorSequence { get; set; }
+    public int NextNaturalArrivalYear { get; set; } = -1;
+    public int NaturalArrivalYear { get; set; } = -1;
+    public int SpaceEssenceBase { get; set; }
+    public int SpaceEssenceUpdatedYear { get; set; } = -1;
+    public int LastSimulationYear { get; set; } = -1;
+    public int TotalSimulations { get; set; }
     public List<MclslHuanzhenAnchorRecord> Anchors { get; set; } = new();
     public MclslHuanzhenPendingRestore PendingRestore { get; set; } = new();
     public List<MclslHuanzhenHistoryRecord> History { get; set; } = new();
+    public List<MclslHuanzhenSimulationRecord> Simulations { get; set; } = new();
+    public List<MclslHuanzhenLegacyRecord> Legacies { get; set; } = new();
+}
+
+internal sealed class MclslHuanzhenLegacyRecord
+{
+    public string Id { get; set; } = string.Empty;
+    public int DeathYear { get; set; }
+    public int AnchorYear { get; set; }
+    public string HostName { get; set; } = string.Empty;
+    public string RealmId { get; set; } = string.Empty;
+    public int CarryLimit { get; set; } = 3;
+    public List<string> ClaimedChoices { get; set; } = new();
+    public MclslHuanzhenCultivationSnapshot Snapshot { get; set; } = new();
+}
+
+internal sealed class MclslHuanzhenSimulationRecord
+{
+    public int Year { get; set; }
+    public string WorldName { get; set; } = string.Empty;
+    public string Outcome { get; set; } = string.Empty;
+    public string Reward { get; set; } = string.Empty;
+    public int Score { get; set; }
 }
 
 internal sealed class MclslHuanzhenAnchorRecord
 {
     public string RelativeSavePath { get; set; } = string.Empty;
+    public string WorldRunId { get; set; } = string.Empty;
     public int Year { get; set; }
     public int Sequence { get; set; }
     public string HostIdentity { get; set; } = string.Empty;
@@ -40,6 +70,7 @@ internal sealed class MclslHuanzhenPendingRestore
     public int AnchorYear { get; set; }
     public int DeathYear { get; set; }
     public int LoopDepth { get; set; }
+    public int LoadAttempts { get; set; }
     public MclslHuanzhenCultivationSnapshot Cultivation { get; set; } = new();
 }
 
@@ -55,6 +86,12 @@ internal sealed class MclslHuanzhenHistoryRecord
 
 internal sealed class MclslHuanzhenCultivationSnapshot
 {
+    // Version 2 supplements the original fixed fields with allow-listed bags. This
+    // keeps new cultivation subsystems from requiring another large DTO rewrite.
+    public Dictionary<string, string> StringState { get; set; } = new();
+    public Dictionary<string, int> IntState { get; set; } = new();
+    public Dictionary<string, float> FloatState { get; set; } = new();
+    public List<string> TraitIds { get; set; } = new();
     public string CultivationSystemId { get; set; } = string.Empty;
     public string RealmId { get; set; } = string.Empty;
     public float CultivationProgress { get; set; }
@@ -122,7 +159,9 @@ internal sealed class MclslHuanzhenCultivationSnapshot
 
 internal readonly struct MclslHuanzhenDeathSnapshot
 {
-    internal static MclslHuanzhenDeathSnapshot Empty => new(false, string.Empty, 0L, string.Empty, 0, new MclslHuanzhenCultivationSnapshot());
+    // Actor.die is a hot path. Reuse one empty snapshot instead of allocating a
+    // cultivation DTO for every non-Huanzhen death while the feature is disabled.
+    internal static readonly MclslHuanzhenDeathSnapshot Empty = new(false, string.Empty, 0L, string.Empty, 0, new MclslHuanzhenCultivationSnapshot());
 
     internal readonly bool Found;
     internal readonly string Identity;

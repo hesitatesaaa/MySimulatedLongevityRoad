@@ -28,6 +28,7 @@ internal static class MclslUiManager
             PowersTabExtension.SetLayout(_tab, new System.Collections.Generic.List<string> { "tab" });
             AddButton("mclsl.codex", "玄黄仙录", "查看新法阶段、天地资源、宗门遗迹、修士生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
             AddButton("mclsl.rank", "玄黄修士榜", "按玄鉴式榜单筛选、排序和查看本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
+            AddButton("mclsl.huanzhen_space", "进入还真空间", "查看唯一持有者、滚动锚点与万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
             if (ShowAuthorDebugButtons)
             {
                 AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");

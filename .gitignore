@@ -11,6 +11,14 @@
 # Local files
 *.log
 *.tmp
+*.bak
+*.cache
+TestResults/
+coverage*/
+.recovered/
+code_broken_*/
+xj_0_7_announce_scan/
+work/
 .DS_Store
 Thumbs.db
 .env
