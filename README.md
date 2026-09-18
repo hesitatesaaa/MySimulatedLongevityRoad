@@ -15,6 +15,7 @@ WorldBox 模组，作者：溪上翁、kinght。模组版本 `0.1.6`，`mod.json
 - `icon.png`：模组图标。
 - `docs/IMPORT.md`：导入来源与完整性记录。
 - `CHANGELOG.md`：按版本记录功能更新和兼容性说明。
+- `VERSIONING.md`：版本隔离、发布、回滚和分支规则。
 
 ## 开发与构建
 
@@ -33,6 +34,8 @@ dotnet build .\InterestingTrait.sln
 ## 版本管理
 
 源码、资源和配置纳入 Git；构建输出、IDE 缓存和本地临时文件忽略。
+
+每一个对外版本都必须使用独立且不可移动的 `v主版本.次版本.修订版本` Git 标签固定；发布包必须从该标签对应的提交生成，并保持版本号、更新日志、标签和压缩包名称一致。开发修改继续提交到 `main` 或功能分支，不得覆盖、移动或复用既有版本标签。详细规则及回滚命令见 `VERSIONING.md`。
 
 ```powershell
 git status
