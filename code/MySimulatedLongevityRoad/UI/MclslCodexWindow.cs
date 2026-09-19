@@ -28,6 +28,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private string _deathRealmFilter = MclslEventCatalog.All;
     private int _ruinViewMode;
     private string _huanzhenActionMessage = string.Empty;
+    private Vector2 _sidebarScroll;
     private string _kingdomDetailName = string.Empty;
     private string _kingdomRealmFilter = MclslEventCatalog.All;
     private Rect _rect = new(60f, 60f, 1600f, 1230f);
@@ -39,7 +40,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static GUIStyle _tagStyle;
     private static GUIStyle _oldLabel;
     private static GUIStyle _oldButton;
+    private static GUIStyle _oldBox;
     private static GUIStyle _oldWindow;
+    private static GUIStyle _boxStyle;
     private static Texture2D _windowBackground;
     private static Texture2D _backdropTexture;
     private static Texture2D _whiteTexture;
@@ -120,27 +123,39 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         _oldLabel = GUI.skin.label;
         _oldButton = GUI.skin.button;
+        _oldBox = GUI.skin.box;
         try
         {
             GUI.skin.label = _labelStyle;
             GUI.skin.button = _buttonStyle;
+            GUI.skin.box = _boxStyle;
             GUILayout.Space(18f);
             if (_standaloneHuanzhenSpace)
             {
                 GUILayout.BeginHorizontal();
+                GUILayout.Label("<b><color=#D8C778>还真空间</color></b>");
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("×", GUILayout.Width(45f), GUILayout.Height(42f))) CloseWindow();
+                if (GUILayout.Button("关闭", GUILayout.Width(78f), GUILayout.Height(38f))) CloseWindow();
                 GUILayout.EndHorizontal();
+                GUILayout.Space(9f);
+                _scroll = GUILayout.BeginScrollView(_scroll, false, true);
+                DrawHuanzhenSpace();
+                GUILayout.EndScrollView();
             }
             else
             {
-                DrawTabRow();
+                DrawCodexHeader();
                 GUILayout.Space(9f);
+                GUILayout.BeginHorizontal();
+                DrawCodexSidebar();
+                GUILayout.Space(8f);
+                GUILayout.BeginVertical(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+                _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUILayout.ExpandWidth(true));
+                DrawPage();
+                GUILayout.EndScrollView();
+                GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
             }
-            _scroll = GUILayout.BeginScrollView(_scroll);
-            if (_standaloneHuanzhenSpace) DrawHuanzhenSpace();
-            else DrawPage();
-            GUILayout.EndScrollView();
             GUI.DragWindow();
         }
         finally
@@ -149,30 +164,86 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.backgroundColor = Color.white;
             GUI.skin.label = _oldLabel;
             GUI.skin.button = _oldButton;
+            GUI.skin.box = _oldBox;
         }
     }
 
-    private void DrawTabRow()
+    private void DrawCodexHeader()
     {
         MclslCodexTab[] tabs = ActiveTabs();
         if (_tab >= tabs.Length) _tab = 0;
+        string current = tabs.Length == 0 ? "天下总览" : tabs[_tab].Title;
+        GUILayout.BeginVertical(GUI.skin.box);
+        DrawCardStripe("#AFC7D9");
         GUILayout.BeginHorizontal();
+        GUILayout.Label("<b><color=#D6DCE8>玄黄仙录</color></b>", GUILayout.Width(120f));
+        GUILayout.Label("<b><color=#F0D58B>" + CodexVolumeName(current) + " · " + current + "</color></b>");
+        GUILayout.FlexibleSpace();
+        GUI.backgroundColor = new Color(0.36f, 0.34f, 0.24f, 1f);
+        if (GUILayout.Button("重新照录", GUILayout.Width(104f), GUILayout.Height(38f)))
+        {
+            _snapshot = MclslCodexSnapshot.Build();
+        }
+        GUI.backgroundColor = new Color(0.27f, 0.34f, 0.38f, 1f);
+        if (GUILayout.Button("修士榜", GUILayout.Width(88f), GUILayout.Height(38f)))
+        {
+            CloseWindow();
+            MclslRankWindow.ShowWindow();
+        }
+        GUI.backgroundColor = new Color(0.42f, 0.28f, 0.25f, 1f);
+        if (GUILayout.Button("关闭", GUILayout.Width(72f), GUILayout.Height(38f))) CloseWindow();
+        GUI.backgroundColor = Color.white;
+        GUILayout.EndHorizontal();
+        GUILayout.EndVertical();
+    }
+
+    private void DrawCodexSidebar()
+    {
+        MclslCodexTab[] tabs = ActiveTabs();
+        if (tabs.Length == 0) return;
+        if (_tab < 0 || _tab >= tabs.Length) _tab = 0;
+        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(218f), GUILayout.ExpandHeight(true));
+        DrawCardStripe("#6FAE9D");
+        _sidebarScroll = GUILayout.BeginScrollView(_sidebarScroll, false, true, GUILayout.Width(210f), GUILayout.ExpandHeight(true));
+        DrawSidebarVolume(tabs, "天下纪事", "#AFC7D9");
+        DrawSidebarVolume(tabs, "修行道统", "#9FC9C0");
+        DrawSidebarVolume(tabs, "山河万象", "#D6BE86");
+        GUILayout.EndScrollView();
+        GUILayout.EndVertical();
+    }
+
+    private void DrawSidebarVolume(MclslCodexTab[] tabs, string volume, string color)
+    {
+        GUILayout.Space(5f);
+        GUILayout.Label("<b><color=" + color + ">◇ " + volume + " ◇</color></b>");
         for (int i = 0; i < tabs.Length; i++)
         {
-            GUI.backgroundColor = _tab == i ? new Color(0.3f, 0.3f, 0.3f) : Color.gray;
-            if (GUILayout.Button(tabs[i].Title, GUILayout.Height(42f)))
-            {
-                _tab = i;
-                _scroll = Vector2.zero;
-                _kingdomDetailName = string.Empty;
-                _kingdomRealmFilter = MclslEventCatalog.All;
-                _ancientEventFilter = MclslEventCatalog.All;
-                _ancientTeachingMaxRealmFilter = MclslEventCatalog.All;
-            }
+            if (!string.Equals(CodexVolumeName(tabs[i].Title), volume, StringComparison.Ordinal)) continue;
+            GUI.backgroundColor = _tab == i ? ParseHexColor(color, Color.gray) : new Color(0.22f, 0.23f, 0.25f, 1f);
+            if (GUILayout.Button(tabs[i].Title, GUILayout.Height(36f))) SelectCodexTab(i);
         }
         GUI.backgroundColor = Color.white;
-        if (GUILayout.Button("×", GUILayout.Width(45f), GUILayout.Height(42f))) CloseWindow();
-        GUILayout.EndHorizontal();
+    }
+
+    private void SelectCodexTab(int index)
+    {
+        _tab = index;
+        _scroll = Vector2.zero;
+        _kingdomDetailName = string.Empty;
+        _kingdomRealmFilter = MclslEventCatalog.All;
+        _ancientEventFilter = MclslEventCatalog.All;
+        _ancientTeachingMaxRealmFilter = MclslEventCatalog.All;
+    }
+
+    private static string CodexVolumeName(string title)
+    {
+        return title switch
+        {
+            "天下总览" or "仙道总览" or "原生诸国" or "世界纪事" or "仙道纪事" => "天下纪事",
+            "境界资源" or "仙道修行" or "仙师授法" or "仙道破境" or "心境劫数"
+                or "元婴洞天" or "天地之魄" or "天地之理" or "仙法不可同修" or "修士生死" or "还真轮回" => "修行道统",
+            _ => "山河万象"
+        };
     }
 
     private void CloseWindow()
@@ -1769,10 +1840,18 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private static void DrawPageHeader(string title, string subtitle)
     {
+        GUILayout.BeginVertical(GUI.skin.box);
+        DrawCardStripe("#BAC6D9");
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("<color=#BAC6D9>◈</color>", GUILayout.Width(24f));
         GUILayout.Label("<size=22><b>" + title + "</b></size>");
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("<color=#BAC6D9>◇ 玄黄照世 ◇</color>", GUILayout.Width(150f));
+        GUILayout.EndHorizontal();
         if (!string.IsNullOrWhiteSpace(subtitle))
-            GUILayout.Label("<color=#B9B0A0>" + subtitle + "</color>");
-        GUILayout.Space(8);
+            GUILayout.Label("<color=#B9B0A0>　" + subtitle + "</color>");
+        GUILayout.EndVertical();
+        GUILayout.Space(6);
     }
 
     private static string EraDisplay(MclslWorldRunState run)
@@ -1862,8 +1941,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static void DrawInfoCard(string title, string accent, Action content)
     {
         GUILayout.BeginVertical(GUI.skin.box);
-        Rect stripe = GUILayoutUtility.GetRect(100f, 5f, GUILayout.ExpandWidth(true));
-        DrawSolidRect(stripe, ParseHexColor(accent, Color.gray));
+        DrawCardStripe(accent);
         GUILayout.Label("<size=20><b>" + title + "</b></size>");
         content?.Invoke();
         GUILayout.EndVertical();
@@ -1873,8 +1951,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static void DrawItemCard(string title, string quality, string tags, string holder, string origin, string root, string description, string accent)
     {
         GUILayout.BeginVertical(GUI.skin.box);
-        Rect stripe = GUILayoutUtility.GetRect(100f, 5f, GUILayout.ExpandWidth(true));
-        DrawSolidRect(stripe, ParseHexColor(accent, Color.yellow));
+        DrawCardStripe(accent);
         GUILayout.BeginHorizontal();
         GUILayout.Label("<size=20><b>" + title + "</b></size>", GUILayout.Width(360));
         DrawTag(quality, accent);
@@ -1893,6 +1970,12 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (string.IsNullOrWhiteSpace(text)) return;
         GUILayout.Label("<b><color=" + color + ">" + text + "</color></b>", _tagStyle ?? GUI.skin.box, GUILayout.Height(28));
+    }
+
+    private static void DrawCardStripe(string color)
+    {
+        Rect stripe = GUILayoutUtility.GetRect(100f, 5f, GUILayout.ExpandWidth(true));
+        DrawSolidRect(stripe, ParseHexColor(color, Color.gray));
     }
 
     private static void DrawSolidRect(Rect rect, Color color)
@@ -1920,18 +2003,24 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _backdropTexture = _whiteTexture;
         _windowStyle = new GUIStyle(GUI.skin.window)
         {
-            fontSize = 24
+            fontSize = 24,
+            padding = new RectOffset(14, 14, 28, 14)
         };
         _buttonStyle = new GUIStyle(GUI.skin.button)
         {
-            fontSize = 18
+            fontSize = 18,
+            richText = true,
+            wordWrap = true,
+            alignment = TextAnchor.MiddleCenter,
+            padding = new RectOffset(9, 9, 5, 5),
+            margin = new RectOffset(3, 3, 3, 3)
         };
         _labelStyle = new GUIStyle(GUI.skin.label)
         {
             fontSize = 18,
             wordWrap = true,
             richText = true,
-            normal = { textColor = new Color(0.9f, 0.94f, 0.91f) }
+            normal = { textColor = MclslUiTheme.TextPrimary }
         };
         _tagStyle = new GUIStyle(GUI.skin.box)
         {
@@ -1939,6 +2028,15 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             richText = true,
             alignment = TextAnchor.MiddleCenter,
             padding = new RectOffset(8, 8, 4, 4)
+        };
+        _boxStyle = new GUIStyle(GUI.skin.box)
+        {
+            fontSize = 18,
+            richText = true,
+            wordWrap = true,
+            alignment = TextAnchor.UpperLeft,
+            padding = new RectOffset(12, 12, 10, 10),
+            margin = new RectOffset(5, 5, 5, 5)
         };
     }
 
@@ -1959,7 +2057,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _whiteTexture,
             ScaleMode.StretchToFill, true, 0, new Color(0f, 0f, 0f, 0.72f), 0, 0);
         GUI.DrawTexture(_rect, _whiteTexture,
-            ScaleMode.StretchToFill, true, 0, new Color(0.035f, 0.032f, 0.028f, 0.98f), 0, 0);
+            ScaleMode.StretchToFill, true, 0, MclslUiTheme.SurfaceWindow, 0, 0);
+        DrawSolidRect(new Rect(_rect.x - 5f, _rect.y - 5f, _rect.width + 10f, 2f), MclslUiTheme.AccentBlue);
+        DrawSolidRect(new Rect(_rect.x - 5f, _rect.y + _rect.height + 3f, _rect.width + 10f, 2f), MclslUiTheme.Frame);
     }
 
     private static void CreateOverlayBlocker()

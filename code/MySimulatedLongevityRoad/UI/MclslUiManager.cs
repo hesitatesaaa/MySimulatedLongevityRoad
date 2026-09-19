@@ -26,9 +26,9 @@ internal static class MclslUiManager
             _tab = TabManager.CreateTab("mclsl_mod_tab", "mclsl_mod_tab", "mclsl_mod_tab Description", icon, "hotkey_tip_tab_other");
             if (_tab == null) throw new InvalidOperationException("无法创建模拟长生路功能页签");
             PowersTabExtension.SetLayout(_tab, new System.Collections.Generic.List<string> { "tab" });
-            AddButton("mclsl.codex", "玄黄仙录", "查看新法阶段、天地资源、宗门遗迹、修士生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
-            AddButton("mclsl.rank", "玄黄修士榜", "按玄鉴式榜单筛选、排序和查看本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
-            AddButton("mclsl.huanzhen_space", "进入还真空间", "独立打开还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
+            AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
+            AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
+            AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
             if (ShowAuthorDebugButtons)
             {
                 AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
@@ -105,11 +105,24 @@ internal static class MclslUiManager
     private static void AddButton(string id, string title, string description, Action action, params string[] icons)
     {
         if (_tab == null) return;
+        if (!ContainsChinese(title) || !ContainsChinese(description))
+        {
+            Debug.LogError("[模拟长生路][界面] 已拒绝缺少中文名称或说明的功能入口: " + id);
+            return;
+        }
         Sprite sprite = null;
         foreach (string path in icons) { sprite = SpriteTextureLoader.getSprite(path); if (sprite != null) break; }
         PowerButton button = PowerButtonCreator.CreateSimpleButton(id, () => { try { PowerButtonSelector.instance?.unselectAll(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #1: " + mclslEmptyCatchEx.Message); } action?.Invoke(); }, sprite, null, default);
         SetupButtonTooltip(button, id, title, description);
         PowersTabExtension.AddPowerButton(_tab, "tab", button);
+    }
+
+    private static bool ContainsChinese(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return false;
+        for (int i = 0; i < value.Length; i++)
+            if (value[i] >= '\u4e00' && value[i] <= '\u9fff') return true;
+        return false;
     }
 
     private static void SetupButtonTooltip(PowerButton button, string id, string title, string description)

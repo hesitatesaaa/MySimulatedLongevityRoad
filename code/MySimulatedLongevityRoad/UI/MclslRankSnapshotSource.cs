@@ -433,7 +433,7 @@ internal static class MclslRankSnapshotSource
                 return localized;
         }
         catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankSnapshotSource.cs #4: " + mclslEmptyCatchEx.Message); }
-        return trait.id;
+        return "未知特征";
     }
 
     private static bool ShouldHideTraitFilterChoice(ActorTrait trait)

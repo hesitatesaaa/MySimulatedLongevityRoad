@@ -564,7 +564,7 @@ internal static class MclslHuanzhenSystem
     internal static string TraitDisplayNameById(string traitId)
     {
         try { return TraitDisplayName(AssetManager.traits.get(traitId)); }
-        catch { return traitId ?? string.Empty; }
+        catch { return "未知特征"; }
     }
 
     private static string TraitDisplayName(ActorTrait trait)
@@ -573,9 +573,11 @@ internal static class MclslHuanzhenSystem
         try
         {
             string name = trait.getTranslatedName();
-            return string.IsNullOrWhiteSpace(name) ? trait.id : name;
+            return string.IsNullOrWhiteSpace(name) || string.Equals(name, trait.id, StringComparison.Ordinal)
+                ? "未知特征"
+                : name;
         }
-        catch { return trait.id ?? "未知特征"; }
+        catch { return "未知特征"; }
     }
 
     internal static void ClearRuntime()

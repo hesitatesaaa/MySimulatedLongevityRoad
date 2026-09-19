@@ -73,8 +73,12 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
         _actor = item.Actor;
         SetText("RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
         SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, Color.white);
+        string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;
+        if (!string.IsNullOrWhiteSpace(item.ExtraText) && !string.Equals(detail, item.ExtraText, StringComparison.Ordinal))
+            detail += " · " + item.ExtraText;
+        SetText("DetailText", detail, MclslUiTheme.TextMuted);
         SetText("PowerText", sortValue, new Color(0.4f, 0.8f, 1f));
-        SetText("RightText", string.IsNullOrWhiteSpace(item.RootText) ? item.ExtraText : item.RootText, new Color(1f, 0.84f, 0f));
+        SetText("RightText", string.IsNullOrWhiteSpace(item.GiftName) ? item.RootText : item.GiftName, new Color(1f, 0.84f, 0f));
         SetText("RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", ""), new Color(1f, 0.6f, 0.2f));
 
         UiUnitAvatarElement avatar = GetComponentInChildren<UiUnitAvatarElement>(true);
@@ -106,6 +110,12 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
     }
 
     public void OnPointerExit(PointerEventData eventData) => Tooltip.hideTooltip();
+
+    private void OnDisable()
+    {
+        _actor = null;
+        Tooltip.hideTooltip();
+    }
 
     private void SetText(string childName, string value, Color color)
     {
