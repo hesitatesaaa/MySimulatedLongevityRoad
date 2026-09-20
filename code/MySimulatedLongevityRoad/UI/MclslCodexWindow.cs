@@ -15,6 +15,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static MclslCodexWindow _instance;
     private bool _visible;
     private bool _standaloneHuanzhenSpace;
+    private bool _standaloneMaobao;
     private bool _pauseCaptured;
     private float _savedTimeScale = 1f;
     private bool _savedConfigPaused;
@@ -28,6 +29,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private string _deathRealmFilter = MclslEventCatalog.All;
     private int _ruinViewMode;
     private string _huanzhenActionMessage = string.Empty;
+    private string _huanzhenReplacementAnchorPath = string.Empty;
+    private string _huanzhenRestoreAnchorPath = string.Empty;
+    private string _huanzhenRestoreConfirmationPath = string.Empty;
     private Vector2 _sidebarScroll;
     private string _kingdomDetailName = string.Empty;
     private string _kingdomRealmFilter = MclslEventCatalog.All;
@@ -60,6 +64,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _instance._snapshot = MclslCodexSnapshot.Build();
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = false;
+        _instance._standaloneMaobao = false;
         _instance._visible = true;
         _instance.enabled = true;
         CreateOverlayBlocker();
@@ -78,6 +83,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _instance._snapshot = MclslCodexSnapshot.Build();
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = true;
+        _instance._standaloneMaobao = false;
         _instance._scroll = Vector2.zero;
         _instance._visible = true;
         _instance.enabled = true;
@@ -109,7 +115,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.window = _windowStyle;
             GUI.color = Color.white;
             GUI.backgroundColor = Color.white;
-            _rect = GUI.Window(781203, _rect, DrawWindow, _standaloneHuanzhenSpace ? "还真空间" : "玄黄仙录");
+            string title = _standaloneHuanzhenSpace ? "还真空间" : _standaloneMaobao ? "猫宝时序录" : "玄黄仙录";
+            _rect = GUI.Window(781203, _rect, DrawWindow, title);
         }
         finally
         {
@@ -130,17 +137,26 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.button = _buttonStyle;
             GUI.skin.box = _boxStyle;
             GUILayout.Space(18f);
-            if (_standaloneHuanzhenSpace)
+            if (_standaloneHuanzhenSpace || _standaloneMaobao)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("<b><color=#D8C778>还真空间</color></b>");
+                GUILayout.Label(_standaloneHuanzhenSpace
+                    ? "<b><color=#D8C778>还真空间</color></b>"
+                    : "<b><color=#8FE3D1>猫宝时序录</color></b>");
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("关闭", GUILayout.Width(78f), GUILayout.Height(38f))) CloseWindow();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(9f);
-                _scroll = GUILayout.BeginScrollView(_scroll, false, true);
-                DrawHuanzhenSpace();
-                GUILayout.EndScrollView();
+                if (_standaloneHuanzhenSpace)
+                {
+                    _scroll = GUILayout.BeginScrollView(_scroll, false, true);
+                    DrawHuanzhenSpace();
+                    GUILayout.EndScrollView();
+                }
+                else
+                {
+                    DrawMaobao();
+                }
             }
             else
             {
@@ -239,7 +255,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         return title switch
         {
-            "天下总览" or "仙道总览" or "原生诸国" or "世界纪事" or "仙道纪事" => "天下纪事",
+            "天下总览" or "仙道总览" or "原生诸国" or "还真纪事" or "世界纪事" or "仙道纪事" => "天下纪事",
             "境界资源" or "仙道修行" or "仙师授法" or "仙道破境" or "心境劫数"
                 or "元婴洞天" or "天地之魄" or "天地之理" or "仙法不可同修" or "修士生死" or "还真轮回" => "修行道统",
             _ => "山河万象"
@@ -412,6 +428,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawHuanzhenReincarnation();
                 break;
             case 12:
+                DrawHuanzhenChronicle();
+                break;
+            case 13:
                 DrawWorldEvents(run);
                 break;
         }
@@ -1298,35 +1317,171 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 GUILayout.Label("加载尝试：" + state.PendingRestore.LoadAttempts + "/3");
             }
         });
-        DrawHuanzhenAnchorsAndHistory();
+        DrawHuanzhenAnchors();
     }
 
     private void DrawHuanzhenSpace()
     {
-        DrawPageHeader("还真空间", "唯一持有者以安全锚点回溯生死，也可消耗灵蕴投影诸界、推演另一种道途。空间推演不会载入第二张地图。\n");
+        DrawPageHeader("还真空间·轮回中枢", "空间灵蕴只由宿主晋升、杀人夺宝与重大机缘获得。可随时手动锚定；开启自动锚定后，灵蕴充足时会按设置间隔建立归途。");
         MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
         GUILayout.BeginHorizontal();
-        DrawOverviewPill("功能状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(210));
-        DrawOverviewPill("持有者", Blank(state.HostName), "#FFD37A", GUILayout.Width(210));
-        DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "/100", "#69E6DD", GUILayout.Width(170));
-        DrawOverviewPill("万界推演", state.TotalSimulations.ToString(), "#9CD7FF", GUILayout.Width(170));
-        DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(170));
+        DrawOverviewPill("轮回状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(230));
+        DrawOverviewPill("此世宿主", Blank(state.HostName), "#FFD37A", GUILayout.Width(220));
+        DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "点", "#69E6DD", GUILayout.Width(170));
+        DrawOverviewPill("锚点数量", (state.Anchors?.Count ?? 0) + "/3", "#9CD7FF", GUILayout.Width(150));
+        DrawOverviewPill("锚定消耗", MclslHuanzhenSystem.AnchorCost + "点", "#AFC7D9", GUILayout.Width(150));
+        DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(150));
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.Space(8);
-        DrawInfoCard("当前绑定", "#CFC7B2", () =>
-        {
-            GUILayout.Label("最近锚点：" + (state.LastAnchorYear < 0 ? "无" : state.LastAnchorYear + "年"));
-            GUILayout.Label("最近回溯：" + (state.LastRestoreYear < 0 ? "无" : state.LastRestoreYear + "年"));
-            if (state.PendingRestore?.Active == true)
-            {
-                GUILayout.Label("待回载：" + state.PendingRestore.DeathYear + "年 → " + state.PendingRestore.AnchorYear + "年");
-                GUILayout.Label("加载尝试：" + state.PendingRestore.LoadAttempts + "/3");
-            }
-        });
+        GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+        DrawHuanzhenAnchorColumn(state);
+        GUILayout.Space(8);
+        DrawHuanzhenLegacyColumn(state);
+        GUILayout.Space(8);
+        DrawHuanzhenEssenceColumn(state);
+        GUILayout.EndHorizontal();
+        if (!string.IsNullOrWhiteSpace(_huanzhenActionMessage))
+            DrawInfoCard("空间回响", "#B7A7FF", () => GUILayout.Label(_huanzhenActionMessage));
+        DrawHuanzhenHistoryStrip();
+    }
 
-        DrawPageHeader("前世遗产", "每次成功回到锚点都会封存一份死前快照。每份前世档案有3个携带槽：五类修行遗产和每个特征都各占1槽，已经选择的项目不能重复领取。");
-        if (state.Legacies == null || state.Legacies.Count == 0) GUILayout.Label("尚无前世档案；第一次成功还真后即可在此选择。");
+    private void DrawHuanzhenAnchorColumn(MclslHuanzhenExternalState state)
+    {
+        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(430), GUILayout.ExpandHeight(true));
+        DrawCardStripe("#9CD7FF");
+        GUILayout.Label("<size=20><b>轮回锚点</b></size>");
+        GUILayout.Label("<color=#B9B0A0>最多保存三枚锚点。手动替换时选择目标；自动锚定会替换最旧锚点。新锚点验证成功前不会删除旧锚点。</color>");
+        GUILayout.Label("最近锚定：" + (state.LastAnchorYear < 0 ? "无" : state.LastAnchorYear + "年"));
+        GUILayout.Label("最近回溯：" + (state.LastRestoreYear < 0 ? "无" : state.LastRestoreYear + "年"));
+        if (state.PendingRestore?.Active == true)
+        {
+            GUILayout.BeginVertical(GUI.skin.box);
+            GUILayout.Label("<b><color=#FFD37A>归途正在接续</color></b>");
+            GUILayout.Label(state.PendingRestore.DeathYear + "年 → " + state.PendingRestore.AnchorYear + "年");
+            GUILayout.Label("加载尝试 " + state.PendingRestore.LoadAttempts + "/3");
+            GUILayout.EndVertical();
+        }
+        int anchorCount = state.Anchors?.Count ?? 0;
+        bool replacementRequired = anchorCount >= 3;
+        bool replacementSelected = !replacementRequired || (state.Anchors?.Exists(x => x != null && string.Equals(x.RelativeSavePath, _huanzhenReplacementAnchorPath, StringComparison.OrdinalIgnoreCase)) == true);
+        bool oldEnabled = GUI.enabled;
+        GUI.enabled = oldEnabled && state.HostLastActorId > 0 && MclslHuanzhenSystem.CurrentSpaceEssence() >= MclslHuanzhenSystem.AnchorCost && replacementSelected && state.PendingRestore?.Active != true;
+        GUI.backgroundColor = new Color(0.20f, 0.46f, 0.62f, 1f);
+        if (GUILayout.Button(replacementRequired ? "替换所选锚点·消耗80空间灵蕴" : "建立还真锚点·消耗80空间灵蕴", GUILayout.Height(42)))
+        {
+            bool success = MclslHuanzhenSystem.TryCreateManualAnchor(replacementRequired ? _huanzhenReplacementAnchorPath : string.Empty, out _huanzhenActionMessage);
+            if (success)
+            {
+                _huanzhenReplacementAnchorPath = string.Empty;
+                _snapshot = MclslCodexSnapshot.Build();
+            }
+        }
+        GUI.backgroundColor = Color.white;
+        GUI.enabled = oldEnabled;
+        if (MclslHuanzhenSystem.CurrentSpaceEssence() < MclslHuanzhenSystem.AnchorCost)
+            GUILayout.Label("<color=#C9977D>空间灵蕴不足：还需" + (MclslHuanzhenSystem.AnchorCost - MclslHuanzhenSystem.CurrentSpaceEssence()) + "点。</color>");
+        else if (replacementRequired && !replacementSelected)
+            GUILayout.Label("<color=#C9977D>锚点已满，请在下方选择要替换的一枚。</color>");
+
+        bool restoreSelected = state.Anchors?.Exists(x => x != null && string.Equals(x.RelativeSavePath, _huanzhenRestoreAnchorPath, StringComparison.OrdinalIgnoreCase)) == true;
+        GUI.enabled = oldEnabled && restoreSelected && state.HostLastActorId > 0 && state.PendingRestore?.Active != true;
+        GUI.backgroundColor = new Color(0.34f, 0.30f, 0.52f, 1f);
+        bool restoreArmed = restoreSelected && string.Equals(_huanzhenRestoreConfirmationPath, _huanzhenRestoreAnchorPath, StringComparison.OrdinalIgnoreCase);
+        string restoreLabel = !restoreSelected ? "手动还真·请先选择归途" : restoreArmed ? "再次点击确认手动还真" : "手动还真·回到所选锚点";
+        if (GUILayout.Button(restoreLabel, GUILayout.Height(42)))
+        {
+            if (!restoreArmed)
+            {
+                _huanzhenRestoreConfirmationPath = _huanzhenRestoreAnchorPath;
+                _huanzhenActionMessage = "再次点击确认：世界将回到所选锚点，当前宿主状态会保存为前世档案。";
+            }
+            else
+            {
+                bool success = MclslHuanzhenSystem.TryManualRestore(_huanzhenRestoreAnchorPath, out _huanzhenActionMessage);
+                if (success)
+                {
+                    _huanzhenRestoreAnchorPath = string.Empty;
+                    _huanzhenRestoreConfirmationPath = string.Empty;
+                }
+            }
+        }
+        GUI.backgroundColor = Color.white;
+        GUI.enabled = oldEnabled;
+        GUILayout.Label("<color=#B9B0A0>手动还真不额外消耗空间灵蕴；回溯前所得会进入前世档案。</color>");
+        if (_snapshot.HuanzhenAnchorsSorted.Count == 0) GUILayout.Label("尚无安全锚点。");
+        foreach (MclslHuanzhenAnchorRecord anchor in _snapshot.HuanzhenAnchorsSorted)
+        {
+            GUILayout.BeginVertical(GUI.skin.box);
+            bool replacement = string.Equals(anchor.RelativeSavePath, _huanzhenReplacementAnchorPath, StringComparison.OrdinalIgnoreCase);
+            bool restore = string.Equals(anchor.RelativeSavePath, _huanzhenRestoreAnchorPath, StringComparison.OrdinalIgnoreCase);
+            GUILayout.Label("<b><color=#9CD7FF>◇ " + anchor.Year + "年·" + Blank(anchor.HostName) + "</color></b>");
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button(replacement ? "替换已选" : "选作替换", GUILayout.Width(92), GUILayout.Height(28)))
+                _huanzhenReplacementAnchorPath = replacement ? string.Empty : anchor.RelativeSavePath;
+            if (GUILayout.Button(restore ? "归途已选" : "选作归途", GUILayout.Width(92), GUILayout.Height(28)))
+            {
+                _huanzhenRestoreAnchorPath = restore ? string.Empty : anchor.RelativeSavePath;
+                _huanzhenRestoreConfirmationPath = string.Empty;
+            }
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            DrawAnchorPossessions(anchor);
+            GUILayout.EndVertical();
+        }
+        GUILayout.EndVertical();
+    }
+
+    private static void DrawAnchorPossessions(MclslHuanzhenAnchorRecord anchor)
+    {
+        MclslHuanzhenCultivationSnapshot snapshot = anchor?.Snapshot;
+        GUILayout.BeginHorizontal();
+        DrawTag(MclslRealmIds.Display(string.IsNullOrWhiteSpace(snapshot?.RealmId) ? anchor?.RealmIdAtAnchor : snapshot.RealmId), "#FFD37A");
+        if (snapshot != null)
+        {
+            DrawTag("真元 " + snapshot.TrueEssence, "#69E6DD");
+            DrawTag("贡献 " + snapshot.Contribution, "#A7E08A");
+            DrawTag("灵石 " + SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones), "#D8C778");
+        }
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        if (snapshot == null || string.IsNullOrWhiteSpace(snapshot.RealmId))
+        {
+            GUILayout.Label("<color=#8F918B>旧版锚点未记录资产明细；重新建立后即可显示。</color>");
+            return;
+        }
+        string root = SnapshotString(snapshot, MclslActorDataKeys.SpiritualRootPrimary);
+        GUILayout.Label("灵根：" + Blank(root) + "　功法：" + Blank(snapshot.TechniqueName));
+        if (!string.IsNullOrWhiteSpace(snapshot.FoundationWonderName)) GUILayout.Label("筑基奇物：" + snapshot.FoundationWonderName + "（品质" + snapshot.FoundationWonderQuality + "）");
+        if (!string.IsNullOrWhiteSpace(snapshot.GoldenCoreLaws)) GUILayout.Label("金丹法则：" + snapshot.GoldenCoreLaws + "　纯度" + snapshot.GoldenCorePurity);
+        if (!string.IsNullOrWhiteSpace(snapshot.NascentCaveName)) GUILayout.Label("元婴洞天：" + snapshot.NascentCaveName + "　完整度" + snapshot.NascentCaveIntegrity);
+        if (!string.IsNullOrWhiteSpace(snapshot.NascentEssenceName)) GUILayout.Label("天地之精：" + snapshot.NascentEssenceName + "（品质" + snapshot.NascentEssenceQuality + "）");
+        if (!string.IsNullOrWhiteSpace(snapshot.DivineMarrowName)) GUILayout.Label("天地之髓：" + snapshot.DivineMarrowName + "×" + snapshot.DivineMarrowCount);
+        if (!string.IsNullOrWhiteSpace(snapshot.WorldSoulName)) GUILayout.Label("天地之魄：" + snapshot.WorldSoulName);
+        if (!string.IsNullOrWhiteSpace(snapshot.InverseTruthName)) GUILayout.Label("逆理：" + snapshot.InverseTruthName + "　进度" + snapshot.InverseTruthProgress + "%");
+        GUILayout.Label("特征：" + (snapshot.TraitIds?.Count ?? 0) + "项");
+    }
+
+    private static string SnapshotString(MclslHuanzhenCultivationSnapshot snapshot, string key)
+    {
+        return snapshot?.StringState != null && snapshot.StringState.TryGetValue(key, out string value) ? value : string.Empty;
+    }
+
+    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key)
+    {
+        return snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
+    }
+
+    private void DrawHuanzhenLegacyColumn(MclslHuanzhenExternalState state)
+    {
+        GUILayout.BeginVertical(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+        DrawCardStripe("#D8C778");
+        GUILayout.Label("<size=20><b>前世轮盘</b></size>");
+        GUILayout.Label("<color=#B9B0A0>每份前世档案有三个携带槽。修为、功法、造物、道果、资源与单个特征各占一槽。</color>");
+        if (state.Legacies == null || state.Legacies.Count == 0)
+        {
+            GUILayout.Label("尚无前世档案；第一次成功还真后，死前快照会在此凝成轮盘。 ");
+        }
         else
         {
             for (int i = state.Legacies.Count - 1; i >= 0; i--)
@@ -1334,78 +1489,107 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 MclslHuanzhenLegacyRecord legacy = state.Legacies[i];
                 if (legacy?.Snapshot == null) continue;
                 int used = legacy.ClaimedChoices?.Count ?? 0;
-                DrawInfoCard(legacy.DeathYear + "年陨落｜" + Blank(legacy.HostName), "#D8C778", () =>
+                GUILayout.BeginVertical(GUI.skin.box);
+                DrawCardStripe(used >= legacy.CarryLimit ? "#88706C" : "#D8C778");
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("<b>" + legacy.DeathYear + "年·" + Blank(legacy.HostName) + "</b>", GUILayout.Width(250));
+                DrawTag(MclslRealmIds.Display(legacy.RealmId), "#FFD37A");
+                DrawTag("归于 " + legacy.AnchorYear + "年", "#9CD7FF");
+                DrawTag("槽位 " + used + "/" + legacy.CarryLimit, used >= legacy.CarryLimit ? "#FF8877" : "#A7E08A");
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                DrawLegacyCategoryButton(legacy, "cultivation", "修为根基");
+                DrawLegacyCategoryButton(legacy, "technique", "功法道统");
+                DrawLegacyCategoryButton(legacy, "treasures", "突破造物");
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                DrawLegacyCategoryButton(legacy, "dao", "天地道果");
+                DrawLegacyCategoryButton(legacy, "resources", "资源心境");
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+                if (legacy.Snapshot.TraitIds != null && legacy.Snapshot.TraitIds.Count > 0)
                 {
+                    GUILayout.Label("前世特征");
                     GUILayout.BeginHorizontal();
-                    DrawTag(MclslRealmIds.Display(legacy.RealmId), "#FFD37A");
-                    DrawTag("回到 " + legacy.AnchorYear + "年", "#9CD7FF");
-                    DrawTag("携带槽 " + used + "/" + legacy.CarryLimit, used >= legacy.CarryLimit ? "#FF8877" : "#A7E08A");
-                    GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal();
-                    DrawLegacyCategoryButton(legacy, "cultivation", "修为根基");
-                    DrawLegacyCategoryButton(legacy, "technique", "功法道统");
-                    DrawLegacyCategoryButton(legacy, "treasures", "突破造物");
-                    DrawLegacyCategoryButton(legacy, "dao", "天地道果");
-                    DrawLegacyCategoryButton(legacy, "resources", "资源心境");
-                    GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
-                    if (legacy.Snapshot.TraitIds != null && legacy.Snapshot.TraitIds.Count > 0)
+                    int column = 0;
+                    foreach (string traitId in legacy.Snapshot.TraitIds)
                     {
-                        GUILayout.Label("前世特征（逐项选择）：");
-                        GUILayout.BeginHorizontal();
-                        int column = 0;
-                        foreach (string traitId in legacy.Snapshot.TraitIds)
-                        {
-                            DrawLegacyTraitButton(legacy, traitId);
-                            if (++column % 5 != 0) continue;
-                            GUILayout.EndHorizontal();
-                            GUILayout.BeginHorizontal();
-                        }
-                        GUILayout.FlexibleSpace();
+                        DrawLegacyTraitButton(legacy, traitId);
+                        if (++column % 3 != 0) continue;
                         GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
                     }
-                });
-            }
-        }
-        if (!string.IsNullOrWhiteSpace(_huanzhenActionMessage)) GUILayout.Label(_huanzhenActionMessage);
-
-        DrawPageHeader("万界模拟器", "从轮回空间与分支世界模拟中提炼为轻量推演：不复制地图、不切换存档，只保存有上限的结果摘要。每次消耗20灵蕴，冷却20年。");
-        DrawInfoCard("推演台", "#69E6DD", () =>
-        {
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("推演一次万界", GUILayout.Width(220), GUILayout.Height(38)))
-            {
-                bool success = MclslHuanzhenSystem.TryRunSpaceSimulation(out string result);
-                _huanzhenActionMessage = result;
-                if (success) _snapshot = MclslCodexSnapshot.Build();
-            }
-            GUILayout.Label(string.IsNullOrWhiteSpace(_huanzhenActionMessage) ? "需唯一持有者与至少一个安全锚点。" : _huanzhenActionMessage);
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-        });
-        if (state.Simulations != null && state.Simulations.Count > 0)
-        {
-            for (int i = state.Simulations.Count - 1; i >= Math.Max(0, state.Simulations.Count - 8); i--)
-            {
-                MclslHuanzhenSimulationRecord simulation = state.Simulations[i];
-                if (simulation == null) continue;
-                DrawInfoCard(simulation.Year + "年｜" + Blank(simulation.WorldName), "#77C9E8", () =>
-                {
-                    GUILayout.BeginHorizontal();
-                    DrawTag("评价 " + simulation.Score, "#B7A7FF");
-                    DrawTag(simulation.Reward, "#FFD37A");
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
-                    GUILayout.Label(simulation.Outcome);
-                });
+                }
+                GUILayout.EndVertical();
             }
         }
-
-        DrawHuanzhenAnchorsAndHistory();
+        GUILayout.EndVertical();
     }
 
-    private void DrawHuanzhenAnchorsAndHistory()
+    private void DrawHuanzhenEssenceColumn(MclslHuanzhenExternalState state)
+    {
+        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(410), GUILayout.ExpandHeight(true));
+        DrawCardStripe("#69E6DD");
+        GUILayout.Label("<size=20><b>空间灵蕴</b></size>");
+        GUILayout.Label("<color=#B9B0A0>空间灵蕴不会随年份自然增长，只在宿主实际完成晋升、杀人夺宝或重大事件后结算。</color>");
+        DrawFlowRow("宿主晋升", "炼气+8、筑基+15、金丹+25、元婴+40、化神+60、合道+90、长生+140。", "#69E6DD");
+        DrawFlowRow("杀人夺宝", "凡俗+2；炼气至长生依次+3、+6、+10、+16、+25、+38、+55。", "#9CD7FF");
+        DrawFlowRow("洞天炼化", "按品质与契合度获得12至32点左右。", "#A7E08A");
+        DrawFlowRow("天地之变", "按天地之髓品质与契合度获得20至48点左右。", "#B7A7FF");
+        DrawFlowRow("势力机缘", "按委托所得贡献与灵石获得2至12点。", "#D8C778");
+        GUILayout.Space(8);
+        GUILayout.Label("<b>最近灵蕴记录</b>");
+        if (state.EssenceHistory == null || state.EssenceHistory.Count == 0)
+        {
+            GUILayout.Label("尚无事件结算记录。");
+        }
+        else
+        {
+            for (int i = state.EssenceHistory.Count - 1; i >= Math.Max(0, state.EssenceHistory.Count - 2); i--)
+            {
+                MclslHuanzhenEssenceRecord record = state.EssenceHistory[i];
+                if (record == null) continue;
+                GUILayout.BeginVertical(GUI.skin.box);
+                GUILayout.Label("<b><color=#77C9E8>" + record.Year + "年·" + Blank(record.Source) + "</color></b>");
+                GUILayout.BeginHorizontal();
+                DrawTag((record.Amount >= 0 ? "+" : string.Empty) + record.Amount + "灵蕴", "#69E6DD");
+                DrawTag("结余 " + record.Balance, "#FFD37A");
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+                GUILayout.Label(record.Detail);
+                GUILayout.EndVertical();
+            }
+        }
+        GUILayout.EndVertical();
+    }
+
+    private void DrawHuanzhenHistoryStrip()
+    {
+        DrawPageHeader("轮回痕迹", "最近六次还真结果，供判断锚点安全性与避环深度。");
+        if (_snapshot.HuanzhenHistoriesSorted.Count == 0)
+        {
+            GUILayout.Label("尚无还真发动记录。");
+            return;
+        }
+        int count = Math.Min(6, _snapshot.HuanzhenHistoriesSorted.Count);
+        for (int i = 0; i < count; i++)
+        {
+            MclslHuanzhenHistoryRecord history = _snapshot.HuanzhenHistoriesSorted[i];
+            if (history == null) continue;
+            GUILayout.BeginHorizontal(GUI.skin.box);
+            GUILayout.Label("<b>" + history.DeathYear + "年·" + Blank(history.HostName) + "</b>", GUILayout.Width(280));
+            DrawTag(MclslRealmIds.Display(history.RealmId), "#9CD7FF");
+            DrawTag("避环 " + history.LoopDepth, "#B7A7FF");
+            DrawTag("归于 " + (history.AnchorYear < 0 ? "无锚点" : history.AnchorYear + "年"), "#FFD37A");
+            GUILayout.Label(history.Result);
+            GUILayout.EndHorizontal();
+        }
+    }
+
+    private void DrawHuanzhenAnchors()
     {
         DrawPageHeader("滚动锚点", "");
         if (_snapshot.HuanzhenAnchorsSorted.Count == 0) GUILayout.Label("当前没有可用还真锚点。");
@@ -1419,22 +1603,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 });
         }
 
-        DrawPageHeader("回溯记录", "");
-        if (_snapshot.HuanzhenHistoriesSorted.Count == 0) GUILayout.Label("尚无还真发动记录。");
-        else
-        {
-            foreach (MclslHuanzhenHistoryRecord history in _snapshot.HuanzhenHistoriesSorted)
-                DrawInfoCard(history.DeathYear + "年身死｜" + Blank(history.HostName), "#B7A7FF", () =>
-                {
-                    GUILayout.BeginHorizontal();
-                    DrawTag(MclslRealmIds.Display(history.RealmId), "#9CD7FF");
-                    DrawTag("避环 " + history.LoopDepth, "#B7A7FF");
-                    DrawTag("回到 " + (history.AnchorYear < 0 ? "无锚点" : history.AnchorYear + "年"), "#FFD37A");
-                    GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
-                    GUILayout.Label(history.Result);
-                });
-        }
     }
 
     private void DrawLegacyCategoryButton(MclslHuanzhenLegacyRecord legacy, string category, string title)

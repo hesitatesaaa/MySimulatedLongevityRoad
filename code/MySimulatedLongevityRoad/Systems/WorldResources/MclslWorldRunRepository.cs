@@ -22,6 +22,7 @@ internal static class MclslWorldRunRepository
     private const int MaxWorldCaveRecords = 64;
     private const int MaxWorldChangeRecords = 64;
     private const int MaxReincarnationRecords = 200;
+    private const int MaxMaobaoRecords = 24;
     private const int MaxEventsPerYear = 36;
     private static MclslWorldRunState _current = new();
     internal static MclslWorldRunState Current => _current;
@@ -835,6 +836,7 @@ internal static class MclslWorldRunRepository
         _current.InheritedKnowledgeIds ??= new List<string>();
         _current.Discoveries ??= new List<MclslKnowledgeDiscoveryRecord>();
         _current.TimelineAnchors ??= new List<MclslTimelineAnchorState>();
+        _current.MaobaoRecords ??= new List<MclslMaobaoRecord>();
         _current.Events ??= new List<MclslRunEventRecord>();
         TrimEventsPreservingMilestones(_current.Events, MaxEvents);
         foreach (MclslRunEventRecord e in _current.Events)
@@ -869,6 +871,7 @@ internal static class MclslWorldRunRepository
         TrimOldest(_current.FactionPressureEvents, MaxFactionPressures);
         TrimOldest(_current.ResourceSpendEvents, MaxResourceSpends);
         TrimOldest(_current.RuinExplorations, MaxRuinExplorations);
+        TrimOldest(_current.MaobaoRecords, MaxMaobaoRecords);
         foreach (MclslInverseTruthRecord truth in _current.InverseTruths)
         {
             if (truth == null) continue;

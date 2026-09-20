@@ -48,6 +48,8 @@ internal static class MclslResourceSystem
         int baseContribution = 10 + quality * 7 + Math.Max(0, contenderCount - 1) * 3;
         AddSpiritStones(actor, baseStones);
         AddContribution(actor, baseContribution);
+        int essence = 8 + Math.Max(0, quality) * 4 + Math.Min(8, Math.Max(0, compatibility) / 20);
+        MclslHuanzhenSystem.OnHostFortune(actor, "洞天炼化", essence, "炼化天地之精，品质" + quality + "、契合" + compatibility);
     }
 
     internal static void GrantWorldChangeReward(Actor actor, int quality, int compatibility, int contenderCount)
@@ -56,13 +58,19 @@ internal static class MclslResourceSystem
         int baseContribution = 16 + quality * 10 + Math.Max(0, contenderCount - 1) * 4;
         AddSpiritStones(actor, baseStones);
         AddContribution(actor, baseContribution);
+        int essence = 14 + Math.Max(0, quality) * 6 + Math.Min(10, Math.Max(0, compatibility) / 15);
+        MclslHuanzhenSystem.OnHostFortune(actor, "天地之变", essence, "抽取天地之髓，品质" + quality + "、契合" + compatibility);
     }
 
     internal static void GrantFactionReward(Actor actor, int contribution, int spiritStones)
     {
         int year = MclslRuntime.CurrentYear();
-        AddContribution(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, contribution), year));
-        AddSpiritStones(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, spiritStones), year));
+        int scaledContribution = MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, contribution), year);
+        int scaledSpiritStones = MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, spiritStones), year);
+        AddContribution(actor, scaledContribution);
+        AddSpiritStones(actor, scaledSpiritStones);
+        int essence = 2 + Math.Min(10, Math.Max(0, scaledContribution + scaledSpiritStones) / 40);
+        MclslHuanzhenSystem.OnHostFortune(actor, "势力机缘", essence, "完成委托并取得修行资源");
     }
 
     internal static void TryAutoSpend(Actor actor, int year)

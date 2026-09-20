@@ -12,16 +12,18 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslRankWindow
 {
-    private const string TransparentCloseGlyphName = "MclslRankTransparentCloseGlyph";
-    private const float WindowWidth = 760f;
-    private const float WindowHeight = 480f;
-    private const float LeftPanelWidth = 140f;
-    private const float RightPanelWidth = 140f;
-    private const float CenterWidth = 450f;
-    private const float ListHeight = 310f;
-    private const float CardHeight = 50f;
+    // 与玄鉴仙族排行榜保持相同的窗口外框尺寸和三栏比例。
+    private const float WindowWidth = 600f;
+    private const float WindowHeight = 372f;
+    private const float LeftPanelWidth = 110f;
+    private const float RightPanelWidth = 110f;
+    private const float CenterWidth = 360f;
+    // 为灵根、境界双下拉框预留一行，外框尺寸仍与玄鉴排行榜一致。
+    private const float ListHeight = 188f;
+    private const float CardHeight = 35f;
+    private const int SideGridCellSize = 26;
 
-    private static readonly string[] RealmOptions = { "全部", "感气", "炼气", "筑基", "金丹", "元婴", "化神", "合道", "长生" };
+    private static readonly string[] RealmOptions = { "全部境界", "感气", "炼气", "筑基", "金丹", "元婴", "化神", "合道", "长生" };
     private static readonly string[] RootOptions = { "全部灵根", "金", "木", "水", "火", "土", "风", "雷", "阴", "阳", "空间" };
     private static readonly List<MclslRankSortKey> ActiveSortKeys = new();
     private static readonly List<MclslRankEntry> Entries = new();
@@ -122,7 +124,7 @@ internal static class MclslRankWindow
         if (_window != null) return false;
         _window = WindowCreator.CreateEmptyWindow("MclslRank", "mclsl.rank", "ui/Icons/XuanHuangXiuShiBang");
         if (_window == null) return false;
-        RemoveCloseButtonBackground();
+        RestoreNativeCloseButton();
         SetupWindowContent();
         _cardPrefab = CreateCardPrefab();
         _cardPrefab.transform.SetParent(_window.transform, false);
@@ -130,179 +132,47 @@ internal static class MclslRankWindow
         updater.OnOpen = () =>
         {
             MclslRankSnapshotSource.Invalidate();
-            RemoveCloseButtonBackground();
+            RestoreNativeCloseButton();
             if (ShouldRefreshFilterChoicesOnOpen()) RefreshFilterChoices();
             RefreshSelectedFilterButtons();
             RefreshSelectedSortButtons();
             _needRefresh = true;
         };
-        updater.OnUpdate = () => { RemoveCloseButtonBackground(); UpdateVisibleCards(); };
+        updater.OnUpdate = () => { RestoreNativeCloseButton(); UpdateVisibleCards(); };
         updater.OnClose = DisposeCardPool;
         return true;
     }
 
-    private static void RemoveCloseButtonBackground()
+    private static void RestoreNativeCloseButton()
     {
         if (_window == null) return;
-        Transform closeButton = FindCloseButtonTransform();
-        if (closeButton == null) return;
-        Button button = closeButton.GetComponent<Button>();
-        Image rootImage = closeButton.GetComponent<Image>();
-        if (rootImage == null) rootImage = closeButton.gameObject.AddComponent<Image>();
-        rootImage.sprite = null;
-        rootImage.color = new Color(1f, 1f, 1f, 0f);
-        rootImage.raycastTarget = true;
-        if (button != null)
-        {
-            button.targetGraphic = rootImage;
-            button.transition = Selectable.Transition.None;
-        }
+        Transform closeRoot = _window.transform.Find("CloseBackground") ?? FindCloseButtonTransform();
+        if (closeRoot == null) return;
 
-        Image[] images = closeButton.GetComponentsInChildren<Image>(true);
-        for (int i = 0; i < images.Length; i++)
-        {
-            Image image = images[i];
-            if (image == null || image == rootImage) continue;
-            image.color = new Color(1f, 1f, 1f, 0f);
-            image.raycastTarget = false;
-        }
-        RawImage[] rawImages = closeButton.GetComponentsInChildren<RawImage>(true);
-        for (int i = 0; i < rawImages.Length; i++)
-        {
-            RawImage rawImage = rawImages[i];
-            if (rawImage == null) continue;
-            rawImage.color = new Color(1f, 1f, 1f, 0f);
-            rawImage.raycastTarget = false;
-        }
+        Transform oldGlyph = closeRoot.Find("MclslRankTransparentCloseGlyph");
+        if (oldGlyph != null) UnityEngine.Object.Destroy(oldGlyph.gameObject);
 
-        EnsureTransparentCloseGlyph(closeButton);
-    }
+        if (closeRoot is RectTransform closeRect)
+            closeRect.anchoredPosition = new Vector2(WindowWidth / 2f - 8f, WindowHeight / 2f - 8f);
 
-    private static void MakeCloseAncestorsTransparent(Transform closeButton)
-    {
-        Transform root = _window.transform;
-        Transform current = closeButton.parent;
-        while (current != null && current != root)
-        {
-            string name = current.name ?? string.Empty;
-            bool closeShell = name.IndexOf("close", StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("buttonclose", StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("x", StringComparison.OrdinalIgnoreCase) >= 0;
-            if (closeShell)
-            {
-                Image[] images = current.GetComponents<Image>();
-                for (int i = 0; i < images.Length; i++) MakeTransparentButtonImage(images[i], false);
-                RawImage[] rawImages = current.GetComponents<RawImage>();
-                for (int i = 0; i < rawImages.Length; i++) MakeTransparentButtonRawImage(rawImages[i], false);
-            }
-            current = current.parent;
-        }
-    }
-
-    private static void MakeTransparentButtonImage(Image image, bool keepRaycast)
-    {
-        if (image == null) return;
-        image.sprite = null;
-        image.color = new Color(1f, 1f, 1f, 0f);
-        image.raycastTarget = keepRaycast;
-        Button button = image.GetComponent<Button>();
-        if (button != null)
-        {
-            button.targetGraphic = image;
-            button.transition = Selectable.Transition.None;
-        }
-    }
-
-    private static void MakeTransparentButtonRawImage(RawImage image, bool keepRaycast)
-    {
-        if (image == null) return;
-        image.texture = null;
-        image.color = new Color(1f, 1f, 1f, 0f);
-        image.raycastTarget = keepRaycast;
-        Button button = image.GetComponent<Button>();
-        if (button != null)
-        {
-            button.targetGraphic = image;
-            button.transition = Selectable.Transition.None;
-        }
-    }
-
-    private static void HideNativeCloseGraphics(Transform closeButton)
-    {
-        Graphic[] graphics = closeButton.GetComponentsInChildren<Graphic>(true);
+        Graphic[] graphics = closeRoot.GetComponentsInChildren<Graphic>(true);
         for (int i = 0; i < graphics.Length; i++)
         {
             Graphic graphic = graphics[i];
             if (graphic == null) continue;
-            bool isRoot = graphic.transform == closeButton;
-            bool isGlyph = string.Equals(graphic.gameObject.name, TransparentCloseGlyphName, StringComparison.Ordinal);
-            if (isGlyph) continue;
-            if (isRoot)
-            {
-                graphic.enabled = true;
-                graphic.color = new Color(1f, 1f, 1f, 0f);
-                graphic.raycastTarget = true;
-                continue;
-            }
-            graphic.raycastTarget = false;
-            graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, 0f);
-            try { graphic.canvasRenderer.SetAlpha(0f); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #1: " + mclslEmptyCatchEx.Message); }
-            graphic.enabled = false;
+            graphic.enabled = true;
+            graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, 1f);
+            graphic.raycastTarget = graphic.transform == closeRoot || graphic.GetComponent<Button>() != null;
+            try { graphic.canvasRenderer.SetAlpha(1f); }
+            catch (Exception exception) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("rank-native-close", exception.Message); }
         }
-    }
 
-    private static void EnsureTransparentHitArea(Transform closeButton)
-    {
-        Image image = closeButton.GetComponent<Image>();
-        if (image == null) image = closeButton.gameObject.AddComponent<Image>();
-        image.sprite = null;
-        image.color = new Color(1f, 1f, 1f, 0f);
-        image.raycastTarget = true;
-        Button button = closeButton.GetComponent<Button>();
-        if (button != null)
+        Button[] buttons = closeRoot.GetComponentsInChildren<Button>(true);
+        for (int i = 0; i < buttons.Length; i++)
         {
-            button.targetGraphic = image;
-            button.transition = Selectable.Transition.None;
-        }
-    }
-
-    private static void EnsureTransparentCloseGlyph(Transform closeButton)
-    {
-        Transform existing = closeButton.Find(TransparentCloseGlyphName);
-        Text glyph = existing == null ? null : existing.GetComponent<Text>();
-        if (glyph == null)
-        {
-            GameObject glyphObject = new(TransparentCloseGlyphName);
-            glyphObject.transform.SetParent(closeButton, false);
-            RectTransform rect = glyphObject.AddComponent<RectTransform>();
-            rect.anchorMin = Vector2.zero;
-            rect.anchorMax = Vector2.one;
-            rect.offsetMin = Vector2.zero;
-            rect.offsetMax = Vector2.zero;
-            glyph = glyphObject.AddComponent<Text>();
-            glyph.raycastTarget = false;
-        }
-        glyph.text = "×";
-        glyph.alignment = TextAnchor.MiddleCenter;
-        glyph.fontSize = 22;
-        glyph.fontStyle = FontStyle.Bold;
-        glyph.color = new Color(1f, 0.08f, 0.06f, 1f);
-        glyph.enabled = true;
-        glyph.raycastTarget = false;
-        glyph.font = LocalizedTextManager.current_font ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
-        glyph.transform.SetAsLastSibling();
-        try { glyph.canvasRenderer.SetAlpha(1f); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #2: " + mclslEmptyCatchEx.Message); }
-    }
-
-    private static void RemoveTransparentCloseGlyphs()
-    {
-        if (_window == null) return;
-        Text[] texts = _window.GetComponentsInChildren<Text>(true);
-        for (int i = 0; i < texts.Length; i++)
-        {
-            Text text = texts[i];
-            if (text == null || !string.Equals(text.gameObject.name, TransparentCloseGlyphName, StringComparison.Ordinal)) continue;
-            UnityEngine.Object.Destroy(text.gameObject);
+            if (buttons[i] == null) continue;
+            buttons[i].enabled = true;
+            buttons[i].interactable = true;
         }
     }
 
@@ -359,7 +229,7 @@ internal static class MclslRankWindow
         SetRect(frame, Vector2.zero, Vector2.one, offsetMin: Vector2.zero, offsetMax: Vector2.zero);
         Image frameImage = frame.GetComponent<Image>();
         frameImage.sprite = null;
-        frameImage.color = MclslUiTheme.Frame;
+        frameImage.color = MclslUiTheme.RankFrame;
         frameImage.raycastTarget = false;
 
         GameObject surface = new("玄黄榜卷面", typeof(RectTransform), typeof(Image));
@@ -367,9 +237,9 @@ internal static class MclslRankWindow
         SetRect(surface, Vector2.zero, Vector2.one, offsetMin: new Vector2(5f, 5f), offsetMax: new Vector2(-5f, -5f));
         Image surfaceImage = surface.GetComponent<Image>();
         surfaceImage.sprite = null;
-        surfaceImage.color = MclslUiTheme.SurfaceWindow;
+        surfaceImage.color = MclslUiTheme.RankSurfaceWindow;
         surfaceImage.raycastTarget = false;
-        CreatePanelAccent(surface.transform, MclslUiTheme.AccentGold, 2f);
+        CreatePanelAccent(surface.transform, MclslUiTheme.RankFrameEdge, 2f);
     }
 
     private static void CreatePanelAccent(Transform parent, Color color, float height)
@@ -387,69 +257,72 @@ internal static class MclslRankWindow
     {
         GameObject panel = new("LeftPanel", typeof(RectTransform), typeof(Image));
         panel.transform.SetParent(parent, false);
-        SetRect(panel, new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 0.5f), new Vector2(10, 0), new Vector2(LeftPanelWidth, -78));
-        panel.GetComponent<Image>().color = MclslUiTheme.SurfacePanel;
+        SetRect(panel, new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 0.5f), new Vector2(8, 0), new Vector2(LeftPanelWidth, -72));
+        panel.GetComponent<Image>().color = MclslUiTheme.RankSurfacePanel;
         panel.AddComponent<MclslRankRightClickHandler>().BlockRightClick = true;
-        CreatePanelAccent(panel.transform, MclslUiTheme.AccentJade, 1.5f);
-        CreateSectionTitle(panel.transform, "筛选卷", new Vector2(0, -7));
+        CreatePanelAccent(panel.transform, MclslUiTheme.RankAccentSecondary, 1.5f);
+        CreateSectionTitle(panel.transform, "筛选", new Vector2(0, -6));
 
-        GameObject scroll = CreateScrollView(panel.transform, "FilterScroll", new Vector2(5, 30), new Vector2(-5, -25));
+        GameObject scroll = CreateScrollView(panel.transform, "FilterScroll", new Vector2(6, 36), new Vector2(-6, -31));
         Transform filterContent = scroll.transform.Find("Viewport/Content");
-        _selectedFilterContainer = CreateTitledGrid(filterContent, "已选条件", 26, 4, false);
-        _kingdomFilterContainer = CreateTitledGrid(filterContent, "所属国家", 26, 4, true);
-        _assetFilterContainer = CreateTitledGrid(filterContent, "生灵种属", 26, 4, true);
-        _traitFilterContainer = CreateTitledGrid(filterContent, "人物特征", 26, 4, true);
+        int sideColumns = ResolveSideGridColumns();
+        _selectedFilterContainer = CreateTitledGrid(filterContent, "已选筛选", SideGridCellSize, sideColumns, false);
+        _kingdomFilterContainer = CreateTitledGrid(filterContent, "国家", SideGridCellSize, sideColumns, true);
+        _assetFilterContainer = CreateTitledGrid(filterContent, "种属", SideGridCellSize, sideColumns, true);
+        _traitFilterContainer = CreateTitledGrid(filterContent, "特征", SideGridCellSize, sideColumns, true);
         RefreshSelectedFilterButtons();
-        Button clear = CreateButton(panel.transform, "ClearFilters", "清除筛选", new Vector2(88, 22), ClearFilters);
-        SetRect(clear.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 11), new Vector2(88, 22));
-        SetButtonColor(clear, MclslUiTheme.Danger);
+        Button clear = CreateButton(panel.transform, "ClearFilters", "清空全部", new Vector2(82, 20), ClearFilters);
+        SetRect(clear.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 12), new Vector2(82, 20));
+        SetButtonColor(clear, MclslUiTheme.RankDanger);
     }
 
     private static void CreateCenterPanel(Transform parent)
     {
+        CreateRankTableFrame(parent);
+
         GameObject titlePanel = new("榜首", typeof(RectTransform), typeof(Image));
         titlePanel.transform.SetParent(parent, false);
-        SetRect(titlePanel, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -20), new Vector2(CenterWidth, 46));
-        titlePanel.GetComponent<Image>().color = MclslUiTheme.SurfaceDeep;
-        CreatePanelAccent(titlePanel.transform, MclslUiTheme.AccentGold, 1.5f);
-        Text title = CreateText("RankTitle", titlePanel.transform, "玄黄修士榜", 16, MclslUiTheme.AccentGold);
+        SetRect(titlePanel, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -17), new Vector2(CenterWidth, 46));
+        titlePanel.GetComponent<Image>().color = MclslUiTheme.RankSurfaceDeep;
+        CreatePanelAccent(titlePanel.transform, MclslUiTheme.RankAccentPrimary, 1.5f);
+        Text title = CreateText("RankTitle", titlePanel.transform, "玄黄修士榜", 15, MclslUiTheme.RankAccentSecondary);
         title.fontStyle = FontStyle.Bold;
         SetRect(title.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(8, 19), offsetMax: new Vector2(-8, -2));
-        _rankSummaryText = CreateText("RankSummary", titlePanel.transform, "天下修士，依序照录", 9, MclslUiTheme.AccentJade);
+        _rankSummaryText = CreateText("RankSummary", titlePanel.transform, "总计入榜角色：0名", 8, MclslUiTheme.RankTextMuted);
         SetRect(_rankSummaryText.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(8, 2), offsetMax: new Vector2(-8, -26));
 
         GameObject topBar = new("TopBar", typeof(RectTransform));
         topBar.transform.SetParent(parent, false);
-        SetRect(topBar, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -66), new Vector2(CenterWidth, 28));
+        SetRect(topBar, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -57), new Vector2(CenterWidth, 22));
         _rootDropdown = CreateDropdown("RootDropdown", topBar.transform, RootOptions, index =>
         {
             _rootFilter = index;
             RefreshSelectedFilterButtons();
             RefreshCurrentList(true);
         });
-        SetRect(_rootDropdown.gameObject, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(210, 27));
+        SetRect(_rootDropdown.gameObject, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(174, 22));
         _realmDropdown = CreateDropdown("RealmDropdown", topBar.transform, RealmOptions, index =>
         {
             _realmFilter = index;
             RefreshSelectedFilterButtons();
             RefreshCurrentList(true);
         });
-        SetRect(_realmDropdown.gameObject, new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(1, 0.5f), Vector2.zero, new Vector2(210, 27));
+        SetRect(_realmDropdown.gameObject, new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(1, 0.5f), Vector2.zero, new Vector2(174, 22));
 
-        Text tableHeader = CreateText("榜单列名", parent, "名次　修士与资质　　　　　　　　　当前首序　　　　　境界", 10, MclslUiTheme.TextMuted);
-        SetRect(tableHeader.gameObject, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -94), new Vector2(CenterWidth, 20));
+        CreateRankTableHeader(parent);
 
         GameObject scrollObj = new("RankScrollView", typeof(RectTransform), typeof(Image), typeof(Mask), typeof(ScrollRect));
         scrollObj.transform.SetParent(parent, false);
-        _scrollViewRect = SetRect(scrollObj, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -24), new Vector2(CenterWidth, ListHeight));
+        _scrollViewRect = SetRect(scrollObj, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -25), new Vector2(CenterWidth, ListHeight));
         Image scrollBg = scrollObj.GetComponent<Image>();
-        scrollBg.color = MclslUiTheme.SurfaceScroll;
+        scrollBg.color = MclslUiTheme.RankSurfaceScroll;
         scrollObj.GetComponent<Mask>().showMaskGraphic = true;
         _rankScroll = scrollObj.GetComponent<ScrollRect>();
         _rankScroll.horizontal = false;
         _rankScroll.vertical = true;
         _rankScroll.movementType = ScrollRect.MovementType.Clamped;
-        _rankScroll.scrollSensitivity = 30f;
+        _rankScroll.inertia = false;
+        _rankScroll.scrollSensitivity = 22f;
 
         GameObject viewport = new("Viewport", typeof(RectTransform));
         viewport.transform.SetParent(scrollObj.transform, false);
@@ -464,39 +337,77 @@ internal static class MclslRankWindow
 
         GameObject bottom = new("BottomBar", typeof(RectTransform));
         bottom.transform.SetParent(parent, false);
-        SetRect(bottom, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 13), new Vector2(CenterWidth, 28));
+        SetRect(bottom, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 15), new Vector2(CenterWidth, 20));
         CreateNavButton(bottom.transform, "ToTop", "置顶", new Vector2(0.32f, 0.5f), ToTop);
         CreateNavButton(bottom.transform, "Refresh", "更新", new Vector2(0.50f, 0.5f), RefreshAll);
         CreateNavButton(bottom.transform, "ToBottom", "置底", new Vector2(0.68f, 0.5f), ToBottom);
 
-        _countText = CreateText("Count", parent, "共 0 人", 10, MclslUiTheme.AccentGold);
-        SetRect(_countText.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 43), new Vector2(CenterWidth, 18));
+        _countText = CreateText("Count", parent, "共 0 人", 9, MclslUiTheme.RankAccentSecondary);
+        SetRect(_countText.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 39), new Vector2(CenterWidth, 17));
 
-        _emptyText = CreateText("Empty", parent, "暂无记录", 14, new Color(0.64f, 0.64f, 0.64f));
-        SetRect(_emptyText.gameObject, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), size: new Vector2(200, 50));
+        _emptyText = CreateText("Empty", parent, "暂无入榜角色", 11, MclslUiTheme.RankTextMuted);
+        SetRect(_emptyText.gameObject, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), pos: new Vector2(0, -25), size: new Vector2(180, 40));
+    }
+
+    private static void CreateRankTableFrame(Transform parent)
+    {
+        GameObject outer = new("玄黄榜框", typeof(RectTransform), typeof(Image));
+        outer.transform.SetParent(parent, false);
+        SetRect(outer, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -2), new Vector2(CenterWidth + 8f, WindowHeight - 24f));
+        outer.GetComponent<Image>().color = MclslUiTheme.RankFrameEdge;
+        outer.GetComponent<Image>().raycastTarget = false;
+
+        GameObject inner = new("玄黄榜内页", typeof(RectTransform), typeof(Image));
+        inner.transform.SetParent(outer.transform, false);
+        SetRect(inner, Vector2.zero, Vector2.one, offsetMin: new Vector2(1.5f, 1.5f), offsetMax: new Vector2(-1.5f, -1.5f));
+        inner.GetComponent<Image>().color = MclslUiTheme.RankSurfaceDeep;
+        inner.GetComponent<Image>().raycastTarget = false;
+    }
+
+    private static void CreateRankTableHeader(Transform parent)
+    {
+        GameObject header = new("榜单列名", typeof(RectTransform), typeof(Image));
+        header.transform.SetParent(parent, false);
+        SetRect(header, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -83), new Vector2(CenterWidth, 22));
+        header.GetComponent<Image>().color = MclslUiTheme.RankButton;
+        CreatePanelAccent(header.transform, MclslUiTheme.RankAccentPrimary, 1f);
+        CreateHeaderLabel(header.transform, "榜", 4, 22, TextAnchor.MiddleCenter);
+        CreateHeaderLabel(header.transform, "姓名/灵根", 55, 98, TextAnchor.MiddleLeft);
+        CreateHeaderLabel(header.transform, "境界", 158, 54, TextAnchor.MiddleCenter);
+        CreateHeaderLabel(header.transform, "战力", 216, 58, TextAnchor.MiddleCenter);
+        CreateHeaderLabel(header.transform, "归属", 279, 72, TextAnchor.MiddleCenter);
+    }
+
+    private static void CreateHeaderLabel(Transform parent, string value, float x, float width, TextAnchor alignment)
+    {
+        Text label = CreateText("列_" + value, parent, value, 8, MclslUiTheme.RankAccentSecondary);
+        label.alignment = alignment;
+        label.fontStyle = FontStyle.Bold;
+        SetRect(label.gameObject, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(x, 0), new Vector2(width, 18));
     }
 
     private static void CreateRightPanel(Transform parent)
     {
         GameObject panel = new("RightPanel", typeof(RectTransform), typeof(Image));
         panel.transform.SetParent(parent, false);
-        SetRect(panel, new Vector2(1, 0), new Vector2(1, 1), new Vector2(1, 0.5f), new Vector2(-10, 0), new Vector2(RightPanelWidth, -78));
-        panel.GetComponent<Image>().color = MclslUiTheme.SurfacePanel;
+        SetRect(panel, new Vector2(1, 0), new Vector2(1, 1), new Vector2(1, 0.5f), new Vector2(-8, 0), new Vector2(RightPanelWidth, -72));
+        panel.GetComponent<Image>().color = MclslUiTheme.RankSurfacePanel;
         panel.AddComponent<MclslRankRightClickHandler>().BlockRightClick = true;
-        CreatePanelAccent(panel.transform, MclslUiTheme.AccentBlue, 1.5f);
-        CreateSectionTitle(panel.transform, "排序卷", new Vector2(0, -7));
+        CreatePanelAccent(panel.transform, MclslUiTheme.RankAccentSecondary, 1.5f);
+        CreateSectionTitle(panel.transform, "排序", new Vector2(0, -6));
 
-        GameObject scroll = CreateScrollView(panel.transform, "SortScroll", new Vector2(5, 30), new Vector2(-5, -25));
+        GameObject scroll = CreateScrollView(panel.transform, "SortScroll", new Vector2(6, 36), new Vector2(-6, -31));
         Transform sortContent = scroll.transform.Find("Viewport/Content");
-        _selectedSortContainer = CreateTitledGrid(sortContent, "当前顺序", 26, 4, false);
-        _availableSortContainer = CreateTitledGrid(sortContent, "可选指标", 26, 4, true);
+        int sideColumns = ResolveSideGridColumns();
+        _selectedSortContainer = CreateTitledGrid(sortContent, "当前排序", SideGridCellSize, sideColumns, false);
+        _availableSortContainer = CreateTitledGrid(sortContent, "可选排序", SideGridCellSize, sideColumns, true);
         CreateSearchSection(sortContent);
         CreateAvailableSortButtons();
         RefreshSelectedSortButtons();
 
-        Button clear = CreateButton(panel.transform, "ClearSort", "恢复默认", new Vector2(88, 22), ClearSortKeys);
-        SetRect(clear.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 11), new Vector2(88, 22));
-        SetButtonColor(clear, MclslUiTheme.Danger);
+        Button clear = CreateButton(panel.transform, "ClearSort", "清空排序", new Vector2(82, 20), ClearSortKeys);
+        SetRect(clear.gameObject, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 12), new Vector2(82, 20));
+        SetButtonColor(clear, MclslUiTheme.RankDanger);
     }
 
     private static void RefreshAll()
@@ -513,7 +424,7 @@ internal static class MclslRankWindow
         ClearCards();
         if (resetScroll && _contentRect != null) _contentRect.anchoredPosition = Vector2.zero;
         Entries.Clear();
-        IReadOnlyList<MclslRankEntry> snapshot = MclslRankSnapshotSource.EntriesSnapshot(forceRebuild: true);
+        IReadOnlyList<MclslRankEntry> snapshot = MclslRankSnapshotSource.EntriesSnapshot(forceRebuild: false);
         string normalizedQuery = NormalizeSearch(_searchQuery);
         for (int i = 0; i < snapshot.Count; i++)
         {
@@ -530,7 +441,8 @@ internal static class MclslRankWindow
             ? "共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人"
             : "搜索：" + _searchQuery.Trim() + "  共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人";
         if (_rankSummaryText != null)
-            _rankSummaryText.text = ActiveSortKeys.Count == 0 ? "以综合战力为首序" : "首序：" + ActiveSortKeys[0].Def.Name;
+            _rankSummaryText.text = "总计入榜角色：" + Entries.Count.ToString(CultureInfo.InvariantCulture)
+                + "名｜" + (ActiveSortKeys.Count == 0 ? "按综合战力排序" : "首序：" + ActiveSortKeys[0].Def.Name);
         _emptyText.gameObject.SetActive(Entries.Count == 0);
         CreateInitialVisibleCards();
         RefreshSelectedSortButtons();
@@ -681,18 +593,22 @@ internal static class MclslRankWindow
     {
         GameObject card = new("MclslRankCardVNext", typeof(RectTransform), typeof(Image), typeof(Button), typeof(MclslRankCardView));
         RectTransform rect = card.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(CenterWidth - 10f, CardHeight - 4f);
+        rect.anchorMin = new Vector2(0.5f, 1f);
+        rect.anchorMax = new Vector2(0.5f, 1f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = new Vector2(CenterWidth - 8f, CardHeight - 1f);
         Image bg = card.GetComponent<Image>();
         bg.sprite = SpriteTextureLoader.getSprite("ui/special/backgroundKingdomElement");
         bg.type = Image.Type.Sliced;
         card.GetComponent<Button>().targetGraphic = bg;
-        CreateCardText("RankText", card.transform, new Vector2(5, 0), new Vector2(32, 38), 14, TextAnchor.MiddleCenter, MclslUiTheme.AccentGold);
+        CreateCardText("RankText", card.transform, new Vector2(4, 0), new Vector2(22, 32), 11, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentSecondary);
         CreateAvatarElement(card.transform);
-        CreateCardText("NameText", card.transform, new Vector2(80, 10), new Vector2(176, 20), 10, TextAnchor.MiddleLeft, MclslUiTheme.TextPrimary);
-        CreateCardText("DetailText", card.transform, new Vector2(80, -10), new Vector2(176, 18), 8, TextAnchor.MiddleLeft, MclslUiTheme.TextMuted);
-        CreateCardText("PowerText", card.transform, new Vector2(260, 0), new Vector2(95, 34), 10, TextAnchor.MiddleCenter, MclslUiTheme.AccentBlue);
-        CreateCardText("RightText", card.transform, new Vector2(355, 9), new Vector2(82, 18), 9, TextAnchor.MiddleCenter, MclslUiTheme.AccentGold);
-        CreateCardText("RealmText", card.transform, new Vector2(355, -10), new Vector2(82, 18), 9, TextAnchor.MiddleCenter, new Color(1f, 0.6f, 0.2f));
+        CreateCardText("NameText", card.transform, new Vector2(55, 5), new Vector2(98, 15), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankTextPrimary);
+        CreateCardText("DetailText", card.transform, new Vector2(55, -7), new Vector2(98, 11), 7, TextAnchor.MiddleLeft, MclslUiTheme.RankTextMuted);
+        CreateCardText("RealmText", card.transform, new Vector2(158, 0), new Vector2(54, 31), 8, TextAnchor.MiddleCenter, MclslUiTheme.RankTextPrimary);
+        CreateCardText("PowerText", card.transform, new Vector2(216, 0), new Vector2(58, 31), 8, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentPrimary);
+        CreateCardText("RightText", card.transform, new Vector2(279, 0), new Vector2(72, 31), 7, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentSecondary);
         card.SetActive(false);
         return card;
     }
@@ -715,16 +631,16 @@ internal static class MclslRankWindow
             rect.anchorMin = new Vector2(0, 0.5f);
             rect.anchorMax = new Vector2(0, 0.5f);
             rect.pivot = new Vector2(0, 0.5f);
-            rect.anchoredPosition = new Vector2(38, 0);
-            rect.localScale = new Vector3(0.55f, 0.55f, 0.55f);
+            rect.anchoredPosition = new Vector2(28, 0);
+            rect.localScale = new Vector3(0.42f, 0.42f, 0.42f);
             avatar.show_banner_kingdom = true;
             avatar.show_banner_clan = false;
             if (avatar.kingdomBanner != null) avatar.kingdomBanner.gameObject.SetActive(false);
             if (avatar.clanBanner != null) avatar.clanBanner.gameObject.SetActive(false);
             return;
         }
-        Image image = CreateImage("AvatarFallback", parent, GetSafeSprite("ui/icons/iconQuestionMark"), Color.white, new Vector2(30, 30));
-        SetRect(image.gameObject, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(30, 0), new Vector2(30, 30));
+        Image image = CreateImage("AvatarFallback", parent, GetSafeSprite("ui/icons/iconQuestionMark"), Color.white, new Vector2(22, 22));
+        SetRect(image.gameObject, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(28, 0), new Vector2(22, 22));
     }
 
     private static void RefreshFilterChoices()
@@ -1084,6 +1000,11 @@ internal static class MclslRankWindow
         list.Clear();
     }
 
+    private static int ResolveSideGridColumns()
+    {
+        return LeftPanelWidth < 112f ? 3 : 4;
+    }
+
     private static Transform CreateTitledGrid(Transform parent, string title, int cellSize, int columns, bool collapsible)
     {
         GameObject container = new("Grid_" + title, typeof(RectTransform), typeof(VerticalLayoutGroup), typeof(ContentSizeFitter));
@@ -1104,9 +1025,9 @@ internal static class MclslRankWindow
         Image titleImage = titleBar.GetComponent<Image>();
         titleImage.sprite = SpriteTextureLoader.getSprite("ui/special/darkInputFieldEmpty");
         titleImage.type = Image.Type.Sliced;
-        titleImage.color = new Color(0.25f, 0.25f, 0.25f, 0.9f);
+        titleImage.color = MclslUiTheme.RankButton;
         titleBar.GetComponent<LayoutElement>().preferredHeight = 20f;
-        Text titleText = CreateText("Title", titleBar.transform, title, 10, new Color(1f, 0.9f, 0.7f));
+        Text titleText = CreateText("Title", titleBar.transform, title, 10, MclslUiTheme.RankAccentSecondary);
         titleText.alignment = TextAnchor.MiddleLeft;
         SetRect(titleText.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(5, 0), offsetMax: new Vector2(-42, 0));
 
@@ -1116,7 +1037,7 @@ internal static class MclslRankWindow
         Image gridImage = gridContainer.GetComponent<Image>();
         gridImage.sprite = SpriteTextureLoader.getSprite("ui/special/windowInnerSliced");
         gridImage.type = Image.Type.Sliced;
-        gridImage.color = new Color(0.15f, 0.15f, 0.15f, 0.8f);
+        gridImage.color = MclslUiTheme.RankSurfaceDeep;
         gridContainer.GetComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
         VerticalLayoutGroup gridContainerLayout = gridContainer.GetComponent<VerticalLayoutGroup>();
         gridContainerLayout.childControlHeight = true;
@@ -1137,7 +1058,7 @@ internal static class MclslRankWindow
 
         if (collapsible)
         {
-            Text toggleText = CreateText("Toggle", titleBar.transform, "[折叠]", 9, new Color(0.7f, 0.7f, 0.7f));
+            Text toggleText = CreateText("Toggle", titleBar.transform, "[折叠]", 9, MclslUiTheme.RankTextMuted);
             toggleText.alignment = TextAnchor.MiddleRight;
             SetRect(toggleText.gameObject, new Vector2(1, 0), new Vector2(1, 1), new Vector2(1, 0.5f), new Vector2(-5, 0), new Vector2(50, 0));
             Button toggle = titleBar.AddComponent<Button>();
@@ -1178,9 +1099,9 @@ internal static class MclslRankWindow
         Image titleImage = titleBar.GetComponent<Image>();
         titleImage.sprite = SpriteTextureLoader.getSprite("ui/special/darkInputFieldEmpty");
         titleImage.type = Image.Type.Sliced;
-        titleImage.color = new Color(0.25f, 0.25f, 0.25f, 0.75f);
+        titleImage.color = MclslUiTheme.RankButton;
         titleBar.GetComponent<LayoutElement>().preferredHeight = 20f;
-        Text titleText = CreateText("Title", titleBar.transform, "角色搜索", 10, new Color(1f, 0.9f, 0.7f));
+        Text titleText = CreateText("Title", titleBar.transform, "姓名搜索", 10, MclslUiTheme.RankAccentSecondary);
         titleText.alignment = TextAnchor.MiddleLeft;
         SetRect(titleText.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(5, 0), offsetMax: new Vector2(-5, 0));
 
@@ -1189,12 +1110,12 @@ internal static class MclslRankWindow
         Image inputImage = inputObj.GetComponent<Image>();
         inputImage.sprite = SpriteTextureLoader.getSprite("ui/special/darkInputFieldEmpty");
         inputImage.type = Image.Type.Sliced;
-        inputImage.color = new Color(0.05f, 0.05f, 0.05f, 0.85f);
+        inputImage.color = MclslUiTheme.RankSurfaceDeep;
         inputObj.GetComponent<LayoutElement>().preferredHeight = 26f;
-        Text inputText = CreateText("Text", inputObj.transform, string.Empty, 10, Color.white);
+        Text inputText = CreateText("Text", inputObj.transform, string.Empty, 10, MclslUiTheme.RankTextPrimary);
         inputText.alignment = TextAnchor.MiddleLeft;
         SetRect(inputText.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(8, 0), offsetMax: new Vector2(-8, 0));
-        Text placeholder = CreateText("Placeholder", inputObj.transform, "输入角色名字", 10, new Color(0.7f, 0.7f, 0.7f, 0.75f));
+        Text placeholder = CreateText("Placeholder", inputObj.transform, "输入角色姓名", 10, MclslUiTheme.RankTextMuted);
         placeholder.alignment = TextAnchor.MiddleLeft;
         SetRect(placeholder.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(8, 0), offsetMax: new Vector2(-8, 0));
         _searchInput = inputObj.GetComponent<InputField>();
@@ -1320,8 +1241,8 @@ internal static class MclslRankWindow
 
     private static Button CreateNavButton(Transform parent, string name, string text, Vector2 anchor, Action onClick)
     {
-        Button button = CreateButton(parent, name, text, new Vector2(58, 22), onClick);
-        SetRect(button.gameObject, anchor, anchor, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(58, 22));
+        Button button = CreateButton(parent, name, text, new Vector2(54, 20), onClick);
+        SetRect(button.gameObject, anchor, anchor, new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(54, 20));
         return button;
     }
 
@@ -1332,12 +1253,13 @@ internal static class MclslRankWindow
         Image image = obj.GetComponent<Image>();
         image.sprite = SpriteTextureLoader.getSprite("ui/special/backgroundKingdomElement");
         image.type = Image.Type.Sliced;
+        image.color = MclslUiTheme.RankButton;
         SetRect(obj, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0.5f, 1), pos ?? Vector2.zero, size);
         Button button = obj.GetComponent<Button>();
         button.targetGraphic = image;
         button.transition = Selectable.Transition.None;
         button.onClick.AddListener(() => onClick?.Invoke());
-        Text label = CreateText("Text", obj.transform, text, 9, Color.white);
+        Text label = CreateText("Text", obj.transform, text, 9, MclslUiTheme.RankTextPrimary);
         SetRect(label.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(2, 0), offsetMax: new Vector2(-2, 0));
         return button;
     }
@@ -1349,10 +1271,11 @@ internal static class MclslRankWindow
         Image bg = obj.GetComponent<Image>();
         bg.sprite = SpriteTextureLoader.getSprite("ui/special/backgroundKingdomElement");
         bg.type = Image.Type.Sliced;
+        bg.color = MclslUiTheme.RankButton;
         Dropdown dropdown = obj.GetComponent<Dropdown>();
         for (int i = 0; i < options.Length; i++) dropdown.options.Add(new Dropdown.OptionData(options[i]));
         dropdown.onValueChanged.AddListener(index => onChange(index));
-        Text label = CreateText("Label", obj.transform, string.Empty, 10, Color.white);
+        Text label = CreateText("Label", obj.transform, string.Empty, 8, MclslUiTheme.RankTextPrimary);
         SetRect(label.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(5, 0), offsetMax: new Vector2(-20, 0));
         dropdown.captionText = label;
         GameObject template = CreateDropdownTemplate(obj.transform, bg.sprite);
@@ -1360,7 +1283,7 @@ internal static class MclslRankWindow
         dropdown.itemText = template.transform.Find("Viewport/Content/Item/Item Label")?.GetComponent<Text>();
         template.SetActive(false);
         dropdown.RefreshShownValue();
-        obj.GetComponent<LayoutElement>().preferredHeight = 25f;
+        obj.GetComponent<LayoutElement>().preferredHeight = 22f;
         return dropdown;
     }
 
@@ -1368,10 +1291,11 @@ internal static class MclslRankWindow
     {
         GameObject template = new("Template", typeof(RectTransform), typeof(Image), typeof(Mask), typeof(ScrollRect));
         template.transform.SetParent(parent, false);
-        SetRect(template, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0.5f, 1), Vector2.zero, new Vector2(0, 120));
+        SetRect(template, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0.5f, 1), Vector2.zero, new Vector2(0, 100));
         Image bg = template.GetComponent<Image>();
         bg.sprite = sprite;
         bg.type = Image.Type.Sliced;
+        bg.color = MclslUiTheme.RankSurfacePanel;
         template.GetComponent<Mask>().showMaskGraphic = true;
         GameObject viewport = new("Viewport", typeof(RectTransform));
         viewport.transform.SetParent(template.transform, false);
@@ -1385,7 +1309,7 @@ internal static class MclslRankWindow
         item.transform.SetParent(content.transform, false);
         SetRect(item, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0.5f, 1), size: new Vector2(0, 20));
         item.GetComponent<LayoutElement>().preferredHeight = 20;
-        Text itemText = CreateText("Item Label", item.transform, string.Empty, 9, Color.white);
+        Text itemText = CreateText("Item Label", item.transform, string.Empty, 8, MclslUiTheme.RankTextPrimary);
         SetRect(itemText.gameObject, Vector2.zero, Vector2.one, offsetMin: new Vector2(5, 0), offsetMax: new Vector2(-5, 0));
         ScrollRect scroll = template.GetComponent<ScrollRect>();
         scroll.content = contentRectLocal;
@@ -1399,7 +1323,7 @@ internal static class MclslRankWindow
         GameObject scrollObj = new(name, typeof(RectTransform), typeof(Image), typeof(ScrollRect));
         scrollObj.transform.SetParent(parent, false);
         SetRect(scrollObj, Vector2.zero, Vector2.one, offsetMin: offsetMin, offsetMax: offsetMax);
-        scrollObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.05f);
+        scrollObj.GetComponent<Image>().color = MclslUiTheme.RankSurfaceDeep;
         ScrollRect scroll = scrollObj.GetComponent<ScrollRect>();
         scroll.horizontal = false;
         scroll.vertical = true;
@@ -1428,7 +1352,7 @@ internal static class MclslRankWindow
 
     private static void CreateSectionTitle(Transform parent, string text, Vector2 pos)
     {
-        Text title = CreateText("Title", parent, text, 10, new Color(1f, 0.84f, 0f));
+        Text title = CreateText("Title", parent, text, 10, MclslUiTheme.RankAccentSecondary);
         SetRect(title.gameObject, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0.5f, 1), pos, new Vector2(0, 16));
     }
 

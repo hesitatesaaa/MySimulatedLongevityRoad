@@ -189,6 +189,7 @@ internal static class MclslRankSnapshotSource
         MclslActorCultivationView view = MclslActorCultivationQuery.Build(actor);
         int realmIndex = string.IsNullOrWhiteSpace(view.RealmId) ? -1 : MclslRealmIds.Index(view.RealmId);
         double power = CalculatePower(actor, view, realmIndex);
+        string kingdomName = KingdomName(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -199,8 +200,9 @@ internal static class MclslRankSnapshotSource
             GiftName = view.GiftName,
             RootText = string.IsNullOrWhiteSpace(view.SpiritualRootAttributes) ? view.GiftName : view.SpiritualRootAttributes.Split('、')[0],
             RootAttributes = view.SpiritualRootAttributes,
-            NormalizedSearchText = NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(view.SpiritualRootAttributes),
+            NormalizedSearchText = NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(view.SpiritualRootAttributes) + NormalizeSearch(kingdomName),
             ExtraText = Extra(view),
+            KingdomName = kingdomName,
             Power = power,
             RealmIndex = realmIndex,
             Aptitude = view.Aptitude,
@@ -234,6 +236,7 @@ internal static class MclslRankSnapshotSource
         catch { name = "修士" + MclslActorAccessor.Id(actor); }
         int realmIndex = string.IsNullOrWhiteSpace(realm) ? -1 : MclslRealmIds.Index(realm);
         int essence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
+        string kingdomName = KingdomName(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -244,10 +247,11 @@ internal static class MclslRankSnapshotSource
             GiftName = rootText,
             RootText = rootText,
             RootAttributes = rootAttributes,
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(rootAttributes),
+            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(rootAttributes) + NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? essence + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
+            KingdomName = kingdomName,
             Power = Math.Max(1d, realmIndex + 1),
             RealmIndex = realmIndex,
             Aptitude = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0)),
@@ -276,6 +280,7 @@ internal static class MclslRankSnapshotSource
         string realmName = string.IsNullOrWhiteSpace(realm) ? "感气" : MclslRealmIds.Display(realm);
         int essence = 0;
         try { essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0); } catch { }
+        string kingdomName = KingdomName(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -286,14 +291,25 @@ internal static class MclslRankSnapshotSource
             GiftName = "灵根",
             RootText = "未明",
             RootAttributes = "未明",
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName),
+            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? Math.Max(0, essence) + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
+            KingdomName = kingdomName,
             Power = 1d,
             RealmIndex = string.IsNullOrWhiteSpace(realm) ? -1 : MclslRealmIds.Index(realm),
             TrueEssence = Math.Max(0, essence)
         };
+    }
+
+    private static string KingdomName(Actor actor)
+    {
+        try
+        {
+            string name = actor?.kingdom?.data?.name;
+            return string.IsNullOrWhiteSpace(name) ? "无归属" : name;
+        }
+        catch { return "无归属"; }
     }
 
     private static void CaptureFilterChoices(

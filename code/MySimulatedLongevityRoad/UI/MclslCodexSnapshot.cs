@@ -47,6 +47,7 @@ internal sealed class MclslCodexSnapshot
     internal readonly List<MclslRunEventRecord> AncientSecretRealmEvents = new();
     internal readonly List<MclslRunEventRecord> AncientWorldSoulObservationEvents = new();
     internal readonly List<MclslRunEventRecord> DaoStruggleEventsSorted = new();
+    internal readonly List<MclslRunEventRecord> HuanzhenEventsSorted = new();
     internal readonly Dictionary<string, int> EventCategoryCounts = new(StringComparer.Ordinal);
     internal readonly List<MclslDeathRecord> DeathsByYear = new();
     internal readonly Dictionary<string, List<MclslDeathRecord>> DeathsByRealm = new(StringComparer.Ordinal);
@@ -261,6 +262,10 @@ internal sealed class MclslCodexSnapshot
             if (string.Equals(category, MclslEventCatalog.DaoStruggle, StringComparison.Ordinal)
                 && snapshot.DaoStruggleEventsSorted.Count < 120)
                 snapshot.DaoStruggleEventsSorted.Add(snapshot.VisibleEventsSorted[i]);
+            string eventType = snapshot.VisibleEventsSorted[i].EventType ?? string.Empty;
+            if (eventType.StartsWith("huanzhen_", StringComparison.Ordinal)
+                && snapshot.HuanzhenEventsSorted.Count < 120)
+                snapshot.HuanzhenEventsSorted.Add(snapshot.VisibleEventsSorted[i]);
             if (string.Equals(category, MclslEventCatalog.AncientWorld, StringComparison.Ordinal))
             {
                 MclslRunEventRecord record = snapshot.VisibleEventsSorted[i];

@@ -76,10 +76,10 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
         string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;
         if (!string.IsNullOrWhiteSpace(item.ExtraText) && !string.Equals(detail, item.ExtraText, StringComparison.Ordinal))
             detail += " · " + item.ExtraText;
-        SetText("DetailText", detail, MclslUiTheme.TextMuted);
-        SetText("PowerText", sortValue, new Color(0.4f, 0.8f, 1f));
-        SetText("RightText", string.IsNullOrWhiteSpace(item.GiftName) ? item.RootText : item.GiftName, new Color(1f, 0.84f, 0f));
-        SetText("RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", ""), new Color(1f, 0.6f, 0.2f));
+        SetText("DetailText", detail, MclslUiTheme.RankTextMuted);
+        SetText("PowerText", sortValue, MclslUiTheme.RankAccentPrimary);
+        SetText("RightText", string.IsNullOrWhiteSpace(item.KingdomName) ? "无归属" : item.KingdomName, MclslUiTheme.RankAccentSecondary);
+        SetText("RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", ""), MclslUiTheme.RankTextPrimary);
 
         UiUnitAvatarElement avatar = GetComponentInChildren<UiUnitAvatarElement>(true);
         if (avatar != null)
@@ -127,9 +127,9 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
 
     private static Color RankColor(int rank)
     {
-        if (rank == 0) return new Color(1f, 0.84f, 0f);
-        if (rank == 1) return new Color(0.75f, 0.75f, 0.75f);
-        if (rank == 2) return new Color(0.8f, 0.5f, 0.2f);
-        return Color.white;
+        if (rank == 0) return new Color(0.66f, 0.77f, 0.79f);
+        if (rank == 1) return new Color(0.55f, 0.68f, 0.72f);
+        if (rank == 2) return new Color(0.46f, 0.59f, 0.65f);
+        return MclslUiTheme.RankTextPrimary;
     }
 }

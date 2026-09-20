@@ -228,7 +228,7 @@ internal static class MclslTraitRegistration
         foreach (MclslAptitudeGiftDefinition gift in MclslAptitudeGiftCatalog.Gifts.OrderBy(x => x.Level))
             AddGift(gift);
 
-        AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", false, true, 0f, 0f, 0f, 0f);
+        AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
         AddSpecial(WorldSoulEntityTraitId, "trait/TianDiZhiPo", false, false, 2500f, 2500000f, 250000f, 2.35f, 240f);
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
@@ -901,6 +901,16 @@ internal static class MclslTraitRegistration
     private static void TryAutoCollectGift(Actor actor, string traitId)
     {
         if (ShouldAutoCollectGift(traitId)) TryMarkFavorite(actor);
+    }
+
+    internal static void TryAutoFavoriteHuanzhenHost(Actor actor)
+    {
+        if (MclslRuntimeSettings.AutoCollectHuanzhenHost) TryMarkFavorite(actor);
+    }
+
+    internal static void TryAutoFavoriteMaobaoInscription(Actor actor)
+    {
+        if (MclslRuntimeSettings.AutoCollectMaobaoInscription) TryMarkFavorite(actor);
     }
 
     private static bool ShouldAutoCollectRealm(int realmIndex)

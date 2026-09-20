@@ -19,8 +19,11 @@ public static class MclslConfig
     public static void EnableFactionPolicyAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void EnableSurvivalAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void EnableHuanzhenCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void AutoHuanzhenAnchorCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void HuanzhenAnchorIntervalCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void HuanzhenSafetyGapCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void AutoCollectHuanzhenHostCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void AutoCollectMaobaoInscriptionCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void TransmissionYearCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectYuanYingCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectHuaShenCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());

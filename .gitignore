@@ -19,6 +19,8 @@ coverage*/
 code_broken_*/
 xj_0_7_announce_scan/
 work/
+# 本地开发者工具会随本机发布包更新，但不进入 GitHub 仓库。
+DeveloperTools/
 .DS_Store
 Thumbs.db
 .env

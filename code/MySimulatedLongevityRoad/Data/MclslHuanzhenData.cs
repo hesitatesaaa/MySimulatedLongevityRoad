@@ -18,12 +18,10 @@ internal sealed class MclslHuanzhenExternalState
     public int NaturalArrivalYear { get; set; } = -1;
     public int SpaceEssenceBase { get; set; }
     public int SpaceEssenceUpdatedYear { get; set; } = -1;
-    public int LastSimulationYear { get; set; } = -1;
-    public int TotalSimulations { get; set; }
     public List<MclslHuanzhenAnchorRecord> Anchors { get; set; } = new();
     public MclslHuanzhenPendingRestore PendingRestore { get; set; } = new();
     public List<MclslHuanzhenHistoryRecord> History { get; set; } = new();
-    public List<MclslHuanzhenSimulationRecord> Simulations { get; set; } = new();
+    public List<MclslHuanzhenEssenceRecord> EssenceHistory { get; set; } = new();
     public List<MclslHuanzhenLegacyRecord> Legacies { get; set; } = new();
 }
 
@@ -39,13 +37,13 @@ internal sealed class MclslHuanzhenLegacyRecord
     public MclslHuanzhenCultivationSnapshot Snapshot { get; set; } = new();
 }
 
-internal sealed class MclslHuanzhenSimulationRecord
+internal sealed class MclslHuanzhenEssenceRecord
 {
     public int Year { get; set; }
-    public string WorldName { get; set; } = string.Empty;
-    public string Outcome { get; set; } = string.Empty;
-    public string Reward { get; set; } = string.Empty;
-    public int Score { get; set; }
+    public string Source { get; set; } = string.Empty;
+    public string Detail { get; set; } = string.Empty;
+    public int Amount { get; set; }
+    public int Balance { get; set; }
 }
 
 internal sealed class MclslHuanzhenAnchorRecord
@@ -57,6 +55,7 @@ internal sealed class MclslHuanzhenAnchorRecord
     public string HostIdentity { get; set; } = string.Empty;
     public string HostName { get; set; } = string.Empty;
     public string RealmIdAtAnchor { get; set; } = string.Empty;
+    public MclslHuanzhenCultivationSnapshot Snapshot { get; set; } = new();
 }
 
 internal sealed class MclslHuanzhenPendingRestore
@@ -71,6 +70,7 @@ internal sealed class MclslHuanzhenPendingRestore
     public int DeathYear { get; set; }
     public int LoopDepth { get; set; }
     public int LoadAttempts { get; set; }
+    public string Trigger { get; set; } = "death";
     public MclslHuanzhenCultivationSnapshot Cultivation { get; set; } = new();
 }
 

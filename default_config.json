@@ -145,15 +145,23 @@
     {
       "Id": "MCLSL_config_enable_huanzhen",
       "Name": "启用还真回溯",
-      "Description": "启用后，还真会在本世第5至20个可处理年份间随机择一名合格小人作为唯一持有者，并建立安全锚点、开启还真空间与死亡回溯。关闭时只保留已有特质与档案。",
+      "Description": "启用后，还真会在本世第5至20个可处理年份间随机择一名合格小人作为唯一持有者，并允许在还真空间消耗灵蕴手动建立锚点、开启死亡回溯。关闭时只保留已有特质与档案。",
       "Type": "SWITCH",
       "BoolVal": true,
       "Callback": "MclslConfig:EnableHuanzhenCallBack"
     },
     {
+      "Id": "MCLSL_config_auto_huanzhen_anchor",
+      "Name": "自动建立还真锚点",
+      "Description": "灵蕴达到八十点且满足安全间隔时自动建立锚点；锚点满后自动替换最旧的一枚。手动锚定始终保留。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoHuanzhenAnchorCallBack"
+    },
+    {
       "Id": "MCLSL_config_huanzhen_anchor_interval",
-      "Name": "还真锚点间隔",
-      "Description": "两次自动建立还真锚点之间至少相隔的世界年份。数值越大，外部锚点文件越少。",
+      "Name": "自动锚点间隔",
+      "Description": "自动建立或替换还真锚点之间至少相隔的世界年份；手动锚定不受此项限制。",
       "Type": "INT_SLIDER",
       "IntVal": 100,
       "MinIntVal": 25,
@@ -171,6 +179,22 @@
       "MaxIntVal": 200,
       "StepIntVal": 10,
       "Callback": "MclslConfig:HuanzhenSafetyGapCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_huanzhen_host",
+      "Name": "还真宿主自动收藏（原版）",
+      "Description": "还真宿主出现后自动加入 WorldBox 原版人物收藏；猫宝仍须手动刻名。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectHuanzhenHostCallBack"
+    },
+    {
+      "Id": "MCLSL_config_auto_collect_maobao_inscription",
+      "Name": "猫宝刻名自动收藏（原版）",
+      "Description": "玩家手动刻名或刷新留影成功后，将人物加入 WorldBox 原版收藏；不会自动刻名。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectMaobaoInscriptionCallBack"
     },
     {
       "Id": "MCLSL_config_auto_collect_yuanying",

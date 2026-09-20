@@ -31,8 +31,11 @@ internal static class MclslRuntimeSettings
     private static bool _factionPolicyAnnouncementsEnabled = true;
     private static bool _survivalAnnouncementsEnabled = true;
     private static bool _huanzhenEnabled;
+    private static bool _autoHuanzhenAnchor = true;
     private static int _huanzhenAnchorIntervalYears = 100;
     private static int _huanzhenSafetyGapYears = 40;
+    private static bool _autoCollectHuanzhenHost = true;
+    private static bool _autoCollectMaobaoInscription = true;
     private static int _transmissionYear = 1000;
     private static bool _autoCollectYuanYing = true;
     private static bool _autoCollectHuaShen = true;
@@ -65,8 +68,11 @@ internal static class MclslRuntimeSettings
     internal static bool FactionPolicyAnnouncementsEnabled => _factionPolicyAnnouncementsEnabled;
     internal static bool SurvivalAnnouncementsEnabled => _survivalAnnouncementsEnabled;
     internal static bool HuanzhenEnabled => _huanzhenEnabled;
+    internal static bool AutoHuanzhenAnchor => _autoHuanzhenAnchor;
     internal static int HuanzhenAnchorIntervalYears => _huanzhenAnchorIntervalYears;
     internal static int HuanzhenSafetyGapYears => _huanzhenSafetyGapYears;
+    internal static bool AutoCollectHuanzhenHost => _autoCollectHuanzhenHost;
+    internal static bool AutoCollectMaobaoInscription => _autoCollectMaobaoInscription;
     internal static int TransmissionYear => _transmissionYear;
     internal static bool AutoCollectYuanYing => _autoCollectYuanYing;
     internal static bool AutoCollectHuaShen => _autoCollectHuaShen;
@@ -103,8 +109,11 @@ internal static class MclslRuntimeSettings
         _factionPolicyAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_faction_policy_announcements", _factionPolicyAnnouncementsEnabled);
         _survivalAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_survival_announcements", _survivalAnnouncementsEnabled);
         _huanzhenEnabled = ReadBool(config, "MCLSL_config_enable_huanzhen", _huanzhenEnabled);
+        _autoHuanzhenAnchor = ReadBool(config, "MCLSL_config_auto_huanzhen_anchor", _autoHuanzhenAnchor);
         _huanzhenAnchorIntervalYears = Math.Clamp(ReadInt(config, "MCLSL_config_huanzhen_anchor_interval", _huanzhenAnchorIntervalYears), 25, 500);
         _huanzhenSafetyGapYears = Math.Clamp(ReadInt(config, "MCLSL_config_huanzhen_safety_gap", _huanzhenSafetyGapYears), 10, 200);
+        _autoCollectHuanzhenHost = ReadBool(config, "MCLSL_config_auto_collect_huanzhen_host", _autoCollectHuanzhenHost);
+        _autoCollectMaobaoInscription = ReadBool(config, "MCLSL_config_auto_collect_maobao_inscription", _autoCollectMaobaoInscription);
         _transmissionYear = Math.Clamp(ReadInt(config, "MCLSL_config_transmission_year", _transmissionYear), 1000, 3000);
         _autoCollectYuanYing = ReadBool(config, "MCLSL_config_auto_collect_yuanying", _autoCollectYuanYing);
         _autoCollectHuaShen = ReadBool(config, "MCLSL_config_auto_collect_huashen", _autoCollectHuaShen);

@@ -19,6 +19,7 @@ internal static class MclslCodexTabCatalog
         T("仙法不可同修", "ui/Icons/TianDiZhiLi"),
         T("修士生死", "ui/Icons/SiWang"),
         T("还真轮回", "ui/Icons/HuanZhen"),
+        T("还真纪事", "ui/Icons/HuanZhen"),
         T("世界纪事", "ui/Icons/XuanHuangXianLu")
     };
 

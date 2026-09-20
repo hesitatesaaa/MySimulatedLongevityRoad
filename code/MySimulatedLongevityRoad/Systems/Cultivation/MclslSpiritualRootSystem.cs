@@ -134,6 +134,15 @@ internal static class MclslSpiritualRootSystem
         return checkedRoot && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ImmortalFate, 0) > 0;
     }
 
+    internal static bool HasActualSpiritualRoot(Actor actor)
+    {
+        if (actor?.data == null) return false;
+        if (GiftFromCurrentTrait(actor) != null) return true;
+        if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritualRootCount, 0) > 0) return true;
+        if (!string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootPrimary, string.Empty))) return true;
+        return !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootAttributes, string.Empty));
+    }
+
     internal static bool HasCultivationPotential(Actor actor)
     {
         return actor?.data != null && HasCultivationRootArchive(actor);

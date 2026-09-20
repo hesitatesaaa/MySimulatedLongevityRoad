@@ -48,6 +48,7 @@ internal sealed class MclslWorldRunState
     public List<string> InheritedKnowledgeIds { get; set; } = new();
     public List<MclslKnowledgeDiscoveryRecord> Discoveries { get; set; } = new();
     public List<MclslTimelineAnchorState> TimelineAnchors { get; set; } = new();
+    public List<MclslMaobaoRecord> MaobaoRecords { get; set; } = new();
     public List<MclslRunEventRecord> Events { get; set; } = new();
     public List<MclslDeathRecord> DeathRecords { get; set; } = new();
     public List<MclslFactionMissionRecord> FactionMissions { get; set; } = new();
@@ -100,6 +101,29 @@ internal sealed class MclslTimelineAnchorState
     public bool Succeeded { get; set; }
     public int ResolvedYear { get; set; }
     public string OutcomeCode { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// 猫宝保存的修士时序留影。只记录展示和定位所需的紧凑字段，
+/// 不持有 Actor 引用，也不复制角色完整存档。
+/// </summary>
+internal sealed class MclslMaobaoRecord
+{
+    public string Id { get; set; } = string.Empty;
+    public long ActorId { get; set; }
+    public string ActorName { get; set; } = string.Empty;
+    public string RealmId { get; set; } = string.Empty;
+    public string RealmName { get; set; } = string.Empty;
+    public string CultivationSystemName { get; set; } = string.Empty;
+    public string TechniqueName { get; set; } = string.Empty;
+    public string FactionName { get; set; } = string.Empty;
+    public int FirstRecordedYear { get; set; }
+    public int LastObservedYear { get; set; }
+    public int MapX { get; set; } = -1;
+    public int MapY { get; set; } = -1;
+    public bool Alive { get; set; } = true;
+    public int ObservationCount { get; set; } = 1;
+    public string Inscription { get; set; } = string.Empty;
 }
 
 

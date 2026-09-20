@@ -15,6 +15,7 @@ internal sealed class MclslRankEntry
     internal string RootAttributes = string.Empty;
     internal string NormalizedSearchText = string.Empty;
     internal string ExtraText = string.Empty;
+    internal string KingdomName = string.Empty;
     internal double Power;
     internal int RealmIndex;
     internal int Aptitude;
@@ -82,10 +83,10 @@ internal sealed class MclslRankFilterSetting
     {
         return Type switch
         {
-            MclslRankFilterType.And => new Color(0.25f, 0.55f, 0.25f, 0.95f),
-            MclslRankFilterType.Or => new Color(0.25f, 0.4f, 0.75f, 0.95f),
-            MclslRankFilterType.Not => new Color(0.65f, 0.25f, 0.25f, 0.95f),
-            _ => Color.gray
+            MclslRankFilterType.And => new Color(0.28f, 0.45f, 0.56f, 0.95f),
+            MclslRankFilterType.Or => new Color(0.39f, 0.56f, 0.64f, 0.95f),
+            MclslRankFilterType.Not => new Color(0.48f, 0.31f, 0.31f, 0.95f),
+            _ => new Color(0.30f, 0.41f, 0.48f, 0.95f)
         };
     }
 }

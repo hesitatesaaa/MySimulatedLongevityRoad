@@ -73,6 +73,8 @@ internal static class MclslNativeKillStatisticsSystem
         RefreshKiller(TryGetKiller(victim));
     }
 
+    internal static Actor ResolveKiller(Actor victim) => TryGetKiller(victim);
+
     internal static MclslNativeKillAttemptState CapturePotentialDivertedHit(Actor victim, BaseSimObject attacker)
     {
         if (!(attacker is Actor killer) || killer?.data == null || killer == victim)

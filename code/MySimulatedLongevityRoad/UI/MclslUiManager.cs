@@ -29,6 +29,7 @@ internal static class MclslUiManager
             AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
             AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
             AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
+            AddButton("mclsl.maobao", "猫宝", "打开独立猫宝时序录，照见本世强者、刻名留影并定位在世修士。", MclslCodexWindow.ShowMaobao, "ui/Icons/MaobaoEntrance", "ui/Icons/XuanHuangXianLu", "ui/icon");
             if (ShowAuthorDebugButtons)
             {
                 AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");

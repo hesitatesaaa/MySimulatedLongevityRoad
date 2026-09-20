@@ -11,6 +11,7 @@ internal static class MclslDeathEventRouter
     {
         // Patches only capture the native event; domain modules own all consequences.
         MclslNativeKillStatisticsSystem.RecordCommittedDeath(actor);
+        MclslHuanzhenSystem.ObserveHostKill(actor, attackType);
         MclslTechniqueOccupationSystem.RecordSameTechniqueKill(actor, MclslRuntime.CurrentYear(), attackType);
         MclslMortalMiasmaSystem.ObserveDeath(actor, MclslRuntime.CurrentYear(), attackType);
         if (!state.WorldSoulDeath.Found) MclslWorldChangeSystem.ObserveNativeDeath(actor, attackType);
