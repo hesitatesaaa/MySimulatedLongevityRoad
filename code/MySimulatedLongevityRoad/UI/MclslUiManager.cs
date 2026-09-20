@@ -33,6 +33,7 @@ internal static class MclslUiManager
             if (ShowAuthorDebugButtons)
             {
                 AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
+                AddButton("mclsl.force_new_law", "立即进入新法纪元", "立即完成纪元切换并触发新法依赖逻辑，便于验证还真自动寻主与新法系统。", () => MclslWorldEpochSystem.ForceNewLawNow(MclslRuntime.CurrentYear()), "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
                 AddButton("mclsl.trigger_ancient_disaster", "触发灵机灾变", "手动记录一次仙道灵机、地火或星石事件，便于测试仙道机缘。", TriggerAncientDisaster, "ui/Icons/TianDiZhiBian", "ui/icon");
                 AddButton("mclsl.trigger_ancient_secret_realm", "触发秘境", "手动记录一次秘境开启，便于测试仙道事件页。", TriggerAncientSecretRealm, "ui/Icons/ZongMenYiJi", "ui/icon");
                 AddButton("mclsl.trigger_ancient_ruin", "触发遗府", "手动生成一处遗府并写入玄黄仙录。", TriggerAncientRuin, "ui/Icons/ZongMenYiJi", "ui/icon");

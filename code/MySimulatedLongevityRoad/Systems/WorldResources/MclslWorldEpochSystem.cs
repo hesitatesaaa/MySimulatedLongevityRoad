@@ -80,6 +80,26 @@ internal static class MclslWorldEpochSystem
         MclslWorldArchiveStore.MarkDirty();
     }
 
+    internal static void ForceNewLawNow(int year)
+    {
+        MclslWorldRunRepository.EnsureCurrentRun(year);
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run == null || string.IsNullOrWhiteSpace(run.RunId)) return;
+
+        NormalizeEra(run);
+        run.AncientLawEndYear = year;
+        run.TransmissionEndYear = year;
+        run.NewLawStartYear = year;
+        run.CultivationEpoch = TransmissionTransitionEpoch;
+        run.NewLawTransitionResolved = false;
+        ProcessTransitionYear(run, year);
+        EnsureAnnualState(year);
+        MclslWorldRunRepository.EnsureNewLawCatalogs(year);
+        MclslTraitRegistration.RefreshRealmTraitVisibility(year);
+        MclslWorldArchiveStore.MarkDirty();
+        MclslWorldArchiveStore.SaveNow();
+    }
+
     internal static void EnsureAnnualState(int year)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;

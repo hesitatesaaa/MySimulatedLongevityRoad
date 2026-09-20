@@ -13,7 +13,7 @@ namespace MySimulatedLongevityRoad.Systems;
 /// </summary>
 internal static class MclslMaobaoSystem
 {
-    internal const int MaxRecords = 24;
+    internal const int MaxRecords = MclslMaobaoArchiveManager.SavedActorLimit;
     internal const int MaxCandidates = 12;
 
     internal static List<MclslMaobaoCandidate> BuildCandidates()
@@ -45,76 +45,48 @@ internal static class MclslMaobaoSystem
             message = "猫宝未能照见这名修士。";
             return false;
         }
+        bool wasSaved = MclslMaobaoArchiveManager.IsActorSaved(candidate.Actor);
+        if (!MclslMaobaoArchiveManager.SaveActor(candidate.Actor, out message)) return false;
+        MclslTraitRegistration.TryAutoFavoriteMaobaoInscription(candidate.Actor);
+        if (wasSaved && string.IsNullOrWhiteSpace(message)) message = "已刷新猫宝中的完整人物快照。";
+        return true;
+    }
 
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        run.MaobaoRecords ??= new List<MclslMaobaoRecord>();
-        MclslMaobaoRecord record = run.MaobaoRecords.Find(x => x != null && x.ActorId == candidate.ActorId);
-        bool created = record == null;
-        if (created)
+    internal static bool TryRecordActor(Actor actor, out string message)
+    {
+        MclslMaobaoCandidate candidate = BuildCandidate(actor);
+        return TryRecord(candidate, out message);
+    }
+
+    /// <summary>
+    /// 人物窗口快捷“登名”按钮使用的切换入口。
+    /// 未留名时立即记录当前人物，已留名时再次点击移除该人物记录，
+    /// 与玄鉴仙族登名石的单击行为保持一致。
+    /// </summary>
+    internal static bool ToggleRecordActor(Actor actor, out string message)
+    {
+        if (actor?.data == null || !MclslActorAccessor.Alive(actor))
         {
-            if (run.MaobaoRecords.Count >= MaxRecords)
-            {
-                message = "猫宝至多保存二十四道留影，请先移除一条旧记录。";
-                return false;
-            }
-            record = new MclslMaobaoRecord
-            {
-                Id = "maobao_" + candidate.ActorId,
-                ActorId = candidate.ActorId,
-                FirstRecordedYear = MclslRuntime.CurrentYear()
-            };
-            run.MaobaoRecords.Add(record);
+            message = "猫宝未能照见这名修士。";
+            return false;
         }
 
-        UpdateRecord(record, candidate.Actor, true);
-        MclslTraitRegistration.TryAutoFavoriteMaobaoInscription(candidate.Actor);
-        MclslWorldArchiveStore.MarkDirty();
-        message = created ? "猫宝已为“" + record.ActorName + "”刻名留影。" : "猫宝已刷新“" + record.ActorName + "”的时序留影。";
-        return true;
+        return MclslMaobaoArchiveManager.ToggleActor(actor, out message);
     }
 
     internal static int RefreshRecords()
     {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.MaobaoRecords == null || run.MaobaoRecords.Count == 0) return 0;
-        int refreshed = 0;
-        for (int i = 0; i < run.MaobaoRecords.Count; i++)
-        {
-            MclslMaobaoRecord record = run.MaobaoRecords[i];
-            if (record == null) continue;
-            if (MclslActorRegistry.ResolveKnownOrWorld(record.ActorId, out Actor actor) && MclslActorAccessor.Alive(actor))
-            {
-                UpdateRecord(record, actor, false);
-                refreshed++;
-            }
-            else
-            {
-                record.Alive = false;
-            }
-        }
-        MclslWorldArchiveStore.MarkDirty();
-        return refreshed;
+        return MclslMaobaoArchiveManager.RefreshLiveSnapshots();
     }
 
     internal static bool Remove(string id, out string message)
     {
-        List<MclslMaobaoRecord> records = MclslWorldRunRepository.Current?.MaobaoRecords;
-        int index = records?.FindIndex(x => x != null && string.Equals(x.Id, id, StringComparison.Ordinal)) ?? -1;
-        if (index < 0)
-        {
-            message = "未找到这道猫宝留影。";
-            return false;
-        }
-        string name = records[index].ActorName;
-        records.RemoveAt(index);
-        MclslWorldArchiveStore.MarkDirty();
-        message = "已拂去“" + name + "”的猫宝留影。";
-        return true;
+        return MclslMaobaoArchiveManager.Remove(id, out message);
     }
 
     internal static bool IsRecorded(long actorId)
     {
-        return MclslWorldRunRepository.Current?.MaobaoRecords?.Exists(x => x != null && x.ActorId == actorId) == true;
+        return MclslMaobaoArchiveManager.IsActorSavedById(actorId);
     }
 
     private static void InsertLeader(List<Actor> leaders, Actor actor)

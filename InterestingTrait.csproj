@@ -53,6 +53,7 @@
     <Compile Remove=".recovered\**\*.cs" />
     <Compile Remove="code_broken_*\**\*.cs" />
     <Compile Remove="xj_0_7_announce_scan\**\*.cs" />
+    <Compile Remove="references\WorldBoxGameDecompiled\**\*.cs" />
   </ItemGroup>
 
 </Project>

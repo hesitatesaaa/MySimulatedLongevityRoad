@@ -433,6 +433,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             case 13:
                 DrawWorldEvents(run);
                 break;
+            case 14:
+                DrawCultivatorBiographies(run);
+                break;
         }
     }
 
@@ -472,6 +475,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 break;
             case 10:
                 DrawAncientEvents(run);
+                break;
+            case 11:
+                DrawCultivatorBiographies(run);
                 break;
             default:
                 DrawAncientEvents(run);
@@ -1477,7 +1483,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
         DrawCardStripe("#D8C778");
         GUILayout.Label("<size=20><b>前世轮盘</b></size>");
-        GUILayout.Label("<color=#B9B0A0>每份前世档案有三个携带槽。修为、功法、造物、道果、资源与单个特征各占一槽。</color>");
+        int selectionLimit = MclslHuanzhenSystem.LegacySelectionLimit();
+        GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，名额由当前还真锚点数量决定。</color>");
+        GUILayout.Label("当前还真锚点：" + selectionLimit + "　可保留数量：" + selectionLimit);
         if (state.Legacies == null || state.Legacies.Count == 0)
         {
             GUILayout.Label("尚无前世档案；第一次成功还真后，死前快照会在此凝成轮盘。 ");
@@ -1489,39 +1497,32 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 MclslHuanzhenLegacyRecord legacy = state.Legacies[i];
                 if (legacy?.Snapshot == null) continue;
                 int used = legacy.ClaimedChoices?.Count ?? 0;
+                IReadOnlyList<MclslHuanzhenLegacyOption> options = MclslHuanzhenSystem.GetLegacyOptions(legacy);
                 GUILayout.BeginVertical(GUI.skin.box);
-                DrawCardStripe(used >= legacy.CarryLimit ? "#88706C" : "#D8C778");
+                DrawCardStripe(selectionLimit <= 0 || used >= selectionLimit ? "#88706C" : "#D8C778");
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("<b>" + legacy.DeathYear + "年·" + Blank(legacy.HostName) + "</b>", GUILayout.Width(250));
                 DrawTag(MclslRealmIds.Display(legacy.RealmId), "#FFD37A");
                 DrawTag("归于 " + legacy.AnchorYear + "年", "#9CD7FF");
-                DrawTag("槽位 " + used + "/" + legacy.CarryLimit, used >= legacy.CarryLimit ? "#FF8877" : "#A7E08A");
+                DrawTag("已选择 " + used + "/" + selectionLimit, selectionLimit <= 0 || used >= selectionLimit ? "#FF8877" : "#A7E08A");
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-                DrawLegacyCategoryButton(legacy, "cultivation", "修为根基");
-                DrawLegacyCategoryButton(legacy, "technique", "功法道统");
-                DrawLegacyCategoryButton(legacy, "treasures", "突破造物");
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-                DrawLegacyCategoryButton(legacy, "dao", "天地道果");
-                DrawLegacyCategoryButton(legacy, "resources", "资源心境");
-                GUILayout.FlexibleSpace();
-                GUILayout.EndHorizontal();
-                if (legacy.Snapshot.TraitIds != null && legacy.Snapshot.TraitIds.Count > 0)
+                if (options.Count == 0)
                 {
-                    GUILayout.Label("前世特征");
-                    GUILayout.BeginHorizontal();
-                    int column = 0;
-                    foreach (string traitId in legacy.Snapshot.TraitIds)
+                    GUILayout.Label("前世快照没有可继承的具体对象。");
+                }
+                else
+                {
+                    for (int optionIndex = 0; optionIndex < options.Count; optionIndex++)
                     {
-                        DrawLegacyTraitButton(legacy, traitId);
-                        if (++column % 3 != 0) continue;
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal();
+                        if (optionIndex % 2 == 0) GUILayout.BeginHorizontal();
+                        DrawLegacyOptionButton(legacy, options[optionIndex], selectionLimit, used);
+                        if (optionIndex % 2 == 1 || optionIndex == options.Count - 1)
+                        {
+                            if (optionIndex % 2 == 0) GUILayout.FlexibleSpace();
+                            GUILayout.EndHorizontal();
+                        }
                     }
-                    GUILayout.FlexibleSpace();
-                    GUILayout.EndHorizontal();
                 }
                 GUILayout.EndVertical();
             }
@@ -1610,10 +1611,25 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         string choice = "category:" + category;
         bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
         bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && !claimed && (legacy.ClaimedChoices?.Count ?? 0) < legacy.CarryLimit;
+        GUI.enabled = oldEnabled && !claimed && MclslHuanzhenSystem.LegacySelectionLimit() > 0 && (legacy.ClaimedChoices?.Count ?? 0) < MclslHuanzhenSystem.LegacySelectionLimit();
         if (GUILayout.Button(claimed ? "已取·" + title : title, GUILayout.Height(34), GUILayout.Width(150)))
         {
             MclslHuanzhenSystem.TryClaimLegacyCategory(legacy.Id, category, out _huanzhenActionMessage);
+            _snapshot = MclslCodexSnapshot.Build();
+        }
+        GUI.enabled = oldEnabled;
+    }
+
+    private void DrawLegacyOptionButton(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, int limit, int used)
+    {
+        bool claimed = legacy.ClaimedChoices?.Contains(option.Id) == true;
+        bool oldEnabled = GUI.enabled;
+        GUI.enabled = oldEnabled && (claimed || (limit > 0 && used < limit));
+        string label = claimed ? "取消占位｜" + option.Label : "保留｜" + option.Label;
+        if (GUILayout.Button(label, GUILayout.Height(34), GUILayout.Width(360)))
+        {
+            if (claimed) MclslHuanzhenSystem.TryReleaseLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
+            else MclslHuanzhenSystem.TryClaimLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
             _snapshot = MclslCodexSnapshot.Build();
         }
         GUI.enabled = oldEnabled;
@@ -1624,7 +1640,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         string choice = "trait:" + traitId;
         bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
         bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && !claimed && (legacy.ClaimedChoices?.Count ?? 0) < legacy.CarryLimit;
+        GUI.enabled = oldEnabled && !claimed && MclslHuanzhenSystem.LegacySelectionLimit() > 0 && (legacy.ClaimedChoices?.Count ?? 0) < MclslHuanzhenSystem.LegacySelectionLimit();
         string name = MclslHuanzhenSystem.TraitDisplayNameById(traitId);
         if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
         {

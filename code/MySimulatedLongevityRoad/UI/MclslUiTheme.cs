@@ -31,8 +31,13 @@ internal static class MclslUiTheme
     internal static readonly Color RankAccentPrimary = new(0.46f, 0.63f, 0.71f, 1f);
     internal static readonly Color RankAccentSecondary = new(0.62f, 0.72f, 0.76f, 1f);
     internal static readonly Color RankTextPrimary = new(0.85f, 0.88f, 0.88f, 1f);
+    internal static readonly Color RankTextEmphasis = new(0.72f, 0.86f, 0.86f, 1f);
     internal static readonly Color RankTextMuted = new(0.56f, 0.62f, 0.64f, 1f);
     internal static readonly Color RankButton = new(0.15f, 0.22f, 0.26f, 0.98f);
     internal static readonly Color RankButtonActive = new(0.25f, 0.36f, 0.41f, 1f);
+    internal static readonly Color RankHighlight = new(0.34f, 0.53f, 0.57f, 0.92f);
+    internal static readonly Color RankMedalFirst = new(0.72f, 0.82f, 0.74f, 1f);
+    internal static readonly Color RankMedalSecond = new(0.63f, 0.74f, 0.76f, 1f);
+    internal static readonly Color RankMedalThird = new(0.60f, 0.68f, 0.66f, 1f);
     internal static readonly Color RankDanger = new(0.39f, 0.24f, 0.25f, 0.96f);
 }

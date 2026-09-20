@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+
+public class BlacklistTest7
+{
+	private static readonly Dictionary<int, HashSet<int>> _profanity = new Dictionary<int, HashSet<int>>();
+
+	private static int _min_length = int.MaxValue;
+
+	private static int _max_length = int.MinValue;
+
+	private static bool _initiated = false;
+
+	public static void init()
+	{
+		if (!_initiated)
+		{
+			_initiated = true;
+			BlacklistTools.loadProfanityFilter(_profanity, ref _min_length, ref _max_length);
+		}
+	}
+
+	private static int getCharHashCode(char[] pChar)
+	{
+		return BlacklistTools.getCharHashCode(pChar);
+	}
+
+	internal static bool checkBlackList(string pName)
+	{
+		ReadOnlySpan<char> readOnlySpan = pName.ToLower().AsSpan();
+		ReadOnlySpan<char> readOnlySpan2 = BlacklistTools.cleanSpan(readOnlySpan);
+		bool flag = !(readOnlySpan2 == readOnlySpan);
+		for (int i = _min_length; i <= _max_length; i++)
+		{
+			HashSet<int> hashSet = _profanity[i];
+			for (int j = 0; j < readOnlySpan.Length - i + 1; j++)
+			{
+				int charHashCode = getCharHashCode(readOnlySpan.Slice(j, i).ToArray());
+				if (hashSet.Contains(charHashCode))
+				{
+					return true;
+				}
+				if (flag && readOnlySpan2.Length >= j + i)
+				{
+					charHashCode = getCharHashCode(readOnlySpan2.Slice(j, i).ToArray());
+					if (hashSet.Contains(charHashCode))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+}

@@ -1,0 +1,1 @@
+public delegate OnomasticsData GetCurrentOnomasticsData();

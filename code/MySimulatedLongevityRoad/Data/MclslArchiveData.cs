@@ -48,6 +48,8 @@ internal sealed class MclslWorldRunState
     public List<string> InheritedKnowledgeIds { get; set; } = new();
     public List<MclslKnowledgeDiscoveryRecord> Discoveries { get; set; } = new();
     public List<MclslTimelineAnchorState> TimelineAnchors { get; set; } = new();
+    // v0.1.9：猫宝改为独立的登名石式完整角色档案。旧的摘要留影只清理一次。
+    public int MaobaoArchiveMigrationVersion { get; set; }
     public List<MclslMaobaoRecord> MaobaoRecords { get; set; } = new();
     public List<MclslRunEventRecord> Events { get; set; } = new();
     public List<MclslDeathRecord> DeathRecords { get; set; } = new();

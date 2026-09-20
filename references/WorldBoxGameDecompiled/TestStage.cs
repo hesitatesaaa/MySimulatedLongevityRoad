@@ -1,0 +1,7 @@
+public enum TestStage
+{
+	SPAWN_CIVS,
+	WAIT_CIVS,
+	SPAWN_CHAOS,
+	REGENERATE
+}

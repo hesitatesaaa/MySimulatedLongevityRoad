@@ -1,5 +1,6 @@
 using MySimulatedLongevityRoad.Modules;
 using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Visual;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ internal static class MclslRuntime
         MclslRuntimeDriver.Ensure();
         int year = CurrentYear();
         MclslModuleHub.OnWorldLoaded(year, MclslRuntimeSettings.CoreEnabled);
+        MclslMaobaoArchiveManager.OnWorldLoaded();
         _lastYear = year;
         _frameCounter = 0;
     }

@@ -1,0 +1,1 @@
+public delegate ColorLibrary MetaCustomizationColorLibrary();

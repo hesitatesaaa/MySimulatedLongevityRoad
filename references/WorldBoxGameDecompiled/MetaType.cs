@@ -1,0 +1,21 @@
+public enum MetaType
+{
+	None,
+	Subspecies,
+	Family,
+	Language,
+	Culture,
+	Religion,
+	Clan,
+	City,
+	Kingdom,
+	Alliance,
+	War,
+	Plot,
+	Unit,
+	Building,
+	Item,
+	World,
+	Special,
+	Army
+}

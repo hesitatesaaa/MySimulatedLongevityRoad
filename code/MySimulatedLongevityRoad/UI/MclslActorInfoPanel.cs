@@ -13,8 +13,8 @@ namespace MySimulatedLongevityRoad.UI;
 /// </summary>
 internal static class MclslActorInfoPanel
 {
-    private const string PanelName = "XuanJianInfoPanel";
-    private const string TextName = "XuanJianInfo";
+    private const string PanelName = "MclslActorInfoPanel";
+    private const string TextName = "MclslActorInfoText";
     private const int ActiveWindowRefreshIntervalFrames = 180;
     private static int _lastActiveWindowRefreshFrame = -9999;
 
@@ -23,13 +23,16 @@ internal static class MclslActorInfoPanel
         if (window == null) return;
         Transform background = ResolvePanelParent(window);
         if (background == null) return;
+        CleanupLegacyPanel(background);
         if (window.actor == null || !window.actor.isAlive())
         {
+            MclslMaobaoShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
-        if (!ShouldShowFor(window.actor))
+        if (!ShouldShowFor(window.actor) && !MclslRuntimeSettings.DebugToolsVisible)
         {
+            MclslMaobaoShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
@@ -43,11 +46,15 @@ internal static class MclslActorInfoPanel
             && !actorChangedBeforeEnsure
             && !forceContentRefresh)
         {
+            EnsureActionBar(background, window.actor);
+            MclslMaobaoShortcutButton.Refresh(window);
             return;
         }
 
         Text text = EnsurePanel(background, out ScrollRect scroll, out PanelState state);
         if (text == null) return;
+        EnsureActionBar(background, window.actor);
+        MclslMaobaoShortcutButton.Refresh(window);
         if (scroll != null) scroll.gameObject.SetActive(true);
         bool wasEmpty = string.IsNullOrEmpty(text.text);
         bool actorChanged = state != null && state.ActorId != actorId;
@@ -59,8 +66,12 @@ internal static class MclslActorInfoPanel
         string formatted = MclslActorInfoFormatter.Format(window.actor);
         if (string.IsNullOrWhiteSpace(formatted))
         {
-            HidePanel(background);
-            return;
+            if (!MclslRuntimeSettings.DebugToolsVisible)
+            {
+                HidePanel(background);
+                return;
+            }
+            formatted = "<b>开发者目标</b>\n" + MclslActorAccessor.DisplayName(window.actor) + "\nID " + MclslActorAccessor.Id(window.actor);
         }
         bool shouldReset = scroll != null && resetScrollForNewActor && (actorChanged || wasEmpty || state is { Initialized: false });
         float keepScroll = scroll == null ? 1f : scroll.verticalNormalizedPosition;
@@ -74,7 +85,12 @@ internal static class MclslActorInfoPanel
         if (textChanged)
         {
             text.text = formatted;
-            if (scroll?.content != null) LayoutRebuilder.MarkLayoutForRebuild(scroll.content);
+            if (scroll?.content != null)
+            {
+                LayoutRebuilder.MarkLayoutForRebuild(scroll.content);
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
+            }
         }
         if (scroll == null) return;
         if (shouldReset)
@@ -84,9 +100,13 @@ internal static class MclslActorInfoPanel
         }
         else if (textChanged)
         {
-            if (scroll.content != null) scroll.content.anchoredPosition = keepContentPosition;
-            scroll.velocity = Vector2.zero;
-            _ = keepScroll;
+            if (state != null)
+            {
+                state.PendingNormalizedPosition = keepScroll;
+                state.PendingContentPosition = keepContentPosition;
+                state.PendingScrollRestore = true;
+            }
+            RestoreScroll(scroll, keepScroll, keepContentPosition);
         }
     }
 
@@ -139,7 +159,7 @@ internal static class MclslActorInfoPanel
             panel.transform.SetParent(parent, false);
         }
         panel.SetActive(true);
-        panel.transform.SetAsLastSibling();
+        if (existing == null) panel.transform.SetAsLastSibling();
         state = panel.GetComponent<PanelState>() ?? panel.AddComponent<PanelState>();
 
         RectTransform rect = panel.GetComponent<RectTransform>();
@@ -172,14 +192,106 @@ internal static class MclslActorInfoPanel
 
     private static void HidePanel(Transform parent)
     {
+        if (parent == null) return;
         Transform existing = parent?.Find(PanelName);
-        if (existing == null) return;
-        try { Object.Destroy(existing.gameObject); }
-        catch
+        if (existing != null)
         {
-            try { existing.gameObject.SetActive(false); }
-            catch { }
+            try { UnityEngine.Object.Destroy(existing.gameObject); }
+            catch
+            {
+                try { existing.gameObject.SetActive(false); }
+                catch { }
+            }
         }
+        Transform actions = parent.Find("MclslActorActions");
+        if (actions != null)
+        {
+            try { UnityEngine.Object.Destroy(actions.gameObject); }
+            catch { actions.gameObject.SetActive(false); }
+        }
+    }
+
+    private static void CleanupLegacyPanel(Transform parent)
+    {
+        Transform legacy = parent?.Find("XuanJianInfoPanel");
+        if (legacy == null || legacy.GetComponent<PanelState>() == null) return;
+        try { UnityEngine.Object.Destroy(legacy.gameObject); }
+        catch { try { legacy.gameObject.SetActive(false); } catch { } }
+    }
+
+    private static void EnsureActionBar(Transform parent, Actor actor)
+    {
+        if (parent == null || actor?.data == null) return;
+        Transform existing = parent.Find("MclslActorActions");
+        GameObject bar = existing?.gameObject;
+        if (bar == null)
+        {
+            bar = new GameObject("MclslActorActions", typeof(RectTransform), typeof(Image));
+            bar.transform.SetParent(parent, false);
+        }
+        bar.SetActive(true);
+        bar.transform.SetAsLastSibling();
+        RectTransform barRect = bar.GetComponent<RectTransform>();
+        barRect.localPosition = new Vector3(256f, -132f);
+        barRect.localScale = Vector3.one;
+        barRect.sizeDelta = new Vector2(172f, 30f);
+        bar.GetComponent<Image>().color = new Color(0.045f, 0.11f, 0.13f, 0.96f);
+
+        EnsureActionButton(bar.transform, "Biography", "修士列传", 0f, () => MclslCodexWindow.ShowBiographyForActor(actor));
+        RemoveActionButton(bar.transform, "Maobao");
+        RemoveActionButton(bar.transform, "Debug");
+    }
+
+    private static void EnsureActionButton(Transform parent, string name, string label, float x, UnityEngine.Events.UnityAction action)
+    {
+        Transform existing = parent.Find(name);
+        GameObject buttonObject = existing?.gameObject;
+        if (buttonObject == null)
+        {
+            buttonObject = new GameObject(name, typeof(RectTransform), typeof(Image), typeof(Button));
+            buttonObject.transform.SetParent(parent, false);
+            Text text = new GameObject("Text", typeof(RectTransform), typeof(Text)).GetComponent<Text>();
+            text.transform.SetParent(buttonObject.transform, false);
+            text.font = LocalizedTextManager.current_font ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.fontSize = 9;
+            text.alignment = TextAnchor.MiddleCenter;
+            text.color = MclslUiTheme.RankTextPrimary;
+            text.raycastTarget = false;
+            RectTransform textRect = text.GetComponent<RectTransform>();
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
+        }
+        RectTransform rect = buttonObject.GetComponent<RectTransform>();
+        rect.localPosition = new Vector3(x, 0f);
+        rect.localScale = Vector3.one;
+        rect.sizeDelta = new Vector2(name == "Biography" ? 162f : 50f, 26f);
+        Image image = buttonObject.GetComponent<Image>();
+        image.color = MclslUiTheme.RankButton;
+        Button button = buttonObject.GetComponent<Button>();
+        button.targetGraphic = image;
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(action);
+        Text labelText = buttonObject.transform.Find("Text")?.GetComponent<Text>();
+        if (labelText != null) labelText.text = label;
+    }
+
+    private static void RemoveActionButton(Transform parent, string name)
+    {
+        Transform existing = parent?.Find(name);
+        if (existing == null) return;
+        try { UnityEngine.Object.Destroy(existing.gameObject); }
+        catch { existing.gameObject.SetActive(false); }
+    }
+
+    private static void RestoreScroll(ScrollRect scroll, float normalizedPosition, Vector2 contentPosition)
+    {
+        if (scroll == null) return;
+        scroll.StopMovement();
+        scroll.verticalNormalizedPosition = Mathf.Clamp01(normalizedPosition);
+        if (scroll.content != null) scroll.content.anchoredPosition = contentPosition;
+        scroll.velocity = Vector2.zero;
     }
 
     private static Transform FindSingleRoot(Transform parent)
@@ -196,7 +308,7 @@ internal static class MclslActorInfoPanel
                 continue;
             }
 
-            try { Object.Destroy(child.gameObject); }
+            try { UnityEngine.Object.Destroy(child.gameObject); }
             catch { child.gameObject.SetActive(false); }
         }
         return kept;
@@ -319,5 +431,19 @@ internal static class MclslActorInfoPanel
     {
         internal long ActorId = -1L;
         internal bool Initialized;
+        internal bool PendingScrollRestore;
+        internal float PendingNormalizedPosition = 1f;
+        internal Vector2 PendingContentPosition;
+
+        private void LateUpdate()
+        {
+            if (!PendingScrollRestore) return;
+            ScrollRect scroll = GetComponent<ScrollRect>();
+            if (scroll == null) { PendingScrollRestore = false; return; }
+            Canvas.ForceUpdateCanvases();
+            if (scroll.content != null) LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
+            RestoreScroll(scroll, PendingNormalizedPosition, PendingContentPosition);
+            PendingScrollRestore = false;
+        }
     }
 }

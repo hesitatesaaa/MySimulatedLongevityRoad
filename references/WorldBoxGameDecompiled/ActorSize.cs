@@ -1,0 +1,21 @@
+public enum ActorSize
+{
+	S0_Bug,
+	S1_Egg,
+	S2_Crab,
+	S3_Rat,
+	S4_Piranha,
+	S5_Snake,
+	S6_Chicken,
+	S7_Cat,
+	S8_Fox,
+	S9_Monkey,
+	S10_Dog,
+	S11_Sheep,
+	S12_Wolf,
+	S13_Human,
+	S14_Cow,
+	S15_Bear,
+	S16_Buffalo,
+	S17_Dragon
+}

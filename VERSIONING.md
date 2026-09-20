@@ -12,11 +12,25 @@
 - 发布压缩包及其顶层目录名称；
 - GitHub Release 标题。
 
-## 开发和发布流程
+## 日常构建与 GitHub 推送边界
 
-1. 日常开发提交到 `main`；较大功能先使用 `feature/功能名` 分支，再合并到 `main`。
+每次完成代码、资源、配置或本地化修改后，先执行本地可运行包流程：
+
+```powershell
+.\scripts\Package-Mod.ps1 -ChangeTag 更新标签
+```
+
+`更新标签`必须是本次最重要功能或修复的 2–5 个中文字符。脚本从 `mod.json` 读取版本，按现有源码型发布包结构生成 `发布包/0.5.1+我的模拟长生路0.1.9-<更新标签>.zip`；同名时追加时间戳。包包含入口源码、解决方案/项目文件、`mod.json`、入口资源、`code`、`GameResources`、`Locales`、配置和说明文档，并排除 `references/`、构建缓存、本地开发工具和打包脚本。
+
+日常构建不修改版本号、不创建正式标签，也不执行 GitHub 写操作。源码型发布包不要求本机存在 WorldBox、Unity、Harmony、NeoModLoader 或 Publicized 游戏程序集；若需要编译验证，再单独执行项目构建。
+
+除非用户明确说“推到 GitHub”或使用等价表达，否则禁止执行 `git push`、远程标签推送、GitHub Release、Pull Request 或其他远程写操作。收到推送指令后，仍须先完成构建、ZIP 内容校验和 `git diff` 检查。
+
+## 正式开发和发布流程
+
+1. 日常开发提交到 `main`；较大功能先使用 `feature/功能名` 分支，再合并到 `main`。本地提交不等于 GitHub 推送。
 2. 发布前更新 `mod.json`、`README.md` 和 `CHANGELOG.md`。
-3. 完成语法、配置、资源和压缩包结构检查。
+3. 完成语法、配置、资源、Release 构建和压缩包结构检查。
 4. 提交发布版本，使用带说明的标签固定该提交，例如：
 
    ```powershell

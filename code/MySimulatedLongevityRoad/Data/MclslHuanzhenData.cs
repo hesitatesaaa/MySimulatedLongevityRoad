@@ -16,7 +16,9 @@ internal sealed class MclslHuanzhenExternalState
     public int AnchorSequence { get; set; }
     public int NextNaturalArrivalYear { get; set; } = -1;
     public int NaturalArrivalYear { get; set; } = -1;
-    public int SpaceEssenceBase { get; set; }
+    // long keeps the value effectively uncapped while remaining compatible with
+    // the old JSON int representation used by v0.1.8 saves.
+    public long SpaceEssenceBase { get; set; }
     public int SpaceEssenceUpdatedYear { get; set; } = -1;
     public List<MclslHuanzhenAnchorRecord> Anchors { get; set; } = new();
     public MclslHuanzhenPendingRestore PendingRestore { get; set; } = new();
@@ -42,8 +44,8 @@ internal sealed class MclslHuanzhenEssenceRecord
     public int Year { get; set; }
     public string Source { get; set; } = string.Empty;
     public string Detail { get; set; } = string.Empty;
-    public int Amount { get; set; }
-    public int Balance { get; set; }
+    public long Amount { get; set; }
+    public long Balance { get; set; }
 }
 
 internal sealed class MclslHuanzhenAnchorRecord
@@ -71,7 +73,18 @@ internal sealed class MclslHuanzhenPendingRestore
     public int LoopDepth { get; set; }
     public int LoadAttempts { get; set; }
     public string Trigger { get; set; } = "death";
+    // Added in v0.1.9. The bool distinguishes old pending restores, where the
+    // field did not exist, from a real pre-restore snapshot of zero.
+    public bool HasSpaceEssenceBeforeRestore { get; set; }
+    public long SpaceEssenceBeforeRestore { get; set; }
     public MclslHuanzhenCultivationSnapshot Cultivation { get; set; } = new();
+}
+
+internal sealed class MclslHuanzhenLegacyOption
+{
+    public string Id { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public string Label { get; set; } = string.Empty;
 }
 
 internal sealed class MclslHuanzhenHistoryRecord

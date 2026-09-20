@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="UnityEngine.TextRenderingModule" />
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="UnityEngine.ParticleSystemModule" />
+    <Reference Include="UnityEngine.InputLegacyModule" />
+    <Reference Include="UnityEngine.UIModule" />
+    <Reference Include="DOTween" />
+    <Reference Include="Beebyte.Obfuscator" />
+    <Reference Include="Newtonsoft.Json" />
+    <Reference Include="Unity.Mathematics" />
+    <Reference Include="UnityEngine.TilemapModule" />
+    <Reference Include="SQLite" />
+    <Reference Include="Assembly-CSharp-firstpass" />
+    <Reference Include="strings" />
+    <Reference Include="FMODUnity" />
+    <Reference Include="UltimateJoystick" />
+    <Reference Include="UnityEngine.AudioModule" />
+    <Reference Include="Firebase.Analytics" />
+    <Reference Include="UnityEngine.Purchasing" />
+    <Reference Include="Proyecto26" />
+    <Reference Include="UnityEngine.Purchasing.Stores" />
+    <Reference Include="UnityEngine.Purchasing.SecurityStub" />
+    <Reference Include="Firebase.App" />
+    <Reference Include="RSG" />
+    <Reference Include="GoogleMobileAds" />
+    <Reference Include="GoogleMobileAds.Core" />
+    <Reference Include="Unity.LevelPlay" />
+    <Reference Include="GraphAndChart" />
+    <Reference Include="AWSSDK.S3" />
+    <Reference Include="Ionic.Zlib.CF" />
+    <Reference Include="Facepunch.Steamworks.Win64" />
+    <Reference Include="UnityEngine.AnimationModule" />
+    <Reference Include="db.tables" />
+    <Reference Include="UnityEngine.UnityWebRequestModule" />
+    <Reference Include="UnityEngine.Purchasing.SecurityCore" />
+    <Reference Include="C5" />
+    <Reference Include="UnityEngine.JSONSerializeModule" />
+    <Reference Include="Newtonsoft.Json.UnityConverters" />
+    <Reference Include="UnityPools" />
+    <Reference Include="SleekRender" />
+    <Reference Include="UnityEngine.CrashReportingModule" />
+    <Reference Include="Firebase.TaskExtension" />
+    <Reference Include="UPersian" />
+    <Reference Include="UnityEngine.ImageConversionModule" />
+    <Reference Include="UnityEngine.ScreenCaptureModule" />
+    <Reference Include="AWSSDK.Core" />
+    <Reference Include="SimpleZip" />
+    <Reference Include="TNRD.Humanizr" />
+    <Reference Include="UnityEngine.IMGUIModule" />
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule" />
+  </ItemGroup>
+</Project>

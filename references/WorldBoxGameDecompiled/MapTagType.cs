@@ -1,0 +1,23 @@
+public enum MapTagType
+{
+	General,
+	Realistic,
+	Earth,
+	Fantasy,
+	Populated,
+	Unpopulated,
+	Country,
+	Continent,
+	Natural,
+	Unnatural,
+	Civilizations,
+	Battle,
+	WorldWar,
+	SciFi,
+	ArtToMap,
+	PerfectBalance,
+	Disasters,
+	Magic,
+	Anime,
+	Other
+}

@@ -1,0 +1,17 @@
+# Build output
+bin/
+obj/
+
+# IDE state
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local analysis files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

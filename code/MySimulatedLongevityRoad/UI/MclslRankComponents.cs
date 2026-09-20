@@ -72,7 +72,7 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
     {
         _actor = item.Actor;
         SetText("RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
-        SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, Color.white);
+        SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, MclslUiTheme.RankTextPrimary);
         string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;
         if (!string.IsNullOrWhiteSpace(item.ExtraText) && !string.Equals(detail, item.ExtraText, StringComparison.Ordinal))
             detail += " · " + item.ExtraText;
@@ -127,9 +127,9 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
 
     private static Color RankColor(int rank)
     {
-        if (rank == 0) return new Color(0.66f, 0.77f, 0.79f);
-        if (rank == 1) return new Color(0.55f, 0.68f, 0.72f);
-        if (rank == 2) return new Color(0.46f, 0.59f, 0.65f);
-        return MclslUiTheme.RankTextPrimary;
+        if (rank == 0) return MclslUiTheme.RankMedalFirst;
+        if (rank == 1) return MclslUiTheme.RankMedalSecond;
+        if (rank == 2) return MclslUiTheme.RankMedalThird;
+        return MclslUiTheme.RankTextEmphasis;
     }
 }

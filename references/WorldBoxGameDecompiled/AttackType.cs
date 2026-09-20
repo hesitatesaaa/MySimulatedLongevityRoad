@@ -1,0 +1,23 @@
+public enum AttackType
+{
+	Acid,
+	Fire,
+	Plague,
+	Infection,
+	Tumor,
+	Other,
+	Divine,
+	AshFever,
+	Metamorphosis,
+	Starvation,
+	Eaten,
+	Age,
+	Weapon,
+	None,
+	Poison,
+	Gravity,
+	Drowning,
+	Water,
+	Explosion,
+	Smile
+}
