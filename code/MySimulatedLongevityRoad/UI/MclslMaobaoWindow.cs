@@ -32,8 +32,12 @@ internal static class MclslMaobaoWindow
     {
         if (_initialized) return;
         MclslLocalizationBridge.RegisterKey(WindowTitleKey, "猫宝");
+        MclslLocalizationBridge.RegisterKey(WindowTitleKey + " Description", "猫宝·时序录");
         MclslMaobaoPlaceMode.EnsureRegistered();
-        _window = WindowCreator.CreateEmptyWindow(WindowId, WindowTitleKey, IconPath);
+        // WindowCreator resolves its title before the runtime localization table is
+        // guaranteed to exist.  Give it the final Chinese title directly; the key
+        // is still registered for tooltips and external integrations.
+        _window = WindowCreator.CreateEmptyWindow(WindowId, "猫宝", IconPath);
         if (_window == null) return;
         SetupWindow();
         _initialized = true;

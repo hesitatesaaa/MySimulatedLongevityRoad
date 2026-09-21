@@ -505,7 +505,7 @@ internal static class MclslHuanzhenSystem
     internal static bool SetSpaceEssenceForDeveloper(long value, out string message)
     {
         EnsureLoaded();
-        if (!MclslRuntimeSettings.DebugToolsVisible)
+        if (!MclslDeveloperBridge.IsAvailable)
         {
             message = "开发者工具未开启。";
             return false;

@@ -31,16 +31,16 @@ internal static class MclslRuntimeCadence
             MclslScheduler.ScheduleAnnualWorld(currentYear);
         }
 
-        // 年度修炼队列是语义工作，不能被帧压策略永久饿死。队列内部已有
-        // 数量与毫秒双预算，因此只要存在积压，每个渲染帧都允许一次有界消费。
+        // 年度队列只在共享调度令牌允许时运行。旧实现让任何积压绕过帧压
+        // 策略、每个渲染帧都进入调度器；新法初开的大量角色因此会反过来
+        // 压低 FPS。队列状态会持久化，故延后一帧不会丢失修炼结算。
         bool annualBacklogDue = MclslScheduler.HasAnnualActorBacklog;
         bool priorityFastDue = MclslScheduler.HasUrgentSimulationBacklog
             || (annualBacklogDue
                 && MclslRuntimeWorkBudget.ShouldRunAnnualActorPriorityPass());
-        bool processFast = annualBacklogDue
-            || ((fastCadenceDue || priorityFastDue)
-                && (priorityFastDue || MclslScheduler.HasFastWork)
-                && MclslRuntimeWorkBudget.TryBeginFastSchedulerPass());
+        bool processFast = (fastCadenceDue || priorityFastDue)
+            && (priorityFastDue || MclslScheduler.HasFastWork)
+            && MclslRuntimeWorkBudget.TryBeginFastSchedulerPass();
         if (processFast || isYearChange)
         {
             MclslDiagnostics.CultivationThrottle(

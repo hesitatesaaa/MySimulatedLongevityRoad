@@ -373,6 +373,12 @@
   "破防": "破防",
   "mclsl.maobao": "猫宝",
   "mclsl.maobao Description": "打开独立猫宝时序录，照见本世强者、刻名留影并定位在世修士。",
+  "mclsl.maobao.window": "猫宝",
+  "mclsl.maobao.window Description": "猫宝·时序录",
+  "mclsl.developer_tools": "开发者工具",
+  "mclsl.developer_tools Description": "点击人物后打开本机角色编辑器；也可按 F8。",
+  "MCLSL_config_show_fps": "显示帧率",
+  "MCLSL_config_show_fps Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
   "猫宝": "猫宝",
   "猫宝时序录": "猫宝时序录"
 }

@@ -27,6 +27,7 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_enable_resource_birth_announcements", "显示天地资源出现提示", "洞天与天地异变出现时显示顶部提示；元婴、化神突破公告仍由各自开关控制。");
         Register("MCLSL_config_enable_faction_policy_announcements", "显示仙盟五老施政提示", "万仙盟或五老会改变施政方略时显示顶部提示；势力影响与委托仍正常结算。");
         Register("MCLSL_config_enable_survival_announcements", "显示洞天避劫提示", "元婴借洞天避过死劫时显示顶部提示；关闭后保命与洞天损耗仍正常生效。");
+        Register("MCLSL_config_show_fps", "显示帧率", "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。");
         Register("MCLSL_config_enable_huanzhen", "启用还真轮回", "开启本世轮回与档案封存逻辑。");
         Register("MCLSL_config_auto_huanzhen_anchor", "自动建立还真锚点", "灵蕴达到八十点且满足安全间隔时自动建立锚点；锚点满后自动替换最旧的一枚。");
         Register("MCLSL_config_huanzhen_anchor_interval", "自动锚点间隔", "自动建立或替换还真锚点之间至少相隔的世界年份；手动锚定不受此项限制。");

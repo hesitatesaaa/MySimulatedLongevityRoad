@@ -44,7 +44,7 @@ internal static class MclslRuntimeSettings
     private static bool _autoCollectPureRoot = true;
     private static bool _autoCollectHeavenRoot = true;
     private static bool _diagnosticsEnabled;
-    private static bool _debugToolsVisible;
+    private static bool _showFps;
 
     internal static bool CoreEnabled => _coreEnabled;
     internal static bool TimelineEnabled => _timelineEnabled;
@@ -81,7 +81,7 @@ internal static class MclslRuntimeSettings
     internal static bool AutoCollectPureRoot => _autoCollectPureRoot;
     internal static bool AutoCollectHeavenRoot => _autoCollectHeavenRoot;
     internal static bool DiagnosticsEnabled => _diagnosticsEnabled;
-    internal static bool DebugToolsVisible => _debugToolsVisible;
+    internal static bool ShowFps => _showFps;
 
     internal static void LoadFromModConfig(object config)
     {
@@ -122,7 +122,7 @@ internal static class MclslRuntimeSettings
         _autoCollectPureRoot = ReadBool(config, "MCLSL_config_auto_collect_pure_root", _autoCollectPureRoot);
         _autoCollectHeavenRoot = ReadBool(config, "MCLSL_config_auto_collect_heaven_root", _autoCollectHeavenRoot);
         _diagnosticsEnabled = ReadBool(config, "MCLSL_config_enable_diagnostics", _diagnosticsEnabled);
-        _debugToolsVisible = ReadBool(config, "MCLSL_config_show_debug_tools", _debugToolsVisible);
+        _showFps = ReadBool(config, "MCLSL_config_show_fps", _showFps);
     }
 
     internal static int ScaleTimelineYear(int year) => year <= 0 ? 0 : Math.Max(1, (int)Math.Round(year * (_timelineYearScalePercent / 100d)));

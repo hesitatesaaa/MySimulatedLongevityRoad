@@ -243,6 +243,14 @@
       "Type": "SWITCH",
       "BoolVal": true,
       "Callback": "MclslConfig:AutoCollectHeavenRootCallBack"
+    },
+    {
+      "Id": "MCLSL_config_show_fps",
+      "Name": "显示帧率",
+      "Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:ShowFpsCallBack"
     }
   ]
 }

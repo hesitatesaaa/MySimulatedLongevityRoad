@@ -80,7 +80,7 @@ internal sealed partial class MclslCodexWindow
         GUILayout.Label("<size=20><b>当世照影</b></size>");
         GUILayout.Label("<color=#B9B0A0>候选来自现有修士索引，最多十二人；点击刻名后才写入存档。</color>");
         float listHeight = Math.Max(300f, _rect.height - 355f);
-        _maobaoCandidateScroll = GUILayout.BeginScrollView(_maobaoCandidateScroll, false, true, GUILayout.Height(listHeight));
+        _maobaoCandidateScroll = GUILayout.BeginScrollView(_maobaoCandidateScroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.Height(listHeight));
         if (_maobaoCandidates.Count == 0)
         {
             GUILayout.Label("猫宝尚未照见可留名的修士。");
@@ -103,7 +103,7 @@ internal sealed partial class MclslCodexWindow
             .Where(x => x != null && (_maobaoFilter == "全部" || (_maobaoFilter == "当世" ? IsPacketActorAlive(x) : !IsPacketActorAlive(x))))
             .OrderByDescending(x => x?.SaveTime ?? string.Empty, StringComparer.Ordinal)
             .ToList();
-        _maobaoRecordScroll = GUILayout.BeginScrollView(_maobaoRecordScroll, false, true, GUILayout.Height(listHeight));
+        _maobaoRecordScroll = GUILayout.BeginScrollView(_maobaoRecordScroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.Height(listHeight));
         if (!visible.Any()) GUILayout.Label("此卷尚无完整登名档案。可从左侧选择修士刻名入宝。 ");
         foreach (MclslMaobaoArchiveManager.SavedActorPacket record in visible) DrawMaobaoRecord(record);
         GUILayout.EndScrollView();

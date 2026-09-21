@@ -23,8 +23,14 @@ internal static class MclslVisibleActorRenderLane
     {
         if (manager?.visible_units == null || manager.render_data == null) return;
 
+        long sample = MySimulatedLongevityRoad.Core.MclslPerformanceProbe.Begin();
+
         int frame = Time.frameCount;
-        if (_lastFrame == frame && ReferenceEquals(_lastRenderData, manager.render_data)) return;
+        if (_lastFrame == frame && ReferenceEquals(_lastRenderData, manager.render_data))
+        {
+            MySimulatedLongevityRoad.Core.MclslPerformanceProbe.End("境界光环", sample);
+            return;
+        }
         _lastFrame = frame;
         _lastRenderData = manager.render_data;
 
@@ -35,6 +41,7 @@ internal static class MclslVisibleActorRenderLane
         if (count <= 0)
         {
             MclslRealmHaloVisualSystem.EndRenderFrame(frame, lodLevel);
+            MySimulatedLongevityRoad.Core.MclslPerformanceProbe.End("境界光环", sample);
             return;
         }
 
@@ -50,6 +57,7 @@ internal static class MclslVisibleActorRenderLane
         }
 
         MclslRealmHaloVisualSystem.EndRenderFrame(frame, lodLevel);
+        MySimulatedLongevityRoad.Core.MclslPerformanceProbe.End("境界光环", sample);
     }
 
     internal static void Clear()

@@ -12,6 +12,7 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
     private float _elapsed;
     private int _frames;
     private int _displayFps;
+    private bool _visible;
 
     internal static void Ensure()
     {
@@ -37,8 +38,19 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
         _instance = this;
     }
 
+    internal static void SetVisible(bool visible)
+    {
+        Ensure();
+        if (_instance == null) return;
+        _instance._visible = visible;
+        _instance._elapsed = 0f;
+        _instance._frames = 0;
+        if (!visible) _instance._displayFps = 0;
+    }
+
     private void Update()
     {
+        if (!_visible) return;
         float delta = Time.unscaledDeltaTime;
         if (delta <= 0f || delta > 2f)
         {
@@ -59,10 +71,12 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
 
     private void OnGUI()
     {
+        if (!_visible) return;
         EnsureStyles();
         string text = "FPS: " + _displayFps;
-        GUI.Label(new Rect(7f, 3f, 90f, 22f), text, _shadowStyle);
-        GUI.Label(new Rect(6f, 2f, 90f, 22f), text, _style);
+        const float x = 8f;
+        GUI.Label(new Rect(x + 1f, 9f, 96f, 22f), text, _shadowStyle);
+        GUI.Label(new Rect(x, 8f, 96f, 22f), text, _style);
     }
 
     private static void EnsureStyles()

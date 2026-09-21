@@ -2,6 +2,12 @@ namespace MySimulatedLongevityRoad.Core;
 
 public static class MclslConfig
 {
+    public static void ShowFpsCallBack(bool value)
+    {
+        MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+        MySimulatedLongevityRoad.UI.MclslFpsOverlay.SetVisible(MclslRuntimeSettings.ShowFps);
+    }
+
     public static void EnableDeathAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void EnableBreakthroughFailureAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void EnableYuanYingBreakthroughAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());

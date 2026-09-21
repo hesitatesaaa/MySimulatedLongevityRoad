@@ -12,6 +12,10 @@
     <AssemblyName>MySimulatedLongevityRoad</AssemblyName>
     <RootNamespace>MySimulatedLongevityRoad</RootNamespace>
     <LangVersion>11</LangVersion>
+    <WorldBoxDataRoot Condition="'$(WorldBoxDataRoot)' == ''">$(MSBuildThisFileDirectory)..\..\worldbox_Data</WorldBoxDataRoot>
+    <WorldBoxDataRoot>$([System.IO.Path]::GetFullPath('$(WorldBoxDataRoot)'))</WorldBoxDataRoot>
+    <NeoModLoaderPath Condition="Exists('$(WorldBoxDataRoot)\StreamingAssets\mods\NML\NeoModLoader.dll')">$(WorldBoxDataRoot)\StreamingAssets\mods\NML\NeoModLoader.dll</NeoModLoaderPath>
+    <NeoModLoaderPath Condition="'$(NeoModLoaderPath)' == '' and Exists('$(WorldBoxDataRoot)\StreamingAssets\mods\NeoModLoader.dll')">$(WorldBoxDataRoot)\StreamingAssets\mods\NeoModLoader.dll</NeoModLoaderPath>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <NoWarn>$(NoWarn);MSB3277;CS0162;CS0219</NoWarn>
@@ -20,48 +24,72 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\worldbox_Data\StreamingAssets\mods\NML\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\StreamingAssets\mods\NML\Assemblies\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\worldbox_Data\StreamingAssets\mods\NML\Assembly-CSharp-Publicized.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\StreamingAssets\mods\NML\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
     <Reference Include="NeoModLoader">
-      <HintPath>..\..\worldbox_Data\StreamingAssets\mods\NeoModLoader.dll</HintPath>
+      <HintPath>$(NeoModLoaderPath)</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\worldbox_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>..\..\worldbox_Data\Managed\System.Net.Http.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\..\worldbox_Data\Managed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>$(WorldBoxDataRoot)\Managed\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DeveloperTools\**\*.cs" Condition="'$(IncludeDeveloperTools)' != 'true'" />
+    <Compile Remove="references\**\*.cs" />
     <Compile Remove=".recovered\**\*.cs" />
     <Compile Remove="code_broken_*\**\*.cs" />
     <Compile Remove="xj_0_7_announce_scan\**\*.cs" />
-    <Compile Remove="references\WorldBoxGameDecompiled\**\*.cs" />
+    <Compile Remove="_archive\**\*.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\StreamingAssets\mods\NML\Assemblies\0Harmony.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\StreamingAssets\mods\NML\Assembly-CSharp-Publicized.dll" />
+    <RequiredWorldBoxFile Include="$(NeoModLoaderPath)" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\Newtonsoft.Json.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\System.Net.Http.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.CoreModule.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.IMGUIModule.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.InputLegacyModule.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.TextRenderingModule.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.UI.dll" />
+    <RequiredWorldBoxFile Include="$(WorldBoxDataRoot)\Managed\UnityEngine.UIModule.dll" />
+  </ItemGroup>
+
+  <Target Name="ValidateWorldBoxDependencies" BeforeTargets="ResolveReferences">
+    <ItemGroup>
+      <MissingWorldBoxFile Include="@(RequiredWorldBoxFile)" Condition="!Exists('%(Identity)')" />
+    </ItemGroup>
+    <Error Condition="'@(MissingWorldBoxFile)' != ''" Text="WorldBoxDataRoot 缺少构建依赖：$(WorldBoxDataRoot)。缺失文件：@(MissingWorldBoxFile, '；')。请使用 -p:WorldBoxDataRoot=... 指向匹配的 worldbox_Data。" />
+  </Target>
 
 </Project>

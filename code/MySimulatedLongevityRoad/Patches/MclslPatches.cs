@@ -152,6 +152,7 @@ internal static class MclslPatches
     private static void MapBox_FinishingUpLoading_Postfix()
     {
         MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+        MclslFpsOverlay.SetVisible(MclslRuntimeSettings.ShowFps);
         MclslRuntime.OnWorldLoaded();
     }
 
@@ -284,7 +285,7 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitWindow), "OnEnable")]
     private static void UnitWindow_OnEnable_Postfix(UnitWindow __instance)
     {
-        TryPatch("developer-select-actor-on-open", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
+        TryPatch("developer-select-actor-on-open", () => MclslDeveloperBridge.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-on-enable", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-on-enable", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-info-panel-enable", () => MclslActorInfoPanel.Refresh(__instance, resetScrollForNewActor: true));
@@ -301,7 +302,7 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitWindow), "showStatsRows")]
     private static void UnitWindow_ShowStatsRows_Postfix(UnitWindow __instance)
     {
-        TryPatch("developer-select-actor-on-stats", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
+        TryPatch("developer-select-actor-on-stats", () => MclslDeveloperBridge.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-stats", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-stats", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-overview-stats", () => MclslActorOverviewStatsFormatter.Refresh(__instance));
@@ -312,7 +313,7 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitWindow), "showInfo")]
     private static void UnitWindow_ShowInfo_Postfix(UnitWindow __instance)
     {
-        TryPatch("developer-select-actor-on-info", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
+        TryPatch("developer-select-actor-on-info", () => MclslDeveloperBridge.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-info", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-info", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-overview-info", () => MclslActorOverviewStatsFormatter.Refresh(__instance));
@@ -323,11 +324,11 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(PlayerControl), "checkClickTouchInspectSelect")]
     private static void PlayerControl_CheckClickTouchInspectSelect_Postfix()
     {
-        if (!MclslRuntimeSettings.DebugToolsVisible) return;
+        if (!MclslDeveloperBridge.IsAvailable) return;
         TryPatch("developer-select-actor-on-map-click", () =>
         {
             Actor actor = World.world?.getActorNearCursor();
-            if (actor?.data != null && actor.isAlive()) MclslDeveloperApi.SetSelectedActor(actor);
+            if (actor?.data != null && actor.isAlive()) MclslDeveloperBridge.SetSelectedActor(actor);
         });
     }
 

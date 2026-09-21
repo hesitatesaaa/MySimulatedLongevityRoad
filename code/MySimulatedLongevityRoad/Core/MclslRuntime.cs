@@ -2,6 +2,7 @@ using MySimulatedLongevityRoad.Modules;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Visual;
+using MySimulatedLongevityRoad.UI;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Core;
@@ -19,6 +20,7 @@ internal static class MclslRuntime
         _initialized = true;
         MclslConfigLocalization.Init();
         MclslModuleHub.Init();
+        MclslFpsOverlay.Ensure();
         MclslRuntimeDriver.Ensure();
     }
 
@@ -35,15 +37,20 @@ internal static class MclslRuntime
 
     internal static void Tick()
     {
+        MclslDeveloperBridge.Tick();
         int unityFrame = Time.frameCount;
         if (unityFrame == _lastFrame) return;
         _lastFrame = unityFrame;
 
+        long realtimeSample = MclslPerformanceProbe.Begin();
         MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
+        MclslPerformanceProbe.End("实时模块", realtimeSample);
         MclslRuntimeWorkBudget.SampleFrame();
         if (!MclslRuntimeSettings.CoreEnabled) return;
         _frameCounter++;
+        long frameSample = MclslPerformanceProbe.Begin();
         MclslModuleHub.TickFrame(_frameCounter, true);
+        MclslPerformanceProbe.End("帧模块", frameSample);
         if (_frameCounter % 15 == 0)
         {
             int year = CurrentYear();

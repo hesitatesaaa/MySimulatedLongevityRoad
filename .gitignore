@@ -1,6 +1,10 @@
 # Build output
 **/bin/
 **/obj/
+发布包/
+_archive/
+.codegraph/
+.codex/
 # IDE and user settings
 .vs/
 .idea/

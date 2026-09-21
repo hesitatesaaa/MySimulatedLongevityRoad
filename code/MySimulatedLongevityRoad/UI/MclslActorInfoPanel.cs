@@ -42,7 +42,7 @@ internal static class MclslActorInfoPanel
         }
 
         MclslMaobaoShortcutButton.Refresh(window);
-        if (!ShouldShowFor(window.actor) && !MclslRuntimeSettings.DebugToolsVisible)
+        if (!ShouldShowFor(window.actor) && !MclslDeveloperBridge.IsAvailable)
         {
             HidePanel(background);
             return;
@@ -60,7 +60,7 @@ internal static class MclslActorInfoPanel
         string formatted = MclslActorInfoFormatter.Format(window.actor);
         if (string.IsNullOrWhiteSpace(formatted))
         {
-            if (!MclslRuntimeSettings.DebugToolsVisible)
+            if (!MclslDeveloperBridge.IsAvailable)
             {
                 HidePanel(background);
                 return;
@@ -185,9 +185,12 @@ internal static class MclslActorInfoPanel
         state = panel.GetComponent<PanelState>() ?? panel.AddComponent<PanelState>();
 
         RectTransform rect = panel.GetComponent<RectTransform>();
-        rect.localPosition = new Vector3(256f, 40f);
+        // Keep the established 0.1.9.1 side-panel footprint.  It is positioned
+        // by the native UnitWindow coordinate space rather than screen anchors.
+        // Keep the existing top edge while extending the panel downward by 28px.
+        rect.localPosition = new Vector3(256f, 26f);
         rect.localScale = Vector3.one;
-        rect.sizeDelta = new Vector2(172f, 332f);
+        rect.sizeDelta = new Vector2(172f, 360f);
 
         Image image = panel.GetComponent<Image>();
         image.color = MclslUiTheme.ActorPanelSurface;
@@ -260,6 +263,14 @@ internal static class MclslActorInfoPanel
     private static void EnsureActionBar(Transform panel, Actor actor)
     {
         if (panel == null || actor?.data == null) return;
+        // 旧版本可能把操作栏挂在人物窗口 Background 下；清理旧的同名
+        // 兄弟节点，避免出现悬空按钮和面板内按钮同时存在。
+        Transform stale = panel.parent?.Find("MclslActorActions");
+        if (stale != null && stale != panel)
+        {
+            try { UnityEngine.Object.Destroy(stale.gameObject); }
+            catch { stale.gameObject.SetActive(false); }
+        }
         Transform existing = panel.Find("MclslActorActions");
         GameObject bar = existing?.gameObject;
         if (bar == null)
@@ -270,17 +281,25 @@ internal static class MclslActorInfoPanel
         bar.SetActive(true);
         bar.transform.SetAsLastSibling();
         RectTransform barRect = bar.GetComponent<RectTransform>();
+        // Use the full side-panel width, but keep the footer only slightly taller
+        // than the button instead of leaving a tall backing block.
         barRect.anchorMin = new Vector2(0f, 0f);
         barRect.anchorMax = new Vector2(1f, 0f);
         barRect.pivot = new Vector2(0.5f, 0f);
-        barRect.offsetMin = new Vector2(7f, 5f);
-        barRect.offsetMax = new Vector2(-7f, 35f);
+        // Match the original compact footer dimensions.  The button fills this
+        // bordered green panel so no map/background gap is visible around it.
+        // Raise the compact biography strip to meet the upper green border of
+        // its footer background, without changing its 30px button height.
+        barRect.offsetMin = new Vector2(7f, 17f);
+        barRect.offsetMax = new Vector2(-7f, 47f);
         barRect.localScale = Vector3.one;
         Image barImage = bar.GetComponent<Image>();
-        barImage.color = new Color(0.035f, 0.16f, 0.16f, 0.82f);
+        // The footer is now a layout-only container.  Keep the green Biography
+        // button itself, but remove the extra green/dark backing plate.
+        barImage.color = Color.clear;
         barImage.raycastTarget = false;
         Outline barOutline = bar.GetComponent<Outline>();
-        barOutline.effectColor = MclslUiTheme.ActorPanelEdge;
+        barOutline.effectColor = Color.clear;
         barOutline.effectDistance = new Vector2(1f, -1f);
         barOutline.useGraphicAlpha = true;
         EnsureActionButton(bar.transform, "Biography", "修士列传", () => MclslCodexWindow.ShowBiographyForActor(actor));
@@ -317,7 +336,7 @@ internal static class MclslActorInfoPanel
         rect.localPosition = Vector3.zero;
         rect.localScale = Vector3.one;
         Image image = buttonObject.GetComponent<Image>();
-        image.color = new Color(0.07f, 0.28f, 0.27f, 0.92f);
+        image.color = new Color(0.07f, 0.28f, 0.27f, 0.88f);
         image.raycastTarget = true;
         Outline buttonOutline = buttonObject.GetComponent<Outline>();
         buttonOutline.effectColor = MclslUiTheme.ActorPanelAccent;
@@ -360,11 +379,12 @@ internal static class MclslActorInfoPanel
         RectTransform rect = body.GetComponent<RectTransform>();
         rect.anchorMin = Vector2.zero;
         rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(7f, 40f);
+        // Reserve the raised footer so document text cannot pass behind it.
+        rect.offsetMin = new Vector2(7f, 52f);
         rect.offsetMax = new Vector2(-7f, -39f);
         rect.localScale = Vector3.one;
         Image image = body.GetComponent<Image>();
-        image.color = new Color(0.01f, 0.04f, 0.045f, 0.14f);
+        image.color = new Color(0.01f, 0.04f, 0.045f, 0.10f);
         image.raycastTarget = true;
         return body.transform;
     }
@@ -382,7 +402,8 @@ internal static class MclslActorInfoPanel
         rect.anchorMin = Vector2.zero;
         rect.anchorMax = Vector2.one;
         rect.offsetMin = new Vector2(4f, 5f);
-        rect.offsetMax = new Vector2(-11f, -5f);
+        // 隐藏滚动条后释放右侧空间；ScrollRect 仍然负责滚轮和触控板滚动。
+        rect.offsetMax = new Vector2(-5f, -5f);
         Image image = viewport.GetComponent<Image>();
         image.color = new Color(1f, 1f, 1f, 0.01f);
         image.raycastTarget = true;
@@ -428,9 +449,12 @@ internal static class MclslActorInfoPanel
             scrollbar.handleRect = handleRect;
         }
         scrollbar.targetGraphic = scrollbarObject.GetComponent<Image>();
-        scroll.verticalScrollbar = scrollbar;
+        // 保留旧节点以兼容已创建的面板，但不再把它挂到 ScrollRect，避免
+        // 显示滚动条或占用正文右侧宽度；ScrollRect 本身仍可滚动。
+        scrollbarObject.SetActive(false);
+        scroll.verticalScrollbar = null;
         scroll.verticalScrollbarVisibility = ScrollRect.ScrollbarVisibility.AutoHide;
-        scroll.verticalScrollbarSpacing = 1f;
+        scroll.verticalScrollbarSpacing = 0f;
     }
 
     private static void EnsurePanelAccent(Transform panel)
@@ -676,8 +700,10 @@ internal static class MclslActorInfoPanel
                 PendingScrollRestoreFrames = 0;
                 return;
             }
+            // The content fitter has already been marked when the text changed.
+            // Restoring the viewport on following frames is sufficient and avoids
+            // four forced full-canvas rebuilds for every actor data refresh.
             Canvas.ForceUpdateCanvases();
-            if (scroll.content != null) LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
             bool wasRestoring = IsRestoring;
             IsRestoring = true;
             RestoreScroll(scroll, PendingNormalizedPosition, PendingContentPosition);

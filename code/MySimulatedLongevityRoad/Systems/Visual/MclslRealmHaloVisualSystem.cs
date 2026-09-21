@@ -40,6 +40,7 @@ internal static class MclslRealmHaloVisualSystem
         HaloEntry entry = GetOrCreateEntry(actor, actorId, profile, position, frames);
         if (entry == null) return;
         entry.Actor = actor;
+        entry.Profile = profile;
         entry.LastSeenFrame = frame;
         entry.LastRenderPosition = position;
 
@@ -88,18 +89,14 @@ internal static class MclslRealmHaloVisualSystem
                 continue;
             }
 
-            if (!TryResolveProfile(entry.Actor, out long actorId, out HaloProfile profile)
-                || !string.Equals(entry.Folder, profile.Folder, StringComparison.Ordinal))
-            {
-                if (entry.GameObject != null) entry.GameObject.SetActive(false);
-                continue;
-            }
-
             if (frame - entry.LastSeenFrame > VisibleScanCadenceFrames + 2)
             {
                 if (entry.GameObject != null) entry.GameObject.SetActive(false);
                 continue;
             }
+
+            long actorId = MclslActorAccessor.Id(entry.Actor);
+            HaloProfile profile = entry.Profile;
 
             Sprite[] frames = entry.BoundFrames;
             if (frames == null || frames.Length == 0) continue;
@@ -126,8 +123,12 @@ internal static class MclslRealmHaloVisualSystem
 
             Sprite sprite = frames[spriteIndex];
             if (!ReferenceEquals(entry.Renderer.sprite, sprite)) entry.Renderer.sprite = sprite;
-            entry.Renderer.color = Color.white;
-            entry.Transform.localScale = new Vector3(profile.Scale, profile.Scale, 1f);
+            if (entry.Renderer.color != Color.white) entry.Renderer.color = Color.white;
+            if (Math.Abs(entry.LastAppliedScale - profile.Scale) > 0.000001f)
+            {
+                entry.Transform.localScale = new Vector3(profile.Scale, profile.Scale, 1f);
+                entry.LastAppliedScale = profile.Scale;
+            }
             if (entry.GameObject != null) entry.GameObject.SetActive(true);
         }
     }
@@ -230,7 +231,7 @@ internal static class MclslRealmHaloVisualSystem
             DisableNativeAnimator(effect);
 
             renderer.color = Color.white;
-            entry = new HaloEntry(actor, effect, component.gameObject, component.transform, renderer, profile.Folder, frames, position);
+            entry = new HaloEntry(actor, effect, component.gameObject, component.transform, renderer, profile, frames, position);
             EntriesByActorId[actorId] = entry;
             return entry;
         }
@@ -379,7 +380,7 @@ internal static class MclslRealmHaloVisualSystem
             GameObject gameObject,
             Transform transform,
             SpriteRenderer renderer,
-            string folder,
+            HaloProfile profile,
             Sprite[] frames,
             Vector3 position)
         {
@@ -388,7 +389,8 @@ internal static class MclslRealmHaloVisualSystem
             GameObject = gameObject;
             Transform = transform;
             Renderer = renderer;
-            Folder = folder;
+            Profile = profile;
+            Folder = profile.Folder;
             BoundFrames = frames;
             LastRenderPosition = position;
             LastSeenFrame = Time.frameCount;
@@ -400,8 +402,10 @@ internal static class MclslRealmHaloVisualSystem
         internal Transform Transform { get; }
         internal SpriteRenderer Renderer { get; }
         internal string Folder { get; set; }
+        internal HaloProfile Profile { get; set; }
         internal Sprite[] BoundFrames { get; set; }
         internal Vector3 LastRenderPosition { get; set; }
         internal int LastSeenFrame { get; set; }
+        internal float LastAppliedScale { get; set; }
     }
 }

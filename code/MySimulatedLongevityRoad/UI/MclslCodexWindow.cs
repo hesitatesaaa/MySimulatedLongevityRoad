@@ -149,7 +149,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 GUILayout.Space(9f);
                 if (_standaloneHuanzhenSpace)
                 {
-                    _scroll = GUILayout.BeginScrollView(_scroll, false, true);
+                    _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, GUIStyle.none);
                     DrawHuanzhenSpace();
                     GUILayout.EndScrollView();
                 }
@@ -166,7 +166,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawCodexSidebar();
                 GUILayout.Space(8f);
                 GUILayout.BeginVertical(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
-                _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUILayout.ExpandWidth(true));
+                _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.ExpandWidth(true));
                 DrawPage();
                 GUILayout.EndScrollView();
                 GUILayout.EndVertical();
@@ -220,7 +220,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (_tab < 0 || _tab >= tabs.Length) _tab = 0;
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(218f), GUILayout.ExpandHeight(true));
         DrawCardStripe("#6FAE9D");
-        _sidebarScroll = GUILayout.BeginScrollView(_sidebarScroll, false, true, GUILayout.Width(210f), GUILayout.ExpandHeight(true));
+        _sidebarScroll = GUILayout.BeginScrollView(_sidebarScroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.Width(210f), GUILayout.ExpandHeight(true));
         DrawSidebarVolume(tabs, "天下纪事", "#AFC7D9");
         DrawSidebarVolume(tabs, "修行道统", "#9FC9C0");
         DrawSidebarVolume(tabs, "山河万象", "#D6BE86");

@@ -42,6 +42,11 @@ internal static class MclslLocalizationBridge
 
     internal static void RetryRuntimeKeys()
     {
+        // WorldBox can recreate its localization table after mods have loaded.
+        // RegisteredKeys only describes the old table, so clear this local cache
+        // before a deliberately infrequent retry.  Static locale files remain the
+        // primary source; this covers runtime-only controls and old save sessions.
+        RegisteredKeys.Clear();
         foreach (KeyValuePair<string, string> pair in TextByRuntimeKey)
             EnsureRegistered(pair.Key, pair.Value);
     }

@@ -138,7 +138,10 @@ internal static class MclslRankWindow
             RefreshSelectedSortButtons();
             _needRefresh = true;
         };
-        updater.OnUpdate = () => { RestoreNativeCloseButton(); UpdateVisibleCards(); };
+        // The native close button is restored on creation/open.  Re-scanning all
+        // of its child graphics every frame caused needless allocations while a
+        // long ranking list was open, without changing its appearance.
+        updater.OnUpdate = UpdateVisibleCards;
         updater.OnClose = DisposeCardPool;
         return true;
     }

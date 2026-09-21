@@ -20,33 +20,67 @@ WorldBox 模组，作者：溪上翁、kinght。模组版本 `0.1.9.1`，`mod.js
 - `CHANGELOG.md`：按版本记录功能更新和兼容性说明。
 - `VERSIONING.md`：版本隔离、发布、回滚和分支规则。
 - `AGENTS.md`：项目长期协作、可运行打包和 GitHub 推送边界规则。
-- `scripts/Package-Mod.ps1`：Release 构建、运行包生成和包内容校验脚本。
+- `scripts/Build-Mod.ps1`：WorldBox 依赖预检和 Release 构建入口。
+- `scripts/Test-Project.ps1`：统一执行静态检查、构建或打包验证。
+- `scripts/Package-Mod.ps1`：源码型运行包生成和包内容校验脚本。
 - `docs/UI_DESIGN.md`：排行榜、玄黄仙录与中文命名的界面设计约束。
 
 ## 开发与构建
 
+项目目标框架为 `netstandard2.1`，用于 WorldBox 的 Unity/Mono 运行环境。项目不会把 WorldBox、Unity、Harmony 或 NeoModLoader DLL 提交到仓库。
+
+默认依赖目录是项目外的 `..\..\worldbox_Data`，也可以通过 `-WorldBoxDataRoot` 指定本机安装位置。构建脚本会先检查全部依赖，缺失时直接列出文件，不继续产生大量无效编译错误。
+
+```powershell
+pwsh -NoProfile -File .\scripts\Build-Mod.ps1 -Configuration Release -WorldBoxDataRoot D:\path\to\worldbox_Data
+```
+
+日常修改优先使用统一检查入口：
+
+```powershell
+# 文档、JSON、本地化或资源修改
+pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Static
+
+# C#、项目文件或构建脚本修改
+pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Build -WorldBoxDataRoot D:\path\to\worldbox_Data
+
+# 一组修改完成后的最终源码包
+pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Package -ChangeTag 项目整理
+```
+
+首次构建成功后，依赖和源码未发生还原变化时，可以给 `Build` 模式增加 `-NoRestore`，跳过重复的 NuGet 还原。
+
+如果只需要检查项目文件而没有 WorldBox 依赖，可使用：
+
+```powershell
+dotnet msbuild .\InterestingTrait.csproj -getItem:Compile -nologo
+```
+
+该检查应确认 `DeveloperTools/` 和 `references/` 不在编译项中。
+
 ## 原版 WorldBox 导入
 
-本压缩包是 NeoModLoader 的“时光长河版”运行包。请先安装与游戏版本匹配的 NeoModLoader，然后把压缩包内的模组目录解压到以下任一 NML 模组目录（只选一个）：
+本项目发布包沿用现有的源码型 Mod 结构。请先安装与游戏版本匹配的 NeoModLoader，然后把压缩包内的模组目录解压到以下任一 NML 模组目录（只选一个）：
 
 ```text
 <WorldBox>\mods\
 <WorldBox>\worldbox_Data\StreamingAssets\mods\
 ```
 
-解压后的目录可以保留外层文件夹，但 NML 搜索到的模组目录必须直接包含以下三个文件：
+解压后的目录可以保留外层文件夹，但 NML 搜索到的模组目录必须直接包含以下文件和目录：
 
 ```text
 mod.json
 icon.png
-MySimulatedLongevityRoad.dll
+InterestingTrait.cs
+code/
+GameResources/
+Locales/
 ```
 
-不要把 ZIP 文件本身放进 `mods`，也不要多套一层目录。若之前安装过旧版，请先删除旧的 `我的模拟长生路` 文件夹，再解压本包；两个文件夹同时存在会触发相同 GUID 冲突，NML 只会加载其中一个。`MySimulatedLongevityRoad.dll` 已按 Unity/Mono 可加载的 `netstandard2.1` 目标重新编译；直接运行原版 WorldBox 时请确认游戏的实验性模组开关已开启。
+不要把 ZIP 文件本身放进 `mods`，也不要多套一层目录。若之前安装过旧版，请先删除旧的 `我的模拟长生路` 文件夹，再解压本包；两个文件夹同时存在会触发相同 GUID 冲突，NML 只会加载其中一个。该发布格式不要求 ZIP 内携带 DLL；直接运行原版 WorldBox 时请确认游戏的实验性模组开关已开启。
 
-安装支持 `netstandard2.1` 的 .NET SDK，并准备 WorldBox 与 NeoModLoader 的对应依赖。
-原项目通过相对路径 `../../worldbox_Data/` 引用游戏和加载器程序集，包括 Unity、Harmony、NeoModLoader 与 `Assembly-CSharp-Publicized.dll`。
-这些外部 DLL 未包含在压缩包中，也未加入仓库。构建前应让该相对路径指向匹配的游戏数据目录，或按本机安装位置调整项目中的 `HintPath`。
+安装支持 `netstandard2.1` 的 .NET SDK，并准备与游戏版本匹配的 WorldBox 与 NeoModLoader 依赖。外部 DLL 未包含在压缩包中，也未加入仓库。
 
 `references/WorldBoxGameDecompiled/` 是单独导入的 WorldBox 反编译参考树，供搜索 `Actor`、`MapBox`、`SaveManager` 等原版类型、字段和方法使用。它不是模组依赖，已从项目编译项中排除；发布模组时不要把该目录复制到玩家的 mods 目录。
 
@@ -58,19 +92,17 @@ rg -n "class MapBox|updateSimulation" .\references\WorldBoxGameDecompiled
 rg -n "class SaveManager" .\references\WorldBoxGameDecompiled
 ```
 
-在项目目录执行：
+开发工具源码只存在于本机被忽略的 `DeveloperTools/`，不会提交 GitHub，也不会进入玩家发布包。当前本机开发版的打开方式是：先点击一个人物选中目标，再按 `F8`；也可以打开“我的模拟长生路”页签并点击“开发者工具”。没有选中人物时不会打开编辑器。
+
+完成一组代码、资源、配置或本地化修改后，先按修改类型完成必要验证，再生成一次源码型运行包：
 
 ```powershell
-dotnet build .\InterestingTrait.sln
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\Package-Mod.ps1 -ChangeTag 空间继承
 ```
 
-开发工具可直接打开 `InterestingTrait.sln`。完成任何代码、资源、配置或本地化修改后，必须尝试生成可运行包：
+若系统只有 Windows PowerShell 5.1，建议安装 PowerShell 7 并使用 `pwsh` 执行脚本。
 
-```powershell
-.\scripts\Package-Mod.ps1 -ChangeTag 空间继承
-```
-
-脚本会按现有发布包的源码型结构，将 `InterestingTrait.cs`、解决方案/项目文件、`mod.json`、入口资源、`code`、`GameResources`、`Locales`、配置和说明文档放入 `发布包/`。包名格式为 `0.5.1+我的模拟长生路0.1.9.1-综合更新.zip`；同名时追加时间戳。该流程不要求本机存在 WorldBox 编译依赖；`references/`、构建缓存、本地 `DeveloperTools/` 和打包脚本不进入玩家发布包。
+脚本会按源码型发布结构，将入口源码、解决方案/项目文件、`mod.json`、资源、`code`、`GameResources`、`Locales`、配置和说明文档放入 `发布包/`。包名格式为 `0.5.1+我的模拟长生路0.1.9.1-综合更新.zip`；同名时追加时间戳。`references/`、构建缓存、`DeveloperTools/` 和打包脚本不进入玩家发布包，也不存在开发者工具混入玩家包的选项。
 
 日常可运行包保持 `mod.json` 当前版本不变。只有明确要求正式版本或推到 GitHub 时，才更新版本号、CHANGELOG、正式标签或远程仓库；未收到明确指令时不得执行 `git push`、GitHub Release 或其他远程写操作。
 
@@ -112,7 +144,7 @@ git commit -m "描述本次修改"
 ## v0.1.9.1 更新摘要
 
 - 两个纪元共用深青黑半透明人物信息栏，标题、分隔线和“修士列传”按钮固定，正文按现有数据分组展示。
-- 正文使用独立滚动容器和青绿色细滚动条；数据刷新不重建节点、不改变滚动位置，关闭后重新打开才回到顶部。
+- 正文使用独立滚动容器并隐藏可见滚动条；鼠标滚轮、触控板和惯性滚动仍然有效，数据刷新不重建节点、不改变滚动位置，关闭后重新打开才回到顶部。
 
 ## v0.1.9 更新摘要
 

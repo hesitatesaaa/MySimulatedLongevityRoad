@@ -71,6 +71,18 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
     internal void Setup(MclslRankEntry item, int index, string sortValue)
     {
         _actor = item.Actor;
+        Image background = GetComponent<Image>();
+        if (background != null)
+        {
+            background.color = index switch
+            {
+                0 => MclslUiTheme.RankRowFirst,
+                1 => MclslUiTheme.RankRowSecond,
+                2 => MclslUiTheme.RankRowThird,
+                _ when index % 2 == 0 => MclslUiTheme.RankRowEven,
+                _ => MclslUiTheme.RankRowOdd
+            };
+        }
         SetText("RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
         SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, MclslUiTheme.RankTextPrimary);
         string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;

@@ -98,7 +98,6 @@ internal static class MclslScheduler
         // 不再重复执行灵根、特质与修炼身份全套校正。
         if (MclslCultivatorCandidateIndex.IsCultivator(actorId))
         {
-            CommitBaseAnnualCultivationFromNativeAge(actor, year);
             EnqueueAnnualActorCore(actor, year);
             return;
         }
@@ -123,49 +122,9 @@ internal static class MclslScheduler
         MclslWorldActorQuery.MarkDirty();
         if (ShouldQueueAnnualActor(actor, year))
         {
-            CommitBaseAnnualCultivationFromNativeAge(actor, year);
             EnqueueAnnualActorCore(actor, year);
         }
     }
-
-    /// <summary>
-    /// 玄鉴式年度保底：Actor.updateAge 是已经验证可用的原生年度入口。
-    /// 基础真元增长计算轻量且不可丢失，因此在该入口同步提交；感气推进、突破、
-    /// 事件及世界结算仍留在有界队列。队列稍后再次进入 Progression 时会识别
-    /// LastCultivationYear，继续后续链路而不会重复发放真元。
-    /// </summary>
-    private static void CommitBaseAnnualCultivationFromNativeAge(Actor actor, int year)
-    {
-        if (actor?.data == null || year <= 0 || !MclslEligibility.CanCultivate(actor)) return;
-        if (!MclslCultivationActorMarker.IsAnnualCandidate(actor)) return;
-        if (MclslActorAccessor.Realm(actor) == MclslRealmIds.ChangSheng) return;
-
-        int lastYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -1);
-        lastYear = MclslCultivationSystem.NormalizeLastCultivationYear(actor, year, lastYear);
-        if (lastYear >= year) return;
-
-        try
-        {
-            if (string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))
-                && MclslSpiritualRootSystem.HasCultivationPotential(actor))
-            {
-                MclslSpiritualRootEntrySystem.TryEnterFromGiftTrait(actor, year);
-            }
-
-            if (MclslAnnualCultivationExecutor.TryApplyOneAnnualStep(actor, year))
-            {
-                MclslCultivatorCandidateIndex.Observe(actor);
-            }
-        }
-        catch (Exception ex)
-        {
-            // 同步保底失败时仍保留年度队列，由标准 Progression 再尝试一次。
-            MclslDiagnostics.Error(
-                "annual-growth-native:" + MclslActorAccessor.Id(actor),
-                "原生年度入口提交基础真元失败，已转入年度队列重试: " + ex.Message);
-        }
-    }
-
 
     internal static void WakeAnnualCultivationActor(Actor actor)
     {
@@ -231,17 +190,21 @@ internal static class MclslScheduler
 
         // 传法变世的旧法修士转化是昂贵工作，必须独立于年度回调分帧消化。
         // 即使年度角色队列为空，也要保留这条轻量车道，直到持久化队列清空。
+        long transitionSample = MclslPerformanceProbe.Begin();
         if (MclslWorldEpochSystem.HasPendingTransitionWork)
         {
             MclslWorldEpochSystem.TickDeferredTransitionWork();
         }
+        MclslPerformanceProbe.End("新法转化", transitionSample);
 
         // 队列一旦存在就必须被消费；DetectionGate 只负责决定何时创建年度工作，
         // 不能再作为已创建语义队列的第二道开关。
+        long actorSample = MclslPerformanceProbe.Begin();
         if (AnnualActorQueue.Count > 0)
         {
             TickAnnualActors(context);
         }
+        MclslPerformanceProbe.End("年度角色", actorSample);
 
         if (MclslAnnualWorldRuntimeLane.HasPending && MclslHotPathPolicy.ShouldRunBackgroundWorldStep())
         {

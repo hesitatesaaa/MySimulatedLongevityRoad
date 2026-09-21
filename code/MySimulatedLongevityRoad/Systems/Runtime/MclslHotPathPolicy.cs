@@ -40,7 +40,7 @@ internal static class MclslHotPathPolicy
 
     internal static bool ShouldExposeDeveloperTools()
     {
-        return MclslRuntimeSettings.DebugToolsVisible;
+        return MclslDeveloperBridge.IsAvailable;
     }
 
     internal static void Clear()
