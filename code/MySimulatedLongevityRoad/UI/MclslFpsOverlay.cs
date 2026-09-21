@@ -15,20 +15,20 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
 
     internal static void Ensure()
     {
-        if ((Object)(object)_instance != (Object)null)
+        if ((UnityEngine.Object)(object)_instance != (UnityEngine.Object)null)
         {
             return;
         }
 
         GameObject host = new GameObject("MclslFpsOverlay");
-        Object.DontDestroyOnLoad(host);
+        UnityEngine.Object.DontDestroyOnLoad(host);
         host.hideFlags = HideFlags.HideAndDontSave;
         _instance = host.AddComponent<MclslFpsOverlay>();
     }
 
     private void Awake()
     {
-        if ((Object)(object)_instance != (Object)null && !ReferenceEquals(_instance, this))
+        if ((UnityEngine.Object)(object)_instance != (UnityEngine.Object)null && !ReferenceEquals(_instance, this))
         {
             Destroy(gameObject);
             return;

@@ -637,6 +637,95 @@ internal static class MclslCultivationSystem
         return true;
     }
 
+    internal static bool RestoreHuanzhenLegacyOption(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, string optionId, int anchorYear, int deathYear, out string message)
+    {
+        message = string.Empty;
+        if (actor?.data == null || snapshot == null) { message = "人物或前世快照无效。"; return false; }
+        switch (optionId ?? string.Empty)
+        {
+            case "cultivation": RestoreLegacyCultivation(actor, snapshot, anchorYear, deathYear); message = "已继承前世修为根基。"; break;
+            case "technique": RestoreLegacyTechnique(actor, snapshot); message = "已继承前世功法道统。"; break;
+            case "foundation_wonder": RestoreLegacyFoundationWonder(actor, snapshot); message = "已继承突破造物：" + snapshot.FoundationWonderName + "。"; break;
+            case "golden_core": RestoreLegacyGoldenCore(actor, snapshot); message = "已继承金丹法则：" + snapshot.GoldenCoreLaws + "。"; break;
+            case "nascent_cave": RestoreLegacyNascentCave(actor, snapshot); message = "已继承元婴洞天：" + snapshot.NascentCaveName + "。"; break;
+            case "nascent_essence": RestoreLegacyNascentEssence(actor, snapshot); message = "已继承天地之精：" + snapshot.NascentEssenceName + "。"; break;
+            case "divine_change": RestoreLegacyDivineChange(actor, snapshot); message = "已继承神通变化：" + snapshot.DivineChangeName + "。"; break;
+            case "divine_marrow": RestoreLegacyDivineMarrow(actor, snapshot); message = "已继承天地之髓：" + snapshot.DivineMarrowName + "。"; break;
+            case "world_soul": RestoreLegacyWorldSoul(actor, snapshot); message = "已继承天地之魄：" + snapshot.WorldSoulName + "。"; break;
+            case "inverse_truth": RestoreLegacyInverseTruth(actor, snapshot); message = "已继承逆理：" + snapshot.InverseTruthName + "。"; break;
+            case "aptitude": MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, snapshot.Aptitude); message = "已继承资质：" + snapshot.Aptitude + "。"; break;
+            case "mind": RestoreLegacyMind(actor, snapshot); message = "已继承心境与心法进度。"; break;
+            case "contribution": MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, snapshot.Contribution); message = "已继承贡献值：" + snapshot.Contribution + "。"; break;
+            case "spirit_stones": MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones)); message = "已继承灵石：" + SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones) + "。"; break;
+            default: message = "未知或已失效的前世遗产。"; return false;
+        }
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, message);
+        MclslActorAccessor.ApplyDisplayName(actor, MclslActorAccessor.Realm(actor));
+        try { actor.updateStats(); } catch (Exception ex) { MclslDiagnostics.Error("huanzhen-legacy-option-stats", "刷新前世遗产属性失败: " + ex.Message); }
+        MclslWorldActorQuery.MarkDirty();
+        return true;
+    }
+
+    private static void RestoreLegacyFoundationWonder(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.FoundationWonderId, s.FoundationWonderId);
+        SetString(actor, MclslActorDataKeys.FoundationWonderName, s.FoundationWonderName);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderQuality, s.FoundationWonderQuality);
+        SetString(actor, MclslActorDataKeys.FoundationWonderTags, s.FoundationWonderTags);
+        SetString(actor, MclslActorDataKeys.FoundationWonderDescription, s.FoundationWonderDescription);
+        SetString(actor, MclslActorDataKeys.FoundationWonderOrigin, s.FoundationWonderOrigin);
+        SetString(actor, MclslActorDataKeys.FoundationWonderEffects, s.FoundationWonderEffects);
+        CopyIntState(actor, s, MclslActorDataKeys.FoundationWonderGrade, MclslActorDataKeys.FoundationWonderCompleteness, MclslActorDataKeys.FoundationWonderRuleStrength);
+    }
+
+    private static void RestoreLegacyGoldenCore(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.GoldenCoreLaws, s.GoldenCoreLaws);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCorePurity, s.GoldenCorePurity);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCoreStability, s.GoldenCoreStability);
+    }
+
+    private static void RestoreLegacyNascentCave(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.NascentCaveId, s.NascentCaveId); SetString(actor, MclslActorDataKeys.NascentCaveName, s.NascentCaveName); SetString(actor, MclslActorDataKeys.NascentCaveTags, s.NascentCaveTags);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveCompatibility, s.NascentCaveCompatibility); MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveIntegrity, s.NascentCaveIntegrity);
+    }
+
+    private static void RestoreLegacyNascentEssence(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.NascentEssenceId, s.NascentEssenceId); SetString(actor, MclslActorDataKeys.NascentEssenceName, s.NascentEssenceName); MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentEssenceQuality, s.NascentEssenceQuality);
+        SetString(actor, MclslActorDataKeys.NascentEssenceTags, s.NascentEssenceTags); SetString(actor, MclslActorDataKeys.NascentEssenceDescription, s.NascentEssenceDescription); SetString(actor, MclslActorDataKeys.NascentEssenceEffects, s.NascentEssenceEffects);
+    }
+
+    private static void RestoreLegacyDivineChange(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.DivineChangeId, s.DivineChangeId); SetString(actor, MclslActorDataKeys.DivineChangeName, s.DivineChangeName); SetString(actor, MclslActorDataKeys.DivineChangeTags, s.DivineChangeTags); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineChangeCompatibility, s.DivineChangeCompatibility);
+    }
+
+    private static void RestoreLegacyDivineMarrow(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.DivineMarrowId, s.DivineMarrowId); SetString(actor, MclslActorDataKeys.DivineMarrowName, s.DivineMarrowName); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrow, s.DivineMarrowCount); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrowQuality, s.DivineMarrowQuality);
+        SetString(actor, MclslActorDataKeys.DivineMarrowTags, s.DivineMarrowTags); SetString(actor, MclslActorDataKeys.DivineMarrowDescription, s.DivineMarrowDescription); SetString(actor, MclslActorDataKeys.DivineMarrowEffects, s.DivineMarrowEffects);
+    }
+
+    private static void RestoreLegacyWorldSoul(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.WorldSoulId, s.WorldSoulId); SetString(actor, MclslActorDataKeys.WorldSoulName, s.WorldSoulName); SetString(actor, MclslActorDataKeys.HeavenlyDuty, s.HeavenlyDuty);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyLeap, s.HarmonyLeap); SetString(actor, MclslActorDataKeys.HarmonyOrigin, s.HarmonyOrigin); MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyCompatibility, s.HarmonyCompatibility); MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyStability, s.HarmonyStability);
+    }
+
+    private static void RestoreLegacyInverseTruth(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        SetString(actor, MclslActorDataKeys.InverseTruthId, s.InverseTruthId); SetString(actor, MclslActorDataKeys.InverseTruthName, s.InverseTruthName); MclslActorAccessor.Set(actor, MclslActorDataKeys.InverseTruthProgress, s.InverseTruthProgress);
+    }
+
+    private static void RestoreLegacyMind(Actor actor, MclslHuanzhenCultivationSnapshot s)
+    {
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, s.MindState); MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, s.HeartTemperingProgress); MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, s.HeartMethodKnown);
+    }
+
+    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key) => snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
+
     private static void RestoreLegacyCultivation(Actor actor, MclslHuanzhenCultivationSnapshot s, int anchorYear, int deathYear)
     {
         string realm = s.RealmId ?? string.Empty;

@@ -38,8 +38,10 @@ internal static class MclslPatches
         count += TryPatchPairOptional(harmony, "ActorTraitsEditor.OnEnable", typeof(ActorTraitsEditor), "OnEnable", Type.EmptyTypes, postfix: nameof(ActorTraitsEditor_OnEnable_Postfix));
         count += TryPatchPair(harmony, "Actor.die", typeof(Actor), "die", new[] { typeof(bool), typeof(AttackType), typeof(bool), typeof(bool) }, prefix: nameof(Actor_Die_Prefix), postfix: nameof(Actor_Die_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.OnEnable", typeof(UnitWindow), "OnEnable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnEnable_Postfix));
+        count += TryPatchPairOptional(harmony, "UnitWindow.OnDisable", typeof(UnitWindow), "OnDisable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnDisable_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.showStatsRows", typeof(UnitWindow), "showStatsRows", Type.EmptyTypes, postfix: nameof(UnitWindow_ShowStatsRows_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.showInfo", typeof(UnitWindow), "showInfo", Type.EmptyTypes, postfix: nameof(UnitWindow_ShowInfo_Postfix));
+        count += TryPatchPairOptional(harmony, "PlayerControl.checkClickTouchInspectSelect", typeof(PlayerControl), "checkClickTouchInspectSelect", Type.EmptyTypes, postfix: nameof(PlayerControl_CheckClickTouchInspectSelect_Postfix));
         count += TryPatchPair(harmony, "UnitStatsElement.showContent.safe", typeof(UnitStatsElement), "showContent", Type.EmptyTypes, finalizer: nameof(UnitStatsElement_ShowContent_Finalizer));
         count += TryPatchPair(harmony, "Actor.calculateMainSprite", typeof(Actor), "calculateMainSprite", Type.EmptyTypes, prefix: nameof(Actor_CalculateMainSprite_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataParallel", typeof(ActorManager), "precalculateRenderDataParallel", Type.EmptyTypes, postfix: nameof(ActorManager_PrecalculateRenderDataParallel_Halo_Postfix));
@@ -282,15 +284,24 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitWindow), "OnEnable")]
     private static void UnitWindow_OnEnable_Postfix(UnitWindow __instance)
     {
+        TryPatch("developer-select-actor-on-open", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-on-enable", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-on-enable", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-info-panel-enable", () => MclslActorInfoPanel.Refresh(__instance, resetScrollForNewActor: true));
     }
 
     [HarmonyPostfix]
+    [HarmonyPatch(typeof(UnitWindow), "OnDisable")]
+    private static void UnitWindow_OnDisable_Postfix(UnitWindow __instance)
+    {
+        TryPatch("unit-window-info-panel-disable", () => MclslActorInfoPanel.OnWindowClosed(__instance));
+    }
+
+    [HarmonyPostfix]
     [HarmonyPatch(typeof(UnitWindow), "showStatsRows")]
     private static void UnitWindow_ShowStatsRows_Postfix(UnitWindow __instance)
     {
+        TryPatch("developer-select-actor-on-stats", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-stats", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-stats", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-overview-stats", () => MclslActorOverviewStatsFormatter.Refresh(__instance));
@@ -301,10 +312,23 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitWindow), "showInfo")]
     private static void UnitWindow_ShowInfo_Postfix(UnitWindow __instance)
     {
+        TryPatch("developer-select-actor-on-info", () => MclslDeveloperApi.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-info", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-info", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-overview-info", () => MclslActorOverviewStatsFormatter.Refresh(__instance));
         TryPatch("unit-window-info-panel-info", () => MclslActorInfoPanel.Refresh(__instance));
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(PlayerControl), "checkClickTouchInspectSelect")]
+    private static void PlayerControl_CheckClickTouchInspectSelect_Postfix()
+    {
+        if (!MclslRuntimeSettings.DebugToolsVisible) return;
+        TryPatch("developer-select-actor-on-map-click", () =>
+        {
+            Actor actor = World.world?.getActorNearCursor();
+            if (actor?.data != null && actor.isAlive()) MclslDeveloperApi.SetSelectedActor(actor);
+        });
     }
 
     [HarmonyFinalizer]

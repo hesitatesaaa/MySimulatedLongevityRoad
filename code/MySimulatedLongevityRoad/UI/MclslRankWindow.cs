@@ -601,6 +601,7 @@ internal static class MclslRankWindow
         Image bg = card.GetComponent<Image>();
         bg.sprite = SpriteTextureLoader.getSprite("ui/special/backgroundKingdomElement");
         bg.type = Image.Type.Sliced;
+        bg.color = MclslUiTheme.RankSurfacePanel;
         card.GetComponent<Button>().targetGraphic = bg;
         CreateCardText("RankText", card.transform, new Vector2(4, 0), new Vector2(22, 32), 11, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentSecondary);
         CreateAvatarElement(card.transform);

@@ -1,9 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <!--
+      WorldBox runs the mod loader inside Unity's Mono runtime. Publishing a
+      net6.0 assembly leaves System.Runtime 6.x references in the mod and the
+      original game refuses to load it. netstandard2.1 keeps the modern API
+      surface used by this code while resolving against the game's
+      netstandard.dll.
+    -->
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>MySimulatedLongevityRoad</AssemblyName>
     <RootNamespace>MySimulatedLongevityRoad</RootNamespace>
+    <LangVersion>11</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <NoWarn>$(NoWarn);MSB3277;CS0162;CS0219</NoWarn>
@@ -53,6 +61,7 @@
     <Compile Remove=".recovered\**\*.cs" />
     <Compile Remove="code_broken_*\**\*.cs" />
     <Compile Remove="xj_0_7_announce_scan\**\*.cs" />
+    <Compile Remove="references\WorldBoxGameDecompiled\**\*.cs" />
   </ItemGroup>
 
 </Project>

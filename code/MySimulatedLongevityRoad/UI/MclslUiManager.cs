@@ -29,10 +29,12 @@ internal static class MclslUiManager
             AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
             AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
             AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
-            AddButton("mclsl.maobao", "猫宝", "打开独立猫宝时序录，照见本世强者、刻名留影并定位在世修士。", MclslCodexWindow.ShowMaobao, "ui/Icons/MaobaoEntrance", "ui/Icons/XuanHuangXianLu", "ui/icon");
+            // 入口位置、按钮创建和窗口打开流程对齐鬼谷“时光长河”；只替换为猫宝图标和文案。
+            AddButton("mclsl.maobao", "猫宝·时光长河", "打开猫宝时光长河，保存、放置或移除完整人物快照。", MclslMaobaoWindow.ShowWindow, "ui/Icons/MaobaoEntrance");
             if (ShowAuthorDebugButtons)
             {
                 AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
+                AddButton("mclsl.force_new_law", "立即进入新法纪元", "立即完成纪元切换并触发新法依赖逻辑，便于验证还真自动寻主与新法系统。", () => MclslWorldEpochSystem.ForceNewLawNow(MclslRuntime.CurrentYear()), "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
                 AddButton("mclsl.trigger_ancient_disaster", "触发灵机灾变", "手动记录一次仙道灵机、地火或星石事件，便于测试仙道机缘。", TriggerAncientDisaster, "ui/Icons/TianDiZhiBian", "ui/icon");
                 AddButton("mclsl.trigger_ancient_secret_realm", "触发秘境", "手动记录一次秘境开启，便于测试仙道事件页。", TriggerAncientSecretRealm, "ui/Icons/ZongMenYiJi", "ui/icon");
                 AddButton("mclsl.trigger_ancient_ruin", "触发遗府", "手动生成一处遗府并写入玄黄仙录。", TriggerAncientRuin, "ui/Icons/ZongMenYiJi", "ui/icon");

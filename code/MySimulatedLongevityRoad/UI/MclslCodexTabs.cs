@@ -20,7 +20,8 @@ internal static class MclslCodexTabCatalog
         T("修士生死", "ui/Icons/SiWang"),
         T("还真轮回", "ui/Icons/HuanZhen"),
         T("还真纪事", "ui/Icons/HuanZhen"),
-        T("世界纪事", "ui/Icons/XuanHuangXianLu")
+        T("世界纪事", "ui/Icons/XuanHuangXianLu"),
+        T("修士列传", "ui/Icons/XuanHuangXiuShiBang")
     };
 
     private static readonly MclslCodexTab[] AncientTabs =
@@ -35,7 +36,8 @@ internal static class MclslCodexTabCatalog
         T("秘境", "ui/Icons/ZongMenYiJi"),
         T("遗府", "ui/Icons/ZongMenYiJi"),
         T("天地观悟", "ui/Icons/TianDiZhiPo"),
-        T("仙道纪事", "ui/Icons/XuanHuangXianLu")
+        T("仙道纪事", "ui/Icons/XuanHuangXianLu"),
+        T("修士列传", "ui/Icons/XuanHuangXiuShiBang")
     };
 
     internal static MclslCodexTab[] ForEpoch(string epoch)

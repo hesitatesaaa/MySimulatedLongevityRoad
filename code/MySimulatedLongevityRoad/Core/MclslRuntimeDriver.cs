@@ -25,7 +25,7 @@ internal sealed partial class MclslRuntimeDriver : MonoBehaviour
 
         _instance = host.GetComponent<MclslRuntimeDriver>();
         if (_instance == null) _instance = host.AddComponent<MclslRuntimeDriver>();
-        Object.DontDestroyOnLoad(host);
+        UnityEngine.Object.DontDestroyOnLoad(host);
     }
 
     private void Update() => MclslRuntime.Tick();
