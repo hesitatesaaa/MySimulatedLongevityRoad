@@ -84,6 +84,94 @@ internal static class MclslWorldSpriteRenderLayer
         }
     }
 
+    internal static bool TrySpawnStaticBackSprite(
+        Vector2 position,
+        float scale,
+        int relativeSortingOrder,
+        Sprite sprite,
+        out BaseEffect effect,
+        out SpriteRenderer renderer)
+    {
+        effect = null;
+        renderer = null;
+        if (sprite == null) return false;
+        if (!TrySpawnActorBackEffect(position, scale, relativeSortingOrder, out effect, out renderer)) return false;
+        try
+        {
+            StopNativeAnimator(effect);
+            renderer.sprite = sprite;
+            renderer.enabled = true;
+            return true;
+        }
+        catch
+        {
+            try { effect?.kill(); } catch { }
+            effect = null;
+            renderer = null;
+            return false;
+        }
+    }
+
+    internal static bool TryCreateStaticWorldSprite(
+        Vector2 position,
+        float scale,
+        int relativeSortingOrder,
+        Sprite sprite,
+        out GameObject gameObject,
+        out SpriteRenderer renderer)
+    {
+        gameObject = null;
+        renderer = null;
+        if (sprite == null) return false;
+
+        try
+        {
+            gameObject = new GameObject("mclsl_static_world_sprite", typeof(SpriteRenderer));
+            if (World.world != null)
+                gameObject.transform.SetParent(((Component)World.world).transform, true);
+
+            gameObject.transform.position = new Vector3(position.x, position.y, 0f);
+            gameObject.transform.localScale = new Vector3(scale <= 0f ? 1f : scale, scale <= 0f ? 1f : scale, 1f);
+            gameObject.hideFlags = HideFlags.DontSave;
+
+            renderer = gameObject.GetComponent<SpriteRenderer>();
+            if (renderer == null) return false;
+            renderer.sprite = sprite;
+            renderer.color = Color.white;
+            ConfigureStaticWorldSorting(renderer, relativeSortingOrder);
+            renderer.enabled = true;
+            gameObject.SetActive(true);
+            try { World.world?.resetRedrawTimer(); } catch { }
+            return true;
+        }
+        catch
+        {
+            if (gameObject != null) UnityEngine.Object.Destroy(gameObject);
+            gameObject = null;
+            renderer = null;
+            return false;
+        }
+    }
+
+    internal static void StopNativeAnimator(BaseEffect effect)
+    {
+        try
+        {
+            Component component = effect as Component;
+            SpriteAnimation animation = component != null ? component.GetComponent<SpriteAnimation>() : null;
+            if (animation != null)
+            {
+                animation.isOn = false;
+                animation.looped = false;
+                animation.returnToPool = false;
+                if (animation is Behaviour behaviour) behaviour.enabled = false;
+            }
+            Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
+            if (animator != null) animator.enabled = false;
+        }
+        catch { }
+    }
+
     internal static bool TryBindLoopAnimation(BaseEffect effect, Sprite[] frames, float frameIntervalSeconds, int startFrame)
     {
         if ((UnityEngine.Object)(object)effect == (UnityEngine.Object)null
@@ -145,6 +233,38 @@ internal static class MclslWorldSpriteRenderLayer
     {
         if (renderer == null) return;
         renderer.sortingLayerID = backLayer.SortingLayerId;
+        renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
+    }
+
+    private static void ConfigureStaticWorldSorting(SpriteRenderer renderer, int relativeSortingOrder)
+    {
+        if (renderer == null) return;
+
+        SortingLayer[] layers;
+        try { layers = SortingLayer.layers; }
+        catch { layers = null; }
+
+        string[] preferredLayers = { "EffectsBack", "Objects", "MapOverlay" };
+        if (layers != null)
+        {
+            for (int preferredIndex = 0; preferredIndex < preferredLayers.Length; preferredIndex++)
+            {
+                for (int layerIndex = 0; layerIndex < layers.Length; layerIndex++)
+                {
+                    if (!string.Equals(layers[layerIndex].name, preferredLayers[preferredIndex], StringComparison.Ordinal)) continue;
+                    renderer.sortingLayerID = layers[layerIndex].id;
+                    renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
+                    return;
+                }
+            }
+        }
+
+        try
+        {
+            SpriteRenderer worldRenderer = World.world?.GetComponent<SpriteRenderer>();
+            if (worldRenderer != null) renderer.sortingLayerID = worldRenderer.sortingLayerID;
+        }
+        catch { }
         renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
     }
 

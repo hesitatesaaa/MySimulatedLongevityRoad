@@ -591,7 +591,9 @@ internal static class MclslTechniqueLineageSystem
         int quality = Math.Clamp(1 + MclslRealmIds.Index(record.PeakRealm) / 2, 2, 4);
         bool newLaw = MclslWorldEpochSystem.IsNewLawActive(year);
         record.MaxRealm = MaxRealmAtLeast(record.MaxRealm, MclslRealmIds.JinDan);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, newLaw ? "仙道传承断绝处" : "山河遗脉", "无主", MclslGeneratedObjectFactory.SplitTags(record.LawTags), quality, "散修遗府");
+        MclslMapLocationResolver.TryPickValidTile(sequence + year, out int mapX, out int mapY, out string location, out _);
+        string mapLocation = string.IsNullOrWhiteSpace(location) ? (newLaw ? "仙道传承断绝处" : "山河遗脉") : location;
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, mapLocation, "无主", MclslGeneratedObjectFactory.SplitTags(record.LawTags), quality, "散修遗府", mapX, mapY);
         ruin.Description = newLaw
             ? "仙道传承《" + record.Name + "》失传后，前人注疏、残卷与法器碎片沉积成遗府。"
             : "仙道传承《" + record.Name + "》余韵沉入山河，前人注疏、残卷与法器碎片汇成遗府。";
@@ -606,7 +608,7 @@ internal static class MclslTechniqueLineageSystem
         record.LifecycleYear = Math.Max(record.LifecycleYear, year);
         if (string.IsNullOrWhiteSpace(record.SectDisplayName))
             record.SectDisplayName = BuildPrivateDisplayName(record.Name);
-        MclslWorldRunRepository.AddEvent(year, "ancient_lineage_ruin_born", ruin.Name + "显世", ruin.Description);
+        MclslWorldRunRepository.AddEvent(year, "ancient_lineage_ruin_born", ruin.Name + "显世", ruin.Description, ruin.MapX, ruin.MapY, ruin.LocationName, ruin.NativeKingdomName);
     }
 
     private static bool EnsureLifecycle(MclslTechniqueLineageRecord record, int year)

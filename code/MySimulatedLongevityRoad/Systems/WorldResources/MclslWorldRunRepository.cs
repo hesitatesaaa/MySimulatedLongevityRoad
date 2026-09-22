@@ -356,6 +356,52 @@ internal static class MclslWorldRunRepository
         }
     }
 
+    internal static void AddMapVisualEvent(int year, string type, string title, string body, Actor actor, string visualKind, int durationYears)
+    {
+        AddEvent(year, type, title, body, actor);
+        if (actor?.data == null) return;
+        MclslMapLocationResolver.ResolveActorLocation(actor, year, out int mapX, out int mapY, out string location, out string kingdom);
+        ApplyMapVisualToEvent(year, type, title, body, mapX, mapY,
+            string.IsNullOrWhiteSpace(location) ? actor.city?.data?.name ?? string.Empty : location,
+            string.IsNullOrWhiteSpace(kingdom) ? actor.kingdom?.data?.name ?? string.Empty : kingdom,
+            visualKind, durationYears);
+    }
+
+    internal static void AddMapVisualEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string visualKind, int durationYears)
+    {
+        AddEvent(year, type, title, body, mapX, mapY, locationName, kingdomName);
+        ApplyMapVisualToEvent(year, type, title, body, mapX, mapY, locationName, kingdomName, visualKind, durationYears);
+    }
+
+    private static void ApplyMapVisualToEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string visualKind, int durationYears)
+    {
+        if (string.IsNullOrWhiteSpace(visualKind) || _current?.Events == null) return;
+        MclslRunEventRecord record = FindEventRecord(year, type, title, body);
+        if (record == null) return;
+        record.MapX = mapX;
+        record.MapY = mapY;
+        record.LocationName = locationName ?? string.Empty;
+        record.KingdomName = kingdomName ?? string.Empty;
+        record.MapVisualKind = visualKind.Trim();
+        record.MapVisualEndYear = Math.Max(0, year) + Math.Max(0, durationYears);
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    private static MclslRunEventRecord FindEventRecord(int year, string type, string title, string body)
+    {
+        int safeYear = Math.Max(0, year);
+        for (int i = _current.Events.Count - 1; i >= 0; i--)
+        {
+            MclslRunEventRecord record = _current.Events[i];
+            if (record == null || record.Year != safeYear) continue;
+            if (!string.Equals(record.EventType, type ?? string.Empty, StringComparison.Ordinal)
+                || !string.Equals(record.Title, title ?? string.Empty, StringComparison.Ordinal)
+                || !string.Equals(record.Body, body ?? string.Empty, StringComparison.Ordinal)) continue;
+            return record;
+        }
+        return null;
+    }
+
     private static bool AlwaysKeepEvent(string eventType)
     {
         return string.Equals(eventType, "longevity_achieved", StringComparison.Ordinal)
@@ -840,8 +886,12 @@ internal static class MclslWorldRunRepository
         _current.Events ??= new List<MclslRunEventRecord>();
         TrimEventsPreservingMilestones(_current.Events, MaxEvents);
         foreach (MclslRunEventRecord e in _current.Events)
-            if (e != null && string.IsNullOrWhiteSpace(e.Category))
-                e.Category = MclslEventCatalog.CategoryForType(e.EventType);
+        {
+            if (e == null) continue;
+            if (string.IsNullOrWhiteSpace(e.Category)) e.Category = MclslEventCatalog.CategoryForType(e.EventType);
+            e.MapVisualKind ??= string.Empty;
+            if (string.IsNullOrWhiteSpace(e.MapVisualKind)) e.MapVisualEndYear = -1;
+        }
         _current.DeathRecords ??= new List<MclslDeathRecord>();
         _current.FactionMissions ??= new List<MclslFactionMissionRecord>();
         _current.FactionPressureEvents ??= new List<MclslFactionPressureRecord>();

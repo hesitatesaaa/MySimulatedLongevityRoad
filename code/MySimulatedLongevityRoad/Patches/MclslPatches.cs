@@ -145,7 +145,11 @@ internal static class MclslPatches
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(MapBox), nameof(MapBox.generateNewMap))]
-    private static void MapBox_GenerateNewMap_Prefix() => MclslHuanzhenSystem.PrepareForNewWorld();
+    private static void MapBox_GenerateNewMap_Prefix()
+    {
+        MclslMapMarkerVisualSystem.Clear();
+        MclslHuanzhenSystem.PrepareForNewWorld();
+    }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(MapBox), "finishingUpLoading")]
@@ -166,7 +170,11 @@ internal static class MclslPatches
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.loadWorld), new Type[] { typeof(string), typeof(bool) })]
-    private static void SaveManager_LoadWorld_Prefix(string __0) => MclslHuanzhenSystem.PrepareForAnyWorldLoad(__0);
+    private static void SaveManager_LoadWorld_Prefix(string __0)
+    {
+        MclslMapMarkerVisualSystem.Clear();
+        MclslHuanzhenSystem.PrepareForAnyWorldLoad(__0);
+    }
 
     [HarmonyFinalizer]
     [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.loadWorld), new Type[] { typeof(string), typeof(bool) })]

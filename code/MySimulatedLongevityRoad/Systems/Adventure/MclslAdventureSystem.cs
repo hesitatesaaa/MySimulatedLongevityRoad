@@ -19,6 +19,8 @@ internal static class MclslAdventureSystem
     {
         internal string Location = "无主荒域";
         internal string Kingdom = "无主";
+        internal int MapX = -1;
+        internal int MapY = -1;
     }
 
     private static readonly List<Actor> AnnualCultivators = new();
@@ -100,13 +102,14 @@ internal static class MclslAdventureSystem
         if (run?.SectRuins == null) return null;
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
         bool newLaw = MclslWorldEpochSystem.IsNewLawActive(year);
-        string location = string.IsNullOrWhiteSpace(source.city?.data?.name) ? (newLaw ? "旧宗废墟" : "洞府旧址") : source.city.data.name + "附近";
-        string kingdom = string.IsNullOrWhiteSpace(source.kingdom?.data?.name) ? "无主" : source.kingdom.data.name;
+        MclslMapLocationResolver.ResolveActorLocation(source, sequence + year, out int mapX, out int mapY, out string location, out string kingdom);
+        if (string.IsNullOrWhiteSpace(location)) location = newLaw ? "旧宗废墟" : "洞府旧址";
+        if (string.IsNullOrWhiteSpace(kingdom)) kingdom = "无主";
         string techniqueId = MclslActorAccessor.GetString(source, MclslActorDataKeys.TechniqueId, string.Empty).Replace("spiritual_", string.Empty).Replace("ancient_", string.Empty);
         MclslTechniqueDefinition technique = PromoteLegacyTechnique(MclslCultivationCatalog.Technique(techniqueId), sequence + year, MclslRealmIds.JinDan);
         int quality = Math.Clamp(2 + MclslRealmIds.Index(MclslActorAccessor.Realm(source)) / 2, 2, 4);
         string category = newLaw ? PickSecretRealmCategory(sequence + year) : PickPrivateRuinCategory(sequence + year);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, category);
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, category, mapX, mapY);
         string displayTechniqueName = string.IsNullOrWhiteSpace(techniqueName) ? technique.Name : techniqueName;
         AttachTechniqueSource(ruin, technique.Id, displayTechniqueName, string.Empty, year);
         ruin.Description = newLaw
@@ -114,7 +117,7 @@ internal static class MclslAdventureSystem
             : "修士旧藏《" + displayTechniqueName + "》余脉沉入山河，残余灵石、功法断章与前人遗物汇为遗府。";
         ruin.Danger = Math.Clamp(ruin.Danger + 10, 20, 95);
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return null;
-        MclslWorldRunRepository.AddEvent(year, "ancient_ruin_born", ruin.Name + (newLaw ? "秘境显世" : "遗府显世"), ruin.Description);
+        MclslWorldRunRepository.AddEvent(year, "ancient_ruin_born", ruin.Name + (newLaw ? "秘境显世" : "遗府显世"), ruin.Description, ruin.MapX, ruin.MapY, ruin.LocationName, ruin.NativeKingdomName);
         if (MclslRuntimeSettings.RuinBirthAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue((newLaw ? "秘境“" : "遗府“") + ruin.Name + "”显世。", newLaw ? "#B7A7FF" : "#D8C778", 8f, 1);
         return ruin;
     }
@@ -136,11 +139,11 @@ internal static class MclslAdventureSystem
             if (!tags.Contains(tag)) tags.Add(tag);
         }
         LocationSeed location = PickLocation(hash);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, PickPrivateRuinCategory(hash));
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, PickPrivateRuinCategory(hash), location.MapX, location.MapY);
         AttachTechniqueSource(ruin, technique.Id, technique.Name, string.Empty, 0);
         ruin.Description = "旧日洞府显于山河之间，残卷、灵石与遗物尚有余韵。";
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return null;
-        MclslWorldRunRepository.AddEvent(year, "ancient_high_cultivator_seclusion", ruin.Name + "现世", ruin.Description + MclslRuinText.DangerEventText(ruin.Danger) + "，尚存" + ruin.RemainingValue + "份主要机缘。");
+        MclslWorldRunRepository.AddEvent(year, "ancient_high_cultivator_seclusion", ruin.Name + "现世", ruin.Description + MclslRuinText.DangerEventText(ruin.Danger) + "，尚存" + ruin.RemainingValue + "份主要机缘。", ruin.MapX, ruin.MapY, ruin.LocationName, ruin.NativeKingdomName);
         if (MclslRuntimeSettings.RuinBirthAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("遗府“" + ruin.Name + "”现世。", "#D8C778", 8f, 1);
         return ruin;
     }
@@ -154,15 +157,16 @@ internal static class MclslAdventureSystem
         int hash = PositiveHash(MclslActorAccessor.Id(source) + "|ancient_secret_lineage|" + sequence + "|" + year);
         MclslTechniqueDefinition technique = PromoteLegacyTechnique(MclslCultivationCatalog.Technique(MclslActorAccessor.GetString(source, MclslActorDataKeys.TechniqueId, string.Empty)), hash, MclslRealmIds.JinDan);
         int quality = Math.Clamp(2 + MclslRealmIds.Index(MclslActorAccessor.Realm(source)) / 2, 2, 4);
-        string location = string.IsNullOrWhiteSpace(source.city?.data?.name) ? "山河秘境" : source.city.data.name + "附近";
-        string kingdom = string.IsNullOrWhiteSpace(source.kingdom?.data?.name) ? "无主" : source.kingdom.data.name;
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, PickSecretRealmCategory(hash));
+        MclslMapLocationResolver.ResolveActorLocation(source, hash, out int mapX, out int mapY, out string location, out string kingdom);
+        if (string.IsNullOrWhiteSpace(location)) location = "山河秘境";
+        if (string.IsNullOrWhiteSpace(kingdom)) kingdom = "无主";
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, PickSecretRealmCategory(hash), mapX, mapY);
         string displayTechniqueName = string.IsNullOrWhiteSpace(techniqueName) ? technique.Name : techniqueName;
         AttachTechniqueSource(ruin, technique.Id, displayTechniqueName, string.Empty, year);
         ruin.Description = "旧日宗门秘境重开，门中《" + displayTechniqueName + "》残章、讲法石刻与试炼余痕尚存。";
         ruin.Danger = Math.Clamp(ruin.Danger + quality * 6, 25, 95);
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return null;
-        MclslWorldRunRepository.AddEvent(year, "ancient_secret_realm_ruin", ruin.Name + "显世", ruin.Description);
+        MclslWorldRunRepository.AddEvent(year, "ancient_secret_realm_ruin", ruin.Name + "显世", ruin.Description, ruin.MapX, ruin.MapY, ruin.LocationName, ruin.NativeKingdomName);
         return ruin;
     }
 
@@ -431,10 +435,10 @@ internal static class MclslAdventureSystem
             ? PickPrivateRuinCategory(hash)
             : PickSecretRealmCategory(hash);
         LocationSeed location = PickLocation(hash);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, category);
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, category, location.MapX, location.MapY);
         AttachTechniqueSource(ruin, technique.Id, technique.Name, string.Empty, 0);
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return false;
-        MclslWorldRunRepository.AddEvent(year, "ruin_born", ruin.Name + "显世", MclslRuinText.DangerEventText(ruin.Danger) + "，尚存" + ruin.RemainingValue + "份主要机缘。");
+        MclslWorldRunRepository.AddEvent(year, "ruin_born", ruin.Name + "显世", MclslRuinText.DangerEventText(ruin.Danger) + "，尚存" + ruin.RemainingValue + "份主要机缘。", ruin.MapX, ruin.MapY, ruin.LocationName, ruin.NativeKingdomName);
         if (announce && MclslRuntimeSettings.RuinBirthAnnouncementsEnabled)
         {
             MclslAnnouncementSystem.Enqueue("宗门遗迹“" + ruin.Name + "”于" + ruin.LocationName + "显世。", "#8AB58C", 8f, 1);
@@ -700,10 +704,13 @@ internal static class MclslAdventureSystem
                 string city = actor.city?.data?.name;
                 if (string.IsNullOrWhiteSpace(city) || !seen.Add(city)) continue;
                 string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无主" : actor.kingdom.data.name;
-                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom });
+                if (!MclslMapLocationResolver.TryUseCoordinate(actor.data.x, actor.data.y, out int mapX, out int mapY)) continue;
+                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom, MapX = mapX, MapY = mapY });
             }
         }
         if (locations.Count > 0) return locations[(hash & int.MaxValue) % locations.Count];
+        if (MclslMapLocationResolver.TryPickValidTile(hash, out int fallbackX, out int fallbackY, out string fallbackLocation, out string fallbackKingdom))
+            return new LocationSeed { Location = fallbackLocation, Kingdom = fallbackKingdom, MapX = fallbackX, MapY = fallbackY };
         return new LocationSeed { Location = MclslProceduralLexicon.CaveOrigins[(hash & int.MaxValue) % MclslProceduralLexicon.CaveOrigins.Length], Kingdom = "无主" };
     }
 

@@ -1,6 +1,7 @@
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Systems.Visual;
 
 namespace MySimulatedLongevityRoad.Modules;
 
@@ -94,6 +95,15 @@ internal sealed class MclslWorldSoulModule : MclslModuleBase
     }
     internal override void TickFrame(int frameCounter) => MclslWorldSoulSystem.TickFrame(frameCounter);
     internal override void Clear() => MclslWorldSoulSystem.Clear();
+}
+
+internal sealed class MclslMapMarkerModule : MclslModuleBase
+{
+    internal override string Name => "MapMarkerVisual";
+    internal override int Order => 70;
+    internal override void OnWorldLoaded(int year) => MclslMapMarkerVisualSystem.OnWorldLoaded();
+    internal override void TickFrame(int frameCounter) => MclslMapMarkerVisualSystem.Tick(UnityEngine.Time.frameCount);
+    internal override void Clear() => MclslMapMarkerVisualSystem.Clear();
 }
 
 internal sealed class MclslInverseTruthModule : MclslModuleBase

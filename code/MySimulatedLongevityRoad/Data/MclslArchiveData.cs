@@ -140,6 +140,9 @@ internal sealed class MclslRunEventRecord
     public string ActorName { get; set; } = string.Empty;
     public int MapX { get; set; } = -1;
     public int MapY { get; set; } = -1;
+    // 仅新建的短时地图事件填写。旧事件保持空值，不根据文字反推位置。
+    public string MapVisualKind { get; set; } = string.Empty;
+    public int MapVisualEndYear { get; set; } = -1;
     public string LocationName { get; set; } = string.Empty;
     public string KingdomName { get; set; } = string.Empty;
     public bool NativeLogged { get; set; }
@@ -287,6 +290,8 @@ internal sealed class MclslSectRuinRecord
     public int BornYear { get; set; }
     public string LocationName { get; set; } = "无主荒域";
     public string NativeKingdomName { get; set; } = "无主";
+    public int MapX { get; set; } = -1;
+    public int MapY { get; set; } = -1;
     public int Depth { get; set; } = 4;
     public int ExplorationProgress { get; set; }
     public int RemainingValue { get; set; } = 4;

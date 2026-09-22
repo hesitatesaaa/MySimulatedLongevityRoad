@@ -33,6 +33,7 @@ internal static class MclslModuleHub
         Register(new MclslTimelineModule());
         Register(new MclslWorldEpochModule());
         Register(new MclslWorldSoulModule());
+        Register(new MclslMapMarkerModule());
         Register(new MclslInverseTruthModule());
         Register(new MclslFactionMissionModule());
         Register(new MclslFactionPressureModule());

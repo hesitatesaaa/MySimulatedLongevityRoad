@@ -15,6 +15,11 @@ internal static class MclslEventLocator
     internal static void Locate(MclslRunEventRecord record)
     {
         if (record == null) return;
+        if (!string.IsNullOrWhiteSpace(record.MapVisualKind) && record.MapX >= 0 && record.MapY >= 0)
+        {
+            Focus(record.MapX, record.MapY);
+            return;
+        }
         Actor actor = FindActor(record.ActorId);
         if (MclslActorAccessor.Alive(actor))
         {
@@ -59,10 +64,12 @@ internal static class MclslEventLocator
     internal static bool CanLocate(MclslWorldCaveRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;
     internal static bool CanLocate(MclslWorldChangeRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;
     internal static bool CanLocate(MclslWorldSoulRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;
+    internal static bool CanLocate(MclslSectRuinRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;
 
     internal static void Locate(MclslWorldCaveRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslWorldChangeRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslWorldSoulRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
+    internal static void Locate(MclslSectRuinRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
 
     internal static bool CanLocate(MclslMaobaoRecord record)
     {

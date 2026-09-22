@@ -42,6 +42,8 @@ internal sealed partial class MclslCodexWindow
                     DrawTag(RuinStateText(ruin), IsRuinOpen(ruin) ? "#A7E08A" : "#B8B8B8");
                     DrawTag(MclslRuinText.DangerBand(ruin.Danger), MclslRuinText.DangerColor(ruin.Danger));
                     GUILayout.FlexibleSpace();
+                    if (MclslEventLocator.CanLocate(ruin) && GUILayout.Button("定位", GUILayout.Width(62f)))
+                        MclslEventLocator.Locate(ruin);
                     GUILayout.EndHorizontal();
                     GUILayout.BeginHorizontal();
                     DrawMiniStat("位置", ruin.NativeKingdomName + "·" + ruin.LocationName, "#CFC7B2", GUILayout.Width(260));

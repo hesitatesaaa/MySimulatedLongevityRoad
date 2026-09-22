@@ -236,7 +236,9 @@ internal static class MclslWorldCalamitySystem
     private static MclslSectRuinRecord CreateCalamityRuin(MclslWorldRunState run, int year, string location, string category, string[] tags, int quality)
     {
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, "无主", tags, Math.Clamp(quality, 1, 4), category);
+        MclslMapLocationResolver.TryPickValidTile(sequence + year, out int mapX, out int mapY, out string fallbackLocation, out _);
+        string mapLocation = string.IsNullOrWhiteSpace(location) ? fallbackLocation : location;
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, mapLocation, "无主", tags, Math.Clamp(quality, 1, 4), category, mapX, mapY);
         ruin.Description = category + "，受" + location + "牵动而显，残存“" + string.Join("、", MclslGeneratedObjectFactory.SplitTags(ruin.LawTags)) + "”旧痕。";
         return ruin;
     }

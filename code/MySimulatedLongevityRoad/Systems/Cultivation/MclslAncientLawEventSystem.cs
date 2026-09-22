@@ -15,17 +15,17 @@ internal static class MclslAncientLawEventSystem
         int roll = PositiveHash("manual_ancient_disaster|" + year + "|" + sequence) % 3;
         if (roll == 0)
         {
-            MclslWorldRunRepository.AddEvent(year, "ancient_spiritual_convergence", "灵气汇聚", "山川灵机一时汇拢，近地修士吐纳有得。");
+            AddManualMapVisualEvent(year, "ancient_spiritual_convergence", "灵气汇聚", "山川灵机一时汇拢，近地修士吐纳有得。", "spiritual_convergence", sequence);
             if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("灵气汇聚，山川有感。", "#A7E08A", 6f, 1);
             return;
         }
         if (roll == 1)
         {
-            MclslWorldRunRepository.AddEvent(year, "ancient_earthfire", "地火涌动", "地火上涌，火、土二道修士遥观其势。");
+            AddManualMapVisualEvent(year, "ancient_earthfire", "地火涌动", "地火上涌，火、土二道修士遥观其势。", "earthfire", sequence);
             if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("地火涌动，赤脉出山。", "#FF8877", 6f, 1);
             return;
         }
-        MclslWorldRunRepository.AddEvent(year, "ancient_meteor_stone", "天降星石", "星石坠野，金石火光中藏一线大道。");
+        AddManualMapVisualEvent(year, "ancient_meteor_stone", "天降星石", "星石坠野，金石火光中藏一线大道。", "meteor_stone", sequence);
         if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("天降星石，灵机入野。", "#FFD37A", 6f, 1);
     }
 
@@ -35,14 +35,14 @@ internal static class MclslAncientLawEventSystem
         if (MclslActorAccessor.Alive(candidate))
             ResolveAncientSecretRealm(candidate, year, MclslActorAccessor.DisplayName(candidate), true);
         else
-            MclslWorldRunRepository.AddEvent(year, "ancient_secret_realm", "秘境开启", "云雾开合，秘境一线洞开，未有修士入内。");
+            AddManualMapVisualEvent(year, "ancient_secret_realm", "秘境开启", "云雾开合，秘境一线洞开，未有修士入内。", "secret_realm", year);
         if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("秘境一线洞开。", "#B7A7FF", 6f, 1);
     }
 
     internal static void ManualTriggerAncientRuin(int year)
     {
         if (MclslAdventureSystem.CreateManualAncientLawRuin(year) != null) return;
-        MclslWorldRunRepository.AddEvent(year, "ancient_high_cultivator_seclusion", "遗府现世", "洞府显于山河之间，残卷、灵石与遗物尚有余韵。");
+        AddManualMapVisualEvent(year, "ancient_high_cultivator_seclusion", "遗府现世", "洞府显于山河之间，残卷、灵石与遗物尚有余韵。", "ruin", year);
         if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("遗府现世。", "#D8C778", 6f, 1);
     }
 
@@ -147,7 +147,7 @@ internal static class MclslAncientLawEventSystem
             case 12:
                 MclslTechniqueStageSystem.AddProgress(actor, 4);
                 AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 3, 0, 100);
-                MclslWorldRunRepository.AddEvent(year, "ancient_spiritual_convergence", "灵气汇聚", place + "一带灵气短暂汇聚，" + name + "趁机吐纳，修行稍进。", actor);
+                MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_spiritual_convergence", "灵气汇聚", place + "一带灵气短暂汇聚，" + name + "趁机吐纳，修行稍进。", actor, "spiritual_convergence", 1);
                 break;
             case 13:
                 ApplyProgressSetback(actor, realm, 4f);
@@ -156,12 +156,12 @@ internal static class MclslAncientLawEventSystem
                 break;
             case 14:
                 AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 5, 0, 100);
-                MclslWorldRunRepository.AddEvent(year, "ancient_earthfire", "地火涌动", place + "地火涌动，火、土二道修士得以旁观悟道。", actor);
+                MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_earthfire", "地火涌动", place + "地火涌动，火、土二道修士得以旁观悟道。", actor, "earthfire", 1);
                 break;
             case 15:
                 MclslTechniqueStageSystem.AddProgress(actor, 5);
                 AddClamped(actor, MclslActorDataKeys.RuinExperience, 1, 0, 9999);
-                MclslWorldRunRepository.AddEvent(year, "ancient_meteor_stone", "天降星石", "星石坠于" + place + "外，" + name + "从金石火光中得一线大道感悟。", actor);
+                MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_meteor_stone", "天降星石", "星石坠于" + place + "外，" + name + "从金石火光中得一线大道感悟。", actor, "meteor_stone", 1);
                 break;
             case 16:
                 ResolveAncientSecretRealm(actor, year, name, false);
@@ -277,7 +277,13 @@ internal static class MclslAncientLawEventSystem
             MclslAdventureSystem.CreateAncientSecretRealmRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "仙道秘法"));
             MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "秘境道统", 16);
         }
-        MclslWorldRunRepository.AddEvent(year, "ancient_secret_realm", "秘境开启", name + "入秘境而还，得灵石、功法残章与大道感悟。", actor);
+        MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_secret_realm", "秘境开启", name + "入秘境而还，得灵石、功法残章与大道感悟。", actor, "secret_realm", 1);
+    }
+
+    private static void AddManualMapVisualEvent(int year, string type, string title, string body, string visualKind, int seed)
+    {
+        MclslMapLocationResolver.TryPickValidTile(seed + year, out int mapX, out int mapY, out string location, out string kingdom);
+        MclslWorldRunRepository.AddMapVisualEvent(year, type, title, body, mapX, mapY, location, kingdom, visualKind, 1);
     }
 
     private static Actor PickSecretRealmCandidate(int year, string scope)
