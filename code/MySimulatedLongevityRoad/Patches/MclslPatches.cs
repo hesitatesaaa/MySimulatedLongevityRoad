@@ -276,6 +276,7 @@ internal static class MclslPatches
 
         MclslDeathEventRouter.CommitActorDeath(__instance, __1, __state);
         long deadActorId = MclslActorAccessor.Id(__instance);
+        MclslSpatialTaskSystem.InterruptActor(deadActorId, MclslRuntime.CurrentYear(), "人物已在空间任务中身陨");
         MclslCultivatorCandidateIndex.Remove(deadActorId);
         MclslWorldActorQuery.MarkDirty();
     }

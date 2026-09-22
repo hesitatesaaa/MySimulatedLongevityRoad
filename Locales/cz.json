@@ -374,5 +374,17 @@
   "mclsl.maobao": "猫宝",
   "mclsl.maobao Description": "打开独立猫宝时序录，照见本世强者、刻名留影并定位在世修士。",
   "猫宝": "猫宝",
-  "猫宝时序录": "猫宝时序录"
+  "猫宝时序录": "猫宝时序录",
+  "mclsl_v020_node_tab": "山河节点",
+  "mclsl_v020_node_tab Description": "查看洞天、遗迹、天地之变、空间任务和宗门控制状态。",
+  "mclsl_v020_node_cave": "洞天",
+  "mclsl_v020_node_ruin": "遗迹",
+  "mclsl_v020_node_world_change": "天地之变",
+  "mclsl_v020_node_controlled": "已控制",
+  "mclsl_v020_node_contested": "争夺中",
+  "mclsl_v020_node_lost": "坐标失联",
+  "mclsl_v020_task_assigned": "已派遣",
+  "mclsl_v020_task_moving": "移动中",
+  "mclsl_v020_task_completed": "已完成",
+  "mclsl_v020_task_failed": "失败"
 }

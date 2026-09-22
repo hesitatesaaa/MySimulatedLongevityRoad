@@ -87,7 +87,7 @@ internal static class MclslGeneratedObjectFactory
         };
     }
 
-    internal static MclslSectRuinRecord CreateSectRuin(int year, int sequence, string location, string kingdom, IReadOnlyList<string> lawTags, int quality, string category)
+    internal static MclslSectRuinRecord CreateSectRuin(int year, int sequence, string location, string kingdom, IReadOnlyList<string> lawTags, int quality, string category, int mapX = -1, int mapY = -1)
     {
         int seed = StableHash(MclslWorldRunRepository.Current.RunId + "|sect_ruin|" + sequence + "|" + year + "|" + location + "|" + category);
         string[] tags = NormalizeTags(lawTags);
@@ -108,6 +108,8 @@ internal static class MclslGeneratedObjectFactory
             BornYear = Math.Max(0, year),
             LocationName = string.IsNullOrWhiteSpace(location) ? "无主荒域" : location,
             NativeKingdomName = string.IsNullOrWhiteSpace(kingdom) ? "无主" : kingdom,
+            MapX = mapX,
+            MapY = mapY,
             Depth = depth,
             RemainingValue = value,
             State = "显世"

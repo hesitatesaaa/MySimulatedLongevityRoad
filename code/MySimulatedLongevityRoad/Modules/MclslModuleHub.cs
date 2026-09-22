@@ -34,6 +34,7 @@ internal static class MclslModuleHub
         Register(new MclslWorldEpochModule());
         Register(new MclslWorldSoulModule());
         Register(new MclslInverseTruthModule());
+        Register(new MclslSpatialWorldModule());
         Register(new MclslFactionMissionModule());
         Register(new MclslFactionPressureModule());
         Register(new MclslRuntimeCadenceModule());

@@ -62,6 +62,9 @@ internal sealed class MclslWorldRunState
     public List<MclslWorldCaveRecord> WorldCaves { get; set; } = new();
     public List<MclslWorldChangeRecord> WorldChanges { get; set; } = new();
     public List<MclslWorldSoulRecord> WorldSouls { get; set; } = new();
+    public List<MclslMapNodeRecord> MapNodes { get; set; } = new();
+    public List<MclslSectRecord> Sects { get; set; } = new();
+    public List<MclslSpatialTaskRecord> SpatialTasks { get; set; } = new();
     public List<MclslInverseTruthRecord> InverseTruths { get; set; } = new();
     public List<MclslActorReincarnationRecord> ReincarnationRecords { get; set; } = new();
     public List<string> UsedGeneratedNames { get; set; } = new();
@@ -142,6 +145,7 @@ internal sealed class MclslRunEventRecord
     public int MapY { get; set; } = -1;
     public string LocationName { get; set; } = string.Empty;
     public string KingdomName { get; set; } = string.Empty;
+    public string NodeId { get; set; } = string.Empty;
     public bool NativeLogged { get; set; }
 }
 
@@ -287,6 +291,8 @@ internal sealed class MclslSectRuinRecord
     public int BornYear { get; set; }
     public string LocationName { get; set; } = "无主荒域";
     public string NativeKingdomName { get; set; } = "无主";
+    public int MapX { get; set; } = -1;
+    public int MapY { get; set; } = -1;
     public int Depth { get; set; } = 4;
     public int ExplorationProgress { get; set; }
     public int RemainingValue { get; set; } = 4;
@@ -387,6 +393,73 @@ internal sealed class MclslWorldChangeRecord
     public int ExtractedCount { get; set; }
     public long LastExtractedByActorId { get; set; }
     public string LastExtractedByActorName { get; set; } = string.Empty;
+}
+
+internal sealed class MclslMapNodeRecord
+{
+    public string Id { get; set; } = string.Empty;
+    public string NodeType { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public int MapX { get; set; } = -1;
+    public int MapY { get; set; } = -1;
+    public int Quality { get; set; } = 1;
+    public string LawTags { get; set; } = string.Empty;
+    public string OwnerKind { get; set; } = "none";
+    public string OwnerId { get; set; } = string.Empty;
+    public string OwnerNameSnapshot { get; set; } = string.Empty;
+    public int Danger { get; set; }
+    public int RemainingValue { get; set; }
+    public string VisibilityState { get; set; } = "discovered";
+    public string LifecycleState { get; set; } = "active";
+    public int BornYear { get; set; }
+    public int LastChangedYear { get; set; }
+    public string MarkerKey { get; set; } = string.Empty;
+    public string SourceType { get; set; } = string.Empty;
+    public string SourceRecordId { get; set; } = string.Empty;
+    public string LocationName { get; set; } = string.Empty;
+    public long NativeKingdomId { get; set; } = -1L;
+    public string NativeKingdomNameSnapshot { get; set; } = string.Empty;
+    public int RecoveryYear { get; set; }
+    public string RegionEffect { get; set; } = string.Empty;
+}
+
+internal sealed class MclslSectRecord
+{
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public long SeatCityId { get; set; } = -1L;
+    public long SeatKingdomId { get; set; } = -1L;
+    public int SeatMapX { get; set; } = -1;
+    public int SeatMapY { get; set; } = -1;
+    public long LeaderActorId { get; set; }
+    public List<long> MemberActorIds { get; set; } = new();
+    public int MemberCountSnapshot { get; set; }
+    public string MainTechniqueId { get; set; } = string.Empty;
+    public Dictionary<string, int> Inventory { get; set; } = new();
+    public int LineageCompleteness { get; set; } = 100;
+    public List<string> ControlledNodeIds { get; set; } = new();
+    public string State { get; set; } = "active";
+    public int FoundedYear { get; set; }
+    public int DestroyedYear { get; set; }
+    public int LastChangedYear { get; set; }
+}
+
+internal sealed class MclslSpatialTaskRecord
+{
+    public string TaskId { get; set; } = string.Empty;
+    public long ActorId { get; set; }
+    public string ActorNameSnapshot { get; set; } = string.Empty;
+    public string TargetNodeId { get; set; } = string.Empty;
+    public int TargetMapX { get; set; } = -1;
+    public int TargetMapY { get; set; } = -1;
+    public string TaskType { get; set; } = string.Empty;
+    public string State { get; set; } = "assigned";
+    public int AssignedYear { get; set; }
+    public int LastProgressYear { get; set; }
+    public int Progress { get; set; }
+    public string FailureReason { get; set; } = string.Empty;
+    public string OriginEventId { get; set; } = string.Empty;
+    public int LastCommandFrame { get; set; } = -10000;
 }
 
 internal sealed class MclslWorldSoulRecord

@@ -19,6 +19,8 @@ internal static class MclslAdventureSystem
     {
         internal string Location = "无主荒域";
         internal string Kingdom = "无主";
+        internal int X = -1;
+        internal int Y = -1;
     }
 
     private static readonly List<Actor> AnnualCultivators = new();
@@ -71,6 +73,9 @@ internal static class MclslAdventureSystem
         int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
         int score = realmIndex * 45 + aptitude + Math.Min(70, experience) + Math.Min(30, contribution / 4)
             + PositiveHash(id + "|ruin_score|" + ruin.Id + "|" + year) % 51;
+        MclslMapNodeSystem.TickAnnual(year);
+        MclslMapNodeRecord node = MclslMapNodeSystem.FindBySource(MclslMapNodeSystem.Ruin, ruin.Id);
+        if (MclslSpatialTaskSystem.TryAssign(actor, node, MclslMapNodeSystem.Ruin, year)) return;
         if (!RuinCandidates.TryGetValue(ruin.Id, out List<RuinCandidate> list)) RuinCandidates[ruin.Id] = list = new List<RuinCandidate>();
         list.Add(new RuinCandidate { Actor = actor, Score = score });
     }
@@ -81,6 +86,24 @@ internal static class MclslAdventureSystem
         ResolveRuinExpeditions(year);
         AnnualCultivators.Clear();
         AnnualActorIds.Clear();
+        RuinCandidates.Clear();
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void ResolveSpatialTask(Actor actor, MclslSectRuinRecord ruin, int year)
+    {
+        if (!MclslRuntimeSettings.WorldAdventuresEnabled || !MclslActorAccessor.Alive(actor) || !IsRuinAvailable(ruin)) return;
+        _year = year;
+        int realmIndex = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
+        int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50);
+        int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
+        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
+        int id = Math.Abs((int)(MclslActorAccessor.Id(actor) % int.MaxValue));
+        int score = realmIndex * 45 + aptitude + Math.Min(70, experience) + Math.Min(30, contribution / 4)
+            + PositiveHash(id + "|ruin_score|" + ruin.Id + "|" + year) % 51;
+        if (!RuinCandidates.TryGetValue(ruin.Id, out List<RuinCandidate> list)) RuinCandidates[ruin.Id] = list = new List<RuinCandidate>();
+        list.Add(new RuinCandidate { Actor = actor, Score = score });
+        ResolveRuinExpeditions(year);
         RuinCandidates.Clear();
         MclslWorldArchiveStore.MarkDirty();
     }
@@ -106,7 +129,7 @@ internal static class MclslAdventureSystem
         MclslTechniqueDefinition technique = PromoteLegacyTechnique(MclslCultivationCatalog.Technique(techniqueId), sequence + year, MclslRealmIds.JinDan);
         int quality = Math.Clamp(2 + MclslRealmIds.Index(MclslActorAccessor.Realm(source)) / 2, 2, 4);
         string category = newLaw ? PickSecretRealmCategory(sequence + year) : PickPrivateRuinCategory(sequence + year);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, category);
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, category, source.data.x, source.data.y);
         string displayTechniqueName = string.IsNullOrWhiteSpace(techniqueName) ? technique.Name : techniqueName;
         AttachTechniqueSource(ruin, technique.Id, displayTechniqueName, string.Empty, year);
         ruin.Description = newLaw
@@ -136,7 +159,7 @@ internal static class MclslAdventureSystem
             if (!tags.Contains(tag)) tags.Add(tag);
         }
         LocationSeed location = PickLocation(hash);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, PickPrivateRuinCategory(hash));
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, PickPrivateRuinCategory(hash), location.X, location.Y);
         AttachTechniqueSource(ruin, technique.Id, technique.Name, string.Empty, 0);
         ruin.Description = "旧日洞府显于山河之间，残卷、灵石与遗物尚有余韵。";
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return null;
@@ -156,7 +179,7 @@ internal static class MclslAdventureSystem
         int quality = Math.Clamp(2 + MclslRealmIds.Index(MclslActorAccessor.Realm(source)) / 2, 2, 4);
         string location = string.IsNullOrWhiteSpace(source.city?.data?.name) ? "山河秘境" : source.city.data.name + "附近";
         string kingdom = string.IsNullOrWhiteSpace(source.kingdom?.data?.name) ? "无主" : source.kingdom.data.name;
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, PickSecretRealmCategory(hash));
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location, kingdom, technique.LawPool, quality, PickSecretRealmCategory(hash), source.data.x, source.data.y);
         string displayTechniqueName = string.IsNullOrWhiteSpace(techniqueName) ? technique.Name : techniqueName;
         AttachTechniqueSource(ruin, technique.Id, displayTechniqueName, string.Empty, year);
         ruin.Description = "旧日宗门秘境重开，门中《" + displayTechniqueName + "》残章、讲法石刻与试炼余痕尚存。";
@@ -431,7 +454,7 @@ internal static class MclslAdventureSystem
             ? PickPrivateRuinCategory(hash)
             : PickSecretRealmCategory(hash);
         LocationSeed location = PickLocation(hash);
-        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, category);
+        MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, location.Location, location.Kingdom, tags, quality, category, location.X, location.Y);
         AttachTechniqueSource(ruin, technique.Id, technique.Name, string.Empty, 0);
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return false;
         MclslWorldRunRepository.AddEvent(year, "ruin_born", ruin.Name + "显世", MclslRuinText.DangerEventText(ruin.Danger) + "，尚存" + ruin.RemainingValue + "份主要机缘。");
@@ -700,7 +723,7 @@ internal static class MclslAdventureSystem
                 string city = actor.city?.data?.name;
                 if (string.IsNullOrWhiteSpace(city) || !seen.Add(city)) continue;
                 string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无主" : actor.kingdom.data.name;
-                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom });
+                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom, X = actor.data.x, Y = actor.data.y });
             }
         }
         if (locations.Count > 0) return locations[(hash & int.MaxValue) % locations.Count];

@@ -150,4 +150,7 @@ internal static class MclslActorDataKeys
     internal const string PendingDeathSource = "mclsl.death.pending.source";
     internal const string PendingDeathDetail = "mclsl.death.pending.detail";
     internal const string PendingDeathImportant = "mclsl.death.pending.important";
+    internal const string SectId = "mclsl.sect.id";
+    internal const string SectRole = "mclsl.sect.role";
+    internal const string SpatialTaskId = "mclsl.spatial.task.id";
 }

@@ -40,8 +40,140 @@ internal static class MclslWorldArchiveMigration
             changed |= RepairOldWorldSoulObservationText(upgraded.CurrentRun);
         }
 
+        changed |= RepairSpatialRecords(upgraded.CurrentRun);
+
         if (sourceVersion <= CurrentVersion) upgraded.Version = CurrentVersion;
         return changed;
+    }
+
+    private static bool RepairSpatialRecords(MclslWorldRunState run)
+    {
+        if (run == null) return false;
+        run.MapNodes ??= new List<MclslMapNodeRecord>();
+        run.Sects ??= new List<MclslSectRecord>();
+        run.SpatialTasks ??= new List<MclslSpatialTaskRecord>();
+        bool changed = false;
+
+        for (int i = 0; i < run.MapNodes.Count; i++)
+        {
+            MclslMapNodeRecord node = run.MapNodes[i];
+            if (node == null) continue;
+            if (string.IsNullOrWhiteSpace(node.MarkerKey)) { node.MarkerKey = "mclsl_node_" + node.Id; changed = true; }
+            if (string.IsNullOrWhiteSpace(node.OwnerKind)) { node.OwnerKind = "none"; changed = true; }
+            if (string.IsNullOrWhiteSpace(node.VisibilityState)) { node.VisibilityState = node.MapX >= 0 && node.MapY >= 0 ? "discovered" : "lost"; changed = true; }
+            if (string.IsNullOrWhiteSpace(node.LifecycleState)) { node.LifecycleState = "active"; changed = true; }
+        }
+
+        if (run.WorldCaves != null)
+        {
+            for (int i = 0; i < run.WorldCaves.Count; i++)
+            {
+                MclslWorldCaveRecord cave = run.WorldCaves[i];
+                if (cave == null || string.IsNullOrWhiteSpace(cave.Id)) continue;
+                changed |= EnsureNode(run, "node_cave_" + cave.Id, "cave", cave.Id, cave.Name, cave.MapX, cave.MapY,
+                    cave.Quality, cave.LawTags, 0, cave.RemainingEssence, cave.BornYear, cave.LocationName,
+                    cave.NativeKingdomName, cave.RemainingEssence > 0 ? "active" : "depleted");
+            }
+        }
+
+        if (run.WorldChanges != null)
+        {
+            for (int i = 0; i < run.WorldChanges.Count; i++)
+            {
+                MclslWorldChangeRecord change = run.WorldChanges[i];
+                if (change == null || string.IsNullOrWhiteSpace(change.Id)) continue;
+                changed |= EnsureNode(run, "node_world_change_" + change.Id, "world_change", change.Id, change.Name, change.MapX, change.MapY,
+                    change.Quality, change.LawTags, Math.Clamp(change.Intensity, 0, 100), change.RemainingMarrow, change.StartYear,
+                    change.LocationName, change.NativeKingdomName, change.RemainingMarrow > 0 ? "active" : "depleted");
+            }
+        }
+
+        if (run.SectRuins != null)
+        {
+            for (int i = 0; i < run.SectRuins.Count; i++)
+            {
+                MclslSectRuinRecord ruin = run.SectRuins[i];
+                if (ruin == null || string.IsNullOrWhiteSpace(ruin.Id)) continue;
+                changed |= EnsureNode(run, "node_ruin_" + ruin.Id, "ruin", ruin.Id, ruin.Name, ruin.MapX, ruin.MapY,
+                    ruin.Quality, ruin.LawTags, ruin.Danger, ruin.RemainingValue, ruin.BornYear, ruin.LocationName,
+                    ruin.NativeKingdomName, ruin.RemainingValue > 0 ? "active" : "depleted");
+            }
+        }
+
+        for (int i = 0; i < run.Sects.Count; i++)
+        {
+            MclslSectRecord sect = run.Sects[i];
+            if (sect == null) continue;
+            sect.MemberActorIds ??= new List<long>();
+            sect.ControlledNodeIds ??= new List<string>();
+            sect.Inventory ??= new Dictionary<string, int>();
+            if (string.IsNullOrWhiteSpace(sect.State)) { sect.State = "active"; changed = true; }
+        }
+        for (int i = 0; i < run.SpatialTasks.Count; i++)
+        {
+            MclslSpatialTaskRecord task = run.SpatialTasks[i];
+            if (task == null) continue;
+            if (string.IsNullOrWhiteSpace(task.State)) { task.State = "assigned"; changed = true; }
+            if (task.LastCommandFrame == 0) { task.LastCommandFrame = -10000; changed = true; }
+        }
+        return changed;
+    }
+
+    private static bool EnsureNode(
+        MclslWorldRunState run,
+        string id,
+        string type,
+        string sourceId,
+        string name,
+        int x,
+        int y,
+        int quality,
+        string lawTags,
+        int danger,
+        int remaining,
+        int bornYear,
+        string location,
+        string kingdom,
+        string lifecycle)
+    {
+        MclslMapNodeRecord node = run.MapNodes.Find(x => x != null && string.Equals(x.Id, id, StringComparison.Ordinal));
+        bool changed = false;
+        if (node == null)
+        {
+            node = new MclslMapNodeRecord { Id = id, MarkerKey = "mclsl_node_" + id };
+            run.MapNodes.Add(node);
+            changed = true;
+        }
+        changed |= Set(node.NodeType, type, value => node.NodeType = value);
+        changed |= Set(node.SourceType, type, value => node.SourceType = value);
+        changed |= Set(node.SourceRecordId, sourceId, value => node.SourceRecordId = value);
+        changed |= Set(node.Name, name, value => node.Name = value);
+        changed |= Set(node.LawTags, lawTags, value => node.LawTags = value);
+        changed |= Set(node.LocationName, location, value => node.LocationName = value);
+        changed |= Set(node.NativeKingdomNameSnapshot, kingdom, value => node.NativeKingdomNameSnapshot = value);
+        string preservedLifecycle = node.LifecycleState == "controlled" && lifecycle != "depleted"
+            ? "controlled"
+            : node.LifecycleState == "contested" && lifecycle == "active"
+                ? "contested"
+                : lifecycle;
+        changed |= Set(node.LifecycleState, preservedLifecycle, value => node.LifecycleState = value);
+        if (node.MapX != x) { node.MapX = x; changed = true; }
+        if (node.MapY != y) { node.MapY = y; changed = true; }
+        if (node.Quality != Math.Max(1, quality)) { node.Quality = Math.Max(1, quality); changed = true; }
+        if (node.Danger != Math.Max(0, danger)) { node.Danger = Math.Max(0, danger); changed = true; }
+        if (node.RemainingValue != Math.Max(0, remaining)) { node.RemainingValue = Math.Max(0, remaining); changed = true; }
+        if (node.BornYear <= 0 && bornYear > 0) { node.BornYear = bornYear; changed = true; }
+        string visibility = x >= 0 && y >= 0 ? "discovered" : "lost";
+        if (!string.Equals(node.VisibilityState, visibility, StringComparison.Ordinal)) { node.VisibilityState = visibility; changed = true; }
+        return changed;
+    }
+
+    private static bool Set(string target, string value, Action<string> setter)
+    {
+        string next = value ?? string.Empty;
+        if (string.Equals(target, next, StringComparison.Ordinal)) return false;
+        setter(next);
+        return true;
     }
 
     private static bool RemoveAbandonedDaoStruggleData(MclslWorldRunState run)

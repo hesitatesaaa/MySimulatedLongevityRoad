@@ -58,6 +58,9 @@ internal sealed class MclslCodexSnapshot
     internal readonly List<MclslTechniqueLineageRecord> TechniqueLineagesSorted = new();
     internal readonly List<MclslTechniqueLineageRecord> DaoStruggleLineagesSorted = new();
     internal readonly List<MclslSectRuinRecord> RuinsSorted = new();
+    internal readonly List<MclslMapNodeRecord> MapNodesSorted = new();
+    internal readonly List<MclslSectRecord> SectsSorted = new();
+    internal readonly List<MclslSpatialTaskRecord> SpatialTasksSorted = new();
     internal readonly List<MclslRuinExplorationRecord> RuinExplorationsSorted = new();
     internal readonly Dictionary<string, string> RuinNameById = new(StringComparer.Ordinal);
     internal readonly Dictionary<string, int> RuinMaxExpeditionsById = new(StringComparer.Ordinal);
@@ -478,6 +481,24 @@ internal sealed class MclslCodexSnapshot
             .Where(x => x != null)
             .OrderByDescending(x => x.Year)
             .Take(160));
+
+        snapshot.MapNodesSorted.AddRange(MclslMapNodeSystem.SnapshotNodes()
+            .Where(x => x != null)
+            .OrderBy(x => x.LifecycleState, StringComparer.Ordinal)
+            .ThenByDescending(x => x.Quality)
+            .ThenBy(x => x.Name, StringComparer.Ordinal)
+            .Take(MclslWorldRunRepository.MaxMapNodeRecords));
+        snapshot.SectsSorted.AddRange(MclslSectSystem.SnapshotSects()
+            .Where(x => x != null)
+            .OrderBy(x => x.State, StringComparer.Ordinal)
+            .ThenByDescending(x => x.MemberCountSnapshot)
+            .ThenBy(x => x.Name, StringComparer.Ordinal)
+            .Take(MclslWorldRunRepository.MaxSectRecords));
+        snapshot.SpatialTasksSorted.AddRange((run.SpatialTasks ?? new List<MclslSpatialTaskRecord>())
+            .Where(x => x != null)
+            .OrderBy(x => x.State, StringComparer.Ordinal)
+            .ThenByDescending(x => x.AssignedYear)
+            .Take(MclslWorldRunRepository.MaxSpatialTasks));
     }
 
     private void AddAncientEventGroup(List<MclslRunEventRecord> target, params string[] eventTypes)

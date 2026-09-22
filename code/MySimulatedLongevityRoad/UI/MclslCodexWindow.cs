@@ -436,6 +436,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             case 14:
                 DrawCultivatorBiographies(run);
                 break;
+            case 15:
+                DrawMapNodes(run);
+                break;
         }
     }
 
@@ -478,6 +481,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 break;
             case 11:
                 DrawCultivatorBiographies(run);
+                break;
+            case 12:
+                DrawMapNodes(run);
                 break;
             default:
                 DrawAncientEvents(run);

@@ -116,6 +116,9 @@ internal static class MclslWorldCaveSystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "金丹圆满，却未寻到法则相合的洞天；" + detail);
             return;
         }
+        MclslMapNodeSystem.TickAnnual(year);
+        MclslMapNodeRecord node = MclslMapNodeSystem.FindBySource(MclslMapNodeSystem.Cave, best.Id);
+        if (MclslSpatialTaskSystem.TryAssign(actor, node, MclslMapNodeSystem.Cave, year)) return;
         MclslAptitudeGiftDefinition gift = MclslAptitudeGiftCatalog.ForAptitude(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
         int purity = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.GoldenCorePurity, 50);
         int stability = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.GoldenCoreStability, 50);
@@ -183,6 +186,24 @@ internal static class MclslWorldCaveSystem
         }
         Claims.Clear();
         MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void ResolveSpatialTask(Actor actor, string caveId, int year)
+    {
+        MclslWorldCaveRecord cave = MclslWorldRunRepository.FindCave(caveId);
+        if (!MclslActorAccessor.Alive(actor) || !IsAvailable(cave)) return;
+        _claimYear = year;
+        string[] laws = MclslGeneratedObjectFactory.SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.GoldenCoreLaws, string.Empty));
+        int compatibility = Compatibility(actor, laws, MclslGeneratedObjectFactory.SplitTags(cave.LawTags));
+        if (compatibility < 50) return;
+        MclslAptitudeGiftDefinition gift = MclslAptitudeGiftCatalog.ForAptitude(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
+        int purity = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.GoldenCorePurity, 50);
+        int stability = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.GoldenCoreStability, 50);
+        int strength = purity + stability + compatibility + (gift.BreakthroughBonus + gift.LawHarmonyBonus) * 2
+            + MclslMindSystem.ClaimStrengthBonus(actor)
+            + PositiveHash(MclslActorAccessor.Id(actor) + "|cave_claim|" + cave.Id + "|" + year) % 51;
+        Claims[cave.Id] = new List<CaveClaim> { new CaveClaim { Actor = actor, CaveId = cave.Id, Compatibility = compatibility, Strength = strength } };
+        ResolveAnnual(year);
     }
 
     internal static MclslWorldCaveRecord GenerateCaveFromDiscovery(int year, Actor discoverer, IReadOnlyList<string> lawTags, string sourceName)

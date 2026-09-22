@@ -224,6 +224,9 @@ internal static class MclslWorldChangeSystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "元婴圆满，却未遇到法则相合的天地之变；" + detail);
             return;
         }
+        MclslMapNodeSystem.TickAnnual(year);
+        MclslMapNodeRecord node = MclslMapNodeSystem.FindBySource(MclslMapNodeSystem.WorldChange, best.Id);
+        if (MclslSpatialTaskSystem.TryAssign(actor, node, MclslMapNodeSystem.WorldChange, year)) return;
         MclslAptitudeGiftDefinition gift = MclslAptitudeGiftCatalog.ForAptitude(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
         int essenceQuality = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.NascentEssenceQuality, 1);
         int ruinExperience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
@@ -279,6 +282,24 @@ internal static class MclslWorldChangeSystem
         }
         Claims.Clear();
         MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void ResolveSpatialTask(Actor actor, string changeId, int year)
+    {
+        MclslWorldChangeRecord change = MclslWorldRunRepository.FindWorldChange(changeId);
+        if (!MclslActorAccessor.Alive(actor) || !IsAvailable(change)) return;
+        _claimYear = year;
+        string[] laws = MclslGeneratedObjectFactory.SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentEssenceTags,
+            MclslActorAccessor.GetString(actor, MclslActorDataKeys.GoldenCoreLaws, string.Empty)));
+        int compatibility = Compatibility(actor, laws, MclslGeneratedObjectFactory.SplitTags(change.LawTags));
+        if (compatibility < 50) return;
+        MclslAptitudeGiftDefinition gift = MclslAptitudeGiftCatalog.ForAptitude(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
+        int essenceQuality = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.NascentEssenceQuality, 1);
+        int strength = essenceQuality * 20 + compatibility + (gift.BreakthroughBonus + gift.LawHarmonyBonus) * 2
+            + MclslMindSystem.ClaimStrengthBonus(actor)
+            + PositiveHash(MclslActorAccessor.Id(actor) + "|change_claim|" + change.Id + "|" + year) % 61;
+        Claims[change.Id] = new List<ChangeClaim> { new ChangeClaim { Actor = actor, ChangeId = change.Id, Compatibility = compatibility, Strength = strength } };
+        ResolveAnnual(year);
     }
 
     internal static bool TryAcquireExistingChangeForConversion(Actor actor, int year)

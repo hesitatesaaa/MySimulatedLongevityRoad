@@ -51,6 +51,11 @@ internal static class MclslCultivationGrowthSystem
         float worldRate = applyWorldState
             ? Math.Max(0.05f, MclslWorldStateModifierSystem.Current(year).CultivationRate)
             : 1f;
+        if (applyWorldState && actor?.data != null)
+        {
+            int localInfluence = MclslMapNodeSystem.LocalInfluence(actor.data.x, actor.data.y);
+            worldRate *= Math.Clamp(1f + localInfluence * 0.01f, 0.6f, 1.4f);
+        }
         float sameLawRate = applySameLaw
             ? Math.Max(0.01f, MclslTechniqueOccupationSystem.CultivationMultiplier(actor))
             : 1f;

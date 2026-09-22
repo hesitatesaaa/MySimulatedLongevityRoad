@@ -9,7 +9,8 @@ internal static class MclslEventLocator
 {
     internal static bool CanLocate(MclslRunEventRecord record)
     {
-        return record != null && (record.ActorId > 0L || (record.MapX >= 0 && record.MapY >= 0));
+        return record != null && (record.ActorId > 0L || (record.MapX >= 0 && record.MapY >= 0)
+            || CanLocate(MclslMapNodeSystem.Find(record.NodeId)));
     }
 
     internal static void Locate(MclslRunEventRecord record)
@@ -25,6 +26,12 @@ internal static class MclslEventLocator
                 return;
             }
             catch { }
+        }
+        MclslMapNodeRecord node = MclslMapNodeSystem.Find(record.NodeId);
+        if (CanLocate(node))
+        {
+            Focus(node.MapX, node.MapY);
+            return;
         }
         if (record.MapX < 0 || record.MapY < 0) return;
         try { Focus(record.MapX, record.MapY); }
@@ -63,6 +70,13 @@ internal static class MclslEventLocator
     internal static void Locate(MclslWorldCaveRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslWorldChangeRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslWorldSoulRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
+
+    internal static bool CanLocate(MclslMapNodeRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;
+
+    internal static void Locate(MclslMapNodeRecord record)
+    {
+        if (CanLocate(record)) Focus(record.MapX, record.MapY);
+    }
 
     internal static bool CanLocate(MclslMaobaoRecord record)
     {

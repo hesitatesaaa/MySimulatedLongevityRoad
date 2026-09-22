@@ -1,6 +1,7 @@
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Systems.Visual;
 
 namespace MySimulatedLongevityRoad.Modules;
 
@@ -115,6 +116,41 @@ internal sealed class MclslRuntimeCadenceModule : MclslModuleBase
     internal override void TickFrame(int frameCounter) => MclslRuntimeCadence.Tick(frameCounter);
     internal override void PrepareForSave() => MclslScheduler.FlushPendingAnnualStatesForSave();
     internal override void Clear() => MclslRuntimeCadence.Clear();
+}
+
+internal sealed class MclslSpatialWorldModule : MclslModuleBase
+{
+    internal override bool HasAnnualStep => true;
+    internal override string Name => "SpatialWorld";
+    internal override int Order => 27;
+
+    internal override void OnWorldLoaded(int year)
+    {
+        MclslMapNodeSystem.OnWorldLoaded(year);
+        MclslSectSystem.OnWorldLoaded(year);
+        MclslSpatialTaskSystem.OnWorldLoaded(year);
+    }
+
+    internal override void TickAnnual(int year)
+    {
+        MclslMapNodeSystem.TickAnnual(year);
+        MclslSectSystem.TickAnnual(year);
+    }
+
+    internal override void TickFrame(int frameCounter)
+    {
+        MclslSpatialTaskSystem.TickFrame(frameCounter);
+        MclslMapNodeMarkerSystem.TickFrame(frameCounter);
+    }
+
+    internal override void Clear()
+    {
+        MclslSpatialTaskSystem.Clear();
+        MclslMapNodeSystem.Clear();
+        MclslSectSystem.Clear();
+        MclslMapNodeMarkerSystem.Clear();
+        MclslNativeWorldAdapter.Reset();
+    }
 }
 
 internal sealed class MclslFactionMissionModule : MclslModuleBase

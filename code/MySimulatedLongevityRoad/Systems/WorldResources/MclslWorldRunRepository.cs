@@ -21,6 +21,10 @@ internal static class MclslWorldRunRepository
     internal const int SectRuinRecoveryFloor = 10;
     private const int MaxWorldCaveRecords = 64;
     private const int MaxWorldChangeRecords = 64;
+    internal const int MaxMapNodeRecords = 192;
+    internal const int MaxSectRecords = 48;
+    internal const int MaxSpatialTasks = 256;
+    internal const int MaxActiveSpatialTasks = 24;
     private const int MaxReincarnationRecords = 200;
     private const int MaxMaobaoRecords = 24;
     private const int MaxEventsPerYear = 36;
@@ -152,6 +156,50 @@ internal static class MclslWorldRunRepository
         }
         _current.WorldChanges = keep.OrderBy(x => x.StartYear).ToList();
         MclslWorldRunRuntimeIndexes.Invalidate();
+    }
+
+    private static void TrimSpatialRecordsToLimit()
+    {
+        _current.MapNodes ??= new List<MclslMapNodeRecord>();
+        _current.Sects ??= new List<MclslSectRecord>();
+        _current.SpatialTasks ??= new List<MclslSpatialTaskRecord>();
+        _current.MapNodes.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.Id));
+        _current.Sects.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.Id));
+        _current.SpatialTasks.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.TaskId));
+        if (_current.MapNodes.Count > MaxMapNodeRecords)
+        {
+            _current.MapNodes = _current.MapNodes
+                .OrderByDescending(x => x.LifecycleState == "active" || x.LifecycleState == "contested" || x.LifecycleState == "controlled")
+                .ThenByDescending(x => x.BornYear)
+                .Take(MaxMapNodeRecords)
+                .ToList();
+        }
+        if (_current.Sects.Count > MaxSectRecords)
+        {
+            _current.Sects = _current.Sects
+                .OrderByDescending(x => x.State == "active")
+                .ThenByDescending(x => x.FoundedYear)
+                .Take(MaxSectRecords)
+                .ToList();
+        }
+        if (_current.SpatialTasks.Count > MaxSpatialTasks)
+        {
+            _current.SpatialTasks = _current.SpatialTasks
+                .OrderByDescending(x => x.State == "moving" || x.State == "arrived")
+                .ThenByDescending(x => x.AssignedYear)
+                .Take(MaxSpatialTasks)
+                .ToList();
+        }
+        for (int i = 0; i < _current.Sects.Count; i++)
+        {
+            MclslSectRecord sect = _current.Sects[i];
+            sect.MemberActorIds ??= new List<long>();
+            sect.ControlledNodeIds ??= new List<string>();
+            sect.Inventory ??= new Dictionary<string, int>();
+            if (sect.MemberActorIds.Count > 128) sect.MemberActorIds = sect.MemberActorIds.Take(128).ToList();
+            if (sect.ControlledNodeIds.Count > 12) sect.ControlledNodeIds = sect.ControlledNodeIds.Take(12).ToList();
+            if (sect.Inventory.Count > 16) sect.Inventory = sect.Inventory.Take(16).ToDictionary(x => x.Key, x => x.Value, StringComparer.Ordinal);
+        }
     }
 
     private static void CollectLiveResourceReferences(out HashSet<string> caveIds, out HashSet<string> changeIds)
@@ -351,6 +399,23 @@ internal static class MclslWorldRunRepository
             record.MapY = mapY;
             record.LocationName = locationName ?? string.Empty;
             record.KingdomName = kingdomName ?? string.Empty;
+            MclslWorldArchiveStore.MarkDirty();
+            return;
+        }
+    }
+
+    internal static void AddEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string nodeId)
+    {
+        AddEvent(year, type, title, body, mapX, mapY, locationName, kingdomName);
+        if (_current?.Events == null || string.IsNullOrWhiteSpace(nodeId)) return;
+        for (int i = _current.Events.Count - 1; i >= 0; i--)
+        {
+            MclslRunEventRecord record = _current.Events[i];
+            if (record == null || record.Year != Math.Max(0, year)) continue;
+            if (!string.Equals(record.EventType, type ?? string.Empty, StringComparison.Ordinal)
+                || !string.Equals(record.Title, title ?? string.Empty, StringComparison.Ordinal)
+                || !string.Equals(record.Body, body ?? string.Empty, StringComparison.Ordinal)) continue;
+            record.NodeId = nodeId;
             MclslWorldArchiveStore.MarkDirty();
             return;
         }
@@ -860,11 +925,15 @@ internal static class MclslWorldRunRepository
         _current.WorldCaves ??= new List<MclslWorldCaveRecord>();
         _current.WorldChanges ??= new List<MclslWorldChangeRecord>();
         _current.WorldSouls ??= new List<MclslWorldSoulRecord>();
+        _current.MapNodes ??= new List<MclslMapNodeRecord>();
+        _current.Sects ??= new List<MclslSectRecord>();
+        _current.SpatialTasks ??= new List<MclslSpatialTaskRecord>();
         _current.InverseTruths ??= new List<MclslInverseTruthRecord>();
         _current.ReincarnationRecords ??= new List<MclslActorReincarnationRecord>();
         TrimSectRuinsToLimit();
         TrimWorldCavesToLimit();
         TrimWorldChangesToLimit();
+        TrimSpatialRecordsToLimit();
         TrimReincarnationRecordsToLimit();
         TrimOldest(_current.DeathRecords, MaxDeaths);
         TrimOldest(_current.FactionMissions, MaxFactionMissions);
