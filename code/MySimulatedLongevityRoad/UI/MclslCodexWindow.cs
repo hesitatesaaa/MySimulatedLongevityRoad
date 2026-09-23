@@ -47,6 +47,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static GUIStyle _oldBox;
     private static GUIStyle _oldWindow;
     private static GUIStyle _boxStyle;
+    private static GUIStyle _codexVerticalScrollbar;
     private static Texture2D _windowBackground;
     private static Texture2D _backdropTexture;
     private static Texture2D _whiteTexture;
@@ -65,6 +66,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = false;
         _instance._standaloneMaobao = false;
+        _instance.ClearLineageFocus();
         _instance._visible = true;
         _instance.enabled = true;
         CreateOverlayBlocker();
@@ -166,7 +168,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawCodexSidebar();
                 GUILayout.Space(8f);
                 GUILayout.BeginVertical(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
-                _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.ExpandWidth(true));
+                _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, _codexVerticalScrollbar, GUILayout.ExpandWidth(true));
                 DrawPage();
                 GUILayout.EndScrollView();
                 GUILayout.EndVertical();
@@ -656,6 +658,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 MclslTechniqueLineageRecord lineage = lineages[i];
                 if (lineage == null || lineage.SystemId != MclslCultivationSystemIds.AncientLaw) continue;
                 if (!AncientTeachingMaxRealmMatches(lineage)) continue;
+                if (!LineageMatchesFocus(lineage)) continue;
                 shown++;
                 DrawInfoCard("《" + Blank(lineage.Name) + "》", LineageColor(lineage.LifecycleState), () =>
                 {
@@ -696,6 +699,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                         GUILayout.Label("<color=#CFC7B2>流传脉络：</color>" + LineageChainText(lineage));
                     }
                     GUILayout.Label("<color=#CFC7B2>当世流传：</color>" + AncientLineageCurrentText(lineage, lineageTitle));
+                    GUILayout.Label("<color=#CFC7B2>当前传承者：</color>" + Blank(lineage.CurrentTransmitterNames));
+                    GUILayout.Label("<color=#CFC7B2>师承关系：</color>" + (string.IsNullOrWhiteSpace(lineage.MentorNameSnapshot)
+                        ? "自立或尚未留下师承快照"
+                        : lineage.MentorNameSnapshot + "（" + Blank(lineage.MentorTechniqueNameSnapshot) + "）"));
+                    GUILayout.Label("<color=#CFC7B2>传法记录：</color>" + lineage.MentorshipCount + "次" +
+                        (string.IsNullOrWhiteSpace(lineage.BranchOriginName) ? string.Empty : "｜分支源自《" + lineage.BranchOriginName + "》"));
+                    if (!string.IsNullOrWhiteSpace(lineage.SourceRuinNameSnapshot))
+                        GUILayout.Label("<color=#CFC7B2>来源遗迹：</color>" + lineage.SourceRuinNameSnapshot + "｜" + Blank(lineage.SourceRuinLocationSnapshot));
                     GUILayout.Label("<color=#CFC7B2>修行倾向：</color>" + AncientLineageTendencyText(lineage, laws));
                     GUILayout.Label("<color=#CFC7B2>词条：</color>" + AncientLineageTermsText(lineage, laws));
                 });
@@ -2222,6 +2233,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             padding = new RectOffset(12, 12, 10, 10),
             margin = new RectOffset(5, 5, 5, 5)
         };
+        _codexVerticalScrollbar = new GUIStyle(GUI.skin.verticalScrollbar)
+        {
+            fixedWidth = 15f,
+            margin = new RectOffset(4, 2, 2, 2)
+        };
+        _codexVerticalScrollbar.normal.background = SolidTexture(new Color(0.08f, 0.16f, 0.17f, 0.92f));
+        _codexVerticalScrollbar.hover.background = _codexVerticalScrollbar.normal.background;
+        _codexVerticalScrollbar.active.background = _codexVerticalScrollbar.normal.background;
     }
 
     private static Rect FitRect()

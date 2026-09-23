@@ -23,6 +23,7 @@ internal static class MclslWorldRunRepository
     private const int MaxWorldChangeRecords = 64;
     private const int MaxReincarnationRecords = 200;
     private const int MaxMaobaoRecords = 24;
+    private const int MaxTechniqueTransmissions = 800;
     private const int MaxEventsPerYear = 36;
     private static MclslWorldRunState _current = new();
     internal static MclslWorldRunState Current => _current;
@@ -897,14 +898,36 @@ internal static class MclslWorldRunRepository
         _current.FactionPressureEvents ??= new List<MclslFactionPressureRecord>();
         _current.ResourceSpendEvents ??= new List<MclslResourceSpendRecord>();
         _current.TechniqueLineages ??= new List<MclslTechniqueLineageRecord>();
+        _current.TechniqueTransmissions ??= new List<MclslTechniqueTransmissionRecord>();
         foreach (MclslTechniqueLineageRecord lineage in _current.TechniqueLineages)
         {
             if (lineage == null) continue;
             lineage.SectDisplayName ??= string.Empty;
             lineage.LifecycleState ??= string.Empty;
             lineage.Summary ??= string.Empty;
+            lineage.FounderName ??= string.Empty;
+            lineage.FounderNameSnapshot = string.IsNullOrWhiteSpace(lineage.FounderNameSnapshot) ? lineage.FounderName : lineage.FounderNameSnapshot;
+            lineage.MentorNameSnapshot ??= string.Empty;
+            lineage.MentorTechniqueNameSnapshot ??= string.Empty;
+            lineage.CurrentTransmitterNames ??= string.Empty;
+            lineage.SourceRuinNameSnapshot ??= string.Empty;
+            lineage.SourceRuinLocationSnapshot ??= string.Empty;
+            lineage.BranchOriginName ??= string.Empty;
+            if (lineage.FoundedYear <= 0) lineage.FoundedYear = lineage.FirstSeenYear;
             if (lineage.Completeness <= 0) lineage.Completeness = 75;
         }
+        foreach (MclslTechniqueTransmissionRecord transmission in _current.TechniqueTransmissions)
+        {
+            if (transmission == null) continue;
+            transmission.LineageId ??= string.Empty;
+            transmission.TechniqueName ??= string.Empty;
+            transmission.TeacherNameSnapshot ??= string.Empty;
+            transmission.TeacherTechniqueNameSnapshot ??= string.Empty;
+            transmission.StudentNameSnapshot ??= string.Empty;
+            transmission.StudentTechniqueNameSnapshot ??= string.Empty;
+            transmission.RelationType = string.IsNullOrWhiteSpace(transmission.RelationType) ? "师承" : transmission.RelationType;
+        }
+        TrimOldest(_current.TechniqueTransmissions, MaxTechniqueTransmissions);
         _current.SectRuins ??= new List<MclslSectRuinRecord>();
         _current.RuinExplorations ??= new List<MclslRuinExplorationRecord>();
         _current.WorldCaves ??= new List<MclslWorldCaveRecord>();

@@ -35,6 +35,7 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_auto_collect_huanzhen_host", "还真宿主自动收藏（原版）", "还真宿主出现后自动加入 WorldBox 原版人物收藏；猫宝仍须手动刻名。");
         Register("MCLSL_config_auto_collect_maobao_inscription", "猫宝刻名自动收藏（原版）", "玩家手动刻名或刷新留影成功后，将人物加入 WorldBox 原版收藏；不会自动刻名。");
         Register("MCLSL_config_transmission_year", "传法变世年份", "控制仙道纪元持续年数；仙道纪元会按此年份自动分段。");
+        Register("MCLSL_config_childhood_root_chance_percent", "幼年灵根显现概率", "只影响尚未完成灵根判定的小人；五岁判定、六岁容错和稳定随机种子保持不变。");
         Register("MCLSL_config_auto_collect_yuanying", "元婴自动收藏", "角色成就元婴时自动加入收藏。");
         Register("MCLSL_config_auto_collect_huashen", "化神自动收藏", "角色成就化神时自动加入收藏。");
         Register("MCLSL_config_auto_collect_hedao", "合道自动收藏", "角色成就合道时自动加入收藏。");

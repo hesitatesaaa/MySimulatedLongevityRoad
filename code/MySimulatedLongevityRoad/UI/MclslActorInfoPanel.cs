@@ -302,12 +302,24 @@ internal static class MclslActorInfoPanel
         barOutline.effectColor = Color.clear;
         barOutline.effectDistance = new Vector2(1f, -1f);
         barOutline.useGraphicAlpha = true;
-        EnsureActionButton(bar.transform, "Biography", "修士列传", () => MclslCodexWindow.ShowBiographyForActor(actor));
+        EnsureActionButton(bar.transform, "Biography", "修士列传", () => MclslCodexWindow.ShowBiographyForActor(actor), 0f, 0.34f);
+        bool hasTechnique = !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty))
+            || !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty));
+        if (hasTechnique)
+        {
+            EnsureActionButton(bar.transform, "Technique", "功法", () => MclslCodexWindow.ShowTechniqueForActor(actor), 0.33f, 0.67f);
+            EnsureActionButton(bar.transform, "Lineage", "法脉", () => MclslCodexWindow.ShowLineageForActor(actor), 0.66f, 1f);
+        }
+        else
+        {
+            RemoveActionButton(bar.transform, "Technique");
+            RemoveActionButton(bar.transform, "Lineage");
+        }
         RemoveActionButton(bar.transform, "Maobao");
         RemoveActionButton(bar.transform, "Debug");
     }
 
-    private static void EnsureActionButton(Transform parent, string name, string label, UnityEngine.Events.UnityAction action)
+    private static void EnsureActionButton(Transform parent, string name, string label, UnityEngine.Events.UnityAction action, float left, float right)
     {
         Transform existing = parent.Find(name);
         GameObject buttonObject = existing?.gameObject;
@@ -329,8 +341,8 @@ internal static class MclslActorInfoPanel
             textRect.offsetMax = Vector2.zero;
         }
         RectTransform rect = buttonObject.GetComponent<RectTransform>();
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
+        rect.anchorMin = new Vector2(left, 0f);
+        rect.anchorMax = new Vector2(right, 1f);
         rect.offsetMin = new Vector2(3f, 2f);
         rect.offsetMax = new Vector2(-3f, -2f);
         rect.localPosition = Vector3.zero;

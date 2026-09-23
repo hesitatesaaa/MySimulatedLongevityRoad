@@ -37,6 +37,7 @@ internal static class MclslRuntimeSettings
     private static bool _autoCollectHuanzhenHost = true;
     private static bool _autoCollectMaobaoInscription = true;
     private static int _transmissionYear = 1000;
+    private static int _childhoodRootChancePercent = 50;
     private static bool _autoCollectYuanYing = true;
     private static bool _autoCollectHuaShen = true;
     private static bool _autoCollectHeDao = true;
@@ -74,6 +75,7 @@ internal static class MclslRuntimeSettings
     internal static bool AutoCollectHuanzhenHost => _autoCollectHuanzhenHost;
     internal static bool AutoCollectMaobaoInscription => _autoCollectMaobaoInscription;
     internal static int TransmissionYear => _transmissionYear;
+    internal static int ChildhoodRootChancePercent => _childhoodRootChancePercent;
     internal static bool AutoCollectYuanYing => _autoCollectYuanYing;
     internal static bool AutoCollectHuaShen => _autoCollectHuaShen;
     internal static bool AutoCollectHeDao => _autoCollectHeDao;
@@ -115,6 +117,7 @@ internal static class MclslRuntimeSettings
         _autoCollectHuanzhenHost = ReadBool(config, "MCLSL_config_auto_collect_huanzhen_host", _autoCollectHuanzhenHost);
         _autoCollectMaobaoInscription = ReadBool(config, "MCLSL_config_auto_collect_maobao_inscription", _autoCollectMaobaoInscription);
         _transmissionYear = Math.Clamp(ReadInt(config, "MCLSL_config_transmission_year", _transmissionYear), 1000, 3000);
+        _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance_percent", _childhoodRootChancePercent), 0, 100);
         _autoCollectYuanYing = ReadBool(config, "MCLSL_config_auto_collect_yuanying", _autoCollectYuanYing);
         _autoCollectHuaShen = ReadBool(config, "MCLSL_config_auto_collect_huashen", _autoCollectHuaShen);
         _autoCollectHeDao = ReadBool(config, "MCLSL_config_auto_collect_hedao", _autoCollectHeDao);

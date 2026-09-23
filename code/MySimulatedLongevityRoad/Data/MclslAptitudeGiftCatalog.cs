@@ -46,7 +46,16 @@ internal static class MclslAptitudeGiftCatalog
 
     internal static bool RollQualification(string seed)
     {
-        return PositiveHash((seed ?? string.Empty) + "|cultivation_qualification") % QualificationDenominator < QualificationChance;
+        return RollQualification(seed, 50);
+    }
+
+    internal static bool RollQualification(string seed, int chancePercent)
+    {
+        int chance = System.Math.Clamp(chancePercent, 0, 100);
+        if (chance <= 0) return false;
+        if (chance >= 100) return true;
+        int threshold = chance * QualificationDenominator / 100;
+        return PositiveHash((seed ?? string.Empty) + "|cultivation_qualification") % QualificationDenominator < threshold;
     }
 
     internal static MclslAptitudeGiftDefinition ForAptitude(int aptitude)

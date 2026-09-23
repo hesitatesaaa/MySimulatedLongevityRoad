@@ -16,6 +16,8 @@ internal static partial class MclslWorldSoulSystem
     private const int ManifestPeacefulDepartureYears = 5;
     private const int HunterDispatchIntervalYears = 1;
     private const int MaxHuntersPerManifest = 8;
+    // 魄身维护是视觉/战斗辅助工作，不需要每 4 帧重复遍历全部显化记录。
+    private const int ManifestMaintenanceCadenceFrames = 12;
     private static readonly string[] KillerMemberNames =
     {
         "last_attacker", "lastAttacker", "_last_attacker", "attacked_by", "attackedBy", "killer", "last_hit_actor", "lastHitActor"
@@ -133,7 +135,7 @@ internal static partial class MclslWorldSoulSystem
 
     internal static void TickFrame(int frameCounter)
     {
-        if (frameCounter % 4 != 0) return;
+        if (frameCounter % ManifestMaintenanceCadenceFrames != 0) return;
         MclslWorldSoulActorRegistration.TickTerrainEffects();
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return;

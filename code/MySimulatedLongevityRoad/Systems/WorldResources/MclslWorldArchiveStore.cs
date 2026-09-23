@@ -18,7 +18,9 @@ internal static class MclslWorldArchiveStore
     };
     private static bool _loaded;
     private static bool _dirty;
+    private static int _changeRevision;
     private static int _worldSeed = int.MinValue;
+    internal static int ChangeRevision => _changeRevision;
 
     internal static void Load()
     {
@@ -53,7 +55,11 @@ internal static class MclslWorldArchiveStore
         catch (Exception ex) { Debug.LogWarning("[模拟长生路][存档] 读取失败，将等待下一次载入: " + ex.Message); }
     }
 
-    internal static void MarkDirty() => _dirty = true;
+    internal static void MarkDirty()
+    {
+        _dirty = true;
+        unchecked { _changeRevision++; }
+    }
 
     internal static void SaveNow()
     {
@@ -83,6 +89,7 @@ internal static class MclslWorldArchiveStore
     {
         _loaded = false;
         _dirty = false;
+        _changeRevision = 0;
         _worldSeed = int.MinValue;
     }
 

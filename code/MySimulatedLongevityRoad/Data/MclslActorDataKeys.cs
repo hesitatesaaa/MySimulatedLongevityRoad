@@ -64,6 +64,8 @@ internal static class MclslActorDataKeys
     internal const string LastResourceSpendYear = "mclsl.resource.last_spend_year";
     internal const string TechniqueId = "mclsl.technique.id";
     internal const string TechniqueName = "mclsl.technique.name";
+    internal const string TechniqueParentId = "mclsl.technique.parent_id";
+    internal const string TechniqueParentName = "mclsl.technique.parent_name";
     internal const string TechniqueMaxRealm = "mclsl.technique.max_realm";
     internal const string FoundationWonderId = "mclsl.foundation_wonder.id";
     internal const string FoundationWonderName = "mclsl.foundation_wonder.name";

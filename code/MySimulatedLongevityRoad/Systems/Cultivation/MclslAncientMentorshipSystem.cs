@@ -45,6 +45,11 @@ internal static class MclslAncientMentorshipSystem
         List<string> parts = new(2);
         if (TryGetTeacher(actor, out Actor teacher))
             parts.Add("师承：" + SafeName(teacher));
+        else
+        {
+            string archivedTeacher = MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientMentorTeacherName, string.Empty);
+            if (!string.IsNullOrWhiteSpace(archivedTeacher)) parts.Add("师承（已故）：" + archivedTeacher);
+        }
 
         List<Actor> students = GetLiveStudents(actor);
         if (students.Count > 0)
@@ -161,6 +166,7 @@ internal static class MclslAncientMentorshipSystem
         MclslTechniqueStageSystem.AddProgress(student, 8);
         AddClamped(student, MclslActorDataKeys.AncientLineageStrength, 6, 0, 100);
         AddClamped(student, MclslActorDataKeys.MindState, 2, 0, 100);
+        MclslTechniqueLineageSystem.RecordMentorship(year, teacher, student);
     }
 
     private static bool TryRecruitUninitiatedStudent(Actor teacher, int year, out Actor student)
@@ -254,7 +260,7 @@ internal static class MclslAncientMentorshipSystem
     private static void ClearTeacher(Actor actor)
     {
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientMentorTeacherId, string.Empty);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientMentorTeacherName, string.Empty);
+        // 姓名字段是死亡人物的历史快照，不能随着运行时 Actor 消失而清空。
     }
 
     private static List<long> GetStudentIds(Actor teacher)

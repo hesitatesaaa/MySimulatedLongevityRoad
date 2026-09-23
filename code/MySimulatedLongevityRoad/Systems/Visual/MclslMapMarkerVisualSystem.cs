@@ -27,7 +27,7 @@ internal static class MclslMapMarkerVisualSystem
     private static readonly List<MarkerDescriptor> DesiredMarkers = new(96);
     private static int _lastRefreshFrame = -1;
     private static int _lastAnimationFrame = -1;
-    private static int _lastSignature;
+    private static int _lastArchiveRevision = -1;
     private static bool _hasSignature;
     private static bool _needsReconcile;
     private static bool _assetValidationLogged;
@@ -38,6 +38,7 @@ internal static class MclslMapMarkerVisualSystem
         _lastRefreshFrame = -1;
         _lastAnimationFrame = -1;
         _hasSignature = false;
+        _lastArchiveRevision = -1;
     }
 
     internal static void Tick(int frame)
@@ -48,12 +49,13 @@ internal static class MclslMapMarkerVisualSystem
             _lastRefreshFrame = frame;
             ValidateAssetsOnce();
             int year = MclslRuntime.CurrentYear();
-            int signature = BuildSnapshotSignature(year);
-            if (!_hasSignature || _needsReconcile || signature != _lastSignature)
+            int archiveRevision = MclslWorldArchiveStore.ChangeRevision;
+            if (!_hasSignature || _needsReconcile || year != _lastYear || archiveRevision != _lastArchiveRevision)
             {
                 _needsReconcile = !Reconcile(year);
-                _lastSignature = signature;
+                _lastArchiveRevision = archiveRevision;
                 _hasSignature = true;
+                _lastYear = year;
             }
         }
 
@@ -73,7 +75,8 @@ internal static class MclslMapMarkerVisualSystem
         DesiredMarkers.Clear();
         _lastRefreshFrame = -1;
         _lastAnimationFrame = -1;
-        _lastSignature = 0;
+        _lastArchiveRevision = -1;
+        _lastYear = -1;
         _hasSignature = false;
         _needsReconcile = false;
         _assetValidationLogged = false;
@@ -216,50 +219,7 @@ internal static class MclslMapMarkerVisualSystem
         }
     }
 
-    private static int BuildSnapshotSignature(int year)
-    {
-        unchecked
-        {
-            int hash = 17;
-            MclslWorldRunState run = MclslWorldRunRepository.Current;
-            AddHash(ref hash, year);
-            AddHash(ref hash, run?.CultivationEpoch);
-            if (run?.SectRuins != null)
-                for (int i = 0; i < run.SectRuins.Count; i++)
-                {
-                    MclslSectRuinRecord ruin = run.SectRuins[i];
-                    if (ruin == null) continue;
-                    AddHash(ref hash, ruin.Id);
-                    AddHash(ref hash, ruin.State);
-                    AddHash(ref hash, ruin.MapX);
-                    AddHash(ref hash, ruin.MapY);
-                    AddHash(ref hash, ruin.RemainingValue);
-                }
-            if (run?.Events != null)
-                for (int i = 0; i < run.Events.Count; i++)
-                {
-                    MclslRunEventRecord record = run.Events[i];
-                    if (record == null || string.IsNullOrWhiteSpace(record.MapVisualKind)) continue;
-                    AddHash(ref hash, record.EventType);
-                    AddHash(ref hash, record.Title);
-                    AddHash(ref hash, record.MapVisualKind);
-                    AddHash(ref hash, record.MapVisualEndYear);
-                    AddHash(ref hash, record.MapX);
-                    AddHash(ref hash, record.MapY);
-                }
-            return hash;
-        }
-    }
-
-    private static void AddHash(ref int hash, string value)
-    {
-        unchecked { foreach (char c in value ?? string.Empty) hash = hash * 31 + c; }
-    }
-
-    private static void AddHash(ref int hash, int value)
-    {
-        unchecked { hash = hash * 31 + value; }
-    }
+    private static int _lastYear = -1;
 
     private static Sprite LoadMarkerSprite(string kind)
     {

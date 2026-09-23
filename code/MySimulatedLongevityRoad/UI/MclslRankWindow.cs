@@ -377,7 +377,7 @@ internal static class MclslRankWindow
         CreateHeaderLabel(header.transform, "榜", 4, 22, TextAnchor.MiddleCenter);
         CreateHeaderLabel(header.transform, "姓名/灵根", 55, 98, TextAnchor.MiddleLeft);
         CreateHeaderLabel(header.transform, "境界", 158, 54, TextAnchor.MiddleCenter);
-        CreateHeaderLabel(header.transform, "战力", 216, 58, TextAnchor.MiddleCenter);
+        CreateHeaderLabel(header.transform, "排序值", 216, 58, TextAnchor.MiddleCenter);
         CreateHeaderLabel(header.transform, "归属", 279, 72, TextAnchor.MiddleCenter);
     }
 
@@ -445,7 +445,7 @@ internal static class MclslRankWindow
             : "搜索：" + _searchQuery.Trim() + "  共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人";
         if (_rankSummaryText != null)
             _rankSummaryText.text = "总计入榜角色：" + Entries.Count.ToString(CultureInfo.InvariantCulture)
-                + "名｜" + (ActiveSortKeys.Count == 0 ? "按综合战力排序" : "首序：" + ActiveSortKeys[0].Def.Name);
+                + "名｜" + SortSummaryText();
         _emptyText.gameObject.SetActive(Entries.Count == 0);
         CreateInitialVisibleCards();
         RefreshSelectedSortButtons();
@@ -514,7 +514,9 @@ internal static class MclslRankWindow
         {
             if (ActiveSortKeys.Count == 0)
             {
-                int result = right.Power.CompareTo(left.Power);
+                int result = right.RealmIndex.CompareTo(left.RealmIndex);
+                if (result != 0) return result;
+                result = right.Power.CompareTo(left.Power);
                 if (result != 0) return result;
             }
             else
@@ -527,9 +529,23 @@ internal static class MclslRankWindow
                     int result = (key.Ascending ? 1 : -1) * lv.CompareTo(rv);
                     if (result != 0) return result;
                 }
+                if (string.Equals(ActiveSortKeys[0].Def.Id, "realm", StringComparison.Ordinal))
+                {
+                    int result = right.Power.CompareTo(left.Power);
+                    if (result != 0) return result;
+                }
             }
-            return string.Compare(left.Name, right.Name, StringComparison.Ordinal);
+            int nameResult = string.Compare(left.Name, right.Name, StringComparison.Ordinal);
+            if (nameResult != 0) return nameResult;
+            return left.ActorId.CompareTo(right.ActorId);
         });
+    }
+
+    private static string SortSummaryText()
+    {
+        if (ActiveSortKeys.Count == 0) return "按境界排序（同境界按战力）";
+        MclslRankSortKey key = ActiveSortKeys[0];
+        return "首序：" + key.Def.Name + (key.Ascending ? "（升序）" : "（降序）");
     }
 
     private static void CreateInitialVisibleCards()
@@ -588,7 +604,7 @@ internal static class MclslRankWindow
         card.transform.localPosition = new Vector3(0, -CardHeight / 2f - index * CardHeight);
         CardInstances.Add(card);
         CardByIndex[index] = card;
-        string primary = ActiveSortKeys.Count > 0 ? ActiveSortKeys[0].Def.GetDisplay(item) : FormatNumber(item.Power);
+        string primary = ActiveSortKeys.Count > 0 ? ActiveSortKeys[0].Def.GetDisplay(item) : item.RealmName;
         card.GetComponent<MclslRankCardView>()?.Setup(item, index, primary);
     }
 

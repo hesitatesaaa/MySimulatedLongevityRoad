@@ -64,6 +64,9 @@ internal static class MclslHuanzhenSystem
 
     internal static void Tick()
     {
+        // 正常游玩时还真没有实时队列，直接退出，避免每帧重复进入存档状态机。
+        // 世界载入/回溯排队时才继续执行下面的状态处理。
+        if (_loaded && !_postLoadApplyQueued && !_rollbackQueued) return;
         EnsureLoaded();
         if (_postLoadApplyQueued)
         {

@@ -124,6 +124,17 @@
       "Callback": "MclslConfig:TransmissionYearCallBack"
     },
     {
+      "Id": "MCLSL_config_childhood_root_chance_percent",
+      "Name": "幼年灵根显现概率",
+      "Description": "只影响尚未完成灵根判定的小人；五岁判定、六岁容错和稳定随机种子保持不变。",
+      "Type": "INT_SLIDER",
+      "IntVal": 50,
+      "MinIntVal": 0,
+      "MaxIntVal": 100,
+      "StepIntVal": 1,
+      "Callback": "MclslConfig:ChildhoodRootChancePercentCallBack"
+    },
+    {
       "Id": "MCLSL_config_enable_ruin_death_announcements",
       "Name": "启用遗迹/遗府死亡公告",
       "Description": "控制修士死于宗门遗迹、遗府或秘境探索时是否显示世界顶部公告；仍需达到死亡公告最低境界。关闭后只写入玄黄仙录。",

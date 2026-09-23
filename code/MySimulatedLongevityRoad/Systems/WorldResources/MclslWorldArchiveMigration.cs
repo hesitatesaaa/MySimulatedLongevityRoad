@@ -39,6 +39,8 @@ internal static class MclslWorldArchiveMigration
             changed |= RepairTechniqueCompleteness(upgraded.CurrentRun);
             changed |= RepairOldWorldSoulObservationText(upgraded.CurrentRun);
         }
+        if (sourceVersion < 18)
+            changed |= RepairTechniqueLineageSnapshots(upgraded.CurrentRun);
 
         if (sourceVersion <= CurrentVersion) upgraded.Version = CurrentVersion;
         return changed;
@@ -137,6 +139,118 @@ internal static class MclslWorldArchiveMigration
                 || lineage.RevivedYear > 0;
             lineage.Completeness = recovered ? 86 : catalogued ? 100 : 75;
             changed = true;
+        }
+        return changed;
+    }
+
+    private static bool RepairTechniqueLineageSnapshots(MclslWorldRunState run)
+    {
+        if (run == null) return false;
+        bool changed = false;
+        HashSet<string> lineageIds = new(StringComparer.Ordinal);
+        if (run.TechniqueLineages != null)
+        {
+            for (int i = run.TechniqueLineages.Count - 1; i >= 0; i--)
+            {
+                MclslTechniqueLineageRecord lineage = run.TechniqueLineages[i];
+                if (lineage == null || string.IsNullOrWhiteSpace(lineage.Id))
+                {
+                    run.TechniqueLineages.RemoveAt(i);
+                    changed = true;
+                    continue;
+                }
+                lineageIds.Add(lineage.Id);
+                lineage.FounderName ??= string.Empty;
+                if (string.IsNullOrWhiteSpace(lineage.FounderNameSnapshot))
+                {
+                    lineage.FounderNameSnapshot = lineage.FounderName;
+                    changed = true;
+                }
+                if (lineage.FoundedYear <= 0)
+                {
+                    lineage.FoundedYear = lineage.FirstSeenYear;
+                    changed = true;
+                }
+            }
+
+            for (int i = 0; i < run.TechniqueLineages.Count; i++)
+            {
+                MclslTechniqueLineageRecord lineage = run.TechniqueLineages[i];
+                if (lineage == null) continue;
+                if (!string.IsNullOrWhiteSpace(lineage.ParentLineageId) && !lineageIds.Contains(lineage.ParentLineageId))
+                {
+                    lineage.ParentLineageId = string.Empty;
+                    changed = true;
+                }
+                if (!string.IsNullOrWhiteSpace(lineage.BranchRootId) && !lineageIds.Contains(lineage.BranchRootId))
+                {
+                    lineage.BranchRootId = string.Empty;
+                    changed = true;
+                }
+            }
+        }
+
+        HashSet<string> ruinIds = new(StringComparer.Ordinal);
+        if (run.SectRuins != null)
+        {
+            for (int i = 0; i < run.SectRuins.Count; i++)
+            {
+                MclslSectRuinRecord ruin = run.SectRuins[i];
+                if (ruin == null || string.IsNullOrWhiteSpace(ruin.Id)) continue;
+                ruinIds.Add(ruin.Id);
+                if (!string.IsNullOrWhiteSpace(ruin.LinkedLineageId) && !lineageIds.Contains(ruin.LinkedLineageId))
+                {
+                    ruin.LinkedLineageId = string.Empty;
+                    changed = true;
+                }
+            }
+        }
+
+        if (run.TechniqueLineages != null)
+        {
+            for (int i = 0; i < run.TechniqueLineages.Count; i++)
+            {
+                MclslTechniqueLineageRecord lineage = run.TechniqueLineages[i];
+                if (lineage == null) continue;
+                if (!string.IsNullOrWhiteSpace(lineage.LinkedRuinId) && !ruinIds.Contains(lineage.LinkedRuinId))
+                {
+                    lineage.LinkedRuinId = string.Empty;
+                    changed = true;
+                }
+            }
+        }
+
+        if (run.RuinExplorations != null)
+        {
+            for (int i = 0; i < run.RuinExplorations.Count; i++)
+            {
+                MclslRuinExplorationRecord exploration = run.RuinExplorations[i];
+                if (exploration == null) continue;
+                if (!string.IsNullOrWhiteSpace(exploration.LinkedLineageId) && !lineageIds.Contains(exploration.LinkedLineageId))
+                {
+                    exploration.LinkedLineageId = string.Empty;
+                    changed = true;
+                }
+                exploration.ActorName ??= string.Empty;
+                exploration.RuinName ??= string.Empty;
+                exploration.RevivedTechniqueName ??= string.Empty;
+            }
+        }
+
+        if (run.TechniqueTransmissions != null)
+        {
+            for (int i = 0; i < run.TechniqueTransmissions.Count; i++)
+            {
+                MclslTechniqueTransmissionRecord transmission = run.TechniqueTransmissions[i];
+                if (transmission == null) continue;
+                if (!string.IsNullOrWhiteSpace(transmission.LineageId) && !lineageIds.Contains(transmission.LineageId))
+                {
+                    transmission.LineageId = string.Empty;
+                    changed = true;
+                }
+                transmission.TeacherNameSnapshot ??= string.Empty;
+                transmission.StudentNameSnapshot ??= string.Empty;
+            }
         }
         return changed;
     }

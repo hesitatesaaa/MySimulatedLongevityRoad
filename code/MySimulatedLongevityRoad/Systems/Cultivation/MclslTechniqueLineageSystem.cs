@@ -18,6 +18,7 @@ internal static class MclslTechniqueLineageSystem
         internal string PeakRealm = string.Empty;
         internal string FounderName = string.Empty;
         internal long FounderActorId;
+        internal readonly List<string> Names = new();
     }
 
     internal static void ResolveAnnual(int year, IReadOnlyList<Actor> actors)
@@ -107,6 +108,11 @@ internal static class MclslTechniqueLineageSystem
             }
 
             snapshot.Count++;
+            if (snapshot.Names.Count < 12)
+            {
+                string displayName = MclslActorAccessor.DisplayName(actor);
+                if (!string.IsNullOrWhiteSpace(displayName) && !snapshot.Names.Contains(displayName)) snapshot.Names.Add(displayName);
+            }
             string realm = MclslActorAccessor.Realm(actor);
             int realmIndex = MclslRealmIds.Index(realm);
             int previousPeakIndex = MclslRealmIds.Index(snapshot.PeakRealm);
@@ -170,6 +176,9 @@ internal static class MclslTechniqueLineageSystem
         PeakRealm = snapshot.PeakRealm,
         FounderActorId = snapshot.FounderActorId,
         FounderName = snapshot.FounderName,
+        FounderNameSnapshot = snapshot.FounderName,
+        FoundedYear = year,
+        CurrentTransmitterNames = string.Join("、", snapshot.Names),
         State = "流传",
         SourceTechniqueId = snapshot.Id,
         SectDisplayName = BuildSectDisplayName(snapshot.Name),
@@ -191,6 +200,18 @@ internal static class MclslTechniqueLineageSystem
         if (MclslRealmIds.Index(snapshot.PeakRealm) > MclslRealmIds.Index(record.PeakRealm)) { record.PeakRealm = snapshot.PeakRealm; changed = true; }
         if (IsPlaceholderFounder(record.FounderName)) { record.FounderName = snapshot.FounderName; changed = true; }
         if (record.FounderActorId <= 0L) { record.FounderActorId = snapshot.FounderActorId; changed = true; }
+        if (string.IsNullOrWhiteSpace(record.FounderNameSnapshot) && !string.IsNullOrWhiteSpace(record.FounderName))
+        {
+            record.FounderNameSnapshot = record.FounderName;
+            changed = true;
+        }
+        if (record.FoundedYear <= 0) { record.FoundedYear = record.FirstSeenYear > 0 ? record.FirstSeenYear : year; changed = true; }
+        string transmitters = string.Join("、", snapshot.Names);
+        if (!string.Equals(record.CurrentTransmitterNames, transmitters, StringComparison.Ordinal))
+        {
+            record.CurrentTransmitterNames = transmitters;
+            changed = true;
+        }
         if (string.IsNullOrWhiteSpace(record.Summary))
         {
             record.Summary = "此法以" + DisplayTags(record.LawTags) + "为本，可修至" + MclslRealmIds.Display(record.MaxRealm) + "。";
@@ -400,6 +421,23 @@ internal static class MclslTechniqueLineageSystem
             record.FounderName = MclslActorAccessor.DisplayName(actor);
         if (record.FounderActorId <= 0)
             record.FounderActorId = MclslActorAccessor.Id(actor);
+        if (string.IsNullOrWhiteSpace(record.FounderNameSnapshot))
+            record.FounderNameSnapshot = record.FounderName;
+        if (record.FoundedYear <= 0) record.FoundedYear = record.FirstSeenYear > 0 ? record.FirstSeenYear : year;
+
+        string parentId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueParentId, string.Empty);
+        string parentName = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueParentName, string.Empty);
+        if (!string.IsNullOrWhiteSpace(parentId) || !string.IsNullOrWhiteSpace(parentName))
+        {
+            MclslTechniqueLineageRecord parent = FindLineageRecord(run, StableTechniqueKey(parentId, parentName));
+            if (parent != null && !string.Equals(parent.Id, record.Id, StringComparison.Ordinal))
+            {
+                record.ParentLineageId = parent.Id;
+                record.BranchRootId = string.IsNullOrWhiteSpace(parent.BranchRootId) ? parent.Id : parent.BranchRootId;
+                record.BranchOriginName = string.IsNullOrWhiteSpace(parent.Name) ? parentName : parent.Name;
+                parent.BranchCount = CountChildren(run.TechniqueLineages, parent.Id);
+            }
+        }
 
         if (privateLineage || secretLineage)
         {
@@ -428,6 +466,90 @@ internal static class MclslTechniqueLineageSystem
             EnsureLifecycle(record, year);
         }
 
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void RecordMentorship(int year, Actor teacher, Actor student)
+    {
+        if (teacher?.data == null || student?.data == null) return;
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run?.TechniqueLineages == null) return;
+        string teacherId = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueId, string.Empty);
+        string teacherName = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueName, string.Empty);
+        string studentId = MclslActorAccessor.GetString(student, MclslActorDataKeys.TechniqueId, teacherId);
+        string studentName = MclslActorAccessor.GetString(student, MclslActorDataKeys.TechniqueName, teacherName);
+        string lineageId = StableTechniqueKey(studentId, studentName);
+        MclslTechniqueLineageRecord lineage = FindLineageRecord(run, lineageId)
+            ?? FindLineageRecord(run, StableTechniqueKey(teacherId, teacherName));
+        if (lineage == null)
+        {
+            TechniqueSnapshot initial = BuildInitialSnapshot(student, lineageId, studentId, studentName);
+            initial.Count = 1;
+            initial.Names.Add(MclslActorAccessor.DisplayName(student));
+            lineage = CreateRecord(year, initial);
+            run.TechniqueLineages.Add(lineage);
+        }
+
+        run.TechniqueTransmissions ??= new List<MclslTechniqueTransmissionRecord>();
+        long teacherActorId = MclslActorAccessor.Id(teacher);
+        long studentActorId = MclslActorAccessor.Id(student);
+        string transmissionId = year + "|" + teacherActorId + "|" + studentActorId + "|" + lineage.Id;
+        bool alreadyRecorded = false;
+        for (int i = 0; i < run.TechniqueTransmissions.Count; i++)
+        {
+            if (run.TechniqueTransmissions[i] != null && run.TechniqueTransmissions[i].Id == transmissionId)
+            {
+                alreadyRecorded = true;
+                break;
+            }
+        }
+        if (!alreadyRecorded)
+        {
+            run.TechniqueTransmissions.Add(new MclslTechniqueTransmissionRecord
+            {
+                Id = transmissionId,
+                Year = year,
+                LineageId = lineage.Id,
+                TechniqueName = string.IsNullOrWhiteSpace(studentName) ? lineage.Name : studentName,
+                TeacherActorId = teacherActorId,
+                TeacherNameSnapshot = MclslActorAccessor.DisplayName(teacher),
+                TeacherTechniqueNameSnapshot = teacherName,
+                StudentActorId = studentActorId,
+                StudentNameSnapshot = MclslActorAccessor.DisplayName(student),
+                StudentTechniqueNameSnapshot = studentName,
+                RelationType = "师承"
+            });
+            while (run.TechniqueTransmissions.Count > 800) run.TechniqueTransmissions.RemoveAt(0);
+            lineage.MentorshipCount++;
+        }
+        lineage.MentorNameSnapshot = MclslActorAccessor.DisplayName(teacher);
+        lineage.MentorTechniqueNameSnapshot = teacherName;
+        string currentNames = lineage.CurrentTransmitterNames ?? string.Empty;
+        string studentDisplayName = MclslActorAccessor.DisplayName(student);
+        if (!string.IsNullOrWhiteSpace(studentDisplayName)
+            && (string.IsNullOrWhiteSpace(currentNames) || !currentNames.Contains(studentDisplayName, StringComparison.Ordinal)))
+            lineage.CurrentTransmitterNames = string.IsNullOrWhiteSpace(currentNames) ? studentDisplayName : currentNames + "、" + studentDisplayName;
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void RecordTechniqueBranch(int year, Actor actor, string parentTechniqueId, string parentTechniqueName)
+    {
+        if (actor?.data == null) return;
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run?.TechniqueLineages == null) return;
+        string childId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
+        string childName = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty);
+        MclslTechniqueLineageRecord child = FindLineageRecord(run, StableTechniqueKey(childId, childName));
+        MclslTechniqueLineageRecord parent = FindLineageRecord(run, StableTechniqueKey(parentTechniqueId, parentTechniqueName));
+        if (child == null || parent == null || child == parent) return;
+        child.ParentLineageId = parent.Id;
+        child.BranchRootId = string.IsNullOrWhiteSpace(parent.BranchRootId) ? parent.Id : parent.BranchRootId;
+        child.BranchOriginName = string.IsNullOrWhiteSpace(parent.Name) ? parentTechniqueName : parent.Name;
+        parent.BranchCount = CountChildren(run.TechniqueLineages, parent.Id);
+        child.LifecycleState = "法脉支流";
+        child.LifecycleYear = Math.Max(child.LifecycleYear, year);
+        MclslWorldRunRepository.AddEvent(year, EventPrefix(child) + "technique_branch_created", "《" + child.Name + "》分支立脉",
+            "此法由《" + parent.Name + "》推演而来，师承与母法来源已留档。");
         MclslWorldArchiveStore.MarkDirty();
     }
 
@@ -578,6 +700,8 @@ internal static class MclslTechniqueLineageSystem
             ruin.SourceTechniqueName = technique.Name;
             ruin.LinkedLineageId = record.Id;
             ruin.SourceTechniqueRevivedYear = year;
+            record.SourceRuinNameSnapshot = string.IsNullOrWhiteSpace(ruin.Name) ? record.SourceRuinNameSnapshot : ruin.Name;
+            record.SourceRuinLocationSnapshot = string.IsNullOrWhiteSpace(ruin.LocationName) ? record.SourceRuinLocationSnapshot : ruin.LocationName;
         }
         MclslWorldArchiveStore.MarkDirty();
         return record.Id;
@@ -604,6 +728,8 @@ internal static class MclslTechniqueLineageSystem
         ruin.SourceTechniqueLostYear = record.LostYear > 0 ? record.LostYear : year;
         if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return;
         record.LinkedRuinId = ruin.Id;
+        record.SourceRuinNameSnapshot = ruin.Name ?? string.Empty;
+        record.SourceRuinLocationSnapshot = ruin.LocationName ?? string.Empty;
         record.LifecycleState = "遗府私传";
         record.LifecycleYear = Math.Max(record.LifecycleYear, year);
         if (string.IsNullOrWhiteSpace(record.SectDisplayName))
@@ -705,6 +831,11 @@ internal static class MclslTechniqueLineageSystem
 
     private static string StableTechniqueKey(string id, string name)
     {
+        // 新增的手工分支必须拥有独立法脉节点；旧版 NormalizeTechniqueId
+        // 会剥掉 _branch_N，这里在档案键层保留分支身份。
+        string rawId = (id ?? string.Empty).Trim();
+        if (rawId.IndexOf("_branch_", StringComparison.Ordinal) >= 0)
+            return rawId.StartsWith("spiritual_", StringComparison.Ordinal) ? rawId.Substring("spiritual_".Length) : rawId;
         // 大人口新法异法在角色修炼与法不可同修计数中保持独立；
         // 玄黄仙录的传承档案按母法汇总，避免生成上千条重复法脉档案。
         if (!string.IsNullOrWhiteSpace(id)) return MclslCultivationCatalog.BaseTechniqueId(id);
@@ -720,6 +851,18 @@ internal static class MclslTechniqueLineageSystem
             if (record != null && string.Equals(record.Id, id, StringComparison.Ordinal)) return record;
         }
         return null;
+    }
+
+    private static int CountChildren(List<MclslTechniqueLineageRecord> lineages, string parentId)
+    {
+        if (lineages == null || string.IsNullOrWhiteSpace(parentId)) return 0;
+        int count = 0;
+        for (int i = 0; i < lineages.Count; i++)
+        {
+            MclslTechniqueLineageRecord child = lineages[i];
+            if (child != null && string.Equals(child.ParentLineageId, parentId, StringComparison.Ordinal)) count++;
+        }
+        return count;
     }
 
     private static void RemoveOldestOverflowLineage(List<MclslTechniqueLineageRecord> records)

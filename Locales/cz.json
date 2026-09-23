@@ -222,6 +222,8 @@
   "MCLSL_config_enable_ancient_lineage_announcements Description": "控制仙道法脉兴盛等传承消息是否写入公告与纪事；传承数据本身仍会记录。",
   "MCLSL_config_transmission_year": "传法变世年份",
   "MCLSL_config_transmission_year Description": "控制仙道纪元持续年数；仙道纪元会按此年份自动分段，到年后进入传法变世。",
+  "MCLSL_config_childhood_root_chance_percent": "幼年灵根显现概率",
+  "MCLSL_config_childhood_root_chance_percent Description": "只影响尚未完成灵根判定的小人；五岁判定、六岁容错和稳定随机种子保持不变。",
   "MCLSL_config_death_popup_min_realm": "死亡顶部公告最低境界",
   "MCLSL_config_death_popup_min_realm Description": "设置普通修士死亡进入世界顶部公告的最低境界：1炼气、2筑基、3金丹、4元婴、5化神、6合道、7长生。特殊重要死亡仍可公告。",
   "MCLSL_config_enable_huanzhen": "启用还真回溯",
