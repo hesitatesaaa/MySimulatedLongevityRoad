@@ -26,8 +26,9 @@ internal static class MclslUiManager
             _tab = TabManager.CreateTab("mclsl_mod_tab", "mclsl_mod_tab", "mclsl_mod_tab Description", icon, "hotkey_tip_tab_other");
             if (_tab == null) throw new InvalidOperationException("无法创建模拟长生路功能页签");
             PowersTabExtension.SetLayout(_tab, new System.Collections.Generic.List<string> { "tab" });
-            AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
-            AddButton("mclsl.about", "模组介绍／入道指南", "了解模组玩法、古法新法、功法传承、还真与常见问题。", MclslAboutWindow.Show, "ui/Icons/MclslAbout", "ui/Icons/XuanHuangXianLu", "ui/icon");
+        AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
+        AddButton("mclsl.guide", "模组介绍／入道指南", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
+        AddButton("mclsl.tianxuan", "天玄镜", "打开万界交易所；修士会按自身需求自动挂牌、购入与结算。", () => MclslFeatureWindow.ShowMarket(), "ui/Icons/TianxuanMirrorEntrance", "ui/Icons/GongXianZhi");
             AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
             AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
             // 入口位置、按钮创建和窗口打开流程对齐鬼谷“时光长河”；只替换为猫宝图标和文案。

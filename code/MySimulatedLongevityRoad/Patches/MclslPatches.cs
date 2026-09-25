@@ -148,6 +148,10 @@ internal static class MclslPatches
     private static void MapBox_GenerateNewMap_Prefix()
     {
         MclslMapMarkerVisualSystem.Clear();
+        MclslArtifactSystem.ClearRuntime();
+        MclslItemEffectDriver.ClearRuntime();
+        MclslBagSystem.ClearRuntime();
+        MclslTianxuanMarket.ClearRuntime();
         MclslHuanzhenSystem.PrepareForNewWorld();
     }
 
@@ -173,6 +177,10 @@ internal static class MclslPatches
     private static void SaveManager_LoadWorld_Prefix(string __0)
     {
         MclslMapMarkerVisualSystem.Clear();
+        MclslArtifactSystem.ClearRuntime();
+        MclslItemEffectDriver.ClearRuntime();
+        MclslBagSystem.ClearRuntime();
+        MclslTianxuanMarket.ClearRuntime();
         MclslHuanzhenSystem.PrepareForAnyWorldLoad(__0);
     }
 
@@ -427,9 +435,10 @@ internal static class MclslPatches
     [HarmonyPrefix]
     [HarmonyPatch(typeof(BaseSimObject), nameof(BaseSimObject.addStatusEffect),
         new Type[] { typeof(StatusAsset), typeof(float), typeof(bool) })]
-    private static bool BaseSimObject_AddStatusEffect_WorldSoul_Prefix(BaseSimObject __instance, StatusAsset __0)
+    private static bool BaseSimObject_AddStatusEffect_WorldSoul_Prefix(BaseSimObject __instance, StatusAsset __0, ref float __1)
     {
         if (__instance == null || !__instance.isActor() || __instance.a == null) return true;
+        MclslItemUseSystem.ShortenCommonNegativeStatus(__instance.a, __0, ref __1);
         if (!MclslWorldSoulActorRegistration.IsWorldSoulActor(__instance.a)) return true;
         return __0 == null || !MclslWorldSoulActorRegistration.IsBlockedControlStatus(__0.id);
     }

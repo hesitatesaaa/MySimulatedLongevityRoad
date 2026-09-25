@@ -24,6 +24,8 @@ internal sealed class MclslMod : BasicMod<MclslMod>
             MclslConfigLocalization.Init();
             MclslRuntimeSettings.LoadFromModConfig(GetConfig());
             MclslTraitRegistration.Init();
+            MclslItemUseSystem.RegisterStatuses();
+            MclslArtifactSystem.RegisterNativeWeapons();
             MclslWorldSoulActorRegistration.Init();
             Harmony harmony = new Harmony(HarmonyId);
             int patchedCount = 0;

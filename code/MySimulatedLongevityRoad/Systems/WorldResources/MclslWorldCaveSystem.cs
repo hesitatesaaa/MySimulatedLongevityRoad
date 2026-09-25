@@ -281,6 +281,7 @@ internal static class MclslWorldCaveSystem
         {
             MclslCultivationSystem.SetRealm(actor, MclslRealmIds.YuanYing, year, "炼化“" + cave.Name + "”中的“" + essence.Name + "”，夺天地之精以成元婴");
             MclslResourceSystem.GrantCaveRefinementReward(actor, cave.Quality, compatibility, contenderCount);
+            MclslMaterialDiscovery.TryDiscoverOpportunity(actor, year, "cave_refinement", cave.Id + "|" + cave.RefinedCount, cave.Quality);
             string contest = contenderCount > 1 ? "力压" + (contenderCount - 1) + "名同道后，" : string.Empty;
             string relation = MclslLawInteractionCatalog.Detail(
                 MclslGeneratedObjectFactory.SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.GoldenCoreLaws, string.Empty)),

@@ -164,8 +164,17 @@ internal static class MclslModuleHub
 
     private static void SafeAnnualStep(MclslModuleBase module, int year)
     {
+        if (!MclslPerformanceProbe.Enabled)
+        {
+            try { module?.TickAnnual(year); }
+            catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败: " + ex.Message); }
+            return;
+        }
+
+        long sample = MclslPerformanceProbe.Begin();
         try { module?.TickAnnual(year); }
         catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败: " + ex.Message); }
+        finally { MclslPerformanceProbe.End("年度模块." + module?.Name, sample); }
     }
 
     private static void SafeLoadRecoveryStep(MclslModuleBase module, int year)

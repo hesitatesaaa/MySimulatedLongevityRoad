@@ -63,6 +63,8 @@ internal static class MclslEventCatalog
             return Cultivation;
         if (type.Contains("death", StringComparison.Ordinal) || type == "cultivator_death")
             return Death;
+        if (type == "material_discovery")
+            return WorldResource;
         if (type.StartsWith("world_calamity_", StringComparison.Ordinal))
             return WorldResource;
         if (type.StartsWith("cave_", StringComparison.Ordinal) || type.StartsWith("world_change", StringComparison.Ordinal)

@@ -84,6 +84,8 @@ internal static class MclslFactionMissionSystem
         }
 
         MclslResourceSystem.GrantFactionReward(actor, contribution, stones);
+        MclslMaterialDiscovery.TryDiscoverFactionReward(actor, year,
+            faction + "|" + order + "|" + roll, highestQuality: quality >= 4);
         if (string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty)))
             MclslActorAccessor.Set(actor, MclslActorDataKeys.FactionAffiliation, faction);
         MclslFactionExchangeSystem.TryExchangeTechnique(actor, faction, year, roll, out string exchangeSummary);

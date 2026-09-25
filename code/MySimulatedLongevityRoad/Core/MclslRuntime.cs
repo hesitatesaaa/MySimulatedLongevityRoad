@@ -43,21 +43,25 @@ internal static class MclslRuntime
         _lastFrame = unityFrame;
 
         long realtimeSample = MclslPerformanceProbe.Begin();
-        MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
+        using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
+            MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
         MclslPerformanceProbe.End("实时模块", realtimeSample);
         MclslRuntimeWorkBudget.SampleFrame();
         if (!MclslRuntimeSettings.CoreEnabled) return;
         _frameCounter++;
         long frameSample = MclslPerformanceProbe.Begin();
-        MclslModuleHub.TickFrame(_frameCounter, true);
+        using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
+            MclslModuleHub.TickFrame(_frameCounter, true);
         MclslPerformanceProbe.End("帧模块", frameSample);
+        MclslPerformanceProbe.SampleFrame();
         if (_frameCounter % 15 == 0)
         {
             int year = CurrentYear();
             if (year != _lastYear)
             {
                 _lastYear = year;
-                MclslModuleHub.TickAnnual(year, true);
+                using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
+                    MclslModuleHub.TickAnnual(year, true);
             }
         }
     }
@@ -73,6 +77,8 @@ internal static class MclslRuntime
         _frameCounter = 0;
         _lastYear = -1;
         MclslRuntimeWorkBudget.Clear();
+        MclslBagSystem.ClearRuntime();
+        MclslTianxuanMarket.ClearRuntime();
         MySimulatedLongevityRoad.Data.MclslHonorificNameCatalog.ClearRuntime();
         MclslModuleHub.Clear();
         MclslVisibleActorRenderLane.Clear();

@@ -141,7 +141,11 @@ internal static class MclslCultivationStateTransitions
         MclslActorAccessor.ApplyDisplayName(actor, realm);
         if (realmChanged) RestoreHealthAfterPromotion(actor);
         RefreshIndexes(actor);
-        if (realmChanged) MclslHuanzhenSystem.OnHostPromotion(actor, previousRealm, realm, normalizedYear, reason);
+        if (realmChanged)
+        {
+            MclslHuanzhenSystem.OnHostPromotion(actor, previousRealm, realm, normalizedYear, reason);
+            MclslMaterialDiscovery.TryDiscoverBreakthrough(actor, previousRealm, realm, normalizedYear, reason);
+        }
         return true;
     }
 

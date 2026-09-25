@@ -374,6 +374,7 @@ internal static class MclslWorldChangeSystem
         {
             MclslCultivationSystem.SetRealm(actor, MclslRealmIds.HuaShen, year, "自“" + change.Name + "”抽得天地之髓“" + marrow.Name + "”，成就化神");
             MclslResourceSystem.GrantWorldChangeReward(actor, change.Quality, compatibility, contenderCount);
+            MclslMaterialDiscovery.TryDiscoverOpportunity(actor, year, "world_change_extraction", change.Id + "|" + change.ExtractedCount, change.Quality);
             string contest = contenderCount > 1 ? "压过" + (contenderCount - 1) + "名元婴后，" : string.Empty;
             string relation = MclslLawInteractionCatalog.Detail(
                 MclslGeneratedObjectFactory.SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentEssenceTags,

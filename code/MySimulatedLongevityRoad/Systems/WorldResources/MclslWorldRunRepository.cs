@@ -16,21 +16,45 @@ internal static class MclslWorldRunRepository
     private const int MaxResourceSpends = 300;
     private const int MaxRuinExplorations = 800;
     private const int MaxGeneratedItems = 1000;
+    private const int MaxTianxuanActivities = 256;
     private const int MaxUsedGeneratedNames = 2400;
+    private const int MaxMaterialAwardEventKeys = 8192;
     internal const int MaxSectRuinRecords = 49;
     internal const int SectRuinRecoveryFloor = 10;
     private const int MaxWorldCaveRecords = 64;
     private const int MaxWorldChangeRecords = 64;
     private const int MaxReincarnationRecords = 200;
     private const int MaxMaobaoRecords = 24;
-    private const int MaxTechniqueTransmissions = 800;
     private const int MaxEventsPerYear = 36;
     private static MclslWorldRunState _current = new();
+    private static MclslWorldRunState _normalizedRun;
+    private static MclslWorldRunState _ensuredRun;
+    private static int _ensuredYear = -1;
+    private static MclslWorldRunState _futureCatalogsRun;
+    private static bool _futureCatalogsTracePersistence;
+    private static int _futureCatalogsLastMarkedYear = -1;
+    private static int _mapMarkerDataRevision;
+    private static MclslWorldRunState _materialAwardKeysRun;
+    private static HashSet<string> _materialAwardKeyIndex;
     internal static MclslWorldRunState Current => _current;
+    internal static int MapMarkerDataRevision => _mapMarkerDataRevision;
+
+    internal static void NotifyMapMarkerDataChanged()
+    {
+        unchecked { _mapMarkerDataRevision++; }
+    }
 
     internal static void EnsureCurrentRun(int year)
     {
-        Normalize();
+        long sample = MclslPerformanceProbe.Begin();
+        try { EnsureCurrentRunCore(year); }
+        finally { MclslPerformanceProbe.End("档案.EnsureCurrentRun", sample); }
+    }
+
+    private static void EnsureCurrentRunCore(int year)
+    {
+        if (ReferenceEquals(_ensuredRun, _current) && _ensuredYear == year) return;
+        NormalizeCurrentRun();
         MclslReincarnationProfile profile = MclslReincarnationProfileStore.Current;
         if (string.IsNullOrWhiteSpace(_current.RunId))
         {
@@ -48,12 +72,17 @@ internal static class MclslWorldRunRepository
                 UsesNativeKingdoms = true,
                 NextCaveBirthYear = Math.Max(0, year) + 80
             };
+            InvalidateCurrentRunCaches();
+            NotifyMapMarkerDataChanged();
+            NormalizeCurrentRun();
             int carryLimit = Math.Max(MclslRuntimeSettings.CarrySlotLimit, profile.CarrySlotLimit);
             int limit = Math.Min(profile.KnownKnowledgeIds.Count, carryLimit);
             for (int i = 0; i < limit; i++) _current.InheritedKnowledgeIds.Add(profile.KnownKnowledgeIds[i]);
         }
         EnsureAnchors();
         EnsureAncientTechniqueSeeds(year);
+        _ensuredRun = _current;
+        _ensuredYear = year;
     }
 
     internal static void EnsureAnnualWorldState(int year)
@@ -66,16 +95,37 @@ internal static class MclslWorldRunRepository
 
     internal static void EnsureNewLawCatalogs(int year)
     {
-        Normalize();
+        long sample = MclslPerformanceProbe.Begin();
+        try { EnsureNewLawCatalogsCore(year); }
+        finally { MclslPerformanceProbe.End("档案.EnsureNewLawCatalogs", sample); }
+    }
+
+    private static void EnsureNewLawCatalogsCore(int year)
+    {
         if (string.IsNullOrWhiteSpace(_current.RunId))
             EnsureCurrentRun(year);
-        EnsureFutureCatalogs();
-        MclslWorldArchiveStore.MarkDirty();
+        NormalizeCurrentRun();
+        bool tracePersistence = IsTracePersistenceReversed();
+        bool catalogStateChanged = !ReferenceEquals(_futureCatalogsRun, _current)
+            || _futureCatalogsTracePersistence != tracePersistence;
+        if (catalogStateChanged)
+        {
+            EnsureFutureCatalogs(tracePersistence);
+            _futureCatalogsRun = _current;
+            _futureCatalogsTracePersistence = tracePersistence;
+            _futureCatalogsLastMarkedYear = -1;
+        }
+        if (catalogStateChanged || _futureCatalogsLastMarkedYear != year)
+        {
+            MclslWorldArchiveStore.MarkDirty();
+            _futureCatalogsLastMarkedYear = year;
+        }
     }
 
     internal static MclslWorldArchiveBundle ExportArchive()
     {
         Normalize();
+        _normalizedRun = _current;
         return JsonConvert.DeserializeObject<MclslWorldArchiveBundle>(JsonConvert.SerializeObject(new MclslWorldArchiveBundle { Version = MclslWorldArchiveMigration.CurrentVersion, CurrentRun = _current })) ?? new();
     }
 
@@ -83,7 +133,10 @@ internal static class MclslWorldRunRepository
     {
         bool changed = MclslWorldArchiveMigration.Upgrade(bundle, out MclslWorldArchiveBundle upgraded);
         _current = upgraded?.CurrentRun ?? new();
+        InvalidateCurrentRunCaches();
+        NotifyMapMarkerDataChanged();
         Normalize();
+        _normalizedRun = _current;
         MclslWorldRunRuntimeIndexes.Invalidate();
         return changed;
     }
@@ -91,8 +144,13 @@ internal static class MclslWorldRunRepository
     private static void TrimSectRuinsToLimit()
     {
         if (_current.SectRuins == null) return;
+        int originalCount = _current.SectRuins.Count;
         _current.SectRuins.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.Id));
-        if (_current.SectRuins.Count <= MaxSectRuinRecords) return;
+        if (_current.SectRuins.Count <= MaxSectRuinRecords)
+        {
+            if (_current.SectRuins.Count != originalCount) NotifyMapMarkerDataChanged();
+            return;
+        }
 
         HashSet<string> linkedIds = new((_current.TechniqueLineages ?? new List<MclslTechniqueLineageRecord>())
             .Where(x => x != null && !string.IsNullOrWhiteSpace(x.LinkedRuinId))
@@ -105,6 +163,7 @@ internal static class MclslWorldRunRepository
             .ToList();
         HashSet<string> keptIds = new(keep.Select(x => x.Id), StringComparer.Ordinal);
         _current.SectRuins = keep;
+        NotifyMapMarkerDataChanged();
         CleanupRemovedRuinReferences(keptIds);
         MclslWorldRunRuntimeIndexes.Invalidate();
     }
@@ -200,6 +259,7 @@ internal static class MclslWorldRunRepository
         if (_current.SectRuins == null || index < 0 || index >= _current.SectRuins.Count) return;
         string removedId = _current.SectRuins[index]?.Id ?? string.Empty;
         _current.SectRuins.RemoveAt(index);
+        NotifyMapMarkerDataChanged();
         if (!string.IsNullOrWhiteSpace(removedId))
         {
             HashSet<string> keptIds = new(_current.SectRuins.Where(x => x != null).Select(x => x.Id), StringComparer.Ordinal);
@@ -226,6 +286,8 @@ internal static class MclslWorldRunRepository
     internal static void ResetWorld()
     {
         _current = new();
+        InvalidateCurrentRunCaches();
+        NotifyMapMarkerDataChanged();
         MclslWorldRunRuntimeIndexes.Invalidate();
     }
 
@@ -235,9 +297,9 @@ internal static class MclslWorldRunRepository
         list.RemoveRange(0, list.Count - max);
     }
 
-    private static void TrimEventsPreservingMilestones(List<MclslRunEventRecord> list, int max)
+    private static bool TrimEventsPreservingMilestones(List<MclslRunEventRecord> list, int max)
     {
-        if (list == null || max <= 0 || list.Count <= max) return;
+        if (list == null || max <= 0 || list.Count <= max) return false;
         int nonMilestoneCount = 0;
         for (int i = 0; i < list.Count; i++)
         {
@@ -245,17 +307,20 @@ internal static class MclslWorldRunRepository
         }
 
         int removeCount = Math.Max(0, nonMilestoneCount - max);
+        bool removedMapVisual = false;
         for (int i = 0; i < list.Count && removeCount > 0;)
         {
             MclslRunEventRecord record = list[i];
             if (record == null || !IsMilestoneEvent(record.EventType))
             {
+                if (record != null && !string.IsNullOrWhiteSpace(record.MapVisualKind)) removedMapVisual = true;
                 list.RemoveAt(i);
                 removeCount--;
                 continue;
             }
             i++;
         }
+        return removedMapVisual;
     }
 
     internal static void AddEvent(int year, string type, string title, string body)
@@ -296,8 +361,96 @@ internal static class MclslWorldRunRepository
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(eventType))
             record.NativeLogged = MclslNativeHistoryBridge.Add(record);
         _current.Events.Add(record);
-        TrimEventsPreservingMilestones(_current.Events, MaxEvents);
+        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
         MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void AddMaterialDiscoveryEvent(int year, string title, string body, Actor actor, string eventKey)
+    {
+        const string eventType = "material_discovery";
+        if (string.IsNullOrWhiteSpace(eventKey) || _current == null) return;
+        _current.Events ??= new List<MclslRunEventRecord>();
+        int safeYear = Math.Max(0, year);
+        string safeTitle = title ?? string.Empty;
+        string safeBody = body ?? string.Empty;
+
+        for (int i = _current.Events.Count - 1; i >= 0; i--)
+        {
+            MclslRunEventRecord existing = _current.Events[i];
+            if (existing != null && string.Equals(existing.EventKey, eventKey, StringComparison.Ordinal)) return;
+        }
+
+        MclslRunEventRecord record = new()
+        {
+            EventKey = eventKey,
+            Year = safeYear,
+            EventType = eventType,
+            Category = MclslEventCatalog.CategoryForType(eventType),
+            Title = safeTitle,
+            Body = safeBody
+        };
+        if (actor?.data != null)
+        {
+            try
+            {
+                record.ActorId = MclslActorAccessor.Id(actor);
+                record.ActorName = MclslActorAccessor.DisplayName(actor);
+                record.MapX = actor.data.x;
+                record.MapY = actor.data.y;
+                record.LocationName = actor.city?.data?.name ?? string.Empty;
+                record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
+            }
+            catch { }
+        }
+        if (MclslEventCatalog.ShouldMirrorToNativeHistory(eventType))
+            record.NativeLogged = MclslNativeHistoryBridge.Add(record);
+        _current.Events.Add(record);
+        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static bool HasMaterialDiscoveryEventKey(string ruinId, string eventKey)
+    {
+        if (_current == null || string.IsNullOrWhiteSpace(ruinId) || string.IsNullOrWhiteSpace(eventKey)) return false;
+        MclslSectRuinRecord ruin = FindSectRuin(ruinId);
+        if (ruin == null) return false;
+        if (ruin.MaterialDiscoveryEventKeys == null) ruin.MaterialDiscoveryEventKeys = new List<string>();
+        return ruin.MaterialDiscoveryEventKeys.Contains(eventKey);
+    }
+
+    internal static bool TryClaimMaterialDiscoveryEventKey(string ruinId, string eventKey)
+    {
+        if (_current == null || string.IsNullOrWhiteSpace(ruinId) || string.IsNullOrWhiteSpace(eventKey)) return false;
+        MclslSectRuinRecord ruin = FindSectRuin(ruinId);
+        if (ruin == null) return false;
+        ruin.MaterialDiscoveryEventKeys ??= new List<string>();
+        if (ruin.MaterialDiscoveryEventKeys.Contains(eventKey)) return false;
+        ruin.MaterialDiscoveryEventKeys.Add(eventKey);
+        MclslWorldArchiveStore.MarkDirty();
+        return true;
+    }
+
+    internal static bool TryClaimMaterialAwardEventKey(string eventKey)
+    {
+        if (_current == null || string.IsNullOrWhiteSpace(eventKey)) return false;
+        _current.MaterialAwardEventKeys ??= new List<string>();
+        if (!ReferenceEquals(_materialAwardKeysRun, _current) || _materialAwardKeyIndex == null)
+        {
+            _materialAwardKeysRun = _current;
+            _materialAwardKeyIndex = new HashSet<string>(_current.MaterialAwardEventKeys, StringComparer.Ordinal);
+        }
+        if (!_materialAwardKeyIndex.Add(eventKey)) return false;
+
+        _current.MaterialAwardEventKeys.Add(eventKey);
+        if (_current.MaterialAwardEventKeys.Count > MaxMaterialAwardEventKeys)
+        {
+            int removeCount = _current.MaterialAwardEventKeys.Count - MaxMaterialAwardEventKeys;
+            for (int i = 0; i < removeCount; i++)
+                _materialAwardKeyIndex.Remove(_current.MaterialAwardEventKeys[i]);
+            _current.MaterialAwardEventKeys.RemoveRange(0, removeCount);
+        }
+        MclslWorldArchiveStore.MarkDirty();
+        return true;
     }
 
     internal static void AddEvent(int year, string type, string title, string body, Actor actor)
@@ -328,6 +481,7 @@ internal static class MclslWorldRunRepository
             record.MapY = actor.data.y;
             record.LocationName = actor.city?.data?.name ?? string.Empty;
             record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
             MclslWorldArchiveStore.MarkDirty();
         }
         catch { }
@@ -352,6 +506,7 @@ internal static class MclslWorldRunRepository
             record.MapY = mapY;
             record.LocationName = locationName ?? string.Empty;
             record.KingdomName = kingdomName ?? string.Empty;
+            if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
             MclslWorldArchiveStore.MarkDirty();
             return;
         }
@@ -385,6 +540,7 @@ internal static class MclslWorldRunRepository
         record.KingdomName = kingdomName ?? string.Empty;
         record.MapVisualKind = visualKind.Trim();
         record.MapVisualEndYear = Math.Max(0, year) + Math.Max(0, durationYears);
+        NotifyMapMarkerDataChanged();
         MclslWorldArchiveStore.MarkDirty();
     }
 
@@ -514,6 +670,7 @@ internal static class MclslWorldRunRepository
         }
 
         _current.SectRuins.Add(ruin);
+        NotifyMapMarkerDataChanged();
         MclslWorldRunRuntimeIndexes.Invalidate();
         MclslWorldArchiveStore.MarkDirty();
         return true;
@@ -568,7 +725,7 @@ internal static class MclslWorldRunRepository
         }
 
         _current.Events.Add(record);
-        TrimEventsPreservingMilestones(_current.Events, MaxEvents);
+        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
     }
 
     private static bool ShouldMirrorDeathToNativeHistory(MclslDeathRecord death)
@@ -742,9 +899,15 @@ internal static class MclslWorldRunRepository
         return "此法以" + tags + "为本，可修至" + MclslRealmIds.Display(definition?.MaxRealm) + "。";
     }
 
-    private static void EnsureFutureCatalogs()
+    private static void EnsureFutureCatalogs(bool tracePersistence)
     {
-        bool tracePersistence = _current.InverseTruths?.Any(x => x != null && x.Id == "truth_player_trace_persistence" && x.Reversed) == true;
+        long sample = MclslPerformanceProbe.Begin();
+        try { EnsureFutureCatalogsCore(tracePersistence); }
+        finally { MclslPerformanceProbe.End("档案.EnsureFutureCatalogs", sample); }
+    }
+
+    private static void EnsureFutureCatalogsCore(bool tracePersistence)
+    {
         MclslWorldSoulRecord[] baseSoulDefinitions =
         {
             new() { Id="soul_attr_metal", Name="金魄", HeavenlyDuty="维系金行秩序，裁断扰乱天地者", LawTags="金,锋锐,秩序", Quality=4 },
@@ -858,7 +1021,45 @@ internal static class MclslWorldRunRepository
         CountsTowardLongevity = true
     };
 
+    private static void NormalizeCurrentRun()
+    {
+        if (ReferenceEquals(_normalizedRun, _current)) return;
+        Normalize();
+        _normalizedRun = _current;
+    }
+
+    private static void InvalidateCurrentRunCaches()
+    {
+        _normalizedRun = null;
+        _ensuredRun = null;
+        _ensuredYear = -1;
+        _futureCatalogsRun = null;
+        _materialAwardKeysRun = null;
+        _materialAwardKeyIndex = null;
+        _futureCatalogsTracePersistence = false;
+        _futureCatalogsLastMarkedYear = -1;
+    }
+
+    private static bool IsTracePersistenceReversed()
+    {
+        List<MclslInverseTruthRecord> truths = _current?.InverseTruths;
+        if (truths == null) return false;
+        for (int i = 0; i < truths.Count; i++)
+        {
+            MclslInverseTruthRecord truth = truths[i];
+            if (truth != null && truth.Id == "truth_player_trace_persistence" && truth.Reversed) return true;
+        }
+        return false;
+    }
+
     private static void Normalize()
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try { NormalizeCore(); }
+        finally { MclslPerformanceProbe.End("档案.Normalize", sample); }
+    }
+
+    private static void NormalizeCore()
     {
         _current ??= new MclslWorldRunState();
         _current.BackgroundFactions ??= new MclslBackgroundFactionState();
@@ -885,6 +1086,8 @@ internal static class MclslWorldRunRepository
         _current.TimelineAnchors ??= new List<MclslTimelineAnchorState>();
         _current.MaobaoRecords ??= new List<MclslMaobaoRecord>();
         _current.Events ??= new List<MclslRunEventRecord>();
+        _current.MaterialAwardEventKeys ??= new List<string>();
+        TrimOldest(_current.MaterialAwardEventKeys, MaxMaterialAwardEventKeys);
         TrimEventsPreservingMilestones(_current.Events, MaxEvents);
         foreach (MclslRunEventRecord e in _current.Events)
         {
@@ -898,36 +1101,14 @@ internal static class MclslWorldRunRepository
         _current.FactionPressureEvents ??= new List<MclslFactionPressureRecord>();
         _current.ResourceSpendEvents ??= new List<MclslResourceSpendRecord>();
         _current.TechniqueLineages ??= new List<MclslTechniqueLineageRecord>();
-        _current.TechniqueTransmissions ??= new List<MclslTechniqueTransmissionRecord>();
         foreach (MclslTechniqueLineageRecord lineage in _current.TechniqueLineages)
         {
             if (lineage == null) continue;
             lineage.SectDisplayName ??= string.Empty;
             lineage.LifecycleState ??= string.Empty;
             lineage.Summary ??= string.Empty;
-            lineage.FounderName ??= string.Empty;
-            lineage.FounderNameSnapshot = string.IsNullOrWhiteSpace(lineage.FounderNameSnapshot) ? lineage.FounderName : lineage.FounderNameSnapshot;
-            lineage.MentorNameSnapshot ??= string.Empty;
-            lineage.MentorTechniqueNameSnapshot ??= string.Empty;
-            lineage.CurrentTransmitterNames ??= string.Empty;
-            lineage.SourceRuinNameSnapshot ??= string.Empty;
-            lineage.SourceRuinLocationSnapshot ??= string.Empty;
-            lineage.BranchOriginName ??= string.Empty;
-            if (lineage.FoundedYear <= 0) lineage.FoundedYear = lineage.FirstSeenYear;
             if (lineage.Completeness <= 0) lineage.Completeness = 75;
         }
-        foreach (MclslTechniqueTransmissionRecord transmission in _current.TechniqueTransmissions)
-        {
-            if (transmission == null) continue;
-            transmission.LineageId ??= string.Empty;
-            transmission.TechniqueName ??= string.Empty;
-            transmission.TeacherNameSnapshot ??= string.Empty;
-            transmission.TeacherTechniqueNameSnapshot ??= string.Empty;
-            transmission.StudentNameSnapshot ??= string.Empty;
-            transmission.StudentTechniqueNameSnapshot ??= string.Empty;
-            transmission.RelationType = string.IsNullOrWhiteSpace(transmission.RelationType) ? "师承" : transmission.RelationType;
-        }
-        TrimOldest(_current.TechniqueTransmissions, MaxTechniqueTransmissions);
         _current.SectRuins ??= new List<MclslSectRuinRecord>();
         _current.RuinExplorations ??= new List<MclslRuinExplorationRecord>();
         _current.WorldCaves ??= new List<MclslWorldCaveRecord>();
@@ -959,6 +1140,10 @@ internal static class MclslWorldRunRepository
         }
         _current.UsedGeneratedNames ??= new List<string>();
         _current.GeneratedItems ??= new List<MclslGeneratedItemRecord>();
+        _current.TianxuanListings ??= new List<MclslMarketListing>();
+        _current.TianxuanActivities ??= new List<MclslMarketActivity>();
+        _current.TianxuanActivities.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.ItemId));
+        TrimOldest(_current.TianxuanActivities, MaxTianxuanActivities);
         TrimOldest(_current.UsedGeneratedNames, MaxUsedGeneratedNames);
         TrimOldest(_current.GeneratedItems, MaxGeneratedItems);
         foreach (MclslWorldSoulRecord soul in _current.WorldSouls)
@@ -985,27 +1170,17 @@ internal static class MclslWorldRunRepository
             if (string.IsNullOrWhiteSpace(change.NativeTerrainEffect))
                 change.NativeTerrainEffect = MclslNativeTerrainProfileCatalog.ForTags(MclslGeneratedObjectFactory.SplitTags(change.LawTags), change.SourceType).Summary;
         }
+        HashSet<string> normalizedGeneratedNames = new(_current.UsedGeneratedNames, StringComparer.Ordinal);
         foreach (MclslWorldCaveRecord cave in _current.WorldCaves)
-            if (!string.IsNullOrWhiteSpace(cave.Name) && !ContainsGeneratedName(cave.Name)) _current.UsedGeneratedNames.Add(cave.Name);
+            if (!string.IsNullOrWhiteSpace(cave.Name) && normalizedGeneratedNames.Add(cave.Name)) _current.UsedGeneratedNames.Add(cave.Name);
         foreach (MclslGeneratedItemRecord item in _current.GeneratedItems)
-            if (!string.IsNullOrWhiteSpace(item.Name) && !ContainsGeneratedName(item.Name)) _current.UsedGeneratedNames.Add(item.Name);
+            if (!string.IsNullOrWhiteSpace(item.Name) && normalizedGeneratedNames.Add(item.Name)) _current.UsedGeneratedNames.Add(item.Name);
         foreach (MclslSectRuinRecord ruin in _current.SectRuins)
-            if (!string.IsNullOrWhiteSpace(ruin.Name) && !ContainsGeneratedName(ruin.Name)) _current.UsedGeneratedNames.Add(ruin.Name);
+            if (!string.IsNullOrWhiteSpace(ruin.Name) && normalizedGeneratedNames.Add(ruin.Name)) _current.UsedGeneratedNames.Add(ruin.Name);
         foreach (MclslWorldChangeRecord change in _current.WorldChanges)
-            if (!string.IsNullOrWhiteSpace(change.Name) && !ContainsGeneratedName(change.Name)) _current.UsedGeneratedNames.Add(change.Name);
+            if (!string.IsNullOrWhiteSpace(change.Name) && normalizedGeneratedNames.Add(change.Name)) _current.UsedGeneratedNames.Add(change.Name);
         _current.UsesNativeKingdoms = true;
         MclslWorldRunRuntimeIndexes.Invalidate();
-    }
-
-    private static bool ContainsGeneratedName(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name) || _current?.UsedGeneratedNames == null) return false;
-        List<string> names = _current.UsedGeneratedNames;
-        for (int i = 0; i < names.Count; i++)
-        {
-            if (string.Equals(names[i], name, StringComparison.Ordinal)) return true;
-        }
-        return false;
     }
 
     private static int StableHash(string value)

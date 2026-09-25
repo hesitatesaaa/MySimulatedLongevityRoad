@@ -2,6 +2,10 @@ namespace MySimulatedLongevityRoad.Core;
 
 public static class MclslConfig
 {
+    public static void ChildhoodRootChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void AlchemistChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void RefinerChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void TalismanChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void ShowFpsCallBack(bool value)
     {
         MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
@@ -31,7 +35,6 @@ public static class MclslConfig
     public static void AutoCollectHuanzhenHostCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectMaobaoInscriptionCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void TransmissionYearCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
-    public static void ChildhoodRootChancePercentCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectYuanYingCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectHuaShenCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AutoCollectHeDaoCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());

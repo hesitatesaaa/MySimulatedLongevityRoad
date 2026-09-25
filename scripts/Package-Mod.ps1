@@ -35,6 +35,25 @@ function Copy-PackageItem {
     $destination = Join-Path $DestinationRoot $RelativePath
     $parent = Split-Path -Parent $destination
     if (-not (Test-Path -LiteralPath $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
+
+    if ($RelativePath -eq 'code') {
+        New-Item -ItemType Directory -Path $destination -Force | Out-Null
+        $sourceRoot = [System.IO.Path]::GetFullPath($source)
+        $excludedDirectoryPattern = '(^|[\\/])(DeveloperTools|references|\.git|bin|obj|scripts|\.vs|\.idea)([\\/]|$)'
+        foreach ($file in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse -Force) {
+            $relativeFile = [System.IO.Path]::GetRelativePath($sourceRoot, $file.FullName)
+            if ($relativeFile -match $excludedDirectoryPattern) { continue }
+
+            $targetFile = Join-Path $destination $relativeFile
+            $targetDirectory = Split-Path -Parent $targetFile
+            if (-not (Test-Path -LiteralPath $targetDirectory)) {
+                New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
+            }
+            Copy-Item -LiteralPath $file.FullName -Destination $targetFile -Force
+        }
+        return
+    }
+
     Copy-Item -LiteralPath $source -Destination $destination -Recurse -Force
 }
 

@@ -17,6 +17,10 @@ internal static class MclslTraitRegistration
     private const string AncientRealmGroupId = "MclslAncientRealms";
     private const string GiftGroupId = "MclslGifts";
     private const string SpecialGroupId = "MclslSpecial";
+    private const string ProfessionGroupId = "MclslProfessions";
+    internal const string AlchemistTraitId = "MclslProfessionAlchemist";
+    internal const string RefinerTraitId = "MclslProfessionRefiner";
+    internal const string TalismanTraitId = "MclslProfessionTalisman";
     internal const string NativeImmortalTraitId = "immortal";
     internal const string HuanzhenTraitId = "MclslHuanzhen";
     internal const string WorldSoulEntityTraitId = "MclslWorldSoulEntity";
@@ -208,6 +212,7 @@ internal static class MclslTraitRegistration
         EnsureGroup(AncientRealmGroupId, "仙道境界", "#A6D8D1");
         EnsureGroup(GiftGroupId, "灵根品阶", "#C8D48F");
         EnsureGroup(SpecialGroupId, "长生路特殊", "#D8C778");
+        EnsureGroup(ProfessionGroupId, "职业", "#D3B878");
 
         AddRealm(MclslRealmIds.LianQi, "trait/realm_1", 1, 200f, 100f, 20f, 0.2f, 0f, false);
         AddRealm(MclslRealmIds.ZhuJi, "trait/realm_2", 2, 300f, 10000f, 1000f, 1.2f, 70f, false);
@@ -229,6 +234,10 @@ internal static class MclslTraitRegistration
             AddGift(gift);
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
+        MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
+        AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。");
+        AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。");
+        AddProfession(TalismanTraitId, "trait/MclslProfessionTalisman", "制符师", "使用灵符纸与灵材制作一次性符箓。");
         AddSpecial(WorldSoulEntityTraitId, "trait/TianDiZhiPo", false, false, 2500f, 2500000f, 250000f, 2.35f, 240f);
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
@@ -870,6 +879,24 @@ internal static class MclslTraitRegistration
         if (string.Equals(id, WorldSoulEntityTraitId, StringComparison.Ordinal))
             ApplyWorldSoulEntityStats(trait.base_stats);
         if (add) AssetManager.traits.add(trait);
+    }
+
+    private static void AddProfession(string id, string icon, string displayName, string description)
+    {
+        RegisterProfessionText(id, displayName, description);
+        AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
+        ActorTrait trait = AssetManager.traits.get(id);
+        if (trait != null) trait.group_id = ProfessionGroupId;
+    }
+
+    private static void RegisterProfessionText(string id, string displayName, string description)
+    {
+        MclslLocalizationBridge.RegisterKey(id, displayName);
+        MclslLocalizationBridge.RegisterKey(id + " Description", description);
+        // WorldBox versions differ on whether the trait editor requests the raw
+        // locale key or its trait_-prefixed alias. Register both to keep IDs internal.
+        MclslLocalizationBridge.RegisterKey("trait_" + id, displayName);
+        MclslLocalizationBridge.RegisterKey("trait_" + id + " Description", description);
     }
 
     private static void ApplyWorldSoulEntityStats(BaseStats statsBlock)

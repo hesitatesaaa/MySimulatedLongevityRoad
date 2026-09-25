@@ -16,8 +16,6 @@ internal static partial class MclslWorldSoulSystem
     private const int ManifestPeacefulDepartureYears = 5;
     private const int HunterDispatchIntervalYears = 1;
     private const int MaxHuntersPerManifest = 8;
-    // 魄身维护是视觉/战斗辅助工作，不需要每 4 帧重复遍历全部显化记录。
-    private const int ManifestMaintenanceCadenceFrames = 12;
     private static readonly string[] KillerMemberNames =
     {
         "last_attacker", "lastAttacker", "_last_attacker", "attacked_by", "attackedBy", "killer", "last_hit_actor", "lastHitActor"
@@ -135,20 +133,23 @@ internal static partial class MclslWorldSoulSystem
 
     internal static void TickFrame(int frameCounter)
     {
-        if (frameCounter % ManifestMaintenanceCadenceFrames != 0) return;
-        MclslWorldSoulActorRegistration.TickTerrainEffects();
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return;
-        for (int i = 0; i < run.WorldSouls.Count; i++)
+        if (frameCounter % 4 != 0) return;
+        using (MclslUnityProfiler.Sample("MCLS/WorldSoul/FrameUpdate"))
         {
-            MclslWorldSoulRecord soul = run.WorldSouls[i];
-            if (soul == null || soul.ManifestActorId <= 0 || soul.State != "显化") continue;
-            Actor actor = FindActor(soul.ManifestActorId);
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            MaintainWorldSoulEntity(actor);
-            if (IsManifestCombatOpened(actor))
-                MarkManifestCombatStarted(soul, MclslRuntime.CurrentYear());
-            MclslWorldSoulActorRegistration.TickWorldSoulAttack(actor);
+            MclslWorldSoulActorRegistration.TickTerrainEffects();
+            MclslWorldRunState run = MclslWorldRunRepository.Current;
+            if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return;
+            for (int i = 0; i < run.WorldSouls.Count; i++)
+            {
+                MclslWorldSoulRecord soul = run.WorldSouls[i];
+                if (soul == null || soul.ManifestActorId <= 0 || soul.State != "显化") continue;
+                Actor actor = FindActor(soul.ManifestActorId);
+                if (!MclslActorAccessor.Alive(actor)) continue;
+                MaintainWorldSoulEntity(actor);
+                if (IsManifestCombatOpened(actor))
+                    MarkManifestCombatStarted(soul, MclslRuntime.CurrentYear());
+                MclslWorldSoulActorRegistration.TickWorldSoulAttack(actor);
+            }
         }
     }
 

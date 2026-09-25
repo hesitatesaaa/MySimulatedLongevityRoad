@@ -28,6 +28,9 @@ internal static class MclslHuanzhenSystem
     private static bool _rollbackLoadInProgress;
     private static bool _anyWorldLoadInProgress;
     private static Actor _cachedHost;
+    private static long _lastEmptyHostScanRevision = -1L;
+    private static long _lastUniqueAuditHostId;
+    private static int _nextUniqueAuditYear;
     private static string _lastFlushedJson = string.Empty;
     private static bool _storageReconciled;
     private static bool _postLoadApplyQueued;
@@ -64,9 +67,6 @@ internal static class MclslHuanzhenSystem
 
     internal static void Tick()
     {
-        // 正常游玩时还真没有实时队列，直接退出，避免每帧重复进入存档状态机。
-        // 世界载入/回溯排队时才继续执行下面的状态处理。
-        if (_loaded && !_postLoadApplyQueued && !_rollbackQueued) return;
         EnsureLoaded();
         if (_postLoadApplyQueued)
         {
@@ -122,8 +122,8 @@ internal static class MclslHuanzhenSystem
     internal static void TickAnnual(int year)
     {
         EnsureLoaded();
-        Actor host = FindLivingHost();
         if (!MclslRuntimeSettings.HuanzhenEnabled || _rollbackLoadInProgress || _state.PendingRestore?.Active == true) return;
+        Actor host = FindLivingHost();
         if (host == null)
         {
             TryNaturalArrival(year);
@@ -232,6 +232,8 @@ internal static class MclslHuanzhenSystem
     {
         if (_applyingRestore || actor?.data == null) return;
         EnsureLoaded();
+        _lastEmptyHostScanRevision = -1L;
+        _nextUniqueAuditYear = 0;
         EnforceUniqueHost(actor);
         BindHost(actor, true);
         MclslTraitRegistration.TryAutoFavoriteHuanzhenHost(actor);
@@ -341,6 +343,8 @@ internal static class MclslHuanzhenSystem
         DeleteAnchorFolders(_state.Anchors);
         _state = new MclslHuanzhenExternalState();
         _cachedHost = null;
+        _lastUniqueAuditHostId = 0;
+        _nextUniqueAuditYear = 0;
         _storageReconciled = false;
         ClearRuntime();
         Flush();
@@ -781,6 +785,9 @@ internal static class MclslHuanzhenSystem
         if (_state.PendingRestore?.Active != true) _rollbackLoadInProgress = false;
         _applyingRestore = false;
         _cachedHost = null;
+        _lastEmptyHostScanRevision = -1L;
+        _lastUniqueAuditHostId = 0;
+        _nextUniqueAuditYear = 0;
     }
 
     private static void BindHost(Actor actor, bool forceReset)
@@ -994,18 +1001,27 @@ internal static class MclslHuanzhenSystem
 
     private static Actor FindLivingHost()
     {
+        long sample = MclslPerformanceProbe.Begin();
+        try { return FindLivingHostCore(); }
+        finally { MclslPerformanceProbe.End("还真.FindLivingHost", sample); }
+    }
+
+    private static Actor FindLivingHostCore()
+    {
         if (IsLivingActor(_cachedHost) && HasHuanzhenTrait(_cachedHost)) return _cachedHost;
+        long registryRevision = MclslActorRegistry.Revision;
+        if (_lastEmptyHostScanRevision == registryRevision) return null;
         IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
         if (units == null) return null;
-        int checkedHosts = 0;
-        for (int i = 0; i < units.Count && checkedHosts < 64; i++)
+        for (int i = 0; i < units.Count; i++)
         {
             Actor actor = units[i];
             if (!IsLivingActor(actor) || !HasHuanzhenTrait(actor)) continue;
-            checkedHosts++;
             _cachedHost = actor;
+            _lastEmptyHostScanRevision = -1L;
             return actor;
         }
+        _lastEmptyHostScanRevision = registryRevision;
         return null;
     }
 
@@ -1048,6 +1064,9 @@ internal static class MclslHuanzhenSystem
 
     private static void EnforceUniqueHost(Actor primary)
     {
+        int year = MclslRuntime.CurrentYear();
+        long hostId = MclslActorAccessor.Id(primary);
+        if (_lastUniqueAuditHostId == hostId && year < _nextUniqueAuditYear) return;
         if (_cachedHost != null && _cachedHost != primary && HasHuanzhenTrait(_cachedHost))
         {
             try { _cachedHost.removeTrait(MclslTraitRegistration.HuanzhenTraitId); }
@@ -1063,6 +1082,8 @@ internal static class MclslHuanzhenSystem
             catch (Exception ex) { MclslDiagnostics.Error("huanzhen-unique-host", "移除重复还真持有者失败: " + ex.Message); }
         }
         _cachedHost = primary;
+        _lastUniqueAuditHostId = hostId;
+        _nextUniqueAuditYear = year + 20;
     }
 
     private static void DeleteAnchorFolders(IEnumerable<MclslHuanzhenAnchorRecord> anchors)

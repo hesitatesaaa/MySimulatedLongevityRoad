@@ -16,6 +16,7 @@ internal static class MclslActorRegistry
     private static long _snapshotRevision = -1L;
 
     internal static int Count => ActorsById.Count;
+    internal static long Revision => _registryRevision;
 
     internal static bool Register(Actor actor, out long actorId)
     {

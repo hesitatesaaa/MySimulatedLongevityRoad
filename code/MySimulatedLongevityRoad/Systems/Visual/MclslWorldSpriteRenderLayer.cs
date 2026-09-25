@@ -25,7 +25,6 @@ internal static class MclslWorldSpriteRenderLayer
     private static bool _hasBackLayer;
     private static int _lastBackLayerResolveFrame = -10000;
     private static Material _backMaterial;
-    private static int _lastRedrawResetFrame = -10000;
 
     internal static bool TrySpawnActorBackEffect(
         Vector2 position,
@@ -142,7 +141,7 @@ internal static class MclslWorldSpriteRenderLayer
             ConfigureStaticWorldSorting(renderer, relativeSortingOrder);
             renderer.enabled = true;
             gameObject.SetActive(true);
-            RequestRedraw();
+            try { World.world?.resetRedrawTimer(); } catch { }
             return true;
         }
         catch
@@ -205,7 +204,7 @@ internal static class MclslWorldSpriteRenderLayer
                 renderer.enabled = true;
             }
 
-            RequestRedraw();
+            try { World.world?.resetRedrawTimer(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #2: " + mclslEmptyCatchEx.Message); }
             return true;
         }
         catch
@@ -222,7 +221,6 @@ internal static class MclslWorldSpriteRenderLayer
         _backLayer = default;
         _hasBackLayer = false;
         _lastBackLayerResolveFrame = -10000;
-        _lastRedrawResetFrame = -10000;
 
         if (_backMaterial != null)
         {
@@ -236,16 +234,6 @@ internal static class MclslWorldSpriteRenderLayer
         if (renderer == null) return;
         renderer.sortingLayerID = backLayer.SortingLayerId;
         renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
-    }
-
-    private static void RequestRedraw()
-    {
-        if (World.world == null) return;
-        int frame = Time.frameCount;
-        if (frame == _lastRedrawResetFrame) return;
-        _lastRedrawResetFrame = frame;
-        try { World.world.resetRedrawTimer(); }
-        catch (System.Exception exception) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("world-sprite-redraw", exception.Message); }
     }
 
     private static void ConfigureStaticWorldSorting(SpriteRenderer renderer, int relativeSortingOrder)

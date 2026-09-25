@@ -64,10 +64,13 @@ internal static class MclslAnnualActorPipeline
             MclslDiagnostics.Cultivation("pipeline.prepare.skip", "actor=" + MclslActorAccessor.Id(actor) + " year=" + annualYear + " reason=not-eligible");
             return false;
         }
+        MclslMaterialDiscovery.TryAnnualActivity(actor, annualYear);
         if (MclslChildhoodRootSystem.ShouldTrackChildhoodCandidate(actor))
         {
             MclslChildhoodRootSystem.TryProcessAgeFiveDeadline(actor, annualYear);
         }
+        MclslProfessionSystem.ProcessAnnual(actor, annualYear);
+        MclslItemUseSystem.SyncPersistent(actor);
         MclslCultivationAgeSanity.RepairImpossibleYouthCultivation(actor, annualYear);
 
         MclslMortalFateEventSystem.TryProcessAnnual(actor, annualYear);
@@ -177,6 +180,8 @@ internal static class MclslAnnualActorPipeline
             {
                 MclslTechniqueOccupationSystem.TryResolveConflictAnnual(actor, annualYear);
                 MclslAdventureSystem.RegisterAnnual(actor, annualYear);
+                MclslTianxuanMarket.TryBuyNeeded(actor, annualYear);
+                MclslTianxuanMarket.TryListSurplus(actor, annualYear);
             }
 
             MclslDiagnostics.Cultivation(

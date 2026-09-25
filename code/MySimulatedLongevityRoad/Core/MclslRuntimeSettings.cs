@@ -37,7 +37,6 @@ internal static class MclslRuntimeSettings
     private static bool _autoCollectHuanzhenHost = true;
     private static bool _autoCollectMaobaoInscription = true;
     private static int _transmissionYear = 1000;
-    private static int _childhoodRootChancePercent = 50;
     private static bool _autoCollectYuanYing = true;
     private static bool _autoCollectHuaShen = true;
     private static bool _autoCollectHeDao = true;
@@ -46,6 +45,10 @@ internal static class MclslRuntimeSettings
     private static bool _autoCollectHeavenRoot = true;
     private static bool _diagnosticsEnabled;
     private static bool _showFps;
+    private static int _childhoodRootChancePercent = 50;
+    private static int _alchemistChanceBasisPoints = 100;
+    private static int _refinerChanceBasisPoints = 150;
+    private static int _talismanChanceBasisPoints = 200;
 
     internal static bool CoreEnabled => _coreEnabled;
     internal static bool TimelineEnabled => _timelineEnabled;
@@ -75,7 +78,6 @@ internal static class MclslRuntimeSettings
     internal static bool AutoCollectHuanzhenHost => _autoCollectHuanzhenHost;
     internal static bool AutoCollectMaobaoInscription => _autoCollectMaobaoInscription;
     internal static int TransmissionYear => _transmissionYear;
-    internal static int ChildhoodRootChancePercent => _childhoodRootChancePercent;
     internal static bool AutoCollectYuanYing => _autoCollectYuanYing;
     internal static bool AutoCollectHuaShen => _autoCollectHuaShen;
     internal static bool AutoCollectHeDao => _autoCollectHeDao;
@@ -84,6 +86,10 @@ internal static class MclslRuntimeSettings
     internal static bool AutoCollectHeavenRoot => _autoCollectHeavenRoot;
     internal static bool DiagnosticsEnabled => _diagnosticsEnabled;
     internal static bool ShowFps => _showFps;
+    internal static int ChildhoodRootChancePercent => _childhoodRootChancePercent;
+    internal static int AlchemistChanceBasisPoints => _alchemistChanceBasisPoints;
+    internal static int RefinerChanceBasisPoints => _refinerChanceBasisPoints;
+    internal static int TalismanChanceBasisPoints => _talismanChanceBasisPoints;
 
     internal static void LoadFromModConfig(object config)
     {
@@ -117,7 +123,6 @@ internal static class MclslRuntimeSettings
         _autoCollectHuanzhenHost = ReadBool(config, "MCLSL_config_auto_collect_huanzhen_host", _autoCollectHuanzhenHost);
         _autoCollectMaobaoInscription = ReadBool(config, "MCLSL_config_auto_collect_maobao_inscription", _autoCollectMaobaoInscription);
         _transmissionYear = Math.Clamp(ReadInt(config, "MCLSL_config_transmission_year", _transmissionYear), 1000, 3000);
-        _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance_percent", _childhoodRootChancePercent), 0, 100);
         _autoCollectYuanYing = ReadBool(config, "MCLSL_config_auto_collect_yuanying", _autoCollectYuanYing);
         _autoCollectHuaShen = ReadBool(config, "MCLSL_config_auto_collect_huashen", _autoCollectHuaShen);
         _autoCollectHeDao = ReadBool(config, "MCLSL_config_auto_collect_hedao", _autoCollectHeDao);
@@ -126,6 +131,10 @@ internal static class MclslRuntimeSettings
         _autoCollectHeavenRoot = ReadBool(config, "MCLSL_config_auto_collect_heaven_root", _autoCollectHeavenRoot);
         _diagnosticsEnabled = ReadBool(config, "MCLSL_config_enable_diagnostics", _diagnosticsEnabled);
         _showFps = ReadBool(config, "MCLSL_config_show_fps", _showFps);
+        _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance", 50), 0, 100);
+        _alchemistChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_alchemist_chance", 10), 0, 1000) * 10;
+        _refinerChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_refiner_chance", 15), 0, 1000) * 10;
+        _talismanChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_talisman_chance", 20), 0, 1000) * 10;
     }
 
     internal static int ScaleTimelineYear(int year) => year <= 0 ? 0 : Math.Max(1, (int)Math.Round(year * (_timelineYearScalePercent / 100d)));

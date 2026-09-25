@@ -25,10 +25,11 @@ internal static class MclslMapMarkerVisualSystem
     private static readonly Dictionary<string, Sprite> SpriteCache = new(StringComparer.Ordinal);
     private static readonly List<string> RemovalBuffer = new(64);
     private static readonly List<MarkerDescriptor> DesiredMarkers = new(96);
+    private static readonly HashSet<string> DesiredKeys = new(StringComparer.Ordinal);
     private static int _lastRefreshFrame = -1;
     private static int _lastAnimationFrame = -1;
-    private static int _lastArchiveRevision = -1;
-    private static bool _hasSignature;
+    private static int _lastDataRevision = -1;
+    private static int _lastYear = -1;
     private static bool _needsReconcile;
     private static bool _assetValidationLogged;
 
@@ -37,8 +38,8 @@ internal static class MclslMapMarkerVisualSystem
         Clear();
         _lastRefreshFrame = -1;
         _lastAnimationFrame = -1;
-        _hasSignature = false;
-        _lastArchiveRevision = -1;
+        _lastDataRevision = -1;
+        _lastYear = -1;
     }
 
     internal static void Tick(int frame)
@@ -49,12 +50,12 @@ internal static class MclslMapMarkerVisualSystem
             _lastRefreshFrame = frame;
             ValidateAssetsOnce();
             int year = MclslRuntime.CurrentYear();
-            int archiveRevision = MclslWorldArchiveStore.ChangeRevision;
-            if (!_hasSignature || _needsReconcile || year != _lastYear || archiveRevision != _lastArchiveRevision)
+            int dataRevision = MclslWorldRunRepository.MapMarkerDataRevision;
+            if (_lastDataRevision != dataRevision || _lastYear != year || _needsReconcile)
             {
-                _needsReconcile = !Reconcile(year);
-                _lastArchiveRevision = archiveRevision;
-                _hasSignature = true;
+                using (MclslUnityProfiler.Sample("MCLS/Visual/MapMarkerReconcile"))
+                    _needsReconcile = !Reconcile(year);
+                _lastDataRevision = dataRevision;
                 _lastYear = year;
             }
         }
@@ -62,7 +63,8 @@ internal static class MclslMapMarkerVisualSystem
         if (_lastAnimationFrame < 0 || frame - _lastAnimationFrame >= AnimationCadenceFrames)
         {
             _lastAnimationFrame = frame;
-            AnimateTemporaryMarkers(frame);
+            using (MclslUnityProfiler.Sample("MCLS/Visual/MapMarkerAnimation"))
+                AnimateTemporaryMarkers(frame);
         }
     }
 
@@ -73,11 +75,11 @@ internal static class MclslMapMarkerVisualSystem
         SpriteCache.Clear();
         RemovalBuffer.Clear();
         DesiredMarkers.Clear();
+        DesiredKeys.Clear();
         _lastRefreshFrame = -1;
         _lastAnimationFrame = -1;
-        _lastArchiveRevision = -1;
+        _lastDataRevision = -1;
         _lastYear = -1;
-        _hasSignature = false;
         _needsReconcile = false;
         _assetValidationLogged = false;
     }
@@ -92,12 +94,12 @@ internal static class MclslMapMarkerVisualSystem
             AddTemporaryEventMarkers(run.Events, year);
         }
 
-        HashSet<string> desiredKeys = new(StringComparer.Ordinal);
+        DesiredKeys.Clear();
         bool complete = true;
         for (int i = 0; i < DesiredMarkers.Count; i++)
         {
             MarkerDescriptor descriptor = DesiredMarkers[i];
-            desiredKeys.Add(descriptor.Key);
+            DesiredKeys.Add(descriptor.Key);
             if (!Entries.TryGetValue(descriptor.Key, out MarkerEntry entry) || !IsUsable(entry))
             {
                 entry = CreateEntry(descriptor);
@@ -113,7 +115,7 @@ internal static class MclslMapMarkerVisualSystem
 
         RemovalBuffer.Clear();
         foreach (string key in Entries.Keys)
-            if (!desiredKeys.Contains(key)) RemovalBuffer.Add(key);
+            if (!DesiredKeys.Contains(key)) RemovalBuffer.Add(key);
         for (int i = 0; i < RemovalBuffer.Count; i++)
         {
             string key = RemovalBuffer[i];
@@ -218,8 +220,6 @@ internal static class MclslMapMarkerVisualSystem
             entry.Renderer.color = new Color(entry.BaseColor.r, entry.BaseColor.g, entry.BaseColor.b, alpha);
         }
     }
-
-    private static int _lastYear = -1;
 
     private static Sprite LoadMarkerSprite(string kind)
     {

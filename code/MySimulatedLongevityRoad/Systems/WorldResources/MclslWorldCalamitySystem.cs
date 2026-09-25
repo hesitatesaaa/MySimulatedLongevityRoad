@@ -135,6 +135,7 @@ internal static class MclslWorldCalamitySystem
             ruin.Danger = Math.Clamp(ruin.Danger + 4, 20, 95);
             ruin.RemainingValue = Math.Clamp(ruin.RemainingValue + 1, 0, 12);
             ruin.Description = "白雾拂过，" + ruin.Description;
+            MclslWorldRunRepository.NotifyMapMarkerDataChanged();
         }
         MclslWorldRunRepository.AddEvent(year, "world_calamity_white_mist_ruin", "白雾显府", "白雾吞界，旧府禁制浮出尘世。");
         return true;

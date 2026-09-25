@@ -10,11 +10,15 @@ internal static class MclslNewLawBreakthroughSystem
     {
         int storedBonus = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationChanceBonus, 0));
         MclslAptitudeGiftDefinition gift = Gift(actor);
-        int chance = 8 + aptitude / 8 + storedBonus + gift.BreakthroughBonus
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi);
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
+        int chance = 8 + aptitude / 8 + storedBonus + pillBonus + buqueBonus
+            + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslInverseTruthSystem.NewLawBreakthroughChanceBonus()
             + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year);
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|foundation|" + year) % 100;
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.v020.buque_break_bonus", 0);
         if (roll >= Math.Min(100, chance))
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "尚未遇到合适的筑基奇物");
@@ -82,6 +86,7 @@ internal static class MclslNewLawBreakthroughSystem
         best.LastExploredYear = year;
         best.LastExplorerNames = MclslActorAccessor.DisplayName(actor);
         if (best.RemainingValue <= 0) best.State = "搜尽";
+        MclslWorldRunRepository.NotifyMapMarkerDataChanged();
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "已从“" + best.Name + "”寻得筑基奇物“" + wonder.Name + "”");
         MclslWorldRunRepository.AddEvent(year, "ancient_conversion_foundation", MclslActorAccessor.DisplayName(actor) + "寻得筑基奇物",
             MclslActorAccessor.DisplayName(actor) + "为转修新法探入“" + best.Name + "”，得“" + wonder.Name + "”。", actor);

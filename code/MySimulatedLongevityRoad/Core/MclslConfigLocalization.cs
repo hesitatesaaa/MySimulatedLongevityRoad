@@ -11,6 +11,10 @@ internal static class MclslConfigLocalization
         if (_initialized) return;
         _initialized = true;
 
+        Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。");
+        Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；10代表1.0%。三职业互斥。");
+        Register("MCLSL_config_refiner_chance", "炼器师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；15代表1.5%。三职业互斥。");
+        Register("MCLSL_config_talisman_chance", "制符师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；20代表2.0%。三职业互斥。");
         Register("MCLSL_config_enable_death_announcements", "启用修士陨落公告", "高境修士死亡时发布玄黄界公告。");
         Register("MCLSL_config_enable_breakthrough_failure_announcements", "显示破境失败记录", "控制仙道破境失败是否写入玄黄仙录；金丹以下默认不入录，收藏角色除外。");
         Register("MCLSL_config_enable_yuanying_breakthrough_announcements", "启用元婴突破公告", "角色成就元婴时发布玄黄界公告；关闭后仍写入玄黄仙录。");
@@ -35,7 +39,6 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_auto_collect_huanzhen_host", "还真宿主自动收藏（原版）", "还真宿主出现后自动加入 WorldBox 原版人物收藏；猫宝仍须手动刻名。");
         Register("MCLSL_config_auto_collect_maobao_inscription", "猫宝刻名自动收藏（原版）", "玩家手动刻名或刷新留影成功后，将人物加入 WorldBox 原版收藏；不会自动刻名。");
         Register("MCLSL_config_transmission_year", "传法变世年份", "控制仙道纪元持续年数；仙道纪元会按此年份自动分段。");
-        Register("MCLSL_config_childhood_root_chance_percent", "幼年灵根显现概率", "只影响尚未完成灵根判定的小人；五岁判定、六岁容错和稳定随机种子保持不变。");
         Register("MCLSL_config_auto_collect_yuanying", "元婴自动收藏", "角色成就元婴时自动加入收藏。");
         Register("MCLSL_config_auto_collect_huashen", "化神自动收藏", "角色成就化神时自动加入收藏。");
         Register("MCLSL_config_auto_collect_hedao", "合道自动收藏", "角色成就合道时自动加入收藏。");

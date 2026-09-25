@@ -30,12 +30,16 @@ internal static class MclslAncientLawBreakthroughSystem
         }
         // 功法参悟只修正年度真元效率，不是破境硬门槛，也不直接叠加破境成功率。
         int fieldBonus = AncientBreakthroughBonus(actor, nextRealm);
-        int chance = Math.Clamp(24 + aptitude / 4 + fieldBonus
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm);
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
+        int chance = Math.Clamp(24 + aptitude / 4 + fieldBonus + pillBonus + buqueBonus
+            + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0)
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year)
             - nextIndex * 8, 8, 88);
         if (MclslWorldEpochSystem.IsNewLawActive(year)) chance = Math.Max(3, chance / 2);
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_break|" + realm + "|" + year) % 100;
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.v020.buque_break_bonus", 0);
         if (roll >= chance)
         {
             ResolveAncientBreakthroughFailure(actor, nextRealm, year, chance, roll);
@@ -120,6 +124,7 @@ internal static class MclslAncientLawBreakthroughSystem
     {
         int nextIndex = Math.Max(0, MclslRealmIds.Index(nextRealm));
         float progressLoss = nextIndex <= 1 ? 14f : nextIndex == 2 ? 20f : nextIndex == 3 ? 28f : 35f;
+        progressLoss *= MclslItemUseSystem.FailureSetbackFactor(actor, nextRealm, year);
         MclslCultivationGrowthSystem.ApplyProgressSetback(
             actor, MclslActorAccessor.Realm(actor), progressLoss, ancientLaw: true, minimumProgressPercent: 20f);
         AddClamped(actor, MclslActorDataKeys.MindState, -(2 + nextIndex), 0, 100);
@@ -142,6 +147,8 @@ internal static class MclslAncientLawBreakthroughSystem
         if (nextIndex >= MclslRealmIds.Index(MclslRealmIds.HuaShen))
         {
             int deathChance = Math.Clamp(2 + nextIndex * 3 - MclslMindSystem.StabilityBonus(actor) / 8, 1, 18);
+            if (nextRealm == MclslRealmIds.HuaShen && MclslItemUseSystem.ConsumedBreakthroughPill(actor, "D012", year))
+                deathChance = Math.Max(1, (int)MathF.Round(deathChance * 0.30f));
             int deathRoll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_break_death|" + nextRealm + "|" + year) % 100;
             if (deathRoll < deathChance)
             {

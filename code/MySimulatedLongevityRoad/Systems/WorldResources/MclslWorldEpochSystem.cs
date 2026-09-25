@@ -184,8 +184,8 @@ internal static class MclslWorldEpochSystem
         else if (offset == 2)
         {
             run.LawConflictEnabled = true;
-            // 功法占用索引会由年度世界车道在角色结算后统一重建；此处重建会在
-            // 纪元切换当帧额外扫描全部修士。
+            // 功法占用索引由年度候选扫描分帧对账，并由角色状态变更事件持续维护；
+            // 这里不在纪元切换帧同步重建全体修士索引。
             Fire(run, year, EventLawConflict, "法不可同修之劫", "同法相争，诸脉一夜生隙。", "#FF8877");
         }
         else if (offset == 3)
@@ -213,7 +213,8 @@ internal static class MclslWorldEpochSystem
     {
         if (run == null || run.PendingAncientCultivatorIds == null) return;
         if (run.PendingAncientCultivatorIds.Count > 0 || _ancientQueueSeedCursor < _ancientQueueSeedActors.Count) return;
-        _ancientQueueSeedActors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
+        using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionSnapshot"))
+            _ancientQueueSeedActors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
         _ancientQueueSeedCursor = 0;
     }
 
@@ -235,16 +236,19 @@ internal static class MclslWorldEpochSystem
         int seedBudget = MclslRuntimeWorkBudget.ScaleCount(TransitionSeedBudget, 2);
         int conversionBudget = MclslRuntimeWorkBudget.ScaleCount(TransitionConversionBudget, 1);
         int seeded = 0;
-        while (_ancientQueueSeedCursor < _ancientQueueSeedActors.Count && seeded < seedBudget)
+        using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionSeedBatch"))
         {
-            Actor actor = _ancientQueueSeedActors[_ancientQueueSeedCursor++];
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw) continue;
-            if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLawProcessed, 0) == 1) continue;
-            long actorId = MclslActorAccessor.Id(actor);
-            if (actorId > 0L) run.PendingAncientCultivatorIds.Add(actorId.ToString());
-            seeded++;
-            if (HasExceededTransitionBudget(started)) break;
+            while (_ancientQueueSeedCursor < _ancientQueueSeedActors.Count && seeded < seedBudget)
+            {
+                Actor actor = _ancientQueueSeedActors[_ancientQueueSeedCursor++];
+                if (!MclslActorAccessor.Alive(actor)) continue;
+                if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw) continue;
+                if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLawProcessed, 0) == 1) continue;
+                long actorId = MclslActorAccessor.Id(actor);
+                if (actorId > 0L) run.PendingAncientCultivatorIds.Add(actorId.ToString());
+                seeded++;
+                if (HasExceededTransitionBudget(started)) break;
+            }
         }
 
         if (_ancientQueueSeedCursor >= _ancientQueueSeedActors.Count)
@@ -254,7 +258,10 @@ internal static class MclslWorldEpochSystem
         }
 
         if (run.PendingAncientCultivatorIds.Count > 0 && !HasExceededTransitionBudget(started))
-            ProcessAncientTransitionBatch(run, MclslRuntime.CurrentYear(), conversionBudget, 0);
+        {
+            using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionConvertBatch"))
+                ProcessAncientTransitionBatch(run, MclslRuntime.CurrentYear(), conversionBudget, 0);
+        }
     }
 
     internal static void ResumeDeferredTransitionWork(int year)
