@@ -30,6 +30,7 @@ internal static class MclslActorInfoPanel
         if (background == null)
         {
             MclslMaobaoShortcutButton.Hide(window);
+            MclslQiankunShortcutButton.Hide(window);
             return;
         }
 
@@ -37,11 +38,13 @@ internal static class MclslActorInfoPanel
         if (window.actor == null || !window.actor.isAlive())
         {
             MclslMaobaoShortcutButton.Hide(window);
+            MclslQiankunShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
 
         MclslMaobaoShortcutButton.Refresh(window);
+        MclslQiankunShortcutButton.Refresh(window);
         if (!ShouldShowFor(window.actor) && !MclslDeveloperBridge.IsAvailable)
         {
             HidePanel(background);
@@ -54,6 +57,7 @@ internal static class MclslActorInfoPanel
         Transform panel = text.transform.parent?.parent?.parent;
         EnsureActionBar(panel ?? background, window.actor);
         MclslMaobaoShortcutButton.Refresh(window);
+        MclslQiankunShortcutButton.Refresh(window);
         if (scroll != null) scroll.gameObject.SetActive(true);
         bool actorChanged = state != null && state.ActorId != actorId;
 
@@ -169,6 +173,7 @@ internal static class MclslActorInfoPanel
         Transform background = ResolvePanelParent(window);
         if (background != null) HidePanel(background);
         MclslMaobaoShortcutButton.Hide(window);
+        MclslQiankunShortcutButton.Hide(window);
     }
 
     private static Text EnsurePanel(Transform parent, out ScrollRect scroll, out PanelState state, out Text header)
@@ -302,24 +307,12 @@ internal static class MclslActorInfoPanel
         barOutline.effectColor = Color.clear;
         barOutline.effectDistance = new Vector2(1f, -1f);
         barOutline.useGraphicAlpha = true;
-        EnsureActionButton(bar.transform, "Biography", "修士列传", () => MclslCodexWindow.ShowBiographyForActor(actor), 0f, 0.34f);
-        bool hasTechnique = !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty))
-            || !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty));
-        if (hasTechnique)
-        {
-            EnsureActionButton(bar.transform, "Technique", "功法", () => MclslCodexWindow.ShowTechniqueForActor(actor), 0.33f, 0.67f);
-            EnsureActionButton(bar.transform, "Lineage", "法脉", () => MclslCodexWindow.ShowLineageForActor(actor), 0.66f, 1f);
-        }
-        else
-        {
-            RemoveActionButton(bar.transform, "Technique");
-            RemoveActionButton(bar.transform, "Lineage");
-        }
+        EnsureActionButton(bar.transform, "Biography", "修士列传", () => MclslCodexWindow.ShowBiographyForActor(actor));
         RemoveActionButton(bar.transform, "Maobao");
         RemoveActionButton(bar.transform, "Debug");
     }
 
-    private static void EnsureActionButton(Transform parent, string name, string label, UnityEngine.Events.UnityAction action, float left, float right)
+    private static void EnsureActionButton(Transform parent, string name, string label, UnityEngine.Events.UnityAction action)
     {
         Transform existing = parent.Find(name);
         GameObject buttonObject = existing?.gameObject;
@@ -341,8 +334,8 @@ internal static class MclslActorInfoPanel
             textRect.offsetMax = Vector2.zero;
         }
         RectTransform rect = buttonObject.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(left, 0f);
-        rect.anchorMax = new Vector2(right, 1f);
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
         rect.offsetMin = new Vector2(3f, 2f);
         rect.offsetMax = new Vector2(-3f, -2f);
         rect.localPosition = Vector3.zero;
@@ -712,10 +705,9 @@ internal static class MclslActorInfoPanel
                 PendingScrollRestoreFrames = 0;
                 return;
             }
-            // The content fitter has already been marked when the text changed.
-            // Restoring the viewport on following frames is sufficient and avoids
-            // four forced full-canvas rebuilds for every actor data refresh.
-            Canvas.ForceUpdateCanvases();
+            // Refresh() already forced the text/layout update before scheduling
+            // this bounded restore window. Retry the scroll position over later
+            // frames without forcing a full-canvas rebuild on every retry.
             bool wasRestoring = IsRestoring;
             IsRestoring = true;
             RestoreScroll(scroll, PendingNormalizedPosition, PendingContentPosition);

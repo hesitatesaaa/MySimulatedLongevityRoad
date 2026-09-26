@@ -18,7 +18,6 @@ internal static class MclslAptitudeGiftCatalog
 {
     private const int RollDenominator = 1000000;
     private const int QualificationDenominator = 10000;
-    private const int QualificationChance = 5000;
 
     internal static readonly MclslAptitudeGiftDefinition[] Gifts =
     {
@@ -44,17 +43,9 @@ internal static class MclslAptitudeGiftCatalog
         return RollWithin(safeSeed, "heaven", 95, 100);
     }
 
-    internal static bool RollQualification(string seed)
+    internal static bool RollQualification(string seed, int probabilityPercent = 50)
     {
-        return RollQualification(seed, 50);
-    }
-
-    internal static bool RollQualification(string seed, int chancePercent)
-    {
-        int chance = System.Math.Clamp(chancePercent, 0, 100);
-        if (chance <= 0) return false;
-        if (chance >= 100) return true;
-        int threshold = chance * QualificationDenominator / 100;
+        int threshold = System.Math.Clamp(probabilityPercent, 0, 100) * 100;
         return PositiveHash((seed ?? string.Empty) + "|cultivation_qualification") % QualificationDenominator < threshold;
     }
 

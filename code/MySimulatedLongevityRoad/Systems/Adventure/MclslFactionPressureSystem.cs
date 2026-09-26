@@ -169,6 +169,7 @@ internal static class MclslFactionPressureSystem
         ruin.Danger = Math.Clamp(ruin.Danger + 5 + level * 5, 20, 98);
         ruin.RemainingValue = Math.Clamp(ruin.RemainingValue + (level >= 2 ? 1 : 0), 1, 12);
         if (ruin.State == "残破") ruin.State = "显世";
+        MclslWorldRunRepository.NotifyMapMarkerDataChanged();
         return "遗迹“" + ruin.Name + "”被暗中设伏，已成" + MclslRuinText.DangerBand(ruin.Danger) + "之地";
     }
 

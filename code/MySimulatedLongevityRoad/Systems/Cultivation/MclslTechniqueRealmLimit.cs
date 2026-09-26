@@ -27,7 +27,7 @@ internal static class MclslTechniqueRealmLimit
         if (realm == MclslRealmIds.ChangSheng) realm = MclslRealmIds.HeDao;
         int target = MclslRealmIds.Index(realm);
         if (target < 0) return;
-        string current = MaxRealm(actor);
+        string current = StoredMaxRealm(actor);
         int currentIndex = MclslRealmIds.Index(current);
         if (currentIndex < target) SetMaxRealm(actor, MclslRealmIds.Ordered[target]);
     }
@@ -35,6 +35,15 @@ internal static class MclslTechniqueRealmLimit
     internal static string MaxRealm(Actor actor)
     {
         if (actor?.data == null) return MclslRealmIds.ZhuJi;
+        string effective = StoredMaxRealm(actor);
+        string pathTarget = MclslImmortalPathSystem.HighestTargetRealm(actor);
+        if (pathTarget == MclslRealmIds.ChangSheng) pathTarget = MclslRealmIds.HeDao;
+        if (MclslRealmIds.Index(pathTarget) > MclslRealmIds.Index(effective)) effective = pathTarget;
+        return effective;
+    }
+
+    private static string StoredMaxRealm(Actor actor)
+    {
         string stored = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueMaxRealm, string.Empty);
         if (MclslRealmIds.Index(stored) >= 0) return stored;
         string techniqueId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
@@ -48,6 +57,7 @@ internal static class MclslTechniqueRealmLimit
         reason = string.Empty;
         if (actor?.data == null || string.IsNullOrWhiteSpace(targetRealm)) return true;
         if (targetRealm == MclslRealmIds.ChangSheng) return true;
+        if (MclslImmortalPathSystem.CanFillTechniqueLimit(actor, targetRealm)) return true;
         string maxRealm = MaxRealm(actor);
         if (MclslRealmIds.Index(targetRealm) <= MclslRealmIds.Index(maxRealm)) return true;
         string technique = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "所修功法");

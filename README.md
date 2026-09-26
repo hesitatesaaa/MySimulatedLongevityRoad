@@ -1,54 +1,40 @@
 # 我的模拟长生路
 
-> 当前模组版本为 **0.1.9.3**。本版本完善法脉人物链、幼年灵根概率设置、玄黄仙录滚动与入道指南，并优化还真降世后的运行负载。
+> 当前模组版本为 **0.2.0**。新增职业、物品制作、乾坤袋、天玄镜及入道指南。
 
-WorldBox 模组，作者：溪上翁、kinght。模组版本 `0.1.9.3`，`mod.json` 中的目标游戏构建为 `115`。
-本项目由“0.5.1+我的模拟长生路0.1.4-新法时代优化-最终版.zip”整理而来；压缩包名称中的版本信息与模组元数据分别保留，不推定其兼容关系。
+WorldBox 模组，作者：溪上翁、kinght。模组版本 `0.2.0`，`mod.json` 中的目标游戏构建为 `115`。本版本以提供的 `0.5.1+我的模拟长生路0.1.9.2.zip` 为基线。
 
 ## 目录
 
 - `InterestingTrait.sln` / `InterestingTrait.csproj`：原有解决方案与 C# 项目，目标框架为 `netstandard2.1`，可由 WorldBox 的 Unity/Mono 运行时加载。
 - `InterestingTrait.cs`：NeoModLoader 模组入口。
 - `code/MySimulatedLongevityRoad/`：核心逻辑、数据、系统、补丁、查询及 UI。
+- `code/MySimulatedLongevityRoad/DeveloperTools/`：开发者版角色编辑器与调试 API；只包含在开发者包中。
 - `GameResources/`：游戏资源。
 - `Locales/`：本地化资源。
 - `mod.json`：模组元数据。
 - `default_config.json`：默认配置。
 - `icon.png`：模组图标。
-- `docs/IMPORT.md`：导入来源与完整性记录。
-- `references/WorldBoxGameDecompiled/`：WorldBox 原版反编译源码，仅用于接口和行为检索，不参与模组编译或发布。
 - `CHANGELOG.md`：按版本记录功能更新和兼容性说明。
-- `VERSIONING.md`：版本隔离、发布、回滚和分支规则。
-- `AGENTS.md`：项目长期协作、可运行打包和 GitHub 推送边界规则。
-- `scripts/Build-Mod.ps1`：WorldBox 依赖预检和 Release 构建入口。
-- `scripts/Test-Project.ps1`：统一执行静态检查、构建或打包验证。
-- `scripts/Package-Mod.ps1`：源码型运行包生成和包内容校验脚本。
-- `docs/UI_DESIGN.md`：排行榜、玄黄仙录与中文命名的界面设计约束。
+- `scripts/Generate-ItemCatalog.py`：依据参考 DOCX 重新生成 ID 驱动的物品目录。
 
 ## 开发与构建
 
 项目目标框架为 `netstandard2.1`，用于 WorldBox 的 Unity/Mono 运行环境。项目不会把 WorldBox、Unity、Harmony 或 NeoModLoader DLL 提交到仓库。
 
-默认依赖目录是项目外的 `..\..\worldbox_Data`，也可以通过 `-WorldBoxDataRoot` 指定本机安装位置。构建脚本会先检查全部依赖，缺失时直接列出文件，不继续产生大量无效编译错误。
+默认依赖目录是项目外的 `..\..\worldbox_Data`，也可以通过 `WorldBoxDataRoot` MSBuild 属性指定本机安装位置。
 
 ```powershell
-pwsh -NoProfile -File .\scripts\Build-Mod.ps1 -Configuration Release -WorldBoxDataRoot D:\path\to\worldbox_Data
+dotnet build .\InterestingTrait.csproj -c Release -p:WorldBoxDataRoot=D:\path\to\worldbox_Data
 ```
 
-日常修改优先使用统一检查入口：
+构建结果位于 `bin/Release/netstandard2.1/MySimulatedLongevityRoad.dll`。发布的源码包保留 `InterestingTrait.cs`、`code/` 和 `GameResources/`，供 NeoModLoader 加载。
+
+开发者包附带 `DeveloperTools/`。需要启用人物编辑器、F8 快捷键和开发者专用入口时，使用以下属性构建：
 
 ```powershell
-# 文档、JSON、本地化或资源修改
-pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Static
-
-# C#、项目文件或构建脚本修改
-pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Build -WorldBoxDataRoot D:\path\to\worldbox_Data
-
-# 一组修改完成后的最终源码包
-pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Package -ChangeTag 项目整理
+dotnet build .\InterestingTrait.csproj -c Release -p:WorldBoxDataRoot=D:\path\to\worldbox_Data -p:IncludeDeveloperTools=true
 ```
-
-首次构建成功后，依赖和源码未发生还原变化时，可以给 `Build` 模式增加 `-NoRestore`，跳过重复的 NuGet 还原。
 
 如果只需要检查项目文件而没有 WorldBox 依赖，可使用：
 
@@ -56,7 +42,7 @@ pwsh -NoProfile -File .\scripts\Test-Project.ps1 -Mode Package -ChangeTag 项目
 dotnet msbuild .\InterestingTrait.csproj -getItem:Compile -nologo
 ```
 
-该检查应确认 `DeveloperTools/` 和 `references/` 不在编译项中。
+不传 `IncludeDeveloperTools=true` 时，项目会把开发者工具源码排除在玩家构建之外；传入该属性后，开发者编辑器与调试 API 会一同编译。`references/` 始终不加入编译项。
 
 ## 原版 WorldBox 导入
 
@@ -84,63 +70,14 @@ Locales/
 
 `references/WorldBoxGameDecompiled/` 是单独导入的 WorldBox 反编译参考树，供搜索 `Actor`、`MapBox`、`SaveManager` 等原版类型、字段和方法使用。它不是模组依赖，已从项目编译项中排除；发布模组时不要把该目录复制到玩家的 mods 目录。
 
-常用检索示例：
+0.2.0 源码型发布包包含入口源码、`code/`、`GameResources/`、`Locales/`、配置、模组元数据和说明文件。`bin/` 与 `obj/` 是本地构建缓存，不属于玩家包。依赖 NeoModLoader 与游戏自带程序集由游戏提供。
 
-```powershell
-rg -n "class Actor|updateAge|killHimself" .\references\WorldBoxGameDecompiled
-rg -n "class MapBox|updateSimulation" .\references\WorldBoxGameDecompiled
-rg -n "class SaveManager" .\references\WorldBoxGameDecompiled
-```
+## v0.2.0 更新摘要
 
-开发工具源码只存在于本机被忽略的 `DeveloperTools/`，不会提交 GitHub，也不会进入玩家发布包。当前本机开发版的打开方式是：先点击一个人物选中目标，再按 `F8`；也可以打开“我的模拟长生路”页签并点击“开发者工具”。没有选中人物时不会打开编辑器。
-
-完成一组代码、资源、配置或本地化修改后，先按修改类型完成必要验证，再生成一次源码型运行包：
-
-```powershell
-pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\Package-Mod.ps1 -ChangeTag 空间继承
-```
-
-若系统只有 Windows PowerShell 5.1，建议安装 PowerShell 7 并使用 `pwsh` 执行脚本。
-
-脚本会按源码型发布结构，将入口源码、解决方案/项目文件、`mod.json`、资源、`code`、`GameResources`、`Locales`、配置和说明文档放入 `发布包/`。包名格式为 `0.5.1+我的模拟长生路0.1.9.2-综合更新.zip`；同名时追加时间戳。`references/`、构建缓存、`DeveloperTools/` 和打包脚本不进入玩家发布包，也不存在开发者工具混入玩家包的选项。
-
-日常可运行包保持 `mod.json` 当前版本不变。只有明确要求正式版本或推到 GitHub 时，才更新版本号、CHANGELOG、正式标签或远程仓库；未收到明确指令时不得执行 `git push`、GitHub Release 或其他远程写操作。
-
-## 版本管理
-
-源码、资源和配置纳入 Git；构建输出、IDE 缓存和本地临时文件忽略。
-
-所有玩家可见的新入口、页面、按钮、特征、物品、状态与说明必须提供中文显示名和中文本地化键，不得把内部英文标识直接显示给玩家。内部 ID、类名和资源路径继续使用稳定的 ASCII 名称，避免破坏旧存档、代码引用和模组兼容性。发布前需检查 `Locales/ch.json` 与 `Locales/cz.json` 均包含新增显示键。
-
-每一个对外版本都必须使用独立且不可移动的 `v主版本.次版本.修订版本` Git 标签固定；发布包必须从该标签对应的提交生成，并保持版本号、更新日志、标签和压缩包名称一致。开发修改继续提交到 `main` 或功能分支，不得覆盖、移动或复用既有版本标签。详细规则及回滚命令见 `VERSIONING.md`。
-
-日常修改与正式发布分开处理：每次修改完成后只生成本地可运行包，不自动递增版本、不创建正式标签、不推送 GitHub。只有用户明确要求“推到 GitHub”或等价操作时，才在构建、包内容校验和 Git 差异检查通过后进行远程操作。
-
-```powershell
-git status
-git add .
-git commit -m "描述本次修改"
-```
-
-当前开发机已安装 .NET SDK；完整构建仍要求项目引用路径中的 WorldBox、Unity、Harmony、NeoModLoader 与 Publicized 游戏程序集实际存在。未提供这些 DLL 时，不能把 SDK 安装成功视为模组编译成功。
-原包未附带许可证，作者信息保留在 `mod.json` 中；本仓库未额外授予使用或分发许可。
-
-## 还真实现与存储约束
-
-还真默认启用。自动寻主只会在新法纪元正式开始后安排降临时点；仙道纪元仍可通过特质编辑器手动给予还真，手动授予时会收回其他人物身上的还真特质并立即写入还真纪事。
-
-还真使用至多 3 个滚动世界锚点。持有者死亡后只选择同一世界、同一身份且满足安全年差的锚点；短期连续死亡必须退到更早锚点，以避免死循环。回载最多尝试 3 次，失败后停止，不会无限重试。加载后人物索引尚未恢复时会短暂分帧重试，不会立刻误判宿主丢失。
-
-功能页中的“进入还真空间”是独立入口，使用 `GameResources/ui/Icons/HuanZhenEntrance.png`，不会复用玄黄仙录内部页签；玄黄仙录的“还真轮回”页面展示当前持有者和时间锚点，独立“还真纪事”页面集中展示还真降临、手动授予、锚点建立、还真归来及死亡回溯结果。空间灵蕴不会自然增长，只由宿主晋升、杀人夺宝、洞天炼化、天地之变与势力机缘等事件增加，且 v0.1.9 不设 999 点上限；还真回载使用执行还真前一刻的实际灵蕴值。玩家可消耗 80 点灵蕴手动建立锚点，也可在设置中开启默认启用的自动锚定；每枚新锚点都会记录宿主当时的修为、功法、资源、突破造物与天地道果。
-
-成功回到锚点时，死前快照不再整包覆盖锚点人物，而是作为“前世档案”收入还真空间。v0.1.9 只生成快照中真实存在的具体遗产选项，并以当前还真锚点数量作为保留上限；界面显示锚点数、可保留数和已选择数，已占用名额可释放后重新选择。境界特质、还真本身和天地之魄实体标记不会进入可选特征，缺失模组的特征也不会被强行写入。
-
-锚点世界固定写入游戏数据目录的 `MySimulatedLongevityRoad/HuanzhenAnchors` 专用文件夹，创建、校验、回载和清理统一使用绝对路径，避免游戏工作目录变化导致写盘失败。外部状态采用版本化、紧凑 JSON，并通过临时文件覆盖；内容未变化时不写盘。年度维护会清除记录失效的锚点和孤立目录，因此存档文件数量保持有界。轮回历史最多保留 40 条，灵蕴流水只保留最新 2 条。
-
-死前快照除境界、真元和突破材料外，还保存允许列表中的灵根、灵石、仙凡瘴、古法阶段、太上进度及寿元改变量。允许列表防止把任意人物数据注入旧世界；新增修炼字段时，应明确加入 `MclslHuanzhenSystem` 的补充字段列表。
-
-源码目录按 `Core / Data / Modules / Patches / Queries / Systems / Traits / UI` 分层。运行逻辑优先放入现有领域文件，避免为单个常量、薄包装或一次性迁移继续新增碎片文件。GameResources 中相邻重复帧可能是动画停顿帧，不应仅因文件哈希相同而删除。
-
+- 幼年灵根概率与职业概率可设置；职业在十八岁时判定，之后按熟练度和境界晋级。
+- 新增三种职业、六类乾坤袋、材料探索、制作、使用与贡献度交易；物品目录收录 38 个 ID。
+- 新增独立入道指南、乾坤袋及天玄镜窗口和贴图；修士榜按境界序号排序，玄黄仙录正文显示滚动条。
+- 还真唯一宿主的全量核查按年节流；旧版世界档案新增挂单字段并兼容空值。
 ## v0.1.9.1 更新摘要
 
 - 两个纪元共用深青黑半透明人物信息栏，标题、分隔线和“修士列传”按钮固定，正文按现有数据分组展示。
@@ -152,13 +89,6 @@ git commit -m "描述本次修改"
 - 新增独立的遗府、秘境、灵气汇聚、地火和星石地图贴图，按持久地点状态与临时事件生命周期显示。
 - 读档、换图和时代切换会清理旧地图标记；地图贴图使用独立资源目录，不复用 `ui/Icons`，并采用像素清晰的等比缩放与地图渲染层级。
 - 临时灵机灾变到期后自动消失，遗府搜尽、封绝、崩毁或沉寂后同步隐藏标记。
-
-## v0.1.9.3 更新摘要
-
-- 法脉档案新增创立、师承、分支、失传、复现和来源遗迹快照；死亡人物姓名保留为历史快照，人物信息栏可直达功法与法脉。
-- 新增幼年灵根显现概率滑条（0—100%、默认 50%），只作用于尚未完成判定的小人，保留稳定种子及五岁/六岁判定逻辑。
-- 玄黄仙录正文显示可见纵向滚动条；新增独立“模组介绍／入道指南”窗口和 `MclslAbout.png` 图标。
-- 默认排行榜按境界索引排序，境界排序支持稳定的战力与姓名次序；还真 Tick、天地之魄、地图标记与重绘调用采用缓存和固定间隔优化。
 
 ## v0.1.9 更新摘要
 

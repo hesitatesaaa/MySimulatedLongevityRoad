@@ -88,8 +88,6 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
         string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;
         if (!string.IsNullOrWhiteSpace(item.ExtraText) && !string.Equals(detail, item.ExtraText, StringComparison.Ordinal))
             detail += " · " + item.ExtraText;
-        if (!string.IsNullOrWhiteSpace(detail)) detail += " · ";
-        detail += "战力 " + item.Power.ToString("0", CultureInfo.InvariantCulture);
         SetText("DetailText", detail, MclslUiTheme.RankTextMuted);
         SetText("PowerText", sortValue, MclslUiTheme.RankAccentPrimary);
         SetText("RightText", string.IsNullOrWhiteSpace(item.KingdomName) ? "无归属" : item.KingdomName, MclslUiTheme.RankAccentSecondary);

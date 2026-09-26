@@ -12,6 +12,7 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
     private float _elapsed;
     private int _frames;
     private int _displayFps;
+    private string _displayText = "FPS: 0";
     private bool _visible;
 
     internal static void Ensure()
@@ -45,7 +46,11 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
         _instance._visible = visible;
         _instance._elapsed = 0f;
         _instance._frames = 0;
-        if (!visible) _instance._displayFps = 0;
+        if (!visible)
+        {
+            _instance._displayFps = 0;
+            _instance._displayText = "FPS: 0";
+        }
     }
 
     private void Update()
@@ -64,7 +69,12 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
             return;
         }
 
-        _displayFps = Mathf.Max(0, Mathf.RoundToInt(_frames / _elapsed));
+        int fps = Mathf.Max(0, Mathf.RoundToInt(_frames / _elapsed));
+        if (fps != _displayFps)
+        {
+            _displayFps = fps;
+            _displayText = "FPS: " + fps;
+        }
         _elapsed = 0f;
         _frames = 0;
     }
@@ -73,10 +83,9 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
     {
         if (!_visible) return;
         EnsureStyles();
-        string text = "FPS: " + _displayFps;
         const float x = 8f;
-        GUI.Label(new Rect(x + 1f, 9f, 96f, 22f), text, _shadowStyle);
-        GUI.Label(new Rect(x, 8f, 96f, 22f), text, _style);
+        GUI.Label(new Rect(x + 1f, 9f, 96f, 22f), _displayText, _shadowStyle);
+        GUI.Label(new Rect(x, 8f, 96f, 22f), _displayText, _style);
     }
 
     private static void EnsureStyles()

@@ -52,12 +52,14 @@ internal sealed class MclslWorldRunState
     public int MaobaoArchiveMigrationVersion { get; set; }
     public List<MclslMaobaoRecord> MaobaoRecords { get; set; } = new();
     public List<MclslRunEventRecord> Events { get; set; } = new();
+    // Source-level idempotency ledger for material awards. Kept separately from the
+    // bounded event feed so loading a save cannot replay a bag transfer after pruning.
+    public List<string> MaterialAwardEventKeys { get; set; } = new();
     public List<MclslDeathRecord> DeathRecords { get; set; } = new();
     public List<MclslFactionMissionRecord> FactionMissions { get; set; } = new();
     public List<MclslFactionPressureRecord> FactionPressureEvents { get; set; } = new();
     public List<MclslResourceSpendRecord> ResourceSpendEvents { get; set; } = new();
     public List<MclslTechniqueLineageRecord> TechniqueLineages { get; set; } = new();
-    public List<MclslTechniqueTransmissionRecord> TechniqueTransmissions { get; set; } = new();
     public List<MclslSectRuinRecord> SectRuins { get; set; } = new();
     public List<MclslRuinExplorationRecord> RuinExplorations { get; set; } = new();
     public List<MclslWorldCaveRecord> WorldCaves { get; set; } = new();
@@ -69,6 +71,8 @@ internal sealed class MclslWorldRunState
     public List<string> FiredHistoricalEvents { get; set; } = new();
     public List<string> PendingAncientCultivatorIds { get; set; } = new();
     public List<MclslGeneratedItemRecord> GeneratedItems { get; set; } = new();
+    public List<MclslMarketListing> TianxuanListings { get; set; } = new();
+    public List<MclslMarketActivity> TianxuanActivities { get; set; } = new();
     public int ProceduralSequence { get; set; }
     public int NextCaveBirthYear { get; set; }
     public int NextWorldChangeYear { get; set; }
@@ -132,6 +136,7 @@ internal sealed class MclslMaobaoRecord
 
 internal sealed class MclslRunEventRecord
 {
+    public string EventKey { get; set; } = string.Empty;
     public int Year { get; set; }
     public string EventType { get; set; } = string.Empty;
     public string Category { get; set; } = string.Empty;
@@ -263,17 +268,7 @@ internal sealed class MclslTechniqueLineageRecord
     public int PeakPractitioners { get; set; }
     public string PeakRealm { get; set; } = string.Empty;
     public string FounderName { get; set; } = string.Empty;
-    // 永久保留人物姓名快照；FounderActorId 仅用于历史追踪，不能作为 UI 的必需引用。
-    public string FounderNameSnapshot { get; set; } = string.Empty;
     public long FounderActorId { get; set; }
-    public int FoundedYear { get; set; }
-    public string MentorNameSnapshot { get; set; } = string.Empty;
-    public string MentorTechniqueNameSnapshot { get; set; } = string.Empty;
-    public int MentorshipCount { get; set; }
-    public string CurrentTransmitterNames { get; set; } = string.Empty;
-    public string SourceRuinNameSnapshot { get; set; } = string.Empty;
-    public string SourceRuinLocationSnapshot { get; set; } = string.Empty;
-    public string BranchOriginName { get; set; } = string.Empty;
     public string State { get; set; } = "流传";
     public int LostYear { get; set; }
     public int RevivedYear { get; set; }
@@ -287,21 +282,6 @@ internal sealed class MclslTechniqueLineageRecord
     public int LifecycleYear { get; set; }
     public int LastLifecycleEventYear { get; set; }
     public string Summary { get; set; } = string.Empty;
-}
-
-internal sealed class MclslTechniqueTransmissionRecord
-{
-    public string Id { get; set; } = string.Empty;
-    public int Year { get; set; }
-    public string LineageId { get; set; } = string.Empty;
-    public string TechniqueName { get; set; } = string.Empty;
-    public long TeacherActorId { get; set; }
-    public string TeacherNameSnapshot { get; set; } = string.Empty;
-    public string TeacherTechniqueNameSnapshot { get; set; } = string.Empty;
-    public long StudentActorId { get; set; }
-    public string StudentNameSnapshot { get; set; } = string.Empty;
-    public string StudentTechniqueNameSnapshot { get; set; } = string.Empty;
-    public string RelationType { get; set; } = "师承";
 }
 
 internal sealed class MclslSectRuinRecord
@@ -326,6 +306,7 @@ internal sealed class MclslSectRuinRecord
     public string State { get; set; } = "显世";
     public int LastExploredYear { get; set; }
     public string LastExplorerNames { get; set; } = string.Empty;
+    public List<string> MaterialDiscoveryEventKeys { get; set; } = new();
     public string SourceTechniqueId { get; set; } = string.Empty;
     public string SourceTechniqueName { get; set; } = string.Empty;
     public string LinkedLineageId { get; set; } = string.Empty;

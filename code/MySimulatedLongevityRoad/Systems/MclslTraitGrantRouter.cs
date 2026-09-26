@@ -32,9 +32,24 @@ internal static class MclslTraitGrantRouter
         bool isGift = MclslTraitRegistration.IsGiftTrait(traitId);
         bool isRealm = MclslTraitRegistration.TryRealmForTrait(traitId, out string realm);
         bool isWorldSoulEntity = traitId == MclslTraitRegistration.WorldSoulEntityTraitId;
-        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity) return;
+        bool isProfession = MclslProfessionSystem.IsProfessionTrait(traitId);
+        bool isImmortalPath = MclslImmortalPathSystem.IsPathTrait(traitId);
+        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity && !isProfession && !isImmortalPath) return;
 
         MclslWorldActorQuery.Track(actor);
+        if (isProfession)
+        {
+            MclslProfessionSystem.OnTraitGranted(actor, traitId);
+            MarkAndRefresh(actor);
+            return;
+        }
+        if (isImmortalPath)
+        {
+            MclslImmortalPathSystem.OnTraitGranted(actor, traitId);
+            MarkAndRefresh(actor);
+            MclslActorInfoPanel.RefreshOpenForActor(actor);
+            return;
+        }
         if (isRealm || isGift) MclslTraitRegistration.TryAutoCollectTrait(actor, traitId);
 
         if (isHuanzhen)
@@ -64,10 +79,17 @@ internal static class MclslTraitGrantRouter
         if (actor?.data == null || string.IsNullOrWhiteSpace(traitId)) return;
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
+        if (MclslProfessionSystem.IsProfessionTrait(traitId))
+        {
+            MclslProfessionSystem.OnTraitRemoved(actor, traitId);
+            MarkAndRefresh(actor);
+            return;
+        }
         if (!MclslTraitRegistration.IsGiftTrait(traitId)
             && !MclslTraitRegistration.TryRealmForTrait(traitId, out _)
             && traitId != MclslTraitRegistration.HuanzhenTraitId
-            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId) return;
+            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId
+            && !MclslImmortalPathSystem.IsPathTrait(traitId)) return;
 
         MclslWorldActorQuery.Track(actor);
         MclslTraitRegistration.ReconcileTraitState(actor);

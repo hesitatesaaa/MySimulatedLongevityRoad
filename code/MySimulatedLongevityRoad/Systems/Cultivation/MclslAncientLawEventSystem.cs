@@ -249,17 +249,12 @@ internal static class MclslAncientLawEventSystem
         string[] tags = AncientLawTags(actor);
         int nameSeed = PositiveHash(MclslActorAccessor.Id(actor) + "|method_branch|" + year);
         string newName = MclslProceduralLexicon.TechniqueName(tags, nameSeed);
-        string parentTechniqueId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
-        string parentTechniqueName = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, oldTechnique);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueParentId, parentTechniqueId);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueParentName, parentTechniqueName);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, newName);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, "spiritual_branch_" + MclslWorldRunRepository.NextProceduralSequence());
         MclslTechniqueRealmLimit.SetProceduralBranchLimit(actor, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
         MclslTechniqueStageSystem.AddProgress(actor, 10);
         AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 8, 0, 100);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "开创新支", 14);
-        MclslTechniqueLineageSystem.RecordTechniqueBranch(year, actor, parentTechniqueId, parentTechniqueName);
         MclslWorldRunRepository.AddEvent(year, "ancient_new_method_branch", "法门新开", name + "由《" + oldTechnique + "》推演出《" + newName + "》，一支新传承由此分出。", actor);
     }
 

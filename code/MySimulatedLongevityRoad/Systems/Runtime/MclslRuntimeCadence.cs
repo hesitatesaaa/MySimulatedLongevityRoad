@@ -34,7 +34,8 @@ internal static class MclslRuntimeCadence
         // 年度队列只在共享调度令牌允许时运行。旧实现让任何积压绕过帧压
         // 策略、每个渲染帧都进入调度器；新法初开的大量角色因此会反过来
         // 压低 FPS。队列状态会持久化，故延后一帧不会丢失修炼结算。
-        bool annualBacklogDue = MclslScheduler.HasAnnualActorBacklog;
+        bool annualBacklogDue = MclslScheduler.HasAnnualActorBacklog
+            || MclslScheduler.HasAnnualCandidateBacklog;
         bool priorityFastDue = MclslScheduler.HasUrgentSimulationBacklog
             || (annualBacklogDue
                 && MclslRuntimeWorkBudget.ShouldRunAnnualActorPriorityPass());

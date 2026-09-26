@@ -194,6 +194,7 @@ internal static class MclslAdventureSystem
             }
             else if (ruin.Danger >= 85 && ruin.CasualtyCount >= 3) ruin.State = "封绝";
             else ruin.State = "残破";
+            MclslWorldRunRepository.NotifyMapMarkerDataChanged();
         }
     }
 
@@ -223,6 +224,7 @@ internal static class MclslAdventureSystem
         int valueLossChance = MclslInverseTruthSystem.IsTruthReversed("truth_player_trace_persistence") ? 24 : 45;
         ruin.RemainingValue = Math.Max(0, ruin.RemainingValue - (PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_value|" + year) % 100 < valueLossChance ? 1 : 0));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, experience + 1 + progressGain / 15);
+        MclslMaterialDiscovery.TryDiscover(actor, ruin, year, order);
         string reward = GrantRuinReward(actor, ruin, year, realmIndex, out string revivedTechniqueId, out string revivedTechniqueName, out string linkedLineageId);
         bool ancientPath = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;

@@ -6,6 +6,7 @@ namespace MySimulatedLongevityRoad.Systems;
 internal sealed class MclslAnnualWorldSnapshot
 {
     private static readonly Actor[] EmptyActors = System.Array.Empty<Actor>();
+    private static readonly List<Actor> ReusableLineageActors = new(1024);
 
     internal IReadOnlyList<Actor> LineageActors { get; }
 
@@ -14,27 +15,40 @@ internal sealed class MclslAnnualWorldSnapshot
         LineageActors = lineageActors ?? EmptyActors;
     }
 
-    internal static MclslAnnualWorldSnapshot Build(IReadOnlyList<Actor> lineageActors)
+    internal static Builder BeginBuild(IReadOnlyList<Actor> lineageActors)
     {
-        return new MclslAnnualWorldSnapshot(BuildLineageSnapshot(lineageActors));
+        ReusableLineageActors.Clear();
+        return new Builder(lineageActors, ReusableLineageActors);
     }
 
-    private static List<Actor> BuildLineageSnapshot(IReadOnlyList<Actor> actors)
+    internal sealed class Builder
     {
-        if (actors == null || actors.Count == 0) return new List<Actor>(0);
+        private readonly IReadOnlyList<Actor> _actors;
+        private readonly List<Actor> _result;
+        private readonly int _sourceCount;
+        private int _cursor;
 
-        List<Actor> result = new(actors.Count);
-        HashSet<long> seen = new();
-        for (int i = 0; i < actors.Count; i++)
+        internal Builder(IReadOnlyList<Actor> actors, List<Actor> result)
         {
-            Actor actor = actors[i];
-            if (!MclslHotPathPolicy.IsActorHotPathSafe(actor)) continue;
-            if (!MclslEligibility.CanCultivate(actor)) continue;
-            long id = MclslActorAccessor.Id(actor);
-            if (id <= 0L || !seen.Add(id)) continue;
-            result.Add(actor);
+            _actors = actors;
+            _result = result;
+            _sourceCount = actors?.Count ?? 0;
         }
 
-        return result;
+        internal bool Tick(int budget)
+        {
+            if (budget <= 0) return _cursor >= _sourceCount;
+            int end = System.Math.Min(_sourceCount, _cursor + budget);
+            for (; _cursor < end; _cursor++)
+            {
+                Actor actor = _actors[_cursor];
+                if (!MclslHotPathPolicy.IsActorHotPathSafe(actor)) continue;
+                if (!MclslEligibility.CanCultivate(actor)) continue;
+                _result.Add(actor);
+            }
+            return _cursor >= _sourceCount;
+        }
+
+        internal MclslAnnualWorldSnapshot Complete() => new(_result);
     }
 }

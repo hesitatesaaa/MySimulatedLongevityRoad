@@ -25,6 +25,7 @@ internal static class MclslActorInfoFormatter
             b.Append(Line("体系", Highlight(cultivation.CultivationSystemName, cultivation.IsSpiritualRootPath ? "#A6D8D1" : "#FFD37A")));
         if (MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()))
             b.Append(Line("所属组织", Highlight(FactionDisplay(cultivation.FactionAffiliation), "#B7A7FF")));
+        AppendProfession(b, actor);
         AppendFormerLife(b, actor);
         if (cultivation.IsSpiritualRootPath)
         {
@@ -94,6 +95,33 @@ internal static class MclslActorInfoFormatter
         string text = MclslTechniqueOccupationSystem.ConflictDisplayText(actor);
         if (!string.IsNullOrWhiteSpace(text))
             b.Append(Line("同法", Highlight(text, text.Contains("不可同修", StringComparison.Ordinal) ? "#FFD37A" : "#A7E08A")));
+    }
+
+    private static void AppendProfession(StringBuilder b, Actor actor)
+    {
+        if (actor?.data == null) return;
+        string profession = MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession, string.Empty);
+        if (string.IsNullOrWhiteSpace(profession)) profession = MclslProfessionSystem.FromTrait(actor);
+        string name = profession switch
+        {
+            MclslProfessionSystem.Alchemist => "炼丹师",
+            MclslProfessionSystem.TalismanMaker => "制符师",
+            MclslProfessionSystem.Refiner => "炼器师",
+            _ => string.Empty
+        };
+        if (string.IsNullOrEmpty(name)) return;
+
+        int grade = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0);
+        string gradeName = grade switch
+        {
+            0 => "学徒",
+            1 => "黄级",
+            2 => "玄级",
+            3 => "地级",
+            4 => "天级",
+            _ => "未定品阶"
+        };
+        b.Append(Line("职业", Highlight(name, "#D8C778") + " <color=#9CD7FF>" + gradeName + "</color>"));
     }
 
     private static string MclslTechniqueLineageName(string lineageId)

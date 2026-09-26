@@ -187,92 +187,140 @@ internal static class MclslInverseTruthSystem
 
     private static bool ApplyReversedTruthEffects(MclslWorldRunState run, int year)
     {
-        bool changed = false;
         IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
         if (actors == null || actors.Count == 0) return false;
+        bool chuanfa = HasReversed(run, "truth_chuanfa_new_law");
+        bool oneHeart = HasReversed(run, "truth_one_heart");
+        bool wuyou = HasReversed(run, "truth_wuyou");
+        bool wangsheng = HasReversed(run, "truth_wangsheng");
+        bool humanWill = HasReversed(run, "truth_human_will");
+        bool trueUnreal = HasReversed(run, "truth_true_unreal");
+        bool failureSteps = HasReversed(run, "truth_player_failure_steps");
+        bool weakNotFixed = HasReversed(run, "truth_player_weak_not_fixed");
+        bool dutyNotFixed = HasReversed(run, "truth_player_duty_not_fixed");
+        bool flawedDao = HasReversed(run, "truth_player_flawed_dao");
+        bool allLawsOne = HasReversed(run, "truth_player_all_laws_one");
+        bool reincarnationUnbroken = HasReversed(run, "truth_player_reincarnation_unbroken");
+        bool lifespanDrain = HasReversed(run, "truth_player_lifespan_drain");
+        bool hasLimitedEffects = chuanfa || oneHeart || wuyou || wangsheng || humanWill || trueUnreal
+            || failureSteps || weakNotFixed || dutyNotFixed || flawedDao || allLawsOne;
+        if (!hasLimitedEffects && !reincarnationUnbroken && !lifespanDrain) return false;
 
-        if (HasReversed(run, "truth_chuanfa_new_law"))
-            changed |= ApplyLimited(actors, year, "truth_chuanfa_new_law", 80,
-                actor => !MclslActorAccessor.IsCultivator(actor) && MclslEligibility.CanCultivate(actor),
-                actor => AddClamped(actor, MclslActorDataKeys.ImmortalFate, 2, 0, 100));
-
-        if (HasReversed(run, "truth_one_heart"))
-            changed |= ApplyLimited(actors, year, "truth_one_heart", 80,
-                actor => MclslActorAccessor.IsCultivator(actor),
-                actor => AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 1, 0, 9999));
-
-        if (HasReversed(run, "truth_wuyou"))
-            changed |= ApplyLimited(actors, year, "truth_wuyou", 80,
-                actor => MclslActorAccessor.IsCultivator(actor),
-                actor => AddClamped(actor, MclslActorDataKeys.MindState, 2, 0, 100));
-
-        if (HasReversed(run, "truth_wangsheng"))
-            changed |= ApplyLimited(actors, year, "truth_wangsheng", 50,
-                actor => MclslActorAccessor.IsCultivator(actor),
-                actor =>
-                {
-                    AddClamped(actor, MclslActorDataKeys.MindState, 1, 0, 100);
-                    AddClamped(actor, MclslActorDataKeys.HeartTemperingProgress, 1, 0, 100);
-                });
-
-        if (HasReversed(run, "truth_human_will"))
-            changed |= ApplyLimited(actors, year, "truth_human_will", 80,
-                actor => MclslEligibility.CanCultivate(actor),
-                actor =>
-                {
-                    if (MclslActorAccessor.IsCultivator(actor)) AddClamped(actor, MclslActorDataKeys.Contribution, 2, 0, 999999);
-                    else AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
-                });
-
-        if (HasReversed(run, "truth_true_unreal"))
-            changed |= ApplyLimited(actors, year, "truth_true_unreal", 60,
-                actor => MclslActorAccessor.IsCultivator(actor),
-                actor => AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999));
-
-        if (HasReversed(run, "truth_player_failure_steps"))
-            changed |= ApplyLimited(actors, year, "truth_player_failure_steps", 80,
-                actor => MclslActorAccessor.Realm(actor) == MclslRealmIds.JinDan,
-                actor => AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 100));
-
-        if (HasReversed(run, "truth_player_failure_steps"))
-            changed |= ApplyLimited(actors, year, "truth_player_failure_steps_divine", 80,
-                actor => MclslActorAccessor.Realm(actor) == MclslRealmIds.YuanYing,
-                actor => AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 100));
-
-        if (HasReversed(run, "truth_player_weak_not_fixed"))
-            changed |= ApplyLimited(actors, year, "truth_player_weak_not_fixed", 100,
-                actor => !MclslActorAccessor.IsCultivator(actor) && MclslEligibility.CanClaimWorldSoul(actor),
-                actor => AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100));
-
-        if (HasReversed(run, "truth_player_duty_not_fixed"))
-            changed |= ApplyLimited(actors, year, "truth_player_duty_not_fixed", 20,
-                actor => MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) >= MclslRealmIds.Index(MclslRealmIds.HeDao),
-                actor => AddClamped(actor, MclslActorDataKeys.HarmonyStability, 1, 0, 100));
-
-        if (HasReversed(run, "truth_player_flawed_dao"))
-            changed |= ApplyLimited(actors, year, "truth_player_flawed_dao", 80,
-                actor => MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw,
-                actor =>
-                {
-                    AddClamped(actor, MclslActorDataKeys.FoundationChanceBonus, 1, 0, 90);
-                    AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 95);
-                    AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 95);
-                });
-
-        if (HasReversed(run, "truth_player_all_laws_one"))
+        bool changed = allLawsOne && MclslTechniqueLineageSystem.TryFuseNewLawLineage(year);
+        int chuanfaCount = 0, oneHeartCount = 0, wuyouCount = 0, wangshengCount = 0;
+        int humanWillCount = 0, trueUnrealCount = 0, failureCount = 0, failureDivineCount = 0;
+        int weakCount = 0, dutyCount = 0, flawedCount = 0, allLawsCount = 0;
+        for (int i = 0; hasLimitedEffects && i < actors.Count; i++)
         {
-            changed |= MclslTechniqueLineageSystem.TryFuseNewLawLineage(year);
-            changed |= ApplyLimited(actors, year, "truth_player_all_laws_one", 80,
-                actor => MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw,
-                actor => AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999));
+            Actor actor = actors[i];
+            if (!MclslActorAccessor.Alive(actor)) continue;
+            long actorId = MclslActorAccessor.Id(actor);
+            bool cultivator = (chuanfa || oneHeart || wuyou || wangsheng || humanWill || trueUnreal || weakNotFixed)
+                && MclslActorAccessor.IsCultivator(actor);
+            bool needsCultivationEligibility = humanWill || (!cultivator && (chuanfa || weakNotFixed));
+            bool canCultivate = needsCultivationEligibility && MclslEligibility.CanCultivate(actor);
+
+            if (chuanfa && chuanfaCount < 80 && !cultivator && canCultivate
+                && PassesLimitedRoll(actorId, "truth_chuanfa_new_law", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.ImmortalFate, 2, 0, 100);
+                chuanfaCount++;
+                changed = true;
+            }
+            if (oneHeart && oneHeartCount < 80 && cultivator
+                && PassesLimitedRoll(actorId, "truth_one_heart", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 1, 0, 9999);
+                oneHeartCount++;
+                changed = true;
+            }
+            if (wuyou && wuyouCount < 80 && cultivator
+                && PassesLimitedRoll(actorId, "truth_wuyou", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.MindState, 2, 0, 100);
+                wuyouCount++;
+                changed = true;
+            }
+            if (wangsheng && wangshengCount < 50 && cultivator
+                && PassesLimitedRoll(actorId, "truth_wangsheng", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.MindState, 1, 0, 100);
+                AddClamped(actor, MclslActorDataKeys.HeartTemperingProgress, 1, 0, 100);
+                wangshengCount++;
+                changed = true;
+            }
+            if (humanWill && humanWillCount < 80 && canCultivate
+                && PassesLimitedRoll(actorId, "truth_human_will", year))
+            {
+                if (cultivator) AddClamped(actor, MclslActorDataKeys.Contribution, 2, 0, 999999);
+                else AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
+                humanWillCount++;
+                changed = true;
+            }
+            if (trueUnreal && trueUnrealCount < 60 && cultivator
+                && PassesLimitedRoll(actorId, "truth_true_unreal", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
+                trueUnrealCount++;
+                changed = true;
+            }
+
+            if (failureSteps || dutyNotFixed)
+            {
+                string realm = MclslActorAccessor.Realm(actor);
+                if (failureSteps && failureCount < 80 && realm == MclslRealmIds.JinDan
+                    && PassesLimitedRoll(actorId, "truth_player_failure_steps", year))
+                {
+                    AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 100);
+                    failureCount++;
+                    changed = true;
+                }
+                if (failureSteps && failureDivineCount < 80 && realm == MclslRealmIds.YuanYing
+                    && PassesLimitedRoll(actorId, "truth_player_failure_steps_divine", year))
+                {
+                    AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 100);
+                    failureDivineCount++;
+                    changed = true;
+                }
+                int realmIndex = dutyNotFixed ? MclslRealmIds.Index(realm) : -1;
+                if (dutyNotFixed && dutyCount < 20
+                    && realmIndex >= MclslRealmIds.Index(MclslRealmIds.HeDao)
+                    && PassesLimitedRoll(actorId, "truth_player_duty_not_fixed", year))
+                {
+                    AddClamped(actor, MclslActorDataKeys.HarmonyStability, 1, 0, 100);
+                    dutyCount++;
+                    changed = true;
+                }
+            }
+            if (weakNotFixed && weakCount < 100 && !cultivator && MclslEligibility.CanClaimWorldSoul(actor)
+                && PassesLimitedRoll(actorId, "truth_player_weak_not_fixed", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
+                weakCount++;
+                changed = true;
+            }
+            if (flawedDao && flawedCount < 80
+                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw
+                && PassesLimitedRoll(actorId, "truth_player_flawed_dao", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.FoundationChanceBonus, 1, 0, 90);
+                AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 95);
+                AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 95);
+                flawedCount++;
+                changed = true;
+            }
+            if (allLawsOne && allLawsCount < 80
+                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw
+                && PassesLimitedRoll(actorId, "truth_player_all_laws_one", year))
+            {
+                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
+                allLawsCount++;
+                changed = true;
+            }
         }
 
-        if (HasReversed(run, "truth_player_reincarnation_unbroken"))
-            changed |= MclslActorReincarnationSystem.TryApplyAnnual(year, actors);
-
-        if (HasReversed(run, "truth_player_lifespan_drain"))
-            changed |= ApplyLifespanDrain(actors, year);
-
+        if (reincarnationUnbroken) changed |= MclslActorReincarnationSystem.TryApplyAnnual(year, actors);
+        if (lifespanDrain) changed |= ApplyLifespanDrain(actors, year);
         return changed;
     }
 
@@ -286,10 +334,11 @@ internal static class MclslInverseTruthSystem
             string realm = MclslActorAccessor.Realm(receiver);
             int realmIndex = MclslRealmIds.Index(realm);
             if (realmIndex < MclslRealmIds.Index(MclslRealmIds.JinDan) || realm == MclslRealmIds.ChangSheng) continue;
-            if (StableHash(MclslActorAccessor.Id(receiver) + "|lifespan_drain|" + year) % 100 >= 18) continue;
+            long receiverId = MclslActorAccessor.Id(receiver);
+            if (StableHash(receiverId, "lifespan_drain", year) % 100 >= 18) continue;
             Actor donor = PickLifespanDonor(actors, receiver, year);
             if (donor == null) continue;
-            int requested = 8 + realmIndex * 3 + StableHash(MclslActorAccessor.Id(receiver) + "|lifespan_years|" + year) % 10;
+            int requested = 8 + realmIndex * 3 + StableHash(receiverId, "lifespan_years", year) % 10;
             if (!MclslLongevityRules.TryDrainYears(receiver, donor, requested, out int gained)) continue;
             MclslActorAccessor.Set(receiver, MclslActorDataKeys.LastBreakthroughResult, "寿元可夺：从" + MclslActorAccessor.DisplayName(donor) + "身上夺得寿元" + gained + "年");
             changed++;
@@ -300,7 +349,7 @@ internal static class MclslInverseTruthSystem
     private static Actor PickLifespanDonor(IReadOnlyList<Actor> actors, Actor receiver, int year)
     {
         if (actors == null || actors.Count == 0 || receiver == null) return null;
-        int start = StableHash(MclslActorAccessor.Id(receiver) + "|donor|" + year) % actors.Count;
+        int start = StableHash(MclslActorAccessor.Id(receiver), "donor", year) % actors.Count;
         int receiverRealm = MclslRealmIds.Index(MclslActorAccessor.Realm(receiver));
         for (int i = 0; i < actors.Count; i++)
         {
@@ -325,19 +374,7 @@ internal static class MclslInverseTruthSystem
         return false;
     }
 
-    private static bool ApplyLimited(IReadOnlyList<Actor> actors, int year, string truthId, int limit, Func<Actor, bool> filter, Action<Actor> apply)
-    {
-        int changed = 0;
-        for (int i = 0; i < actors.Count && changed < limit; i++)
-        {
-            Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor) || !filter(actor)) continue;
-            if (StableHash(MclslActorAccessor.Id(actor) + "|" + truthId + "|" + year) % 100 >= 35) continue;
-            apply(actor);
-            changed++;
-        }
-        return changed > 0;
-    }
+    private static bool PassesLimitedRoll(long actorId, string truthId, int year) => StableHash(actorId, truthId, year) % 100 < 35;
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
@@ -540,6 +577,33 @@ internal static class MclslInverseTruthSystem
     private static int StableHash(string value)
     {
         unchecked { int hash = 67; foreach (char c in value ?? string.Empty) hash = hash * 41 + c; return hash & int.MaxValue; }
+    }
+
+    private static int StableHash(long actorId, string middle, int year)
+    {
+        unchecked
+        {
+            int hash = 67;
+            hash = AppendPositiveNumber(hash, actorId);
+            hash = hash * 41 + '|';
+            for (int i = 0; i < middle.Length; i++) hash = hash * 41 + middle[i];
+            hash = hash * 41 + '|';
+            hash = AppendPositiveNumber(hash, year);
+            return hash & int.MaxValue;
+        }
+    }
+
+    private static int AppendPositiveNumber(int hash, long value)
+    {
+        if (value <= 0L) return hash * 41 + '0';
+        long divisor = 1L;
+        while (value / divisor >= 10L && divisor <= long.MaxValue / 10L) divisor *= 10L;
+        do
+        {
+            hash = hash * 41 + (int)('0' + value / divisor % 10L);
+            divisor /= 10L;
+        } while (divisor > 0L);
+        return hash;
     }
 
     private sealed class MclslInverseTruthContext

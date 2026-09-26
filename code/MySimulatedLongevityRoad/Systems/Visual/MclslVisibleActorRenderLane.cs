@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using MySimulatedLongevityRoad.Core;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems.Visual;
@@ -47,12 +48,16 @@ internal static class MclslVisibleActorRenderLane
 
         if (scanHalo)
         {
-            for (int i = 0; i < count; i++)
+            Vector3[] renderPositions = TryGetRenderPositions(manager.render_data);
+            using (MclslUnityProfiler.Sample("MCLS/Visual/HaloVisibleActorScan"))
             {
-                Actor actor = actors[i];
-                if (actor?.data == null) continue;
-                if (!TryGetRenderPosition(manager.render_data, i, actor, out Vector3 position)) continue;
-                MclslRealmHaloVisualSystem.ObserveVisibleActor(actor, position, frame);
+                for (int i = 0; i < count; i++)
+                {
+                    Actor actor = actors[i];
+                    if (actor?.data == null) continue;
+                    if (!TryGetRenderPosition(renderPositions, i, actor, out Vector3 position)) continue;
+                    MclslRealmHaloVisualSystem.ObserveVisibleActor(actor, position, frame);
+                }
             }
         }
 
@@ -90,21 +95,29 @@ internal static class MclslVisibleActorRenderLane
         return 0;
     }
 
-    private static bool TryGetRenderPosition(ActorRenderData renderData, int index, Actor actor, out Vector3 position)
+    private static Vector3[] TryGetRenderPositions(ActorRenderData renderData)
     {
-        position = default;
         try
         {
-            if (PositionsField != null
-                && PositionsField.GetValue(renderData) is Vector3[] positions
-                && index >= 0
-                && index < positions.Length)
-            {
-                position = positions[index];
-                return true;
-            }
+            return PositionsField?.GetValue(renderData) as Vector3[];
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception ex)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Error(
+                "visible-actor-render-positions",
+                "读取可见人物渲染位置失败: " + ex.Message);
+            return null;
+        }
+    }
+
+    private static bool TryGetRenderPosition(Vector3[] positions, int index, Actor actor, out Vector3 position)
+    {
+        position = default;
+        if (positions != null && index >= 0 && index < positions.Length)
+        {
+            position = positions[index];
+            return true;
+        }
 
         try
         {

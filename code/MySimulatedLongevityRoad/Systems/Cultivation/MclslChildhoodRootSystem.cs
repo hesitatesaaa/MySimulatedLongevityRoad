@@ -1,5 +1,4 @@
 using System;
-using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 
@@ -82,9 +81,8 @@ internal static class MclslChildhoodRootSystem
     private static bool HasSpiritualRoot(Actor actor, int year)
     {
         const int ageFiveSeed = 5;
-        return MclslAptitudeGiftCatalog.RollQualification(
-            MclslActorAccessor.Id(actor) + "|childhood_root|" + ageFiveSeed,
-            MclslRuntimeSettings.ChildhoodRootChancePercent);
+        return MclslAptitudeGiftCatalog.RollQualification(MclslActorAccessor.Id(actor) + "|childhood_root|" + ageFiveSeed,
+            MySimulatedLongevityRoad.Core.MclslRuntimeSettings.ChildhoodRootChancePercent);
     }
 
     private static bool IsRootCheckAgeYear(int ageYear)

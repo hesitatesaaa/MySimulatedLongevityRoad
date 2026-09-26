@@ -17,9 +17,17 @@ internal static class MclslTraitRegistration
     private const string AncientRealmGroupId = "MclslAncientRealms";
     private const string GiftGroupId = "MclslGifts";
     private const string SpecialGroupId = "MclslSpecial";
+    private const string ProfessionGroupId = "MclslProfessions";
+    private const string ImmortalPathGroupId = "MclslImmortalPaths";
+    internal const string AlchemistTraitId = "MclslProfessionAlchemist";
+    internal const string RefinerTraitId = "MclslProfessionRefiner";
+    internal const string TalismanTraitId = "MclslProfessionTalisman";
     internal const string NativeImmortalTraitId = "immortal";
     internal const string HuanzhenTraitId = "MclslHuanzhen";
     internal const string WorldSoulEntityTraitId = "MclslWorldSoulEntity";
+    internal const string PathHuaShenTraitId = "MclslPathHuaShen";
+    internal const string PathHeDaoTraitId = "MclslPathHeDao";
+    internal const string PathChangShengTraitId = "MclslPathChangSheng";
     private static bool _initialized;
     private static bool _reconciling;
     private static bool? _lastRealmEditorNewLawState;
@@ -208,6 +216,8 @@ internal static class MclslTraitRegistration
         EnsureGroup(AncientRealmGroupId, "仙道境界", "#A6D8D1");
         EnsureGroup(GiftGroupId, "灵根品阶", "#C8D48F");
         EnsureGroup(SpecialGroupId, "长生路特殊", "#D8C778");
+        EnsureGroup(ProfessionGroupId, "职业", "#D3B878");
+        EnsureGroup(ImmortalPathGroupId, "仙路", "#D3A8E7");
 
         AddRealm(MclslRealmIds.LianQi, "trait/realm_1", 1, 200f, 100f, 20f, 0.2f, 0f, false);
         AddRealm(MclslRealmIds.ZhuJi, "trait/realm_2", 2, 300f, 10000f, 1000f, 1.2f, 70f, false);
@@ -229,6 +239,14 @@ internal static class MclslTraitRegistration
             AddGift(gift);
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
+        MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
+        AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。");
+        AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。");
+        AddProfession(TalismanTraitId, "trait/MclslProfessionTalisman", "制符师", "使用灵符纸与灵材制作一次性符箓。");
+        AddImmortalPathTrait(PathHuaShenTraitId, "trait/MclslPathHuaShen", "神化天资", "天生道心映神，逐境修行可至化神；化神之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足洞天与天地资源之门槛。自然显现概率为0.5%。");
+        AddImmortalPathTrait(PathHeDaoTraitId, "trait/MclslPathHeDao", "合道圣胎", "先天圣胎与天地相契，逐境修行可至合道；目标境界之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足天地之魄与归属条件。仅可手动授予。");
+        AddImmortalPathTrait(PathChangShengTraitId, "trait/MclslPathChangSheng", "长生道种", "道种蕴生机，逐境修行可至长生；目标境界之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足世界资源、席位与长生道果条件。仅可手动授予。");
+        MclslLocalizationBridge.RegisterKey("trait_group_" + ImmortalPathGroupId, "仙路");
         AddSpecial(WorldSoulEntityTraitId, "trait/TianDiZhiPo", false, false, 2500f, 2500000f, 250000f, 2.35f, 240f);
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
@@ -870,6 +888,33 @@ internal static class MclslTraitRegistration
         if (string.Equals(id, WorldSoulEntityTraitId, StringComparison.Ordinal))
             ApplyWorldSoulEntityStats(trait.base_stats);
         if (add) AssetManager.traits.add(trait);
+    }
+
+    private static void AddProfession(string id, string icon, string displayName, string description)
+    {
+        RegisterProfessionText(id, displayName, description);
+        AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
+        ActorTrait trait = AssetManager.traits.get(id);
+        if (trait != null) trait.group_id = ProfessionGroupId;
+    }
+
+    private static void AddImmortalPathTrait(string id, string icon, string displayName, string description)
+    {
+        MclslLocalizationBridge.RegisterKey(id, displayName);
+        MclslLocalizationBridge.RegisterKey(id + " Description", description);
+        AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
+        ActorTrait trait = AssetManager.traits.get(id);
+        if (trait != null) trait.group_id = ImmortalPathGroupId;
+    }
+
+    private static void RegisterProfessionText(string id, string displayName, string description)
+    {
+        MclslLocalizationBridge.RegisterKey(id, displayName);
+        MclslLocalizationBridge.RegisterKey(id + " Description", description);
+        // WorldBox versions differ on whether the trait editor requests the raw
+        // locale key or its trait_-prefixed alias. Register both to keep IDs internal.
+        MclslLocalizationBridge.RegisterKey("trait_" + id, displayName);
+        MclslLocalizationBridge.RegisterKey("trait_" + id + " Description", description);
     }
 
     private static void ApplyWorldSoulEntityStats(BaseStats statsBlock)

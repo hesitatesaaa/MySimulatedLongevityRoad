@@ -13,6 +13,25 @@ internal static class MclslTechniqueOccupationSystem
     private static readonly Dictionary<long, Actor> RegisteredActors = new();
     private static readonly Dictionary<string, List<long>> PractitionerIdsByTechnique = new(StringComparer.Ordinal);
     private static readonly HashSet<string> ResolvedTechniquesThisYear = new(StringComparer.Ordinal);
+    private static readonly List<LegacyTechniqueCandidate> LegacyTechniqueCandidates = new();
+    private static IReadOnlyList<Actor> _legacyTechniqueScanActors;
+    private static MclslWorldRunState _legacyTechniqueScanRun;
+    private static int _legacyTechniqueScanCursor;
+    private static int _legacyTechniqueApplyCursor;
+    private static string _legacyTechniqueApplyGroupId;
+    private static int _legacyTechniqueApplyGroupIndex;
+    private static int _legacyTechniqueApplyGroupStart;
+    private static int _legacyTechniqueApplyGroupEnd;
+    private static bool _legacyTechniqueMigrationActive;
+    private static bool _legacyTechniqueMigrationChanged;
+
+    private struct LegacyTechniqueCandidate
+    {
+        internal Actor Actor;
+        internal long ActorId;
+        internal string BaseTechniqueId;
+        internal MclslTechniqueDefinition BaseTechnique;
+    }
 
     // 每部固定母法提供六十四个真实异法版本（含母法本身）。只改变功法ID与名称，
     // 法则、境界上限继续复用母法，不建立额外实体或年度生成器。
@@ -92,6 +111,123 @@ internal static class MclslTechniqueOccupationSystem
                 "旧有固定功法记录已按修士差异分化为多部同源异法，仙法不可同修的计数由此恢复正常。");
         MclslWorldArchiveStore.MarkDirty();
     }
+
+    /// <summary>
+    /// Runs the one-time legacy technique distribution in bounded slices. Annual Prepare
+    /// waits for completion before resolving year events, preserving the prior ordering
+    /// without putting a population-wide migration into the year-transition frame.
+    /// </summary>
+    internal static bool TickLegacyTechniqueMigration(IReadOnlyList<Actor> units, int budget = 192)
+    {
+        const string migrationKey = "migration_newlaw_derived_methods_v1";
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run?.LawConflictEnabled != true || run.FiredHistoricalEvents?.Contains(migrationKey) == true)
+        {
+            ResetLegacyTechniqueMigration();
+            return true;
+        }
+
+        if (!_legacyTechniqueMigrationActive || !ReferenceEquals(run, _legacyTechniqueScanRun))
+            BeginLegacyTechniqueMigration(units, run);
+
+        if (budget <= 0) return false;
+        int processed = 0;
+        while (_legacyTechniqueScanCursor < _legacyTechniqueScanActors.Count && processed < budget)
+        {
+            Actor actor = _legacyTechniqueScanActors[_legacyTechniqueScanCursor++];
+            processed++;
+            if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) continue;
+            if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.NewLaw) continue;
+            string id = TechniqueId(actor);
+            if (!MclslCultivationCatalog.TryTechnique(id, out MclslTechniqueDefinition definition) || definition == null || definition.Id != id) continue;
+            LegacyTechniqueCandidates.Add(new LegacyTechniqueCandidate
+            {
+                Actor = actor,
+                ActorId = MclslActorAccessor.Id(actor),
+                BaseTechniqueId = id,
+                BaseTechnique = definition
+            });
+        }
+
+        if (_legacyTechniqueScanCursor < _legacyTechniqueScanActors.Count) return false;
+        if (_legacyTechniqueApplyCursor == 0 && LegacyTechniqueCandidates.Count > 1)
+            LegacyTechniqueCandidates.Sort(CompareLegacyTechniqueCandidates);
+
+        int applyCount = 0;
+        while (_legacyTechniqueApplyCursor < LegacyTechniqueCandidates.Count && applyCount < budget)
+        {
+            int candidateIndex = _legacyTechniqueApplyCursor++;
+            LegacyTechniqueCandidate candidate = LegacyTechniqueCandidates[candidateIndex];
+            applyCount++;
+
+            if (!string.Equals(_legacyTechniqueApplyGroupId, candidate.BaseTechniqueId, StringComparison.Ordinal))
+            {
+                _legacyTechniqueApplyGroupId = candidate.BaseTechniqueId;
+                _legacyTechniqueApplyGroupIndex = 0;
+                _legacyTechniqueApplyGroupEnd = candidateIndex + 1;
+                while (_legacyTechniqueApplyGroupEnd < LegacyTechniqueCandidates.Count
+                    && string.Equals(LegacyTechniqueCandidates[_legacyTechniqueApplyGroupEnd].BaseTechniqueId, candidate.BaseTechniqueId, StringComparison.Ordinal))
+                    _legacyTechniqueApplyGroupEnd++;
+                _legacyTechniqueApplyGroupStart = StableHash((_legacyTechniqueScanRun.RunId ?? string.Empty)
+                    + "|legacy_method_distribution|" + candidate.BaseTechniqueId) % VariantsPerBaseTechnique;
+            }
+            int groupOffset = _legacyTechniqueApplyGroupIndex++;
+            int groupCount = _legacyTechniqueApplyGroupEnd - (candidateIndex - groupOffset);
+            if (groupCount <= 1) continue;
+            if (!MclslActorAccessor.Alive(candidate.Actor) || !MclslActorAccessor.IsCultivator(candidate.Actor)
+                || TechniqueId(candidate.Actor) != candidate.BaseTechniqueId) continue;
+
+            int variant = (_legacyTechniqueApplyGroupStart + groupOffset) % VariantsPerBaseTechnique;
+            MclslTechniqueDefinition assigned = VariantDefinition(candidate.BaseTechnique, variant);
+            if (assigned == null || TechniqueId(candidate.Actor) == assigned.Id) continue;
+            MclslActorAccessor.Set(candidate.Actor, MclslActorDataKeys.TechniqueId, assigned.Id);
+            MclslActorAccessor.Set(candidate.Actor, MclslActorDataKeys.TechniqueName, assigned.Name);
+            MclslTechniqueRealmLimit.EnsureFromDefinition(candidate.Actor, assigned);
+            _legacyTechniqueMigrationChanged = true;
+        }
+
+        if (_legacyTechniqueApplyCursor < LegacyTechniqueCandidates.Count) return false;
+
+        run.FiredHistoricalEvents ??= new List<string>();
+        if (!run.FiredHistoricalEvents.Contains(migrationKey)) run.FiredHistoricalEvents.Add(migrationKey);
+        if (_legacyTechniqueMigrationChanged)
+            MclslWorldRunRepository.AddEvent(MclslRuntime.CurrentYear(), "newlaw_method_diversification", "新法诸功分流",
+                "旧有固定功法记录已按修士差异分化为多部同源异法，仙法不可同修的计数由此恢复正常。");
+        MclslWorldArchiveStore.MarkDirty();
+        ResetLegacyTechniqueMigration();
+        return true;
+    }
+
+    private static void BeginLegacyTechniqueMigration(IReadOnlyList<Actor> units, MclslWorldRunState run)
+    {
+        ResetLegacyTechniqueMigration();
+        _legacyTechniqueScanActors = units ?? System.Array.Empty<Actor>();
+        _legacyTechniqueScanRun = run;
+        _legacyTechniqueMigrationActive = true;
+    }
+
+    private static int CompareLegacyTechniqueCandidates(LegacyTechniqueCandidate a, LegacyTechniqueCandidate b)
+    {
+        int technique = string.CompareOrdinal(a.BaseTechniqueId, b.BaseTechniqueId);
+        return technique != 0 ? technique : a.ActorId.CompareTo(b.ActorId);
+    }
+
+    private static void ResetLegacyTechniqueMigration()
+    {
+        LegacyTechniqueCandidates.Clear();
+        _legacyTechniqueScanActors = null;
+        _legacyTechniqueScanRun = null;
+        _legacyTechniqueScanCursor = 0;
+        _legacyTechniqueApplyCursor = 0;
+        _legacyTechniqueApplyGroupId = null;
+        _legacyTechniqueApplyGroupIndex = 0;
+        _legacyTechniqueApplyGroupStart = 0;
+        _legacyTechniqueApplyGroupEnd = 0;
+        _legacyTechniqueMigrationActive = false;
+        _legacyTechniqueMigrationChanged = false;
+    }
+
+    internal static void CancelLegacyTechniqueMigration() => ResetLegacyTechniqueMigration();
 
     internal static float CultivationMultiplier(Actor actor)
     {
@@ -402,6 +538,8 @@ internal static class MclslTechniqueOccupationSystem
         if (actor?.data != null) Unregister(MclslActorAccessor.Id(actor));
     }
 
+    internal static void Forget(long actorId) => Unregister(actorId);
+
     internal static void OnTechniqueChanged(Actor actor, string oldTechniqueId, string newTechniqueId) => RefreshRegistration(actor, MclslCultivationCatalog.NormalizeTechniqueId(newTechniqueId));
     internal static void OnCultivationStateChanged(Actor actor) => RefreshRegistration(actor, TechniqueId(actor));
 
@@ -435,6 +573,7 @@ internal static class MclslTechniqueOccupationSystem
         _annualStruggleCount = 0;
         AnnualTechniquePools.Clear();
         _techniquePoolYear = -1;
+        ResetLegacyTechniqueMigration();
     }
 
     private static void RefreshRegistration(Actor actor, string newTechniqueId)

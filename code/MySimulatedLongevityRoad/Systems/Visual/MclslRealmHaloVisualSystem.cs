@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Traits;
@@ -13,13 +14,13 @@ internal static class MclslRealmHaloVisualSystem
     private const int FrameStep = 3;
     private const float FrameIntervalSeconds = 0.08f;
     private const int VisibleScanCadenceFrames = 10;
-    private const int CleanupIntervalFrames = 45;
+    private const int CleanupQueueBudget = 12;
     private const int StaleFrameThreshold = 24;
 
     private static readonly Dictionary<string, Sprite[]> FramesByFolder = new(StringComparer.Ordinal);
     private static readonly Dictionary<long, HaloEntry> EntriesByActorId = new(64);
-    private static readonly List<long> CleanupBuffer = new(64);
-    private static int _lastCleanupFrame = -1;
+    private static readonly List<HaloEntry> ActiveEntries = new(64);
+    private static readonly Queue<CleanupTicket> CleanupQueue = new(128);
     private static int _lastVisibleScanFrame = -1;
 
     internal static bool BeginRenderFrame(int frame)
@@ -43,6 +44,12 @@ internal static class MclslRealmHaloVisualSystem
         entry.Profile = profile;
         entry.LastSeenFrame = frame;
         entry.LastRenderPosition = position;
+        if (!entry.IsActive)
+        {
+            entry.IsActive = true;
+            ActiveEntries.Add(entry);
+        }
+        CancelCleanup(entry);
 
         if (!string.Equals(entry.Folder, profile.Folder, StringComparison.Ordinal)
             || !ReferenceEquals(entry.BoundFrames, frames))
@@ -62,10 +69,12 @@ internal static class MclslRealmHaloVisualSystem
 
     internal static void EndRenderFrame(int frame, int lodLevel)
     {
-        UpdateExistingEntries(frame, lodLevel);
-        if (_lastCleanupFrame < 0 || frame - _lastCleanupFrame >= CleanupIntervalFrames)
+        using (MclslUnityProfiler.Sample("MCLS/Visual/HaloActiveUpdates"))
+            UpdateExistingEntries(frame, lodLevel);
+        if (CleanupQueue.Count > 0)
         {
-            Cleanup(frame, false);
+            using (MclslUnityProfiler.Sample("MCLS/Visual/HaloStaleCleanupBatch"))
+                Cleanup(frame);
         }
     }
 
@@ -73,25 +82,36 @@ internal static class MclslRealmHaloVisualSystem
     {
         foreach (HaloEntry entry in EntriesByActorId.Values) DestroyEntry(entry);
         EntriesByActorId.Clear();
-        CleanupBuffer.Clear();
+        ActiveEntries.Clear();
+        CleanupQueue.Clear();
         FramesByFolder.Clear();
-        _lastCleanupFrame = -1;
         _lastVisibleScanFrame = -1;
         MclslWorldSpriteRenderLayer.ResetActorLayerCache();
     }
 
     private static void UpdateExistingEntries(int frame, int lodLevel)
     {
-        foreach (HaloEntry entry in EntriesByActorId.Values)
+        for (int i = ActiveEntries.Count - 1; i >= 0; i--)
         {
+            HaloEntry entry = ActiveEntries[i];
             if (entry == null || entry.Transform == null || entry.Renderer == null || entry.Actor?.data == null)
             {
+                if (entry != null)
+                {
+                    entry.IsActive = false;
+                    if (entry.GameObject != null) entry.GameObject.SetActive(false);
+                    ScheduleCleanup(entry);
+                }
+                ActiveEntries.RemoveAt(i);
                 continue;
             }
 
             if (frame - entry.LastSeenFrame > VisibleScanCadenceFrames + 2)
             {
                 if (entry.GameObject != null) entry.GameObject.SetActive(false);
+                entry.IsActive = false;
+                ScheduleCleanup(entry);
+                ActiveEntries.RemoveAt(i);
                 continue;
             }
 
@@ -231,7 +251,7 @@ internal static class MclslRealmHaloVisualSystem
             DisableNativeAnimator(effect);
 
             renderer.color = Color.white;
-            entry = new HaloEntry(actor, effect, component.gameObject, component.transform, renderer, profile, frames, position);
+            entry = new HaloEntry(actorId, actor, effect, component.gameObject, component.transform, renderer, profile, frames, position);
             EntriesByActorId[actorId] = entry;
             return entry;
         }
@@ -306,28 +326,49 @@ internal static class MclslRealmHaloVisualSystem
         catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
-    private static void Cleanup(int frame, bool force)
+    private static void ScheduleCleanup(HaloEntry entry)
     {
-        _lastCleanupFrame = frame;
-        CleanupBuffer.Clear();
-        foreach (KeyValuePair<long, HaloEntry> pair in EntriesByActorId)
+        if (entry == null || entry.CleanupPending) return;
+        entry.CleanupPending = true;
+        entry.CleanupGeneration = unchecked(entry.CleanupGeneration + 1);
+        CleanupQueue.Enqueue(new CleanupTicket(entry.ActorId, entry.CleanupGeneration));
+    }
+
+    private static void CancelCleanup(HaloEntry entry)
+    {
+        if (entry == null || !entry.CleanupPending) return;
+        entry.CleanupPending = false;
+        entry.CleanupGeneration = unchecked(entry.CleanupGeneration + 1);
+    }
+
+    private static void Cleanup(int frame)
+    {
+        int budget = Math.Min(CleanupQueueBudget, CleanupQueue.Count);
+        for (int i = 0; i < budget; i++)
         {
-            HaloEntry entry = pair.Value;
-            bool remove = force
+            CleanupTicket ticket = CleanupQueue.Dequeue();
+            long actorId = ticket.ActorId;
+            if (!EntriesByActorId.TryGetValue(actorId, out HaloEntry entry)
                 || entry == null
-                || entry.Actor?.data == null
+                || !entry.CleanupPending
+                || ticket.Generation != entry.CleanupGeneration) continue;
+
+            bool remove = entry.Actor?.data == null
                 || !entry.Actor.isAlive()
                 || frame - entry.LastSeenFrame > StaleFrameThreshold;
-            if (remove) CleanupBuffer.Add(pair.Key);
-        }
+            if (!remove)
+            {
+                // Keep active actors eligible for reuse if they become visible
+                // again before the stale-entry cleanup reaches them.
+                CleanupQueue.Enqueue(ticket);
+                continue;
+            }
 
-        for (int i = 0; i < CleanupBuffer.Count; i++)
-        {
-            long actorId = CleanupBuffer[i];
-            if (EntriesByActorId.TryGetValue(actorId, out HaloEntry entry)) DestroyEntry(entry);
+            entry.CleanupPending = false;
+            entry.IsActive = false;
             EntriesByActorId.Remove(actorId);
+            DestroyEntry(entry);
         }
-        CleanupBuffer.Clear();
     }
 
     private static void DestroyEntry(HaloEntry entry)
@@ -372,9 +413,22 @@ internal static class MclslRealmHaloVisualSystem
         internal float YOffset { get; }
     }
 
+    private readonly struct CleanupTicket
+    {
+        internal CleanupTicket(long actorId, int generation)
+        {
+            ActorId = actorId;
+            Generation = generation;
+        }
+
+        internal long ActorId { get; }
+        internal int Generation { get; }
+    }
+
     private sealed class HaloEntry
     {
         internal HaloEntry(
+            long actorId,
             Actor actor,
             BaseEffect effect,
             GameObject gameObject,
@@ -384,6 +438,7 @@ internal static class MclslRealmHaloVisualSystem
             Sprite[] frames,
             Vector3 position)
         {
+            ActorId = actorId;
             Actor = actor;
             Effect = effect;
             GameObject = gameObject;
@@ -396,6 +451,7 @@ internal static class MclslRealmHaloVisualSystem
             LastSeenFrame = Time.frameCount;
         }
 
+        internal long ActorId { get; }
         internal Actor Actor { get; set; }
         internal BaseEffect Effect { get; }
         internal GameObject GameObject { get; }
@@ -407,5 +463,8 @@ internal static class MclslRealmHaloVisualSystem
         internal Vector3 LastRenderPosition { get; set; }
         internal int LastSeenFrame { get; set; }
         internal float LastAppliedScale { get; set; }
+        internal bool IsActive { get; set; }
+        internal bool CleanupPending { get; set; }
+        internal int CleanupGeneration { get; set; }
     }
 }

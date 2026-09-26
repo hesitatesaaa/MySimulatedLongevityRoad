@@ -63,6 +63,7 @@
 
   <ItemGroup>
     <Compile Remove="DeveloperTools\**\*.cs" Condition="'$(IncludeDeveloperTools)' != 'true'" />
+    <Compile Remove="code\MySimulatedLongevityRoad\DeveloperTools\**\*.cs" Condition="'$(IncludeDeveloperTools)' != 'true'" />
     <Compile Remove="references\**\*.cs" />
     <Compile Remove=".recovered\**\*.cs" />
     <Compile Remove="code_broken_*\**\*.cs" />

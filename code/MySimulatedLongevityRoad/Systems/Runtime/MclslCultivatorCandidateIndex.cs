@@ -138,6 +138,7 @@ internal static class MclslCultivatorCandidateIndex
         bool changed = SetCultivator(actorId, false);
         changed |= SetAnnualCandidate(actorId, false);
         changed |= SetRealm(actorId, string.Empty);
+        MclslTechniqueOccupationSystem.Forget(actorId);
         if (changed) MclslWorldActorQuery.MarkDirty();
     }
 
@@ -152,26 +153,33 @@ internal static class MclslCultivatorCandidateIndex
         return _annualCandidateSnapshot;
     }
 
-    internal static void RefreshAnnualCandidatesFromKnownActors(int budget = 512)
+    internal static void BeginAnnualCandidateRefresh()
+    {
+        _knownRefreshCursor = 0;
+    }
+
+    internal static bool RefreshAnnualCandidatesFromKnownActors(int budget = 512)
     {
         IReadOnlyList<Actor> actors = MclslActorRegistry.Snapshot();
-        if (actors.Count == 0 || budget <= 0)
+        if (actors.Count == 0)
         {
             _knownRefreshCursor = 0;
-            return;
+            return true;
         }
+        if (budget <= 0) return false;
 
         if (_knownRefreshCursor >= actors.Count) _knownRefreshCursor = 0;
-        int processed = 0;
-        int limit = Math.Min(budget, actors.Count);
-        while (processed < limit && actors.Count > 0)
+        int limit = Math.Min(budget, actors.Count - _knownRefreshCursor);
+        for (int processed = 0; processed < limit; processed++)
         {
-            if (_knownRefreshCursor >= actors.Count) _knownRefreshCursor = 0;
             Actor actor = actors[_knownRefreshCursor++];
-            processed++;
             if (actor?.data == null || !MclslActorAccessor.Alive(actor)) continue;
             if (ObserveCultivationState(actor)) MclslWorldActorQuery.MarkDirty();
         }
+
+        if (_knownRefreshCursor < actors.Count) return false;
+        _knownRefreshCursor = 0;
+        return true;
     }
 
     internal static IReadOnlyList<Actor> GetKnownActorsSnapshot()
@@ -364,8 +372,14 @@ internal static class MclslCultivatorCandidateIndex
         changed |= SetAnnualCandidate(actorId, annualCandidate);
         changed |= SetRealm(actorId, cultivator ? MclslActorAccessor.Realm(actor) : string.Empty);
 
-        if (cultivator && !wasCultivator)
-            MclslLegacyActorDataRepair.RepairTechnique(actor);
+        if (cultivator)
+        {
+            if (!wasCultivator) MclslLegacyActorDataRepair.RepairTechnique(actor);
+            // Reconcile the technique index while the annual known-actor scan is
+            // already visiting this actor. This replaces a full index rebuild once
+            // per year and also catches state changes made outside our own writers.
+            MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
+        }
         return changed;
     }
 

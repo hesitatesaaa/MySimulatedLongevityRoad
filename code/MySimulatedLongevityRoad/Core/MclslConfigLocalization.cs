@@ -11,6 +11,10 @@ internal static class MclslConfigLocalization
         if (_initialized) return;
         _initialized = true;
 
+        Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。");
+        Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；10代表1.0%。三职业互斥。");
+        Register("MCLSL_config_refiner_chance", "炼器师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；15代表1.5%。三职业互斥。");
+        Register("MCLSL_config_talisman_chance", "制符师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；20代表2.0%。三职业互斥。");
         Register("MCLSL_config_enable_death_announcements", "启用修士陨落公告", "高境修士死亡时发布玄黄界公告。");
         Register("MCLSL_config_enable_breakthrough_failure_announcements", "显示破境失败记录", "控制仙道破境失败是否写入玄黄仙录；金丹以下默认不入录，收藏角色除外。");
         Register("MCLSL_config_enable_yuanying_breakthrough_announcements", "启用元婴突破公告", "角色成就元婴时发布玄黄界公告；关闭后仍写入玄黄仙录。");
@@ -28,6 +32,7 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_enable_faction_policy_announcements", "显示仙盟五老施政提示", "万仙盟或五老会改变施政方略时显示顶部提示；势力影响与委托仍正常结算。");
         Register("MCLSL_config_enable_survival_announcements", "显示洞天避劫提示", "元婴借洞天避过死劫时显示顶部提示；关闭后保命与洞天损耗仍正常生效。");
         Register("MCLSL_config_show_fps", "显示帧率", "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。");
+        Register("MCLSL_config_item_acquisition_history_enabled", "显示物品获取记事", "开启后，地阶及以上材料与职业制作的丹药、法宝、符箓会记入仙缘宝录；关闭只停止新增记事，不影响物品获取与天阶材料世界公告。");
         Register("MCLSL_config_enable_huanzhen", "启用还真轮回", "开启本世轮回与档案封存逻辑。");
         Register("MCLSL_config_auto_huanzhen_anchor", "自动建立还真锚点", "灵蕴达到八十点且满足安全间隔时自动建立锚点；锚点满后自动替换最旧的一枚。");
         Register("MCLSL_config_huanzhen_anchor_interval", "自动锚点间隔", "自动建立或替换还真锚点之间至少相隔的世界年份；手动锚定不受此项限制。");
@@ -35,7 +40,6 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_auto_collect_huanzhen_host", "还真宿主自动收藏（原版）", "还真宿主出现后自动加入 WorldBox 原版人物收藏；猫宝仍须手动刻名。");
         Register("MCLSL_config_auto_collect_maobao_inscription", "猫宝刻名自动收藏（原版）", "玩家手动刻名或刷新留影成功后，将人物加入 WorldBox 原版收藏；不会自动刻名。");
         Register("MCLSL_config_transmission_year", "传法变世年份", "控制仙道纪元持续年数；仙道纪元会按此年份自动分段。");
-        Register("MCLSL_config_childhood_root_chance_percent", "幼年灵根显现概率", "只影响尚未完成灵根判定的小人；五岁判定、六岁容错和稳定随机种子保持不变。");
         Register("MCLSL_config_auto_collect_yuanying", "元婴自动收藏", "角色成就元婴时自动加入收藏。");
         Register("MCLSL_config_auto_collect_huashen", "化神自动收藏", "角色成就化神时自动加入收藏。");
         Register("MCLSL_config_auto_collect_hedao", "合道自动收藏", "角色成就合道时自动加入收藏。");

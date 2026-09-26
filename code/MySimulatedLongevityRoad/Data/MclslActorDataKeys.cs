@@ -2,11 +2,18 @@ namespace MySimulatedLongevityRoad.Data;
 
 internal static class MclslActorDataKeys
 {
+    internal const string QiankunBag = "mclsl.v020.qiankun_bag";
+    internal const string Profession = "mclsl.v020.profession";
+    internal const string ProfessionGrade = "mclsl.v020.profession_grade";
+    internal const string ProfessionExperience = "mclsl.v020.profession_experience";
+    internal const string ProfessionChecked = "mclsl.v020.profession_checked";
+    internal const string ProfessionLastCraftYear = "mclsl.v020.profession_last_craft_year";
     internal const string Realm = "mclsl.realm";
     internal const string RealmEnteredYear = "mclsl.realm.entered_year";
     internal const string ImmortalFate = "mclsl.immortal_fate";
     internal const string MortalSeparationChecked = "mclsl.mortal_separation.checked";
     internal const string ChildhoodRootChecked = "mclsl.childhood_root.checked";
+    internal const string ImmortalPathChecked = "mclsl.immortal_path.checked";
     internal const string CultivationSystem = "mclsl.cultivation.system";
     internal const string AncientLawProcessed = "mclsl.ancient_law.processed";
     internal const string AncientLawTribulation = "mclsl.ancient_law.tribulation";
@@ -64,8 +71,6 @@ internal static class MclslActorDataKeys
     internal const string LastResourceSpendYear = "mclsl.resource.last_spend_year";
     internal const string TechniqueId = "mclsl.technique.id";
     internal const string TechniqueName = "mclsl.technique.name";
-    internal const string TechniqueParentId = "mclsl.technique.parent_id";
-    internal const string TechniqueParentName = "mclsl.technique.parent_name";
     internal const string TechniqueMaxRealm = "mclsl.technique.max_realm";
     internal const string FoundationWonderId = "mclsl.foundation_wonder.id";
     internal const string FoundationWonderName = "mclsl.foundation_wonder.name";

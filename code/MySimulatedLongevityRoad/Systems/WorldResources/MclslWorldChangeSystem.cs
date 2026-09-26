@@ -374,6 +374,7 @@ internal static class MclslWorldChangeSystem
         {
             MclslCultivationSystem.SetRealm(actor, MclslRealmIds.HuaShen, year, "自“" + change.Name + "”抽得天地之髓“" + marrow.Name + "”，成就化神");
             MclslResourceSystem.GrantWorldChangeReward(actor, change.Quality, compatibility, contenderCount);
+            MclslMaterialDiscovery.TryDiscoverOpportunity(actor, year, "world_change_extraction", change.Id + "|" + change.ExtractedCount, change.Quality);
             string contest = contenderCount > 1 ? "压过" + (contenderCount - 1) + "名元婴后，" : string.Empty;
             string relation = MclslLawInteractionCatalog.Detail(
                 MclslGeneratedObjectFactory.SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentEssenceTags,
@@ -391,6 +392,7 @@ internal static class MclslWorldChangeSystem
         int deathChance = Math.Clamp(6 + change.Quality * 5 + change.Intensity / 10 - compatibility / 8 - MclslMindSystem.StabilityBonus(actor) / 2 - MclslSpiritualRootSystem.LawHarmonyBonus(actor) / 8, 4, 35);
         bool failureStep = MclslInverseTruthSystem.IsTruthReversed("truth_player_failure_steps");
         if (failureStep) deathChance = Math.Max(2, deathChance - 8);
+        if (MclslImmortalPathSystem.AllowsBreakthrough(actor, MclslRealmIds.HuaShen)) deathChance = 0;
         int deathRoll = PositiveHash(change.Id + "|backlash_death|" + MclslActorAccessor.Id(actor) + "|" + year) % 100;
         change.Intensity = Math.Max(1, change.Intensity - 5);
         if (deathRoll < deathChance)
