@@ -72,6 +72,8 @@ internal sealed class MclslWorldRunState
     public List<string> PendingAncientCultivatorIds { get; set; } = new();
     public List<MclslGeneratedItemRecord> GeneratedItems { get; set; } = new();
     public List<MclslMarketListing> TianxuanListings { get; set; } = new();
+    // Queue keeps overflow publication O(1) per yearly quota, even in large worlds.
+    public Queue<MclslMarketListing> PendingArtifactListings { get; set; } = new();
     public List<MclslMarketActivity> TianxuanActivities { get; set; } = new();
     public int ProceduralSequence { get; set; }
     public int NextCaveBirthYear { get; set; }
@@ -80,6 +82,50 @@ internal sealed class MclslWorldRunState
     public int NextFactionMissionYear { get; set; }
     public int NextFactionPressureYear { get; set; }
     public int NativeKillStatisticsRepairVersion { get; set; }
+    public MclslAnnualBatchState AnnualBatch { get; set; } = new();
+}
+
+internal sealed class MclslAnnualBatchState
+{
+    public int ActiveYear { get; set; }
+    public int LatestRequestedYear { get; set; }
+    public int LastCompletedYear { get; set; }
+    public byte WorldStage { get; set; }
+    public bool EraSnapshotRecorded { get; set; }
+    public bool NewLawEraActive { get; set; }
+    public bool NewLawCultivationAvailable { get; set; }
+    public List<long> LineageActorIds { get; set; } = new();
+    public List<MclslAnnualClaimRecord> CaveClaims { get; set; } = new();
+    public List<MclslAnnualClaimRecord> ChangeClaims { get; set; } = new();
+    public List<MclslAnnualClaimRecord> AdventureCandidates { get; set; } = new();
+    public Dictionary<string, int> ModuleCompletedYears { get; set; } = new();
+    public byte WorldFailureStage { get; set; }
+    public int WorldFailureCount { get; set; }
+    public List<MclslAnnualFailureRecord> FailureRecords { get; set; } = new();
+    public List<string> TechniqueLineagePendingIds { get; set; } = new();
+    public bool TechniqueLineagePendingInitialized { get; set; }
+    public int SectLifecycleCursor { get; set; }
+    public int SectLifecycleEmitted { get; set; }
+}
+
+internal sealed class MclslAnnualFailureRecord
+{
+    public int Year { get; set; }
+    public string Scope { get; set; } = string.Empty;
+    public string TargetId { get; set; } = string.Empty;
+    public string Step { get; set; } = string.Empty;
+    public int Attempts { get; set; }
+    public string Result { get; set; } = string.Empty;
+    public string Error { get; set; } = string.Empty;
+}
+
+internal sealed class MclslAnnualClaimRecord
+{
+    public int Year { get; set; }
+    public long ActorId { get; set; }
+    public string TargetId { get; set; } = string.Empty;
+    public int Compatibility { get; set; }
+    public int Strength { get; set; }
 }
 
 internal sealed class MclslBackgroundFactionState

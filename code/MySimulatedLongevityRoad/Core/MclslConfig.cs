@@ -2,6 +2,10 @@ namespace MySimulatedLongevityRoad.Core;
 
 public static class MclslConfig
 {
+    public static void EnableStaggeredEventsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void EventStaggerFramesCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void EnableAggressivePerformanceCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void AnnualActorBudgetCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void ChildhoodRootChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void AlchemistChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void RefinerChanceCallBack(int value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
@@ -12,6 +16,7 @@ public static class MclslConfig
         MySimulatedLongevityRoad.UI.MclslFpsOverlay.SetVisible(MclslRuntimeSettings.ShowFps);
     }
     public static void ItemAcquisitionHistoryCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
+    public static void RecordLowMaterialAcquisitionHistoryCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
 
     public static void EnableDeathAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());
     public static void EnableBreakthroughFailureAnnouncementsCallBack(bool value) => MclslRuntimeSettings.LoadFromModConfig(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe());

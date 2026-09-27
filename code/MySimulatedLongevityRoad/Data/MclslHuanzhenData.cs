@@ -16,6 +16,9 @@ internal sealed class MclslHuanzhenExternalState
     public int AnchorSequence { get; set; }
     public int NextNaturalArrivalYear { get; set; } = -1;
     public int NaturalArrivalYear { get; set; } = -1;
+    public bool InitialSpaceEssenceGranted { get; set; }
+    public int NextNaturalEssenceSettlementYear { get; set; } = -1;
+    public Dictionary<string, MclslHuanzhenEssenceLedger> EssenceLedgers { get; set; } = new();
     // long keeps the value effectively uncapped while remaining compatible with
     // the old JSON int representation used by v0.1.8 saves.
     public long SpaceEssenceBase { get; set; }
@@ -25,6 +28,15 @@ internal sealed class MclslHuanzhenExternalState
     public List<MclslHuanzhenHistoryRecord> History { get; set; } = new();
     public List<MclslHuanzhenEssenceRecord> EssenceHistory { get; set; } = new();
     public List<MclslHuanzhenLegacyRecord> Legacies { get; set; } = new();
+}
+
+internal sealed class MclslHuanzhenEssenceLedger
+{
+    public long SpaceEssenceBase { get; set; }
+    public int SpaceEssenceUpdatedYear { get; set; } = -1;
+    public bool InitialSpaceEssenceGranted { get; set; }
+    public int NextNaturalEssenceSettlementYear { get; set; } = -1;
+    public List<MclslHuanzhenEssenceRecord> EssenceHistory { get; set; } = new();
 }
 
 internal sealed class MclslHuanzhenLegacyRecord

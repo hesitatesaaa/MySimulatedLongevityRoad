@@ -95,7 +95,8 @@ $arguments = @(
     '--nologo',
     '--verbosity',
     'minimal',
-    "-p:WorldBoxDataRoot=$WorldBoxDataRoot"
+    "-p:WorldBoxDataRoot=$WorldBoxDataRoot",
+    '-p:_EnableDefaultWindowsPlatform=false'
 )
 
 if ($NoRestore) {

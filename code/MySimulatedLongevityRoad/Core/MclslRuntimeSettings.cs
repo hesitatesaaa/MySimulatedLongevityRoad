@@ -14,6 +14,9 @@ internal static class MclslRuntimeSettings
     private static int _timelineYearScalePercent = 100;
     private static int _carrySlotLimit = 8;
     private static int _annualActorBudget = 80;
+    private static bool _staggeredEventsEnabled = true;
+    private static int _eventStaggerFrames = 60;
+    private static bool _aggressivePerformanceEnabled = true;
     private static bool _deathAnnouncementsEnabled = true;
     private static bool _breakthroughFailureAnnouncementsEnabled = true;
     private static bool _nascentBreakthroughAnnouncementsEnabled = true;
@@ -46,6 +49,7 @@ internal static class MclslRuntimeSettings
     private static bool _diagnosticsEnabled;
     private static bool _showFps;
     private static bool _itemAcquisitionHistoryEnabled = true;
+    private static bool _recordLowMaterialAcquisitionHistory;
     private static int _childhoodRootChancePercent = 50;
     private static int _alchemistChanceBasisPoints = 100;
     private static int _refinerChanceBasisPoints = 150;
@@ -56,6 +60,9 @@ internal static class MclslRuntimeSettings
     internal static bool AutoSealTerminalCycle => _autoSealTerminalCycle;
     internal static int CarrySlotLimit => _carrySlotLimit;
     internal static int AnnualActorBudget => _annualActorBudget;
+    internal static bool StaggeredEventsEnabled => _staggeredEventsEnabled;
+    internal static int EventStaggerFrames => _eventStaggerFrames;
+    internal static bool AggressivePerformanceEnabled => _aggressivePerformanceEnabled;
     internal static bool DeathAnnouncementsEnabled => _deathAnnouncementsEnabled;
     internal static bool BreakthroughFailureAnnouncementsEnabled => _breakthroughFailureAnnouncementsEnabled;
     internal static bool NascentBreakthroughAnnouncementsEnabled => _nascentBreakthroughAnnouncementsEnabled;
@@ -88,6 +95,7 @@ internal static class MclslRuntimeSettings
     internal static bool DiagnosticsEnabled => _diagnosticsEnabled;
     internal static bool ShowFps => _showFps;
     internal static bool ItemAcquisitionHistoryEnabled => _itemAcquisitionHistoryEnabled;
+    internal static bool RecordLowMaterialAcquisitionHistory => _recordLowMaterialAcquisitionHistory;
     internal static int ChildhoodRootChancePercent => _childhoodRootChancePercent;
     internal static int AlchemistChanceBasisPoints => _alchemistChanceBasisPoints;
     internal static int RefinerChanceBasisPoints => _refinerChanceBasisPoints;
@@ -102,6 +110,9 @@ internal static class MclslRuntimeSettings
         _timelineYearScalePercent = Math.Clamp(ReadInt(config, "MCLSL_config_timeline_year_scale", _timelineYearScalePercent), 25, 400);
         _carrySlotLimit = Math.Clamp(ReadInt(config, "MCLSL_config_profile_carry_slots", _carrySlotLimit), 1, 20);
         _annualActorBudget = Math.Clamp(ReadInt(config, "MCLSL_config_annual_actor_budget", _annualActorBudget), 20, 400);
+        _staggeredEventsEnabled = ReadBool(config, "MCLSL_config_enable_staggered_events", _staggeredEventsEnabled);
+        _eventStaggerFrames = Math.Clamp(ReadInt(config, "MCLSL_config_event_stagger_frames", _eventStaggerFrames), 15, 120);
+        _aggressivePerformanceEnabled = ReadBool(config, "MCLSL_config_enable_aggressive_performance", _aggressivePerformanceEnabled);
         _deathAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_death_announcements", _deathAnnouncementsEnabled);
         _breakthroughFailureAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_breakthrough_failure_announcements", _breakthroughFailureAnnouncementsEnabled);
         _nascentBreakthroughAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_yuanying_breakthrough_announcements", _nascentBreakthroughAnnouncementsEnabled);
@@ -134,6 +145,7 @@ internal static class MclslRuntimeSettings
         _diagnosticsEnabled = ReadBool(config, "MCLSL_config_enable_diagnostics", _diagnosticsEnabled);
         _showFps = ReadBool(config, "MCLSL_config_show_fps", _showFps);
         _itemAcquisitionHistoryEnabled = ReadBool(config, "MCLSL_config_item_acquisition_history_enabled", _itemAcquisitionHistoryEnabled);
+        _recordLowMaterialAcquisitionHistory = ReadBool(config, "MCLSL_config_record_low_material_history", false);
         _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance", 50), 0, 100);
         _alchemistChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_alchemist_chance", 10), 0, 1000) * 10;
         _refinerChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_refiner_chance", 15), 0, 1000) * 10;

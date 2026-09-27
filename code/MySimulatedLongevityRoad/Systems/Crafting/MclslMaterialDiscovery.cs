@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
@@ -19,10 +20,22 @@ internal static class MclslMaterialDiscovery
     private const int RuinHuangChance = 800;  // 8% per material
     private const int RuinXuanChance = 300;  // 3% per material
 
-    private static readonly string[] AllMaterialIds =
+    private static readonly string[] AllMaterialIds = MclslItemCatalog.All
+        .Where(x => x.MaterialTier != MclslMaterialTier.None).Select(x => x.Id).ToArray();
+    static MclslMaterialDiscovery()
     {
-        "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "F01"
-    };
+        if (AllMaterialIds.Length > 64)
+            throw new InvalidOperationException("材料发现记录最多支持 64 种材料；请先扩容位掩码。");
+    }
+    private static readonly Dictionary<MclslMaterialTier, int> MaterialCountByTier = MclslItemCatalog.All
+        .Where(x => x.MaterialTier != MclslMaterialTier.None)
+        .GroupBy(x => x.MaterialTier).ToDictionary(x => x.Key, x => x.Count());
+
+    private static int ScaledChance(MclslMaterialTier tier, int original)
+    {
+        int baseline = tier is MclslMaterialTier.Huang or MclslMaterialTier.Xuan ? 4 : 1;
+        return Math.Max(1, original * baseline / Math.Max(1, MaterialCountByTier.GetValueOrDefault(tier, 1)));
+    }
 
     internal static void TryAnnualActivity(Actor actor, int year)
     {
@@ -38,7 +51,7 @@ internal static class MclslMaterialDiscovery
         bool woodland = IsWoodlandBiome(biome);
         bool mountain = tile.Type.mountains || biome == "biome_rocklands" || biome == "biome_hill";
         bool water = tile.Type.liquid;
-        int mask = 0;
+        ulong mask = 0;
 
         for (int i = 0; i < AllMaterialIds.Length; i++)
         {
@@ -48,9 +61,10 @@ internal static class MclslMaterialDiscovery
                 || item.MaterialTier == MclslMaterialTier.Di || item.MaterialTier == MclslMaterialTier.Tian)
                 continue;
 
-            int chance = item.MaterialTier == MclslMaterialTier.Huang ? AnnualHuangChance : AnnualXuanChance;
+            int chance = ScaledChance(item.MaterialTier,
+                item.MaterialTier == MclslMaterialTier.Huang ? AnnualHuangChance : AnnualXuanChance);
             if (MatchesHabitat(item, woodland, water, mountain)) chance *= 2;
-            if (Passes(seed, materialId, chance)) mask |= 1 << i;
+            if (Passes(seed, materialId, chance)) mask |= 1UL << i;
         }
 
         Commit(actor, year, "野外活动", sourceKey, mask, null, null);
@@ -67,7 +81,7 @@ internal static class MclslMaterialDiscovery
         if (MclslWorldRunRepository.HasMaterialDiscoveryEventKey(exploration.Id, legacyKey)) return;
 
         string sourceKey = BuildSourceKey(runId, actor, year, "ruin", exploration.Id + "|" + order);
-        int mask = 0;
+        ulong mask = 0;
         for (int i = 0; i < AllMaterialIds.Length; i++)
         {
             string materialId = AllMaterialIds[i];
@@ -89,7 +103,7 @@ internal static class MclslMaterialDiscovery
                     break;
                 default: continue;
             }
-            if (Passes(sourceKey, materialId, chance)) mask |= 1 << i;
+            if (Passes(sourceKey, materialId, ScaledChance(item.MaterialTier, chance))) mask |= 1UL << i;
         }
 
         Commit(actor, year, "遗迹探索", sourceKey, mask, exploration.Id, legacyKey);
@@ -110,7 +124,7 @@ internal static class MclslMaterialDiscovery
             : current >= MclslRealmIds.Index(MclslRealmIds.JinDan)
                 ? MclslMaterialTier.Di
                 : MclslMaterialTier.Xuan;
-        int mask = SelectSingleMaterial(sourceKey, MclslMaterialTier.Huang, maxTier, MclslMaterialSource.Breakthrough);
+        ulong mask = SelectSingleMaterial(sourceKey, MclslMaterialTier.Huang, maxTier, MclslMaterialSource.Breakthrough);
         Commit(actor, year, "突破机缘", sourceKey, mask, null, null);
     }
 
@@ -124,7 +138,7 @@ internal static class MclslMaterialDiscovery
         MclslMaterialTier maxTier = quality >= 4
             ? MclslMaterialTier.Tian
             : quality >= 3 ? MclslMaterialTier.Di : MclslMaterialTier.Xuan;
-        int mask = SelectSingleMaterial(sourceKey, MclslMaterialTier.Huang,
+        ulong mask = SelectSingleMaterial(sourceKey, MclslMaterialTier.Huang,
             maxTier, MclslMaterialSource.Opportunity);
         Commit(actor, year, "天地机缘", sourceKey, mask, null, null);
     }
@@ -134,7 +148,7 @@ internal static class MclslMaterialDiscovery
     {
         if (!MclslActorAccessor.Alive(actor) || string.IsNullOrWhiteSpace(sourceId)) return;
         string sourceKey = BuildSourceKey(CurrentRunId(year), actor, year, "faction_reward", sourceId);
-        int mask = 0;
+        ulong mask = 0;
         if (StableRoll(sourceKey, "low_tier_gate") % RollRange < 800) // 8% Huang/Xuan chance
             mask |= SelectSingleMaterial(sourceKey + "|low_tier", MclslMaterialTier.Huang,
                 MclslMaterialTier.Xuan, MclslMaterialSource.Faction);
@@ -188,7 +202,7 @@ internal static class MclslMaterialDiscovery
             || biome == "biome_maple" || biome == "biome_flower";
     }
 
-    private static int SelectSingleMaterial(string seed, MclslMaterialTier minTier,
+    private static ulong SelectSingleMaterial(string seed, MclslMaterialTier minTier,
         MclslMaterialTier maxTier, MclslMaterialSource source)
     {
         int totalWeight = 0;
@@ -208,7 +222,7 @@ internal static class MclslMaterialDiscovery
             if (item == null || !HasSource(item, source)
                 || item.MaterialTier < minTier || item.MaterialTier > maxTier) continue;
             int weight = TierWeight(item.MaterialTier);
-            if (selected < weight) return 1 << i;
+            if (selected < weight) return 1UL << i;
             selected -= weight;
         }
         return 0;
@@ -261,7 +275,7 @@ internal static class MclslMaterialDiscovery
         }
     }
 
-    private static void Commit(Actor actor, int year, string sourceName, string sourceKey, int mask,
+    private static void Commit(Actor actor, int year, string sourceName, string sourceKey, ulong mask,
         string legacyRuinId, string legacyRuinKey)
     {
         if (mask == 0 || !MclslActorAccessor.Alive(actor)) return;
@@ -275,11 +289,14 @@ internal static class MclslMaterialDiscovery
         string place = string.IsNullOrWhiteSpace(actor.city?.data?.name) ? "野外" : actor.city.data.name;
         for (int i = 0; i < AllMaterialIds.Length; i++)
         {
-            if ((mask & (1 << i)) == 0) continue;
+            if ((mask & (1UL << i)) == 0) continue;
             string itemId = AllMaterialIds[i];
             MclslItemDefinition item = MclslItemCatalog.Get(itemId);
             MclslBagSystem.Add(bag, itemId);
-            if (item != null && (int)item.MaterialTier >= (int)MclslMaterialTier.Di)
+            bool recordTier = item != null && MclslItemAcquisitionHistoryPolicy.ShouldRecordMaterial(
+                (int)item.MaterialTier, MclslRuntimeSettings.ItemAcquisitionHistoryEnabled,
+                MclslRuntimeSettings.RecordLowMaterialAcquisitionHistory);
+            if (recordTier)
             {
                 if (found.Length > 0) found.Append('、');
                 found.Append('【').Append(item.Name).Append("】×1");
@@ -291,7 +308,7 @@ internal static class MclslMaterialDiscovery
         MclslBagSystem.Write(actor, bag);
         if (recordable.Count > 0)
         {
-            string title = actorName + "觅得高阶灵材";
+            string title = actorName + "觅得灵材";
             string body = actorName + "在" + place + "通过" + sourceName + "获得" + found + "，已收入乾坤袋。";
             string eventKey = sourceKey + "|" + string.Join(",", recordable);
             MclslWorldRunRepository.AddMaterialDiscoveryEvent(year, title, body, actor, eventKey);

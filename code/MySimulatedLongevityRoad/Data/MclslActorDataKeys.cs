@@ -3,12 +3,25 @@ namespace MySimulatedLongevityRoad.Data;
 internal static class MclslActorDataKeys
 {
     internal const string QiankunBag = "mclsl.v020.qiankun_bag";
+    internal const string QiankunBagBackup = "mclsl.v021.qiankun_bag_backup";
+    internal const string QiankunBagCorrupt = "mclsl.v021.qiankun_bag_corrupt";
+    internal const string AnnualStep = "mclsl.v021.annual_step";
+    internal const string ManaInitialized = "mclsl.mana.initialized";
+    internal const string ManaCurrent = "mclsl.mana.current";
+    internal const string ManaLastWorldTime = "mclsl.mana.last_world_time";
+    internal const string LearnedSpells = "mclsl.spells.learned";
+    internal const string LastSpellInsightRealm = "mclsl.spells.last_insight_realm";
+    internal const string ArtifactMigrationVersion = "mclsl.v020.artifact_migration_version";
+    internal const string ArtifactNativeWeaponBackup = "mclsl.v020.artifact_native_weapon_backup";
     internal const string Profession = "mclsl.v020.profession";
     internal const string ProfessionGrade = "mclsl.v020.profession_grade";
     internal const string ProfessionExperience = "mclsl.v020.profession_experience";
     internal const string ProfessionChecked = "mclsl.v020.profession_checked";
     internal const string ProfessionLastCraftYear = "mclsl.v020.profession_last_craft_year";
+    internal const string KnownRecipes = "mclsl.recipes.known";
     internal const string Realm = "mclsl.realm";
+    internal const string NativeRealmTraitsSynced = "mclsl.native_realm_traits_synced";
+    internal const string ManualRealmTraitReconciled = "mclsl.manual_realm_trait_reconciled";
     internal const string RealmEnteredYear = "mclsl.realm.entered_year";
     internal const string ImmortalFate = "mclsl.immortal_fate";
     internal const string MortalSeparationChecked = "mclsl.mortal_separation.checked";
@@ -43,6 +56,7 @@ internal static class MclslActorDataKeys
     internal const string AncientMentorTeacherName = "mclsl.ancient.mentor.teacher_name";
     internal const string AncientMentorStudentIds = "mclsl.ancient.mentor.student_ids";
     internal const string AncientMentorLastRecruitYear = "mclsl.ancient.mentor.last_recruit_year";
+    internal const string AncientMentorLastTransmissionYear = "mclsl.ancient.mentor.last_transmission_year";
     internal const string NewLawPioneer = "mclsl.new_law.pioneer";
     internal const string NewLawPioneerYear = "mclsl.new_law.pioneer_year";
     internal const string NewLawPioneerOrigin = "mclsl.new_law.pioneer_origin";
@@ -63,6 +77,8 @@ internal static class MclslActorDataKeys
     internal const string Contribution = "mclsl.contribution";
     internal const string FactionAffiliation = "mclsl.faction.affiliation";
     internal const string SpiritStones = "mclsl.spirit_stones";
+    internal const string MarketPurchaseYear = "mclsl.market.purchase_year";
+    internal const string MarketPurchaseCount = "mclsl.market.purchase_count";
     internal const string RuinExperience = "mclsl.ruin.experience";
     internal const string TechniqueInsight = "mclsl.technique.insight";
     internal const string FoundationChanceBonus = "mclsl.foundation.chance_bonus";

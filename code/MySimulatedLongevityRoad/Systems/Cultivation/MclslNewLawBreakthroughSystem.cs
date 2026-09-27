@@ -10,7 +10,7 @@ internal static class MclslNewLawBreakthroughSystem
     {
         int storedBonus = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationChanceBonus, 0));
         MclslAptitudeGiftDefinition gift = Gift(actor);
-        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi);
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi, year);
         int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
         int chance = 8 + aptitude / 8 + storedBonus + pillBonus + buqueBonus
             + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus

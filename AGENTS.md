@@ -33,7 +33,7 @@
   pwsh -NoProfile -File .\scripts\Package-Mod.ps1 -ChangeTag 项目整理
   ```
 
-- JSON 或本地化修改：解析 JSON，并检查 `Locales/ch.json`、`Locales/cz.json` 的新增键；不因文案修改重复完整编译。
+- JSON 或本地化修改：解析 JSON，并检查 `Locales/ch.json` 的新增键；不因文案修改重复完整编译。
 - 资源修改：检查资源路径、文件存在性和最终压缩包内容；只有同时改动 C# 或项目文件时才构建。
 - 仅文档修改：检查 Markdown 链接和内容一致性，不运行完整构建。
 - 缺少 WorldBox 外部 DLL 时，构建必须快速失败并列出缺失文件；不得用大量无效编译错误代替依赖预检。
@@ -42,6 +42,7 @@
 
 - 项目目标框架为 `netstandard2.1`，供 WorldBox 的 Unity/Mono 运行环境加载。
 - 外部依赖通过 `WorldBoxDataRoot` 提供，默认值为项目外的 `..\..\worldbox_Data`，可通过脚本参数或 MSBuild 属性覆盖。
+- 当前机器的 WorldBox 数据目录为 `D:\owl\gameversion\0_51_2_imported\worldbox_Data`；执行构建或验证时，优先将此路径传给 `-WorldBoxDataRoot`。
 - `DeveloperTools/` 和 `references/` 中的 C# 文件不得进入项目编译项；正式包不得包含 `references/`、`.git/`、`bin/`、`obj/`、`DeveloperTools/` 或 `scripts/`。
 - 运行时源码按现有 `Core / Data / Interop / Modules / Patches / Queries / Systems / Traits / UI` 领域放置，避免为单个常量或薄包装继续创建碎片文件。
 
@@ -49,7 +50,7 @@
 
 - 还真锚点、回载、前世档案和遗产选择必须保持有界重试、同世界同身份校验和版本化外部存储；新增快照字段时同步更新允许字段列表。
 - 还真空间、玄黄仙录、修士列传、猫宝和人物信息栏保持独立入口与现有滚动行为；数据刷新不得无故重建滚动节点或改变用户滚动位置。
-- 所有玩家可见的新入口、页面、按钮、特征、物品、状态和说明都必须提供中文显示名及 `ch/cz` 本地化键；内部 ID、类名和资源路径保持稳定 ASCII 名称。
+- 所有玩家可见的新入口、页面、按钮、特征、物品、状态和说明都必须提供简体中文显示名及 `ch` 本地化键；内部 ID、类名和资源路径保持稳定 ASCII 名称。
 - 不因资源动画中存在相邻重复帧而擅自删除资源。
 
 ## 版本、打包与 Git 边界

@@ -220,6 +220,8 @@ internal static class MclslWorldEpochSystem
 
     internal static bool HasPendingTransitionWork => _ancientQueueSeedCursor < _ancientQueueSeedActors.Count
         || (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0) > 0;
+    internal static int PendingTransitionWorkCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor)
+        + (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0);
 
     /// <summary>
     /// 用数量和时间双预算消化旧法修士队列。队列数据保存在世界档案中，存档或读档

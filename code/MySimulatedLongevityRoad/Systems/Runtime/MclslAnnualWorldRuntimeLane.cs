@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
+using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -26,42 +30,180 @@ internal static class MclslAnnualWorldRuntimeLane
 
     private static Stage _stage;
     private static int _activeYear;
-    private static int _latestRequestedYear;
     private static bool _newLawEraActive;
     private static bool _newLawCultivationAvailable;
     private static MclslAnnualWorldSnapshot _snapshot;
     private static MclslAnnualWorldSnapshot.Builder _snapshotBuilder;
+    private static int _retryAfterFrame;
 
     internal static bool HasPending => _stage != Stage.None;
+    internal static string CurrentStageName => _stage switch
+    {
+        Stage.None => "无",
+        Stage.Prepare => "准备",
+        Stage.LegacyTechniqueMigration => "旧功法分流",
+        Stage.EraCycle => "时代轮转",
+        Stage.WorldCalamity => "天地灾变",
+        Stage.Cave => "洞天",
+        Stage.WorldChange => "天地变",
+        Stage.WorldSoul => "天地之魄",
+        Stage.InverseTruth => "逆理",
+        Stage.Adventure => "探索",
+        Stage.TechniqueLineage => "功法传承",
+        Stage.SectLifecycle => "宗门周期",
+        Stage.FactionMission => "仙盟委托",
+        Stage.FactionPressure => "势力施压",
+        Stage.Complete => "完成",
+        _ => "未知"
+    };
 
     internal static void Schedule(int year, bool newLawEraActive, bool newLawCultivationAvailable)
     {
         if (year <= 0) return;
-        _latestRequestedYear = year;
-        _newLawEraActive = newLawEraActive;
-        _newLawCultivationAvailable = newLawCultivationAvailable;
         if (_stage == Stage.None)
         {
             _activeYear = year;
-            _stage = Stage.Prepare;
+            _newLawEraActive = newLawEraActive;
+            _newLawCultivationAvailable = newLawCultivationAvailable;
+            byte savedStage = MclslWorldRunRepository.Current.AnnualBatch.WorldStage;
+            _stage = savedStage >= (byte)Stage.Prepare && savedStage <= (byte)Stage.Complete
+                ? (Stage)savedStage : Stage.Prepare;
         }
     }
 
     internal static bool Tick(IReadOnlyList<Actor> lineageActors)
     {
         if (_stage == Stage.None || _activeYear <= 0) return true;
+        if (Time.frameCount < _retryAfterFrame) return false;
 
         Stage sampledStage = _stage;
         long sample = MclslPerformanceProbe.Begin();
+        long stageStarted = Stopwatch.GetTimestamp();
+        bool sideEffectsStarted = _snapshot != null;
         try
         {
             using (MclslUnityProfiler.Sample(ProfilerName(sampledStage)))
-                return TickStage(lineageActors);
+            {
+                if (_stage != Stage.Prepare && _snapshot == null)
+                {
+                    _snapshotBuilder ??= MclslAnnualWorldSnapshot.BeginBuild(lineageActors);
+                    if (!_snapshotBuilder.Tick(MclslRuntimeWorkBudget.ScaleCount(256, 16))) return false;
+                    _snapshot = _snapshotBuilder.Complete();
+                    _snapshotBuilder = null;
+                }
+                sideEffectsStarted = true;
+                bool completed = TickStage(lineageActors);
+                MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+                batch.WorldFailureStage = 0;
+                batch.WorldFailureCount = 0;
+                if (batch.WorldStage != (byte)_stage)
+                {
+                    batch.WorldStage = (byte)_stage;
+                    MclslWorldArchiveStore.MarkDirty();
+                }
+                return completed;
+            }
+        }
+        catch (Exception ex)
+        {
+            MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+            int failures = batch.WorldFailureStage == (byte)sampledStage ? batch.WorldFailureCount + 1 : 1;
+            batch.WorldFailureStage = (byte)sampledStage;
+            batch.WorldFailureCount = failures;
+            if (MclslAnnualResiliencePolicy.ShouldRetry(failures, sideEffectsStarted))
+            {
+                _snapshot = null;
+                _snapshotBuilder = null;
+                _retryAfterFrame = MclslAnnualResiliencePolicy.RetryAtFrame(Time.frameCount);
+                MclslWorldRunRepository.RecordAnnualFailure(_activeYear, "世界", string.Empty,
+                    sampledStage.ToString(), failures, "待重试", ex.Message);
+                return false;
+            }
+            MclslWorldRunRepository.RecordAnnualFailure(_activeYear, "世界", string.Empty,
+                sampledStage.ToString(), failures, sideEffectsStarted ? "部分失败" : "跳过", ex.Message);
+            if (!sideEffectsStarted)
+            {
+                _snapshotBuilder = null;
+                _snapshot = MclslAnnualWorldSnapshot.BeginBuild(Array.Empty<Actor>()).Complete();
+            }
+            SkipFailedStage(sampledStage);
+            batch.WorldStage = (byte)_stage;
+            batch.WorldFailureStage = 0;
+            batch.WorldFailureCount = 0;
+            MclslWorldArchiveStore.MarkDirty();
+            return false;
         }
         finally
         {
             MclslPerformanceProbe.End(ProbeName(sampledStage), sample);
+            double elapsedMs = (Stopwatch.GetTimestamp() - stageStarted) * 1000d / Stopwatch.Frequency;
+            double budgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(0.65d, 0.20d);
+            if (elapsedMs > budgetMs)
+                MclslDiagnostics.Error("annual-world-overbudget:" + sampledStage,
+                    "世界年度单步超预算：年=" + _activeYear + " 阶段=" + sampledStage
+                    + " 耗时=" + elapsedMs.ToString("F2") + "ms 预算=" + budgetMs.ToString("F2") + "ms");
         }
+    }
+
+    private static void SkipFailedStage(Stage failed)
+    {
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        List<MclslAnnualClaimRecord> pendingClaims = failed switch
+        {
+            Stage.Cave => batch.CaveClaims,
+            Stage.WorldChange => batch.ChangeClaims,
+            Stage.Adventure => batch.AdventureCandidates,
+            _ => null
+        };
+        if (pendingClaims != null)
+        {
+            HashSet<string> recordedTargets = new(StringComparer.Ordinal);
+            foreach (MclslAnnualClaimRecord claim in pendingClaims)
+            {
+                if (claim.Year != _activeYear || !recordedTargets.Add(claim.TargetId)) continue;
+                MclslWorldRunRepository.RecordAnnualFailure(_activeYear, "世界", claim.TargetId,
+                    failed.ToString(), 1, "未结算", "年度阶段隔离，申请未执行");
+            }
+        }
+        switch (failed)
+        {
+            case Stage.Cave:
+                batch.CaveClaims.RemoveAll(x => x.Year == _activeYear);
+                break;
+            case Stage.WorldChange:
+                batch.ChangeClaims.RemoveAll(x => x.Year == _activeYear);
+                break;
+            case Stage.Adventure:
+                batch.AdventureCandidates.RemoveAll(x => x.Year == _activeYear);
+                break;
+            case Stage.TechniqueLineage:
+                foreach (string targetId in batch.TechniqueLineagePendingIds)
+                    MclslWorldRunRepository.RecordAnnualFailure(_activeYear, "世界", targetId,
+                        "TechniqueLineage", 1, "未结算", "年度阶段隔离，传承记录未执行");
+                batch.TechniqueLineagePendingIds.Clear();
+                batch.TechniqueLineagePendingInitialized = false;
+                MclslTechniqueLineageSystem.ClearRuntime();
+                break;
+            case Stage.SectLifecycle:
+                batch.SectLifecycleCursor = 0;
+                batch.SectLifecycleEmitted = 0;
+                break;
+        }
+        _stage = failed switch
+        {
+            Stage.Prepare or Stage.LegacyTechniqueMigration => Stage.EraCycle,
+            Stage.EraCycle => Stage.WorldCalamity,
+            Stage.WorldCalamity => Stage.Cave,
+            Stage.Cave => Stage.WorldChange,
+            Stage.WorldChange => Stage.WorldSoul,
+            Stage.WorldSoul => Stage.InverseTruth,
+            Stage.InverseTruth => Stage.Adventure,
+            Stage.Adventure => Stage.TechniqueLineage,
+            Stage.TechniqueLineage => Stage.SectLifecycle,
+            Stage.SectLifecycle => Stage.FactionMission,
+            Stage.FactionMission => Stage.FactionPressure,
+            _ => Stage.Complete
+        };
     }
 
     private static bool TickStage(IReadOnlyList<Actor> lineageActors)
@@ -100,11 +242,13 @@ internal static class MclslAnnualWorldRuntimeLane
                 _stage = Stage.Cave;
                 return false;
             case Stage.Cave:
-                if (_newLawCultivationAvailable) MclslWorldCaveSystem.ResolveAnnual(_activeYear);
+                if (!_newLawCultivationAvailable) { SkipFailedStage(Stage.Cave); return false; }
+                if (!MclslWorldCaveSystem.TickResolveAnnual(_activeYear)) return false;
                 _stage = Stage.WorldChange;
                 return false;
             case Stage.WorldChange:
-                if (_newLawCultivationAvailable) MclslWorldChangeSystem.ResolveAnnual(_activeYear);
+                if (!_newLawCultivationAvailable) { SkipFailedStage(Stage.WorldChange); return false; }
+                if (!MclslWorldChangeSystem.TickResolveAnnual(_activeYear)) return false;
                 _stage = Stage.WorldSoul;
                 return false;
             case Stage.WorldSoul:
@@ -116,15 +260,16 @@ internal static class MclslAnnualWorldRuntimeLane
                 _stage = Stage.Adventure;
                 return false;
             case Stage.Adventure:
-                MclslAdventureSystem.ResolveAnnual(_activeYear);
+                if (!MclslAdventureSystem.TickResolveAnnual(_activeYear)) return false;
                 _stage = Stage.TechniqueLineage;
                 return false;
             case Stage.TechniqueLineage:
-                MclslTechniqueLineageSystem.ResolveAnnual(_activeYear, _snapshot?.LineageActors ?? lineageActors);
+                if (!MclslTechniqueLineageSystem.TickResolveAnnual(_activeYear,
+                    _snapshot?.LineageActors ?? lineageActors)) return false;
                 _stage = Stage.SectLifecycle;
                 return false;
             case Stage.SectLifecycle:
-                MclslSectLifecycleSystem.ResolveAnnual(_activeYear);
+                if (!MclslSectLifecycleSystem.TickResolveAnnual(_activeYear)) return false;
                 _stage = Stage.FactionMission;
                 return false;
             case Stage.FactionMission:
@@ -146,6 +291,7 @@ internal static class MclslAnnualWorldRuntimeLane
 
     private static void BeginAnnualWorldSystems()
     {
+        MclslTianxuanMarket.PublishPendingArtifactListings(8);
         if (_newLawCultivationAvailable)
         {
             MclslWorldCaveSystem.BeginAnnual(_activeYear);
@@ -158,19 +304,19 @@ internal static class MclslAnnualWorldRuntimeLane
     {
         Stage.Prepare => "年度世界.Prepare",
         Stage.LegacyTechniqueMigration => "年度世界.旧功法分流",
-        Stage.EraCycle => "年度世界.EraCycle",
-        Stage.WorldCalamity => "年度世界.WorldCalamity",
-        Stage.Cave => "年度世界.Cave",
-        Stage.WorldChange => "年度世界.WorldChange",
-        Stage.WorldSoul => "年度世界.WorldSoul",
-        Stage.InverseTruth => "年度世界.InverseTruth",
-        Stage.Adventure => "年度世界.Adventure",
-        Stage.TechniqueLineage => "年度世界.TechniqueLineage",
-        Stage.SectLifecycle => "年度世界.SectLifecycle",
-        Stage.FactionMission => "年度世界.FactionMission",
-        Stage.FactionPressure => "年度世界.FactionPressure",
-        Stage.Complete => "年度世界.Complete",
-        _ => "年度世界.None"
+        Stage.EraCycle => "年度世界.时代轮转",
+        Stage.WorldCalamity => "年度世界.天地灾变",
+        Stage.Cave => "年度世界.洞天",
+        Stage.WorldChange => "年度世界.天地变",
+        Stage.WorldSoul => "年度世界.天地之魄",
+        Stage.InverseTruth => "年度世界.逆理",
+        Stage.Adventure => "年度世界.探索",
+        Stage.TechniqueLineage => "年度世界.功法传承",
+        Stage.SectLifecycle => "年度世界.宗门周期",
+        Stage.FactionMission => "年度世界.仙盟委托",
+        Stage.FactionPressure => "年度世界.势力施压",
+        Stage.Complete => "年度世界.完成",
+        _ => "年度世界.无"
     };
 
     private static string ProfilerName(Stage stage) => stage switch
@@ -196,27 +342,17 @@ internal static class MclslAnnualWorldRuntimeLane
     {
         _stage = Stage.None;
         _activeYear = 0;
-        _latestRequestedYear = 0;
         _newLawEraActive = false;
         _newLawCultivationAvailable = false;
         _snapshot = null;
         _snapshotBuilder = null;
+        _retryAfterFrame = 0;
+        MclslTechniqueLineageSystem.ClearRuntime();
         MclslTechniqueOccupationSystem.CancelLegacyTechniqueMigration();
     }
 
     private static void CompleteActiveYear()
     {
-        if (_latestRequestedYear > _activeYear)
-        {
-            _activeYear = _latestRequestedYear;
-            _newLawEraActive = MclslWorldEpochSystem.IsNewLawActive(_activeYear);
-            _newLawCultivationAvailable = MclslNewLawPioneerSystem.CanPracticeNewLaw(_activeYear);
-            _snapshot = null;
-            _snapshotBuilder = null;
-            _stage = Stage.Prepare;
-            return;
-        }
-
         Clear();
     }
 }

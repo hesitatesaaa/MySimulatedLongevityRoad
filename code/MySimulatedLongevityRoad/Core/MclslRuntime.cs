@@ -41,28 +41,35 @@ internal static class MclslRuntime
         int unityFrame = Time.frameCount;
         if (unityFrame == _lastFrame) return;
         _lastFrame = unityFrame;
-
-        long realtimeSample = MclslPerformanceProbe.Begin();
-        using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
-            MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
-        MclslPerformanceProbe.End("实时模块", realtimeSample);
-        MclslRuntimeWorkBudget.SampleFrame();
-        if (!MclslRuntimeSettings.CoreEnabled) return;
-        _frameCounter++;
-        long frameSample = MclslPerformanceProbe.Begin();
-        using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
-            MclslModuleHub.TickFrame(_frameCounter, true);
-        MclslPerformanceProbe.End("帧模块", frameSample);
-        MclslPerformanceProbe.SampleFrame();
-        if (_frameCounter % 15 == 0)
+        long modFrameSample = MclslPerformanceProbe.Begin();
+        try
         {
-            int year = CurrentYear();
-            if (year != _lastYear)
+            long realtimeSample = MclslPerformanceProbe.Begin();
+            using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
+                MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
+            MclslPerformanceProbe.End("实时模块", realtimeSample);
+            MclslRuntimeWorkBudget.SampleFrame();
+            if (!MclslRuntimeSettings.CoreEnabled) return;
+            _frameCounter++;
+            long frameSample = MclslPerformanceProbe.Begin();
+            using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
+                MclslModuleHub.TickFrame(_frameCounter, true);
+            MclslPerformanceProbe.End("帧模块", frameSample);
+            if (_frameCounter % 15 == 0)
             {
-                _lastYear = year;
-                using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
-                    MclslModuleHub.TickAnnual(year, true);
+                int year = CurrentYear();
+                if (year != _lastYear)
+                {
+                    _lastYear = year;
+                    using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
+                        MclslModuleHub.TickAnnual(year, true);
+                }
             }
+        }
+        finally
+        {
+            MclslPerformanceProbe.End("模组每帧CPU", modFrameSample);
+            MclslPerformanceProbe.SampleFrame();
         }
     }
 
@@ -79,6 +86,8 @@ internal static class MclslRuntime
         MclslRuntimeWorkBudget.Clear();
         MclslBagSystem.ClearRuntime();
         MclslTianxuanMarket.ClearRuntime();
+        MclslSpellSystem.ClearRuntime();
+        MySimulatedLongevityRoad.Traits.MclslImmortalActorRegistration.ClearRuntime();
         MySimulatedLongevityRoad.Data.MclslHonorificNameCatalog.ClearRuntime();
         MclslModuleHub.Clear();
         MclslVisibleActorRenderLane.Clear();

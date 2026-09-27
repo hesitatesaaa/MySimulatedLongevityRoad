@@ -33,7 +33,9 @@ internal static class MclslCultivationSystem
     private static void ProcessAnnual(Actor actor, int year)
     {
         if (!MclslEligibility.CanCultivate(actor)) return;
-        ReconcileManualTrait(actor, year);
+        long detailSample = MclslPerformanceProbe.Begin();
+        try { ReconcileManualTrait(actor, year); }
+        finally { MclslPerformanceProbe.End("新法细分.手动特质", detailSample); }
         string realm = MclslActorAccessor.Realm(actor);
         string cultivationSystem = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         if (cultivationSystem == MclslCultivationSystemIds.AncientLaw)
@@ -49,38 +51,73 @@ internal static class MclslCultivationSystem
             if (!MclslNewLawEntrySystem.TryBeginFromMortal(actor, year)) return;
             return;
         }
-        MclslMindSystem.ProcessAnnual(actor, year, realm);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslMindSystem.ProcessAnnual(actor, year, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.炼心", detailSample); }
         if (string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)))
             MclslCultivationStateTransitions.TrySetCultivationSystem(actor, MclslCultivationSystemIds.NewLaw);
         StabilizeCultivatorSurvival(actor, realm);
-        MclslTraitRegistration.SyncNativeRealmTraits(actor, realm);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslTraitRegistration.SyncNativeRealmTraits(actor, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.原版境界特质", detailSample); }
 
         bool directHarmonyLeap = MclslRealmIds.Index(realm) >= MclslRealmIds.Index(MclslRealmIds.HeDao)
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.HarmonyLeap, 0) == 1;
-        if (!directHarmonyLeap) EnsureTechnique(actor);
-        MclslResourceSystem.EnsureActorResources(actor);
-        ReconcileAptitudeGift(actor);
-        MclslGeneratedObjectFactory.MigrateLegacyFoundationWonder(actor, year);
-        MclslGeneratedObjectFactory.NormalizeActorRootText(actor);
-        EnsureManualStageData(actor, realm, year);
-        MclslTaishangSystem.ProcessAnnual(actor, year, realm);
+        if (!directHarmonyLeap)
+        {
+            detailSample = MclslPerformanceProbe.Begin();
+            try { EnsureTechnique(actor); }
+            finally { MclslPerformanceProbe.End("新法细分.功法校准", detailSample); }
+        }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslResourceSystem.EnsureActorResources(actor); }
+        finally { MclslPerformanceProbe.End("新法细分.资源校准", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { ReconcileAptitudeGift(actor); }
+        finally { MclslPerformanceProbe.End("新法细分.资质校准", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslGeneratedObjectFactory.MigrateLegacyFoundationWonder(actor, year); }
+        finally { MclslPerformanceProbe.End("新法细分.奇物迁移", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslGeneratedObjectFactory.NormalizeActorRootText(actor); }
+        finally { MclslPerformanceProbe.End("新法细分.根基文本", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { EnsureManualStageData(actor, realm, year); }
+        finally { MclslPerformanceProbe.End("新法细分.阶段数据", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslTaishangSystem.ProcessAnnual(actor, year, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.太上", detailSample); }
 
         if (realm == MclslRealmIds.ChangSheng) return;
         if (MclslWorldEpochSystem.IsNewLawActive(year))
         {
-            MclslResourceSystem.GrantAnnualStipend(actor, year);
-            MclslResourceSystem.TryAutoSpend(actor, year);
+            detailSample = MclslPerformanceProbe.Begin();
+            try
+            {
+                MclslResourceSystem.GrantAnnualStipend(actor, year);
+                MclslResourceSystem.TryAutoSpend(actor, year);
+            }
+            finally { MclslPerformanceProbe.End("新法细分.资源发放购买", detailSample); }
         }
 
         bool ancientLaw = false;
-        MclslCultivationGrowthSystem.Reconcile(actor, realm, ancientLaw);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslCultivationGrowthSystem.Reconcile(actor, realm, ancientLaw); }
+        finally { MclslPerformanceProbe.End("新法细分.进度校准", detailSample); }
         int aptitude = Math.Clamp(
             MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50),
             1,
             100);
-        MclslNewLawEventSystem.ProcessAnnual(actor, year, realm, aptitude);
-        MclslCultivationGrowthSystem.MaybeRecordSameLawPressure(actor, year);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslNewLawEventSystem.ProcessAnnual(actor, year, realm, aptitude); }
+        finally { MclslPerformanceProbe.End("新法细分.机缘事件", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslCultivationGrowthSystem.MaybeRecordSameLawPressure(actor, year); }
+        finally { MclslPerformanceProbe.End("新法细分.同法压力", detailSample); }
 
+        detailSample = MclslPerformanceProbe.Begin();
+        try
+        {
         if (!MclslCultivationGrowthSystem.MeetsNextRealmMinimum(actor, realm, ancientLaw, out int essence, out int requiredEssence))
         {
             if (requiredEssence > 0)
@@ -114,6 +151,8 @@ internal static class MclslCultivationSystem
             MclslWorldChangeSystem.RegisterDivineClaim(actor, year);
         }
         // 合道由天地之魄的祭炼归属触发；当前以原生战斗击杀归属落地。
+        }
+        finally { MclslPerformanceProbe.End("新法细分.突破判定", detailSample); }
     }
 
     private static void StabilizeCultivatorSurvival(Actor actor, string realm)
@@ -231,6 +270,17 @@ internal static class MclslCultivationSystem
     }
 
     private static void ReconcileManualTrait(Actor actor, int year)
+    {
+        string realm = MclslActorAccessor.Realm(actor);
+        string reconciled = MclslActorAccessor.GetString(actor, MclslActorDataKeys.ManualRealmTraitReconciled);
+        if (string.Equals(reconciled, string.IsNullOrEmpty(realm) ? "<none>" : realm, StringComparison.Ordinal)) return;
+        ReconcileManualTraitCore(actor, year);
+        string resolvedRealm = MclslActorAccessor.Realm(actor);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.ManualRealmTraitReconciled,
+            string.IsNullOrEmpty(resolvedRealm) ? "<none>" : resolvedRealm);
+    }
+
+    private static void ReconcileManualTraitCore(Actor actor, int year)
     {
         if (HasForbiddenAncientLongevity(actor, year))
         {
@@ -449,7 +499,7 @@ internal static class MclslCultivationSystem
             || system == MclslCultivationSystemIds.AncientLaw
             || (system != MclslCultivationSystemIds.NewLaw && !MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()));
         string techniqueSeed = id > 0L ? id.ToString() : MclslActorAccessor.DisplayName(actor) + "|" + MclslRuntime.CurrentYear();
-        MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(techniqueSeed, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), ancient);
+        MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(actor, techniqueSeed, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), ancient);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, ancient ? "spiritual_" + technique.Id : technique.Id);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
         MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);

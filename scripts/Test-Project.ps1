@@ -26,6 +26,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $projectPath = Join-Path $repoRoot 'InterestingTrait.csproj'
 $buildScript = Join-Path $PSScriptRoot 'Build-Mod.ps1'
 $packageScript = Join-Path $PSScriptRoot 'Package-Mod.ps1'
+$mortalItemIntegrationScript = Join-Path $PSScriptRoot 'Test-MortalItemIntegration.ps1'
 
 function Invoke-CheckedScript {
     param(
@@ -50,16 +51,23 @@ function Test-JsonFiles {
     }
 
     $chPath = Join-Path $repoRoot 'Locales\ch.json'
-    $czPath = Join-Path $repoRoot 'Locales\cz.json'
     $ch = Get-Content -LiteralPath $chPath -Raw | ConvertFrom-Json
-    $cz = Get-Content -LiteralPath $czPath -Raw | ConvertFrom-Json
     $chKeys = @($ch.PSObject.Properties.Name)
-    $czKeys = @($cz.PSObject.Properties.Name)
-    $missingInCz = @($chKeys | Where-Object { $_ -notin $czKeys })
-    $missingInCh = @($czKeys | Where-Object { $_ -notin $chKeys })
+    if ($chKeys.Count -eq 0 -or @($chKeys | Where-Object { [string]::IsNullOrWhiteSpace([string]$ch.$_) }).Count -gt 0) {
+        throw '简体中文本地化为空或包含空白翻译。'
+    }
 
-    if ($missingInCz.Count -gt 0 -or $missingInCh.Count -gt 0) {
-        throw "本地化键不一致：ch.json 缺少 $($missingInCh.Count) 个，cz.json 缺少 $($missingInCz.Count) 个。"
+    # WorldBox normalizes punctuation and capital letters in add(), so two
+    # differently spelled source keys can overwrite the same visible label.
+    $normalized = @{}
+    foreach ($key in $chKeys) {
+        $canonical = [regex]::Replace($key, '([a-z0-9])([A-Z])', '$1_$2')
+        $canonical = [regex]::Replace($canonical, '[^\p{L}\p{Nd}_]+', '_').Trim('_').ToLowerInvariant()
+        $value = [string]$ch.$key
+        if ($normalized.ContainsKey($canonical) -and $normalized[$canonical].Value -ne $value) {
+            throw "简体中文键归一化冲突：$($normalized[$canonical].Key) 与 $key -> $canonical"
+        }
+        $normalized[$canonical] = @{ Key = $key; Value = $value }
     }
 
     Write-Host "JSON 检查通过：$($jsonFiles.Count) 个文件；本地化键：$($chKeys.Count) 个。"
@@ -99,6 +107,7 @@ Write-Host "项目检查模式：$Mode"
 Test-JsonFiles
 Test-CompileBoundary
 Test-GitDiff
+Invoke-CheckedScript -Path $mortalItemIntegrationScript
 
 if ($Mode -eq 'Build' -or $Mode -eq 'Package') {
     if ($Mode -eq 'Build') {

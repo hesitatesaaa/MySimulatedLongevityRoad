@@ -78,6 +78,19 @@ internal static class MclslSpiritualRootSystem
         return EnsureRootAttributes(actor, count);
     }
 
+    internal static int TechniqueWeight(Actor actor, MclslTechniqueDefinition technique)
+    {
+        if (actor?.data == null || technique?.LawPool == null) return 10;
+        string[] attributes = RootAttributes(actor);
+        if (attributes.Length == 0) return 10;
+        int hits = 0;
+        for (int i = 0; i < attributes.Length; i++)
+            if (Array.IndexOf(technique.LawPool, attributes[i]) >= 0) hits++;
+        string primary = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootPrimary, string.Empty);
+        int primaryBonus = !string.IsNullOrEmpty(primary) && Array.IndexOf(technique.LawPool, primary) >= 0 ? 8 : 0;
+        return 10 + (int)Math.Round(12d * hits / attributes.Length) + primaryBonus;
+    }
+
     internal static float CountCultivationMultiplier(Actor actor) => CountCultivationMultiplier(Profile(actor).Count);
 
     internal static int MultiLawInsightBonus(Actor actor) => MultiLawInsightBonus(Profile(actor).Count);

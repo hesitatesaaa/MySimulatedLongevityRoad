@@ -36,6 +36,7 @@ internal static class MclslActorAccessor
         string oldTechniqueId = string.Empty;
         bool techniqueChanged = string.Equals(key, MclslActorDataKeys.TechniqueId, StringComparison.Ordinal);
         bool cultivationStateChanged = string.Equals(key, MclslActorDataKeys.Realm, StringComparison.Ordinal);
+        string oldRealm = cultivationStateChanged ? GetString(actor, key, string.Empty) : string.Empty;
         bool honorificSourceChanged = IsHonorificSourceKey(key);
         if (techniqueChanged)
             oldTechniqueId = GetString(actor, key, string.Empty);
@@ -45,7 +46,10 @@ internal static class MclslActorAccessor
         if (techniqueChanged)
             MclslTechniqueOccupationSystem.OnTechniqueChanged(actor, oldTechniqueId, value ?? string.Empty);
         if (cultivationStateChanged)
+        {
             MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
+            MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
+        }
         if (honorificSourceChanged)
         {
             string realm = Realm(actor);

@@ -1535,7 +1535,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(410), GUILayout.ExpandHeight(true));
         DrawCardStripe("#69E6DD");
         GUILayout.Label("<size=20><b>空间灵蕴</b></size>");
-        GUILayout.Label("<color=#B9B0A0>空间灵蕴不会随年份自然增长，只在宿主实际完成晋升、杀人夺宝或重大事件后结算。</color>");
+        GUILayout.Label("<color=#B9B0A0>首次绑定获得80点空间灵蕴；当前宿主每经过10个游戏年自然增加1点。晋升、击杀与重大事件也会结算灵蕴。</color>");
         DrawFlowRow("宿主晋升", "炼气+8、筑基+15、金丹+25、元婴+40、化神+60、合道+90、长生+140。", "#69E6DD");
         DrawFlowRow("杀人夺宝", "凡俗+2；炼气至长生依次+3、+6、+10、+16、+25、+38、+55。", "#9CD7FF");
         DrawFlowRow("洞天炼化", "按品质与契合度获得12至32点左右。", "#A7E08A");

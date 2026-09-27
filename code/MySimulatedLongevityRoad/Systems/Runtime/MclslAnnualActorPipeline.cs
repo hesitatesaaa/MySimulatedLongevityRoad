@@ -8,14 +8,17 @@ internal enum MclslAnnualPipelineStage : byte
 {
     Prepare = 0,
     Progression = 1,
-    Finalize = 2
+    Finalize = 2,
+    Market = 3
 }
 
 internal static class MclslAnnualActorPipeline
 {
-    internal static bool ProcessStage(Actor actor, int annualYear, MclslAnnualPipelineStage stage, out MclslAnnualPipelineStage nextStage)
+    internal static bool ProcessStage(Actor actor, int annualYear, MclslAnnualPipelineStage stage,
+        int step, out MclslAnnualPipelineStage nextStage, out int nextStep)
     {
         nextStage = stage;
+        nextStep = step;
         MclslDiagnostics.Cultivation(
             "pipeline.stage.enter",
             "actor=" + MclslActorAccessor.Id(actor)
@@ -36,23 +39,35 @@ internal static class MclslAnnualActorPipeline
             return false;
         }
 
-        switch (stage)
+        bool bagStep = stage == MclslAnnualPipelineStage.Market
+            || stage == MclslAnnualPipelineStage.Prepare && step is 0 or 1 or 3 or 5 or 6 or 7
+            || stage == MclslAnnualPipelineStage.Progression && step is 1 or 2;
+        if (bagStep) MclslBagSystem.BeginTransaction(actor);
+        try
         {
-            case MclslAnnualPipelineStage.Prepare:
-                return ProcessPrepare(actor, annualYear, out nextStage);
-            case MclslAnnualPipelineStage.Progression:
-                return ProcessProgression(actor, annualYear, out nextStage);
-            case MclslAnnualPipelineStage.Finalize:
-                ProcessFinalize(actor);
-                return false;
-            default:
-                return false;
+            switch (stage)
+            {
+                case MclslAnnualPipelineStage.Prepare:
+                    return ProcessPrepare(actor, annualYear, step, out nextStage, out nextStep);
+                case MclslAnnualPipelineStage.Progression:
+                    return ProcessProgressionStep(actor, annualYear, step, out nextStage, out nextStep);
+                case MclslAnnualPipelineStage.Market:
+                    return ProcessMarketStep(actor, annualYear, step, out nextStage, out nextStep);
+                case MclslAnnualPipelineStage.Finalize:
+                    ProcessFinalize(actor);
+                    return false;
+                default:
+                    return false;
+            }
         }
+        finally { if (bagStep) MclslBagSystem.EndTransaction(actor); }
     }
 
-    private static bool ProcessPrepare(Actor actor, int annualYear, out MclslAnnualPipelineStage nextStage)
+    private static bool ProcessPrepare(Actor actor, int annualYear, int step,
+        out MclslAnnualPipelineStage nextStage, out int nextStep)
     {
-        nextStage = MclslAnnualPipelineStage.Progression;
+        nextStage = MclslAnnualPipelineStage.Prepare;
+        nextStep = step + 1;
         MclslDiagnostics.Cultivation(
             "pipeline.prepare.enter",
             "actor=" + MclslActorAccessor.Id(actor)
@@ -64,22 +79,31 @@ internal static class MclslAnnualActorPipeline
             MclslDiagnostics.Cultivation("pipeline.prepare.skip", "actor=" + MclslActorAccessor.Id(actor) + " year=" + annualYear + " reason=not-eligible");
             return false;
         }
-        MclslImmortalPathSystem.TryNaturalGrant(actor);
-        MclslMaterialDiscovery.TryAnnualActivity(actor, annualYear);
-        if (MclslChildhoodRootSystem.ShouldTrackChildhoodCandidate(actor))
+        switch (step)
         {
-            MclslChildhoodRootSystem.TryProcessAgeFiveDeadline(actor, annualYear);
+            case 0: MclslArtifactSystem.OnActorInitialized(actor); break;
+            case 1: MclslAncientMentorshipSystem.ProcessAnnual(actor, annualYear); break;
+            case 2: MclslImmortalPathSystem.TryNaturalGrant(actor); break;
+            case 3: MclslMaterialDiscovery.TryAnnualActivity(actor, annualYear); break;
+            case 4:
+                if (MclslChildhoodRootSystem.ShouldTrackChildhoodCandidate(actor))
+                    MclslChildhoodRootSystem.TryProcessAgeFiveDeadline(actor, annualYear);
+                break;
+            case 5: MclslProfessionSystem.ProcessAnnual(actor, annualYear); break;
+            case 6: MclslItemUseSystem.SyncPersistent(actor); break;
+            case 7: MclslItemUseSystem.TryAutoCultivationConsumables(actor, annualYear); break;
+            case 8: MclslCultivationAgeSanity.RepairImpossibleYouthCultivation(actor, annualYear); break;
+            case 9: MclslMortalFateEventSystem.TryProcessAnnual(actor, annualYear); break;
+            case 10:
+                if (MclslCultivationActorMarker.ShouldKeepTracked(actor)) MclslWorldActorQuery.Track(actor);
+                nextStage = MclslAnnualPipelineStage.Progression;
+                nextStep = 0;
+                break;
+            default:
+                nextStage = MclslAnnualPipelineStage.Progression;
+                nextStep = 0;
+                break;
         }
-        MclslProfessionSystem.ProcessAnnual(actor, annualYear);
-        MclslItemUseSystem.SyncPersistent(actor);
-        MclslCultivationAgeSanity.RepairImpossibleYouthCultivation(actor, annualYear);
-
-        MclslMortalFateEventSystem.TryProcessAnnual(actor, annualYear);
-        if (MclslCultivationActorMarker.ShouldKeepTracked(actor))
-        {
-            MclslWorldActorQuery.Track(actor);
-        }
-        MclslDiagnostics.Cultivation("pipeline.prepare.done", "actor=" + MclslActorAccessor.Id(actor) + " year=" + annualYear + " next=" + nextStage);
         return true;
     }
 
@@ -88,7 +112,7 @@ internal static class MclslAnnualActorPipeline
         int annualYear,
         out MclslAnnualPipelineStage nextStage)
     {
-        nextStage = MclslAnnualPipelineStage.Finalize;
+        nextStage = MclslAnnualPipelineStage.Market;
         long actorId = MclslActorAccessor.Id(actor);
         if (!MclslAnnualExecutionContext.TryEnter(actor, annualYear)) return false;
 
@@ -122,7 +146,10 @@ internal static class MclslAnnualActorPipeline
                 + " essence=" + MclslCultivationGrowthSystem.CurrentTrueEssence(actor)
                 + " lastCultYear=" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -999));
 
-            bool didGrow = MclslAnnualCultivationExecutor.TryApplyOneAnnualStep(actor, annualYear);
+            long growthSample = MclslPerformanceProbe.Begin();
+            bool didGrow;
+            try { didGrow = MclslAnnualCultivationExecutor.TryApplyOneAnnualStep(actor, annualYear); }
+            finally { MclslPerformanceProbe.End("年度角色.修炼增长", growthSample); }
             int committedCultivationYear = MclslCultivationSystem.NormalizeLastCultivationYear(
                 actor,
                 annualYear,
@@ -164,14 +191,18 @@ internal static class MclslAnnualActorPipeline
                 MclslDiagnostics.Cultivation(
                     "pipeline.progress.newlaw",
                     "actor=" + actorId + " year=" + annualYear + " realm=" + realm);
-                MclslCultivationSystem.ProcessAnnualFromScheduler(actor, annualYear);
+                long cultivationSample = MclslPerformanceProbe.Begin();
+                try { MclslCultivationSystem.ProcessAnnualFromScheduler(actor, annualYear); }
+                finally { MclslPerformanceProbe.End("年度角色.新法修炼", cultivationSample); }
             }
             else
             {
                 MclslDiagnostics.Cultivation(
                     "pipeline.progress.ancient",
                     "actor=" + actorId + " year=" + annualYear + " realm=" + realm);
-                MclslAncientLawSystem.ProcessAnnualFromScheduler(actor, annualYear);
+                long cultivationSample = MclslPerformanceProbe.Begin();
+                try { MclslAncientLawSystem.ProcessAnnualFromScheduler(actor, annualYear); }
+                finally { MclslPerformanceProbe.End("年度角色.旧法修炼", cultivationSample); }
             }
 
             bool alive = MclslActorAccessor.Alive(actor);
@@ -179,10 +210,15 @@ internal static class MclslAnnualActorPipeline
             bool sensing = alive && !hasRealm && MclslSensingQiSystem.IsSensing(actor);
             if (hasRealm)
             {
-                MclslTechniqueOccupationSystem.TryResolveConflictAnnual(actor, annualYear);
-                MclslAdventureSystem.RegisterAnnual(actor, annualYear);
-                MclslTianxuanMarket.TryBuyNeeded(actor, annualYear);
-                MclslTianxuanMarket.TryListSurplus(actor, annualYear);
+                MclslSpellSystem.TryProgressAnnual(actor, annualYear);
+                if (MclslArtifactSystem.EquippedArtifactId(actor, MclslArtifactEquipmentSlot.Amulet) == "B080")
+                    actor.restoreHealthPercent(0.10f);
+                long techniqueSample = MclslPerformanceProbe.Begin();
+                try { MclslTechniqueOccupationSystem.TryResolveConflictAnnual(actor, annualYear); }
+                finally { MclslPerformanceProbe.End("年度角色.功法占用", techniqueSample); }
+                long adventureSample = MclslPerformanceProbe.Begin();
+                try { MclslAdventureSystem.RegisterAnnual(actor, annualYear); }
+                finally { MclslPerformanceProbe.End("年度角色.冒险登记", adventureSample); }
             }
 
             MclslDiagnostics.Cultivation(
@@ -199,6 +235,105 @@ internal static class MclslAnnualActorPipeline
         {
             MclslAnnualExecutionContext.Exit(actor, annualYear);
         }
+    }
+
+    private static bool ProcessMarket(Actor actor, int annualYear, out MclslAnnualPipelineStage nextStage)
+    {
+        nextStage = MclslAnnualPipelineStage.Finalize;
+        if (string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return true;
+        long sample = MclslPerformanceProbe.Begin();
+        bool purchased;
+        try { purchased = MclslTianxuanMarket.TryBuyNeeded(actor, annualYear); }
+        finally { MclslPerformanceProbe.End("天玄镜.需求购买", sample); }
+        if (purchased && MclslTianxuanMarket.PurchasesInYear(actor, annualYear) < MclslTianxuanMarket.MaxAnnualPurchases)
+        {
+            nextStage = MclslAnnualPipelineStage.Market;
+            return true;
+        }
+        long sellSample = MclslPerformanceProbe.Begin();
+        try { MclslTianxuanMarket.TryListSurplus(actor, annualYear); }
+        finally { MclslPerformanceProbe.End("天玄镜.多余出售", sellSample); }
+        return true;
+    }
+
+    private static bool ProcessProgressionStep(Actor actor, int year, int step,
+        out MclslAnnualPipelineStage nextStage, out int nextStep)
+    {
+        nextStage = MclslAnnualPipelineStage.Progression;
+        nextStep = step + 1;
+        if (!MclslAnnualExecutionContext.TryEnter(actor, year)) return false;
+        try
+        {
+            bool hasRealm = !string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor));
+            switch (step)
+            {
+                case 0:
+                    if (MclslLongevityRules.TryExpireAtAnnualLimit(actor, year)) return false;
+                    if (!hasRealm && MclslSpiritualRootSystem.HasCultivationPotential(actor))
+                        MclslSpiritualRootEntrySystem.TryEnterFromGiftTrait(actor, year);
+                    bool grew = MclslAnnualCultivationExecutor.TryApplyOneAnnualStep(actor, year);
+                    return grew || MclslCultivationSystem.NormalizeLastCultivationYear(actor, year,
+                        MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -1)) >= year;
+                case 1:
+                    string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem);
+                    if (!hasRealm && MclslSpiritualRootSystem.HasCultivationPotential(actor))
+                        MclslSensingQiSystem.ProcessAnnual(actor, year, system == MclslCultivationSystemIds.AncientLaw);
+                    else if (system == MclslCultivationSystemIds.NewLaw
+                        || (string.IsNullOrWhiteSpace(system) && MclslWorldEpochSystem.IsNewLawActive(year)))
+                        MclslCultivationSystem.ProcessAnnualFromScheduler(actor, year);
+                    else
+                        MclslAncientLawSystem.ProcessAnnualFromScheduler(actor, year);
+                    break;
+                case 2:
+                    if (hasRealm) MclslSpellSystem.TryProgressAnnual(actor, year);
+                    break;
+                case 3:
+                    if (hasRealm && MclslArtifactSystem.EquippedArtifactId(actor, MclslArtifactEquipmentSlot.Amulet) == "B080")
+                        actor.restoreHealthPercent(0.10f);
+                    break;
+                case 4:
+                    if (hasRealm) MclslTechniqueOccupationSystem.TryResolveConflictAnnual(actor, year);
+                    break;
+                case 5:
+                    if (hasRealm) MclslAdventureSystem.RegisterAnnual(actor, year);
+                    break;
+                default:
+                    bool sensing = !hasRealm && MclslSensingQiSystem.IsSensing(actor);
+                    nextStage = MclslAnnualPipelineStage.Market;
+                    nextStep = 0;
+                    return hasRealm || sensing;
+            }
+            return true;
+        }
+        finally { MclslAnnualExecutionContext.Exit(actor, year); }
+    }
+
+    private static bool ProcessMarketStep(Actor actor, int year, int step,
+        out MclslAnnualPipelineStage nextStage, out int nextStep)
+    {
+        nextStage = MclslAnnualPipelineStage.Market;
+        nextStep = step + 1;
+        if (string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor)))
+        {
+            nextStage = MclslAnnualPipelineStage.Finalize;
+            nextStep = 0;
+            return true;
+        }
+        if (step == 0)
+        {
+            bool purchased = MclslTianxuanMarket.TryBuyNeeded(actor, year);
+            if (purchased && MclslTianxuanMarket.PurchasesInYear(actor, year) < MclslTianxuanMarket.MaxAnnualPurchases)
+            {
+                nextStep = 0;
+                return true;
+            }
+            nextStep = 1;
+            return true;
+        }
+        MclslTianxuanMarket.TryListSurplus(actor, year);
+        nextStage = MclslAnnualPipelineStage.Finalize;
+        nextStep = 0;
+        return true;
     }
 
     private static void ProcessFinalize(Actor actor)

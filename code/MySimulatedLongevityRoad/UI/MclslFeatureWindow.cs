@@ -12,9 +12,19 @@ namespace MySimulatedLongevityRoad.UI;
 internal sealed class MclslFeatureWindow : MonoBehaviour
 {
     private enum Page { Guide, Bag, Market }
+    private sealed class MarketOfferGroup
+    {
+        internal MclslItemDefinition Item;
+        internal List<MclslMarketListing> Offers;
+        internal int Total;
+        internal int SellerCount;
+        internal int MinimumPrice;
+        internal int MaximumPrice;
+    }
 
-    private static readonly string[] Categories = { "丹药", "灵植", "灵物", "符箓材料", "符箓", "法宝" };
-    private static readonly string[] CategoryIds = { "Pill", "Plant", "SpiritObject", "TalismanMaterial", "Talisman", "Artifact" };
+    private static readonly string[] Categories = { "丹药", "灵植", "灵物", "符箓材料", "炼器材料", "符箓", "法宝", "法术卷轴" };
+    private static readonly string[] CategoryIds = { "Pill", "Plant", "SpiritObject", "TalismanMaterial", "Material", "Talisman", "Artifact", "SpellScroll" };
+    private static readonly string[] BagCategories = { "法宝", "丹药", "符箓", "材料", "传承典籍", "法术" };
     private static readonly string[] GuideTitles = { "入道", "修炼", "职业", "储物", "交易", "还真" };
     private static readonly string[] JourneyNames = { "灵根显现", "引气入体", "修炼破境", "探索寻材", "天玄镜交易", "还真回溯" };
     private static readonly GUIContent EmptyWindowTitle = GUIContent.none;
@@ -22,16 +32,16 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     {
         "天地灵机复苏，凡人可凭灵根踏上仙途。修士的灵根在五岁判定；高倍速略过五岁时，会在六岁补判。设置中的概率只影响尚未判定的人物。",
         "修士由炼气、筑基、金丹、元婴逐步问道。灵根、根骨、真元、功法和时代共同影响修行。留意人物境界与仙录纪事，可以追踪每次破境。",
-        "有根骨的人物在十八岁时可能成为炼丹师、炼器师或制符师。学徒先练习，熟练度与境界同时达标后晋级。职业只能制作当前品阶的成品。",
+        "有根骨的人物在十八岁时可能成为炼丹师、炼器师或制符师。三职业每年最多成功制作一次，优先同阶、缺料时最多降一阶；只有同阶成品增加熟练度。",
         "乾坤袋存放丹药、灵植、灵物、符箓材料、符箓和法宝。丹药与符箓可以使用，符箓用后消失；法宝各自保留耐久。",
-        "天玄镜使用贡献度进行全世界交易。修士满足自用需求后才会挂牌，买卖双方在成交时交换物品与贡献度。丹药与制符材料可由野外、遗迹和修行机缘发现；高阶材料来源更少。",
-        "还真会把世界回到锚点时刻，并将宿主回溯前的部分经历送入前世轮盘供玩家选择。首次使用请按本卷步骤操作：先确认宿主、建立锚点，再选择回溯方式；空间灵蕴不随世界回档，乾坤袋则随锚点存档恢复。\n\n【启用与宿主】还真功能须在设置中启用。新法纪元稳定后会按系统安排出现宿主；仙道纪元可在特质编辑器授予“还真”特质。宿主唯一，授予新宿主会替换原持有者。\n\n【建立锚点】先在游戏内保存当前世界，再从模组功能页打开“还真之门”。宿主必须存活、不在战斗中，生命至少达到最大生命的 85%；手动建立锚点消耗 80 点空间灵蕴。最多保留三枚锚点，达到上限时先选一枚作为替换对象。锚点保存建立当刻的整个世界存档，不只是宿主档案。若保存失败，不会扣除灵蕴或建立锚点。\n\n【手动回溯】在“还真之门”选择一枚锚点，点击“手动还真·回到所选锚点”，再次点击确认。手动回溯不额外消耗空间灵蕴。世界载入锚点存档后，晚于该锚点的锚点会被清理。\n\n【死亡回溯】若宿主死亡，系统会寻找符合当前世界与安全间隔要求的可用锚点并自动回载；没有合格锚点时不会回载。刚回溯后的安全间隔由设置决定，默认 40 年。\n\n【前世轮盘】回溯前宿主的修为与境界、功法、突破造物、天地道果、资质、心境、贡献、灵石及符合条件的特征会形成前世选项。进入轮盘后逐项选择要继承的内容；每项占一个名额，名额数取决于回溯后仍保留的锚点数。乾坤袋物品不是前世轮盘选项，会随整个世界恢复到锚点当时的状态。\n\n【空间灵蕴】空间灵蕴保存在世界回档之外，回溯后保留回溯前余额。主要来源包括宿主晋升、击杀、洞天炼化、天地之变与势力机缘。开启自动锚定后，系统仍须满足至少 80 点灵蕴及设置的锚定间隔；默认间隔 100 年，锚点满额时自动替换最旧的一枚。"
+        "天玄镜可用贡献或灵石进行全世界交易。修士满足自用需求后才会挂牌，买卖双方在成交时交换物品与所选货币。丹药与制符材料可由野外、遗迹和修行机缘发现；高阶材料来源更少。",
+        "【还真操作】\n\n1）启用还真\n在设置中开启“启用还真回溯”。关闭时保留特质与档案，但暂停还真回溯。\n\n2）获得并绑定宿主\n新法纪元稳定后会按系统安排自然出现宿主；仙道纪元可在特质编辑器手动授予“还真”。同一世界只有一名宿主，授予新宿主会替换原持有者。\n\n3）获得空间灵蕴\n首次绑定还真获得 80 点空间灵蕴；当前宿主每经过 10 个游戏年自然增加 1 点。宿主晋升、击杀、洞天炼化、天地之变与势力机缘也可增加灵蕴。灵蕴保存在世界回档之外，回溯后保留当时余额。\n\n4）建立还真锚点\n先在游戏内保存当前世界，再从模组功能页打开“还真之门”。宿主须存活、不在战斗中且生命不低于最大生命的 85%。建立或替换锚点消耗 80 点灵蕴；最多保留三枚，满额时先选择要替换的旧锚点。锚点保存当刻的整个世界。若保存失败，不会扣除灵蕴。开启自动锚定后仍须满足灵蕴和间隔条件，默认间隔 100 年。\n\n5）死亡后回溯\n宿主死亡时，系统会寻找符合当前世界与安全间隔要求的锚点并自动回载；没有合格锚点时不会回载。也可在“还真之门”选择锚点，点击“手动还真·回到所选锚点”并再次确认；手动回溯不额外消耗灵蕴。回载后，晚于所选锚点的锚点会被清理。\n\n6）在前世轮盘选择保留内容\n宿主回溯前的境界、功法、造物、资质、心境、贡献、灵石及符合条件的特征会形成选项。逐项选择要继承的内容，每项占一个名额；名额数取决于回溯后保留的锚点数。乾坤袋随锚点存档恢复，不属于轮盘选项。"
     };
     private static readonly string[][] GuidePoints =
     {
         new[] { "查看人物是否显现灵根", "灵根判定后不会因设置改变" },
         new[] { "观察境界与修行纪事", "不同纪元采用不同修行法门" },
-        new[] { "十八岁时判定职业", "练习与制作都会积累熟练度" },
+        new[] { "十八岁时判定职业", "仅制作同阶成品增加熟练度" },
         new[] { "人物界面打开乾坤袋", "留意符箓数量与法宝耐久" },
         new[] { "修士依自身需求自动交易", "无需选择人物或手动下单" },
         new[] { "先存档，再在还真之门建立锚点", "选锚点回溯并二次确认；死亡回溯须有合格锚点", "进入前世轮盘逐项选择遗产", "乾坤袋随世界回档，空间灵蕴在回档外保留" }
@@ -47,8 +57,16 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     private int _guidePage;
     private int _marketView;
     private readonly int[] _marketCategoryCounts = new int[CategoryIds.Length];
+    private readonly int[] _marketListingCounts = new int[CategoryIds.Length];
+    private readonly int[] _marketListedCounts = new int[CategoryIds.Length];
+    private readonly int[] _marketPurchasedCounts = new int[CategoryIds.Length];
+    private readonly Dictionary<int, List<MarketOfferGroup>> _marketOfferGroups = new();
+    private int _marketCachedRevision = -1;
+    private int _marketListedTotal;
+    private int _marketPurchasedTotal;
     private int _marketTotalCount;
     private string _selectedBagItemKey = string.Empty;
+    private string _bagActionMessage = string.Empty;
     private string _expandedMarketItemId = string.Empty;
     private Vector2 _artifactInstanceScroll;
     private Vector2 _marketScroll;
@@ -85,6 +103,13 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     private GUIStyle _bagSelectedCategory;
     private GUIStyle _bagButton;
     private GUIStyle _bagPrimaryButton;
+    private GUIStyle _marketWindow;
+    private GUIStyle _marketPanel;
+    private GUIStyle _marketInset;
+    private GUIStyle _marketRow;
+    private GUIStyle _marketTab;
+    private GUIStyle _marketSelectedTab;
+    private Texture2D _marketWindowTexture;
     private Texture2D _panelTexture;
     private Texture2D _innerTexture;
     private Texture2D _cardTexture;
@@ -122,6 +147,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         _instance._bagScroll = Vector2.zero;
         _instance._guideScroll = Vector2.zero;
         _instance._selectedBagItemKey = string.Empty;
+        _instance._bagActionMessage = string.Empty;
         _instance._marketView = 0;
         _instance._visible = true;
         _instance.enabled = true;
@@ -157,7 +183,8 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             GUI.color = Color.white;
             GUI.backgroundColor = Color.white;
         }
-        _rect = GUI.Window(781208, _rect, DrawWindow, EmptyWindowTitle, _page == Page.Bag ? _bagWindow : _window);
+        _rect = GUI.Window(781208, _rect, DrawWindow, EmptyWindowTitle,
+            _page == Page.Bag ? _bagWindow : _page == Page.Market ? _marketWindow : _window);
         GUI.color = previous;
         GUI.backgroundColor = previousBackground;
     }
@@ -192,7 +219,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
 
     private void DrawHeader()
     {
-        GUILayout.BeginHorizontal(_page == Page.Bag ? _bagPanel : _card, GUILayout.Height(62f));
+        GUILayout.BeginHorizontal(_page == Page.Bag ? _bagPanel : _page == Page.Market ? _marketPanel : _card, GUILayout.Height(62f));
         DrawEntryIcon(_page == Page.Guide ? "ui/Icons/GuideEntrance"
             : _page == Page.Bag ? "ui/Icons/QiankunBagEntrance" : "ui/Icons/TianxuanMirrorEntrance", 42f);
         GUILayout.BeginVertical();
@@ -203,7 +230,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             : _page == Page.Bag ? "分类收纳丹药、灵材、符箓与法宝。" : "修士按需自动挂单与成交，浏览全世界交易动态。", _subtitle);
         GUILayout.EndVertical();
         GUILayout.FlexibleSpace();
-        if (GUILayout.Button("× 关闭", _page == Page.Bag ? _bagButton : _button,
+        if (GUILayout.Button("× 关闭", _page == Page.Bag ? _bagButton : _page == Page.Market ? _marketTab : _button,
                 GUILayout.Width(88f), GUILayout.Height(34f))) CloseWindow();
         GUILayout.EndHorizontal();
     }
@@ -325,14 +352,26 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             return;
         }
         MclslBagState bag = MclslBagSystem.Peek(_actor);
+        if (MclslBagSystem.IsLocked(_actor))
+        {
+            MclslLocalizationBridge.TryResolveRuntimeKey("mclsl_qiankun_corrupt_warning", out string warning);
+            GUILayout.Label(string.IsNullOrWhiteSpace(warning) ? "乾坤袋数据损坏，已保留原文并暂停写入" : warning, _section);
+            return;
+        }
         List<MclslOwnedItem> visibleItems = GetBagItems(bag, _category);
-        EnsureBagSelection(visibleItems);
+        if (_category == 4)
+        {
+            List<MclslMentorshipBook> books = bag.Books ?? new List<MclslMentorshipBook>();
+            if (!books.Any(book => "book:" + book.BookId == _selectedBagItemKey))
+                _selectedBagItemKey = books.Count == 0 ? string.Empty : "book:" + books[0].BookId;
+        }
+        else if (_category != 5) EnsureBagSelection(visibleItems);
 
         GUILayout.BeginHorizontal(_bagPanel, GUILayout.Height(56f));
         DrawEntryIcon("ui/Icons/QiankunBagEntrance", 42f);
         GUILayout.BeginVertical();
         GUILayout.Label(MclslActorAccessor.DisplayName(_actor), _section);
-        GUILayout.Label("专属纳物匣　·　物品随修士保存", _small);
+        GUILayout.Label("专属纳物匣　·　法宝、丹药、符箓、材料与传承典籍", _small);
         GUILayout.EndVertical();
         GUILayout.FlexibleSpace();
         DrawBagSummary("收纳件数", CountBagItems(bag, null));
@@ -362,14 +401,14 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     {
         float width = Mathf.Clamp(_rect.width * 0.18f, 132f, 184f);
         GUILayout.BeginVertical(_bagShelf, GUILayout.Width(width), GUILayout.ExpandHeight(true));
-        GUILayout.Label("六格纳珍", _section);
-        GUILayout.Label("依物性分匣", _muted);
+        GUILayout.Label("乾坤袋", _section);
+        GUILayout.Label("按物品类别存放", _muted);
         GUILayout.Space(8f);
-        for (int i = 0; i < Categories.Length; i++)
+        for (int i = 0; i < BagCategories.Length; i++)
         {
             int index = i;
-            int count = CountBagItems(bag, CategoryIds[i]);
-            string label = Categories[i] + "\n" + count + " 件";
+            int count = CountBagCategory(bag, i);
+            string label = BagCategories[i] + "\n" + count + (i == 4 ? " 册" : i == 5 ? " 门" : " 件");
             if (GUILayout.Button(label, _category == i ? _bagSelectedCategory : _bagCategory,
                     GUILayout.Height(50f), GUILayout.ExpandWidth(true)))
             {
@@ -381,7 +420,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             GUILayout.Space(4f);
         }
         GUILayout.FlexibleSpace();
-        GUILayout.Label("普通物品合并堆放\n法宝逐件保留耐久", _small);
+        GUILayout.Label("法宝每种唯一一件\n丹药、符箓与材料按数量堆叠", _small);
         GUILayout.EndVertical();
     }
 
@@ -389,7 +428,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     {
         GUILayout.BeginVertical(_bagPanel, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
         GUILayout.BeginHorizontal();
-        GUILayout.Label(Categories[_category] + " · 藏珍格", _section);
+        GUILayout.Label(BagCategories[_category] + " · 藏珍格", _section);
         GUILayout.FlexibleSpace();
         GUILayout.Label(items.Count + " 种", _muted);
         GUILayout.EndHorizontal();
@@ -397,7 +436,43 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         GUILayout.Space(6f);
         _bagScroll = GUILayout.BeginScrollView(_bagScroll, false, true, GUIStyle.none,
             GUI.skin.verticalScrollbar, GUILayout.ExpandHeight(true));
-        if (items.Count == 0)
+        if (_category == 5)
+        {
+            List<MclslSpellDefinition> known = MclslSpellSystem.Known(_actor);
+            if (known.Count == 0) GUILayout.Label("尚未学会法术", _section);
+            foreach (MclslSpellDefinition spell in known)
+            {
+                GUILayout.BeginHorizontal(_card, GUILayout.Height(48f));
+                Sprite icon = SpriteTextureLoader.getSprite(spell.IconPath);
+                if (icon != null) GUILayout.Label(icon.texture, GUILayout.Width(38f), GUILayout.Height(38f));
+                GUILayout.Label(spell.Name + "　耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
+                GUILayout.EndHorizontal();
+            }
+            foreach (MclslOwnedItem scroll in MclslBagSystem.Peek(_actor).Items)
+            {
+                MclslItemDefinition definition = MclslItemCatalog.Get(scroll?.ItemId);
+                if (definition?.Category != "SpellScroll") continue;
+                if (GUILayout.Button("研习《" + definition.Name + "》 ×" + scroll.Count, _bagButton, GUILayout.Height(34f)))
+                    MclslSpellSystem.TryStudyScroll(_actor, definition.Id);
+            }
+        }
+        else if (_category == 4)
+        {
+            List<MclslMentorshipBook> books = MclslBagSystem.Peek(_actor).Books ?? new List<MclslMentorshipBook>();
+            if (books.Count == 0)
+            {
+                GUILayout.Space(28f);
+                GUILayout.Label("尚无师门典籍", _section);
+                GUILayout.Label("成为旧法修士的弟子后，会在此收录师门传承。", _muted);
+            }
+            foreach (MclslMentorshipBook book in books)
+            {
+                string bookKey = "book:" + book.BookId;
+                if (GUILayout.Button((bookKey == _selectedBagItemKey ? "◆ " : "◇ ") + book.TechniqueName + "\n师父：" + book.TeacherName + "　参悟 " + book.Progress + "%", _bagCategory, GUILayout.Height(58f)))
+                    _selectedBagItemKey = bookKey;
+            }
+        }
+        else if (items.Count == 0)
         {
             GUILayout.Space(28f);
             GUILayout.Label("此分匣尚空", _section);
@@ -452,7 +527,21 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         float width = Mathf.Clamp(_rect.width * 0.24f, 178f, 246f);
         GUILayout.BeginVertical(_bagShelf, GUILayout.Width(width), GUILayout.ExpandHeight(true));
         GUILayout.Label("藏品签", _section);
+        if (_category != 4 && _category != 5) DrawEquippedArtifactControl();
         GUILayout.Space(6f);
+        if (_category == 4)
+        {
+            DrawMentorshipBookDetail();
+            GUILayout.EndVertical();
+            return;
+        }
+        if (_category == 5)
+        {
+            GUILayout.Label("灵力 " + MclslSpellSystem.CurrentMana(_actor) + "/" + MclslSpellSystem.MaxMana(_actor), _section);
+            GUILayout.Label("已学法术在战斗中自动消耗灵力施展；卷轴可在左侧研习。", _muted);
+            GUILayout.EndVertical();
+            return;
+        }
         MclslOwnedItem owned = FindBagSelection(items, out MclslItemDefinition item);
         if (owned == null || item == null)
         {
@@ -477,22 +566,30 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         GUILayout.Space(8f);
         if (item.Category == "Artifact")
         {
+            GUILayout.Label("制作配方　" + MclslItemCatalog.IngredientDisplayName(item.IngredientA)
+                + " + " + MclslItemCatalog.IngredientDisplayName(item.IngredientB)
+                + "（炼器师品阶需达到" + DisplayGradeName(item) + "）", _muted);
             List<MclslOwnedItem> instances = MclslBagSystem.Peek(_actor).Items
                 .Where(x => x != null && string.Equals(x.ItemId, item.Id, StringComparison.Ordinal))
                 .ToList();
-            GUILayout.Label("同类法宝　" + instances.Count + " 件独立实例", _muted);
-            Item equippedItem = _actor?.equipment?.weapon?.getItem();
-            if (equippedItem?.asset?.id == MclslArtifactSystem.NativeId(item.Id))
-                GUILayout.Label("当前装备　耐久 " + Mathf.Clamp(equippedItem.data?.durability ?? 0, 0, 100) + "%", _section);
+            GUILayout.Label("槽位　" + MclslArtifactSystem.SlotDisplayName(item.EquipmentSlot) + "　·　唯一持有", _muted);
+            string equippedArtifactId = MclslArtifactSystem.EquippedArtifactId(_actor, item.EquipmentSlot);
+            if (equippedArtifactId == item.Id)
+                GUILayout.Label("当前装备于" + MclslArtifactSystem.SlotDisplayName(item.EquipmentSlot) + "栏", _section);
             _artifactInstanceScroll = GUILayout.BeginScrollView(_artifactInstanceScroll, false, true,
-                GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Height(Mathf.Min(230f, Math.Max(90f, instances.Count * 42f))));
+                GUIStyle.none, GUI.skin.verticalScrollbar, GUILayout.Height(Mathf.Min(165f, Math.Max(76f, instances.Count * 42f))));
             for (int i = 0; i < instances.Count; i++)
             {
                 MclslOwnedItem instance = instances[i];
                 GUILayout.BeginHorizontal(_card, GUILayout.MinHeight(36f));
-                GUILayout.Label("法宝 " + (i + 1) + "　耐久 " + Mathf.Clamp(instance.Durability, 0, 100) + "%　袋中未装备", _small);
-                if (GUILayout.Button("装备", _bagButton, GUILayout.Width(52f), GUILayout.Height(30f)))
-                    MclslArtifactSystem.TryEquip(_actor, instance.InstanceId);
+                GUILayout.Label("耐久 " + Mathf.Clamp(instance.Durability, 0, 100) + "%　" + (equippedArtifactId == item.Id ? "已装备" : "收纳中"), _small);
+                string action = equippedArtifactId == item.Id ? "已装备"
+                    : equippedArtifactId.Length > 0 ? "替换" : "装备";
+                if (action != "已装备" && GUILayout.Button(action, _bagButton, GUILayout.Width(52f), GUILayout.Height(30f)))
+                {
+                    MclslArtifactSystem.TryEquip(_actor, instance.InstanceId,
+                        replaceExisting: equippedArtifactId.Length > 0);
+                }
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndScrollView();
@@ -507,32 +604,68 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         {
             if (MclslItemUseSystem.TryUse(_actor, item.Id))
             {
+                _bagActionMessage = "使用成功。";
                 MclslBagState refreshed = MclslBagSystem.Peek(_actor);
                 List<MclslOwnedItem> remaining = GetBagItems(refreshed, _category);
                 if (!ContainsBagSelection(remaining, _selectedBagItemKey)) _selectedBagItemKey = string.Empty;
             }
+            else _bagActionMessage = MclslItemUseSystem.ManualUseFailureReason(_actor, item.Id);
         }
-        if (item.Category == "Artifact" && GUILayout.Button("装备此法宝", _bagButton, GUILayout.Height(36f)))
-            MclslArtifactSystem.TryEquip(_actor, owned.InstanceId);
+        if (!string.IsNullOrWhiteSpace(_bagActionMessage)) GUILayout.Label(_bagActionMessage, _muted);
+        if (item.Category == "Artifact")
+        {
+            string equippedId = MclslArtifactSystem.EquippedArtifactId(_actor, item.EquipmentSlot);
+            bool isEquipped = equippedId == item.Id;
+            string action = isEquipped ? "卸下"
+                : equippedId.Length > 0 ? "装备 / 更换" : "装备此法宝";
+            if (GUILayout.Button(action, _bagButton, GUILayout.Height(36f)))
+            {
+                if (isEquipped) MclslArtifactSystem.TryUnequip(_actor, item.EquipmentSlot);
+                else MclslArtifactSystem.TryEquip(_actor, owned.InstanceId,
+                    replaceExisting: equippedId.Length > 0);
+            }
+        }
+        GUILayout.EndVertical();
+    }
+
+    private void DrawEquippedArtifactControl()
+    {
+        GUILayout.BeginVertical(_bagPanel);
+        GUILayout.Label("六个法宝槽", _muted);
+        foreach (MclslArtifactEquipmentSlot slot in Enum.GetValues(typeof(MclslArtifactEquipmentSlot)))
+        {
+            MclslOwnedItem owned = MclslArtifactSystem.EquippedArtifact(_actor, slot);
+            MclslItemDefinition equipped = MclslItemCatalog.Get(owned?.ItemId);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(MclslArtifactSystem.SlotDisplayName(slot), _small, GUILayout.Width(48f));
+            GUILayout.Label(equipped?.Name ?? "空", _section);
+            if (equipped != null && GUILayout.Button("卸下", _bagButton, GUILayout.Width(46f), GUILayout.Height(28f))) MclslArtifactSystem.TryUnequip(_actor, slot);
+            GUILayout.EndHorizontal();
+        }
         GUILayout.EndVertical();
     }
 
     private void DrawMarketPage()
     {
         IReadOnlyList<MclslMarketListing> listings = MclslTianxuanMarket.Snapshot();
-        RefreshMarketCategoryCounts(listings);
+        IReadOnlyList<MclslMarketActivity> listed = MclslTianxuanMarket.ListingActivitySnapshot();
+        IReadOnlyList<MclslMarketActivity> purchased = MclslTianxuanMarket.PurchaseActivitySnapshot();
+        RefreshMarketCategoryCounts(listings, listed, purchased);
         IReadOnlyList<MclslMarketActivity> activity = _marketView == 1
-            ? MclslTianxuanMarket.ListingActivitySnapshot()
-            : _marketView == 2 ? MclslTianxuanMarket.PurchaseActivitySnapshot() : Array.Empty<MclslMarketActivity>();
-        GUILayout.BeginHorizontal(_jadePanel, GUILayout.Height(62f));
+            ? listed : _marketView == 2 ? purchased : Array.Empty<MclslMarketActivity>();
+        bool compact = _rect.width < 900f;
+        GUILayout.BeginHorizontal(_marketPanel, GUILayout.Height(compact ? 76f : 66f));
         DrawMarketTicker("在售挂单", _marketTotalCount.ToString(), "件");
-        DrawMarketTicker("上架记录", MclslTianxuanMarket.ListingActivitySnapshot().Count.ToString(), "笔");
-        DrawMarketTicker("购入记录", MclslTianxuanMarket.PurchaseActivitySnapshot().Count.ToString(), "笔");
+        DrawMarketTicker("近期上架", listed.Count + "笔 · " + _marketListedTotal + "件", "");
+        DrawMarketTicker("近期成交", purchased.Count + "笔 · " + _marketPurchasedTotal + "件", "");
         GUILayout.FlexibleSpace();
-        GUILayout.BeginVertical(GUILayout.Width(174f));
-        GUILayout.Label("万界交易时刻", _muted);
-        GUILayout.Label("第 " + MclslRuntime.CurrentYear() + " 年 · 自动撮合", _body);
-        GUILayout.EndVertical();
+        if (!compact)
+        {
+            GUILayout.BeginVertical(GUILayout.Width(174f));
+            GUILayout.Label("万界交易时刻", _muted);
+            GUILayout.Label("第 " + MclslRuntime.CurrentYear() + " 年 · 自动撮合", _body);
+            GUILayout.EndVertical();
+        }
         GUILayout.EndHorizontal();
         GUILayout.Space(8f);
         GUILayout.BeginHorizontal();
@@ -540,67 +673,78 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         for (int i = 0; i < views.Length; i++)
         {
             int view = i;
-            if (GUILayout.Button(views[i], _marketView == view ? _selectedTab : _tab, GUILayout.Height(38f)))
+            if (GUILayout.Button(views[i], _marketView == view ? _marketSelectedTab : _marketTab, GUILayout.Height(38f)))
             {
                 _marketView = view;
                 _marketScroll = Vector2.zero;
             }
         }
         GUILayout.EndHorizontal();
+        // A tab click happens after the first count refresh in this GUI pass.
+        // Copy the newly selected cached column before drawing the category rail.
+        RefreshMarketCategoryCounts(listings, listed, purchased);
         GUILayout.Space(8f);
-        GUILayout.BeginHorizontal(GUILayout.ExpandHeight(true));
-        float categoryWidth = Mathf.Clamp(_rect.width * 0.16f, 120f, 176f);
+        float contentWidth = Mathf.Max(300f, _rect.width - 30f);
+        GUILayout.BeginHorizontal(GUILayout.Width(contentWidth), GUILayout.ExpandHeight(true));
+        float categoryWidth = compact ? 124f : Mathf.Clamp(_rect.width * 0.16f, 124f, 176f);
         float infoWidth = Mathf.Clamp(_rect.width * 0.20f, 164f, 230f);
+        float boardWidth = Mathf.Max(160f, contentWidth - categoryWidth - 7f - (compact ? 0f : infoWidth + 7f));
         DrawMarketCategoryRail(categoryWidth);
-        GUILayout.Space(10f);
-        float boardMinWidth = Mathf.Clamp(_rect.width * 0.34f, 250f, 390f);
-        if (_marketView == 0) DrawMarketListings(listings, boardMinWidth);
-        else DrawMarketActivity(activity, boardMinWidth);
-        GUILayout.Space(10f);
-        DrawMarketExchangeInfo(infoWidth);
+        GUILayout.Space(7f);
+        if (compact) GUILayout.BeginVertical(GUILayout.Width(boardWidth), GUILayout.ExpandHeight(true));
+        if (_marketView == 0) DrawMarketListings(boardWidth);
+        else DrawMarketActivity(activity, boardWidth);
+        if (compact)
+        {
+            GUILayout.Space(5f);
+            DrawMarketExchangeInfo(0f, true);
+            GUILayout.EndVertical();
+        }
+        else
+        {
+            GUILayout.Space(7f);
+            DrawMarketExchangeInfo(infoWidth, false);
+        }
         GUILayout.EndHorizontal();
     }
 
     private void DrawMarketTicker(string label, string value, string unit)
     {
-        GUILayout.BeginVertical(_card, GUILayout.Width(142f), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(_marketInset, GUILayout.MinWidth(100f), GUILayout.ExpandHeight(true));
         GUILayout.Label(label, _muted);
         GUILayout.BeginHorizontal();
-        GUILayout.Label(value, _section);
-        GUILayout.Label(unit, _small);
+        GUILayout.Label(value, unit.Length == 0 ? _body : _section);
+        if (unit.Length > 0) GUILayout.Label(unit, _small);
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
     }
 
     private void DrawMarketCategoryRail(float width)
     {
-        GUILayout.BeginVertical(_jadePanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(_marketPanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
         GUILayout.Label("交易板块", _section);
         GUILayout.Space(8f);
         for (int i = 0; i < Categories.Length; i++)
         {
             int index = i;
-            GUIStyle style = _category == index ? _selectedTab : _tab;
+            GUIStyle style = _category == index ? _marketSelectedTab : _marketTab;
             int count = _marketCategoryCounts[index];
-            if (GUILayout.Button(Categories[i] + "    " + (_marketView == 0 ? count : "·"), style, GUILayout.Height(37f)))
+            if (GUILayout.Button(Categories[i] + "  " + count + "件", style, GUILayout.Height(37f)))
             {
                 _category = index;
                 _marketScroll = Vector2.zero;
             }
         }
         GUILayout.FlexibleSpace();
-        GUILayout.Label("全球修士自动撮合\n满足自用后挂售\n成交同步交割物品与贡献度", _small);
+        GUILayout.Label("全球修士自动撮合\n满足自用后挂售\n成交同步交割物品与贡献或灵石", _small);
         GUILayout.EndVertical();
     }
 
-    private void DrawMarketListings(IReadOnlyList<MclslMarketListing> listings, float minWidth)
+    private void DrawMarketListings(float width)
     {
-        List<IGrouping<string, MclslMarketListing>> groups = listings
-            .Where(listing => MclslItemCatalog.Get(listing?.Item?.ItemId)?.Category == CategoryIds[_category])
-            .GroupBy(listing => listing.Item.ItemId)
-            .OrderBy(group => MclslItemCatalog.Get(group.Key)?.Name, StringComparer.Ordinal)
-            .ToList();
-        GUILayout.BeginVertical(_innerPanel, GUILayout.MinWidth(minWidth), GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+        List<MarketOfferGroup> groups = _marketOfferGroups.TryGetValue(_category, out List<MarketOfferGroup> cached)
+            ? cached : new List<MarketOfferGroup>();
+        GUILayout.BeginVertical(_marketPanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
         GUILayout.BeginHorizontal();
         GUILayout.Label(Categories[_category] + " · 实时盘口", _section);
         GUILayout.FlexibleSpace();
@@ -609,36 +753,33 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         GUILayout.Space(6f);
         _marketScroll = GUILayout.BeginScrollView(_marketScroll, false, true, GUIStyle.none, GUI.skin.verticalScrollbar,
             GUILayout.ExpandHeight(true));
-        int kindCount = 0;
-        foreach (IGrouping<string, MclslMarketListing> group in groups)
+        foreach (MarketOfferGroup group in groups)
         {
-            MclslItemDefinition item = MclslItemCatalog.Get(group.Key);
-            if (item == null) continue;
-            List<MclslMarketListing> offers = group.OrderBy(x => x.Price).ThenBy(x => x.Year).ToList();
-            int total = offers.Sum(x => Math.Max(1, x.Item?.Count ?? 1));
-            int sellers = offers.Select(x => x.SellerId).Distinct().Count();
-            int minPrice = offers.Min(x => x.Price);
-            int maxPrice = offers.Max(x => x.Price);
-            kindCount++;
-            GUILayout.BeginHorizontal(_card, GUILayout.MinHeight(72f));
+            MclslItemDefinition item = group.Item;
+            List<MclslMarketListing> offers = group.Offers;
+            GUILayout.BeginHorizontal(_marketRow, GUILayout.MinHeight(72f));
             DrawIcon(item, 50f);
             GUILayout.BeginVertical(GUILayout.MinWidth(125f), GUILayout.ExpandWidth(true));
             GUILayout.Label(item.Name + "  ·  " + DisplayGradeName(item), _body);
-            GUILayout.Label(total + " 件挂单　" + sellers + " 位卖家", _small);
+            GUILayout.Label(group.Total + " 件挂单　" + group.SellerCount + " 位卖家", _small);
             GUILayout.EndVertical();
-            GUILayout.BeginVertical(_jadePanel, GUILayout.Width(118f), GUILayout.ExpandHeight(true));
-            GUILayout.Label(minPrice == maxPrice ? minPrice + " 点" : minPrice + "—" + maxPrice + " 点", _priceStyle);
-            GUILayout.Label("最低价—最高价", _muted);
+            GUILayout.BeginVertical(_marketInset, GUILayout.Width(118f), GUILayout.ExpandHeight(true));
+            GUILayout.Label(group.MinimumPrice == group.MaximumPrice ? group.MinimumPrice + " 贡献" : group.MinimumPrice + "—" + group.MaximumPrice + " 贡献", _priceStyle);
+            GUILayout.Label("另可用灵石", _muted);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
-            if (GUILayout.Button(_expandedMarketItemId == group.Key ? "收起卖家挂单" : "展开 " + offers.Count + " 条挂单", _bagButton, GUILayout.Height(30f)))
-                _expandedMarketItemId = _expandedMarketItemId == group.Key ? string.Empty : group.Key;
-            if (_expandedMarketItemId == group.Key)
+            if (GUILayout.Button(_expandedMarketItemId == item.Id ? "收起卖家挂单" : "展开 " + offers.Count + " 条挂单", _marketTab, GUILayout.Height(30f)))
+                _expandedMarketItemId = _expandedMarketItemId == item.Id ? string.Empty : item.Id;
+            if (_expandedMarketItemId == item.Id)
             {
                 foreach (MclslMarketListing listing in offers)
                 {
-                    GUILayout.BeginHorizontal(_bagShelf, GUILayout.MinHeight(38f));
-                    GUILayout.Label("卖家 " + SellerName(listing.SellerId) + "　单价 " + listing.Price + " 点　挂单年份 " + listing.Year, _small);
+                    GUILayout.BeginHorizontal(_marketInset, GUILayout.MinHeight(38f));
+                    int contributionPrice = listing.ContributionUnitPrice > 0 ? listing.ContributionUnitPrice : listing.Price;
+                    int stonePrice = listing.SpiritStoneUnitPrice > 0 ? listing.SpiritStoneUnitPrice
+                        : MclslTianxuanMarket.SpiritStonePrice(item, contributionPrice);
+                    GUILayout.Label("卖家 " + SellerName(listing.SellerId) + "　×" + Math.Max(1, listing.Item?.Count ?? 1)
+                        + "　单价 贡献" + contributionPrice + "／灵石" + stonePrice + "　挂单年份 " + listing.Year, _small);
                     if (item.Category == "Artifact")
                         GUILayout.Label("耐久 " + Mathf.Clamp(listing.Item?.Durability ?? 0, 0, 100) + "%", _muted, GUILayout.Width(74f));
                     GUILayout.EndHorizontal();
@@ -646,7 +787,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             }
             GUILayout.Space(5f);
         }
-        if (kindCount == 0)
+        if (groups.Count == 0)
         {
             GUILayout.Space(18f);
             GUILayout.Label("此板块暂无挂单", _section);
@@ -656,11 +797,11 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         GUILayout.EndVertical();
     }
 
-    private void DrawMarketActivity(IReadOnlyList<MclslMarketActivity> activities, float minWidth)
+    private void DrawMarketActivity(IReadOnlyList<MclslMarketActivity> activities, float width)
     {
-        GUILayout.BeginVertical(_innerPanel, GUILayout.MinWidth(minWidth), GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(_marketPanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
         GUILayout.Label(_marketView == 1 ? "修士上架动态" : "修士购入成交", _section);
-        GUILayout.Label(_marketView == 1 ? "展示自动挂牌的物品、卖方与挂牌年份。" : "展示买卖双方、物品与实际成交贡献度。", _muted);
+        GUILayout.Label(_marketView == 1 ? "展示自动挂牌的数量、物品、卖方与年份。" : "展示买卖双方、成交数量与实际支付币种。", _muted);
         GUILayout.Space(6f);
         _marketScroll = GUILayout.BeginScrollView(_marketScroll, false, true, GUIStyle.none, GUI.skin.verticalScrollbar,
             GUILayout.ExpandHeight(true));
@@ -670,17 +811,21 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             MclslItemDefinition item = MclslItemCatalog.Get(record.ItemId);
             if (item == null || item.Category != CategoryIds[_category]) continue;
             count++;
-            GUILayout.BeginHorizontal(_card, GUILayout.MinHeight(68f));
+            GUILayout.BeginHorizontal(_marketRow, GUILayout.MinHeight(68f));
             DrawIcon(item, 46f);
             GUILayout.BeginVertical(GUILayout.ExpandWidth(true));
-            GUILayout.Label(item.Name + "  ·  " + DisplayGradeName(item), _body);
+            GUILayout.Label(item.Name + "  ·  " + DisplayGradeName(item) + "  ×" + Math.Max(1, record.Count), _body);
             string names = _marketView == 1
                 ? "上架修士　" + record.ActorName
                 : "购入　" + record.ActorName + "　／　售出　" + record.OtherActorName;
             GUILayout.Label(names, _small);
             GUILayout.EndVertical();
-            GUILayout.BeginVertical(_jadePanel, GUILayout.Width(106f));
-            GUILayout.Label(record.Price + " 点", _priceStyle);
+            GUILayout.BeginVertical(_marketInset, GUILayout.Width(106f));
+            string currencyName = record.Currency == MclslTianxuanMarket.SpiritStoneCurrency ? "灵石" : "贡献";
+            int unitPrice = record.UnitPrice > 0 ? record.UnitPrice : record.Price;
+            int totalPrice = record.TotalPrice > 0 ? record.TotalPrice : unitPrice * Math.Max(1, record.Count);
+            GUILayout.Label(currencyName + totalPrice, _priceStyle);
+            GUILayout.Label("单价 " + unitPrice, _muted);
             GUILayout.Label("第 " + record.Year + " 年", _muted);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -696,22 +841,29 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         GUILayout.EndVertical();
     }
 
-    private void DrawMarketExchangeInfo(float width)
+    private void DrawMarketExchangeInfo(float width, bool compact)
     {
-        GUILayout.BeginVertical(_jadePanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
+        if (compact)
+        {
+            GUILayout.BeginVertical(_marketInset, GUILayout.ExpandWidth(true), GUILayout.Height(76f));
+            GUILayout.Label("万界撮合：修士按职业和自身需要自动买卖；贡献与灵石分别计价，成交后即交割。", _small);
+            GUILayout.EndVertical();
+            return;
+        }
+        GUILayout.BeginVertical(_marketPanel, GUILayout.Width(width), GUILayout.ExpandHeight(true));
         GUILayout.Label("万界撮合规则", _section);
         GUILayout.Space(8f);
-        GUILayout.Label("全体修士依自身境界、职业、库存和贡献度自动买卖。玩家无需选中人物或手动下单。", _body);
+        GUILayout.Label("全体修士依自身境界、职业、库存、贡献与灵石自动买卖。玩家无需选中人物或手动下单。", _body);
         GUILayout.Space(8f);
         GUILayout.Label("交易结算", _section);
-        GUILayout.Label("买方扣除贡献度，卖方获得贡献度，物品与法宝耐久随订单交割。无有效买方时挂单留存。", _small);
+        GUILayout.Label("买方可用贡献或灵石支付，卖方获得同种货币；物品与法宝耐久随订单交割。无有效买方时挂单留存。", _small);
         GUILayout.Space(8f);
-        GUILayout.Label("当前市场", _section);
+        GUILayout.Label(_marketView == 0 ? "当前市场" : _marketView == 1 ? "近期上架" : "近期成交", _section);
         for (int i = 0; i < Categories.Length; i++)
             GUILayout.Label(Categories[i] + "　" + _marketCategoryCounts[i] + " 件", _small);
         GUILayout.FlexibleSpace();
-        GUILayout.BeginVertical(_card);
-        GUILayout.Label("贡献度价格", _section);
+        GUILayout.BeginVertical(_marketInset);
+        GUILayout.Label("双币种价格", _section);
         GUILayout.Label("成品依品阶递增；材料按稀有度定价。", _small);
         GUILayout.Label("挂单保留　·　成交有据　·　全域流通", _muted);
         GUILayout.EndVertical();
@@ -725,34 +877,78 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         return "云游修士";
     }
 
-    private void RefreshMarketCategoryCounts(IReadOnlyList<MclslMarketListing> listings)
+    private void RefreshMarketCategoryCounts(IReadOnlyList<MclslMarketListing> listings,
+        IReadOnlyList<MclslMarketActivity> listed, IReadOnlyList<MclslMarketActivity> purchased)
     {
-        Array.Clear(_marketCategoryCounts, 0, _marketCategoryCounts.Length);
-        _marketTotalCount = 0;
-        foreach (MclslMarketListing listing in listings)
+        int revision = MclslTianxuanMarket.Revision;
+        if (_marketCachedRevision != revision)
         {
-            MclslItemDefinition item = MclslItemCatalog.Get(listing?.Item?.ItemId);
-            if (item == null) continue;
-            _marketTotalCount += Math.Max(1, listing.Item?.Count ?? 1);
-            int index = item.Category switch
+            _marketCachedRevision = revision;
+            Array.Clear(_marketListingCounts, 0, _marketListingCounts.Length);
+            Array.Clear(_marketListedCounts, 0, _marketListedCounts.Length);
+            Array.Clear(_marketPurchasedCounts, 0, _marketPurchasedCounts.Length);
+            _marketOfferGroups.Clear();
+            _marketTotalCount = _marketListedTotal = _marketPurchasedTotal = 0;
+            foreach (MclslMarketListing listing in listings)
             {
-                "Pill" => 0, "Plant" => 1, "SpiritObject" => 2,
-                "TalismanMaterial" => 3, "Talisman" => 4, "Artifact" => 5, _ => -1
-            };
-            if (index >= 0) _marketCategoryCounts[index] += Math.Max(1, listing.Item?.Count ?? 1);
+                MclslItemDefinition item = MclslItemCatalog.Get(listing?.Item?.ItemId);
+                int index = item == null ? -1 : Array.IndexOf(CategoryIds, item.Category);
+                if (index < 0) continue;
+                int count = Math.Max(1, listing.Item.Count);
+                _marketListingCounts[index] += count;
+                _marketTotalCount += count;
+            }
+            CountMarketActivity(listed, _marketListedCounts, ref _marketListedTotal);
+            CountMarketActivity(purchased, _marketPurchasedCounts, ref _marketPurchasedTotal);
+            for (int category = 0; category < CategoryIds.Length; category++)
+            {
+                List<MarketOfferGroup> groups = listings
+                    .Where(x => MclslItemCatalog.Get(x?.Item?.ItemId)?.Category == CategoryIds[category])
+                    .GroupBy(x => x.Item.ItemId)
+                    .Select(group =>
+                    {
+                        MclslMarketListing[] offers = group.OrderBy(x => x.ContributionUnitPrice > 0 ? x.ContributionUnitPrice : x.Price)
+                            .ThenBy(x => x.Year).ToArray();
+                        return new MarketOfferGroup
+                        {
+                            Item = MclslItemCatalog.Get(group.Key), Offers = offers.ToList(),
+                            Total = offers.Sum(x => Math.Max(1, x.Item.Count)),
+                            SellerCount = offers.Select(x => x.SellerId).Distinct().Count(),
+                            MinimumPrice = offers.Min(x => x.ContributionUnitPrice > 0 ? x.ContributionUnitPrice : x.Price),
+                            MaximumPrice = offers.Max(x => x.ContributionUnitPrice > 0 ? x.ContributionUnitPrice : x.Price)
+                        };
+                    })
+                    .OrderBy(x => x.Item?.Name, StringComparer.Ordinal).ToList();
+                _marketOfferGroups[category] = groups;
+            }
+        }
+        int[] source = _marketView switch { 1 => _marketListedCounts, 2 => _marketPurchasedCounts, _ => _marketListingCounts };
+        Array.Copy(source, _marketCategoryCounts, source.Length);
+    }
+
+    private static void CountMarketActivity(IReadOnlyList<MclslMarketActivity> activities, int[] counts, ref int total)
+    {
+        foreach (MclslMarketActivity record in activities)
+        {
+            MclslItemDefinition item = MclslItemCatalog.Get(record?.ItemId);
+            int index = item == null ? -1 : Array.IndexOf(CategoryIds, item.Category);
+            if (index < 0) continue;
+            int quantity = Math.Max(1, record.Count);
+            counts[index] += quantity;
+            total += quantity;
         }
     }
 
     private static List<MclslOwnedItem> GetBagItems(MclslBagState bag, int category)
     {
         List<MclslOwnedItem> items = new();
-        if (bag?.Items == null) return items;
+        if (bag?.Items == null || category < 0 || category >= BagCategories.Length || category == 4) return items;
         Dictionary<string, MclslOwnedItem> artifactGroups = new(StringComparer.Ordinal);
         foreach (MclslOwnedItem owned in bag.Items)
         {
             if (owned == null) continue;
             MclslItemDefinition item = MclslItemCatalog.Get(owned.ItemId);
-            if (item == null || item.Category != CategoryIds[category]) continue;
+            if (item == null || !MatchesBagCategory(item, category)) continue;
             if (item.Category != "Artifact")
             {
                 items.Add(owned);
@@ -780,6 +976,51 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
             count += item.Category == "Artifact" ? 1 : Math.Max(1, owned.Count);
         }
         return count;
+    }
+
+    private int CountBagCategory(MclslBagState bag, int category)
+    {
+        if (category == 4) return bag?.Books?.Count ?? 0;
+        if (category == 5) return MclslSpellSystem.Known(_actor).Count;
+        if (bag?.Items == null) return 0;
+        int count = 0;
+        foreach (MclslOwnedItem owned in bag.Items)
+        {
+            MclslItemDefinition item = MclslItemCatalog.Get(owned?.ItemId);
+            if (item == null || !MatchesBagCategory(item, category)) continue;
+            count += item.Category == "Artifact" ? 1 : Math.Max(1, owned.Count);
+        }
+        return count;
+    }
+
+    private static bool MatchesBagCategory(MclslItemDefinition item, int category) => category switch
+    {
+        0 => item.Category == "Artifact",
+        1 => item.Category == "Pill",
+        2 => item.Category == "Talisman",
+        3 => item.Category is "Plant" or "SpiritObject" or "TalismanMaterial" or "Material",
+        _ => false
+    };
+
+    private void DrawMentorshipBookDetail()
+    {
+        GUILayout.Label("师门传承", _section);
+        MclslMentorshipBook book = MclslBagSystem.Peek(_actor).Books?
+            .FirstOrDefault(x => "book:" + x.BookId == _selectedBagItemKey)
+            ?? MclslBagSystem.Peek(_actor).Books?.FirstOrDefault();
+        if (book == null)
+        {
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("成为旧法修士的弟子后，师父所授功法与心得会收录于此。", _muted);
+            GUILayout.FlexibleSpace();
+            return;
+        }
+        GUILayout.Label(book.TechniqueName, _section);
+        GUILayout.Label("师父　" + book.TeacherName, _body);
+        GUILayout.Label("收徒年份　" + book.StartYear, _small);
+        GUILayout.Label("传承参悟　" + book.Progress + "%", _small);
+        GUILayout.Space(10f);
+        GUILayout.Label("此典籍保存师父传下的旧法功法、法脉与修行心得。参悟进度会随年度师徒传授提高。", _muted);
     }
 
     private void EnsureBagSelection(List<MclslOwnedItem> items)
@@ -874,7 +1115,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
     private static string CategoryFor(string category) => category switch
     {
         "Pill" => "丹药", "Plant" => "灵植", "SpiritObject" => "灵物", "TalismanMaterial" => "符箓材料",
-        "Talisman" => "符箓", "Artifact" => "法宝", _ => "灵物"
+        "Material" => "炼器材料", "Talisman" => "符箓", "Artifact" => "法宝", "SpellScroll" => "法术卷轴", _ => "灵物"
     };
 
     private static void DrawIcon(MclslItemDefinition item, float size)
@@ -914,7 +1155,7 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         return icon;
     }
 
-    private static string GradeName(int grade) => grade switch { 1 => "黄级", 2 => "玄级", 3 => "地级", 4 => "天级", _ => "材料" };
+    private static string GradeName(int grade) => grade switch { 0 => "凡阶", 1 => "黄级", 2 => "玄级", 3 => "地级", 4 => "天级", _ => "材料" };
 
     private static string DisplayGradeName(MclslItemDefinition item)
     {
@@ -995,6 +1236,33 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         _bagSelectedCategory = ButtonStyle(_bagSelectedSlotTexture, MclslUiTheme.RankTextPrimary, 13);
         _bagButton = ButtonStyle(_bagShelfTexture, MclslUiTheme.RankTextPrimary, 13);
         _bagPrimaryButton = ButtonStyle(Solid(new Color(0.34f, 0.31f, 0.22f, 1f)), new Color(1f, 0.94f, 0.77f), 14);
+
+        // Market frames are small point-filtered pixel panels with fixed corner
+        // pixels. Only the centre stretches; the bag and guide keep their styles.
+        Color stoneEdge = new(0.10f, 0.13f, 0.12f, 1f);
+        Color stoneLight = new(0.43f, 0.47f, 0.39f, 1f);
+        _marketWindowTexture = PixelPanel(MclslUiTheme.RankSurfaceWindow, stoneEdge, stoneLight);
+        Texture2D marketPanelTexture = PixelPanel(MclslUiTheme.RankSurfacePanel, stoneEdge, stoneLight);
+        Texture2D marketInsetTexture = PixelPanel(MclslUiTheme.RankSurfaceDeep, stoneEdge, new Color(0.32f, 0.38f, 0.31f, 1f));
+        Texture2D marketRowTexture = PixelPanel(new Color(0.21f, 0.28f, 0.23f, 1f), stoneEdge, new Color(0.35f, 0.43f, 0.34f, 1f));
+        Texture2D marketSelectedTexture = PixelPanel(new Color(0.29f, 0.35f, 0.25f, 1f), stoneEdge, MclslUiTheme.FrameGold);
+        _marketWindow = new GUIStyle(GUI.skin.window)
+        {
+            normal = { background = _marketWindowTexture, textColor = Color.white },
+            onNormal = { background = _marketWindowTexture, textColor = Color.white },
+            border = new RectOffset(3, 3, 3, 3),
+            padding = new RectOffset(12, 12, 12, 12),
+            contentOffset = Vector2.zero
+        };
+        _marketPanel = BoxStyle(marketPanelTexture, new RectOffset(11, 11, 9, 9));
+        _marketInset = BoxStyle(marketInsetTexture, new RectOffset(8, 8, 7, 7));
+        _marketRow = BoxStyle(marketRowTexture, new RectOffset(9, 9, 7, 7));
+        foreach (GUIStyle style in new[] { _marketPanel, _marketInset, _marketRow })
+            style.border = new RectOffset(3, 3, 3, 3);
+        _marketTab = ButtonStyle(marketInsetTexture, MclslUiTheme.RankTextPrimary, 13);
+        _marketSelectedTab = ButtonStyle(marketSelectedTexture, MclslUiTheme.AccentGold, 13);
+        _marketTab.border = new RectOffset(3, 3, 3, 3);
+        _marketSelectedTab.border = new RectOffset(3, 3, 3, 3);
     }
 
     private static GUIStyle LabelStyle(int size, FontStyle weight, Color color, TextAnchor anchor)
@@ -1045,6 +1313,26 @@ internal sealed class MclslFeatureWindow : MonoBehaviour
         };
         texture.SetPixel(0, 0, color);
         texture.Apply();
+        return texture;
+    }
+
+    private static Texture2D PixelPanel(Color fill, Color edge, Color highlight)
+    {
+        const int size = 12;
+        Texture2D texture = new(size, size, TextureFormat.RGBA32, false)
+        {
+            filterMode = FilterMode.Point,
+            wrapMode = TextureWrapMode.Clamp
+        };
+        Color32[] pixels = new Color32[size * size];
+        for (int y = 0; y < size; y++)
+        for (int x = 0; x < size; x++)
+        {
+            int distance = Math.Min(Math.Min(x, size - 1 - x), Math.Min(y, size - 1 - y));
+            pixels[y * size + x] = distance == 0 ? edge : distance == 1 ? highlight : fill;
+        }
+        texture.SetPixels32(pixels);
+        texture.Apply(false, true);
         return texture;
     }
 }

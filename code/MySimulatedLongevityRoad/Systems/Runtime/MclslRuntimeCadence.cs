@@ -15,6 +15,8 @@ internal static class MclslRuntimeCadence
         int unityFrame = Time.frameCount;
         if (_lastUnityFrame == unityFrame) return;
         _lastUnityFrame = unityFrame;
+        MclslSpellVisualQueue.Tick();
+        MclslSpellSystem.TickSelfCasting(frameCounter);
 
         bool fastCadenceDue = frameCounter > 0 && frameCounter % FastCadenceFrames == 0;
         int currentYear = MclslRuntime.CurrentYear();

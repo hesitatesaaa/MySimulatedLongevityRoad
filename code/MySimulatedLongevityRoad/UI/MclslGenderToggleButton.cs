@@ -50,8 +50,8 @@ internal static class MclslGenderToggleButton
         image.raycastTarget = true;
 
         TipButton tip = buttonObject.GetComponent<TipButton>() ?? buttonObject.AddComponent<TipButton>();
-        tip.textOnClick = "切换性别";
-        tip.textOnClickDescription = "点击切换此生物的原生性别，并刷新头像显示。";
+        tip.textOnClick = MclslLocalizationBridge.RuntimeText("切换性别");
+        tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText("点击切换此生物的原生性别，并刷新头像显示。");
         return buttonObject;
     }
 

@@ -1,6 +1,44 @@
 {
   "ConfigItems": [
     {
+      "Id": "MCLSL_config_enable_staggered_events",
+      "Name": "启用同类事件跨帧错峰",
+      "Description": "默认开启。将年度成长、背包、市场和世界结算按类别去重并稳定分散到后续帧；伤害、死亡、物品消耗和主动存档仍立即完成。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableStaggeredEventsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_event_stagger_frames",
+      "Name": "事件错峰窗口（帧）",
+      "Description": "默认60帧，范围15—120帧。高压时可自动扩展到75、90或120帧，不改变事件所属逻辑年份。",
+      "Type": "INT_SLIDER",
+      "IntVal": 60,
+      "MinIntVal": 15,
+      "MaxIntVal": 120,
+      "StepIntVal": 1,
+      "Callback": "MclslConfig:EventStaggerFramesCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_aggressive_performance",
+      "Name": "启用极限帧率模式",
+      "Description": "默认开启。帧率压力升高时扩大事件错峰窗口，并降低远景光环和地图纯动画的更新频率，不降低模拟精度。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableAggressivePerformanceCallBack"
+    },
+    {
+      "Id": "MCLSL_config_annual_actor_budget",
+      "Name": "年度角色步骤单帧上限",
+      "Description": "默认80，范围20—400。它是年度角色步骤的单帧绝对上限，仍同时受分类配额和毫秒预算限制。",
+      "Type": "INT_SLIDER",
+      "IntVal": 80,
+      "MinIntVal": 20,
+      "MaxIntVal": 400,
+      "StepIntVal": 1,
+      "Callback": "MclslConfig:AnnualActorBudgetCallBack"
+    },
+    {
       "Id": "MCLSL_config_childhood_root_chance",
       "Name": "幼年灵根显现概率（%）",
       "Description": "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。",
@@ -299,10 +337,18 @@
     {
       "Id": "MCLSL_config_item_acquisition_history_enabled",
       "Name": "显示物品获取记事",
-      "Description": "开启后，地阶及以上材料与职业制作的丹药、法宝、符箓会记入仙缘宝录；关闭只停止新增记事，不影响物品获取与天阶材料世界公告。",
+      "Description": "总开关。开启后，地阶、天阶材料与成品会记入仙缘宝录；凡阶、黄阶、玄阶还须同时开启低阶记录。关闭只停止新增记事，不影响物品获取与天阶材料世界公告。",
       "Type": "SWITCH",
       "BoolVal": true,
       "Callback": "MclslConfig:ItemAcquisitionHistoryCallBack"
+    },
+    {
+      "Id": "MCLSL_config_record_low_material_history",
+      "Name": "记录低阶材料与物品获取",
+      "Description": "总开关开启时，本项控制凡阶、黄阶、玄阶材料与丹药、符箓、法宝的获取历史；关闭不影响实际获取、入袋、交易及地阶、天阶历史和公告。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:RecordLowMaterialAcquisitionHistoryCallBack"
     }
   ]
 }

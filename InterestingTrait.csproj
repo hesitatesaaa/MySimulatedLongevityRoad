@@ -16,7 +16,8 @@
     <WorldBoxDataRoot>$([System.IO.Path]::GetFullPath('$(WorldBoxDataRoot)'))</WorldBoxDataRoot>
     <NeoModLoaderPath Condition="Exists('$(WorldBoxDataRoot)\StreamingAssets\mods\NML\NeoModLoader.dll')">$(WorldBoxDataRoot)\StreamingAssets\mods\NML\NeoModLoader.dll</NeoModLoaderPath>
     <NeoModLoaderPath Condition="'$(NeoModLoaderPath)' == '' and Exists('$(WorldBoxDataRoot)\StreamingAssets\mods\NeoModLoader.dll')">$(WorldBoxDataRoot)\StreamingAssets\mods\NeoModLoader.dll</NeoModLoaderPath>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- NML compiles the packaged source without SDK-generated global using directives. -->
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <NoWarn>$(NoWarn);MSB3277;CS0162;CS0219</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -69,6 +70,7 @@
     <Compile Remove="code_broken_*\**\*.cs" />
     <Compile Remove="xj_0_7_announce_scan\**\*.cs" />
     <Compile Remove="_archive\**\*.cs" />
+    <Compile Remove="tests\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>

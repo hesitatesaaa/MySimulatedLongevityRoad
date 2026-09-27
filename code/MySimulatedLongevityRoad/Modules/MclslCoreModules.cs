@@ -37,7 +37,6 @@ internal sealed class MclslPersistenceModule : MclslModuleBase
     internal override void PrepareForSave()
     {
         MclslReincarnationProfileStore.Flush();
-        MclslWorldArchiveStore.SaveNow();
     }
 
     internal override void Clear()
@@ -123,7 +122,11 @@ internal sealed class MclslRuntimeCadenceModule : MclslModuleBase
     internal override void TickLoadRecovery(int year) => MclslScheduler.ScheduleAnnualWorld(year);
     internal override void TickAnnual(int year) => MclslScheduler.ScheduleAnnualWorld(year);
     internal override void TickFrame(int frameCounter) => MclslRuntimeCadence.Tick(frameCounter);
-    internal override void PrepareForSave() => MclslScheduler.FlushPendingAnnualStatesForSave();
+    internal override void PrepareForSave()
+    {
+        MclslScheduler.FlushPendingAnnualStatesForSave();
+        MclslWorldArchiveStore.SaveNow();
+    }
     internal override void Clear() => MclslRuntimeCadence.Clear();
 }
 

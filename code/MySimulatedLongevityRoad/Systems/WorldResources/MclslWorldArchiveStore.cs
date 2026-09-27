@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -18,6 +20,8 @@ internal static class MclslWorldArchiveStore
     };
     private static bool _loaded;
     private static bool _dirty;
+    private static bool _periodicSavePending;
+    private static int _nextPeriodicRetryFrame;
     private static int _worldSeed = int.MinValue;
 
     internal static void Load()
@@ -55,36 +59,70 @@ internal static class MclslWorldArchiveStore
 
     internal static void MarkDirty() => _dirty = true;
 
-    internal static void SaveNow()
+    internal static void SaveNow(bool force = true)
     {
         EnsureWorldIdentity();
         Load();
+        if (!force && ShouldDeferPeriodicSave())
+        {
+            _periodicSavePending = true;
+            return;
+        }
         try
         {
             SaveCustomData data = EnsureData(true);
             if (!_loaded) _loaded = true;
             if (data == null) return;
-            string raw = JsonConvert.SerializeObject(MclslWorldRunRepository.ExportArchive());
+            long exportSample = MclslPerformanceProbe.Begin();
+            MclslWorldArchiveBundle archive;
+            try { archive = MclslWorldRunRepository.ExportArchive(); }
+            finally { MclslPerformanceProbe.End("存档.导出档案", exportSample); }
+            long serializationSample = MclslPerformanceProbe.Begin();
+            string raw;
+            try { raw = JsonConvert.SerializeObject(archive); }
+            finally { MclslPerformanceProbe.End("存档.JSON序列化", serializationSample); }
+            long writeSample = MclslPerformanceProbe.Begin();
             data.get(Key, out string oldRaw, string.Empty);
+            MclslPerformanceProbe.RecordArchiveBytes(
+                Encoding.UTF8.GetByteCount(raw),
+                string.IsNullOrEmpty(oldRaw) ? 0 : Encoding.UTF8.GetByteCount(oldRaw));
             if (!string.IsNullOrWhiteSpace(oldRaw)) data.set(BackupKey, oldRaw);
             data.set(Key, raw);
             if (string.IsNullOrWhiteSpace(oldRaw)) data.set(BackupKey, raw);
+            MclslPerformanceProbe.End("存档.SaveCustomData写入", writeSample);
             _dirty = false;
+            _periodicSavePending = false;
+            _nextPeriodicRetryFrame = 0;
         }
         catch (Exception ex) { Debug.LogError("[模拟长生路][存档] 写入失败: " + ex); }
     }
 
     internal static void TickPeriodic(int frame)
     {
-        if (_dirty && frame % 1800 == 0) SaveNow();
+        if (_dirty && frame % 1800 == 0) _periodicSavePending = true;
+        if (!_dirty || !_periodicSavePending || frame < _nextPeriodicRetryFrame) return;
+        if (ShouldDeferPeriodicSave())
+        {
+            _nextPeriodicRetryFrame = frame + 60;
+            return;
+        }
+        SaveNow(force: false);
     }
 
     internal static void Clear()
     {
         _loaded = false;
         _dirty = false;
+        _periodicSavePending = false;
+        _nextPeriodicRetryFrame = 0;
         _worldSeed = int.MinValue;
     }
+
+    private static bool ShouldDeferPeriodicSave() => MclslScheduler.HasAnnualActorBacklog
+        || MclslScheduler.HasAnnualCandidateBacklog
+        || MclslScheduler.AnnualActorStateCount > 0
+        || MclslRuntimeWorkBudget.StressTier >= MclslRuntimeStressTier.Severe
+        || Time.unscaledDeltaTime >= 1f / 30f;
 
     private static SaveCustomData EnsureData(bool create)
     {

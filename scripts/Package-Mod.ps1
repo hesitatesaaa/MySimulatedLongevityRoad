@@ -11,6 +11,7 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $modFile = Join-Path $repoRoot 'mod.json'
 $packageDirectory = Join-Path $repoRoot '发布包'
+$mortalItemIntegrationScript = Join-Path $PSScriptRoot 'Test-MortalItemIntegration.ps1'
 $runtimeItems = @(
     'InterestingTrait.cs',
     'InterestingTrait.csproj',
@@ -85,6 +86,8 @@ function Test-SourcePackageContents {
 }
 
 try {
+    & $mortalItemIntegrationScript
+    if ($LASTEXITCODE -ne 0) { throw "凡阶物品端到端接入校验失败（$LASTEXITCODE）。" }
     if (-not (Test-Path -LiteralPath $modFile)) { throw "找不到模组元数据：$modFile" }
     $metadata = Get-Content -LiteralPath $modFile -Raw | ConvertFrom-Json
     $version = [string]$metadata.version

@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Collections.Generic;
 using HarmonyLib;
 using MySimulatedLongevityRoad.Core;
 
@@ -6,6 +7,9 @@ namespace MySimulatedLongevityRoad.Patches;
 
 internal static class MclslHarmonyPatchGuard
 {
+    private static readonly HashSet<string> FailedRequiredPatches = new();
+    internal static int FailedRequiredCount => FailedRequiredPatches.Count;
+    internal static string FailedRequiredSummary => string.Join("、", FailedRequiredPatches);
     internal static bool TryPatch(
         Harmony harmony,
         string key,
@@ -16,7 +20,8 @@ internal static class MclslHarmonyPatchGuard
     {
         if (harmony == null || original == null)
         {
-            MclslDiagnostics.Once("harmony-missing:" + key, "跳过缺失补丁目标: " + key);
+            FailedRequiredPatches.Add(key ?? "unknown");
+            MclslDiagnostics.Error("harmony-missing:" + key, "关键补丁目标缺失: " + key);
             return false;
         }
 
@@ -31,6 +36,7 @@ internal static class MclslHarmonyPatchGuard
         }
         catch (System.Exception ex)
         {
+            FailedRequiredPatches.Add(key ?? "unknown");
             MclslDiagnostics.Error("harmony-failed:" + key, "补丁挂载失败 " + key + ": " + ex.Message);
             return false;
         }

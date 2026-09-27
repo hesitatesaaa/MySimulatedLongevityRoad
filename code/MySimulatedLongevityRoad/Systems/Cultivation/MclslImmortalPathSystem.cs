@@ -32,8 +32,19 @@ internal static class MclslImmortalPathSystem
 
     internal static void TryNaturalGrant(Actor actor)
     {
-        if (actor?.data == null || !MclslActorAccessor.Alive(actor)
-            || !MclslEligibility.CanCultivate(actor)
+        if (actor?.data == null || !MclslActorAccessor.Alive(actor)) return;
+
+        // addTrait runs for normal grants, but traits restored from old saves may
+        // already be present before Harmony observes the mutation. Reconcile the
+        // strongest saved path once during the existing annual actor pass.
+        string existingPath = HighestPathTrait(actor);
+        if (!string.IsNullOrEmpty(existingPath))
+        {
+            OnTraitGranted(actor, existingPath);
+            return;
+        }
+
+        if (!MclslEligibility.CanCultivate(actor)
             || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ImmortalPathChecked, 0) != 0) return;
 
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ImmortalPathChecked, 1);
@@ -63,7 +74,35 @@ internal static class MclslImmortalPathSystem
             }
         });
 
+        EnsureLinkedSpiritualRoot(actor, traitId);
+
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ImmortalPathChecked, 1);
+    }
+
+    private static string HighestPathTrait(Actor actor)
+    {
+        if (actor?.data == null) return string.Empty;
+        string highest = string.Empty;
+        string[] pathTraits =
+        {
+            MclslTraitRegistration.PathHuaShenTraitId,
+            MclslTraitRegistration.PathHeDaoTraitId,
+            MclslTraitRegistration.PathChangShengTraitId
+        };
+        foreach (string pathTrait in pathTraits)
+            if (actor.hasTrait(pathTrait)
+                && (highest.Length == 0 || TargetIndexForTrait(pathTrait) > TargetIndexForTrait(highest)))
+                highest = pathTrait;
+        return highest;
+    }
+
+    private static void EnsureLinkedSpiritualRoot(Actor actor, string pathTrait)
+    {
+        int aptitude = pathTrait == MclslTraitRegistration.PathHuaShenTraitId ? 85 : 95;
+        string rootTraitId = MclslTraitRegistration.GiftTraitIdForAptitude(aptitude);
+        if (string.IsNullOrEmpty(rootTraitId) || actor.hasTrait(rootTraitId)) return;
+        ActorTrait rootTrait = AssetManager.traits.get(rootTraitId);
+        if (rootTrait != null) actor.addTrait(rootTrait, true);
     }
 
     internal static bool IsPathTrait(string traitId) => TargetIndexForTrait(traitId) >= 0;

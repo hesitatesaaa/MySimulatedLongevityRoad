@@ -203,8 +203,8 @@ internal static class MclslMaobaoShortcutButton
 
         TipButton tip = button.GetComponent<TipButton>() ?? button.gameObject.AddComponent<TipButton>();
         bool saved = MclslMaobaoSystem.IsRecorded(MclslActorAccessor.Id(actor));
-        tip.textOnClick = saved ? "移除猫宝登名" : "猫宝登名";
-        tip.textOnClickDescription = saved ? "再次点击移除当前人物的猫宝留名。" : "点击将当前人物刻入猫宝。";
+        tip.textOnClick = MclslLocalizationBridge.RuntimeText(saved ? "移除猫宝登名" : "猫宝登名");
+        tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText(saved ? "再次点击移除当前人物的猫宝留名。" : "点击将当前人物刻入猫宝。");
     }
 
     private static void ConfigureSurfaceOutline(GameObject buttonObject)

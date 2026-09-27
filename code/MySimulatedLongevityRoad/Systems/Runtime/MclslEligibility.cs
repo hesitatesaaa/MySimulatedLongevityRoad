@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -33,6 +34,7 @@ internal static class MclslEligibility
     {
         if (!MclslActorAccessor.Alive(actor) || actor?.asset == null) return false;
         string id = actor.asset.id ?? string.Empty;
+        if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
         if (IsLockedAsset(actor.asset, id)) return false;
         return IsCivilizedActor(actor) || HasRequiredCultivationBrain(actor);
     }
@@ -43,6 +45,7 @@ internal static class MclslEligibility
         if (actor?.asset == null) return false;
         if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached;
         string id = actor.asset.id ?? string.Empty;
+        if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
         bool result = !IsLockedAsset(actor.asset, id)
             && (ExplicitCivilizedSpecies.Contains(id) || IsCivilizedSapient(actor));
         CivilizedAssetCache[actor.asset] = result;

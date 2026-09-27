@@ -16,6 +16,9 @@ internal sealed class MclslRankEntry
     internal string NormalizedSearchText = string.Empty;
     internal string ExtraText = string.Empty;
     internal string KingdomName = string.Empty;
+    internal string ProfessionId = string.Empty;
+    internal int ProfessionGrade;
+    internal int ProfessionExperience;
     internal double Power;
     internal int RealmIndex;
     internal int Aptitude;

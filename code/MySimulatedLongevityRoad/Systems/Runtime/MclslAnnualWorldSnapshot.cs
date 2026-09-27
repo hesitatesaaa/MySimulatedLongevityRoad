@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Diagnostics;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -39,9 +41,14 @@ internal sealed class MclslAnnualWorldSnapshot
         {
             if (budget <= 0) return _cursor >= _sourceCount;
             int end = System.Math.Min(_sourceCount, _cursor + budget);
-            for (; _cursor < end; _cursor++)
+            long started = Stopwatch.GetTimestamp();
+            double timeBudgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(0.65d, 0.20d);
+            while (_cursor < end)
             {
-                Actor actor = _actors[_cursor];
+                if (_cursor > 0 && (_cursor & 15) == 0
+                    && (Stopwatch.GetTimestamp() - started) * 1000d / Stopwatch.Frequency >= timeBudgetMs)
+                    break;
+                Actor actor = _actors[_cursor++];
                 if (!MclslHotPathPolicy.IsActorHotPathSafe(actor)) continue;
                 if (!MclslEligibility.CanCultivate(actor)) continue;
                 _result.Add(actor);

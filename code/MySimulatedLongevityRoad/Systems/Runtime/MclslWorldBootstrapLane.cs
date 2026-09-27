@@ -4,6 +4,7 @@ using System.Diagnostics;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -57,6 +58,8 @@ internal static class MclslWorldBootstrapLane
             // 完整人口只恢复角色引用；修炼身份校正仅作用于有明确修炼标记的角色。
             MclslCultivatorCandidateIndex.Observe(actor);
             if (!MclslEligibility.CanCultivate(actor)) continue;
+            if (MclslImmortalActorRegistration.IsImmortal(actor))
+                MclslImmortalActorRegistration.RepairRealmAfterLoad(actor, MclslRuntime.CurrentYear());
 
             bool hasCultivationState = MclslCultivationActorMarker.HasCultivationMarker(actor)
                 || MclslActorAccessor.HasCultivationPath(actor)

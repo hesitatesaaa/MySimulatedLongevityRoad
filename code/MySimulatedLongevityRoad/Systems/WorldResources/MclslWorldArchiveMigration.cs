@@ -28,6 +28,14 @@ internal static class MclslWorldArchiveMigration
         upgraded.CurrentRun ??= new MclslWorldRunState();
         int sourceVersion = Math.Max(1, upgraded.Version);
         bool changed = sourceVersion < CurrentVersion;
+        upgraded.CurrentRun.AnnualBatch ??= new MclslAnnualBatchState();
+        upgraded.CurrentRun.AnnualBatch.LineageActorIds ??= new List<long>();
+        upgraded.CurrentRun.AnnualBatch.CaveClaims ??= new List<MclslAnnualClaimRecord>();
+        upgraded.CurrentRun.AnnualBatch.ChangeClaims ??= new List<MclslAnnualClaimRecord>();
+        upgraded.CurrentRun.AnnualBatch.AdventureCandidates ??= new List<MclslAnnualClaimRecord>();
+        upgraded.CurrentRun.AnnualBatch.ModuleCompletedYears ??= new Dictionary<string, int>();
+        upgraded.CurrentRun.AnnualBatch.FailureRecords ??= new List<MclslAnnualFailureRecord>();
+        upgraded.CurrentRun.AnnualBatch.TechniqueLineagePendingIds ??= new List<string>();
 
         // Exact abandoned prototype artifacts are safe to remove regardless of the
         // declared bundle version; some test saves were written with the same version number.

@@ -203,6 +203,9 @@ internal static class MclslRankSnapshotSource
             NormalizedSearchText = NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(view.SpiritualRootAttributes) + NormalizeSearch(kingdomName),
             ExtraText = Extra(view),
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0), 0, 4),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = power,
             RealmIndex = realmIndex,
             Aptitude = view.Aptitude,
@@ -252,6 +255,9 @@ internal static class MclslRankSnapshotSource
                 ? essence + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0), 0, 4),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = Math.Max(1d, realmIndex + 1),
             RealmIndex = realmIndex,
             Aptitude = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0)),
@@ -296,6 +302,9 @@ internal static class MclslRankSnapshotSource
                 ? Math.Max(0, essence) + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0), 0, 4),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = 1d,
             RealmIndex = string.IsNullOrWhiteSpace(realm) ? -1 : MclslRealmIds.Index(realm),
             TrueEssence = Math.Max(0, essence)
@@ -310,6 +319,14 @@ internal static class MclslRankSnapshotSource
             return string.IsNullOrWhiteSpace(name) ? "无归属" : name;
         }
         catch { return "无归属"; }
+    }
+
+    private static string ResolveProfessionId(Actor actor)
+    {
+        string traitProfession = MclslProfessionSystem.FromTrait(actor);
+        return string.IsNullOrWhiteSpace(traitProfession)
+            ? MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession, string.Empty)
+            : traitProfession;
     }
 
     private static void CaptureFilterChoices(

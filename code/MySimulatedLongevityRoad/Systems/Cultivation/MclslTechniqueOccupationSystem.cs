@@ -264,6 +264,24 @@ internal static class MclslTechniqueOccupationSystem
         return PickLeastCrowdedVariant(baseTechnique, seed);
     }
 
+    internal static MclslTechniqueDefinition SelectStartingTechnique(Actor actor, string seed, int aptitude, bool ancient)
+    {
+        MclslTechniqueDefinition[] pool = MclslCultivationCatalog.StartingTechniquePool(seed, aptitude, ancient);
+        if (pool.Length == 0) return SelectStartingTechnique(seed, aptitude, ancient);
+        int total = 0;
+        for (int i = 0; i < pool.Length; i++) total += MclslSpiritualRootSystem.TechniqueWeight(actor, pool[i]);
+        int roll = StableHash((seed ?? string.Empty) + "|root_soft_match") % total;
+        MclslTechniqueDefinition selected = pool[pool.Length - 1];
+        for (int i = 0; i < pool.Length; i++)
+        {
+            roll -= MclslSpiritualRootSystem.TechniqueWeight(actor, pool[i]);
+            if (roll >= 0) continue;
+            selected = pool[i];
+            break;
+        }
+        return ancient ? selected : PickLeastCrowdedVariant(selected, seed);
+    }
+
     internal static MclslTechniqueDefinition SelectTechniqueVariant(MclslTechniqueDefinition technique, string seed)
     {
         if (technique == null) return null;
@@ -281,11 +299,11 @@ internal static class MclslTechniqueOccupationSystem
         string oldId = TechniqueId(actor);
         MclslTechniqueDefinition best = null;
         int bestCount = int.MaxValue;
-        int bestTie = int.MaxValue;
+        double bestTie = double.MaxValue;
 
         IReadOnlyList<MclslTechniqueDefinition> pool = GetAnnualTechniquePool(year, realmIndex, aptitude);
         for (int i = 0; i < pool.Count; i++)
-            ConsiderTechnique(pool[i], seed + "|pool_tie|" + i, ref best, ref bestCount, ref bestTie);
+            ConsiderTechnique(actor, pool[i], seed + "|pool_tie|" + i, ref best, ref bestCount, ref bestTie);
 
         if (best == null) return false;
         if (best.Id == oldId && CountFor(oldId) <= 1) return true;
@@ -306,12 +324,18 @@ internal static class MclslTechniqueOccupationSystem
         return true;
     }
 
-    private static void ConsiderTechnique(MclslTechniqueDefinition candidate, string seed,
-        ref MclslTechniqueDefinition best, ref int bestCount, ref int bestTie)
+    private static double WeightedTie(Actor actor, MclslTechniqueDefinition candidate, string seed)
+    {
+        double sample = (StableHash(seed + "|" + candidate.Id) + 1d) / 2147483648d;
+        return -Math.Log(sample) / MclslSpiritualRootSystem.TechniqueWeight(actor, candidate);
+    }
+
+    private static void ConsiderTechnique(Actor actor, MclslTechniqueDefinition candidate, string seed,
+        ref MclslTechniqueDefinition best, ref int bestCount, ref double bestTie)
     {
         if (candidate == null || string.IsNullOrWhiteSpace(candidate.Id)) return;
         int count = CountFor(candidate.Id);
-        int tie = StableHash(seed + "|" + candidate.Id);
+        double tie = WeightedTie(actor, candidate, seed);
         if (best == null || count < bestCount || (count == bestCount && tie < bestTie))
         {
             best = candidate;
@@ -414,7 +438,7 @@ internal static class MclslTechniqueOccupationSystem
 
         MclslTechniqueDefinition best = null;
         int bestCount = int.MaxValue;
-        int tie = int.MaxValue;
+        double tie = double.MaxValue;
         int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100);
         IReadOnlyList<MclslTechniqueDefinition> pool = GetAnnualTechniquePool(year, realmIndex, aptitude);
         for (int i = 0; i < pool.Count; i++)
@@ -422,7 +446,7 @@ internal static class MclslTechniqueOccupationSystem
             MclslTechniqueDefinition candidate = pool[i];
             if (candidate == null || candidate.Id == oldTechniqueId) continue;
             int candidateCount = CountFor(candidate.Id);
-            int candidateTie = StableHash(MclslActorAccessor.Id(actor) + "|alternative_method|" + year + "|" + candidate.Id);
+            double candidateTie = WeightedTie(actor, candidate, MclslActorAccessor.Id(actor) + "|alternative_method|" + year);
             if (candidateCount < bestCount || (candidateCount == bestCount && candidateTie < tie))
             {
                 best = candidate;

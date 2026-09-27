@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Systems;
 
 namespace MySimulatedLongevityRoad.Modules;
 
@@ -10,15 +12,27 @@ internal static class MclslModuleHub
 {
     private sealed class AnnualWorkItem
     {
-        internal int Year;
+        internal int NextYear;
+        internal int LatestYear;
         internal bool CoreEnabled;
+        internal int Failures;
+        internal int RetryAfterFrame;
+    }
+    private sealed class LoadRecoveryWorkItem
+    {
+        internal MclslModuleBase Module;
+        internal int Failures;
+        internal int RetryAfterFrame;
     }
     private static readonly List<MclslModuleBase> Modules = new();
     private static readonly Dictionary<MclslModuleBase, AnnualWorkItem> PendingAnnualWork = new();
-    private static readonly Queue<MclslModuleBase> LoadRecoveryQueue = new();
+    private static readonly Dictionary<MclslModuleBase, int> CompletedAnnualYears = new();
+    private static readonly Queue<LoadRecoveryWorkItem> LoadRecoveryQueue = new();
     private static bool _initialized;
+    private static int _annualModuleCursor;
     private static int _loadRecoveryYear;
     private static bool _loadRecoveryCoreEnabled;
+    private static int _frameCounter;
 
     internal static int AnnualModuleBacklogCount => PendingAnnualWork.Count;
     internal static int LoadRecoveryBacklogCount => LoadRecoveryQueue.Count;
@@ -47,8 +61,17 @@ internal static class MclslModuleHub
     internal static void OnWorldLoaded(int year, bool coreEnabled)
     {
         PendingAnnualWork.Clear();
+        CompletedAnnualYears.Clear();
+        _annualModuleCursor = 0;
         LoadRecoveryQueue.Clear();
         ForEach(coreEnabled, module => module.OnWorldLoaded(year), "OnWorldLoaded");
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        foreach (MclslModuleBase module in Modules)
+        {
+            if (!module.HasAnnualStep || !batch.ModuleCompletedYears.TryGetValue(module.Name, out int completed)) continue;
+            CompletedAnnualYears[module] = completed;
+            if (completed < year) DeferredAnnualStep(module, year, coreEnabled);
+        }
         ScheduleLoadRecovery(year, coreEnabled);
     }
 
@@ -69,6 +92,7 @@ internal static class MclslModuleHub
     internal static void TickRealtime(bool coreEnabled) => ForEach(coreEnabled, module => module.TickRealtime(), "TickRealtime");
     internal static void TickFrame(int frameCounter, bool coreEnabled)
     {
+        _frameCounter = frameCounter;
         ForEach(coreEnabled, module => module.TickFrame(frameCounter), "TickFrame");
         DrainLoadRecoveryQueue();
         DrainAnnualQueue();
@@ -88,6 +112,8 @@ internal static class MclslModuleHub
     internal static void Clear()
     {
         PendingAnnualWork.Clear();
+        CompletedAnnualYears.Clear();
+        _annualModuleCursor = 0;
         LoadRecoveryQueue.Clear();
         ForEach(true, module => module.Clear(), "Clear");
     }
@@ -113,20 +139,23 @@ internal static class MclslModuleHub
         if (module == null) return;
         if (PendingAnnualWork.TryGetValue(module, out AnnualWorkItem pending))
         {
-            pending.Year = Math.Max(pending.Year, year);
+            pending.LatestYear = Math.Max(pending.LatestYear, year);
             pending.CoreEnabled = coreEnabled;
             return;
         }
+        int nextYear = CompletedAnnualYears.TryGetValue(module, out int completed)
+            ? Math.Min(year, completed + 1) : year;
         PendingAnnualWork[module] = new AnnualWorkItem
         {
-            Year = year,
+            NextYear = nextYear,
+            LatestYear = year,
             CoreEnabled = coreEnabled
         };
     }
 
     private static void DeferredLoadRecoveryStep(MclslModuleBase module)
     {
-        if (module != null) LoadRecoveryQueue.Enqueue(module);
+        if (module != null) LoadRecoveryQueue.Enqueue(new LoadRecoveryWorkItem { Module = module });
     }
 
     private static void DrainAnnualQueue()
@@ -137,17 +166,56 @@ internal static class MclslModuleHub
             MclslModuleBase module = null;
             for (int i = 0; i < Modules.Count; i++)
             {
-                MclslModuleBase candidate = Modules[i];
-                if (PendingAnnualWork.ContainsKey(candidate))
+                int index = (_annualModuleCursor + i) % Modules.Count;
+                MclslModuleBase candidate = Modules[index];
+                if (PendingAnnualWork.TryGetValue(candidate, out AnnualWorkItem candidateWork)
+                    && candidateWork.RetryAfterFrame <= _frameCounter)
                 {
                     module = candidate;
+                    _annualModuleCursor = (index + 1) % Modules.Count;
                     break;
                 }
             }
             if (module == null || !PendingAnnualWork.TryGetValue(module, out AnnualWorkItem work)) break;
             PendingAnnualWork.Remove(module);
             if (!work.CoreEnabled && !module.RunsWhenCoreDisabled) continue;
-            SafeAnnualStep(module, work.Year);
+            if (!SafeAnnualStep(module, work.NextYear))
+            {
+                work.Failures++;
+                // Annual module callbacks can cross multiple writes; without a commit cursor
+                // the whole callback cannot be safely replayed after an exception.
+                bool safeToRetry = false;
+                if (MclslAnnualResiliencePolicy.ShouldRetry(work.Failures, !safeToRetry))
+                {
+                    work.RetryAfterFrame = MclslAnnualResiliencePolicy.RetryAtFrame(_frameCounter);
+                    PendingAnnualWork[module] = work;
+                }
+                else
+                {
+                    MclslWorldRunRepository.RecordAnnualFailure(work.NextYear, "模块", module.Name,
+                        "TickAnnual", work.Failures, safeToRetry ? "跳过" : "部分失败", "年度模块执行异常；详见诊断日志");
+                    CompletedAnnualYears[module] = work.NextYear;
+                    MclslWorldRunRepository.Current.AnnualBatch.ModuleCompletedYears[module.Name] = work.NextYear;
+                    MclslWorldArchiveStore.MarkDirty();
+                    if (work.NextYear < work.LatestYear)
+                    {
+                        work.NextYear++;
+                        work.Failures = 0;
+                        work.RetryAfterFrame = MclslAnnualResiliencePolicy.RetryAtFrame(_frameCounter);
+                        PendingAnnualWork[module] = work;
+                    }
+                }
+                continue;
+            }
+            work.Failures = 0;
+            CompletedAnnualYears[module] = work.NextYear;
+            MclslWorldRunRepository.Current.AnnualBatch.ModuleCompletedYears[module.Name] = work.NextYear;
+            MclslWorldArchiveStore.MarkDirty();
+            if (work.NextYear < work.LatestYear)
+            {
+                work.NextYear++;
+                PendingAnnualWork[module] = work;
+            }
         }
     }
 
@@ -156,31 +224,49 @@ internal static class MclslModuleHub
         const int loadRecoveryModuleBudgetPerFrame = 1;
         for (int i = 0; i < loadRecoveryModuleBudgetPerFrame && LoadRecoveryQueue.Count > 0; i++)
         {
-            MclslModuleBase module = LoadRecoveryQueue.Dequeue();
+            LoadRecoveryWorkItem work = LoadRecoveryQueue.Dequeue();
+            if (work.RetryAfterFrame > _frameCounter)
+            {
+                LoadRecoveryQueue.Enqueue(work);
+                continue;
+            }
+            MclslModuleBase module = work.Module;
             if (!_loadRecoveryCoreEnabled && !module.RunsWhenCoreDisabled) continue;
-            SafeLoadRecoveryStep(module, _loadRecoveryYear);
+            if (!SafeLoadRecoveryStep(module, _loadRecoveryYear))
+            {
+                work.Failures++;
+                bool safeToRetry = false;
+                if (MclslAnnualResiliencePolicy.ShouldRetry(work.Failures, !safeToRetry))
+                {
+                    work.RetryAfterFrame = MclslAnnualResiliencePolicy.RetryAtFrame(_frameCounter);
+                    LoadRecoveryQueue.Enqueue(work);
+                }
+                else
+                    MclslWorldRunRepository.RecordAnnualFailure(_loadRecoveryYear, "模块", module.Name,
+                        "TickLoadRecovery", work.Failures, safeToRetry ? "跳过" : "部分失败",
+                        "读档恢复失败；详见诊断日志");
+            }
         }
     }
 
-    private static void SafeAnnualStep(MclslModuleBase module, int year)
+    private static bool SafeAnnualStep(MclslModuleBase module, int year)
     {
         if (!MclslPerformanceProbe.Enabled)
         {
-            try { module?.TickAnnual(year); }
-            catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败: " + ex.Message); }
-            return;
+            try { module?.TickAnnual(year); return true; }
+            catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败，年度任务已保留: " + ex); return false; }
         }
 
         long sample = MclslPerformanceProbe.Begin();
-        try { module?.TickAnnual(year); }
-        catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败: " + ex.Message); }
+        try { module?.TickAnnual(year); return true; }
+        catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickAnnual", module?.Name + ".TickAnnual 失败，年度任务已保留: " + ex); return false; }
         finally { MclslPerformanceProbe.End("年度模块." + module?.Name, sample); }
     }
 
-    private static void SafeLoadRecoveryStep(MclslModuleBase module, int year)
+    private static bool SafeLoadRecoveryStep(MclslModuleBase module, int year)
     {
-        try { module?.TickLoadRecovery(year); }
-        catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickLoadRecovery", module?.Name + ".TickLoadRecovery 失败: " + ex.Message); }
+        try { module?.TickLoadRecovery(year); return true; }
+        catch (Exception ex) { MclslDiagnostics.Error("module:" + module?.Name + ":TickLoadRecovery", module?.Name + ".TickLoadRecovery 失败: " + ex.Message); return false; }
     }
 
     internal static string DebugModuleList() => string.Join(" -> ", Modules.Select(x => x.Name));

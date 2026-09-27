@@ -1,6 +1,7 @@
 using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -20,8 +21,12 @@ internal static class MclslCultivationAgeSanity
         int currentEssence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         string allowedRealm = HighestRealmAllowedAtAge(age);
         bool changed = false;
+        // These two placed immortals are authored at their epoch's final realm.
+        // Keep scale-version repair below, but never treat their age as evidence
+        // that their realm or true essence is invalid.
+        bool placedImmortal = MclslImmortalActorRegistration.IsImmortal(actor);
 
-        if (!string.IsNullOrWhiteSpace(realm)
+        if (!placedImmortal && !string.IsNullOrWhiteSpace(realm)
             && MclslRealmIds.Index(realm) > MclslRealmIds.Index(allowedRealm))
         {
             string previousRealm = realm;
@@ -50,7 +55,9 @@ internal static class MclslCultivationAgeSanity
             changed = true;
         }
 
-        int cappedEssence = CapEssenceBeforeAgeGate(actor, realm, ancientLaw, age, currentEssence);
+        int cappedEssence = placedImmortal
+            ? currentEssence
+            : CapEssenceBeforeAgeGate(actor, realm, ancientLaw, age, currentEssence);
         if (cappedEssence < MclslCultivationGrowthSystem.CurrentTrueEssence(actor))
         {
             MclslCultivationGrowthSystem.SetTrueEssence(

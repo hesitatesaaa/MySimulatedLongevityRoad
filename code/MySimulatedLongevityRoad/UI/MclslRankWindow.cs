@@ -70,6 +70,12 @@ internal static class MclslRankWindow
         new("power", "战力", "ui/Icons/TianDiZhiLi", entry => (float)Math.Min(float.MaxValue, entry.Power), entry => FormatNumber(entry.Power)),
         new("realm", "境界", "trait/realm_7", entry => entry.RealmIndex, entry => entry.RealmName),
         new("root", "灵根品阶", "trait/gifts_6", entry => entry.Aptitude, entry => string.IsNullOrWhiteSpace(entry.GiftName) ? entry.Aptitude.ToString(CultureInfo.InvariantCulture) : entry.GiftName),
+        new("profession_alchemist", "炼丹师", "trait/MclslProfessionAlchemist", entry => ProfessionSortRank(entry, MclslProfessionSystem.Alchemist),
+            entry => FormatProfession(entry, MclslProfessionSystem.Alchemist)),
+        new("profession_refiner", "炼器师", "trait/MclslProfessionRefiner", entry => ProfessionSortRank(entry, MclslProfessionSystem.Refiner),
+            entry => FormatProfession(entry, MclslProfessionSystem.Refiner)),
+        new("profession_talisman", "制符师", "trait/MclslProfessionTalisman", entry => ProfessionSortRank(entry, MclslProfessionSystem.TalismanMaker),
+            entry => FormatProfession(entry, MclslProfessionSystem.TalismanMaker)),
         new("essence", "真元", "ui/Icons/ZhenQi", entry => entry.TrueEssence, entry => entry.TrueEssence.ToString(CultureInfo.InvariantCulture)),
         new("mind", "心境", "ui/Icons/XinJing", entry => entry.MindState, entry => entry.MindState.ToString(CultureInfo.InvariantCulture)),
         new("contribution", "贡献", "ui/Icons/GongXianZhi", entry => entry.Contribution, entry => entry.Contribution.ToString(CultureInfo.InvariantCulture)),
@@ -510,6 +516,13 @@ internal static class MclslRankWindow
 
     private static void SortEntries(List<MclslRankEntry> entries)
     {
+        if (ActiveSortKeys.Count > 0 && IsProfessionSort(ActiveSortKeys[0].Def.Id))
+        {
+            string profession = ProfessionForSortId(ActiveSortKeys[0].Def.Id);
+            entries.Sort((left, right) => CompareProfession(left, right, profession));
+            return;
+        }
+
         entries.Sort((left, right) =>
         {
             if (ActiveSortKeys.Count == 0)
@@ -532,6 +545,48 @@ internal static class MclslRankWindow
             if (powerTie != 0) return powerTie;
             return left.ActorId.CompareTo(right.ActorId);
         });
+    }
+
+    private static int CompareProfession(MclslRankEntry left, MclslRankEntry right, string profession)
+    {
+        int leftGrade = ProfessionSortRank(left, profession);
+        int rightGrade = ProfessionSortRank(right, profession);
+        int result = rightGrade.CompareTo(leftGrade);
+        if (result != 0) return result;
+
+        int leftExperience = left?.ProfessionId == profession ? left.ProfessionExperience : 0;
+        int rightExperience = right?.ProfessionId == profession ? right.ProfessionExperience : 0;
+        result = rightExperience.CompareTo(leftExperience);
+        if (result != 0) return result;
+
+        result = (right?.RealmIndex ?? -1).CompareTo(left?.RealmIndex ?? -1);
+        if (result != 0) return result;
+        return (left?.ActorId ?? 0L).CompareTo(right?.ActorId ?? 0L);
+    }
+
+    private static int ProfessionSortRank(MclslRankEntry entry, string profession)
+    {
+        if (entry == null || entry.ProfessionId != profession) return 0;
+        return Math.Clamp(entry.ProfessionGrade, 0, 4) + 1;
+    }
+
+    private static bool IsProfessionSort(string sortId) => sortId is
+        "profession_alchemist" or "profession_refiner" or "profession_talisman";
+
+    private static string ProfessionForSortId(string sortId) => sortId switch
+    {
+        "profession_alchemist" => MclslProfessionSystem.Alchemist,
+        "profession_refiner" => MclslProfessionSystem.Refiner,
+        "profession_talisman" => MclslProfessionSystem.TalismanMaker,
+        _ => string.Empty
+    };
+
+    private static string FormatProfession(MclslRankEntry entry, string profession)
+    {
+        if (entry == null || entry.ProfessionId != profession) return "无该职业";
+        string[] grades = { "学徒", "黄级", "玄级", "地级", "天级" };
+        int grade = Math.Clamp(entry.ProfessionGrade, 0, grades.Length - 1);
+        return grades[grade] + " · 熟练度 " + Math.Max(0, entry.ProfessionExperience).ToString(CultureInfo.InvariantCulture);
     }
 
     private static void CreateInitialVisibleCards()
@@ -913,7 +968,7 @@ internal static class MclslRankWindow
                     ActiveSortKeys.Remove(selectedKey);
                     ActiveSortKeys.Insert(0, selectedKey);
                 }
-                else selectedKey.Toggle();
+                else if (!IsProfessionSort(selectedKey.Def.Id)) selectedKey.Toggle();
                 RefreshSelectedSortButtons();
                 RefreshCurrentList(false);
             });
@@ -930,7 +985,11 @@ internal static class MclslRankWindow
         }
         MclslRankTooltipTrigger tip = image.gameObject.AddComponent<MclslRankTooltipTrigger>();
         tip.TooltipText = selectedKey == null ? definition.Name : definition.Name + (selectedKey.Ascending ? "（升序）" : "（降序）");
-        tip.TooltipDescription = selectedKey == null ? "左键设为首排序" : "左键设为首排序或切换升降序，右键移除";
+        tip.TooltipDescription = selectedKey == null
+            ? "左键设为首排序"
+            : IsProfessionSort(definition.Id)
+                ? "按品阶天、地、玄、黄及无该职业排序；同品阶按熟练度、境界和稳定ID排序。"
+                : "左键设为首排序或切换升降序，右键移除";
         return image.gameObject;
     }
 

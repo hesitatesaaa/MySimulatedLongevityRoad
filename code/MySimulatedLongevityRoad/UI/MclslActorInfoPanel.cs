@@ -30,7 +30,6 @@ internal static class MclslActorInfoPanel
         if (background == null)
         {
             MclslMaobaoShortcutButton.Hide(window);
-            MclslQiankunShortcutButton.Hide(window);
             return;
         }
 
@@ -38,13 +37,11 @@ internal static class MclslActorInfoPanel
         if (window.actor == null || !window.actor.isAlive())
         {
             MclslMaobaoShortcutButton.Hide(window);
-            MclslQiankunShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
 
         MclslMaobaoShortcutButton.Refresh(window);
-        MclslQiankunShortcutButton.Refresh(window);
         if (!ShouldShowFor(window.actor) && !MclslDeveloperBridge.IsAvailable)
         {
             HidePanel(background);
@@ -57,7 +54,6 @@ internal static class MclslActorInfoPanel
         Transform panel = text.transform.parent?.parent?.parent;
         EnsureActionBar(panel ?? background, window.actor);
         MclslMaobaoShortcutButton.Refresh(window);
-        MclslQiankunShortcutButton.Refresh(window);
         if (scroll != null) scroll.gameObject.SetActive(true);
         bool actorChanged = state != null && state.ActorId != actorId;
 
@@ -173,7 +169,6 @@ internal static class MclslActorInfoPanel
         Transform background = ResolvePanelParent(window);
         if (background != null) HidePanel(background);
         MclslMaobaoShortcutButton.Hide(window);
-        MclslQiankunShortcutButton.Hide(window);
     }
 
     private static Text EnsurePanel(Transform parent, out ScrollRect scroll, out PanelState state, out Text header)

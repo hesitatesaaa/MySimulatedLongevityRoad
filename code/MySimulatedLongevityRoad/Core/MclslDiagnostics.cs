@@ -27,8 +27,11 @@ internal static class MclslDiagnostics
 
     internal static void Error(string key, string message)
     {
-        if (!Enabled) return;
-        Debug.LogWarning("[模拟长生路][诊断] " + message);
+        if (string.IsNullOrWhiteSpace(key)) key = message ?? "unknown";
+        int frame = Time.frameCount;
+        if (LastFrameByKey.TryGetValue("error:" + key, out int last) && frame - last < 3600) return;
+        LastFrameByKey["error:" + key] = frame;
+        Debug.LogWarning("[模拟长生路][诊断][" + key + "] " + message);
     }
 
     // 修炼链逐角色日志属于编译期诊断能力。发布包未定义该符号时，

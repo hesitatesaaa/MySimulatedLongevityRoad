@@ -30,7 +30,7 @@ internal static class MclslAncientLawBreakthroughSystem
         }
         // 功法参悟只修正年度真元效率，不是破境硬门槛，也不直接叠加破境成功率。
         int fieldBonus = AncientBreakthroughBonus(actor, nextRealm);
-        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm);
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm, year);
         int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
         int chance = Math.Clamp(24 + aptitude / 4 + fieldBonus + pillBonus + buqueBonus
             + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0)

@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -7,17 +9,23 @@ internal static class MclslSectLifecycleSystem
 {
     private const int MaxEventsPerYear = 3;
 
-    internal static void ResolveAnnual(int year)
+    internal static bool TickResolveAnnual(int year)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.TechniqueLineages == null || run.TechniqueLineages.Count == 0) return;
-        if (run.LastSectLifecycleYear == year) return;
+        if (run?.TechniqueLineages == null || run.LastSectLifecycleYear == year) return true;
+        MclslAnnualBatchState batch = run.AnnualBatch;
+        long started = Stopwatch.GetTimestamp();
+        double budgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(0.65d, 0.20d);
+        int limit = Math.Min(run.TechniqueLineages.Count,
+            batch.SectLifecycleCursor + MclslRuntimeWorkBudget.ScaleCount(32, 8));
 
-        int emitted = 0;
         bool changed = false;
-        for (int i = 0; i < run.TechniqueLineages.Count; i++)
+        while (batch.SectLifecycleCursor < limit)
         {
-            MclslTechniqueLineageRecord record = run.TechniqueLineages[i];
+            if (batch.SectLifecycleCursor > 0 && (batch.SectLifecycleCursor & 7) == 0
+                && (Stopwatch.GetTimestamp() - started) * 1000d / Stopwatch.Frequency >= budgetMs)
+                break;
+            MclslTechniqueLineageRecord record = run.TechniqueLineages[batch.SectLifecycleCursor++];
             if (record == null) continue;
 
             if (string.IsNullOrWhiteSpace(record.SectDisplayName))
@@ -34,16 +42,21 @@ internal static class MclslSectLifecycleSystem
             record.LifecycleYear = Math.Max(0, year);
             changed = true;
 
-            if (emitted >= MaxEventsPerYear || record.LastLifecycleEventYear == year || IsTrivialFirstSight(record, previous, nextState))
+            if (batch.SectLifecycleEmitted >= MaxEventsPerYear || record.LastLifecycleEventYear == year || IsTrivialFirstSight(record, previous, nextState))
                 continue;
 
             EmitLifecycleEvent(year, record, nextState);
             record.LastLifecycleEventYear = year;
-            emitted++;
+            batch.SectLifecycleEmitted++;
         }
 
+        if (changed || batch.SectLifecycleCursor > 0) MclslWorldArchiveStore.MarkDirty();
+        if (batch.SectLifecycleCursor < run.TechniqueLineages.Count) return false;
         run.LastSectLifecycleYear = year;
-        if (changed) MclslWorldArchiveStore.MarkDirty();
+        batch.SectLifecycleCursor = 0;
+        batch.SectLifecycleEmitted = 0;
+        MclslWorldArchiveStore.MarkDirty();
+        return true;
     }
 
     private static bool IsTrivialFirstSight(MclslTechniqueLineageRecord record, string previous, string nextState)

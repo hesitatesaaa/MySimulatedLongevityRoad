@@ -32,13 +32,23 @@ internal enum MclslMaterialTier : byte
     Tian = 4
 }
 
+internal enum MclslArtifactEquipmentSlot : byte
+{
+    Weapon,
+    Helmet,
+    Armor,
+    Boots,
+    Ring,
+    Amulet
+}
+
 internal sealed class MclslItemDefinition
 {
     internal readonly string Id;
     internal readonly string Name;
     internal readonly string Category;
     internal readonly int Grade;
-    internal readonly string EffectText;
+    internal string EffectText;
     internal readonly string IngredientA;
     internal readonly string IngredientB;
     internal readonly int Price;
@@ -46,13 +56,18 @@ internal sealed class MclslItemDefinition
     internal readonly MclslMaterialTier MaterialTier;
     internal readonly MclslMaterialSource MaterialSources;
     internal readonly MclslMaterialHabitat PreferredHabitat;
-    internal string IconPath => "ui/Items/" + Id;
+    internal readonly string IconPath;
+    internal readonly MclslArtifactEquipmentSlot EquipmentSlot;
+    internal (string Id, float Value)[] NativeStats;
 
     internal MclslItemDefinition(string id, string name, string category, int grade,
         string effectText, string ingredientA, string ingredientB, int price,
         MclslMaterialTier materialTier = MclslMaterialTier.None,
         MclslMaterialSource materialSources = MclslMaterialSource.None,
-        MclslMaterialHabitat preferredHabitat = MclslMaterialHabitat.None)
+        MclslMaterialHabitat preferredHabitat = MclslMaterialHabitat.None,
+        string iconPath = null,
+        MclslArtifactEquipmentSlot equipmentSlot = MclslArtifactEquipmentSlot.Weapon,
+        (string Id, float Value)[] nativeStats = null)
     {
         Id = id;
         Name = name;
@@ -65,6 +80,9 @@ internal sealed class MclslItemDefinition
         MaterialTier = materialTier;
         MaterialSources = materialSources;
         PreferredHabitat = preferredHabitat;
+        IconPath = iconPath ?? "ui/Items/" + id;
+        EquipmentSlot = equipmentSlot;
+        NativeStats = nativeStats ?? Array.Empty<(string Id, float Value)>();
     }
 }
 
@@ -85,6 +103,66 @@ internal static class MclslItemCatalog
         new("A09", "洗髓液", "SpiritObject", 0, "用于洗髓、重塑根基与改善资质。", "", "", 12, MclslMaterialTier.Xuan, AllMaterialSources, MclslMaterialHabitat.Mountain),
         new("F01", "灵符纸", "TalismanMaterial", 0, "所有符箓的基础载体；每张符箓固定消耗 1 份灵符纸，并额外消耗 1 种丹药材料。", "", "", 6, MclslMaterialTier.Huang,
             MclslMaterialSource.AnnualActivity | MclslMaterialSource.Ruin | MclslMaterialSource.Faction),
+        Mat("A10", "回灵草", "Plant", MclslMaterialTier.Huang, MclslMaterialHabitat.Woodland),
+        Mat("A11", "清心花", "Plant", MclslMaterialTier.Huang, MclslMaterialHabitat.Woodland),
+        Mat("A12", "玄霜露", "SpiritObject", MclslMaterialTier.Xuan, MclslMaterialHabitat.Water),
+        Mat("A13", "赤阳芝", "Plant", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("A14", "玉髓莲", "Plant", MclslMaterialTier.Xuan, MclslMaterialHabitat.Water),
+        Mat("A15", "地脉灵乳", "SpiritObject", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("A16", "星魂藤", "Plant", MclslMaterialTier.Di, MclslMaterialHabitat.Woodland),
+        Mat("A17", "九转金液", "SpiritObject", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("A18", "天露琼华", "SpiritObject", MclslMaterialTier.Tian, MclslMaterialHabitat.Water),
+        Mat("A19", "太虚灵泉", "SpiritObject", MclslMaterialTier.Tian, MclslMaterialHabitat.Water),
+        Mat("F010", "朱砂灵墨", "TalismanMaterial", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("F011", "轻风符砂", "TalismanMaterial", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("F012", "坚岩符砂", "TalismanMaterial", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("F013", "水镜灵墨", "TalismanMaterial", MclslMaterialTier.Xuan, MclslMaterialHabitat.Water),
+        Mat("F014", "雷纹晶粉", "TalismanMaterial", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("F015", "镇魂墨", "TalismanMaterial", MclslMaterialTier.Di, MclslMaterialHabitat.Woodland),
+        Mat("F016", "青木符骨", "TalismanMaterial", MclslMaterialTier.Di, MclslMaterialHabitat.Woodland),
+        Mat("F017", "辟邪金砂", "TalismanMaterial", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("F018", "星河墨", "TalismanMaterial", MclslMaterialTier.Tian, MclslMaterialHabitat.Water),
+        Mat("F019", "玄黄符胆", "TalismanMaterial", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M01", "灵木器胚", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Woodland),
+        Mat("M02", "玄铁器胚", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("M03", "地脉器胚", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M04", "天星器胚", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M05", "青铜灵砂", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("M06", "赤纹矿", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("M07", "灵木芯", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Woodland),
+        Mat("M08", "青岩晶", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("M09", "云纹铜", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("M10", "松魄木", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Woodland),
+        Mat("M11", "赤砂铁", "Material", MclslMaterialTier.Huang, MclslMaterialHabitat.Mountain),
+        Mat("M12", "玄铁晶", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("M13", "寒水玉", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Water),
+        Mat("M14", "紫电砂", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("M15", "月纹木", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Woodland),
+        Mat("M16", "碧波银", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Water),
+        Mat("M17", "幽光石", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("M18", "雷纹铜", "Material", MclslMaterialTier.Xuan, MclslMaterialHabitat.Mountain),
+        Mat("M19", "地髓精金", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M20", "幽冥骨", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M21", "赤炎晶", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M22", "沧海魄", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Water),
+        Mat("M23", "山河石髓", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M24", "玄冥寒铁", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Mountain),
+        Mat("M25", "朱雀火羽", "Material", MclslMaterialTier.Di, MclslMaterialHabitat.Woodland),
+        Mat("M26", "星陨神铁", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M27", "太虚晶", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M28", "九霄雷髓", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M29", "造化玉", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M30", "天河银砂", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Water),
+        Mat("M31", "混元金髓", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Mountain),
+        Mat("M32", "乾坤灵木", "Material", MclslMaterialTier.Tian, MclslMaterialHabitat.Woodland),
+        new("D019", "粗炼回春丸", "Pill", 0, "立即恢复 10% 最大生命。", "R07", "R08", 4),
+        new("D020", "引气散", "Pill", 0, "立即恢复 8% 最大灵力。", "R07", "R09", 4),
+        new("F026", "微力符", "Talisman", 0, "伤害 +5%，持续 15 秒。", "R01", "R08", 3),
+        new("F027", "轻身符", "Talisman", 0, "移动速度 +5%，持续 15 秒。", "R01", "R09", 3),
+        new("B082", "凡铁短剑", "Artifact", 0, "固定伤害 +30。", "R01", "R03", 8,
+            nativeStats: Stats(("damage", 30f))),
+        new("B083", "素木护心佩", "Artifact", 0, "最大生命 +50。", "R01", "R02", 8,
+            equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 50f))),
         new("D001", "筑基丹", "Pill", 1, "仅炼气圆满可使用。筑基突破成功率 +25%；突破失败时修为损失 -50%；若以低于正常要求的状态强行突破，成功后有 20% 概率获得“根基受损”5 年：最大生命 -8%、修炼速度 -5%。", "A07", "A08", 20),
         new("D006", "活气抱元丹", "Pill", 1, "立即恢复 30% 最大生命；之后 20 秒内每 2 秒恢复 2% 最大生命（额外共 20%）；解除“轻伤”。", "A08", "A04", 20),
         new("D009", "净体拂尘丹", "Pill", 1, "立即清除中毒、虚弱、传送不适、轻度减速等普通负面状态；恢复 15% 最大生命；30 秒内负面状态持续时间 -30%。", "A02", "A08", 20),
@@ -97,6 +175,12 @@ internal static class MclslItemCatalog
         new("D007", "百愈丹", "Pill", 3, "立即恢复 85% 最大生命；移除轻伤、中伤、重伤；15 秒内生命恢复速度 +100%。不能复活已死亡单位。", "A06", "A04", 180),
         new("D011", "造化紫金丹", "Pill", 4, "可主动服用或设置自动保命：生命首次低于 10% 时立即恢复至 80% 最大生命，清除普通伤势与重伤，并获得 5 秒 90% 减伤。每个单位 50 年最多触发 1 次。", "A05", "A04", 540),
         new("D012", "化神丹", "Pill", 4, "仅元婴圆满冲击化神时可使用：化神突破成功率 +40%；突破失败时 80% 概率避免境界跌落；反噬伤害 -70%；失败后保留 50% 突破积累。不提供常驻修炼加成。", "A05", "A07", 540),
+        new("D013", "回灵丹", "Pill", 1, "恢复最大灵力的25%；同类回灵物品冷却30秒。", "A10", "A07", 20),
+        new("D014", "清心丹", "Pill", 1, "解除普通眩晕和迟缓，短时定神。", "A11", "A08", 20),
+        new("D015", "玄霜养脉丹", "Pill", 2, "恢复35%生命，20秒内减少35%火焰伤害。", "A12", "A09", 60),
+        new("D016", "赤阳培元丹", "Pill", 2, "一段时间内提高灵力恢复。", "A13", "A10", 60),
+        new("D017", "星魂定魄丹", "Pill", 3, "镇定神魂并恢复40%灵力。", "A16", "A15", 180),
+        new("D018", "太虚续命丹", "Pill", 4, "濒危时恢复50%生命，每五十年只触发一次。", "A19", "A18", 540),
         new("F002", "巨力符", "Talisman", 1, "攻击力 +15%，持续 30 秒。", "A06", "F01", 12),
         new("F003", "神行符", "Talisman", 1, "移动速度 +15%，持续 30 秒。", "A07", "F01", 12),
         new("F001", "护体符箓", "Talisman", 2, "护甲 +15%，受到伤害 -8%，持续 30 秒。", "A08", "F01", 36),
@@ -104,25 +188,231 @@ internal static class MclslItemCatalog
         new("F005", "健体符", "Talisman", 3, "最大生命 +20%，并立即按新增上限同比补充生命，持续 45 秒。", "A04", "F01", 108),
         new("F006", "凝神符", "Talisman", 3, "暴击率 +8%，命中/感知类属性 +10%，持续 45 秒。", "A03", "F01", 108),
         new("F007", "聚灵符", "Talisman", 4, "修炼效率 +15%，灵力恢复效率 +15%，持续 60 秒。", "A05", "F01", 324),
-        new("B001", "神武雷", "Artifact", 1, "投向目标位置，1.5 秒后爆炸；中心造成 300 点 + 使用者攻击力×250% 伤害，半径 3 格，外围最低 50% 伤害；对建筑额外 +50% 伤害。使用时消耗耐久。", "R03", "R04", 30),
-        new("B002", "万头幡", "Artifact", 2, "主动释放魂煞，半径 6 格；造成攻击力×180% +150 伤害；敌人恐惧 4 秒，并在 12 秒内攻击力 -15%、护甲 -10%；冷却 30 秒。", "R01", "R05", 90),
-        new("B004", "混元紫金葫芦", "Artifact", 2, "每次发动释放 5 柄混元飞刀，优先攻击 5 个不同目标；目标不足时可重复命中。每刀造成攻击力×120% +80 伤害；索敌距离 12 格；冷却 12 秒。", "R01", "R05", 90),
-        new("B009", "定海神剑", "Artifact", 2, "普通攻击伤害 +35%；每第 4 次攻击触发“定海”，额外造成攻击力×100% 伤害并定身 2 秒；对首领/高境界单位定身缩短为 0.8 秒。", "R04", "R06", 90),
-        new("B003", "裂界神兵", "Artifact", 3, "普通攻击伤害 +60%；主动斩击单体造成攻击力×400% +500 伤害并无视 35% 护甲；对护盾、建筑、空间类目标额外 +100% 伤害；冷却 20 秒。", "R05", "R06", 270),
-        new("B005", "墨染恶书", "Artifact", 3, "墨光命中造成攻击力×220% +300 伤害；目标获得“墨染”15 秒：攻击力 -15%、护甲 -15%、装备/法宝效果 -25%；再次命中仅刷新持续时间；冷却 18 秒。", "R01", "R06", 270),
-        new("B006", "连山杖", "Artifact", 4, "召唤山岳冲击半径 8 格区域；中心造成攻击力×450% +800 伤害，外围最低 50%；击退 4 格并眩晕 2 秒；对建筑额外 +100% 伤害；冷却 35 秒。", "R02", "R01", 810),
-        new("B007", "归海铲", "Artifact", 4, "向前释放宽 6 格、长度 14 格海潮；造成攻击力×350% +650 伤害并击退；减速 50% 持续 8 秒；水域目标额外受到 25% 伤害；冷却 30 秒。", "R04", "R05", 810),
-        new("B008", "众生棍", "Artifact", 4, "锁定 12 格内目标，命中率最低 95%；普通攻击伤害 +70%；主动“众生一击”造成攻击力×550% +1000 单体伤害并眩晕 1.5 秒；同一目标第 3 次连续命中额外造成最大生命 5% 伤害（Boss 上限 2000）；冷却 25 秒。", "R01", "R06", 810),
+        new("F020", "回灵符", "Talisman", 1, "立即恢复15%灵力；同类回灵物品冷却30秒。", "F010", "F01", 12),
+        new("F021", "御风符", "Talisman", 1, "三十秒内行动更迅捷。", "F011", "F01", 12),
+        new("F022", "镇岩符", "Talisman", 2, "25秒内护甲+15，所受击退力减半。", "F012", "F01", 36),
+        new("F023", "水镜符", "Talisman", 2, "20秒内抵挡下一次法术伤害的25%。", "F013", "F01", 36),
+        new("F024", "雷引符", "Talisman", 3, "小范围雷击，最多命中3名敌人。", "F014", "F01", 108),
+        new("F025", "天幕符", "Talisman", 4, "15秒内自身和附近友军所受伤害减少15%。", "F019", "F01", 324),
+        new("B002", "万头幡", "Artifact", 2, "固定伤害 +750；伤害倍率 +300%；生命 +500；护甲 +20。", "M02", "M12", 90, nativeStats: Stats(("damage", 750f), ("multiplier_damage", 3f), ("health", 500f), ("armor", 20f))),
+        new("B004", "混元紫金葫芦", "Artifact", 2, "固定伤害 +650；伤害倍率 +250%；攻速倍率 +300%；射程 +5。", "M02", "M13", 90, nativeStats: Stats(("damage", 650f), ("multiplier_damage", 2.5f), ("multiplier_attack_speed", 3f), ("range", 5f))),
+        new("B009", "定海神剑", "Artifact", 2, "固定伤害 +900；伤害倍率 +350%；命中 +5；攻速倍率 +150%。", "M02", "M14", 90, nativeStats: Stats(("damage", 900f), ("multiplier_damage", 3.5f), ("accuracy", 5f), ("multiplier_attack_speed", 1.5f))),
+        new("B003", "裂界神兵", "Artifact", 3, "固定伤害 +2200；伤害倍率 +900%；暴击率 +40%；暴击伤害倍率 +200%。", "M03", "M19", 270, nativeStats: Stats(("damage", 2200f), ("multiplier_damage", 9f), ("critical_chance", 0.4f), ("critical_damage_multiplier", 2f))),
+        new("B005", "墨染恶书", "Artifact", 3, "固定伤害 +1800；伤害倍率 +700%；生命 +2000；生命倍率 +400%。", "M03", "M20", 270, nativeStats: Stats(("damage", 1800f), ("multiplier_damage", 7f), ("health", 2000f), ("multiplier_health", 4f))),
+        new("B006", "连山杖", "Artifact", 4, "固定伤害 +5500；伤害倍率 +1800%；护甲 +50；击退 +10。", "M04", "M26", 810, nativeStats: Stats(("damage", 5500f), ("multiplier_damage", 18f), ("armor", 50f), ("knockback", 10f))),
+        new("B007", "归海铲", "Artifact", 4, "固定伤害 +5000；伤害倍率 +1600%；速度倍率 +300%；射程 +10。", "M04", "M27", 810, nativeStats: Stats(("damage", 5000f), ("multiplier_damage", 16f), ("multiplier_speed", 3f), ("range", 10f))),
+        new("B008", "众生棍", "Artifact", 4, "固定伤害 +6500；伤害倍率 +2000%；命中 +9；暴击率 +80%；暴击伤害倍率 +500%。", "M04", "M28", 810, nativeStats: Stats(("damage", 6500f), ("multiplier_damage", 20f), ("accuracy", 9f), ("critical_chance", 0.8f), ("critical_damage_multiplier", 5f))),
+        new("B010", "青锋灵剑", "Artifact", 1, "固定伤害 +250；伤害倍率 +100%；攻速倍率 +100%。", "M01", "M05", 30, iconPath: "ui/Items/B010", nativeStats: Stats(("damage", 250f), ("multiplier_damage", 1f), ("multiplier_attack_speed", 1f))),
+        new("B011", "玄铁镇岳刀", "Artifact", 1, "固定伤害 +300；伤害倍率 +120%；护甲 +15。", "M01", "M06", 30, iconPath: "ui/Items/B011", nativeStats: Stats(("damage", 300f), ("multiplier_damage", 1.2f), ("armor", 15f))),
+        new("B012", "青木护心甲", "Artifact", 1, "护甲 +35；生命 +500；生命倍率 +100%。", "M01", "M07", 30, equipmentSlot: MclslArtifactEquipmentSlot.Armor, nativeStats: Stats(("armor", 35f), ("health", 500f), ("multiplier_health", 1f))),
+        new("B013", "玄水流光甲", "Artifact", 2, "护甲 +60；生命 +1500；生命倍率 +300%。", "M02", "M15", 90, equipmentSlot: MclslArtifactEquipmentSlot.Armor, nativeStats: Stats(("armor", 60f), ("health", 1500f), ("multiplier_health", 3f))),
+        new("B014", "地煞玄罡甲", "Artifact", 3, "护甲 +85；生命 +4000；生命倍率 +800%。", "M03", "M21", 270, equipmentSlot: MclslArtifactEquipmentSlot.Armor, nativeStats: Stats(("armor", 85f), ("health", 4000f), ("multiplier_health", 8f))),
+        new("B015", "九曜天辰甲", "Artifact", 4, "护甲 +99；生命 +10000；生命倍率 +1800%。", "M04", "M29", 810, equipmentSlot: MclslArtifactEquipmentSlot.Armor, nativeStats: Stats(("armor", 99f), ("health", 10000f), ("multiplier_health", 18f))),
+        new("B016", "清心玉冠", "Artifact", 1, "命中 +3；攻速倍率 +100%；暴击率 +10%。", "M01", "M08", 30, equipmentSlot: MclslArtifactEquipmentSlot.Helmet, nativeStats: Stats(("accuracy", 3f), ("multiplier_attack_speed", 1f), ("critical_chance", 0.1f))),
+        new("B017", "玄霜定神冠", "Artifact", 2, "命中 +5；攻速倍率 +300%；暴击率 +25%。", "M02", "M16", 90, equipmentSlot: MclslArtifactEquipmentSlot.Helmet, nativeStats: Stats(("accuracy", 5f), ("multiplier_attack_speed", 3f), ("critical_chance", 0.25f))),
+        new("B018", "地魂镇念盔", "Artifact", 3, "命中 +8；攻速倍率 +800%；暴击率 +50%；暴击伤害倍率 +300%。", "M03", "M22", 270, equipmentSlot: MclslArtifactEquipmentSlot.Helmet, nativeStats: Stats(("accuracy", 8f), ("multiplier_attack_speed", 8f), ("critical_chance", 0.5f), ("critical_damage_multiplier", 3f))),
+        new("B019", "太虚观天冕", "Artifact", 4, "命中 +9；攻速倍率 +1800%；暴击率 +100%；暴击伤害倍率 +800%。", "M04", "M30", 810, equipmentSlot: MclslArtifactEquipmentSlot.Helmet, nativeStats: Stats(("accuracy", 9f), ("multiplier_attack_speed", 18f), ("critical_chance", 1f), ("critical_damage_multiplier", 8f))),
+        new("B020", "踏风履", "Artifact", 1, "速度倍率 +100%；体力 +500；体力倍率 +100%。", "M01", "M09", 30, equipmentSlot: MclslArtifactEquipmentSlot.Boots, nativeStats: Stats(("multiplier_speed", 1f), ("stamina", 500f), ("multiplier_stamina", 1f))),
+        new("B021", "玄影追云靴", "Artifact", 2, "速度倍率 +300%；体力 +1500；体力倍率 +300%。", "M02", "M17", 90, equipmentSlot: MclslArtifactEquipmentSlot.Boots, nativeStats: Stats(("multiplier_speed", 3f), ("stamina", 1500f), ("multiplier_stamina", 3f))),
+        new("B022", "地脉挪移靴", "Artifact", 3, "速度倍率 +800%；体力 +4000；体力倍率 +800%。", "M03", "M23", 270, equipmentSlot: MclslArtifactEquipmentSlot.Boots, nativeStats: Stats(("multiplier_speed", 8f), ("stamina", 4000f), ("multiplier_stamina", 8f))),
+        new("B023", "天涯咫尺履", "Artifact", 4, "速度倍率 +1800%；体力 +10000；体力倍率 +1800%。", "M04", "M31", 810, equipmentSlot: MclslArtifactEquipmentSlot.Boots, nativeStats: Stats(("multiplier_speed", 18f), ("stamina", 10000f), ("multiplier_stamina", 18f))),
+        new("B024", "聚灵戒", "Artifact", 1, "伤害倍率 +120%；暴击率 +15%；暴击伤害倍率 +100%。", "M01", "M10", 30, equipmentSlot: MclslArtifactEquipmentSlot.Ring, nativeStats: Stats(("multiplier_damage", 1.2f), ("critical_chance", 0.15f), ("critical_damage_multiplier", 1f))),
+        new("B025", "玄火战戒", "Artifact", 2, "伤害倍率 +350%；暴击率 +30%；暴击伤害倍率 +200%。", "M02", "M18", 90, equipmentSlot: MclslArtifactEquipmentSlot.Ring, nativeStats: Stats(("multiplier_damage", 3.5f), ("critical_chance", 0.3f), ("critical_damage_multiplier", 2f))),
+        new("B026", "地元归真戒", "Artifact", 3, "伤害倍率 +900%；暴击率 +60%；暴击伤害倍率 +500%。", "M03", "M24", 270, equipmentSlot: MclslArtifactEquipmentSlot.Ring, nativeStats: Stats(("multiplier_damage", 9f), ("critical_chance", 0.6f), ("critical_damage_multiplier", 5f))),
+        new("B027", "周天星辰戒", "Artifact", 4, "伤害倍率 +2000%；暴击率 +100%；暴击伤害倍率 +1000%。", "M04", "M32", 810, equipmentSlot: MclslArtifactEquipmentSlot.Ring, nativeStats: Stats(("multiplier_damage", 20f), ("critical_chance", 1f), ("critical_damage_multiplier", 10f))),
+        new("B028", "护脉玉符", "Artifact", 1, "生命 +300；生命倍率 +100%；寿命倍率 +100%；护甲 +15。", "M01", "M11", 30, equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 300f), ("multiplier_health", 1f), ("multiplier_lifespan", 1f), ("armor", 15f))),
+        new("B029", "玄龟护身佩", "Artifact", 2, "生命 +1000；生命倍率 +300%；寿命倍率 +300%；护甲 +35。", "M12", "M13", 90, equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 1000f), ("multiplier_health", 3f), ("multiplier_lifespan", 3f), ("armor", 35f))),
+        new("B030", "地藏回生坠", "Artifact", 3, "生命 +3000；生命倍率 +800%；寿命倍率 +800%；护甲 +65。", "M03", "M25", 270, equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 3000f), ("multiplier_health", 8f), ("multiplier_lifespan", 8f), ("armor", 65f))),
+        new("B031", "长生护道符", "Artifact", 4, "生命 +8000；生命倍率 +1800%；寿命倍率 +1800%；护甲 +90。", "M26", "M27", 810, equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 8000f), ("multiplier_health", 18f), ("multiplier_lifespan", 18f), ("armor", 90f))),
+        Art("B032", "青羽灵弓", 1, "弦动如风。", "bow", "M05", "M06"), Art("B033", "逐月玄弓", 2, "月影随箭。", "bow", "M12", "M14"),
+        Art("B034", "破云地弓", 3, "一矢穿云。", "bow", "M19", "M20"), Art("B035", "天河星弓", 4, "星河为弦。", "bow", "M26", "M28"),
+        Art("B036", "开山灵斧", 1, "劈石见径。", "axe", "M05", "M07"), Art("B037", "断岳玄斧", 2, "重锋撼山。", "axe", "M12", "M15"),
+        Art("B038", "裂海地斧", 3, "斧落分潮。", "axe", "M19", "M21"), Art("B039", "乾坤天斧", 4, "一击定乾坤。", "axe", "M26", "M29"),
+        Art("B040", "镇军灵钺", 1, "威仪初显。", "yue", "M05", "M08"), Art("B041", "玄章法钺", 2, "符章护刃。", "yue", "M12", "M16"),
+        Art("B042", "地阙王钺", 3, "厚土为锋。", "yue", "M19", "M22"), Art("B043", "天律圣钺", 4, "法度随身。", "yue", "M26", "M30"),
+        Art("B044", "索影灵钩", 1, "牵敌失位。", "hook", "M05", "M09"), Art("B045", "玄丝月钩", 2, "弧光无声。", "hook", "M12", "M17"),
+        Art("B046", "地缚锁钩", 3, "锁势难逃。", "hook", "M19", "M23"), Art("B047", "天罗星钩", 4, "钩起星痕。", "hook", "M26", "M31"),
+        Art("B048", "分潮灵叉", 1, "水势开路。", "fork", "M05", "M10"), Art("B049", "三元玄叉", 2, "三锋齐进。", "fork", "M12", "M18"),
+        Art("B050", "镇渊地叉", 3, "定浪沉渊。", "fork", "M19", "M24"), Art("B051", "四海天叉", 4, "四海同鸣。", "fork", "M26", "M32"),
+        Art("B052", "霜纹灵刀", 1, "刃映薄霜。", "blade", "M05", "M11"), Art("B053", "赤霞玄刀", 2, "霞色炽烈。", "blade", "M13", "M14"),
+        Art("B054", "断念地刀", 3, "锋尽杂念。", "blade", "M19", "M25"), Art("B055", "归寂天刀", 4, "静中藏锋。", "blade", "M27", "M28"),
+        Art("B056", "点星灵枪", 1, "一点寒星。", "spear", "M06", "M07"), Art("B057", "游龙玄枪", 2, "枪势如龙。", "spear", "M13", "M15"),
+        Art("B058", "贯岳地枪", 3, "直取山心。", "spear", "M20", "M21"), Art("B059", "太虚天枪", 4, "虚实莫测。", "spear", "M27", "M29"),
+        Art("B060", "清光灵剑", 1, "一线清辉。", "sword", "M06", "M08"), Art("B061", "碧霄玄剑", 2, "青虹破空。", "sword", "M13", "M16"),
+        Art("B062", "镇魄地剑", 3, "剑意定神。", "sword", "M20", "M22"), Art("B063", "万法天剑", 4, "万法归锋。", "sword", "M27", "M30"),
+        Art("B064", "横云灵戟", 1, "横扫云头。", "halberd", "M06", "M09"), Art("B065", "逐雷玄戟", 2, "电光随刃。", "halberd", "M13", "M17"),
+        Art("B066", "破阵地戟", 3, "阵纹俱碎。", "halberd", "M20", "M23"), Art("B067", "周天神戟", 4, "环天而动。", "halberd", "M27", "M31"),
+        Art("B068", "护心灵钟", 1, "微鸣护体。", "bell", "M06", "M10"), Art("B069", "定神玄钟", 2, "钟声清念。", "bell", "M13", "M18"),
+        Art("B070", "镇海地钟", 3, "音沉如海。", "bell", "M20", "M24"), Art("B071", "无量天钟", 4, "余响不绝。", "bell", "M27", "M32"),
+        Art("B072", "聚元灵印", 1, "凝元成纹。", "seal", "M06", "M11"), Art("B073", "伏岳玄印", 2, "印落如岳。", "seal", "M14", "M15"),
+        Art("B074", "山河地印", 3, "山川入掌。", "seal", "M20", "M25"), Art("B075", "玄黄天印", 4, "一印定界。", "seal", "M28", "M29"),
+        Art("B076", "避雨灵伞", 1, "灵雨不侵。", "umbrella", "M07", "M08"), Art("B077", "流云玄伞", 2, "伞下云行。", "umbrella", "M14", "M16"),
+        Art("B078", "万象地伞", 3, "诸相成幕。", "umbrella", "M21", "M22"), Art("B079", "天幕宝伞", 4, "撑开一方天。", "umbrella", "M28", "M30"),
+        new("B080", "济世药匣", "Artifact", 4, "一匣药香，护尽有缘人。白先生专属法宝。", "", "", 999999,
+            equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 500000f), ("armor", 80f))),
+        new("B081", "传法玉简", "Artifact", 4, "万法由此传诸世间。传法天尊专属法宝。", "", "", 999999,
+            equipmentSlot: MclslArtifactEquipmentSlot.Amulet, nativeStats: Stats(("health", 500000f), ("multiplier_damage", 10f))),
+        new("S001_SCROLL", "金芒剑气卷", "SpellScroll", 1, "使用后学会金芒剑气。", "F01", "A07", 24, iconPath: "ui/Spells/S001"),
+        new("S002_SCROLL", "青木回春卷", "SpellScroll", 1, "使用后学会青木回春。", "F01", "A07", 24, iconPath: "ui/Spells/S002"),
+        new("S003_SCROLL", "水镜护身卷", "SpellScroll", 1, "使用后学会水镜护身。", "F01", "A07", 24, iconPath: "ui/Spells/S003"),
+        new("S004_SCROLL", "赤焰术卷", "SpellScroll", 1, "使用后学会赤焰术。", "F01", "A07", 24, iconPath: "ui/Spells/S004"),
+        new("S005_SCROLL", "厚土壁卷", "SpellScroll", 2, "使用后学会厚土壁。", "F01", "A07", 72, iconPath: "ui/Spells/S005"),
+        new("S006_SCROLL", "御风行卷", "SpellScroll", 2, "使用后学会御风行。", "F01", "A07", 72, iconPath: "ui/Spells/S006"),
+        new("S007_SCROLL", "雷引诀卷", "SpellScroll", 2, "使用后学会雷引诀。", "F01", "A07", 72, iconPath: "ui/Spells/S007"),
+        new("S008_SCROLL", "玄阴缚卷", "SpellScroll", 3, "使用后学会玄阴缚。", "F01", "A07", 216, iconPath: "ui/Spells/S008"),
+        new("S009_SCROLL", "阳华破障卷", "SpellScroll", 3, "使用后学会阳华破障。", "F01", "A07", 216, iconPath: "ui/Spells/S009"),
+        new("S010_SCROLL", "五行轮转卷", "SpellScroll", 4, "使用后学会五行轮转。", "F01", "A07", 648, iconPath: "ui/Spells/S010"),
+        new("S011_SCROLL", "咫尺遁光卷", "SpellScroll", 4, "使用后学会咫尺遁光。", "F01", "A07", 648, iconPath: "ui/Spells/S011"),
+        new("S012_SCROLL", "万象归一卷", "SpellScroll", 4, "使用后学会万象归一。", "F01", "A07", 648, iconPath: "ui/Spells/S012"),
     };
 
     private const MclslMaterialSource AllMaterialSources = MclslMaterialSource.AnnualActivity
         | MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough
         | MclslMaterialSource.Opportunity | MclslMaterialSource.Faction;
 
+    private static MclslItemDefinition Mat(string id, string name, string category, MclslMaterialTier tier,
+        MclslMaterialHabitat habitat)
+    {
+        MclslMaterialSource sources = tier switch
+        {
+            MclslMaterialTier.Tian => MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough | MclslMaterialSource.Opportunity,
+            MclslMaterialTier.Di => MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough
+                | MclslMaterialSource.Opportunity | MclslMaterialSource.Faction,
+            _ => AllMaterialSources
+        };
+        int price = tier switch { MclslMaterialTier.Huang => 6, MclslMaterialTier.Xuan => 12,
+            MclslMaterialTier.Di => 24, _ => 48 };
+        return new MclslItemDefinition(id, name, category, 0, "用于仙道制作的" + name + "。", "", "", price,
+            tier, sources, habitat);
+    }
+
+    private static MclslItemDefinition Art(string id, string name, int grade, string introduction, string family,
+        string first, string second)
+    {
+        bool accessory = family is "bell" or "seal" or "umbrella";
+        int price = grade switch { 1 => 30, 2 => 90, 3 => 270, _ => 810 };
+        int damage = grade switch { 1 => 250, 2 => 900, 3 => 2200, _ => 5500 };
+        int health = grade switch { 1 => 300, 2 => 1000, 3 => 3000, _ => 8000 };
+        (string Id, float Value)[] stats = accessory
+            ? family == "bell" ? Stats(("health", health), ("armor", 10f + grade * 15f))
+                : family == "seal" ? Stats(("health", health), ("multiplier_damage", grade * 0.8f))
+                : Stats(("health", health), ("multiplier_speed", grade * 0.4f))
+            : family == "bow" ? Stats(("damage", damage), ("range", 3f + grade * 2f))
+                : family is "spear" or "halberd" or "fork" ? Stats(("damage", damage), ("range", 1f + grade))
+                : family is "hook" or "sword" ? Stats(("damage", damage), ("multiplier_attack_speed", grade * 0.35f))
+                : Stats(("damage", damage), ("multiplier_damage", grade * 0.7f));
+        return new MclslItemDefinition(id, name, "Artifact", grade, introduction, first, second, price,
+            equipmentSlot: accessory ? MclslArtifactEquipmentSlot.Amulet : MclslArtifactEquipmentSlot.Weapon,
+            nativeStats: stats);
+    }
+
+    private static (string Id, float Value)[] Stats(params (string Id, float Value)[] values) => values;
+
     private static readonly Dictionary<string, MclslItemDefinition> ById = BuildIndex();
 
-    internal static MclslItemDefinition Get(string id) =>
-        !string.IsNullOrWhiteSpace(id) && ById.TryGetValue(id, out var item) ? item : null;
+    private static readonly Dictionary<string, string> LegacyIds = BuildLegacyIds();
+
+    internal static MclslItemDefinition Get(string id)
+    {
+        string canonicalId = NormalizeId(id);
+        return canonicalId.Length > 0 && ById.TryGetValue(canonicalId, out MclslItemDefinition item) ? item : null;
+    }
+
+    internal static string IngredientDisplayName(string id) => Get(id)?.Name ?? id switch
+    {
+        "R01" => "木材",
+        "R02" => "石料",
+        "R03" or "R04" => "常见金属",
+        "R05" => "秘银",
+        "R06" => "精金",
+        "R07" => "草药",
+        "R08" => "浆果",
+        "R09" => "小麦",
+        _ => id ?? string.Empty
+    };
+
+    internal static string NormalizeId(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id)) return string.Empty;
+        string value = id.Trim();
+        if (value.EndsWith(" Description", StringComparison.OrdinalIgnoreCase))
+            value = value.Substring(0, value.Length - " Description".Length).Trim();
+        else if (value.EndsWith("_description", StringComparison.OrdinalIgnoreCase))
+            value = value.Substring(0, value.Length - "_description".Length).Trim();
+        if (value.StartsWith("mclsl_artifact_", StringComparison.OrdinalIgnoreCase))
+            value = value.Substring("mclsl_artifact_".Length);
+        else if (value.StartsWith("artifact_", StringComparison.OrdinalIgnoreCase))
+            value = value.Substring("artifact_".Length);
+        else if (value.StartsWith("item_", StringComparison.OrdinalIgnoreCase))
+            value = value.Substring("item_".Length);
+
+        string upper = value.ToUpperInvariant();
+        if (ById.ContainsKey(upper)) return upper;
+        if (LegacyIds.TryGetValue(value, out string canonical)
+            || LegacyIds.TryGetValue(upper, out canonical)) return canonical;
+        return string.Empty;
+    }
+
+    internal static bool IsRemovedArtifactId(string id) => NormalizeId(id) == "B001";
+
+    private static Dictionary<string, string> BuildLegacyIds()
+    {
+        Dictionary<string, string> aliases = new(StringComparer.OrdinalIgnoreCase);
+        AddRemovedAliases(aliases, "B001", "神武雷", "Thunderbolt", "DivineThunder", "ShenWuLei", "WarThunder", "thunder", "mclsl_artifact_thunder");
+        AddAliases(aliases, "B002", "万头幡", "TenThousandHeadBanner", "Ten Thousand Banner", "SoulBanner", "WanTouFan");
+        AddAliases(aliases, "B003", "裂界神兵", "WorldSplittingWeapon", "World-Splitting Divine Weapon", "RiftWeapon", "LieJieShenBing");
+        AddAliases(aliases, "B004", "混元紫金葫芦", "MixedYuanPurpleGoldGourd", "PurpleGoldGourd", "HunYuanZiJinHuLu");
+        AddAliases(aliases, "B005", "墨染恶书", "InkStainedEvilBook", "InkEvilBook", "MoRanEShu");
+        AddAliases(aliases, "B006", "连山杖", "ContinuousMountainStaff", "LianShanZhang");
+        AddAliases(aliases, "B007", "归海铲", "ReturningSeaSpade", "SeaReturningSpade", "GuiHaiChan");
+        AddAliases(aliases, "B008", "众生棍", "AllBeingsStaff", "ZhongShengGun");
+        AddAliases(aliases, "B009", "定海神剑", "SeaCalmingDivineSword", "SeaCalmingSword", "DingHaiShenJian");
+        AddAliases(aliases, "B010", "青锋灵剑", "QingFengLingJian");
+        AddAliases(aliases, "B011", "玄铁镇岳刀", "XuanTieZhenYueDao");
+        AddAliases(aliases, "B012", "青木护心甲");
+        AddAliases(aliases, "B013", "玄水流光甲");
+        AddAliases(aliases, "B014", "地煞玄罡甲");
+        AddAliases(aliases, "B015", "九曜天辰甲");
+        AddAliases(aliases, "B016", "清心玉冠");
+        AddAliases(aliases, "B017", "玄霜定神冠");
+        AddAliases(aliases, "B018", "地魂镇念盔");
+        AddAliases(aliases, "B019", "太虚观天冕");
+        AddAliases(aliases, "B020", "踏风履");
+        AddAliases(aliases, "B021", "玄影追云靴");
+        AddAliases(aliases, "B022", "地脉挪移靴");
+        AddAliases(aliases, "B023", "天涯咫尺履");
+        AddAliases(aliases, "B024", "聚灵戒");
+        AddAliases(aliases, "B025", "玄火战戒");
+        AddAliases(aliases, "B026", "地元归真戒");
+        AddAliases(aliases, "B027", "周天星辰戒");
+        AddAliases(aliases, "B028", "护脉玉符");
+        AddAliases(aliases, "B029", "玄龟护身佩");
+        AddAliases(aliases, "B030", "地藏回生坠");
+        AddAliases(aliases, "B031", "长生护道符");
+        return aliases;
+    }
+
+    private static void AddRemovedAliases(Dictionary<string, string> aliases, string retiredId, params string[] names)
+    {
+        aliases[retiredId] = retiredId;
+        aliases["item_" + retiredId] = retiredId;
+        aliases["artifact_" + retiredId] = retiredId;
+        aliases["mclsl_artifact_" + retiredId] = retiredId;
+        aliases[retiredId + " Description"] = retiredId;
+        foreach (string name in names)
+            if (!string.IsNullOrWhiteSpace(name)) aliases[name] = retiredId;
+    }
+
+    private static void AddAliases(Dictionary<string, string> aliases, string canonicalId, params string[] names)
+    {
+        aliases[canonicalId] = canonicalId;
+        aliases["item_" + canonicalId] = canonicalId;
+        aliases["artifact_" + canonicalId] = canonicalId;
+        aliases["mclsl_artifact_" + canonicalId] = canonicalId;
+        aliases[canonicalId + " Description"] = canonicalId;
+        foreach (string name in names)
+            if (!string.IsNullOrWhiteSpace(name)) aliases[name] = canonicalId;
+    }
 
     private static Dictionary<string, MclslItemDefinition> BuildIndex()
     {

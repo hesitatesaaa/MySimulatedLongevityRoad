@@ -25,6 +25,8 @@ internal static class MclslTraitRegistration
     internal const string NativeImmortalTraitId = "immortal";
     internal const string HuanzhenTraitId = "MclslHuanzhen";
     internal const string WorldSoulEntityTraitId = "MclslWorldSoulEntity";
+    internal const string BaiTraitId = "MclslBaiXiansheng";
+    internal const string ChuanfaTraitId = "MclslChuanfaTianzun";
     internal const string PathHuaShenTraitId = "MclslPathHuaShen";
     internal const string PathHeDaoTraitId = "MclslPathHeDao";
     internal const string PathChangShengTraitId = "MclslPathChangSheng";
@@ -240,14 +242,34 @@ internal static class MclslTraitRegistration
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
         MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
-        AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。");
-        AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。");
-        AddProfession(TalismanTraitId, "trait/MclslProfessionTalisman", "制符师", "使用灵符纸与灵材制作一次性符箓。");
-        AddImmortalPathTrait(PathHuaShenTraitId, "trait/MclslPathHuaShen", "神化天资", "天生道心映神，逐境修行可至化神；化神之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足洞天与天地资源之门槛。自然显现概率为0.5%。");
-        AddImmortalPathTrait(PathHeDaoTraitId, "trait/MclslPathHeDao", "合道圣胎", "先天圣胎与天地相契，逐境修行可至合道；目标境界之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足天地之魄与归属条件。仅可手动授予。");
-        AddImmortalPathTrait(PathChangShengTraitId, "trait/MclslPathChangSheng", "长生道种", "道种蕴生机，逐境修行可至长生；目标境界之前突破必成，功法后路自得补全，突破反噬不致命，仍须满足世界资源、席位与长生道果条件。仅可手动授予。");
+        AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。",
+            "辨材炼药，以丹助修。", "每年最多成功炼制一次；优先炼制同阶丹药，缺料时最多降一阶；只有同阶成品增加 1 点熟练度。");
+        AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。",
+            "百炼成器，以器载道。", "每年最多成功炼制一次；优先炼制同阶法宝，缺料时最多降一阶；只有同阶成品增加 1 点熟练度，重复法宝会自动上架天玄镜。");
+        AddProfession(TalismanTraitId, "trait/MclslProfessionTalisman", "制符师", "使用灵符纸与灵材制作一次性符箓。",
+            "灵材为引，挥笔成符。", "每年最多成功制作一次；优先制作同阶符箓，缺料时最多降一阶；只有同阶成品增加 1 点熟练度，符箓使用后消耗。");
+        AddImmortalPathTrait(PathHuaShenTraitId, "trait/MclslPathHuaShen", "神化天资", "自动获得【纯一灵根】（已有时不重复添加）；可无瓶颈突破至化神，化神前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足洞天与天地资源条件。自然出现概率为0.5%。", 1, Rarity.R2_Epic);
+        AddImmortalPathTrait(PathHeDaoTraitId, "trait/MclslPathHeDao", "合道圣胎", "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至合道，合道前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足天地之魄与归属条件；当前未配置自然出现概率。", 2, Rarity.R3_Legendary);
+        AddImmortalPathTrait(PathChangShengTraitId, "trait/MclslPathChangSheng", "长生道种", "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至长生，长生前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足世界资源、席位与长生道果条件；当前未配置自然出现概率。", 3, Rarity.R3_Legendary);
         MclslLocalizationBridge.RegisterKey("trait_group_" + ImmortalPathGroupId, "仙路");
         AddSpecial(WorldSoulEntityTraitId, "trait/TianDiZhiPo", false, false, 2500f, 2500000f, 250000f, 2.35f, 240f);
+        MclslLocalizationBridge.RegisterKey(BaiTraitId, "白先生");
+        MclslLocalizationBridge.RegisterKey("trait_" + BaiTraitId, "白先生");
+        MclslLocalizationBridge.RegisterKey("trait_" + BaiTraitId + "_info", "慈悲济世，生命与灵力大幅提升。");
+        MclslLocalizationBridge.RegisterKey("trait_" + BaiTraitId + "_info_2", "慈悲济世，生命与灵力大幅提升。");
+        MclslLocalizationBridge.RegisterKey(ChuanfaTraitId, "传法天尊");
+        MclslLocalizationBridge.RegisterKey("trait_" + ChuanfaTraitId, "传法天尊");
+        MclslLocalizationBridge.RegisterKey("trait_" + ChuanfaTraitId + "_info", "开立新法，生命与灵力大幅提升。");
+        MclslLocalizationBridge.RegisterKey("trait_" + ChuanfaTraitId + "_info_2", "开立新法，生命与灵力大幅提升。");
+        AddSpecial(BaiTraitId, "trait/Bai", true, true, 99999f, 5000000f, 500000f, 2f, 80f);
+        AddSpecial(ChuanfaTraitId, "trait/Chuanfa", true, true, 99999f, 5000000f, 500000f, 2f, 80f);
+        foreach (string id in new[] { BaiTraitId, ChuanfaTraitId })
+        {
+            ActorTrait special = AssetManager.traits.get(id);
+            if (special == null) continue;
+            SafeSetStat(special.base_stats, "multiplier_health", 10f);
+            SafeSetStat(special.base_stats, "multiplier_damage", 10f);
+        }
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
     }
@@ -257,6 +279,7 @@ internal static class MclslTraitRegistration
     internal static void SyncNativeRealmTraits(Actor actor, string realm)
     {
         if (actor?.data == null) return;
+        if (string.Equals(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NativeRealmTraitsSynced), realm, StringComparison.Ordinal)) return;
         int targetIndex = MclslRealmIds.Index(realm);
         if (targetIndex < 0) return;
         TryAutoCollectRealm(actor, targetIndex);
@@ -271,6 +294,14 @@ internal static class MclslTraitRegistration
                 for (int g = 0; g < groups.Length; g++) AddFirstExistingNativeTrait(actor, groups[g]);
             }
         });
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.NativeRealmTraitsSynced, realm);
+    }
+
+    internal static void InvalidateNativeRealmTraitSync(Actor actor)
+    {
+        if (actor?.data == null) return;
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.NativeRealmTraitsSynced, string.Empty);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.ManualRealmTraitReconciled, string.Empty);
     }
 
     private static void RemoveInvalidLowRealmHealingTraits(Actor actor, int targetIndex)
@@ -792,23 +823,25 @@ internal static class MclslTraitRegistration
         SafeSetStat(statsBlock, "Accuracy", value * 20f);
     }
 
-    private static void ApplyNativeOrderingAndRarity(ActorTrait trait, int order, int rarity)
+    private static void ApplyNativeOrderingAndRarity(ActorTrait trait, int order, Rarity rarity)
     {
+        if (trait == null) return;
         int displayOrder = 100 - Math.Clamp(order, 1, 99);
-        TrySetRarity(trait, rarity);
+        TrySetRarity(trait, (int)rarity);
+        trait.priority = displayOrder;
         TrySet(trait, "rank", displayOrder);
         TrySet(trait, "order", displayOrder);
         TrySet(trait, "sort_order", displayOrder);
         TrySet(trait, "priority", displayOrder);
     }
 
-    private static int RealmRarity(int order) => order <= 3 ? 1 : order <= 5 ? 2 : 3;
+    private static Rarity RealmRarity(int order) => order <= 3 ? Rarity.R1_Rare : order <= 5 ? Rarity.R2_Epic : Rarity.R3_Legendary;
 
-    private static int GiftRarity(int level) => level switch
+    private static Rarity GiftRarity(int level) => level switch
     {
-        >= 5 => 3,
-        >= 3 => 2,
-        _ => 1
+        >= 5 => Rarity.R3_Legendary,
+        >= 3 => Rarity.R2_Epic,
+        _ => Rarity.R1_Rare
     };
 
     private static void TrySet(object target, string name, int value)
@@ -890,21 +923,29 @@ internal static class MclslTraitRegistration
         if (add) AssetManager.traits.add(trait);
     }
 
-    private static void AddProfession(string id, string icon, string displayName, string description)
+    private static void AddProfession(string id, string icon, string displayName, string description, string intro, string effects)
     {
         RegisterProfessionText(id, displayName, description);
+        RegisterTraitInfo(id, intro, effects);
         AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
         ActorTrait trait = AssetManager.traits.get(id);
         if (trait != null) trait.group_id = ProfessionGroupId;
     }
 
-    private static void AddImmortalPathTrait(string id, string icon, string displayName, string description)
+    private static void AddImmortalPathTrait(string id, string icon, string displayName, string description, int order, Rarity rarity)
     {
         MclslLocalizationBridge.RegisterKey(id, displayName);
         MclslLocalizationBridge.RegisterKey(id + " Description", description);
+        MclslLocalizationBridge.RegisterKey("trait_" + id, displayName);
+        MclslLocalizationBridge.RegisterKey("trait_" + id + " Description", description);
+        RegisterPathTraitInfo(id);
         AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
         ActorTrait trait = AssetManager.traits.get(id);
-        if (trait != null) trait.group_id = ImmortalPathGroupId;
+        if (trait != null)
+        {
+            trait.group_id = ImmortalPathGroupId;
+            ApplyNativeOrderingAndRarity(trait, order, rarity);
+        }
     }
 
     private static void RegisterProfessionText(string id, string displayName, string description)
@@ -915,6 +956,30 @@ internal static class MclslTraitRegistration
         // locale key or its trait_-prefixed alias. Register both to keep IDs internal.
         MclslLocalizationBridge.RegisterKey("trait_" + id, displayName);
         MclslLocalizationBridge.RegisterKey("trait_" + id + " Description", description);
+    }
+
+    private static void RegisterPathTraitInfo(string id)
+    {
+        switch (id)
+        {
+            case PathHuaShenTraitId:
+                RegisterTraitInfo(id, "根骨纯一，天资直指化神。", "自动获得【纯一灵根】；可无瓶颈突破至化神，化神前免除中途境界突破瓶颈，突破必成且免于突破致死；补全功法境界上限，仍须满足洞天与天地资源条件。");
+                break;
+            case PathHeDaoTraitId:
+                RegisterTraitInfo(id, "身负圣胎，得天地之魄方可合道。", "自动获得【天赐灵根】；可无瓶颈突破至合道，合道前免除中途境界突破瓶颈，突破必成且免于突破致死；补全功法境界上限，仍须满足天地之魄与归属条件。");
+                break;
+            case PathChangShengTraitId:
+                RegisterTraitInfo(id, "道种深植，修行所向长生。", "自动获得【天赐灵根】；可无瓶颈突破至长生，长生前免除中途境界突破瓶颈，突破必成且免于突破致死；补全功法境界上限，仍须满足世界资源、席位与长生道果条件。");
+                break;
+        }
+    }
+
+    private static void RegisterTraitInfo(string id, string intro, string effects)
+    {
+        MclslLocalizationBridge.RegisterKey(id + "_info", intro);
+        MclslLocalizationBridge.RegisterKey(id + "_info_2", effects);
+        MclslLocalizationBridge.RegisterKey("trait_" + id + "_info", intro);
+        MclslLocalizationBridge.RegisterKey("trait_" + id + "_info_2", effects);
     }
 
     private static void ApplyWorldSoulEntityStats(BaseStats statsBlock)

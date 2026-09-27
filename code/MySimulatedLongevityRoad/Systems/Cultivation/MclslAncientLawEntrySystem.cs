@@ -54,7 +54,7 @@ internal static class MclslAncientLawEntrySystem
             int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0), 0, 100);
             if (aptitude <= 0) aptitude = RollAncientAptitude(id);
             string techniqueSeed = id > 0L ? id.ToString() : MclslActorAccessor.DisplayName(actor) + "|" + year;
-            MclslTechniqueDefinition technique = MclslCultivationCatalog.StartingTechnique(techniqueSeed, aptitude, true);
+            MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(actor, techniqueSeed, aptitude, true);
             MclslCultivationStateTransitions.TrySetCultivationSystem(actor, MclslCultivationSystemIds.AncientLaw);
             if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0) <= 0)
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationStartYear, Math.Max(0, year));

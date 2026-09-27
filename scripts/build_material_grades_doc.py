@@ -1,4 +1,4 @@
-"""Generate the player-facing material grade reference for version 0.2.0."""
+"""Generate the player-facing material grade reference for version 0.3.1."""
 from pathlib import Path
 
 from docx import Document
