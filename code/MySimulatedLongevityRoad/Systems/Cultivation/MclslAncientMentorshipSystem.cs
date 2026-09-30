@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
@@ -19,15 +20,9 @@ internal static class MclslAncientMentorshipSystem
         if (!CanRecruit(teacher, year)) return false;
 
         CleanupTeacherStudents(teacher);
-        IReadOnlyList<Actor> candidates = MclslCultivatorCandidateIndex.SelectCultivators(
-            32,
-            candidate => IsValidStudent(teacher, candidate),
-            ScoreStudent);
-
-        for (int i = 0; i < candidates.Count; i++)
+        Actor candidate = MclslActorProjectionIndex.PickMentorshipStudent(teacher);
+        if (candidate != null)
         {
-            Actor candidate = candidates[i];
-            if (candidate == null || candidate == teacher) continue;
             Recruit(teacher, candidate, year);
             student = candidate;
             return true;
@@ -41,7 +36,7 @@ internal static class MclslAncientMentorshipSystem
 
     internal static string BuildSummary(Actor actor)
     {
-        if (actor?.data == null || MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear())) return string.Empty;
+        if (actor?.data == null) return string.Empty;
         List<string> parts = new(2);
         if (TryGetTeacher(actor, out Actor teacher))
             parts.Add("师承：" + SafeName(teacher));
@@ -58,30 +53,25 @@ internal static class MclslAncientMentorshipSystem
         return parts.Count == 0 ? string.Empty : string.Join("｜", parts);
     }
 
-    internal static List<(Actor Teacher, List<Actor> Students)> SnapshotActiveMentors(int limit)
+    internal static bool HasLivingTeacher(Actor student)
     {
-        List<(Actor Teacher, List<Actor> Students)> result = new();
-        if (MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear())) return result;
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        for (int i = 0; i < actors.Count; i++)
+        string raw = MclslActorAccessor.GetString(student, MclslActorDataKeys.AncientMentorTeacherId);
+        return long.TryParse(raw, NumberStyles.Integer, CultureInfo.InvariantCulture, out long id)
+            && MclslActorRegistry.Resolve(id, out Actor teacher) && IsAncientCultivator(teacher);
+    }
+
+    internal static void OnActorRemoved(Actor teacher)
+    {
+        if (teacher?.data == null) return;
+        long teacherId = MclslActorAccessor.Id(teacher);
+        foreach (long id in GetStudentIds(teacher))
         {
-            Actor teacher = actors[i];
-            if (!IsAncientCultivator(teacher)) continue;
-            List<Actor> students = GetLiveStudents(teacher);
-            if (students.Count <= 0) continue;
-            result.Add((teacher, students));
+            if (!MclslActorRegistry.Resolve(id, out Actor student)) continue;
+            if (MclslActorAccessor.GetString(student, MclslActorDataKeys.AncientMentorTeacherId)
+                != teacherId.ToString(CultureInfo.InvariantCulture)) continue;
+            ClearTeacher(student);
+            MclslActorProjectionIndex.Update(student);
         }
-        result.Sort((left, right) =>
-        {
-            int students = right.Students.Count.CompareTo(left.Students.Count);
-            if (students != 0) return students;
-            int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(right.Teacher)).CompareTo(MclslRealmIds.Index(MclslActorAccessor.Realm(left.Teacher)));
-            if (realm != 0) return realm;
-            return MclslActorAccessor.Id(left.Teacher).CompareTo(MclslActorAccessor.Id(right.Teacher));
-        });
-        if (limit > 0 && result.Count > limit)
-            result.RemoveRange(limit, result.Count - limit);
-        return result;
     }
 
     internal static bool TryGetTeacher(Actor student, out Actor teacher)
@@ -122,7 +112,6 @@ internal static class MclslAncientMentorshipSystem
 
     private static bool CanRecruit(Actor teacher, int year)
     {
-        if (MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (!IsAncientCultivator(teacher)) return false;
         if (MclslRealmIds.Index(MclslActorAccessor.Realm(teacher)) < MclslRealmIds.Index(MclslRealmIds.ZhuJi)) return false;
         CleanupTeacherStudents(teacher);
@@ -131,7 +120,7 @@ internal static class MclslAncientMentorshipSystem
         return last <= 0 || year - last >= RecruitIntervalYears;
     }
 
-    private static bool IsValidStudent(Actor teacher, Actor candidate)
+    internal static bool IsValidStudent(Actor teacher, Actor candidate)
     {
         if (!IsAncientCultivator(teacher) || !IsAncientCultivator(candidate) || teacher == candidate) return false;
         if (TryGetTeacher(candidate, out _)) return false;
@@ -152,6 +141,7 @@ internal static class MclslAncientMentorshipSystem
         MclslActorAccessor.Set(teacher, MclslActorDataKeys.AncientMentorLastRecruitYear, Math.Max(0, year));
         MclslActorAccessor.Set(student, MclslActorDataKeys.AncientMentorTeacherId, teacherId.ToString(CultureInfo.InvariantCulture));
         MclslActorAccessor.Set(student, MclslActorDataKeys.AncientMentorTeacherName, SafeName(teacher));
+        MclslActorProjectionIndex.Update(student);
 
         string teacherTechniqueId = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueId, string.Empty);
         string teacherTechniqueName = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueName, string.Empty);
@@ -161,27 +151,117 @@ internal static class MclslAncientMentorshipSystem
         MclslTechniqueStageSystem.AddProgress(student, 8);
         AddClamped(student, MclslActorDataKeys.AncientLineageStrength, 6, 0, 100);
         AddClamped(student, MclslActorDataKeys.MindState, 2, 0, 100);
+        EnsureMentorshipBooks(teacher, student, year);
+    }
+
+    internal static void ProcessAnnual(Actor actor, int year)
+    {
+        if (!IsAncientCultivator(actor)) return;
+        if (TryGetTeacher(actor, out Actor teacher))
+        {
+            EnsureMentorshipBooks(teacher, actor, year);
+            UpdateBookProgress(actor, year);
+        }
+
+        List<Actor> students = GetLiveStudents(actor);
+        if (students.Count == 0) return;
+        int last = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientMentorLastTransmissionYear, 0);
+        int recruited = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientMentorLastRecruitYear, 0);
+        if (year - Math.Max(last, recruited) < RecruitIntervalYears) return;
+        foreach (Actor student in students)
+        {
+            EnsureMentorshipBooks(actor, student, year);
+            UpdateBookProgress(student, year);
+            TransmitProfessionGift(actor, student, year);
+        }
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientMentorLastTransmissionYear, year);
+    }
+
+    private static void EnsureMentorshipBooks(Actor teacher, Actor student, int year)
+    {
+        if (teacher?.data == null || student?.data == null) return;
+        long teacherId = MclslActorAccessor.Id(teacher);
+        long studentId = MclslActorAccessor.Id(student);
+        MclslBagState bag = MclslBagSystem.Read(student);
+        bag.Books ??= new List<MclslMentorshipBook>();
+        string techniqueId = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueId, string.Empty);
+        string techniqueName = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueName, "师传仙法");
+        int recruitYear = MclslActorAccessor.GetInt(teacher, MclslActorDataKeys.AncientMentorLastRecruitYear, year);
+        bool changed = UpsertBook(bag, "formula:" + teacherId + ":" + studentId, teacher, student, techniqueId,
+            "师传法诀·" + techniqueName, recruitYear);
+        changed |= UpsertBook(bag, "insight:" + teacherId + ":" + studentId, teacher, student, techniqueId,
+            "修行心得·" + SafeName(teacher), recruitYear);
+        if (changed) MclslBagSystem.Write(student, bag);
+    }
+
+    private static bool UpsertBook(MclslBagState bag, string id, Actor teacher, Actor student,
+        string techniqueId, string name, int year)
+    {
+        MclslMentorshipBook book = bag.Books.FirstOrDefault(x => x.BookId == id);
+        bool changed = false;
+        if (book == null)
+        {
+            book = new MclslMentorshipBook { BookId = id, StartYear = Math.Max(0, year), Progress = 0 };
+            bag.Books.Add(book);
+            changed = true;
+        }
+        string teacherName = SafeName(teacher);
+        if (book.TeacherId != MclslActorAccessor.Id(teacher)) { book.TeacherId = MclslActorAccessor.Id(teacher); changed = true; }
+        if (book.TeacherName != teacherName) { book.TeacherName = teacherName; changed = true; }
+        if (book.TargetId != MclslActorAccessor.Id(student)) { book.TargetId = MclslActorAccessor.Id(student); changed = true; }
+        if (book.TechniqueId != techniqueId) { book.TechniqueId = techniqueId; changed = true; }
+        if (book.TechniqueName != name) { book.TechniqueName = name; changed = true; }
+        return changed;
+    }
+
+    private static void UpdateBookProgress(Actor student, int year)
+    {
+        MclslBagState bag = MclslBagSystem.Read(student);
+        if (bag?.Books == null) return;
+        bool changed = false;
+        foreach (MclslMentorshipBook book in bag.Books)
+        {
+            if (book == null || book.TargetId != MclslActorAccessor.Id(student)) continue;
+            int progress = Math.Clamp((year - book.StartYear) * 2, 0, 100);
+            if (progress <= book.Progress) continue;
+            book.Progress = progress;
+            changed = true;
+        }
+        if (changed) MclslBagSystem.Write(student, bag);
+        if (changed) MclslTechniqueStageSystem.AddProgress(student, 1);
+    }
+
+    private static void TransmitProfessionGift(Actor teacher, Actor student, int year)
+    {
+        string profession = MclslProfessionSystem.FromTrait(teacher);
+        if (string.IsNullOrWhiteSpace(profession))
+            profession = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.Profession, string.Empty);
+        int grade = Math.Clamp(MclslProfessionSystem.GetGrade(teacher), 1, 4);
+        string itemId;
+        if (profession == MclslProfessionSystem.Alchemist)
+            itemId = grade switch { 1 => "D006", 2 => "D010", 3 => "D007", _ => "D011" };
+        else if (profession == MclslProfessionSystem.TalismanMaker)
+            itemId = grade switch { 1 => "F002", 2 => "F001", 3 => "F005", _ => "F007" };
+        else if (profession == MclslProfessionSystem.Refiner)
+        {
+            string preferred = grade switch { 1 => "B010", 2 => "B002", 3 => "B003", _ => "B008" };
+            itemId = MclslBagSystem.Count(student, preferred) == 0 ? preferred : "R0" + Math.Min(6, grade + 2);
+        }
+        else itemId = grade >= 3 ? "A04" : "A07";
+
+        if (itemId.StartsWith("R", StringComparison.Ordinal))
+        {
+            // R-tier craft resources are translated into the matching stored material.
+            itemId = grade switch { 1 => "A07", 2 => "A08", 3 => "A09", _ => "A05" };
+        }
+        MclslBagSystem.Add(student, itemId, acquiredYear: year);
+        MclslWorldRunRepository.AddItemAcquisitionEvent(year, student, itemId, 1, "师徒赠予");
     }
 
     private static bool TryRecruitUninitiatedStudent(Actor teacher, int year, out Actor student)
     {
         student = null;
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
-        Actor best = null;
-        int bestScore = int.MinValue;
-        if (actors.Count == 0) return false;
-        long seed = unchecked(MclslActorAccessor.Id(teacher) * 397L + year * 31L);
-        int start = (int)((seed & long.MaxValue) % actors.Count);
-        int scanBudget = Math.Min(256, actors.Count);
-        for (int i = 0; i < scanBudget; i++)
-        {
-            Actor candidate = actors[(start + i) % actors.Count];
-            if (!IsValidUninitiatedStudent(teacher, candidate)) continue;
-            int score = ScoreUninitiatedStudent(candidate);
-            if (score <= bestScore) continue;
-            best = candidate;
-            bestScore = score;
-        }
+        Actor best = MclslActorProjectionIndex.PickUninitiatedStudent(teacher);
         if (best == null) return false;
 
         BeginStudentCultivationFromTeacher(teacher, best, year);
@@ -190,7 +270,21 @@ internal static class MclslAncientMentorshipSystem
         return true;
     }
 
-    private static bool IsValidUninitiatedStudent(Actor teacher, Actor candidate)
+    internal static bool IsAvailableUninitiatedStudent(Actor actor)
+    {
+        return MclslActorAccessor.Alive(actor) && MclslEligibility.CanCultivate(actor)
+            && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))
+            && string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem))
+            && SafeAge(actor) >= 12f
+            && (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude) > 0
+                || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ImmortalFate) > 0);
+    }
+    internal static void OnCultivationChanged(Actor actor)
+    {
+        if (!IsAncientCultivator(actor)) OnActorRemoved(actor);
+    }
+
+    internal static bool IsValidUninitiatedStudent(Actor teacher, Actor candidate)
     {
         if (!IsAncientCultivator(teacher) || candidate == null || candidate == teacher) return false;
         if (!MclslActorAccessor.Alive(candidate) || !MclslEligibility.CanCultivate(candidate)) return false;
@@ -289,7 +383,7 @@ internal static class MclslAncientMentorshipSystem
             && !string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor));
     }
 
-    private static int ScoreStudent(Actor actor)
+    internal static int ScoreStudent(Actor actor)
     {
         return MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50) * 100
             + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 50) * 4
@@ -297,7 +391,7 @@ internal static class MclslAncientMentorshipSystem
             + Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 10;
     }
 
-    private static int ScoreUninitiatedStudent(Actor actor)
+    internal static int ScoreUninitiatedStudent(Actor actor)
     {
         return MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0) * 100
             + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ImmortalFate, 0) * 20

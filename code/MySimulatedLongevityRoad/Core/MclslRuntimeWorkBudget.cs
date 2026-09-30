@@ -23,7 +23,6 @@ internal static class MclslRuntimeWorkBudget
     private static int _lastSampledUnityFrame = -1;
     private static int _lastFastSchedulerUnityFrame = -1;
     private static int _backgroundStrideCounter;
-    private static int _annualPriorityStrideCounter;
     private static MclslRuntimeStressTier _stressTier;
 
     internal static MclslRuntimeStressTier StressTier => _stressTier;
@@ -100,21 +99,6 @@ internal static class MclslRuntimeWorkBudget
         return true;
     }
 
-    internal static bool ShouldRunAnnualActorPriorityPass()
-    {
-        int stride = _stressTier switch
-        {
-            MclslRuntimeStressTier.Mild => 2,
-            MclslRuntimeStressTier.Severe => 3,
-            MclslRuntimeStressTier.Critical => 4,
-            _ => 1
-        };
-        _annualPriorityStrideCounter++;
-        if (_annualPriorityStrideCounter < stride) return false;
-        _annualPriorityStrideCounter = 0;
-        return true;
-    }
-
     internal static void Clear()
     {
         _smoothedDelta = 1f / 30f;
@@ -122,7 +106,6 @@ internal static class MclslRuntimeWorkBudget
         _lastSampledUnityFrame = -1;
         _lastFastSchedulerUnityFrame = -1;
         _backgroundStrideCounter = 0;
-        _annualPriorityStrideCounter = 0;
         _stressTier = MclslRuntimeStressTier.Normal;
     }
 }

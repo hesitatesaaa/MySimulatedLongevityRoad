@@ -19,14 +19,7 @@ internal static class MclslMaobaoSystem
     internal static List<MclslMaobaoCandidate> BuildCandidates()
     {
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        List<Actor> leaders = new(MaxCandidates);
-        IReadOnlyList<Actor> indexed = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        for (int i = 0; i < indexed.Count; i++)
-        {
-            Actor actor = indexed[i];
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            InsertLeader(leaders, actor);
-        }
+        IReadOnlyList<Actor> leaders = MclslActorProjectionIndex.MaobaoCandidates(MaxCandidates);
 
         List<MclslMaobaoCandidate> result = new(leaders.Count);
         for (int i = 0; i < leaders.Count; i++)
@@ -89,21 +82,6 @@ internal static class MclslMaobaoSystem
         return MclslMaobaoArchiveManager.IsActorSavedById(actorId);
     }
 
-    private static void InsertLeader(List<Actor> leaders, Actor actor)
-    {
-        long score = Score(actor);
-        int position = leaders.Count;
-        for (int i = 0; i < leaders.Count; i++)
-        {
-            if (score <= Score(leaders[i])) continue;
-            position = i;
-            break;
-        }
-        if (position >= MaxCandidates && leaders.Count >= MaxCandidates) return;
-        leaders.Insert(position, actor);
-        if (leaders.Count > MaxCandidates) leaders.RemoveAt(leaders.Count - 1);
-    }
-
     private static MclslMaobaoCandidate BuildCandidate(Actor actor)
     {
         if (!MclslActorAccessor.Alive(actor)) return null;
@@ -123,33 +101,7 @@ internal static class MclslMaobaoSystem
         };
     }
 
-    private static long Score(Actor actor)
-    {
-        int realm = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
-        int essence = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0));
-        return realm * 10000000L + essence;
-    }
 
-    private static void UpdateRecord(MclslMaobaoRecord record, Actor actor, bool countObservation)
-    {
-        MclslActorCultivationView view = MclslActorCultivationQuery.Build(actor);
-        int year = MclslRuntime.CurrentYear();
-        record.ActorName = view.Name;
-        record.RealmId = view.RealmId;
-        record.RealmName = view.RealmName;
-        record.CultivationSystemName = view.CultivationSystemName;
-        record.TechniqueName = view.TechniqueName;
-        record.FactionName = view.FactionAffiliation;
-        record.LastObservedYear = year;
-        record.MapX = actor.data.x;
-        record.MapY = actor.data.y;
-        record.Alive = true;
-        if (countObservation && record.FirstRecordedYear != year) record.ObservationCount++;
-        record.Inscription = "猫宝照影：" + record.ActorName + "以" + Blank(record.RealmName, "凡俗")
-            + "之身，于" + year + "年映入时序。";
-    }
-
-    private static string Blank(string value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
 }
 
 internal sealed class MclslMaobaoCandidate

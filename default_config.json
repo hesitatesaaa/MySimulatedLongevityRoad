@@ -1,11 +1,38 @@
 {
   "ConfigItems": [
     {
+      "Id": "MCLSL_config_annual_backpressure",
+      "Name": "年度积压自动限速",
+      "Description": "默认开启。年度结算积压时临时降低时间推进速度，追上后自动恢复玩家所选倍速。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AnnualBackpressureCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_aggressive_performance",
+      "Name": "启用极限帧率模式",
+      "Description": "默认开启。帧率压力升高时降低远景光环和地图纯动画的更新频率，不降低模拟精度。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableAggressivePerformanceCallBack"
+    },
+    {
+      "Id": "MCLSL_config_annual_actor_budget",
+      "Name": "年度角色步骤单帧上限",
+      "Description": "默认80，范围20—400；控制年度角色每帧最多处理的步骤数，同时受年度模拟时间预算限制。",
+      "Type": "INT_SLIDER",
+      "IntVal": 80,
+      "MinIntVal": 20,
+      "MaxIntVal": 400,
+      "StepIntVal": 1,
+      "Callback": "MclslConfig:AnnualActorBudgetCallBack"
+    },
+    {
       "Id": "MCLSL_config_childhood_root_chance",
       "Name": "幼年灵根显现概率（%）",
-      "Description": "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。",
+      "Description": "0—100%，默认10%；只影响尚未完成五岁或六岁补判的小人。",
       "Type": "INT_SLIDER",
-      "IntVal": 50,
+      "IntVal": 10,
       "MinIntVal": 0,
       "MaxIntVal": 100,
       "StepIntVal": 1,
@@ -14,9 +41,9 @@
     {
       "Id": "MCLSL_config_alchemist_chance",
       "Name": "炼丹师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；10代表1.0%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 10,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -25,9 +52,9 @@
     {
       "Id": "MCLSL_config_refiner_chance",
       "Name": "炼器师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；15代表1.5%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 15,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -36,9 +63,9 @@
     {
       "Id": "MCLSL_config_talisman_chance",
       "Name": "制符师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；20代表2.0%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 20,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -289,12 +316,36 @@
       "Callback": "MclslConfig:AutoCollectHeavenRootCallBack"
     },
     {
+      "Id": "MCLSL_config_performance_monitor",
+      "Name": "性能监控",
+      "Description": "记录各系统耗时、GC 分配和积压情况；开启后可在左上角查看与导出报告。默认关闭，报告最多保留12份。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:PerformanceMonitorCallBack"
+    },
+    {
       "Id": "MCLSL_config_show_fps",
       "Name": "显示帧率",
       "Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
       "Type": "SWITCH",
       "BoolVal": false,
       "Callback": "MclslConfig:ShowFpsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_item_acquisition_history_enabled",
+      "Name": "显示物品获取记事",
+      "Description": "总开关。开启后，地阶、天阶材料与成品会记入仙缘宝录；凡阶、黄阶、玄阶还须同时开启低阶记录。关闭只停止新增记事，不影响物品获取与天阶材料世界公告。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:ItemAcquisitionHistoryCallBack"
+    },
+    {
+      "Id": "MCLSL_config_record_low_material_history",
+      "Name": "记录低阶材料与物品获取",
+      "Description": "总开关开启时，本项控制凡阶、黄阶、玄阶材料与丹药、符箓、法宝的获取历史；关闭不影响实际获取、入袋、交易及地阶、天阶历史和公告。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:RecordLowMaterialAcquisitionHistoryCallBack"
     }
   ]
 }

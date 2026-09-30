@@ -111,7 +111,7 @@ internal static class MclslActorInfoFormatter
         };
         if (string.IsNullOrEmpty(name)) return;
 
-        int grade = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0);
+        int grade = MclslProfessionSystem.GetGrade(actor);
         string gradeName = grade switch
         {
             0 => "学徒",
@@ -122,19 +122,6 @@ internal static class MclslActorInfoFormatter
             _ => "未定品阶"
         };
         b.Append(Line("职业", Highlight(name, "#D8C778") + " <color=#9CD7FF>" + gradeName + "</color>"));
-    }
-
-    private static string MclslTechniqueLineageName(string lineageId)
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.TechniqueLineages == null || string.IsNullOrWhiteSpace(lineageId)) return "未定";
-        for (int i = 0; i < run.TechniqueLineages.Count; i++)
-        {
-            MclslTechniqueLineageRecord lineage = run.TechniqueLineages[i];
-            if (lineage != null && string.Equals(lineage.Id, lineageId, StringComparison.Ordinal))
-                return string.IsNullOrWhiteSpace(lineage.Name) ? lineageId : lineage.Name;
-        }
-        return lineageId;
     }
 
     private static void AppendCurrentStage(StringBuilder b, MclslActorCultivationView cultivation)
@@ -239,22 +226,6 @@ internal static class MclslActorInfoFormatter
     };
 
     private static string AncientQuality(int quality) => quality switch { >= 4 => "上乘", 3 => "精纯", 2 => "稳固", 1 => "初成", _ => string.Empty };
-    private static string PercentText(string label, int value) => value <= 0 ? string.Empty : label + value + "%";
-
-    private static void AppendAncientBlock(StringBuilder b, string label, string name, params (string Label, string Value)[] fields)
-    {
-        if (string.IsNullOrWhiteSpace(name)) return;
-        b.Append(Line(label, Highlight(ReplaceTags(name), "#F1D17A")));
-        if (fields == null) return;
-        for (int i = 0; i < fields.Length; i++)
-        {
-            string fieldLabel = fields[i].Label;
-            string fieldValue = fields[i].Value;
-            if (string.IsNullOrWhiteSpace(fieldLabel) || string.IsNullOrWhiteSpace(fieldValue)) continue;
-            b.Append(Line("  " + fieldLabel, ReplaceTags(fieldValue)));
-        }
-    }
-
     private static void AppendAncientSummaryBlock(StringBuilder b, string label, string name, params (string Label, string Value)[] fields)
     {
         if (string.IsNullOrWhiteSpace(name)) return;
@@ -364,12 +335,6 @@ internal static class MclslActorInfoFormatter
 
     private static string ReplaceTags(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
     private static string RootCountText(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value == "单灵根" ? "单灵根" : value + "（多灵根）";
-    private static string ShortText(string value, int max)
-    {
-        string text = ReplaceTags(value).Replace("\n", " ").Trim();
-        if (text.Length <= max) return text;
-        return text.Substring(0, Math.Max(1, max - 1)) + "…";
-    }
     private static string FoundationWonderRank(MclslActorCultivationView cultivation) =>
         MclslGeneratedObjectFactory.FoundationRankText(cultivation.FoundationWonderCategory, cultivation.FoundationWonderGrade, cultivation.FoundationWonderCompleteness, cultivation.FoundationWonderRuleStrength, cultivation.FoundationWonderQuality);
     private static string Title(string title) => "<color=#A6D8D1><b>◇ " + title + "</b></color>\n";

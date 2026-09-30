@@ -29,69 +29,100 @@ internal static class MclslScheduler
         internal int LatestRequestedYear;
         internal int LastCompletedYear;
         internal MclslAnnualPipelineStage Stage;
+        internal int Step;
         internal bool Queued;
+        internal double FirstEssenceQueuedAt = UnityEngine.Time.unscaledTime;
     }
 
     private const int CleanupIntervalTicks = 128;
     private const int CleanupRemoveBudget = 64;
-    private const int AnnualActorStageBudget = 96;
-    private const double AnnualActorTimeBudgetMs = 0.65d;
-    private const int AnnualCandidateRefreshBudget = 256;
-    private const int AnnualCandidateEnqueueBudget = 192;
-    private const double AnnualCandidateTimeBudgetMs = 0.35d;
+    private const int AnnualCandidateEnqueueBudget = 64;
 
-    private static readonly Queue<long> AnnualActorQueue = new();
+    private static readonly MclslAnnualReadyQueue AnnualActorQueue = new();
     private static readonly Dictionary<long, AnnualActorState> AnnualActorStates = new();
-    private static readonly Dictionary<long, int> DeferredAnnualCompletions = new();
-    private static readonly List<Actor> LineageActors = new();
+    private static readonly List<long> LineageActorSlots = new();
+    private static readonly IReadOnlyList<Actor> LineageActors = MclslActorRegistry.CreateView(LineageActorSlots);
     private static readonly HashSet<long> LineageActorIds = new();
+    private static readonly HashSet<long> PersistedLineageIds = new();
     private static int _tickCounter;
     private static int _activeAnnualYear = -1;
     private static bool _newLawActive;
-    private static bool _annualCandidateRefreshPending;
+    private static int _worldLaneScheduleFailures;
+    private static int _worldLaneRetryAfterFrame;
+    private static bool _annualStartPending;
+    private static int _startLineageCursor;
+    private static int _restoreLineageCursor;
+    private static int _startRuntimeCursor;
     private static bool _annualCandidateScanPending;
     private static IReadOnlyList<long> _annualCandidateScanIds = Array.Empty<long>();
     private static int _annualCandidateScanCursor;
     private static long _annualCycleStarted;
 
-    internal static bool HasFastWork => MclslWorldBootstrapLane.HasPending
+    internal static bool HasFastWork => _activeAnnualYear > 0
+        || MclslWorldBootstrapLane.HasPending
         || AnnualActorQueue.Count > 0
-        || _annualCandidateRefreshPending
+        || _annualStartPending
         || _annualCandidateScanPending
         || MclslAnnualWorldRuntimeLane.HasPending
         || MclslWorldEpochSystem.HasPendingTransitionWork;
     internal static bool HasAnnualActorBacklog => AnnualActorQueue.Count > 0;
-    internal static bool HasAnnualCandidateBacklog => _annualCandidateRefreshPending || _annualCandidateScanPending;
-    internal static bool HasUrgentSimulationBacklog => AnnualActorQueue.Count > 2048;
+    internal static bool HasAnnualCandidateBacklog => _annualStartPending || _annualCandidateScanPending;
+    private static int AnnualUrgentBacklogThreshold => Math.Min(2048,
+        Math.Max(256, MclslCultivatorCandidateIndex.CultivatorCount / 2));
+    internal static bool HasUrgentSimulationBacklog => AnnualActorQueue.Count > AnnualUrgentBacklogThreshold;
     internal static int AnnualActorBacklogCount => AnnualActorQueue.Count;
     internal static int AnnualActorStateCount => AnnualActorStates.Count;
+    internal static int AnnualReadyCount => AnnualActorQueue.ReadyCount;
+    internal static int AnnualWaitingCount => AnnualActorQueue.WaitingCount;
+    internal static int OldestWaitingYear => AnnualActorQueue.OldestWaitingYear;
+    internal static int NewestWaitingYear => AnnualActorQueue.NewestWaitingYear;
     internal static bool AnnualWorldWorkPending => MclslAnnualWorldRuntimeLane.HasPending;
+    internal static int AnnualCandidateScanRemaining => _annualStartPending
+        ? -1
+        : _annualCandidateScanPending
+            ? Math.Max(0, _annualCandidateScanIds.Count - _annualCandidateScanCursor)
+            : 0;
+
+    internal static void GetAnnualYearSpan(out int latestRequestedYear, out int oldestPendingYear)
+    {
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        latestRequestedYear = batch.LatestRequestedYear;
+        oldestPendingYear = AnnualActorQueue.OldestWaitingYear;
+        if (batch.ActiveYear > 0 && (oldestPendingYear == 0 || batch.ActiveYear < oldestPendingYear))
+            oldestPendingYear = batch.ActiveYear;
+    }
 
     internal static void InitializeAfterLoad(int currentYear)
     {
         AnnualActorQueue.Clear();
         AnnualActorStates.Clear();
-        DeferredAnnualCompletions.Clear();
-        LineageActors.Clear();
+        LineageActorSlots.Clear();
         LineageActorIds.Clear();
+        PersistedLineageIds.Clear();
         MclslDetectionGate.ClearRuntimeState();
-        MclslHotPathPolicy.Clear();
         MclslLongevityRules.ClearRuntimeCache();
         MclslAnnualExecutionContext.Clear();
         MclslCultivatorCandidateIndex.Clear();
         MclslWorldActorQuery.ClearCache();
         _activeAnnualYear = -1;
-        _annualCandidateRefreshPending = false;
+        _annualStartPending = false;
+        _startLineageCursor = 0;
+        _restoreLineageCursor = 0;
+        _startRuntimeCursor = 0;
         _annualCandidateScanPending = false;
         _annualCandidateScanIds = Array.Empty<long>();
         _annualCandidateScanCursor = 0;
         _annualCycleStarted = 0L;
         _newLawActive = MclslWorldEpochSystem.IsNewLawActive(Math.Max(0, currentYear));
         _tickCounter = 0;
+        MclslAnnualWorldRuntimeLane.Clear();
+        MclslWorldCaveSystem.Clear();
+        MclslWorldChangeSystem.Clear();
+        MclslAdventureSystem.Clear();
         MclslNewLawPioneerSystem.Clear();
         MclslWorldEpochSystem.ClearDeferredTransitionWork();
         MclslWorldEpochSystem.ResumeDeferredTransitionWork(currentYear);
-        MclslTechniqueOccupationSystem.Rebuild();
+        MclslTechniqueOccupationSystem.Clear();
         MclslWorldBootstrapLane.ScheduleAfterLoad();
     }
 
@@ -176,80 +207,219 @@ internal static class MclslScheduler
 
     internal static void ScheduleAnnualWorld(int year)
     {
-        if (year <= 0 || _activeAnnualYear == year || !MclslDetectionGate.TryBeginAnnualJob(MclslDetectionGate.AnnualWorldPreparation, year))
+        if (year <= 0) return;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (year > batch.LatestRequestedYear)
         {
+            batch.LatestRequestedYear = year;
+
+        }
+        if (_activeAnnualYear > 0)
+        {
+            EnsureWorldLaneScheduled();
             return;
         }
+        int startYear = batch.ActiveYear > 0 ? batch.ActiveYear
+            : batch.LastCompletedYear > 0 ? batch.LastCompletedYear + 1 : year;
+        if (startYear > batch.LatestRequestedYear) return;
+        StartAnnualWorld(startYear);
+    }
 
+    private static void StartAnnualWorld(int year)
+    {
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
         _activeAnnualYear = year;
+        batch.ActiveYear = year;
         _annualCycleStarted = MclslPerformanceProbe.Begin();
-        MclslTianxuanMarket.PruneDeadSellers();
-        _newLawActive = MclslWorldEpochSystem.IsNewLawActive(year);
-        bool newLawCultivationAvailable = MclslNewLawPioneerSystem.CanPracticeNewLaw(year);
-        MclslNewLawPioneerSystem.ProcessAnnual(year);
-        LineageActors.Clear();
+        _annualStartPending = true;
+        _startLineageCursor = 0;
+        LineageActorSlots.Clear();
         LineageActorIds.Clear();
-        MclslWorldActorQuery.BeginAnnualDetection(year);
-        TickBootstrapLane();
-        // Adventure candidates register during the actor annual pipeline, so the
-        // adventure year must be initialized before actors are enqueued.
-        MclslAdventureSystem.BeginAnnual(year);
+        PersistedLineageIds.Clear();
+
+    }
+
+    private static void ContinueAnnualStart()
+    {
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        while (_startLineageCursor < batch.LineageActorIds.Count && !AnnualBudgetExpired())
+            PersistedLineageIds.Add(batch.LineageActorIds[_startLineageCursor++]);
+        if (AnnualBudgetExpired()) return;
+        int year = _activeAnnualYear;
+        while (batch.StartCursor < 6 && !AnnualBudgetExpired())
+        {
+            switch (batch.StartCursor)
+            {
+                case 0: RunAnnualStartStep(year, "MarketPruneBegin", () => MclslTianxuanMarket.BeginAnnualPrune(year)); break;
+                case 1:
+                    if (!batch.EraSnapshotRecorded)
+                        batch.NewLawEraActive = RunAnnualStartQuery(year, "NewLawEra", () => MclslWorldEpochSystem.IsNewLawActive(year));
+                    break;
+                case 2:
+                    if (!batch.EraSnapshotRecorded)
+                        batch.NewLawCultivationAvailable = RunAnnualStartQuery(year, "NewLawCultivation", () => MclslNewLawPioneerSystem.CanPracticeNewLaw(year));
+                    break;
+                case 3: batch.EraSnapshotRecorded = true; break;
+                case 4:
+                    // Keep the persisted startup cursor here until the read-only
+                    // candidate query finishes; no population-wide work in one frame.
+                    if (!MclslNewLawPioneerSystem.ProcessAnnual(year)) return;
+                    break;
+                case 5: RunAnnualStartStep(year, "AdventureBegin", () => MclslAdventureSystem.BeginAnnual(year)); break;
+            }
+            batch.StartCursor++;
+
+        }
+        if (batch.StartCursor < 6) return;
+        // Saved startup cursors describe persistent effects. Runtime registries
+        // must be restored independently after a load; both begin methods are idempotent.
+        while (_startRuntimeCursor < 1 && !AnnualBudgetExpired())
+        {
+            RunAnnualStartStep(year, "AdventureRestore", () => MclslAdventureSystem.BeginAnnual(year));
+            _startRuntimeCursor++;
+        }
+        if (_startRuntimeCursor < 1) return;
+        _newLawActive = batch.NewLawEraActive;
+        // Runtime candidate membership is rebuilt even when a persisted startup is complete.
         BeginAnnualCandidateScan();
-        MclslAnnualWorldRuntimeLane.Schedule(year, _newLawActive, newLawCultivationAvailable);
+        _annualStartPending = false;
+    }
+
+    private static void EnsureWorldLaneScheduled()
+    {
+        if (_annualStartPending || _activeAnnualYear <= 0 || MclslAnnualWorldRuntimeLane.HasPending
+            || UnityEngine.Time.frameCount < _worldLaneRetryAfterFrame) return;
+        int year = _activeAnnualYear;
+        try
+        {
+            MclslAnnualWorldRuntimeLane.Schedule(year, _newLawActive,
+                MclslWorldRunRepository.Current.AnnualBatch.NewLawCultivationAvailable);
+            _worldLaneScheduleFailures = 0;
+            _worldLaneRetryAfterFrame = 0;
+        }
+        catch (Exception ex)
+        {
+            _worldLaneScheduleFailures++;
+            bool retry = MclslAnnualResiliencePolicy.ShouldRetry(_worldLaneScheduleFailures, false);
+            MclslWorldRunRepository.RecordAnnualFailure(year, "年度启动", string.Empty,
+                "WorldLaneSchedule", _worldLaneScheduleFailures, retry ? "待重试" : "未结算", ex.Message);
+            if (retry)
+            {
+                _worldLaneRetryAfterFrame = MclslAnnualResiliencePolicy.RetryAtFrame(UnityEngine.Time.frameCount);
+                return;
+            }
+            MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+            batch.LastCompletedYear = Math.Max(batch.LastCompletedYear, year);
+            batch.ActiveYear = 0;
+            batch.WorldStage = 0;
+            batch.EraSnapshotRecorded = false;
+            batch.StartCursor = 0;
+            batch.LineageActorIds.Clear();
+            batch.InverseWork = null;
+            _activeAnnualYear = -1;
+            _worldLaneScheduleFailures = 0;
+            _worldLaneRetryAfterFrame = 0;
+            MclslAnnualWorldRuntimeLane.Clear();
+
+            if (batch.LatestRequestedYear > year) StartAnnualWorld(year + 1);
+        }
+    }
+
+    private static void RunAnnualStartStep(int year, string step, Action action)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try { action(); }
+        catch (Exception ex)
+        {
+            MclslWorldRunRepository.RecordAnnualFailure(year, "年度启动", string.Empty,
+                step, 1, "部分失败", ex.Message);
+        }
+        finally { if (sample != 0L) MclslPerformanceProbe.End("年度启动." + step, sample); }
+    }
+
+    private static bool RunAnnualStartQuery(int year, string step, Func<bool> query)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try { return query(); }
+        catch (Exception ex)
+        {
+            MclslWorldRunRepository.RecordAnnualFailure(year, "年度启动", string.Empty,
+                step, 1, "跳过", ex.Message);
+            return false;
+        }
+        finally { if (sample != 0L) MclslPerformanceProbe.End("年度启动." + step, sample); }
     }
 
     internal static void ProcessAll(in MclslSchedulerContext context)
     {
         if (!MclslRuntimeSettings.CoreEnabled) return;
-        if (MclslWorldBootstrapLane.HasPending && (context.ProcessFast || context.IsYearChange))
+        MclslAnnualFrameBudget.Begin(MclslAnnualFrameBudget.ForPressure((int)MclslRuntimeWorkBudget.StressTier));
+        try
         {
-            TickBootstrapLane();
+            if (_activeAnnualYear > 0 || HasAnnualActorBacklog || HasAnnualCandidateBacklog)
+            if (MclslWorldBootstrapLane.HasPending) TickBootstrapLane();
+            if (AnnualBudgetExpired()) return;
+            if (_annualStartPending) ContinueAnnualStart();
+            if (_annualStartPending || AnnualBudgetExpired()) return;
+            if (_activeAnnualYear > 0)
+            {
+                EnsureWorldLaneScheduled();
+                if (AnnualBudgetExpired()) return;
+                long sample = MclslPerformanceProbe.Begin();
+                bool pruned;
+                try { pruned = MclslTianxuanMarket.TickAnnualPrune(); }
+                finally { MclslPerformanceProbe.End("年度启动.MarketPrune", sample); }
+                if (!pruned || AnnualBudgetExpired()) return;
+            }
+            if (_annualCandidateScanPending)
+            {
+                long sample = MclslPerformanceProbe.Begin();
+                try { TickAnnualCandidateScan(); }
+                finally { MclslPerformanceProbe.End("年度候选扫描", sample); }
+            }
+            AnnualActorQueue.Release(_activeAnnualYear, AnnualCandidateEnqueueBudget, AnnualBudgetExpired);
+            if (!AnnualBudgetExpired() && MclslWorldEpochSystem.HasPendingTransitionWork)
+            {
+                long sample = MclslPerformanceProbe.Begin();
+                try { MclslWorldEpochSystem.TickDeferredTransitionWork(); }
+                finally { MclslPerformanceProbe.End("新法转化", sample); }
+            }
+            if (!AnnualBudgetExpired() && AnnualActorQueue.ReadyCount > 0)
+            {
+                long sample = MclslPerformanceProbe.Begin();
+                try { TickAnnualActors(context); }
+                finally { MclslPerformanceProbe.End("年度角色", sample); }
+            }
+            if (!AnnualBudgetExpired() && MclslAnnualWorldRuntimeLane.HasPending)
+                TryResolveAnnualWorld();
+            if (!AnnualBudgetExpired()) TickCleanup();
         }
+        finally { MclslAnnualFrameBudget.End(); }
+    }
 
-        if (_annualCandidateRefreshPending || _annualCandidateScanPending)
-        {
-            using (MclslUnityProfiler.Sample("MCLS/Annual/CandidateScan"))
-                TickAnnualCandidateScan();
-        }
+    private static bool AnnualBudgetExpired() => MclslAnnualFrameBudget.Expired;
 
-        // 传法变世的旧法修士转化是昂贵工作，必须独立于年度回调分帧消化。
-        // 即使年度角色队列为空，也要保留这条轻量车道，直到持久化队列清空。
-        long transitionSample = MclslPerformanceProbe.Begin();
-        if (MclslWorldEpochSystem.HasPendingTransitionWork)
-        {
-            using (MclslUnityProfiler.Sample("MCLS/NewLaw/DeferredTransition"))
-                MclslWorldEpochSystem.TickDeferredTransitionWork();
-        }
-        MclslPerformanceProbe.End("新法转化", transitionSample);
-
-        // 队列一旦存在就必须被消费；DetectionGate 只负责决定何时创建年度工作，
-        // 不能再作为已创建语义队列的第二道开关。
-        long actorSample = MclslPerformanceProbe.Begin();
-        if (AnnualActorQueue.Count > 0)
-        {
-            TickAnnualActors(context);
-        }
-        MclslPerformanceProbe.End("年度角色", actorSample);
-
-        if (MclslAnnualWorldRuntimeLane.HasPending && MclslHotPathPolicy.ShouldRunBackgroundWorldStep())
-        {
-            TryResolveAnnualWorld();
-        }
-
-        TickCleanup();
+    internal static void ForgetAnnualActor(long actorId)
+    {
+        AnnualActorQueue.Remove(actorId);
+        AnnualActorStates.Remove(actorId);
+        MclslTianxuanMarket.ForgetPurchaseBatch(actorId);
     }
 
     internal static void Clear()
     {
         AnnualActorQueue.Clear();
         AnnualActorStates.Clear();
-        DeferredAnnualCompletions.Clear();
-        LineageActors.Clear();
+        LineageActorSlots.Clear();
         LineageActorIds.Clear();
+        PersistedLineageIds.Clear();
         _tickCounter = 0;
         _activeAnnualYear = -1;
         _newLawActive = false;
-        _annualCandidateRefreshPending = false;
+        _worldLaneScheduleFailures = 0;
+        _worldLaneRetryAfterFrame = 0;
+        _annualStartPending = false;
+        _startLineageCursor = 0;
         _annualCandidateScanPending = false;
         _annualCandidateScanIds = Array.Empty<long>();
         _annualCandidateScanCursor = 0;
@@ -267,7 +437,6 @@ internal static class MclslScheduler
         MclslTechniqueOccupationSystem.Clear();
         MclslMortalFateEventSystem.Clear();
         MclslNewLawPioneerSystem.Clear();
-        MclslHotPathPolicy.Clear();
         MclslLongevityRules.ClearRuntimeCache();
         MclslAnnualExecutionContext.Clear();
         MclslWorldActorQuery.ClearCache();
@@ -310,7 +479,6 @@ internal static class MclslScheduler
             return;
         }
 
-        RepairImpossibleZeroProgressCursor(actor, requestedYear);
         if (!AnnualActorStates.TryGetValue(actorId, out AnnualActorState state))
         {
             if (!TryReadPersistedPendingAnnualState(actor, out state))
@@ -385,6 +553,7 @@ internal static class MclslScheduler
         {
             state.ActiveYear = ResolveNextAnnualActiveYear(state.LastCompletedYear, state.LatestRequestedYear);
             state.Stage = MclslAnnualPipelineStage.Prepare;
+            state.Step = 0;
         }
         if (state.ActiveYear <= 0)
         {
@@ -404,87 +573,48 @@ internal static class MclslScheduler
 
     private static void BeginAnnualCandidateScan()
     {
-        _annualCandidateRefreshPending = true;
-        _annualCandidateScanPending = false;
-        _annualCandidateScanIds = Array.Empty<long>();
+        _annualCandidateScanIds = MclslCultivatorCandidateIndex.GetAnnualCandidateIds();
         _annualCandidateScanCursor = 0;
-        MclslCultivatorCandidateIndex.BeginAnnualCandidateRefresh();
+        _annualCandidateScanPending = _annualCandidateScanIds.Count > 0;
     }
 
     private static void TickAnnualCandidateScan()
     {
-        long started = Stopwatch.GetTimestamp();
-        double timeBudgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(AnnualCandidateTimeBudgetMs, 0.10d);
-        if (_annualCandidateRefreshPending)
-        {
-            bool complete;
-            using (MclslUnityProfiler.Sample("MCLS/Annual/CandidateIndexRefresh"))
-            {
-                complete = MclslCultivatorCandidateIndex.RefreshAnnualCandidatesFromKnownActors(
-                    MclslRuntimeWorkBudget.ScaleCount(AnnualCandidateRefreshBudget, 16));
-            }
-            if (!complete)
-            {
-                MclslPerformanceProbe.End("年度候选.索引刷新", started);
-                return;
-            }
-
-            _annualCandidateRefreshPending = false;
-            _annualCandidateScanIds = MclslCultivatorCandidateIndex.GetAnnualCandidateIds();
-            _annualCandidateScanCursor = 0;
-            _annualCandidateScanPending = _annualCandidateScanIds.Count > 0;
-            if (!_annualCandidateScanPending)
-            {
-                MclslPerformanceProbe.End("年度候选.索引刷新", started);
-                return;
-            }
-        }
-
         int processed = 0;
-        int budget = MclslRuntimeWorkBudget.ScaleCount(AnnualCandidateEnqueueBudget, 16);
-        using (MclslUnityProfiler.Sample("MCLS/Annual/CandidateEnqueue"))
+        while (_annualCandidateScanCursor < _annualCandidateScanIds.Count
+            && processed < AnnualCandidateEnqueueBudget && !AnnualBudgetExpired())
         {
-            while (_annualCandidateScanCursor < _annualCandidateScanIds.Count && processed < budget)
-            {
-                long actorId = _annualCandidateScanIds[_annualCandidateScanCursor++];
-                processed++;
-                if (MclslCultivatorCandidateIndex.Resolve(actorId, out Actor actor)
-                    && ShouldQueueAnnualActor(actor, _activeAnnualYear))
-                {
-                    EnqueueAnnualActorCore(actor, _activeAnnualYear);
-                }
-
-                if ((processed & 15) == 0
-                    && Stopwatch.GetTimestamp() - started > timeBudgetMs * Stopwatch.Frequency / 1000d)
-                    break;
-            }
+            long actorId = _annualCandidateScanIds[_annualCandidateScanCursor++];
+            processed++;
+            if (MclslCultivatorCandidateIndex.Resolve(actorId, out Actor actor)
+                && ShouldQueueAnnualActor(actor, _activeAnnualYear))
+                EnqueueAnnualActorCore(actor, _activeAnnualYear);
         }
-
-        if (_annualCandidateScanCursor >= _annualCandidateScanIds.Count)
-        {
-            _annualCandidateScanPending = false;
-            _annualCandidateScanIds = Array.Empty<long>();
-            _annualCandidateScanCursor = 0;
-        }
-        MclslPerformanceProbe.End("年度候选.入队", started);
+        if (_annualCandidateScanCursor < _annualCandidateScanIds.Count) return;
+        _annualCandidateScanPending = false;
+        _annualCandidateScanIds = Array.Empty<long>();
+        _annualCandidateScanCursor = 0;
     }
 
     private static void TickBootstrapLane()
     {
-        MclslWorldBootstrapLane.Tick(
-            MclslRuntimeWorkBudget.ScaleCount(96, 16),
-            MclslRuntimeWorkBudget.ScaleMilliseconds(0.65d, 0.20d));
+        MclslWorldBootstrapLane.Tick(MclslRuntimeWorkBudget.ScaleCount(96, 16),
+            MclslAnnualFrameBudget.RemainingMs);
     }
 
     private static void TickAnnualActors(in MclslSchedulerContext context)
     {
-        int stageBudget = MclslRuntimeWorkBudget.ScaleCount(Math.Max(12, AnnualActorStageBudget), 8);
-        double timeBudgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(AnnualActorTimeBudgetMs, 0.20d);
+        int stageBudget = MclslRuntimeWorkBudget.ScaleCount(MclslRuntimeSettings.AnnualActorBudget, 8);
+        double timeBudgetMs = MclslAnnualFrameBudget.RemainingMs;
         long started = Stopwatch.GetTimestamp();
         int processed = 0;
-        while (AnnualActorQueue.Count > 0 && processed < stageBudget)
+        int examined = 0;
+        int examineBudget = Math.Max(64, stageBudget * 4);
+        while (AnnualActorQueue.ReadyCount > 0 && processed < stageBudget && examined < examineBudget
+            && !AnnualBudgetExpired())
         {
-            long actorId = AnnualActorQueue.Dequeue();
+            if (!AnnualActorQueue.TryDequeue(out long actorId)) break;
+            examined++;
             if (!AnnualActorStates.TryGetValue(actorId, out AnnualActorState state))
             {
                 MclslDiagnostics.Cultivation("scheduler.tick.missing_state", "actor=" + actorId);
@@ -501,47 +631,55 @@ internal static class MclslScheduler
                 + " stage=" + state.Stage
                 + " queueRemaining=" + AnnualActorQueue.Count);
 
-            if (!MclslActorRegistry.Resolve(actorId, out Actor actor)
-                || actor?.data == null
-                || !MclslActorAccessor.Alive(actor))
             {
-                MclslDiagnostics.Cultivation("scheduler.tick.remove", "actor=" + actorId + " reason=missing-or-dead");
-                AnnualActorStates.Remove(actorId);
-                MclslCultivatorCandidateIndex.Remove(actorId);
-            }
-            else if (!MclslEligibility.CanCultivate(actor)
-                || !MclslCultivationActorMarker.IsAnnualCandidate(actor))
-            {
-                // 存活但已失去修炼资格/修炼标记的角色只退出修炼队列与索引，
-                // 仍保留在完整人口注册表中，避免世界人口和凡人查询被误删。
-                CompletePersistedAnnualState(
-                    actor,
-                    Math.Max(state.LastCompletedYear, state.LatestRequestedYear));
-                MclslDiagnostics.Cultivation("scheduler.tick.retire", "actor=" + actorId + " reason=ineligible-or-no-marker");
-                AnnualActorStates.Remove(actorId);
-                MclslCultivatorCandidateIndex.MarkNonCultivator(actorId);
-            }
-            else
-            {
+                if (!MclslActorRegistry.Resolve(actorId, out Actor actor)
+                    || actor?.data == null
+                    || !MclslActorAccessor.Alive(actor))
+                {
+                    MclslDiagnostics.Cultivation("scheduler.tick.remove", "actor=" + actorId + " reason=missing-or-dead");
+                    AnnualActorStates.Remove(actorId);
+                    MclslTianxuanMarket.ForgetPurchaseBatch(actorId);
+                    MclslCultivatorCandidateIndex.Remove(actorId);
+                    continue;
+                }
+                if (!MclslEligibility.CanCultivate(actor)
+                    || !MclslCultivationActorMarker.IsAnnualCandidate(actor))
+                {
+                    CompletePersistedAnnualState(
+                        actor,
+                        Math.Max(state.LastCompletedYear, state.LatestRequestedYear));
+                    MclslDiagnostics.Cultivation("scheduler.tick.retire", "actor=" + actorId + " reason=ineligible-or-no-marker");
+                    AnnualActorStates.Remove(actorId);
+                    MclslTianxuanMarket.ForgetPurchaseBatch(actorId);
+                    MclslCultivatorCandidateIndex.MarkNonCultivator(actorId);
+                    continue;
+                }
+
                 int activeYear = state.ActiveYear > 0
                     ? state.ActiveYear
                     : ResolveActiveYear(state, context.CurrentYear);
                 state.ActiveYear = activeYear;
 
+                bool awaitingFirstEssence = MclslPerformanceProbe.Enabled
+                    && MclslCultivationGrowthSystem.CurrentTrueEssence(actor) <= 0;
                 bool hasNextStage;
                 MclslAnnualPipelineStage nextStage;
+                int nextStep;
                 long annualStageSample = MclslPerformanceProbe.Begin();
+                long annualStageStarted = Stopwatch.GetTimestamp();
                 try
                 {
                     MclslDiagnostics.Cultivation(
                         "scheduler.tick.stage_start",
                         "actor=" + actorId
                         + " active=" + activeYear
-                        + " stage=" + state.Stage);
+                        + " stage=" + state.Stage
+                        + " lagYears=" + Math.Max(0, context.CurrentYear - activeYear));
                     string profilerStage = state.Stage switch
                     {
                         MclslAnnualPipelineStage.Prepare => "MCLS/Annual/ActorPrepare",
                         MclslAnnualPipelineStage.Progression => "MCLS/Annual/ActorProgression",
+                        MclslAnnualPipelineStage.Market => "MCLS/Annual/ActorMarket",
                         _ => "MCLS/Annual/ActorFinalize"
                     };
                     using (MclslUnityProfiler.Sample(profilerStage))
@@ -550,7 +688,9 @@ internal static class MclslScheduler
                             actor,
                             activeYear,
                             state.Stage,
-                            out nextStage);
+                            state.Step,
+                            out nextStage,
+                            out nextStep);
                     }
                     MclslDiagnostics.Cultivation(
                         "scheduler.tick.stage_done",
@@ -564,25 +704,50 @@ internal static class MclslScheduler
                 }
                 catch (Exception ex)
                 {
-                    // 可选维护、事件或突破逻辑不能让角色永久脱离年度队列。
-                    // 基础真元增长位于 Progression 最前方；发生异常后推进到
-                    // 下一阶段，下一年仍会继续正常修炼。
-                    MclslDiagnostics.Error(
-                        "annual-actor:" + actorId + ":" + state.Stage,
-                        "角色年度结算异常，已跳过当前附加阶段: " + ex.Message);
+                    // 单步可能已产生副作用，不能重放整段年度流水线。
+                    MclslWorldRunRepository.RecordAnnualFailure(activeYear, "角色", actorId.ToString(),
+                        state.Stage + "." + state.Step, 1, "部分失败", ex.Message);
                     hasNextStage = state.Stage != MclslAnnualPipelineStage.Finalize;
-                    nextStage = state.Stage switch
+                    nextStage = state.Stage;
+                    nextStep = state.Step + 1;
+                    if (state.Stage == MclslAnnualPipelineStage.Progression && state.Step == 0)
+                        nextStep = 2; // 基础增长未确认，不能继续突破。
+                    if (state.Stage == MclslAnnualPipelineStage.Prepare && nextStep > 10)
                     {
-                        MclslAnnualPipelineStage.Prepare => MclslAnnualPipelineStage.Progression,
-                        MclslAnnualPipelineStage.Progression => MclslAnnualPipelineStage.Finalize,
-                        _ => MclslAnnualPipelineStage.Finalize
-                    };
+                        nextStage = MclslAnnualPipelineStage.Progression;
+                        nextStep = 0;
+                    }
+                    if (state.Stage == MclslAnnualPipelineStage.Progression && nextStep > 6)
+                    {
+                        nextStage = MclslAnnualPipelineStage.Market;
+                        nextStep = 0;
+                    }
+                    if (state.Stage == MclslAnnualPipelineStage.Market)
+                    {
+                        MclslTianxuanMarket.ForgetPurchaseBatch(actorId);
+                        nextStage = MclslAnnualPipelineStage.Finalize;
+                        nextStep = 0;
+                    }
                 }
                 finally
                 {
                     MclslPerformanceProbe.End(AnnualStageProbeName(state.Stage), annualStageSample);
+                    double stageMs = (Stopwatch.GetTimestamp() - annualStageStarted) * 1000d / Stopwatch.Frequency;
+                    if (stageMs > timeBudgetMs)
+                        MclslDiagnostics.Error("annual-actor-overbudget:" + state.Stage + "." + state.Step,
+                            "角色年度单步超预算：角色=" + actorId + " 年=" + activeYear
+                            + " 步骤=" + state.Stage + "." + state.Step
+                            + " 耗时=" + stageMs.ToString("F2") + "ms 预算=" + timeBudgetMs.ToString("F2") + "ms");
                 }
 
+                if (awaitingFirstEssence && MclslCultivationGrowthSystem.CurrentTrueEssence(actor) > 0)
+                    MclslAnnualBackpressure.RecordFirstEssenceWait(UnityEngine.Time.unscaledTime - state.FirstEssenceQueuedAt);
+                MclslAnnualBackpressure.RecordStep();
+                if (!MclslActorAccessor.Alive(actor) || !AnnualActorStates.ContainsKey(actorId))
+                {
+                    ForgetAnnualActor(actorId);
+                    continue;
+                }
                 if (MclslActorAccessor.Alive(actor)
                     && !string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor)))
                 {
@@ -592,6 +757,8 @@ internal static class MclslScheduler
                 if (hasNextStage)
                 {
                     state.Stage = nextStage;
+                    state.Step = nextStep;
+                    PersistAnnualState(actor, state);
                     QueueExistingState(actorId, state);
                 }
                 else
@@ -611,6 +778,8 @@ internal static class MclslScheduler
                             state.LastCompletedYear,
                             state.LatestRequestedYear);
                         state.Stage = MclslAnnualPipelineStage.Prepare;
+                        state.Step = 0;
+                        PersistAnnualState(actor, state);
                         QueueExistingState(actorId, state);
                     }
                     else
@@ -631,6 +800,7 @@ internal static class MclslScheduler
     private static bool ShouldDeferIncompleteProgression(Actor actor, MclslAnnualPipelineStage stage, int activeYear)
     {
         if (stage != MclslAnnualPipelineStage.Progression
+            && stage != MclslAnnualPipelineStage.Market
             && stage != MclslAnnualPipelineStage.Finalize) return false;
         if (actor?.data == null || activeYear <= 0) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
@@ -650,9 +820,10 @@ internal static class MclslScheduler
 
     private static void QueueExistingState(long actorId, AnnualActorState state)
     {
-        if (state == null || state.Queued) return;
+        if (state == null) return;
+        if (state.Queued) return;
         state.Queued = true;
-        AnnualActorQueue.Enqueue(actorId);
+        AnnualActorQueue.Enqueue(actorId, state.ActiveYear, _activeAnnualYear);
     }
 
     private static bool TryReadPersistedPendingAnnualState(Actor actor, out AnnualActorState state)
@@ -663,12 +834,13 @@ internal static class MclslScheduler
         int activeYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualActiveYear, 0);
         int latestYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualLatestRequestedYear, 0);
         int stageValue = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualStage, -1);
+        int stepValue = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualStep, 0);
         int lastCompletedYear = ReadEffectiveLastCompletedYear(actor);
         if (activeYear <= 0
             || latestYear < activeYear
             || activeYear <= lastCompletedYear
             || stageValue < (int)MclslAnnualPipelineStage.Prepare
-            || stageValue > (int)MclslAnnualPipelineStage.Finalize)
+            || stageValue > (int)MclslAnnualPipelineStage.Market)
         {
             return false;
         }
@@ -684,106 +856,28 @@ internal static class MclslScheduler
             LatestRequestedYear = latestYear,
             LastCompletedYear = Math.Max(0, lastCompletedYear),
             Stage = (MclslAnnualPipelineStage)stageValue,
+            Step = Math.Clamp(stepValue, 0, 10),
             Queued = false
         };
         return true;
     }
 
-    /// <summary>
-    /// 0.1.4/0.1.5 的失败链可能写入“年度已完成”或“本年已修炼”，却没有任何真元。
-    /// 对已经开始感气、跨过至少一个世界年且仍为 0 真元的角色，这组游标不可能
-    /// 代表真实完成状态，必须回退到上一年，让 Progression 重新执行。
-    /// </summary>
-    private static void RepairImpossibleZeroProgressCursor(Actor actor, int requestedYear)
-    {
-        if (actor?.data == null || requestedYear <= 0) return;
-        if (!MclslSpiritualRootSystem.HasCultivationPotential(actor)) return;
-        if (MclslCultivationGrowthSystem.CurrentTrueEssence(actor) > 0) return;
-        if (MclslActorAccessor.Realm(actor) == MclslRealmIds.ChangSheng) return;
-
-        int startYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0);
-        if (startYear <= 0 || startYear >= requestedYear) return;
-
-        int previousYear = Math.Max(0, requestedYear - 1);
-        int lastCultivationYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, 0);
-        int lastCompletedYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualLastCompletedYear, 0);
-        if (lastCultivationYear < requestedYear && lastCompletedYear < requestedYear) return;
-
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, previousYear);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLastCompletedYear, previousYear);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualActiveYear, 0);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLatestRequestedYear, 0);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualStage, (int)MclslAnnualPipelineStage.Prepare);
-    }
-
     private static int ReadInitialLastCompletedYear(Actor actor, int requestedYear)
     {
         if (actor?.data == null) return 0;
-
         int requested = Math.Max(0, requestedYear);
         int completed = Math.Min(ReadEffectiveLastCompletedYear(actor), requested);
-        bool expectsAnnualGrowth =
-            MclslActorAccessor.Realm(actor) != MclslRealmIds.ChangSheng
-            && MclslCultivationActorMarker.HasCultivationMarker(actor);
-
-        if (!expectsAnnualGrowth) return Math.Max(0, completed);
-
-        int cultivationYear = MclslActorAccessor.GetInt(
-            actor,
-            MclslActorDataKeys.LastCultivationYear,
-            0);
-
-        if (cultivationYear > 0)
-        {
-            cultivationYear = Math.Min(cultivationYear, requested);
-
-            // 旧版本可能只推进“年度完成”而没有真正写入真元。
-            // 只补最近十二个缺失年份，既修复卡死角色，也避免高年份旧档
-            // 从出生年开始形成巨大补算队列。
-            if (cultivationYear < completed)
-                completed = Math.Max(cultivationYear, Math.Max(0, requested - 12));
-            else if (cultivationYear >= requested && completed < requested)
-            {
-                // updateAge 保底已经提交了本年基础真元，但感气、突破和事件阶段
-                // 仍需由年度队列完成，不能把 LastCultivationYear 误当整条流水线完成。
-                completed = Math.Max(0, requested - 1);
-            }
-            else if (completed <= 0)
-                completed = cultivationYear;
-        }
-        else
-        {
-            // 有修炼标记却没有真实修炼年份时，年度完成游标不可信。
-            // 至少回退到上一年，让年度流水线重新尝试一次基础真元写入。
-            int previousYear = Math.Max(0, requested - 1);
-            int startYear = MclslActorAccessor.GetInt(
-                actor,
-                MclslActorDataKeys.CultivationStartYear,
-                0);
-            if (completed <= 0)
-            {
-                completed = startYear > 0
-                    ? Math.Max(0, Math.Min(previousYear, startYear - 1))
-                    : previousYear;
-            }
-            else
-            {
-                completed = Math.Min(completed, previousYear);
-            }
-        }
-
-        return Math.Max(0, Math.Min(completed, requested));
+        if (completed > 0) return completed;
+        // The authoritative annual cursor is independent of essence spent on gameplay.
+        // New actors never receive work that predates their cultivation start.
+        int start = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, requested);
+        return Math.Max(0, Math.Min(requested - 1, start > 0 ? start - 1 : requested - 1));
     }
 
     private static int ReadEffectiveLastCompletedYear(Actor actor)
     {
         if (actor?.data == null) return 0;
         int persistedYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualLastCompletedYear, 0);
-        long actorId = MclslActorAccessor.Id(actor);
-        if (actorId > 0L && DeferredAnnualCompletions.TryGetValue(actorId, out int deferredYear))
-        {
-            persistedYear = Math.Max(persistedYear, deferredYear);
-        }
         return ClampFutureCompletedYear(actor, persistedYear);
     }
 
@@ -810,15 +904,10 @@ internal static class MclslScheduler
     {
         if (actor?.data == null || state == null) return;
         int lastCompletedYear = state.LastCompletedYear;
-        long actorId = MclslActorAccessor.Id(actor);
-        if (actorId > 0L && DeferredAnnualCompletions.TryGetValue(actorId, out int deferredYear))
-        {
-            lastCompletedYear = Math.Max(lastCompletedYear, deferredYear);
-        }
-
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualActiveYear, Math.Max(0, state.ActiveYear));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLatestRequestedYear, Math.Max(0, state.LatestRequestedYear));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualStage, (int)state.Stage);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualStep, Math.Max(0, state.Step));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLastCompletedYear, Math.Max(0, lastCompletedYear));
     }
 
@@ -828,58 +917,71 @@ internal static class MclslScheduler
         long actorId = MclslActorAccessor.Id(actor);
         int normalizedYear = Math.Max(0, completedYear);
         if (actorId <= 0L || normalizedYear <= 0) return;
+        MclslTianxuanMarket.ForgetPurchaseBatch(actorId);
 
         int persistedYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AnnualLastCompletedYear, 0);
-        if (normalizedYear <= persistedYear && !DeferredAnnualCompletions.ContainsKey(actorId)) return;
-        if (!DeferredAnnualCompletions.TryGetValue(actorId, out int previousYear) || normalizedYear > previousYear)
-        {
-            DeferredAnnualCompletions[actorId] = normalizedYear;
-        }
-    }
-
-    internal static void FlushPendingAnnualStatesForSave()
-    {
-        foreach (KeyValuePair<long, int> pair in DeferredAnnualCompletions)
-        {
-            if (MclslCultivatorCandidateIndex.Resolve(pair.Key, out Actor actor) && actor?.data != null)
-            {
-                MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLastCompletedYear, pair.Value);
-            }
-        }
-
-        foreach (KeyValuePair<long, AnnualActorState> pair in AnnualActorStates)
-        {
-            if (pair.Value != null && MclslCultivatorCandidateIndex.Resolve(pair.Key, out Actor actor))
-            {
-                PersistAnnualState(actor, pair.Value);
-            }
-        }
-        DeferredAnnualCompletions.Clear();
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualLastCompletedYear, Math.Max(persistedYear, normalizedYear));
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualActiveYear, 0);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualStage, 0);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AnnualStep, 0);
     }
 
     private static void TryResolveAnnualWorld()
     {
         if (_activeAnnualYear <= 0) return;
         if (MclslWorldBootstrapLane.HasPending) return;
-        if (_annualCandidateRefreshPending || _annualCandidateScanPending) return;
-        if (AnnualActorQueue.Count > 0 || AnnualActorStates.Count > 0) return;
+        if (_annualStartPending || _annualCandidateScanPending) return;
+        if (AnnualActorQueue.ReadyCount > 0
+            || (AnnualActorQueue.OldestWaitingYear > 0 && AnnualActorQueue.OldestWaitingYear <= _activeAnnualYear)) return;
 
+        if (!RestoreLineageActors()) return;
         bool completed = MclslAnnualWorldRuntimeLane.Tick(LineageActors);
         if (completed)
         {
-            MclslWorldActorQuery.EndAnnualDetection(_activeAnnualYear);
-            LineageActors.Clear();
+            int completedYear = _activeAnnualYear;
+            MclslAnnualBackpressure.RecordYear();
+            LineageActorSlots.Clear();
             LineageActorIds.Clear();
-            MclslPerformanceProbe.End("年度周期总耗时", _annualCycleStarted);
+            PersistedLineageIds.Clear();
+            MclslPerformanceProbe.End("年度周期总耗时", _annualCycleStarted, acrossFrames: true);
             _annualCycleStarted = 0L;
+            MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+            batch.LastCompletedYear = Math.Max(batch.LastCompletedYear, completedYear);
+            batch.ActiveYear = 0;
+            batch.WorldStage = 0;
+            batch.EraSnapshotRecorded = false;
+            batch.StartCursor = 0;
+            batch.LineageActorIds.Clear();
+            batch.InverseWork = null;
+            _activeAnnualYear = -1;
+
+            if (batch.LatestRequestedYear > completedYear) StartAnnualWorld(completedYear + 1);
         }
+    }
+
+    private static bool RestoreLineageActors()
+    {
+        List<long> ids = MclslWorldRunRepository.Current.AnnualBatch.LineageActorIds;
+        while (_restoreLineageCursor < ids.Count && !AnnualBudgetExpired())
+        {
+            long actorId = ids[_restoreLineageCursor++];
+            if (!LineageActorIds.Contains(actorId)
+                && MclslActorRegistry.ResolveKnownOrWorld(actorId, out Actor actor)) AddLineageActor(actor);
+        }
+        return _restoreLineageCursor >= ids.Count;
     }
 
     private static void AddLineageActor(Actor actor)
     {
         long actorId = MclslActorAccessor.Id(actor);
         if (actorId <= 0L || !LineageActorIds.Add(actorId)) return;
-        LineageActors.Add(actor);
+        LineageActorSlots.Add(actorId);
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (PersistedLineageIds.Add(actorId))
+        {
+            batch.LineageActorIds.Add(actorId);
+
+        }
     }
 
     private static void TickCleanup()
@@ -903,10 +1005,11 @@ internal static class MclslScheduler
 
     private static string AnnualStageProbeName(MclslAnnualPipelineStage stage) => stage switch
     {
-        MclslAnnualPipelineStage.Prepare => "年度角色.Prepare",
-        MclslAnnualPipelineStage.Progression => "年度角色.Progression",
-        MclslAnnualPipelineStage.Finalize => "年度角色.Finalize",
-        _ => "年度角色.Unknown"
+        MclslAnnualPipelineStage.Prepare => "年度角色.准备",
+        MclslAnnualPipelineStage.Progression => "年度角色.修行推进",
+        MclslAnnualPipelineStage.Market => "年度角色.天玄镜交易",
+        MclslAnnualPipelineStage.Finalize => "年度角色.收尾",
+        _ => "年度角色.未知阶段"
     };
 
     private static bool HasExceededTimeBudget(long startedTimestamp, double budgetMilliseconds)

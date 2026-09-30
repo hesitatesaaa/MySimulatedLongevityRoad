@@ -1,6 +1,7 @@
 using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Systems;
+using MySimulatedLongevityRoad.Traits;
 using NeoModLoader.General;
 using NeoModLoader.General.UI.Tab;
 using UnityEngine;
@@ -13,6 +14,7 @@ internal static class MclslUiManager
 
     private static bool _initialized;
     private static PowersTab _tab;
+    private static PowersTab _immortalTab;
 
     internal static void Init()
     {
@@ -26,9 +28,19 @@ internal static class MclslUiManager
             _tab = TabManager.CreateTab("mclsl_mod_tab", "mclsl_mod_tab", "mclsl_mod_tab Description", icon, "hotkey_tip_tab_other");
             if (_tab == null) throw new InvalidOperationException("无法创建模拟长生路功能页签");
             PowersTabExtension.SetLayout(_tab, new System.Collections.Generic.List<string> { "tab" });
+            MclslLocalizationBridge.RegisterKey("mclsl_immortal_tab", "仙道人物");
+            MclslLocalizationBridge.RegisterKey("mclsl_immortal_tab Description", "放置白先生与传法天尊");
+            _immortalTab = TabManager.CreateTab("mclsl_immortal_tab", "mclsl_immortal_tab", "mclsl_immortal_tab Description", SpriteTextureLoader.getSprite("trait/Bai"), "hotkey_tip_tab_other");
+            if (_immortalTab != null)
+            {
+                PowersTabExtension.SetLayout(_immortalTab, new System.Collections.Generic.List<string> { "tab" });
+                MclslImmortalActorRegistration.AddPowers(_immortalTab);
+            }
         AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
-        AddButton("mclsl.guide", "模组介绍／入道指南", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
+        AddButton("mclsl.guide", "模组介绍／入道指南（QQ群：1049012706）", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
         AddButton("mclsl.tianxuan", "天玄镜", "打开万界交易所；修士会按自身需求自动挂牌、购入与结算。", () => MclslFeatureWindow.ShowMarket(), "ui/Icons/TianxuanMirrorEntrance", "ui/Icons/GongXianZhi");
+        AddButton("mclsl.artifact_rain_editor", "法宝雨编辑", "选择法宝雨可以生成的法宝。", MclslArtifactRainEditor.ShowWindow, "ui/Icons/ArtifactRain");
+        AddArtifactRainPower();
             AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
             AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
             // 入口位置、按钮创建和窗口打开流程对齐鬼谷“时光长河”；只替换为猫宝图标和文案。
@@ -123,6 +135,14 @@ internal static class MclslUiManager
         PowersTabExtension.AddPowerButton(_tab, "tab", button);
     }
 
+    private static void AddArtifactRainPower()
+    {
+        MclslArtifactRain.Init();
+        Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/ArtifactRain");
+        PowerButton button = PowerButtonCreator.CreateGodPowerButton(MclslArtifactRain.PowerId, icon);
+        if (button != null) PowersTabExtension.AddPowerButton(_tab, "tab", button);
+    }
+
     private static bool ContainsChinese(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return false;
@@ -136,10 +156,8 @@ internal static class MclslUiManager
         try
         {
             if (button == null) return;
-            string titleKey = id;
-            string descriptionKey = id + " Description";
-            MclslLocalizationBridge.RegisterKey(titleKey, title);
-            MclslLocalizationBridge.RegisterKey(descriptionKey, description);
+            string titleKey = MclslLocalizationBridge.RegisterKey(id, title);
+            string descriptionKey = MclslLocalizationBridge.RegisterKey(id + " Description", description);
             TipButton tip = button.GetComponent<TipButton>();
             if (tip == null) tip = button.gameObject.AddComponent<TipButton>();
             tip.textOnClick = titleKey;

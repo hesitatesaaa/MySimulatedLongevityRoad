@@ -36,11 +36,6 @@ internal static class MclslDetectionGate
         return true;
     }
 
-    internal static bool ShouldProcessAnnualActors(in MclslSchedulerContext context)
-    {
-        return context.IsYearChange || context.ProcessFast;
-    }
-
     internal static bool ShouldRunCadence(string key, int tickCounter, int intervalTicks)
     {
         return !string.IsNullOrWhiteSpace(key)

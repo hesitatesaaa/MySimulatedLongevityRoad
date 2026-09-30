@@ -16,6 +16,7 @@ internal static class MclslEventCatalog
     internal const string All = "all";
     internal const string Cultivation = "cultivation";
     internal const string WorldResource = "world_resource";
+    internal const string TreasureAcquisition = "treasure_acquisition";
     internal const string DaoStruggle = "dao_struggle";
     internal const string Faction = "faction";
     internal const string Ruin = "ruin";
@@ -29,6 +30,7 @@ internal static class MclslEventCatalog
         C(All, "全部", "#CFC7B2", "ui/Icons/XuanHuangXianLu"),
         C(Cultivation, "修行大事", "#FFD37A", "trait/realm_3"),
         C(WorldResource, "天地资源", "#9CD7FF", "ui/Icons/DongTian"),
+        C(TreasureAcquisition, "仙缘宝录", "#E7C878", "ui/Icons/QiankunBagEntrance"),
         C(DaoStruggle, "仙法不可同修", "#D8A7FF", "ui/Icons/JinDanWuFa"),
         C(Faction, "仙盟五老", "#B7A7FF", "ui/Icons/WanXianMeng"),
         C(Ruin, "宗门遗迹", "#A7E08A", "ui/Icons/ZongMenYiJi"),
@@ -63,8 +65,8 @@ internal static class MclslEventCatalog
             return Cultivation;
         if (type.Contains("death", StringComparison.Ordinal) || type == "cultivator_death")
             return Death;
-        if (type == "material_discovery")
-            return WorldResource;
+        if (type is "material_discovery" or "item_acquisition")
+            return TreasureAcquisition;
         if (type.StartsWith("world_calamity_", StringComparison.Ordinal))
             return WorldResource;
         if (type.StartsWith("cave_", StringComparison.Ordinal) || type.StartsWith("world_change", StringComparison.Ordinal)

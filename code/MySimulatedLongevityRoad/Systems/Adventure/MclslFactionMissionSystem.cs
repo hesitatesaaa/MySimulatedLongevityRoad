@@ -18,10 +18,7 @@ internal static class MclslFactionMissionSystem
         if (year < run.NextFactionMissionYear) return;
         if (!MclslDetectionGate.TryBeginAnnualJob(MclslDetectionGate.AnnualFactionMission, year)) return;
 
-        List<Actor> candidates = new(MclslCultivatorCandidateIndex.SelectCultivators(
-            80,
-            MclslActorAccessor.Alive,
-            MissionCandidateScore));
+        IReadOnlyList<Actor> candidates = MclslActorProjectionIndex.MissionCandidates(80);
         if (candidates.Count == 0)
         {
             run.NextFactionMissionYear = year + 5;
@@ -180,7 +177,7 @@ internal static class MclslFactionMissionSystem
         };
     }
 
-    private static int MissionCandidateScore(Actor actor)
+    internal static int MissionCandidateScore(Actor actor)
     {
         int realm = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
         int contribution = Math.Min(80, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) / 5);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
@@ -13,9 +14,16 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslActorOverviewStatsFormatter
 {
+    private sealed class WindowState { internal long ActorId, Revision = -1; internal bool Visible, NewLaw; }
+    private static ConditionalWeakTable<UnitWindow, WindowState> States = new();
+    private sealed class IconTextBinding { internal bool Initialized; internal Text Value; }
+    private static ConditionalWeakTable<Transform, IconTextBinding> IconTextBindings = new();
+    internal static void ClearRuntime() { States = new(); IconTextBindings = new(); }
+    internal static void OnClosed(UnitWindow window) { if (window != null) States.Remove(window); }
     private static readonly OverviewStatIcon[] Icons =
     {
         new("MclslImmortalFate", "仙缘", "ui/Icons/XuanHuangXianLu"),
+        new("MclslSpellInsight", "悟性", "ui/Icons/WuXing"),
         new("MclslMindState", "心境", "ui/Icons/XinJing", "ui/Icons/HuanZhen"),
         new("MclslMortalMiasma", "仙凡瘴", "ui/Icons/XianFanZhang"),
         new("MclslTrueEssence", "真元", "ui/Icons/ZhenQi"),
@@ -25,10 +33,16 @@ internal static class MclslActorOverviewStatsFormatter
 
     internal static void Refresh(UnitWindow window)
     {
-        Actor actor = window?.actor;
+        if (window == null || !window.gameObject.activeInHierarchy) return;
+        Actor actor = window.actor;
+        long id = MclslActorAccessor.Id(actor), revision = MclslRuntimeChanges.DataRevision(id);
+        WindowState state = States.GetOrCreateValue(window);
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        if (state.ActorId == id && state.Revision == revision && state.NewLaw == newLaw) return;
         if (!ShouldShowOverview(actor))
         {
             HideMclslOverview(window);
+            state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = false;
             return;
         }
 
@@ -37,6 +51,7 @@ internal static class MclslActorOverviewStatsFormatter
 
         SetIconVisibility(window, "MclslAptitude", false);
         SetIconVisibility(window, "MclslQi", false);
+        SetIconValue(window, "MclslSpellInsight", MclslSpellProgression.Insight(actor));
         SetIconValue(window, "MclslImmortalFate", cultivation.ImmortalFate);
         SetIconValue(window, "MclslMindState", cultivation.MindState);
         if (ShouldShowMiasma(cultivation)) SetIconText(window, "MclslMortalMiasma", cultivation.MortalMiasma + "/" + cultivation.MortalMiasmaLimit);
@@ -47,6 +62,7 @@ internal static class MclslActorOverviewStatsFormatter
         SetIconValue(window, "MclslSpiritStones", cultivation.SpiritStones);
         ArrangeOverviewRows(window);
         RefreshFactionAffiliationRow(window, actor, cultivation);
+        state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = true;
     }
 
     private static bool ShouldShowOverview(Actor actor)
@@ -373,15 +389,12 @@ internal static class MclslActorOverviewStatsFormatter
             if (sprite != null && iconImage != null) iconImage.sprite = sprite;
         }
         TipButton tip = iconTransform.GetComponent<TipButton>();
-        if (tip != null) tip.textOnClick = icon.DisplayName;
-    }
-
-    private static void SetIconSprite(UnitWindow window, string id, string resourcePath)
-    {
-        Transform icon = FindOverviewIcon(window, id);
-        Image image = icon?.GetComponent<StatsIcon>()?.getIcon();
-        Sprite sprite = LoadSprite(new[] { resourcePath });
-        if (image != null && sprite != null) image.sprite = sprite;
+        if (tip != null)
+        {
+            tip.textOnClick = icon.DisplayName;
+            if (icon.Id == "MclslSpellInsight")
+                tip.textOnClickDescription = "先天悟性；数值越高，参悟和精进法术越快。";
+        }
     }
 
     private static Sprite LoadSprite(string[] resourcePaths)
@@ -412,8 +425,15 @@ internal static class MclslActorOverviewStatsFormatter
         SetIconVisibility(window, id, true);
         try { window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message); }
         Transform icon = FindOverviewIcon(window, id);
-        Text[] texts = icon?.GetComponentsInChildren<Text>(true);
-        if (texts != null && texts.Length > 0) texts[texts.Length - 1].text = value ?? string.Empty;
+        if (icon == null) return;
+        IconTextBinding binding = IconTextBindings.GetOrCreateValue(icon);
+        if (!binding.Initialized)
+        {
+            Text[] texts = icon.GetComponentsInChildren<Text>(true);
+            binding.Value = texts.Length > 0 ? texts[texts.Length - 1] : null;
+            binding.Initialized = true;
+        }
+        if (binding.Value != null) binding.Value.text = value ?? string.Empty;
     }
 
     private static void SetIconVisibility(UnitWindow window, string id, bool visible)

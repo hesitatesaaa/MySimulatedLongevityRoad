@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
+using System.Diagnostics;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
@@ -26,7 +29,7 @@ internal static class MclslRankWindow
     private static readonly string[] RealmOptions = { "全部境界", "感气", "炼气", "筑基", "金丹", "元婴", "化神", "合道", "长生" };
     private static readonly string[] RootOptions = { "全部灵根", "金", "木", "水", "火", "土", "风", "雷", "阴", "阳", "空间" };
     private static readonly List<MclslRankSortKey> ActiveSortKeys = new();
-    private static readonly List<MclslRankEntry> Entries = new();
+    private static MclslOrderedIdIndex<MclslRankEntry> Entries = new((a, b) => b.Power.CompareTo(a.Power));
     private static readonly List<GameObject> CardInstances = new();
     private static readonly Stack<GameObject> RecycledCards = new();
     private static readonly Dictionary<int, GameObject> CardByIndex = new();
@@ -61,6 +64,14 @@ internal static class MclslRankWindow
     private static int _realmFilter;
     private static string _searchQuery = string.Empty;
     private static bool _needRefresh;
+    private static long _viewRevision = -1;
+    private static MclslOrderedIdIndex<MclslRankEntry> NextEntries;
+    private static Comparison<MclslRankEntry> _viewCompare = (a, b) => b.Power.CompareTo(a.Power);
+    private static bool _viewDataDirty;
+    private static int _filterCursor = -1;
+    private static bool _resetPendingScroll;
+    private static string _pendingQuery;
+    private static string _orderSignature;
     private static bool _filterChoicesInitialized;
     private static int _lastViewStart = int.MaxValue;
     private static int _lastViewEnd = -1;
@@ -68,8 +79,14 @@ internal static class MclslRankWindow
     private static readonly MclslRankSortDef[] SortDefs =
     {
         new("power", "战力", "ui/Icons/TianDiZhiLi", entry => (float)Math.Min(float.MaxValue, entry.Power), entry => FormatNumber(entry.Power)),
-        new("realm", "境界", "trait/realm_7", entry => entry.RealmIndex, entry => entry.RealmName),
+        new("realm", "境界", "trait/realm_7", entry => entry.RealmSortRank, entry => entry.RealmName),
         new("root", "灵根品阶", "trait/gifts_6", entry => entry.Aptitude, entry => string.IsNullOrWhiteSpace(entry.GiftName) ? entry.Aptitude.ToString(CultureInfo.InvariantCulture) : entry.GiftName),
+        new("profession_alchemist", "炼丹师", "trait/MclslProfessionAlchemist", entry => ProfessionSortRank(entry, MclslProfessionSystem.Alchemist),
+            entry => FormatProfession(entry, MclslProfessionSystem.Alchemist)),
+        new("profession_refiner", "炼器师", "trait/MclslProfessionRefiner", entry => ProfessionSortRank(entry, MclslProfessionSystem.Refiner),
+            entry => FormatProfession(entry, MclslProfessionSystem.Refiner)),
+        new("profession_talisman", "制符师", "trait/MclslProfessionTalisman", entry => ProfessionSortRank(entry, MclslProfessionSystem.TalismanMaker),
+            entry => FormatProfession(entry, MclslProfessionSystem.TalismanMaker)),
         new("essence", "真元", "ui/Icons/ZhenQi", entry => entry.TrueEssence, entry => entry.TrueEssence.ToString(CultureInfo.InvariantCulture)),
         new("mind", "心境", "ui/Icons/XinJing", entry => entry.MindState, entry => entry.MindState.ToString(CultureInfo.InvariantCulture)),
         new("contribution", "贡献", "ui/Icons/GongXianZhi", entry => entry.Contribution, entry => entry.Contribution.ToString(CultureInfo.InvariantCulture)),
@@ -131,7 +148,6 @@ internal static class MclslRankWindow
         MclslRankWindowUpdater updater = _window.gameObject.AddComponent<MclslRankWindowUpdater>();
         updater.OnOpen = () =>
         {
-            MclslRankSnapshotSource.Invalidate();
             RestoreNativeCloseButton();
             if (ShouldRefreshFilterChoicesOnOpen()) RefreshFilterChoices();
             RefreshSelectedFilterButtons();
@@ -142,7 +158,10 @@ internal static class MclslRankWindow
         // of its child graphics every frame caused needless allocations while a
         // long ranking list was open, without changing its appearance.
         updater.OnUpdate = UpdateVisibleCards;
-        updater.OnClose = DisposeCardPool;
+        updater.OnClose = () =>
+        {
+            _filterCursor = -1; NextEntries = null; Entries.Clear(); DisposeCardPool();
+        };
         return true;
     }
 
@@ -424,22 +443,36 @@ internal static class MclslRankWindow
 
     private static void RefreshCurrentList(bool resetScroll)
     {
-        ClearCards();
-        if (resetScroll && _contentRect != null) _contentRect.anchoredPosition = Vector2.zero;
-        Entries.Clear();
-        IReadOnlyList<MclslRankEntry> snapshot = MclslRankSnapshotSource.EntriesSnapshot(forceRebuild: false);
-        string normalizedQuery = NormalizeSearch(_searchQuery);
-        for (int i = 0; i < snapshot.Count; i++)
+        RequestSortOrder();
+        NextEntries = new MclslOrderedIdIndex<MclslRankEntry>(_viewCompare);
+        _filterCursor = 0;
+        _resetPendingScroll = resetScroll;
+        _pendingQuery = NormalizeSearch(_searchQuery);
+        _viewRevision = MclslRankSnapshotSource.Revision;
+    }
+    private static void ContinueFilteredView()
+    {
+        if (_filterCursor < 0) return;
+        IReadOnlyList<MclslRankEntry> snapshot = MclslRankSnapshotSource.MembershipEntries;
+        long deadline = Stopwatch.GetTimestamp() + Stopwatch.Frequency / 2000;
+        int processed = 0;
+        while (_filterCursor < snapshot.Count && processed++ < 128 && Stopwatch.GetTimestamp() < deadline)
         {
-            MclslRankEntry entry = snapshot[i];
+            MclslRankEntry entry = snapshot[_filterCursor++];
             if (entry == null || !MclslActorAccessor.Alive(entry.Actor)) continue;
-            if (!PassRootFilter(entry) || !PassRealmFilter(entry) || !PassSearch(entry, normalizedQuery) || !PassActiveFilters(entry.Actor)) continue;
-            Entries.Add(entry);
+            if (!PassRootFilter(entry) || !PassRealmFilter(entry) || !PassSearch(entry, _pendingQuery)
+                || !PassActiveFilters(entry.Actor)) continue;
+            NextEntries.Upsert(entry.ActorId, entry);
         }
-        SortEntries(Entries);
+        if (_filterCursor < snapshot.Count) return;
+        _filterCursor = -1;
+        ClearCards();
+        if (_resetPendingScroll && _contentRect != null) _contentRect.anchoredPosition = Vector2.zero;
+        Entries = NextEntries; NextEntries = null;
+        _viewDataDirty = false;
+        _viewRevision = MclslRankSnapshotSource.Revision;
         _contentRect.sizeDelta = new Vector2(0, Math.Max(1, Entries.Count) * CardHeight);
-        _lastViewStart = int.MaxValue;
-        _lastViewEnd = -1;
+        _lastViewStart = int.MaxValue; _lastViewEnd = -1;
         _countText.text = string.IsNullOrWhiteSpace(_searchQuery)
             ? "共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人"
             : "搜索：" + _searchQuery.Trim() + "  共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人";
@@ -449,6 +482,29 @@ internal static class MclslRankWindow
         _emptyText.gameObject.SetActive(Entries.Count == 0);
         CreateInitialVisibleCards();
         RefreshSelectedSortButtons();
+    }
+
+    internal static void OnEntryChanged(long id, MclslRankEntry entry)
+    {
+        if (_window == null || !_window.gameObject.activeInHierarchy) return;
+        bool included = entry != null && MclslActorAccessor.Alive(entry.Actor)
+            && PassRootFilter(entry) && PassRealmFilter(entry)
+            && PassSearch(entry, NormalizeSearch(_searchQuery)) && PassActiveFilters(entry.Actor);
+        if (_filterCursor >= 0)
+        {
+            if (included) NextEntries?.Upsert(id, entry); else NextEntries?.Remove(id);
+        }
+        else
+        {
+            if (included) Entries.Upsert(id, entry); else Entries.Remove(id);
+            _viewDataDirty = true;
+        }
+        _viewRevision = MclslRankSnapshotSource.Revision;
+    }
+    internal static void ClearRuntime()
+    {
+        Entries.Clear(); NextEntries = null; _filterCursor = -1; _viewRevision = -1;
+        _needRefresh = true; _viewDataDirty = false;
     }
 
     private static bool PassRootFilter(MclslRankEntry entry)
@@ -508,30 +564,71 @@ internal static class MclslRankWindow
 
     private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
 
-    private static void SortEntries(List<MclslRankEntry> entries)
+    private static void RequestSortOrder()
     {
-        entries.Sort((left, right) =>
+        StringBuilder signature = new();
+        for (int i = 0; i < ActiveSortKeys.Count; i++)
+            signature.Append(ActiveSortKeys[i].Def.Id).Append(ActiveSortKeys[i].Ascending ? '+' : '-').Append('|');
+        string key = ActiveSortKeys.Count == 0 ? "power" : signature.ToString();
+        if (_orderSignature == key) return;
+        _orderSignature = key;
+        MclslRankSortKey[] keys = new MclslRankSortKey[ActiveSortKeys.Count];
+        for (int i = 0; i < keys.Length; i++)
+            keys[i] = new MclslRankSortKey(ActiveSortKeys[i].Def) { Ascending = ActiveSortKeys[i].Ascending };
+        _viewCompare = (left, right) =>
         {
-            if (ActiveSortKeys.Count == 0)
+            if (keys.Length > 0 && IsProfessionSort(keys[0].Def.Id))
+                return CompareProfession(left, right, ProfessionForSortId(keys[0].Def.Id));
+            for (int i = 0; i < keys.Length; i++)
             {
-                int result = right.Power.CompareTo(left.Power);
-                if (result != 0) return result;
+                int order = keys[i].Compare(left, right);
+                if (order != 0) return order;
             }
-            else
-            {
-                for (int i = 0; i < ActiveSortKeys.Count; i++)
-                {
-                    MclslRankSortKey key = ActiveSortKeys[i];
-                    float lv = key.Def.GetValue(left);
-                    float rv = key.Def.GetValue(right);
-                    int result = (key.Ascending ? 1 : -1) * lv.CompareTo(rv);
-                    if (result != 0) return result;
-                }
-            }
-            int powerTie = right.Power.CompareTo(left.Power);
-            if (powerTie != 0) return powerTie;
-            return left.ActorId.CompareTo(right.ActorId);
-        });
+            int power = right.Power.CompareTo(left.Power);
+            return power != 0 ? power : left.ActorId.CompareTo(right.ActorId);
+        };
+    }
+
+    private static int CompareProfession(MclslRankEntry left, MclslRankEntry right, string profession)
+    {
+        int leftGrade = ProfessionSortRank(left, profession);
+        int rightGrade = ProfessionSortRank(right, profession);
+        int result = rightGrade.CompareTo(leftGrade);
+        if (result != 0) return result;
+
+        int leftExperience = left?.ProfessionId == profession ? left.ProfessionExperience : 0;
+        int rightExperience = right?.ProfessionId == profession ? right.ProfessionExperience : 0;
+        result = rightExperience.CompareTo(leftExperience);
+        if (result != 0) return result;
+
+        result = (right?.RealmIndex ?? -1).CompareTo(left?.RealmIndex ?? -1);
+        if (result != 0) return result;
+        return (left?.ActorId ?? 0L).CompareTo(right?.ActorId ?? 0L);
+    }
+
+    private static int ProfessionSortRank(MclslRankEntry entry, string profession)
+    {
+        if (entry == null || entry.ProfessionId != profession) return 0;
+        return Math.Clamp(entry.ProfessionGrade, 0, 4) + 1;
+    }
+
+    private static bool IsProfessionSort(string sortId) => sortId is
+        "profession_alchemist" or "profession_refiner" or "profession_talisman";
+
+    private static string ProfessionForSortId(string sortId) => sortId switch
+    {
+        "profession_alchemist" => MclslProfessionSystem.Alchemist,
+        "profession_refiner" => MclslProfessionSystem.Refiner,
+        "profession_talisman" => MclslProfessionSystem.TalismanMaker,
+        _ => string.Empty
+    };
+
+    private static string FormatProfession(MclslRankEntry entry, string profession)
+    {
+        if (entry == null || entry.ProfessionId != profession) return "无该职业";
+        string[] grades = { "学徒", "黄级", "玄级", "地级", "天级" };
+        int grade = Math.Clamp(entry.ProfessionGrade, 0, grades.Length - 1);
+        return grades[grade] + " · 熟练度 " + Math.Max(0, entry.ProfessionExperience).ToString(CultureInfo.InvariantCulture);
     }
 
     private static void CreateInitialVisibleCards()
@@ -546,6 +643,15 @@ internal static class MclslRankWindow
 
     private static void UpdateVisibleCards()
     {
+        if (_filterCursor >= 0) { ContinueFilteredView(); return; }
+        if (_viewDataDirty)
+        {
+            _viewDataDirty = false; ClearCards();
+            _lastViewStart = int.MaxValue; _lastViewEnd = -1;
+            if (_contentRect != null) _contentRect.sizeDelta = new Vector2(0, Math.Max(1, Entries.Count) * CardHeight);
+            if (_countText != null) _countText.text = "共 " + Entries.Count.ToString(CultureInfo.InvariantCulture) + " 人";
+            _emptyText?.gameObject.SetActive(Entries.Count == 0);
+        }
         if (_needRefresh)
         {
             _needRefresh = false;
@@ -913,7 +1019,7 @@ internal static class MclslRankWindow
                     ActiveSortKeys.Remove(selectedKey);
                     ActiveSortKeys.Insert(0, selectedKey);
                 }
-                else selectedKey.Toggle();
+                else if (!IsProfessionSort(selectedKey.Def.Id)) selectedKey.Toggle();
                 RefreshSelectedSortButtons();
                 RefreshCurrentList(false);
             });
@@ -930,7 +1036,11 @@ internal static class MclslRankWindow
         }
         MclslRankTooltipTrigger tip = image.gameObject.AddComponent<MclslRankTooltipTrigger>();
         tip.TooltipText = selectedKey == null ? definition.Name : definition.Name + (selectedKey.Ascending ? "（升序）" : "（降序）");
-        tip.TooltipDescription = selectedKey == null ? "左键设为首排序" : "左键设为首排序或切换升降序，右键移除";
+        tip.TooltipDescription = selectedKey == null
+            ? "左键设为首排序"
+            : IsProfessionSort(definition.Id)
+                ? "按品阶天、地、玄、黄及无该职业排序；同品阶按熟练度、境界和稳定ID排序。"
+                : "左键设为首排序或切换升降序，右键移除";
         return image.gameObject;
     }
 

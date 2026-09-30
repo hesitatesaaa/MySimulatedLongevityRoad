@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -45,39 +46,25 @@ internal static class MclslActorReincarnationSystem
         MclslWorldArchiveStore.MarkDirty();
     }
 
-    internal static bool TryApplyAnnual(int year, IReadOnlyList<Actor> actors)
+    internal static bool TickApplyAnnual(MclslInverseAnnualState work, IReadOnlyList<Actor> actors, int year)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.ReincarnationRecords == null || run.ReincarnationRecords.Count == 0 || actors == null || actors.Count == 0) return false;
-
-        bool changed = false;
-        int applied = 0;
-        for (int i = 0; i < run.ReincarnationRecords.Count && applied < MaxApplicationsPerYear; i++)
+        if (run?.ReincarnationRecords == null || run.ReincarnationRecords.Count == 0 || actors.Count == 0) return true;
+        for (int n = 0; n < 64 && !MclslAnnualFrameBudget.Expired; n++)
         {
-            MclslActorReincarnationRecord record = run.ReincarnationRecords[i];
-            if (record == null || !string.Equals(record.Status, "待转", StringComparison.Ordinal)) continue;
-            Actor target = PickTarget(record, actors, year);
-            if (target == null) continue;
+            if (work.ReincarnationsApplied >= MaxApplicationsPerYear
+                || work.ReincarnationRecordCursor >= run.ReincarnationRecords.Count) return true;
+            MclslActorReincarnationRecord record = run.ReincarnationRecords[work.ReincarnationRecordCursor];
+            if (record == null || record.Status != "待转" || work.ReincarnationTargetCursor >= actors.Count)
+            { work.ReincarnationRecordCursor++; work.ReincarnationTargetCursor = 0; continue; }
+            int start = PositiveHash(record.Id + "|target|" + year) % actors.Count;
+            Actor target = actors[(int)(((long)start + work.ReincarnationTargetCursor++) % actors.Count)];
+            if (!CanReceive(target, record)) continue;
             Apply(record, target, year);
-            applied++;
-            changed = true;
+            work.ReincarnationsApplied++; work.ReincarnationRecordCursor++; work.ReincarnationTargetCursor = 0;
+            MclslWorldArchiveStore.MarkDirty();
         }
-
-        if (changed) MclslWorldArchiveStore.MarkDirty();
-        return changed;
-    }
-
-    private static Actor PickTarget(MclslActorReincarnationRecord record, IReadOnlyList<Actor> actors, int year)
-    {
-        if (actors.Count == 0) return null;
-        int start = PositiveHash(record.Id + "|target|" + year) % actors.Count;
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor actor = actors[(start + i) % actors.Count];
-            if (!CanReceive(actor, record)) continue;
-            return actor;
-        }
-        return null;
+        return false;
     }
 
     private static bool CanReceive(Actor actor, MclslActorReincarnationRecord record)

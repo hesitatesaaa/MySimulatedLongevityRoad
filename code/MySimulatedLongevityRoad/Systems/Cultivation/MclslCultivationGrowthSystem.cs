@@ -56,7 +56,8 @@ internal static class MclslCultivationGrowthSystem
             : 1f;
         if (applyWorldState) gain *= worldRate;
         if (applySameLaw) gain *= sameLawRate;
-        if (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0) gain *= 1.08f;
+        if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v1.actor.taishang_taken") > 0) gain *= 1.08f;
+        if (MclslArtifactSystem.EquippedArtifactId(actor, MclslArtifactEquipmentSlot.Amulet) == "B081") gain *= 1.20f;
         if (actor.hasStatus("mclsl_item_F007")) gain *= 1.15f;
         gain = Math.Max(1f, gain);
 

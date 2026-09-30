@@ -19,7 +19,6 @@ internal static class MclslMaobaoArchiveManager
 {
     internal const int SavedActorLimit = 49;
     private const string FileName = "mclsl_maobao_saved_actors.json";
-    private const int LegacyMigrationVersion = 1;
     private const int RespawnAge = 18;
 
     private static readonly JsonSerializerSettings JsonSettings = new()
@@ -51,15 +50,12 @@ internal static class MclslMaobaoArchiveManager
         if (_initialized) return;
         _initialized = true;
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        MigrateLegacySummaryRecords();
         LoadFromFile();
     }
 
     internal static void OnWorldLoaded()
     {
         Init();
-        // 每个世界的旧摘要字段都只迁移一次；跨世界完整猫宝档案继续保留。
-        MigrateLegacySummaryRecords();
     }
 
     internal static IReadOnlyList<SavedActorPacket> GetSavedActors()
@@ -243,18 +239,7 @@ internal static class MclslMaobaoArchiveManager
         return refreshed;
     }
 
-    private static void MigrateLegacySummaryRecords()
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null || run.MaobaoArchiveMigrationVersion >= LegacyMigrationVersion) return;
-        // 用户已选择清空旧的摘要记录；新档案不读取它们，避免把旧摘要误当完整登名石。
-        run.MaobaoRecords ??= new List<MclslMaobaoRecord>();
-        run.MaobaoRecords.Clear();
-        run.MaobaoArchiveMigrationVersion = LegacyMigrationVersion;
-        MclslWorldArchiveStore.MarkDirty();
-    }
-
-    private static string SavePath => Path.Combine(Application.persistentDataPath, FileName);
+    private static string SavePath => Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV1", FileName);
 
     private static void SaveToFile()
     {
@@ -262,6 +247,7 @@ internal static class MclslMaobaoArchiveManager
         string backup = SavePath + ".bak";
         try
         {
+            Directory.CreateDirectory(Path.GetDirectoryName(SavePath));
             string json = JsonConvert.SerializeObject(_savedActors, Formatting.Indented, JsonSettings);
             File.WriteAllText(temp, json);
             if (File.Exists(SavePath)) File.Copy(SavePath, backup, true);
@@ -287,7 +273,7 @@ internal static class MclslMaobaoArchiveManager
                 ?? new Dictionary<string, SavedActorPacket>(StringComparer.Ordinal);
             List<string> invalid = new();
             foreach (KeyValuePair<string, SavedActorPacket> pair in _savedActors)
-                if (pair.Value?.ActorData == null) invalid.Add(pair.Key);
+                if (pair.Value?.ActorData == null || pair.Value.SchemaVersion != 1) invalid.Add(pair.Key);
             for (int i = 0; i < invalid.Count; i++) _savedActors.Remove(invalid[i]);
             if (!string.Equals(source, primary, StringComparison.Ordinal)) SaveToFile();
         }

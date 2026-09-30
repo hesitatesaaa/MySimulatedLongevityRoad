@@ -1,4 +1,5 @@
 using System;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Traits;
@@ -39,9 +40,18 @@ internal static class MclslCultivationStateTransitions
             return true;
         }
 
+        bool converting = string.Equals(previous, MclslCultivationSystemIds.AncientLaw, StringComparison.Ordinal)
+            && string.Equals(normalized, MclslCultivationSystemIds.NewLaw, StringComparison.Ordinal);
+        if (converting)
+        {
+            MclslDiagnostics.Cultivation("conversion.before",
+                "actor=" + MclslActorAccessor.Id(actor) + " realm=" + MclslActorAccessor.Realm(actor)
+                + " system=" + previous + " lifespan="
+                + MclslLongevityRules.ExpectedLifespan(actor, MclslActorAccessor.Realm(actor)));
+            MclslLongevityRules.PreserveAncientLifespanForConversion(actor);
+        }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationSystem, normalized);
-        if (string.Equals(previous, MclslCultivationSystemIds.AncientLaw, StringComparison.Ordinal)
-            && string.Equals(normalized, MclslCultivationSystemIds.NewLaw, StringComparison.Ordinal))
+        if (converting)
         {
             // 0.1.9 以前旧法高境也曾误用新法尊号键。转修新法时清空，
             // 让角色依据新法法则、天地之魄与逆理重新获得对应尊号。
@@ -64,6 +74,12 @@ internal static class MclslCultivationStateTransitions
         }
         MclslActorAccessor.ApplyDisplayName(actor, realm);
         RefreshIndexes(actor);
+        if (converting)
+            MclslDiagnostics.Cultivation("conversion.identity",
+                "actor=" + MclslActorAccessor.Id(actor) + " realm=" + realm
+                + " system=" + previous + "->" + normalized
+                + " baseFloor=" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ConvertedLifespanFloor, 0)
+                + " lifespanAfter=" + MclslLongevityRules.ExpectedLifespan(actor, realm));
         return true;
     }
 

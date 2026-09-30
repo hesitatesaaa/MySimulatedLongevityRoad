@@ -28,10 +28,7 @@ internal static class MclslFactionPressureSystem
             return;
         }
 
-        List<Actor> candidates = new(MclslCultivatorCandidateIndex.SelectCultivators(
-            CandidateLimit,
-            MclslActorAccessor.Alive,
-            PressureCandidateScore));
+        IReadOnlyList<Actor> candidates = MclslActorProjectionIndex.PressureCandidates(CandidateLimit);
 
         int seed = PositiveHash(run.RunId + "|faction_pressure|" + year + "|" + run.FactionPressureEvents.Count);
         if (allianceLevel > 0) ResolveWanXianPressure(run, candidates, year, allianceLevel, seed);
@@ -46,7 +43,7 @@ internal static class MclslFactionPressureSystem
     {
     }
 
-    private static void ResolveWanXianPressure(MclslWorldRunState run, List<Actor> candidates, int year, int level, int seed)
+    private static void ResolveWanXianPressure(MclslWorldRunState run, IReadOnlyList<Actor> candidates, int year, int level, int seed)
     {
         string policy = level switch { >= 3 => "明令巡天", 2 => "仙盟清册", _ => "监察诸修" };
         List<Actor> affected = PickActors(candidates, year, seed, preferOrder: true);
@@ -66,7 +63,7 @@ internal static class MclslFactionPressureSystem
             "万仙盟推行“" + policy + "”，" + effect + (string.IsNullOrWhiteSpace(names) ? "。" : "，牵涉：" + names + "。"));
     }
 
-    private static void ResolveFiveEldersPressure(MclslWorldRunState run, List<Actor> candidates, int year, int level, int seed)
+    private static void ResolveFiveEldersPressure(MclslWorldRunState run, IReadOnlyList<Actor> candidates, int year, int level, int seed)
     {
         string policy = level switch { >= 3 => "潜伏成网", 2 => "遗迹设伏", _ => "暗布棋子" };
         List<Actor> affected = PickActors(candidates, year, seed, preferOrder: false);
@@ -131,7 +128,7 @@ internal static class MclslFactionPressureSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "五老会" + policy + "牵引暗线，得灵石、遗迹阅历与炼心残篇");
     }
 
-    private static List<Actor> PickActors(List<Actor> candidates, int year, int seed, bool preferOrder)
+    private static List<Actor> PickActors(IReadOnlyList<Actor> candidates, int year, int seed, bool preferOrder)
     {
         List<Actor> result = new(AffectedActorLimit);
         if (candidates == null || candidates.Count == 0) return result;
@@ -153,7 +150,7 @@ internal static class MclslFactionPressureSystem
         return realm * 45 + mind + (preferOrder ? contribution : ruin);
     }
 
-    private static int PressureCandidateScore(Actor actor)
+    internal static int PressureCandidateScore(Actor actor)
     {
         int realm = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
         int essence = Math.Min(120, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0) / 80);

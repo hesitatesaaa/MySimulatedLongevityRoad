@@ -3,9 +3,8 @@ using UnityEngine;
 namespace MySimulatedLongevityRoad.Core;
 
 /// <summary>
-/// 独立于 Harmony 模拟钩子的运行时驱动。MapBox.updateSimulation 补丁仍保留，
-/// 但即使目标方法签名变化或补丁被其他模组覆盖，年度队列也会每个渲染帧获得
-/// 一次有界消费机会。MclslRuntime.Tick 自身按 Unity 帧去重，因此双入口不会重复结算。
+/// 唯一的渲染帧调度入口。年度队列每帧获得一次有界消费机会，
+/// 原生模拟补丁只发布生命周期变化，不再另行执行模组 Tick。
 /// </summary>
 internal sealed partial class MclslRuntimeDriver : MonoBehaviour
 {

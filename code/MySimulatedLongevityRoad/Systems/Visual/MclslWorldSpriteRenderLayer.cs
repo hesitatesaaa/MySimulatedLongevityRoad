@@ -26,6 +26,15 @@ internal static class MclslWorldSpriteRenderLayer
     private static int _lastBackLayerResolveFrame = -10000;
     private static Material _backMaterial;
 
+    internal static bool TryConfigureFrontEffect(SpriteRenderer renderer)
+    {
+        if (renderer == null || !TryResolveNativeEffectLayer(out EffectLayerDescriptor layer)) return false;
+        renderer.sortingLayerID = layer.SortingLayerId;
+        renderer.sortingOrder = 101;
+        if (layer.SharedMaterial != null) renderer.sharedMaterial = layer.SharedMaterial;
+        return true;
+    }
+
     internal static bool TrySpawnActorBackEffect(
         Vector2 position,
         float scale,

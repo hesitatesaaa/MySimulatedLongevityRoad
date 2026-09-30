@@ -1,18 +1,17 @@
 using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslCultivationAgeSanity
 {
-    private const int CurrentTrueEssenceScaleVersion = 2;
 
     internal static bool RepairImpossibleYouthCultivation(Actor actor, int year)
     {
         if (actor?.data == null || !MclslActorAccessor.Alive(actor)) return false;
 
-        int storedScaleVersion = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssenceScaleVersion, 0);
         int age = SafeAge(actor);
         string realm = MclslActorAccessor.Realm(actor);
         bool ancientLaw = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
@@ -20,8 +19,12 @@ internal static class MclslCultivationAgeSanity
         int currentEssence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         string allowedRealm = HighestRealmAllowedAtAge(age);
         bool changed = false;
+        // These two placed immortals are authored at their epoch's final realm.
+        // Never treat their age as evidence
+        // that their realm or true essence is invalid.
+        bool placedImmortal = MclslImmortalActorRegistration.IsImmortal(actor);
 
-        if (!string.IsNullOrWhiteSpace(realm)
+        if (!placedImmortal && !string.IsNullOrWhiteSpace(realm)
             && MclslRealmIds.Index(realm) > MclslRealmIds.Index(allowedRealm))
         {
             string previousRealm = realm;
@@ -50,7 +53,9 @@ internal static class MclslCultivationAgeSanity
             changed = true;
         }
 
-        int cappedEssence = CapEssenceBeforeAgeGate(actor, realm, ancientLaw, age, currentEssence);
+        int cappedEssence = placedImmortal
+            ? currentEssence
+            : CapEssenceBeforeAgeGate(actor, realm, ancientLaw, age, currentEssence);
         if (cappedEssence < MclslCultivationGrowthSystem.CurrentTrueEssence(actor))
         {
             MclslCultivationGrowthSystem.SetTrueEssence(
@@ -69,22 +74,6 @@ internal static class MclslCultivationAgeSanity
                 + " realm=" + realm
                 + " before=" + currentEssence
                 + " after=" + cappedEssence);
-            changed = true;
-        }
-
-        if (storedScaleVersion < CurrentTrueEssenceScaleVersion
-            && MclslCultivationActorMarker.HasCultivationMarker(actor))
-        {
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.TrueEssenceScaleVersion, CurrentTrueEssenceScaleVersion);
-            MclslDiagnostics.Cultivation(
-                "age_sanity.scale_version",
-                "actor=" + MclslActorAccessor.Id(actor)
-                + " year=" + year
-                + " age=" + age
-                + " oldVersion=" + storedScaleVersion
-                + " newVersion=" + CurrentTrueEssenceScaleVersion
-                + " realm=" + MclslActorAccessor.Realm(actor)
-                + " essence=" + MclslCultivationGrowthSystem.CurrentTrueEssence(actor));
             changed = true;
         }
 

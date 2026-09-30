@@ -26,7 +26,6 @@ internal sealed class MclslPersistenceModule : MclslModuleBase
     {
         MclslWorldRunRepository.EnsureCurrentRun(year);
         MclslNativeHistoryBridge.EnsureRegistered();
-        MclslNativeKillStatisticsSystem.TickAnnualRepair(year);
     }
 
     internal override void TickFrame(int frameCounter)
@@ -37,7 +36,6 @@ internal sealed class MclslPersistenceModule : MclslModuleBase
     internal override void PrepareForSave()
     {
         MclslReincarnationProfileStore.Flush();
-        MclslWorldArchiveStore.SaveNow();
     }
 
     internal override void Clear()
@@ -123,7 +121,10 @@ internal sealed class MclslRuntimeCadenceModule : MclslModuleBase
     internal override void TickLoadRecovery(int year) => MclslScheduler.ScheduleAnnualWorld(year);
     internal override void TickAnnual(int year) => MclslScheduler.ScheduleAnnualWorld(year);
     internal override void TickFrame(int frameCounter) => MclslRuntimeCadence.Tick(frameCounter);
-    internal override void PrepareForSave() => MclslScheduler.FlushPendingAnnualStatesForSave();
+    internal override void PrepareForSave()
+    {
+        MclslWorldArchiveStore.SaveNow();
+    }
     internal override void Clear() => MclslRuntimeCadence.Clear();
 }
 
@@ -147,11 +148,4 @@ internal sealed class MclslAnnouncementModule : MclslModuleBase
     internal override int Order => 90;
     internal override void TickFrame(int frameCounter) => MclslAnnouncementSystem.Tick();
     internal override void Clear() => MclslAnnouncementSystem.Clear();
-}
-
-internal sealed class MclslArchiveMaintenanceModule : MclslModuleBase
-{
-    internal override string Name => "ArchiveMaintenance";
-    internal override int Order => 120;
-    internal override void TickFrame(int frameCounter) => MclslWorldArchiveStore.TickPeriodic(frameCounter);
 }

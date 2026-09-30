@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Modules;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using NeoModLoader.General;
@@ -37,6 +38,22 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private string _kingdomRealmFilter = MclslEventCatalog.All;
     private Rect _rect = new(60f, 60f, 1600f, 1230f);
     private MclslCodexSnapshot _snapshot = new();
+    private MclslCodexSnapshot _nextSnapshot;
+    private void BeginSnapshot()
+    {
+        _nextSnapshot?.Cancel();
+        if (!_snapshot.Ready) _snapshot.Cancel();
+        MclslCodexSnapshot next = MclslCodexSnapshot.Build();
+        if (_visible && _snapshot.Ready) _nextSnapshot = next;
+        else { _snapshot = next; _nextSnapshot = null; }
+    }
+    internal static void ClearRuntime()
+    {
+        if (_instance == null) return;
+        if (_instance._visible) _instance.CloseWindow();
+        _instance._snapshot.Cancel(); _instance._nextSnapshot?.Cancel();
+        _instance._snapshot = new(); _instance._nextSnapshot = null;
+    }
     private static bool _stylesReady;
     private static GUIStyle _windowStyle;
     private static GUIStyle _buttonStyle;
@@ -61,7 +78,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             _instance = host.AddComponent<MclslCodexWindow>();
         }
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        _instance._snapshot = MclslCodexSnapshot.Build();
+        _instance.BeginSnapshot();
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = false;
         _instance._standaloneMaobao = false;
@@ -80,7 +97,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             _instance = host.AddComponent<MclslCodexWindow>();
         }
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        _instance._snapshot = MclslCodexSnapshot.Build();
+        _instance.BeginSnapshot();
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = true;
         _instance._standaloneMaobao = false;
@@ -95,6 +112,24 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (_visible)
         {
+            MclslCodexSnapshot building = _nextSnapshot ?? _snapshot;
+            building.Advance();
+            if (building.Ready)
+            {
+                if (_nextSnapshot != null) { _snapshot = _nextSnapshot; _nextSnapshot = null; }
+                if (_snapshot.SourceRevision != MclslWorldArchiveStore.Revision) BeginSnapshot();
+            }
+            RefreshBiographyIndex();
+            _snapshot.Population = MclslWorldActorQuery.UnitCount();
+            _snapshot.Cultivators = MclslCodexPopulationIndex.Count;
+            _snapshot.SensingQi = MclslCodexPopulationIndex.SensingQi;
+            _snapshot.TrackedActors = MclslCultivatorCandidateIndex.KnownActorCount;
+            _snapshot.AnnualCandidates = MclslCultivatorCandidateIndex.AnnualCandidateCount;
+            _snapshot.AnnualActorBacklog = MclslScheduler.AnnualActorBacklogCount;
+            _snapshot.AnnualActorStates = MclslScheduler.AnnualActorStateCount;
+            _snapshot.AnnualModuleBacklog = MclslModuleHub.AnnualModuleBacklogCount;
+            _snapshot.LoadRecoveryBacklog = MclslModuleHub.LoadRecoveryBacklogCount;
+            _snapshot.AnnualWorldWorkPending = MclslScheduler.AnnualWorldWorkPending;
             EnforceCodexPause();
             if (Input.GetKeyDown(KeyCode.Escape)) CloseWindow();
         }
@@ -198,7 +233,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUI.backgroundColor = new Color(0.36f, 0.34f, 0.24f, 1f);
         if (GUILayout.Button("重新照录", GUILayout.Width(104f), GUILayout.Height(38f)))
         {
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.backgroundColor = new Color(0.27f, 0.34f, 0.38f, 1f);
         if (GUILayout.Button("修士榜", GUILayout.Width(88f), GUILayout.Height(38f)))
@@ -264,6 +299,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void CloseWindow()
     {
+        _snapshot.Cancel(); _nextSnapshot?.Cancel();
+        _snapshot = new(); _nextSnapshot = null;
+        ClearBiographyRuntime();
         _visible = false;
         DestroyOverlayBlocker();
         ReleaseCodexPause();
@@ -1380,7 +1418,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             if (success)
             {
                 _huanzhenReplacementAnchorPath = string.Empty;
-                _snapshot = MclslCodexSnapshot.Build();
+                BeginSnapshot();
             }
         }
         GUI.backgroundColor = Color.white;
@@ -1535,7 +1573,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(410), GUILayout.ExpandHeight(true));
         DrawCardStripe("#69E6DD");
         GUILayout.Label("<size=20><b>空间灵蕴</b></size>");
-        GUILayout.Label("<color=#B9B0A0>空间灵蕴不会随年份自然增长，只在宿主实际完成晋升、杀人夺宝或重大事件后结算。</color>");
+        GUILayout.Label("<color=#B9B0A0>首次绑定获得80点空间灵蕴；当前宿主每经过10个游戏年自然增加1点。晋升、击杀与重大事件也会结算灵蕴。</color>");
         DrawFlowRow("宿主晋升", "炼气+8、筑基+15、金丹+25、元婴+40、化神+60、合道+90、长生+140。", "#69E6DD");
         DrawFlowRow("杀人夺宝", "凡俗+2；炼气至长生依次+3、+6、+10、+16、+25、+38、+55。", "#9CD7FF");
         DrawFlowRow("洞天炼化", "按品质与契合度获得12至32点左右。", "#A7E08A");
@@ -1615,7 +1653,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (GUILayout.Button(claimed ? "已取·" + title : title, GUILayout.Height(34), GUILayout.Width(150)))
         {
             MclslHuanzhenSystem.TryClaimLegacyCategory(legacy.Id, category, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.enabled = oldEnabled;
     }
@@ -1630,7 +1668,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             if (claimed) MclslHuanzhenSystem.TryReleaseLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
             else MclslHuanzhenSystem.TryClaimLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.enabled = oldEnabled;
     }
@@ -1645,7 +1683,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
         {
             MclslHuanzhenSystem.TryClaimLegacyTrait(legacy.Id, traitId, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.enabled = oldEnabled;
     }
@@ -1731,16 +1769,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         int realm = Math.Max(0, MclslRealmIds.Index(lineage.PeakRealm)) * 9;
         int cap = Math.Max(0, MclslRealmIds.Index(lineage.MaxRealm)) * 5;
         return Math.Clamp(peak + realm + cap, 1, 100);
-    }
-
-    private static int AncientLineageScore(MclslTechniqueLineageRecord lineage)
-    {
-        if (lineage == null) return 0;
-        int strength = AncientLineageStrength(lineage);
-        int current = Math.Clamp(lineage.CurrentPractitioners, 0, 999);
-        int realm = Math.Max(0, MclslRealmIds.Index(lineage.MaxRealm));
-        int branches = Math.Clamp(lineage.BranchCount, 0, 9);
-        return Math.Max(100, strength * 780 + current * 120 + realm * 1800 + branches * 950);
     }
 
     private static string AncientLineageStrengthLabel(MclslTechniqueLineageRecord lineage)
@@ -1873,13 +1901,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         string stability = AncientLineageStrength(lineage) >= 66 ? "道基稳固" : AncientLineageStrength(lineage) >= 36 ? "根基渐成" : "初传未稳";
         string state = AncientLineageState(lineage);
         return laws + " · 上限" + realm + " · " + stability + " · " + state;
-    }
-
-    private static int CountLineageLaws(MclslTechniqueLineageRecord lineage)
-    {
-        if (lineage == null || string.IsNullOrWhiteSpace(lineage.LawTags)) return 0;
-        string[] parts = lineage.LawTags.Split(new[] { ',', '、' }, StringSplitOptions.RemoveEmptyEntries);
-        return parts.Length;
     }
 
     private static string BlankFounder(string value)
@@ -2015,13 +2036,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private static string Signed(int value) => value > 0 ? "+" + value : value.ToString();
 
-    private static string FirstSegment(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value)) return "记录";
-        int index = value.IndexOfAny(new[] { '｜', '：', ':' });
-        return index > 0 ? value.Substring(0, Math.Min(index, 24)) : value.Substring(0, Math.Min(value.Length, 24));
-    }
-
     private static void DrawPageHeader(string title, string subtitle)
     {
         GUILayout.BeginVertical(GUI.skin.box);
@@ -2076,8 +2090,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             _ => "本世时代状态尚未归档。"
         };
     }
-
-    private static string YearLabel(int year) => year > 0 ? year + "年" : "未定";
 
     private static MclslCodexTab[] ActiveTabs()
     {

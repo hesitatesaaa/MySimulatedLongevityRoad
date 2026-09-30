@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MySimulatedLongevityRoad.Core;
@@ -20,48 +21,55 @@ internal static class MclslActorInfoPanel
     private const string ViewportName = "Viewport";
     private const string TextName = "MclslActorInfoText";
     private const string ScrollbarName = "MclslActorInfoScrollbar";
-    private const int ActiveWindowRefreshIntervalFrames = 180;
-    private static int _lastActiveWindowRefreshFrame = -9999;
+    private static readonly HashSet<UnitWindow> OpenWindows = new();
+    private static readonly Dictionary<UnitWindow, PanelState> WindowStates = new();
 
     internal static void Refresh(UnitWindow window, bool resetScrollForNewActor = false, bool forceContentRefresh = false)
     {
-        if (window == null) return;
+        if (window == null || !window.gameObject.activeInHierarchy) return;
+        OpenWindows.Add(window);
+        long actorId = MclslActorAccessor.Id(window.actor);
+        if (!forceContentRefresh && !resetScrollForNewActor
+            && WindowStates.TryGetValue(window, out PanelState cached) && cached != null
+            && MclslActorAccessor.Alive(window.actor)
+            && cached.Initialized && cached.ActorId == actorId && cached.gameObject.activeInHierarchy) return;
         Transform background = ResolvePanelParent(window);
         if (background == null)
         {
             MclslMaobaoShortcutButton.Hide(window);
-            MclslQiankunShortcutButton.Hide(window);
             return;
         }
 
-        CleanupLegacyPanel(background);
         if (window.actor == null || !window.actor.isAlive())
         {
             MclslMaobaoShortcutButton.Hide(window);
-            MclslQiankunShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
 
         MclslMaobaoShortcutButton.Refresh(window);
-        MclslQiankunShortcutButton.Refresh(window);
         if (!ShouldShowFor(window.actor) && !MclslDeveloperBridge.IsAvailable)
         {
             HidePanel(background);
             return;
         }
 
-        long actorId = MclslActorAccessor.Id(window.actor);
         Text text = EnsurePanel(background, out ScrollRect scroll, out PanelState state, out Text header);
         if (text == null) return;
+        WindowStates[window] = state;
         Transform panel = text.transform.parent?.parent?.parent;
         EnsureActionBar(panel ?? background, window.actor);
-        MclslMaobaoShortcutButton.Refresh(window);
-        MclslQiankunShortcutButton.Refresh(window);
         if (scroll != null) scroll.gameObject.SetActive(true);
         bool actorChanged = state != null && state.ActorId != actorId;
 
-        string formatted = MclslActorInfoFormatter.Format(window.actor);
+        string formatted;
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            using (MclslUnityProfiler.Sample("MCLS/UI/ActorInfo"))
+                formatted = MclslActorInfoFormatter.Format(window.actor);
+        }
+        finally { MclslPerformanceProbe.End("UI.人物侧栏", sample); }
         if (string.IsNullOrWhiteSpace(formatted))
         {
             if (!MclslDeveloperBridge.IsAvailable)
@@ -97,8 +105,6 @@ internal static class MclslActorInfoPanel
             if (scroll?.content != null)
             {
                 LayoutRebuilder.MarkLayoutForRebuild(scroll.content);
-                Canvas.ForceUpdateCanvases();
-                LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
             }
         }
         if (scroll == null) return;
@@ -128,52 +134,32 @@ internal static class MclslActorInfoPanel
         }
     }
 
-    internal static void RefreshActiveWindowsThrottled(int frameCount)
-    {
-        if (frameCount - _lastActiveWindowRefreshFrame < ActiveWindowRefreshIntervalFrames) return;
-        _lastActiveWindowRefreshFrame = frameCount;
-        UnitWindow[] windows;
-        try { windows = Resources.FindObjectsOfTypeAll<UnitWindow>(); }
-        catch (System.Exception ex)
-        {
-            MclslDiagnostics.Error("actor-info-find-active-windows", "查找打开的角色窗口失败: " + ex.Message);
-            return;
-        }
-        for (int i = 0; i < windows.Length; i++)
-        {
-            UnitWindow window = windows[i];
-            if (window == null || !window.gameObject.activeInHierarchy || window.actor?.data == null) continue;
-            Refresh(window, resetScrollForNewActor: false, forceContentRefresh: true);
-        }
-    }
-
     internal static void RefreshOpenForActor(Actor actor)
     {
         if (actor?.data == null) return;
-        long id = MclslActorAccessor.Id(actor);
-        UnitWindow[] windows;
-        try { windows = Resources.FindObjectsOfTypeAll<UnitWindow>(); }
-        catch (System.Exception ex)
+        foreach (UnitWindow window in OpenWindows)
         {
-            MclslDiagnostics.Error("actor-info-find-actor-window", "查找指定角色窗口失败: " + ex.Message);
-            return;
-        }
-        for (int i = 0; i < windows.Length; i++)
-        {
-            UnitWindow window = windows[i];
-            if (window == null || !window.gameObject.activeInHierarchy || window.actor?.data == null) continue;
-            if (MclslActorAccessor.Id(window.actor) != id) continue;
+            if (window == null || !window.gameObject.activeInHierarchy || window.actor != actor) continue;
             Refresh(window, resetScrollForNewActor: false, forceContentRefresh: true);
         }
     }
+    internal static bool HasOpenActor(Actor actor)
+    {
+        foreach (UnitWindow window in OpenWindows)
+            if (window != null && window.gameObject.activeInHierarchy && window.actor == actor) return true;
+        return false;
+    }
+    internal static void ClearRuntime() { OpenWindows.Clear(); WindowStates.Clear(); MclslActorOverviewStatsFormatter.ClearRuntime(); MclslGenderToggleButton.ClearRuntime(); MclslMaobaoShortcutButton.ClearRuntime(); }
 
     internal static void OnWindowClosed(UnitWindow window)
     {
+        OpenWindows.Remove(window);
+        MclslActorOverviewStatsFormatter.OnClosed(window);
+        if (!ReferenceEquals(window, null)) WindowStates.Remove(window);
         if (window == null) return;
         Transform background = ResolvePanelParent(window);
         if (background != null) HidePanel(background);
         MclslMaobaoShortcutButton.Hide(window);
-        MclslQiankunShortcutButton.Hide(window);
     }
 
     private static Text EnsurePanel(Transform parent, out ScrollRect scroll, out PanelState state, out Text header)
@@ -182,7 +168,7 @@ internal static class MclslActorInfoPanel
         GameObject panel = existing?.gameObject;
         if (panel == null)
         {
-            panel = new GameObject(PanelName, typeof(RectTransform), typeof(Image), typeof(Outline), typeof(ScrollRect));
+            panel = new GameObject(PanelName, typeof(RectTransform), typeof(Image), typeof(Outline));
             panel.transform.SetParent(parent, false);
         }
         panel.SetActive(true);
@@ -209,17 +195,8 @@ internal static class MclslActorInfoPanel
         panelShadow.effectDistance = new Vector2(2f, -2f);
         panelShadow.useGraphicAlpha = true;
 
-        // Keep the old component for scene migration, but the child body owns
-        // scrolling so the header and footer never move with the content.
-        ScrollRect legacyRootScroll = panel.GetComponent<ScrollRect>();
-        legacyRootScroll.enabled = false;
-
         EnsurePanelAccent(panel.transform);
         header = EnsureHeader(panel.transform);
-        // A panel created by 0.1.9 may still contain a direct Viewport child.
-        // Hide it once so the migrated body is the only visible content tree.
-        Transform legacyViewport = panel.transform.Find(ViewportName);
-        if (legacyViewport != null) legacyViewport.gameObject.SetActive(false);
         Transform body = EnsureBody(panel.transform);
         RectTransform viewport = EnsureViewport(body);
         Text text = EnsureText(viewport.transform);
@@ -257,25 +234,9 @@ internal static class MclslActorInfoPanel
         }
     }
 
-    private static void CleanupLegacyPanel(Transform parent)
-    {
-        Transform legacy = parent?.Find("XuanJianInfoPanel");
-        if (legacy == null || legacy.GetComponent<PanelState>() == null) return;
-        try { UnityEngine.Object.Destroy(legacy.gameObject); }
-        catch { try { legacy.gameObject.SetActive(false); } catch { } }
-    }
-
     private static void EnsureActionBar(Transform panel, Actor actor)
     {
         if (panel == null || actor?.data == null) return;
-        // 旧版本可能把操作栏挂在人物窗口 Background 下；清理旧的同名
-        // 兄弟节点，避免出现悬空按钮和面板内按钮同时存在。
-        Transform stale = panel.parent?.Find("MclslActorActions");
-        if (stale != null && stale != panel)
-        {
-            try { UnityEngine.Object.Destroy(stale.gameObject); }
-            catch { stale.gameObject.SetActive(false); }
-        }
         Transform existing = panel.Find("MclslActorActions");
         GameObject bar = existing?.gameObject;
         if (bar == null)
@@ -705,9 +666,8 @@ internal static class MclslActorInfoPanel
                 PendingScrollRestoreFrames = 0;
                 return;
             }
-            // Refresh() already forced the text/layout update before scheduling
-            // this bounded restore window. Retry the scroll position over later
-            // frames without forcing a full-canvas rebuild on every retry.
+            // Restore after Unity has processed the dirty layout. The retry
+            // window is bounded and never forces a canvas rebuild.
             bool wasRestoring = IsRestoring;
             IsRestoring = true;
             RestoreScroll(scroll, PendingNormalizedPosition, PendingContentPosition);

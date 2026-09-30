@@ -22,9 +22,17 @@ internal static class MclslPatches
         int count = 0;
         count += TryPatchPair(harmony, "Debug.LogError", typeof(Debug), nameof(Debug.LogError), new[] { typeof(object) }, prefix: nameof(Debug_LogError_FilterMclslMissingText_Prefix));
         count += TryPatchPair(harmony, "Debug.LogWarning", typeof(Debug), nameof(Debug.LogWarning), new[] { typeof(object) }, prefix: nameof(Debug_LogWarning_FilterMclslMissingText_Prefix));
+        count += TryPatchPair(harmony, "LocalizedTextManager.getText", typeof(LocalizedTextManager), nameof(LocalizedTextManager.getText), new[] { typeof(string), typeof(UnityEngine.UI.Text), typeof(bool) }, prefix: nameof(LocalizedTextManager_GetText_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_GetText_MclslFallback_Postfix));
+        count += TryPatchPair(harmony, "LocalizedTextManager.stringExists", typeof(LocalizedTextManager), nameof(LocalizedTextManager.stringExists), new[] { typeof(string) }, prefix: nameof(LocalizedTextManager_StringExists_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_StringExists_MclslFallback_Postfix));
+        count += TryPatchPair(harmony, "LocalizedTextManager.setLanguage", typeof(LocalizedTextManager), nameof(LocalizedTextManager.setLanguage), new[] { typeof(string) }, postfix: nameof(LocalizedTextManager_SetLanguage_RestoreMclslChinese_Postfix));
         count += TryPatchPair(harmony, "Subspecies.generateName", typeof(Subspecies), "generateName", Type.EmptyTypes, postfix: nameof(Subspecies_GenerateName_WorldSoul_Postfix));
         count += TryPatchPair(harmony, "Subspecies.getUnitSpriteForBanner", typeof(Subspecies), "getUnitSpriteForBanner", Type.EmptyTypes, prefix: nameof(Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "MapBox.updateSimulation", typeof(MapBox), "updateSimulation", Type.EmptyTypes, postfix: nameof(MapBox_UpdateSimulation_Postfix));
+        MethodInfo simulation = AccessTools.Method(typeof(MapBox), "updateSimulation", new[] { typeof(float) });
+        bool protectedSimulation = MclslHarmonyPatchGuard.TryPatch(harmony, "MapBox.updateSimulation(float)", simulation,
+            AccessTools.Method(typeof(MclslPatches), nameof(MapBox_UpdateSimulation_Prefix)),
+            null);
+        MclslAnnualBackpressure.SetPatchAvailable(protectedSimulation);
+        if (protectedSimulation) count++;
         count += TryPatchPair(harmony, "MapBox.generateNewMap", typeof(MapBox), nameof(MapBox.generateNewMap), Type.EmptyTypes, prefix: nameof(MapBox_GenerateNewMap_Prefix));
         count += TryPatchPair(harmony, "MapBox.finishingUpLoading", typeof(MapBox), "finishingUpLoading", Type.EmptyTypes, postfix: nameof(MapBox_FinishingUpLoading_Postfix));
         count += TryPatchPair(harmony, "MapBox.clearWorld", typeof(MapBox), "clearWorld", Type.EmptyTypes, postfix: nameof(MapBox_ClearWorld_Postfix));
@@ -36,11 +44,19 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "Actor.updateStats.lifespanRepair", typeof(Actor), "updateStats", Type.EmptyTypes, postfix: nameof(Actor_UpdateStats_LifespanRepair_Postfix));
         count += TryPatchPair(harmony, "Actor.removeTrait", typeof(Actor), "removeTrait", new[] { typeof(string) }, postfix: nameof(Actor_RemoveTrait_Postfix));
         count += TryPatchPairOptional(harmony, "ActorTraitsEditor.OnEnable", typeof(ActorTraitsEditor), "OnEnable", Type.EmptyTypes, postfix: nameof(ActorTraitsEditor_OnEnable_Postfix));
+        count += TryPatchPairOptional(harmony, "ActorTraitsEditor.OnDisable", typeof(ActorTraitsEditor), "OnDisable", Type.EmptyTypes, postfix: nameof(ActorTraitsEditor_OnDisable_Postfix));
+        count += TryPatchPair(harmony, "Actor.setAttackTarget", typeof(Actor), "setAttackTarget", new[] { typeof(BaseSimObject) }, postfix: nameof(Actor_TargetChanged_Postfix));
+        count += TryPatchPair(harmony, "Actor.clearAttackTarget", typeof(Actor), "clearAttackTarget", Type.EmptyTypes, postfix: nameof(Actor_TargetChanged_Postfix));
+        count += TryPatchPair(harmony, "Actor.clearBeh", typeof(Actor), "clearBeh", Type.EmptyTypes, postfix: nameof(Actor_TargetChanged_Postfix));
+        count += TryPatchPair(harmony, "Actor.clearTasks", typeof(Actor), "clearTasks", Type.EmptyTypes, postfix: nameof(Actor_TargetChanged_Postfix));
+        count += TryPatchPair(harmony, "Actor.setTask", typeof(Actor), "setTask", new[] { typeof(string), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(Actor_TargetChanged_Postfix));
         count += TryPatchPair(harmony, "Actor.die", typeof(Actor), "die", new[] { typeof(bool), typeof(AttackType), typeof(bool), typeof(bool) }, prefix: nameof(Actor_Die_Prefix), postfix: nameof(Actor_Die_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.OnEnable", typeof(UnitWindow), "OnEnable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnEnable_Postfix));
         count += TryPatchPairOptional(harmony, "UnitWindow.OnDisable", typeof(UnitWindow), "OnDisable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnDisable_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.showStatsRows", typeof(UnitWindow), "showStatsRows", Type.EmptyTypes, postfix: nameof(UnitWindow_ShowStatsRows_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.showInfo", typeof(UnitWindow), "showInfo", Type.EmptyTypes, postfix: nameof(UnitWindow_ShowInfo_Postfix));
+        count += TryPatchPairOptional(harmony, "SelectedUnitTab.showStatBars.mana", typeof(SelectedUnitTab), "showStatBars", new[] { typeof(Actor) }, postfix: nameof(SelectedUnitTab_ShowStatBars_Mana_Postfix));
+        count += TryPatchPairOptional(harmony, "UnitBarsElement.showContent.mana", typeof(UnitBarsElement), "showContent", Type.EmptyTypes, postfix: nameof(UnitBarsElement_ShowContent_Mana_Postfix));
         count += TryPatchPairOptional(harmony, "PlayerControl.checkClickTouchInspectSelect", typeof(PlayerControl), "checkClickTouchInspectSelect", Type.EmptyTypes, postfix: nameof(PlayerControl_CheckClickTouchInspectSelect_Postfix));
         count += TryPatchPair(harmony, "UnitStatsElement.showContent.safe", typeof(UnitStatsElement), "showContent", Type.EmptyTypes, finalizer: nameof(UnitStatsElement_ShowContent_Finalizer));
         count += TryPatchPair(harmony, "Actor.calculateMainSprite", typeof(Actor), "calculateMainSprite", Type.EmptyTypes, prefix: nameof(Actor_CalculateMainSprite_WorldSoul_Prefix));
@@ -107,6 +123,41 @@ internal static class MclslPatches
         return !MclslLocalizationBridge.ShouldSuppressMissingTextLog(__0);
     }
 
+    private static bool LocalizedTextManager_GetText_NormalizeMclslKey_Prefix(ref string __0, ref string __result)
+    {
+        if (MclslTextValue.TryDecode(__0, out string inlineText)) { __result = inlineText; return false; }
+        MclslLocalizationBridge.NormalizeLookupKey(ref __0);
+        if (MclslLocalizationBridge.TryResolveRuntimeKey(__0, out string chinese)
+            && !MclslLocalizationBridge.TryGetActiveText(__0, out _))
+        {
+            __result = chinese;
+            return false;
+        }
+        return true;
+    }
+
+    private static void LocalizedTextManager_GetText_MclslFallback_Postfix(string __0, ref string __result)
+    {
+        if ((string.IsNullOrEmpty(__result) || string.Equals(__result, __0, StringComparison.Ordinal))
+            && MclslLocalizationBridge.TryResolveRuntimeKey(__0, out string chinese))
+            __result = chinese;
+    }
+
+    private static void LocalizedTextManager_StringExists_NormalizeMclslKey_Prefix(ref string __0)
+    {
+        MclslLocalizationBridge.NormalizeLookupKey(ref __0);
+    }
+
+    private static void LocalizedTextManager_StringExists_MclslFallback_Postfix(string __0, ref bool __result)
+    {
+        if (!__result && MclslLocalizationBridge.TryResolveRuntimeKey(__0, out _)) __result = true;
+    }
+
+    private static void LocalizedTextManager_SetLanguage_RestoreMclslChinese_Postfix()
+    {
+        MclslLocalizationBridge.ReapplyAfterLanguageChange();
+    }
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(Subspecies), "generateName")]
     private static void Subspecies_GenerateName_WorldSoul_Postfix(Subspecies __instance)
@@ -118,30 +169,15 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(Subspecies), "getUnitSpriteForBanner")]
     private static bool Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix(Subspecies __instance, ref UnityEngine.Sprite __result)
     {
+        __result = MclslImmortalActorRegistration.TryGetBannerSprite(__instance);
+        if (__result != null) return false;
         if (!MclslWorldSoulActorRegistration.IsWorldSoulSubspecies(__instance)) return true;
         __result = MclslWorldSoulActorRegistration.TryGetBannerSprite();
         return __result == null;
     }
 
-    [HarmonyPostfix]
-    [HarmonyPatch(typeof(MapBox), "updateSimulation")]
-    private static void MapBox_UpdateSimulation_Postfix()
-    {
-        MclslRuntime.Tick();
-        int frame = Time.frameCount;
-        if (MclslHotPathPolicy.CanRunFrameGate("runtime-localization-retry", MclslHotPathPolicy.LocalizationRetryFrames))
-        {
-            TryPatch("runtime-localization-retry", () => MclslLocalizationBridge.RetryRuntimeKeys());
-        }
-        if (MclslHotPathPolicy.CanRunFrameGate("trait-editor-era-refresh", MclslHotPathPolicy.TraitEditorGlobalRefreshFrames))
-        {
-            TryPatch("trait-editor-era-refresh", () => MclslTraitEditorEraFilter.RefreshActiveEditorsThrottled(frame));
-        }
-        if (MclslHotPathPolicy.CanRunFrameGate("actor-info-refresh", MclslHotPathPolicy.ActorInfoRefreshFrames))
-        {
-            TryPatch("actor-info-refresh", () => MclslActorInfoPanel.RefreshActiveWindowsThrottled(frame));
-        }
-    }
+    [HarmonyPrefix]
+    private static bool MapBox_UpdateSimulation_Prefix(ref float __0) => MclslAnnualBackpressure.Apply(ref __0);
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(MapBox), nameof(MapBox.generateNewMap))]
@@ -197,7 +233,9 @@ internal static class MclslPatches
     private static void Actor_AddTrait_Postfix(Actor __instance, ActorTrait __0, bool __result)
     {
         if (!__result) return;
+        MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0?.id);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
     }
 
     [HarmonyPostfix]
@@ -205,7 +243,9 @@ internal static class MclslPatches
     private static void Actor_AddTraitById_Postfix(Actor __instance, string __0, bool __result)
     {
         if (!__result) return;
+        MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
     }
 
     [HarmonyPostfix]
@@ -213,21 +253,29 @@ internal static class MclslPatches
     private static void Actor_UpdateAge_RegisterPostfix(Actor __instance)
     {
         MclslScheduler.RegisterAndEnqueueAnnualActor(__instance);
+        MclslArtifactSystem.OnActorInitialized(__instance);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Native);
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(Actor), "updateStats")]
     private static void Actor_UpdateStats_LifespanRepair_Postfix(Actor __instance)
     {
-        MclslLongevityRules.ApplyRuntimeLifespan(__instance);
+        // WorldBox calls updateStats from Parallel.ForEach. Only the per-actor ID
+        // crosses this callback; caches and gameplay repair run on the main thread.
+        MclslRuntimeChanges.PublishNativeStats(__instance);
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(Actor), "removeTrait", new Type[] { typeof(string) })]
     private static void Actor_RemoveTrait_Postfix(Actor __instance, string __0)
     {
+        MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleRemovedTrait(__instance, __0);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
     }
+
+    private static void ActorTraitsEditor_OnDisable_Postfix(ActorTraitsEditor __instance) => MclslTraitEditorEraFilter.OnClosed(__instance);
 
     private static void ActorTraitsEditor_OnEnable_Postfix(ActorTraitsEditor __instance)
     {
@@ -274,6 +322,9 @@ internal static class MclslPatches
         return true;
     }
 
+    private static void Actor_TargetChanged_Postfix(Actor __instance)
+        => MclslRuntimeChanges.Publish(__instance, MclslActorChange.Native);
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(Actor), "die", new Type[] { typeof(bool), typeof(AttackType), typeof(bool), typeof(bool) })]
     private static void Actor_Die_Postfix(Actor __instance, AttackType __1, MclslDeathPatchState __state)
@@ -291,10 +342,13 @@ internal static class MclslPatches
             return;
         }
 
-        MclslDeathEventRouter.CommitActorDeath(__instance, __1, __state);
         long deadActorId = MclslActorAccessor.Id(__instance);
-        MclslCultivatorCandidateIndex.Remove(deadActorId);
-        MclslWorldActorQuery.MarkDirty();
+        try { MclslDeathEventRouter.CommitActorDeath(__instance, __1, __state); }
+        finally
+        {
+            MclslCultivatorCandidateIndex.Remove(deadActorId);
+            MclslWorldActorQuery.MarkDirty();
+        }
     }
 
     [HarmonyPostfix]
@@ -304,6 +358,7 @@ internal static class MclslPatches
         TryPatch("developer-select-actor-on-open", () => MclslDeveloperBridge.SetSelectedActor(__instance?.actor));
         TryPatch("unit-window-track-on-enable", () => MclslWorldActorQuery.TrackIfRelevant(__instance?.actor));
         TryPatch("unit-window-gender-on-enable", () => MclslGenderToggleButton.Refresh(__instance));
+        TryPatch("unit-window-qiankun-tab", () => MclslBackpackTabSystem.Bind(__instance));
         TryPatch("unit-window-info-panel-enable", () => MclslActorInfoPanel.Refresh(__instance, resetScrollForNewActor: true));
     }
 
@@ -323,6 +378,16 @@ internal static class MclslPatches
         TryPatch("unit-window-gender-stats", () => MclslGenderToggleButton.Refresh(__instance));
         TryPatch("unit-window-overview-stats", () => MclslActorOverviewStatsFormatter.Refresh(__instance));
         TryPatch("unit-window-info-panel-stats", () => MclslActorInfoPanel.Refresh(__instance));
+    }
+
+    private static void SelectedUnitTab_ShowStatBars_Mana_Postfix(SelectedUnitTab __instance, Actor pActor)
+    {
+        TryPatch("selected-unit-mana-bar", () => MclslManaBar.UpdateSelected(__instance, pActor));
+    }
+
+    private static void UnitBarsElement_ShowContent_Mana_Postfix(UnitBarsElement __instance)
+    {
+        TryPatch("unit-bars-mana", () => MclslManaBar.UpdateUnit(__instance));
     }
 
     [HarmonyPostfix]

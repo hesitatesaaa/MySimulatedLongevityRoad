@@ -4,12 +4,14 @@ using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using Newtonsoft.Json;
+using MySimulatedLongevityRoad.UI;
 
 namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslWorldRunRepository
 {
     private const int MaxEvents = 400;
+    private const int MaxMilestones = 128;
     private const int MaxDeaths = 600;
     private const int MaxFactionMissions = 300;
     private const int MaxFactionPressures = 180;
@@ -24,7 +26,6 @@ internal static class MclslWorldRunRepository
     private const int MaxWorldCaveRecords = 64;
     private const int MaxWorldChangeRecords = 64;
     private const int MaxReincarnationRecords = 200;
-    private const int MaxMaobaoRecords = 24;
     private const int MaxEventsPerYear = 36;
     private static MclslWorldRunState _current = new();
     private static MclslWorldRunState _normalizedRun;
@@ -36,6 +37,12 @@ internal static class MclslWorldRunRepository
     private static int _mapMarkerDataRevision;
     private static MclslWorldRunState _materialAwardKeysRun;
     private static HashSet<string> _materialAwardKeyIndex;
+    private static MclslWorldRunState _eventIndexesRun;
+    private static readonly Dictionary<(int Year, string Type, string Title), int> EventTitleKeys = new();
+    private static readonly Dictionary<(int Year, string Type, string Body), int> EventBodyKeys = new();
+    private static readonly HashSet<string> EventKeys = new(StringComparer.Ordinal);
+    private static readonly Dictionary<int, int> EventCountsByYear = new();
+    private static readonly Dictionary<(int Year, string Type), int> EventCountsByTypeYear = new();
     internal static MclslWorldRunState Current => _current;
     internal static int MapMarkerDataRevision => _mapMarkerDataRevision;
 
@@ -124,21 +131,32 @@ internal static class MclslWorldRunRepository
 
     internal static MclslWorldArchiveBundle ExportArchive()
     {
-        Normalize();
-        _normalizedRun = _current;
-        return JsonConvert.DeserializeObject<MclslWorldArchiveBundle>(JsonConvert.SerializeObject(new MclslWorldArchiveBundle { Version = MclslWorldArchiveMigration.CurrentVersion, CurrentRun = _current })) ?? new();
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            NormalizeCurrentRun();
+            return new MclslWorldArchiveBundle
+            {
+                Version = MclslSaveVersions.WorldArchive,
+                CurrentRun = _current
+            };
+        }
+        finally { MclslPerformanceProbe.End("档案导出", sample); }
     }
 
     internal static bool ImportArchive(MclslWorldArchiveBundle bundle)
     {
-        bool changed = MclslWorldArchiveMigration.Upgrade(bundle, out MclslWorldArchiveBundle upgraded);
-        _current = upgraded?.CurrentRun ?? new();
+        if (bundle == null || bundle.Version != MclslSaveVersions.WorldArchive || bundle.CurrentRun == null)
+            throw new InvalidOperationException("世界档案格式不匹配；本架构仅支持新格式存档");
+        _current = bundle.CurrentRun;
         InvalidateCurrentRunCaches();
         NotifyMapMarkerDataChanged();
         Normalize();
         _normalizedRun = _current;
+        InvalidateEventIndexes();
+        EnsureEventIndexes();
         MclslWorldRunRuntimeIndexes.Invalidate();
-        return changed;
+        return false;
     }
 
     private static void TrimSectRuinsToLimit()
@@ -216,19 +234,8 @@ internal static class MclslWorldRunRepository
 
     private static void CollectLiveResourceReferences(out HashSet<string> caveIds, out HashSet<string> changeIds)
     {
-        caveIds = new HashSet<string>(StringComparer.Ordinal);
-        changeIds = new HashSet<string>(StringComparer.Ordinal);
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        if (actors == null) return;
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            string caveId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentCaveId, string.Empty);
-            string changeId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.DivineChangeId, string.Empty);
-            if (!string.IsNullOrWhiteSpace(caveId)) caveIds.Add(caveId);
-            if (!string.IsNullOrWhiteSpace(changeId)) changeIds.Add(changeId);
-        }
+        caveIds = new HashSet<string>(MclslActorRegistry.LiveCaveReferences, StringComparer.Ordinal);
+        changeIds = new HashSet<string>(MclslActorRegistry.LiveChangeReferences, StringComparer.Ordinal);
     }
 
     private static void TrimReincarnationRecordsToLimit()
@@ -299,33 +306,166 @@ internal static class MclslWorldRunRepository
 
     private static bool TrimEventsPreservingMilestones(List<MclslRunEventRecord> list, int max)
     {
-        if (list == null || max <= 0 || list.Count <= max) return false;
-        int nonMilestoneCount = 0;
+        if (list == null || list.Count <= Math.Min(max, MaxMilestones)) return false;
+        int ordinary = 0, milestone = 0;
         for (int i = 0; i < list.Count; i++)
-        {
-            if (!IsMilestoneEvent(list[i]?.EventType)) nonMilestoneCount++;
-        }
-
-        int removeCount = Math.Max(0, nonMilestoneCount - max);
-        bool removedMapVisual = false;
-        for (int i = 0; i < list.Count && removeCount > 0;)
+            if (IsMilestoneEvent(list[i]?.EventType)) milestone++; else ordinary++;
+        int removeOrdinary = Math.Max(0, ordinary - max);
+        int removeMilestones = Math.Max(0, milestone - MaxMilestones);
+        bool visual = false;
+        for (int i = 0; i < list.Count && (removeOrdinary > 0 || removeMilestones > 0);)
         {
             MclslRunEventRecord record = list[i];
-            if (record == null || !IsMilestoneEvent(record.EventType))
-            {
-                if (record != null && !string.IsNullOrWhiteSpace(record.MapVisualKind)) removedMapVisual = true;
-                list.RemoveAt(i);
-                removeCount--;
-                continue;
-            }
-            i++;
+            bool important = IsMilestoneEvent(record?.EventType);
+            if (important ? removeMilestones <= 0 : removeOrdinary <= 0) { i++; continue; }
+            visual |= !string.IsNullOrWhiteSpace(record?.MapVisualKind);
+            if (ReferenceEquals(list, _current.Events) && ReferenceEquals(_eventIndexesRun, _current))
+                UnindexEvent(record);
+            list.RemoveAt(i);
+            if (important) removeMilestones--; else removeOrdinary--;
         }
-        return removedMapVisual;
+        return visual;
+    }
+    private static void Increment<TKey>(Dictionary<TKey, int> index, TKey key)
+    { index.TryGetValue(key, out int count); index[key] = count + 1; }
+    private static void Decrement<TKey>(Dictionary<TKey, int> index, TKey key)
+    {
+        if (!index.TryGetValue(key, out int count)) return;
+        if (count > 1) index[key] = count - 1; else index.Remove(key);
+    }
+    private static readonly Dictionary<long, List<MclslRunEventRecord>> ActorEvents = new();
+    internal static IReadOnlyList<MclslRunEventRecord> RecentActorEvents(long id)
+    {
+        EnsureEventIndexes();
+        return ActorEvents.TryGetValue(id, out List<MclslRunEventRecord> events)
+            ? events : Array.Empty<MclslRunEventRecord>();
+    }
+    private static void UnindexEvent(MclslRunEventRecord record)
+    {
+        if (record == null) return;
+        string type = record.EventType ?? string.Empty;
+        Decrement(EventTitleKeys, (record.Year, type, record.Title ?? string.Empty));
+        Decrement(EventBodyKeys, (record.Year, type, record.Body ?? string.Empty));
+        Decrement(EventCountsByYear, record.Year);
+        Decrement(EventCountsByTypeYear, (record.Year, type));
+        if (!string.IsNullOrWhiteSpace(record.EventKey)) EventKeys.Remove(record.EventKey);
+        if (ActorEvents.TryGetValue(record.ActorId, out List<MclslRunEventRecord> events))
+        { events.Remove(record); if (events.Count == 0) ActorEvents.Remove(record.ActorId); }
+        MclslCodexWindow.InvalidateActorHistory(record.ActorId);
+    }
+
+    private static bool ContainsEventKey(string eventKey)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            EnsureEventIndexes();
+            return EventKeys.Contains(eventKey);
+        }
+        finally { MclslPerformanceProbe.End("事件键去重", sample); }
+    }
+
+    private static void AppendEvent(MclslRunEventRecord record)
+    {
+        EnsureEventIndexes();
+        _current.Events.Add(record);
+        IndexEvent(record);
+        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
+    }
+
+    private static void EnsureEventIndexes()
+    {
+        if (ReferenceEquals(_eventIndexesRun, _current)) return;
+        ActorEvents.Clear();
+        EventTitleKeys.Clear();
+        EventBodyKeys.Clear();
+        EventKeys.Clear();
+        EventCountsByYear.Clear();
+        EventCountsByTypeYear.Clear();
+        List<MclslRunEventRecord> events = _current?.Events;
+        if (events != null)
+            foreach (MclslRunEventRecord record in events)
+                if (record != null) IndexEvent(record);
+        _eventIndexesRun = _current;
+    }
+
+    private static void IndexEvent(MclslRunEventRecord record)
+    {
+        IndexActorEvent(record);
+        string eventType = record.EventType ?? string.Empty;
+        Increment(EventTitleKeys, (record.Year, eventType, record.Title ?? string.Empty));
+        Increment(EventBodyKeys, (record.Year, eventType, record.Body ?? string.Empty));
+        if (!string.IsNullOrWhiteSpace(record.EventKey)) EventKeys.Add(record.EventKey);
+        EventCountsByYear.TryGetValue(record.Year, out int yearCount);
+        EventCountsByYear[record.Year] = yearCount + 1;
+        (int Year, string Type) typeKey = (record.Year, eventType);
+        EventCountsByTypeYear.TryGetValue(typeKey, out int typeCount);
+        EventCountsByTypeYear[typeKey] = typeCount + 1;
+    }
+
+    private static void IndexActorEvent(MclslRunEventRecord record)
+    {
+        if (record.ActorId > 0)
+        {
+            if (!ActorEvents.TryGetValue(record.ActorId, out List<MclslRunEventRecord> events))
+                ActorEvents[record.ActorId] = events = new();
+            if (events.Contains(record)) return;
+            int position = events.Count;
+            while (position > 0 && events[position - 1].Year < record.Year) position--;
+            events.Insert(position, record);
+            MclslCodexWindow.InvalidateActorHistory(record.ActorId);
+        }
+    }
+
+    private static void InvalidateEventIndexes()
+    {
+        _eventIndexesRun = null;
+        ActorEvents.Clear();
+        EventTitleKeys.Clear();
+        EventBodyKeys.Clear();
+        EventKeys.Clear();
+        EventCountsByYear.Clear();
+        EventCountsByTypeYear.Clear();
     }
 
     internal static void AddEvent(int year, string type, string title, string body)
     {
+        long sample = MclslPerformanceProbe.Begin();
+        try { AddEventCore(year, type, title, body); }
+        finally { MclslPerformanceProbe.End("事件记录与去重", sample); }
+    }
+
+    internal static void RecordAnnualFailure(int year, string scope, string targetId,
+        string step, int attempts, string result, string error)
+    {
+        MclslAnnualBatchState batch = Current.AnnualBatch;
+        batch.FailureRecords ??= new List<MclslAnnualFailureRecord>();
+        MclslAnnualFailureRecord record = batch.FailureRecords.Find(x => x.Year == year
+            && x.Scope == scope && x.TargetId == targetId && x.Step == step);
+        if (record == null)
+        {
+            record = new MclslAnnualFailureRecord { Year = year, Scope = scope ?? string.Empty,
+                TargetId = targetId ?? string.Empty, Step = step ?? string.Empty };
+            batch.FailureRecords.Add(record);
+            if (batch.FailureRecords.Count > 512) batch.FailureRecords.RemoveAt(0);
+        }
+        record.Attempts = attempts;
+        record.Result = result ?? string.Empty;
+        record.Error = error?.Length > 300 ? error.Substring(0, 300) : error ?? string.Empty;
+        MclslWorldArchiveStore.MarkDirty();
+        if (result is "跳过" or "部分失败" or "未结算")
+        {
+            MclslDiagnostics.Error("annual-failure:" + scope + ":" + step + ":" + targetId,
+                year + " 年 " + scope + "/" + step + " 结算" + result + "：" + record.Error);
+            AddEvent(year, "annual_settlement_failure", "年度结算异常",
+                scope + "/" + step + "（" + targetId + "）" + result + "：" + record.Error);
+        }
+    }
+
+    private static void AddEventCore(int year, string type, string title, string body)
+    {
         _current.Events ??= new List<MclslRunEventRecord>();
+        EnsureEventIndexes();
         string eventType = type ?? string.Empty;
         int safeYear = Math.Max(0, year);
         string safeTitle = title ?? string.Empty;
@@ -333,21 +473,13 @@ internal static class MclslWorldRunRepository
         if (ShouldSuppressSilentEvent(eventType, safeTitle, safeBody)) return;
         if (!AlwaysKeepEvent(eventType))
         {
-            int yearCount = 0;
-            int typeCount = 0;
+            EventCountsByYear.TryGetValue(safeYear, out int yearCount);
+            EventCountsByTypeYear.TryGetValue((safeYear, eventType), out int typeCount);
             int typeLimit = EventTypeYearLimit(eventType);
-            for (int i = _current.Events.Count - 1; i >= 0; i--)
-            {
-                MclslRunEventRecord existing = _current.Events[i];
-                if (existing == null || existing.Year != safeYear) continue;
-                yearCount++;
-                if (string.Equals(existing.EventType, eventType, StringComparison.Ordinal)) typeCount++;
-                if (yearCount >= MaxEventsPerYear || typeCount >= typeLimit) return;
-            }
+            if (yearCount >= MaxEventsPerYear || typeCount >= typeLimit) return;
         }
-        if (_current.Events.Any(x => x.Year == safeYear
-            && string.Equals(x.EventType, eventType, StringComparison.Ordinal)
-            && (string.Equals(x.Title, safeTitle, StringComparison.Ordinal) || string.Equals(x.Body, safeBody, StringComparison.Ordinal))))
+        if (EventTitleKeys.ContainsKey((safeYear, eventType, safeTitle))
+            || EventBodyKeys.ContainsKey((safeYear, eventType, safeBody)))
             return;
         string category = MclslEventCatalog.CategoryForType(eventType);
         MclslRunEventRecord record = new()
@@ -360,25 +492,20 @@ internal static class MclslWorldRunRepository
         };
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(eventType))
             record.NativeLogged = MclslNativeHistoryBridge.Add(record);
-        _current.Events.Add(record);
-        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
+        AppendEvent(record);
         MclslWorldArchiveStore.MarkDirty();
     }
 
     internal static void AddMaterialDiscoveryEvent(int year, string title, string body, Actor actor, string eventKey)
     {
         const string eventType = "material_discovery";
-        if (string.IsNullOrWhiteSpace(eventKey) || _current == null) return;
+        if (!MclslRuntimeSettings.ItemAcquisitionHistoryEnabled || string.IsNullOrWhiteSpace(eventKey) || _current == null) return;
         _current.Events ??= new List<MclslRunEventRecord>();
         int safeYear = Math.Max(0, year);
         string safeTitle = title ?? string.Empty;
         string safeBody = body ?? string.Empty;
 
-        for (int i = _current.Events.Count - 1; i >= 0; i--)
-        {
-            MclslRunEventRecord existing = _current.Events[i];
-            if (existing != null && string.Equals(existing.EventKey, eventKey, StringComparison.Ordinal)) return;
-        }
+        if (ContainsEventKey(eventKey)) return;
 
         MclslRunEventRecord record = new()
         {
@@ -404,30 +531,46 @@ internal static class MclslWorldRunRepository
         }
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(eventType))
             record.NativeLogged = MclslNativeHistoryBridge.Add(record);
-        _current.Events.Add(record);
-        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
+        AppendEvent(record);
         MclslWorldArchiveStore.MarkDirty();
     }
 
-    internal static bool HasMaterialDiscoveryEventKey(string ruinId, string eventKey)
+    internal static void AddItemAcquisitionEvent(int year, Actor actor, string itemId, int count, string source)
     {
-        if (_current == null || string.IsNullOrWhiteSpace(ruinId) || string.IsNullOrWhiteSpace(eventKey)) return false;
-        MclslSectRuinRecord ruin = FindSectRuin(ruinId);
-        if (ruin == null) return false;
-        if (ruin.MaterialDiscoveryEventKeys == null) ruin.MaterialDiscoveryEventKeys = new List<string>();
-        return ruin.MaterialDiscoveryEventKeys.Contains(eventKey);
-    }
+        if (actor?.data == null || count <= 0 || _current == null) return;
+        MclslItemDefinition item = MclslItemCatalog.Get(itemId);
+        if (item == null || !MclslItemAcquisitionHistoryPolicy.ShouldRecordFinishedProduct(
+                item.Category, item.Grade, MclslRuntimeSettings.ItemAcquisitionHistoryEnabled,
+                MclslRuntimeSettings.RecordLowMaterialAcquisitionHistory)) return;
+        int safeYear = Math.Max(0, year);
+        string actorId = MclslActorAccessor.Id(actor).ToString(System.Globalization.CultureInfo.InvariantCulture);
+        string safeSource = string.IsNullOrWhiteSpace(source) ? "未知来源" : source.Trim();
+        string eventKey = "item|" + actorId + "|" + item.Id + "|" + count + "|" + safeSource + "|" + safeYear;
+        _current.Events ??= new List<MclslRunEventRecord>();
+        if (ContainsEventKey(eventKey)) return;
 
-    internal static bool TryClaimMaterialDiscoveryEventKey(string ruinId, string eventKey)
-    {
-        if (_current == null || string.IsNullOrWhiteSpace(ruinId) || string.IsNullOrWhiteSpace(eventKey)) return false;
-        MclslSectRuinRecord ruin = FindSectRuin(ruinId);
-        if (ruin == null) return false;
-        ruin.MaterialDiscoveryEventKeys ??= new List<string>();
-        if (ruin.MaterialDiscoveryEventKeys.Contains(eventKey)) return false;
-        ruin.MaterialDiscoveryEventKeys.Add(eventKey);
+        string actorName = MclslActorAccessor.DisplayName(actor);
+        string title = actorName + "获得" + item.Name;
+        string place = string.IsNullOrWhiteSpace(actor.city?.data?.name) ? "野外" : actor.city.data.name;
+        MclslRunEventRecord record = new()
+        {
+            EventKey = eventKey,
+            Year = safeYear,
+            EventType = "item_acquisition",
+            Category = MclslEventCatalog.TreasureAcquisition,
+            Title = title,
+            Body = actorName + "于" + place + "通过" + safeSource + "获得【" + item.Name + "】×" + count + "。",
+            ActorId = MclslActorAccessor.Id(actor),
+            ActorName = actorName,
+            MapX = actor.data.x,
+            MapY = actor.data.y,
+            LocationName = place,
+            KingdomName = actor.kingdom?.data?.name ?? string.Empty
+        };
+        if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType))
+            record.NativeLogged = MclslNativeHistoryBridge.Add(record);
+        AppendEvent(record);
         MclslWorldArchiveStore.MarkDirty();
-        return true;
     }
 
     internal static bool TryClaimMaterialAwardEventKey(string eventKey)
@@ -475,7 +618,15 @@ internal static class MclslWorldRunRepository
         if (record == null) return;
         try
         {
-            record.ActorId = MclslActorAccessor.Id(actor);
+            long actorId = MclslActorAccessor.Id(actor);
+            if (record.ActorId != actorId && ActorEvents.TryGetValue(record.ActorId, out List<MclslRunEventRecord> previous))
+            {
+                previous.Remove(record);
+                if (previous.Count == 0) ActorEvents.Remove(record.ActorId);
+                MclslCodexWindow.InvalidateActorHistory(record.ActorId);
+            }
+            record.ActorId = actorId;
+            IndexActorEvent(record);
             record.ActorName = MclslActorAccessor.DisplayName(actor);
             record.MapX = actor.data.x;
             record.MapY = actor.data.y;
@@ -691,9 +842,9 @@ internal static class MclslWorldRunRepository
         int safeYear = Math.Max(0, death.Year);
         string title = string.IsNullOrWhiteSpace(death.Title) ? death.ActorName + "陨落" : death.Title;
         string body = death.Announcement ?? string.Empty;
-        if (_current.Events.Any(x => x.Year == safeYear
-            && string.Equals(x.EventType, "cultivator_death", StringComparison.Ordinal)
-            && (string.Equals(x.Title, title, StringComparison.Ordinal) || string.Equals(x.Body, body, StringComparison.Ordinal))))
+        EnsureEventIndexes();
+        if (EventTitleKeys.ContainsKey((safeYear, "cultivator_death", title))
+            || EventBodyKeys.ContainsKey((safeYear, "cultivator_death", body)))
             return;
 
         MclslRunEventRecord record = new()
@@ -724,8 +875,7 @@ internal static class MclslWorldRunRepository
             record.NativeLogged = MclslNativeHistoryBridge.Add(native);
         }
 
-        _current.Events.Add(record);
-        if (TrimEventsPreservingMilestones(_current.Events, MaxEvents)) NotifyMapMarkerDataChanged();
+        AppendEvent(record);
     }
 
     private static bool ShouldMirrorDeathToNativeHistory(MclslDeathRecord death)
@@ -1036,6 +1186,7 @@ internal static class MclslWorldRunRepository
         _futureCatalogsRun = null;
         _materialAwardKeysRun = null;
         _materialAwardKeyIndex = null;
+        InvalidateEventIndexes();
         _futureCatalogsTracePersistence = false;
         _futureCatalogsLastMarkedYear = -1;
     }
@@ -1084,7 +1235,6 @@ internal static class MclslWorldRunRepository
         _current.InheritedKnowledgeIds ??= new List<string>();
         _current.Discoveries ??= new List<MclslKnowledgeDiscoveryRecord>();
         _current.TimelineAnchors ??= new List<MclslTimelineAnchorState>();
-        _current.MaobaoRecords ??= new List<MclslMaobaoRecord>();
         _current.Events ??= new List<MclslRunEventRecord>();
         _current.MaterialAwardEventKeys ??= new List<string>();
         TrimOldest(_current.MaterialAwardEventKeys, MaxMaterialAwardEventKeys);
@@ -1092,7 +1242,10 @@ internal static class MclslWorldRunRepository
         foreach (MclslRunEventRecord e in _current.Events)
         {
             if (e == null) continue;
-            if (string.IsNullOrWhiteSpace(e.Category)) e.Category = MclslEventCatalog.CategoryForType(e.EventType);
+            if (string.Equals(e.EventType, "material_discovery", StringComparison.Ordinal)
+                || string.Equals(e.EventType, "item_acquisition", StringComparison.Ordinal))
+                e.Category = MclslEventCatalog.TreasureAcquisition;
+            else if (string.IsNullOrWhiteSpace(e.Category)) e.Category = MclslEventCatalog.CategoryForType(e.EventType);
             e.MapVisualKind ??= string.Empty;
             if (string.IsNullOrWhiteSpace(e.MapVisualKind)) e.MapVisualEndYear = -1;
         }
@@ -1125,7 +1278,6 @@ internal static class MclslWorldRunRepository
         TrimOldest(_current.FactionPressureEvents, MaxFactionPressures);
         TrimOldest(_current.ResourceSpendEvents, MaxResourceSpends);
         TrimOldest(_current.RuinExplorations, MaxRuinExplorations);
-        TrimOldest(_current.MaobaoRecords, MaxMaobaoRecords);
         foreach (MclslInverseTruthRecord truth in _current.InverseTruths)
         {
             if (truth == null) continue;
@@ -1141,7 +1293,12 @@ internal static class MclslWorldRunRepository
         _current.UsedGeneratedNames ??= new List<string>();
         _current.GeneratedItems ??= new List<MclslGeneratedItemRecord>();
         _current.TianxuanListings ??= new List<MclslMarketListing>();
+        _current.PendingArtifactListings ??= new Queue<MclslMarketListing>();
         _current.TianxuanActivities ??= new List<MclslMarketActivity>();
+        _current.PendingMarketPurchases ??= new Dictionary<long, MclslMarketPurchaseBatch>();
+        foreach (long actorId in _current.PendingMarketPurchases.Keys.ToArray())
+            if (actorId <= 0 || _current.PendingMarketPurchases[actorId] is not { Year: > 0 })
+                _current.PendingMarketPurchases.Remove(actorId);
         _current.TianxuanActivities.RemoveAll(x => x == null || string.IsNullOrWhiteSpace(x.ItemId));
         TrimOldest(_current.TianxuanActivities, MaxTianxuanActivities);
         TrimOldest(_current.UsedGeneratedNames, MaxUsedGeneratedNames);

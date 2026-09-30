@@ -10,6 +10,8 @@ internal sealed class MclslWorldArchiveBundle
 
 internal sealed class MclslWorldRunState
 {
+    public int LastCalamityPulseYear { get; set; } = -1;
+    public string LastCalamityPulseState { get; set; } = string.Empty;
     public string RunId { get; set; } = string.Empty;
     public int CycleNumber { get; set; } = 1;
     public int StartYear { get; set; }
@@ -48,9 +50,6 @@ internal sealed class MclslWorldRunState
     public List<string> InheritedKnowledgeIds { get; set; } = new();
     public List<MclslKnowledgeDiscoveryRecord> Discoveries { get; set; } = new();
     public List<MclslTimelineAnchorState> TimelineAnchors { get; set; } = new();
-    // v0.1.9：猫宝改为独立的登名石式完整角色档案。旧的摘要留影只清理一次。
-    public int MaobaoArchiveMigrationVersion { get; set; }
-    public List<MclslMaobaoRecord> MaobaoRecords { get; set; } = new();
     public List<MclslRunEventRecord> Events { get; set; } = new();
     // Source-level idempotency ledger for material awards. Kept separately from the
     // bounded event feed so loading a save cannot replay a bag transfer after pruning.
@@ -72,14 +71,107 @@ internal sealed class MclslWorldRunState
     public List<string> PendingAncientCultivatorIds { get; set; } = new();
     public List<MclslGeneratedItemRecord> GeneratedItems { get; set; } = new();
     public List<MclslMarketListing> TianxuanListings { get; set; } = new();
+    // Queue keeps overflow publication O(1) per yearly quota, even in large worlds.
+    public Queue<MclslMarketListing> PendingArtifactListings { get; set; } = new();
     public List<MclslMarketActivity> TianxuanActivities { get; set; } = new();
+    // Only unfinished yearly demand batches are retained.
+    public Dictionary<long, MclslMarketPurchaseBatch> PendingMarketPurchases { get; set; } = new();
+    public Queue<int> ManualSecretRealmRequests { get; set; } = new();
     public int ProceduralSequence { get; set; }
     public int NextCaveBirthYear { get; set; }
     public int NextWorldChangeYear { get; set; }
     public int NextRuinBirthYear { get; set; }
     public int NextFactionMissionYear { get; set; }
     public int NextFactionPressureYear { get; set; }
-    public int NativeKillStatisticsRepairVersion { get; set; }
+    public MclslAnnualBatchState AnnualBatch { get; set; } = new();
+}
+
+internal sealed class MclslAnnualBatchState
+{
+    public int ActiveYear { get; set; }
+    public int LatestRequestedYear { get; set; }
+    public int LastCompletedYear { get; set; }
+    public byte WorldStage { get; set; }
+    public bool EraSnapshotRecorded { get; set; }
+    public int StartCursor { get; set; }
+    public bool NewLawEraActive { get; set; }
+    public bool NewLawCultivationAvailable { get; set; }
+    public List<long> LineageActorIds { get; set; } = new();
+    public List<MclslAnnualClaimRecord> CaveClaims { get; set; } = new();
+    public List<MclslAnnualClaimRecord> ChangeClaims { get; set; } = new();
+    public List<MclslAnnualClaimRecord> AdventureCandidates { get; set; } = new();
+    public Dictionary<string, int> ModuleCompletedYears { get; set; } = new();
+    public byte WorldFailureStage { get; set; }
+    public int WorldFailureCount { get; set; }
+    public List<MclslAnnualFailureRecord> FailureRecords { get; set; } = new();
+    public List<string> TechniqueLineagePendingIds { get; set; } = new();
+    public bool TechniqueLineagePendingInitialized { get; set; }
+    public int SectLifecycleCursor { get; set; }
+    public int SectLifecycleEmitted { get; set; }
+    public int MarketPruneYear { get; set; }
+    public int MarketPruneCursor { get; set; }
+    public List<string> MarketPruneListingIds { get; set; } = new();
+    public MclslInverseAnnualState InverseWork { get; set; }
+    public int WorldSoulYear { get; set; }
+    public int WorldSoulCursor { get; set; }
+}
+
+/// <summary>Only IDs, counters and rule values survive an interrupted world settlement.</summary>
+internal sealed class MclslInverseAnnualState
+{
+    public int Year { get; set; }
+    public int Phase { get; set; }
+    public int Cursor { get; set; }
+    public int SourceCount { get; set; }
+    public bool[] Effects { get; set; } = new bool[14];
+    public int[] EffectCounts { get; set; } = new int[12];
+    public List<long> ActorIds { get; set; } = new();
+    public List<long> ChallengerIds { get; set; } = new();
+    public int ReincarnationRecordCursor { get; set; }
+    public int ReincarnationTargetCursor { get; set; }
+    public int ReincarnationsApplied { get; set; }
+    public long DrainReceiverId { get; set; }
+    public int DrainDonorCursor { get; set; }
+    public int DrainCount { get; set; }
+    public MclslInverseTruthContext Context { get; set; }
+}
+
+internal sealed class MclslInverseTruthContext
+{
+    public int DeathRecords { get; set; }
+    public int SpecialDeathRecords { get; set; }
+    public int MiasmaDeaths { get; set; }
+    public int SharedHighTechniqueGroups { get; set; }
+    public int Cultivators { get; set; }
+    public int FiveEldersPressure { get; set; }
+    public int HuanzhenReturns { get; set; }
+    public int FutureKnowledge { get; set; }
+    public int CompletedCycles { get; set; }
+    public int TerminalPressure { get; set; }
+    public int AvailableCaves { get; set; }
+    public int AvailableWorldChanges { get; set; }
+    public int NascentAndAbove { get; set; }
+    public int HarmonyAndAbove { get; set; }
+}
+
+internal sealed class MclslAnnualFailureRecord
+{
+    public int Year { get; set; }
+    public string Scope { get; set; } = string.Empty;
+    public string TargetId { get; set; } = string.Empty;
+    public string Step { get; set; } = string.Empty;
+    public int Attempts { get; set; }
+    public string Result { get; set; } = string.Empty;
+    public string Error { get; set; } = string.Empty;
+}
+
+internal sealed class MclslAnnualClaimRecord
+{
+    public int Year { get; set; }
+    public long ActorId { get; set; }
+    public string TargetId { get; set; } = string.Empty;
+    public int Compatibility { get; set; }
+    public int Strength { get; set; }
 }
 
 internal sealed class MclslBackgroundFactionState
@@ -109,30 +201,6 @@ internal sealed class MclslTimelineAnchorState
     public int ResolvedYear { get; set; }
     public string OutcomeCode { get; set; } = string.Empty;
 }
-
-/// <summary>
-/// 猫宝保存的修士时序留影。只记录展示和定位所需的紧凑字段，
-/// 不持有 Actor 引用，也不复制角色完整存档。
-/// </summary>
-internal sealed class MclslMaobaoRecord
-{
-    public string Id { get; set; } = string.Empty;
-    public long ActorId { get; set; }
-    public string ActorName { get; set; } = string.Empty;
-    public string RealmId { get; set; } = string.Empty;
-    public string RealmName { get; set; } = string.Empty;
-    public string CultivationSystemName { get; set; } = string.Empty;
-    public string TechniqueName { get; set; } = string.Empty;
-    public string FactionName { get; set; } = string.Empty;
-    public int FirstRecordedYear { get; set; }
-    public int LastObservedYear { get; set; }
-    public int MapX { get; set; } = -1;
-    public int MapY { get; set; } = -1;
-    public bool Alive { get; set; } = true;
-    public int ObservationCount { get; set; } = 1;
-    public string Inscription { get; set; } = string.Empty;
-}
-
 
 internal sealed class MclslRunEventRecord
 {
@@ -306,7 +374,6 @@ internal sealed class MclslSectRuinRecord
     public string State { get; set; } = "显世";
     public int LastExploredYear { get; set; }
     public string LastExplorerNames { get; set; } = string.Empty;
-    public List<string> MaterialDiscoveryEventKeys { get; set; } = new();
     public string SourceTechniqueId { get; set; } = string.Empty;
     public string SourceTechniqueName { get; set; } = string.Empty;
     public string LinkedLineageId { get; set; } = string.Empty;

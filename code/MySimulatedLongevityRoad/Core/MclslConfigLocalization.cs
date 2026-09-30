@@ -11,10 +11,11 @@ internal static class MclslConfigLocalization
         if (_initialized) return;
         _initialized = true;
 
-        Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。");
-        Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；10代表1.0%。三职业互斥。");
-        Register("MCLSL_config_refiner_chance", "炼器师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；15代表1.5%。三职业互斥。");
-        Register("MCLSL_config_talisman_chance", "制符师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；20代表2.0%。三职业互斥。");
+        Register("MCLSL_config_annual_backpressure", "年度积压自动限速", "默认开启。年度结算积压时临时降低时间推进速度，追上后自动恢复玩家所选倍速。");
+        Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认10%；只影响尚未完成五岁或六岁补判的小人。");
+        Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");
+        Register("MCLSL_config_refiner_chance", "炼器师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");
+        Register("MCLSL_config_talisman_chance", "制符师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");
         Register("MCLSL_config_enable_death_announcements", "启用修士陨落公告", "高境修士死亡时发布玄黄界公告。");
         Register("MCLSL_config_enable_breakthrough_failure_announcements", "显示破境失败记录", "控制仙道破境失败是否写入玄黄仙录；金丹以下默认不入录，收藏角色除外。");
         Register("MCLSL_config_enable_yuanying_breakthrough_announcements", "启用元婴突破公告", "角色成就元婴时发布玄黄界公告；关闭后仍写入玄黄仙录。");
@@ -31,9 +32,12 @@ internal static class MclslConfigLocalization
         Register("MCLSL_config_enable_resource_birth_announcements", "显示天地资源出现提示", "洞天与天地异变出现时显示顶部提示；元婴、化神突破公告仍由各自开关控制。");
         Register("MCLSL_config_enable_faction_policy_announcements", "显示仙盟五老施政提示", "万仙盟或五老会改变施政方略时显示顶部提示；势力影响与委托仍正常结算。");
         Register("MCLSL_config_enable_survival_announcements", "显示洞天避劫提示", "元婴借洞天避过死劫时显示顶部提示；关闭后保命与洞天损耗仍正常生效。");
+        Register("MCLSL_config_performance_monitor", "性能监控", "记录各系统耗时、GC 分配和积压情况；开启后可在左上角查看与导出报告。默认关闭，报告最多保留12份。");
         Register("MCLSL_config_show_fps", "显示帧率", "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。");
-        Register("MCLSL_config_enable_huanzhen", "启用还真轮回", "开启本世轮回与档案封存逻辑。");
-        Register("MCLSL_config_auto_huanzhen_anchor", "自动建立还真锚点", "灵蕴达到八十点且满足安全间隔时自动建立锚点；锚点满后自动替换最旧的一枚。");
+        Register("MCLSL_config_item_acquisition_history_enabled", "记录材料与物品获取历史", "总开关。开启后，地阶、天阶材料与成品会记入仙缘宝录；凡阶、黄阶、玄阶还须同时开启低阶记录。关闭只停止新增记事，不影响物品获取与天阶材料世界公告。");
+        Register("MCLSL_config_record_low_material_history", "记录低阶材料与物品获取", "总开关开启时，本项控制凡阶、黄阶、玄阶材料与丹药、符箓、法宝的获取历史；关闭不影响实际获取、入袋、交易及地阶、天阶历史和公告。");
+        Register("MCLSL_config_enable_huanzhen", "启用还真回溯", "启用唯一还真宿主的空间灵蕴、锚点与死亡回溯。首次绑定获得80点空间灵蕴；宿主每经过10个游戏年自然获得1点。关闭时只保留特质与档案。");
+        Register("MCLSL_config_auto_huanzhen_anchor", "自动建立还真锚点", "空间灵蕴达到80点且满足锚定间隔时自动建立或替换锚点；每次消耗80点，最多保留3枚。");
         Register("MCLSL_config_huanzhen_anchor_interval", "自动锚点间隔", "自动建立或替换还真锚点之间至少相隔的世界年份；手动锚定不受此项限制。");
         Register("MCLSL_config_huanzhen_safety_gap", "还真安全间隔", "限制连续还真触发的最短间隔。");
         Register("MCLSL_config_auto_collect_huanzhen_host", "还真宿主自动收藏（原版）", "还真宿主出现后自动加入 WorldBox 原版人物收藏；猫宝仍须手动刻名。");

@@ -14,6 +14,8 @@ internal static class MclslNewLawPioneerSystem
 {
     private const int MaxTotalPioneers = 64;
     private static int _lastProcessedYear = -1;
+    private static MclslActorSelection _selection;
+    private static int _selectionYear;
 
     internal static int PioneerLeadYears
     {
@@ -53,12 +55,12 @@ internal static class MclslNewLawPioneerSystem
         return IsPioneerEra(year) && run != null && run.AncientLawEndYear - year <= 300;
     }
 
-    internal static void ProcessAnnual(int year)
+    internal static bool ProcessAnnual(int year)
     {
-        if (_lastProcessedYear == year || !IsPioneerEra(year)) return;
-        _lastProcessedYear = year;
+        if (_lastProcessedYear == year || !IsPioneerEra(year)) return true;
+        if (MclslWorldBootstrapLane.HasPending) return false;
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null) return;
+        if (run == null) return true;
         if (run.NewLawPioneerStartYear <= 0) run.NewLawPioneerStartYear = PioneerStartYear;
 
         const string eventId = "epoch_new_law_pioneers";
@@ -78,8 +80,10 @@ internal static class MclslNewLawPioneerSystem
         int remaining = Math.Max(0, run.AncientLawEndYear - year);
         if (remaining <= 240) MclslWorldChangeSystem.EnsureWorldChanges(year);
 
-        TryConvertAncientPioneer(year, remaining);
+        if (!TryConvertAncientPioneer(year, remaining)) return false;
+        _lastProcessedYear = year;
         MclslWorldArchiveStore.MarkDirty();
+        return true;
     }
 
     internal static bool TryBeginMortalPioneer(Actor actor, int year)
@@ -120,51 +124,35 @@ internal static class MclslNewLawPioneerSystem
 
     internal static void Clear()
     {
-        _lastProcessedYear = -1;
+        _lastProcessedYear = -1; _selection = null; _selectionYear = 0;
     }
 
-    private static void TryConvertAncientPioneer(int year, int remaining)
+    private static bool TryConvertAncientPioneer(int year, int remaining)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null || run.NewLawPioneerCount >= MaxTotalPioneers) return;
+        if (run == null || run.NewLawPioneerCount >= MaxTotalPioneers) return true;
         int interval = remaining <= 120 ? 10 : remaining <= 300 ? 16 : 24;
-        if (run.LastNewLawPioneerConversionYear > 0 && year - run.LastNewLawPioneerConversionYear < interval) return;
-        if (year < PioneerStartYear + 60) return;
-
-        const int candidateLimit = 6;
-        Actor[] candidates = new Actor[candidateLimit];
-        int[] scores = new int[candidateLimit];
-        for (int i = 0; i < candidateLimit; i++) scores[i] = int.MinValue;
-
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        for (int i = 0; i < actors.Count; i++)
+        if (run.LastNewLawPioneerConversionYear > 0 && year - run.LastNewLawPioneerConversionYear < interval) return true;
+        if (year < PioneerStartYear + 60) return true;
+        if (_selection == null || _selectionYear != year)
         {
-            Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw) continue;
-            string realm = MclslActorAccessor.Realm(actor);
-            int realmIndex = MclslRealmIds.Index(realm);
-            if (realmIndex < MclslRealmIds.Index(MclslRealmIds.ZhuJi) || realmIndex > MclslRealmIds.Index(MclslRealmIds.YuanYing)) continue;
-            int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0), 0, 100);
-            if (aptitude < 68) continue;
-            int score = realmIndex * 10000 + aptitude * 100
-                + PositiveHash(MclslActorAccessor.Id(actor) + "|pioneer_conversion|" + year) % 100;
-            for (int slot = 0; slot < candidateLimit; slot++)
-            {
-                if (score <= scores[slot]) continue;
-                for (int move = candidateLimit - 1; move > slot; move--)
+            _selectionYear = year;
+            _selection = new(MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot(), 6,
+                actor =>
                 {
-                    scores[move] = scores[move - 1];
-                    candidates[move] = candidates[move - 1];
-                }
-                scores[slot] = score;
-                candidates[slot] = actor;
-                break;
-            }
+                    int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
+                    return MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem) == MclslCultivationSystemIds.AncientLaw
+                        && realm >= MclslRealmIds.Index(MclslRealmIds.ZhuJi) && realm <= MclslRealmIds.Index(MclslRealmIds.YuanYing)
+                        && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude) >= 68;
+                },
+                actor => MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) * 10000
+                    + Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude), 0, 100) * 100
+                    + PositiveHash(MclslActorAccessor.Id(actor) + "|pioneer_conversion|" + year) % 100);
         }
-
+        if (!_selection.Tick()) return false;
+        IReadOnlyList<Actor> candidates = _selection.Results;
         run.LastNewLawPioneerConversionYear = year;
-        for (int i = 0; i < candidates.Length; i++)
+        for (int i = 0; i < candidates.Count; i++)
         {
             Actor candidate = candidates[i];
             if (!MclslActorAccessor.Alive(candidate)) continue;
@@ -175,6 +163,8 @@ internal static class MclslNewLawPioneerSystem
             run.NewLawPioneerCount++;
             break;
         }
+        _selection = null; _selectionYear = 0;
+        return true;
     }
 
     private static int PositiveHash(string value)

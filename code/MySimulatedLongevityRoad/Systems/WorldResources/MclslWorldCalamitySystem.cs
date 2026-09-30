@@ -58,10 +58,9 @@ internal static class MclslWorldCalamitySystem
         int interval = PulseInterval(state.Id);
         if (interval <= 0 || (year - start) % interval != 0) return;
 
-        int pulseIndex = Math.Max(1, (year - start) / interval);
-        string firedKey = "world_calamity_pulse|" + state.Id + "|" + pulseIndex;
-        if (HasFired(run, firedKey)) return;
-        run.FiredHistoricalEvents.Add(firedKey);
+        if (run.LastCalamityPulseYear == year && run.LastCalamityPulseState == state.Id) return;
+        run.LastCalamityPulseYear = year;
+        run.LastCalamityPulseState = state.Id;
 
         bool changed = state.Id switch
         {

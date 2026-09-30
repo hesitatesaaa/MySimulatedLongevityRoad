@@ -185,6 +185,13 @@ internal static class MclslWorldChangeSystem
     {
         if (!MclslNewLawPioneerSystem.CanUseWorldChanges(year)) return;
         if (!MclslActorAccessor.Alive(actor) || MclslActorAccessor.Realm(actor) != MclslRealmIds.YuanYing) return;
+        if (year <= MclslWorldRunRepository.Current.AnnualBatch.LastCompletedYear)
+        {
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "该年度天地变争夺已结算，旧档申请无法补入");
+            return;
+        }
+        if (MclslWorldRunRepository.Current.AnnualBatch.ChangeClaims.Exists(
+            x => x.Year == year && x.ActorId == MclslActorAccessor.Id(actor))) return;
         BeginAnnual(year);
         if (!MclslRealmSeatSystem.CanAddDivineTransformation(out string seatReason))
         {
@@ -234,18 +241,73 @@ internal static class MclslWorldChangeSystem
         if (claimBonus > 0) MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineClaimBonus, 0);
         if (!Claims.TryGetValue(best.Id, out List<ChangeClaim> list)) Claims[best.Id] = list = new List<ChangeClaim>();
         list.Add(new ChangeClaim { Actor = actor, ChangeId = best.Id, Compatibility = bestCompatibility, Strength = strength });
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!batch.ChangeClaims.Exists(x => x.Year == year && x.ActorId == MclslActorAccessor.Id(actor)))
+            batch.ChangeClaims.Add(new MclslAnnualClaimRecord { Year = year, ActorId = MclslActorAccessor.Id(actor),
+                TargetId = best.Id, Compatibility = bestCompatibility, Strength = strength });
+        MclslWorldArchiveStore.MarkDirty();
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在等待“" + best.Name + "”演化至可抽髓之机；" + MclslLawInteractionCatalog.Detail(laws, MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
     }
 
-    internal static void ResolveAnnual(int year)
+    internal static bool TickResolveAnnual(int year)
     {
-        if (_claimYear != year || Claims.Count == 0) return;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        MclslAnnualClaimRecord next = batch.ChangeClaims.Find(x => x.Year == year);
+        if (next == null) return true;
+        string targetId = next.TargetId;
+        try { ResolveAnnual(year, targetId); }
+        catch (Exception ex)
+        {
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", targetId,
+                "WorldChange", 1, "部分失败", ex.Message);
+            Claims.Remove(targetId);
+            batch.ChangeClaims.RemoveAll(x => x.Year == year && x.TargetId == targetId);
+            MclslWorldArchiveStore.MarkDirty();
+        }
+        return batch.ChangeClaims.Find(x => x.Year == year) == null;
+    }
+
+    internal static void ResolveAnnual(int year, string onlyTargetId = null)
+    {
+        RestorePendingClaims(year);
+        if (_claimYear != year)
+        {
+            if (onlyTargetId != null)
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", onlyTargetId,
+                    "WorldChange", 1, "未结算", "当前年度天地变资源不可用");
+                MclslWorldRunRepository.Current.AnnualBatch.ChangeClaims.RemoveAll(x => x.Year == year && x.TargetId == onlyTargetId);
+                MclslWorldArchiveStore.MarkDirty();
+            }
+            return;
+        }
+        if (onlyTargetId != null && !Claims.ContainsKey(onlyTargetId))
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", onlyTargetId,
+                "WorldChange", 1, "未结算", "申请角色不可解析");
+        if (Claims.Count == 0)
+        {
+            if (MclslWorldRunRepository.Current.AnnualBatch.ChangeClaims.RemoveAll(x => x.Year == year
+                && (onlyTargetId == null || x.TargetId == onlyTargetId)) > 0)
+                MclslWorldArchiveStore.MarkDirty();
+            return;
+        }
         foreach (KeyValuePair<string, List<ChangeClaim>> pair in Claims)
         {
+            if (onlyTargetId != null && pair.Key != onlyTargetId) continue;
             MclslWorldChangeRecord change = MclslWorldRunRepository.FindWorldChange(pair.Key);
-            if (!IsAvailable(change)) continue;
+            if (!IsAvailable(change))
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", pair.Key,
+                    "WorldChange", 1, "未结算", "天地变目标已不可用");
+                continue;
+            }
             ChangeClaim winner = PickWinningClaim(pair.Value);
-            if (winner == null) continue;
+            if (winner == null)
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", pair.Key,
+                    "WorldChange", 1, "未结算", "申请角色均不满足结算条件");
+                continue;
+            }
             int contenderCount = CountValidClaims(pair.Value);
             MclslAptitudeGiftDefinition gift = MclslAptitudeGiftCatalog.ForAptitude(MclslActorAccessor.GetInt(winner.Actor, MclslActorDataKeys.Aptitude, 50));
             int essenceQuality = MclslActorAccessor.GetInt(winner.Actor, MclslActorDataKeys.NascentEssenceQuality, 1);
@@ -277,8 +339,24 @@ internal static class MclslWorldChangeSystem
                 }
             }
         }
-        Claims.Clear();
+        if (onlyTargetId == null) Claims.Clear();
+        else Claims.Remove(onlyTargetId);
+        MclslWorldRunRepository.Current.AnnualBatch.ChangeClaims.RemoveAll(x => x.Year == year
+            && (onlyTargetId == null || x.TargetId == onlyTargetId));
         MclslWorldArchiveStore.MarkDirty();
+    }
+
+    private static void RestorePendingClaims(int year)
+    {
+        if (_claimYear != year) BeginAnnual(year);
+        foreach (MclslAnnualClaimRecord record in MclslWorldRunRepository.Current.AnnualBatch.ChangeClaims)
+        {
+            if (record.Year != year || !MclslActorRegistry.ResolveKnownOrWorld(record.ActorId, out Actor actor)) continue;
+            if (!Claims.TryGetValue(record.TargetId, out List<ChangeClaim> list)) Claims[record.TargetId] = list = new();
+            if (list.Exists(x => MclslActorAccessor.Id(x.Actor) == record.ActorId)) continue;
+            list.Add(new ChangeClaim { Actor = actor, ChangeId = record.TargetId,
+                Compatibility = record.Compatibility, Strength = record.Strength });
+        }
     }
 
     internal static bool TryAcquireExistingChangeForConversion(Actor actor, int year)
@@ -392,6 +470,7 @@ internal static class MclslWorldChangeSystem
         int deathChance = Math.Clamp(6 + change.Quality * 5 + change.Intensity / 10 - compatibility / 8 - MclslMindSystem.StabilityBonus(actor) / 2 - MclslSpiritualRootSystem.LawHarmonyBonus(actor) / 8, 4, 35);
         bool failureStep = MclslInverseTruthSystem.IsTruthReversed("truth_player_failure_steps");
         if (failureStep) deathChance = Math.Max(2, deathChance - 8);
+        if (MclslImmortalPathSystem.AllowsBreakthrough(actor, MclslRealmIds.HuaShen)) deathChance = 0;
         int deathRoll = PositiveHash(change.Id + "|backlash_death|" + MclslActorAccessor.Id(actor) + "|" + year) % 100;
         change.Intensity = Math.Max(1, change.Intensity - 5);
         if (deathRoll < deathChance)
@@ -504,7 +583,7 @@ internal static class MclslWorldChangeSystem
     private static LocationSeed PickLocation(int hash)
     {
         List<LocationSeed> locations = new();
-        IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
+        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
         if (units != null)
         {
             HashSet<string> seen = new(StringComparer.Ordinal);

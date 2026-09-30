@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 
@@ -37,6 +38,23 @@ internal readonly struct MclslSpiritualRootProfile
 
 internal static class MclslSpiritualRootSystem
 {
+    private sealed class RootCache
+    {
+        internal string Stored, Primary, Display;
+        internal int Count;
+        internal bool ValidStored;
+        internal string[] Attributes;
+    }
+    private static ConditionalWeakTable<Actor, RootCache> RootCaches = new();
+    internal static void ClearRuntime() => RootCaches = new();
+    internal static void Forget(Actor actor) { if (actor != null) RootCaches.Remove(actor); }
+    private static string AttributeDisplay(Actor actor, string[] attributes)
+    {
+        if (actor == null) return string.Join("、", attributes);
+        RootCache cache = RootCaches.GetOrCreateValue(actor);
+        return cache.Display ??= string.Join("、", attributes);
+    }
+
     private static readonly string[] Elements = { "金", "木", "水", "火", "土", "风", "雷", "阴", "阳", "空间" };
 
     internal static MclslSpiritualRootProfile Profile(Actor actor)
@@ -48,7 +66,7 @@ internal static class MclslSpiritualRootSystem
         int count = StoredRootCount(actor, purity);
         return new MclslSpiritualRootProfile(
             grade.Name,
-            string.Join("、", EnsureRootAttributes(actor, count)),
+            AttributeDisplay(actor, EnsureRootAttributes(actor, count)),
             count,
             purity,
             CountCultivationMultiplier(count),
@@ -65,7 +83,7 @@ internal static class MclslSpiritualRootSystem
         int count = storedCount >= 1 && storedCount <= 5 ? storedCount : RootCount(actor, purity);
         return new MclslSpiritualRootProfile(
             grade.Name,
-            string.Join("、", ReadRootAttributes(actor, count)),
+            AttributeDisplay(actor, ReadRootAttributes(actor, count)),
             count,
             purity,
             CountCultivationMultiplier(count),
@@ -78,9 +96,22 @@ internal static class MclslSpiritualRootSystem
         return EnsureRootAttributes(actor, count);
     }
 
-    internal static float CountCultivationMultiplier(Actor actor) => CountCultivationMultiplier(Profile(actor).Count);
+    internal static int TechniqueWeight(Actor actor, MclslTechniqueDefinition technique)
+    {
+        if (actor?.data == null || technique?.LawPool == null) return 10;
+        string[] attributes = RootAttributes(actor);
+        if (attributes.Length == 0) return 10;
+        int hits = 0;
+        for (int i = 0; i < attributes.Length; i++)
+            if (Array.IndexOf(technique.LawPool, attributes[i]) >= 0) hits++;
+        string primary = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootPrimary, string.Empty);
+        int primaryBonus = !string.IsNullOrEmpty(primary) && Array.IndexOf(technique.LawPool, primary) >= 0 ? 8 : 0;
+        return 10 + (int)Math.Round(12d * hits / attributes.Length) + primaryBonus;
+    }
 
-    internal static int MultiLawInsightBonus(Actor actor) => MultiLawInsightBonus(Profile(actor).Count);
+    internal static float CountCultivationMultiplier(Actor actor) => CountCultivationMultiplier(StoredRootCount(actor, EffectivePurity(actor)));
+
+    internal static int MultiLawInsightBonus(Actor actor) => MultiLawInsightBonus(StoredRootCount(actor, EffectivePurity(actor)));
 
     internal static int LawHarmonyBonus(Actor actor)
     {
@@ -187,50 +218,39 @@ internal static class MclslSpiritualRootSystem
     private static string[] ReadRootAttributes(Actor actor, int count)
     {
         string stored = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootAttributes, string.Empty);
-        string[] existing = (stored ?? string.Empty).Split(new[] { ',', '，', '、' }, StringSplitOptions.RemoveEmptyEntries);
-        if (existing.Length == count) return existing;
-
-        List<string> attrs = new();
         string primary = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootPrimary, string.Empty);
-        if (string.IsNullOrWhiteSpace(primary) || !Elements.Contains(primary, StringComparer.Ordinal))
-        {
-            int primaryIndex = PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_primary") % Elements.Length;
-            primary = Elements[primaryIndex];
-        }
-        attrs.Add(primary);
-        int start = PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_attrs") % Elements.Length;
-        for (int i = 0; i < Elements.Length && attrs.Count < count; i++)
+        RootCache cache = actor == null ? new RootCache() : RootCaches.GetOrCreateValue(actor);
+        if (cache.Attributes != null && cache.Stored == stored && cache.Primary == primary && cache.Count == count)
+            return cache.Attributes;
+        string[] existing = (stored ?? string.Empty).Split(new[] { ',', '，', '、' }, StringSplitOptions.RemoveEmptyEntries);
+        cache.Stored = stored; cache.Primary = primary; cache.Count = count; cache.Display = null;
+        cache.ValidStored = existing.Length == count;
+        if (cache.ValidStored) return cache.Attributes = existing;
+        if (string.IsNullOrWhiteSpace(primary) || Array.IndexOf(Elements, primary) < 0)
+            primary = Elements[PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_primary") % Elements.Length];
+        string[] result = new string[Math.Clamp(count, 1, 5)];
+        result[0] = primary;
+        int written = 1, start = PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_attrs") % Elements.Length;
+        for (int i = 0; i < Elements.Length && written < result.Length; i++)
         {
             string value = Elements[(start + i) % Elements.Length];
-            if (!attrs.Contains(value, StringComparer.Ordinal)) attrs.Add(value);
+            if (Array.IndexOf(result, value, 0, written) < 0) result[written++] = value;
         }
-        return attrs.Take(Math.Clamp(count, 1, 5)).ToArray();
+        return cache.Attributes = result;
     }
 
     private static string[] EnsureRootAttributes(Actor actor, int count)
     {
-        string stored = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootAttributes, string.Empty);
-        string[] existing = (stored ?? string.Empty).Split(new[] { ',', '，', '、' }, StringSplitOptions.RemoveEmptyEntries);
-        if (existing.Length == count) return existing;
-
-        List<string> attrs = new();
-        string primary = MclslActorAccessor.GetString(actor, MclslActorDataKeys.SpiritualRootPrimary, string.Empty);
-        if (string.IsNullOrWhiteSpace(primary) || !Elements.Contains(primary, StringComparer.Ordinal))
-        {
-            int primaryIndex = PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_primary") % Elements.Length;
-            primary = Elements[primaryIndex];
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritualRootPrimary, primary);
-        }
-        attrs.Add(primary);
-        int start = PositiveHash(MclslActorAccessor.Id(actor) + "|spiritual_root_attrs") % Elements.Length;
-        for (int i = 0; i < Elements.Length && attrs.Count < count; i++)
-        {
-            string value = Elements[(start + i) % Elements.Length];
-            if (!attrs.Contains(value, StringComparer.Ordinal)) attrs.Add(value);
-        }
-        string[] result = attrs.Take(Math.Clamp(count, 1, 5)).ToArray();
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritualRootAttributes, string.Join(",", result));
-        return result;
+        string[] attributes = ReadRootAttributes(actor, count);
+        if (actor?.data == null) return attributes;
+        RootCache cache = RootCaches.GetOrCreateValue(actor);
+        if (cache.ValidStored) return attributes;
+        string primary = attributes[0];
+        string stored = string.Join(",", attributes);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritualRootPrimary, primary);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritualRootAttributes, stored);
+        cache.Primary = primary; cache.Stored = stored; cache.ValidStored = true;
+        return attributes;
     }
 
     private static int StoredRootCount(Actor actor, int purity)

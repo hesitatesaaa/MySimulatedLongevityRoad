@@ -220,6 +220,8 @@ internal static class MclslWorldEpochSystem
 
     internal static bool HasPendingTransitionWork => _ancientQueueSeedCursor < _ancientQueueSeedActors.Count
         || (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0) > 0;
+    internal static int PendingTransitionWorkCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor)
+        + (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0);
 
     /// <summary>
     /// 用数量和时间双预算消化旧法修士队列。队列数据保存在世界档案中，存档或读档
@@ -238,7 +240,7 @@ internal static class MclslWorldEpochSystem
         int seeded = 0;
         using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionSeedBatch"))
         {
-            while (_ancientQueueSeedCursor < _ancientQueueSeedActors.Count && seeded < seedBudget)
+            while (_ancientQueueSeedCursor < _ancientQueueSeedActors.Count && seeded < seedBudget && !MclslAnnualFrameBudget.Expired)
             {
                 Actor actor = _ancientQueueSeedActors[_ancientQueueSeedCursor++];
                 if (!MclslActorAccessor.Alive(actor)) continue;
@@ -257,7 +259,7 @@ internal static class MclslWorldEpochSystem
             _ancientQueueSeedCursor = 0;
         }
 
-        if (run.PendingAncientCultivatorIds.Count > 0 && !HasExceededTransitionBudget(started))
+        if (run.PendingAncientCultivatorIds.Count > 0 && !MclslAnnualFrameBudget.Expired && !HasExceededTransitionBudget(started))
         {
             using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionConvertBatch"))
                 ProcessAncientTransitionBatch(run, MclslRuntime.CurrentYear(), conversionBudget, 0);
@@ -283,7 +285,7 @@ internal static class MclslWorldEpochSystem
     {
         if (run == null || limit <= 0 || run.PendingAncientCultivatorIds == null) return;
         int processed = 0;
-        while (run.PendingAncientCultivatorIds.Count > 0 && processed < limit)
+        while (run.PendingAncientCultivatorIds.Count > 0 && processed < limit && !MclslAnnualFrameBudget.Expired)
         {
             int lastIndex = run.PendingAncientCultivatorIds.Count - 1;
             string raw = run.PendingAncientCultivatorIds[lastIndex];
@@ -330,6 +332,9 @@ internal static class MclslWorldEpochSystem
         if (!TryPrepareAncientConversion(actor, year, realm, realmIndex, out string missing))
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "转修新法尚缺“" + missing + "”，将继续寻找");
+            MclslDiagnostics.Cultivation("conversion.pending",
+                "actor=" + MclslActorAccessor.Id(actor) + " year=" + year + " realm=" + realm
+                + " missing=" + missing + " lifespan=" + MclslLongevityRules.ExpectedLifespan(actor, realm));
             return false;
         }
 
@@ -355,6 +360,11 @@ internal static class MclslWorldEpochSystem
         MclslTraitRegistration.SyncNativeRealmTraits(actor, realm);
         string name = MclslActorAccessor.DisplayName(actor, realm);
         string techniqueName = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "无名功法");
+        MclslDiagnostics.Cultivation("conversion.completed",
+            "actor=" + MclslActorAccessor.Id(actor) + " year=" + year + " age=" + actor.getAge()
+            + " realm=" + realm + " lifespan=" + MclslLongevityRules.ExpectedLifespan(actor, realm)
+            + " technique=" + MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty)
+            + " maxRealm=" + MclslTechniqueRealmLimit.MaxRealm(actor));
         MclslWorldRunRepository.AddEvent(year, "ancient_convert_new_law", name + "转修新法",
             name + "保留原有" + MclslRealmIds.Display(realm) + "修为，集齐新法所需要素，并另择《" + techniqueName + "》继续修行。", actor);
         MclslCultivationWake.EnsureAwake(
@@ -418,6 +428,9 @@ internal static class MclslWorldEpochSystem
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult,
                 "尝试转入早期新法，尚缺“" + missing + "”");
+            MclslDiagnostics.Cultivation("conversion.pioneer_pending",
+                "actor=" + MclslActorAccessor.Id(actor) + " year=" + year + " realm=" + realm
+                + " missing=" + missing + " lifespan=" + MclslLongevityRules.ExpectedLifespan(actor, realm));
             return false;
         }
 
@@ -438,6 +451,11 @@ internal static class MclslWorldEpochSystem
         MclslTraitRegistration.SyncNativeRealmTraits(actor, realm);
         string name = MclslActorAccessor.DisplayName(actor, realm);
         string techniqueName = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "无名功法");
+        MclslDiagnostics.Cultivation("conversion.pioneer_completed",
+            "actor=" + MclslActorAccessor.Id(actor) + " year=" + year + " age=" + actor.getAge()
+            + " realm=" + realm + " lifespan=" + MclslLongevityRules.ExpectedLifespan(actor, realm)
+            + " technique=" + MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty)
+            + " maxRealm=" + MclslTechniqueRealmLimit.MaxRealm(actor));
         MclslWorldRunRepository.AddEvent(year, "newlaw_pioneer_conversion", name + "转试新法",
             name + "在新法尚未定世之时，集齐所需要素，保留" + MclslRealmIds.Display(realm)
             + "修为转入《" + techniqueName + "》。", actor);

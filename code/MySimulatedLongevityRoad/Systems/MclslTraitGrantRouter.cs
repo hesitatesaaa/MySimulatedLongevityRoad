@@ -33,13 +33,21 @@ internal static class MclslTraitGrantRouter
         bool isRealm = MclslTraitRegistration.TryRealmForTrait(traitId, out string realm);
         bool isWorldSoulEntity = traitId == MclslTraitRegistration.WorldSoulEntityTraitId;
         bool isProfession = MclslProfessionSystem.IsProfessionTrait(traitId);
-        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity && !isProfession) return;
+        bool isImmortalPath = MclslImmortalPathSystem.IsPathTrait(traitId);
+        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity && !isProfession && !isImmortalPath) return;
 
         MclslWorldActorQuery.Track(actor);
         if (isProfession)
         {
             MclslProfessionSystem.OnTraitGranted(actor, traitId);
             MarkAndRefresh(actor);
+            return;
+        }
+        if (isImmortalPath)
+        {
+            MclslImmortalPathSystem.OnTraitGranted(actor, traitId);
+            MarkAndRefresh(actor);
+            MclslActorInfoPanel.RefreshOpenForActor(actor);
             return;
         }
         if (isRealm || isGift) MclslTraitRegistration.TryAutoCollectTrait(actor, traitId);
@@ -80,7 +88,8 @@ internal static class MclslTraitGrantRouter
         if (!MclslTraitRegistration.IsGiftTrait(traitId)
             && !MclslTraitRegistration.TryRealmForTrait(traitId, out _)
             && traitId != MclslTraitRegistration.HuanzhenTraitId
-            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId) return;
+            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId
+            && !MclslImmortalPathSystem.IsPathTrait(traitId)) return;
 
         MclslWorldActorQuery.Track(actor);
         MclslTraitRegistration.ReconcileTraitState(actor);

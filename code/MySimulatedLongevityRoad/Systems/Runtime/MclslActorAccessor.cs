@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Core;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -12,6 +13,7 @@ internal static class MclslActorAccessor
     internal static string GetString(Actor actor, string key, string fallback = "")
     {
         if (actor?.data == null) return fallback;
+        if (key == MclslActorDataKeys.QiankunBag) return MclslBagSystem.SnapshotJson(actor);
         ((BaseSystemData)actor.data).get(key, out string value, fallback);
         return value ?? fallback;
     }
@@ -33,19 +35,28 @@ internal static class MclslActorAccessor
     internal static void Set(Actor actor, string key, string value)
     {
         if (actor?.data == null) return;
+        value ??= string.Empty;
+        if (string.Equals(GetString(actor, key), value, StringComparison.Ordinal)) return;
         string oldTechniqueId = string.Empty;
         bool techniqueChanged = string.Equals(key, MclslActorDataKeys.TechniqueId, StringComparison.Ordinal);
         bool cultivationStateChanged = string.Equals(key, MclslActorDataKeys.Realm, StringComparison.Ordinal);
+        bool professionChanged = string.Equals(key, MclslActorDataKeys.Profession, StringComparison.Ordinal);
+        string oldRealm = cultivationStateChanged ? GetString(actor, key, string.Empty) : string.Empty;
         bool honorificSourceChanged = IsHonorificSourceKey(key);
         if (techniqueChanged)
             oldTechniqueId = GetString(actor, key, string.Empty);
 
         ((BaseSystemData)actor.data).set(key, value ?? string.Empty);
+        MclslRuntimeChanges.OnWrite(actor, key);
+        if (cultivationStateChanged || professionChanged) MclslProfessionSystem.ReconcileAndPromote(actor);
 
         if (techniqueChanged)
             MclslTechniqueOccupationSystem.OnTechniqueChanged(actor, oldTechniqueId, value ?? string.Empty);
         if (cultivationStateChanged)
+        {
             MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
+            MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
+        }
         if (honorificSourceChanged)
         {
             string realm = Realm(actor);
@@ -70,8 +81,22 @@ internal static class MclslActorAccessor
             || string.Equals(key, MclslActorDataKeys.InverseTruthName, StringComparison.Ordinal);
     }
 
-    internal static void Set(Actor actor, string key, int value) { if (actor?.data != null) ((BaseSystemData)actor.data).set(key, value); }
-    internal static void Set(Actor actor, string key, float value) { if (actor?.data != null) ((BaseSystemData)actor.data).set(key, value); }
+    internal static void Set(Actor actor, string key, int value)
+    {
+        if (key == MclslActorDataKeys.ProfessionGrade)
+            value = MclslProfessionCraftingPolicy.ClampGrade(value, MclslRealmIds.Index(Realm(actor)));
+        if (actor?.data == null || GetInt(actor, key, int.MinValue) == value) return;
+        ((BaseSystemData)actor.data).set(key, value);
+        MclslRuntimeChanges.OnWrite(actor, key);
+        if (key == MclslActorDataKeys.ProfessionExperience)
+            MclslProfessionSystem.ReconcileAndPromote(actor);
+    }
+    internal static void Set(Actor actor, string key, float value)
+    {
+        if (actor?.data == null || GetFloat(actor, key, float.NaN).Equals(value)) return;
+        ((BaseSystemData)actor.data).set(key, value);
+        MclslRuntimeChanges.OnWrite(actor, key);
+    }
 
     internal static string Realm(Actor actor) => GetString(actor, MclslActorDataKeys.Realm, string.Empty);
     internal static bool IsCultivator(Actor actor) => !string.IsNullOrWhiteSpace(Realm(actor));
