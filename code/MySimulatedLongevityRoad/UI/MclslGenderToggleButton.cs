@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Systems;
 using NeoModLoader.General;
 using UnityEngine;
@@ -7,11 +9,17 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslGenderToggleButton
 {
+    private sealed class Binding { internal long ActorId; internal ActorSex Sex; internal Button Button; }
+    private static ConditionalWeakTable<UnitWindow, Binding> Bindings = new();
+    internal static void ClearRuntime() => Bindings = new();
     private const string ButtonName = "MclslGenderToggle";
 
     internal static void Refresh(UnitWindow window)
     {
-        if (window?.actor?.data == null) return;
+        if (window?.actor?.data == null || !window.gameObject.activeInHierarchy) return;
+        Binding binding = Bindings.GetOrCreateValue(window);
+        long id = MclslActorAccessor.Id(window.actor);
+        if (binding.Button != null && binding.Button.gameObject.activeInHierarchy && binding.ActorId == id && binding.Sex == window.actor.data.sex) return;
         Transform avatar = SafeAvatarTransform(window);
         if (avatar == null) return;
 
@@ -23,6 +31,7 @@ internal static class MclslGenderToggleButton
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => Toggle(window));
         RefreshImage(window.actor, image, button);
+        binding.ActorId = id; binding.Sex = window.actor.data.sex; binding.Button = button;
     }
 
     private static Transform SafeAvatarTransform(UnitWindow window)
@@ -50,8 +59,8 @@ internal static class MclslGenderToggleButton
         image.raycastTarget = true;
 
         TipButton tip = buttonObject.GetComponent<TipButton>() ?? buttonObject.AddComponent<TipButton>();
-        tip.textOnClick = "切换性别";
-        tip.textOnClickDescription = "点击切换此生物的原生性别，并刷新头像显示。";
+        tip.textOnClick = MclslLocalizationBridge.RuntimeText("切换性别");
+        tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText("点击切换此生物的原生性别，并刷新头像显示。");
         return buttonObject;
     }
 

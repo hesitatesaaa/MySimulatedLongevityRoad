@@ -18,6 +18,7 @@ internal static class MclslRuntime
     {
         if (_initialized) return;
         _initialized = true;
+        MclslRuntimeChanges.BindMainThread();
         MclslConfigLocalization.Init();
         MclslModuleHub.Init();
         MclslFpsOverlay.Ensure();
@@ -29,56 +30,99 @@ internal static class MclslRuntime
         Init();
         MclslRuntimeDriver.Ensure();
         int year = CurrentYear();
+        MclslRuntimeChanges.Clear();
         MclslModuleHub.OnWorldLoaded(year, MclslRuntimeSettings.CoreEnabled);
         MclslMaobaoArchiveManager.OnWorldLoaded();
+        MclslAnnualBackpressure.InitializeAfterLoad();
         _lastYear = year;
         _frameCounter = 0;
     }
 
     internal static void Tick()
     {
+        MclslRuntimeChanges.BindMainThread();
         MclslDeveloperBridge.Tick();
         int unityFrame = Time.frameCount;
         if (unityFrame == _lastFrame) return;
         _lastFrame = unityFrame;
-
-        long realtimeSample = MclslPerformanceProbe.Begin();
-        using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
-            MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
-        MclslPerformanceProbe.End("实时模块", realtimeSample);
-        MclslRuntimeWorkBudget.SampleFrame();
-        if (!MclslRuntimeSettings.CoreEnabled) return;
-        _frameCounter++;
-        long frameSample = MclslPerformanceProbe.Begin();
-        using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
-            MclslModuleHub.TickFrame(_frameCounter, true);
-        MclslPerformanceProbe.End("帧模块", frameSample);
-        MclslPerformanceProbe.SampleFrame();
-        if (_frameCounter % 15 == 0)
+        long modFrameSample = MclslPerformanceProbe.Begin();
+        MclslFrameDeadline.Begin(3d);
+        try
         {
-            int year = CurrentYear();
-            if (year != _lastYear)
+            MclslRuntimeWorkBudget.SampleFrame();
+            MclslAnnualBackpressure.TickStatus();
+            MclslRuntimeChanges.Drain(16);
+            if (MclslRuntimeSettings.CoreEnabled)
             {
-                _lastYear = year;
-                using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
-                    MclslModuleHub.TickAnnual(year, true);
+                _frameCounter++;
+                int year = CurrentYear();
+                if (year > _lastYear && year > 0)
+                {
+                    _lastYear = year;
+                    using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
+                        MclslModuleHub.TickAnnual(year, true);
+                }
+                MclslAnnualFrameBudget.Begin(MclslAnnualFrameBudget.ForLag(MclslAnnualBackpressure.LagYears));
+                try
+                {
+                    using (MclslUnityProfiler.Sample("MCLS/Runtime/PriorityAnnualWork"))
+                        MclslModuleHub.TickPriorityAnnualWork(_frameCounter, true);
+                }
+                finally { MclslAnnualFrameBudget.End(); }
             }
+            long realtimeSample = MclslPerformanceProbe.Begin();
+            using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
+                MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
+            MclslPerformanceProbe.End("实时模块", realtimeSample);
+            MclslTraitEditorEraFilter.RefreshVisibleEditors();
+            MclslItemEffectDriver.Tick();
+            if (!MclslRuntimeSettings.CoreEnabled) return;
+            long frameSample = MclslPerformanceProbe.Begin();
+            using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
+                MclslModuleHub.TickFrame(_frameCounter, true);
+            MclslPerformanceProbe.End("帧模块", frameSample);
+            MclslRuntimeChanges.Drain(32);
+            MclslBagSystem.FlushPending();
+
+        }
+        finally
+        {
+            MclslFrameDeadline.End();
+            MclslPerformanceProbe.End("模组每帧CPU", modFrameSample);
+            MclslPerformanceProbe.SampleFrame();
         }
     }
 
     internal static void PrepareForSave()
     {
+        MclslBagSystem.FlushForSave();
         MclslModuleHub.PrepareForSave();
     }
 
     internal static void ClearWorldState()
     {
+        MclslDiagnostics.Clear();
+        MclslPerformanceProbe.SetEnabled(MclslPerformanceProbe.Enabled);
+        MclslFpsOverlay.ClearReport();
+        MclslAnnualBackpressure.Clear();
         _lastFrame = -1;
         _frameCounter = 0;
         _lastYear = -1;
         MclslRuntimeWorkBudget.Clear();
+        MclslRuntimeChanges.Clear();
         MclslBagSystem.ClearRuntime();
+        MclslActorInfoPanel.ClearRuntime();
+        MclslManaBar.ClearRuntime();
+        MclslTextValue.ClearRuntime();
+        MclslTraitEditorEraFilter.ClearRuntime();
+        MclslFeatureWindow.ClearRuntime();
+        MclslCodexWindow.ClearRuntime();
         MclslTianxuanMarket.ClearRuntime();
+        MclslSpellSystem.ClearRuntime();
+        MclslItemEffectDriver.ClearRuntime();
+        MclslRecipeKnowledge.ClearRuntime();
+        MclslSpiritualRootSystem.ClearRuntime();
+        MySimulatedLongevityRoad.Traits.MclslImmortalActorRegistration.ClearRuntime();
         MySimulatedLongevityRoad.Data.MclslHonorificNameCatalog.ClearRuntime();
         MclslModuleHub.Clear();
         MclslVisibleActorRenderLane.Clear();

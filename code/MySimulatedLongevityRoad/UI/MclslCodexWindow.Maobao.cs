@@ -20,16 +20,6 @@ internal sealed partial class MclslCodexWindow
     private long _maobaoFocusActorId;
 #pragma warning restore CS0649
 
-    internal static void ShowMaobao()
-    {
-        MclslMaobaoWindow.ShowWindow();
-    }
-
-    internal static void ShowMaobaoForActor(Actor actor)
-    {
-        MclslMaobaoWindow.Show(actor, saveActor: true);
-    }
-
     private void DrawMaobao()
     {
         IReadOnlyList<MclslMaobaoArchiveManager.SavedActorPacket> records = MclslMaobaoArchiveManager.GetSavedActors();
@@ -77,7 +67,7 @@ internal sealed partial class MclslCodexWindow
         GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(520), GUILayout.ExpandHeight(true));
         DrawCardStripe("#6FAE9D");
-        GUILayout.Label("<size=20><b>当世照影</b></size>");
+        GUILayout.Label("<size=22><b>当世照影</b></size>");
         GUILayout.Label("<color=#B9B0A0>候选来自现有修士索引，最多十二人；点击刻名后才写入存档。</color>");
         float listHeight = Math.Max(300f, _rect.height - 355f);
         _maobaoCandidateScroll = GUILayout.BeginScrollView(_maobaoCandidateScroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.Height(listHeight));
@@ -93,7 +83,7 @@ internal sealed partial class MclslCodexWindow
         GUILayout.BeginVertical(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
         DrawCardStripe("#D6BE86");
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<size=20><b>时序名录</b></size>", GUILayout.Width(180));
+        GUILayout.Label("<size=22><b>时序名录</b></size>", GUILayout.Width(180));
         DrawMaobaoFilterButton("全部");
         DrawMaobaoFilterButton("当世");
         DrawMaobaoFilterButton("往昔");
@@ -138,17 +128,17 @@ internal sealed partial class MclslCodexWindow
         if (record?.ActorData == null) return;
         bool alive = IsPacketActorAlive(record);
         GUILayout.BeginVertical(GUI.skin.box);
-        DrawCardStripe(record.SourceActorId == _maobaoFocusActorId ? "#D8C778" : alive ? "#8FE3D1" : "#777D88");
+        DrawCardStripe(alive && record.SourceActorId == _maobaoFocusActorId ? "#D8C778" : alive ? "#8FE3D1" : "#777D88");
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<size=19><b>" + Blank(record.Name) + "</b></size>", GUILayout.Width(250));
+        GUILayout.Label("<size=21><b>" + Blank(record.Name) + "</b></size>", GUILayout.Width(250));
         DrawTag(alive ? "当世" : "档案", alive ? "#8FE3D1" : "#A8ABB3");
-        string realm = record.SourceActorId > 0L && MclslActorRegistry.ResolveKnownOrWorld(record.SourceActorId, out Actor actor)
+        string realm = MclslMaobaoArchiveManager.TryResolveSource(record, out Actor actor)
             ? MclslActorAccessor.Realm(actor) : string.Empty;
         DrawTag(Blank(realm, "完整快照"), "#FFD37A");
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.Label("保存时间 " + Blank(record.SaveTime) + "｜源角色ID " + record.SourceActorId);
-        GUILayout.Label("已保存原生角色数据、物品引用、特质与本 Mod custom_data；放置时会重新生成当前世界编号。");
+        GUILayout.Label("已保存角色数据、物品引用、特质与模组自定义档案；放置时会重新生成当前世界编号。");
         GUILayout.BeginHorizontal();
         GUILayout.Label("保存年份 " + record.SavedYear + "｜资源 " + Blank(record.AssetId));
         GUILayout.FlexibleSpace();
@@ -157,7 +147,7 @@ internal sealed partial class MclslCodexWindow
         GUI.enabled = oldEnabled && canLocate;
         if (GUILayout.Button("定位修士", GUILayout.Width(90), GUILayout.Height(32)))
         {
-            if (MclslActorRegistry.ResolveKnownOrWorld(record.SourceActorId, out Actor target))
+            if (MclslMaobaoArchiveManager.TryResolveSource(record, out Actor target))
             {
                 CloseWindow();
                 try { ActionLibrary.openUnitWindow(target); } catch { }
@@ -178,9 +168,7 @@ internal sealed partial class MclslCodexWindow
 
     private static bool IsPacketActorAlive(MclslMaobaoArchiveManager.SavedActorPacket packet)
     {
-        return packet != null && packet.SourceActorId > 0L
-            && MclslActorRegistry.ResolveKnownOrWorld(packet.SourceActorId, out Actor actor)
-            && MclslActorAccessor.Alive(actor);
+        return MclslMaobaoArchiveManager.TryResolveSource(packet, out _);
     }
 
     private void DrawMaobaoFilterButton(string filter)

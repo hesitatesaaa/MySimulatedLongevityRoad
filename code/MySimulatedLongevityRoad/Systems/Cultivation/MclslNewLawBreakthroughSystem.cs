@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -10,16 +11,17 @@ internal static class MclslNewLawBreakthroughSystem
     {
         int storedBonus = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationChanceBonus, 0));
         MclslAptitudeGiftDefinition gift = Gift(actor);
-        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi);
-        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi, year);
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_break_bonus");
         int chance = 8 + aptitude / 8 + storedBonus + pillBonus + buqueBonus
-            + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus
+            + (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslInverseTruthSystem.NewLawBreakthroughChanceBonus()
-            + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year);
+            + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year)
+            + MclslPhysiqueSystem.BreakthroughPoints(actor);
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|foundation|" + year) % 100;
-        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.v020.buque_break_bonus", 0);
-        if (roll >= Math.Min(100, chance))
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_break_bonus", 0);
+        if (roll >= Math.Min(100, chance) && !MclslImmortalPathSystem.AllowsBreakthrough(actor, MclslRealmIds.ZhuJi))
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "尚未遇到合适的筑基奇物");
             return;

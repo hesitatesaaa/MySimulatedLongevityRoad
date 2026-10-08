@@ -43,6 +43,21 @@ internal static class MclslAptitudeGiftCatalog
         return RollWithin(safeSeed, "heaven", 95, 100);
     }
 
+    internal static int RollSpecialPhysiqueAptitude(string seed, bool highestOnly)
+    {
+        string safeSeed = seed ?? string.Empty;
+        // Preserve the original relative rarity of each permitted grade.
+        int roll = PositiveHash(safeSeed + "|physique_grade") % (highestOnly ? 10900 : 90000);
+        if (!highestOnly)
+        {
+            if (roll < 55800) return RollWithin(safeSeed, "middle", 55, 69);
+            if (roll < 79100) return RollWithin(safeSeed, "upper", 70, 84);
+            roll -= 79100;
+        }
+        if (roll < 10760) return RollWithin(safeSeed, "pure", 85, 94);
+        return RollWithin(safeSeed, "heaven", 95, 100);
+    }
+
     internal static bool RollQualification(string seed, int probabilityPercent = 50)
     {
         int threshold = System.Math.Clamp(probabilityPercent, 0, 100) * 100;

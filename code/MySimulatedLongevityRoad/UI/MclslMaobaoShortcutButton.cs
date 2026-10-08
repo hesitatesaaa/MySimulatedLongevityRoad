@@ -28,6 +28,7 @@ internal static class MclslMaobaoShortcutButton
     private static readonly Dictionary<UnitWindow, Button> WindowButtons = new();
     private static readonly Dictionary<UnitWindow, Image> WindowIcons = new();
 
+    internal static void ClearRuntime() { WindowButtons.Clear(); WindowIcons.Clear(); _currentWindow = null; }
     internal static void Refresh(UnitWindow window) => ShowButton(window);
 
     internal static void ShowButton(UnitWindow window)
@@ -67,12 +68,7 @@ internal static class MclslMaobaoShortcutButton
         if (window == null) return;
         try
         {
-            Transform[] all = window.transform.GetComponentsInChildren<Transform>(true);
-            for (int i = 0; i < all.Length; i++)
-            {
-                Transform child = all[i];
-                if (child != null && child.name == ButtonName) child.gameObject.SetActive(false);
-            }
+            if (WindowButtons.TryGetValue(window, out Button button) && button != null) button.gameObject.SetActive(false);
         }
         catch (Exception ex)
         {
@@ -88,20 +84,7 @@ internal static class MclslMaobaoShortcutButton
             return cached;
         }
 
-        Transform selected = null;
-        Transform[] all = window.transform.GetComponentsInChildren<Transform>(true);
-        for (int i = 0; i < all.Length; i++)
-        {
-            Transform candidate = all[i];
-            if (candidate == null || candidate.name != ButtonName) continue;
-            if (selected == null || candidate.parent == background)
-            {
-                if (selected != null && selected != candidate) selected.gameObject.SetActive(false);
-                selected = candidate;
-                if (candidate.parent == background) break;
-            }
-            else candidate.gameObject.SetActive(false);
-        }
+        Transform selected = background.Find(ButtonName);
 
         GameObject buttonObject = selected?.gameObject;
         if (buttonObject == null) buttonObject = CreateButton(background);
@@ -203,8 +186,8 @@ internal static class MclslMaobaoShortcutButton
 
         TipButton tip = button.GetComponent<TipButton>() ?? button.gameObject.AddComponent<TipButton>();
         bool saved = MclslMaobaoSystem.IsRecorded(MclslActorAccessor.Id(actor));
-        tip.textOnClick = saved ? "移除猫宝登名" : "猫宝登名";
-        tip.textOnClickDescription = saved ? "再次点击移除当前人物的猫宝留名。" : "点击将当前人物刻入猫宝。";
+        tip.textOnClick = MclslLocalizationBridge.RuntimeText(saved ? "移除猫宝登名" : "猫宝登名");
+        tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText(saved ? "再次点击移除当前人物的猫宝留名。" : "点击将当前人物刻入猫宝。");
     }
 
     private static void ConfigureSurfaceOutline(GameObject buttonObject)

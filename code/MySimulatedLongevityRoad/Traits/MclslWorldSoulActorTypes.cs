@@ -49,16 +49,21 @@ internal sealed class SoulActorDefinition
 internal readonly struct SoulSpriteSet
 {
     internal readonly Sprite[] Idle;
+    internal readonly Sprite[] Breathing;
     internal readonly Sprite[] Run;
     internal readonly Sprite[] Attack;
+    internal readonly Sprite[] Hit;
     internal readonly Sprite[] Death;
     internal readonly bool UsesGenericFallback;
 
-    internal SoulSpriteSet(Sprite[] idle, Sprite[] run, Sprite[] attack, Sprite[] death, bool usesGenericFallback)
+    internal SoulSpriteSet(Sprite[] idle, Sprite[] breathing, Sprite[] run, Sprite[] attack,
+        Sprite[] hit, Sprite[] death, bool usesGenericFallback)
     {
         Idle = idle ?? Array.Empty<Sprite>();
+        Breathing = breathing ?? Array.Empty<Sprite>();
         Run = run ?? Array.Empty<Sprite>();
         Attack = attack ?? Array.Empty<Sprite>();
+        Hit = hit ?? Array.Empty<Sprite>();
         Death = death ?? Array.Empty<Sprite>();
         UsesGenericFallback = usesGenericFallback;
     }

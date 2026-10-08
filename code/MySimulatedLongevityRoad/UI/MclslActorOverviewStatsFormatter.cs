@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
@@ -13,9 +14,17 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslActorOverviewStatsFormatter
 {
+    private sealed class WindowState { internal long ActorId, Revision = -1; internal bool Visible, NewLaw; }
+    private static ConditionalWeakTable<UnitWindow, WindowState> States = new();
+    private sealed class IconTextBinding { internal bool Initialized; internal Text Value; }
+    private static ConditionalWeakTable<Transform, IconTextBinding> IconTextBindings = new();
+    internal static void ClearRuntime() { States = new(); IconTextBindings = new(); }
+    internal static void OnClosed(UnitWindow window) { if (window != null) States.Remove(window); }
     private static readonly OverviewStatIcon[] Icons =
     {
         new("MclslImmortalFate", "仙缘", "ui/Icons/XuanHuangXianLu"),
+        new("MclslAptitude", "资质", "ui/Icons/Aptitude"),
+        new("MclslSpellInsight", "悟性", "ui/Icons/WuXing"),
         new("MclslMindState", "心境", "ui/Icons/XinJing", "ui/Icons/HuanZhen"),
         new("MclslMortalMiasma", "仙凡瘴", "ui/Icons/XianFanZhang"),
         new("MclslTrueEssence", "真元", "ui/Icons/ZhenQi"),
@@ -25,28 +34,36 @@ internal static class MclslActorOverviewStatsFormatter
 
     internal static void Refresh(UnitWindow window)
     {
-        Actor actor = window?.actor;
+        if (window == null || !window.gameObject.activeInHierarchy) return;
+        Actor actor = window.actor;
+        long id = MclslActorAccessor.Id(actor), revision = MclslRuntimeChanges.DataRevision(id);
+        WindowState state = States.GetOrCreateValue(window);
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        if (state.ActorId == id && state.Revision == revision && state.NewLaw == newLaw) return;
         if (!ShouldShowOverview(actor))
         {
             HideMclslOverview(window);
+            state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = false;
             return;
         }
 
         MclslActorCultivationView cultivation = MclslActorCultivationQuery.Build(actor);
         if (!EnsureIconGroup(window)) return;
 
-        SetIconVisibility(window, "MclslAptitude", false);
+        SetIconValue(window, "MclslAptitude", Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100));
         SetIconVisibility(window, "MclslQi", false);
+        SetIconValue(window, "MclslSpellInsight", MclslSpellProgression.Insight(actor));
         SetIconValue(window, "MclslImmortalFate", cultivation.ImmortalFate);
         SetIconValue(window, "MclslMindState", cultivation.MindState);
         if (ShouldShowMiasma(cultivation)) SetIconText(window, "MclslMortalMiasma", cultivation.MortalMiasma + "/" + cultivation.MortalMiasmaLimit);
         else SetIconVisibility(window, "MclslMortalMiasma", false);
         if (cultivation.NextRealmMinimum <= 0 && !string.IsNullOrWhiteSpace(cultivation.RealmId)) SetIconText(window, "MclslTrueEssence", "-");
         else SetIconValue(window, "MclslTrueEssence", cultivation.TrueEssence);
-        SetIconValue(window, "MclslContribution", cultivation.Contribution);
-        SetIconValue(window, "MclslSpiritStones", cultivation.SpiritStones);
+        SetIconText(window, "MclslContribution", cultivation.Contribution.ToString());
+        SetIconText(window, "MclslSpiritStones", cultivation.SpiritStones.ToString());
         ArrangeOverviewRows(window);
         RefreshFactionAffiliationRow(window, actor, cultivation);
+        state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = true;
     }
 
     private static bool ShouldShowOverview(Actor actor)
@@ -92,33 +109,50 @@ internal static class MclslActorOverviewStatsFormatter
     {
         Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content");
         if (content == null) return;
-        Transform row = content.Find("MclslFactionAffiliationRow");
-        if (row == null) row = CreateFactionAffiliationRow(content);
+        bool show = cultivation != null && !string.IsNullOrWhiteSpace(cultivation.RealmId);
+        if (!show) { HideFactionAffiliationRow(window); return; }
+        MclslFamilySystem.Observe(actor);
+        SetAffiliationRow(content, "MclslFamilyRow", "所属家族：", MclslFamilySystem.FamilyOf(actor)?.Name ?? "无");
+        string sect = MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear());
+        SetAffiliationRow(content, "MclslCurrentSectRow", "所属宗门：", string.IsNullOrWhiteSpace(sect) ? "无" : sect);
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        Transform factionRow = content.Find("MclslFactionAffiliationRow");
+        if (newLaw) SetAffiliationRow(content, "MclslFactionAffiliationRow", "所属组织：", FactionAffiliationName(actor));
+        else if (factionRow != null) factionRow.gameObject.SetActive(false);
+        string origin = MclslFactionMissionSystem.DisplaySectText(
+            MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty));
+        Transform originRow = content.Find("MclslAncientSectOriginRow");
+        if (newLaw && !string.IsNullOrWhiteSpace(origin))
+            SetAffiliationRow(content, "MclslAncientSectOriginRow", "旧法宗门出身：", origin);
+        else if (originRow != null) originRow.gameObject.SetActive(false);
+    }
+
+    private static void SetAffiliationRow(Transform content, string rowName, string label, string value)
+    {
+        Transform row = content.Find(rowName);
+        if (row == null) row = CreateFactionAffiliationRow(content, rowName);
         if (row == null) return;
-
-        bool show = cultivation != null
-            && !string.IsNullOrWhiteSpace(cultivation.RealmId)
-            && MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
-        row.gameObject.SetActive(show);
-        if (!show) return;
-
+        row.gameObject.SetActive(true);
         Text text = row.GetComponentInChildren<Text>(true);
-        if (text == null) return;
-        string affiliation = FactionAffiliationName(actor);
-        text.text = "<color=#D8CDAA>已加入：</color><color=#F1D17A>" + (string.IsNullOrWhiteSpace(affiliation) ? "无" : affiliation) + "</color>";
+        if (text != null) text.text = "<color=#D8CDAA>" + label + "</color><color=#F1D17A>"
+            + (string.IsNullOrWhiteSpace(value) ? "无" : value) + "</color>";
         row.SetAsLastSibling();
     }
 
     private static void HideFactionAffiliationRow(UnitWindow window)
     {
         Transform content = window == null ? null : ((Component)window).transform.Find("Background/Scroll View/Viewport/Content");
-        Transform row = content == null ? null : content.Find("MclslFactionAffiliationRow");
-        if (row != null) row.gameObject.SetActive(false);
+        if (content == null) return;
+        foreach (string name in new[] { "MclslFactionAffiliationRow", "MclslFamilyRow", "MclslCurrentSectRow", "MclslAncientSectOriginRow" })
+        {
+            Transform row = content.Find(name);
+            if (row != null) row.gameObject.SetActive(false);
+        }
     }
 
-    private static Transform CreateFactionAffiliationRow(Transform content)
+    private static Transform CreateFactionAffiliationRow(Transform content, string rowName)
     {
-        GameObject row = new GameObject("MclslFactionAffiliationRow", typeof(RectTransform), typeof(LayoutElement));
+        GameObject row = new GameObject(rowName, typeof(RectTransform), typeof(LayoutElement));
         row.transform.SetParent(content, false);
         RectTransform rowRect = row.GetComponent<RectTransform>();
         rowRect.anchorMin = new Vector2(0f, 1f);
@@ -138,7 +172,7 @@ internal static class MclslActorOverviewStatsFormatter
         textRect.offsetMax = new Vector2(-12f, 0f);
         Text text = textObject.GetComponent<Text>();
         text.font = LocalizedTextManager.current_font ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
-        text.fontSize = 15;
+        text.fontSize = MclslUiTheme.ReadableFontSize(15);
         text.alignment = TextAnchor.MiddleLeft;
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
         text.verticalOverflow = VerticalWrapMode.Truncate;
@@ -373,15 +407,14 @@ internal static class MclslActorOverviewStatsFormatter
             if (sprite != null && iconImage != null) iconImage.sprite = sprite;
         }
         TipButton tip = iconTransform.GetComponent<TipButton>();
-        if (tip != null) tip.textOnClick = icon.DisplayName;
-    }
-
-    private static void SetIconSprite(UnitWindow window, string id, string resourcePath)
-    {
-        Transform icon = FindOverviewIcon(window, id);
-        Image image = icon?.GetComponent<StatsIcon>()?.getIcon();
-        Sprite sprite = LoadSprite(new[] { resourcePath });
-        if (image != null && sprite != null) image.sprite = sprite;
+        if (tip != null)
+        {
+            tip.textOnClick = icon.Id;
+            if (icon.Id == "MclslSpellInsight")
+                tip.textOnClickDescription = "mclsl_spell_insight_description";
+            else if (icon.Id == "MclslAptitude")
+                tip.textOnClickDescription = "mclsl_aptitude_description";
+        }
     }
 
     private static Sprite LoadSprite(string[] resourcePaths)
@@ -412,8 +445,15 @@ internal static class MclslActorOverviewStatsFormatter
         SetIconVisibility(window, id, true);
         try { window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message); }
         Transform icon = FindOverviewIcon(window, id);
-        Text[] texts = icon?.GetComponentsInChildren<Text>(true);
-        if (texts != null && texts.Length > 0) texts[texts.Length - 1].text = value ?? string.Empty;
+        if (icon == null) return;
+        IconTextBinding binding = IconTextBindings.GetOrCreateValue(icon);
+        if (!binding.Initialized)
+        {
+            Text[] texts = icon.GetComponentsInChildren<Text>(true);
+            binding.Value = texts.Length > 0 ? texts[texts.Length - 1] : null;
+            binding.Initialized = true;
+        }
+        if (binding.Value != null) binding.Value.text = value ?? string.Empty;
     }
 
     private static void SetIconVisibility(UnitWindow window, string id, bool visible)

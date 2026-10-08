@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Traits;
 using MySimulatedLongevityRoad.Core;
 
 namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslAncientLawEventSystem
 {
+    private static MclslActorSelection _manualSelection;
+    private static MclslWorldRunState _manualRun;
+    private static int _manualYear;
+    internal static int PendingManualCount => MclslWorldRunRepository.Current?.ManualSecretRealmRequests?.Count ?? 0;
+    internal static void ClearManual() { _manualSelection = null; _manualRun = null; _manualYear = 0; }
+
     internal static void ManualTriggerSpiritualDisaster(int year)
     {
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
@@ -31,12 +38,46 @@ internal static class MclslAncientLawEventSystem
 
     internal static void ManualTriggerSecretRealm(int year)
     {
-        Actor candidate = PickSecretRealmCandidate(year, "manual_secret_realm");
-        if (MclslActorAccessor.Alive(candidate))
-            ResolveAncientSecretRealm(candidate, year, MclslActorAccessor.DisplayName(candidate), true);
-        else
-            AddManualMapVisualEvent(year, "ancient_secret_realm", "秘境开启", "云雾开合，秘境一线洞开，未有修士入内。", "secret_realm", year);
-        if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("秘境一线洞开。", "#B7A7FF", 6f, 1);
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run.ManualSecretRealmRequests.Count >= 32)
+        {
+            MclslAnnouncementSystem.Enqueue(LocalizedTextManager.getText("MCLSL_ui_secret_realm_busy"), "#B7A7FF", 6f, 1);
+            return;
+        }
+        run.ManualSecretRealmRequests.Enqueue(Math.Max(1, year));
+        MclslWorldArchiveStore.MarkDirty();
+    }
+
+    internal static void TickManual()
+    {
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run.ManualSecretRealmRequests.Count == 0 || MclslFrameDeadline.Expired || MclslWorldBootstrapLane.HasPending) return;
+        int year = run.ManualSecretRealmRequests.Peek();
+        if (_manualSelection == null || !ReferenceEquals(_manualRun, run) || _manualYear != year)
+        {
+            _manualRun = run; _manualYear = year;
+            _manualSelection = new(MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot(), 1,
+                actor => MclslEligibility.CanCultivate(actor)
+                    && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem) == MclslCultivationSystemIds.AncientLaw,
+                actor => Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 80
+                    + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience) * 4
+                    + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50)
+                    + PositiveHash(MclslActorAccessor.Id(actor) + "|secret_realm_score|" + year) % 50);
+        }
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            if (!_manualSelection.Tick()) return;
+            Actor candidate = _manualSelection.Results.Count > 0 ? _manualSelection.Results[0] : null;
+            // Consume once before side effects, so failures or reload cannot replay rewards.
+            run.ManualSecretRealmRequests.Dequeue(); ClearManual(); MclslWorldArchiveStore.MarkDirty();
+            if (MclslActorAccessor.Alive(candidate))
+                ResolveAncientSecretRealm(candidate, year, MclslActorAccessor.DisplayName(candidate), true);
+            else
+                AddManualMapVisualEvent(year, "ancient_secret_realm", "秘境开启", "云雾开合，秘境一线洞开，未有修士入内。", "secret_realm", year);
+            if (MclslRuntimeSettings.MinorWorldAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue("秘境一线洞开。", "#B7A7FF", 6f, 1);
+        }
+        finally { MclslPerformanceProbe.End("手动秘境.分帧择人", sample); }
     }
 
     internal static void ManualTriggerAncientRuin(int year)
@@ -78,10 +119,7 @@ internal static class MclslAncientLawEventSystem
                 {
                     AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 5, 0, 100);
                     AddClamped(actor, MclslActorDataKeys.Contribution, 2 + realmIndex, 0, 999999);
-                    if (MclslAncientMentorshipSystem.TryRecruitFromTeacher(actor, year, out Actor student))
-                        MclslWorldRunRepository.AddEvent(year, "ancient_master_teaching", "仙师授法", name + "于" + kingdom + "收" + MclslActorAccessor.DisplayName(student) + "为徒，传下《" + technique + "》口诀。师徒关系已入仙道履历。", actor);
-                    else
-                        MclslWorldRunRepository.AddEvent(year, "ancient_master_teaching", "仙师授法", name + "于" + kingdom + "传下《" + technique + "》口诀，附近求道者渐知此法。", actor);
+                    MclslWorldRunRepository.AddEvent(year, "ancient_master_teaching", "仙师授法", name + "于" + kingdom + "传下《" + technique + "》口诀，附近求道者渐知此法。", actor);
                 }
                 break;
             case 3:
@@ -254,7 +292,8 @@ internal static class MclslAncientLawEventSystem
         MclslTechniqueRealmLimit.SetProceduralBranchLimit(actor, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
         MclslTechniqueStageSystem.AddProgress(actor, 10);
         AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 8, 0, 100);
-        MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "开创新支", 14);
+        MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "开创新支", 14,
+            string.Join(",", tags));
         MclslWorldRunRepository.AddEvent(year, "ancient_new_method_branch", "法门新开", name + "由《" + oldTechnique + "》推演出《" + newName + "》，一支新传承由此分出。", actor);
     }
 
@@ -262,7 +301,7 @@ internal static class MclslAncientLawEventSystem
     {
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "ancient_secret_realm", "explore", year, manual ? 12 : 48)) return;
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_secret_realm|" + year) % 100;
-        if (roll < 10)
+        if (roll < MclslAdventureSystem.SecretRealmDeathChance(actor, 85) && !actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId))
         {
             MclslAdventureSystem.CreateAncientLawRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "上古秘法"));
             MclslDeathSystem.ExecuteScriptedDeath(actor, "ancient_secret_realm", "秘境", "深入秘境后失陷于残阵与地脉裂隙", true);
@@ -284,19 +323,6 @@ internal static class MclslAncientLawEventSystem
     {
         MclslMapLocationResolver.TryPickValidTile(seed + year, out int mapX, out int mapY, out string location, out string kingdom);
         MclslWorldRunRepository.AddMapVisualEvent(year, type, title, body, mapX, mapY, location, kingdom, visualKind, 1);
-    }
-
-    private static Actor PickSecretRealmCandidate(int year, string scope)
-    {
-        IReadOnlyList<Actor> candidates = MclslCultivatorCandidateIndex.SelectCultivators(
-            96,
-            actor => MclslEligibility.CanCultivate(actor)
-                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.AncientLaw,
-            actor => Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 80
-                + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0) * 4
-                + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50)
-                + PositiveHash(MclslActorAccessor.Id(actor) + "|secret_realm_score|" + year) % 50);
-        return candidates.Count > 0 ? candidates[0] : null;
     }
 
     private static void ResolveGoldenCoreLecture(Actor actor, int year, string name, string technique, string place)
@@ -344,6 +370,14 @@ internal static class MclslAncientLawEventSystem
             if (!string.IsNullOrWhiteSpace(dao)) return MclslGeneratedObjectFactory.NormalizeTags(new[] { dao });
         }
         MclslTechniqueDefinition technique = MclslCultivationCatalog.Technique(techniqueId);
+        string[] roots = MclslSpiritualRootSystem.RootAttributes(actor);
+        if (roots.Length > 0 && PositiveHash(MclslActorAccessor.Id(actor) + "|branch_root") % 5 != 0)
+        {
+            string[] preferred = new string[technique.LawPool.Length + 1];
+            preferred[0] = roots[0];
+            Array.Copy(technique.LawPool, 0, preferred, 1, technique.LawPool.Length);
+            return MclslGeneratedObjectFactory.NormalizeTags(preferred);
+        }
         return MclslGeneratedObjectFactory.NormalizeTags(technique.LawPool);
     }
 
@@ -354,6 +388,7 @@ internal static class MclslAncientLawEventSystem
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
+        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
         int current = MclslActorAccessor.GetInt(actor, key, min);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
     }

@@ -33,13 +33,39 @@ internal static class MclslTraitGrantRouter
         bool isRealm = MclslTraitRegistration.TryRealmForTrait(traitId, out string realm);
         bool isWorldSoulEntity = traitId == MclslTraitRegistration.WorldSoulEntityTraitId;
         bool isProfession = MclslProfessionSystem.IsProfessionTrait(traitId);
-        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity && !isProfession) return;
+        bool isImmortalPath = MclslImmortalPathSystem.IsPathTrait(traitId);
+        bool isHeavenFavor = traitId == MclslTraitRegistration.HeavenFavorTraitId;
+        bool isPhysique = MclslPhysiqueSystem.IsPhysique(traitId);
+        if (!isHuanzhen && !isGift && !isRealm && !isWorldSoulEntity && !isProfession && !isImmortalPath && !isHeavenFavor && !isPhysique) return;
 
         MclslWorldActorQuery.Track(actor);
+        if (isPhysique)
+        {
+            MclslPhysiqueSystem.OnGranted(actor, traitId);
+            if (MclslRuntimeSettings.AutoCollectPhysique) MclslTraitRegistration.TryMarkFavorite(actor);
+            MarkAndRefresh(actor);
+            return;
+        }
+        if (isHeavenFavor)
+        {
+            EnforceUniqueHeavenFavor(actor);
+            MclslTraitRegistration.TryMarkFavorite(actor);
+            MclslTechniqueStageSystem.AddProgress(actor, 10);
+            MarkAndRefresh(actor);
+            return;
+        }
         if (isProfession)
         {
             MclslProfessionSystem.OnTraitGranted(actor, traitId);
             MarkAndRefresh(actor);
+            return;
+        }
+        if (isImmortalPath)
+        {
+            MclslImmortalPathSystem.OnTraitGranted(actor, traitId);
+            MclslTraitRegistration.TryMarkFavorite(actor);
+            MarkAndRefresh(actor);
+            MclslActorInfoPanel.RefreshOpenForActor(actor);
             return;
         }
         if (isRealm || isGift) MclslTraitRegistration.TryAutoCollectTrait(actor, traitId);
@@ -65,6 +91,22 @@ internal static class MclslTraitGrantRouter
         HandleWorldSoulEntityGrant(actor);
     }
 
+    private static void EnforceUniqueHeavenFavor(Actor recipient)
+    {
+        try
+        {
+            var actors = World.world?.units?.getSimpleList();
+            if (actors == null) return;
+            for (int i = 0; i < actors.Count; i++)
+            {
+                Actor previous = actors[i];
+                if (previous == null || previous == recipient || !previous.hasTrait(MclslTraitRegistration.HeavenFavorTraitId)) continue;
+                SuppressRouting(() => previous.removeTrait(MclslTraitRegistration.HeavenFavorTraitId));
+            }
+        }
+        catch (Exception ex) { MclslDiagnostics.Error("heaven-favor-unique", ex.Message); }
+    }
+
     internal static void HandleRemovedTrait(Actor actor, string traitId)
     {
         if (IsSuppressed) return;
@@ -77,13 +119,21 @@ internal static class MclslTraitGrantRouter
             MarkAndRefresh(actor);
             return;
         }
+        if (MclslPhysiqueSystem.IsPhysique(traitId))
+        {
+            MarkAndRefresh(actor);
+            return;
+        }
         if (!MclslTraitRegistration.IsGiftTrait(traitId)
             && !MclslTraitRegistration.TryRealmForTrait(traitId, out _)
             && traitId != MclslTraitRegistration.HuanzhenTraitId
-            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId) return;
+            && traitId != MclslTraitRegistration.WorldSoulEntityTraitId
+            && !MclslImmortalPathSystem.IsPathTrait(traitId)) return;
 
         MclslWorldActorQuery.Track(actor);
         MclslTraitRegistration.ReconcileTraitState(actor);
+        if (MclslTraitRegistration.IsGiftTrait(traitId))
+            MclslPhysiqueSystem.ReconcileOwner(actor);
         MarkAndRefresh(actor);
     }
 

@@ -13,8 +13,6 @@ internal static class MclslCultivationSystem
     private static readonly HashSet<string> ManualRealmGrantGuards = new(StringComparer.Ordinal);
     private const string ManualRealmAnnouncementPrefix = "mclsl.manual_realm_announcement.";
 
-    internal static void ClearRuntimeOnly() { }
-
     internal static void ProcessAnnualFromScheduler(Actor actor, int year) => ProcessAnnual(actor, year);
 
     /// <summary>
@@ -23,9 +21,11 @@ internal static class MclslCultivationSystem
     /// </summary>
     internal static int NormalizeLastCultivationYear(Actor actor, int year, int lastYear)
     {
-        if (actor?.data == null || year <= 0 || lastYear <= year) return lastYear;
-
-        int repairedYear = Math.Max(-1, year - 1);
+        // A local first-year commit may be ahead of the lagging world lane.
+        // Only a cursor beyond the actual world year is evidence of a rewind.
+        if (actor?.data == null) return lastYear;
+        int repairedYear = MclslInitialCultivationPolicy.NormalizeCompletedYear(lastYear, year, MclslRuntime.CurrentYear());
+        if (repairedYear == lastYear) return lastYear;
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, repairedYear);
         return repairedYear;
     }
@@ -33,7 +33,9 @@ internal static class MclslCultivationSystem
     private static void ProcessAnnual(Actor actor, int year)
     {
         if (!MclslEligibility.CanCultivate(actor)) return;
-        ReconcileManualTrait(actor, year);
+        long detailSample = MclslPerformanceProbe.Begin();
+        try { ReconcileManualTrait(actor, year); }
+        finally { MclslPerformanceProbe.End("新法细分.手动特质", detailSample); }
         string realm = MclslActorAccessor.Realm(actor);
         string cultivationSystem = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         if (cultivationSystem == MclslCultivationSystemIds.AncientLaw)
@@ -49,38 +51,67 @@ internal static class MclslCultivationSystem
             if (!MclslNewLawEntrySystem.TryBeginFromMortal(actor, year)) return;
             return;
         }
-        MclslMindSystem.ProcessAnnual(actor, year, realm);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslMindSystem.ProcessAnnual(actor, year, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.炼心", detailSample); }
         if (string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)))
             MclslCultivationStateTransitions.TrySetCultivationSystem(actor, MclslCultivationSystemIds.NewLaw);
         StabilizeCultivatorSurvival(actor, realm);
-        MclslTraitRegistration.SyncNativeRealmTraits(actor, realm);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslTraitRegistration.SyncNativeRealmTraits(actor, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.原版境界特质", detailSample); }
 
         bool directHarmonyLeap = MclslRealmIds.Index(realm) >= MclslRealmIds.Index(MclslRealmIds.HeDao)
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.HarmonyLeap, 0) == 1;
-        if (!directHarmonyLeap) EnsureTechnique(actor);
-        MclslResourceSystem.EnsureActorResources(actor);
-        ReconcileAptitudeGift(actor);
-        MclslGeneratedObjectFactory.MigrateLegacyFoundationWonder(actor, year);
-        MclslGeneratedObjectFactory.NormalizeActorRootText(actor);
-        EnsureManualStageData(actor, realm, year);
-        MclslTaishangSystem.ProcessAnnual(actor, year, realm);
+        if (!directHarmonyLeap)
+        {
+            detailSample = MclslPerformanceProbe.Begin();
+            try { EnsureTechnique(actor); }
+            finally { MclslPerformanceProbe.End("新法细分.功法校准", detailSample); }
+        }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { ReconcileAptitudeGift(actor); }
+        finally { MclslPerformanceProbe.End("新法细分.资质校准", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslGeneratedObjectFactory.NormalizeActorRootText(actor); }
+        finally { MclslPerformanceProbe.End("新法细分.根基文本", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { EnsureManualStageData(actor, realm, year); }
+        finally { MclslPerformanceProbe.End("新法细分.阶段数据", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslTaishangSystem.ProcessAnnual(actor, year, realm); }
+        finally { MclslPerformanceProbe.End("新法细分.太上", detailSample); }
 
         if (realm == MclslRealmIds.ChangSheng) return;
         if (MclslWorldEpochSystem.IsNewLawActive(year))
         {
-            MclslResourceSystem.GrantAnnualStipend(actor, year);
-            MclslResourceSystem.TryAutoSpend(actor, year);
+            detailSample = MclslPerformanceProbe.Begin();
+            try
+            {
+                MclslResourceSystem.GrantAnnualStipend(actor, year);
+                MclslResourceSystem.TryAutoSpend(actor, year);
+            }
+            finally { MclslPerformanceProbe.End("新法细分.资源发放购买", detailSample); }
         }
 
         bool ancientLaw = false;
-        MclslCultivationGrowthSystem.Reconcile(actor, realm, ancientLaw);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslCultivationGrowthSystem.Reconcile(actor, realm, ancientLaw); }
+        finally { MclslPerformanceProbe.End("新法细分.进度校准", detailSample); }
         int aptitude = Math.Clamp(
             MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50),
             1,
             100);
-        MclslNewLawEventSystem.ProcessAnnual(actor, year, realm, aptitude);
-        MclslCultivationGrowthSystem.MaybeRecordSameLawPressure(actor, year);
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslNewLawEventSystem.ProcessAnnual(actor, year, realm, aptitude); }
+        finally { MclslPerformanceProbe.End("新法细分.机缘事件", detailSample); }
+        detailSample = MclslPerformanceProbe.Begin();
+        try { MclslCultivationGrowthSystem.MaybeRecordSameLawPressure(actor, year); }
+        finally { MclslPerformanceProbe.End("新法细分.同法压力", detailSample); }
 
+        detailSample = MclslPerformanceProbe.Begin();
+        try
+        {
         if (!MclslCultivationGrowthSystem.MeetsNextRealmMinimum(actor, realm, ancientLaw, out int essence, out int requiredEssence))
         {
             if (requiredEssence > 0)
@@ -114,6 +145,8 @@ internal static class MclslCultivationSystem
             MclslWorldChangeSystem.RegisterDivineClaim(actor, year);
         }
         // 合道由天地之魄的祭炼归属触发；当前以原生战斗击杀归属落地。
+        }
+        finally { MclslPerformanceProbe.End("新法细分.突破判定", detailSample); }
     }
 
     private static void StabilizeCultivatorSurvival(Actor actor, string realm)
@@ -231,6 +264,17 @@ internal static class MclslCultivationSystem
     }
 
     private static void ReconcileManualTrait(Actor actor, int year)
+    {
+        string realm = MclslActorAccessor.Realm(actor);
+        string reconciled = MclslActorAccessor.GetString(actor, MclslActorDataKeys.ManualRealmTraitReconciled);
+        if (string.Equals(reconciled, string.IsNullOrEmpty(realm) ? "<none>" : realm, StringComparison.Ordinal)) return;
+        ReconcileManualTraitCore(actor, year);
+        string resolvedRealm = MclslActorAccessor.Realm(actor);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.ManualRealmTraitReconciled,
+            string.IsNullOrEmpty(resolvedRealm) ? "<none>" : resolvedRealm);
+    }
+
+    private static void ReconcileManualTraitCore(Actor actor, int year)
     {
         if (HasForbiddenAncientLongevity(actor, year))
         {
@@ -449,10 +493,10 @@ internal static class MclslCultivationSystem
             || system == MclslCultivationSystemIds.AncientLaw
             || (system != MclslCultivationSystemIds.NewLaw && !MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()));
         string techniqueSeed = id > 0L ? id.ToString() : MclslActorAccessor.DisplayName(actor) + "|" + MclslRuntime.CurrentYear();
-        MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(techniqueSeed, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), ancient);
+        MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(actor, techniqueSeed, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), ancient);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, ancient ? "spiritual_" + technique.Id : technique.Id);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
-        MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+        MclslTechniqueRealmLimit.OnTechniqueAssigned(actor, technique);
     }
 
     internal static void EnsureManualStageData(Actor actor, string realm, int year)
@@ -530,7 +574,6 @@ internal static class MclslCultivationSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, snapshot.HeartTemperingProgress);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, snapshot.HeartMethodKnown);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.MiasmaPoolCleansing, snapshot.MiasmaPoolCleansing);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, snapshot.Contribution);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, snapshot.RuinExperience);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueInsight, snapshot.TechniqueInsight);
         SetString(actor, MclslActorDataKeys.TechniqueId, snapshot.TechniqueId);
@@ -593,31 +636,20 @@ internal static class MclslCultivationSystem
         MclslActorAccessor.ApplyDisplayName(actor, realm);
     }
 
-    internal static bool RestoreHuanzhenLegacyCategory(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, string category, int anchorYear, int deathYear, out string message)
+    internal static bool RestoreHuanzhenLegacyCategory(Actor actor, MclslHuanzhenCultivationSnapshot snapshot,
+        string category, int anchorYear, int deathYear, out string message)
     {
         message = string.Empty;
         if (actor?.data == null || snapshot == null) { message = "人物或前世快照无效。"; return false; }
         switch (category)
         {
-            case "cultivation":
-                RestoreLegacyCultivation(actor, snapshot, anchorYear, deathYear);
-                message = "已继承前世修为根基。";
-                break;
-            case "technique":
-                RestoreLegacyTechnique(actor, snapshot);
-                message = "已继承前世功法道统。";
-                break;
-            case "treasures":
-                RestoreLegacyTreasures(actor, snapshot);
-                message = "已继承前世突破造物。";
-                break;
+            case "cultivation": RestoreLegacyCultivation(actor, snapshot, anchorYear, deathYear); message = "已继承前世修为根基。"; break;
+            case "technique": RestoreLegacyTechnique(actor, snapshot); message = "已继承前世功法道统。"; break;
+            case "treasures": RestoreLegacyTreasures(actor, snapshot); message = "已继承前世突破造物。"; break;
             case "dao":
                 if ((!string.IsNullOrWhiteSpace(snapshot.WorldSoulId) || !string.IsNullOrWhiteSpace(snapshot.InverseTruthId))
                     && MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < MclslRealmIds.Index(MclslRealmIds.HeDao))
-                {
-                    message = "天地道果需要合道根基；请先选择“修为根基”。";
-                    return false;
-                }
+                { message = "天地道果需要合道根基；请先选择“修为根基”。"; return false; }
                 RestoreLegacyDao(actor, snapshot);
                 MclslWorldSoulSystem.ReconcileRestoredHolder(actor, snapshot, MclslRuntime.CurrentYear());
                 message = "已继承前世天地道果。";
@@ -626,9 +658,7 @@ internal static class MclslCultivationSystem
                 RestoreLegacyResources(actor, snapshot);
                 message = "已继承前世资源与心境。";
                 break;
-            default:
-                message = "未知的前世遗产类别。";
-                return false;
+            default: message = "未知的前世遗产类别。"; return false;
         }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, message);
         MclslActorAccessor.ApplyDisplayName(actor, MclslActorAccessor.Realm(actor));
@@ -637,7 +667,22 @@ internal static class MclslCultivationSystem
         return true;
     }
 
-    internal static bool RestoreHuanzhenLegacyOption(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, string optionId, int anchorYear, int deathYear, out string message)
+    private static void RestoreLegacyResources(Actor actor, MclslHuanzhenCultivationSnapshot snapshot)
+    {
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, snapshot.MindState);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, snapshot.HeartTemperingProgress);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, snapshot.HeartMethodKnown);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.MiasmaPoolCleansing, snapshot.MiasmaPoolCleansing);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, snapshot.Contribution);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, snapshot.SpiritStones);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, snapshot.RuinExperience);
+        CopyIntState(actor, snapshot, MclslActorDataKeys.MortalMiasma,
+            MclslActorDataKeys.FoundationChanceBonus, MclslActorDataKeys.CaveClaimBonus, MclslActorDataKeys.DivineClaimBonus);
+        CopyStringState(actor, snapshot, MclslActorDataKeys.FactionAffiliation);
+    }
+
+    internal static bool RestoreHuanzhenLegacyOption(Actor actor, MclslHuanzhenCultivationSnapshot snapshot,
+        string optionId, string operationId, int anchorYear, int deathYear, out string message)
     {
         message = string.Empty;
         if (actor?.data == null || snapshot == null) { message = "人物或前世快照无效。"; return false; }
@@ -655,8 +700,16 @@ internal static class MclslCultivationSystem
             case "inverse_truth": RestoreLegacyInverseTruth(actor, snapshot); message = "已继承逆理：" + snapshot.InverseTruthName + "。"; break;
             case "aptitude": MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, snapshot.Aptitude); message = "已继承资质：" + snapshot.Aptitude + "。"; break;
             case "mind": RestoreLegacyMind(actor, snapshot); message = "已继承心境与心法进度。"; break;
-            case "contribution": MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, snapshot.Contribution); message = "已继承贡献值：" + snapshot.Contribution + "。"; break;
-            case "spirit_stones": MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones)); message = "已继承灵石：" + SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones) + "。"; break;
+            case "contribution":
+                MclslEconomyCommands.Issue(actor, MclslActorDataKeys.Contribution, snapshot.Contribution,
+                    operationId, 1);
+                message = "已继承贡献值：" + snapshot.Contribution + "。";
+                break;
+            case "spirit_stones":
+                MclslEconomyCommands.Issue(actor, MclslActorDataKeys.SpiritStones, snapshot.SpiritStones,
+                    operationId, 1);
+                message = "已继承灵石：" + snapshot.SpiritStones + "。";
+                break;
             default: message = "未知或已失效的前世遗产。"; return false;
         }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, message);
@@ -786,16 +839,6 @@ internal static class MclslCultivationSystem
         SetString(actor, MclslActorDataKeys.HuaShenHonorific, s.HuaShenHonorific); SetString(actor, MclslActorDataKeys.HeDaoHonorific, s.HeDaoHonorific); SetString(actor, MclslActorDataKeys.ChangShengHonorific, s.ChangShengHonorific);
         SetString(actor, MclslActorDataKeys.AncientHuaShenHonorific, s.AncientHuaShenHonorific); SetString(actor, MclslActorDataKeys.AncientHeDaoHonorific, s.AncientHeDaoHonorific); SetString(actor, MclslActorDataKeys.AncientChangShengHonorific, s.AncientChangShengHonorific);
         CopyIntState(actor, s, MclslActorDataKeys.TaishangProgress, MclslActorDataKeys.LifespanStolenBonus, MclslActorDataKeys.LifespanDrainedPenalty, MclslActorDataKeys.HeavenlyDutyBacklash);
-    }
-
-    private static void RestoreLegacyResources(Actor actor, MclslHuanzhenCultivationSnapshot s)
-    {
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, s.MindState); MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, s.HeartTemperingProgress);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, s.HeartMethodKnown); MclslActorAccessor.Set(actor, MclslActorDataKeys.MiasmaPoolCleansing, s.MiasmaPoolCleansing);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, s.Contribution); MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, s.RuinExperience);
-        CopyIntState(actor, s, MclslActorDataKeys.SpiritStones, MclslActorDataKeys.MortalMiasma,
-            MclslActorDataKeys.FoundationChanceBonus, MclslActorDataKeys.CaveClaimBonus, MclslActorDataKeys.DivineClaimBonus);
-        CopyStringState(actor, s, MclslActorDataKeys.FactionAffiliation);
     }
 
     private static void CopyStringState(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, params string[] keys)

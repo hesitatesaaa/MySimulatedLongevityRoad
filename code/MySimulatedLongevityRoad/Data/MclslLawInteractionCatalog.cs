@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace MySimulatedLongevityRoad.Data;
 
@@ -52,17 +52,19 @@ internal static class MclslLawInteractionCatalog
     {
         if (source == null || target == null || source.Count == 0 || target.Count == 0) return 0;
         int score = 0;
-        foreach (string s in Clean(source))
+        for (int i = 0; i < source.Count; i++)
         {
-            foreach (string t in Clean(target))
+            if (!UniqueTag(source, i, out string s)) continue;
+            for (int j = 0; j < target.Count; j++)
             {
+                if (!UniqueTag(target, j, out string t)) continue;
                 if (s == t) score += 16;
                 if (Generates.TryGetValue(s, out string born) && born == t) score += 10;
                 if (Generates.TryGetValue(t, out string feeds) && feeds == s) score += 6;
                 if (Restrains.TryGetValue(s, out string restrained) && restrained == t) score -= 18;
                 if (Restrains.TryGetValue(t, out string controller) && controller == s) score -= 12;
-                if (Supports.TryGetValue(s, out string[] supports) && supports.Contains(t, StringComparer.Ordinal)) score += 8;
-                if (Supports.TryGetValue(t, out string[] reverse) && reverse.Contains(s, StringComparer.Ordinal)) score += 4;
+                if (Supports.TryGetValue(s, out string[] supports) && ContainsTag(supports, t)) score += 8;
+                if (Supports.TryGetValue(t, out string[] reverse) && ContainsTag(reverse, s)) score += 4;
             }
         }
         return Math.Clamp(score, -40, 36);
@@ -80,36 +82,65 @@ internal static class MclslLawInteractionCatalog
 
     internal static int CompatibilityScore(IReadOnlyList<string> source, IReadOnlyList<string> target, int minInteractionForNoOverlap = 18)
     {
-        List<string> sourceTags = Clean(source ?? Array.Empty<string>()).ToList();
-        List<string> targetTags = Clean(target ?? Array.Empty<string>()).ToList();
-        if (sourceTags.Count == 0 || targetTags.Count == 0) return 0;
-
-        int overlap = sourceTags.Count(x => targetTags.Contains(x, StringComparer.Ordinal));
-        int interaction = InteractionScore(sourceTags, targetTags);
+        int sourceCount = CountTags(source, out string firstSource);
+        int targetCount = CountTags(target, out string firstTarget);
+        if (sourceCount == 0 || targetCount == 0) return 0;
+        int overlap = 0;
+        for (int i = 0; i < source.Count; i++)
+            if (UniqueTag(source, i, out string tag) && ContainsTag(target, tag)) overlap++;
+        int interaction = InteractionScore(source, target);
         if (overlap <= 0 && interaction < minInteractionForNoOverlap) return 0;
-
         int score = overlap > 0 ? 35 + overlap * 25 : 28 + interaction;
-        if (sourceTags[0] == targetTags[0]) score += 10;
+        if (firstSource == firstTarget) score += 10;
         score += interaction;
-        score -= Math.Abs(sourceTags.Count - targetTags.Count) * 4;
+        score -= Math.Abs(sourceCount - targetCount) * 4;
         return Math.Clamp(score, 0, 100);
     }
 
     internal static string Detail(IReadOnlyList<string> source, IReadOnlyList<string> target)
     {
-        List<string> sourceTags = Clean(source ?? Array.Empty<string>()).ToList();
-        List<string> targetTags = Clean(target ?? Array.Empty<string>()).ToList();
-        if (sourceTags.Count == 0 || targetTags.Count == 0) return "法则未明";
-
-        string brief = Brief(sourceTags, targetTags);
-        int score = CompatibilityScore(sourceTags, targetTags);
-        List<string> common = sourceTags.Where(x => targetTags.Contains(x, StringComparer.Ordinal)).ToList();
-        string commonText = common.Count == 0 ? string.Empty : "，同源：" + string.Join("、", common);
-        return brief + "，适配" + score + "%" + commonText;
+        if (CountTags(source, out _) == 0 || CountTags(target, out _) == 0) return "法则未明";
+        var text = new StringBuilder(Brief(source, target));
+        text.Append("，适配").Append(CompatibilityScore(source, target)).Append('%');
+        bool first = true;
+        for (int i = 0; i < source.Count; i++)
+        {
+            if (!UniqueTag(source, i, out string tag) || !ContainsTag(target, tag)) continue;
+            text.Append(first ? "，同源：" : "、").Append(tag);
+            first = false;
+        }
+        return text.ToString();
     }
 
-    private static IEnumerable<string> Clean(IEnumerable<string> values) => values
-        .Where(x => !string.IsNullOrWhiteSpace(x))
-        .Select(x => x.Trim())
-        .Distinct(StringComparer.Ordinal);
+    // Law tag sets are small. Compare in place, preserving first occurrence,
+    // trimming and ordinal semantics without allocating lists or hash sets.
+    private static bool UniqueTag(IReadOnlyList<string> tags, int index, out string tag)
+    {
+        tag = tags[index]?.Trim();
+        if (string.IsNullOrEmpty(tag)) return false;
+        for (int i = 0; i < index; i++)
+            if (string.Equals(tags[i]?.Trim(), tag, StringComparison.Ordinal)) return false;
+        return true;
+    }
+
+    private static bool ContainsTag(IReadOnlyList<string> tags, string tag)
+    {
+        if (tags == null) return false;
+        for (int i = 0; i < tags.Count; i++)
+            if (string.Equals(tags[i]?.Trim(), tag, StringComparison.Ordinal)) return true;
+        return false;
+    }
+
+    private static int CountTags(IReadOnlyList<string> tags, out string first)
+    {
+        first = null;
+        if (tags == null) return 0;
+        int count = 0;
+        for (int i = 0; i < tags.Count; i++)
+        {
+            if (!UniqueTag(tags, i, out string tag)) continue;
+            if (count++ == 0) first = tag;
+        }
+        return count;
+    }
 }

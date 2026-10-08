@@ -13,6 +13,9 @@ _archive/
 *.userosscache
 *.sln.docstates
 # Local files
+scripts/beast_sprite_sources/
+scripts/individual_frame_sources/
+scripts/spell_vfx_concepts/
 *.log
 *.tmp
 *.bak

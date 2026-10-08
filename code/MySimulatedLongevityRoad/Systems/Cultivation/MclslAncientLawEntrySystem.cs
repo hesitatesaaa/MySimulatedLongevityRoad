@@ -9,6 +9,7 @@ internal static class MclslAncientLawEntrySystem
 {
     internal static bool ShouldAttemptMortalEntry(Actor actor, int year)
     {
+        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
@@ -24,6 +25,7 @@ internal static class MclslAncientLawEntrySystem
 
     internal static bool TryBeginFromMortal(Actor actor, int year)
     {
+        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (!ShouldAttemptMortalEntry(actor, year)) return false;
         if (MclslNewLawPioneerSystem.TryBeginMortalPioneer(actor, year)) return true;
         BeginAncientCultivation(actor, year);
@@ -33,6 +35,7 @@ internal static class MclslAncientLawEntrySystem
     internal static bool TryBeginFromKnownRoot(Actor actor, int year)
     {
         if (actor?.data == null) return false;
+        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
         if (MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (!string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return false;
@@ -54,7 +57,7 @@ internal static class MclslAncientLawEntrySystem
             int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0), 0, 100);
             if (aptitude <= 0) aptitude = RollAncientAptitude(id);
             string techniqueSeed = id > 0L ? id.ToString() : MclslActorAccessor.DisplayName(actor) + "|" + year;
-            MclslTechniqueDefinition technique = MclslCultivationCatalog.StartingTechnique(techniqueSeed, aptitude, true);
+            MclslTechniqueDefinition technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(actor, techniqueSeed, aptitude, true);
             MclslCultivationStateTransitions.TrySetCultivationSystem(actor, MclslCultivationSystemIds.AncientLaw);
             if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0) <= 0)
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationStartYear, Math.Max(0, year));
@@ -71,6 +74,7 @@ internal static class MclslAncientLawEntrySystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "灵根感应，开始感气");
         }
         MclslActorAccessor.ApplyDisplayName(actor, string.Empty);
+        MclslAnnualCultivationExecutor.TryApplyInitialYear(actor, year);
     }
 
     private static int RollAncientAptitude(long actorId)

@@ -17,7 +17,8 @@ internal static class MclslSpiritualRootEntrySystem
             + " realm=" + MclslActorAccessor.Realm(actor)
             + " system=" + MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             + " hasRoot=" + MclslSpiritualRootSystem.HasCultivationPotential(actor));
-        if (actor?.data == null || !MclslEligibility.CanCultivate(actor))
+        if (actor?.data == null || !MclslEligibility.CanCultivate(actor)
+            || actor.getAge() < MclslCultivationAgeSanity.SpiritualRootEntryAge)
         {
             MclslDiagnostics.Cultivation("entry.skip", "actor=" + actorId + " year=" + year + " reason=data-or-eligibility");
             return false;

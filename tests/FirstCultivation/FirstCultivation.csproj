@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RestoreConfigFile>$(MSBuildProjectDirectory)/../RegressionSafety/NuGet.Config</RestoreConfigFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAnnualCultivationExecutor.cs" Link="Executor.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationLocalCore.cs" Link="LocalCore.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslAnnualExecutionContext.cs" Link="Context.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslAnnualSchedulingPolicy.cs" Link="Policy.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslAptitudeGiftCatalog.cs" Link="Gifts.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslEventCatalog.cs" Link="Events.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/WorldResources/MclslNativeHistoryBridge.cs" Link="History.cs" />
+  </ItemGroup>
+</Project>

@@ -6,12 +6,24 @@ namespace MySimulatedLongevityRoad.Core;
 internal static class MclslDiagnostics
 {
     internal static bool Enabled => MclslRuntimeSettings.DiagnosticsEnabled;
+    private const int MaxRememberedKeys = 512;
     private static readonly HashSet<string> OnceKeys = new();
     private static readonly Dictionary<string, int> LastFrameByKey = new();
+
+    internal static int CacheCount => OnceKeys.Count + LastFrameByKey.Count;
+    internal static void Clear() { OnceKeys.Clear(); LastFrameByKey.Clear(); }
+
+    private static void RememberFrame(string key, int frame)
+    {
+        if (LastFrameByKey.Count >= MaxRememberedKeys && !LastFrameByKey.ContainsKey(key))
+            LastFrameByKey.Clear();
+        LastFrameByKey[key] = frame;
+    }
 
     internal static void Once(string key, string message)
     {
         if (!Enabled || string.IsNullOrWhiteSpace(key)) return;
+        if (OnceKeys.Count >= MaxRememberedKeys && !OnceKeys.Contains(key)) OnceKeys.Clear();
         if (!OnceKeys.Add(key)) return;
         Debug.Log("[模拟长生路][诊断] " + message);
     }
@@ -21,14 +33,17 @@ internal static class MclslDiagnostics
         if (!Enabled || string.IsNullOrWhiteSpace(key)) return;
         intervalFrames = intervalFrames <= 0 ? 60 : intervalFrames;
         if (LastFrameByKey.TryGetValue(key, out int last) && frameCount - last < intervalFrames) return;
-        LastFrameByKey[key] = frameCount;
+        RememberFrame(key, frameCount);
         Debug.Log("[模拟长生路][诊断] " + message);
     }
 
     internal static void Error(string key, string message)
     {
-        if (!Enabled) return;
-        Debug.LogWarning("[模拟长生路][诊断] " + message);
+        if (string.IsNullOrWhiteSpace(key)) key = message ?? "unknown";
+        int frame = Time.frameCount;
+        if (LastFrameByKey.TryGetValue("error:" + key, out int last) && frame - last < 3600) return;
+        RememberFrame("error:" + key, frame);
+        Debug.LogWarning("[模拟长生路][诊断][" + key + "] " + message);
     }
 
     // 修炼链逐角色日志属于编译期诊断能力。发布包未定义该符号时，
@@ -47,7 +62,7 @@ internal static class MclslDiagnostics
         if (!Enabled || string.IsNullOrWhiteSpace(key)) return;
         intervalFrames = intervalFrames <= 0 ? 60 : intervalFrames;
         if (LastFrameByKey.TryGetValue("cultivation:" + key, out int last) && frameCount - last < intervalFrames) return;
-        LastFrameByKey["cultivation:" + key] = frameCount;
+        RememberFrame("cultivation:" + key, frameCount);
         Debug.Log("[模拟长生路][修炼链][" + key + "] " + message);
     }
 }

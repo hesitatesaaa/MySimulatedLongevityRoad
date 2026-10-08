@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 
@@ -7,6 +9,18 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslTechniqueLineageSystem
 {
+    private static int _snapshotYear = -1;
+    private static int _snapshotCursor;
+    private static IReadOnlyList<Actor> _snapshotActors;
+    private static Dictionary<string, TechniqueSnapshot> _pendingSnapshot;
+
+    internal static void ClearRuntime()
+    {
+        _snapshotYear = -1;
+        _snapshotActors = null;
+        _snapshotCursor = 0;
+        _pendingSnapshot = null;
+    }
     private sealed class TechniqueSnapshot
     {
         internal string Id = string.Empty;
@@ -20,16 +34,58 @@ internal static class MclslTechniqueLineageSystem
         internal long FounderActorId;
     }
 
-    internal static void ResolveAnnual(int year, IReadOnlyList<Actor> actors)
+    internal static bool TickResolveAnnual(int year, IReadOnlyList<Actor> actors)
+    {
+        if (_snapshotYear != year || !ReferenceEquals(_snapshotActors, actors))
+        {
+            _snapshotYear = year;
+            _snapshotActors = actors;
+            _snapshotCursor = 0;
+            _pendingSnapshot = new Dictionary<string, TechniqueSnapshot>(StringComparer.Ordinal);
+        }
+        int count = actors?.Count ?? 0;
+        _snapshotCursor = AccumulateSnapshot(actors, _snapshotCursor, count, _pendingSnapshot);
+        if (_snapshotCursor < count) return false;
+        if (MclslAnnualFrameBudget.Expired) return false;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!batch.TechniqueLineagePendingInitialized)
+        {
+            batch.TechniqueLineagePendingIds = MclslAnnualTargetCursor.Create(_pendingSnapshot.Keys
+                .Concat(MclslWorldRunRepository.Current.TechniqueLineages
+                    .Where(x => x != null).Select(x => x.Id)));
+            batch.TechniqueLineagePendingInitialized = true;
+            MclslWorldArchiveStore.MarkDirty();
+        }
+        if (batch.TechniqueLineagePendingIds.Count > 0)
+        {
+            string targetId = batch.TechniqueLineagePendingIds[0];
+            // Let the world lane block on failure before committing this target.
+            ResolveAnnual(year, actors, _pendingSnapshot, targetId, false);
+            MclslAnnualTargetCursor.Complete(batch.TechniqueLineagePendingIds, targetId);
+            MclslWorldArchiveStore.MarkDirty();
+            MclslAnnualFrameBudget.ReportProgress();
+            MclslAnnualBackpressure.RecordProgress();
+            return false;
+        }
+        ResolveAnnual(year, actors, _pendingSnapshot, string.Empty, true);
+        batch.TechniqueLineagePendingInitialized = false;
+        MclslWorldArchiveStore.MarkDirty();
+        ClearRuntime();
+        return true;
+    }
+
+    private static void ResolveAnnual(int year, IReadOnlyList<Actor> actors,
+        Dictionary<string, TechniqueSnapshot> prepared, string onlyTargetId, bool finalize)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         if (run?.TechniqueLineages == null || actors == null) return;
 
-        Dictionary<string, TechniqueSnapshot> current = BuildSnapshot(actors);
+        Dictionary<string, TechniqueSnapshot> current = prepared ?? throw new InvalidOperationException("法脉统计必须由分帧构建器提供");
         bool changed = false;
 
         foreach (TechniqueSnapshot snapshot in current.Values)
         {
+            if (onlyTargetId != null && snapshot.Id != onlyTargetId) continue;
             MclslTechniqueLineageRecord record = FindLineageRecord(run, snapshot.Id);
             if (record == null)
             {
@@ -68,6 +124,7 @@ internal static class MclslTechniqueLineageSystem
 
         foreach (MclslTechniqueLineageRecord record in run.TechniqueLineages)
         {
+            if (onlyTargetId != null && record?.Id != onlyTargetId) continue;
             if (record == null || current.ContainsKey(record.Id) || record.CurrentPractitioners <= 0) continue;
             record.CurrentPractitioners = 0;
             record.LastSeenYear = Math.Max(record.LastSeenYear, year);
@@ -79,20 +136,21 @@ internal static class MclslTechniqueLineageSystem
             TryCreateLineageRuin(year, run, record);
         }
 
-        if (MclslWorldEpochSystem.IsNewLawActive(year))
+        if (finalize && MclslWorldEpochSystem.IsNewLawActive(year))
             changed |= CarryAncientLineagesIntoNewLaw(year, run);
 
-        while (run.TechniqueLineages.Count > 500)
+        while (finalize && run.TechniqueLineages.Count > 500)
             RemoveOldestOverflowLineage(run.TechniqueLineages);
 
         if (changed) MclslWorldArchiveStore.MarkDirty();
     }
 
-    private static Dictionary<string, TechniqueSnapshot> BuildSnapshot(IReadOnlyList<Actor> actors)
+    private static int AccumulateSnapshot(IReadOnlyList<Actor> actors, int start, int end,
+        Dictionary<string, TechniqueSnapshot> result)
     {
-        Dictionary<string, TechniqueSnapshot> result = new(StringComparer.Ordinal);
-        for (int i = 0; i < actors.Count; i++)
+        for (int i = start; i < end; i++)
         {
+            if (!MclslAnnualFrameBudget.TryConsumeOperation()) return i;
             Actor actor = actors[i];
             if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) continue;
             string id = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
@@ -122,7 +180,7 @@ internal static class MclslTechniqueLineageSystem
                 snapshot.FounderName = MclslActorAccessor.DisplayName(actor);
             }
         }
-        return result;
+        return end;
     }
 
     private static TechniqueSnapshot BuildInitialSnapshot(Actor actor, string key, string id, string name)
@@ -276,6 +334,9 @@ internal static class MclslTechniqueLineageSystem
     }
 
     internal static bool TryPickInheritedTechnique(int year, string seed, int aptitude, out MclslTechniqueDefinition technique)
+        => TryPickInheritedTechnique(null, year, seed, aptitude, out technique);
+
+    internal static bool TryPickInheritedTechnique(Actor actor, int year, string seed, int aptitude, out MclslTechniqueDefinition technique)
     {
         technique = null;
         MclslWorldRunState run = MclslWorldRunRepository.Current;
@@ -291,6 +352,12 @@ internal static class MclslTechniqueLineageSystem
             int score = Math.Max(1, FameScore(record)) + Math.Max(0, MclslRealmIds.Index(record.MaxRealm)) * 25
                 + Math.Clamp(record.Completeness, 0, 100) / 4
                 + (StableHash(record.Id + "|" + salt) & int.MaxValue) % 97;
+            if (actor != null)
+            {
+                string[] lawPool = MclslGeneratedObjectFactory.SplitTags(record.LawTags);
+                score += (MclslSpiritualRootSystem.TechniqueWeight(actor,
+                    new MclslTechniqueDefinition { LawPool = lawPool }) - 10) * 5;
+            }
             if (score <= pickedScore) continue;
             picked = record;
             pickedScore = score;
@@ -364,7 +431,8 @@ internal static class MclslTechniqueLineageSystem
         return false;
     }
 
-    internal static void MarkAncientTechniqueImprint(Actor actor, int year, string reason, int fameFloor = 0)
+    internal static void MarkAncientTechniqueImprint(Actor actor, int year, string reason, int fameFloor = 0,
+        string createdLawTags = null)
     {
         if (actor?.data == null || MclslWorldEpochSystem.IsNewLawActive(year)) return;
         MclslWorldRunState run = MclslWorldRunRepository.Current;
@@ -378,7 +446,9 @@ internal static class MclslTechniqueLineageSystem
         MclslTechniqueLineageRecord record = FindLineageRecord(run, key);
         if (record == null)
         {
-            record = CreateRecord(year, BuildInitialSnapshot(actor, key, id, name));
+            TechniqueSnapshot snapshot = BuildInitialSnapshot(actor, key, id, name);
+            if (!string.IsNullOrWhiteSpace(createdLawTags)) snapshot.LawTags = createdLawTags;
+            record = CreateRecord(year, snapshot);
             run.TechniqueLineages.Add(record);
         }
 

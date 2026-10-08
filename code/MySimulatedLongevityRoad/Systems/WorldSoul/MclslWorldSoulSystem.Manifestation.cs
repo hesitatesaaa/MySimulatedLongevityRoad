@@ -61,15 +61,22 @@ internal static partial class MclslWorldSoulSystem
         return tile == null ? "无主荒域" : "无主荒域" + coordinate;
     }
 
-    private static void DispatchHuntersIfNeeded(MclslWorldSoulRecord soul, Actor manifest, int year)
+    private static MclslActorSelection _hunterSelection;
+    private static string _hunterSelectionSoul;
+    private static bool DispatchHuntersIfNeeded(MclslWorldSoulRecord soul, Actor manifest, int year)
     {
-        if (soul == null || !MclslActorAccessor.Alive(manifest)) return;
-        if (soul.LastHunterDispatchYear > 0 && year - soul.LastHunterDispatchYear < HunterDispatchIntervalYears) return;
-        IReadOnlyList<Actor> candidates = MclslCultivatorCandidateIndex.SelectRealm(
-            MclslRealmIds.HuaShen,
-            60,
-            actor => IsQualifiedHunter(actor) && actor.current_tile != null,
-            actor => HunterScore(actor, manifest, soul));
+        if (soul == null || !MclslActorAccessor.Alive(manifest)) return true;
+        if (soul.LastHunterDispatchYear > 0 && year - soul.LastHunterDispatchYear < HunterDispatchIntervalYears) return true;
+        if (_hunterSelection == null || _hunterSelectionSoul != soul.Id)
+        {
+            long manifestId = MclslActorAccessor.Id(manifest);
+            _hunterSelectionSoul = soul.Id;
+            _hunterSelection = new MclslActorSelection(MclslCultivatorCandidateIndex.RealmActors(MclslRealmIds.HuaShen),
+                60, actor => IsQualifiedHunter(actor) && actor.current_tile != null,
+                actor => HunterScore(actor, FindActor(manifestId), soul));
+        }
+        if (!_hunterSelection.Tick()) return false;
+        IReadOnlyList<Actor> candidates = _hunterSelection.Results;
         int sent = 0;
         for (int i = 0; i < candidates.Count && sent < MaxHuntersPerManifest; i++)
         {
@@ -85,11 +92,12 @@ internal static partial class MclslWorldSoulSystem
         }
 
         soul.LastHunterDispatchYear = year;
-        if (sent <= 0) return;
-        MclslWorldArchiveStore.MarkDirty();
+        _hunterSelection = null; _hunterSelectionSoul = null;
+        if (sent > 0) MclslWorldArchiveStore.MarkDirty();
+        return true;
     }
 
-    private static bool IsQualifiedHunter(Actor actor)
+    internal static bool IsQualifiedHunter(Actor actor)
     {
         if (!MclslEligibility.CanClaimWorldSoul(actor)) return false;
         if (!string.Equals(MclslActorAccessor.Realm(actor), MclslRealmIds.HuaShen, StringComparison.Ordinal)) return false;
@@ -155,16 +163,13 @@ internal static partial class MclslWorldSoulSystem
 
     private static Actor PickManifestTarget()
     {
-        IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.SelectRealm(
-            MclslRealmIds.HuaShen,
-            120,
-            actor => IsQualifiedHunter(actor) && actor.current_tile != null,
-            ManifestTargetScore);
+        IReadOnlyList<Actor> units = MclslActorProjectionIndex.ManifestCandidates(120);
         Actor best = null;
         int bestScore = int.MinValue;
         for (int i = 0; i < units.Count; i++)
         {
             Actor actor = units[i];
+            if (!MclslActorAccessor.Alive(actor) || !IsQualifiedHunter(actor) || actor.current_tile == null) continue;
             int score = ManifestTargetScore(actor);
             if (score > bestScore) { bestScore = score; best = actor; }
         }
@@ -186,17 +191,12 @@ internal static partial class MclslWorldSoulSystem
 
     private static void CountWorldMaturity(out int huaShen, out int goldenCore, out int cultivators)
     {
-        cultivators = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot().Count;
+        cultivators = MclslCultivatorCandidateIndex.CultivatorCount;
         goldenCore = MclslCultivatorCandidateIndex.CountRealmAtLeast(MclslRealmIds.JinDan);
-        IReadOnlyList<Actor> huaShenActors = MclslCultivatorCandidateIndex.SelectRealm(
-            MclslRealmIds.HuaShen,
-            0,
-            IsQualifiedHunter,
-            null);
-        huaShen = huaShenActors.Count;
+        huaShen = MclslActorProjectionIndex.QualifiedHunters;
     }
 
-    private static int ManifestTargetScore(Actor actor)
+    internal static int ManifestTargetScore(Actor actor)
     {
         int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
         int score = realm * 100 + StableHash(MclslActorAccessor.Id(actor) + "|manifest") % 100;

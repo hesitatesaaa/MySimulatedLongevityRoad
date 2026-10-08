@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 
@@ -8,46 +9,74 @@ internal static class MclslResourceSystem
 {
     private const int SpendCooldownYears = 4;
 
-    internal static void EnsureActorResources(Actor actor)
+    internal static void AdjustMoney(Actor actor, string key, int delta)
     {
-        if (!MclslActorAccessor.Alive(actor)) return;
-        if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, -1) < 0)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, 0);
-        if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, -1) < 0)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, 0);
+        long current = MclslActorAccessor.GetMoney(actor, key);
+        MclslActorAccessor.Set(actor, key, Math.Max(0L, checked(current + delta)));
+    }
+
+    internal static int ContributionInfluence(Actor actor, int divisor)
+        => (int)(Math.Min(999999L, MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution)) / Math.Max(1, divisor));
+
+    internal static void EnsureInitialCultivationFunds(Actor actor)
+    {
+        if (!MclslActorAccessor.Alive(actor)
+            || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.InitialCultivationFundsGranted, 0) != 0) return;
+        string account = MclslEconomyCommands.Account(actor);
+        MclslEconomicResult result = MclslEconomyCommands.Commit(MclslEconomyCommands.YearFor(actor),
+            new[] { new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.Contribution, 20, toAccount: account) },
+            "initial/" + account, 1);
+        if (result is not (MclslEconomicResult.Applied or MclslEconomicResult.AlreadyApplied))
+            throw new InvalidOperationException("首次资助提交失败：" + result);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.InitialCultivationFundsGranted, 1);
+        MclslEconomyCommands.NotifyWallet(actor);
     }
 
     internal static void GrantAnnualStipend(Actor actor, int year)
     {
         if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) return;
-        EnsureActorResources(actor);
+        string source = "annual-income/" + MclslEconomyCommands.Account(actor);
+        if (MclslEconomyCommands.WasApplied(source, year)) return;
         int realmIndex = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
         bool hasSettlement = actor.city != null || actor.kingdom != null;
         int seed = PositiveHash(MclslActorAccessor.Id(actor) + "|stipend|" + year);
-        int contribution = MclslWorldStateModifierSystem.ScaleResourceIncome(AnnualContributionIncome(realmIndex, hasSettlement, seed), year);
-        int stones = MclslWorldStateModifierSystem.ScaleResourceIncome((realmIndex + 1) * (realmIndex + 1) + seed % Math.Max(2, 4 + realmIndex * 3), year);
-        if (realmIndex >= MclslRealmIds.Index(MclslRealmIds.HuaShen)) stones += 12 + realmIndex * 5;
-        AddContribution(actor, contribution);
-        AddSpiritStones(actor, stones);
-        ApplyAnnualMaintenance(actor, realmIndex, seed);
+        MclslCurrencyPair income = MclslCultivatorIncomePolicy.NewLawIncome(realmIndex, hasSettlement, seed);
+        int contribution = MclslWorldStateModifierSystem.ScaleResourceIncome(income.Contribution, year);
+        int stones = MclslWorldStateModifierSystem.ScaleResourceIncome(income.SpiritStones, year);
+        long availableContribution = checked(MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution) + contribution);
+        long availableStones = checked(MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones) + stones);
+        MclslCurrencyPair maintenance = MclslCultivatorIncomePolicy.NewLawMaintenance(
+            realmIndex, seed, availableContribution, availableStones);
+        long contributionCost = maintenance.Contribution;
+        long stoneCost = maintenance.SpiritStones;
+        string account = MclslEconomyCommands.Account(actor);
+        MclslEconomicResult result = MclslEconomyCommands.Commit(year, new[]
+        {
+            new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.Contribution, contribution, toAccount: account),
+            new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.SpiritStone, stones, toAccount: account),
+            new MclslEconomicOperation(MclslEconomicKind.Consume, MclslCurrency.Contribution, contributionCost, fromAccount: account),
+            new MclslEconomicOperation(MclslEconomicKind.Consume, MclslCurrency.SpiritStone, stoneCost, fromAccount: account)
+        }, source, year);
+        if (result is not (MclslEconomicResult.Applied or MclslEconomicResult.AlreadyApplied))
+            throw new InvalidOperationException("年度收支提交失败：" + result);
+        MclslEconomyCommands.NotifyWallet(actor);
     }
 
     internal static void GrantRuinContribution(Actor actor, int amount)
     {
-        AddContribution(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, amount), MclslRuntime.CurrentYear()));
+        AddContribution(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, amount), MclslEconomyCommands.YearFor(actor)));
     }
 
     internal static void GrantRuinSpiritStones(Actor actor, int amount)
     {
-        AddSpiritStones(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, amount), MclslRuntime.CurrentYear()));
+        AddSpiritStones(actor, MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, amount), MclslEconomyCommands.YearFor(actor)));
     }
 
     internal static void GrantCaveRefinementReward(Actor actor, int quality, int compatibility, int contenderCount)
     {
         int baseStones = 18 + quality * 16 + compatibility / 4;
         int baseContribution = 10 + quality * 7 + Math.Max(0, contenderCount - 1) * 3;
-        AddSpiritStones(actor, baseStones);
-        AddContribution(actor, baseContribution);
+        Issue(actor, baseContribution, baseStones);
         int essence = 8 + Math.Max(0, quality) * 4 + Math.Min(8, Math.Max(0, compatibility) / 20);
         MclslHuanzhenSystem.OnHostFortune(actor, "洞天炼化", essence, "炼化天地之精，品质" + quality + "、契合" + compatibility);
     }
@@ -56,27 +85,29 @@ internal static class MclslResourceSystem
     {
         int baseStones = 35 + quality * 28 + compatibility / 3;
         int baseContribution = 16 + quality * 10 + Math.Max(0, contenderCount - 1) * 4;
-        AddSpiritStones(actor, baseStones);
-        AddContribution(actor, baseContribution);
+        Issue(actor, baseContribution, baseStones);
         int essence = 14 + Math.Max(0, quality) * 6 + Math.Min(10, Math.Max(0, compatibility) / 15);
         MclslHuanzhenSystem.OnHostFortune(actor, "天地之变", essence, "抽取天地之髓，品质" + quality + "、契合" + compatibility);
     }
 
-    internal static void GrantFactionReward(Actor actor, int contribution, int spiritStones)
+    internal static (int Contribution, int SpiritStones) GrantFactionReward(Actor actor, int contribution, int spiritStones)
     {
-        int year = MclslRuntime.CurrentYear();
+        if (!MclslActorAccessor.Alive(actor)) return (0, 0);
+        int year = MclslEconomyCommands.YearFor(actor);
         int scaledContribution = MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, contribution), year);
         int scaledSpiritStones = MclslWorldStateModifierSystem.ScaleResourceIncome(Math.Max(0, spiritStones), year);
-        AddContribution(actor, scaledContribution);
-        AddSpiritStones(actor, scaledSpiritStones);
+        long beforeContribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
+        long beforeStones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0);
+        Issue(actor, scaledContribution, scaledSpiritStones);
         int essence = 2 + Math.Min(10, Math.Max(0, scaledContribution + scaledSpiritStones) / 40);
         MclslHuanzhenSystem.OnHostFortune(actor, "势力机缘", essence, "完成委托并取得修行资源");
+        return (checked((int)(MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0) - beforeContribution)),
+            checked((int)(MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0) - beforeStones)));
     }
 
     internal static void TryAutoSpend(Actor actor, int year)
     {
         if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) return;
-        EnsureActorResources(actor);
         int lastYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastResourceSpendYear, -9999);
         if (year - lastYear < SpendCooldownYears) return;
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "resource", MclslDetectionGate.ResourceAutoSpend, year, 2))
@@ -84,10 +115,10 @@ internal static class MclslResourceSystem
 
         string realm = MclslActorAccessor.Realm(actor);
         int realmIndex = Math.Max(0, MclslRealmIds.Index(realm));
-        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
-        int stones = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0);
+        long contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
+        long stones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0);
         int seed = PositiveHash(MclslActorAccessor.Id(actor) + "|auto_spend|" + year + "|" + contribution + "|" + stones);
-        int willingness = 26 + realmIndex * 4 + Math.Min(28, contribution / 30) + Math.Min(24, stones / 45);
+        int willingness = 26 + realmIndex * 4 + (int)Math.Min(28, contribution / 30) + (int)Math.Min(24, stones / 45);
         if (seed % 100 >= Math.Clamp(willingness, 25, 78)) return;
 
         ResourcePurchase purchase = PickPurchase(actor, realm, contribution, stones, year, seed);
@@ -98,35 +129,29 @@ internal static class MclslResourceSystem
     internal static void AddContribution(Actor actor, int amount)
     {
         if (!MclslActorAccessor.Alive(actor) || amount <= 0) return;
-        int current = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, Math.Min(999999, current + amount));
+        MclslEconomyCommands.Issue(actor, MclslActorDataKeys.Contribution, amount);
     }
 
     internal static void AddSpiritStones(Actor actor, int amount)
     {
         if (!MclslActorAccessor.Alive(actor) || amount <= 0) return;
-        int current = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, Math.Min(9999999, current + amount));
+        MclslEconomyCommands.Issue(actor, MclslActorDataKeys.SpiritStones, amount);
     }
 
-    private static void ApplyAnnualMaintenance(Actor actor, int realmIndex, int seed)
+    private static void Issue(Actor actor, long contribution, long stones)
     {
-        if (realmIndex < MclslRealmIds.Index(MclslRealmIds.JinDan)) return;
-
-        int contributionCost = Math.Max(1, realmIndex - 1) + seed % Math.Max(1, 1 + realmIndex / 2);
-        int stoneCost = realmIndex * 4 + seed % Math.Max(2, 6 + realmIndex * 2);
-        if (realmIndex >= MclslRealmIds.Index(MclslRealmIds.HuaShen)) stoneCost += realmIndex * 6;
-        if (realmIndex >= MclslRealmIds.Index(MclslRealmIds.HeDao)) contributionCost += 4;
-
-        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
-        int stones = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0);
-        int finalContributionCost = Math.Min(contributionCost, Math.Max(0, contribution / 3));
-        int finalStoneCost = Math.Min(stoneCost, Math.Max(0, stones / 3));
-        if (finalContributionCost > 0) MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, contribution - finalContributionCost);
-        if (finalStoneCost > 0) MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, stones - finalStoneCost);
+        if (!MclslActorAccessor.Alive(actor)) return;
+        string account = MclslEconomyCommands.Account(actor);
+        MclslEconomicResult result = MclslEconomyCommands.Commit(MclslEconomyCommands.YearFor(actor), new[]
+        {
+            new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.Contribution, Math.Max(0, contribution), toAccount: account),
+            new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.SpiritStone, Math.Max(0, stones), toAccount: account)
+        });
+        if (result != MclslEconomicResult.Applied) throw new InvalidOperationException("奖励提交失败：" + result);
+        MclslEconomyCommands.NotifyWallet(actor);
     }
 
-    private static ResourcePurchase PickPurchase(Actor actor, string realm, int contribution, int stones, int year, int seed)
+    private static ResourcePurchase PickPurchase(Actor actor, string realm, long contribution, long stones, int year, int seed)
     {
         bool ancientLaw = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;
@@ -198,7 +223,7 @@ internal static class MclslResourceSystem
         return null;
     }
 
-    private static ResourcePurchase TryBuildTechniqueExchange(Actor actor, string realm, int contribution, int stones, int year, int seed)
+    private static ResourcePurchase TryBuildTechniqueExchange(Actor actor, string realm, long contribution, long stones, int year, int seed)
     {
         if (actor?.data == null || string.IsNullOrWhiteSpace(realm)) return null;
         if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.NewLaw) return null;
@@ -216,8 +241,8 @@ internal static class MclslResourceSystem
         if (!CanAfford(contribution, stones, cost.Contribution, cost.Stones)) return null;
 
         int urgency = currentRealmIndex >= maxIndex ? 70 : 35;
-        urgency += Math.Min(18, contribution / Math.Max(1, cost.Contribution / 3));
-        urgency += Math.Min(12, stones / Math.Max(1, cost.Stones / 3));
+        urgency += (int)Math.Min(18, contribution / Math.Max(1, cost.Contribution / 3));
+        urgency += (int)Math.Min(12, stones / Math.Max(1, cost.Stones / 3));
         if (seed % 100 >= Math.Clamp(urgency, 45, 92)) return null;
 
         string faction = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty);
@@ -263,23 +288,6 @@ internal static class MclslResourceSystem
         };
     }
 
-    private static int AnnualContributionIncome(int realmIndex, bool hasSettlement, int seed)
-    {
-        int baseIncome = realmIndex switch
-        {
-            <= 0 => 2,
-            1 => 4,
-            2 => 8,
-            3 => 14,
-            4 => 24,
-            5 => 38,
-            _ => 52
-        };
-        int variance = seed % Math.Max(2, 3 + realmIndex * 2);
-        int settlement = hasSettlement ? 1 + realmIndex : 0;
-        return baseIncome + settlement + variance;
-    }
-
     private static string BuildExchangedTechniqueName(string oldName, string targetRealm, string suffix, int year, int seed)
     {
         string clean = string.IsNullOrWhiteSpace(oldName) ? "无名功法" : oldName.Trim('《', '》', ' ');
@@ -290,12 +298,32 @@ internal static class MclslResourceSystem
 
     private static void ApplyPurchase(Actor actor, int year, ResourcePurchase purchase)
     {
-        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
-        int stones = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0);
+        string account = MclslEconomyCommands.Account(actor);
+        string source = "resource-spend/" + account;
+        if (MclslEconomyCommands.WasApplied(source, year)) return;
+        long contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
+        long stones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0);
         if (!CanAfford(contribution, stones, purchase.ContributionCost, purchase.SpiritStoneCost)) return;
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, contribution - purchase.ContributionCost);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, stones - purchase.SpiritStoneCost);
-        purchase.Apply(actor);
+        ResourceEffectSnapshot snapshot = ResourceEffectSnapshot.Capture(actor);
+        try
+        {
+            purchase.Apply(actor);
+            MclslEconomicResult result = MclslEconomyCommands.Commit(year, new[]
+            {
+                new MclslEconomicOperation(MclslEconomicKind.Consume, MclslCurrency.Contribution,
+                    purchase.ContributionCost, fromAccount: account),
+                new MclslEconomicOperation(MclslEconomicKind.Consume, MclslCurrency.SpiritStone,
+                    purchase.SpiritStoneCost, fromAccount: account)
+            }, source, year);
+            if (result != MclslEconomicResult.Applied)
+                throw new InvalidOperationException("资源购买结算失败：" + result);
+        }
+        catch
+        {
+            snapshot.Restore(actor);
+            throw;
+        }
+        MclslEconomyCommands.NotifyWallet(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastResourceSpendYear, year);
         string summary = SafeName(actor) + "购得“" + purchase.ItemName + "”，耗贡献" + purchase.ContributionCost + "、灵石" + purchase.SpiritStoneCost + "，" + purchase.EffectText + "。";
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, summary);
@@ -326,9 +354,45 @@ internal static class MclslResourceSystem
             Math.Min(100, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.HeartTemperingProgress, 0) + Math.Max(0, amount)));
     }
 
-    private static bool CanAfford(int contribution, int stones, int contributionCost, int stoneCost)
+    private static bool CanAfford(long contribution, long stones, int contributionCost, int stoneCost)
     {
         return contribution >= contributionCost && stones >= stoneCost;
+    }
+
+    // Only the fields written by ResourcePurchase effects belong to this rollback.
+    // The purchase runs before its single two-currency ledger commit, so an effect
+    // exception cannot leave one currency spent while the other remains intact.
+    private sealed class ResourceEffectSnapshot
+    {
+        private static readonly string[] IntKeys =
+        {
+            MclslActorDataKeys.FoundationChanceBonus, MclslActorDataKeys.TechniqueInsight,
+            MclslActorDataKeys.HeartTemperingProgress, MclslActorDataKeys.CaveClaimBonus,
+            MclslActorDataKeys.DivineClaimBonus, MclslActorDataKeys.MindState,
+            MclslActorDataKeys.RuinExperience, MclslActorDataKeys.InverseTruthProgress,
+            MclslActorDataKeys.HeartMethodKnown
+        };
+        private static readonly string[] StringKeys =
+        {
+            MclslActorDataKeys.TechniqueMaxRealm, MclslActorDataKeys.TechniqueId,
+            MclslActorDataKeys.TechniqueName, MclslActorDataKeys.FactionAffiliation
+        };
+        private readonly Dictionary<string, int> _ints = new();
+        private readonly Dictionary<string, string> _strings = new();
+
+        internal static ResourceEffectSnapshot Capture(Actor actor)
+        {
+            ResourceEffectSnapshot snapshot = new();
+            foreach (string key in IntKeys) snapshot._ints[key] = MclslActorAccessor.GetInt(actor, key, 0);
+            foreach (string key in StringKeys) snapshot._strings[key] = MclslActorAccessor.GetString(actor, key, string.Empty);
+            return snapshot;
+        }
+
+        internal void Restore(Actor actor)
+        {
+            foreach (var pair in _ints) MclslActorAccessor.Set(actor, pair.Key, pair.Value);
+            foreach (var pair in _strings) MclslActorAccessor.Set(actor, pair.Key, pair.Value);
+        }
     }
 
     private static string SafeName(Actor actor)

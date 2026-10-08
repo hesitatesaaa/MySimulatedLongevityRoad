@@ -25,8 +25,9 @@ internal static class MclslRealmHaloVisualSystem
 
     internal static bool BeginRenderFrame(int frame)
     {
+        int cadence = CurrentVisibleScanCadence();
         bool shouldScan = _lastVisibleScanFrame < 0
-            || frame - _lastVisibleScanFrame >= VisibleScanCadenceFrames;
+            || frame - _lastVisibleScanFrame >= cadence;
         if (shouldScan) _lastVisibleScanFrame = frame;
         return shouldScan;
     }
@@ -91,6 +92,8 @@ internal static class MclslRealmHaloVisualSystem
 
     private static void UpdateExistingEntries(int frame, int lodLevel)
     {
+        int visibleScanCadence = CurrentVisibleScanCadence();
+        int updateStride = CurrentUpdateStride(lodLevel);
         for (int i = ActiveEntries.Count - 1; i >= 0; i--)
         {
             HaloEntry entry = ActiveEntries[i];
@@ -106,7 +109,7 @@ internal static class MclslRealmHaloVisualSystem
                 continue;
             }
 
-            if (frame - entry.LastSeenFrame > VisibleScanCadenceFrames + 2)
+            if (frame - entry.LastSeenFrame > visibleScanCadence + 2)
             {
                 if (entry.GameObject != null) entry.GameObject.SetActive(false);
                 entry.IsActive = false;
@@ -117,6 +120,9 @@ internal static class MclslRealmHaloVisualSystem
 
             long actorId = MclslActorAccessor.Id(entry.Actor);
             HaloProfile profile = entry.Profile;
+
+            if (updateStride > 1 && (frame + (int)(actorId % updateStride)) % updateStride != 0)
+                continue;
 
             Sprite[] frames = entry.BoundFrames;
             if (frames == null || frames.Length == 0) continue;
@@ -130,16 +136,9 @@ internal static class MclslRealmHaloVisualSystem
                 entry.Transform.position = AnchorPosition(position, profile);
             }
 
-            int spriteIndex;
-            if (lodLevel >= 2)
-            {
-                spriteIndex = Math.Abs((int)(actorId % frames.Length));
-            }
-            else
-            {
-                int animationStride = lodLevel == 1 ? 3 : 1;
-                spriteIndex = Math.Abs((frame / (FrameStep * animationStride)) + (int)(actorId % frames.Length)) % frames.Length;
-            }
+            int animationStride = lodLevel >= 2 ? 6 : lodLevel == 1 ? 3 : 1;
+            int spriteIndex = Math.Abs((frame / (FrameStep * animationStride))
+                + (int)(actorId % frames.Length)) % frames.Length;
 
             Sprite sprite = frames[spriteIndex];
             if (!ReferenceEquals(entry.Renderer.sprite, sprite)) entry.Renderer.sprite = sprite;
@@ -151,6 +150,31 @@ internal static class MclslRealmHaloVisualSystem
             }
             if (entry.GameObject != null) entry.GameObject.SetActive(true);
         }
+    }
+
+    private static int CurrentVisibleScanCadence()
+    {
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return VisibleScanCadenceFrames;
+        return MclslRuntimeWorkBudget.StressTier switch
+        {
+            MclslRuntimeStressTier.Mild => 15,
+            MclslRuntimeStressTier.Severe => 20,
+            MclslRuntimeStressTier.Critical => 30,
+            _ => VisibleScanCadenceFrames
+        };
+    }
+
+    private static int CurrentUpdateStride(int lodLevel)
+    {
+        int stride = lodLevel >= 2 ? 4 : lodLevel == 1 ? 2 : 1;
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return stride;
+        return MclslRuntimeWorkBudget.StressTier switch
+        {
+            MclslRuntimeStressTier.Mild => Math.Max(stride, 2),
+            MclslRuntimeStressTier.Severe => Math.Max(stride, 4),
+            MclslRuntimeStressTier.Critical => Math.Max(stride, 6),
+            _ => stride
+        };
     }
 
     private static bool TryResolveProfile(Actor actor, out long actorId, out HaloProfile profile)

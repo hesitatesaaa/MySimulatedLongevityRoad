@@ -8,12 +8,14 @@ namespace MySimulatedLongevityRoad.UI;
 /// </summary>
 internal static class MclslUiTheme
 {
+    internal static int ReadableFontSize(int size) => Mathf.Max(size + 1, (size * 11 + 5) / 10);
+
     internal static readonly Color Frame = new(0.16f, 0.17f, 0.19f, 0.99f);
     internal static readonly Color FrameGold = new(0.68f, 0.53f, 0.24f, 0.96f);
-    internal static readonly Color SurfaceWindow = new(0.045f, 0.043f, 0.04f, 0.99f);
-    internal static readonly Color SurfacePanel = new(0.075f, 0.073f, 0.068f, 0.98f);
-    internal static readonly Color SurfaceDeep = new(0.055f, 0.052f, 0.048f, 0.99f);
-    internal static readonly Color SurfaceScroll = new(0.025f, 0.025f, 0.024f, 0.94f);
+    internal static readonly Color SurfaceWindow = new(0.035f, 0.075f, 0.078f, 0.99f);
+    internal static readonly Color SurfacePanel = new(0.065f, 0.115f, 0.112f, 0.98f);
+    internal static readonly Color SurfaceDeep = new(0.025f, 0.057f, 0.060f, 0.99f);
+    internal static readonly Color SurfaceScroll = new(0.020f, 0.045f, 0.047f, 0.96f);
     internal static readonly Color AccentGold = new(0.94f, 0.78f, 0.35f, 1f);
     internal static readonly Color AccentBlue = new(0.57f, 0.76f, 0.88f, 1f);
     internal static readonly Color AccentJade = new(0.49f, 0.77f, 0.68f, 1f);
@@ -22,13 +24,12 @@ internal static class MclslUiTheme
     internal static readonly Color Danger = new(0.58f, 0.20f, 0.16f, 0.95f);
 
     // 角色侧栏采用偏青的半透明卷面，和地图背景拉开层次，同时保留文字可读性。
-    internal static readonly Color ActorPanelSurface = new(0.035f, 0.075f, 0.082f, 0.91f);
+    internal static readonly Color ActorPanelSurface = new(0.12f, 0.30f, 0.29f, 0.60f);
     internal static readonly Color ActorPanelEdge = new(0.47f, 0.78f, 0.72f, 0.58f);
     internal static readonly Color ActorPanelAccent = new(0.58f, 0.90f, 0.82f, 0.86f);
     internal static readonly Color ActorPanelText = new(0.91f, 0.97f, 0.95f, 1f);
 
-    // 玄黄修士榜沿用参考包的低饱和深墨绿/青绿色卷面，功能代码不变。
-    internal static readonly Color RankFrame = new(0.31f, 0.35f, 0.28f, 1f);
+    // 保留深色卷面和栏目底色；透明边框之外不再铺灰绿色底板。
     internal static readonly Color RankFrameEdge = new(0.42f, 0.61f, 0.62f, 0.88f);
     internal static readonly Color RankSurfaceWindow = new(0.20f, 0.27f, 0.23f, 1f);
     internal static readonly Color RankSurfacePanel = new(0.16f, 0.23f, 0.20f, 0.98f);

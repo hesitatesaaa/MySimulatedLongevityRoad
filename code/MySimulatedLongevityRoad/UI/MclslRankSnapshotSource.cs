@@ -4,6 +4,7 @@ using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
+using MySimulatedLongevityRoad.Systems.Death;
 using NeoModLoader.General;
 using UnityEngine;
 
@@ -11,122 +12,152 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslRankSnapshotSource
 {
-    private const int CacheFrames = 30;
+    private struct RankValues
+    {
+        internal string RealmId;
+        internal string Name;
+        internal string RealmName;
+        internal string GiftName;
+        internal string SpiritualRootAttributes;
+        internal int TaishangProgress;
+        internal float CultivationProgress;
+        internal int Aptitude;
+        internal int TrueEssence;
+        internal long Contribution;
+        internal long SpiritStones;
+        internal int MindState;
+        internal int MortalMiasma;
+        internal int MortalMiasmaLimit;
+        internal int HarmonyStability;
+        internal int InverseTruthProgress;
+        internal int GoldenCorePurity;
+        internal int NascentCaveIntegrity;
+        internal int DivineChangeCompatibility;
+        internal int NextRealmMinimum;
+    }
     private static readonly List<MclslRankEntry> CachedEntries = new();
+    private static readonly Dictionary<long, int> Positions = new();
     private static readonly List<MclslRankKingdomFilterChoice> CachedKingdomChoices = new();
     private static readonly List<MclslRankAssetFilterChoice> CachedAssetChoices = new();
     private static readonly List<MclslRankTraitFilterChoice> CachedTraitChoices = new();
-    private static int _cachedYear = -1;
-    private static int _cachedActorCount = -1;
-    private static long _cachedIndexRevision = -1L;
-    private static int _cachedFrame = -100000;
-    private static bool _isBuilding;
-    private static bool _invalidateAfterBuild;
-
-    internal static IReadOnlyList<MclslRankEntry> EntriesSnapshot(bool forceRebuild = false)
+    private static readonly Dictionary<long, FilterProjection> Filters = new();
+    private static readonly Dictionary<long, int> KingdomUsers = new();
+    private static readonly Dictionary<string, int> AssetUsers = new(StringComparer.Ordinal);
+    private static readonly Dictionary<string, int> TraitUsers = new(StringComparer.Ordinal);
+    private static readonly List<MclslRankKingdomFilterChoice> KingdomScratch = new();
+    private static readonly List<MclslRankAssetFilterChoice> AssetScratch = new();
+    private static readonly List<MclslRankTraitFilterChoice> TraitScratch = new();
+    private static readonly HashSet<long> KingdomIds = new();
+    private static readonly HashSet<string> AssetIds = new(StringComparer.Ordinal);
+    private static readonly HashSet<string> TraitIds = new(StringComparer.Ordinal);
+    private sealed class FilterProjection
     {
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        int year = MclslRuntime.CurrentYear();
-        long indexRevision = MclslCultivatorCandidateIndex.Revision;
-        if (!forceRebuild
-            && _cachedYear == year
-            && _cachedActorCount == actors.Count
-            && _cachedIndexRevision == indexRevision
-            && Time.frameCount - _cachedFrame < CacheFrames)
-            return CachedEntries;
-
-        // 排行榜采用“局部构建，完成后一次性提交”。任何角色读取异常或
-        // 构建期间发生的缓存失效都不能清空已完成的前序角色。
-        List<MclslRankEntry> nextEntries = new(actors.Count);
-        List<MclslRankKingdomFilterChoice> nextKingdomChoices = new();
-        List<MclslRankAssetFilterChoice> nextAssetChoices = new();
-        List<MclslRankTraitFilterChoice> nextTraitChoices = new();
-        HashSet<long> nextKingdomIds = new();
-        HashSet<string> nextAssetIds = new(StringComparer.Ordinal);
-        HashSet<string> nextTraitIds = new(StringComparer.Ordinal);
-
-        _isBuilding = true;
-        _invalidateAfterBuild = false;
-        try
+        internal long Kingdom;
+        internal string Asset;
+        internal readonly List<string> Traits = new();
+    }
+    internal static long Revision { get; private set; }
+    internal static int Count => CachedEntries.Count;
+    private static MclslOrderedIdIndex<MclslRankEntry> Ordered = new((a, b) => b.Power.CompareTo(a.Power));
+    internal static IReadOnlyList<MclslRankEntry> MembershipEntries => CachedEntries;
+    internal static IReadOnlyList<MclslRankEntry> EntriesSnapshot(bool forceRebuild = false) => Ordered;
+    internal static void UpdateActor(Actor actor, bool refreshFilters = false)
+    {
+        long id = MclslActorAccessor.Id(actor);
+        if (!MclslCultivatorCandidateIndex.IsCultivator(id) || !MclslActorAccessor.Alive(actor))
+        { Remove(id); return; }
+        MclslRankEntry entry = BuildEntrySafely(actor, refreshFilters || !Positions.ContainsKey(id));
+        if (entry == null) return;
+        Ordered.Upsert(id, entry);
+        if (Positions.TryGetValue(id, out int pos)) CachedEntries[pos] = entry;
+        else { Positions[id] = CachedEntries.Count; CachedEntries.Add(entry); refreshFilters = true; }
+        if (refreshFilters) UpdateFilters(actor, id);
+        Revision++;
+        MclslCodexPopulationIndex.Update(entry);
+        MclslRankWindow.OnEntryChanged(id, entry);
+        MclslCodexWindow.OnEntryChanged(id, entry);
+    }
+    private static void UpdateFilters(Actor actor, long id)
+    {
+        RemoveFilters(id);
+        KingdomScratch.Clear(); AssetScratch.Clear(); TraitScratch.Clear();
+        KingdomIds.Clear(); AssetIds.Clear(); TraitIds.Clear();
+        CaptureFilterChoices(actor, KingdomScratch, AssetScratch, TraitScratch, KingdomIds, AssetIds, TraitIds);
+        FilterProjection projection = new();
+        foreach (MclslRankKingdomFilterChoice choice in KingdomScratch)
         {
-            for (int i = 0; i < actors.Count; i++)
-            {
-                Actor actor = actors[i];
-                if (actor?.data == null || !MclslActorAccessor.Alive(actor)) continue;
-
-                MclslRankEntry entry = BuildEntrySafely(actor);
-                if (entry == null) continue;
-                nextEntries.Add(entry);
-
-                try
-                {
-                    CaptureFilterChoices(
-                        actor,
-                        nextKingdomChoices,
-                        nextAssetChoices,
-                        nextTraitChoices,
-                        nextKingdomIds,
-                        nextAssetIds,
-                        nextTraitIds);
-                }
-                catch (Exception ex)
-                {
-                    MclslDiagnostics.Error(
-                        "rank-filter-choice:" + MclslActorAccessor.Id(actor),
-                        "排行榜筛选项构建已跳过单个异常角色: " + ex.Message);
-                }
-            }
-
-            nextTraitChoices.Sort((left, right) =>
-            {
-                int order = TraitFilterOrder(left?.TraitId).CompareTo(TraitFilterOrder(right?.TraitId));
-                return order != 0 ? order : string.Compare(left?.TraitId, right?.TraitId, StringComparison.Ordinal);
-            });
-
-            CachedEntries.Clear();
-            CachedEntries.AddRange(nextEntries);
-            CachedKingdomChoices.Clear();
-            CachedKingdomChoices.AddRange(nextKingdomChoices);
-            CachedAssetChoices.Clear();
-            CachedAssetChoices.AddRange(nextAssetChoices);
-            CachedTraitChoices.Clear();
-            CachedTraitChoices.AddRange(nextTraitChoices);
-
-            _cachedYear = year;
-            _cachedActorCount = actors.Count;
-            _cachedIndexRevision = indexRevision;
-            _cachedFrame = Time.frameCount;
+            projection.Kingdom = choice.KingdomId;
+            if (!KingdomUsers.TryGetValue(choice.KingdomId, out int count)) CachedKingdomChoices.Add(choice);
+            KingdomUsers[choice.KingdomId] = count + 1;
         }
-        finally
+        foreach (MclslRankAssetFilterChoice choice in AssetScratch)
         {
-            _isBuilding = false;
-            if (_invalidateAfterBuild)
-            {
-                // 保留本次已完成的原子快照供当前调用使用，只把缓存标为过期；
-                // 下一次读取会基于最新索引重新构建。
-                _cachedYear = -1;
-                _cachedActorCount = -1;
-                _cachedIndexRevision = -1L;
-                _cachedFrame = -100000;
-                _invalidateAfterBuild = false;
-            }
+            projection.Asset = choice.AssetId;
+            if (!AssetUsers.TryGetValue(choice.AssetId, out int count)) CachedAssetChoices.Add(choice);
+            AssetUsers[choice.AssetId] = count + 1;
         }
-
-        if (CachedEntries.Count != actors.Count)
+        foreach (MclslRankTraitFilterChoice choice in TraitScratch)
         {
-            MclslDiagnostics.Error(
-                "rank-snapshot:count-mismatch",
-                "排行榜快照人数与修士索引不一致: entries=" + CachedEntries.Count
-                + " actors=" + actors.Count);
+            projection.Traits.Add(choice.TraitId);
+            if (!TraitUsers.TryGetValue(choice.TraitId, out int count)) CachedTraitChoices.Add(choice);
+            TraitUsers[choice.TraitId] = count + 1;
         }
-        return CachedEntries;
+        Filters[id] = projection;
+    }
+    private static void RemoveFilters(long id)
+    {
+        if (!Filters.TryGetValue(id, out FilterProjection p)) return;
+        Filters.Remove(id);
+        if (p.Kingdom != 0 && KingdomUsers.TryGetValue(p.Kingdom, out int kingdoms))
+        {
+            if (kingdoms > 1) KingdomUsers[p.Kingdom] = kingdoms - 1;
+            else { KingdomUsers.Remove(p.Kingdom); CachedKingdomChoices.RemoveAll(x => x.KingdomId == p.Kingdom); }
+        }
+        if (p.Asset != null && AssetUsers.TryGetValue(p.Asset, out int assets))
+        {
+            if (assets > 1) AssetUsers[p.Asset] = assets - 1;
+            else { AssetUsers.Remove(p.Asset); CachedAssetChoices.RemoveAll(x => x.AssetId == p.Asset); }
+        }
+        foreach (string trait in p.Traits)
+        {
+            int count = TraitUsers[trait];
+            if (count > 1) TraitUsers[trait] = count - 1;
+            else { TraitUsers.Remove(trait); CachedTraitChoices.RemoveAll(x => x.TraitId == trait); }
+        }
+    }
+    internal static void Remove(long id)
+    {
+        if (!Positions.TryGetValue(id, out int pos)) return;
+        int last = CachedEntries.Count - 1;
+        if (pos != last)
+        {
+            CachedEntries[pos] = CachedEntries[last]; Positions[CachedEntries[pos].ActorId] = pos;
+            MclslRankWindow.OnEntryChanged(CachedEntries[pos].ActorId, CachedEntries[pos]);
+            MclslCodexWindow.OnEntryChanged(CachedEntries[pos].ActorId, CachedEntries[pos]);
+        }
+        Ordered.Remove(id);
+        MclslCodexPopulationIndex.Remove(id);
+        MclslRankWindow.OnEntryChanged(id, null);
+        MclslCodexWindow.OnEntryChanged(id, null);
+        CachedEntries.RemoveAt(last); Positions.Remove(id); RemoveFilters(id); Revision++;
+    }
+    internal static void Clear()
+    {
+        CachedEntries.Clear(); Positions.Clear(); Filters.Clear();
+        MclslCodexPopulationIndex.Clear();
+        CachedKingdomChoices.Clear(); CachedAssetChoices.Clear(); CachedTraitChoices.Clear();
+        KingdomUsers.Clear(); AssetUsers.Clear(); TraitUsers.Clear(); Revision++;
+        Ordered.Clear();
+        MclslRankWindow.ClearRuntime();
+        MclslCodexWindow.ClearBiographyRuntime();
+        Ordered = new MclslOrderedIdIndex<MclslRankEntry>((a, b) => b.Power.CompareTo(a.Power));
     }
 
-    private static MclslRankEntry BuildEntrySafely(Actor actor)
+    private static MclslRankEntry BuildEntrySafely(Actor actor, bool metadataChanged)
     {
         try
         {
-            return BuildEntry(actor);
+            return BuildEntry(actor, metadataChanged);
         }
         catch (Exception ex)
         {
@@ -166,27 +197,48 @@ internal static class MclslRankSnapshotSource
         return CachedTraitChoices;
     }
 
-    internal static void Invalidate()
+    internal static void Invalidate() => Revision++;
+
+    private static MclslRankEntry BuildEntry(Actor actor, bool metadataChanged)
     {
-        if (_isBuilding)
+        MclslRankEntry prior = Positions.TryGetValue(MclslActorAccessor.Id(actor), out int position)
+            ? CachedEntries[position] : null;
+        string realm = MclslActorAccessor.Realm(actor);
+        string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem);
+        if (MclslSensingQiSystem.ShouldReturnToSensingQi(actor, realm, system)) realm = string.Empty;
+        int essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence);
+        float progress = ReadRankProgress(actor, realm, essence);
+        int taishang = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress), 0, 100);
+        string roots = prior?.RootAttributes ?? string.Empty;
+        string gift = prior?.GiftName ?? string.Empty;
+        if (metadataChanged)
         {
-            _invalidateAfterBuild = true;
-            return;
+            MclslSpiritualRootProfile root = MclslSpiritualRootSystem.ReadProfile(actor);
+            roots = root.AttributeText;
+            gift = MclslSpiritualRootSystem.ReadGiftForCultivation(actor)?.Name ?? root.GradeName;
         }
-
-        _cachedYear = -1;
-        _cachedActorCount = -1;
-        _cachedIndexRevision = -1L;
-        _cachedFrame = -100000;
-        CachedEntries.Clear();
-        CachedKingdomChoices.Clear();
-        CachedAssetChoices.Clear();
-        CachedTraitChoices.Clear();
-    }
-
-    private static MclslRankEntry BuildEntry(Actor actor)
-    {
-        MclslActorCultivationView view = MclslActorCultivationQuery.Build(actor);
+        RankValues view = new()
+        {
+            Name = metadataChanged || prior == null ? MclslActorAccessor.DisplayName(actor, realm) : prior.Name,
+            RealmId = realm,
+            RealmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishang),
+            SpiritualRootAttributes = roots, GiftName = gift,
+            CultivationProgress = progress, TrueEssence = essence,
+            Aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude), 0, 100),
+            MindState = MclslMindSystem.ReadMindState(actor),
+            MortalMiasmaLimit = MclslMortalMiasmaSystem.Capacity(realm),
+            MortalMiasma = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma), 0,
+                MclslMortalMiasmaSystem.Capacity(realm)),
+            Contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution),
+            SpiritStones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones),
+            TaishangProgress = taishang,
+            HarmonyStability = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.HarmonyStability),
+            InverseTruthProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.InverseTruthProgress),
+            GoldenCorePurity = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.GoldenCorePurity),
+            NascentCaveIntegrity = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.NascentCaveIntegrity),
+            DivineChangeCompatibility = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.DivineChangeCompatibility),
+            NextRealmMinimum = MclslRealmProgress.NextRealmMinimum(realm, system == MclslCultivationSystemIds.AncientLaw)
+        };
         int realmIndex = string.IsNullOrWhiteSpace(view.RealmId) ? -1 : MclslRealmIds.Index(view.RealmId);
         double power = CalculatePower(actor, view, realmIndex);
         string kingdomName = KingdomName(actor);
@@ -198,13 +250,19 @@ internal static class MclslRankSnapshotSource
             RealmId = view.RealmId,
             RealmName = view.RealmName,
             GiftName = view.GiftName,
-            RootText = string.IsNullOrWhiteSpace(view.SpiritualRootAttributes) ? view.GiftName : view.SpiritualRootAttributes.Split('、')[0],
+            RootText = !metadataChanged && prior != null ? prior.RootText : FirstRoot(view.SpiritualRootAttributes, view.GiftName),
             RootAttributes = view.SpiritualRootAttributes,
-            NormalizedSearchText = NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(view.SpiritualRootAttributes) + NormalizeSearch(kingdomName),
-            ExtraText = Extra(view),
+            NormalizedSearchText = prior != null && prior.Name == view.Name && prior.RealmName == view.RealmName
+                && prior.RootAttributes == roots && prior.KingdomName == kingdomName ? prior.NormalizedSearchText
+                : NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(roots) + NormalizeSearch(kingdomName),
+            ExtraData = ExtraValues(view),
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = power,
-            RealmIndex = realmIndex,
+            RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(view.RealmId, view.TaishangProgress),
+            MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(view.RealmId, view.CultivationProgress),
             Aptitude = view.Aptitude,
             TrueEssence = view.TrueEssence,
             Contribution = view.Contribution,
@@ -218,7 +276,6 @@ internal static class MclslRankSnapshotSource
     private static MclslRankEntry BuildFallbackEntry(Actor actor)
     {
         string realm = MclslActorAccessor.Realm(actor);
-        string realmName = string.IsNullOrWhiteSpace(realm) ? "感气" : MclslRealmIds.Display(realm);
         string rootAttributes = MclslActorAccessor.GetString(
             actor,
             MclslActorDataKeys.SpiritualRootAttributes,
@@ -236,6 +293,9 @@ internal static class MclslRankSnapshotSource
         catch { name = "修士" + MclslActorAccessor.Id(actor); }
         int realmIndex = string.IsNullOrWhiteSpace(realm) ? -1 : MclslRealmIds.Index(realm);
         int essence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
+        float progress = ReadRankProgress(actor, realm, essence);
+        int taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0);
+        string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
         return new MclslRankEntry
         {
@@ -252,12 +312,16 @@ internal static class MclslRankSnapshotSource
                 ? essence + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = Math.Max(1d, realmIndex + 1),
-            RealmIndex = realmIndex,
+            RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(realm, taishangProgress),
+            MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(realm, progress),
             Aptitude = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0)),
             TrueEssence = essence,
-            Contribution = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0)),
-            SpiritStones = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0)),
+            Contribution = Math.Max(0, MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0)),
+            SpiritStones = Math.Max(0, MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0)),
             MindState = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 0)),
             MortalMiasma = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma, 0)),
             MortalMiasmaLimit = 0
@@ -277,9 +341,13 @@ internal static class MclslRankSnapshotSource
         catch { }
         string realm = string.Empty;
         try { realm = MclslActorAccessor.Realm(actor); } catch { }
-        string realmName = string.IsNullOrWhiteSpace(realm) ? "感气" : MclslRealmIds.Display(realm);
         int essence = 0;
         try { essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0); } catch { }
+        float progress = 0f;
+        int taishangProgress = 0;
+        try { progress = ReadRankProgress(actor, realm, essence); } catch { }
+        try { taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0); } catch { }
+        string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
         return new MclslRankEntry
         {
@@ -296,10 +364,22 @@ internal static class MclslRankSnapshotSource
                 ? Math.Max(0, essence) + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
             KingdomName = kingdomName,
+            ProfessionId = ResolveProfessionId(actor),
+            ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
+            ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
             Power = 1d,
-            RealmIndex = string.IsNullOrWhiteSpace(realm) ? -1 : MclslRealmIds.Index(realm),
+            RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(realm, taishangProgress),
+            MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(realm, progress),
             TrueEssence = Math.Max(0, essence)
         };
+    }
+
+    private static float ReadRankProgress(Actor actor, string realm, int essence)
+    {
+        bool ancientPath = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
+            == MclslCultivationSystemIds.AncientLaw;
+        return MclslRealmProgress.ProgressForRealm(realm, essence, ancientPath,
+            MclslActorAccessor.GetFloat(actor, MclslActorDataKeys.CultivationProgress, 0f));
     }
 
     private static string KingdomName(Actor actor)
@@ -310,6 +390,14 @@ internal static class MclslRankSnapshotSource
             return string.IsNullOrWhiteSpace(name) ? "无归属" : name;
         }
         catch { return "无归属"; }
+    }
+
+    private static string ResolveProfessionId(Actor actor)
+    {
+        string traitProfession = MclslProfessionSystem.FromTrait(actor);
+        return string.IsNullOrWhiteSpace(traitProfession)
+            ? MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession, string.Empty)
+            : traitProfession;
     }
 
     private static void CaptureFilterChoices(
@@ -355,7 +443,7 @@ internal static class MclslRankSnapshotSource
         }
     }
 
-    private static double CalculatePower(Actor actor, MclslActorCultivationView view, int realmIndex)
+    private static double CalculatePower(Actor actor, RankValues view, int realmIndex)
     {
         if (!MclslActorAccessor.Alive(actor)) return 0d;
         float attack = GetStatSafe(actor, "damage");
@@ -395,18 +483,24 @@ internal static class MclslRankSnapshotSource
         };
     }
 
-    private static string Extra(MclslActorCultivationView view) => view.RealmId switch
+    private static MclslRankExtraData ExtraValues(RankValues view) => view.RealmId switch
     {
-        MclslRealmIds.JinDan => view.GoldenCorePurity > 0 ? view.GoldenCorePurity + "纯" : "悟法",
-        MclslRealmIds.YuanYing => view.NascentCaveIntegrity > 0 ? view.NascentCaveIntegrity + "洞" : "洞天",
-        MclslRealmIds.HuaShen => view.DivineChangeCompatibility > 0 ? view.DivineChangeCompatibility + "髓" : "抽髓",
-        MclslRealmIds.HeDao => view.HarmonyStability > 0 ? view.HarmonyStability + "稳" : "祭魄",
-        MclslRealmIds.ChangSheng => view.TaishangProgress >= 100 ? "太上" : view.TaishangProgress + "太上",
+        MclslRealmIds.JinDan => new(1, view.GoldenCorePurity),
+        MclslRealmIds.YuanYing => new(2, view.NascentCaveIntegrity),
+        MclslRealmIds.HuaShen => new(3, view.DivineChangeCompatibility),
+        MclslRealmIds.HeDao => new(4, view.HarmonyStability),
+        MclslRealmIds.ChangSheng => new(5, view.TaishangProgress),
         _ when string.IsNullOrWhiteSpace(view.RealmId) && view.TrueEssence > 0
-            => view.TrueEssence + "/" + MclslRealmProgress.LianQiEntryMinimum,
-        _ => view.NextRealmMinimum > 0 ? view.CultivationProgress.ToString("0", System.Globalization.CultureInfo.InvariantCulture) + "%" : string.Empty
+            => new(6, view.TrueEssence, MclslRealmProgress.LianQiEntryMinimum),
+        _ => view.NextRealmMinimum > 0 ? new(7, progress: view.CultivationProgress) : default
     };
 
+    private static string FirstRoot(string value, string fallback)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return fallback;
+        int separator = value.IndexOf('、');
+        return separator < 0 ? value : value.Substring(0, separator);
+    }
     private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
 
     private static string GetAssetDisplayName(ActorAsset asset)
@@ -461,37 +555,6 @@ internal static class MclslRankSnapshotSource
         return MclslLocalizationBridge.IsRuntimeKey(displayName);
     }
 
-    private static int TraitFilterOrder(string traitId)
-    {
-        if (string.IsNullOrWhiteSpace(traitId)) return int.MaxValue;
-        if (traitId.StartsWith("gifts_", StringComparison.Ordinal))
-        {
-            int rank = ParseTrailingNumber(traitId);
-            return rank > 0 ? 100 + rank : 199;
-        }
-        if (traitId.StartsWith("realm_", StringComparison.Ordinal))
-        {
-            int rank = ParseTrailingNumber(traitId);
-            return rank > 0 ? 200 + rank : 299;
-        }
-        if (traitId.StartsWith("trait_Mclsl", StringComparison.Ordinal)
-            || traitId.StartsWith("MCLSL", StringComparison.OrdinalIgnoreCase)
-            || traitId.StartsWith("mclsl", StringComparison.OrdinalIgnoreCase))
-            return 300;
-        return 1000;
-    }
-
-    private static int ParseTrailingNumber(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value)) return -1;
-        int end = value.Length - 1;
-        while (end >= 0 && !char.IsDigit(value[end])) end--;
-        if (end < 0) return -1;
-        int start = end;
-        while (start >= 0 && char.IsDigit(value[start])) start--;
-        string digits = value.Substring(start + 1, end - start);
-        return int.TryParse(digits, out int result) ? result : -1;
-    }
 }
 
 internal sealed class MclslRankKingdomFilterChoice

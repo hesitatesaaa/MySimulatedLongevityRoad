@@ -12,7 +12,7 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static partial class MclslWorldSoulSystem
 {
     private static int _lastAnnualYear = -1;
-    private static bool _claimsRepaired;
+    private static int _manifestFrameCursor, _manifestFrameRemaining;
     private const int ManifestPeacefulDepartureYears = 5;
     private const int HunterDispatchIntervalYears = 1;
     private const int MaxHuntersPerManifest = 8;
@@ -28,22 +28,26 @@ internal static partial class MclslWorldSoulSystem
     internal static void OnWorldLoaded()
     {
         _lastAnnualYear = -1;
-        _claimsRepaired = false;
-        RepairDuplicateSoulClaims();
+        _manifestFrameCursor = _manifestFrameRemaining = 0;
     }
 
-    internal static void TickAnnual(int year)
+    internal static bool TickAnnual(int year)
     {
-        if (_lastAnnualYear == year) return;
-        _lastAnnualYear = year;
-        if (!MclslWorldEpochSystem.IsNewLawActive(year)) return;
-        if (!_claimsRepaired) RepairDuplicateSoulClaims();
-        Reconcile(year);
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return;
-
-        foreach (MclslWorldSoulRecord soul in run.WorldSouls)
+        if (_lastAnnualYear == year) return true;
+        if (!MclslWorldEpochSystem.IsNewLawActive(year)) return true;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (batch.WorldSoulYear != year)
         {
+            batch.WorldSoulYear = year; batch.WorldSoulCursor = 0;
+            Reconcile(year);
+        }
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return true;
+
+        while (batch.WorldSoulCursor < run.WorldSouls.Count && MclslAnnualFrameBudget.TryConsumeOperation())
+        {
+            MclslWorldSoulRecord soul = run.WorldSouls[batch.WorldSoulCursor++];
+            MclslWorldArchiveStore.MarkDirty();
             if (soul == null) continue;
             if (soul.HolderActorId > 0)
             {
@@ -84,21 +88,24 @@ internal static partial class MclslWorldSoulSystem
                 if (IsManifestCombatOpened(manifest))
                     MarkManifestCombatStarted(soul, year);
 
-                if (MclslWorldEpochSystem.IsNewLawActive(year))
-                    DispatchHuntersIfNeeded(soul, manifest, year);
+                if (!DispatchHuntersIfNeeded(soul, manifest, year))
+                { batch.WorldSoulCursor--; return false; }
 
                 if (soul.ManifestCombatStartedYear <= 0 && year - soul.ManifestYear >= ManifestPeacefulDepartureYears)
                     DepartPeacefully(soul, manifest, year);
             }
         }
 
+        if (batch.WorldSoulCursor < run.WorldSouls.Count) return false;
         MclslWorldArchiveStore.MarkDirty();
-        if (HasActiveManifest(run)) return;
+        _lastAnnualYear = year;
+        if (HasActiveManifest(run)) return true;
         CountWorldMaturity(out int huaShen, out int goldenCore, out int cultivators);
-        if (huaShen <= 0) return;
+        if (huaShen <= 0) return true;
 
         MclslWorldSoulRecord candidate = PickNextManifestCandidate(run, year);
         if (candidate != null) Manifest(candidate, year);
+        return true;
     }
 
     private static bool HasActiveManifest(MclslWorldRunState run)
@@ -133,15 +140,20 @@ internal static partial class MclslWorldSoulSystem
 
     internal static void TickFrame(int frameCounter)
     {
-        if (frameCounter % 4 != 0) return;
+        if (_manifestFrameRemaining == 0 && frameCounter % 4 != 0) return;
         using (MclslUnityProfiler.Sample("MCLS/WorldSoul/FrameUpdate"))
         {
-            MclslWorldSoulActorRegistration.TickTerrainEffects();
+            if (_manifestFrameRemaining == 0) MclslWorldSoulActorRegistration.TickTerrainEffects();
             MclslWorldRunState run = MclslWorldRunRepository.Current;
-            if (run?.WorldSouls == null || run.WorldSouls.Count == 0) return;
-            for (int i = 0; i < run.WorldSouls.Count; i++)
+            if (run?.WorldSouls == null || run.WorldSouls.Count == 0)
+            { _manifestFrameCursor = _manifestFrameRemaining = 0; return; }
+            if (_manifestFrameRemaining == 0)
+                _manifestFrameRemaining = run.WorldSouls.Count;
+            while (_manifestFrameRemaining > 0 && !MclslFrameDeadline.Expired)
             {
-                MclslWorldSoulRecord soul = run.WorldSouls[i];
+                if (_manifestFrameCursor >= run.WorldSouls.Count) _manifestFrameCursor = 0;
+                MclslWorldSoulRecord soul = run.WorldSouls[_manifestFrameCursor++];
+                _manifestFrameRemaining--;
                 if (soul == null || soul.ManifestActorId <= 0 || soul.State != "显化") continue;
                 Actor actor = FindActor(soul.ManifestActorId);
                 if (!MclslActorAccessor.Alive(actor)) continue;
@@ -333,8 +345,8 @@ internal static partial class MclslWorldSoulSystem
     internal static void Clear()
     {
         _lastAnnualYear = -1;
-        _claimsRepaired = false;
-        MclslWorldSoulObservationSystem.Clear();
+        _manifestFrameCursor = _manifestFrameRemaining = 0;
+        _hunterSelection = null; _hunterSelectionSoul = null;
         MclslWorldSoulActorRegistration.ClearRuntime();
     }
 
@@ -459,7 +471,10 @@ internal static partial class MclslWorldSoulSystem
         MclslTraitRegistration.SyncGiftTrait(killer, Math.Clamp(MclslActorAccessor.GetInt(killer, MclslActorDataKeys.Aptitude, 50), 1, 100));
         MclslMindSystem.EnsureMindState(killer);
         MclslActorAccessor.Set(killer, MclslActorDataKeys.ImmortalFate, Math.Max(80, MclslActorAccessor.GetInt(killer, MclslActorDataKeys.ImmortalFate, 0)));
-        MclslActorAccessor.Set(killer, MclslActorDataKeys.Contribution, Math.Max(500, MclslActorAccessor.GetInt(killer, MclslActorDataKeys.Contribution, 0)));
+        long currentContribution = MclslActorAccessor.GetMoney(killer, MclslActorDataKeys.Contribution, 0);
+        if (currentContribution < 500)
+            MclslEconomyCommands.Issue(killer, MclslActorDataKeys.Contribution, 500 - currentContribution,
+                "world-soul-minimum/" + MclslEconomyCommands.Account(killer), 1);
         MclslCultivationSystem.SetRealm(killer, MclslRealmIds.HeDao, year, origin + "：" + soul.Name);
         try
         {
@@ -579,22 +594,7 @@ internal static partial class MclslWorldSoulSystem
         Actor target = TryGetActorMember(victim, TargetMemberNames);
         if (MclslEligibility.CanClaimWorldSoul(target)) return target;
 
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor actor = actors[i];
-            if (actor == victim || !MclslEligibility.CanClaimWorldSoul(actor)) continue;
-            if (Targets(actor, victim)) return actor;
-        }
-        return null;
-    }
-
-    private static bool Targets(Actor actor, Actor victim)
-    {
-        if (actor == null || victim == null) return false;
-        try { if (actor.attack_target == victim || actor.beh_actor_target == victim) return true; }
-        catch (Exception ex) { MclslDiagnostics.Error("world-soul-read-actor-target", "读取角色攻击目标失败: " + ex.Message); }
-        return TryGetActorMember(actor, TargetMemberNames) == victim;
+        return MclslActorRegistry.FindTargeter(MclslActorAccessor.Id(victim));
     }
 
     private static Actor TryGetActorMember(object source, string[] memberNames)
@@ -665,49 +665,6 @@ internal static partial class MclslWorldSoulSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyCompatibility, 0);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyStability, 0);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyOrigin, string.Empty);
-    }
-
-    private static void RepairDuplicateSoulClaims()
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.WorldSouls == null) return;
-        Dictionary<string, long> owners = new(StringComparer.Ordinal);
-        for (int i = 0; i < run.WorldSouls.Count; i++)
-        {
-            MclslWorldSoulRecord soul = run.WorldSouls[i];
-            if (soul == null) continue;
-            Actor holder = FindActor(soul.HolderActorId);
-            if (soul.HolderActorId > 0 && MclslActorAccessor.Alive(holder)) owners[soul.Id] = soul.HolderActorId;
-            else if (soul.HolderActorId > 0)
-            {
-                soul.HolderActorId = 0;
-                soul.HolderActorName = string.Empty;
-                soul.HolderOrigin = string.Empty;
-                if (soul.ManifestActorId <= 0) soul.State = "沉寂";
-            }
-        }
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        if (actors == null || actors.Count == 0) return;
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor)) continue;
-            string soulId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulId, string.Empty);
-            if (string.IsNullOrWhiteSpace(soulId)) continue;
-            MclslWorldSoulRecord soul = FindSoulById(run, soulId);
-            long actorId = MclslActorAccessor.Id(actor);
-            if (soul == null || (owners.TryGetValue(soulId, out long owner) && owner != actorId))
-            {
-                ClearActorSoulClaim(actor);
-                continue;
-            }
-            if (!owners.ContainsKey(soulId) && CanClaimSoul(soul, actorId))
-            {
-                ClaimSoulForActor(actor, soul, MclslRuntime.CurrentYear(), string.IsNullOrWhiteSpace(soul.HolderOrigin) ? "旧档魄位修复" : soul.HolderOrigin);
-                owners[soulId] = actorId;
-            }
-        }
-        _claimsRepaired = true;
     }
 
     private static string[] ResolveManualSoulTags(Actor actor)

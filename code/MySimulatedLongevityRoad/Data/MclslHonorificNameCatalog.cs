@@ -336,6 +336,15 @@ internal static class MclslHonorificNameCatalog
         return Compose(personalName, ResolveActorHonorific(actor, realmId), realmId);
     }
 
+    internal static string PersonalName(Actor actor)
+    {
+        long actorId = SafeActorId(actor);
+        string rawName;
+        try { rawName = actor?.getName(); }
+        catch { rawName = string.Empty; }
+        return ResolvePersonalName(rawName, actorId);
+    }
+
     internal static string Format(string baseName, long actorId, string realmId)
     {
         return Compose(ResolvePersonalName(baseName, actorId), Honorific(realmId), realmId);
@@ -808,6 +817,66 @@ internal static class MclslHonorificNameCatalog
             if (name.StartsWith(surname, StringComparison.Ordinal)) return surname;
         }
         return string.Empty;
+    }
+
+    internal static string PersonalSurname(string value) => ExtractSurname(StripLegacyDecoration(value));
+
+    internal static string StableFamilySurname(string value, long seed)
+    {
+        string surname = PersonalSurname(value);
+        if (surname.Length > 0) return surname;
+        return Surnames[StableHash(seed + "|family_surname") % Surnames.Length];
+    }
+
+    // Keep the uniqueness registry in step with an actual family rename. Otherwise
+    // ApplyDisplayName would restore the actor's old cached surname on the next realm change.
+    internal static string ApplyFamilySurname(long actorId, string rawName, string surname)
+    {
+        if (string.IsNullOrWhiteSpace(surname)) return rawName ?? string.Empty;
+        string cleaned = StripLegacyDecoration(rawName);
+        if (actorId > 0 && NameByActorId.TryGetValue(actorId, out string current)
+            && string.Equals(current, cleaned, StringComparison.Ordinal)
+            && string.Equals(ExtractSurname(cleaned), surname, StringComparison.Ordinal)) return rawName;
+        string oldSurname = ExtractSurname(cleaned);
+        string given = oldSurname.Length > 0 ? cleaned.Substring(oldSurname.Length) : string.Empty;
+        bool usable = given.Length is 1 or 2;
+        if (usable)
+            foreach (char c in given)
+                if (c < '\u4e00' || c > '\u9fff') { usable = false; break; }
+
+        if (actorId > 0 && NameByActorId.TryGetValue(actorId, out string previous))
+        {
+            if (ActorIdByName.TryGetValue(previous, out long owner) && owner == actorId)
+                ActorIdByName.Remove(previous);
+            NameByActorId.Remove(actorId);
+        }
+
+        string candidate = usable ? surname + given : string.Empty;
+        if (candidate.Length == 0 || ActorIdByName.TryGetValue(candidate, out long taken) && taken != actorId)
+        {
+            int pairCount = GivenFirst.Length * GivenSecond.Length;
+            int start = StableHash(actorId + "|" + cleaned + "|family_given") % Math.Max(1, pairCount);
+            for (int offset = 0; offset < pairCount; offset++)
+            {
+                int pair = (start + offset) % pairCount;
+                string first = GivenFirst[pair % GivenFirst.Length];
+                string second = GivenSecond[(pair / GivenFirst.Length) % GivenSecond.Length];
+                if (first == second) continue;
+                candidate = surname + first + second;
+                if (!ActorIdByName.TryGetValue(candidate, out taken) || taken == actorId) break;
+            }
+        }
+        if (ActorIdByName.TryGetValue(candidate, out long collision) && collision != actorId)
+            candidate = surname + GivenFirst[StableHash(actorId + "|given") % GivenFirst.Length]
+                + actorId.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        if (actorId > 0)
+        {
+            NameByActorId[actorId] = candidate;
+            ActorIdByName[candidate] = actorId;
+        }
+        if (string.IsNullOrWhiteSpace(rawName) || cleaned.Length == 0) return candidate;
+        int index = rawName.IndexOf(cleaned, StringComparison.Ordinal);
+        return index >= 0 ? rawName.Substring(0, index) + candidate + rawName.Substring(index + cleaned.Length) : candidate;
     }
 
     private static bool TryClaim(long actorId, string name)

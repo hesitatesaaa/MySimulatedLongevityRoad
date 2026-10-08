@@ -10,8 +10,6 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslAncientLawSystem
 {
-    internal static void ClearRuntimeOnly() { }
-
     internal static void ProcessAnnualFromScheduler(Actor actor, int year) => ProcessAnnual(actor, year);
 
     private static void ProcessAnnual(Actor actor, int year)
@@ -36,7 +34,6 @@ internal static class MclslAncientLawSystem
         if (MclslWorldEpochSystem.TryRetryAncientConversion(actor, year)) return;
 
         MclslMindSystem.ProcessAnnual(actor, year, realm);
-        MclslResourceSystem.EnsureActorResources(actor);
         MaintainAncientLineage(actor, year, realm);
         StabilizeAncientSurvival(actor, realm);
         MclslTraitRegistration.SyncNativeRealmTraits(actor, realm);
@@ -110,27 +107,34 @@ internal static class MclslAncientLawSystem
 
     private static void ProcessAncientSpiritStones(Actor actor, int year, string realm, int aptitude)
     {
-        int stones = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0));
+        string account = MclslEconomyCommands.Account(actor);
+        string source = "ancient-income/" + account;
+        if (MclslEconomyCommands.WasApplied(source, year)) return;
+        long stones = Math.Max(0, MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0));
         int realmIndex = Math.Max(0, MclslRealmIds.Index(realm));
         long actorId = MclslActorAccessor.Id(actor);
-        int incomeChance = Math.Clamp(16 + realmIndex * 5 + aptitude / 14, 16, 55);
+        int incomeChance = MclslCultivatorIncomePolicy.AncientIncomeChance(realmIndex, aptitude);
+        int income = 0;
         if (PositiveHash(actorId + "|ancient_spirit_stone_income|" + year) % 100 < incomeChance)
         {
-            int variance = PositiveHash(actorId + "|ancient_spirit_stone_amount|" + year) % Math.Max(2, 4 + realmIndex * 2);
-            int income = Math.Max(1, 1 + realmIndex + aptitude / 38 + variance);
-            stones = Math.Min(999999, stones + income);
+            income = MclslCultivatorIncomePolicy.AncientIncome(realmIndex, aptitude,
+                PositiveHash(actorId + "|ancient_spirit_stone_amount|" + year));
+            stones = checked(stones + income);
         }
 
-        int cost = 3 + realmIndex * 4;
-        int spendChance = Math.Clamp(30 + aptitude / 4 + realmIndex * 3, 30, 72);
-        if (stones >= cost && PositiveHash(actorId + "|ancient_spirit_stone_spend|" + year) % 100 < spendChance)
+        int cost = MclslCultivatorIncomePolicy.AncientSpendCost(realmIndex);
+        int spendChance = MclslCultivatorIncomePolicy.AncientSpendChance(realmIndex, aptitude);
+        // Keep two full maintenance payments available so the annual sink does
+        // not consume every stone before market settlement can use the wallet.
+        int spent = stones >= (long)cost * 3L
+            && PositiveHash(actorId + "|ancient_spirit_stone_spend|" + year) % 100 < spendChance ? cost : 0;
+        MclslEconomicResult result = MclslEconomyCommands.Commit(year, new[]
         {
-            stones -= cost;
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, stones);
-            return;
-        }
-
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, stones);
+            new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.SpiritStone, income, toAccount: account),
+            new MclslEconomicOperation(MclslEconomicKind.Consume, MclslCurrency.SpiritStone, spent, fromAccount: account)
+        }, source, year);
+        if (result != MclslEconomicResult.Applied) throw new InvalidOperationException("旧法年度收支提交失败：" + result);
+        MclslEconomyCommands.NotifyWallet(actor);
     }
 
     internal static int AnnualFieldBonusPercent(Actor actor, string realm)

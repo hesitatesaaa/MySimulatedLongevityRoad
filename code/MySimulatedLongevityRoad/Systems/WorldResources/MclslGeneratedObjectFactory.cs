@@ -147,27 +147,6 @@ internal static class MclslGeneratedObjectFactory
         return MclslInverseTruthSystem.IsTruthReversed("truth_player_trace_persistence") ? 2 : 1;
     }
 
-    internal static bool MigrateLegacyFoundationWonder(Actor actor, int year)
-    {
-        if (!MclslActorAccessor.IsCultivator(actor)) return false;
-        string id = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderId, string.Empty);
-        string name = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderName, string.Empty);
-        if (string.IsNullOrWhiteSpace(name)) return false;
-        bool legacy = id.StartsWith("wonder_", StringComparison.Ordinal) || string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderDescription, string.Empty));
-        if (!legacy) return false;
-        string[] tags = SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderTags, "灵"));
-        int quality = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationWonderQuality, 1), 1, 4);
-        int seed = StableHash(MclslWorldRunRepository.Current.RunId + "|migrate_foundation|" + MclslActorAccessor.Id(actor));
-        MclslGeneratedItemRecord item = CreateItem(MclslGeneratedKinds.FoundationWonder, year, quality, tags, ActorOrigin(actor, year, "旧世奇物重定名"), seed);
-        ApplyFoundationClassification(item, seed);
-        item.HolderActorId = MclslActorAccessor.Id(actor);
-        item.HolderName = MclslActorAccessor.DisplayName(actor);
-        item.Consumed = true;
-        MclslWorldRunRepository.RegisterGeneratedItem(item);
-        ApplyFoundation(actor, item);
-        return true;
-    }
-
     internal static void ApplyFoundation(Actor actor, MclslGeneratedItemRecord item)
     {
         MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderId, item.Id);

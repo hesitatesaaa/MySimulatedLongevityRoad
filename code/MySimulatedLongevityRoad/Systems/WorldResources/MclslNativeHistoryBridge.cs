@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using UnityEngine;
 
@@ -9,6 +11,20 @@ internal static class MclslNativeHistoryBridge
     private const string AssetPrefix = "mclsl_history_";
     private static bool _initialized;
     private static bool _disabled;
+    private static MclslWorldRunState _legacyRun;
+    private static readonly HashSet<(int Year, string Title, string Body)> LegacyLineages = new();
+
+    internal static void BeginLegacyClassification(MclslWorldRunState run)
+    {
+        _legacyRun = run;
+        LegacyLineages.Clear();
+    }
+
+    internal static void RegisterLegacyClassification(MclslRunEventRecord record)
+    {
+        if (record.NativeLogged && MclslEventCatalog.IsLineageEvent(record.EventType))
+            LegacyLineages.Add((record.Year, record.Title, TrimForNative(record.Body)));
+    }
 
     internal static void EnsureRegistered()
     {
@@ -20,15 +36,19 @@ internal static class MclslNativeHistoryBridge
     internal static bool Add(MclslRunEventRecord record)
     {
         if (_disabled || record == null || string.IsNullOrWhiteSpace(record.Title)) return false;
+        if (!MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType, record.Importance,
+                MclslRuntimeSettings.LineageNativeHistoryEnabled)) return false;
         try
         {
             EnsureAssets();
-            string category = string.IsNullOrWhiteSpace(record.Category) ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
+            string category = MclslEventCatalog.IsLineageEvent(record.EventType)
+                ? MclslEventCatalog.Lineage
+                : string.IsNullOrWhiteSpace(record.Category) ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
             MclslEventCategoryDefinition definition = MclslEventCatalog.Category(category);
             WorldLogMessage message = new()
             {
                 asset_id = AssetPrefix + definition.Id,
-                timestamp = Math.Max(0, record.Year),
+                timestamp = MclslEventCatalog.NativeTimestampForYear(record.Year),
                 special1 = definition.Name,
                 special2 = record.Title,
                 special3 = TrimForNative(record.Body)
@@ -117,6 +137,16 @@ internal static class MclslNativeHistoryBridge
 
     private static void FormatLogText(WorldLogMessage message, ref string text)
     {
+        // Legacy native messages have no event ID. Match all retained fields,
+        // old timestamp and owning run; never infer type from title keywords.
+        if (ReferenceEquals(_legacyRun, MclslWorldRunRepository.Current)
+            && message.asset_id == AssetPrefix + MclslEventCatalog.Ruin
+            && LegacyLineages.Contains((message.timestamp, message.special2, message.special3)))
+        {
+            message.asset_id = AssetPrefix + MclslEventCatalog.Lineage;
+            message.special1 = MclslEventCatalog.Category(MclslEventCatalog.Lineage).Name;
+            message.timestamp = MclslEventCatalog.NativeTimestampForYear(message.timestamp);
+        }
         string category = string.IsNullOrWhiteSpace(message.special1) ? "玄黄" : message.special1;
         string title = string.IsNullOrWhiteSpace(message.special2) ? "玄黄异动" : message.special2;
         string body = string.IsNullOrWhiteSpace(message.special3) ? string.Empty : "：" + message.special3;

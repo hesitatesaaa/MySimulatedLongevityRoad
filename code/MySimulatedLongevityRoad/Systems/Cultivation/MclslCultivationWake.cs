@@ -132,11 +132,8 @@ internal static class MclslCultivationWake
         }
 
         MclslWorldActorQuery.MarkDirty();
-        MclslRankSnapshotSource.Invalidate();
-        if (refreshUi)
-        {
-            MclslActorInfoPanel.RefreshOpenForActor(actor);
-        }
+        MclslRuntimeChanges.Publish(actor, MclslActorChange.Data | MclslActorChange.Membership
+            | MclslActorChange.Traits | (refreshUi ? MclslActorChange.Presentation : MclslActorChange.None));
     }
 
     private static bool NormalizeGiftArchive(Actor actor)

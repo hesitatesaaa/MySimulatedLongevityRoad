@@ -14,7 +14,6 @@ namespace MySimulatedLongevityRoad.Systems.Death;
 /// </summary>
 internal static class MclslNativeKillStatisticsSystem
 {
-    private const int RepairVersion = 1;
     private static readonly Dictionary<long, int> ObservedKillCounts = new();
     private static readonly string[] KillMemberNames =
     {
@@ -24,17 +23,9 @@ internal static class MclslNativeKillStatisticsSystem
     {
         "last_attacker", "lastAttacker", "_last_attacker", "attacked_by", "attackedBy", "killer", "last_hit_actor", "lastHitActor"
     };
-    private static readonly string[] WorldDeathMemberNames =
-    {
-        "deaths", "_deaths", "total_deaths", "totalDeaths", "death_count", "deathCount", "units_died", "unitsDied", "creatures_died", "creaturesDied"
-    };
-
-    private static int _loadedYear;
-
     internal static void OnWorldLoaded(int year)
     {
         ObservedKillCounts.Clear();
-        _loadedYear = Math.Max(0, year);
     }
 
     internal static void Observe(Actor actor)
@@ -55,7 +46,7 @@ internal static class MclslNativeKillStatisticsSystem
         if (!ObservedKillCounts.TryGetValue(killerId, out int confirmed))
         {
             // No trustworthy baseline yet. Keep the current value and begin tracking;
-            // the one-time save repair handles counters polluted by older versions.
+            // subsequent diverted hits use this observed baseline.
             ObservedKillCounts[killerId] = Math.Max(0, current);
             return;
         }
@@ -109,54 +100,7 @@ internal static class MclslNativeKillStatisticsSystem
         RefreshKiller(state.Killer);
     }
 
-    internal static void TickAnnualRepair(int year)
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null || run.NativeKillStatisticsRepairVersion >= RepairVersion) return;
-        if (year <= _loadedYear) return;
-
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
-        if (actors == null || actors.Count == 0) return;
-        long totalDeaths = ReadNativeWorldDeathTotal();
-        if (totalDeaths <= 0L) return;
-
-        List<KillEntry> entries = new(actors.Count);
-        long totalLivingKills = 0L;
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor) || !TryReadNativeKills(actor, out int kills) || kills <= 0) continue;
-            entries.Add(new KillEntry(actor, kills));
-            totalLivingKills = SaturatingAdd(totalLivingKills, kills);
-        }
-
-        bool changed = false;
-        if (totalLivingKills > totalDeaths && entries.Count > 0)
-        {
-            double scale = totalDeaths / (double)totalLivingKills;
-            for (int i = 0; i < entries.Count; i++)
-            {
-                KillEntry entry = entries[i];
-                int corrected = Math.Max(0, (int)Math.Floor(entry.Kills * scale));
-                if (corrected == entry.Kills) continue;
-                TryWriteNativeKills(entry.Actor, corrected);
-                changed = true;
-            }
-        }
-
-        ObservedKillCounts.Clear();
-        for (int i = 0; i < actors.Count; i++) Observe(actors[i]);
-        run.NativeKillStatisticsRepairVersion = RepairVersion;
-        if (changed)
-        {
-            MclslWorldRunRepository.AddEvent(
-                year,
-                "native_kill_statistics_repaired",
-                "击杀统计归正",
-                "旧版本中被免死或救回的致死判定曾重复计入击杀，本世现存角色的原生击杀数已按世界真实死亡总量等比例归正。");
-        }
-        MclslWorldArchiveStore.MarkDirty();
-    }
+    internal static void Forget(long actorId) => ObservedKillCounts.Remove(actorId);
 
     internal static Actor DetachScriptedDeathAttacker(Actor actor)
     {
@@ -177,7 +121,6 @@ internal static class MclslNativeKillStatisticsSystem
     internal static void Clear()
     {
         ObservedKillCounts.Clear();
-        _loadedYear = 0;
     }
 
     private static void RefreshKiller(Actor killer)
@@ -241,46 +184,6 @@ internal static class MclslNativeKillStatisticsSystem
             if (TryWriteNumericMember(data, KillMemberNames[i], safe)) return true;
         }
         return false;
-    }
-
-    private static long ReadNativeWorldDeathTotal()
-    {
-        object world = World.world;
-        if (world == null) return 0L;
-        long best = 0L;
-        try { best = Math.Max(best, ReadDeathTotalFromObject(World.world.map_stats)); }
-        catch { }
-        best = Math.Max(best, ReadDeathTotalFromObject(world));
-        object worldData = TryReadObjectMember(world, "data");
-        best = Math.Max(best, ReadDeathTotalFromObject(worldData));
-        return best;
-    }
-
-    private static long ReadDeathTotalFromObject(object target)
-    {
-        if (target == null) return 0L;
-        long best = 0L;
-        for (int i = 0; i < WorldDeathMemberNames.Length; i++)
-        {
-            if (TryReadNumericMember(target, WorldDeathMemberNames[i], out long value))
-                best = Math.Max(best, value);
-        }
-        return Math.Max(0L, best);
-    }
-
-    private static object TryReadObjectMember(object target, string name)
-    {
-        if (target == null || string.IsNullOrWhiteSpace(name)) return null;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        try
-        {
-            FieldInfo field = target.GetType().GetField(name, flags);
-            if (field != null) return field.GetValue(target);
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
-            if (property?.CanRead == true) return property.GetValue(target, null);
-        }
-        catch { }
-        return null;
     }
 
     private static bool TryReadNumericMember(object target, string name, out long value)
@@ -363,12 +266,6 @@ internal static class MclslNativeKillStatisticsSystem
         return true;
     }
 
-    private static long SaturatingAdd(long left, long right)
-    {
-        if (right <= 0L) return left;
-        return left > long.MaxValue - right ? long.MaxValue : left + right;
-    }
-
     internal readonly struct MclslNativeKillAttemptState
     {
         internal static readonly MclslNativeKillAttemptState Empty = new(false, null, 0);
@@ -384,15 +281,4 @@ internal static class MclslNativeKillStatisticsSystem
         }
     }
 
-    private readonly struct KillEntry
-    {
-        internal readonly Actor Actor;
-        internal readonly int Kills;
-
-        internal KillEntry(Actor actor, int kills)
-        {
-            Actor = actor;
-            Kills = kills;
-        }
-    }
 }

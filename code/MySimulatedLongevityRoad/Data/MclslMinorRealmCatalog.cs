@@ -13,6 +13,13 @@ internal enum MclslMinorRealmStage
 
 internal static class MclslMinorRealmCatalog
 {
+    internal static int RankRealmIndex(string realmId, int taishangProgress) =>
+        realmId == MclslRealmIds.ChangSheng && taishangProgress >= 100
+            ? MclslRealmIds.Ordered.Length : MclslRealmIds.Index(realmId);
+
+    internal static int RankMinorIndex(string realmId, float progress) =>
+        UsesMinorRealm(realmId) ? (int)Stage(progress) : 0;
+
     internal static bool UsesMinorRealm(string realmId)
     {
         if (string.IsNullOrWhiteSpace(realmId)) return false;

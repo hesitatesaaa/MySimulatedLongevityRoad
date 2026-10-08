@@ -5,8 +5,8 @@ using MySimulatedLongevityRoad.UI;
 namespace MySimulatedLongevityRoad.Core;
 
 /// <summary>
-/// 可选的本机开发者工具桥接层。
-/// 正式源码和玩家包不包含 DeveloperTools/，因此这里不能静态引用调试编辑器。
+/// 游戏内开发者编辑器桥接层。保留反射边界，避免核心启动流程
+/// 因编辑器界面初始化异常而中断模拟。
 /// </summary>
 internal static class MclslDeveloperBridge
 {
@@ -78,14 +78,8 @@ internal static class MclslDeveloperBridge
         _resolved = true;
         try
         {
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (int i = 0; i < assemblies.Length && _showMethod == null; i++)
-            {
-                Type type = assemblies[i].GetType(EditorTypeName, throwOnError: false);
-                MethodInfo method = type?.GetMethod("Show", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-                if (method == null) continue;
-                _showMethod = method;
-            }
+            Type type = typeof(MclslDeveloperBridge).Assembly.GetType(EditorTypeName, throwOnError: false);
+            _showMethod = type?.GetMethod("Show", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         }
         catch (Exception ex)
         {

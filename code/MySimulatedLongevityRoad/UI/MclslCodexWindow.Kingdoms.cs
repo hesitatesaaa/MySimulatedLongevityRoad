@@ -8,6 +8,20 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal sealed partial class MclslCodexWindow
 {
+    private int _kingdomPage, _kingdomActorPage;
+    private const int KingdomPageSize = 18;
+    private void DrawPopulationPageControls(int count, ref int page)
+    {
+        int pages = Math.Max(1, (count + KingdomPageSize - 1) / KingdomPageSize);
+        page = Math.Clamp(page, 0, pages - 1);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(string.Format(LocalizedTextManager.getText("MCLSL_ui_page_summary"), count, page + 1, pages));
+        if (page > 0 && GUILayout.Button(LocalizedTextManager.getText("MCLSL_ui_page_previous"), GUILayout.Width(76)))
+        { page--; _scroll = Vector2.zero; }
+        if (page + 1 < pages && GUILayout.Button(LocalizedTextManager.getText("MCLSL_ui_page_next"), GUILayout.Width(76)))
+        { page++; _scroll = Vector2.zero; }
+        GUILayout.EndHorizontal();
+    }
     private void DrawKingdomDistribution(string title, string empty)
     {
         if (!string.IsNullOrWhiteSpace(_kingdomDetailName))
@@ -19,8 +33,10 @@ internal sealed partial class MclslCodexWindow
         DrawPageHeader(title, "凡俗国度自有兴亡，仙修行迹随国势流转。");
         bool any = false;
         IReadOnlyList<MclslKingdomCodexEntry> entries = _snapshot.KingdomEntries;
-        int kingdomLimit = Math.Min(entries.Count, 120);
-        for (int i = 0; i < kingdomLimit; i++)
+        DrawPopulationPageControls(entries.Count, ref _kingdomPage);
+        int first = _kingdomPage * KingdomPageSize;
+        int kingdomLimit = Math.Min(entries.Count, first + KingdomPageSize);
+        for (int i = first; i < kingdomLimit; i++)
         {
             MclslKingdomCodexEntry entry = entries[i];
             if (entry == null || string.IsNullOrWhiteSpace(entry.Name)) continue;
@@ -35,6 +51,7 @@ internal sealed partial class MclslCodexWindow
                 {
                     _kingdomDetailName = entry.Name;
                     _kingdomRealmFilter = MclslEventCatalog.All;
+                    _kingdomActorPage = 0;
                     _scroll = Vector2.zero;
                 }
                 GUILayout.EndHorizontal();
@@ -86,8 +103,10 @@ internal sealed partial class MclslCodexWindow
 
         IReadOnlyList<MclslKingdomCultivatorEntry> list = entry.CultivatorsForRealm(_kingdomRealmFilter);
         bool any = false;
-        int limit = Math.Min(list.Count, 180);
-        for (int i = 0; i < limit; i++)
+        DrawPopulationPageControls(list.Count, ref _kingdomActorPage);
+        int first = _kingdomActorPage * KingdomPageSize;
+        int limit = Math.Min(list.Count, first + KingdomPageSize);
+        for (int i = first; i < limit; i++)
         {
             MclslKingdomCultivatorEntry cultivator = list[i];
             if (cultivator == null) continue;
@@ -105,17 +124,7 @@ internal sealed partial class MclslCodexWindow
         if (!any) DrawInfoCard("暂无记录", "#CFC7B2", () => GUILayout.Label("当前筛选下暂无修士。"));
     }
 
-    private MclslKingdomCodexEntry FindKingdomEntry(string name)
-    {
-        if (string.IsNullOrWhiteSpace(name)) return null;
-        IReadOnlyList<MclslKingdomCodexEntry> entries = _snapshot.KingdomEntries;
-        for (int i = 0; i < entries.Count; i++)
-        {
-            MclslKingdomCodexEntry entry = entries[i];
-            if (entry != null && string.Equals(entry.Name, name, StringComparison.Ordinal)) return entry;
-        }
-        return null;
-    }
+    private MclslKingdomCodexEntry FindKingdomEntry(string name) => MclslCodexPopulationIndex.FindKingdom(name);
 
     private void DrawKingdomRealmFilter(MclslKingdomCodexEntry entry)
     {
@@ -139,6 +148,7 @@ internal sealed partial class MclslCodexWindow
         if (GUILayout.Button(label, GUILayout.Width(110f), GUILayout.Height(30f)))
         {
             _kingdomRealmFilter = realm;
+            _kingdomActorPage = 0;
             _scroll = Vector2.zero;
         }
         GUI.backgroundColor = old;

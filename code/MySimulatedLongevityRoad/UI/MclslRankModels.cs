@@ -1,11 +1,18 @@
 using System;
+using System.Collections.Generic;
+using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Systems;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.UI;
 
 internal sealed class MclslRankEntry
 {
-    internal Actor Actor;
+    internal Actor Actor
+    {
+        get => MclslActorRegistry.Resolve(ActorId, out Actor actor) ? actor : null;
+        set { long id = MclslActorAccessor.Id(value); if (id > 0) ActorId = id; }
+    }
     internal long ActorId;
     internal string Name = string.Empty;
     internal string RealmId = string.Empty;
@@ -14,17 +21,45 @@ internal sealed class MclslRankEntry
     internal string RootText = string.Empty;
     internal string RootAttributes = string.Empty;
     internal string NormalizedSearchText = string.Empty;
-    internal string ExtraText = string.Empty;
+    internal MclslRankExtraData ExtraData;
+    private string _extraText;
+    internal string ExtraText { get => _extraText ??= ExtraData.Format(); set => _extraText = value; }
     internal string KingdomName = string.Empty;
+    internal string ProfessionId = string.Empty;
+    internal int ProfessionGrade;
+    internal int ProfessionExperience;
     internal double Power;
     internal int RealmIndex;
+    internal int MinorRealmIndex;
+    internal int RealmSortRank => (RealmIndex + 1) * 5 + MinorRealmIndex;
     internal int Aptitude;
     internal int TrueEssence;
-    internal int Contribution;
-    internal int SpiritStones;
+    internal long Contribution;
+    internal long SpiritStones;
     internal int MindState;
     internal int MortalMiasma;
     internal int MortalMiasmaLimit;
+}
+
+/// <summary>Numeric presentation data; text is allocated only for displayed rows.</summary>
+internal readonly struct MclslRankExtraData
+{
+    internal readonly byte Kind;
+    internal readonly int Value, Limit;
+    internal readonly float Progress;
+    internal MclslRankExtraData(byte kind, int value = 0, int limit = 0, float progress = 0)
+    { Kind = kind; Value = value; Limit = limit; Progress = progress; }
+    internal string Format() => Kind switch
+    {
+        1 => Value > 0 ? Value + "纯" : "悟法",
+        2 => Value > 0 ? Value + "洞" : "洞天",
+        3 => Value > 0 ? Value + "髓" : "抽髓",
+        4 => Value > 0 ? Value + "稳" : "祭魄",
+        5 => Value >= 100 ? "太上" : Value + "太上",
+        6 => Value + "/" + Limit,
+        7 => Progress.ToString("0", System.Globalization.CultureInfo.InvariantCulture) + "%",
+        _ => string.Empty
+    };
 }
 
 internal enum MclslRankFilterType
@@ -120,4 +155,35 @@ internal sealed class MclslRankSortKey
     }
 
     internal void Toggle() => Ascending = !Ascending;
+    internal int Compare(MclslRankEntry left, MclslRankEntry right) =>
+        (Ascending ? 1 : -1) * Def.GetValue(left).CompareTo(Def.GetValue(right));
+}
+
+internal sealed class MclslKingdomCodexEntry
+{
+    internal string Name = string.Empty;
+    internal int TotalCultivators;
+    internal readonly Dictionary<string, int> RealmCounts = new(StringComparer.Ordinal);
+    internal IReadOnlyList<MclslKingdomCultivatorEntry> Cultivators = Array.Empty<MclslKingdomCultivatorEntry>();
+    internal readonly Dictionary<string, IReadOnlyList<MclslKingdomCultivatorEntry>> CultivatorsByRealm = new(StringComparer.Ordinal);
+
+    internal IReadOnlyList<MclslKingdomCultivatorEntry> CultivatorsForRealm(string realmId)
+    {
+        if (string.IsNullOrWhiteSpace(realmId) || string.Equals(realmId, MclslEventCatalog.All, StringComparison.Ordinal))
+            return Cultivators;
+        return CultivatorsByRealm.TryGetValue(realmId, out IReadOnlyList<MclslKingdomCultivatorEntry> list)
+            ? list
+            : Array.Empty<MclslKingdomCultivatorEntry>();
+    }
+}
+
+internal sealed class MclslKingdomCultivatorEntry
+{
+    internal long ActorId;
+    internal string Name = string.Empty;
+    internal string RealmId = string.Empty;
+    internal string RealmName = string.Empty;
+    internal int RealmIndex;
+    internal int TrueEssence;
+    internal long Contribution;
 }

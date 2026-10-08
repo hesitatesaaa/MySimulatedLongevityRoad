@@ -60,12 +60,25 @@ internal static class MclslMapMarkerVisualSystem
             }
         }
 
-        if (_lastAnimationFrame < 0 || frame - _lastAnimationFrame >= AnimationCadenceFrames)
+        int animationCadence = CurrentAnimationCadence();
+        if (_lastAnimationFrame < 0 || frame - _lastAnimationFrame >= animationCadence)
         {
             _lastAnimationFrame = frame;
             using (MclslUnityProfiler.Sample("MCLS/Visual/MapMarkerAnimation"))
                 AnimateTemporaryMarkers(frame);
         }
+    }
+
+    private static int CurrentAnimationCadence()
+    {
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return AnimationCadenceFrames;
+        return MclslRuntimeWorkBudget.StressTier switch
+        {
+            MclslRuntimeStressTier.Mild => 6,
+            MclslRuntimeStressTier.Severe => 8,
+            MclslRuntimeStressTier.Critical => 12,
+            _ => AnimationCadenceFrames
+        };
     }
 
     internal static void Clear()

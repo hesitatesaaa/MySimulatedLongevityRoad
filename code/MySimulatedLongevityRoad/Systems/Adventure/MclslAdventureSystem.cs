@@ -4,6 +4,7 @@ using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -25,8 +26,11 @@ internal static class MclslAdventureSystem
 
     private static readonly List<Actor> AnnualCultivators = new();
     private static readonly HashSet<long> AnnualActorIds = new();
+    private static readonly HashSet<long> CandidateActorIds = new();
     private static readonly Dictionary<string, List<RuinCandidate>> RuinCandidates = new(StringComparer.Ordinal);
     private static int _year = -1;
+    private static int _restoreCursor;
+    private static bool _candidatesRestored;
 
     private static readonly string[] PrivateRuinCategories =
     {
@@ -50,7 +54,10 @@ internal static class MclslAdventureSystem
         _year = year;
         AnnualCultivators.Clear();
         AnnualActorIds.Clear();
+        CandidateActorIds.Clear();
         RuinCandidates.Clear();
+        _restoreCursor = 0;
+        _candidatesRestored = false;
         if (!MclslRuntimeSettings.WorldAdventuresEnabled) return;
         EnsureSectRuins(year);
     }
@@ -60,6 +67,8 @@ internal static class MclslAdventureSystem
         if (!MclslRuntimeSettings.WorldAdventuresEnabled || _year != year || !MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) return;
         long id = MclslActorAccessor.Id(actor);
         if (id <= 0L || !AnnualActorIds.Add(id)) return;
+        int lastExploredYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinLastExploredYear, -1);
+        if (lastExploredYear >= 0 && (long)year - lastExploredYear < 5L) return;
         EnsureActorAdventureData(actor);
         AnnualCultivators.Add(actor);
 
@@ -70,29 +79,151 @@ internal static class MclslAdventureSystem
         if (ruin == null) return;
         int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50);
         int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
-        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
-        int score = realmIndex * 45 + aptitude + Math.Min(70, experience) + Math.Min(30, contribution / 4)
+        long contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
+        int score = realmIndex * 45 + aptitude + Math.Min(70, experience) + (int)Math.Min(30, contribution / 4)
             + PositiveHash(id + "|ruin_score|" + ruin.Id + "|" + year) % 51;
         if (!RuinCandidates.TryGetValue(ruin.Id, out List<RuinCandidate> list)) RuinCandidates[ruin.Id] = list = new List<RuinCandidate>();
         list.Add(new RuinCandidate { Actor = actor, Score = score });
+        CandidateActorIds.Add(id);
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!batch.AdventureCandidates.Exists(x => x.Year == year && x.ActorId == id))
+            batch.AdventureCandidates.Add(new MclslAnnualClaimRecord
+                { Year = year, ActorId = id, TargetId = ruin.Id, Strength = score });
+        MclslWorldArchiveStore.MarkDirty();
     }
 
-    internal static void ResolveAnnual(int year)
+    internal static bool TickResolveAnnual(int year)
     {
-        if (!MclslRuntimeSettings.WorldAdventuresEnabled || _year != year) return;
-        ResolveRuinExpeditions(year);
-        AnnualCultivators.Clear();
-        AnnualActorIds.Clear();
-        RuinCandidates.Clear();
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!MclslRuntimeSettings.WorldAdventuresEnabled)
+        {
+            HashSet<string> skippedTargets = new(StringComparer.Ordinal);
+            foreach (MclslAnnualClaimRecord claim in batch.AdventureCandidates)
+                if (claim.Year == year && skippedTargets.Add(claim.TargetId))
+                    MclslWorldRunRepository.RecordAnnualFailure(year, "世界", claim.TargetId,
+                        "Adventure", 1, "未结算", "探索功能已关闭");
+            batch.AdventureCandidates.RemoveAll(x => x.Year == year);
+            MclslWorldArchiveStore.MarkDirty();
+            return true;
+        }
+        if (_year != year) BeginAnnual(year);
+        if (!_candidatesRestored && !RestorePendingCandidatesStep(year)) return false;
+        if (MclslAnnualFrameBudget.Expired) return false;
+        MclslAnnualClaimRecord next = batch.AdventureCandidates.Find(x => x.Year == year);
+        if (next == null) return true;
+        string targetId = next.TargetId;
+        if (!ResolveAnnualStep(year, targetId)) return false;
+        MclslAnnualFrameBudget.ReportProgress();
+        MclslAnnualBackpressure.RecordProgress();
+        return batch.AdventureCandidates.Find(x => x.Year == year) == null;
+    }
+
+    private static bool ResolveAnnualStep(int year, string targetId)
+    {
+        if (!MclslRuntimeSettings.WorldAdventuresEnabled || _year != year) return true;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!RuinCandidates.TryGetValue(targetId, out List<RuinCandidate> candidates))
+        {
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", targetId,
+                "Adventure", 1, "未结算", "探索角色不可解析");
+            batch.AdventureCandidates.RemoveAll(x => x.Year == year && x.TargetId == targetId);
+            MclslWorldArchiveStore.MarkDirty();
+            return true;
+        }
+        MclslSectRuinRecord ruin = MclslWorldRunRepository.FindSectRuin(targetId);
+        if (!IsRuinAvailable(ruin))
+        {
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", targetId,
+                "Adventure", 1, "未结算", "遗府目标已不可用");
+            batch.AdventureCandidates.RemoveAll(x => x.Year == year && x.TargetId == targetId);
+            RuinCandidates.Remove(targetId);
+            MclslWorldArchiveStore.MarkDirty();
+            return true;
+        }
+
+        List<MclslAnnualClaimRecord> targetClaims = batch.AdventureCandidates.FindAll(
+            x => x.Year == year && x.TargetId == targetId);
+        bool initialized = targetClaims.Exists(x => x.Compatibility > 0);
+        if (!initialized)
+        {
+            int capacity = Math.Clamp(1 + ruin.Quality, 2, 5);
+            List<RuinCandidate> expedition = PickExpedition(candidates, capacity);
+            if (expedition.Count == 0)
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", targetId,
+                    "Adventure", 1, "未结算", "探索角色均不满足结算条件");
+                batch.AdventureCandidates.RemoveAll(x => x.Year == year && x.TargetId == targetId);
+                RuinCandidates.Remove(targetId);
+                MclslWorldArchiveStore.MarkDirty();
+                return true;
+            }
+            Dictionary<long, int> orderByActor = new(expedition.Count);
+            for (int i = 0; i < expedition.Count; i++)
+                orderByActor[MclslActorAccessor.Id(expedition[i].Actor)] = i + 1;
+            batch.AdventureCandidates.RemoveAll(x => x.Year == year && x.TargetId == targetId
+                && !orderByActor.ContainsKey(x.ActorId));
+            foreach (MclslAnnualClaimRecord claim in batch.AdventureCandidates)
+                if (claim.Year == year && claim.TargetId == targetId
+                    && orderByActor.TryGetValue(claim.ActorId, out int order)) claim.Compatibility = order;
+            ruin.State = "探索中";
+            ruin.LastExploredYear = year;
+            ruin.ExpeditionCount++;
+            ruin.LastExplorerNames = JoinExplorerNames(expedition);
+            MclslWorldArchiveStore.MarkDirty();
+            MclslAnnualFrameBudget.ReportProgress();
+            MclslAnnualBackpressure.RecordProgress();
+            return false;
+        }
+
+        MclslAnnualClaimRecord claimToResolve = null;
+        for (int i = 0; i < targetClaims.Count; i++)
+            if (targetClaims[i].Compatibility > 0 && (claimToResolve == null
+                || targetClaims[i].Compatibility < claimToResolve.Compatibility)) claimToResolve = targetClaims[i];
+        if (claimToResolve != null && MclslActorRegistry.ResolveKnownOrWorld(claimToResolve.ActorId, out Actor explorer))
+            ResolveSingleExplorer(explorer, ruin, year, claimToResolve.Compatibility - 1);
+        else if (claimToResolve != null)
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", targetId,
+                "Adventure", 1, "未结算", "探索角色已不可解析");
+        if (claimToResolve != null) batch.AdventureCandidates.Remove(claimToResolve);
+
+        bool hasMore = batch.AdventureCandidates.Exists(x => x.Year == year && x.TargetId == targetId);
+        if (!hasMore)
+        {
+            FinalizeRuinExpedition(ruin, year);
+            RuinCandidates.Remove(targetId);
+        }
         MclslWorldArchiveStore.MarkDirty();
+        MclslAnnualFrameBudget.ReportProgress();
+        MclslAnnualBackpressure.RecordProgress();
+        return !hasMore;
+    }
+
+    private static bool RestorePendingCandidatesStep(int year)
+    {
+        List<MclslAnnualClaimRecord> records = MclslWorldRunRepository.Current.AnnualBatch.AdventureCandidates;
+        while (_restoreCursor < records.Count && MclslAnnualFrameBudget.TryConsumeOperation())
+        {
+            MclslAnnualClaimRecord record = records[_restoreCursor++];
+            if (record.Year != year || CandidateActorIds.Contains(record.ActorId)) continue;
+            if (!MclslActorRegistry.ResolveKnownOrWorld(record.ActorId, out Actor actor)) continue;
+            CandidateActorIds.Add(record.ActorId);
+            if (!RuinCandidates.TryGetValue(record.TargetId, out List<RuinCandidate> list))
+                RuinCandidates[record.TargetId] = list = new();
+            list.Add(new RuinCandidate { Actor = actor, Score = record.Strength });
+        }
+        _candidatesRestored = _restoreCursor >= records.Count;
+        return _candidatesRestored;
     }
 
     internal static void Clear()
     {
         AnnualCultivators.Clear();
         AnnualActorIds.Clear();
+        CandidateActorIds.Clear();
         RuinCandidates.Clear();
         _year = -1;
+        _restoreCursor = 0;
+        _candidatesRestored = false;
     }
 
     internal static MclslSectRuinRecord CreateAncientLawRuin(int year, Actor source, string techniqueName)
@@ -170,45 +301,35 @@ internal static class MclslAdventureSystem
         return ruin;
     }
 
-    private static void ResolveRuinExpeditions(int year)
+    private static void FinalizeRuinExpedition(MclslSectRuinRecord ruin, int year)
     {
-        foreach (KeyValuePair<string, List<RuinCandidate>> pair in RuinCandidates)
+        if (ruin.RemainingValue <= 0 || ruin.ExplorationProgress >= ruin.Depth * 100
+            || ruin.ExpeditionCount >= RuinMaxExpeditions(ruin))
         {
-            MclslSectRuinRecord ruin = MclslWorldRunRepository.FindSectRuin(pair.Key);
-            if (!IsRuinAvailable(ruin)) continue;
-            int capacity = Math.Clamp(1 + ruin.Quality, 2, 5);
-            List<RuinCandidate> expedition = PickExpedition(pair.Value, capacity);
-            if (expedition.Count == 0) continue;
-            ruin.State = "探索中";
-            ruin.LastExploredYear = year;
-            ruin.ExpeditionCount++;
-            ruin.LastExplorerNames = JoinExplorerNames(expedition);
-            for (int i = 0; i < expedition.Count; i++) ResolveSingleExplorer(expedition[i].Actor, ruin, year, i);
-            if (ruin.RemainingValue <= 0 || ruin.ExplorationProgress >= ruin.Depth * 100 || ruin.ExpeditionCount >= RuinMaxExpeditions(ruin))
-            {
-                ruin.RemainingValue = 0;
-                ruin.State = "搜尽";
-                MclslWorldRunRepository.AddEvent(year, "ruin_exhausted", ruin.Name + "探索告终", "历经" + ruin.ExpeditionCount + "次探索、折损" + ruin.CasualtyCount + "名修士后，此地有价值的传承已被搜尽。");
-                int collapseRoll = PositiveHash(ruin.Id + "|collapse|" + year) % 100;
-                if (collapseRoll < 25 + ruin.Quality * 8) MclslWorldChangeSystem.CreateFromRuinCollapse(year, ruin);
-            }
-            else if (ruin.Danger >= 85 && ruin.CasualtyCount >= 3) ruin.State = "封绝";
-            else ruin.State = "残破";
-            MclslWorldRunRepository.NotifyMapMarkerDataChanged();
+            ruin.RemainingValue = 0;
+            ruin.State = "搜尽";
+            MclslWorldRunRepository.AddEvent(year, "ruin_exhausted", ruin.Name + "探索告终", "历经" + ruin.ExpeditionCount + "次探索、折损" + ruin.CasualtyCount + "名修士后，此地有价值的传承已被搜尽。");
+            int collapseRoll = PositiveHash(ruin.Id + "|collapse|" + year) % 100;
+            if (collapseRoll < 25 + ruin.Quality * 8) MclslWorldChangeSystem.CreateFromRuinCollapse(year, ruin);
         }
+        else if (ruin.Danger >= 85 && ruin.CasualtyCount >= 3) ruin.State = "封绝";
+        else ruin.State = "残破";
+        MclslWorldRunRepository.NotifyMapMarkerDataChanged();
     }
 
     private static void ResolveSingleExplorer(Actor actor, MclslSectRuinRecord ruin, int year, int order)
     {
         if (!MclslActorAccessor.Alive(actor)) return;
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinLastExploredYear, year);
         int realmIndex = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
         int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50);
         int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
         int lawCompatibility = RuinLawCompatibility(actor, ruin);
-        int survival = Math.Clamp(72 + realmIndex * 9 + aptitude / 6 + experience / 8 + lawCompatibility / 8 - ruin.Danger, 8, 98);
+        int deathChance = SecretRealmDeathChance(actor, ruin.Danger, lawCompatibility);
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_survival|" + ruin.Id + "|" + year + "|" + order) % 100;
         int progressGain = Math.Clamp(12 + realmIndex * 8 + aptitude / 8 + PositiveHash(actor.getName() + "|ruin_progress|" + year) % 25, 10, 70);
-        if (roll >= survival)
+        progressGain = (int)Math.Ceiling(progressGain * (1d + MclslPhysiqueSystem.ExplorePercent(actor) / 100d));
+        if (!actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId) && roll >= 100 - deathChance)
         {
             ruin.CasualtyCount++;
             ruin.ExplorationProgress += Math.Max(3, progressGain / 4);
@@ -237,6 +358,15 @@ internal static class MclslAdventureSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, summary);
     }
 
+    internal static int SecretRealmDeathChance(Actor actor, int danger, int lawCompatibility = 0)
+    {
+        int realm = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
+        int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100);
+        int experience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0));
+        int survival = 72 + realm * 9 + aptitude / 6 + experience / 8 + lawCompatibility / 8 - danger;
+        return Math.Clamp(100 - survival - MclslPhysiqueSystem.DeathReduction(actor), 2, 40);
+    }
+
     private static string GrantRuinReward(Actor actor, MclslSectRuinRecord ruin, int year, int realmIndex, out string revivedTechniqueId, out string revivedTechniqueName, out string linkedLineageId)
     {
         revivedTechniqueId = string.Empty;
@@ -260,6 +390,7 @@ internal static class MclslAdventureSystem
         if (rewardRoll < 36)
         {
             int amount = 10 + quality * 9 + PositiveHash(actor.getName() + "|spirit_stones|" + year) % 24;
+            amount = (int)Math.Ceiling(amount * (1d + MclslPhysiqueSystem.StonesPercent(actor) / 100d));
             MclslResourceSystem.GrantRuinSpiritStones(actor, amount);
             return "搜得灵石" + amount;
         }
@@ -272,7 +403,7 @@ internal static class MclslAdventureSystem
             {
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, technique.Id);
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
-                MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+                MclslTechniqueRealmLimit.OnTechniqueAssigned(actor, technique);
                 int completeness = Math.Clamp(80 + quality * 3, 83, 92);
                 MclslTechniqueStageSystem.SetProgress(
                     actor,
@@ -688,14 +819,13 @@ internal static class MclslAdventureSystem
 
     private static void EnsureActorAdventureData(Actor actor)
     {
-        if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, -1) < 0)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, 20);
+        MclslResourceSystem.EnsureInitialCultivationFunds(actor);
     }
 
     private static LocationSeed PickLocation(int hash)
     {
         List<LocationSeed> locations = new();
-        IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
+        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
         if (units != null)
         {
             HashSet<string> seen = new(StringComparer.Ordinal);

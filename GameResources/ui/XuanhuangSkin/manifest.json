@@ -1,0 +1,14 @@
+{
+  "style": "东方修仙 / 玄黄仙录",
+  "format": "transparent PNG",
+  "background_guardians": { "left": "guardian_bai.png", "right": "guardian_chuanfa.png" },
+  "assets": [
+    { "frame": "frame_tianxuanjing.png", "title": "title_tianxuanjing.png", "exact_text": "天玄镜·万界交易所" },
+    { "frame": "frame_mod_intro.png", "title": "title_mod_intro.png", "exact_text": "我的模拟长生路·模组介绍" },
+    { "frame": "frame_ranking.png", "title": "title_ranking.png", "exact_text": "玄黄修士榜" },
+    { "frame": "frame_huanzhen_space.png", "title": "title_huanzhen_space.png", "exact_text": "还真空间" },
+    { "frame": "frame_character_panel.png", "title": "title_character_panel.png", "exact_text": "修士档案" },
+    { "frame": "frame_biography.png", "title": "title_biography.png", "exact_text": "修士列传" },
+    { "frame": "frame_xuanhuang_record.png", "title": "title_xuanhuang_record.png", "exact_text": "玄黄仙录" }
+  ]
+}

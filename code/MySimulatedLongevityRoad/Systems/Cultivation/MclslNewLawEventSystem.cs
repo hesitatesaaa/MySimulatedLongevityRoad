@@ -227,6 +227,7 @@ internal static class MclslNewLawEventSystem
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
+        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
         int current = MclslActorAccessor.GetInt(actor, key, min);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
     }

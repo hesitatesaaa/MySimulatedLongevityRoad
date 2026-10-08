@@ -92,6 +92,7 @@ internal static class MclslMortalFateEventSystem
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
+        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
         if (actor?.data == null || string.IsNullOrWhiteSpace(key) || delta == 0) return;
         int current = MclslActorAccessor.GetInt(actor, key, 0);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));

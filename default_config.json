@@ -1,11 +1,27 @@
 {
   "ConfigItems": [
     {
+      "Id": "MCLSL_config_annual_backpressure",
+      "Name": "年度积压自动限速",
+      "Description": "默认开启。年度结算积压时临时降低时间推进速度，追上后自动恢复玩家所选倍速。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AnnualBackpressureCallBack"
+    },
+    {
+      "Id": "MCLSL_config_enable_aggressive_performance",
+      "Name": "启用极限帧率模式",
+      "Description": "默认开启。帧率压力升高时降低远景光环和地图纯动画的更新频率，不降低模拟精度。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:EnableAggressivePerformanceCallBack"
+    },
+    {
       "Id": "MCLSL_config_childhood_root_chance",
       "Name": "幼年灵根显现概率（%）",
-      "Description": "0—100%，默认50%；只影响尚未完成五岁或六岁补判的小人。",
+      "Description": "0—100%，默认10%；只影响尚未完成五岁或六岁补判的小人。",
       "Type": "INT_SLIDER",
-      "IntVal": 50,
+      "IntVal": 10,
       "MinIntVal": 0,
       "MaxIntVal": 100,
       "StepIntVal": 1,
@@ -14,9 +30,9 @@
     {
       "Id": "MCLSL_config_alchemist_chance",
       "Name": "炼丹师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；10代表1.0%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 10,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -25,9 +41,9 @@
     {
       "Id": "MCLSL_config_refiner_chance",
       "Name": "炼器师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；15代表1.5%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 15,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -36,9 +52,9 @@
     {
       "Id": "MCLSL_config_talisman_chance",
       "Name": "制符师生成概率（0.1%）",
-      "Description": "18岁有根骨修士的一次性职业判定；20代表2.0%。三职业互斥。",
+      "Description": "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。",
       "Type": "INT_SLIDER",
-      "IntVal": 20,
+      "IntVal": 100,
       "MinIntVal": 0,
       "MaxIntVal": 1000,
       "StepIntVal": 1,
@@ -103,10 +119,18 @@
     {
       "Id": "MCLSL_config_enable_ancient_lineage_announcements",
       "Name": "显示仙道传承公告",
-      "Description": "控制仙道法脉兴盛等传承消息是否写入公告与纪事；传承数据本身仍会记录。",
+      "Description": "控制个人仙道法脉兴盛的额外纪事；道统兴衰与功法传承记录不受影响，原版历史由独立开关控制。",
       "Type": "SWITCH",
       "BoolVal": false,
       "Callback": "MclslConfig:EnableAncientLineageAnnouncementsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_lineage_native_history",
+      "Name": "将传承事件写入原版历史",
+      "Description": "控制新旧法道统兴衰、功法入录、失传和复现等符合历史重要性规则的消息是否写入原版历史。关闭后玄黄仙录与传承数据仍保留；已有历史不删除，重新开启不补发。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:LineageNativeHistoryCallBack"
     },
     {
       "Id": "MCLSL_config_enable_pioneer_announcements",
@@ -241,6 +265,14 @@
       "Callback": "MclslConfig:AutoCollectMaobaoInscriptionCallBack"
     },
     {
+      "Id": "MCLSL_config_auto_collect_physique",
+      "Name": "玄黄异禀自动收藏（原版）",
+      "Description": "角色获得任一玄黄异禀体质时，自动加入 WorldBox 原版人物收藏；关闭后不取消已有收藏。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:AutoCollectPhysiqueCallBack"
+    },
+    {
       "Id": "MCLSL_config_auto_collect_yuanying",
       "Name": "元婴自动收藏",
       "Description": "角色成就元婴时自动加入收藏。",
@@ -289,12 +321,297 @@
       "Callback": "MclslConfig:AutoCollectHeavenRootCallBack"
     },
     {
+      "Id": "MCLSL_config_performance_monitor",
+      "Name": "性能监控",
+      "Description": "记录各系统耗时、GC 分配和积压情况；开启后可在左上角查看与导出报告。默认关闭，报告最多保留12份。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:PerformanceMonitorCallBack"
+    },
+    {
       "Id": "MCLSL_config_show_fps",
       "Name": "显示帧率",
       "Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
       "Type": "SWITCH",
       "BoolVal": false,
       "Callback": "MclslConfig:ShowFpsCallBack"
+    },
+    {
+      "Id": "MCLSL_config_item_acquisition_history_enabled",
+      "Name": "显示物品获取记事",
+      "Description": "总开关。开启后，地阶、天阶材料与成品会记入仙缘宝录；凡阶、黄阶、玄阶还须同时开启低阶记录。关闭只停止新增记事，不影响物品获取与天阶材料世界公告。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslConfig:ItemAcquisitionHistoryCallBack"
+    },
+    {
+      "Id": "MCLSL_config_record_low_material_history",
+      "Name": "记录低阶材料与物品获取",
+      "Description": "总开关开启时，本项控制凡阶、黄阶、玄阶材料与丹药、符箓、法宝的获取历史；关闭不影响实际获取、入袋、交易及地阶、天阶历史和公告。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:RecordLowMaterialAcquisitionHistoryCallBack"
+    },
+    {
+      "Id": "MCLSL_config_beast_natural_spawn",
+      "Name": "妖兽自然出现",
+      "Description": "每个世界年按各妖兽概率判定一次。",
+      "Type": "SWITCH",
+      "BoolVal": true,
+      "Callback": "MclslBeastConfig:ReloadBool"
+    },
+    {
+      "Id": "MCLSL_config_beast_red_moon_chance",
+      "Name": "红月事件概率（百万分之）",
+      "Description": "默认10000，即每年1%。",
+      "Type": "INT_SLIDER",
+      "IntVal": 10000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_revival_chance",
+      "Name": "高山复苏事件概率（百万分之）",
+      "Description": "默认100，即每年0.01%；成功时再判定兲兽。",
+      "Type": "INT_SLIDER",
+      "IntVal": 100,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_kunpeng_chance",
+      "Name": "鲲鹏自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 200,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_qinglong_chance",
+      "Name": "青龙自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_huanglong_chance",
+      "Name": "黄龙自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1200,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_zhuque_chance",
+      "Name": "朱雀自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 800,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_baihu_chance",
+      "Name": "白虎自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1800,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_qilin_chance",
+      "Name": "麒麟自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 800,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_moqilin_chance",
+      "Name": "墨麒麟麒麟变种概率（百万分之）",
+      "Description": "麒麟出现成功后判定；默认100000，即10%。",
+      "Type": "INT_SLIDER",
+      "IntVal": 100000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_xuanwu_chance",
+      "Name": "玄武自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_fenghuang_chance",
+      "Name": "凤凰自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 400,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_dafeng_chance",
+      "Name": "大风自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 8000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_manman_chance",
+      "Name": "蛮蛮自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 12000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_xuanniao_chance",
+      "Name": "玄鸟自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 800,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_qingluan_chance",
+      "Name": "青鸾自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 3500,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_changliao_chance",
+      "Name": "长獠凶犬自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 7500,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_mo_chance",
+      "Name": "貘自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 6000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_hongmao_chance",
+      "Name": "红毛异兽自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 30000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_feiqiu_chance",
+      "Name": "飞球兽自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 40000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_yingying_chance",
+      "Name": "阴影兽自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 300000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_goushou_chance",
+      "Name": "狗首妖兽自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1500,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_liejiejing_chance",
+      "Name": "裂解鲸自然出现概率（百万分之）",
+      "Description": "每年一次；达到当前原版亚种种群限制时跳过。",
+      "Type": "INT_SLIDER",
+      "IntVal": 500,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_tianshou_chance",
+      "Name": "兲兽自然出现概率（百万分之）",
+      "Description": "仅高山复苏事件成功后判定；默认1000000，即100%。",
+      "Type": "INT_SLIDER",
+      "IntVal": 1000000,
+      "MinIntVal": 0,
+      "MaxIntVal": 1000000,
+      "StepIntVal": 1,
+      "Callback": "MclslBeastConfig:ReloadInt"
     }
   ]
 }

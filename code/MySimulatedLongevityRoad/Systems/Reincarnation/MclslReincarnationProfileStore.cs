@@ -19,12 +19,17 @@ internal static class MclslReincarnationProfileStore
         _loaded = true;
         try
         {
-            string path = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ReincarnationProfile.json");
-            if (File.Exists(path)) _current = JsonConvert.DeserializeObject<MclslReincarnationProfile>(File.ReadAllText(path)) ?? new();
+            string path = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV1", "ReincarnationProfile.json");
+            if (File.Exists(path))
+            {
+                MclslReincarnationProfile loaded = JsonConvert.DeserializeObject<MclslReincarnationProfile>(File.ReadAllText(path));
+                if (loaded == null || loaded.Version != MclslSaveVersions.ReincarnationProfile)
+                    throw new InvalidDataException("还真档案格式不属于当前架构。");
+                _current = loaded;
+            }
         }
         catch (Exception ex) { Debug.LogWarning("[模拟长生路][还真档案] 读取失败: " + ex.Message); }
         _current ??= new MclslReincarnationProfile();
-        _current.Version = MclslSaveVersions.ReincarnationProfile;
         _current.KnownKnowledgeIds ??= new System.Collections.Generic.List<string>();
         _current.KnownTechniqueIds ??= new System.Collections.Generic.List<string>();
         _current.KnownTimelineAnchorIds ??= new System.Collections.Generic.List<string>();
@@ -36,7 +41,7 @@ internal static class MclslReincarnationProfileStore
         EnsureLoaded();
         try
         {
-            string dir = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad");
+            string dir = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV1");
             Directory.CreateDirectory(dir);
             File.WriteAllText(Path.Combine(dir, "ReincarnationProfile.json"), JsonConvert.SerializeObject(_current, Formatting.Indented));
         }

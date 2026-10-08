@@ -19,7 +19,7 @@ internal static class MclslChildhoodRootSystem
         if (!IsRootCheckAgeDeadlineYear(age)) return;
 
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ChildhoodRootChecked, 1);
-        if (!HasSpiritualRoot(actor, year))
+        if (!MclslSpiritualRootSystem.HasActualSpiritualRoot(actor) && !HasSpiritualRoot(actor, year))
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.MortalSeparationChecked, 1);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.ImmortalFate, 0);
@@ -27,7 +27,8 @@ internal static class MclslChildhoodRootSystem
             return;
         }
 
-        int aptitude = RollAptitude(actor);
+        int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0);
+        if (aptitude < 1 || aptitude > 100) aptitude = RollAptitude(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, aptitude);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ImmortalFate, Math.Clamp(aptitude, 20, 100));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.MortalSeparationChecked, 1);

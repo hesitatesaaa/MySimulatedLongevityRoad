@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>annotations</Nullable>
+    <RestoreConfigFile>$(MSBuildProjectDirectory)\NuGet.Config</RestoreConfigFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslAnnualWorldRuntimeLane.cs" Link="MclslAnnualWorldRuntimeLane.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslAnnualWorldSnapshot.cs" Link="MclslAnnualWorldSnapshot.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslAnnualBackpressure.cs" Link="MclslAnnualBackpressure.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslSaveVersions.cs" Link="MclslSaveVersions.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslAnnualExecutionContext.cs" Link="MclslAnnualExecutionContext.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/WorldResources/MclslEconomyCommands.cs" Link="MclslEconomyCommands.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslAtomicFile.cs" Link="MclslAtomicFile.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslEconomyState.cs" Link="MclslEconomyState.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslAnnualResiliencePolicy.cs" Link="MclslAnnualResiliencePolicy.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslAnnualSchedulingPolicy.cs" Link="MclslAnnualSchedulingPolicy.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslOrderedIdIndex.cs" Link="MclslOrderedIdIndex.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslFamilyData.cs" Link="MclslFamilyData.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslEventCatalog.cs" Link="MclslEventCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslFactionMissionCatalog.cs" Link="MclslFactionMissionCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Modules/MclslModuleBase.cs" Link="MclslModuleBase.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Modules/MclslModuleHub.cs" Link="MclslModuleHub.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/WorldResources/MclslWorldArchiveStore.cs" Link="MclslWorldArchiveStore.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Traits/MclslPhysiqueSystem.cs" Link="MclslPhysiqueSystem.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslLongevityRules.cs" Link="MclslLongevityRules.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslAptitudeGiftCatalog.cs" Link="MclslAptitudeGiftCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Runtime/MclslEligibility.cs" Link="MclslEligibility.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellAcquisitionPolicy.cs" Link="MclslSpellAcquisitionPolicy.cs" />
+  </ItemGroup>
+</Project>

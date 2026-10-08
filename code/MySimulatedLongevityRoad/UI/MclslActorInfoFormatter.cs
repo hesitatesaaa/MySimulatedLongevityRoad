@@ -4,6 +4,7 @@ using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
+using NeoModLoader.General;
 
 namespace MySimulatedLongevityRoad.UI;
 
@@ -19,13 +20,28 @@ internal static class MclslActorInfoFormatter
         string displayRealm = DisplayRealmName(cultivation);
         StringBuilder b = new(720);
         b.Append(Title(string.IsNullOrWhiteSpace(cultivation.CultivationSystemName) || cultivation.CultivationSystemName == "未入道" ? "修行档案" : cultivation.CultivationSystemName + "档案"));
-        b.Append(Section("基础"));
+        b.Append(Section("修行"));
         b.Append(Line("境界", Highlight(displayRealm, string.IsNullOrWhiteSpace(realm) ? "#9CD7FF" : RealmColor(realm))));
         if (!string.IsNullOrWhiteSpace(realm))
             b.Append(Line("体系", Highlight(cultivation.CultivationSystemName, cultivation.IsSpiritualRootPath ? "#A6D8D1" : "#FFD37A")));
-        if (MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()))
-            b.Append(Line("所属组织", Highlight(FactionDisplay(cultivation.FactionAffiliation), "#B7A7FF")));
         AppendProfession(b, actor);
+        MclslFamilySystem.Observe(actor);
+        string family = MclslFamilySystem.FamilyOf(actor)?.Name;
+        string currentSect = MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear());
+        string faction = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear())
+            ? FactionDisplay(cultivation.FactionAffiliation) : string.Empty;
+        string ancientOrigin = MclslFactionMissionSystem.DisplaySectText(
+            MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty));
+        if (!string.IsNullOrWhiteSpace(family) || !string.IsNullOrWhiteSpace(currentSect)
+            || !string.IsNullOrWhiteSpace(faction) && faction != "无"
+            || MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()) && !string.IsNullOrWhiteSpace(ancientOrigin))
+            b.Append(Section(LM.Get("mclsl_xianlu_profile_affiliation")));
+        if (!string.IsNullOrWhiteSpace(family)) b.Append(Line("所属家族", Highlight(family, "#D8C778")));
+        if (!string.IsNullOrWhiteSpace(currentSect)) b.Append(Line("所属宗门", Highlight(currentSect, "#A6D8D1")));
+        if (!string.IsNullOrWhiteSpace(faction) && faction != "无")
+            b.Append(Line("所属组织", Highlight(faction, "#B7A7FF")));
+        if (MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()) && !string.IsNullOrWhiteSpace(ancientOrigin))
+            b.Append(Line("旧法宗门出身", Highlight(ancientOrigin, "#A6D8D1")));
         AppendFormerLife(b, actor);
         if (cultivation.IsSpiritualRootPath)
         {
@@ -45,7 +61,7 @@ internal static class MclslActorInfoFormatter
             b.Append(Line("纯度", PercentColor(cultivation.SpiritualRootPurity)));
         }
 
-        b.Append(Section("修行"));
+        b.Append(Section(LM.Get("mclsl_xianlu_profile_progress")));
         if (string.IsNullOrWhiteSpace(realm))
         {
             b.Append(Line("炼心", cultivation.HeartMethodText));
@@ -111,7 +127,7 @@ internal static class MclslActorInfoFormatter
         };
         if (string.IsNullOrEmpty(name)) return;
 
-        int grade = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionGrade, 0);
+        int grade = MclslProfessionSystem.GetGrade(actor);
         string gradeName = grade switch
         {
             0 => "学徒",
@@ -121,20 +137,8 @@ internal static class MclslActorInfoFormatter
             4 => "天级",
             _ => "未定品阶"
         };
+        b.Append(Section(LM.Get("mclsl_xianlu_profile_craft")));
         b.Append(Line("职业", Highlight(name, "#D8C778") + " <color=#9CD7FF>" + gradeName + "</color>"));
-    }
-
-    private static string MclslTechniqueLineageName(string lineageId)
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.TechniqueLineages == null || string.IsNullOrWhiteSpace(lineageId)) return "未定";
-        for (int i = 0; i < run.TechniqueLineages.Count; i++)
-        {
-            MclslTechniqueLineageRecord lineage = run.TechniqueLineages[i];
-            if (lineage != null && string.Equals(lineage.Id, lineageId, StringComparison.Ordinal))
-                return string.IsNullOrWhiteSpace(lineage.Name) ? lineageId : lineage.Name;
-        }
-        return lineageId;
     }
 
     private static void AppendCurrentStage(StringBuilder b, MclslActorCultivationView cultivation)
@@ -239,22 +243,6 @@ internal static class MclslActorInfoFormatter
     };
 
     private static string AncientQuality(int quality) => quality switch { >= 4 => "上乘", 3 => "精纯", 2 => "稳固", 1 => "初成", _ => string.Empty };
-    private static string PercentText(string label, int value) => value <= 0 ? string.Empty : label + value + "%";
-
-    private static void AppendAncientBlock(StringBuilder b, string label, string name, params (string Label, string Value)[] fields)
-    {
-        if (string.IsNullOrWhiteSpace(name)) return;
-        b.Append(Line(label, Highlight(ReplaceTags(name), "#F1D17A")));
-        if (fields == null) return;
-        for (int i = 0; i < fields.Length; i++)
-        {
-            string fieldLabel = fields[i].Label;
-            string fieldValue = fields[i].Value;
-            if (string.IsNullOrWhiteSpace(fieldLabel) || string.IsNullOrWhiteSpace(fieldValue)) continue;
-            b.Append(Line("  " + fieldLabel, ReplaceTags(fieldValue)));
-        }
-    }
-
     private static void AppendAncientSummaryBlock(StringBuilder b, string label, string name, params (string Label, string Value)[] fields)
     {
         if (string.IsNullOrWhiteSpace(name)) return;
@@ -364,12 +352,6 @@ internal static class MclslActorInfoFormatter
 
     private static string ReplaceTags(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
     private static string RootCountText(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value == "单灵根" ? "单灵根" : value + "（多灵根）";
-    private static string ShortText(string value, int max)
-    {
-        string text = ReplaceTags(value).Replace("\n", " ").Trim();
-        if (text.Length <= max) return text;
-        return text.Substring(0, Math.Max(1, max - 1)) + "…";
-    }
     private static string FoundationWonderRank(MclslActorCultivationView cultivation) =>
         MclslGeneratedObjectFactory.FoundationRankText(cultivation.FoundationWonderCategory, cultivation.FoundationWonderGrade, cultivation.FoundationWonderCompleteness, cultivation.FoundationWonderRuleStrength, cultivation.FoundationWonderQuality);
     private static string Title(string title) => "<color=#A6D8D1><b>◇ " + title + "</b></color>\n";

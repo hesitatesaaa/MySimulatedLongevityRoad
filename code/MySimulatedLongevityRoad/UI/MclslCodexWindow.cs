@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Modules;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using NeoModLoader.General;
@@ -20,7 +21,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private float _savedTimeScale = 1f;
     private bool _savedConfigPaused;
     private int _tab;
-    private string _eventCategory = MclslEventCatalog.All;
+    private string _tabTitle = string.Empty;
     private string _ancientEventFilter = MclslEventCatalog.All;
     private string _ancientTeachingMaxRealmFilter = MclslEventCatalog.All;
     private string _ancientBreakthroughRealmFilter = MclslEventCatalog.All;
@@ -37,6 +38,23 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private string _kingdomRealmFilter = MclslEventCatalog.All;
     private Rect _rect = new(60f, 60f, 1600f, 1230f);
     private MclslCodexSnapshot _snapshot = new();
+    private MclslCodexSnapshot _nextSnapshot;
+    private float _nextSummaryRefresh;
+    private void BeginSnapshot()
+    {
+        _nextSnapshot?.Cancel();
+        if (!_snapshot.Ready) _snapshot.Cancel();
+        MclslCodexSnapshot next = MclslCodexSnapshot.Build();
+        if (_visible && _snapshot.Ready) _nextSnapshot = next;
+        else { _snapshot = next; _nextSnapshot = null; }
+    }
+    internal static void ClearRuntime()
+    {
+        if (_instance == null) return;
+        if (_instance._visible) _instance.CloseWindow();
+        _instance._snapshot.Cancel(); _instance._nextSnapshot?.Cancel();
+        _instance._snapshot = new(); _instance._nextSnapshot = null;
+    }
     private static bool _stylesReady;
     private static GUIStyle _windowStyle;
     private static GUIStyle _buttonStyle;
@@ -61,10 +79,12 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             _instance = host.AddComponent<MclslCodexWindow>();
         }
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        _instance._snapshot = MclslCodexSnapshot.Build();
+        _instance.BeginSnapshot();
+        _instance._atlasRevision = -1;
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = false;
         _instance._standaloneMaobao = false;
+        _instance._nextSummaryRefresh = 0f;
         _instance._visible = true;
         _instance.enabled = true;
         CreateOverlayBlocker();
@@ -80,11 +100,12 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             _instance = host.AddComponent<MclslCodexWindow>();
         }
         MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        _instance._snapshot = MclslCodexSnapshot.Build();
+        _instance.BeginSnapshot();
         _instance._rect = FitRect();
         _instance._standaloneHuanzhenSpace = true;
         _instance._standaloneMaobao = false;
         _instance._scroll = Vector2.zero;
+        _instance._nextSummaryRefresh = 0f;
         _instance._visible = true;
         _instance.enabled = true;
         CreateOverlayBlocker();
@@ -95,6 +116,28 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (_visible)
         {
+            MclslCodexSnapshot building = _nextSnapshot ?? _snapshot;
+            building.Advance();
+            if (building.Ready)
+            {
+                if (_nextSnapshot != null) { _snapshot = _nextSnapshot; _nextSnapshot = null; }
+                if (_snapshot.SourceRevision != MclslWorldArchiveStore.Revision) BeginSnapshot();
+            }
+            RefreshBiographyIndex();
+            if (Time.unscaledTime >= _nextSummaryRefresh)
+            {
+                _snapshot.Population = MclslWorldActorQuery.UnitCount();
+                _snapshot.Cultivators = MclslCodexPopulationIndex.Count;
+                _snapshot.SensingQi = MclslCodexPopulationIndex.SensingQi;
+                _snapshot.TrackedActors = MclslCultivatorCandidateIndex.KnownActorCount;
+                _snapshot.AnnualCandidates = MclslCultivatorCandidateIndex.AnnualCandidateCount;
+                _snapshot.AnnualActorBacklog = MclslScheduler.AnnualActorBacklogCount;
+                _snapshot.AnnualActorStates = MclslScheduler.AnnualActorStateCount;
+                _snapshot.AnnualModuleBacklog = MclslModuleHub.AnnualModuleBacklogCount;
+                _snapshot.LoadRecoveryBacklog = MclslModuleHub.LoadRecoveryBacklogCount;
+                _snapshot.AnnualWorldWorkPending = MclslScheduler.AnnualWorldWorkPending;
+                _nextSummaryRefresh = Time.unscaledTime + 0.25f;
+            }
             EnforceCodexPause();
             if (Input.GetKeyDown(KeyCode.Escape)) CloseWindow();
         }
@@ -105,6 +148,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (!_visible) return;
         EnsureStyles();
+        XianLuUIStyles.Ensure();
         CreateOverlayBlocker();
         DrawBackdrop();
         Color oldColor = GUI.color;
@@ -115,8 +159,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.window = _windowStyle;
             GUI.color = Color.white;
             GUI.backgroundColor = Color.white;
-            string title = _standaloneHuanzhenSpace ? "还真空间" : _standaloneMaobao ? "猫宝时序录" : "玄黄仙录";
-            _rect = GUI.Window(781203, _rect, DrawWindow, title);
+            _rect = GUI.Window(781203, _rect, DrawWindow, GUIContent.none);
         }
         finally
         {
@@ -131,25 +174,51 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _oldLabel = GUI.skin.label;
         _oldButton = GUI.skin.button;
         _oldBox = GUI.skin.box;
+        GUIStyle oldScrollbar = GUI.skin.verticalScrollbar;
+        GUIStyle oldThumb = GUI.skin.verticalScrollbarThumb;
         try
         {
+            if (_standaloneMaobao)
+            {
+                GUI.DrawTexture(new Rect(0f, 0f, _rect.width, _rect.height), _whiteTexture,
+                    ScaleMode.StretchToFill, true, 0, MclslUiTheme.SurfaceWindow, 0, 0);
+            }
+            else
+            {
+                Rect localWindow = new Rect(0f, 0f, _rect.width, _rect.height);
+                Rect surface = _standaloneHuanzhenSpace
+                    ? new Rect(_rect.width * 0.043f, _rect.height * 0.085f, _rect.width * 0.914f, _rect.height * 0.845f)
+                    : new Rect(22f, 60f, Mathf.Max(0f, _rect.width - 44f), Mathf.Max(0f, _rect.height - 94f));
+                GUI.DrawTexture(surface, _whiteTexture,
+                    ScaleMode.StretchToFill, true, 0, MclslUiTheme.SurfaceWindow, 0, 0);
+                if (!_standaloneHuanzhenSpace)
+                    XianLuUIRenderer.Frame(localWindow, "frame_xuanhuang_record");
+                else
+                    XianLuUIRenderer.Frame(localWindow, "frame_huanzhen_space", 0f, 0.7f);
+            }
             GUI.skin.label = _labelStyle;
             GUI.skin.button = _buttonStyle;
             GUI.skin.box = _boxStyle;
-            GUILayout.Space(18f);
+            GUI.skin.verticalScrollbar = XianLuUIStyles.ScrollbarStyle;
+            GUI.skin.verticalScrollbarThumb = XianLuUIStyles.ScrollbarThumbStyle;
+            if (_standaloneHuanzhenSpace)
+                GUILayout.BeginArea(new Rect(88f, 18f, Mathf.Max(1f, _rect.width - 176f), Mathf.Max(1f, _rect.height * 0.86f - 18f)));
+            GUILayout.Space(_standaloneMaobao ? 18f : _standaloneHuanzhenSpace ? 55f : 90f);
             if (_standaloneHuanzhenSpace || _standaloneMaobao)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(_standaloneHuanzhenSpace
-                    ? "<b><color=#D8C778>还真空间</color></b>"
-                    : "<b><color=#8FE3D1>猫宝时序录</color></b>");
+                if (!_standaloneHuanzhenSpace)
+                    GUILayout.Label("<b><color=#8FE3D1>猫宝时序录</color></b>");
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button("关闭", GUILayout.Width(78f), GUILayout.Height(38f))) CloseWindow();
+                if (_standaloneHuanzhenSpace) GUILayout.Space(50f);
                 GUILayout.EndHorizontal();
                 GUILayout.Space(9f);
                 if (_standaloneHuanzhenSpace)
                 {
-                    _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, GUI.skin.verticalScrollbar);
+                    _scroll.x = 0f;
+                    _scroll = GUILayout.BeginScrollView(_scroll, false, true, GUIStyle.none, GUI.skin.verticalScrollbar,
+                        GUILayout.MinHeight(0f), GUILayout.ExpandHeight(true));
                     DrawHuanzhenSpace();
                     GUILayout.EndScrollView();
                 }
@@ -170,8 +239,27 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 DrawPage();
                 GUILayout.EndScrollView();
                 GUILayout.EndVertical();
+                if (_rect.width >= 1100f)
+                {
+                    GUILayout.Space(8f);
+                    DrawCodexShortcuts();
+                }
                 GUILayout.EndHorizontal();
+                DrawCodexFooter();
             }
+            if (_standaloneHuanzhenSpace)
+            {
+                GUILayout.EndArea();
+                XianLuUIRenderer.Frame(new Rect(0f, 0f, _rect.width, _rect.height), "frame_huanzhen_space", 0.7f, 1f);
+            }
+            if (_standaloneHuanzhenSpace)
+                XianLuUIRenderer.WindowTitle(new Rect(0f, 0f, _rect.width, _rect.height),
+                    "title_huanzhen_space", "还真空间", 10f,
+                    Mathf.Clamp(_rect.height * 0.105f, 56f, 84f));
+            else if (!_standaloneMaobao)
+                XianLuUIRenderer.WindowTitle(new Rect(0f, 0f, _rect.width, _rect.height),
+                    "title_xuanhuang_record", "玄黄仙录", 10f,
+                    Mathf.Clamp(_rect.height * 0.075f, 46f, 68f));
             GUI.DragWindow();
         }
         finally
@@ -181,24 +269,27 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUI.skin.label = _oldLabel;
             GUI.skin.button = _oldButton;
             GUI.skin.box = _oldBox;
+            GUI.skin.verticalScrollbar = oldScrollbar;
+            GUI.skin.verticalScrollbarThumb = oldThumb;
         }
     }
 
     private void DrawCodexHeader()
     {
         MclslCodexTab[] tabs = ActiveTabs();
-        if (_tab >= tabs.Length) _tab = 0;
-        string current = tabs.Length == 0 ? "天下总览" : tabs[_tab].Title;
-        GUILayout.BeginVertical(GUI.skin.box);
+        string current = CurrentTabTitle();
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle);
         DrawCardStripe("#AFC7D9");
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<b><color=#D6DCE8>玄黄仙录</color></b>", GUILayout.Width(120f));
-        GUILayout.Label("<b><color=#F0D58B>" + CodexVolumeName(current) + " · " + current + "</color></b>");
+        string volume = CodexVolumeName(current);
+        GUILayout.Label((volume == "玄黄春秋" ? LM.Get("mclsl_history_volume") : volume)
+            + " · " + (tabs.Length == 0 ? current : tabs[_tab].DisplayTitle), XianLuUIStyles.SectionHeaderStyle);
         GUILayout.FlexibleSpace();
         GUI.backgroundColor = new Color(0.36f, 0.34f, 0.24f, 1f);
         if (GUILayout.Button("重新照录", GUILayout.Width(104f), GUILayout.Height(38f)))
         {
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
+            if (current == "玄黄史册" && _historyBookView == HistoryBiographyView) RequestBiographyRefresh();
         }
         GUI.backgroundColor = new Color(0.27f, 0.34f, 0.38f, 1f);
         if (GUILayout.Button("修士榜", GUILayout.Width(88f), GUILayout.Height(38f)))
@@ -210,6 +301,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (GUILayout.Button("关闭", GUILayout.Width(72f), GUILayout.Height(38f))) CloseWindow();
         GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
+        GUILayout.Label(LM.Get("mclsl_xianlu_codex_subtitle"), XianLuUIStyles.SecondaryTextStyle);
         GUILayout.EndVertical();
     }
 
@@ -217,26 +309,70 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         MclslCodexTab[] tabs = ActiveTabs();
         if (tabs.Length == 0) return;
-        if (_tab < 0 || _tab >= tabs.Length) _tab = 0;
-        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(218f), GUILayout.ExpandHeight(true));
+        CurrentTabTitle();
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle, GUILayout.Width(218f), GUILayout.ExpandHeight(true));
         DrawCardStripe("#6FAE9D");
+        GUILayout.Label(LM.Get("mclsl_xianlu_codex_catalog"), XianLuUIStyles.SectionHeaderStyle);
+        GUILayout.Label(LM.Get("mclsl_xianlu_codex_catalog_hint"), XianLuUIStyles.SecondaryTextStyle);
         _sidebarScroll = GUILayout.BeginScrollView(_sidebarScroll, false, true, GUIStyle.none, GUIStyle.none, GUILayout.Width(210f), GUILayout.ExpandHeight(true));
         DrawSidebarVolume(tabs, "天下纪事", "#AFC7D9");
         DrawSidebarVolume(tabs, "修行道统", "#9FC9C0");
         DrawSidebarVolume(tabs, "山河万象", "#D6BE86");
+        DrawSidebarVolume(tabs, "玄黄春秋", "#8FA9C7");
         GUILayout.EndScrollView();
         GUILayout.EndVertical();
+    }
+
+    private bool IsBiographyPage() => !_standaloneHuanzhenSpace && !_standaloneMaobao
+        && _historyBookView == HistoryBiographyView
+        && CurrentTabTitle() == "玄黄史册";
+
+    private void DrawCodexShortcuts()
+    {
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle, GUILayout.Width(180f), GUILayout.ExpandHeight(true));
+        GUILayout.Label(LM.Get("mclsl_xianlu_codex_shortcuts"), XianLuUIStyles.SectionHeaderStyle);
+        GUILayout.Space(8f);
+        if (GUILayout.Button(LM.Get("mclsl_xianlu_codex_overview"), XianLuUIStyles.ButtonPrimaryStyle, GUILayout.Height(40f))) SelectCodexTab(0);
+        if (GUILayout.Button(LM.Get("mclsl_xianlu_codex_ranking"), XianLuUIStyles.ButtonSecondaryStyle, GUILayout.Height(40f)))
+        {
+            CloseWindow();
+            MclslRankWindow.ShowWindow();
+        }
+        if (GUILayout.Button(LM.Get("mclsl_xianlu_codex_huanzhen"), XianLuUIStyles.ButtonSecondaryStyle, GUILayout.Height(40f)))
+        {
+            CloseWindow();
+            ShowHuanzhenSpace();
+        }
+        GUILayout.EndVertical();
+    }
+
+    private void DrawCodexFooter()
+    {
+        MclslCodexTab[] tabs = ActiveTabs();
+        if (tabs.Length == 0) return;
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(55f);
+        if (GUILayout.Button(LM.Get("mclsl_xianlu_codex_previous"), XianLuUIStyles.ButtonSecondaryStyle, GUILayout.Width(110f), GUILayout.Height(34f)))
+            SelectCodexTab((_tab + tabs.Length - 1) % tabs.Length);
+        GUILayout.FlexibleSpace();
+        GUILayout.Label(tabs[_tab].DisplayTitle + " · " + string.Format(LM.Get("mclsl_xianlu_codex_total"), tabs.Length), XianLuUIStyles.SecondaryTextStyle);
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button(LM.Get("mclsl_xianlu_codex_next"), XianLuUIStyles.ButtonPrimaryStyle, GUILayout.Width(110f), GUILayout.Height(34f)))
+            SelectCodexTab((_tab + 1) % tabs.Length);
+        GUILayout.Space(55f);
+        GUILayout.EndHorizontal();
     }
 
     private void DrawSidebarVolume(MclslCodexTab[] tabs, string volume, string color)
     {
         GUILayout.Space(5f);
-        GUILayout.Label("<b><color=" + color + ">◇ " + volume + " ◇</color></b>");
+        GUILayout.Label("<b><color=" + color + ">◇ "
+            + (volume == "玄黄春秋" ? LM.Get("mclsl_history_volume") : volume) + " ◇</color></b>");
         for (int i = 0; i < tabs.Length; i++)
         {
             if (!string.Equals(CodexVolumeName(tabs[i].Title), volume, StringComparison.Ordinal)) continue;
             GUI.backgroundColor = _tab == i ? ParseHexColor(color, Color.gray) : new Color(0.22f, 0.23f, 0.25f, 1f);
-            if (GUILayout.Button(tabs[i].Title, GUILayout.Height(36f))) SelectCodexTab(i);
+            if (GUILayout.Button(tabs[i].DisplayTitle, GUILayout.Height(36f))) SelectCodexTab(i);
         }
         GUI.backgroundColor = Color.white;
     }
@@ -244,6 +380,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private void SelectCodexTab(int index)
     {
         _tab = index;
+        _tabTitle = ActiveTabs()[index].Title;
+        if (_tabTitle == "玄黄史册" && _historyBookView == HistoryBiographyView) RequestBiographyRefresh();
         _scroll = Vector2.zero;
         _kingdomDetailName = string.Empty;
         _kingdomRealmFilter = MclslEventCatalog.All;
@@ -251,11 +389,39 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _ancientTeachingMaxRealmFilter = MclslEventCatalog.All;
     }
 
+    private bool SelectCodexTab(string title)
+    {
+        MclslCodexTab[] tabs = ActiveTabs();
+        for (int i = 0; i < tabs.Length; i++)
+            if (string.Equals(tabs[i].Title, title, StringComparison.Ordinal))
+            {
+                SelectCodexTab(i);
+                return true;
+            }
+        return false;
+    }
+
+    private string CurrentTabTitle()
+    {
+        MclslCodexTab[] tabs = ActiveTabs();
+        if (tabs.Length == 0) return "天下总览";
+        for (int i = 0; i < tabs.Length; i++)
+            if (string.Equals(tabs[i].Title, _tabTitle, StringComparison.Ordinal))
+            {
+                _tab = i;
+                return _tabTitle;
+            }
+        _tab = Math.Clamp(_tab, 0, tabs.Length - 1);
+        _tabTitle = tabs[_tab].Title;
+        return _tabTitle;
+    }
+
     private static string CodexVolumeName(string title)
     {
         return title switch
         {
-            "天下总览" or "仙道总览" or "原生诸国" or "还真纪事" or "世界纪事" or "仙道纪事" => "天下纪事",
+            "天下总览" or "仙道总览" or "原生诸国" or "还真纪事" or "玄黄舆图" => "天下纪事",
+            "玄黄史册" => "玄黄春秋",
             "境界资源" or "仙道修行" or "仙师授法" or "仙道破境" or "心境劫数"
                 or "元婴洞天" or "天地之魄" or "天地之理" or "仙法不可同修" or "修士生死" or "还真轮回" => "修行道统",
             _ => "山河万象"
@@ -264,6 +430,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void CloseWindow()
     {
+        _snapshot.Cancel(); _nextSnapshot?.Cancel();
+        _snapshot = new(); _nextSnapshot = null;
+        ClearBiographyRuntime();
         _visible = false;
         DestroyOverlayBlocker();
         ReleaseCodexPause();
@@ -304,9 +473,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             DrawAncientCodexPage(run);
             return;
         }
-        switch (_tab)
+        switch (CurrentTabTitle())
         {
-            case 0:
+            case "天下总览":
                 DrawPageHeader("玄黄总览", "本世新法修行、背景势力与天地资源的档案总览。");
                 GUILayout.BeginHorizontal();
                 DrawOverviewPill("当前年份", _snapshot.Year.ToString(), "#CFC7B2", GUILayout.Width(170));
@@ -357,6 +526,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                     GUILayout.EndHorizontal();
                 });
                 MclslBackgroundFactionState factions = run.BackgroundFactions ?? new MclslBackgroundFactionState();
+                if (run.WanxianAllianceFounded)
+                {
                 DrawInfoCard("万仙盟", "#9CD7FF", () =>
                 {
                     GUILayout.BeginHorizontal();
@@ -367,6 +538,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                     GUILayout.Label("秩序压力：" + factions.AllianceOrderPressure);
                     DrawFactionRows(_snapshot.WanXianRecentMissions, _snapshot.WanXianRecentPressure, "#9CD7FF");
                 });
+                }
+                if (run.FiveEldersFounded)
+                {
                 DrawInfoCard("五老会", "#FFD37A", () =>
                 {
                     GUILayout.BeginHorizontal();
@@ -377,6 +551,20 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                     GUILayout.Label("暗线渗透：" + factions.FiveEldersSubversion);
                     DrawFactionRows(_snapshot.FiveEldersRecentMissions, _snapshot.FiveEldersRecentPressure, "#FFD37A");
                 });
+                }
+                if (MclslRuntime.CurrentYear() >= run.AncientLawEndYear)
+                    DrawInfoCard("旧法十宗往事", "#A6D8D1", () =>
+                    {
+                        int shown = 0;
+                        for (int i = run.AncientSectMissions.Count - 1; i >= 0 && shown < 8; i--)
+                        {
+                            MclslFactionMissionRecord mission = run.AncientSectMissions[i];
+                            if (mission.FactionId == null || !mission.FactionId.StartsWith("ancient_", StringComparison.Ordinal)) continue;
+                            GUILayout.Label(mission.Year + "年 · " + PlayerFacingEventBody(mission.Summary));
+                            shown++;
+                        }
+                        if (shown == 0) GUILayout.Label("尚无留存的旧法宗门委托记录。");
+                    });
                 DrawInfoCard("动态档案", "#B7A7FF", () =>
                 {
                     GUILayout.BeginHorizontal();
@@ -392,92 +580,101 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 });
                 DrawRuntimeHealthCard(run);
                 break;
-            case 1:
+            case "境界资源":
                 DrawRealmRequirements();
                 GUILayout.Space(14);
                 DrawResourceRules();
                 break;
-            case 2:
+            case "原生诸国":
                 DrawKingdomDistribution("原生诸国", "尚无国家拥有修士。");
                 break;
-            case 3:
+            case "元婴洞天":
                 DrawCaves(run);
                 break;
-            case 4:
+            case "天地之变":
                 DrawWorldChanges(run);
                 break;
-            case 5:
+            case "天地之魄":
                 DrawWorldSouls(run);
                 break;
-            case 6:
+            case "天地之理":
                 DrawInverseTruths(run);
                 break;
-            case 7:
+            case "宗门遗迹":
                 DrawRuins(run);
                 break;
-            case 8:
+            case "秘境":
                 DrawRuins(run, true);
                 break;
-            case 9:
+            case "仙法不可同修":
                 DrawDaoStruggle(run);
                 break;
-            case 10:
+            case "修士生死":
                 DrawDeaths(run);
                 break;
-            case 11:
+            case "还真轮回":
                 DrawHuanzhenReincarnation();
                 break;
-            case 12:
+            case "还真纪事":
                 DrawHuanzhenChronicle();
                 break;
-            case 13:
-                DrawWorldEvents(run);
+            case "修仙家族":
+                DrawFamilies(run);
                 break;
-            case 14:
-                DrawCultivatorBiographies(run);
+            case "玄黄舆图":
+                DrawWorldAtlasOverview();
+                break;
+            case "玄黄史册":
+                DrawHistoryBook(run);
                 break;
         }
     }
 
     private void DrawAncientCodexPage(MclslWorldRunState run)
     {
-        switch (_tab)
+        switch (CurrentTabTitle())
         {
-            case 0:
+            case "仙道总览":
                 DrawAncientOverview(run);
                 break;
-            case 1:
+            case "仙道修行":
                 DrawAncientCultivationPage(run);
                 break;
-            case 2:
+            case "仙师授法":
                 DrawAncientTeachingPage(run);
                 break;
-            case 3:
+            case "仙道破境":
                 DrawAncientBreakthroughPage(run);
                 break;
-            case 4:
+            case "心境劫数":
                 DrawAncientMindPage(run);
                 break;
-            case 5:
+            case "原生诸国":
                 DrawKingdomDistribution("原生诸国", "尚无凡俗国度拥有仙修。");
                 break;
-            case 6:
+            case "灵机灾变":
                 DrawAncientDisasterPage(run);
                 break;
-            case 7:
+            case "秘境":
                 DrawAncientSecretRealms(run);
                 break;
-            case 8:
+            case "遗府":
                 DrawAncientRuins(run);
                 break;
-            case 9:
+            case "天地观悟":
                 DrawAncientEventsFromSnapshot("山河观悟", _snapshot.AncientWorldSoulObservationEvents, "暂无高境仙修观悟山河道痕的记录。");
                 break;
-            case 10:
-                DrawAncientEvents(run);
+            case "十大仙宗":
+                DrawAncientSects(run);
                 break;
-            case 11:
-                DrawCultivatorBiographies(run);
+            case "修仙家族":
+                DrawFamilies(run);
+                break;
+            case "玄黄舆图":
+                DrawWorldAtlasOverview();
+                break;
+            case "玄黄史册":
+                DrawHistoryBook(run);
                 break;
             default:
                 DrawAncientEvents(run);
@@ -908,7 +1105,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static void DrawEventCard(MclslRunEventRecord e)
     {
         MclslEventCategoryDefinition category = MclslEventCatalog.Category(EventCategory(e));
-        DrawInfoCard(e.Year + "年｜" + e.Title, category.Color, () =>
+        DrawInfoCard(e.Year + "年｜" + MclslFactionMissionSystem.DisplaySectText(e.Title), category.Color, () =>
         {
             GUILayout.BeginHorizontal();
             DrawTag(category.Name, category.Color);
@@ -1328,35 +1525,53 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void DrawHuanzhenSpace()
     {
+        GUILayout.Label(LM.Get("mclsl_xianlu_huanzhen_subtitle"));
         DrawPageHeader("还真空间·轮回中枢", "空间灵蕴只由宿主晋升、杀人夺宝与重大机缘获得。可随时手动锚定；开启自动锚定后，灵蕴充足时会按设置间隔建立归途。");
         MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
+        float contentWidth = HuanzhenContentWidth();
+        bool compactStats = contentWidth < 1100f;
+        float statWidth = compactStats ? Mathf.Max(170f, (contentWidth - 16f) / 3f) : 0f;
         GUILayout.BeginHorizontal();
-        DrawOverviewPill("轮回状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(230));
-        DrawOverviewPill("此世宿主", Blank(state.HostName), "#FFD37A", GUILayout.Width(220));
-        DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "点", "#69E6DD", GUILayout.Width(170));
-        DrawOverviewPill("锚点数量", (state.Anchors?.Count ?? 0) + "/3", "#9CD7FF", GUILayout.Width(150));
-        DrawOverviewPill("锚定消耗", MclslHuanzhenSystem.AnchorCost + "点", "#AFC7D9", GUILayout.Width(150));
-        DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(150));
+        DrawOverviewPill("轮回状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(compactStats ? statWidth : 230f));
+        DrawOverviewPill("此世宿主", Blank(state.HostName), "#FFD37A", GUILayout.Width(compactStats ? statWidth : 220f));
+        DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "点", "#69E6DD", GUILayout.Width(compactStats ? statWidth : 170f));
+        if (compactStats) { GUILayout.EndHorizontal(); GUILayout.BeginHorizontal(); }
+        DrawOverviewPill("锚点数量", (state.Anchors?.Count ?? 0) + "/3", "#9CD7FF", GUILayout.Width(compactStats ? statWidth : 150f));
+        DrawOverviewPill("锚定消耗", MclslHuanzhenSystem.AnchorCost + "点", "#AFC7D9", GUILayout.Width(compactStats ? statWidth : 150f));
+        DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(compactStats ? statWidth : 150f));
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         GUILayout.Space(8);
-        GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+        bool stacked = contentWidth < 930f;
+        if (stacked) GUILayout.BeginVertical(GUILayout.ExpandWidth(true));
+        else GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
         DrawHuanzhenAnchorColumn(state);
         GUILayout.Space(8);
         DrawHuanzhenLegacyColumn(state);
         GUILayout.Space(8);
         DrawHuanzhenEssenceColumn(state);
-        GUILayout.EndHorizontal();
+        if (stacked) GUILayout.EndVertical();
+        else GUILayout.EndHorizontal();
         if (!string.IsNullOrWhiteSpace(_huanzhenActionMessage))
             DrawInfoCard("空间回响", "#B7A7FF", () => GUILayout.Label(_huanzhenActionMessage));
         DrawHuanzhenHistoryStrip();
     }
 
+    private float HuanzhenColumnWidth()
+    {
+        float contentWidth = HuanzhenContentWidth();
+        return contentWidth < 930f ? contentWidth - 8f : (contentWidth - 24f) / 3f;
+    }
+
+    private float HuanzhenContentWidth() => Mathf.Max(280f,
+        _rect.width - (_standaloneHuanzhenSpace ? 176f : _windowStyle.padding.horizontal) - 32f);
+
     private void DrawHuanzhenAnchorColumn(MclslHuanzhenExternalState state)
     {
-        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(430), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle,
+            GUILayout.Width(HuanzhenColumnWidth()), GUILayout.ExpandHeight(true));
         DrawCardStripe("#9CD7FF");
-        GUILayout.Label("<size=20><b>轮回锚点</b></size>");
+        GUILayout.Label("<size=22><b>轮回锚点</b></size>");
         GUILayout.Label("<color=#B9B0A0>最多保存三枚锚点。手动替换时选择目标；自动锚定会替换最旧锚点。新锚点验证成功前不会删除旧锚点。</color>");
         GUILayout.Label("最近锚定：" + (state.LastAnchorYear < 0 ? "无" : state.LastAnchorYear + "年"));
         GUILayout.Label("最近回溯：" + (state.LastRestoreYear < 0 ? "无" : state.LastRestoreYear + "年"));
@@ -1380,7 +1595,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             if (success)
             {
                 _huanzhenReplacementAnchorPath = string.Empty;
-                _snapshot = MclslCodexSnapshot.Build();
+                BeginSnapshot();
             }
         }
         GUI.backgroundColor = Color.white;
@@ -1447,7 +1662,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             DrawTag("真元 " + snapshot.TrueEssence, "#69E6DD");
             DrawTag("贡献 " + snapshot.Contribution, "#A7E08A");
-            DrawTag("灵石 " + SnapshotInt(snapshot, MclslActorDataKeys.SpiritStones), "#D8C778");
+            DrawTag("灵石 " + snapshot.SpiritStones, "#D8C778");
         }
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -1480,9 +1695,10 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void DrawHuanzhenLegacyColumn(MclslHuanzhenExternalState state)
     {
-        GUILayout.BeginVertical(GUI.skin.box, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle,
+            GUILayout.Width(HuanzhenColumnWidth()), GUILayout.ExpandHeight(true));
         DrawCardStripe("#D8C778");
-        GUILayout.Label("<size=20><b>前世轮盘</b></size>");
+        GUILayout.Label("<size=22><b>前世轮盘</b></size>");
         int selectionLimit = MclslHuanzhenSystem.LegacySelectionLimit();
         GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，名额由当前还真锚点数量决定。</color>");
         GUILayout.Label("当前还真锚点：" + selectionLimit + "　可保留数量：" + selectionLimit);
@@ -1532,10 +1748,11 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private void DrawHuanzhenEssenceColumn(MclslHuanzhenExternalState state)
     {
-        GUILayout.BeginVertical(GUI.skin.box, GUILayout.Width(410), GUILayout.ExpandHeight(true));
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle,
+            GUILayout.Width(HuanzhenColumnWidth()), GUILayout.ExpandHeight(true));
         DrawCardStripe("#69E6DD");
-        GUILayout.Label("<size=20><b>空间灵蕴</b></size>");
-        GUILayout.Label("<color=#B9B0A0>空间灵蕴不会随年份自然增长，只在宿主实际完成晋升、杀人夺宝或重大事件后结算。</color>");
+        GUILayout.Label("<size=22><b>空间灵蕴</b></size>");
+        GUILayout.Label("<color=#B9B0A0>首次绑定获得80点空间灵蕴；当前宿主每经过10个游戏年自然增加1点。晋升、击杀与重大事件也会结算灵蕴。</color>");
         DrawFlowRow("宿主晋升", "炼气+8、筑基+15、金丹+25、元婴+40、化神+60、合道+90、长生+140。", "#69E6DD");
         DrawFlowRow("杀人夺宝", "凡俗+2；炼气至长生依次+3、+6、+10、+16、+25、+38、+55。", "#9CD7FF");
         DrawFlowRow("洞天炼化", "按品质与契合度获得12至32点左右。", "#A7E08A");
@@ -1606,20 +1823,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     }
 
-    private void DrawLegacyCategoryButton(MclslHuanzhenLegacyRecord legacy, string category, string title)
-    {
-        string choice = "category:" + category;
-        bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
-        bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && !claimed && MclslHuanzhenSystem.LegacySelectionLimit() > 0 && (legacy.ClaimedChoices?.Count ?? 0) < MclslHuanzhenSystem.LegacySelectionLimit();
-        if (GUILayout.Button(claimed ? "已取·" + title : title, GUILayout.Height(34), GUILayout.Width(150)))
-        {
-            MclslHuanzhenSystem.TryClaimLegacyCategory(legacy.Id, category, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
-        }
-        GUI.enabled = oldEnabled;
-    }
-
     private void DrawLegacyOptionButton(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, int limit, int used)
     {
         bool claimed = legacy.ClaimedChoices?.Contains(option.Id) == true;
@@ -1630,7 +1833,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             if (claimed) MclslHuanzhenSystem.TryReleaseLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
             else MclslHuanzhenSystem.TryClaimLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.enabled = oldEnabled;
     }
@@ -1645,7 +1848,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
         {
             MclslHuanzhenSystem.TryClaimLegacyTrait(legacy.Id, traitId, out _huanzhenActionMessage);
-            _snapshot = MclslCodexSnapshot.Build();
+            BeginSnapshot();
         }
         GUI.enabled = oldEnabled;
     }
@@ -1731,16 +1934,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         int realm = Math.Max(0, MclslRealmIds.Index(lineage.PeakRealm)) * 9;
         int cap = Math.Max(0, MclslRealmIds.Index(lineage.MaxRealm)) * 5;
         return Math.Clamp(peak + realm + cap, 1, 100);
-    }
-
-    private static int AncientLineageScore(MclslTechniqueLineageRecord lineage)
-    {
-        if (lineage == null) return 0;
-        int strength = AncientLineageStrength(lineage);
-        int current = Math.Clamp(lineage.CurrentPractitioners, 0, 999);
-        int realm = Math.Max(0, MclslRealmIds.Index(lineage.MaxRealm));
-        int branches = Math.Clamp(lineage.BranchCount, 0, 9);
-        return Math.Max(100, strength * 780 + current * 120 + realm * 1800 + branches * 950);
     }
 
     private static string AncientLineageStrengthLabel(MclslTechniqueLineageRecord lineage)
@@ -1875,13 +2068,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         return laws + " · 上限" + realm + " · " + stability + " · " + state;
     }
 
-    private static int CountLineageLaws(MclslTechniqueLineageRecord lineage)
-    {
-        if (lineage == null || string.IsNullOrWhiteSpace(lineage.LawTags)) return 0;
-        string[] parts = lineage.LawTags.Split(new[] { ',', '、' }, StringSplitOptions.RemoveEmptyEntries);
-        return parts.Length;
-    }
-
     private static string BlankFounder(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "未详";
@@ -1918,7 +2104,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private static string PlayerFacingEventBody(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "无详载。";
-        return value
+        return MclslFactionMissionSystem.DisplaySectText(value)
             .Replace("WorldBox 原生逻辑", "世俗王朝之势")
             .Replace("WorldBox 原生", "世俗")
             .Replace("原生国家", "凡俗国度")
@@ -1992,6 +2178,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawTag(mission.Year + "年", "#CFC7B2");
         DrawTag(mission.MissionName, color);
         DrawTag(Blank(mission.ActorName), "#FFD37A");
+        if (mission.ResultCode == "failed" || mission.ResultCode == "dead")
+            DrawTag(mission.ResultCode == "dead" ? "任务中陨落" : "任务失败", "#FF8877");
         if (mission.ContributionReward > 0) DrawTag("贡献+" + mission.ContributionReward, "#9CD7FF");
         if (mission.SpiritStoneReward > 0) DrawTag("灵石+" + mission.SpiritStoneReward, "#FFD37A");
         if (mission.InfluenceDelta != 0) DrawTag("影响" + Signed(mission.InfluenceDelta), mission.InfluenceDelta > 0 ? "#A7E08A" : "#FF8877");
@@ -2015,27 +2203,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private static string Signed(int value) => value > 0 ? "+" + value : value.ToString();
 
-    private static string FirstSegment(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value)) return "记录";
-        int index = value.IndexOfAny(new[] { '｜', '：', ':' });
-        return index > 0 ? value.Substring(0, Math.Min(index, 24)) : value.Substring(0, Math.Min(value.Length, 24));
-    }
-
     private static void DrawPageHeader(string title, string subtitle)
     {
-        GUILayout.BeginVertical(GUI.skin.box);
-        DrawCardStripe("#BAC6D9");
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("<color=#BAC6D9>◈</color>", GUILayout.Width(24f));
-        GUILayout.Label("<size=22><b>" + title + "</b></size>");
-        GUILayout.FlexibleSpace();
-        GUILayout.Label("<color=#BAC6D9>◇ 玄黄照世 ◇</color>", GUILayout.Width(150f));
-        GUILayout.EndHorizontal();
+        GUILayout.BeginVertical(XianLuUIStyles.PanelStyle);
+        GUILayout.Label(title, XianLuUIStyles.SectionHeaderStyle);
         if (!string.IsNullOrWhiteSpace(subtitle))
-            GUILayout.Label("<color=#B9B0A0>　" + subtitle + "</color>");
+            GUILayout.Label(subtitle, XianLuUIStyles.SecondaryTextStyle);
         GUILayout.EndVertical();
-        GUILayout.Space(6);
+        GUILayout.Space(8f);
     }
 
     private static string EraDisplay(MclslWorldRunState run)
@@ -2077,8 +2252,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         };
     }
 
-    private static string YearLabel(int year) => year > 0 ? year + "年" : "未定";
-
     private static MclslCodexTab[] ActiveTabs()
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
@@ -2110,7 +2283,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         GUILayout.BeginVertical(GUI.skin.box, options);
         GUILayout.Label("<color=grey>" + label + "</color>");
-        GUILayout.Label("<size=22><b><color=" + color + ">" + value + "</color></b></size>");
+        GUILayout.Label("<size=24><b><color=" + color + ">" + value + "</color></b></size>");
         GUILayout.EndVertical();
     }
 
@@ -2126,7 +2299,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         GUILayout.BeginVertical(GUI.skin.box);
         DrawCardStripe(accent);
-        GUILayout.Label("<size=20><b>" + title + "</b></size>");
+        GUILayout.Label("<size=22><b>" + title + "</b></size>");
         content?.Invoke();
         GUILayout.EndVertical();
         GUILayout.Space(4);
@@ -2137,7 +2310,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginVertical(GUI.skin.box);
         DrawCardStripe(accent);
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<size=20><b>" + title + "</b></size>", GUILayout.Width(360));
+        GUILayout.Label("<size=22><b>" + title + "</b></size>", GUILayout.Width(360));
         DrawTag(quality, accent);
         DrawTag(tags, "#9CD7FF");
         DrawTag("持有 " + holder, "#CFC7B2");
@@ -2185,14 +2358,15 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         _whiteTexture = SolidTexture(Color.white);
         _windowBackground = _whiteTexture;
         _backdropTexture = _whiteTexture;
-        _windowStyle = new GUIStyle(GUI.skin.window)
+        XianLuUIStyles.Ensure();
+        _windowStyle = new GUIStyle(XianLuUIStyles.TransparentWindowStyle)
         {
-            fontSize = 24,
-            padding = new RectOffset(14, 14, 28, 14)
+            fontSize = MclslUiTheme.ReadableFontSize(24),
+            padding = new RectOffset(54, 54, 18, 64)
         };
-        _buttonStyle = new GUIStyle(GUI.skin.button)
+        _buttonStyle = new GUIStyle(XianLuUIStyles.ButtonSecondaryStyle)
         {
-            fontSize = 18,
+            fontSize = MclslUiTheme.ReadableFontSize(18),
             richText = true,
             wordWrap = true,
             alignment = TextAnchor.MiddleCenter,
@@ -2201,21 +2375,21 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         };
         _labelStyle = new GUIStyle(GUI.skin.label)
         {
-            fontSize = 18,
+            fontSize = MclslUiTheme.ReadableFontSize(18),
             wordWrap = true,
             richText = true,
             normal = { textColor = MclslUiTheme.TextPrimary }
         };
         _tagStyle = new GUIStyle(GUI.skin.box)
         {
-            fontSize = 18,
+            fontSize = MclslUiTheme.ReadableFontSize(18),
             richText = true,
             alignment = TextAnchor.MiddleCenter,
             padding = new RectOffset(8, 8, 4, 4)
         };
-        _boxStyle = new GUIStyle(GUI.skin.box)
+        _boxStyle = new GUIStyle(XianLuUIStyles.CardStyle)
         {
-            fontSize = 18,
+            fontSize = MclslUiTheme.ReadableFontSize(18),
             richText = true,
             wordWrap = true,
             alignment = TextAnchor.UpperLeft,
@@ -2226,12 +2400,10 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private static Rect FitRect()
     {
-        float maxWidth = Math.Max(960f, Screen.width - 80f);
-        float maxHeight = Math.Max(720f, Screen.height - 80f);
-        float width = Math.Min(1600f, maxWidth);
-        float height = Math.Min(1230f, maxHeight);
-        float x = Math.Clamp(60f, 20f, Math.Max(20f, Screen.width - width - 20f));
-        float y = Math.Clamp(60f, 20f, Math.Max(20f, Screen.height - height - 20f));
+        float width = Math.Min(1600f, Math.Max(480f, Screen.width - 32f));
+        float height = Math.Min(1230f, Math.Max(400f, Screen.height - 32f));
+        float x = (Screen.width - width) * 0.5f;
+        float y = (Screen.height - height) * 0.5f;
         return new Rect(x, y, width, height);
     }
 
@@ -2240,10 +2412,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         if (_whiteTexture == null) _whiteTexture = SolidTexture(Color.white);
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _whiteTexture,
             ScaleMode.StretchToFill, true, 0, new Color(0f, 0f, 0f, 0.72f), 0, 0);
-        GUI.DrawTexture(_rect, _whiteTexture,
-            ScaleMode.StretchToFill, true, 0, MclslUiTheme.SurfaceWindow, 0, 0);
-        DrawSolidRect(new Rect(_rect.x - 5f, _rect.y - 5f, _rect.width + 10f, 2f), MclslUiTheme.AccentBlue);
-        DrawSolidRect(new Rect(_rect.x - 5f, _rect.y + _rect.height + 3f, _rect.width + 10f, 2f), MclslUiTheme.Frame);
+        XianLuUIRenderer.ScreenGuardians();
     }
 
     private static void CreateOverlayBlocker()

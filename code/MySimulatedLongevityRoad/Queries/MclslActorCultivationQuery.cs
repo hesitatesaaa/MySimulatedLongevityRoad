@@ -50,8 +50,8 @@ internal sealed class MclslActorCultivationView
     internal float CultivationProgress { get; set; }
     internal int TrueEssence { get; set; }
     internal int NextRealmMinimum { get; set; }
-    internal int Contribution { get; set; }
-    internal int SpiritStones { get; set; }
+    internal long Contribution { get; set; }
+    internal long SpiritStones { get; set; }
     internal string FactionAffiliation { get; set; } = string.Empty;
     internal string LastResult { get; set; } = string.Empty;
     internal int LineageIntegrity { get; set; }
@@ -179,8 +179,8 @@ internal static class MclslActorCultivationQuery
             CultivationProgress = progress,
             TrueEssence = trueEssence,
             NextRealmMinimum = nextRealmMinimum,
-            Contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0),
-            SpiritStones = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.SpiritStones, 0),
+            Contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0),
+            SpiritStones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0),
             FactionAffiliation = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty),
             LastResult = MclslActorAccessor.GetString(actor, MclslActorDataKeys.LastBreakthroughResult, "无"),
             LineageIntegrity = MclslCultivationLineage.Integrity(actor),
@@ -221,7 +221,7 @@ internal static class MclslActorCultivationQuery
         return view;
     }
 
-    private static string RealmDisplay(string realm, int trueEssence, float progress, int taishangProgress)
+    internal static string RealmDisplay(string realm, int trueEssence, float progress, int taishangProgress)
     {
         if (string.IsNullOrWhiteSpace(realm))
         {

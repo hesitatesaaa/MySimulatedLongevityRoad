@@ -49,8 +49,7 @@ internal static class MclslMaobaoWindow
         if (!_initialized) Init();
         Refresh();
         if (_window == null) return;
-        ScrollWindow.showWindow(WindowId);
-        Canvas.ForceUpdateCanvases();
+        MclslWindowOpenGuard.Show(_window, WindowId, false);
     }
 
     internal static void Show(Actor actor = null, bool saveActor = false)
@@ -219,8 +218,8 @@ internal static class MclslMaobaoWindow
         });
 
         TipButton tip = row.AddComponent<TipButton>();
-        tip.textOnClick = actorName;
-        tip.textOnClickDescription = "保存时间：" + SafeText(packet?.SaveTime, "未知") + "\n跨世界完整猫宝人物数据";
+        tip.textOnClick = MclslLocalizationBridge.RuntimeText(actorName);
+        tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText("保存时间：" + SafeText(packet?.SaveTime, "未知") + "\n跨世界完整猫宝人物数据");
     }
 
     private static Text CreateText(Transform parent, string name, Vector2 position, Vector2 size, int fontSize, TextAnchor alignment)

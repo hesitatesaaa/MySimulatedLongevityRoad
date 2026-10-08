@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -28,23 +29,41 @@ internal static class MclslFactionExchangeSystem
 
         string targetRealm = MclslRealmIds.Ordered[targetIndex];
         int cost = TechniqueCost(targetRealm, factionId);
-        int contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0);
+        long contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
         if (contribution < cost) return false;
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "faction", MclslDetectionGate.FactionTechniqueExchange + "." + factionId, year, ExchangeAttemptIntervalYears))
             return false;
 
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|" + factionId + "|exchange|" + year + "|" + seed);
         if (roll % 100 >= 34) return false;
+        string paymentSource = "faction-exchange/" + MclslEconomyCommands.Account(actor);
+        if (MclslEconomyCommands.WasApplied(paymentSource, year)) return false;
 
         MclslTechniqueDefinition technique = PickTechnique(targetRealm, factionId, actor, year, roll);
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        int lineageCountBefore = run.TechniqueLineages?.Count ?? 0;
         MclslTechniqueLineageRecord lineage = ResolveExchangeLineage(technique, targetRealm, year, factionId, roll);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, Math.Max(0, contribution - cost));
-        if (string.IsNullOrWhiteSpace(affiliation))
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.FactionAffiliation, factionId);
-        ApplyTechniqueLineage(actor, technique, lineage);
-        MclslTechniqueStageSystem.AddProgress(actor, 6 + targetIndex * 2);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueInsight,
-            MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TechniqueInsight, 0) + 5 + targetIndex * 3);
+        MclslTechniqueMutationSnapshot actorSnapshot = MclslTechniqueMutationSnapshot.Capture(actor);
+        try
+        {
+            if (string.IsNullOrWhiteSpace(affiliation))
+                MclslActorAccessor.Set(actor, MclslActorDataKeys.FactionAffiliation, factionId);
+            ApplyTechniqueLineage(actor, technique, lineage);
+            MclslTechniqueStageSystem.AddProgress(actor, 6 + targetIndex * 2);
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueInsight,
+                MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TechniqueInsight, 0) + 5 + targetIndex * 3);
+            if (!MclslEconomyCommands.TryConsume(actor, MclslActorDataKeys.Contribution, cost,
+                paymentSource, year))
+                throw new InvalidOperationException("功法兑换资金提交失败");
+        }
+        catch (Exception ex)
+        {
+            actorSnapshot.Restore(actor);
+            if ((run.TechniqueLineages?.Count ?? 0) > lineageCountBefore && lineage != null)
+                run.TechniqueLineages.Remove(lineage);
+            MclslDiagnostics.Error("faction-technique-exchange", ex.Message);
+            return false;
+        }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastResourceSpendYear, year);
 
         string factionName = factionId == WanXian ? "万仙盟" : "五老会";

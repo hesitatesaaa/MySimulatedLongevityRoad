@@ -42,15 +42,6 @@ internal static class MclslMaobaoCommands
             : new MclslMaobaoCommandResult(false, string.IsNullOrWhiteSpace(message) ? "移除失败。" : message);
     }
 
-    internal static MclslMaobaoCommandResult ToggleSavedActor(Actor actor)
-    {
-        if (actor?.data == null)
-            return new MclslMaobaoCommandResult(false, "未选中角色。");
-        return MclslMaobaoArchiveManager.ToggleActor(actor, out string message)
-            ? new MclslMaobaoCommandResult(true, message)
-            : new MclslMaobaoCommandResult(false, string.IsNullOrWhiteSpace(message) ? "操作失败。" : message);
-    }
-
     internal static bool IsActorSaved(Actor actor)
     {
         return actor?.data != null && MclslMaobaoArchiveManager.IsActorSaved(actor);

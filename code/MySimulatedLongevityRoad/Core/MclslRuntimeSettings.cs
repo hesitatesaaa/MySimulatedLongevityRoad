@@ -9,11 +9,12 @@ namespace MySimulatedLongevityRoad.Core;
 internal static class MclslRuntimeSettings
 {
     private static bool _coreEnabled = true;
+    private static bool _annualBackpressureEnabled = true;
+    private static bool _aggressivePerformanceEnabled = true;
     private static bool _timelineEnabled = true;
     private static bool _autoSealTerminalCycle;
     private static int _timelineYearScalePercent = 100;
     private static int _carrySlotLimit = 8;
-    private static int _annualActorBudget = 80;
     private static bool _deathAnnouncementsEnabled = true;
     private static bool _breakthroughFailureAnnouncementsEnabled = true;
     private static bool _nascentBreakthroughAnnouncementsEnabled = true;
@@ -24,6 +25,7 @@ internal static class MclslRuntimeSettings
     private static bool _worldAdventuresEnabled = true;
     private static bool _factionCommissionAnnouncementsEnabled = true;
     private static bool _ancientLineageAnnouncementsEnabled;
+    private static bool _lineageNativeHistoryEnabled = true;
     private static bool _pioneerAnnouncementsEnabled = true;
     private static bool _minorWorldAnnouncementsEnabled;
     private static bool _ruinBirthAnnouncementsEnabled = true;
@@ -36,6 +38,7 @@ internal static class MclslRuntimeSettings
     private static int _huanzhenSafetyGapYears = 40;
     private static bool _autoCollectHuanzhenHost = true;
     private static bool _autoCollectMaobaoInscription = true;
+    private static bool _autoCollectPhysique = true;
     private static int _transmissionYear = 1000;
     private static bool _autoCollectYuanYing = true;
     private static bool _autoCollectHuaShen = true;
@@ -45,16 +48,20 @@ internal static class MclslRuntimeSettings
     private static bool _autoCollectHeavenRoot = true;
     private static bool _diagnosticsEnabled;
     private static bool _showFps;
-    private static int _childhoodRootChancePercent = 50;
-    private static int _alchemistChanceBasisPoints = 100;
-    private static int _refinerChanceBasisPoints = 150;
-    private static int _talismanChanceBasisPoints = 200;
+    private static bool _performanceMonitor;
+    private static bool _itemAcquisitionHistoryEnabled = true;
+    private static bool _recordLowMaterialAcquisitionHistory;
+    private static int _childhoodRootChancePercent = 10;
+    private static int _alchemistChanceBasisPoints = 1000;
+    private static int _refinerChanceBasisPoints = 1000;
+    private static int _talismanChanceBasisPoints = 1000;
 
     internal static bool CoreEnabled => _coreEnabled;
+    internal static bool AnnualBackpressureEnabled => _annualBackpressureEnabled;
+    internal static bool AggressivePerformanceEnabled => _aggressivePerformanceEnabled;
     internal static bool TimelineEnabled => _timelineEnabled;
     internal static bool AutoSealTerminalCycle => _autoSealTerminalCycle;
     internal static int CarrySlotLimit => _carrySlotLimit;
-    internal static int AnnualActorBudget => _annualActorBudget;
     internal static bool DeathAnnouncementsEnabled => _deathAnnouncementsEnabled;
     internal static bool BreakthroughFailureAnnouncementsEnabled => _breakthroughFailureAnnouncementsEnabled;
     internal static bool NascentBreakthroughAnnouncementsEnabled => _nascentBreakthroughAnnouncementsEnabled;
@@ -65,6 +72,7 @@ internal static class MclslRuntimeSettings
     internal static bool WorldAdventuresEnabled => _worldAdventuresEnabled;
     internal static bool FactionCommissionAnnouncementsEnabled => _factionCommissionAnnouncementsEnabled;
     internal static bool AncientLineageAnnouncementsEnabled => _ancientLineageAnnouncementsEnabled;
+    internal static bool LineageNativeHistoryEnabled => _lineageNativeHistoryEnabled;
     internal static bool PioneerAnnouncementsEnabled => _pioneerAnnouncementsEnabled;
     internal static bool MinorWorldAnnouncementsEnabled => _minorWorldAnnouncementsEnabled;
     internal static bool RuinBirthAnnouncementsEnabled => _ruinBirthAnnouncementsEnabled;
@@ -77,6 +85,7 @@ internal static class MclslRuntimeSettings
     internal static int HuanzhenSafetyGapYears => _huanzhenSafetyGapYears;
     internal static bool AutoCollectHuanzhenHost => _autoCollectHuanzhenHost;
     internal static bool AutoCollectMaobaoInscription => _autoCollectMaobaoInscription;
+    internal static bool AutoCollectPhysique => _autoCollectPhysique;
     internal static int TransmissionYear => _transmissionYear;
     internal static bool AutoCollectYuanYing => _autoCollectYuanYing;
     internal static bool AutoCollectHuaShen => _autoCollectHuaShen;
@@ -86,6 +95,9 @@ internal static class MclslRuntimeSettings
     internal static bool AutoCollectHeavenRoot => _autoCollectHeavenRoot;
     internal static bool DiagnosticsEnabled => _diagnosticsEnabled;
     internal static bool ShowFps => _showFps;
+    internal static bool PerformanceMonitor => _performanceMonitor;
+    internal static bool ItemAcquisitionHistoryEnabled => _itemAcquisitionHistoryEnabled;
+    internal static bool RecordLowMaterialAcquisitionHistory => _recordLowMaterialAcquisitionHistory;
     internal static int ChildhoodRootChancePercent => _childhoodRootChancePercent;
     internal static int AlchemistChanceBasisPoints => _alchemistChanceBasisPoints;
     internal static int RefinerChanceBasisPoints => _refinerChanceBasisPoints;
@@ -95,11 +107,12 @@ internal static class MclslRuntimeSettings
     {
         if (config == null) return;
         _coreEnabled = ReadBool(config, "MCLSL_config_enable_core", _coreEnabled);
+        _annualBackpressureEnabled = ReadBool(config, "MCLSL_config_annual_backpressure", true);
+        _aggressivePerformanceEnabled = ReadBool(config, "MCLSL_config_enable_aggressive_performance", true);
         _timelineEnabled = ReadBool(config, "MCLSL_config_enable_timeline", _timelineEnabled);
         _autoSealTerminalCycle = ReadBool(config, "MCLSL_config_auto_seal_terminal", _autoSealTerminalCycle);
         _timelineYearScalePercent = Math.Clamp(ReadInt(config, "MCLSL_config_timeline_year_scale", _timelineYearScalePercent), 25, 400);
         _carrySlotLimit = Math.Clamp(ReadInt(config, "MCLSL_config_profile_carry_slots", _carrySlotLimit), 1, 20);
-        _annualActorBudget = Math.Clamp(ReadInt(config, "MCLSL_config_annual_actor_budget", _annualActorBudget), 20, 400);
         _deathAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_death_announcements", _deathAnnouncementsEnabled);
         _breakthroughFailureAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_breakthrough_failure_announcements", _breakthroughFailureAnnouncementsEnabled);
         _nascentBreakthroughAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_yuanying_breakthrough_announcements", _nascentBreakthroughAnnouncementsEnabled);
@@ -110,6 +123,7 @@ internal static class MclslRuntimeSettings
         _worldAdventuresEnabled = ReadBool(config, "MCLSL_config_enable_world_adventures", _worldAdventuresEnabled);
         _factionCommissionAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_faction_commissions", _factionCommissionAnnouncementsEnabled);
         _ancientLineageAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_ancient_lineage_announcements", _ancientLineageAnnouncementsEnabled);
+        _lineageNativeHistoryEnabled = ReadBool(config, "MCLSL_config_lineage_native_history", true);
         _pioneerAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_pioneer_announcements", _pioneerAnnouncementsEnabled);
         _minorWorldAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_minor_world_announcements", _minorWorldAnnouncementsEnabled);
         _ruinBirthAnnouncementsEnabled = ReadBool(config, "MCLSL_config_enable_ruin_birth_announcements", _ruinBirthAnnouncementsEnabled);
@@ -122,6 +136,7 @@ internal static class MclslRuntimeSettings
         _huanzhenSafetyGapYears = Math.Clamp(ReadInt(config, "MCLSL_config_huanzhen_safety_gap", _huanzhenSafetyGapYears), 10, 200);
         _autoCollectHuanzhenHost = ReadBool(config, "MCLSL_config_auto_collect_huanzhen_host", _autoCollectHuanzhenHost);
         _autoCollectMaobaoInscription = ReadBool(config, "MCLSL_config_auto_collect_maobao_inscription", _autoCollectMaobaoInscription);
+        _autoCollectPhysique = ReadBool(config, "MCLSL_config_auto_collect_physique", _autoCollectPhysique);
         _transmissionYear = Math.Clamp(ReadInt(config, "MCLSL_config_transmission_year", _transmissionYear), 1000, 3000);
         _autoCollectYuanYing = ReadBool(config, "MCLSL_config_auto_collect_yuanying", _autoCollectYuanYing);
         _autoCollectHuaShen = ReadBool(config, "MCLSL_config_auto_collect_huashen", _autoCollectHuaShen);
@@ -131,10 +146,13 @@ internal static class MclslRuntimeSettings
         _autoCollectHeavenRoot = ReadBool(config, "MCLSL_config_auto_collect_heaven_root", _autoCollectHeavenRoot);
         _diagnosticsEnabled = ReadBool(config, "MCLSL_config_enable_diagnostics", _diagnosticsEnabled);
         _showFps = ReadBool(config, "MCLSL_config_show_fps", _showFps);
-        _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance", 50), 0, 100);
-        _alchemistChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_alchemist_chance", 10), 0, 1000) * 10;
-        _refinerChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_refiner_chance", 15), 0, 1000) * 10;
-        _talismanChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_talisman_chance", 20), 0, 1000) * 10;
+        _performanceMonitor = ReadBool(config, "MCLSL_config_performance_monitor", _performanceMonitor);
+        _itemAcquisitionHistoryEnabled = ReadBool(config, "MCLSL_config_item_acquisition_history_enabled", _itemAcquisitionHistoryEnabled);
+        _recordLowMaterialAcquisitionHistory = ReadBool(config, "MCLSL_config_record_low_material_history", false);
+        _childhoodRootChancePercent = Math.Clamp(ReadInt(config, "MCLSL_config_childhood_root_chance", 10), 0, 100);
+        _alchemistChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_alchemist_chance", 100), 0, 1000) * 10;
+        _refinerChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_refiner_chance", 100), 0, 1000) * 10;
+        _talismanChanceBasisPoints = Math.Clamp(ReadInt(config, "MCLSL_config_talisman_chance", 100), 0, 1000) * 10;
     }
 
     internal static int ScaleTimelineYear(int year) => year <= 0 ? 0 : Math.Max(1, (int)Math.Round(year * (_timelineYearScalePercent / 100d)));

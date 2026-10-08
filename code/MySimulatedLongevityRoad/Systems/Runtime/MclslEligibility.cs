@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -33,8 +34,31 @@ internal static class MclslEligibility
     {
         if (!MclslActorAccessor.Alive(actor) || actor?.asset == null) return false;
         string id = actor.asset.id ?? string.Empty;
+        if (MclslBeastActorRegistration.IsBeast(actor)) return true;
+        if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
         if (IsLockedAsset(actor.asset, id)) return false;
         return IsCivilizedActor(actor) || HasRequiredCultivationBrain(actor);
+    }
+
+    internal static bool CanOwnSpecialPhysique(Actor actor)
+        => TryGetSpecialPhysiqueEligibility(actor, out bool eligible) && eligible;
+
+    internal static bool TryGetSpecialPhysiqueEligibility(Actor actor, out bool eligible)
+    {
+        eligible = false;
+        if (actor?.data == null || actor.asset == null || MclslActorAccessor.Id(actor) <= 0L) return false;
+        string id = actor.asset.id ?? string.Empty;
+        if (id.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
+            || MclslWorldSoulActorRegistration.IsWorldSoulAssetId(id)) return true;
+        // Native Actor.isSapient returns false before a subspecies is attached.
+        // Treat that state as pending, not as a completed negative birth roll.
+        if (actor.subspecies == null) return false;
+        try { eligible = actor.isSapient(); return true; }
+        catch (Exception ex)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("physique-sapience", ex.Message);
+            return false;
+        }
     }
 
     // Death routers call this after the native actor has already died, so this check must not depend on isAlive().
@@ -43,6 +67,7 @@ internal static class MclslEligibility
         if (actor?.asset == null) return false;
         if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached;
         string id = actor.asset.id ?? string.Empty;
+        if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
         bool result = !IsLockedAsset(actor.asset, id)
             && (ExplicitCivilizedSpecies.Contains(id) || IsCivilizedSapient(actor));
         CivilizedAssetCache[actor.asset] = result;

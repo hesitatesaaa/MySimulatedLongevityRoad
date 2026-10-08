@@ -2,7 +2,10 @@
 param(
     [Parameter(Mandatory = $false)]
     [ValidatePattern('^[\p{IsCJKUnifiedIdeographs}]{2,5}$')]
-    [string]$ChangeTag = '综合更新'
+    [string]$ChangeTag = '开发验证',
+
+    [Parameter(Mandatory = $false)]
+    [switch]$VersionUpdate
 )
 
 Set-StrictMode -Version Latest
@@ -13,23 +16,19 @@ $modFile = Join-Path $repoRoot 'mod.json'
 $packageDirectory = Join-Path $repoRoot '发布包'
 $runtimeItems = @(
     'InterestingTrait.cs',
-    'InterestingTrait.csproj',
-    'InterestingTrait.sln',
     'mod.json',
     'default_config.json',
     'icon.png',
-    'README.md',
-    'CHANGELOG.md',
     'code',
     'GameResources',
     'Locales'
 )
 $stagingRoot = $null
-$zipPath = $null
+$createdZips = [System.Collections.Generic.List[string]]::new()
 $success = $false
 
 function Copy-PackageItem {
-    param([string]$RelativePath, [string]$DestinationRoot)
+    param([string]$RelativePath, [string]$DestinationRoot, [bool]$IncludeDeveloperEditor)
     $source = Join-Path $repoRoot $RelativePath
     if (-not (Test-Path -LiteralPath $source)) { throw "缺少发布包文件或目录：$RelativePath" }
     $destination = Join-Path $DestinationRoot $RelativePath
@@ -43,6 +42,7 @@ function Copy-PackageItem {
         foreach ($file in Get-ChildItem -LiteralPath $sourceRoot -File -Recurse -Force) {
             $relativeFile = [System.IO.Path]::GetRelativePath($sourceRoot, $file.FullName)
             if ($relativeFile -match $excludedDirectoryPattern) { continue }
+            if (-not $IncludeDeveloperEditor -and $relativeFile -match '(^|[\\/])UI[\\/]MclslDeveloperActorEditor\.cs$') { continue }
 
             $targetFile = Join-Path $destination $relativeFile
             $targetDirectory = Split-Path -Parent $targetFile
@@ -58,18 +58,40 @@ function Copy-PackageItem {
 }
 
 function Test-SourcePackageContents {
-    param([string]$Path, [string]$RootName, [string]$Version)
+    param([string]$Path, [string]$RootName, [string]$Version, [bool]$IncludeDeveloperEditor)
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $archive = [System.IO.Compression.ZipFile]::OpenRead($Path)
     try {
         $entries = @($archive.Entries | ForEach-Object { $_.FullName.Replace('\', '/') })
         $root = $RootName.TrimEnd('/') + '/'
-        foreach ($required in @('InterestingTrait.cs', 'InterestingTrait.csproj', 'InterestingTrait.sln', 'mod.json', 'default_config.json', 'icon.png', 'README.md', 'CHANGELOG.md')) {
+        foreach ($required in @('InterestingTrait.cs', 'mod.json', 'default_config.json', 'icon.png')) {
             if ($entries -notcontains ($root + $required)) { throw "发布包缺少必需文件：$required" }
         }
         foreach ($directory in @('code/', 'GameResources/', 'Locales/')) {
             if (-not ($entries | Where-Object { $_.StartsWith($root + $directory, [System.StringComparison]::OrdinalIgnoreCase) })) { throw "发布包缺少必需目录：$directory" }
         }
+
+        $allowedRootFiles = @('InterestingTrait.cs', 'mod.json', 'default_config.json', 'icon.png')
+        $allowedDirectories = @('code/', 'GameResources/', 'Locales/')
+        $unexpected = foreach ($entry in $entries) {
+            if (-not $entry.StartsWith($root, [System.StringComparison]::OrdinalIgnoreCase)) {
+                throw "发布包包含根目录外的内容：$entry"
+            }
+            $relativeEntry = $entry.Substring($root.Length)
+            if ([string]::IsNullOrEmpty($relativeEntry)) { continue }
+            $isAllowed = $allowedRootFiles -contains $relativeEntry
+            if (-not $isAllowed) {
+                $isAllowed = @($allowedDirectories | Where-Object {
+                    $relativeEntry.StartsWith($_, [System.StringComparison]::OrdinalIgnoreCase)
+                }).Count -gt 0
+            }
+            if (-not $isAllowed) { $entry }
+        }
+        if ($unexpected) { throw "发布包包含非游戏运行内容：$($unexpected -join ', ')" }
+
+        $editorEntry = $root + 'code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs'
+        if ($IncludeDeveloperEditor -and $entries -notcontains $editorEntry) { throw '开发者包缺少人物编辑器源码。' }
+        if (-not $IncludeDeveloperEditor -and $entries -contains $editorEntry) { throw '玩家包包含人物编辑器源码。' }
         $forbidden = $entries | Where-Object {
             $_ -match '(^|/)(references|\.git|bin|obj|DeveloperTools|scripts)(/|$)' -or
             $_ -match '(^|/)(\.vs|\.idea)(/|$)' -or
@@ -91,35 +113,50 @@ try {
     if ([string]::IsNullOrWhiteSpace($version) -or $version -notmatch '^\d+\.\d+\.\d+(\.\d+)?$') { throw "mod.json 中的 version 不是有效版本号：$version" }
     if (-not (Test-Path -LiteralPath $packageDirectory)) { New-Item -ItemType Directory -Path $packageDirectory -Force | Out-Null }
 
-    $packageFolderName = "0.5.1+我的模拟长生路$version-$ChangeTag"
     $stagingRoot = Join-Path $packageDirectory ('.staging-' + [Guid]::NewGuid().ToString('N'))
-    $packageRoot = Join-Path $stagingRoot $packageFolderName
-    New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
-    foreach ($item in $runtimeItems) { Copy-PackageItem -RelativePath $item -DestinationRoot $packageRoot }
+    $packageKinds = if ($VersionUpdate) { @('开发者包', '玩家包') } else { @('开发者包') }
+    foreach ($kind in $packageKinds) {
+        $includeDeveloperEditor = $kind -eq '开发者包'
+        $packageFolderName = "我的模拟长生路$version-$ChangeTag-$kind"
+        $packageRoot = Join-Path $stagingRoot $packageFolderName
+        New-Item -ItemType Directory -Path $packageRoot -Force | Out-Null
+        foreach ($item in $runtimeItems) {
+            Copy-PackageItem -RelativePath $item -DestinationRoot $packageRoot -IncludeDeveloperEditor $includeDeveloperEditor
+        }
 
-    $zipPath = Join-Path $packageDirectory ($packageFolderName + '.zip')
-    if (Test-Path -LiteralPath $zipPath) {
-        $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-        $suffix = 0
-        do {
-            if ($suffix -eq 0) { $collisionSuffix = "" }
-            else { $collisionSuffix = "-" + [string]$suffix }
-            $zipPath = Join-Path $packageDirectory ("$packageFolderName-$stamp$collisionSuffix.zip")
-            $suffix++
-        } while (Test-Path -LiteralPath $zipPath)
+        $zipPath = Join-Path $packageDirectory ($packageFolderName + '.zip')
+        if (Test-Path -LiteralPath $zipPath) {
+            $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+            $suffix = 0
+            do {
+                $collisionSuffix = if ($suffix -eq 0) { '' } else { '-' + [string]$suffix }
+                $zipPath = Join-Path $packageDirectory ("$packageFolderName-$stamp$collisionSuffix.zip")
+                $suffix++
+            } while (Test-Path -LiteralPath $zipPath)
+        }
+
+        $createdZips.Add($zipPath)
+        Compress-Archive -Path $packageRoot -DestinationPath $zipPath -CompressionLevel Optimal
+        Test-SourcePackageContents -Path $zipPath -RootName $packageFolderName -Version $version -IncludeDeveloperEditor $includeDeveloperEditor
     }
-
-    $stagingItems = @(Get-ChildItem -LiteralPath $stagingRoot -Force | ForEach-Object { $_.FullName })
-    Compress-Archive -Path $stagingItems -DestinationPath $zipPath -CompressionLevel Optimal
-    Test-SourcePackageContents -Path $zipPath -RootName $packageFolderName -Version $version
     $success = $true
-    Write-Output $zipPath
+    $createdZips | ForEach-Object { Write-Output $_ }
 }
 catch {
     Write-Error $_.Exception.Message
     exit 1
 }
 finally {
-    if ($stagingRoot -and (Test-Path -LiteralPath $stagingRoot)) { Remove-Item -LiteralPath $stagingRoot -Recurse -Force -ErrorAction SilentlyContinue }
-    if (-not $success -and $zipPath -and (Test-Path -LiteralPath $zipPath)) { Remove-Item -LiteralPath $zipPath -Force -ErrorAction SilentlyContinue }
+    if ($stagingRoot -and (Test-Path -LiteralPath $stagingRoot)) {
+        $resolvedStage = [System.IO.Path]::GetFullPath($stagingRoot)
+        $resolvedPackage = [System.IO.Path]::GetFullPath($packageDirectory).TrimEnd([System.IO.Path]::DirectorySeparatorChar)
+        if ($resolvedStage.StartsWith($resolvedPackage + [System.IO.Path]::DirectorySeparatorChar, [System.StringComparison]::OrdinalIgnoreCase)) {
+            Remove-Item -LiteralPath $resolvedStage -Recurse -Force -ErrorAction SilentlyContinue
+        }
+    }
+    if (-not $success) {
+        foreach ($createdZip in $createdZips) {
+            if (Test-Path -LiteralPath $createdZip) { Remove-Item -LiteralPath $createdZip -Force -ErrorAction SilentlyContinue }
+        }
+    }
 }

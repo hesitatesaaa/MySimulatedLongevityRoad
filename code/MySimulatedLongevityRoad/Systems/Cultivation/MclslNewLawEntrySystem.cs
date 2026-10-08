@@ -13,6 +13,7 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
+        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return hasGift;
@@ -28,6 +29,7 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
+        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor)))
@@ -71,6 +73,7 @@ internal static class MclslNewLawEntrySystem
         if (alreadyInitialized)
         {
             MclslActorAccessor.ApplyDisplayName(actor, MclslActorAccessor.Realm(actor));
+            MclslAnnualCultivationExecutor.TryApplyInitialYear(actor, year);
             return;
         }
 
@@ -83,9 +86,9 @@ internal static class MclslNewLawEntrySystem
         else
             aptitude = Math.Clamp((aptitude + fate) / 2 + aptitudeBonus, 1, 100);
         string techniqueSeed = id > 0L ? id.ToString() : MclslActorAccessor.DisplayName(actor) + "|" + year;
-        bool inheritedTechnique = MclslTechniqueLineageSystem.TryPickInheritedTechnique(year, techniqueSeed, aptitude, out MclslTechniqueDefinition technique);
+        bool inheritedTechnique = MclslTechniqueLineageSystem.TryPickInheritedTechnique(actor, year, techniqueSeed, aptitude, out MclslTechniqueDefinition technique);
         if (technique == null)
-            technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(techniqueSeed, aptitude, false);
+            technique = MclslTechniqueOccupationSystem.SelectStartingTechnique(actor, techniqueSeed, aptitude, false);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, aptitude);
         MclslCultivationStateTransitions.TrySetCultivationSystem(actor, MclslCultivationSystemIds.NewLaw);
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0) <= 0)
@@ -102,9 +105,10 @@ internal static class MclslNewLawEntrySystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueInsight,
                 MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TechniqueInsight, 0) + 8);
         }
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, 20);
+        MclslResourceSystem.EnsureInitialCultivationFunds(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, reason ?? DefaultEntryReason);
         MclslActorAccessor.ApplyDisplayName(actor, string.Empty);
+        MclslAnnualCultivationExecutor.TryApplyInitialYear(actor, year);
     }
 
     private static int PositiveHash(string value)

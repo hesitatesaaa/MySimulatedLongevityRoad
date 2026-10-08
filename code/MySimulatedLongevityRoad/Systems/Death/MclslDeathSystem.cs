@@ -13,7 +13,9 @@ namespace MySimulatedLongevityRoad.Systems.Death;
 internal static class MclslDeathSystem
 {
     private const int CaveDeathDivertCooldownYears = 50;
+    private const int RecentDeathCapacity = 8192;
     private static readonly HashSet<long> CommittedActorIds = new();
+    private static readonly Queue<long> CommittedActorOrder = new();
     private static readonly string[] KillerMemberNames =
     {
         "last_attacker", "lastAttacker", "_last_attacker", "attacked_by", "attackedBy", "killer", "last_hit_actor", "lastHitActor"
@@ -22,6 +24,7 @@ internal static class MclslDeathSystem
     internal static MclslDeathSnapshot Capture(Actor actor, AttackType attackType)
     {
         if (actor?.data == null || !MclslActorAccessor.IsCultivator(actor)) return MclslDeathSnapshot.Empty;
+        MclslFamilySystem.Observe(actor);
         long actorId = MclslActorAccessor.Id(actor);
         if (actorId <= 0L || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.DeathArchived, 0) == 1) return MclslDeathSnapshot.Empty;
         string pendingCause = MclslActorAccessor.GetString(actor, MclslActorDataKeys.PendingDeathCode, string.Empty);
@@ -225,13 +228,15 @@ internal static class MclslDeathSystem
 
     internal static void Commit(Actor actor, in MclslDeathSnapshot snapshot)
     {
-        if (!snapshot.Found || snapshot.ActorId <= 0L || IsAlive(actor) || !CommittedActorIds.Add(snapshot.ActorId)) return;
+        if (!snapshot.Found || snapshot.ActorId <= 0L || IsAlive(actor) || !TryRememberDeath(snapshot.ActorId)) return;
         if (actor?.data != null) MclslActorAccessor.Set(actor, MclslActorDataKeys.DeathArchived, 1);
         MclslDeathRecord record = BuildRecord(snapshot);
         MclslWorldRunRepository.RegisterDeath(record);
         MclslActorReincarnationSystem.RecordFromDeath(actor, record);
         MclslWorldActorQuery.MarkDirty();
-        if (ShouldShowTopDeathAnnouncement(record)) MclslAnnouncementSystem.Enqueue(record.Announcement, DeathColor(record.CauseCode), DeathDuration(record.CauseCode));
+        if (ShouldShowTopDeathAnnouncement(record))
+            MclslAnnouncementSystem.EnqueueGrouped("death:" + record.CauseCode, record.Year, record.ActorName,
+                record.Announcement, "陨落", DeathColor(record.CauseCode), DeathDuration(record.CauseCode));
     }
 
     internal static bool ExecuteScriptedDeath(Actor actor, string causeCode, string sourceName, string detail, bool important = true)
@@ -255,15 +260,29 @@ internal static class MclslDeathSystem
         }
         catch
         {
-            ClearPendingDeath(actor);
-            MclslNativeKillStatisticsSystem.RestoreScriptedDeathAttacker(actor, priorAttacker);
-            return false;
+            bool dead = !IsAlive(actor);
+            if (!dead)
+            {
+                ClearPendingDeath(actor);
+                MclslNativeKillStatisticsSystem.RestoreScriptedDeathAttacker(actor, priorAttacker);
+            }
+            return dead;
         }
     }
 
     internal static void Clear()
     {
         CommittedActorIds.Clear();
+        CommittedActorOrder.Clear();
+    }
+
+    private static bool TryRememberDeath(long actorId)
+    {
+        if (!CommittedActorIds.Add(actorId)) return false;
+        CommittedActorOrder.Enqueue(actorId);
+        while (CommittedActorOrder.Count > RecentDeathCapacity)
+            CommittedActorIds.Remove(CommittedActorOrder.Dequeue());
+        return true;
     }
 
     private static MclslDeathRecord BuildRecord(in MclslDeathSnapshot s)

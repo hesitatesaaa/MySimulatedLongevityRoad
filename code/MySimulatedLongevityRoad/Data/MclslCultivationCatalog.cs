@@ -144,10 +144,14 @@ internal static class MclslCultivationCatalog
 
     internal static MclslTechniqueDefinition StartingTechnique(string seed, int aptitude, bool ancient)
     {
-        if (ancient)
-        {
-            return StartingAncientTechnique(seed, aptitude);
-        }
+        MclslTechniqueDefinition[] pool = StartingTechniquePool(seed, aptitude, ancient);
+        int index = PositiveHash((seed ?? string.Empty) + "|starting_technique|" + (ancient ? "ancient" : "new")) % Math.Max(1, pool.Length);
+        return pool.Length == 0 ? Techniques[0] : pool[index];
+    }
+
+    internal static MclslTechniqueDefinition[] StartingTechniquePool(string seed, int aptitude, bool ancient)
+    {
+        if (ancient) return StartingAncientTechniquePool(seed, aptitude);
 
         int targetIndex = aptitude >= 95 ? MclslRealmIds.Index(MclslRealmIds.HeDao)
             : aptitude >= 82 ? MclslRealmIds.Index(MclslRealmIds.HuaShen)
@@ -160,11 +164,10 @@ internal static class MclslCultivationCatalog
             ? Techniques.Where(x => MclslRealmIds.Index(x.MaxRealm) == selectedIndex).ToArray()
             : Techniques.Where(x => MclslRealmIds.Index(x.MaxRealm) >= 1 && MclslRealmIds.Index(x.MaxRealm) <= targetIndex).ToArray();
         if (pool.Length == 0) pool = Techniques.Where(x => x.MaxRealm == MclslRealmIds.ZhuJi).ToArray();
-        int index = PositiveHash((seed ?? string.Empty) + "|starting_technique|" + (ancient ? "ancient" : "new")) % Math.Max(1, pool.Length);
-        return pool.Length == 0 ? Techniques[0] : pool[index];
+        return pool;
     }
 
-    private static MclslTechniqueDefinition StartingAncientTechnique(string seed, int aptitude)
+    private static MclslTechniqueDefinition[] StartingAncientTechniquePool(string seed, int aptitude)
     {
         // 旧法时代的功法来源是前人传承，不应只由入门者资质决定上限。
         // 资质只略微影响获得高阶传承的概率，保证仙道纪元早期自然存在金丹、元婴法。
@@ -187,8 +190,7 @@ internal static class MclslCultivationCatalog
             .ToArray();
         if (pool.Length == 0) pool = Techniques.Where(x => x.MaxRealm == MclslRealmIds.JinDan).ToArray();
         if (pool.Length == 0) pool = Techniques.Where(x => x.MaxRealm == MclslRealmIds.ZhuJi).ToArray();
-        int index = PositiveHash((seed ?? string.Empty) + "|ancient_starting_technique|" + maxRealm) % Math.Max(1, pool.Length);
-        return pool.Length == 0 ? Techniques[0] : pool[index];
+        return pool;
     }
 
     internal static string NormalizeTechniqueId(string id)

@@ -2,6 +2,7 @@ using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Traits;
 using MySimulatedLongevityRoad.UI;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -13,6 +14,28 @@ namespace MySimulatedLongevityRoad.Systems;
 /// </summary>
 internal static class MclslAnnualCultivationExecutor
 {
+    internal static bool TryApplyInitialYear(Actor actor, int year)
+    {
+        if (actor?.data == null) return false;
+        // Entry hooks may run during another actor's annual step. Always retain
+        // the request, instead of dropping it because a global context is active.
+        MclslScheduler.RequestFirstCultivation(actor);
+        return false;
+    }
+
+    internal static bool TryApplyQueuedInitialYear(Actor actor)
+    {
+        if (actor?.data == null) return false;
+        int startYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0);
+        int lastYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -1);
+        int year = startYear;
+        if (!MclslInitialCultivationPolicy.ShouldApply(
+                year, startYear, lastYear, MclslAnnualExecutionContext.IsActive)
+            || !MclslAnnualExecutionContext.TryEnter(actor, year)) return false;
+        try { return TryApplyOneAnnualStep(actor, year); }
+        finally { MclslAnnualExecutionContext.Exit(actor, year); }
+    }
+
     internal static bool TryApplyOneAnnualStep(Actor actor, int annualYear)
     {
         return TryApplyOneAnnualStep(actor, annualYear, out _);
@@ -24,8 +47,6 @@ internal static class MclslAnnualCultivationExecutor
         out string failureReason)
     {
         failureReason = string.Empty;
-        RepairLocalZeroProgressCursor(actor, annualYear);
-
         MclslCultivationAnnualSnapshot snapshot =
             MclslCultivationLocalCore.BuildAnnualSnapshot(actor, annualYear);
         MclslCultivationLocalCheckResult check =
@@ -66,7 +87,8 @@ internal static class MclslAnnualCultivationExecutor
             annualYear,
             snapshot.AncientLaw,
             applyWorldState: true,
-            applySameLaw: true);
+            applySameLaw: true,
+            annualCultivation: true);
         int afterEssence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         float afterRemainder = MclslActorAccessor.GetFloat(
             actor,
@@ -85,19 +107,13 @@ internal static class MclslAnnualCultivationExecutor
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, annualYear);
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0) <= 0)
             MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationStartYear, annualYear);
+        MclslScheduler.CompleteFirstCultivation(actor);
+        if (string.IsNullOrWhiteSpace(snapshot.Realm))
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult,
+                "感气积累真元：" + Math.Min(afterEssence, MclslRealmProgress.LianQiEntryMinimum)
+                + "/" + MclslRealmProgress.LianQiEntryMinimum);
         RefreshCultivationRuntime(actor);
         return true;
-    }
-
-    private static void RepairLocalZeroProgressCursor(Actor actor, int annualYear)
-    {
-        if (actor?.data == null || annualYear <= 0) return;
-        if (!MclslSpiritualRootSystem.HasCultivationPotential(actor)) return;
-        if (MclslCultivationGrowthSystem.CurrentTrueEssence(actor) > 0) return;
-        int startYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0);
-        int lastYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -1);
-        if (startYear > 0 && startYear < annualYear && lastYear >= annualYear)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, annualYear - 1);
     }
 
     internal static float CalculateRawAnnualGain(
@@ -107,7 +123,8 @@ internal static class MclslAnnualCultivationExecutor
         bool ancientLaw)
     {
         int aptitude = Math.Clamp(
-            MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0),
+            MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0)
+                + (actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId) ? 20 : 0),
             0,
             100);
         MclslAptitudeGiftDefinition gift =
@@ -157,6 +174,7 @@ internal static class MclslAnnualCultivationExecutor
         float variance = 0.95f
             + (PositiveHash(MclslActorAccessor.Id(actor)
                 + "|annual_cultivation|" + year) % 11) / 100f;
+        if (actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId)) gain *= 1.20f;
         return Math.Max(0.01f, gain * variance);
     }
 

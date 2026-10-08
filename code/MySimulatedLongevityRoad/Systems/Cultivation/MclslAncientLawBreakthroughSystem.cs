@@ -2,6 +2,7 @@ using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -30,17 +31,17 @@ internal static class MclslAncientLawBreakthroughSystem
         }
         // 功法参悟只修正年度真元效率，不是破境硬门槛，也不直接叠加破境成功率。
         int fieldBonus = AncientBreakthroughBonus(actor, nextRealm);
-        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm);
-        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.v020.buque_break_bonus");
+        int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm, year);
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_break_bonus");
         int chance = Math.Clamp(24 + aptitude / 4 + fieldBonus + pillBonus + buqueBonus
-            + (MclslActorAccessor.GetInt(actor, "mclsl.v020.taishang_taken") > 0 ? 5 : 0)
+            + (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0 ? 5 : 0)
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year)
-            - nextIndex * 8, 8, 88);
+            - nextIndex * 8 + MclslPhysiqueSystem.BreakthroughPoints(actor), 8, 100);
         if (MclslWorldEpochSystem.IsNewLawActive(year)) chance = Math.Max(3, chance / 2);
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_break|" + realm + "|" + year) % 100;
-        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.v020.buque_break_bonus", 0);
-        if (roll >= chance)
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_break_bonus", 0);
+        if (roll >= chance && !MclslImmortalPathSystem.AllowsBreakthrough(actor, nextRealm))
         {
             ResolveAncientBreakthroughFailure(actor, nextRealm, year, chance, roll);
             return;
@@ -71,7 +72,8 @@ internal static class MclslAncientLawBreakthroughSystem
         int lineage = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLineageStrength, 0);
         int legacy = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLegacyPotential, 0);
         int mind = MclslMindSystem.EnsureMindState(actor);
-        int chance = Math.Clamp(5 + aptitude / 12 + lineage / 18 + legacy / 22 + mind / 25 + currentIndex * 2, 6, 48);
+        int chance = Math.Clamp(5 + aptitude / 12 + lineage / 18 + legacy / 22 + mind / 25 + currentIndex * 2
+            + MclslPhysiqueSystem.BreakthroughPoints(actor), 6, 100);
         if (MclslWorldEpochSystem.IsNewLawActive(year)) chance = Math.Max(3, chance / 2);
 
         int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_limit_bottleneck|" + nextRealm + "|" + year) % 100;
@@ -284,6 +286,7 @@ internal static class MclslAncientLawBreakthroughSystem
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
+        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
         int current = MclslActorAccessor.GetInt(actor, key, min);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
     }

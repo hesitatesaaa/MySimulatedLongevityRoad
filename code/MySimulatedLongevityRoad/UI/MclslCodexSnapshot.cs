@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
@@ -11,6 +12,33 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal sealed class MclslCodexSnapshot
 {
+    private IEnumerator _pending;
+    internal bool Ready => _pending == null;
+    internal long SourceRevision;
+    internal void Cancel() { (_pending as IDisposable)?.Dispose(); _pending = null; }
+    internal void Advance()
+    {
+        if (_pending == null) return;
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            // One bounded archive category per visible frame. Population is read
+            // directly from indexes, and no UI task is advanced while closed.
+            if (!_pending.MoveNext()) { (_pending as IDisposable)?.Dispose(); _pending = null; }
+        }
+        finally { MclslPerformanceProbe.End("UI.仙录分帧照录", sample); }
+    }
+    private static IEnumerator BuildPending(MclslCodexSnapshot snapshot)
+    {
+        IEnumerator current = BuildArchiveRankLines(snapshot);
+        try
+        {
+            while (current.MoveNext()) yield return null;
+            (current as IDisposable)?.Dispose(); current = BuildCodexPageCaches(snapshot);
+            while (current.MoveNext()) yield return null;
+        }
+        finally { (current as IDisposable)?.Dispose(); }
+    }
     internal int Year;
     internal int Population;
     internal int Cultivators;
@@ -29,10 +57,8 @@ internal sealed class MclslCodexSnapshot
     internal int BackgroundEraEndYear;
     internal string WorldStateName = string.Empty;
     internal string WorldStateSummary = string.Empty;
-    internal readonly Dictionary<string, int> RealmCounts = new();
-    internal readonly List<string> KingdomLines = new();
-    internal readonly List<MclslKingdomCodexEntry> KingdomEntries = new();
-    internal readonly List<string> CultivatorLines = new();
+    internal IReadOnlyDictionary<string, int> RealmCounts => MclslCodexPopulationIndex.RealmCounts;
+    internal IReadOnlyList<MclslKingdomCodexEntry> KingdomEntries => MclslCodexPopulationIndex.Entries;
     internal readonly List<string> RealmRankLines = new();
     internal readonly List<string> DeathRankLines = new();
     internal readonly List<string> WorldSoulRankLines = new();
@@ -48,7 +74,6 @@ internal sealed class MclslCodexSnapshot
     internal readonly List<MclslRunEventRecord> AncientWorldSoulObservationEvents = new();
     internal readonly List<MclslRunEventRecord> DaoStruggleEventsSorted = new();
     internal readonly List<MclslRunEventRecord> HuanzhenEventsSorted = new();
-    internal readonly Dictionary<string, int> EventCategoryCounts = new(StringComparer.Ordinal);
     internal readonly List<MclslDeathRecord> DeathsByYear = new();
     internal readonly Dictionary<string, List<MclslDeathRecord>> DeathsByRealm = new(StringComparer.Ordinal);
     internal readonly List<MclslWorldCaveRecord> CavesSorted = new();
@@ -73,6 +98,7 @@ internal sealed class MclslCodexSnapshot
     internal readonly List<MclslHuanzhenHistoryRecord> HuanzhenHistoriesSorted = new();
     internal readonly List<MclslGeneratedItemRecord> FoundationWondersSorted = new();
     internal readonly List<MclslFactionMissionRecord> WanXianRecentMissions = new();
+    internal readonly Dictionary<string, List<MclslFactionMissionRecord>> AncientSectRecentMissions = new(StringComparer.Ordinal);
     internal readonly List<MclslFactionPressureRecord> WanXianRecentPressure = new();
     internal readonly List<MclslFactionMissionRecord> FiveEldersRecentMissions = new();
     internal readonly List<MclslFactionPressureRecord> FiveEldersRecentPressure = new();
@@ -91,7 +117,7 @@ internal sealed class MclslCodexSnapshot
     internal static MclslCodexSnapshot Build()
     {
         MclslCodexSnapshot snapshot = new() { Year = MclslRuntime.CurrentYear() };
-        snapshot.ArchiveVersion = MclslWorldArchiveMigration.CurrentVersion;
+        snapshot.ArchiveVersion = MclslSaveVersions.WorldArchive;
         snapshot.TrackedActors = MclslCultivatorCandidateIndex.KnownActorCount;
         snapshot.AnnualCandidates = MclslCultivatorCandidateIndex.AnnualCandidateCount;
         snapshot.AnnualActorBacklog = MclslScheduler.AnnualActorBacklogCount;
@@ -108,80 +134,8 @@ internal sealed class MclslCodexSnapshot
         snapshot.WorldStateName = worldState.Name;
         snapshot.WorldStateSummary = worldState.Summary;
         snapshot.Population = Math.Max(0, MclslWorldActorQuery.UnitCount());
-        IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        Dictionary<string, Dictionary<string, int>> kingdomRealms = new(StringComparer.Ordinal);
-        Dictionary<string, List<string>> kingdomCultivators = new(StringComparer.Ordinal);
-        Dictionary<string, MclslKingdomCodexEntry> kingdomEntries = new(StringComparer.Ordinal);
-        List<CultivatorRankEntry> rankEntries = new();
-        for (int i = 0; i < units.Count; i++)
-        {
-            Actor actor = units[i];
-            if (!MclslActorAccessor.HasCultivationPath(actor)
-                && !MclslCultivationActorMarker.HasCultivationMarker(actor)) continue;
-            snapshot.Cultivators++;
-            string realm = MclslActorAccessor.Realm(actor);
-            if (string.IsNullOrWhiteSpace(realm))
-            {
-                snapshot.SensingQi++;
-                rankEntries.Add(BuildRankEntry(actor, realm));
-                continue;
-            }
-            snapshot.RealmCounts[realm] = snapshot.RealmCounts.TryGetValue(realm, out int c) ? c + 1 : 1;
-            string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无国散修" : actor.kingdom.data.name;
-            if (!kingdomRealms.TryGetValue(kingdom, out var map)) kingdomRealms[kingdom] = map = new();
-            map[realm] = map.TryGetValue(realm, out int kc) ? kc + 1 : 1;
-            if (!kingdomEntries.TryGetValue(kingdom, out MclslKingdomCodexEntry kingdomEntry))
-            {
-                kingdomEntry = new MclslKingdomCodexEntry { Name = kingdom };
-                kingdomEntries[kingdom] = kingdomEntry;
-            }
-            kingdomEntry.TotalCultivators++;
-            kingdomEntry.RealmCounts[realm] = kingdomEntry.RealmCounts.TryGetValue(realm, out int rc) ? rc + 1 : 1;
-            kingdomEntry.Cultivators.Add(new MclslKingdomCultivatorEntry
-            {
-                ActorId = MclslActorAccessor.Id(actor),
-                Name = MclslActorAccessor.DisplayName(actor),
-                RealmId = realm,
-                RealmName = MclslRealmIds.Display(realm),
-                RealmIndex = MclslRealmIds.Index(realm),
-                TrueEssence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0),
-                Contribution = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0)
-            });
-            if (!kingdomCultivators.TryGetValue(kingdom, out List<string> roster))
-            {
-                roster = new List<string>();
-                kingdomCultivators[kingdom] = roster;
-            }
-            if (roster.Count < 24)
-                roster.Add(MclslActorAccessor.DisplayName(actor) + "·" + MclslRealmIds.Display(realm));
-            rankEntries.Add(BuildRankEntry(actor, realm));
-        }
-        foreach (var pair in kingdomRealms.OrderByDescending(x => x.Value.Values.Sum()).ThenBy(x => x.Key))
-        {
-            int count = pair.Value.Values.Sum();
-            string realms = string.Join("，", MclslRealmIds.Ordered.Where(pair.Value.ContainsKey).Select(r => MclslRealmIds.Display(r) + pair.Value[r]));
-            string roster = kingdomCultivators.TryGetValue(pair.Key, out List<string> names)
-                ? string.Join("，", names.OrderBy(x => x, StringComparer.Ordinal).Take(12))
-                : string.Empty;
-            snapshot.KingdomLines.Add(pair.Key + "｜修士" + count + "｜" + realms + (string.IsNullOrWhiteSpace(roster) ? string.Empty : "｜名册:" + roster));
-        }
-        foreach (MclslKingdomCodexEntry entry in kingdomEntries.Values
-            .OrderByDescending(x => x.TotalCultivators)
-            .ThenBy(x => x.Name, StringComparer.Ordinal))
-        {
-            entry.Cultivators.Sort((a, b) =>
-            {
-                int realm = b.RealmIndex.CompareTo(a.RealmIndex);
-                if (realm != 0) return realm;
-                int essence = b.TrueEssence.CompareTo(a.TrueEssence);
-                if (essence != 0) return essence;
-                int contribution = b.Contribution.CompareTo(a.Contribution);
-                if (contribution != 0) return contribution;
-                return string.Compare(a.Name, b.Name, StringComparison.Ordinal);
-            });
-            entry.RebuildRealmIndex();
-            snapshot.KingdomEntries.Add(entry);
-        }
+        snapshot.Cultivators = MclslCodexPopulationIndex.Count;
+        snapshot.SensingQi = MclslCodexPopulationIndex.SensingQi;
         int realmRank = 1;
         foreach (string realmId in MclslRealmIds.Ordered.Reverse())
         {
@@ -191,74 +145,77 @@ internal sealed class MclslCodexSnapshot
             snapshot.RealmRankLines.Add("第" + realmRank + "位｜" + MclslRealmIds.Display(realmId) + "｜" + count + "人｜占修士" + share + "%");
             realmRank++;
         }
-        int rank = 1;
-        foreach (CultivatorRankEntry entry in rankEntries
-            .OrderByDescending(x => x.RealmIndex)
-            .ThenByDescending(x => x.TrueEssence)
-            .ThenByDescending(x => x.Contribution)
-            .ThenByDescending(x => x.Aptitude)
-            .ThenBy(x => x.Name, StringComparer.Ordinal)
-            .Take(160))
-        {
-            snapshot.CultivatorLines.Add("第" + rank + "名｜" + entry.Line);
-            rank++;
-        }
-        BuildArchiveRankLines(snapshot);
-        BuildCodexPageCaches(snapshot);
+        snapshot.SourceRevision = MclslWorldArchiveStore.Revision;
+        snapshot._pending = BuildPending(snapshot);
         return snapshot;
     }
 
-    private static void BuildArchiveRankLines(MclslCodexSnapshot snapshot)
+    private static IEnumerator BuildArchiveRankLines(MclslCodexSnapshot snapshot)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null) return;
+        if (run == null) yield break;
 
         int deathRank = 1;
-        foreach (MclslDeathRecord death in (run.DeathRecords ?? new List<MclslDeathRecord>())
-            .OrderByDescending(x => MclslRealmIds.Index(x.RealmId))
-            .ThenByDescending(x => x.Year)
-            .ThenByDescending(x => x.Age)
-            .Take(80))
+        List<MclslDeathRecord> deathOrder = new();
+        IEnumerator deathWork = MclslBudgetedView.Sort((run.DeathRecords ?? new List<MclslDeathRecord>()),
+            deathOrder,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(MclslRealmIds.Index(a.RealmId), MclslRealmIds.Index(b.RealmId), true); if (order != 0) return order; order = MclslBudgetedView.Compare(a.Year, b.Year, true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Age, b.Age, true); },
+            take: 80);
+        try { while (deathWork.MoveNext()) yield return null; }
+        finally { (deathWork as IDisposable)?.Dispose(); }
+        foreach (MclslDeathRecord death in deathOrder)
         {
+            if ((deathRank & 15) == 0) yield return null;
             snapshot.DeathRankLines.Add("第" + deathRank + "名｜" + Blank(death.ActorName) + "｜" + Blank(death.RealmName) + "｜" + death.Year + "年｜" + ShortCause(death.CauseText));
             deathRank++;
         }
 
+        yield return null;
         int soulRank = 1;
-        foreach (MclslWorldSoulRecord soul in (run.WorldSouls ?? new List<MclslWorldSoulRecord>())
-            .OrderBy(x => SoulStateOrder(x.State))
-            .ThenByDescending(x => x.Quality)
-            .ThenByDescending(x => x.DutyProgress)
-            .ThenBy(x => x.Name, StringComparer.Ordinal)
-            .Take(80))
+        List<MclslWorldSoulRecord> soulOrder = new();
+        IEnumerator soulWork = MclslBudgetedView.Sort((run.WorldSouls ?? new List<MclslWorldSoulRecord>()),
+            soulOrder,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(SoulStateOrder(a.State), SoulStateOrder(b.State), false); if (order != 0) return order; order = MclslBudgetedView.Compare(a.Quality, b.Quality, true); if (order != 0) return order; order = MclslBudgetedView.Compare(a.DutyProgress, b.DutyProgress, true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            take: 80);
+        try { while (soulWork.MoveNext()) yield return null; }
+        finally { (soulWork as IDisposable)?.Dispose(); }
+        foreach (MclslWorldSoulRecord soul in soulOrder)
         {
+            if ((soulRank & 15) == 0) yield return null;
             string holder = soul.HolderActorId > 0 ? Blank(soul.HolderActorName) : "无主";
             snapshot.WorldSoulRankLines.Add("第" + soulRank + "位｜" + soul.Name + "｜" + Quality(soul.Quality) + "｜" + soul.State + "｜" + holder + "｜天职" + soul.DutyProgress + "%｜反噬" + soul.DutyBacklash + "%");
             soulRank++;
         }
     }
 
-    private static void BuildCodexPageCaches(MclslCodexSnapshot snapshot)
+    private static IEnumerator BuildCodexPageCaches(MclslCodexSnapshot snapshot)
     {
+        yield return null;
         MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run == null) return;
+        if (run == null) yield break;
 
         List<MclslWorldSoulRecord> souls = run.WorldSouls ?? new List<MclslWorldSoulRecord>();
         snapshot.WorldSoulManifestedCount = souls.Count(x => string.Equals(x.State, "显化", StringComparison.Ordinal));
         snapshot.WorldSoulHeldCount = souls.Count(x => string.Equals(x.State, "已祭炼", StringComparison.Ordinal));
-        snapshot.WorldSoulsSorted.AddRange(souls
-            .Where(x => x != null)
-            .OrderBy(x => SoulStateOrder(x.State))
-            .ThenBy(x => x.Name, StringComparer.Ordinal));
+        IEnumerator view1 = MclslBudgetedView.Sort(souls,
+            snapshot.WorldSoulsSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(SoulStateOrder(a.State), SoulStateOrder(b.State), false); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            filter: x => x != null);
+        try { while (view1.MoveNext()) yield return null; }
+        finally { (view1 as IDisposable)?.Dispose(); }
 
+        yield return null;
         List<MclslRunEventRecord> events = run.Events ?? new List<MclslRunEventRecord>();
-        snapshot.VisibleEventsSorted.AddRange(events
-            .Where(x => x != null && !string.Equals(x.EventType, "cycle_start", StringComparison.Ordinal))
-            .OrderByDescending(x => x.Year));
+        IEnumerator view2 = MclslBudgetedView.Sort(events,
+            snapshot.VisibleEventsSorted,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null && !string.Equals(x.EventType, "cycle_start", StringComparison.Ordinal));
+        try { while (view2.MoveNext()) yield return null; }
+        finally { (view2 as IDisposable)?.Dispose(); }
         for (int i = 0; i < snapshot.VisibleEventsSorted.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             string category = EventCategory(snapshot.VisibleEventsSorted[i]);
-            snapshot.EventCategoryCounts[category] = snapshot.EventCategoryCounts.TryGetValue(category, out int count) ? count + 1 : 1;
             if (string.Equals(category, MclslEventCatalog.DaoStruggle, StringComparison.Ordinal)
                 && snapshot.DaoStruggleEventsSorted.Count < 120)
                 snapshot.DaoStruggleEventsSorted.Add(snapshot.VisibleEventsSorted[i]);
@@ -304,11 +261,11 @@ internal sealed class MclslCodexSnapshot
             "ancient_meteor_stone");
         snapshot.AddAncientEventGroup(snapshot.AncientSecretRealmEvents, "ancient_secret_realm");
         snapshot.AddAncientEventGroup(snapshot.AncientWorldSoulObservationEvents, "ancient_heaven_earth_resonance");
-        snapshot.EventCategoryCounts[MclslEventCatalog.All] = snapshot.VisibleEventsSorted.Count;
-
+        yield return null;
         List<MclslInverseTruthRecord> truths = run.InverseTruths ?? new List<MclslInverseTruthRecord>();
         for (int i = 0; i < truths.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslInverseTruthRecord truth = truths[i];
             if (truth == null) continue;
             if (truth.CountsTowardLongevity)
@@ -321,59 +278,105 @@ internal sealed class MclslCodexSnapshot
             else snapshot.CanonTruths.Add(truth);
         }
 
+        yield return null;
         List<MclslActorReincarnationRecord> reincarnations = run.ReincarnationRecords ?? new List<MclslActorReincarnationRecord>();
         for (int i = 0; i < reincarnations.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslActorReincarnationRecord record = reincarnations[i];
             if (record == null) continue;
             if (string.Equals(record.Status, "已转", StringComparison.Ordinal)) snapshot.ReincarnationAppliedCount++;
             else snapshot.ReincarnationPendingCount++;
         }
-        snapshot.ReincarnationRecordsSorted.AddRange(reincarnations
-            .Where(x => x != null)
-            .OrderByDescending(x => x.AppliedYear > 0 ? x.AppliedYear : x.DeathYear)
-            .ThenByDescending(x => MclslRealmIds.Index(x.SourceRealmId))
-            .Take(80));
+        IEnumerator view3 = MclslBudgetedView.Sort(reincarnations,
+            snapshot.ReincarnationRecordsSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(a.AppliedYear > 0 ? a.AppliedYear : a.DeathYear, b.AppliedYear > 0 ? b.AppliedYear : b.DeathYear, true); if (order != 0) return order; return MclslBudgetedView.Compare(MclslRealmIds.Index(a.SourceRealmId), MclslRealmIds.Index(b.SourceRealmId), true); },
+            filter: x => x != null,
+            take: 80);
+        try { while (view3.MoveNext()) yield return null; }
+        finally { (view3 as IDisposable)?.Dispose(); }
 
+        yield return null;
         MclslHuanzhenExternalState huanzhen = MclslHuanzhenSystem.Current;
         if (huanzhen?.Anchors != null)
         {
-            snapshot.HuanzhenAnchorsSorted.AddRange(huanzhen.Anchors
-                .Where(x => x != null)
-                .OrderByDescending(x => x.Year)
-                .ThenByDescending(x => x.Sequence));
+            IEnumerator view4 = MclslBudgetedView.Sort(huanzhen.Anchors,
+            snapshot.HuanzhenAnchorsSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(a.Year, b.Year, true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Sequence, b.Sequence, true); },
+            filter: x => x != null);
+        try { while (view4.MoveNext()) yield return null; }
+        finally { (view4 as IDisposable)?.Dispose(); }
         }
         if (huanzhen?.History != null)
         {
-            snapshot.HuanzhenHistoriesSorted.AddRange(huanzhen.History
-                .Where(x => x != null)
-                .OrderByDescending(x => x.DeathYear)
-                .Take(80));
+            IEnumerator view5 = MclslBudgetedView.Sort(huanzhen.History,
+            snapshot.HuanzhenHistoriesSorted,
+            (a, b) => MclslBudgetedView.Compare(a.DeathYear, b.DeathYear, true),
+            filter: x => x != null,
+            take: 80);
+        try { while (view5.MoveNext()) yield return null; }
+        finally { (view5 as IDisposable)?.Dispose(); }
         }
 
+        yield return null;
         List<MclslFactionMissionRecord> missions = run.FactionMissions ?? new List<MclslFactionMissionRecord>();
-        snapshot.WanXianRecentMissions.AddRange(missions
-            .Where(x => x != null && x.FactionId == "wanxian")
-            .OrderByDescending(x => x.Year)
-            .Take(3));
-        snapshot.FiveEldersRecentMissions.AddRange(missions
-            .Where(x => x != null && x.FactionId == "five_elders")
-            .OrderByDescending(x => x.Year)
-            .Take(3));
+        if (snapshot.Year < run.AncientLawEndYear && run.AncientSectMissions != null)
+        {
+            foreach (var sect in MclslFactionMissionSystem.AncientSects)
+                snapshot.AncientSectRecentMissions[sect.Id] = new List<MclslFactionMissionRecord>(3);
+            int complete = 0;
+            for (int i = run.AncientSectMissions.Count - 1; i >= 0 && complete < MclslFactionMissionSystem.AncientSects.Length; i--)
+            {
+                if ((i & 63) == 0) yield return null;
+                MclslFactionMissionRecord mission = run.AncientSectMissions[i];
+                if (mission == null || mission.FactionId == null
+                    || !snapshot.AncientSectRecentMissions.TryGetValue(mission.FactionId, out List<MclslFactionMissionRecord> recent)
+                    || recent.Count >= 3) continue;
+                recent.Add(mission);
+                if (recent.Count == 3) complete++;
+            }
+        }
+        IEnumerator view6 = MclslBudgetedView.Sort(missions,
+            snapshot.WanXianRecentMissions,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null && x.FactionId == "wanxian",
+            take: 3);
+        try { while (view6.MoveNext()) yield return null; }
+        finally { (view6 as IDisposable)?.Dispose(); }
+        IEnumerator view7 = MclslBudgetedView.Sort(missions,
+            snapshot.FiveEldersRecentMissions,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null && x.FactionId == "five_elders",
+            take: 3);
+        try { while (view7.MoveNext()) yield return null; }
+        finally { (view7 as IDisposable)?.Dispose(); }
         List<MclslFactionPressureRecord> pressureEvents = run.FactionPressureEvents ?? new List<MclslFactionPressureRecord>();
-        snapshot.WanXianRecentPressure.AddRange(pressureEvents
-            .Where(x => x != null && x.FactionId == "wanxian")
-            .OrderByDescending(x => x.Year)
-            .Take(2));
-        snapshot.FiveEldersRecentPressure.AddRange(pressureEvents
-            .Where(x => x != null && x.FactionId == "five_elders")
-            .OrderByDescending(x => x.Year)
-            .Take(2));
+        IEnumerator view8 = MclslBudgetedView.Sort(pressureEvents,
+            snapshot.WanXianRecentPressure,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null && x.FactionId == "wanxian",
+            take: 2);
+        try { while (view8.MoveNext()) yield return null; }
+        finally { (view8 as IDisposable)?.Dispose(); }
+        IEnumerator view9 = MclslBudgetedView.Sort(pressureEvents,
+            snapshot.FiveEldersRecentPressure,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null && x.FactionId == "five_elders",
+            take: 2);
+        try { while (view9.MoveNext()) yield return null; }
+        finally { (view9 as IDisposable)?.Dispose(); }
 
+        yield return null;
         List<MclslDeathRecord> deaths = run.DeathRecords ?? new List<MclslDeathRecord>();
-        snapshot.DeathsByYear.AddRange(deaths.Where(x => x != null).OrderByDescending(x => x.Year));
+        IEnumerator view10 = MclslBudgetedView.Sort(deaths,
+            snapshot.DeathsByYear,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null);
+        try { while (view10.MoveNext()) yield return null; }
+        finally { (view10 as IDisposable)?.Dispose(); }
         for (int i = 0; i < snapshot.DeathsByYear.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslDeathRecord death = snapshot.DeathsByYear[i];
             string realm = string.IsNullOrWhiteSpace(death.RealmId) ? MclslRealmIds.Mortal : death.RealmId;
             if (!snapshot.DeathsByRealm.TryGetValue(realm, out List<MclslDeathRecord> list))
@@ -384,47 +387,65 @@ internal sealed class MclslCodexSnapshot
             list.Add(death);
         }
 
+        yield return null;
         List<MclslWorldCaveRecord> caves = run.WorldCaves ?? new List<MclslWorldCaveRecord>();
         snapshot.ActiveCaveCount = caves.Count(x => x != null && string.Equals(x.State, "活跃", StringComparison.Ordinal));
-        snapshot.CavesSorted.AddRange(caves
-            .Where(x => x != null)
-            .OrderBy(x => CaveStateOrder(x.State))
-            .ThenByDescending(x => x.Quality)
-            .ThenBy(x => x.Name, StringComparer.Ordinal));
-        snapshot.HeavenEarthEssencesSorted.AddRange((run.GeneratedItems ?? new List<MclslGeneratedItemRecord>())
-            .Where(x => x != null && x.Kind == MclslGeneratedKinds.HeavenEarthEssence)
-            .OrderByDescending(x => x.CreatedYear)
-            .Take(200));
+        IEnumerator view11 = MclslBudgetedView.Sort(caves,
+            snapshot.CavesSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(CaveStateOrder(a.State), CaveStateOrder(b.State), false); if (order != 0) return order; order = MclslBudgetedView.Compare(a.Quality, b.Quality, true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            filter: x => x != null);
+        try { while (view11.MoveNext()) yield return null; }
+        finally { (view11 as IDisposable)?.Dispose(); }
+        IEnumerator view12 = MclslBudgetedView.Sort((run.GeneratedItems ?? new List<MclslGeneratedItemRecord>()),
+            snapshot.HeavenEarthEssencesSorted,
+            (a, b) => MclslBudgetedView.Compare(a.CreatedYear, b.CreatedYear, true),
+            filter: x => x != null && x.Kind == MclslGeneratedKinds.HeavenEarthEssence,
+            take: 200);
+        try { while (view12.MoveNext()) yield return null; }
+        finally { (view12 as IDisposable)?.Dispose(); }
 
+        yield return null;
         List<MclslWorldChangeRecord> changes = run.WorldChanges ?? new List<MclslWorldChangeRecord>();
         snapshot.ActiveWorldChangeCount = changes.Count(x => x != null && string.Equals(x.State, "活跃", StringComparison.Ordinal));
-        snapshot.WorldChangesSorted.AddRange(changes
-            .Where(x => x != null)
-            .OrderBy(x => WorldChangeStateOrder(x.State))
-            .ThenByDescending(x => x.StartYear)
-            .Take(200));
-        snapshot.WorldChangeMarrowsSorted.AddRange((run.GeneratedItems ?? new List<MclslGeneratedItemRecord>())
-            .Where(x => x != null && x.Kind == MclslGeneratedKinds.WorldChangeMarrow)
-            .OrderByDescending(x => x.CreatedYear)
-            .Take(200));
+        IEnumerator view13 = MclslBudgetedView.Sort(changes,
+            snapshot.WorldChangesSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(WorldChangeStateOrder(a.State), WorldChangeStateOrder(b.State), false); if (order != 0) return order; return MclslBudgetedView.Compare(a.StartYear, b.StartYear, true); },
+            filter: x => x != null,
+            take: 200);
+        try { while (view13.MoveNext()) yield return null; }
+        finally { (view13 as IDisposable)?.Dispose(); }
+        IEnumerator view14 = MclslBudgetedView.Sort((run.GeneratedItems ?? new List<MclslGeneratedItemRecord>()),
+            snapshot.WorldChangeMarrowsSorted,
+            (a, b) => MclslBudgetedView.Compare(a.CreatedYear, b.CreatedYear, true),
+            filter: x => x != null && x.Kind == MclslGeneratedKinds.WorldChangeMarrow,
+            take: 200);
+        try { while (view14.MoveNext()) yield return null; }
+        finally { (view14 as IDisposable)?.Dispose(); }
 
+        yield return null;
         List<MclslGeneratedItemRecord> generatedItems = run.GeneratedItems ?? new List<MclslGeneratedItemRecord>();
-        snapshot.FoundationWondersSorted.AddRange(generatedItems
-            .Where(x => x != null && x.Kind == MclslGeneratedKinds.FoundationWonder)
-            .OrderByDescending(x => x.CreatedYear)
-            .Take(240));
+        IEnumerator view15 = MclslBudgetedView.Sort(generatedItems,
+            snapshot.FoundationWondersSorted,
+            (a, b) => MclslBudgetedView.Compare(a.CreatedYear, b.CreatedYear, true),
+            filter: x => x != null && x.Kind == MclslGeneratedKinds.FoundationWonder,
+            take: 240);
+        try { while (view15.MoveNext()) yield return null; }
+        finally { (view15 as IDisposable)?.Dispose(); }
         for (int i = 0; i < snapshot.FoundationWondersSorted.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslGeneratedItemRecord wonder = snapshot.FoundationWondersSorted[i];
             if (wonder.Category == MclslGeneratedObjectFactory.FoundationHeaven) snapshot.FoundationHeavenCount++;
             if (wonder.Category == MclslGeneratedObjectFactory.FoundationEarth) snapshot.FoundationEarthCount++;
             if (!string.IsNullOrWhiteSpace(wonder.HolderName)) snapshot.FoundationRefinedCount++;
         }
 
+        yield return null;
         List<MclslSectRuinRecord> ruins = run.SectRuins ?? new List<MclslSectRuinRecord>();
         snapshot.OpenRuinCount = ruins.Count(IsRuinOpen);
         for (int i = 0; i < ruins.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslSectRuinRecord ruin = ruins[i];
             if (ruin == null || string.IsNullOrWhiteSpace(ruin.Id)) continue;
             snapshot.RuinNameById[ruin.Id] = string.IsNullOrWhiteSpace(ruin.Name) ? "无名遗迹" : ruin.Name;
@@ -434,6 +455,7 @@ internal sealed class MclslCodexSnapshot
         List<MclslRuinExplorationRecord> explorations = run.RuinExplorations ?? new List<MclslRuinExplorationRecord>();
         for (int i = 0; i < explorations.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslRuinExplorationRecord exploration = explorations[i];
             if (exploration == null) continue;
             if (!string.IsNullOrWhiteSpace(exploration.RuinId))
@@ -442,42 +464,49 @@ internal sealed class MclslCodexSnapshot
                 snapshot.LineageRevivalCountsById[exploration.LinkedLineageId] = snapshot.LineageRevivalCountsById.TryGetValue(exploration.LinkedLineageId, out int count) ? count + 1 : 1;
         }
 
+        yield return null;
         List<MclslTechniqueLineageRecord> lineageSource = run.TechniqueLineages ?? new List<MclslTechniqueLineageRecord>();
         for (int i = 0; i < lineageSource.Count; i++)
         {
+            if (i > 0 && (i & 31) == 0) yield return null;
             MclslTechniqueLineageRecord lineage = lineageSource[i];
             if (lineage == null || string.IsNullOrWhiteSpace(lineage.Id)) continue;
             snapshot.LineageNameById[lineage.Id] = lineage.Name ?? string.Empty;
             snapshot.LineageSectById[lineage.Id] = lineage.SectDisplayName ?? string.Empty;
         }
 
-        snapshot.TechniqueLineagesSorted.AddRange(lineageSource
-            .Where(x => x != null)
-            .OrderBy(x => LineageStateOrder(x.LifecycleState))
-            .ThenByDescending(x => x.CurrentPractitioners)
-            .ThenByDescending(x => MclslRealmIds.Index(x.PeakRealm))
-            .ThenBy(x => x.Name, StringComparer.Ordinal)
-            .Take(160));
+        IEnumerator view16 = MclslBudgetedView.Sort(lineageSource,
+            snapshot.TechniqueLineagesSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(LineageStateOrder(a.LifecycleState), LineageStateOrder(b.LifecycleState), false); if (order != 0) return order; order = MclslBudgetedView.Compare(a.CurrentPractitioners, b.CurrentPractitioners, true); if (order != 0) return order; order = MclslBudgetedView.Compare(MclslRealmIds.Index(a.PeakRealm), MclslRealmIds.Index(b.PeakRealm), true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            filter: x => x != null,
+            take: 160);
+        try { while (view16.MoveNext()) yield return null; }
+        finally { (view16 as IDisposable)?.Dispose(); }
         if (MclslWorldEpochSystem.IsNewLawActive(snapshot.Year))
         {
-            snapshot.DaoStruggleLineagesSorted.AddRange(lineageSource
-                .Where(x => x != null
-                    && x.CurrentPractitioners > 1)
-                .OrderByDescending(x => x.CurrentPractitioners)
-                .ThenByDescending(x => MclslRealmIds.Index(x.PeakRealm))
-                .ThenBy(x => x.Name, StringComparer.Ordinal)
-                .Take(20));
+            IEnumerator view17 = MclslBudgetedView.Sort(lineageSource,
+            snapshot.DaoStruggleLineagesSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(a.CurrentPractitioners, b.CurrentPractitioners, true); if (order != 0) return order; order = MclslBudgetedView.Compare(MclslRealmIds.Index(a.PeakRealm), MclslRealmIds.Index(b.PeakRealm), true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            filter: x => x != null
+                    && x.CurrentPractitioners > 1,
+            take: 20);
+        try { while (view17.MoveNext()) yield return null; }
+        finally { (view17 as IDisposable)?.Dispose(); }
         }
-        snapshot.RuinsSorted.AddRange(ruins
-            .Where(x => x != null)
-            .OrderBy(x => RuinStateOrder(x.State))
-            .ThenByDescending(x => x.Quality)
-            .ThenBy(x => x.Name, StringComparer.Ordinal)
-            .Take(160));
-        snapshot.RuinExplorationsSorted.AddRange(explorations
-            .Where(x => x != null)
-            .OrderByDescending(x => x.Year)
-            .Take(160));
+        IEnumerator view18 = MclslBudgetedView.Sort(ruins,
+            snapshot.RuinsSorted,
+            (a, b) => { int order; order = MclslBudgetedView.Compare(RuinStateOrder(a.State), RuinStateOrder(b.State), false); if (order != 0) return order; order = MclslBudgetedView.Compare(a.Quality, b.Quality, true); if (order != 0) return order; return MclslBudgetedView.Compare(a.Name, b.Name, false, StringComparer.Ordinal); },
+            filter: x => x != null,
+            take: 160);
+        try { while (view18.MoveNext()) yield return null; }
+        finally { (view18 as IDisposable)?.Dispose(); }
+        IEnumerator view19 = MclslBudgetedView.Sort(explorations,
+            snapshot.RuinExplorationsSorted,
+            (a, b) => MclslBudgetedView.Compare(a.Year, b.Year, true),
+            filter: x => x != null,
+            take: 160);
+        try { while (view19.MoveNext()) yield return null; }
+        finally { (view19 as IDisposable)?.Dispose(); }
     }
 
     private void AddAncientEventGroup(List<MclslRunEventRecord> target, params string[] eventTypes)
@@ -497,48 +526,6 @@ internal sealed class MclslCodexSnapshot
         target.Sort((a, b) => (b?.Year ?? 0).CompareTo(a?.Year ?? 0));
     }
 
-    private static CultivatorRankEntry BuildRankEntry(Actor actor, string realm)
-    {
-        MclslActorCultivationView cultivation = MclslActorCultivationQuery.Build(actor);
-        int aptitude = cultivation.Aptitude;
-        int essence = cultivation.TrueEssence;
-        string essenceText = cultivation.NextRealmMinimum > 0 ? essence + "（下境最低" + cultivation.NextRealmMinimum + "）" : essence.ToString();
-        float qi = cultivation.CultivationProgress;
-        int contribution = cultivation.Contribution;
-        int stones = cultivation.SpiritStones;
-        string extra = StageBrief(cultivation);
-        string line = cultivation.Name
-            + "｜" + cultivation.RealmName
-            + "｜灵根 " + aptitude + "·" + cultivation.GiftName
-            + "｜仙缘 " + cultivation.ImmortalFate
-            + "｜修炼 " + qi.ToString("0") + "%"
-            + "｜心境 " + cultivation.MindState
-            + "｜真元 " + essenceText
-            + "｜贡献 " + contribution
-            + "｜灵石 " + stones
-            + extra;
-        return new CultivatorRankEntry
-        {
-            Name = cultivation.Name,
-            RealmIndex = Math.Max(0, MclslRealmIds.Index(realm)),
-            TrueEssence = essence,
-            Contribution = contribution,
-            Aptitude = aptitude,
-            Line = line
-        };
-    }
-
-    private static string StageBrief(MclslActorCultivationView cultivation) => cultivation.RealmId switch
-    {
-        MclslRealmIds.JinDan => "｜" + ReplaceTags(string.IsNullOrWhiteSpace(cultivation.GoldenCoreLaws) ? "未悟法" : cultivation.GoldenCoreLaws),
-        MclslRealmIds.YuanYing => "｜" + (string.IsNullOrWhiteSpace(cultivation.NascentEssenceName) ? "未炼天地之精" : cultivation.NascentEssenceName),
-        MclslRealmIds.HuaShen => "｜" + (string.IsNullOrWhiteSpace(cultivation.DivineMarrowName) ? "未抽天地之髓" : cultivation.DivineMarrowName),
-        MclslRealmIds.HeDao => "｜天地之魄·" + (string.IsNullOrWhiteSpace(cultivation.WorldSoulName) ? "无主魄位" : cultivation.WorldSoulName) + "｜逆理" + MclslInverseTruthStageCatalog.StageName(cultivation.InverseTruthProgress) + (cultivation.HarmonyLeap == 1 ? "｜祭魄跃迁" : string.Empty),
-        MclslRealmIds.ChangSheng => "｜" + (string.IsNullOrWhiteSpace(cultivation.InverseTruthName) ? "未定天地之理" : cultivation.InverseTruthName) + "｜逆理" + MclslInverseTruthStageCatalog.StageName(cultivation.InverseTruthProgress),
-        _ => string.Empty
-    };
-
-    private static string ReplaceTags(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
     private static string Blank(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value;
     private static string Quality(int q) => q switch { 4 => "玄奇", 3 => "天奇", 2 => "地奇", _ => "凡奇" };
     private static string ShortCause(string value)
@@ -572,59 +559,5 @@ internal sealed class MclslCodexSnapshot
         return string.IsNullOrWhiteSpace(record.Category) ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
     }
 
-    private sealed class CultivatorRankEntry
-    {
-        internal string Name = string.Empty;
-        internal int RealmIndex;
-        internal int TrueEssence;
-        internal int Contribution;
-        internal int Aptitude;
-        internal string Line = string.Empty;
-    }
-}
 
-internal sealed class MclslKingdomCodexEntry
-{
-    internal string Name = string.Empty;
-    internal int TotalCultivators;
-    internal readonly Dictionary<string, int> RealmCounts = new(StringComparer.Ordinal);
-    internal readonly List<MclslKingdomCultivatorEntry> Cultivators = new();
-    internal readonly Dictionary<string, List<MclslKingdomCultivatorEntry>> CultivatorsByRealm = new(StringComparer.Ordinal);
-
-    internal void RebuildRealmIndex()
-    {
-        CultivatorsByRealm.Clear();
-        for (int i = 0; i < Cultivators.Count; i++)
-        {
-            MclslKingdomCultivatorEntry cultivator = Cultivators[i];
-            if (cultivator == null) continue;
-            string realm = string.IsNullOrWhiteSpace(cultivator.RealmId) ? MclslRealmIds.Mortal : cultivator.RealmId;
-            if (!CultivatorsByRealm.TryGetValue(realm, out List<MclslKingdomCultivatorEntry> list))
-            {
-                list = new List<MclslKingdomCultivatorEntry>();
-                CultivatorsByRealm[realm] = list;
-            }
-            list.Add(cultivator);
-        }
-    }
-
-    internal IReadOnlyList<MclslKingdomCultivatorEntry> CultivatorsForRealm(string realmId)
-    {
-        if (string.IsNullOrWhiteSpace(realmId) || string.Equals(realmId, MclslEventCatalog.All, StringComparison.Ordinal))
-            return Cultivators;
-        return CultivatorsByRealm.TryGetValue(realmId, out List<MclslKingdomCultivatorEntry> list)
-            ? list
-            : Array.Empty<MclslKingdomCultivatorEntry>();
-    }
-}
-
-internal sealed class MclslKingdomCultivatorEntry
-{
-    internal long ActorId;
-    internal string Name = string.Empty;
-    internal string RealmId = string.Empty;
-    internal string RealmName = string.Empty;
-    internal int RealmIndex;
-    internal int TrueEssence;
-    internal int Contribution;
 }

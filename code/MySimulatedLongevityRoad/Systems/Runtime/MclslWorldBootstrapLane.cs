@@ -4,6 +4,7 @@ using System.Diagnostics;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Traits;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -48,15 +49,20 @@ internal static class MclslWorldBootstrapLane
 
         long started = Stopwatch.GetTimestamp();
         int processed = 0;
-        while (_cursor < _actors.Count && processed < budget)
+        while (_cursor < _actors.Count && processed < budget && !MclslAnnualFrameBudget.Expired
+            && (maxMilliseconds <= 0d || (Stopwatch.GetTimestamp() - started) * 1000d / Stopwatch.Frequency < maxMilliseconds))
         {
             Actor actor = _actors[_cursor++];
             processed++;
             if (actor?.data == null || !MclslActorAccessor.Alive(actor)) continue;
+            MclslBeastActorRegistration.ReconcileForm(actor);
+            MclslProfessionSystem.ReconcileAndPromote(actor);
 
             // 完整人口只恢复角色引用；修炼身份校正仅作用于有明确修炼标记的角色。
             MclslCultivatorCandidateIndex.Observe(actor);
             if (!MclslEligibility.CanCultivate(actor)) continue;
+            if (MclslImmortalActorRegistration.IsImmortal(actor))
+                MclslImmortalActorRegistration.RepairRealmAfterLoad(actor, MclslRuntime.CurrentYear());
 
             bool hasCultivationState = MclslCultivationActorMarker.HasCultivationMarker(actor)
                 || MclslActorAccessor.HasCultivationPath(actor)
@@ -88,7 +94,6 @@ internal static class MclslWorldBootstrapLane
         }
 
         if (_cursor < _actors.Count) return;
-        MclslTechniqueOccupationSystem.Rebuild();
         MclslWorldActorQuery.MarkDirty();
         Clear();
     }

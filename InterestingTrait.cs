@@ -21,16 +21,28 @@ internal sealed class MclslMod : BasicMod<MclslMod>
         try
         {
             MclslLocalizationRuntimeMarker.MarkLoaded();
+            MclslLocalizationBridge.LoadChineseCatalog();
             MclslConfigLocalization.Init();
-            MclslRuntimeSettings.LoadFromModConfig(GetConfig());
+            ModConfig config = GetConfig();
+            MclslConfig.EnsurePhysiqueAutoCollectItem(config);
+            MclslRuntimeSettings.LoadFromModConfig(config);
             MclslTraitRegistration.Init();
             MclslItemUseSystem.RegisterStatuses();
-            MclslArtifactSystem.RegisterNativeWeapons();
+            MclslSpellSystem.RegisterStatuses();
+            MclslArtifactSystem.RegisterEquipmentStatuses();
+            MclslArtifactRain.Init();
             MclslWorldSoulActorRegistration.Init();
+            MclslImmortalActorRegistration.Init();
+            MclslBeastConfig.Ensure(config);
+            MclslBeastActorRegistration.Init();
+            MclslNamedCharacterRegistration.Init();
             Harmony harmony = new Harmony(HarmonyId);
             int patchedCount = 0;
             patchedCount += MclslPatches.ApplySafely(harmony);
             patchedCount += MclslCombatPatches.ApplySafely(harmony);
+            if (MclslHarmonyPatchGuard.FailedRequiredCount > 0)
+                Debug.LogWarning("[模拟长生路] " + MclslHarmonyPatchGuard.FailedRequiredCount
+                    + " 个关键补丁未挂载：" + MclslHarmonyPatchGuard.FailedRequiredSummary);
             MclslRuntime.Init();
             MclslUiManager.Init();
             MclslNativeHistoryBridge.EnsureRegistered();

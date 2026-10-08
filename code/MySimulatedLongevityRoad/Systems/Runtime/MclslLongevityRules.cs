@@ -45,18 +45,44 @@ internal static class MclslLongevityRules
 
     internal static int ExpectedLifespan(Actor actor, string realm)
     {
-        bool ancient = UsesAncientLifespan(actor, realm);
-        int baseLifespan = ExpectedLifespan(realm, ancient);
-        if (actor?.data == null || realm == MclslRealmIds.ChangSheng) return baseLifespan;
-        int maxBonus = MaxTransferBonus(realm, ancient);
-        int bonus = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LifespanStolenBonus, 0), 0, maxBonus);
-        int penalty = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LifespanDrainedPenalty, 0), 0, Math.Max(0, baseLifespan - 20));
-        return Math.Max(20, baseLifespan + bonus - penalty);
+        int baseLifespan = BaseLifespan(actor, realm);
+        if (actor?.data == null) return baseLifespan;
+
+        int effectiveLifespan = baseLifespan + MclslPhysiqueSystem.LifespanBonus(actor);
+        if (realm != MclslRealmIds.ChangSheng)
+        {
+            int maxBonus = Math.Max(20, baseLifespan / 2);
+            int bonus = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LifespanStolenBonus, 0), 0, maxBonus);
+            int penalty = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LifespanDrainedPenalty, 0), 0, Math.Max(0, baseLifespan - 20));
+            effectiveLifespan += bonus - penalty;
+        }
+
+        effectiveLifespan = Math.Max(20, effectiveLifespan);
+        return actor.hasTrait("MclslPhysiqueWeak")
+            ? Math.Max(20, (int)Math.Floor(effectiveLifespan * 0.5d))
+            : effectiveLifespan;
     }
 
     internal static int MaxTransferBonus(string realm) => Math.Max(20, ExpectedLifespan(realm) / 2);
 
-    private static int MaxTransferBonus(string realm, bool ancient) => Math.Max(20, ExpectedLifespan(realm, ancient) / 2);
+    private static int BaseLifespan(Actor actor, string realm)
+    {
+        int current = ExpectedLifespan(realm, UsesAncientLifespan(actor, realm));
+        if (actor?.data == null || MclslRealmIds.Index(realm) < 0 || realm == MclslRealmIds.ChangSheng)
+            return current;
+        return Math.Max(current, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ConvertedLifespanFloor, 0));
+    }
+
+    internal static void PreserveAncientLifespanForConversion(Actor actor)
+    {
+        if (actor?.data == null
+            || MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
+                != MclslCultivationSystemIds.AncientLaw) return;
+        string realm = MclslActorAccessor.Realm(actor);
+        if (MclslRealmIds.Index(realm) < 0 || realm == MclslRealmIds.ChangSheng) return;
+        int preserved = Math.Max(BaseLifespan(actor, realm), ExpectedLifespan(realm, true));
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.ConvertedLifespanFloor, preserved);
+    }
 
     internal static void ApplyRuntimeLifespan(Actor actor)
     {
@@ -65,11 +91,14 @@ internal static class MclslLongevityRules
 
         string realm = MclslActorAccessor.Realm(actor);
         if (string.IsNullOrWhiteSpace(realm)) return;
+        bool hasWeakPhysique = actor.hasTrait("MclslPhysiqueWeak");
         int expected = ExpectedLifespan(actor, realm);
-        if (expected <= MortalBaseLifespan) return;
+        if (expected <= MortalBaseLifespan && !hasWeakPhysique) return;
 
         float current = GetStatSafe(actor, "lifespan", 0f);
-        if (current + 0.01f >= expected) return;
+        if (hasWeakPhysique
+            ? Math.Abs(current - expected) < 0.01f
+            : current + 0.01f >= expected) return;
 
         long actorId = MclslActorAccessor.Id(actor);
         if (actorId > 0 && !RepairingActorIds.Add(actorId)) return;
@@ -93,9 +122,7 @@ internal static class MclslLongevityRules
         string receiverRealm = MclslActorAccessor.Realm(receiver);
         if (string.IsNullOrWhiteSpace(receiverRealm) || receiverRealm == MclslRealmIds.ChangSheng) return false;
         string donorRealm = MclslActorAccessor.Realm(donor);
-        bool receiverAncient = UsesAncientLifespan(receiver, receiverRealm);
-        int receiverBase = ExpectedLifespan(receiverRealm, receiverAncient);
-        int receiverCap = MaxTransferBonus(receiverRealm, receiverAncient);
+        int receiverCap = Math.Max(20, BaseLifespan(receiver, receiverRealm) / 2);
         int receiverBonus = Math.Clamp(MclslActorAccessor.GetInt(receiver, MclslActorDataKeys.LifespanStolenBonus, 0), 0, receiverCap);
         int room = Math.Max(0, receiverCap - receiverBonus);
         if (room <= 0) return false;
@@ -127,6 +154,11 @@ internal static class MclslLongevityRules
         try { age = Math.Max(0, (int)Math.Floor((double)actor.getAge())); }
         catch { return false; }
         int limit = ExpectedLifespan(actor, realm);
+        MySimulatedLongevityRoad.Core.MclslDiagnostics.Cultivation(
+            "lifespan.annual_check",
+            "actor=" + MclslActorAccessor.Id(actor) + " year=" + year
+            + " realm=" + realm + " age=" + age + " limit=" + limit
+            + " convertedFloor=" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ConvertedLifespanFloor, 0));
         if (age < limit) return false;
 
         string name = MclslActorAccessor.DisplayName(actor);

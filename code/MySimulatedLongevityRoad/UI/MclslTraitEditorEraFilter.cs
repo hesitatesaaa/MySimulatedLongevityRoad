@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
@@ -13,12 +14,16 @@ internal static class MclslTraitEditorEraFilter
 {
     private const string NewLawRealmTitle = "新法境界";
     private const string AncientRealmTitle = "仙道境界";
-    private const int ActiveEditorRefreshIntervalFrames = 30;
-    private static int _lastActiveEditorRefreshFrame = -9999;
+    private static readonly HashSet<ActorTraitsEditor> Active = new();
+    private static readonly List<ActorTraitsEditor> Invalid = new();
+    private static bool _lastNewLaw;
+    internal static void OnClosed(ActorTraitsEditor editor) => Active.Remove(editor);
+    internal static void ClearRuntime() { Active.Clear(); Invalid.Clear(); _lastNewLaw = false; }
 
     internal static void Apply(ActorTraitsEditor editor)
     {
         if (editor == null) return;
+        Active.Add(editor);
 
         int year = MclslRuntime.CurrentYear();
         bool showNewLaw = MclslWorldEpochSystem.IsNewLawActive(year);
@@ -28,24 +33,20 @@ internal static class MclslTraitEditorEraFilter
         ApplyRealmButtonVisibility(editor, year);
     }
 
-    internal static void RefreshActiveEditorsThrottled(int frameCount)
+    internal static void RefreshVisibleEditors()
     {
-        if (frameCount - _lastActiveEditorRefreshFrame < ActiveEditorRefreshIntervalFrames) return;
-        _lastActiveEditorRefreshFrame = frameCount;
-        ActorTraitsEditor[] editors;
-        try { editors = Resources.FindObjectsOfTypeAll<ActorTraitsEditor>(); }
-        catch (Exception ex)
+        if (Active.Count == 0) return;
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        if (newLaw == _lastNewLaw) return;
+        _lastNewLaw = newLaw;
+        Invalid.Clear();
+        foreach (ActorTraitsEditor editor in Active)
         {
-            MclslDiagnostics.Error("trait-editor-find-active-editors", "查找特质编辑器失败: " + ex.Message);
-            return;
-        }
-        if (editors == null || editors.Length == 0) return;
-        for (int i = 0; i < editors.Length; i++)
-        {
-            ActorTraitsEditor editor = editors[i];
-            if (editor == null || !editor.gameObject.activeInHierarchy) continue;
+            if (editor == null || !editor.gameObject.activeInHierarchy) { Invalid.Add(editor); continue; }
             Apply(editor);
         }
+        for (int i = 0; i < Invalid.Count; i++) Active.Remove(Invalid[i]);
+        Invalid.Clear();
     }
 
     private static void ApplyRealmButtonVisibility(ActorTraitsEditor editor, int year)

@@ -1,54 +1,137 @@
 using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Core;
 
 namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslInverseTruthSystem
 {
-    internal static void TickAnnual(int year)
+    private readonly struct Challenger
     {
-        if (!MclslDetectionGate.TryBeginAnnualJob(MclslDetectionGate.AnnualInverseTruth, year)) return;
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.InverseTruths == null || run.InverseTruths.Count == 0) return;
-        bool effectsChanged = ApplyReversedTruthEffects(run, year);
+        internal readonly long Id;
+        internal readonly int Strength;
+        internal Challenger(Actor actor) { Id = MclslActorAccessor.Id(actor); Strength = ChallengeStrength(actor); }
+    }
+    private static readonly string[] AnnualEffects =
+    {
+        "truth_chuanfa_new_law", "truth_one_heart", "truth_wuyou", "truth_wangsheng",
+        "truth_human_will", "truth_true_unreal", "truth_player_failure_steps",
+        "truth_player_weak_not_fixed", "truth_player_duty_not_fixed", "truth_player_flawed_dao",
+        "truth_player_all_laws_one", "truth_player_reincarnation_unbroken", "truth_player_lifespan_drain"
+    };
+    private static readonly MclslOrderedIdIndex<Challenger> ChallengerOrder = new((a, b) => b.Strength.CompareTo(a.Strength));
+    private static MclslInverseAnnualState _orderingState;
+    private static MclslInverseAnnualState _captureState;
 
-        IReadOnlyList<Actor> highUnits = MclslCultivatorCandidateIndex.SelectRealmAtLeast(
-            MclslRealmIds.JinDan,
-            0);
-        List<Actor> candidates = new(MclslCultivatorCandidateIndex.SelectRealm(
-            MclslRealmIds.HeDao,
-            0,
-            MclslActorAccessor.Alive,
-            ChallengeStrength));
-        if (candidates.Count == 0)
+    internal static bool TickAnnual(int year)
+    {
+        while (!MclslAnnualFrameBudget.Expired)
         {
-            if (effectsChanged) MclslWorldArchiveStore.MarkDirty();
-            return;
+            MclslInverseAnnualState previous = MclslWorldRunRepository.Current.AnnualBatch.InverseWork;
+            int phase = previous?.Phase ?? -1;
+            if (TickAnnualSlice(year)) return true;
+            MclslInverseAnnualState current = MclslWorldRunRepository.Current.AnnualBatch.InverseWork;
+            if (current == null || (ReferenceEquals(previous, current) && phase == current.Phase)) return false;
+            // Phase transitions are progress too, including empty phases.
+            if (!MclslAnnualFrameBudget.TryConsumeOperation()) return false;
         }
+        return false;
+    }
 
-        MclslInverseTruthContext context = BuildContext(run, highUnits, year);
-        foreach (Actor actor in candidates)
+    private static bool TickAnnualSlice(int year)
+    {
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        if (run?.InverseTruths == null || run.InverseTruths.Count == 0) return true;
+        MclslAnnualBatchState batch = run.AnnualBatch;
+        MclslInverseAnnualState work = batch.InverseWork;
+        if (work == null || work.Year != year)
         {
-            if (MclslActorAccessor.Realm(actor) != MclslRealmIds.HeDao) continue;
-            MclslInverseTruthRecord truth = EnsureChallenge(actor, run, context, year);
-            if (truth == null || truth.Reversed) continue;
-
-            int gain = ProgressGain(actor, truth, context);
-            if (gain <= 0) continue;
-            truth.Progress = Math.Clamp(truth.Progress + gain, 0, 100);
-            truth.ChallengerActorId = MclslActorAccessor.Id(actor);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.InverseTruthProgress, truth.Progress);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在逆反天地之理“" + truth.Name + "”，进度" + truth.Progress + "%");
-
-            if (truth.Progress >= 100) Complete(actor, truth, year);
+            if (!MclslDetectionGate.TryBeginAnnualJob(MclslDetectionGate.AnnualInverseTruth, year)) return true;
+            work = batch.InverseWork = new MclslInverseAnnualState
+            { Year = year, SourceCount = MclslActorRegistry.Snapshot().Count };
+            for (int i = 0; i < AnnualEffects.Length; i++) work.Effects[i] = HasReversed(run, AnnualEffects[i]);
         }
         MclslWorldArchiveStore.MarkDirty();
-    }
+        IReadOnlyList<Actor> actors = MclslActorRegistry.CreateView(work.ActorIds);
+        switch (work.Phase)
+        {
+            case 0:
+                // Registry slots are rebuilt on load. Restart the read-only capture
+                // so a saved slot cursor cannot duplicate or omit current actors.
+                if (!ReferenceEquals(_captureState, work))
+                {
+                    _captureState = work; work.Cursor = 0; work.ActorIds.Clear();
+                    work.SourceCount = MclslActorRegistry.Snapshot().Count;
+                }
+                IReadOnlyList<Actor> source = MclslActorRegistry.Snapshot();
+                while (work.Cursor < work.SourceCount && MclslAnnualFrameBudget.TryConsumeOperation())
+                    work.ActorIds.Add(work.Cursor < source.Count ? MclslActorAccessor.Id(source[work.Cursor++]) : AdvanceEmpty(work));
+                if (work.Cursor < work.SourceCount) return false;
+                work.Cursor = 0; work.Phase = 1;
+                if (work.Effects[10]) MclslTechniqueLineageSystem.TryFuseNewLawLineage(year);
+                return false;
+            case 1:
+                if (!TickLimitedEffects(run, work, actors, year)) return false;
+                work.Cursor = 0; work.Phase = 2; return false;
+            case 2:
+                if (work.Effects[11] && !MclslActorReincarnationSystem.TickApplyAnnual(work, actors, year)) return false;
+                work.Cursor = 0; work.Phase = 3; return false;
+            case 3:
+                if (work.Effects[12] && !TickLifespanDrain(work, actors, year)) return false;
+                work.Cursor = 0; work.Phase = 4; return false;
+            case 4:
+            case 5:
+                // Selection has no gameplay effects. A reload may safely restart
+                // its partial order, whereas completed effects keep their saved cursors.
+                if (!ReferenceEquals(_orderingState, work))
+                {
+                    ChallengerOrder.Clear(); _orderingState = work;
+                    work.Phase = 4; work.Cursor = 0; work.ChallengerIds.Clear();
+                }
+                if (work.Phase == 4)
+                {
+                    while (work.Cursor < actors.Count && MclslAnnualFrameBudget.TryConsumeOperation())
+                    {
+                        Actor actor = actors[work.Cursor++];
+                        if (MclslActorAccessor.Alive(actor) && MclslActorAccessor.Realm(actor) == MclslRealmIds.HeDao)
+                            ChallengerOrder.Upsert(MclslActorAccessor.Id(actor), new Challenger(actor));
+                    }
+                    if (work.Cursor < actors.Count) return false;
+                    work.Phase = 5; work.Cursor = 0;
+                    work.Context = BuildContext(run, year);
+                }
+                while (work.Cursor < ChallengerOrder.Count && MclslAnnualFrameBudget.TryConsumeOperation())
+                    work.ChallengerIds.Add(ChallengerOrder[work.Cursor++].Id);
+                if (work.Cursor < ChallengerOrder.Count) return false;
+                work.Phase = 6; work.Cursor = 0; ChallengerOrder.Clear(); return false;
+            case 6:
+                MclslInverseTruthContext context = work.Context;
+                while (work.Cursor < work.ChallengerIds.Count && MclslAnnualFrameBudget.TryConsumeOperation())
+                {
+                    if (!MclslActorRegistry.Resolve(work.ChallengerIds[work.Cursor++], out Actor actor)
+                        || !MclslActorAccessor.Alive(actor)) continue;
+                    if (MclslActorAccessor.Realm(actor) != MclslRealmIds.HeDao) continue;
+                    MclslInverseTruthRecord truth = EnsureChallenge(actor, run, context, year);
+                    if (truth == null || truth.Reversed) continue;
 
-    internal static void Clear()
-    {
+                    int gain = ProgressGain(actor, truth, context);
+                    if (gain <= 0) continue;
+                    truth.Progress = Math.Clamp(truth.Progress + gain, 0, 100);
+                    truth.ChallengerActorId = MclslActorAccessor.Id(actor);
+                    MclslActorAccessor.Set(actor, MclslActorDataKeys.InverseTruthProgress, truth.Progress);
+                    MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在逆反天地之理“" + truth.Name + "”，进度" + truth.Progress + "%");
+
+                    if (truth.Progress >= 100) Complete(actor, truth, year);
+
+                }
+                if (work.Cursor < work.ChallengerIds.Count) return false;
+                batch.InverseWork = null; Clear(); return true;
+            default: throw new InvalidOperationException("Unknown inverse settlement phase");
+        }
     }
+    private static long AdvanceEmpty(MclslInverseAnnualState state) { state.Cursor++; return 0; }
+    internal static void Clear() { ChallengerOrder.Clear(); _orderingState = _captureState = null; }
 
     internal static bool IsTruthReversed(string truthId)
     {
@@ -83,7 +166,7 @@ internal static class MclslInverseTruthSystem
     private static int ChallengeScore(Actor actor, MclslInverseTruthRecord truth, MclslInverseTruthContext context)
     {
         int backlash = DutyBacklash(actor);
-        int baseScore = DutyProgress(actor) - backlash / 2 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) / 20;
+        int baseScore = DutyProgress(actor) - backlash / 2 + MclslResourceSystem.ContributionInfluence(actor, 20);
         string soul = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulName, string.Empty);
         string duty = MclslActorAccessor.GetString(actor, MclslActorDataKeys.HeavenlyDuty, string.Empty);
         string laws = MclslActorAccessor.GetString(actor, MclslActorDataKeys.DivineMarrowTags,
@@ -99,7 +182,7 @@ internal static class MclslInverseTruthSystem
             "truth_wuyou" => baseScore + unstable / 2 + Math.Max(0, 60 - MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 50)) + context.DeathRecords / 12,
             "truth_wangsheng" => baseScore + context.DeathRecords / 8 + context.HuanzhenReturns * 42 + (context.SpecialDeathRecords > 0 ? 20 : 0),
             "truth_mortal_miasma" => baseScore + context.MiasmaDeaths * 35 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma, 0) + (duty.Contains("凡") || truth.Name.Contains("瘴") ? 15 : 0),
-            "truth_human_will" => baseScore + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) / 10 + context.CompletedCycles * 20 + context.Cultivators / 20,
+            "truth_human_will" => baseScore + MclslResourceSystem.ContributionInfluence(actor, 10) + context.CompletedCycles * 20 + context.Cultivators / 20,
             "truth_true_unreal" => baseScore + context.FutureKnowledge * 14 + context.HuanzhenReturns * 25 + (soul.Contains("幻") || laws.Contains("空间") || laws.Contains("隐匿") ? 20 : 0),
             "truth_player_many_paths" => baseScore + context.SharedHighTechniqueGroups * 30 + context.Cultivators / 10 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TechniqueInsight, 0) / 5,
             "truth_player_failure_steps" => baseScore + context.SpecialDeathRecords * 24 + context.AvailableCaves * 5 + context.AvailableWorldChanges * 5 + unstable / 2,
@@ -133,7 +216,7 @@ internal static class MclslInverseTruthSystem
             "truth_wuyou" => context.DeathRecords >= 8 || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 50) < 45 ? baseGain + Math.Min(8, context.DeathRecords / 70 + unstable / 18) : 0,
             "truth_wangsheng" => context.DeathRecords >= 10 || context.HuanzhenReturns > 0 ? baseGain + Math.Min(8, context.SpecialDeathRecords + context.DeathRecords / 80 + context.HuanzhenReturns * 4) : 0,
             "truth_mortal_miasma" => context.MiasmaDeaths > 0 || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma, 0) >= 40 ? baseGain + context.MiasmaDeaths * 4 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma, 0) / 20 : 0,
-            "truth_human_will" => MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) >= 200 || context.CompletedCycles > 0 ? baseGain + Math.Min(7, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) / 180 + context.CompletedCycles * 3) : 0,
+            "truth_human_will" => MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0) >= 200 || context.CompletedCycles > 0 ? baseGain + Math.Min(7, MclslResourceSystem.ContributionInfluence(actor, 180) + context.CompletedCycles * 3) : 0,
             "truth_true_unreal" => context.FutureKnowledge > 0 || context.HuanzhenReturns > 0 ? baseGain + context.FutureKnowledge + context.HuanzhenReturns * 3 : 0,
             "truth_player_many_paths" => context.SharedHighTechniqueGroups > 0 ? baseGain + Math.Min(8, context.SharedHighTechniqueGroups * 2 + context.Cultivators / 90) : 0,
             "truth_player_failure_steps" => context.SpecialDeathRecords > 0 || context.AvailableWorldChanges > 0 ? baseGain + Math.Min(7, context.SpecialDeathRecords * 2 + context.AvailableWorldChanges / 4 + unstable / 25) : 0,
@@ -185,34 +268,39 @@ internal static class MclslInverseTruthSystem
         MclslAnnouncementSystem.Enqueue(displayName + "逆反“" + truth.Name + "”，证得长生。", "#D8C778", 12f, 1);
     }
 
-    private static bool ApplyReversedTruthEffects(MclslWorldRunState run, int year)
+    private static bool TickLimitedEffects(MclslWorldRunState run, MclslInverseAnnualState state, IReadOnlyList<Actor> actors, int year)
     {
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
-        if (actors == null || actors.Count == 0) return false;
-        bool chuanfa = HasReversed(run, "truth_chuanfa_new_law");
-        bool oneHeart = HasReversed(run, "truth_one_heart");
-        bool wuyou = HasReversed(run, "truth_wuyou");
-        bool wangsheng = HasReversed(run, "truth_wangsheng");
-        bool humanWill = HasReversed(run, "truth_human_will");
-        bool trueUnreal = HasReversed(run, "truth_true_unreal");
-        bool failureSteps = HasReversed(run, "truth_player_failure_steps");
-        bool weakNotFixed = HasReversed(run, "truth_player_weak_not_fixed");
-        bool dutyNotFixed = HasReversed(run, "truth_player_duty_not_fixed");
-        bool flawedDao = HasReversed(run, "truth_player_flawed_dao");
-        bool allLawsOne = HasReversed(run, "truth_player_all_laws_one");
-        bool reincarnationUnbroken = HasReversed(run, "truth_player_reincarnation_unbroken");
-        bool lifespanDrain = HasReversed(run, "truth_player_lifespan_drain");
-        bool hasLimitedEffects = chuanfa || oneHeart || wuyou || wangsheng || humanWill || trueUnreal
-            || failureSteps || weakNotFixed || dutyNotFixed || flawedDao || allLawsOne;
-        if (!hasLimitedEffects && !reincarnationUnbroken && !lifespanDrain) return false;
-
-        bool changed = allLawsOne && MclslTechniqueLineageSystem.TryFuseNewLawLineage(year);
-        int chuanfaCount = 0, oneHeartCount = 0, wuyouCount = 0, wangshengCount = 0;
-        int humanWillCount = 0, trueUnrealCount = 0, failureCount = 0, failureDivineCount = 0;
-        int weakCount = 0, dutyCount = 0, flawedCount = 0, allLawsCount = 0;
-        for (int i = 0; hasLimitedEffects && i < actors.Count; i++)
+        bool chuanfa = state.Effects[0];
+        bool oneHeart = state.Effects[1];
+        bool wuyou = state.Effects[2];
+        bool wangsheng = state.Effects[3];
+        bool humanWill = state.Effects[4];
+        bool trueUnreal = state.Effects[5];
+        bool failureSteps = state.Effects[6];
+        bool weakNotFixed = state.Effects[7];
+        bool dutyNotFixed = state.Effects[8];
+        bool flawedDao = state.Effects[9];
+        bool allLawsOne = state.Effects[10];
+        int chuanfaCount = state.EffectCounts[0];
+        int oneHeartCount = state.EffectCounts[1];
+        int wuyouCount = state.EffectCounts[2];
+        int wangshengCount = state.EffectCounts[3];
+        int humanWillCount = state.EffectCounts[4];
+        int trueUnrealCount = state.EffectCounts[5];
+        int failureCount = state.EffectCounts[6];
+        int failureDivineCount = state.EffectCounts[7];
+        int weakCount = state.EffectCounts[8];
+        int dutyCount = state.EffectCounts[9];
+        int flawedCount = state.EffectCounts[10];
+        int allLawsCount = state.EffectCounts[11];
+        bool changed = false;
+        // No actor reads or random rolls occur when all limited effects are disabled.
+        if (!chuanfa && !oneHeart && !wuyou && !wangsheng && !humanWill && !trueUnreal
+            && !failureSteps && !weakNotFixed && !dutyNotFixed && !flawedDao && !allLawsOne)
+        { state.Cursor = actors.Count; return true; }
+        while (state.Cursor < actors.Count && MclslAnnualFrameBudget.TryConsumeOperation())
         {
-            Actor actor = actors[i];
+            Actor actor = actors[state.Cursor++];
             if (!MclslActorAccessor.Alive(actor)) continue;
             long actorId = MclslActorAccessor.Id(actor);
             bool cultivator = (chuanfa || oneHeart || wuyou || wangsheng || humanWill || trueUnreal || weakNotFixed)
@@ -299,8 +387,9 @@ internal static class MclslInverseTruthSystem
                 weakCount++;
                 changed = true;
             }
-            if (flawedDao && flawedCount < 80
-                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw
+            bool newLaw = (flawedDao || allLawsOne)
+                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw;
+            if (flawedDao && flawedCount < 80 && newLaw
                 && PassesLimitedRoll(actorId, "truth_player_flawed_dao", year))
             {
                 AddClamped(actor, MclslActorDataKeys.FoundationChanceBonus, 1, 0, 90);
@@ -309,58 +398,64 @@ internal static class MclslInverseTruthSystem
                 flawedCount++;
                 changed = true;
             }
-            if (allLawsOne && allLawsCount < 80
-                && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.NewLaw
+            if (allLawsOne && allLawsCount < 80 && newLaw
                 && PassesLimitedRoll(actorId, "truth_player_all_laws_one", year))
             {
                 AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
                 allLawsCount++;
                 changed = true;
             }
-        }
 
-        if (reincarnationUnbroken) changed |= MclslActorReincarnationSystem.TryApplyAnnual(year, actors);
-        if (lifespanDrain) changed |= ApplyLifespanDrain(actors, year);
-        return changed;
+        }
+        state.EffectCounts[0] = chuanfaCount;
+        state.EffectCounts[1] = oneHeartCount;
+        state.EffectCounts[2] = wuyouCount;
+        state.EffectCounts[3] = wangshengCount;
+        state.EffectCounts[4] = humanWillCount;
+        state.EffectCounts[5] = trueUnrealCount;
+        state.EffectCounts[6] = failureCount;
+        state.EffectCounts[7] = failureDivineCount;
+        state.EffectCounts[8] = weakCount;
+        state.EffectCounts[9] = dutyCount;
+        state.EffectCounts[10] = flawedCount;
+        state.EffectCounts[11] = allLawsCount;
+        if (changed) MclslWorldArchiveStore.MarkDirty();
+        return state.Cursor >= actors.Count;
     }
 
-    private static bool ApplyLifespanDrain(IReadOnlyList<Actor> actors, int year)
+    private static bool TickLifespanDrain(MclslInverseAnnualState work, IReadOnlyList<Actor> actors, int year)
     {
-        int changed = 0;
-        for (int i = 0; i < actors.Count && changed < 24; i++)
+        while (MclslAnnualFrameBudget.TryConsumeOperation())
         {
-            Actor receiver = actors[i];
-            if (!MclslActorAccessor.Alive(receiver) || !MclslActorAccessor.IsCultivator(receiver)) continue;
-            string realm = MclslActorAccessor.Realm(receiver);
-            int realmIndex = MclslRealmIds.Index(realm);
-            if (realmIndex < MclslRealmIds.Index(MclslRealmIds.JinDan) || realm == MclslRealmIds.ChangSheng) continue;
-            long receiverId = MclslActorAccessor.Id(receiver);
-            if (StableHash(receiverId, "lifespan_drain", year) % 100 >= 18) continue;
-            Actor donor = PickLifespanDonor(actors, receiver, year);
-            if (donor == null) continue;
-            int requested = 8 + realmIndex * 3 + StableHash(receiverId, "lifespan_years", year) % 10;
-            if (!MclslLongevityRules.TryDrainYears(receiver, donor, requested, out int gained)) continue;
-            MclslActorAccessor.Set(receiver, MclslActorDataKeys.LastBreakthroughResult, "寿元可夺：从" + MclslActorAccessor.DisplayName(donor) + "身上夺得寿元" + gained + "年");
-            changed++;
-        }
-        return changed > 0;
-    }
-
-    private static Actor PickLifespanDonor(IReadOnlyList<Actor> actors, Actor receiver, int year)
-    {
-        if (actors == null || actors.Count == 0 || receiver == null) return null;
-        int start = StableHash(MclslActorAccessor.Id(receiver), "donor", year) % actors.Count;
-        int receiverRealm = MclslRealmIds.Index(MclslActorAccessor.Realm(receiver));
-        for (int i = 0; i < actors.Count; i++)
-        {
-            Actor donor = actors[(start + i) % actors.Count];
-            if (!MclslActorAccessor.Alive(donor) || donor == receiver) continue;
-            if (!MclslEligibility.CanCultivate(donor)) continue;
+            if (work.DrainCount >= 24 || (work.DrainReceiverId == 0 && work.Cursor >= actors.Count)) return true;
+            if (work.DrainReceiverId == 0)
+            {
+                Actor receiver = actors[work.Cursor++];
+                if (!MclslActorAccessor.Alive(receiver) || !MclslActorAccessor.IsCultivator(receiver)) continue;
+                string realm = MclslActorAccessor.Realm(receiver);
+                if (MclslRealmIds.Index(realm) < MclslRealmIds.Index(MclslRealmIds.JinDan) || realm == MclslRealmIds.ChangSheng) continue;
+                long receiverId = MclslActorAccessor.Id(receiver);
+                if (StableHash(receiverId, "lifespan_drain", year) % 100 >= 18) continue;
+                work.DrainReceiverId = receiverId; work.DrainDonorCursor = 0;
+            }
+            if (!MclslActorRegistry.Resolve(work.DrainReceiverId, out Actor target) || !MclslActorAccessor.Alive(target)
+                || work.DrainDonorCursor >= actors.Count)
+            { work.DrainReceiverId = 0; continue; }
+            int start = StableHash(work.DrainReceiverId, "donor", year) % actors.Count;
+            Actor donor = actors[(int)(((long)start + work.DrainDonorCursor++) % actors.Count)];
+            if (!MclslActorAccessor.Alive(donor) || donor == target || !MclslEligibility.CanCultivate(donor)) continue;
+            int receiverRealm = MclslRealmIds.Index(MclslActorAccessor.Realm(target));
             int donorRealm = MclslRealmIds.Index(MclslActorAccessor.Realm(donor));
             if (donorRealm >= receiverRealm && donorRealm >= 0) continue;
-            return donor;
+            int requested = 8 + receiverRealm * 3 + StableHash(work.DrainReceiverId, "lifespan_years", year) % 10;
+            if (MclslLongevityRules.TryDrainYears(target, donor, requested, out int gained))
+            {
+                MclslActorAccessor.Set(target, MclslActorDataKeys.LastBreakthroughResult, "寿元可夺：从" + MclslActorAccessor.DisplayName(donor) + "身上夺得寿元" + gained + "年");
+                work.DrainCount++;
+            }
+            work.DrainReceiverId = 0;
         }
-        return null;
+        return false;
     }
 
     private static bool HasReversed(MclslWorldRunState run, string truthId)
@@ -378,21 +473,13 @@ internal static class MclslInverseTruthSystem
 
     private static void AddClamped(Actor actor, string key, int delta, int min, int max)
     {
+        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
         int current = MclslActorAccessor.GetInt(actor, key, min);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
     }
 
-    private static MclslInverseTruthContext BuildContext(MclslWorldRunState run, IReadOnlyList<Actor> units, int year)
+    private static MclslInverseTruthContext BuildContext(MclslWorldRunState run, int year)
     {
-        Dictionary<string, int> highTechniqueCounts = new(StringComparer.Ordinal);
-        for (int i = 0; i < units.Count; i++)
-        {
-            Actor actor = units[i];
-            string technique = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
-            if (string.IsNullOrWhiteSpace(technique)) continue;
-            highTechniqueCounts[technique] = highTechniqueCounts.TryGetValue(technique, out int count) ? count + 1 : 1;
-        }
-
         int terminalPressure = run.IsTerminal ? 80 : 0;
         MclslTimelineAnchorState terminal = FindTimelineAnchor(run, "anchor_xuanhuang_terminal");
         if (terminal != null)
@@ -406,8 +493,8 @@ internal static class MclslInverseTruthSystem
             DeathRecords = run.DeathRecords?.Count ?? 0,
             SpecialDeathRecords = CountDeathRecords(run, "ruin_exploration", "world_change_backlash"),
             MiasmaDeaths = CountDeathRecords(run, "mortal_miasma"),
-            SharedHighTechniqueGroups = CountSharedHighTechniqueGroups(highTechniqueCounts),
-            Cultivators = units?.Count ?? 0,
+            SharedHighTechniqueGroups = MclslActorProjectionIndex.SharedHighTechniqueGroups,
+            Cultivators = MclslActorProjectionIndex.HighCultivators,
             FiveEldersPressure = run.BackgroundFactions?.FiveEldersSubversion ?? 0,
             HuanzhenReturns = CountHuanzhenReturns(),
             FutureKnowledge = (run.InheritedKnowledgeIds?.Count ?? 0) + CountAnchorDiscoveries(run),
@@ -421,7 +508,7 @@ internal static class MclslInverseTruthSystem
     }
 
     private static int ChallengeStrength(Actor actor) =>
-        DutyProgress(actor) + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Contribution, 0) / 10 + SafeAge(actor) / 5;
+        DutyProgress(actor) + MclslResourceSystem.ContributionInfluence(actor, 10) + SafeAge(actor) / 5;
 
     private static int DutyProgress(Actor actor)
     {
@@ -497,15 +584,6 @@ internal static class MclslInverseTruthSystem
                 }
             }
         }
-        return count;
-    }
-
-    private static int CountSharedHighTechniqueGroups(Dictionary<string, int> highTechniqueCounts)
-    {
-        if (highTechniqueCounts == null || highTechniqueCounts.Count == 0) return 0;
-        int count = 0;
-        foreach (KeyValuePair<string, int> pair in highTechniqueCounts)
-            if (pair.Value >= 2) count++;
         return count;
     }
 
@@ -606,21 +684,4 @@ internal static class MclslInverseTruthSystem
         return hash;
     }
 
-    private sealed class MclslInverseTruthContext
-    {
-        internal int DeathRecords;
-        internal int SpecialDeathRecords;
-        internal int MiasmaDeaths;
-        internal int SharedHighTechniqueGroups;
-        internal int Cultivators;
-        internal int FiveEldersPressure;
-        internal int HuanzhenReturns;
-        internal int FutureKnowledge;
-        internal int CompletedCycles;
-        internal int TerminalPressure;
-        internal int AvailableCaves;
-        internal int AvailableWorldChanges;
-        internal int NascentAndAbove;
-        internal int HarmonyAndAbove;
-    }
 }

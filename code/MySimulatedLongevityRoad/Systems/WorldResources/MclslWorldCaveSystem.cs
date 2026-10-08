@@ -78,6 +78,13 @@ internal static class MclslWorldCaveSystem
     {
         if (!MclslNewLawPioneerSystem.CanUseNewLawResources(year)) return;
         if (!MclslActorAccessor.Alive(actor) || MclslActorAccessor.Realm(actor) != MclslRealmIds.JinDan) return;
+        if (year <= MclslWorldRunRepository.Current.AnnualBatch.LastCompletedYear)
+        {
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "该年度洞天争夺已结算，旧档申请无法补入");
+            return;
+        }
+        if (MclslWorldRunRepository.Current.AnnualBatch.CaveClaims.Exists(
+            x => x.Year == year && x.ActorId == MclslActorAccessor.Id(actor))) return;
         BeginAnnual(year);
         if (!MclslRealmSeatSystem.CanAddNascentSoul(out string seatReason))
         {
@@ -126,18 +133,71 @@ internal static class MclslWorldCaveSystem
         if (claimBonus > 0) MclslActorAccessor.Set(actor, MclslActorDataKeys.CaveClaimBonus, 0);
         if (!Claims.TryGetValue(best.Id, out List<CaveClaim> list)) Claims[best.Id] = list = new List<CaveClaim>();
         list.Add(new CaveClaim { Actor = actor, CaveId = best.Id, Compatibility = bestCompatibility, Strength = strength });
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        if (!batch.CaveClaims.Exists(x => x.Year == year && x.ActorId == MclslActorAccessor.Id(actor)))
+            batch.CaveClaims.Add(new MclslAnnualClaimRecord { Year = year, ActorId = MclslActorAccessor.Id(actor),
+                TargetId = best.Id, Compatibility = bestCompatibility, Strength = strength });
+        MclslWorldArchiveStore.MarkDirty();
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在争夺“" + best.Name + "”的天地之精；" + MclslLawInteractionCatalog.Detail(laws, MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
     }
 
-    internal static void ResolveAnnual(int year)
+    internal static bool TickResolveAnnual(int year)
     {
-        if (_claimYear != year || Claims.Count == 0) return;
+        MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+        MclslAnnualClaimRecord next = batch.CaveClaims.Find(x => x.Year == year);
+        if (next == null) return true;
+        string targetId = next.TargetId;
+        int before = batch.CaveClaims.Count;
+        ResolveAnnual(year, targetId);
+        if (batch.CaveClaims.Count < before)
+        {
+            MclslAnnualFrameBudget.ReportProgress();
+            MclslAnnualBackpressure.RecordProgress();
+        }
+        return batch.CaveClaims.Find(x => x.Year == year) == null;
+    }
+
+    internal static void ResolveAnnual(int year, string onlyTargetId = null)
+    {
+        RestorePendingClaims(year);
+        if (_claimYear != year)
+        {
+            if (onlyTargetId != null)
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", onlyTargetId,
+                    "Cave", 1, "未结算", "当前年度洞天资源不可用");
+                MclslWorldRunRepository.Current.AnnualBatch.CaveClaims.RemoveAll(x => x.Year == year && x.TargetId == onlyTargetId);
+                MclslWorldArchiveStore.MarkDirty();
+            }
+            return;
+        }
+        if (onlyTargetId != null && !Claims.ContainsKey(onlyTargetId))
+            MclslWorldRunRepository.RecordAnnualFailure(year, "世界", onlyTargetId,
+                "Cave", 1, "未结算", "申请角色不可解析");
+        if (Claims.Count == 0)
+        {
+            if (MclslWorldRunRepository.Current.AnnualBatch.CaveClaims.RemoveAll(x => x.Year == year
+                && (onlyTargetId == null || x.TargetId == onlyTargetId)) > 0)
+                MclslWorldArchiveStore.MarkDirty();
+            return;
+        }
         foreach (KeyValuePair<string, List<CaveClaim>> pair in Claims)
         {
+            if (onlyTargetId != null && pair.Key != onlyTargetId) continue;
             MclslWorldCaveRecord cave = MclslWorldRunRepository.FindCave(pair.Key);
-            if (!IsAvailable(cave)) continue;
+            if (!IsAvailable(cave))
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", pair.Key,
+                    "Cave", 1, "未结算", "洞天目标已不可用");
+                continue;
+            }
             CaveClaim winner = PickWinningClaim(pair.Value);
-            if (winner == null) continue;
+            if (winner == null)
+            {
+                MclslWorldRunRepository.RecordAnnualFailure(year, "世界", pair.Key,
+                    "Cave", 1, "未结算", "申请角色均不满足结算条件");
+                continue;
+            }
             int contenderCount = CountValidClaims(pair.Value);
             cave.LastContestedYear = year;
             int purity = MclslActorAccessor.GetInt(winner.Actor, MclslActorDataKeys.GoldenCorePurity, 50);
@@ -181,8 +241,24 @@ internal static class MclslWorldCaveSystem
                 MclslWorldRunRepository.AddEvent(year, "cave_refine_failed", cave.Name + "炼化未成", MclslActorAccessor.DisplayName(winner.Actor) + "压过诸修，却未能夺得其中天地之精；" + relation + "。洞天完整度降至" + cave.Integrity + "%。", winner.Actor);
             }
         }
-        Claims.Clear();
+        if (onlyTargetId == null) Claims.Clear();
+        else Claims.Remove(onlyTargetId);
+        MclslWorldRunRepository.Current.AnnualBatch.CaveClaims.RemoveAll(x => x.Year == year
+            && (onlyTargetId == null || x.TargetId == onlyTargetId));
         MclslWorldArchiveStore.MarkDirty();
+    }
+
+    private static void RestorePendingClaims(int year)
+    {
+        if (_claimYear != year) BeginAnnual(year);
+        foreach (MclslAnnualClaimRecord record in MclslWorldRunRepository.Current.AnnualBatch.CaveClaims)
+        {
+            if (record.Year != year || !MclslActorRegistry.ResolveKnownOrWorld(record.ActorId, out Actor actor)) continue;
+            if (!Claims.TryGetValue(record.TargetId, out List<CaveClaim> list)) Claims[record.TargetId] = list = new();
+            if (list.Exists(x => MclslActorAccessor.Id(x.Actor) == record.ActorId)) continue;
+            list.Add(new CaveClaim { Actor = actor, CaveId = record.TargetId,
+                Compatibility = record.Compatibility, Strength = record.Strength });
+        }
     }
 
     internal static MclslWorldCaveRecord GenerateCaveFromDiscovery(int year, Actor discoverer, IReadOnlyList<string> lawTags, string sourceName)
@@ -322,7 +398,7 @@ internal static class MclslWorldCaveSystem
     private static LocationSeed PickLocation(int hash)
     {
         List<LocationSeed> locations = new();
-        IReadOnlyList<Actor> units = MclslCultivatorCandidateIndex.GetKnownActorsSnapshot();
+        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
         if (units != null)
         {
             HashSet<string> seen = new(StringComparer.Ordinal);

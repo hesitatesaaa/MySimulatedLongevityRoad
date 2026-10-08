@@ -1,5 +1,6 @@
 using System;
 using MySimulatedLongevityRoad.Systems;
+using NeoModLoader.General;
 
 namespace MySimulatedLongevityRoad.UI;
 
@@ -20,8 +21,9 @@ internal static class MclslCodexTabCatalog
         T("修士生死", "ui/Icons/SiWang"),
         T("还真轮回", "ui/Icons/HuanZhen"),
         T("还真纪事", "ui/Icons/HuanZhen"),
-        T("世界纪事", "ui/Icons/XuanHuangXianLu"),
-        T("修士列传", "ui/Icons/XuanHuangXiuShiBang")
+        T("修仙家族", "ui/Icons/XuanHuangXiuShiBang"),
+        T("玄黄舆图", "ui/Icons/XuanHuangXianLu"),
+        T("玄黄史册", "ui/Icons/XuanHuangXianLu")
     };
 
     private static readonly MclslCodexTab[] AncientTabs =
@@ -36,8 +38,10 @@ internal static class MclslCodexTabCatalog
         T("秘境", "ui/Icons/ZongMenYiJi"),
         T("遗府", "ui/Icons/ZongMenYiJi"),
         T("天地观悟", "ui/Icons/TianDiZhiPo"),
-        T("仙道纪事", "ui/Icons/XuanHuangXianLu"),
-        T("修士列传", "ui/Icons/XuanHuangXiuShiBang")
+        T("十大仙宗", "ui/Icons/ZongMenYiJi"),
+        T("修仙家族", "ui/Icons/XuanHuangXiuShiBang"),
+        T("玄黄舆图", "ui/Icons/XuanHuangXianLu"),
+        T("玄黄史册", "ui/Icons/XuanHuangXianLu")
     };
 
     internal static MclslCodexTab[] ForEpoch(string epoch)
@@ -54,6 +58,14 @@ internal sealed class MclslCodexTab
 {
     internal readonly string Title;
     internal readonly string IconPath;
+    internal string DisplayTitle => Title switch
+    {
+        "十大仙宗" => LM.Get("mclsl_codex_ten_sects"),
+        "修仙家族" => LM.Get("mclsl_codex_families"),
+        "玄黄舆图" => LM.Get("mclsl_atlas_title"),
+        "玄黄史册" => LM.Get("mclsl_history_book"),
+        _ => Title
+    };
 
     internal MclslCodexTab(string title, string iconPath)
     {

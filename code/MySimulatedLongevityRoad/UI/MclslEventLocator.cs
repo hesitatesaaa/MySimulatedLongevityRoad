@@ -1,4 +1,5 @@
 using System;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
 using UnityEngine;
@@ -7,6 +8,17 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslEventLocator
 {
+    internal static void Locate(Actor actor)
+    {
+        if (!MclslActorAccessor.Alive(actor)) return;
+        try
+        {
+            Focus(actor.data.x, actor.data.y);
+            ActionLibrary.openUnitWindow(actor);
+        }
+        catch (Exception ex) { MclslDiagnostics.Error("locate-actor", ex.Message); }
+    }
+
     internal static bool CanLocate(MclslRunEventRecord record)
     {
         return record != null && (record.ActorId > 0L || (record.MapX >= 0 && record.MapY >= 0));
@@ -70,28 +82,6 @@ internal static class MclslEventLocator
     internal static void Locate(MclslWorldChangeRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslWorldSoulRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
     internal static void Locate(MclslSectRuinRecord record) { if (CanLocate(record)) Focus(record.MapX, record.MapY); }
-
-    internal static bool CanLocate(MclslMaobaoRecord record)
-    {
-        return record != null && (record.ActorId > 0L || (record.MapX >= 0 && record.MapY >= 0));
-    }
-
-    internal static void Locate(MclslMaobaoRecord record)
-    {
-        if (record == null) return;
-        Actor actor = FindActor(record.ActorId);
-        if (MclslActorAccessor.Alive(actor))
-        {
-            try
-            {
-                Focus(actor.data.x, actor.data.y);
-                ActionLibrary.openUnitWindow(actor);
-                return;
-            }
-            catch { }
-        }
-        if (record.MapX >= 0 && record.MapY >= 0) Focus(record.MapX, record.MapY);
-    }
 
     private static void Focus(int x, int y)
     {

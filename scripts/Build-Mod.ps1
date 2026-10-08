@@ -8,10 +8,7 @@ param(
     [string]$WorldBoxDataRoot,
 
     [Parameter(Mandatory = $false)]
-    [switch]$NoRestore,
-
-    [Parameter(Mandatory = $false)]
-    [switch]$IncludeDeveloperTools
+    [switch]$NoRestore
 )
 
 Set-StrictMode -Version Latest
@@ -31,7 +28,7 @@ function Resolve-ProjectPath {
 }
 
 if ([string]::IsNullOrWhiteSpace($WorldBoxDataRoot)) {
-    $WorldBoxDataRoot = '..\..\worldbox_Data'
+    $WorldBoxDataRoot = 'D:\owl\gameversion\0_51_2_imported\worldbox_Data'
 }
 $WorldBoxDataRoot = Resolve-ProjectPath -Path $WorldBoxDataRoot
 
@@ -95,15 +92,12 @@ $arguments = @(
     '--nologo',
     '--verbosity',
     'minimal',
-    "-p:WorldBoxDataRoot=$WorldBoxDataRoot"
+    "-p:WorldBoxDataRoot=$WorldBoxDataRoot",
+    '-p:_EnableDefaultWindowsPlatform=false'
 )
 
 if ($NoRestore) {
     $arguments += '--no-restore'
 }
-if ($IncludeDeveloperTools) {
-    $arguments += '-p:IncludeDeveloperTools=true'
-}
-
 & $dotnet.Source @arguments
 exit $LASTEXITCODE

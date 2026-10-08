@@ -23,22 +23,8 @@ internal static class MclslTechniqueStageSystem
         return StageName(progress) + " " + progress + "%（功法效率" + EfficiencyPercent(progress) + "%）";
     }
 
-    /// <summary>
-    /// 读取新字段；若是0.1.11及以前的旧档，则将旧字段中的0—100数值原样迁移为参悟进度。
-    /// </summary>
     internal static int Progress(Actor actor)
-    {
-        if (actor?.data == null) return 0;
-        int stored = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientTechniqueComprehension, -1);
-        if (stored >= 0) return Math.Clamp(stored, 0, 100);
-
-        int legacy = Math.Clamp(
-            MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LegacyAncientTechniqueProgressKey, 0),
-            0,
-            100);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientTechniqueComprehension, legacy);
-        return legacy;
-    }
+        => Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientTechniqueComprehension, 0), 0, 100);
 
     internal static void SetProgress(Actor actor, int value)
     {
