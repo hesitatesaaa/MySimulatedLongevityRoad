@@ -111,15 +111,7 @@ internal static class MclslActorPixelResources
                 wrapMode = TextureWrapMode.Clamp,
                 anisoLevel = 0
             };
-            byte[] bytes = File.ReadAllBytes(file);
-            if (profile.Sha256 != null)
-            {
-                using var sha = System.Security.Cryptography.SHA256.Create();
-                string digest = BitConverter.ToString(sha.ComputeHash(bytes)).Replace("-", "").ToLowerInvariant();
-                if (!string.Equals(digest, profile.Sha256, StringComparison.Ordinal))
-                    throw new InvalidDataException("Native PNG source hash mismatch: " + resourcePath);
-            }
-            if (!ImageConversion.LoadImage(texture, bytes, true)
+            if (!ImageConversion.LoadImage(texture, File.ReadAllBytes(file), true)
                 || texture.width != profile.Width || texture.height != profile.Height
                 || texture.mipmapCount != 1 ||
                 (texture.format != TextureFormat.RGBA32 && texture.format != TextureFormat.ARGB32

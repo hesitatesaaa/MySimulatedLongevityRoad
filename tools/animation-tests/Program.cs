@@ -139,6 +139,16 @@ File.WriteAllText(manifestPath, previewScale.ToString());
 ResetCatalog();
 Check(!MclslActorAnimationCatalog.Get("actors/Test").ScaleApproved,
     "unreviewed art cannot enable preview scaling");
+previewScale["groups"][0]["integrationAccepted"] = true;
+previewScale["groups"][0]["anchorReviewed"] = false;
+previewScale["groups"][0]["geometryConfigured"] = true;
+File.WriteAllText(manifestPath, previewScale.ToString());
+ResetCatalog();
+Check(MclslActorAnimationCatalog.Get("actors/Test").AnchorApproved
+    && MclslActorAnimationCatalog.Get("actors/Test").ScaleApproved
+    && !(bool)previewScale["groups"][0]["approved"]
+    && !(bool)previewScale["groups"][0]["calibration"]["verifiedInGame"],
+    "explicit integration accepts configured geometry without claiming visual or Unity acceptance");
 JObject waivedCombat = Manifest(2);
 waivedCombat["groups"][0]["actions"]["attack"] = new JObject {
     ["visualFallback"] = "idle", ["frames"] = new JArray(), ["loop"] = false, ["durationMs"] = 600 };
@@ -192,48 +202,31 @@ File.WriteAllText(manifestPath, streamed.ToString());
 ResetCatalog();
 Check(MclslActorAnimationCatalog.Get("actors/Test").NativeResourcePath == "actors/Test",
     "complete native form uses separate non-auto-imported resource root");
+JObject directIntegration = (JObject)streamed.DeepClone();
+directIntegration["groups"][0]["approved"] = false;
+directIntegration["groups"][0]["anchorReviewed"] = false;
+directIntegration["groups"][0]["integrationAccepted"] = true;
+directIntegration["groups"][0]["geometryConfigured"] = true;
+foreach (string action in MclslActorAnimationCatalog.ActionNames)
+    foreach (JToken frame in directIntegration["groups"][0]["actions"][action]["frames"])
+    {
+        frame["anchorReviewed"] = false;
+        frame["geometryConfigured"] = true;
+    }
+File.WriteAllText(manifestPath, directIntegration.ToString());
+ResetCatalog();
+Check(MclslActorAnimationCatalog.Get("actors/Test").FrameProfiles["idle_0"].AnchorApproved,
+    "direct native integration accepts configured frame geometry without inventing review approval");
+directIntegration["groups"][0]["actions"]["idle"]["frames"][0]["pixelsPerUnit"] = 0;
+File.WriteAllText(manifestPath, directIntegration.ToString());
+ResetCatalog();
+Check(MclslActorAnimationCatalog.Get("actors/Test") == null,
+    "direct integration still rejects invalid native geometry");
 streamed["groups"][0]["nativeResourcePath"] = "../../outside";
 File.WriteAllText(manifestPath, streamed.ToString());
 ResetCatalog();
 Check(MclslActorAnimationCatalog.Get("actors/Test") == null,
     "native resource path cannot escape the mod root");
-JObject unreviewed = (JObject)streamed.DeepClone();
-JToken waivedGroup = unreviewed["groups"][0];
-waivedGroup["nativeResourcePath"] = "actors/Test";
-waivedGroup["enabled"] = true;
-waivedGroup["reviewStatus"] = "waived-by-user";
-waivedGroup["approved"] = false;
-waivedGroup["anchorReviewed"] = false;
-waivedGroup["calibration"]["verifiedInGame"] = false;
-string nativeDirectory = Path.Combine(fixture, "NativeActorResources/actors/Test/main");
-Directory.CreateDirectory(nativeDirectory);
-foreach (string action in MclslActorAnimationCatalog.ActionNames)
-    foreach (JToken frame in waivedGroup["actions"][action]["frames"])
-    {
-        frame["anchorReviewed"] = false;
-        frame["sha256"] = new string('a', 64);
-        File.WriteAllBytes(Path.Combine(nativeDirectory, (string)frame["name"] + ".png"), Array.Empty<byte>());
-    }
-File.WriteAllText(manifestPath, unreviewed.ToString());
-ResetCatalog();
-Check(MclslActorAnimationCatalog.Get("actors/Test")?.FrameProfiles["idle_0"].AnchorApproved == true
-    && !(bool)waivedGroup["approved"] && !(bool)waivedGroup["anchorReviewed"]
-    && !(bool)waivedGroup["calibration"]["verifiedInGame"],
-    "explicit user waiver enables geometry without fabricating review or game acceptance");
-waivedGroup["enabled"] = false;
-File.WriteAllText(manifestPath, unreviewed.ToString());
-ResetCatalog();
-Check(MclslActorAnimationCatalog.Get("actors/Test") == null, "explicitly disabled native form stays disabled");
-waivedGroup["enabled"] = true;
-File.Delete(Path.Combine(nativeDirectory, "idle_0.png"));
-File.WriteAllText(manifestPath, unreviewed.ToString());
-ResetCatalog();
-Check(MclslActorAnimationCatalog.Get("actors/Test") == null, "waived native form still requires real frame files");
-File.WriteAllBytes(Path.Combine(nativeDirectory, "idle_0.png"), Array.Empty<byte>());
-waivedGroup["actions"]["idle"]["frames"][0]["pixelsPerUnit"] = 0;
-File.WriteAllText(manifestPath, unreviewed.ToString());
-ResetCatalog();
-Check(MclslActorAnimationCatalog.Get("actors/Test") == null, "waiver never bypasses invalid geometry");
 File.WriteAllText(manifestPath, mixed.ToString());
 ResetCatalog();
 native["anchorReviewed"] = false;
@@ -295,4 +288,14 @@ catch (InvalidOperationException) { workerPumpRejected = true; }
 Check(workerPumpRejected, "render worker cannot decode or destroy Unity resources");
 nativeCache.Clear(released.Add);
 Check(nativeCache.ResidentBytes == 0 && released.Contains("frame-b"), "world reset releases resident native frames");
+MclslMod.Root = workspace;
+ResetCatalog();
+JObject actualManifest = JObject.Parse(File.ReadAllText(Path.Combine(workspace, "resources/actor-frames.manifest.json")));
+foreach (JToken group in actualManifest["groups"])
+{
+    string resource = (string)group["resourcePath"];
+    var actual = MclslActorAnimationCatalog.Get(resource);
+    Check(actual != null && actual.NativeResourcePath != null && actual.Actions.Count == 5,
+        "current production native profile parses all actions: " + (string)group["actorId"]);
+}
 Console.WriteLine($"PASS: {checks} assertions; timing at 30/60/144 FPS, states, schema 1/2, confinement and native-cache thread/budget checks");

@@ -1,6 +1,6 @@
 {
   "actorId": "mclsl_beast_fenghuang",
-  "checkedAtUtc": "2026-10-14T05:31:23.620093+00:00",
+  "checkedAtUtc": "2026-10-18T08:55:31.829681+00:00",
   "actions": {
     "idle": {
       "loop": true,
@@ -20,7 +20,12 @@
             1143
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "2c633210405f8fbc4e8da645c599e7af59e42f06b1da71d9b58ae4abd3ba72d1",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -31,7 +36,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": false
         },
@@ -50,7 +55,12 @@
             1144
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6ddc79c58f5c25adc6544eeedf5895f1fa4faa27ff8c0982f26d49121c79ef76",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -61,7 +71,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -80,7 +90,12 @@
             1144
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "a8b6922db9dd81fc27da44d4ec39526caca53284e02b0a81faf56d9c3b1820e8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -91,7 +106,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -110,7 +125,12 @@
             1144
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "9703a144f257486b05c45bca5564e0d4864c75c156e1f042bfc901bd28cfb854",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -121,7 +141,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -140,7 +160,12 @@
             1126
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "e3dd7a247ecb3bfc5473be8e92e6671f35765c295590dbab5e9e70ef3f52287f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -151,7 +176,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -170,7 +195,12 @@
             1146
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "001dc733f3d93698a8f8b00ab3788e3c3389151a9515d3bd78f318e4af5e2d9a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -181,7 +211,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -205,7 +235,12 @@
             1115
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "b3e988cabef11ba82e1031692028bcf007b7031c3fc9aa230c9fc8f17e13c83d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -216,7 +251,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -235,7 +270,12 @@
             1237
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "e9075203b043044314fc6ef62160879046bfb450012da49e3543280001017c32",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -246,7 +286,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -265,7 +305,12 @@
             1180
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "477c4f9bcb149ce3d5ed736a48c2b645b3b61f97ce65cfdb6c5561d1640e9e75",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -276,7 +321,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -295,7 +340,12 @@
             1189
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "9a0657805d8d7cb3793caa5b6b35028bf1ea003c17e1352b87d7bfc227d9e9c8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -306,7 +356,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -325,7 +375,12 @@
             1094
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "b0ddf22c7344213ea3bf562031b82462961b4e420f286ab9544c289756e17dba",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -336,7 +391,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -355,7 +410,12 @@
             1168
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6424882e4b7b57473eddb4fb62000876c66fae7a968ae06cf18b75c07c12c686",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -366,7 +426,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -385,7 +445,12 @@
             1208
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "f9c36a8634f78ad5a537b56a463d92311c307f5675f16f3efd9e72e2f8307444",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -396,7 +461,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -415,7 +480,12 @@
             1155
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "792f6e2db469a633936baa2cf05649b9a5f1cc31d59ce9a6366d74a52bacc6a4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -426,7 +496,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -450,7 +520,12 @@
             1171
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "a7025c2cccd5288d8007374ef92e96129c5a4ac61f6aa087b4fb21a6c46b0fcb",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -461,7 +536,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -480,7 +555,12 @@
             1130
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "f7da47de69847d83ec818ba60d32b4def868894a3c09daf118c5115c5df2d3a5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -491,7 +571,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -510,7 +590,12 @@
             1150
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "3b4de3a6de5d858da6ac56e850e079950f61feef2bbe36bed5042ca67915368c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -521,7 +606,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -544,10 +629,7 @@
             "sourceSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.231503+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -559,7 +641,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -578,7 +660,12 @@
             1122
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "a7878386fd526bbb502df0b21f853f7630172bf14d5f23ebbd45dbba6ea2b4d8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -589,7 +676,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -608,7 +695,12 @@
             1151
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "a81d008fc9d3dbf63097479fcab05bcc5269462f0cd6732ca3351a6b4c8dedee",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -619,7 +711,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -642,10 +734,7 @@
             "sourceSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.276586+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -657,7 +746,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -676,7 +765,12 @@
             1124
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "2fae8e6894ad5b6abd198479b539d776718909c991e45587d79acee1d02c20bc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -687,7 +781,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -706,7 +800,12 @@
             1145
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "b54626c191a6721169f05efc1c4608be565f3f05f27626f18644f9a093c00f69",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -717,7 +816,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -736,7 +835,12 @@
             1154
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "df7fadecef139df763952c86584fc7e6bde753c44182296cb79f9654fb607c47",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -747,7 +851,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -771,7 +875,12 @@
             1132
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6fdf3bd116ca41517f25ac8412268fe4cd991643eef6ab3e3bb2a813200e707f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -782,7 +891,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -801,7 +910,12 @@
             1146
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "4b5c19d27af63465d2b2fc781f9b0f918fa8cccc0bdc25a63b3a159f552e9854",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -812,7 +926,7 @@
               1143
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -836,7 +950,12 @@
             1137
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "76665b624e0028fe5b4bec3229b573d46ad10b71c85ad48207efafe83362178b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -844,10 +963,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1137
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -866,7 +985,12 @@
             1121
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "76ac50f5bdb0ffc6cdf8b3f3d7d52691bfef6d42665d795705179a33b57a3e62",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -874,10 +998,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1121
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -896,7 +1020,12 @@
             1099
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "30d3c5b6e48bc7f42c53c70ac8a7f8cf1624ce40649604f0d026db027c3eb088",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -904,10 +1033,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1099
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -926,7 +1055,12 @@
             1090
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6c35ee9090a5444340d7f87d65f70053afa1d32f38cf825421fbf735505e9d95",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -934,10 +1068,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1090
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -956,7 +1090,12 @@
             1051
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "ace28afe5c39cf99bc721083397145862a59d84b2d5c44b1260e1a9a747cbbf0",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -964,10 +1103,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1051
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -986,7 +1125,12 @@
             978
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "9a5830cc923b4f9a08cb2cdbbc5ce5ebb66b2476ded0a3720d77cc73c5facbe0",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -994,10 +1138,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              978
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -1016,7 +1160,12 @@
             938
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "55342ae97361d12f49dab82ac276abe40084e97767ecaf580f96d9a867c2a8eb",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -1024,10 +1173,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              938
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -1046,7 +1195,12 @@
             1047
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6323f0a5600d6c11febf51745bc76216820070d227214955a6dc058c2acc3e62",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -1054,10 +1208,10 @@
             ],
             "anchor": [
               627.5,
-              1143
+              1047
             ],
             "pixelsPerUnit": 15.01639344262295,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -1082,42 +1236,18 @@
     7
   ],
   "sourceFilesComplete": true,
-  "geometryApproved": false,
-  "actionContinuityApproved": false,
-  "installed": false,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
   "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
-  "visualReviewFindings": [
-    {
-      "severity": "needs-action-review",
-      "action": "attack",
-      "frame": 3,
-      "reason": "Three visible legs in a two-legged bird; independently redraw with one support and one striking leg.",
-      "originalSeverity": "needs-redraw",
-      "replacementSourceSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
-      "replacementStaticAnatomyReviewed": true,
-      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
-    },
-    {
-      "severity": "needs-action-review",
-      "action": "attack",
-      "frame": 6,
-      "reason": "Attack recovery snaps from extended claw strike to idle; add intermediate recoil pose.",
-      "originalSeverity": "needs-redraw",
-      "replacementSourceSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
-      "replacementStaticAnatomyReviewed": true,
-      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
-    },
-    {
-      "severity": "needs-action-review",
-      "action": "attack",
-      "frame": 6,
-      "sourceSha256": "5fd2d1a1f77573a5e04694ea6707639cc3f3c96f2982c39db5508e40571f65df",
-      "reason": "Recovery frame still contains three legs: two grounded feet plus a raised claw.",
-      "originalSeverity": "needs-redraw",
-      "replacementSourceSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
-      "replacementStaticAnatomyReviewed": true,
-      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
-    }
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "All target native source frames and complete sequences individually reviewed by assigned agent. Main conversation reviewed settled contact; flying/undulating actions preserve fixed source anchor, death follows resting silhouette. Unity calibration remains unverified."
   ],
-  "reviewerNotes": "All 34 source PNGs viewed individually. Idle/flight/hit/death identity and feathers acceptable; death_6/7 wing/tail rise leaves body prone. Attack_3 anatomy and attack_6 recovery rejected. No form installation until corrections pass."
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/fenghuang/Beast",
+    "frameCount": 34,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
 }

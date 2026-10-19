@@ -1,0 +1,44 @@
+{
+  "actorId": "mclsl_beast_hongmao",
+  "action": "death",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao/death_2.png",
+  "sourceSha256": "a91ebf10c5f1fa8d05d64b7ae2f42c94836227af6f38f0ef99d6021e6cee8f1e",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_hongmao/main/death_2.png",
+  "outputSha256": "a91ebf10c5f1fa8d05d64b7ae2f42c94836227af6f38f0ef99d6021e6cee8f1e",
+  "prompt": "Use case: stylized-concept. Draw one NEW independent transparent 1254x1254 RGBA pixel-art game frame, 红毛兽·兽形 (mclsl_beast_hongmao), death_2. Reference image is preceding death_1 and establishes identity: right-facing fiery red/orange quadruped lion-wolf, cream mane and horn tips, four connected legs, crisp broad pixel clusters. In this next death pose the beast sinks lower: head hangs farther down, front shoulders and elbows buckle, body lowers toward the ground. CRITICAL: the large curled tail must DROP from death_1 and lie low behind the haunches, its highest visible tuft BELOW the topline of the back. It must never flare upward during the collapse. Draw tail with coherent attachment and full outline. Preserve recognizable size and body anchor, complete silhouette with clear transparent margin. Exactly one beast in one newly drawn pose. No copied or transformed pixels, no extra legs, no background, shadow, panel, text or glow.",
+  "references": [
+    "output/actor-redraw/frames/mclsl_beast_hongmao/main/death_1.png"
+  ],
+  "createdAtUtc": "2026-10-18T02:47:00.144818+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "repair": {
+    "replacedSourceSha256": "076d0651ef54e3ce639532bf22c767a6786ff385562520a0477fa30b9cd469a2",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/forms_b/mclsl_beast_hongmao/death_2.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_hongmao/death_2"
+  }
+}

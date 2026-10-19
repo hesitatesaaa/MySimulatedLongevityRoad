@@ -1,0 +1,2010 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "checkedAtUtc": "2026-10-18T12:31:28.365998+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_0.png",
+          "sourceSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            268,
+            338,
+            933,
+            1028
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_1.png",
+          "sourceSha256": "15049d27ede72bc8f7cb63773d3b19f9b5c1f995b97205fe5dcf0447e10ac014",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            261,
+            333,
+            948,
+            1031
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "15049d27ede72bc8f7cb63773d3b19f9b5c1f995b97205fe5dcf0447e10ac014",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_2.png",
+          "sourceSha256": "3c9dd06df078754d8ce06e0376aeee3e448b5cdd971a691ad25055354d6d1af6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            261,
+            330,
+            940,
+            1029
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3c9dd06df078754d8ce06e0376aeee3e448b5cdd971a691ad25055354d6d1af6",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_3.png",
+          "sourceSha256": "2e19c1e0f21e0792d6ee0e58fcbf971cf6ca410ca73af44eb664580080d3524e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            245,
+            323,
+            968,
+            1057
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "2e19c1e0f21e0792d6ee0e58fcbf971cf6ca410ca73af44eb664580080d3524e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_4.png",
+          "sourceSha256": "f56719de926b2f206f66bffb80f721cf23c17f11bd5fc5ee903c7524906bce3b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            245,
+            342,
+            972,
+            1078
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f56719de926b2f206f66bffb80f721cf23c17f11bd5fc5ee903c7524906bce3b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_5.png",
+          "sourceSha256": "bf30cac1dfc2fdc9585c65a54e8c9adfe04bdf5f8880b23ef8d539c6f06c3c00",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            271,
+            340,
+            970,
+            1076
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bf30cac1dfc2fdc9585c65a54e8c9adfe04bdf5f8880b23ef8d539c6f06c3c00",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_6.png",
+          "sourceSha256": "29ad00356fb354684271cc26c5902e9f64ea1d4ee3ea03da4abafce030a31903",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            268,
+            352,
+            937,
+            1028
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "29ad00356fb354684271cc26c5902e9f64ea1d4ee3ea03da4abafce030a31903",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_7.png",
+          "sourceSha256": "be26d4a61c57508841104dfbba7815c67e0038989e7b87d4049a041b1ca3c0d4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            270,
+            333,
+            952,
+            1029
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "be26d4a61c57508841104dfbba7815c67e0038989e7b87d4049a041b1ca3c0d4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_8.png",
+          "sourceSha256": "f198713484de7167037505e39f0b5b782d4d94bca70d3072be537bc065c97a79",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            274,
+            333,
+            937,
+            1029
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f198713484de7167037505e39f0b5b782d4d94bca70d3072be537bc065c97a79",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\idle_9.png",
+          "sourceSha256": "b163e51c356f34638c95e6be24cdd606e2af360a78fb6c56c602adb090be04be",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            266,
+            335,
+            941,
+            1029
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b163e51c356f34638c95e6be24cdd606e2af360a78fb6c56c602adb090be04be",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_0.png",
+          "sourceSha256": "d1d86248817a22f5062f23ed7cbe1148efa6b660e560260ee5e8467fb062d2e4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            138,
+            75,
+            1134,
+            1175
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d1d86248817a22f5062f23ed7cbe1148efa6b660e560260ee5e8467fb062d2e4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_1.png",
+          "sourceSha256": "7d76749a40586f0b2c1939f6ceacec0c5b3d1093611c8ff107477d6458be601d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            141,
+            97,
+            1145,
+            1186
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7d76749a40586f0b2c1939f6ceacec0c5b3d1093611c8ff107477d6458be601d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_9.png",
+          "sourceSha256": "667c98f711ba6fce9d990d895b02c6b70238528c7d57fad8c96747c394ce95ab",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            141,
+            245,
+            1141,
+            1189
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "667c98f711ba6fce9d990d895b02c6b70238528c7d57fad8c96747c394ce95ab",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_4.png",
+          "sourceSha256": "b60d6d9ce081a97700545848c50bbb6996ec9a0ec0f48117dc080df639a20acc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            59,
+            346,
+            1212,
+            1151
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b60d6d9ce081a97700545848c50bbb6996ec9a0ec0f48117dc080df639a20acc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_3.png",
+          "sourceSha256": "31a964037d89fba4c11d74ec660fda0e14825a0d312c288921580bd17f1bf1bf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            114,
+            337,
+            1220,
+            1154
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "31a964037d89fba4c11d74ec660fda0e14825a0d312c288921580bd17f1bf1bf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_2.png",
+          "sourceSha256": "fad60f7854f54923418ad3322109e31b21d94bf950462209fc8bbaf03d42f01a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            68,
+            337,
+            1203,
+            1169
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "fad60f7854f54923418ad3322109e31b21d94bf950462209fc8bbaf03d42f01a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_5.png",
+          "sourceSha256": "b4a743b8afb6b385918cc13cd7f35e126e7e940a7a4e5d7b91db5e6907de7a33",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            119,
+            336,
+            1167,
+            1112
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b4a743b8afb6b385918cc13cd7f35e126e7e940a7a4e5d7b91db5e6907de7a33",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_6.png",
+          "sourceSha256": "88e6e0abd141f4191e4e37430d298b5cb1784d5eb76eb2769c398ec70f13b2dd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            133,
+            337,
+            1181,
+            1151
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "88e6e0abd141f4191e4e37430d298b5cb1784d5eb76eb2769c398ec70f13b2dd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_7.png",
+          "sourceSha256": "3492dc7127c8019b9c2b1a5b345d8b1b3fc97bfcd1e5ab0905a28d75eb4bc0dd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            138,
+            334,
+            1068,
+            1126
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3492dc7127c8019b9c2b1a5b345d8b1b3fc97bfcd1e5ab0905a28d75eb4bc0dd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_12",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_12.png",
+          "sourceSha256": "4711c4a409dce2b9107cb6504cf8eb79eeb200e34e65a768e30b855790b1dcf5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            114,
+            363,
+            1157,
+            1179
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4711c4a409dce2b9107cb6504cf8eb79eeb200e34e65a768e30b855790b1dcf5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_13",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_13.png",
+          "sourceSha256": "b9c7a9d9e25ad87048f018adf794a7822caa2be9921c2761b5261fac9a22675e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            140,
+            429,
+            1233,
+            1178
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b9c7a9d9e25ad87048f018adf794a7822caa2be9921c2761b5261fac9a22675e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_8.png",
+          "sourceSha256": "2ae7dbd7c08140b18c6d2ba0be1b32691531e1e0ca66c78bf85a0f5c933bc2db",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            144,
+            263,
+            1119,
+            1177
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "2ae7dbd7c08140b18c6d2ba0be1b32691531e1e0ca66c78bf85a0f5c933bc2db",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_10",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_10.png",
+          "sourceSha256": "2879ab9c795ff77d09ce1c7303357fef8d5968bef720e1d03ced779231cdc2c8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            173,
+            189,
+            1108,
+            1155
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "2879ab9c795ff77d09ce1c7303357fef8d5968bef720e1d03ced779231cdc2c8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_11",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\walk_11.png",
+          "sourceSha256": "a7ed927343ced145dbaa866046ebe08ec3af88b8f432d43147480c3bc9a23075",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            138,
+            76,
+            1136,
+            1176
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "a7ed927343ced145dbaa866046ebe08ec3af88b8f432d43147480c3bc9a23075",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_0.png",
+          "sourceSha256": "ee3883e0598f4f66e68a6d085464828c9c4751a9f647d5e4523cd64d66b7d56a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            198,
+            324,
+            1158,
+            1145
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ee3883e0598f4f66e68a6d085464828c9c4751a9f647d5e4523cd64d66b7d56a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_11",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_11.png",
+          "sourceSha256": "e7bde8f6e803df29c9ee194f9559712a6a565636b96b12b0b8dd8c2af537c449",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            192,
+            277,
+            1095,
+            1129
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e7bde8f6e803df29c9ee194f9559712a6a565636b96b12b0b8dd8c2af537c449",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_2.png",
+          "sourceSha256": "f71647f6ed1ef0e70a1054e3e9abbd5f62d5d7b7f9d44562c2066db0169cb72d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            265,
+            276,
+            1180,
+            1147
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f71647f6ed1ef0e70a1054e3e9abbd5f62d5d7b7f9d44562c2066db0169cb72d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_1.png",
+          "sourceSha256": "d90c7cc8b7f8c7b8da7409d66cf2ac225753ca8835e88bdbd938632b62a1ef56",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            213,
+            217,
+            1218,
+            1157
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d90c7cc8b7f8c7b8da7409d66cf2ac225753ca8835e88bdbd938632b62a1ef56",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_3.png",
+          "sourceSha256": "82097e19ac73d47ab48a96080cf3aef3130309c6e0b05ca4bcd46b81509fef51",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            139,
+            107,
+            1201,
+            1176
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "82097e19ac73d47ab48a96080cf3aef3130309c6e0b05ca4bcd46b81509fef51",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_4.png",
+          "sourceSha256": "cd2515b0f84ea9d545b08354ef2300180aa5bea6679a185f2b9d1318c4138f09",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            127,
+            63,
+            1189,
+            1187
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cd2515b0f84ea9d545b08354ef2300180aa5bea6679a185f2b9d1318c4138f09",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_5.png",
+          "sourceSha256": "19f7c585e7a4616a38ea925b416e31cb4278c2c982eb2a3f0499d2d537cd9772",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            117,
+            250,
+            1202,
+            1110
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "19f7c585e7a4616a38ea925b416e31cb4278c2c982eb2a3f0499d2d537cd9772",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_6.png",
+          "sourceSha256": "6d8d5a613d47b08847b1b5967bd57232c5692048b7ead696a023d200c101d227",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            46,
+            247,
+            1229,
+            1123
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6d8d5a613d47b08847b1b5967bd57232c5692048b7ead696a023d200c101d227",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_7.png",
+          "sourceSha256": "ca32ef2859e09df004602711d556e797b9832525aef8433defe9d95b67789d19",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            80,
+            329,
+            1243,
+            1138
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ca32ef2859e09df004602711d556e797b9832525aef8433defe9d95b67789d19",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_8.png",
+          "sourceSha256": "31e004a052cc4281b227650f35585f10888df112d3a9f3f1e505e8017c0102bd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            141,
+            403,
+            1204,
+            1164
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "31e004a052cc4281b227650f35585f10888df112d3a9f3f1e505e8017c0102bd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_9.png",
+          "sourceSha256": "5f435e81fb0fd142eb8cd062ab6609a5106efce4cf4b8307f08099fb2b1665fc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            153,
+            391,
+            1190,
+            1110
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5f435e81fb0fd142eb8cd062ab6609a5106efce4cf4b8307f08099fb2b1665fc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_10",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_10.png",
+          "sourceSha256": "829f73dd5421e234b21d978f5d21765182efd5e61c869d8a07f4586797d4530e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            156,
+            312,
+            1095,
+            1140
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "829f73dd5421e234b21d978f5d21765182efd5e61c869d8a07f4586797d4530e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_12",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_12.png",
+          "sourceSha256": "7ef50ce994984a96ed6aded3063f90bb15ffe30fec952a4505f1868f543f6465",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            161,
+            315,
+            1040,
+            1141
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7ef50ce994984a96ed6aded3063f90bb15ffe30fec952a4505f1868f543f6465",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_13",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\attack_13.png",
+          "sourceSha256": "d565800d5130987742f1466da1765675559ebe04f5716085f7db364f73fea702",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            232,
+            328,
+            943,
+            1053
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d565800d5130987742f1466da1765675559ebe04f5716085f7db364f73fea702",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\hit_0.png",
+          "sourceSha256": "5063f17b9ade9de9b0338e095de3edba3933f35b67f2f2bc3153f625936fed1a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            223,
+            326,
+            1057,
+            1086
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5063f17b9ade9de9b0338e095de3edba3933f35b67f2f2bc3153f625936fed1a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\hit_1.png",
+          "sourceSha256": "59b07dcfbcd27fcdd9fdcf78cefbe1167a1eb7094e63c358baf2458315a11779",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            120,
+            322,
+            1182,
+            1125
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "59b07dcfbcd27fcdd9fdcf78cefbe1167a1eb7094e63c358baf2458315a11779",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\hit_2.png",
+          "sourceSha256": "fc70b6e73b2653beb9e54f402a6f327b34d71032f527a8e634ef8f553b75324a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            258,
+            327,
+            956,
+            1039
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "fc70b6e73b2653beb9e54f402a6f327b34d71032f527a8e634ef8f553b75324a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\hit_3.png",
+          "sourceSha256": "692335a02785f0b437f254e3a190f4483b5167d5a2886dcfacaccd2fd74fda90",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            254,
+            339,
+            938,
+            1031
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "692335a02785f0b437f254e3a190f4483b5167d5a2886dcfacaccd2fd74fda90",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1028
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_0.png",
+          "sourceSha256": "9269978a209df292c499c57fc7879e8e15f2e2eb0333a5e19e43092a820373a3",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            196,
+            476,
+            1128,
+            1047
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9269978a209df292c499c57fc7879e8e15f2e2eb0333a5e19e43092a820373a3",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1047
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_1.png",
+          "sourceSha256": "24d05476f35333e024237cd40a8e1cff551011ed9f107e3e9add6d7773e919a9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            201,
+            592,
+            1144,
+            1154
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "24d05476f35333e024237cd40a8e1cff551011ed9f107e3e9add6d7773e919a9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1154
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_2.png",
+          "sourceSha256": "e3f36fe2aa81649da54b7df95b02603be37dde45321f7c67b998b3e82297d028",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            164,
+            616,
+            1107,
+            1132
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e3f36fe2aa81649da54b7df95b02603be37dde45321f7c67b998b3e82297d028",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1132
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_5.png",
+          "sourceSha256": "282001ac84f7c8314b67cf74d9aa09cc7e435d731decbf33611a1c0e6a1c527d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            69,
+            626,
+            1180,
+            1063
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "282001ac84f7c8314b67cf74d9aa09cc7e435d731decbf33611a1c0e6a1c527d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1063
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_3.png",
+          "sourceSha256": "79f6ab092326a6abd7917c7f853db2b1dea4cb158fa5cb59a436ff2d30b987bf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            143,
+            609,
+            1184,
+            1040
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "79f6ab092326a6abd7917c7f853db2b1dea4cb158fa5cb59a436ff2d30b987bf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1040
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_4.png",
+          "sourceSha256": "68f985beea833261569c7101f4b532eb5fdf6840f9f5e3a775cdf9c342025eaf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            120,
+            717,
+            1168,
+            1102
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "68f985beea833261569c7101f4b532eb5fdf6840f9f5e3a775cdf9c342025eaf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1102
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_6.png",
+          "sourceSha256": "b47b9e8fb287cecbad54a0e0f7a906b67b737290bd3ef1d96694357809cb36fd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            125,
+            746,
+            1167,
+            1034
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b47b9e8fb287cecbad54a0e0f7a906b67b737290bd3ef1d96694357809cb36fd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1034
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_7.png",
+          "sourceSha256": "b87a464cd517becf0b96a55ca776004780e01562e6d4993bc87189971a599764",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            96,
+            870,
+            1164,
+            1124
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b87a464cd517becf0b96a55ca776004780e01562e6d4993bc87189971a599764",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1124
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_8.png",
+          "sourceSha256": "771051d0637ded529984b0dcdbed84fcdeac5181a7c32316ae781f49c4a427f6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            146,
+            827,
+            1160,
+            1062
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "771051d0637ded529984b0dcdbed84fcdeac5181a7c32316ae781f49c4a427f6",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1062
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_9.png",
+          "sourceSha256": "67f45dedc800188becf71cd5b54382b8f2b483614a761bfbcb33e583300fe69c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            111,
+            825,
+            1181,
+            1080
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "67f45dedc800188becf71cd5b54382b8f2b483614a761bfbcb33e583300fe69c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1080
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_10",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_10.png",
+          "sourceSha256": "4ad48498053d647678a50c2675e5730a6f7d7c5e3a674468968b282eb0814718",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            106,
+            781,
+            1150,
+            1042
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4ad48498053d647678a50c2675e5730a6f7d7c5e3a674468968b282eb0814718",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1042
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_11",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan\\death_11.png",
+          "sourceSha256": "eed405aaef966cded5967bb6961a60faad7a477fae77583791e332fffce112d4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            82,
+            821,
+            1196,
+            1113
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "eed405aaef966cded5967bb6961a60faad7a477fae77583791e332fffce112d4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              763,
+              1113
+            ],
+            "pixelsPerUnit": 11.311475409836065,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 339663456,
+  "deathSilhouetteHeights": [
+    571,
+    562,
+    516,
+    437,
+    431,
+    385,
+    288,
+    254,
+    235,
+    255,
+    261,
+    292
+  ],
+  "deathHeightRiseCandidates": [
+    9,
+    10,
+    11
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [],
+  "reviewerNotes": "Complete original-source frames individually reviewed by forms_b in authored target order. Parent checked terminal contact silhouette; proposed anchors remain offline only. No game validation claimed.",
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/qingluan/Beast",
+    "frameCount": 54,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

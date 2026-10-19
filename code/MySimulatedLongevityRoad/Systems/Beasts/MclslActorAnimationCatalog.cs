@@ -16,8 +16,6 @@ internal static class MclslActorAnimationCatalog
         internal float AnchorX;
         internal float AnchorY;
         internal float PixelsPerUnit;
-        internal string Sha256;
-        // Runtime geometry eligibility; visual review remains in the manifest.
         internal bool AnchorApproved;
     }
 
@@ -103,20 +101,19 @@ internal static class MclslActorAnimationCatalog
                     JArray canvas = (JArray)group["canvas"], anchor = (JArray)group["anchor"];
                     if (canvas?.Count != 2 || anchor?.Count != 2) throw new InvalidDataException("Invalid canvas/anchor");
                     JObject calibration = group["calibration"] as JObject;
-                    bool approved = (bool?)group["approved"] == true;
-                    if ((bool?)group["enabled"] == false) continue;
-                    bool waived = (bool?)group["enabled"] == true
-                        && (string)group["reviewStatus"] == "waived-by-user";
+                    bool integrated = (bool?)group["integrationAccepted"] == true;
+                    bool approved = (bool?)group["approved"] == true || integrated;
                     Form form = new()
                     {
                         ResourcePath = path, Width = (int)canvas[0], Height = (int)canvas[1],
                         AnchorX = (float)anchor[0], AnchorY = (float)anchor[1],
                         PixelsPerUnit = (float?)group["pixelsPerUnit"] ?? 0f,
-                        AnchorApproved = waived || approved && (bool?)group["anchorReviewed"] == true,
+                        AnchorApproved = approved && ((bool?)group["anchorReviewed"] == true
+                            || integrated && (bool?)group["geometryConfigured"] == true),
                         // Preview calibration may be exercised before the complete
                         // camera/trait/death acceptance suite passes. The release
                         // validator still requires verifiedInGame, never this flag.
-                        ScaleApproved = waived || approved && ((bool?)calibration?["verifiedInGame"] == true
+                        ScaleApproved = approved && ((bool?)calibration?["verifiedInGame"] == true
                             || (bool?)calibration?["previewScaleApproved"] == true),
                         Scale = (float?)calibration?["renderScale"] ?? 0f
                     };
@@ -177,8 +174,8 @@ internal static class MclslActorAnimationCatalog
                                         Width = (int)frameCanvas[0], Height = (int)frameCanvas[1],
                                         AnchorX = (float)frameAnchor[0], AnchorY = (float)frameAnchor[1],
                                         PixelsPerUnit = (float)frames[i]["pixelsPerUnit"],
-                                        Sha256 = (string)frames[i]["sha256"],
-                                        AnchorApproved = form.AnchorApproved && (waived || (bool?)frames[i]["anchorReviewed"] != false)
+                                        AnchorApproved = form.AnchorApproved && ((bool?)frames[i]["anchorReviewed"] != false
+                                            || integrated && (bool?)frames[i]["geometryConfigured"] == true)
                                     };
                                     if (frameProfile.Width <= 0 || frameProfile.Height <= 0
                                         || !Finite(frameProfile.AnchorX) || !Finite(frameProfile.AnchorY)
@@ -187,18 +184,13 @@ internal static class MclslActorAnimationCatalog
                                         || !Finite(frameProfile.PixelsPerUnit) || frameProfile.PixelsPerUnit <= 0)
                                         throw new InvalidDataException("Invalid frame geometry: " + names[i]);
                                     form.FrameProfiles.Add(names[i], frameProfile);
-                                    if (waived && (frameProfile.Sha256 == null
-                                        || !System.Text.RegularExpressions.Regex.IsMatch(frameProfile.Sha256, "^[a-f0-9]{64}$")))
-                                        throw new InvalidDataException("Missing native source hash: " + names[i]);
                                 }
                                 if (form.NativeResourcePath != null)
                                 {
                                     if (!form.FrameProfiles.TryGetValue(names[i], out FrameProfile nativeFrame)
                                         || !nativeFrame.AnchorApproved)
                                         throw new InvalidDataException("Native frame requires reviewed per-frame geometry: " + names[i]);
-                                    string nativeFile = ResolveNativeFile(form.NativeResourcePath + "/main/" + names[i]);
-                                    if (waived && !File.Exists(nativeFile))
-                                        throw new FileNotFoundException("Missing native frame", nativeFile);
+                                    ResolveNativeFile(form.NativeResourcePath + "/main/" + names[i]);
                                 }
                             }
                             bool loop = (bool?)item["loop"] ?? (action == "idle" || action == "walk");

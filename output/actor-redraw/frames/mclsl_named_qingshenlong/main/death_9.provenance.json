@@ -1,0 +1,45 @@
+{
+  "actorId": "mclsl_named_qingshenlong",
+  "action": "death",
+  "index": 9,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_named_qingshenlong/death_9.png",
+  "sourceSha256": "c540f9492300b457ef54e2f220f91cdc9a1e278ed2184912513bc929597d5a6b",
+  "outputFile": "output/actor-redraw/frames/mclsl_named_qingshenlong/main/death_9.png",
+  "outputSha256": "c540f9492300b457ef54e2f220f91cdc9a1e278ed2184912513bc929597d5a6b",
+  "prompt": "Use case: stylized-concept. Generate exactly ONE independent transparent pixel-art game frame for QingShenLong 青神龙·兽形, death_9 FINAL RESTING POSE. Image 1 is established identity, palette, anatomy; image 2 is preceding death_8 for continuity. Draw a newly composed final still pose: long slender blue Chinese serpentine dragon lying low, curled S-shaped torso and tail, cream underside, white mane and tail tuft, gold antlers, closed or nearly closed eyes, head resting at lower right. Exactly FOUR small paws attached to torso, TWO gold whiskers. Preserve existing pixel-art identity and approximate native scale, but CURL BOTH WHISKERS CLEARLY INSIDE THE RIGHT CANVAS with at least 40 transparent pixels before the edge. Entire dragon, tail, claws, antlers and whiskers visible. 1254x1254 native transparent RGBA PNG, one character, one frame. No cropping, no clipped edge, no fifth paw, no background, text, shadow, particles, sprite sheet, or manipulation of the reference pixels.",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_qingshenlong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_qingshenlong/death_8.png"
+  ],
+  "createdAtUtc": "2026-10-18T02:39:58.106580+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "repair": {
+    "replacedSourceSha256": "36dd6653938a87acb9c492775cb9aa6eeffdbc3a2767c2f7052b5d8544764eac",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_qingshenlong/death_9.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_named_qingshenlong/death_9"
+  }
+}

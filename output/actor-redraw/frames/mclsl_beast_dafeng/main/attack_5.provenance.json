@@ -1,0 +1,46 @@
+{
+  "actorId": "mclsl_beast_dafeng",
+  "action": "attack",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_dafeng/attack_5.png",
+  "sourceSha256": "ad198fc5e293a2dcd379b76516dd30c447f93597b406b0fbb884481e037ff825",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_dafeng/main/attack_5.png",
+  "outputSha256": "ad198fc5e293a2dcd379b76516dd30c447f93597b406b0fbb884481e037ff825",
+  "prompt": "Edit the provided native transparent pixel-art sprite, using the middle reference as the exact target pose. This is a single animation frame of the same blue-and-white Chinese fantasy giant bird, golden crest, golden beak and talons, two blue-and-white wings, long blue tail, facing screen right, lunging in midair with both talons thrust forward. Preserve the original attack_5 body, both legs and both wings, facial identity, blue feather pattern, and crisp pixel-art rendering. The right/back wing behind the head in the middle image is hard clipped at the right canvas border: independently redraw its complete outer feather tips and move/fit the whole single bird enough left so every extremity has generous transparent padding, at least 30 pixels from every image edge. Keep the left/near wing swept upward, the right/far wing fanned vertically behind the head, both talons anatomically complete and separate. No extra character, no second frame, no text, no scenery, no cast shadow, no platform. Output ONE native 1254x1254 transparent RGBA PNG, pixel art consistent with references. Reference order: attack_4 preceding pose, attack_5 target pose with cropped far wing, attack_6 following recovery pose.",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_dafeng/attack_4.png",
+    "output/actor-redraw/originals/mclsl_beast_dafeng/attack_5.png",
+    "output/actor-redraw/originals/mclsl_beast_dafeng/attack_6.png"
+  ],
+  "createdAtUtc": "2026-10-18T10:09:45.750757+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "repair": {
+    "replacedSourceSha256": "f320081f37d0593ff707b004a32154576c7ca207719b933a0d1b8abed1545c24",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_dafeng/attack_5-attempt1.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_dafeng/attack_5"
+  }
+}

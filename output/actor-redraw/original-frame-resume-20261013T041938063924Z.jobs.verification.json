@@ -1,0 +1,785 @@
+{
+  "checkedAtUtc": "2026-10-13T05:33:14.056794+00:00",
+  "frames": [
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "walk",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "15860630b55bdff3622b3df0c5022fabdc626f564d2de151f80876b804e31daa",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "walk",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9e47a8fe59d70e84a62dd47bb8aeea4536bd72f98641f785c63eedb105226e1e",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "98f45dd1904a37b06be84a63e98a19154e6b0b1aa2a0c87d41ad94264ae6e04b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "7b6bfb64591e76854d96365c4cc2ee2f40f3090190dc9e5ce5cb8bfd202dfbdd",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "59a82313581b4e0eff76622199c0c5d3e0cf4fdc8eebac460ced3da4316ab836",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "c2e3e3ffc08542c76b49dfab3242d0e44b33bb27af616ffe6216882e71c5f048",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "6c6d8255404e19249b2a105d9809f7a01b50066148e2e049fd959d8df2dcf003",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "16f39828577a913f8d326e0c2360432eda74f7217f64b55d2aa0aa3e44ebd8b1",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 6,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "5283707f559fad1f186b04f50e23669ff91483b39636295fc291494b9f5c0103",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "index": 7,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "5a0da31426c50b5595a41188dcb418acfd54d0c1c9d3f03dbf0f5cf8ce1443ea",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "hit",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "4b1c41517e589a0b7384eb9c65a9e3b3416531c49c06e7b64fac7c865733ad70",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "hit",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "73b4f22396d6d316d7160b4484a72beaaeff1f2842e1c7e9c3dab12c1643fe89",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "7c61db92a893b6190ecfa120a8fc7ffe4a36dda66b6aaff3c9b03acd51149dcf",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "196288a9259f876557fad0170498c3b67f2168c59e9fe79f69014a983e249bec",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "092527aedb242411de4929e6f46ec49ed0db7786b9e918ca8041dd8974d2542e",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "bf5ae82b44ac0ea1add27901e57ca943e4e4127d5547247c831a5ff3e14153a2",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "66d8f9ddc857419dd94d89ae80a99200a0bc610fb7023160023ab818bbb61add",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "88ef2c978d2fad2538f4f3b160cd1f548f7832117d40ab65b78c276445b08f08",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "e38acabc484c7003d23d8ae7791f70ceec4c5b86fb638b98b2c70311fbc10015",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9816c1f564e374f35ca6effac3be6dafd25ef3d035ea28af1d26c43094f76ed2",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "629be08990df473b60d9f5dbd8b67103fbafada4428087216565bffbe6d0543c",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "00958dc3a8797220a209cc9a665f0289708a122836b62c0c7f59786d71c655fe",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "fd542643e2397ff2044a437dfd29e87bee4e5cee8cba6713e1c56255ff2750af",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "0677134d85b30ea4b92e222ccdfe6d1389f22aeacc626d29d8eb7ff075f5c67c",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "2d4b261473d227ad5a43c6c93edc550a768512e30abc6b718afb9039d28324e2",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "156daeef65563f1851fef8835497869deb51a96e254f9af2c538273401f6c41e",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "c8974d5e6a47abf54f6609acef28f274c5d4642ac2918841ef0c110440659454",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "f5f93c8f895154f89216d6cf34d5dc6994024d5cd9e577cdeb1433e7d349d061",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "d455ba944169d7e64f27471cf3e1450c369baa2be8af180cb0824ed2840f2d1b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "8d776b63e9a358cb2074805aabe5ab1eda2e901a155bb148f24b1adc1502968b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "634ff1a6a2e9ba80d5d293f6761648506ba8dbfe107bd4ebd8529693fd0172c6",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9020bd8d99d9e34156b210e2ff8d8ed6043161c1ed24d436b553c1e68020b1e7",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9d32a2b502e46f2b3a5478c9106a6313fb54ec5b9dfca4c2feab6e7657da251f",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 6,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9cdde2b55d57629347ff3b6767fc2054199618d73df4b50f760b2a7514017b19",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "index": 7,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "46f084940f9b64adb1cbed415e9a4dab1f7117d1928106740e72e5d10d4e1516",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "hit",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "422a8092b632ae629e3d1fd71cd070b50b9d8b4a621d291767f2b76b9237ad93",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "hit",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9bbf8a1a882753fc73b3bd635c552fe3433d8fee086c9db4fb465f7c7e528b98",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "0ff0cd13b52c8c30fcbed87315a529ca0fe0a0c146789620d246a12bbe329116",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "add338b33d6d77265c235ec16ecbada4165f48ada14216df450d06ab0b2b25d5",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "0439a63233a9cebc2f4722e923fc8a416012c59969c88d832be62b1c3e1954d6",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "9d7250ed0bd20acff7e82ea2118a6511686e20a83b1e92c1797f561de42c124b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "2343504bf7a6f579126a6cf9d5c13374eee1edf38317194d721d7f37119942c5",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "d98375938509db6d397aec17f0bfe0d10c50e400ae899ecd91e062ecba903560",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_moqilin",
+      "action": "icon",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "57cbf7b64f395e088ae00e7561f8e6aea63f9677f1b465a2ea67fe05914987e8",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "2d01de75ffd1de8e8844b608535254a4f2b1c13026b265497ca05a3a8cc89049",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "b52c0154944b55b574d4d6bca05de60c230cceacf67487f899bf9485875bd74c",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "13be98504617160756929e3bf711ab565d4696278d58b90cf9658d9b7e81d682",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "0b61569b0dc885f5f98f95d37da890357ef7ae0a4e7acc3781cf86b0350955df",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "fa30c7474485b69191f12756230161e0f2780d8af425f8c63344358a5e5ab858",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "b83eade1c06dcd425634b2bf4a63642a33de854289cb462f670ba9fa7e87c8e7",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "356c2763ec9bfa86786e8dcd709723338882049e3349991c242f9b58f33d52aa",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "02b630c489cfc35feb9cca06845494e25df09ed5993b2fc3f325ccb599d9cfbb",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "55c3dd8c58d065496b2d53b540acd3647bc5f76a7e41f11d17105832cc73c35c",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "17a38882b38b5ecd5b7aa222baded689f01e37eff3e38e40672bd2320b1f94d6",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "cc6a6902fdd5fae24536e604ca25477ccaf0445dee2fd409e5a09af4e03e1d6f",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "5b5c7ffee5240cc71821b42e6a42fee5830ddb130b08e3d8b399edddb3935d4b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "748bb6c53f7a4d2ed3dafadbcb1f5d5aee40c6e833ae6833a389671e1a37616c",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "0f1af099fbbfe4819131885e54e6a502655487eea3b16fc6249474cd30588874",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 5,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "3160d03691d65e4fcf9b8dc1ee571bd928d950bab6d904f8a3a804edc2b5ffa7",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 6,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "460e1378b3eada371f6dfe2c6226243f166a51479e42bf924315a56a0feceeef",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "index": 7,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "ed89e59e2759bcb79fe5ad8fbfb370325d424d574992a4756137655742d3a14f",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "hit",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "76ff4dc1dcf46f6f6317049dbda7f49e40be2a273c0778b61297db0f01c37026",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "hit",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "a2dce7193b1673bedec7db2d04f407796be0f81e2f47d1f03da1e640b121b2e3",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_xuanwu",
+      "action": "death",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "2d5e69d677704b913f5b7545b6824d47c9f0647e2036392e54f6d0e57159f502",
+      "nativeResolution": true
+    }
+  ],
+  "checkedFrames": 64,
+  "imageSource": "built-in-imagegen-independent-per-frame",
+  "clarityReference": "output/actor-redraw/originals/mclsl_beast_zhuque_yuan/attack_2.png",
+  "lossyCompression": false,
+  "downsampling": false,
+  "reencoding": false,
+  "cropping": false,
+  "fileChecksPassed": true,
+  "completeActionReviewPassed": false,
+  "installedToRuntime": false,
+  "formalReleaseReady": false,
+  "archivedLowReferenceBatch": "output/actor-redraw/rejected/low-reference-20261013"
+}

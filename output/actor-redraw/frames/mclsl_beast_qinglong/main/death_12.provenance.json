@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "death",
+  "index": 12,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/death_12.png",
+  "sourceSha256": "c3ed208e0ec782f10e219cb860d9f17641bf5b6681ab2a2ea13a046978c2ed26",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_qinglong/main/death_12.png",
+  "outputSha256": "ce7ed0cda1d37a133ef47be951af38846c4b98ff0e514c504c5f3e9209b97085",
+  "createdAtUtc": "2026-10-09T08:06:45.319892+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE independently authored transparent pixel-art Qinglong death_12. Reference is previous stage of SAME dragon. Same1254x1254 transparent canvas, exact same anatomical pixel scale, side camera facing RIGHT. Next pose: Near-final still corpse, same low compact ovalcoil headrightclosedeyes ongroundy1177, top910. Only last slight tailplume andwhisker settling. Four-limbanatomy, two nearfeetvisiblefarfeethidden. Draw new bent anatomy for progressive collapse. Preserve original head and body thickness, full serpent length represented by tightening coils; do not shrink anatomical size. Turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers and dorsal crest, cyan flowing mane/tail plume, two long cream-lined whiskers with cyan border. Exactly FOUR limbs with ONE hand/foot each: near and far forelegs from shoulders, near and far hindlegs from lower body. No branched arm, duplicated forehand or extra claw; far limbs may be occluded by coil. Cyan fins are mane. Body and head settle progressively downward; end is prone compact coil, eyes closed, head never rises again. Ground contact around source y1177, no drawn ground. Whole body, horns, whiskers, feet and plume stay inside x180..1180,y60..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw fresh frame, no sprite paste, translate, scale or recolor as redraw. No wings, blood, aura, particles, text, floor, shadow, background, sheets, panels or multiple poses.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/death_11.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 23735,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

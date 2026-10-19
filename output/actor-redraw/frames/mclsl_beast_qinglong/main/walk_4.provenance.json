@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "walk",
+  "index": 4,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/walk_4.png",
+  "sourceSha256": "7e9850766362eb54dbdba7305972444a6e0c11fa9e8e695337c99c2a865b0240",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_qinglong/main/walk_4.png",
+  "outputSha256": "ac6e7f99da09151cafd69937d6dac27aba926eb1d113eb41dd004402bac557b6",
+  "createdAtUtc": "2026-10-09T06:38:50.530525+00:00",
+  "prompt": "Use case: game-asset. Independently draw exactly ONE new transparent pixel-art game frame, Qinglong walk_4. Image 1 fixes identity and anatomical pixel scale: turquoise/cyan scales, navy shading, cream belly, gold antlers and dorsal crest, cyan mane and tail plume, two long whiskers, Eastern serpentine S-shaped body with compact lower tail loop. NO wings. Image 2 is preceding independently drawn glide frame, motion guide only. Four-limb anatomy: exactly TWO forelimbs on upper torso and TWO hindlimbs on lower torso, no extra claw hand near chest. Near foreclaw ahead of midbody, far foreclaw on right of upper belly; near hindclaw at lower curve, far hindclaw partly occluded inside middle coil. Each claw connects to its own limb. Same1254x1254 transparent canvas, right-facing three-quarter side camera. Keep original head size, body thickness and anatomical lengths; only curves and joint angles change. Pose: First wave crest. Head begins curving back toward center, upper torso bends gently left. Lower body curves right, tail plume reaches rightmost modest sweep about 50px beyond standard, compact coil intact. Stay compact within x220..1160,y100..1190, full antlers, whiskers, claws and tail clear of edges. Crisp square pixel clusters, dark outline and limited flat shades. Independently DRAW from scratch, no old whole-sprite paste, scaling/recolor as redraw, no sheets, panels, multiple poses, text, aura, particles, ground, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/walk_3.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 81346,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

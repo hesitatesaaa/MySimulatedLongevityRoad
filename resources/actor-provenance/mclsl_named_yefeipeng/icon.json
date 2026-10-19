@@ -1,0 +1,76 @@
+{
+  "actorId": "mclsl_named_yefeipeng",
+  "action": "icon",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_named_yefeipeng/icon_0.png",
+  "sourceSha256": "85cc90fd71c1a8a7eccea25ebbc30f569484146d0b4067556dec37db0a481722",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_named_yefeipeng.png",
+  "outputSha256": "85cc90fd71c1a8a7eccea25ebbc30f569484146d0b4067556dec37db0a481722",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 叶飞鹏 (mclsl_named_yefeipeng), icon_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: blue/white swordsman with a feather-edged flowing cloak, dark hair tied with a headband, white cuffs and a slender sword. Visual gender: male, adult fully clothed human. Pose: Dedicated square placement-icon pose: newly draw an attractive compact readable character, full recognizable silhouette with limbs, weapons and head included; long creatures coil their body/tail and birds fold wings to fit. This is an independent portrait pose, not a copy or crop of a world frame. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_yefeipeng\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T12:35:37.758198+08:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "canvas": true,
+    "independentIcon": true
+  },
+  "staticReview": {
+    "jobIndex": 33,
+    "actorId": "mclsl_named_yefeipeng",
+    "action": "icon",
+    "frame": 0,
+    "sourceSha256": "85cc90fd71c1a8a7eccea25ebbc30f569484146d0b4067556dec37db0a481722",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "viewedFullNativeImage": true,
+    "limbConnectionsReviewed": true,
+    "extraLimbs": false,
+    "clippingDetected": false,
+    "identityConsistent": true,
+    "actionContinuityApproved": false,
+    "geometryApproved": false,
+    "reviewedBy": "draw_a",
+    "notes": "Independent full-body icon, blue-white shoulder feathers, dark hair, sword and both boots readable; no visible clipping."
+  },
+  "iconFinalReview": {
+    "sourceSha256": "85cc90fd71c1a8a7eccea25ebbc30f569484146d0b4067556dec37db0a481722",
+    "reviewedBy": "main-conversation",
+    "reviewedAtUtc": "2026-10-17T10:22:31.096861+00:00",
+    "identityReferenceCompared": true,
+    "anatomyAndSilhouetteReviewed": true,
+    "hardClipping": false,
+    "confirmedDefects": [],
+    "visibleBoundsAtAlpha128": [
+      82,
+      147,
+      1205,
+      1157
+    ],
+    "buttonOccupancyVerifiedInGame": false,
+    "note": "Original icon and idle_0 identity reference viewed directly. Native PNG unchanged; runtime button occupancy remains unverified."
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "checkedAtUtc": "2026-10-15T06:16:09.792150+00:00",
+  "threadId": "01a13a2c-723f-77f0-859b-7215b9d052a1",
+  "agentFailure": {
+    "message": "You\u2019ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 2:15 PM.",
+    "additionalDetails": null
+  },
+  "allReturnedImagesSaved": true,
+  "imagegenUsageLimitObserved": false,
+  "inFlight": 0,
+  "images": [
+    {
+      "jobIndex": 5,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_0.png",
+      "sourceSha256": "035acc8113ef0d363f397e76e012469c406739f505a4e8b47fd31af7e19ecba6",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-9f9d77dc-4639-4d4a-af32-1d172ae0387c"
+    },
+    {
+      "jobIndex": 4,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "walk",
+      "index": 7,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_7.png",
+      "sourceSha256": "d3a587f04df7ca3ddb8e9966ea5c46be4c2fd0a4c9afae25229fb7e7b054cd55",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-fbfe9dae-e341-464e-9eea-bb82f13256db"
+    },
+    {
+      "jobIndex": 3,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "walk",
+      "index": 6,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_6.png",
+      "sourceSha256": "139a25994899fce9550ebf75a29a0fade147654f9631ec5c81e379e63edab078",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-d2ebcbed-1944-4417-984b-8cdd77cd24dd"
+    },
+    {
+      "jobIndex": 6,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_1.png",
+      "sourceSha256": "529c045d4d80d2c0bc943a8c7b86af1f5b7c500ca8a17a61a49d4497bf7172ec",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-6c2333f4-4f99-41d2-9259-f4c9af4b2a2a"
+    },
+    {
+      "jobIndex": 9,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_4.png",
+      "sourceSha256": "ed93ea9eb4516a481a51b2254db1810fe7fa5e5e47ffed4b89966224e3906f9a",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-a8beb02b-7a81-4684-b3cc-305c756550be"
+    },
+    {
+      "jobIndex": 7,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_2.png",
+      "sourceSha256": "b73405713e3968e443137316c4fc993793d3c92c02d734e60487e0929f0f9aa4",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-96ea652e-e48d-441d-a1dc-0a7e2428ab94"
+    },
+    {
+      "jobIndex": 8,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_3.png",
+      "sourceSha256": "625014787cbf5c1e4ef5fcd56dc7e9c99a25c16588fa867deb5c0af4bf468d15",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-240796e3-0ad2-4dda-8b91-7f366299ed95"
+    },
+    {
+      "jobIndex": 10,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_5.png",
+      "sourceSha256": "a086f9f3dff0ce4117180cd3b8fbd072b2aca6b9d1d569e7c7f652940ae2ff9b",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-981a49c9-0d74-4e8f-b093-e8966136a687"
+    },
+    {
+      "jobIndex": 11,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 6,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_6.png",
+      "sourceSha256": "258d2e1d8c3547d55254d1c53bdca58e9e2f1aefa6d6a4bc7427716b469290d5",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-45503a3e-0962-41fe-ac7a-a44ab28ef64f"
+    },
+    {
+      "jobIndex": 14,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "idle",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\idle_1.png",
+      "sourceSha256": "f4416335c538c9846959d0621e6a000e354796e0a164c814ef9fe2ede8ad1b13",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-acb7a140-b9c2-4d48-b9f0-cee7c4075781"
+    },
+    {
+      "jobIndex": 13,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "icon",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_xuanniao.png",
+      "sourceSha256": "7b2b2d8ce4dcd8779bbcf9f2742cbd0feb5fa21ff52d47babc916013a5621f01",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-e5162d43-f8ba-4755-ba32-e27152526952"
+    },
+    {
+      "jobIndex": 12,
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 7,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_7.png",
+      "sourceSha256": "9fd235035efdbfb54aaf637a33dfc9154dedfa27f018640c1d3fd3f08d797a32",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-d918b375-5ac5-4e08-b77d-9ca9c0876d22"
+    }
+  ]
+}

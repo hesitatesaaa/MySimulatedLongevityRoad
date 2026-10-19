@@ -1,0 +1,1250 @@
+{
+  "actorId": "mclsl_beast_kunpeng",
+  "checkedAtUtc": "2026-10-18T09:36:52.168697+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_0.png",
+          "sourceSha256": "a49ec5e0684c21e78e062fb3bb0e593358b3067198197decefe458b3365fa9ca",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            28,
+            302,
+            1237,
+            1148
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "a49ec5e0684c21e78e062fb3bb0e593358b3067198197decefe458b3365fa9ca",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_1.png",
+          "sourceSha256": "562ca659b21c587a93d988e7a2426d51aedd943fd0e4bab89fee85ffbf1f550d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            24,
+            286,
+            1247,
+            1145
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "562ca659b21c587a93d988e7a2426d51aedd943fd0e4bab89fee85ffbf1f550d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_2.png",
+          "sourceSha256": "97237aee36ae597b85df7e456f5df67f9bef62568fc288b24d976fe1ba547637",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            25,
+            296,
+            1242,
+            1149
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "97237aee36ae597b85df7e456f5df67f9bef62568fc288b24d976fe1ba547637",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_3.png",
+          "sourceSha256": "cfa5ecf5c5b021e81eb389dc5747c042e4973adbf16085a291216d9d31d09dff",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            24,
+            290,
+            1243,
+            1166
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cfa5ecf5c5b021e81eb389dc5747c042e4973adbf16085a291216d9d31d09dff",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_4.png",
+          "sourceSha256": "50b18163e2d172073b6592d04aaf9d0f0f2b2b0da08c6db24c3d783dd5265d55",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            16,
+            287,
+            1244,
+            1153
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "50b18163e2d172073b6592d04aaf9d0f0f2b2b0da08c6db24c3d783dd5265d55",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_5.png",
+          "sourceSha256": "cff2567f029ee29b0be1cf70a195e9250687eb23c727c972d8caba24516fcff3",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            18,
+            397,
+            1240,
+            1191
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cff2567f029ee29b0be1cf70a195e9250687eb23c727c972d8caba24516fcff3",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_0.png",
+          "sourceSha256": "3c44b8171d0c995dbc120919ad1594c3914157304605af353c1b770c1a823638",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            39,
+            322,
+            1236,
+            1130
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3c44b8171d0c995dbc120919ad1594c3914157304605af353c1b770c1a823638",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_1.png",
+          "sourceSha256": "9ae224387a75b1c966b1239d9b1e5be464a604e5c19d617ef03b85cab965d33f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            34,
+            166,
+            1239,
+            1175
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9ae224387a75b1c966b1239d9b1e5be464a604e5c19d617ef03b85cab965d33f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_2.png",
+          "sourceSha256": "5286fe5b330a2f4a039931b5ea9ae36a63cbe2a28511ac25966eb7f285cbd95b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            17,
+            241,
+            1248,
+            1156
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5286fe5b330a2f4a039931b5ea9ae36a63cbe2a28511ac25966eb7f285cbd95b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_3.png",
+          "sourceSha256": "6979c2ff887aa9639e4348d1eda822cf03cf318ae1ea3d9818607ee266e33861",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            31,
+            351,
+            1242,
+            1172
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6979c2ff887aa9639e4348d1eda822cf03cf318ae1ea3d9818607ee266e33861",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_4.png",
+          "sourceSha256": "e9b6b9bfd20429ae18145bd63b2a627bda05386a34c63053188f80b8ca69dcf1",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            17,
+            274,
+            1249,
+            1203
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e9b6b9bfd20429ae18145bd63b2a627bda05386a34c63053188f80b8ca69dcf1",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_5.png",
+          "sourceSha256": "88befbe4aad14eec7dc53a2c042844849699e167dbbde773224865d672014e2a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            24,
+            297,
+            1237,
+            1164
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "88befbe4aad14eec7dc53a2c042844849699e167dbbde773224865d672014e2a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_6.png",
+          "sourceSha256": "d7d373fb454f71eb00eaea3f55774652a3e1c1057205f0444daea4fec9044d66",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            10,
+            146,
+            1246,
+            1174
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d7d373fb454f71eb00eaea3f55774652a3e1c1057205f0444daea4fec9044d66",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\walk_7.png",
+          "sourceSha256": "82a8b519f2b3eb1d3f206cd5d502d747c8f672258d998f9da0c41b1dc80ab347",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            25,
+            325,
+            1245,
+            1150
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "82a8b519f2b3eb1d3f206cd5d502d747c8f672258d998f9da0c41b1dc80ab347",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_0.png",
+          "sourceSha256": "02381ba9a472c5a1707b2b146a96f08e5054e96ed63078f1c5074fbc846d9b13",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            12,
+            345,
+            1242,
+            1176
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "02381ba9a472c5a1707b2b146a96f08e5054e96ed63078f1c5074fbc846d9b13",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_1.png",
+          "sourceSha256": "a1c59ca2a977267a9acc7900959b06b41c4018b805d854b3880d8ebee7f46e32",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            17,
+            374,
+            1240,
+            1128
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "a1c59ca2a977267a9acc7900959b06b41c4018b805d854b3880d8ebee7f46e32",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_2.png",
+          "sourceSha256": "4a3e8a5838c22d2e51fd677bfef22c0b111b4839e1de779cd668324e57a249a5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            12,
+            368,
+            1249,
+            1171
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4a3e8a5838c22d2e51fd677bfef22c0b111b4839e1de779cd668324e57a249a5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_4.png",
+          "sourceSha256": "bda561e9e549252c6aa452b9afe48fc4026527585346f1e48bb88c07a6ececbe",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            9,
+            323,
+            1249,
+            1124
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bda561e9e549252c6aa452b9afe48fc4026527585346f1e48bb88c07a6ececbe",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_3.png",
+          "sourceSha256": "3c16d1e18d601fed0fa2810de3c930d0ed47f93806770502efaeecab2ae8d1b7",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            10,
+            333,
+            1250,
+            1166
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3c16d1e18d601fed0fa2810de3c930d0ed47f93806770502efaeecab2ae8d1b7",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_5.png",
+          "sourceSha256": "5694c3a9497e8344b6c7f41d833d297dc802278831c885ee7907faf0aa2e8820",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            7,
+            350,
+            1240,
+            1156
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5694c3a9497e8344b6c7f41d833d297dc802278831c885ee7907faf0aa2e8820",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_6.png",
+          "sourceSha256": "6ee9b3ae84fe4ebfb710434bac0989e5ffd8117acb1526c67edfbd9b852730ab",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            29,
+            352,
+            1229,
+            1125
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6ee9b3ae84fe4ebfb710434bac0989e5ffd8117acb1526c67edfbd9b852730ab",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_7.png",
+          "sourceSha256": "eda4510d2951bdcbbe76fe24eaa9217bb25a7501175a3553fb7793005940fd0a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            32,
+            355,
+            1243,
+            1092
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "eda4510d2951bdcbbe76fe24eaa9217bb25a7501175a3553fb7793005940fd0a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_8.png",
+          "sourceSha256": "ffad4d630167d948ca06fbba8527a765b4afeee123a8e567763d5c40e29bb5ba",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            14,
+            329,
+            1239,
+            1173
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ffad4d630167d948ca06fbba8527a765b4afeee123a8e567763d5c40e29bb5ba",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\attack_9.png",
+          "sourceSha256": "c3300003d322790740ea2a2ad0800318d9d84a12e17c73e95eddf3ab42e84108",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            30,
+            311,
+            1246,
+            1178
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c3300003d322790740ea2a2ad0800318d9d84a12e17c73e95eddf3ab42e84108",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\hit_0.png",
+          "sourceSha256": "dcece3b723aafa48565b4e8d8f6ef15a4cb99cbe8666f4623935b5484a7aeee3",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            20,
+            286,
+            1249,
+            1104
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "dcece3b723aafa48565b4e8d8f6ef15a4cb99cbe8666f4623935b5484a7aeee3",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\hit_1.png",
+          "sourceSha256": "c1e6f4f492f09a01ff4b9a617b98f3386367e0540b0bf21f3e62d7c13a02f97d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            23,
+            341,
+            1247,
+            1196
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c1e6f4f492f09a01ff4b9a617b98f3386367e0540b0bf21f3e62d7c13a02f97d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1148
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_1.png",
+          "sourceSha256": "2438a2c1ca9fbf3ac158cc75cd1ffa40c066a75393852e3e2a086546d51c3a30",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            27,
+            330,
+            1243,
+            1178
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "2438a2c1ca9fbf3ac158cc75cd1ffa40c066a75393852e3e2a086546d51c3a30",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1178
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_0.png",
+          "sourceSha256": "c44cf15d4eba7410c34f21019202db133b249ba94d24d1c11b1c319e445e4369",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            21,
+            404,
+            1230,
+            1173
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c44cf15d4eba7410c34f21019202db133b249ba94d24d1c11b1c319e445e4369",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1173
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_2.png",
+          "sourceSha256": "8ad4d6c9151a31556dcdac31dd7f788103951b4014e211413fad0eb65ec7500c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            24,
+            407,
+            1245,
+            1159
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "8ad4d6c9151a31556dcdac31dd7f788103951b4014e211413fad0eb65ec7500c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1159
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_3.png",
+          "sourceSha256": "429554746b2047d2dab76a44466d1fbb555312cfbd5dfe6bbaf4c6103b13d4a9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            12,
+            454,
+            1243,
+            1141
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "429554746b2047d2dab76a44466d1fbb555312cfbd5dfe6bbaf4c6103b13d4a9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1141
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_4.png",
+          "sourceSha256": "cf11d4ad6cdaaff163f86ed5805a7c11ab4cfaebd4e8ebed4d80a3ae229dfdf4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            15,
+            449,
+            1243,
+            1102
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cf11d4ad6cdaaff163f86ed5805a7c11ab4cfaebd4e8ebed4d80a3ae229dfdf4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1102
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_5.png",
+          "sourceSha256": "957052921336da99a57183ae2445e6129244c14cb2db8278c52e7b86c8cd18a9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            13,
+            545,
+            1249,
+            1121
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "957052921336da99a57183ae2445e6129244c14cb2db8278c52e7b86c8cd18a9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1121
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_6.png",
+          "sourceSha256": "f402a072fffc6bb75b78dd0de3e0da2fd8fbbb0d35822a9df5b488792f0ba31c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            12,
+            507,
+            1250,
+            1049
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f402a072fffc6bb75b78dd0de3e0da2fd8fbbb0d35822a9df5b488792f0ba31c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1049
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\death_7.png",
+          "sourceSha256": "3a537e8da4387b7cde70197bdfbb0c768662f4f88123c4ff521425afd2358000",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            15,
+            579,
+            1241,
+            1117
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3a537e8da4387b7cde70197bdfbb0c768662f4f88123c4ff521425afd2358000",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              632.5,
+              1117
+            ],
+            "pixelsPerUnit": 6.045,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 213862176,
+  "deathSilhouetteHeights": [
+    848,
+    769,
+    752,
+    687,
+    653,
+    576,
+    542,
+    538
+  ],
+  "deathHeightRiseCandidates": [],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "All target native frames individually reviewed in labeled batches; ground contact follows paws/resting body; flying/swimming actions keep existing fixed calibration. Unity calibration remains unverified."
+  ],
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/kunpeng/Beast",
+    "frameCount": 34,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

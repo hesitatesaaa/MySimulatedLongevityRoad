@@ -1,0 +1,23 @@
+{
+  "actorId": "mclsl_beast_hongmao_yuan",
+  "action": "death",
+  "index": 5,
+  "sourceSha256": "18d0ebf215e4cd24a1b86063f39880ba4cb62f81571cadc0189a09fee584fa9a",
+  "reason": "Hair outline reaches right boundary; six alpha>=16 edge pixels",
+  "archivedAtUtc": "2026-10-15T07:59:46.581804+00:00",
+  "files": [
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao_yuan\\main\\death_5.png",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-hongmao-human-death5-edge\\candidate\\death_5.png"
+    },
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao_yuan\\main\\death_5.provenance.json",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-hongmao-human-death5-edge\\candidate\\death_5.provenance.json"
+    },
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_hongmao_yuan\\death_5.png",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-hongmao-human-death5-edge\\originals\\death_5.png"
+    }
+  ],
+  "installed": false
+}

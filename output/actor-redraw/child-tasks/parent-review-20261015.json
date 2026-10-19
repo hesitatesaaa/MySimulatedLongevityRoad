@@ -1,0 +1,14 @@
+{
+  "reviewedAtUtc": "2026-10-15T03:49:09.052524+00:00",
+  "actorId": "mclsl_beast_xuanniao",
+  "action": "walk",
+  "frame": 4,
+  "sourceSha256": "b031146068ccdd755a9995de4204ebfb48cfce4edfb901935e84c66671049bf9",
+  "viewedFullNativeImage": true,
+  "staticAnatomyPassed": true,
+  "clipped": false,
+  "transparentRightMargin": 21,
+  "marginOverrideReason": "Full silhouette is intact. 32px was a suggested authoring margin, not a reason alone to redraw a complete usable frame.",
+  "continuityApproved": false,
+  "installed": false
+}

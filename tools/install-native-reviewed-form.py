@@ -22,12 +22,7 @@ def sha(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--actor', required=True)
-    parser.add_argument('--skip-review', action='store_true', help='Install with the explicit user review waiver; never mark review passed')
     args = parser.parse_args()
-    if args.skip_review:
-        from release_assets import install_form
-        install_form(args.actor)
-        return
     targets = read(ROOT / 'resources' / 'actor-redraw.targets.json')
     target = next(f for f in targets['forms'] if f['id'] == args.actor)
     review_path = ROOT / 'resources' / 'actor-native-reviews' / (args.actor + '.json')
@@ -39,8 +34,8 @@ def main():
         raise ValueError('Form still has rejected frames')
     manifest = read(MANIFEST)
     group = next(g for g in manifest['groups'] if g['actorId'] == args.actor)
-    if group.get('nativeResourcePath') or group.get('approved'):
-        raise ValueError('Refuse to overwrite an already installed form')
+    if group.get('nativeResourcePath'):
+        raise ValueError('Refuse to overwrite an already installed native form')
     installed = copy.deepcopy(group)
     installed['nativeResourcePath'] = target['resourcePath']
     idle = review['actions']['idle']['frames'][0]['proposedGeometry']
@@ -91,7 +86,7 @@ def main():
             if not geometry.get('anchorReviewed') or frame['sourceTouchesEdge']:
                 raise ValueError('Unreviewed/clipped frame: ' + name)
             destination = NATIVE / target['resourcePath'] / 'main' / (name + '.png')
-            provenance = ROOT / 'resources' / 'actor-provenance' / args.actor / (name + '.json')
+            provenance = ROOT / 'resources' / 'actor-provenance' / args.actor / 'native' / (name + '.json')
             if destination.exists() or provenance.exists():
                 raise FileExistsError('Refuse to overwrite native frame or provenance: ' + name)
             native_proof = copy.deepcopy(proof)

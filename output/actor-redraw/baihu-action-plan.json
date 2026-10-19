@@ -1,0 +1,80 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "jobs": [
+    [
+      "idle",
+      1,
+      "Early inhalation. Chest expands slightly, shoulder lifts about 10 source pixels, curled tail tip tilts a little upward; all four paw contact points remain exactly planted."
+    ],
+    [
+      "idle",
+      2,
+      "Inhalation continues. Chest is slightly fuller, shoulder lifts about 20 source pixels, ears alert, curled tail tip rises gently; planted paws unchanged."
+    ],
+    [
+      "idle",
+      3,
+      "Breath reaches its peak. Shoulders lift about 25 source pixels, muzzle calmly raised by about 10 source pixels, curled tail sways left; paws stay planted."
+    ],
+    [
+      "idle",
+      4,
+      "Begin exhalation. Chest relaxes halfway, shoulders lower slightly, ears twitch a few degrees and tail curl loosens subtly; paws stay planted."
+    ],
+    [
+      "idle",
+      5,
+      "Late exhalation. Chest settles nearly to the standard height, muzzle level, tail tip curls inward, all four paws remain planted."
+    ],
+    [
+      "idle",
+      6,
+      "Quiet resting beat between breaths. Standard chest height, slight ear movement and tail tip settles; preserve standard planted paw positions."
+    ],
+    [
+      "idle",
+      7,
+      "Transition smoothly back to standard idle_0. Alert calm face, chest at standard height, curled tail almost the original position with a subtle tip variation; paws planted."
+    ],
+    [
+      "walk",
+      0,
+      "Walk cycle phase 1. Near front paw lifts and reaches forward, far front paw planted under shoulder. Near hind paw trails planted, far hind paw begins swinging forward. Keep four distinct anatomically connected legs."
+    ],
+    [
+      "walk",
+      1,
+      "Walk cycle phase 2. Near front paw reaches forward and touches ground, far hind paw comes down beneath hip. Far front paw starts lifting backwards, near hind paw starts its forward swing."
+    ],
+    [
+      "walk",
+      2,
+      "Walk cycle phase 3. Near front paw supports the body ahead, far hind paw supports the hip. Far front leg bends and swings under chest; near hind paw swings forward, joints clearly bent."
+    ],
+    [
+      "walk",
+      3,
+      "Walk cycle phase 4. Near front paw is planted beneath chest. Far front paw reaches forward lifted, near hind paw continues forward swing beneath hip; far hind paw trails planted."
+    ],
+    [
+      "walk",
+      4,
+      "Walk cycle phase 5, opposite diagonal to phase 1. Far front paw lifts and reaches forward; near front paw trails planted. Near hind paw swings forward; far hind paw planted behind hip."
+    ],
+    [
+      "walk",
+      5,
+      "Walk cycle phase 6. Far front paw touches ground ahead, near hind paw comes down beneath hip. Near front paw starts lifting backwards and far hind paw starts swinging forward."
+    ],
+    [
+      "walk",
+      6,
+      "Walk cycle phase 7. Far front paw supports body ahead and near hind paw supports hip. Near front leg bends and swings under chest; far hind paw swings forward with bent joints."
+    ],
+    [
+      "walk",
+      7,
+      "Walk cycle phase 8, clean transition back to phase 1. Far front paw planted beneath chest, near front paw lifted forward; far hind paw swinging beneath hip and near hind paw trailing planted."
+    ]
+  ]
+}

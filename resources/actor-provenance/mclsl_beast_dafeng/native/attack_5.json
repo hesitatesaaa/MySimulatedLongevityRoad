@@ -43,5 +43,5 @@
     "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_dafeng/attack_5-attempt1.provenance.json",
     "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_dafeng/attack_5"
   },
-  "reviewStatus": "waived-by-user"
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

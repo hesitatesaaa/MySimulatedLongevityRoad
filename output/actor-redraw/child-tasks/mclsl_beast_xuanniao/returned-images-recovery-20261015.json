@@ -1,0 +1,95 @@
+{
+  "threadId": "01a13a2c-723f-77f0-859b-7215b9d052a1",
+  "failedTurnId": "01a13dae-18b8-75c0-b013-746ef8486878",
+  "error": {
+    "message": "You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 2:15 PM.",
+    "additionalDetails": null
+  },
+  "service": "codex-agent-limit-not-imagegen",
+  "images": [
+    {
+      "toolCallId": "exec-9f9d77dc-4639-4d4a-af32-1d172ae0387c",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 0,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-9f9d77dc-4639-4d4a-af32-1d172ae0387c.png"
+    },
+    {
+      "toolCallId": "exec-fbfe9dae-e341-464e-9eea-bb82f13256db",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "walk",
+      "index": 7,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-fbfe9dae-e341-464e-9eea-bb82f13256db.png"
+    },
+    {
+      "toolCallId": "exec-d2ebcbed-1944-4417-984b-8cdd77cd24dd",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "walk",
+      "index": 6,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-d2ebcbed-1944-4417-984b-8cdd77cd24dd.png"
+    },
+    {
+      "toolCallId": "exec-6c2333f4-4f99-41d2-9259-f4c9af4b2a2a",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 1,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-6c2333f4-4f99-41d2-9259-f4c9af4b2a2a.png"
+    },
+    {
+      "toolCallId": "exec-a8beb02b-7a81-4684-b3cc-305c756550be",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 4,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-a8beb02b-7a81-4684-b3cc-305c756550be.png"
+    },
+    {
+      "toolCallId": "exec-96ea652e-e48d-441d-a1dc-0a7e2428ab94",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 2,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-96ea652e-e48d-441d-a1dc-0a7e2428ab94.png"
+    },
+    {
+      "toolCallId": "exec-240796e3-0ad2-4dda-8b91-7f366299ed95",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 3,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-240796e3-0ad2-4dda-8b91-7f366299ed95.png"
+    },
+    {
+      "toolCallId": "exec-981a49c9-0d74-4e8f-b093-e8966136a687",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 5,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-981a49c9-0d74-4e8f-b093-e8966136a687.png"
+    },
+    {
+      "toolCallId": "exec-45503a3e-0962-41fe-ac7a-a44ab28ef64f",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 6,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-45503a3e-0962-41fe-ac7a-a44ab28ef64f.png"
+    },
+    {
+      "toolCallId": "exec-acb7a140-b9c2-4d48-b9f0-cee7c4075781",
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "idle",
+      "index": 1,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-acb7a140-b9c2-4d48-b9f0-cee7c4075781.png"
+    },
+    {
+      "toolCallId": "exec-e5162d43-f8ba-4755-ba32-e27152526952",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "icon",
+      "index": 0,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-e5162d43-f8ba-4755-ba32-e27152526952.png"
+    },
+    {
+      "toolCallId": "exec-d918b375-5ac5-4e08-b77d-9ca9c0876d22",
+      "actor": "mclsl_beast_xuanniao",
+      "action": "death",
+      "index": 7,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-723f-77f0-859b-7215b9d052a1\\exec-d918b375-5ac5-4e08-b77d-9ca9c0876d22.png"
+    }
+  ]
+}

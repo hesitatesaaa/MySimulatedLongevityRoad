@@ -1,0 +1,26 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "reason": "Restore short bent forelimb proportions; express strike through neck and jaw motion.",
+  "jobs": [
+    [
+      4,
+      "Last windup: head and tight upper neck retain image1's pulled-back pose, open jaw. Near foreclaw stays BENT close in front of chest, not reaching: one hand at about x790,y580. Far foreclaw unchanged, two hindlegs at original roots. Tail stabilizes body."
+    ],
+    [
+      5,
+      "Lunge begins: head and neck curve shift forward-right about40px. Open jaw and backward-streaming mane. Near foreclaw remains BENT close to chest with one hand at x810,y610, not a long reach. Elbow flexes to preserve original limb lengths."
+    ],
+    [
+      6,
+      "Forward bite building: head about70px right of standard and neck curve partly straightens. Jaws open. Near foreclaw stays bent below the muzzle with ONE hand at x845,y640, well behind the nose. Far foreclaw and two hindlimbs retain their roots."
+    ],
+    [
+      7,
+      "Strong forward bite: head about100px right of standard, jaw opens wide. Near foreclaw remains folded close to upper belly, ONE hand at x870,y670, strictly behind muzzle; do not extend toward canvas edge. Whiskers curl backward. Torso and tail counterbalance."
+    ],
+    [
+      8,
+      "Peak bite: head forward-right about110px, readable open jaw and fangs. Near foreclaw is flexed by chest, ONE hand at x890,y690, well behind and below the nose. Same short bent upper arm and forearm as image1. Far foreclaw and two hindlegs tucked correctly, compact tail coil."
+    ]
+  ]
+}

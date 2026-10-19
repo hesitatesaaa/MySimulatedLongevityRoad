@@ -1,0 +1,781 @@
+Mono path[0] = 'E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Managed'
+Mono config path = 'E:/wol/gameversion/0_51_2_0.51.2/MonoBleedingEdge/etc'
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028B0F4ABA70.dll
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028B1552C040.dll
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
+[Subsystems] Discovering subsystems at path E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 11
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1660 Ti (ID=0x2182)
+    Vendor:   NVIDIA
+    VRAM:     5966 MB
+    Driver:   32.0.15.9579
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.656 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Message:   BepInEx] BepInEx 5.4.22.0 - worldbox (2025/9/14 17:13:56)
+[Info   :   BepInEx] Running under Unity v2022.3.60.6251517
+[Info   :   BepInEx] CLR runtime version: 4.0.30319.42000
+[Info   :   BepInEx] Supports SRE: True
+[Info   :   BepInEx] System platform: Bits64, Windows
+[Message:   BepInEx] Preloader started
+[Info   :   BepInEx] Loaded 1 patcher method from [BepInEx.Preloader 5.4.22.0]
+[Info   :   BepInEx] 1 patcher plugin loaded
+[Info   :   BepInEx] Patching [UnityEngine.CoreModule] with [BepInEx.Chainloader]
+[Message:   BepInEx] Preloader finished
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 1.565900 ms
+INIT Progress
+INIT PlayerConfig
+Init PlayerConfig
+LOAD LANGUAGE cz
+LocalizedTextManager: total texts loaded: 0
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 3.472900 ms
+Init PlotLibrary
+INIT ActorStats
+GENERATE ACTOR STATS 230
+Init Achievements
+InAppManager::Start
+[ap]
+InAppManager::End
+LOAD LANGUAGE cz
+LocalizedTextManager: total texts loaded: 44
+[NeoModLoader] Loading NeoModLoader.dll
+[NeoModLoader] Assembly: NeoModLoader, Version=1.2.0.1, Culture=neutral, PublicKeyToken=null
+[NeoModLoader] classes inside the mod:
+[NeoModLoader] Microsoft.CodeAnalysis.EmbeddedAttribute
+[NeoModLoader] System.Runtime.CompilerServices.NullableAttribute
+[NeoModLoader] System.Runtime.CompilerServices.NullableContextAttribute
+[NeoModLoader] System.Runtime.CompilerServices.RefSafetyRulesAttribute
+[NeoModLoader] ReflectionUtility.Reflection
+[NeoModLoader] NCMS.Core
+[NeoModLoader] NCMS.ModEntry
+[NeoModLoader] NCMS.ModLoader
+[NeoModLoader] NCMS.NCMod
+[NeoModLoader] NCMS.WorldBoxMod
+[NeoModLoader] NCMS.Utils.ButtonType
+[NeoModLoader] NCMS.Utils.GameObjects
+[NeoModLoader] NCMS.Utils.GameObjects+<>c__DisplayClass0_0
+[NeoModLoader] NCMS.Utils.Localization
+[NeoModLoader] NCMS.Utils.PowerButtons
+[NeoModLoader] NCMS.Utils.PowerButtons+<>c__DisplayClass3_0
+[NeoModLoader] NCMS.Utils.PowerTab
+[NeoModLoader] NCMS.Utils.ResourcesPatch
+[NeoModLoader] NCMS.Utils.Sprites
+[NeoModLoader] NCMS.Utils.Windows
+[NeoModLoader] NCMS.Extensions.DictionaryRange
+[NeoModLoader] ModDeclaration.Info
+[NeoModLoader] BepInEx.BaseUnityPlugin
+[NeoModLoader] BepInEx.BepInPlugin
+[NeoModLoader] NeoModLoader.WorldBoxMod
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>O
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_0
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_1
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_2
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_3
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_4
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_5
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_6
+[NeoModLoader] NeoModLoader.utils.WrappedAssetBundle
+[NeoModLoader] NeoModLoader.utils.WrappedAssetBundle+AssetNode
+[NeoModLoader] NeoModLoader.utils.AssetBundleUtils
+[NeoModLoader] NeoModLoader.utils.BenchUtils
+[NeoModLoader] NeoModLoader.utils.AssetPatches
+[NeoModLoader] NeoModLoader.utils.DelegateExtentions
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass0_1
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass1_1
+[NeoModLoader] NeoModLoader.utils.HttpUtils
+[NeoModLoader] NeoModLoader.utils.InternalResourcesGetter
+[NeoModLoader] NeoModLoader.utils.ModDependencyNode
+[NeoModLoader] NeoModLoader.utils.ModDependencyGraph
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass4_1
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils+<>O
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils+<>c
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils+<>c
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils+<>c__DisplayClass19_0
+[NeoModLoader] NeoModLoader.utils.OtherUtils
+[NeoModLoader] NeoModLoader.utils.PriorityQueue`1[T]
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper+<>c
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+ResourceTree
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+ResourceTreeNode
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+<>c
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+<>c__DisplayClass11_0
+[NeoModLoader] NeoModLoader.utils.SoundType
+[NeoModLoader] NeoModLoader.utils.SoundMode
+[NeoModLoader] NeoModLoader.utils.WavContainer
+[NeoModLoader] NeoModLoader.utils.ChannelContainer
+[NeoModLoader] NeoModLoader.utils.CustomAudioManager
+[NeoModLoader] NeoModLoader.utils.TextureImporter
+[NeoModLoader] NeoModLoader.utils.SpriteSheet
+[NeoModLoader] NeoModLoader.utils.SingleSpriteMetaData
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+MetaFile
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+NCMSSpritesSettings
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+NCMSSpritesSettings+SpecificSetting
+[NeoModLoader] NeoModLoader.utils.SystemUtils
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializableAsset`1[A]
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializedActorTrait
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializedItemAsset
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.utils.installers.ACmdModInstaller
+[NeoModLoader] NeoModLoader.utils.installers.GBModInstaller
+[NeoModLoader] NeoModLoader.utils.installers.GBModInstaller+<CheckInstall>d__2
+[NeoModLoader] NeoModLoader.utils.Builders.ActorAssetBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.GetAdditionalBaseStatsMethod
+[NeoModLoader] NeoModLoader.utils.Builders.ActorTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.AssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.AugmentationAssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.BaseTraitBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.Builder
+[NeoModLoader] NeoModLoader.utils.Builders.ClanTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.CultureTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.CultureTraitBuilder+<>c
+[NeoModLoader] NeoModLoader.utils.Builders.GroupAssetBuilder`1[A]
+[NeoModLoader] NeoModLoader.utils.Builders.MasterBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.SubSpeciesTrait
+[NeoModLoader] NeoModLoader.utils.Builders.SubspeciesTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.SubspeciesTraitBuilder+<>c
+[NeoModLoader] NeoModLoader.utils.Builders.UnlockableAssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.authentication.AuthenticaticationException
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordAutomaticRoleAuthUtils
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordCommonAuthLogic
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordCommonAuthLogic+<>c
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+TokenInfo
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>O
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>c
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+TokenInfo
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+UserInfo
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+DeviceFlow
+[NeoModLoader] NeoModLoader.ui.InformationWindow
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigGrid
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass6_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass7_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass8_0
+[NeoModLoader] NeoModLoader.ui.ModListWindow
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem+<>c__DisplayClass2_0
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem+<WaitOpenWindow>d__1
+[NeoModLoader] NeoModLoader.ui.ModListWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>O
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>c__DisplayClass9_0
+[NeoModLoader] NeoModLoader.ui.ModUploadingProgressWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadingProgressWindow+UploadProgress
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>O
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>c__DisplayClass9_0
+[NeoModLoader] NeoModLoader.ui.NewModListWindow
+[NeoModLoader] NeoModLoader.ui.NewModListWindow+DisplayType
+[NeoModLoader] NeoModLoader.ui.NewModListWindow+<>c__DisplayClass15_0
+[NeoModLoader] NeoModLoader.ui.UIManager
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+WorkshopModListItem
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+WorkshopModListItem+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+<>O
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+<>c
+[NeoModLoader] NeoModLoader.ui.prefabs.ModInfoPanel
+[NeoModLoader] NeoModLoader.ui.prefabs.ModInfoPanel+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.ui.prefabs.ModListItem
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService+<>c
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService+<CheckExternalModInstall>d__0
+[NeoModLoader] NeoModLoader.services.IPlatformSpecificModWorkshopService
+[NeoModLoader] NeoModLoader.services.LogService
+[NeoModLoader] NeoModLoader.services.LogService+LogType
+[NeoModLoader] NeoModLoader.services.LogService+WrappedMessage
+[NeoModLoader] NeoModLoader.services.LogService+ConcurrentLogHandle
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass11_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass17_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass6_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass6_1
+[NeoModLoader] NeoModLoader.services.ModDepenSolveService
+[NeoModLoader] NeoModLoader.services.ModReloadService
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService+<>c
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopService
+[NeoModLoader] NeoModLoader.services.ModWorkshopService+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<FindSubscribedMods>d__5
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<GetSubscribedItems>d__7
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<FindSubscribedMods>d__6
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<GetSubscribedItems>d__7
+[NeoModLoader] NeoModLoader.ncms_compatible_layer.NCMSCompatibleLayer
+[NeoModLoader] NeoModLoader.ncms_compatible_layer.NCMSCompatibleLayer+<>c
+[NeoModLoader] NeoModLoader.General.LM
+[NeoModLoader] NeoModLoader.General.LM+<>c
+[NeoModLoader] NeoModLoader.General.OT
+[NeoModLoader] NeoModLoader.General.PowerButtonCreator
+[NeoModLoader] NeoModLoader.General.PowerTabNames
+[NeoModLoader] NeoModLoader.General.ResourcesFinder
+[NeoModLoader] NeoModLoader.General.RF
+[NeoModLoader] NeoModLoader.General.WindowCreator
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutElement`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutGroup`2[T,TElement]
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.MultiTabWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.MultiTabWindow`1+<>c__DisplayClass8_0[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.SingleAutoLayoutWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.Utils.Extensions.AutoLayoutGroupExtension
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoGridLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoHoriLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoVertLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Tab.PowersTabExtension
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab+TabElement
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab+<>c
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabBombs
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabCreatures
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabDrawing
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabKingdoms
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabMain
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass30_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass32_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass36_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabNature
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabOther
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+WrappedRectTransform
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+PlaceholdRegions
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+PlaceholdRegions+SimpleRegion
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.APrefab`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleButton
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleButton+<>c__DisplayClass16_0
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleStatBar
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SliderBar
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SwitchButton
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SwitchButton+<>c__DisplayClass13_0
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.TextInput
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtension
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+LibraryState[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+<>c[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+<>c__DisplayClass2_0[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.DataExtension
+[NeoModLoader] NeoModLoader.General.Game.extensions.SerializedCustomData
+[NeoModLoader] NeoModLoader.General.Game.extensions.ICustomData
+[NeoModLoader] NeoModLoader.General.Game.extensions.BasicCustomData`1[TDataClass]
+[NeoModLoader] NeoModLoader.General.Event.AbstractHandler`1[THandler]
+[NeoModLoader] NeoModLoader.General.Event.BaseListener
+[NeoModLoader] NeoModLoader.General.Event.AbstractListener`2[TListener,THandler]
+[NeoModLoader] NeoModLoader.General.Event.ListenerManager
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ActorTryToAttackListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ActorTryToAttackListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.AllianceCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.CityCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ClanCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.CultureCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.KingdomSetupListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.PlotStartListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.PlotStartListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarEndListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarStartListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarStartListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WorldLogMessageListener
+[NeoModLoader] NeoModLoader.General.Event.Handlers.ActorTryToAttackHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.AllianceCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.CityCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.ClanCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.CultureCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.KingdomSetupHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.PlotStartHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WarEndHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WarStartHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WorldLogMessageHandler
+[NeoModLoader] NeoModLoader.constants.CoreConstants
+[NeoModLoader] NeoModLoader.constants.Others
+[NeoModLoader] NeoModLoader.constants.Paths
+[NeoModLoader] NeoModLoader.constants.Paths+<>O
+[NeoModLoader] NeoModLoader.constants.Setting
+[NeoModLoader] NeoModLoader.api.AbstractListWindowItem`1[TItem]
+[NeoModLoader] NeoModLoader.api.AbstractListWindow`2[T,TItem]
+[NeoModLoader] NeoModLoader.api.AbstractWideWindow`1[T]
+[NeoModLoader] NeoModLoader.api.AbstractWindow`1[T]
+[NeoModLoader] NeoModLoader.api.AttachedModComponent
+[NeoModLoader] NeoModLoader.api.BasicMod`1[T]
+[NeoModLoader] NeoModLoader.api.BepinexMod
+[NeoModLoader] NeoModLoader.api.FeatureLoadException
+[NeoModLoader] NeoModLoader.api.IConfigurable
+[NeoModLoader] NeoModLoader.api.ICsvSepCustomized
+[NeoModLoader] NeoModLoader.api.IDecoratePanel
+[NeoModLoader] NeoModLoader.api.IFeatureLoadManaged
+[NeoModLoader] NeoModLoader.api.ILocalizable
+[NeoModLoader] NeoModLoader.api.IMod
+[NeoModLoader] NeoModLoader.api.IModFeature
+[NeoModLoader] NeoModLoader.api.IModFeatureManager
+[NeoModLoader] NeoModLoader.api.IReloadable
+[NeoModLoader] NeoModLoader.api.IStagedLoad
+[NeoModLoader] NeoModLoader.api.IUnloadable
+[NeoModLoader] NeoModLoader.api.ModCompilationCache
+[NeoModLoader] NeoModLoader.api.ConfigItemType
+[NeoModLoader] NeoModLoader.api.ModConfigItem
+[NeoModLoader] NeoModLoader.api.ModConfig
+[NeoModLoader] NeoModLoader.api.ModConfig+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.api.ModConfig+<>c__DisplayClass5_1
+[NeoModLoader] NeoModLoader.api.ModTypeEnum
+[NeoModLoader] NeoModLoader.api.ModState
+[NeoModLoader] NeoModLoader.api.ModDeclare
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_1
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_2
+[NeoModLoader] NeoModLoader.api.ModFeature
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureTreeNode[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureLoadPathNode[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureLoadPathNode+PlaceholderRootModFeature[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass10_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass20_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass8_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureRequirementList
+[NeoModLoader] NeoModLoader.api.VirtualMod
+[NeoModLoader] NeoModLoader.api.features.ModAssetFeature`1[TAsset]
+[NeoModLoader] NeoModLoader.api.features.ModButtonFeature`1[TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.features.ModGodPowerButtonFeature`2[TGodPowerFeature,TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.features.ModObjectFeature`1[TObject]
+[NeoModLoader] NeoModLoader.api.features.ModPowerTabFeature
+[NeoModLoader] NeoModLoader.api.features.ModWindowButtonFeature`2[TWindowFeature,TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.exceptions.UnrecognizableResourceFileException
+[NeoModLoader] NeoModLoader.api.exceptions.UnsupportedFileTypeException
+[NeoModLoader] NeoModLoader.api.attributes.ExperimentalAttribute
+[NeoModLoader] NeoModLoader.api.attributes.HotfixableAttribute
+[NeoModLoader] <PrivateImplementationDetails>
+[NeoModLoader] <PrivateImplementationDetails>+__StaticArrayInitTypeSize=6
+[NeoModLoader] <PrivateImplementationDetails>+__StaticArrayInitTypeSize=16
+[NeoModLoader] Attempting to load NeoModLoader.WorldBoxMod
+[NeoModLoader] Was added
+[NeoModLoader.AutoUpdate] Loading NeoModLoader.AutoUpdate_memload.dll into memory
+[NeoModLoader.AutoUpdate] Failed to load mod from path : 
+[NeoModLoader.AutoUpdate] E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\StreamingAssets\mods\NeoModLoader.AutoUpdate_memload.dll
+0x0000028B0E523EA0
+S:76561199358449126
+s:Detect - Steam detecting language
+s:Detect - Already have a language, not falling back to english
+s:Detect - language en
+[NML]: NeoModLoader Version: 02266fe8185d940c4065185de0a117c18975cf09
+Unloading 659 unused Assets to reduce memory usage. Loaded Objects now: 32695.
+Total: 18.878400 ms (FindLiveObjects: 2.008300 ms CreateObjectMapping: 0.773600 ms MarkObjects: 14.917900 ms  DeleteObjects: 1.178400 ms)
+
+[NML]: Trying auto auth at 0...
+001: Preloading windows (1/5)            = 0.0285
+LocalizedTextManager: total texts loaded: 44
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.ActorTryToAttackListener+<>c
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.PlotStartListener+<>c
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.WarStartListener+<>c
+002: Initialize NeoModLoader             = 0.0544
+[NML]: Checking ForceLoadMods, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\寒海的全解锁_1.2 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\玄鉴仙族 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\西幻世界 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\鬼谷修仙[重制] in Mods
+[NML]: Workshop folder not found, skip loading workshop mods
+<color=red>003: Load Mods Info And Prepare Mods     = 5.5886</color>
+004: Compile Mods And Load resources     = 0.0006
+<color=red>005: Compile Mod FunBoost                = 1.6149</color>
+<color=yellow>006: Compile Mod Supower                 = 0.8284</color>
+007: Compile Mod 全文明种族版中文名（三词库独立版）       = 0.4477
+<color=red>008: Compile Mod 我的模拟长生路                 = 3.9342</color>
+009: Load Resources From Mod FunBoost    = 0.0011
+010: Load Resources From Mod Supower     = 0.1062
+011: Load Resources From Mod 全文明种族版中文名（三词库独立版） = 0.0002
+<color=red>012: Load Resources From Mod 我的模拟长生路     = 8.1159</color>
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028CDE6E3020.dll
+[NML]: [FunBoost]: OnLoad
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028C666D4950.dll
+[NML]: [FunBoost]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028CEF394050.dll
+[NML]: [Supower]: OnLoad
+[NML]: Set sp_nw_plants toggle to True
+[NML]: Set sp_nw_trees toggle to True
+[NML]: Set sp_nw_minerals toggle to True
+[NML]: Set sp_nw_nests toggle to True
+[NML]: Set sp_nw_civ_buildings toggle to True
+[NML]: Set sp_nw_other_buildings toggle to True
+[NML]: Set sp_nw_smart_units toggle to True
+[NML]: Set sp_nw_civ_units toggle to True
+[NML]: Set sp_nw_animal_units toggle to True
+[NML]: Set sp_nw_zombie_units toggle to True
+[NML]: Set sp_nw_skeleton_units toggle to True
+[NML]: Set sp_nw_other_units toggle to True
+[NML]: Set sp_nw_frozen_land toggle to True
+[NML]: Set sp_nw_fire_layer toggle to True
+[NML]: Set sp_nw_lava_layer toggle to True
+[NML]: Set sp_nw_cities toggle to True
+[NML]: Set sp_category_kingdom toggle to True
+[NML]: Set sp_category_city toggle to False
+[NML]: Set sp_category_unit toggle to False
+[NML]: Set sp_species_human toggle to False
+[NML]: Set sp_species_elf toggle to False
+[NML]: Set sp_species_orc toggle to False
+[NML]: Set sp_species_dwarf toggle to False
+[NML]: Set sp_species_fox toggle to False
+[NML]: Set sp_species_buffalo toggle to False
+[NML]: Set sp_species_hyena toggle to False
+[NML]: Set sp_species_crocodile toggle to False
+[NML]: Set sp_species_monkey toggle to False
+[NML]: Set sp_species_rhino toggle to False
+[NML]: Set sp_species_frog toggle to False
+[NML]: Set sp_species_snake toggle to False
+[NML]: Set sp_species_dog toggle to False
+[NML]: Set sp_species_wolf toggle to False
+[NML]: Set sp_species_bear toggle to False
+[NML]: Set sp_species_rabbit toggle to False
+[NML]: Set sp_species_cat toggle to False
+[NML]: Set sp_species_raccoon toggle to False
+[NML]: Set sp_species_seal toggle to False
+[NML]: Set sp_species_ostrich toggle to False
+[NML]: Set sp_species_unicorn toggle to False
+[NML]: Set sp_species_rat toggle to False
+[NML]: Set sp_species_chicken toggle to False
+[NML]: Set sp_species_sheep toggle to False
+[NML]: Set sp_species_cow toggle to False
+[NML]: Set sp_species_penguin toggle to False
+[NML]: Set sp_species_armadillo toggle to False
+[NML]: Set sp_species_alpaca toggle to False
+[NML]: Set sp_species_capybara toggle to False
+[NML]: Set sp_species_goat toggle to False
+[NML]: Set sp_species_scorpion toggle to False
+[NML]: Set sp_species_turtle toggle to False
+[NML]: Set sp_species_crab toggle to False
+[NML]: Set sp_species_crystal_sword toggle to False
+[NML]: Set sp_species_smore toggle to False
+[NML]: Set sp_species_acid_blob toggle to False
+[NML]: Set sp_species_flower_bud toggle to False
+[NML]: Set sp_species_lemon_snail toggle to False
+[NML]: Set sp_species_garl toggle to False
+[NML]: Set sp_species_bee toggle to False
+[NML]: Set sp_species_fly toggle to False
+[NML]: Set sp_species_butterfly toggle to False
+[NML]: Set sp_species_grasshopper toggle to False
+[NML]: Set sp_species_beetle toggle to False
+[NML]: Set sp_species_cold_one toggle to False
+[NML]: Set sp_species_necromancer toggle to False
+[NML]: Set sp_species_druid toggle to False
+[NML]: Set sp_species_plague_doctor toggle to False
+[NML]: Set sp_species_white_mage toggle to False
+[NML]: Set sp_species_evil_mage toggle to False
+[NML]: Set sp_species_skeleton toggle to False
+[NML]: Set sp_species_jumpy_skull toggle to False
+[NML]: Set sp_species_ghost toggle to False
+[NML]: Set sp_species_fire_skull toggle to False
+[NML]: Set sp_species_demon toggle to False
+[NML]: Set sp_species_angle toggle to False
+[NML]: Set sp_species_fairy toggle to False
+[NML]: Set sp_species_bandit toggle to False
+[NML]: Set sp_species_snowman toggle to False
+[NML]: Set sp_species_alien toggle to False
+[NML]: Set sp_species_civ_cat toggle to False
+[NML]: Set sp_species_civ_dog toggle to False
+[NML]: Set sp_species_civ_chicken toggle to False
+[NML]: Set sp_species_civ_rabbit toggle to False
+[NML]: Set sp_species_civ_monkey toggle to False
+[NML]: Set sp_species_civ_fox toggle to False
+[NML]: Set sp_species_civ_sheep toggle to False
+[NML]: Set sp_species_civ_cow toggle to False
+[NML]: Set sp_species_civ_armadillo toggle to False
+[NML]: Set sp_species_civ_wolf toggle to False
+[NML]: Set sp_species_civ_bear toggle to False
+[NML]: Set sp_species_civ_rhino toggle to False
+[NML]: Set sp_species_civ_buffalo toggle to False
+[NML]: Set sp_species_civ_hyena toggle to False
+[NML]: Set sp_species_civ_rat toggle to False
+[NML]: Set sp_species_civ_alpaca toggle to False
+[NML]: Set sp_species_civ_capybara toggle to False
+[NML]: Set sp_species_civ_goat toggle to False
+[NML]: Set sp_species_civ_scorpion toggle to False
+[NML]: Set sp_species_civ_crab toggle to False
+[NML]: Set sp_species_civ_penguin toggle to False
+[NML]: Set sp_species_civ_turtle toggle to False
+[NML]: Set sp_species_civ_crocodile toggle to False
+[NML]: Set sp_species_civ_snake toggle to False
+[NML]: Set sp_species_civ_frog toggle to False
+[NML]: Set sp_species_civ_piranha toggle to False
+[NML]: Set sp_species_civ_liliar toggle to False
+[NML]: Set sp_species_civ_garlic_man toggle to False
+[NML]: Set sp_species_civ_lemon_man toggle to False
+[NML]: Set sp_species_civ_acid_gentleman toggle to False
+[NML]: Set sp_species_civ_crystal_golem toggle to False
+[NML]: Set sp_species_civ_candy_man toggle to False
+[NML]: Set sp_species_civ_beetle toggle to False
+[NML]: Set sp_species_civ_seal toggle to False
+[NML]: Set sp_species_civ_unicorn toggle to False
+[NML]: Set sp_species_greg toggle to False
+[NML]: [Supower]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028A20F44660.dll
+[NML]: [全文明种族版中文名（三词库独立版）]: OnLoad
+[NML]: [全文明种族版中文名（三词库独立版）]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-0000028D13FEF040.dll
+[NML]: [我的模拟长生路]: OnLoad
+[模拟长生路][诊断][actor-icon:mclsl_bai_xiansheng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_bai_xiansheng
+[模拟长生路][诊断][actor-icon:mclsl_chuanfa_tianzun] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_chuanfa_tianzun
+[模拟长生路][诊断][actor-icon:mclsl_named_tianyi] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_tianyi
+[模拟长生路][诊断][actor-icon:mclsl_named_moruibin] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_moruibin
+[模拟长生路][诊断][actor-icon:mclsl_named_xuantianwang] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xuantianwang
+[模拟长生路][诊断][actor-icon:mclsl_named_xuke] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xuke
+[模拟长生路][诊断][actor-icon:mclsl_named_yefeipeng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_yefeipeng
+[模拟长生路][诊断][actor-icon:mclsl_named_xiaoheng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xiaoheng
+[模拟长生路][诊断][actor-icon:mclsl_named_xubai] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xubai
+[模拟长生路][诊断][actor-icon:mclsl_named_liping] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_liping
+[模拟长生路][诊断][actor-icon:mclsl_named_shanfan] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_shanfan
+[模拟长生路][诊断][actor-icon:mclsl_named_zhangfan] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_zhangfan
+[模拟长生路][诊断][actor-icon:mclsl_named_zhenshen] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_zhenshen
+[模拟长生路][诊断][actor-icon:mclsl_named_diyi] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_diyi
+[模拟长生路][诊断][actor-icon:mclsl_named_disanmo] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_disanmo
+[模拟长生路][诊断][actor-icon:mclsl_named_qingshenlong] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_qingshenlong
+[模拟长生路][诊断][actor-icon:mclsl_beast_xuanniao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_xuanniao
+[模拟长生路][诊断][actor-icon:mclsl_beast_changliao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_changliao
+[模拟长生路][诊断][actor-icon:mclsl_beast_mo] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_mo
+[模拟长生路][诊断][actor-icon:mclsl_beast_hongmao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_hongmao
+[模拟长生路][诊断][actor-icon:mclsl_beast_feiqiu] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_feiqiu
+[模拟长生路][诊断][actor-icon:mclsl_beast_yingying] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_yingying
+[模拟长生路][诊断][actor-icon:mclsl_beast_goushou] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_goushou
+[模拟长生路][诊断][actor-icon:mclsl_beast_tianshou] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_tianshou
+[NML]: [我的模拟长生路]: Loaded
+[NML]: NCMS Compatible Layer has been initialized.
+<color=red>013: Load Mods                           = 59.7120</color>
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+014: Init Mod FunBoost                   = 0.0015
+015: Init Mod Supower                    = 0.0000
+016: Init Mod 全文明种族版中文名（三词库独立版）          = 0.0000
+017: Init Mod 我的模拟长生路                    = 0.0002
+018: Post-Init Mod FunBoost              = 0.0010
+019: Post-Init Mod Supower               = 0.0000
+020: Post-Init Mod 全文明种族版中文名（三词库独立版）     = 0.0000
+021: Post-Init Mod 我的模拟长生路               = 0.0000
+LocalizedTextManager: total texts loaded: 61
+<color=red>022: NeoModLoader Post Initialize        = 1.5352</color>
+[NML]: -batchmode
+[NML]: -force-d3d11
+[NML]: -screen-width
+[NML]: 1280
+[NML]: -screen-height
+[NML]: 720
+[NML]: -logFile
+[NML]: E:\0.6.0\output\runtime-validation\visual-baihu-20261014\native-72.log
+023: Check External Mods to Install      = 0.0046
+Total Preloaded Hand Renderer Sprites : 750 with colors 106
+024: Preload hand item textures...       = 0.1456
+Loaded unit related sprites: 18174
+<color=red>025: Preload main unit textures...       = 1.7168</color>
+Loaded unit related sprites: 19542
+026: Preload unit trait textures...      = 0.1948
+027: Preload building sprite lists...    = 0.0010
+<color=yellow>028: Preload building sprites...         = 0.5704</color>
+029: Preload boat animations...          = 0.3263
+030: Preload unit animations...          = 0.2797
+031: Preload pixel bags units...         = 0.4520
+032: Preload pixel bags buildings...     = 0.1477
+034: Close windows                       = 0.0084
+036: Quantum Clean                       = 0.0005
+037: Generate New Map (1/3)              = 0.0005
+039: Clearing World                      = 0.2616
+040: Clean old Tiles                     = 0.0006
+041: Generate New Map (2/3)              = 0.0000
+042: Generate New Map (3/3)              = 0.0004
+043: Recreate Sizes (1/4)                = 0.0047
+044: Recreate Sizes (2/4)                = 0.0003
+045: Prepare Tiles                       = 0.0004
+047: Create Tiles (65536)                = 0.0860
+Firebase Starting Check
+Firebase check continuing on thread
+049: Create Neighbours [65536] (1/3)     = 0.0002
+Firebase check status
+Firebase is available
+Available
+051: Create Neighbours [65536] (2/3)     = 0.0034
+053: Create Neighbours [65536] (3/3)     = 0.0467
+055: Create Zones                        = 0.0161
+057: Create Chunks                       = 0.0275
+059: Tile Manager                        = 0.0054
+060: Recreate Sizes (3/4) (1/13)         = 0.0024
+061: Recreate Sizes (3/4) (2/13)         = 0.0010
+062: Recreate Sizes (3/4) (3/13)         = 0.0010
+063: Recreate Sizes (3/4) (4/13)         = 0.0018
+064: Recreate Sizes (3/4) (5/13)         = 0.0021
+065: Recreate Sizes (3/4) (6/13)         = 0.0016
+066: Recreate Sizes (3/4) (7/13)         = 0.0015
+067: Recreate Sizes (3/4) (8/13)         = 0.0021
+068: Recreate Sizes (3/4) (9/13)         = 0.0023
+069: Recreate Sizes (3/4) (10/13)        = 0.0015
+070: Recreate Sizes (3/4) (11/13)        = 0.0014
+071: Recreate Sizes (3/4) (12/13)        = 0.0017
+072: Recreate Sizes (3/4) (13/13)        = 0.0023
+073: Recreate Sizes (4/4)                = 0.0060
+074: gen: World Laws                     = 0.0015
+075: gen: Generating Name                = 0.0104
+[SQLITE] new db C:/Users/Arthur.lu/AppData/LocalLow/mkarpenko/WorldBox/stats.s3db
+[SQLITE] opening db 3044002
+076: Creating Stats DB                   = 0.0550
+077: Creating Stats                      = 0.0241
+078: Creating Stats (WorldTable)         = 0.0584
+079: Creating Stats (AllianceTable)      = 0.0350
+080: Creating Stats (ClanTable)          = 0.0287
+081: Creating Stats (CityTable)          = 0.0371
+082: Creating Stats (CultureTable)       = 0.0244
+083: Creating Stats (FamilyTable)        = 0.0205
+084: Creating Stats (ArmyTable)          = 0.0190
+085: Creating Stats (KingdomTable)       = 0.0345
+086: Creating Stats (LanguageTable)      = 0.0216
+087: Creating Stats (ReligionTable)      = 0.0217
+088: Creating Stats (SubspeciesTable)    = 0.0258
+089: Creating Stats (WarTable)           = 0.0193
+090: Creating Triggers                   = 0.4563
+092: Preloading windows (2/5)            = 0.0010
+094: Preloading windows (3/5)            = 0.1297
+095: Preloading windows (4/5) (1/39)     = 0.0057
+096: Preloading windows (4/5) (2/39)     = 0.0312
+097: Preloading windows (4/5) (3/39)     = 0.0065
+098: Preloading windows (4/5) (4/39)     = 0.0466
+099: Preloading windows (4/5) (5/39)     = 0.0362
+100: Preloading windows (4/5) (6/39)     = 0.0305
+101: Preloading windows (4/5) (7/39)     = 0.0373
+102: Preloading windows (4/5) (8/39)     = 0.0075
+103: Preloading windows (4/5) (9/39)     = 0.0321
+104: Preloading windows (4/5) (10/39)    = 0.0032
+105: Preloading windows (4/5) (11/39)    = 0.0386
+106: Preloading windows (4/5) (12/39)    = 0.0348
+107: Preloading windows (4/5) (13/39)    = 0.0099
+108: Preloading windows (4/5) (14/39)    = 0.0027
+109: Preloading windows (4/5) (15/39)    = 0.0027
+110: Preloading windows (4/5) (16/39)    = 0.0024
+111: Preloading windows (4/5) (17/39)    = 0.0039
+112: Preloading windows (4/5) (18/39)    = 0.0036
+113: Preloading windows (4/5) (19/39)    = 0.0029
+114: Preloading windows (4/5) (20/39)    = 0.0032
+115: Preloading windows (4/5) (21/39)    = 0.0062
+116: Preloading windows (4/5) (22/39)    = 0.0024
+117: Preloading windows (4/5) (23/39)    = 0.0036
+118: Preloading windows (4/5) (24/39)    = 0.0017
+119: Preloading windows (4/5) (25/39)    = 0.0033
+120: Preloading windows (4/5) (26/39)    = 0.0035
+121: Preloading windows (4/5) (27/39)    = 0.0027
+122: Preloading windows (4/5) (28/39)    = 0.0027
+123: Preloading windows (4/5) (29/39)    = 0.0030
+124: Preloading windows (4/5) (30/39)    = 0.0371
+125: Preloading windows (4/5) (31/39)    = 0.0174
+126: Preloading windows (4/5) (32/39)    = 0.0462
+127: Preloading windows (4/5) (33/39)    = 0.0197
+128: Preloading windows (4/5) (34/39)    = 0.0367
+129: Preloading windows (4/5) (35/39)    = 0.0136
+130: Preloading windows (4/5) (36/39)    = 0.0044
+131: Preloading windows (4/5) (37/39)    = 0.0026
+132: Preloading windows (4/5) (38/39)    = 0.0323
+133: Preloading windows (4/5) (39/39)    = 0.0048
+134: gen: World Ages                     = 0.0018
+136: Preparing Map                       = 0.0030
+137: Perlin Random Shapes (Init)         = 0.0133
+138: Perlin Random Shapes (1/5)          = 0.0034
+139: Perlin Random Shapes (2/5)          = 0.0031
+140: Perlin Random Shapes (3/5)          = 0.0060
+141: Perlin Random Shapes (4/5)          = 0.0061
+142: Perlin Random Shapes (5/5)          = 0.0028
+144: Perlin Noise                        = 0.0157
+145: Center Gradient                     = 0.0039
+146: Perlin Noise (1)                    = 0.0161
+147: Perlin Noise (2)                    = 0.0175
+148: Perlin Random Shapes (Init)         = 0.0000
+149: Perlin Random Shapes (1/5)          = 0.0049
+150: Perlin Random Shapes (2/5)          = 0.0033
+151: Perlin Random Shapes (3/5)          = 0.0023
+152: Perlin Random Shapes (4/5)          = 0.0063
+153: Perlin Random Shapes (5/5)          = 0.0062
+155: Perlin Ring                         = 0.0242
+157: Gradient Circle Edges               = 0.0041
+159: Generate Tiles (16384/65536)        = 0.0217
+161: Generate Tiles (32768/65536)        = 0.0291
+163: Generate Tiles (49152/65536)        = 0.0252
+165: Generate Tiles (65536/65536)        = 0.0159
+166: Perlin Random Shapes (Init)         = 0.0000
+167: Perlin Random Shapes (1/5)          = 0.0026
+168: Perlin Random Shapes (2/5)          = 0.0045
+169: Perlin Random Shapes (3/5)          = 0.0047
+170: Perlin Random Shapes (4/5)          = 0.0019
+171: Perlin Random Shapes (5/5)          = 0.0040
+172: Perlin Replace                      = 0.0079
+173: Map Chunk Manager (1/2)             = 0.0006
+174: Map Chunk Manager (2/2)             = 0.0410
+175: Add Random Biome                    = 0.0528
+176: Freeze Mountain Tops                = 0.0029
+177: Add Vegetation (1/12)               = 0.0233
+178: Add Vegetation (2/12)               = 0.0045
+179: Add Vegetation (3/12)               = 0.0039
+180: Add Vegetation (4/12)               = 0.0036
+181: Add Vegetation (5/12)               = 0.0047
+182: Add Vegetation (6/12)               = 0.0036
+183: Add Vegetation (7/12)               = 0.0033
+184: Add Vegetation (8/12)               = 0.0029
+185: Add Vegetation (9/12)               = 0.0024
+186: Add Vegetation (10/12)              = 0.0048
+187: Add Vegetation (11/12)              = 0.0035
+188: Add Vegetation (12/12)              = 0.0037
+189: Add Resources                       = 0.0004
+191: Cleaning Up The World               = 0.0703
+193: Drawing Up The World                = 0.1062
+194: Preload rendered sprites...         = 0.0199
+196: Tidying Up The World                = 0.0484
+198: Rewriting The World                 = 0.3803
+200: World Loaded                        = 0.0042
+201: Finishing up...                     = 0.0358
+202: add_volcano                         = 0.0006
+203: spawn_angles                        = 0.0902
+204: Prepare Game Launch                 = 0.0006
+206: Preloading windows (5/5)            = 0.1259
+LOAD TIME INIT: 10.75028
+LOAD TIME CREATE: 0.01748466
+LOAD TIME GENERATE: 93.52074
+207: Start the Game                      = 0.0013
+209: Loading finished                    = 93.5009
+[模拟长生路][诊断][annual-world-overbudget:Prepare] 世界年度单步超预算：年=1 阶段=Prepare 耗时=1.68ms 预算=1.49ms
+[模拟长生路][诊断][annual-world-overbudget:TechniqueLineage] 世界年度单步超预算：年=1 阶段=TechniqueLineage 耗时=3.09ms 预算=1.49ms
+[模拟长生路][诊断][annual-world-overbudget:FactionMission] 世界年度单步超预算：年=1 阶段=FactionMission 耗时=2.04ms 预算=1.49ms
+[模拟长生路][诊断][annual-world-overbudget:Family] 世界年度单步超预算：年=1 阶段=Family 耗时=1.90ms 预算=1.49ms
+[MCLSL native probe] saved E:\0.6.0\output\runtime-validation\visual-baihu-20261014\native-72.json
+[MCLSL native probe] released measurement saved E:\0.6.0\output\runtime-validation\visual-baihu-20261014\native-72.json

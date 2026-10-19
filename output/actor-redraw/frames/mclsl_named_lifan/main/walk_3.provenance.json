@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "action": "walk",
+  "index": 3,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/walk_3.png",
+  "sourceSha256": "a5e11378e5b330be43ea42312ee12ab572f9cad472a78b168e1987dfe78989cd",
+  "outputFile": "GameResources/actors/Named/LiFan/main/walk_3.png",
+  "outputSha256": "263b00e8458d7784ed4ea26ee347069a53ef14af124adcf3f766094d3326028b",
+  "createdAtUtc": "2026-10-09T03:48:22.291791+00:00",
+  "prompt": "Use case: stylized-concept. Asset type: exactly ONE independently drawn pixel-game animation frame, LiFan walk_3, frame 4 of 8. Supplied image: fixed identity reference of LiFan, draw him anew in the requested pose. Keep the same dark navy/white Chinese robes, gold trim and sash, long dark hair tied with a gold ornament, face and boots. Preserve exact costume, colors, anatomy, pixel cluster size, three-quarter right-facing orientation, camera and original body scale. Canvas MUST stay 1254x1254 square with genuinely transparent RGBA background. It is a 128x128 virtual pixel-art game canvas shown enlarged; crisp square pixel clusters, hard edges, dark outlines and flat shading. Action: left knee rises gently, right heel begins lifting. This is an in-place walking cycle: keep pelvis at the same horizontal screen location, no traveling across the image, show leg and robe motion clearly. Draw ONE single pose ONLY. Do not copy/paste or translate the entire previous sprite. No projectile or spell particles, no text, no sheets, no panels, no duplicates, no backgrounds, no shadow, no glow, no blur, no smooth painting. Entire body and extended limbs must remain inside the canvas with generous transparent margins.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08888888888888889,
+    "translation": [
+      10,
+      8
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 25896,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

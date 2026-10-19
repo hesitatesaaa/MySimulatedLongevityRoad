@@ -1,0 +1,315 @@
+{
+  "actorId": "mclsl_beast_mo_yuan",
+  "batch": "cumulative",
+  "reviewMethod": "逐张使用 view_image 查看 provenance.sourceFile 指向的原生 1254x1254 PNG",
+  "frames": [
+    {
+      "action": "idle",
+      "index": 0,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/idle_0.png",
+      "sha256": "f7d237672cd9af4d18f4719c6bf696f5f4b7d2d41b6e184a2fe85eab4bab2204",
+      "reviewed": true,
+      "actualObservation": "正右向女性全身像；头发、发饰、两袖、手部、长裙及双靴都在画布内，未见多余肢体或硬裁边。"
+    },
+    {
+      "action": "idle",
+      "index": 1,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/idle_1.png",
+      "sha256": "8129510c2f446280cbdd6326f49f4811791f14aaff57e417463a476f2cfe0beb",
+      "reviewed": true,
+      "actualObservation": "全身完整，发尾与外袍轮廓相对 idle_0 有轻微变化；袖口、手部和双靴可辨，无明显断接或裁边。"
+    },
+    {
+      "action": "idle",
+      "index": 2,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/idle_2.png",
+      "sha256": "f50541965249c12af694f67240e0fed223b74152448efd58ff7cd97a76467fd7",
+      "reviewed": true,
+      "actualObservation": "全身轮廓完整，发尾和衣摆有细微姿态变化；双靴分别可见，未见额外肢体或边缘截断。"
+    },
+    {
+      "action": "idle",
+      "index": 3,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/idle_3.png",
+      "sha256": "9aeefd1b96f06bad0fe238a118984f9de9fb573af0c94969b5e4f6f726628462",
+      "reviewed": true,
+      "actualObservation": "全身完整且身份造型连续；裙摆遮住部分小腿，但两只靴子仍分别可辨，未见画布边缘裁断。"
+    },
+    {
+      "action": "walk",
+      "index": 0,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_0.png",
+      "sha256": "24fad0161c998bbe5ec1bc5e6f9e112bdfc96099ecee84a990b9a0e92b9842ef",
+      "reviewed": true,
+      "actualObservation": "宽幅低步幅；画面右侧靴向前、左侧靴向后，双脚靠近同一地面线且完整入画。"
+    },
+    {
+      "action": "walk",
+      "index": 1,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_1.png",
+      "sha256": "c1fefad24880d4a0efe417b9e0a547609c6f67d81de3b7186941af5a4d7af811",
+      "reviewed": true,
+      "actualObservation": "与 walk_0 相比，仍呈右侧前靴、左侧后靴；近远腿领步翻转不清楚，双靴和肢体未裁断。"
+    },
+    {
+      "action": "walk",
+      "index": 2,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_2.png",
+      "sha256": "c1a8ee1786571d39a1713983c91f49390e1786ac48689b7c7b73500cb2f6ce2c",
+      "reviewed": true,
+      "actualObservation": "衣摆和腿部局部姿态有变化，但可见脚仍是右前、左后关系，未形成明确反向领步；两脚完整入画。"
+    },
+    {
+      "action": "walk",
+      "index": 3,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_3.png",
+      "sha256": "ed3c268e4b4f6349aebdd3bc02581b70130ba5fa8c3fe5a1c09f55d4996e3ca7",
+      "reviewed": true,
+      "actualObservation": "仍显示画面右脚在前、左脚在后；腿部没有清楚交换前后关系，手臂摆动也较弱；无硬裁边。"
+    },
+    {
+      "action": "walk",
+      "index": 4,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_4.png",
+      "sha256": "c4ed4b48ff4c93a0a2d0636d4de3f1f5935b585d95f26f390e8c48462167795e",
+      "reviewed": true,
+      "actualObservation": "该帧来源提示要求远腿领步，但实际可见姿态仍像右前靴、左后靴，反向领步不易辨认；步幅低且双脚完整。"
+    },
+    {
+      "action": "walk",
+      "index": 5,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/walk_5.png",
+      "sha256": "1061b7dab11c23e0870cd5c3139857bcc0bd985f497bf1804e4f864e862b052c",
+      "reviewed": true,
+      "actualObservation": "循环末帧回到右前靴、左后靴的同一可见关系；六帧内没有清楚的近远脚交替闭环，肢体未裁边。"
+    },
+    {
+      "action": "death",
+      "index": 0,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_0.png",
+      "sha256": "75d4bb7d7cfe70038599493bcf916d00f52e4b5679122afbe52bc9a556cb86b3",
+      "reviewed": true,
+      "actualObservation": "起始倒下姿态：上身前倾、低头、双臂下垂，双靴仍可辨且轮廓完整，未见硬裁边。"
+    },
+    {
+      "action": "death",
+      "index": 1,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_1.png",
+      "sha256": "0fc69ee6a3a50acba098e44dbc46779f3ff22f9a9ea1aa4473d736207d090921",
+      "reviewed": true,
+      "actualObservation": "比 death_0 进一步低头和屈膝，重心下沉；双手、双靴可辨，未见多余肢体或明显截断。"
+    },
+    {
+      "action": "death",
+      "index": 2,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_2.png",
+      "sha256": "dd5f677011040a16ef6d786c4528330c905b03286b898d8437134a621d9bb896",
+      "reviewed": true,
+      "actualObservation": "明显深蹲下沉，头胸压低、双臂靠近地面，腿脚仍完整可见；动作继续向下，无明显回抬。"
+    },
+    {
+      "action": "death",
+      "index": 3,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_3.png",
+      "sha256": "d32d2140efd70857ea4fd36b47323d3cb11be25317dbf65669e0eff74d6e34a7",
+      "reviewed": true,
+      "actualObservation": "转为低跪/坐倒、双手接近地面，收势继续下沉；衣摆接近画布底边，留白极小，未能确认轮廓被截。"
+    },
+    {
+      "action": "death",
+      "index": 4,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_4.png",
+      "sha256": "860c528e8ccbf396b16c09935b94ce75b9944ad48d68244cf5da9836926fb4ad",
+      "reviewed": true,
+      "actualObservation": "侧向倒地，头在右、手臂向前，身体横向铺开；轮廓基本完整，但横向和底边留白都很紧。"
+    },
+    {
+      "action": "death",
+      "index": 5,
+      "path": "output/actor-redraw/originals/mclsl_beast_mo_yuan/death_5.png",
+      "sha256": "ecc20f214ba5b0c5056e8dcff1f93879308670fc7661e1939849dc6e83b56d53",
+      "reviewed": true,
+      "actualObservation": "最终侧卧伏地，头脸贴近手臂；未见回抬。衣物/靴部下缘看起来触及画布底边，疑似硬裁边，需重点复核。"
+    }
+  ],
+  "actionIssues": [
+    {
+      "action": "walk",
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5"
+      ],
+      "observation": "六帧均保持画面右侧脚在前、左侧脚在后；walk_1 与 walk_4 的近远领步反转在图像中不清楚，完整循环缺少可读的近远腿交替。双脚分离和低步幅尚可，未见硬裁边。",
+      "requiresRepair": true
+    },
+    {
+      "action": "death",
+      "frames": [
+        "death_3",
+        "death_4",
+        "death_5"
+      ],
+      "observation": "死亡下沉至侧卧的收势整体连贯，无明显回抬；death_3–5 底边留白极小，death_5 下缘似触画布边，疑似裁边。",
+      "requiresRepair": true
+    }
+  ],
+  "unreviewedFrames": [],
+  "verifiedInGame": false,
+  "completedBatches": 2,
+  "reviewedFramesCount": 16,
+  "additionalForms": [
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "reviewedCount": 16,
+      "frames": [
+        {
+          "action": "idle",
+          "index": 0,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/idle_0.png",
+          "sourceSha256": "a687d96f3280d4568ce05cdb938d347e6254f4e917f3fd5fe70c989301e908bf",
+          "viewed": true,
+          "observation": "红发人形全身像，发饰、长发、狐尾、两臂、长袍和双靴完整入画；未见多余肢体或硬裁边。"
+        },
+        {
+          "action": "idle",
+          "index": 1,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/idle_1.png",
+          "sourceSha256": "bf6044a80002662daf5e3205020a657282835ee341e72043b3cad72d6a89b18c",
+          "viewed": true,
+          "observation": "全身轮廓完整；长发、狐尾与外袍有轻微摆动变化，双手和双靴可辨，无明显断接或裁边。"
+        },
+        {
+          "action": "idle",
+          "index": 2,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/idle_2.png",
+          "sourceSha256": "86dc87ba36f914b5ed436029eb95fe2034098ec7293278cd9c4ae4661dc228c7",
+          "viewed": true,
+          "observation": "完整站立姿态，狐尾及衣摆轮廓清楚；脚部完整，未见画布边缘截断。"
+        },
+        {
+          "action": "idle",
+          "index": 3,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/idle_3.png",
+          "sourceSha256": "e583b71e4ca9cc138d31912193c284cc86520e6634d9e0146a656c16a368900d",
+          "viewed": true,
+          "observation": "与其他 idle 帧保持同一身份和站姿，主要变化在发尾、狐尾和衣摆；全身及双靴均完整。"
+        },
+        {
+          "action": "walk",
+          "index": 0,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_0.png",
+          "sourceSha256": "42e63f64ee1d0c34cf4baebd994e3c04d0e3e2720b1352ac606eb69c8741e44c",
+          "viewed": true,
+          "observation": "低幅宽步；画面右侧靴向前、左侧靴向后，双脚分开并完整入画；手臂摆动较小。"
+        },
+        {
+          "action": "walk",
+          "index": 1,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_1.png",
+          "sourceSha256": "2e1d15c5131790b5af6945416ffd0b96fd3ffe00fe8fb3fdc0d0951d4acb73ee",
+          "viewed": true,
+          "observation": "前后脚仍呈右前、左后关系；步幅清楚，但看不出近远腿交换领步，轮廓无裁边。"
+        },
+        {
+          "action": "walk",
+          "index": 2,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_2.png",
+          "sourceSha256": "68f759d24f9eb00ec3308e73c63a3ee6cc5784ef6cf53b62b27edf6305bcfb07",
+          "viewed": true,
+          "observation": "衣摆、狐尾和腿部有姿态变化，脚仍显示右侧前伸、左侧后蹬；未见清楚的相反领步。"
+        },
+        {
+          "action": "walk",
+          "index": 3,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_3.png",
+          "sourceSha256": "f63011a4c05153e4c3b583815ab7cbe795afcffed9a3ce8197fda6e483ec1a8d",
+          "viewed": true,
+          "observation": "同样保持右前靴、左后靴；近远腿前后关系没有可读翻转，长袍遮挡使手臂反向摆动也不明显。"
+        },
+        {
+          "action": "walk",
+          "index": 4,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_4.png",
+          "sourceSha256": "62cdea65b4d238f8cf3964aee3e97a9c2c376779010c6c5411c6b228f5eb2107",
+          "viewed": true,
+          "observation": "该帧提示要求远腿领步，但实际脚位仍像右侧前伸、左侧后伸；无法明确读出与 walk_1 相反的领步。双靴完整。"
+        },
+        {
+          "action": "walk",
+          "index": 5,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/walk_5.png",
+          "sourceSha256": "0220247afae3a96a0acb5214eadbb8638564cd6ff0f272abbb6a8be017a06f35",
+          "viewed": true,
+          "observation": "循环末帧仍呈右前、左后脚位；六帧没有清楚的近远脚交替闭环。头发、狐尾与衣摆均在画布内。"
+        },
+        {
+          "action": "death",
+          "index": 0,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_0.png",
+          "sourceSha256": "04eabb5c845d3ecd2068dff63d6230d5ed2ea49f7f3008a4091e0c532548e9cc",
+          "viewed": true,
+          "observation": "死亡起始为低头前倾、双臂下垂，双靴仍落地；全身轮廓清楚，无硬裁边。"
+        },
+        {
+          "action": "death",
+          "index": 1,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_1.png",
+          "sourceSha256": "18fc34d92769927b7bac0201bd635e0ccbc5a8483931a4f231f9b45cd3771453",
+          "viewed": true,
+          "observation": "比 death_0 头肩进一步下沉、躯干前屈；双手、双腿和狐尾完整可辨，无明显裁边。"
+        },
+        {
+          "action": "death",
+          "index": 2,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_2.png",
+          "sourceSha256": "269d41acd689e4ba8a9077b546c6965505652ab7815cdc71b28c8a52670b519d",
+          "viewed": true,
+          "observation": "继续屈身下沉，手臂更靠近腿部，双靴仍可辨；未见动作回抬或多余肢体。"
+        },
+        {
+          "action": "death",
+          "index": 3,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_3.png",
+          "sourceSha256": "9451888e75d21657648275de8987a50b7e911f656dc8e364da9c72fbbe760db3",
+          "viewed": true,
+          "observation": "落至低跪/坐倒姿态，双手靠近地面，长袍和狐尾铺开；下缘留白较窄但未见明确截断。"
+        },
+        {
+          "action": "death",
+          "index": 4,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_4.png",
+          "sourceSha256": "951f95e0aab007f238e703dff282d73f4bc6531999544a3c6560dbe8f236926e",
+          "viewed": true,
+          "observation": "转入侧卧，头在画面右侧、尾部向左铺开；身体完整，四周边距紧但轮廓未见硬切。"
+        },
+        {
+          "action": "death",
+          "index": 5,
+          "sourceFile": "output/actor-redraw/originals/mclsl_beast_hongmao_yuan/death_5.png",
+          "sourceSha256": "ee873d776073ab741f719fc770b97484c0f190305ae740a8e600acf6e5235595",
+          "viewed": true,
+          "observation": "侧卧最终收势与 death_4 连续，未见回抬；衣物和靴部下缘仍有可见透明间距，先前记录的底边裁断在本帧未复现。"
+        }
+      ],
+      "actionIssues": [
+        {
+          "action": "walk",
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5"
+          ],
+          "observation": "六帧可见脚位都维持画面右侧前伸、左侧后伸；walk_1 与 walk_4 虽分别提示近腿/远腿领步，图像里没有清楚的反向切换。近远腿交替及完整循环未通过静态审看。",
+          "requiresRepair": true
+        }
+      ]
+    }
+  ]
+}

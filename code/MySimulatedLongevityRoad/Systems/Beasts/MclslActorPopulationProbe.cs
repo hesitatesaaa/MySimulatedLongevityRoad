@@ -35,7 +35,8 @@ internal static class MclslActorPopulationProbe
                 string file = Path.Combine(MySimulatedLongevityRoad.MclslMod.I.GetDeclaration().FolderPath,
                     "resources", "actor-frames.manifest.json");
                 foreach (JToken group in JObject.Parse(File.ReadAllText(file))["groups"])
-                    if ((bool?)group["approved"] == true) ids.Add((string)group["actorId"]);
+                    if ((bool?)group["approved"] == true || (bool?)group["integrationAccepted"] == true)
+                        ids.Add((string)group["actorId"]);
                 Ids = ids.ToArray();
             }
             if (_mapAt < 0)

@@ -1,0 +1,523 @@
+{
+  "batch": "original-frame-resume-20261013T041938063924Z.jobs.json",
+  "submitted": 64,
+  "saved": 64,
+  "method": "built-in-imagegen-independent-frame",
+  "concurrency": 8,
+  "downsampling": false,
+  "installed": false,
+  "outcomes": [
+    {
+      "index": 2,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-1839f93a-3655-4052-b11e-26377ee6de3a.png",
+      "exitCode": 0
+    },
+    {
+      "index": 3,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-670a31b9-f752-4bb3-9e86-8f0f67367ef5.png",
+      "exitCode": 0
+    },
+    {
+      "index": 8,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 6,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-72e56275-792e-4f74-b53d-abdc63798693.png",
+      "exitCode": 0
+    },
+    {
+      "index": 5,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-606779c7-f0d9-4997-a8fb-535574887b1d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 4,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-c2b33263-a24e-466e-a409-44ce1ab6772e.png",
+      "exitCode": 0
+    },
+    {
+      "index": 9,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 7,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-677711a3-83a1-41ba-8c9c-ba74897a370d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 10,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "hit",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-beddb106-d762-4842-8728-05d0903db57b.png",
+      "exitCode": 0
+    },
+    {
+      "index": 1,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "walk",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-6f29a746-596b-4602-bbb5-545028f7b2f3.png",
+      "exitCode": 0
+    },
+    {
+      "index": 0,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "walk",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-3d9f3f5e-db4f-4aab-9901-a2111af7c82b.png",
+      "exitCode": 0
+    },
+    {
+      "index": 6,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-21d24c68-abb6-4e54-9675-6f43109df712.png",
+      "exitCode": 0
+    },
+    {
+      "index": 11,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "hit",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-6cfa9129-1345-4466-8aaa-35c066a9bace.png",
+      "exitCode": 0
+    },
+    {
+      "index": 12,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-622515e4-8120-4e3c-93fe-f856ce4202e0.png",
+      "exitCode": 0
+    },
+    {
+      "index": 7,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e9eefb4f-16c9-4893-8897-d3ea532df18d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 13,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-41c0e7de-8266-4eeb-926b-4fac742b3a81.png",
+      "exitCode": 0
+    },
+    {
+      "index": 14,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e3ebdd6b-df6c-4c25-8476-29c6a53f81b2.png",
+      "exitCode": 0
+    },
+    {
+      "index": 15,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-4e6e733b-0506-4662-a5f6-84f19a4753ce.png",
+      "exitCode": 0
+    },
+    {
+      "index": 16,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-ed4ccb97-c33a-4c66-b332-53387c97be5e.png",
+      "exitCode": 0
+    },
+    {
+      "index": 17,
+      "actor": "mclsl_beast_baihu_yuan",
+      "action": "death",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-c93e3810-8221-4a99-affe-293d95df42cd.png",
+      "exitCode": 0
+    },
+    {
+      "index": 21,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-02466589-d07c-4edc-82f2-9b47d3fb854f.png",
+      "exitCode": 0
+    },
+    {
+      "index": 18,
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-31478196-871e-4130-af70-807861a7c162.png",
+      "exitCode": 0
+    },
+    {
+      "index": 25,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7646a1b9-8a7b-4211-803c-f7f517600964.png",
+      "exitCode": 0
+    },
+    {
+      "index": 22,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-125bf189-4a12-4563-a7c4-e1d47f92f153.png",
+      "exitCode": 0
+    },
+    {
+      "index": 19,
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-a56e2eb8-7194-4d38-b233-23de0269a188.png",
+      "exitCode": 0
+    },
+    {
+      "index": 20,
+      "actor": "mclsl_beast_moqilin",
+      "action": "idle",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-97d7c335-eae1-4bc6-a901-4e10a2cfd8f0.png",
+      "exitCode": 0
+    },
+    {
+      "index": 27,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-0d79d352-8695-46cf-b3da-d09ef179ad35.png",
+      "exitCode": 0
+    },
+    {
+      "index": 24,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-d7861c3b-04e5-466a-9675-dccb802b7884.png",
+      "exitCode": 0
+    },
+    {
+      "index": 30,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-f9cf0973-b0d8-4ec9-abe2-85023d796dc7.png",
+      "exitCode": 0
+    },
+    {
+      "index": 29,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e5f85ba1-c5ad-4d2a-a360-ffd001849a6e.png",
+      "exitCode": 0
+    },
+    {
+      "index": 32,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-c7eb6ab0-2a9b-4b1a-b6aa-f7aae2864171.png",
+      "exitCode": 0
+    },
+    {
+      "index": 26,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-0c46b185-e6a4-43bb-b902-4b546661ec49.png",
+      "exitCode": 0
+    },
+    {
+      "index": 28,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-3212ed69-7984-4850-9de5-f43cd1400512.png",
+      "exitCode": 0
+    },
+    {
+      "index": 23,
+      "actor": "mclsl_beast_moqilin",
+      "action": "walk",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-624fa134-7f08-474e-8fba-cf386624f28a.png",
+      "exitCode": 0
+    },
+    {
+      "index": 36,
+      "actor": "mclsl_beast_moqilin",
+      "action": "hit",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-4bd55fa9-605c-4807-a8a5-fb365c706f4d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 31,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-84b4c934-43dc-4f54-8bd2-96978feca71f.png",
+      "exitCode": 0
+    },
+    {
+      "index": 37,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-33b62113-06ad-4a10-937e-803d6a755a98.png",
+      "exitCode": 0
+    },
+    {
+      "index": 40,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-fabf22e5-3014-4daa-8056-ac4668dce349.png",
+      "exitCode": 0
+    },
+    {
+      "index": 38,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e855aa5a-0480-4fc4-bc0f-73e95d0e4079.png",
+      "exitCode": 0
+    },
+    {
+      "index": 33,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 6,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-d08d7234-fafe-4756-91ee-e94f11d17dc1.png",
+      "exitCode": 0
+    },
+    {
+      "index": 42,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-775a700a-64b5-4121-85be-e620ee924204.png",
+      "exitCode": 0
+    },
+    {
+      "index": 35,
+      "actor": "mclsl_beast_moqilin",
+      "action": "hit",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-5ad29ff5-e7ed-4f77-9ac2-6c37f3602f9f.png",
+      "exitCode": 0
+    },
+    {
+      "index": 41,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-4ecd07d1-b0b4-48df-a5e7-3520609a84ef.png",
+      "exitCode": 0
+    },
+    {
+      "index": 43,
+      "actor": "mclsl_beast_moqilin",
+      "action": "icon",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7f60705d-9364-4cd9-841c-502e22a79f0d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 39,
+      "actor": "mclsl_beast_moqilin",
+      "action": "death",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e0af20ea-f572-4f13-8068-143fef207ad0.png",
+      "exitCode": 0
+    },
+    {
+      "index": 44,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-27f2bcf3-fa3a-4ec8-91da-a78361207a43.png",
+      "exitCode": 0
+    },
+    {
+      "index": 34,
+      "actor": "mclsl_beast_moqilin",
+      "action": "attack",
+      "frame": 7,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7a41a24b-ccfb-4a81-b9a5-21600391285a.png",
+      "exitCode": 0
+    },
+    {
+      "index": 48,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-8219c67e-dfa7-4fbf-86a9-ebed37a07112.png",
+      "exitCode": 0
+    },
+    {
+      "index": 49,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-8d042219-5ce2-40b6-8a43-4bdb3fe521d7.png",
+      "exitCode": 0
+    },
+    {
+      "index": 50,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-5bd6cee0-0372-4946-94c9-dc0cc8080811.png",
+      "exitCode": 0
+    },
+    {
+      "index": 51,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-6935ec54-661c-447b-a3a4-b110ec6c87b0.png",
+      "exitCode": 0
+    },
+    {
+      "index": 47,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7ae6c62e-7f78-4de1-804b-e57f0299762f.png",
+      "exitCode": 0
+    },
+    {
+      "index": 45,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-d00f4791-03c9-417b-81ef-2ebdc494a545.png",
+      "exitCode": 0
+    },
+    {
+      "index": 52,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "walk",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-cc5200d4-6ab8-4999-8a8b-29cf32e4a064.png",
+      "exitCode": 0
+    },
+    {
+      "index": 46,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "idle",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-bebcfb2b-5d77-4d5f-9c64-c28539fa406d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 56,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 3,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-94cfc367-01bd-4ce6-9a23-ed785be05a4c.png",
+      "exitCode": 0
+    },
+    {
+      "index": 57,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 4,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-3722e6ee-d61f-49f8-9ee9-353505f78ecf.png",
+      "exitCode": 0
+    },
+    {
+      "index": 61,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "hit",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-a21b7021-1ef1-42e6-af7c-7debf445bc87.png",
+      "exitCode": 0
+    },
+    {
+      "index": 59,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 6,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-12a6400a-599c-46b1-87f6-8c199c1bf367.png",
+      "exitCode": 0
+    },
+    {
+      "index": 63,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "death",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-c5bee7d6-ea6f-4f66-a72c-8e657378cf52.png",
+      "exitCode": 0
+    },
+    {
+      "index": 58,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 5,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e239baa3-08fe-4c88-a1ad-47bcc1254996.png",
+      "exitCode": 0
+    },
+    {
+      "index": 62,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "hit",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-db46d8f8-5582-417f-b53e-92a1fa969929.png",
+      "exitCode": 0
+    },
+    {
+      "index": 53,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 0,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-3a499540-ff29-405c-9e20-b92e00056b02.png",
+      "exitCode": 0
+    },
+    {
+      "index": 60,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 7,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-351d52ec-250c-4ee3-8ddb-0fd266ccfa1d.png",
+      "exitCode": 0
+    },
+    {
+      "index": 54,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 1,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-19c1a1c0-7c38-4a9e-9da8-05df2a0d92d5.png",
+      "exitCode": 0
+    },
+    {
+      "index": 55,
+      "actor": "mclsl_beast_xuanwu",
+      "action": "attack",
+      "frame": 2,
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-807bc59d-40df-4fb7-9f47-3d7d6fb009fb.png",
+      "exitCode": 0
+    }
+  ]
+}

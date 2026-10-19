@@ -1,0 +1,44 @@
+{
+  "actorId": "mclsl_beast_manman_yuan",
+  "action": "death",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_manman_yuan/death_5.png",
+  "sourceSha256": "a60d9f45e51b8bd646a1716bd5ce0e37aa776eaabfbc1587ca574648e9cb978c",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_manman_yuan/main/death_5.png",
+  "outputSha256": "a60d9f45e51b8bd646a1716bd5ce0e37aa776eaabfbc1587ca574648e9cb978c",
+  "prompt": "Use case: stylized-concept. Create exactly ONE new independent transparent 1254x1254 RGBA pixel-art game frame for 蛮蛮·化形 (mclsl_beast_manman_yuan), death_5, the FINAL exhausted death pose. Image 1 is the preceding death_4 frame and establishes identity, palette, pixel scale and the direction of collapse. Freshly draw the next frame: the adult woman with long dark hair, red/cream paired-bird robe and two braids remains lying on her side, fully settled; head and shoulders sink LOWER than in death_4, cheek and forearm resting on the ground, no recovery or lifting, eyes closed. Maintain coherent exactly two arms and two legs, with the long robe and hair pooling on the ground. Full single character inside canvas with transparent padding all around. Preserve the approximate body scale and foot anchor of the source. Broad clean pixel clusters, crisp outline. This is a new pose, not a copied, translated, scaled, rotated or recolored old sprite. No extra figures, panel, grid, background, shadow, text, glow or particles.",
+  "references": [
+    "output/actor-redraw/frames/mclsl_beast_manman_yuan/main/death_4.png"
+  ],
+  "createdAtUtc": "2026-10-18T02:39:58.608094+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "repair": {
+    "replacedSourceSha256": "eb40c1a01439aa779842a6bbc68141dd199524893519c1834a39eab371e2e7a5",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/forms_b/mclsl_beast_manman_yuan/death_5.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_manman_yuan/death_5"
+  }
+}

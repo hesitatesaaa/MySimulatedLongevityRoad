@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_named_zhangfan",
+  "action": "walk",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_named_zhangfan/walk_5.png",
+  "sourceSha256": "6fcf2d0d5ac5135de61eaf52d3c4369f522fc12c4c5ef43d59e1fadd5a6fa224",
+  "outputFile": "output/actor-redraw/frames/mclsl_named_zhangfan/main/walk_5.png",
+  "outputSha256": "6fcf2d0d5ac5135de61eaf52d3c4369f522fc12c4c5ef43d59e1fadd5a6fa224",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5f20\u51e1 (mclsl_named_zhangfan), walk_5. Image 1 is this form's standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste or transform the reference bitmap. Character: dark crimson/black armored cultivator, dark tied hair and headband, layered shoulder armor, trailing red sash and sword. Male, adult fully clothed human. Walking cycle phase 0.833 (300 degrees): grounded wide stride; near leg recovering forward and far leg moving opposite, visible hip, knee and ankle articulation, natural opposing arm swing, trailing cloth and hair. Both boots near ground; no high knee lift. Maintain body height and grounded foot line. Balanced crisp pixel art: broad clean square pixel clusters, two or three shade levels per material, restrained trim. Keep same anatomical pixel scale, body anchor, right-facing view. Complete pose inside transparent padding. Square 1254x1254 transparent RGBA canvas. Exactly one character and one pose in one PNG; no grid, panels, background, ground shadow, text, glow, particles, extra limbs, clipping.",
+  "references": [
+    "E:\\\\0.6.0\\\\output\\\\actor-redraw\\\\originals\\\\mclsl_named_zhangfan\\\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-19T02:24:31.071003+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      624.5,
+      1191
+    ],
+    "pixelsPerUnit": 11.829545454545455
+  },
+  "repair": {
+    "replacedSourceSha256": "71ab0b1339914b6ed37fbec95248b9b7fdcb339e31fb0f1ac88028e17f03adf0",
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14800-c185-7543-8282-8b1b1f21fa2c\\exec-20cfa42d-5d00-4ce9-937b-445dd25bb964.png",
+    "candidateProvenance": "output/actor-redraw/generated-frame-recovery.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  }
+}

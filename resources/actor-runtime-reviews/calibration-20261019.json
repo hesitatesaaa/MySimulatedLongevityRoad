@@ -1,0 +1,567 @@
+{
+  "kind": "scale-proposal-from-actual-placed-reference-units",
+  "sizeComparisonPassed": false,
+  "runtimeReport": "output/runtime-validation/release-20261019/size-mature-observation.json",
+  "runtimeReportSha256": "f007faee5cf41f03e62dfb6c03a117ce96eab0f1570e1f672a8a9299081a80bb",
+  "limitation": "Matches visible alpha-silhouette height; no manual anatomical landmark or art review. Final placed-unit retest remains required.",
+  "forms": [
+    {
+      "actorId": "mclsl_beast_kunpeng",
+      "previousScale": 0.06609485815602836,
+      "proposedScale": 1,
+      "reference": "Behemoth",
+      "referenceVisibleWorldHeight": 9.25,
+      "nativeIdleSha256": "a49ec5e0684c21e78e062fb3bb0e593358b3067198197decefe458b3365fa9ca",
+      "referenceSha256": "cbae3d764184877d8fbba44b764540ae7b838f8f2b7d040c02a9b418233d617f"
+    },
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "3254eb4493a778f4aa1ead48137401c6cfa0ee1fd230effdada7890ba7dcedba",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_qinglong",
+      "previousScale": 0.12319527120000003,
+      "proposedScale": 1,
+      "reference": "PrimordialFrostDragon",
+      "referenceVisibleWorldHeight": 20.8200008328,
+      "nativeIdleSha256": "82b6066ac41b43745710762e191d7568d3d5be5f3bf89063e1ce48abc9ed9666",
+      "referenceSha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930"
+    },
+    {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "695b495f683dd3cd80b320a2387427efbc6a0199a9ef94fc000065b3b1e6aa35",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_huanglong",
+      "previousScale": 0.12319527120000003,
+      "proposedScale": 1,
+      "reference": "PrimordialFrostDragon",
+      "referenceVisibleWorldHeight": 20.8200008328,
+      "nativeIdleSha256": "574b9058958e2238ba35ab59fe0a0f7865bc0858573acb51c4c3af9c6a10c7f0",
+      "referenceSha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930"
+    },
+    {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "e5d0758b62fb571da5a47257067e232942b24a36aa6c15df22795b740e3dbed0",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_zhuque",
+      "previousScale": 0.07213114754098361,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "02bab770b1b26483b0caf941f8123fe58952f4a2f50d39978c093f41937a9ace",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_zhuque_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "da18cc69deadc99cabb0736fd0d6f3a9bd1676cd3503a1bcd18ee985db034cdd",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_baihu",
+      "previousScale": 0.025000000000000005,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "52fe777ffc754036afbf9a640161cea184657199a1b67d3f87c77eb07f2b0219",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_qilin",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "769b0d931d06a3b795e13763be048db516533668d5b91e5a6c405d90b3a6eb76",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "bf28f52ddad8c35c3ef42151ac14740482051d6ac410cafec39aad8d4a9451bf",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_moqilin",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "e25d2519c5a82be46f29a9edb13a83d07103da8c36b4e1e862d699e9906d27c3",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "28eb9fbfbd6e1ae8a327eb916600d48818d493a93f301b1dc443b5902f31af96",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu",
+      "previousScale": 0.016428572085714285,
+      "proposedScale": 1,
+      "reference": "StoneGolem",
+      "referenceVisibleWorldHeight": 1.3800000552,
+      "nativeIdleSha256": "9dd125f60bae26f610a89eb29754069a7a062517c3bdc435734dc8b08024c7b4",
+      "referenceSha256": "3aaf3e569d59a867e736ee46f49b6370db79884a80996d351a56210e9f1581cf"
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "aa2ca087cbb295fe2c5a2b4b4de5abf947799224cb8763b9198809d5567a917f",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang",
+      "previousScale": 0.07213114754098361,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "2c633210405f8fbc4e8da645c599e7af59e42f06b1da71d9b58ae4abd3ba72d1",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "4dde59281270cd88bb591926121ff0aeed62fbcdc1745aee379ccf2f0065857f",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_dafeng",
+      "previousScale": 0.0721311475409836,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "b2832807f0119bf59169420b5ee222ec4707ef21bb1fbb3f47e4f47c5a021751",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_manman",
+      "previousScale": 0.07213114754098361,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "a3256a683b1778343bbb25eed448fb7b7756e3421431f44b680ea75242586901",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_manman_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "9065643c4d3184237d2e80f826e43088fdbc74adce301d02425de985dd7a85b6",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao",
+      "previousScale": 0.07213114754098361,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "c849eab6e365bd02396081c03688d7ca998c36a3d009a123419a69d2e2abc533",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "3a2ef4367c65530b0ebf7e9d834436b4fe197c32fea460c8cc3c0b173134de58",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_qingluan",
+      "previousScale": 0.07213114754098361,
+      "proposedScale": 1,
+      "reference": "Phoenix",
+      "referenceVisibleWorldHeight": 4.4,
+      "nativeIdleSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
+      "referenceSha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c"
+    },
+    {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "previousScale": 0.03238636493181818,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "55c7ac116ddeae5b8f59c4c6522af7d15317901fe7873c991ffa38058f95425f",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_changliao",
+      "previousScale": 0.024999999999999998,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "97e2d2b276dbe022830fd0b7640ecc51f93b3488f87cc93ff4473bcfdcd90264",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "4dabe058759d454c769f6420c654386bbde0ee5f98fa5d4df430c5927a5c5b8c",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_mo",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "964f43a5e91710908fe32acb86a535b288af279532bf1873b0b8ac61358434b0",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_mo_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "f7d237672cd9af4d18f4719c6bf696f5f4b7d2d41b6e184a2fe85eab4bab2204",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_hongmao",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "b2240412cd4d8d0dd125bde2e2e16b82b16aa6d8f7a1d5a780945d5828e81c96",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "a687d96f3280d4568ce05cdb938d347e6254f4e917f3fd5fe70c989301e908bf",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu",
+      "previousScale": 0.034126984126984124,
+      "proposedScale": 1,
+      "reference": "SpiritTraveler",
+      "referenceVisibleWorldHeight": 2.15,
+      "nativeIdleSha256": "65b9b1f8c698b588b06dd5c67ce2a8e4a66801adf549ecea9cc195c5d7851f73",
+      "referenceSha256": "fbfbeb563635c9624834bc5159ef7a4f4b07bfacc442bf199d0cc9ec51a656a1"
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "977aef2153267b098f4b78d403ce6dbc600388e810f0a1873eb1dffde75aa214",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_yingying",
+      "previousScale": 0.034126984126984124,
+      "proposedScale": 1,
+      "reference": "SpiritTraveler",
+      "referenceVisibleWorldHeight": 2.15,
+      "nativeIdleSha256": "03caa1ab1a4bf3f64e09430dd3746acfb4117be38e64c9a4b9e6f3b7b6a0aeb2",
+      "referenceSha256": "fbfbeb563635c9624834bc5159ef7a4f4b07bfacc442bf199d0cc9ec51a656a1"
+    },
+    {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "ec88ffd44599400c39d83a2c3c3d53035f8dbd32326d9ea31344522cabc638ce",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_goushou",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "2052a94bfaa7cabfb26de33f4be7a4a3e8b677ef98115281c80c2a044a22b1a9",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "previousScale": 0.03238636493181818,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "89cd051e06518dfe16dabd53c87ab1f5149b1321f4be040182b9e08988fa598b",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing",
+      "previousScale": 0.09020966453674122,
+      "proposedScale": 1,
+      "reference": "Behemoth",
+      "referenceVisibleWorldHeight": 9.25,
+      "nativeIdleSha256": "43292233c9db653264071ccd84c81c379113a1dae8e5d8e526232736a42eac0d",
+      "referenceSha256": "cbae3d764184877d8fbba44b764540ae7b838f8f2b7d040c02a9b418233d617f"
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "76071df7a574472fe29f1ae5070f59f354fb1bfa0dea3976b4890378ae176345",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_beast_tianshou",
+      "previousScale": 0.11011904761904762,
+      "proposedScale": 1,
+      "reference": "Behemoth",
+      "referenceVisibleWorldHeight": 9.25,
+      "nativeIdleSha256": "18060c7cb5047a4629ce08c022075be53ada788c5a0c71f995da41c35ecbbf5a",
+      "referenceSha256": "cbae3d764184877d8fbba44b764540ae7b838f8f2b7d040c02a9b418233d617f"
+    },
+    {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "13a8b3422d4db3c97afe65d04887f67ae94c5c4575b52976dff12b091fde13e7",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_diyi",
+      "previousScale": 0.024999999999999998,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "3e7c006695cf1a89d72f0d2131c28084a1c81221bf65422659739b254e5b3c8f",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_named_diyi_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "a89ac2e777465c5609f8c998b7a1c7ba7a216e216f3aa7892feb5652bc8a26a4",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_disanmo",
+      "previousScale": 0.025,
+      "proposedScale": 1,
+      "reference": "NightWolf",
+      "referenceVisibleWorldHeight": 1.4000000000000001,
+      "nativeIdleSha256": "8b0bb73da606fd6891f03a9104940aec201dc8db0b8d01663d82da6bad7bc077",
+      "referenceSha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8"
+    },
+    {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "07d8dd3c33b8c77f283bea6e6c435e45ccdcea582fcd695f8d98ebcd8c692ee5",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong",
+      "previousScale": 0.12319527120000001,
+      "proposedScale": 1,
+      "reference": "PrimordialFrostDragon",
+      "referenceVisibleWorldHeight": 20.8200008328,
+      "nativeIdleSha256": "e5fe44664300c299e75a46fc464e4e62aeb8ee685c014254bf482faddaf9cb70",
+      "referenceSha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930"
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "previousScale": 0.03238636493181818,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "2a90ed49dfb6e1a11699c41b5054dd670dde7629c4c71216da692159d23e3b58",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_lifan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "f939b3660d6134970cf70a04ccc9f925bbcc7075934d2f84de01e3684cd60197",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_tianyi",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "2e3c4c297023eb47e33050857464b8b58f7e628f77e8b73ae38cf1bd35579e04",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_moruibin",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "3fcf1d77929afe08f6369b9d829b0ee3f0ff6f663d964700db64bab64e514cb2",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_xuantianwang",
+      "previousScale": 0.03238636493181818,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "0bad4498016561de54b81a87273cbd4a82c3e0477b23aa38cc7c0aa9bf2a1f4f",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_xuke",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "36c7a5dbac11dc0a783068feb0703ba3c89a45a5504f6f91e87718ad38086a17",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_yefeipeng",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "4fae466d3a5b3200957fd986135b3940d408fc0f91ed64c95284c6979a40430a",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_xiaoheng",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "f6344a9792e0bada562121b651b640c2005b8f82bcb9613ca2511677f73fce7e",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_xubai",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "da566031575916ff56d97a91f002afd2fee3b2be0b63046aefc54c749f9aba3d",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_liping",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "20e4514778368ea647b262147478072173ea35da804e43593e4c17ec5b76d213",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_shanfan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "9af6d5c464969cf6720f9cc0be9063b2377bb47ef1d9e5211c1480713c210ffa",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_zhangfan",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "d7879317de6f5f510d08e9f6e80197cb26018e35befef068e7d49f6c317ea35d",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_named_zhenshen",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "ad20629475472988590e7197faaabab57be4d289e5a928a61079ad4ed6d8bcea",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_bai_xiansheng",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "6a7039196b8877c00c86c69c551aecb17c5ab28bbf964dfc65299436d7fb222f",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    },
+    {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "previousScale": 0.032386364931818186,
+      "proposedScale": 1,
+      "reference": "TenguSamurai",
+      "referenceVisibleWorldHeight": 2.850000114,
+      "nativeIdleSha256": "e88bf839800cc20057f3249cd8e8474b40bbb380d6e720794cff77be1491b629",
+      "referenceSha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c"
+    }
+  ]
+}

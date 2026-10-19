@@ -1,0 +1,69 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "jobs": [
+    [
+      0,
+      "Notice a target: upper neck stiffens, head holds standard height, foreclaws curl in readiness. Tail coil tightens slightly. Mouth still closed."
+    ],
+    [
+      1,
+      "Early windup: pull the head about40px backward-left, upper neck curve tightens, cyan mane lifts, near foreclaw starts drawing up toward chest. Far foreclaw remains relaxed."
+    ],
+    [
+      2,
+      "Windup increases: head pulled about80px backward-left, jaws start opening to reveal a few fangs, near foreground foreclaw raised ahead of chest with bent elbow. Lower coil stays compact."
+    ],
+    [
+      3,
+      "Deep windup: head about100px behind standard, near foreground foreclaw lifted toward the front of pale chest, far foreclaw stays lower. Upper S neck tightly curved, jaw open. Hindlegs flex inward."
+    ],
+    [
+      4,
+      "Last windup: same pulled-back head and tight neck curve, open jaw, raised near foreclaw poised to reach forward. Cyan mane swept upward; tail stabilizes body. No extra hands."
+    ],
+    [
+      5,
+      "Lunge begins: upper neck uncoils forward-right, head approaches standard position, near foreclaw drives forward with bent elbow. Mouth open, whiskers stream back to stay compact."
+    ],
+    [
+      6,
+      "Forward strike building: head about70px right of standard, upper neck partly straightens, near foreclaw reaches forward-right toward x1010,y680. Far foreclaw held beneath upper torso, hindlegs tucked. Do not lengthen bones."
+    ],
+    [
+      7,
+      "Strong forward strike: head about100px right of standard, jaws wide but same head size. Foreground near foreclaw reaches x1060,y650, fingers spread. Whiskers trail backward, not beyond canvas. Tail coil counterbalances."
+    ],
+    [
+      8,
+      "Peak bite-and-claw strike: head forward-right about110px, near foreclaw reaches x1080,y660, jaw open with readable fangs. Far foreclaw and two hindlegs tucked at their original roots. Upper neck extended through curve change, not anatomical stretch."
+    ],
+    [
+      9,
+      "Downward follow-through: forward head lowers a little, near striking claw arcs down to x1040,y735, mouth still partly open. Lower coil and tail stable, mane and whiskers lag behind."
+    ],
+    [
+      10,
+      "Start recovery: neck recoils halfway toward center, head only about60px forward of standard, striking near claw pulls back toward x920,y730. Far foreclaw remains attached and relaxed."
+    ],
+    [
+      11,
+      "Recovery continuing: head about30px forward of standard, jaws begin closing, near foreclaw elbow bends toward chest. Upper S curve reforms, whiskers settle."
+    ],
+    [
+      12,
+      "Late recovery: head returns to standard position and height, mouth nearly closed, foreclaws lower halfway to standard. Mane fins settle and tail coil loosens."
+    ],
+    [
+      13,
+      "End recoil: standard head position, closed mouth, upper neck and middle S curves near original. Near foreclaw relaxes, far foreclaw returns to its standard position."
+    ],
+    [
+      14,
+      "Nearly recovered standard hovering S silhouette: original head height, original body curves, three obvious limbs plus partly hidden fourth, relaxed claws. Only minor whisker and mane settling."
+    ],
+    [
+      15,
+      "Final recovery at EXACT original idle_0 silhouette: original head, antlers, neck, body coils and claw positions, mouth closed, standard long whisker curls, lower tail plume at original angle. No raised striking arm, no stretched neck."
+    ]
+  ]
+}

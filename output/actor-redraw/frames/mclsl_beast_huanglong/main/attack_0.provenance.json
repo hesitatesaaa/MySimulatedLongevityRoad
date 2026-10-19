@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_huanglong",
+  "action": "attack",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_huanglong/attack_0.png",
+  "sourceSha256": "c124ea461aed888eb3135a66fc6f034cb6c56ac57e527db1f87bbb38e175e670",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_huanglong/main/attack_0.png",
+  "outputSha256": "c124ea461aed888eb3135a66fc6f034cb6c56ac57e527db1f87bbb38e175e670",
+  "createdAtUtc": "2026-10-19T02:18:24.995094+00:00",
+  "prompt": "Create a corrected version of the first reference image: a SINGLE full-body golden Chinese dragon pixel-art attack-start sprite on 1254x1254 transparent canvas. Keep the dragon's visual identity and attack-start pose. Both original left tail fan and right whisker were clipped at canvas boundaries. Scale/recompose the whole body to fit INSIDE a safe rectangle x=80..1174, y=55..1190. Every point of the horns, whiskers, claws and tail fan must be fully visible with at least 80 transparent pixels left and right. No touching canvas borders. One character, one frame, no background, text, grid or effects. Preserve original golden pixel-art palette and sharp outline, do not blur.",
+  "references": [
+    "E:\\\\0.6.0\\\\output\\\\actor-redraw\\\\originals\\\\mclsl_beast_huanglong\\\\attack_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      735.0,
+      1226
+    ],
+    "pixelsPerUnit": 6.9112426035502965
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "repair": {
+    "replacedSourceSha256": "ff5f3323c309a4f9237dc86c04333a4051c7b6496fe709db265b5cb4744b7c12",
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-a38a-7783-97c4-7799beba6b2f\\exec-4bd25651-a86f-4292-8adf-22d4a4222139.png",
+    "candidateProvenance": "output/actor-redraw/generated-frame-recovery.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  }
+}

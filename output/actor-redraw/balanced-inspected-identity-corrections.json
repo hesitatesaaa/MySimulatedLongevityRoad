@@ -1,0 +1,65 @@
+[
+  {
+    "actor": "mclsl_named_qingshenlong",
+    "sha256": "ea875d8276fad69143e8b23189e7e64b65316df534b8cd946a0ade2986f2e16f",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: long S-shaped blue-white dragon torso and four small claws, correct species silhouette with moderate cluster shading. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_moruibin",
+    "sha256": "abfcee7c093026726d79041bb3569d77ff49c5e749c21c88b150df11ffa4dc15",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: brown scholar robe, black scholar cap and clearly opened ivory fan distinguish this character. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_xuke",
+    "sha256": "4cb0a958cdb4d4b5b33c76855a7c5596f4038520a42e638de4475c581af90c43",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: tall amber/dark scholar hat and visible upright staff, restrained brown/cream robe. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_xiaoheng",
+    "sha256": "ecb65517eeb3e67039d192ca8f88d3b991595d0c91157be5c3e667da5ea1ab2e",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: rounded brimmed traveler hat, visible gourd and practical shorter olive traveling clothes. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_xubai",
+    "sha256": "313d9368e138c646f7255532d69abb97dd7b6ede267a464cdd5213419562fce8",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: white hair, pale blue/white flowing robe and readable opened folding fan. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_liping",
+    "sha256": "0312935d55b58520264c6d881f9719407dd8835a8e2f57cb18e1c2b1a81e01fe",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: short brown martial robe, trousers and boots, visible gray axe head and broad warrior build. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_named_zhenshen",
+    "sha256": "d4c833e221b6bee0d7d987485cfa79ab3349bb2fa35b85cbf615931821188e30",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: white-haired ivory/gold sage with clearly visible ceremonial staff. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_bai_xiansheng",
+    "sha256": "37b5ae093816a7e229c9f7d8382ec90a19c3338e098c7d14bcc0d57a0073c4a8",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected full contact: white scholar robe, dark hair and visible white fan, reduced blue armor decoration. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  },
+  {
+    "actor": "mclsl_chuanfa_tianzun",
+    "sha256": "3e981ff6ddbc25903689f0d8f83c512a6faa4ff403788b8d3fd7a5c312e2aaf0",
+    "scope": "idle_0-character-standard-only",
+    "inspected": true,
+    "note": "Inspected contact and original: tall black/gold ceremonial hat, black robe with ivory lining and a clearly visible closed scripture book. Matches Li Fan/Baihu detail level. Standard only; action continuity and game calibration not approved."
+  }
+]

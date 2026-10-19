@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_zhuque",
+  "action": "walk",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_zhuque/originals/walk_1.png",
+  "sourceSha256": "3ae12ae892e0a65f380dd8a01a69c8b138b03439e36e54ab91e81006e8ff9fed",
+  "outputFile": "GameResources/actors/Beasts/zhuque/Beast/main/walk_1.png",
+  "outputSha256": "545890dceb6c240c298700e23a1b79ef2a55bc714e0d9051f3df5fc96900abcf",
+  "createdAtUtc": "2026-10-09T10:43:42.329198+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 朱雀·兽形 (mclsl_beast_zhuque), walk_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: vermilion sacred bird, red/orange layered feathers with gold edging, flame-shaped crest, hooked gold beak, two wings, two legs and sweeping red-gold tail plumage. Pose: FLYING wingbeat cycle phase 0.125: upstroke halfway raised; articulate paired shoulder/elbow/wrist joints and layered feathers, tuck legs naturally, head stable, tail follows the beat. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque\\idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.06308169596690796,
+    "translation": [
+      25,
+      41
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 624.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 62841,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

@@ -1,0 +1,835 @@
+{
+  "actorId": "mclsl_beast_xuanniao",
+  "checkedAtUtc": "2026-10-18T07:47:59.266461+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_0.png",
+          "sourceSha256": "c849eab6e365bd02396081c03688d7ca998c36a3d009a123419a69d2e2abc533",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            132,
+            207,
+            1124,
+            1112
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c849eab6e365bd02396081c03688d7ca998c36a3d009a123419a69d2e2abc533",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_1.png",
+          "sourceSha256": "923046db767919d3d8f5672bbb5702ab41e93b2d39e6cc80dda2654ee651b339",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            140,
+            195,
+            1137,
+            1120
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "923046db767919d3d8f5672bbb5702ab41e93b2d39e6cc80dda2654ee651b339",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_2.png",
+          "sourceSha256": "80edac08e9cb078446785fb8c7cf3f2c60808c49473cccc2c58b22ecf7f3b5f8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            131,
+            201,
+            1128,
+            1116
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "80edac08e9cb078446785fb8c7cf3f2c60808c49473cccc2c58b22ecf7f3b5f8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_3.png",
+          "sourceSha256": "b355e4a701e37dc5f769e42b080623acdf73093f5b7c4e61318c0f91ac15b897",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            128,
+            200,
+            1134,
+            1133
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b355e4a701e37dc5f769e42b080623acdf73093f5b7c4e61318c0f91ac15b897",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_4.png",
+          "sourceSha256": "226e6cdb20152ae576b5705b1b612901099bb3441dbba0602b3c30cdc4c72f3d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            134,
+            213,
+            1128,
+            1119
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "226e6cdb20152ae576b5705b1b612901099bb3441dbba0602b3c30cdc4c72f3d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\idle_5.png",
+          "sourceSha256": "11d0714a3d923dfea32dec3ccc72dd200610ab313384334520e9dcf7ac99ca01",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            128,
+            208,
+            1140,
+            1121
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "11d0714a3d923dfea32dec3ccc72dd200610ab313384334520e9dcf7ac99ca01",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_0.png",
+          "sourceSha256": "9de6d471c219d7e21d9960f3baf89f071e2f19ef8881a4f836363d7d240c5632",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            78,
+            192,
+            1235,
+            1079
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9de6d471c219d7e21d9960f3baf89f071e2f19ef8881a4f836363d7d240c5632",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_1.png",
+          "sourceSha256": "65fedb5c01c2f4e50a3574e040c5a844f0cac010ea51dc6767288b4ca85fe4cf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            87,
+            102,
+            1212,
+            1171
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "65fedb5c01c2f4e50a3574e040c5a844f0cac010ea51dc6767288b4ca85fe4cf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_2.png",
+          "sourceSha256": "608c65002c740e5cf4e98997cdf002d0d1ba9a03c48399e0454c45ed01ca4031",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            88,
+            52,
+            1216,
+            1180
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "608c65002c740e5cf4e98997cdf002d0d1ba9a03c48399e0454c45ed01ca4031",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_3.png",
+          "sourceSha256": "0234d58e0b9ce9c83b576bd642ffb9b0a9382a411d2feed38ad511822173422a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            85,
+            116,
+            1216,
+            1118
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "0234d58e0b9ce9c83b576bd642ffb9b0a9382a411d2feed38ad511822173422a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_4.png",
+          "sourceSha256": "b031146068ccdd755a9995de4204ebfb48cfce4edfb901935e84c66671049bf9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            60,
+            243,
+            1232,
+            1091
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b031146068ccdd755a9995de4204ebfb48cfce4edfb901935e84c66671049bf9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_5.png",
+          "sourceSha256": "bf7f5ca08f0e1ff7be961f5130d1e8c089a09f72c5124371019274797922adcc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            50,
+            62,
+            1221,
+            1176
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bf7f5ca08f0e1ff7be961f5130d1e8c089a09f72c5124371019274797922adcc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_6.png",
+          "sourceSha256": "139a25994899fce9550ebf75a29a0fade147654f9631ec5c81e379e63edab078",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            65,
+            97,
+            1227,
+            1135
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "139a25994899fce9550ebf75a29a0fade147654f9631ec5c81e379e63edab078",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_7.png",
+          "sourceSha256": "d3a587f04df7ca3ddb8e9966ea5c46be4c2fd0a4c9afae25229fb7e7b054cd55",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            65,
+            93,
+            1216,
+            1147
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d3a587f04df7ca3ddb8e9966ea5c46be4c2fd0a4c9afae25229fb7e7b054cd55",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1112
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 840.0
+    },
+    "hit": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 320.0
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_0.png",
+          "sourceSha256": "035acc8113ef0d363f397e76e012469c406739f505a4e8b47fd31af7e19ecba6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            91,
+            243,
+            1197,
+            1119
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "035acc8113ef0d363f397e76e012469c406739f505a4e8b47fd31af7e19ecba6",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1119
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_1.png",
+          "sourceSha256": "529c045d4d80d2c0bc943a8c7b86af1f5b7c500ca8a17a61a49d4497bf7172ec",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            113,
+            235,
+            1171,
+            1129
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "529c045d4d80d2c0bc943a8c7b86af1f5b7c500ca8a17a61a49d4497bf7172ec",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1129
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_2.png",
+          "sourceSha256": "b73405713e3968e443137316c4fc993793d3c92c02d734e60487e0929f0f9aa4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            75,
+            369,
+            1196,
+            1130
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b73405713e3968e443137316c4fc993793d3c92c02d734e60487e0929f0f9aa4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1130
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_3.png",
+          "sourceSha256": "625014787cbf5c1e4ef5fcd56dc7e9c99a25c16588fa867deb5c0af4bf468d15",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            96,
+            397,
+            1202,
+            1138
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "625014787cbf5c1e4ef5fcd56dc7e9c99a25c16588fa867deb5c0af4bf468d15",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1138
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_4.png",
+          "sourceSha256": "ed93ea9eb4516a481a51b2254db1810fe7fa5e5e47ffed4b89966224e3906f9a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            53,
+            416,
+            1241,
+            1069
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ed93ea9eb4516a481a51b2254db1810fe7fa5e5e47ffed4b89966224e3906f9a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1069
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_5.png",
+          "sourceSha256": "a086f9f3dff0ce4117180cd3b8fbd072b2aca6b9d1d569e7c7f652940ae2ff9b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            37,
+            647,
+            1233,
+            1111
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "a086f9f3dff0ce4117180cd3b8fbd072b2aca6b9d1d569e7c7f652940ae2ff9b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1111
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_6.png",
+          "sourceSha256": "3ab216451934da62c8eec6243c3a6ef400f13e0b4038e009a34bb3d6f145bb19",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            22,
+            726,
+            1243,
+            1104
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3ab216451934da62c8eec6243c3a6ef400f13e0b4038e009a34bb3d6f145bb19",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1104
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\death_7.png",
+          "sourceSha256": "9fd235035efdbfb54aaf637a33dfc9154dedfa27f018640c1d3fd3f08d797a32",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            59,
+            677,
+            1222,
+            1100
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9fd235035efdbfb54aaf637a33dfc9154dedfa27f018640c1d3fd3f08d797a32",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              628.0,
+              1100
+            ],
+            "pixelsPerUnit": 14.836065573770492,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 138381408,
+  "deathSilhouetteHeights": [
+    876,
+    894,
+    761,
+    741,
+    653,
+    464,
+    378,
+    423
+  ],
+  "deathHeightRiseCandidates": [
+    1,
+    7
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "forms_b individually reviewed all 22 native source frames. Flying idle/walk retain fixed source anchor; death follows settled body/wing contact. Unity calibration remains unverified."
+  ],
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/xuanniao/Beast",
+    "frameCount": 22,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

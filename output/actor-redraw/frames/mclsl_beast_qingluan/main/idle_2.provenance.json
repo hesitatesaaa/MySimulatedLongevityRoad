@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "idle",
+  "index": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/idle_2.png",
+  "sourceSha256": "3c9dd06df078754d8ce06e0376aeee3e448b5cdd971a691ad25055354d6d1af6",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_qingluan/main/idle_2.png",
+  "outputSha256": "15055283716a97072d056d3f330eca44a33562dbc1ba5e1314ec90120b1ea445",
+  "createdAtUtc": "2026-10-09T05:04:04.247841+00:00",
+  "prompt": "Use case: stylized-concept. ONE independently redrawn game pixel-sprite frame Qingluan idle_2, frame 3/10. Image 1 is identity AND fixed source layout reference: sacred blue-green Chinese luan bird, cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and accents, long curled three-plume tail to left, facing right. Preserve exact anatomy, costume markings, original BODY SCALE and pixel cluster size, fixed camera, neck/head placement and golden feet placement. Same 1254x1254 transparent RGBA source canvas. Pixel art with crisp hard square clusters, dark outline and flat shades. Both golden feet remain firmly planted at precisely the reference ground line; no whole-body translation. Idle pose: breath expands gently, folded wing opens a few feather tips, long tail rises slightly. Body changes are small; never turn it into flight or running. Independently draw ONE pose only. Whole bird, tail, crest and feet inside generous margins. Outside the subject alpha is exactly zero, no shadow, glow, aura, background, text, panels, sheet or smooth shading. No copy/paste/rescale/recolor of the entire previous sprite.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08840579710144927,
+    "translation": [
+      13,
+      38
+    ],
+    "canvas": [
+      160,
+      160
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 756.0,
+    "groundedFootBottom": 90,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 32156,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

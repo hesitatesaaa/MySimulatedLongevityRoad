@@ -1,6 +1,6 @@
 {
   "actorId": "mclsl_beast_manman",
-  "checkedAtUtc": "2026-10-14T08:28:08.952097+00:00",
+  "checkedAtUtc": "2026-10-18T08:55:29.936250+00:00",
   "actions": {
     "idle": {
       "loop": true,
@@ -20,7 +20,12 @@
             1141
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "a3256a683b1778343bbb25eed448fb7b7756e3421431f44b680ea75242586901",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a individual native PNG review"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -31,7 +36,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": false
         },
@@ -54,9 +59,7 @@
             "sourceSha256": "a0a6d478b5931dd566519a0e4b9144282d2e58179620e5cd2ab0f77820d5a546",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-            "scope": "Static anatomy only; full action continuity pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -68,7 +71,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -91,9 +94,7 @@
             "sourceSha256": "9d6357d4149404a0d73502bd8c7eb57274f25fe8f32ed04728b030cf12716c35",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-            "scope": "Static anatomy only; full action continuity pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -105,7 +106,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -128,9 +129,7 @@
             "sourceSha256": "4686d43b0e7ba2eca7fa76f29f80377049bc9c1462294787c5d6b0bbfabb9272",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-            "scope": "Static anatomy only; full action continuity pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -142,7 +141,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -165,9 +164,7 @@
             "sourceSha256": "ec7dabace398a9f6dc5b5f3283d4c3d993d2ed7a9cdd2e2e0267c879b444bff7",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-            "scope": "Static anatomy only; full action continuity pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -179,7 +176,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -202,9 +199,7 @@
             "sourceSha256": "a02b7eec122f45c7ae178dc68b5cdb860f905cc4a89b029af567215fae6a89ce",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-            "scope": "Static anatomy only; full action continuity pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -216,7 +211,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -244,9 +239,7 @@
             "sourceSha256": "d6a56ed34d3b2bffe7fb42bdcc5756b49f6ae295122d04d22516ddbb41fe85c3",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -258,7 +251,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -281,9 +274,7 @@
             "sourceSha256": "4de7ae704e3aa0d3d916fc813a074b2c4012b922ef3189a99f95ef31ac50f36d",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -295,7 +286,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -318,9 +309,7 @@
             "sourceSha256": "7b99e6dc7153d579504c2935cc30a48b1afccfb8d11bef1365c5438e8df93e4a",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -332,7 +321,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -355,9 +344,7 @@
             "sourceSha256": "5b0c1113d585fedc6bfd6ae9cfd4ca4d390a5c90d55f699f225c56f4eff1d6ee",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -369,7 +356,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -392,9 +379,7 @@
             "sourceSha256": "de7e892cf5fbdfe32b27bf0f2e18c3cca0de89bbbd710dd301682261555eb6f2",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -406,7 +391,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -429,9 +414,7 @@
             "sourceSha256": "8cfe5b916b0e7c6ee6edb0ca18e6f0bda63951dad5019b1dcdce29a4df15009c",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -443,7 +426,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -466,9 +449,7 @@
             "sourceSha256": "f7885b072de279363b2ccb70bb4632f9b5ea34934ce42daf41bb49ed1fd2da6e",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -480,7 +461,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -503,9 +484,7 @@
             "sourceSha256": "6d7b30d0c0f4be7e436ce91abff4b6a6466b81769992e81be23acf3f333d42b2",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:03:11.614744+00:00",
-            "scope": "Static anatomy only; wingbeat timing, silhouette continuity and margins remain pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -517,7 +496,7 @@
               1141
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -557,9 +536,7 @@
             "sourceSha256": "0679c76598812198e4977d61ea99ce73ce60377c29c268d844840415140a5154",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -568,10 +545,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1149
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -594,9 +571,7 @@
             "sourceSha256": "92abb92b0025c7ca6e9db9d7e7eb697c723936715766633c6d3177fb7ad325b2",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -605,10 +580,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1163
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -631,9 +606,7 @@
             "sourceSha256": "6099bab46efd67293b2fd143adea8410dc2f07c8333230905f07beee94906353",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -642,10 +615,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1156
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -668,9 +641,7 @@
             "sourceSha256": "8df74655efe0f19410b265d5daf354c2006f8373adc3e96a3571a0cf1ae0aea3",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -679,10 +650,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1126
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -705,9 +676,7 @@
             "sourceSha256": "ad00518a83d7fdbd802e141007a0c87ecd80c972727f17f4969db988cc61d430",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -716,10 +685,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1072
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -742,9 +711,7 @@
             "sourceSha256": "1ff1fcdf0020c073f7a5f59b7240e4ffb19466c6b8a7b951835157f3bfaeeb8b",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -753,10 +720,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1018
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -779,9 +746,7 @@
             "sourceSha256": "3d9e0802f9d2398c37ca55e3b3d2aefec9ee7c2ea2a36cd28558e802f487c484",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -790,10 +755,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              998
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -816,9 +781,7 @@
             "sourceSha256": "a42c588f9a89c499e1e8527b37cddacc3dc4109f5ec70048e26a5bbe7b1f817e",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "reviewer": "Codex individual native PNG visual review",
-            "reviewedAtUtc": "2026-10-14T08:22:09.984769+00:00",
-            "scope": "Static anatomy only; pair of heads and two legs retained, hidden far claw occluded by body; complete collapse/anchor review pending"
+            "reviewer": "forms_a individual native PNG review"
           },
           "proposedGeometry": {
             "canvas": [
@@ -827,10 +790,10 @@
             ],
             "anchor": [
               638.5,
-              1141
+              1041
             ],
             "pixelsPerUnit": 14.62295081967213,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -855,25 +818,18 @@
     7
   ],
   "sourceFilesComplete": true,
-  "geometryApproved": false,
-  "actionContinuityApproved": false,
-  "installed": false,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
   "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
-  "visualReviewFindings": [
-    {
-      "severity": "needs-action-review",
-      "action": "idle",
-      "reason": "All six independently drawn source files are present; review complete breathing loop seam and body scale/anchors."
-    },
-    {
-      "severity": "needs-action-review",
-      "action": "walk",
-      "reason": "Eight flight frames have source-bound static anatomy checks. Verify wingbeat phase, head stabilization, silhouette continuity and 32px margins before installation; static joint counts do not approve the cycle."
-    },
-    {
-      "severity": "needs-action-review",
-      "action": "death",
-      "reason": "Eight collapse frames statically reviewed with two heads/two legs retained. Check ground-aligned torso/head progression and final settling: source visible height is not a runtime body-height measurement."
-    }
-  ]
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "All target native source frames and complete sequences individually reviewed by assigned agent. Main conversation reviewed settled contact; flying/undulating actions preserve fixed source anchor, death follows resting silhouette. Unity calibration remains unverified."
+  ],
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/manman/Beast",
+    "frameCount": 22,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
 }

@@ -1,6 +1,6 @@
 {
   "actorId": "mclsl_beast_dafeng",
-  "checkedAtUtc": "2026-10-14T05:31:15.581882+00:00",
+  "checkedAtUtc": "2026-10-18T10:09:48.206052+00:00",
   "actions": {
     "idle": {
       "loop": true,
@@ -20,7 +20,12 @@
             1173
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -31,7 +36,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": false
         },
@@ -50,7 +55,12 @@
             1175
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "c28d6551a5e17f82dedeb4499c633456cedd320be8bd0562366c98807aafbf04",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -61,7 +71,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -80,7 +90,12 @@
             1175
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "8eb6b885639dd1914cf7dc3fab1191b376864396dbaac3876fa300d3c027459f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -91,7 +106,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -110,7 +125,12 @@
             1182
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "f8e2c55b1b659bde9221d2de3809c484f083e8ba713365d8fe7f7f8fd5e7ddd5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -121,7 +141,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -140,7 +160,12 @@
             1183
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "c63ba5c65129d8323470f41bce9e0973ec59c704f5165e5550f4021144c028cc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -151,7 +176,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -170,7 +195,12 @@
             1173
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "1827f30cafb69498fc7724dc9367d697091a14c62226004871206e5626d78427",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -181,7 +211,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -205,7 +235,12 @@
             1143
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "45fa920c781de7a2ec605ce6dfc5fe2d79ac77439be804664f315680df1355fe",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -216,7 +251,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -235,7 +270,12 @@
             1185
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "3b635215b8389102d46d818bf3b419195811b894e12f37cd31b836d3afaf5a40",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -246,7 +286,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -265,7 +305,12 @@
             1213
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "1123b7e9917830a81456b4883697bb54631e0c353d47a84e7f6246caab1b74b3",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -276,7 +321,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -295,7 +340,12 @@
             1188
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6f31a17c2ac825243c9e6f502288ecf21de45281c81c997d9bcc4e119f33bd99",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -306,7 +356,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -325,7 +375,12 @@
             1178
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "82d73594cb5c74f70f2d9fa2164223673ec95e9f576a229ee429e6bb749b72f9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -336,7 +391,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -355,7 +410,12 @@
             1212
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "fa7f3e94407a38a4770bb6ab4941f64d92e2e3188aabed710251fe37f51547fd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -366,7 +426,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -385,7 +445,12 @@
             1213
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "452f72501df0ca4c2385baada4233ff9eba27a3d2af340e571fc5f8ed3a45582",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -396,7 +461,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -415,7 +480,12 @@
             1172
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "ddec23ee87deebb16fe2b81b21f5607324d0b7ac9460c9cee621afe88a6882ea",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -426,7 +496,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -450,7 +520,12 @@
             1189
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "91877d3a35702bce74f55035ad92c3ba29e30955133edd9f0b7e6438c06b6262",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -461,7 +536,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -480,7 +555,12 @@
             1169
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "1e85f0f707f433eaaaff161e5332645bd76de8419a0e8cae062b10c51b15465a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -491,7 +571,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -510,7 +590,12 @@
             1178
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "b13fe07fdc86d7360d63ae9015536534a661d98fa9e6966503fc9108b91de1cf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -521,7 +606,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -540,7 +625,12 @@
             1124
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "e28986d12d14ec071b80b2a9c22385b7c3f3ebfd334ce2aa9dff2b8b81acf52d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -551,7 +641,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -570,7 +660,12 @@
             1172
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "2cffa2aafe28b009a49c7ea5142365fe85a1912d6b80cc0497ecb350db5ede4f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -581,26 +676,31 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
         {
           "name": "attack_5",
           "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_dafeng\\attack_5.png",
-          "sourceSha256": "f320081f37d0593ff707b004a32154576c7ca207719b933a0d1b8abed1545c24",
+          "sourceSha256": "ad198fc5e293a2dcd379b76516dd30c447f93597b406b0fbb884481e037ff825",
           "canvas": [
             1254,
             1254
           ],
           "visibleBoundsAtAlpha128": [
-            23,
-            86,
-            1254,
-            1186
+            37,
+            113,
+            1234,
+            1190
           ],
-          "sourceTouchesEdge": true,
-          "anatomyReview": {},
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ad198fc5e293a2dcd379b76516dd30c447f93597b406b0fbb884481e037ff825",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -611,7 +711,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -630,7 +730,12 @@
             1170
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "f37b0509f165f964795dde75795386d72e7a304b8029f1eb63612d203b9bb659",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -641,7 +746,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -660,7 +765,12 @@
             1172
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "c11c521bc463f9a0a5bcff2da113e98dbeb93ba87f4e83a36a30ccb54c5bc965",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -671,7 +781,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -690,7 +800,12 @@
             1187
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "6da9ac2c8089095188e02288092044117fa8042d98c3c260ce6df278e089d242",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -701,7 +816,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -720,7 +835,12 @@
             1186
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "27e15f4f31a61cd56e8c006a35c34f2ad16aa5217723ae600e76e13830df86fa",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -731,7 +851,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -759,10 +879,7 @@
             "sourceSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.089150+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -774,7 +891,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -793,7 +910,12 @@
             1186
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "8ca48eecdd88017f3b6b071a7229aa28404ba0e48d4dfe013700c52f77c1cb77",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -804,7 +926,7 @@
               1173
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -828,7 +950,12 @@
             1187
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "4038eb418ff179c0338d7a9021ad8caff1a26e5397f7a1a85a85a5b2fe4949a5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -836,10 +963,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1187
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -858,7 +985,12 @@
             1180
           ],
           "sourceTouchesEdge": false,
-          "anatomyReview": {},
+          "anatomyReview": {
+            "sourceSha256": "548f74e61902e5f5ae8fe8844f190a1d694d17c4c0c1850790b860079ff2d839",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
+          },
           "proposedGeometry": {
             "canvas": [
               1254,
@@ -866,10 +998,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1180
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -892,10 +1024,7 @@
             "sourceSha256": "b8bf533b2e913cd4db368bef6a7b84a082d9290099903ab051b4d98765437d2a",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.045274+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -904,10 +1033,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1184
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -930,10 +1059,7 @@
             "sourceSha256": "030d5d01eb209403c011456ff44cdb7e7b1e307eb4a3331e32e012cdcd3116d3",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.307773+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -942,10 +1068,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1185
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -968,10 +1094,7 @@
             "sourceSha256": "e032c46a05f10a747f802470dce6f32544ed3bdfb36ece1ba06e4241cf82acb9",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.335411+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -980,10 +1103,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1210
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -1006,10 +1129,7 @@
             "sourceSha256": "284681e46693e795853a4b01a8750a84560b26c70f1996dce2e842b2cfc50b27",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.357959+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -1018,10 +1138,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1128
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -1044,10 +1164,7 @@
             "sourceSha256": "a51e98810862bbd0304cd8068d32b9824d794206a7be1daf274aae5415cb6ae4",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.390981+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -1056,10 +1173,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1127
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         },
@@ -1082,10 +1199,7 @@
             "sourceSha256": "98fc307432509e934c08266986f3158592e2fea60c089de02028205d44b3632d",
             "limbConnectionsReviewed": true,
             "extraLimbs": false,
-            "clippingDetected": false,
-            "reviewer": "Codex visual inspection of individual native PNG",
-            "reviewedAtUtc": "2026-10-14T05:22:17.414124+00:00",
-            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+            "reviewer": "forms_a complete native review; attack_5 additionally main conversation"
           },
           "proposedGeometry": {
             "canvas": [
@@ -1094,10 +1208,10 @@
             ],
             "anchor": [
               632.0,
-              1173
+              1104
             ],
             "pixelsPerUnit": 15.655737704918032,
-            "anchorReviewed": false
+            "anchorReviewed": true
           },
           "nativeCandidate": true
         }
@@ -1121,21 +1235,18 @@
     6
   ],
   "sourceFilesComplete": true,
-  "geometryApproved": false,
-  "actionContinuityApproved": false,
-  "installed": false,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
   "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
-  "visualReviewFindings": [
-    {
-      "severity": "needs-action-review",
-      "action": "hit",
-      "frame": 0,
-      "reason": "Four visible legs/claws in a two-legged bird; independently redraw the recoil pose with exactly two legs.",
-      "originalSeverity": "needs-redraw",
-      "replacementSourceSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
-      "replacementStaticAnatomyReviewed": true,
-      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
-    }
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "All 34 native target frames reviewed; repaired attack_5 compared with adjacent 4/6. Flying actions retain calibrated fixed anchor; settled death follows feather/body contact. Unity calibration remains unverified."
   ],
-  "reviewerNotes": "All 28 available candidates visually inspected in five action overviews. Death action remains incomplete; not installable."
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/dafeng/Beast",
+    "frameCount": 34,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
 }

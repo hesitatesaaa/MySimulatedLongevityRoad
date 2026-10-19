@@ -1,0 +1,72 @@
+{
+  "actorId": "mclsl_beast_liejiejing",
+  "action": "icon",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/icon_0.png",
+  "sourceSha256": "b11b2ad66c77eb4c9ffd5937abef9366c49a48d86ce560c4136afc020de0a5a3",
+  "outputFile": "output/actor-redraw/icons/mclsl_beast_liejiejing.png",
+  "outputSha256": "6981d4205999c6a19c0a7322215639e437c5956c17b26a01fbdcdb3cf1efebf8",
+  "createdAtUtc": "2026-10-09T09:10:22.479063+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independently redrawn transparent pixel-art game sprite, Liejiejing icon_0. Input reference: identity, proportions, palette and detailed pixel rendering standard ONLY, never an old bitmap to transform. New pose: Dedicated placement-button portrait pose: full whale in a compact graceful curve, tail curling upward behind body to fit a square, near fin extended elegantly, head right-facing and horns clearly separated. This is a newly drawn icon, not a copy or crop of an animation frame. Preserve broad Chinese fantasy deep-blue whale, layered blue and cyan stepped highlight clusters, intricate cyan fissure markings, cream-gray grooved belly, ornate cream horns and gold facial ridge, curling dorsal wavefins, exactly ONE pair of pectoral fins, split tail flukes, no legs or extra limbs. Match the reference's fine contour work, fin edging, horn shading, belly grooves and rich readable pixel clusters. No geometric simplification, no plain flat silhouette. Right-facing side view and same anatomical scale on square 1254x1254 source canvas. Hold main torso and head position stable except the described pose changes. Keep entire silhouette with generous transparent margin; no part touches any canvas edge. If tail bends widely, curl its tips inward rather than enlarge the character or cut off fins. Output one newly drawn character and one pose in one transparent RGBA PNG only. No water, background, light halo, particles, shadow, floor, text, panels, sprite sheet or multiple poses. Never translate, rotate, scale, recolor or paste an existing sprite as this frame.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_liejiejing\\idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08013640238704177,
+    "translation": [
+      12,
+      18
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": null,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 59587,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "iconFinalReview": {
+    "sourceSha256": "b11b2ad66c77eb4c9ffd5937abef9366c49a48d86ce560c4136afc020de0a5a3",
+    "reviewedBy": "main-conversation",
+    "reviewedAtUtc": "2026-10-17T08:56:40.688482+00:00",
+    "identityReferenceCompared": true,
+    "anatomyAndSilhouetteReviewed": true,
+    "hardClipping": false,
+    "confirmedDefects": [],
+    "visibleBoundsAtAlpha128": [
+      70,
+      126,
+      1243,
+      1181
+    ],
+    "buttonOccupancyVerifiedInGame": false,
+    "note": "Original icon and idle_0 identity reference viewed directly. Native PNG unchanged; low-alpha edge pixels are not clipping. Runtime button occupancy remains unverified."
+  }
+}

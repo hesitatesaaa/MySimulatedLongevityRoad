@@ -1,0 +1,622 @@
+{
+  "actorId": "mclsl_beast_goushou",
+  "checkedAtUtc": "2026-10-18T08:00:24.971534+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\idle_0.png",
+          "sourceSha256": "2052a94bfaa7cabfb26de33f4be7a4a3e8b677ef98115281c80c2a044a22b1a9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            83,
+            254,
+            1195,
+            1101
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "2052a94bfaa7cabfb26de33f4be7a4a3e8b677ef98115281c80c2a044a22b1a9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1101
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\idle_1.png",
+          "sourceSha256": "3a5a1aeda6ba468a322d00bd67ad29a75868d039cfd4fa6a321c6a8385f0a811",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            87,
+            249,
+            1197,
+            1100
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3a5a1aeda6ba468a322d00bd67ad29a75868d039cfd4fa6a321c6a8385f0a811",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1100
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\idle_2.png",
+          "sourceSha256": "38b44874db4508c08a80d3db9d5e2756a20ef5d4a212f0212598d6f32738e4e4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            53,
+            260,
+            1216,
+            1110
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "38b44874db4508c08a80d3db9d5e2756a20ef5d4a212f0212598d6f32738e4e4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1110
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\idle_3.png",
+          "sourceSha256": "6653917d73d5af800562bcfe5b546c14e3e26c2213aed9078c04377c23583fc8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            65,
+            246,
+            1197,
+            1100
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6653917d73d5af800562bcfe5b546c14e3e26c2213aed9078c04377c23583fc8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1100
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_0.png",
+          "sourceSha256": "70cf6e2fc9a2e903b7a34377160dbd86077a938d0ac07a8bdf3e5bc437bb06b9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            75,
+            253,
+            1194,
+            1093
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "70cf6e2fc9a2e903b7a34377160dbd86077a938d0ac07a8bdf3e5bc437bb06b9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1093
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_1.png",
+          "sourceSha256": "e36076024aa24b45e0907679fa5796600ba69b3cf0f03f8defa5417952cb50f9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            76,
+            253,
+            1195,
+            1094
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e36076024aa24b45e0907679fa5796600ba69b3cf0f03f8defa5417952cb50f9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1094
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_2.png",
+          "sourceSha256": "64fa463fc0ad7b518bc7947b98032b473014db8948dfce14eb1e0451e5c08b0a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            79,
+            252,
+            1203,
+            1102
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "64fa463fc0ad7b518bc7947b98032b473014db8948dfce14eb1e0451e5c08b0a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1102
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_3.png",
+          "sourceSha256": "13dcd332e3b5dabb625d181a14c283a87e0f6cf1ce00ad5c5c1862fd7c34cdeb",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            64,
+            238,
+            1235,
+            1113
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "13dcd332e3b5dabb625d181a14c283a87e0f6cf1ce00ad5c5c1862fd7c34cdeb",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1113
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_4.png",
+          "sourceSha256": "7df1a4c81a7fd351fd7f58ac8b20bbad980b2f2237c3d79862ee38d9de6fcd34",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            80,
+            252,
+            1200,
+            1090
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7df1a4c81a7fd351fd7f58ac8b20bbad980b2f2237c3d79862ee38d9de6fcd34",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1090
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\walk_5.png",
+          "sourceSha256": "70532785610aea20fb16a5fce2de8a040592323aab95c3967c94f8660c1db9dc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            78,
+            254,
+            1199,
+            1093
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "70532785610aea20fb16a5fce2de8a040592323aab95c3967c94f8660c1db9dc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1093
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 720.0
+    },
+    "hit": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 320.0
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_0.png",
+          "sourceSha256": "66447907d93aadd7566e8b0d41610561509e45fbf71dd76a5ccd89ff98ff04ec",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            63,
+            357,
+            1226,
+            1097
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "66447907d93aadd7566e8b0d41610561509e45fbf71dd76a5ccd89ff98ff04ec",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1097
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_1.png",
+          "sourceSha256": "0760965d00662daa65159b80f7ee7d38d2e20433f142858f1ba7cd0c6b19b3d9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            67,
+            367,
+            1212,
+            1107
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "0760965d00662daa65159b80f7ee7d38d2e20433f142858f1ba7cd0c6b19b3d9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1107
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_2.png",
+          "sourceSha256": "f3992db02385f34e5282660a647bc8bd8414cf10e568678466b7cc5e9c64f29a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            60,
+            357,
+            1218,
+            1091
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f3992db02385f34e5282660a647bc8bd8414cf10e568678466b7cc5e9c64f29a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1091
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_3.png",
+          "sourceSha256": "706cd57b2e80fba41ba6d7e80d309aab623b3a8bde9c91f415b8ac6313b8d95e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            57,
+            562,
+            1205,
+            1121
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "706cd57b2e80fba41ba6d7e80d309aab623b3a8bde9c91f415b8ac6313b8d95e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1121
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_4.png",
+          "sourceSha256": "02cb862f2fe9785a4ee004a6de3ec682b7572dea53f5a63ea1091f4e6830fc98",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            42,
+            634,
+            1233,
+            1070
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "02cb862f2fe9785a4ee004a6de3ec682b7572dea53f5a63ea1091f4e6830fc98",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1070
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_goushou\\death_5.png",
+          "sourceSha256": "7d116ce7afbf732b8771b36b045cdea072ac91b58924ee334b8e2b1060b376f5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            32,
+            637,
+            1240,
+            1134
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7d116ce7afbf732b8771b36b045cdea072ac91b58924ee334b8e2b1060b376f5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_b individual native PNG review"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              639.0,
+              1046
+            ],
+            "pixelsPerUnit": 15.125,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 100641024,
+  "deathSilhouetteHeights": [
+    740,
+    740,
+    734,
+    559,
+    436,
+    497
+  ],
+  "deathHeightRiseCandidates": [
+    5
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [],
+  "reviewerNotes": [
+    "forms_b individually reviewed all 16 native source frames. death_5 anchor Y=1046 follows body/front-paw contact excluding low tail at Y=1133. Unity calibration remains unverified."
+  ],
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/goushou/Beast",
+    "frameCount": 16,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

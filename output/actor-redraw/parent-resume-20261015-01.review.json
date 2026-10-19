@@ -1,0 +1,645 @@
+{
+  "reviewedAtUtc": "2026-10-15T07:05:06.454992+00:00",
+  "scope": "static anatomy of generated independent frames only",
+  "frames": [
+    {
+      "jobIndex": 0,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 2,
+      "sourceSha256": "b38b893613d27c69c571235593034b4658e20d00402e8b163823eef2b523f460",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Generated tool image viewed in full. Two connected arms/hands and two booted legs; short bob, violet feather pin and black/violet/gold robe retained. Near/far leg alternation and actual action phase require final full-clip review."
+    },
+    {
+      "jobIndex": 1,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 3,
+      "sourceSha256": "6c4f9b414571cc31a5bcb1d4403957b530f194759393bac85030a5e89b78ec1b",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Generated tool image viewed in full. Two connected arms/hands and two booted legs; short bob, violet feather pin and black/violet/gold robe retained. Near/far leg alternation and actual action phase require final full-clip review."
+    },
+    {
+      "jobIndex": 2,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "50b3186e8af68ebb3d4d3ca306ed854ada1bb8d36209c8e6b7d6d11dfa0eeb4e",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Generated tool image viewed in full. Two connected arms/hands and two booted legs; short bob, violet feather pin and black/violet/gold robe retained. Near/far leg alternation and actual action phase require final full-clip review."
+    },
+    {
+      "jobIndex": 3,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 5,
+      "sourceSha256": "abae9314c8a03f7d1fa7d24e8ed0e23eb8b8784a011f8024ae1921393071d88c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Generated tool image viewed in full. Two connected arms/hands and two booted legs; short bob, violet feather pin and black/violet/gold robe retained. Near/far leg alternation and actual action phase require final full-clip review."
+    },
+    {
+      "jobIndex": 4,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 0,
+      "sourceSha256": "307d068b7152c7da61e8226ecb5c3a70c986ac386ed8d62004e61bd1f74fca58",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full returned native image viewed: eyes closed, head droops and arms hang in early phases; death_3 is collapsed to knees with two hands on the ground. Robe occlusion of folded legs is consistent, silhouette intact. Full collapse timing and terminal settling remain pending."
+    },
+    {
+      "jobIndex": 5,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 1,
+      "sourceSha256": "9353be87415b3cb50c7a0b95bdbfc437c47273ad6b63757fe0a8c69d145e1b02",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full returned native image viewed: eyes closed, head droops and arms hang in early phases; death_3 is collapsed to knees with two hands on the ground. Robe occlusion of folded legs is consistent, silhouette intact. Full collapse timing and terminal settling remain pending."
+    },
+    {
+      "jobIndex": 6,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 2,
+      "sourceSha256": "fd50ea24aad96b5bd50bc01172bb6e5de48fd5f0e2b03164d9a03b0a71859e07",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full returned native image viewed: eyes closed, head droops and arms hang in early phases; death_3 is collapsed to knees with two hands on the ground. Robe occlusion of folded legs is consistent, silhouette intact. Full collapse timing and terminal settling remain pending."
+    },
+    {
+      "jobIndex": 7,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 3,
+      "sourceSha256": "c17a8b154eef09f7167885587293722719c9f747ef0f0b58ee7279cd77dd5ad0",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full returned native image viewed: eyes closed, head droops and arms hang in early phases; death_3 is collapsed to knees with two hands on the ground. Robe occlusion of folded legs is consistent, silhouette intact. Full collapse timing and terminal settling remain pending."
+    },
+    {
+      "jobIndex": 8,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 4,
+      "sourceSha256": "00429931b0b6da3ad95c59624c968c55d361ffe6464eb4e37ac221f67eff61ec",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Xuanniao human death_4: side-prone, closed eyes, both hands and one foreground boot visible with second leg occluded by robe. No apparent limb duplication or actual clipped silhouette."
+    },
+    {
+      "jobIndex": 9,
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 5,
+      "sourceSha256": "71377e062d155786578ef5dc83986b997c0fc9b3af5357829a4771675c7ef912",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Xuanniao human final death: side-prone with closed eyes, two slack hands near face, folded booted legs under robe and intact feather mantle. Compare anchoring and settling to death_4; no apparent extra limbs."
+    },
+    {
+      "jobIndex": 10,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "f04f9fb77ce9f7558d4f6fe9d0d4007f60c49edbbf4fc0fbdfa923b6534f22b2",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Male identity and coherent two arms/hands/booted legs retained. Passing contact remains unclear; wide planted stride."
+    },
+    {
+      "jobIndex": 11,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "walk",
+      "frame": 2,
+      "sourceSha256": "6668f75fc95d0671a6265024ad9151c1b8e3394c7255c5045ad49ed3e375eaf1",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Male identity retained; two hands and two boots, complete outline. Heel-contact stride visible."
+    },
+    {
+      "jobIndex": 12,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "walk",
+      "frame": 3,
+      "sourceSha256": "c85af4e5532a0fd4544c391c742c3ea963c6a6d1a5b508fc2d1be26d2b305b84",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Walk_3: complete outline, two coherent hands/boots; rear heel raised and front boot extended; no extra limbs."
+    },
+    {
+      "jobIndex": 13,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "53c9e82fdd0d12a52be744bbe6772409953479459191c44979586ffc9071ca8c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Male identity retained; two hands/two boots complete, but requested passing pose remains a wide stride."
+    },
+    {
+      "jobIndex": 14,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "walk",
+      "frame": 5,
+      "sourceSha256": "e919c9a0a615b569d8c12ca1616d6bafa28a61b59b497c2e3e15e021cfdb47d2",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Changliao human walk_5: stable male identity, two connected hands and two boots, trailing hair/robe; full gait phase unapproved."
+    },
+    {
+      "jobIndex": 15,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 0,
+      "sourceSha256": "3612077fdc9d6412ee31d6591ab73275e9020489c0b1aaecea86bbd0e55f53b8",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_0: closed eyes, initial lowered head, two hands and two grounded boots; identity stable."
+    },
+    {
+      "jobIndex": 16,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 1,
+      "sourceSha256": "415e9ea1cd741c9e90ee99b23b29e9cdc88e0fae70ee8debaa4f5c1c469fbc2d",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_1: eyes closed, bowed head, bent knees, two slack hands with tusk ornament retained; complete silhouette."
+    },
+    {
+      "jobIndex": 17,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 2,
+      "sourceSha256": "b11992f0cc6a4e64ddb69532bd09a9e993c11ba0b6a40cce505296a9390cf646",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_2: closed eyes, deeper bow and knee bend; no extra limbs or clipping; full sequence pending."
+    },
+    {
+      "jobIndex": 18,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 3,
+      "sourceSha256": "bcf3848fcc32e1b9ef1df960cfdac6d436433779a409b1239cd4328859bbd0d5",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_3: torso on bent knees, two arm positions coherent beneath sleeves, folded legs occluded by robe, intact trailing hair."
+    },
+    {
+      "jobIndex": 19,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 4,
+      "sourceSha256": "3869af5e5fad8aeb266ee93c714cf3e43788ac72424e26f9e5b6efb79b014a73",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_4: fully prone, two visible hands, head resting low, legs under robe; full outline retained."
+    },
+    {
+      "jobIndex": 20,
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "death",
+      "frame": 5,
+      "sourceSha256": "558db841933bdc8b5e27427f39c76de6be68a1108470a30ea723bc64a6ae2e5d",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Death_5: fully prone, slack two hands and low face, folded booted legs occluded consistently; intact silhouette. Compare resting head to death_4 in final sequence."
+    },
+    {
+      "jobIndex": 21,
+      "actorId": "mclsl_beast_mo",
+      "action": "idle",
+      "frame": 1,
+      "sourceSha256": "3bd509658602f91c7fcbf3ab71b57c6b2ab5ab2f1f712097cdc2bbf275c2e345",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Mo idle_1: four weight-bearing legs, coherent short trunk/tusks and tail, violet/ivory identity retained. Trunk tip very close to right edge; check actual alpha boundary. Boundary check: zero alpha>=16 pixels on right canvas edge; complete outline, no clipping. Tight padding alone is not a defect."
+    },
+    {
+      "jobIndex": 22,
+      "actorId": "mclsl_beast_mo",
+      "action": "idle",
+      "frame": 2,
+      "sourceSha256": "26d471905e13ad2691a3c895c40c0e0ab245438cf1335eaf8bc71819d2aad511",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Mo idle_2: four weight-bearing legs, trunk/tusks and tail coherent, violet/ivory identity retained. Right trunk tip may touch canvas boundary; inspect edge before approval. Boundary check: zero alpha>=16 pixels on right canvas edge; complete outline, no clipping. Tight padding alone is not a defect."
+    },
+    {
+      "jobIndex": 23,
+      "actorId": "mclsl_beast_mo",
+      "action": "idle",
+      "frame": 3,
+      "sourceSha256": "c391ce2045b59b82f940672f25fac05e71b255b678b65ce791eb180463ce53ba",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: violet/ivory tapir identity, four articulated legs, trunk/tusks and tail retained; no obvious extra appendage or outline clipping. Full gait/loop/anchor review pending."
+    },
+    {
+      "jobIndex": 24,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 0,
+      "sourceSha256": "f840990ea635bcde770b893f60f153e8f60f433ad81854525ca57806a22faee3",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: violet/ivory tapir identity, four articulated legs, trunk/tusks and tail retained; no obvious extra appendage or outline clipping. Full gait/loop/anchor review pending."
+    },
+    {
+      "jobIndex": 25,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "b1c9125501f3563189decde6d34b8877a096f6105ffb9e95f6c3b5371820617d",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Mo walk_1: four coherent legs with visible front step/raised paw, short trunk/tusks and tail. Outline appears complete but right trunk margin is tight. Boundary check: zero alpha>=16 pixels on right canvas edge; complete outline, no clipping. Tight padding alone is not a defect."
+    },
+    {
+      "jobIndex": 26,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 2,
+      "sourceSha256": "dd4325c628a182b66bd7577e423a32b7ad507dbb7221b46c8fcad63d6c86b414",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Mo walk_2: four articulated legs, shifted rear/fore contacts; trunk/tusks and tail retained. Check tight right edge and final gait. Boundary check: zero alpha>=16 pixels on right canvas edge; complete outline, no clipping. Tight padding alone is not a defect."
+    },
+    {
+      "jobIndex": 27,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 3,
+      "sourceSha256": "b70afe6a1007d1a6c692e114410e0d9e73aea5f8ae08cab8a3c82b37b1a9cc9f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Mo walk_3: four legs with rear hoof lifted and forward forefoot; violet body, tusks and tail retained. Right trunk edge tight. Boundary check: zero alpha>=16 pixels on right canvas edge; complete outline, no clipping. Tight padding alone is not a defect."
+    },
+    {
+      "jobIndex": 28,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "a6fe557e3ad96ebec46114210588abaef2bce6f1dea3e9fb0d82bb4118eafe56",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: violet/ivory tapir identity, four articulated legs, trunk/tusks and tail retained; no obvious extra appendage or outline clipping. Full gait/loop/anchor review pending."
+    },
+    {
+      "jobIndex": 29,
+      "actorId": "mclsl_beast_mo",
+      "action": "walk",
+      "frame": 5,
+      "sourceSha256": "5d113bc377b55b40af8142104dc3afb8cc43aa3f1c0421482f6c3bbde0c85ebe",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: violet/ivory tapir identity, four articulated legs, trunk/tusks and tail retained; no obvious extra appendage or outline clipping. Full gait/loop/anchor review pending."
+    },
+    {
+      "jobIndex": 30,
+      "actorId": "mclsl_beast_mo",
+      "action": "death",
+      "frame": 0,
+      "sourceSha256": "1bc4ab075733616d5f2bf248f2962986c736e96f7c98e0b73c747d4c51b2ab62",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: four legs/feet, two ears, trunk and tusks intact; death opening bowed head on standing body. No obvious extra limb or clipping. Full death continuity and anchor review pending."
+    },
+    {
+      "jobIndex": 31,
+      "actorId": "mclsl_beast_mo",
+      "action": "death",
+      "frame": 1,
+      "sourceSha256": "af2127140102dc5f86f510ccea3b5bdb77462ce530c4a7aebb33b2088ddae89f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Viewed full native PNG: head and shoulder lower than death_0, four feet, intact tusks/trunk/tail. Full death transition/anchor review pending."
+    }
+  ],
+  "findings": [
+    {
+      "jobIndex": 2,
+      "sourceSha256": "50b3186e8af68ebb3d4d3ca306ed854ada1bb8d36209c8e6b7d6d11dfa0eeb4e",
+      "severity": "needs-full-action-review",
+      "finding": "walk_4 still presents a wide forward/back stride although the requested contact phase places the supporting foot under the hip. Verify the six-frame alternation before approving; do not treat isolated appearance as completed gait.",
+      "status": "superseded-by-user-broad-stride-direction-20261015",
+      "currentDefect": false,
+      "resolution": "Absence of a raised-knee passing pose is no longer a defect; retain suitable broad stride and review only actual near/far alternation."
+    },
+    {
+      "jobIndex": 10,
+      "sourceSha256": "f04f9fb77ce9f7558d4f6fe9d0d4007f60c49edbbf4fc0fbdfa923b6534f22b2",
+      "severity": "needs-full-action-review",
+      "finding": "Requested passing-step contact is not clearly drawn: both boots remain in a broad forward/back stance. Review the complete walk cycle; passing poses may require targeted independent redraw after full review.",
+      "status": "superseded-by-user-broad-stride-direction-20261015",
+      "currentDefect": false,
+      "resolution": "Absence of a raised-knee passing pose is no longer a defect; retain suitable broad stride and review only actual near/far alternation."
+    },
+    {
+      "jobIndex": 13,
+      "sourceSha256": "53c9e82fdd0d12a52be744bbe6772409953479459191c44979586ffc9071ca8c",
+      "severity": "needs-full-action-review",
+      "finding": "Requested passing-step contact is not clearly drawn: both boots remain in a broad forward/back stance. Review the complete walk cycle; passing poses may require targeted independent redraw after full review.",
+      "status": "superseded-by-user-broad-stride-direction-20261015",
+      "currentDefect": false,
+      "resolution": "Absence of a raised-knee passing pose is no longer a defect; retain suitable broad stride and review only actual near/far alternation."
+    }
+  ],
+  "installed": false,
+  "finalFullReviewPassed": false
+}

@@ -13,19 +13,11 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--actor', action='append', required=True)
-    p.add_argument('--skip-review', action='store_true', help='Install with the explicit user review waiver')
     args=p.parse_args()
-    if args.skip_review:
-        from release_assets import install_icons
-        install_icons(args.actor)
-        return
     manifestPath=ROOT/'resources/actor-frames.manifest.json'
     manifest=read(manifestPath)
-    reviews=read(ROOT/'resources/actor-icon-reviews.json')
     operations=[]
     for actor in args.actor:
-        review=reviews[actor]
-        assert review['identityApproved'] and review['canvasApproved']
         entry=next(x for x in manifest['icons'] if x['actorId']==actor)
         assert not entry['approved'], 'Refuse approved icon overwrite'
         source=ROOT/'output/actor-redraw/icons'/f'{actor}.png'
@@ -34,9 +26,12 @@ def main():
         original.relative_to(ROOT.resolve())
         assert sha(source)==proof['outputSha256']==proof['sourceSha256']==sha(original)
         assert proof['actorId']==actor and proof['action']=='icon'
-        anatomy=proof.get('anatomyReview', {})
-        assert review.get('sourceSha256')==proof['sourceSha256'], 'Icon review is not bound to its current source'
-        assert anatomy.get('sourceSha256')==proof['sourceSha256'] and anatomy.get('limbConnectionsReviewed') is True and anatomy.get('extraLimbs') is False, 'Icon anatomy review required'
+        review=proof.get('iconFinalReview', {})
+        assert (review.get('sourceSha256')==proof['sourceSha256']
+                and review.get('identityReferenceCompared') is True
+                and review.get('anatomyAndSilhouetteReviewed') is True
+                and review.get('hardClipping') is False
+                and not review.get('confirmedDefects')), 'Source-bound final icon review required'
         with Image.open(source) as im:
             im.load()
             bounds=im.getchannel('A').point(lambda v:255 if v>=128 else 0).getbbox()

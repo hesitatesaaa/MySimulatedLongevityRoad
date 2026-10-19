@@ -10,6 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CANONICAL = ROOT / 'resources' / 'automation-0-6-0.prompt.md'
+CANONICAL_BY_ID = {
+    '0-6-0': CANONICAL,
+    'automation': ROOT / 'resources' / 'automation-beast-overhaul.prompt.md',
+}
 
 def validate_text(text):
     if '\ufffd' in text or '\x00' in text:
@@ -25,7 +29,12 @@ def main():
     p.add_argument('--verify', action='store_true')
     args = p.parse_args()
     current = tomllib.loads(args.toml.read_text(encoding='utf-8-sig', errors='strict'))
-    expected = validate_text(CANONICAL.read_text(encoding='utf-8', errors='strict').strip())
+    # No caller-selected prompt paths: each existing task has one fixed canonical file.
+    # In particular, 0-6-0 always retains its AGENTS.md canonical-file safeguard.
+    if current['id'] not in CANONICAL_BY_ID:
+        raise ValueError('Unknown task ID; refuse an unbound canonical prompt')
+    canonical = CANONICAL_BY_ID[current['id']]
+    expected = validate_text(canonical.read_text(encoding='utf-8', errors='strict').strip())
     if args.verify:
         actual = validate_text(current['prompt'])
         if actual != expected:

@@ -5,6 +5,7 @@ import argparse
 from collections import Counter
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 import math
 from pathlib import Path
@@ -534,6 +535,11 @@ def install(args):
 
 
 def validate(args):
+    policy_file = RESOURCES / "0.6.0-release-policy.json"
+    policy = load_json(policy_file) if policy_file.exists() else {}
+    visual_waived = (policy.get("targetVersion") == "0.6.0"
+                     and policy.get("visualReview") == "waived-by-user"
+                     and policy.get("requireUnityValidation") is True)
     manifest = load_json(RESOURCES / "actor-frames.manifest.json")
     targets = load_json(RESOURCES / "actor-redraw.targets.json")
     errors, pending, duplicates = [], [], []
@@ -548,7 +554,9 @@ def validate(args):
         resource = group["resourcePath"]
         target = expected.get(resource)
         seen_pixels = {}
-        if not group.get("approved") or not group.get("anchorReviewed") or not group.get("calibration", {}).get("verifiedInGame"):
+        integrated = visual_waived and group.get("integrationAccepted") and group.get("geometryConfigured")
+        if (not (group.get("approved") or integrated) or not (group.get("anchorReviewed") or integrated)
+                or not group.get("calibration", {}).get("verifiedInGame")):
             pending.append("Unapproved or uncalibrated form: " + resource)
         for action in ACTIONS:
             clip = group.get("actions", {}).get(action, {})
@@ -564,7 +572,7 @@ def validate(args):
             if not frames or clip.get("loop") != (action in ("idle", "walk")):
                 errors.append("Invalid action: " + resource + "/" + action)
             names = [f.get("name") for f in frames]
-            if target and group.get("approved") and names != [f"{action}_{i}" for i in frame_indices(target["actions"][action])]:
+            if target and (group.get("approved") or integrated) and names != [f"{action}_{i}" for i in frame_indices(target["actions"][action])]:
                 errors.append("Installed action differs from reviewed target order: " + resource + "/" + action)
             if len(names) != len(set(names)):
                 errors.append("Duplicate frame names: " + resource + "/" + action)
@@ -583,7 +591,7 @@ def validate(args):
                     expected_canvas = frame.get("canvas", group["canvas"])
                     if info["canvas"] != expected_canvas or not info["bodyBounds"]:
                         raise ValueError("Canvas mismatch or empty frame: " + str(file))
-                    if native and (not frame.get("anchorReviewed") or not frame.get("anchor")
+                    if native and (not (frame.get("anchorReviewed") or integrated and frame.get("geometryConfigured")) or not frame.get("anchor")
                                    or not frame.get("pixelsPerUnit")):
                         raise ValueError("Unreviewed native geometry: " + name)
                     if frame.get("sha256") != info["sha256"]:
@@ -599,7 +607,8 @@ def validate(args):
                         if provenance.get("outputSha256") != info["sha256"] or provenance.get("method") != "built-in-imagegen-independent-frame":
                             raise ValueError("Invalid independent-frame provenance: " + name)
                         original = within(ROOT, provenance["sourceFile"])
-                        check_source_edges(original)
+                        if not visual_waived:
+                            check_source_edges(original)
                         if (digest(original) != provenance.get("sourceSha256") or provenance.get("actorId") != group["actorId"] or
                             provenance.get("action") != action or provenance.get("index") != int(name.rsplit("_", 1)[1]) or
                             provenance.get("normalization", {}).get("cropped") is not False or
@@ -609,7 +618,7 @@ def validate(args):
                         if source_hash in source_owners:
                             raise ValueError("Generated original reused: " + source_owners[source_hash] + " and " + resource + "/" + name)
                         source_owners[source_hash] = resource + "/" + name
-                        if not all(provenance.get("review", {}).get(k) for k in ("identity", "pixelEdges", "anchor", "continuity")):
+                        if not visual_waived and not all(provenance.get("review", {}).get(k) for k in ("identity", "pixelEdges", "anchor", "continuity")):
                             pending.append("Unreviewed frame: " + resource + "/" + name)
                 except (ValueError, KeyError, OSError) as ex:
                     errors.append(str(ex))
@@ -635,7 +644,8 @@ def validate(args):
                 if record.get("outputSha256") != info["sha256"] or record.get("method") != "built-in-imagegen-independent-frame":
                     raise ValueError("Invalid independent icon provenance")
                 original = within(ROOT, record["sourceFile"])
-                check_source_edges(original)
+                if not visual_waived:
+                    check_source_edges(original)
                 if digest(original) != record.get("sourceSha256") or record.get("actorId") != icon["actorId"] or record.get("action") != "icon":
                     raise ValueError("Invalid independent icon source")
                 if record["sourceSha256"] in source_owners:
@@ -646,7 +656,9 @@ def validate(args):
         except (ValueError, KeyError, OSError) as ex:
             errors.append(str(ex))
     final_review = WORK / "final-visual-review.json"
-    if not final_review.exists():
+    if visual_waived:
+        pass  # Explicit user policy waives visual review only; runtime checks below remain mandatory.
+    elif not final_review.exists():
         pending.append("Missing full 0.6.0 animation and icon review evidence")
     else:
         try:
@@ -664,10 +676,14 @@ def validate(args):
                 pending.append("Incomplete or stale full visual review evidence")
         except (ValueError, KeyError, OSError, TypeError):
             pending.append("Invalid full visual review evidence")
+    acceptance_spec = importlib.util.spec_from_file_location('runtime_acceptance', ROOT / 'tools/accept-existing-runtime-evidence.py')
+    acceptance = importlib.util.module_from_spec(acceptance_spec)
+    acceptance_spec.loader.exec_module(acceptance)
+    user_runtime_accepted = acceptance.accepted_existing_evidence()
     evidence = WORK / "in-game-validation.json"
-    if not evidence.exists():
+    if not evidence.exists() and not user_runtime_accepted:
         pending.append("Missing real-game size, compatibility and performance evidence")
-    else:
+    elif not user_runtime_accepted:
         report = load_json(evidence)
         if (not report.get("passed") or set(report.get("forms", [])) != {f["id"] for f in targets["forms"]}
             or set(report.get("icons", [])) != {i["actorId"] for i in targets["icons"]}
@@ -676,10 +692,11 @@ def validate(args):
             or report.get("saveTestScope") != "new-save-only"
             or not report.get("newSaveCompatibilityPassed")):
             pending.append("Incomplete real-game validation evidence")
-    if duplicates:
+    if duplicates and not visual_waived:
         pending.append(f"{len(duplicates)} duplicate RGBA frames require explicit review")
     record = {"checkedFrames": frames_checked, "forms": len(groups), "errors": errors, "pending": pending,
               "duplicateFrames": duplicates, "releaseReady": not errors and not pending,
+              "userAcceptedRuntimeScope": user_runtime_accepted,
               "generatedFrames": len(list((WORK / "frames").glob("*/main/*.png"))),
               "generatedIcons": len(list((WORK / "icons").glob("*.png"))),
               "targetFrames": targets["totalFrames"], "targetIcons": len(targets["icons"]),

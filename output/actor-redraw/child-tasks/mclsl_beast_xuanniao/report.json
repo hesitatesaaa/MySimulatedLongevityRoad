@@ -1,0 +1,505 @@
+{
+  "actor": "mclsl_beast_xuanniao",
+  "status": "handed-back-to-parent",
+  "updatedAtUtc": "2026-10-15T06:29:19.4609930Z",
+  "savedCandidates": [
+    {
+      "jobIndex": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_3.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/walk_3.png",
+      "sourceSha256": "0234d58e0b9ce9c83b576bd642ffb9b0a9382a411d2feed38ad511822173422a",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "staticReview": "Two tucked legs and claws, one coherent wing pair, one head; no visible clipped silhouette; identity consistent",
+      "continuity": false,
+      "continuityNotes": "Wingbeat phase and body anchor require full-clip review; walk_5 raised near wing may not follow required downstroke/recovery phase",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_5.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/walk_5.png",
+      "sourceSha256": "bf7f5ca08f0e1ff7be961f5130d1e8c089a09f72c5124371019274797922adcc",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "staticReview": "Two tucked legs and claws, one coherent wing pair, one head; no visible clipped silhouette; identity consistent",
+      "continuity": false,
+      "continuityNotes": "Wingbeat phase and body anchor require full-clip review; walk_5 raised near wing may not follow required downstroke/recovery phase",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_6.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/walk_6.png",
+      "sourceSha256": "139a25994899fce9550ebf75a29a0fade147654f9631ec5c81e379e63edab078",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/two claws, one wing pair (folded far wing partly occluded in death), coherent joints, closed eyes in death, identity intact",
+      "continuity": false,
+      "continuityNotes": "Full wingbeat seam and death head/body-height progression pending whole-clip review",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\walk_7.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/walk_7.png",
+      "sourceSha256": "d3a587f04df7ca3ddb8e9966ea5c46be4c2fd0a4c9afae25229fb7e7b054cd55",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/two claws, one wing pair (folded far wing partly occluded in death), coherent joints, closed eyes in death, identity intact",
+      "continuity": false,
+      "continuityNotes": "Full wingbeat seam and death head/body-height progression pending whole-clip review",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_0.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_0.png",
+      "sourceSha256": "035acc8113ef0d363f397e76e012469c406739f505a4e8b47fd31af7e19ecba6",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/two claws, one wing pair (folded far wing partly occluded in death), coherent joints, closed eyes in death, identity intact",
+      "continuity": false,
+      "continuityNotes": "Full wingbeat seam and death head/body-height progression pending whole-clip review",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 6,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_1.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_1.png",
+      "sourceSha256": "529c045d4d80d2c0bc943a8c7b86af1f5b7c500ca8a17a61a49d4497bf7172ec",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/two claws, one wing pair (folded far wing partly occluded in death), coherent joints, closed eyes in death, identity intact",
+      "continuity": false,
+      "continuityNotes": "Full wingbeat seam and death head/body-height progression pending whole-clip review",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 7,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_2.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_2.png",
+      "sourceSha256": "b73405713e3968e443137316c4fc993793d3c92c02d734e60487e0929f0f9aa4",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/claws with coherent folded joints; folded wings and tail intact, closed eyelid, identity retained",
+      "continuity": false,
+      "continuityNotes": "death_2 to death_5 progress from bent legs to low collapsed body; complete clip and final settling pending",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 8,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_3.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_3.png",
+      "sourceSha256": "625014787cbf5c1e4ef5fcd56dc7e9c99a25c16588fa867deb5c0af4bf468d15",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/claws with coherent folded joints; folded wings and tail intact, closed eyelid, identity retained",
+      "continuity": false,
+      "continuityNotes": "death_2 to death_5 progress from bent legs to low collapsed body; complete clip and final settling pending",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 9,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_4.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_4.png",
+      "sourceSha256": "ed93ea9eb4516a481a51b2254db1810fe7fa5e5e47ffed4b89966224e3906f9a",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/claws with coherent folded joints; folded wings and tail intact, closed eyelid, identity retained",
+      "continuity": false,
+      "continuityNotes": "death_2 to death_5 progress from bent legs to low collapsed body; complete clip and final settling pending",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 10,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_5.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_5.png",
+      "sourceSha256": "a086f9f3dff0ce4117180cd3b8fbd072b2aca6b9d1d569e7c7f652940ae2ff9b",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Two legs/claws with coherent folded joints; folded wings and tail intact, closed eyelid, identity retained",
+      "continuity": false,
+      "continuityNotes": "death_2 to death_5 progress from bent legs to low collapsed body; complete clip and final settling pending",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 11,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_6.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_6.png",
+      "sourceSha256": "258d2e1d8c3547d55254d1c53bdca58e9e2f1aefa6d6a4bc7427716b469290d5",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "One bird head, one wing pair, two claws (far claw partly hidden at final death), identity and complete silhouette retained.",
+      "continuity": false,
+      "continuityNotes": "Whole clip/seam not approved",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 12,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao\\main\\death_7.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/death_7.png",
+      "sourceSha256": "9fd235035efdbfb54aaf637a33dfc9154dedfa27f018640c1d3fd3f08d797a32",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "One bird head, one wing pair, two claws (far claw partly hidden at final death), identity and complete silhouette retained.",
+      "continuity": false,
+      "continuityNotes": "Final body low and slack; death_6 to death_7 head rises slightly in canvas coordinates and needs full-clip anchor/settling review.",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 13,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_xuanniao.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao/icon_0.png",
+      "sourceSha256": "7b2b2d8ce4dcd8779bbcf9f2742cbd0feb5fa21ff52d47babc916013a5621f01",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "One bird head, one wing pair, two claws (far claw partly hidden at final death), identity and complete silhouette retained.",
+      "continuity": false,
+      "continuityNotes": "Whole clip/seam not approved",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 14,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\idle_1.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao_yuan/idle_1.png",
+      "sourceSha256": "f4416335c538c9846959d0621e6a000e354796e0a164c814ef9fe2ede8ad1b13",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Adult female identity retained; two connected arms/hands and two boots, no extra limb; full silhouette.",
+      "continuity": false,
+      "continuityNotes": "Whole clip/seam not approved",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 15,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\idle_2.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao_yuan/idle_2.png",
+      "sourceSha256": "0a9892d2c9399a9763b8bee4a88f1c3810ffeb5c8e61e3ce5980e6236f3898b6",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Adult female identity and outfit retained; two connected arms (far hand occluded by sleeve in idle), two legs/two boots, intact silhouette.",
+      "continuity": false,
+      "continuityNotes": "Idle body/feet placement shifts slightly; loop anchor/seam pending review.",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 16,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\idle_3.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao_yuan/idle_3.png",
+      "sourceSha256": "48a256af6577d012ac49cfb7b56a575a48427f3ff40da6cf2f6dba15c9425a0b",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Adult female identity and outfit retained; two connected arms (far hand occluded by sleeve in idle), two legs/two boots, intact silhouette.",
+      "continuity": false,
+      "continuityNotes": "Idle body/feet placement shifts slightly; loop anchor/seam pending review.",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 17,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_0.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao_yuan/walk_0.png",
+      "sourceSha256": "517eedd19895092a22dd1c5bf821ae488f4b7a708f4ab1074f5612014cb103ce",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Adult female identity and outfit retained; two connected arms (far hand occluded by sleeve in idle), two legs/two boots, intact silhouette.",
+      "continuity": false,
+      "continuityNotes": "walk_0 has forward planted boot and rear raised heel; near/far identity and cycle progression pending full sequence.",
+      "runtimeValidated": false
+    },
+    {
+      "jobIndex": 18,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_1.png",
+      "sourceFile": "output/actor-redraw/originals/mclsl_beast_xuanniao_yuan/walk_1.png",
+      "sourceSha256": "ad37c5f6e883879de6ec774a7f97291ff5b3b24dcc1a9037623221934ae126b4",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clipped": false,
+      "staticReview": "Adult female identity and outfit retained; two connected arms (far hand occluded by sleeve in idle), two legs/two boots, intact silhouette.",
+      "continuity": false,
+      "continuityNotes": "walk_1 remains a wide stride with forward foot, rather than clear near-foot-under-hip passing phase; compare walk_0/1 before approval.",
+      "runtimeValidated": false
+    }
+  ],
+  "rejected": [
+    {
+      "path": "E:\\0.6.0\\output\\actor-redraw\\child-tasks\\mclsl_beast_xuanniao\\rejected\\walk_3-first",
+      "sourceSha256": "c841b2e8b27d5b519b4a6dc6d73c89b7af16ae9fb08a07b2e7c3770d24cdb1f9",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "reason": "Right wing silhouette fails 32px transparent margin",
+      "anatomyApproval": false
+    },
+    {
+      "path": "E:\\0.6.0\\output\\actor-redraw\\child-tasks\\mclsl_beast_xuanniao\\rejected\\walk_4-first",
+      "sourceSha256": "b2f334fdc3a59bbe20a6cc4b60107cbfb72bb6f870fa26dc05ab1220e03455c2",
+      "nativeCanvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "reason": "Right wing silhouette fails 32px transparent margin",
+      "anatomyApproval": false
+    }
+  ],
+  "remainingMissing": [
+    {
+      "jobIndex": 19,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_2.png"
+    },
+    {
+      "jobIndex": 20,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_3.png"
+    },
+    {
+      "jobIndex": 21,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_4.png"
+    },
+    {
+      "jobIndex": 22,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "walk",
+      "frame": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\walk_5.png"
+    },
+    {
+      "jobIndex": 23,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_0.png"
+    },
+    {
+      "jobIndex": 24,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_1.png"
+    },
+    {
+      "jobIndex": 25,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_2.png"
+    },
+    {
+      "jobIndex": 26,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_3.png"
+    },
+    {
+      "jobIndex": 27,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_4.png"
+    },
+    {
+      "jobIndex": 28,
+      "actor": "mclsl_beast_xuanniao_yuan",
+      "action": "death",
+      "frame": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_xuanniao_yuan\\main\\death_5.png"
+    }
+  ],
+  "quota": {
+    "status": "probe-succeeded",
+    "activeMarker": false,
+    "historicalLimitResolvedByProbe": true
+  },
+  "inFlight": 0,
+  "fullActionReviewPassed": false,
+  "runtimeValidated": false,
+  "existingFrames": "Queued outputs/originals/provenance absent before generation. Older nonqueued frames not approved by this task.",
+  "parentNotification": "Parent reads report.json; no cross-thread message sent",
+  "gitChanged": false,
+  "promptsChanged": false,
+  "latestProbe": {
+    "jobIndex": 1,
+    "actor": "mclsl_beast_xuanniao",
+    "action": "walk",
+    "frame": 4,
+    "quotaProbeSucceeded": true,
+    "requestsSubmitted": 1,
+    "inFlight": 0,
+    "serviceError": null,
+    "createdAtUtc": "2026-10-15T03:47:09.9395257Z",
+    "generatedSource": "C:/Users/Arthur.lu/.codex/generated_images/01a13a2c-723f-77f0-859b-7215b9d052a1/exec-97099625-552b-4e68-a1b1-9774f77dec1a.png",
+    "source": "E:\\0.6.0\\output\\actor-redraw\\child-tasks\\mclsl_beast_xuanniao\\rejected\\walk_4-probe-20261015\\source.png",
+    "output": "E:\\0.6.0\\output\\actor-redraw\\child-tasks\\mclsl_beast_xuanniao\\rejected\\walk_4-probe-20261015\\output.png",
+    "provenance": "E:\\0.6.0\\output\\actor-redraw\\child-tasks\\mclsl_beast_xuanniao\\rejected\\walk_4-probe-20261015\\provenance.json",
+    "sourceSha256": "b031146068ccdd755a9995de4204ebfb48cfce4edfb901935e84c66671049bf9",
+    "nativeCanvas": [
+      1254,
+      1254
+    ],
+    "resampling": "none",
+    "byteIdentical": true,
+    "viewedFullNativeImage": true,
+    "limbConnectionsReviewed": true,
+    "extraLimbs": false,
+    "staticReview": "Two tucked legs/claws and one wing pair with coherent connections; identity retained; no visible cut extremity. Right wing margin only 21px (alpha>=16 bbox [60,242,1233,1092]), below required 32px.",
+    "accepted": false,
+    "reason": "Insufficient right transparent margin",
+    "continuity": false,
+    "runtimeValidated": false,
+    "nextAction": "Wait for parent authorization; do not submit another request"
+  },
+  "parentReview": {
+    "reviewedAtUtc": "2026-10-15T11:49:09.052524+08:00",
+    "actorId": "mclsl_beast_xuanniao",
+    "action": "walk",
+    "frame": 4,
+    "sourceSha256": "b031146068ccdd755a9995de4204ebfb48cfce4edfb901935e84c66671049bf9",
+    "viewedFullNativeImage": true,
+    "staticAnatomyPassed": true,
+    "clipped": false,
+    "transparentRightMargin": 21,
+    "marginOverrideReason": "Full silhouette is intact. 32px was a suggested authoring margin, not a reason alone to redraw a complete usable frame.",
+    "continuityApproved": false,
+    "installed": false
+  },
+  "recoveredImagesReviewed": true,
+  "handoffReason": "User switched all remaining generation to parent-only; no further requests submitted after stop instruction.",
+  "promptUpdates": {
+    "jobIndices": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "scope": "Only previously unsubmitted walk prompts updated; both job.prompt and promptFile synchronized",
+    "submittedAfterUpdate": [
+      17,
+      18
+    ],
+    "remainingUnsubmitted": [
+      19,
+      20,
+      21,
+      22
+    ]
+  }
+}

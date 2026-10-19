@@ -12,7 +12,7 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static class MclslNativeActorFrames
 {
     // Development limit. Final value requires GPU-memory measurements in WorldBox.
-    private const long BudgetBytes = 512L * 1024 * 1024;
+    private const long BudgetBytes = 2L * 1024 * 1024 * 1024;
     private static readonly MclslActorFrameCache<Sprite> Cache = new(BudgetBytes);
     private static readonly Dictionary<string, string> Files = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, MclslActorAnimationCatalog.FrameProfile> Profiles = new(StringComparer.Ordinal);

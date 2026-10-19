@@ -8,7 +8,7 @@
   "sourceSha256": "6723e28346b897df7e0ab80d3202e831b1026cf328f50dbabf3135a6de60caf8",
   "outputFile": "NativeActorResources/actors/Beasts/huanglong/Beast/main/death_8.png",
   "outputSha256": "6723e28346b897df7e0ab80d3202e831b1026cf328f50dbabf3135a6de60caf8",
-  "createdAtUtc": "2026-10-09T15:03:37.992862+00:00",
+  "createdAtUtc": "2026-10-19T02:18:25.013132+00:00",
   "prompt": "Draw ONE independent native 1254x1254 transparent RGBA pixel-art death animation frame of the EXACT same golden Chinese dragon in supplied original death_7 and death_9 images. This replaces death_8 between them. The long gold scaled body remains tightly coiled and COLLAPSED low to ground, neck and head lower than death_7 and slightly higher than death_9; no rebound or lifting the head. Eye closed, whiskers resting low, four claws naturally relaxed and correctly connected, tail curled at left. Match the original crisp pixel-art identity, antlers, mane, gold scale pattern, right-facing direction, canvas positioning and body scale. One complete dragon, one pose, no extra heads or claws, no cropped whiskers, text, border, ground art or background.",
   "references": [
     {
@@ -41,11 +41,24 @@
     "anchor": false,
     "continuity": false
   },
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      735.0,
+      1226
+    ],
+    "pixelsPerUnit": 6.9112426035502965
+  },
   "nativeResolution": true,
   "pendingNativeRuntimeIntegration": false,
-  "reviewStatus": "waived-by-user",
   "repair": {
     "replacedSourceSha256": "ce03000184e962606451819fb1f249541dcd7451f76a2a33f9b708f818895f2f",
-    "candidateProvenance": "resources/actor-provenance/mclsl_beast_huanglong/native/death_8.repair.json"
-  }
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-a38a-7783-97c4-7799beba6b2f\\exec-aba454f6-426c-4c54-b625-bf1c44044df2.png",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_huanglong/death_8.provenance.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  },
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_moqilin",
+  "action": "death",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_moqilin/death_5.png",
+  "sourceSha256": "9ddbeee469348871f24ebb5cc0399eb0afd358d0e2004d6e58fe5780c5b1605b",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_moqilin/main/death_5.png",
+  "outputSha256": "9ddbeee469348871f24ebb5cc0399eb0afd358d0e2004d6e58fe5780c5b1605b",
+  "prompt": "Use case: stylized-concept. Independently redraw 墨麒麟·兽形 (mclsl_beast_moqilin) death_5 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Draw the final settled death pose after death_4. Head and chest stay ON the ground or lower, eyes closed, legs fully slack, tail and mane resting. Do not raise the head or torso or regain support. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character’s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 墨麒麟·兽形 (mclsl_beast_moqilin), death_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, fou",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_4.png"
+  ],
+  "createdAtUtc": "2026-10-14T04:10:52.893050+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

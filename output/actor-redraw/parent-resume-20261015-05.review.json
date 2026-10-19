@@ -1,0 +1,617 @@
+{
+  "frames": [
+    {
+      "jobIndex": 0,
+      "actorId": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "c1fefad24880d4a0efe417b9e0a547609c6f67d81de3b7186941af5a4d7af811",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: wide front/back stride with both boots near ground and no raised-knee passing pose; two connected arms/hands and two booted legs, standard identity retained, no extra limb/clipping. Low-stride request is present in isolated pose; complete near/far leading-leg alternation, arm swing and loop remain pending."
+    },
+    {
+      "jobIndex": 1,
+      "actorId": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "c4ed4b48ff4c93a0a2d0636d4de3f1f5935b585d95f26f390e8c48462167795e",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: widely separated front/back booted legs remain near ground without high-knee passing pose, two connected arms/hands, identity retained and no apparent extra appendage/crop. Complete opposite-lead alternation and walk loop remain pending."
+    },
+    {
+      "jobIndex": 2,
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "2e1d15c5131790b5af6945416ffd0b96fd3ffe00fe8fb3fdc0d0951d4acb73ee",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: red male has widely separated front/back boots close to ground, rear heel push-off and no high knee. Two arms/hands and two booted legs, identity retained, no extra limb/clipping. Full opposite-lead pairing and walk loop pending."
+    },
+    {
+      "jobIndex": 3,
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "62cdea65b4d238f8cf3964aee3e97a9c2c376779010c6c5411c6b228f5eb2107",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: wide front/back stride with both boots near ground and no raised-knee passing pose; two connected arms/hands and two booted legs, standard identity retained, no extra limb/clipping. Low-stride request is present in isolated pose; complete near/far leading-leg alternation, arm swing and loop remain pending."
+    },
+    {
+      "jobIndex": 4,
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "7559316bee3669d2e33ff4d9fac25b7e5c01278238b6ba0670b3f4b6965364b3",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: widely separated front/back booted legs remain near ground without high-knee passing pose, two connected arms/hands, identity retained and no apparent extra appendage/crop. Complete opposite-lead alternation and walk loop remain pending."
+    },
+    {
+      "jobIndex": 5,
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "6e10e8aae8820926393d53f51248903c1e00589f7dd574e09ddeba9357a64d66",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native replacement PNG viewed: wide front/back stride with both boots near ground and no raised-knee passing pose; two connected arms/hands and two booted legs, standard identity retained, no extra limb/clipping. Low-stride request is present in isolated pose; complete near/far leading-leg alternation, arm swing and loop remain pending."
+    },
+    {
+      "jobIndex": 6,
+      "actorId": "mclsl_beast_yingying",
+      "action": "death",
+      "frame": 4,
+      "sourceSha256": "e8a4255f74766bc38554c989b80183ccc4fa4cdb5634b86fc8a18a4ccffa5ef4",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: purple wolf prone with closed eye, resting forepaws, folded hind legs and curled tail, no apparent extra appendage. Tight right muzzle margin requires alpha-boundary check; full death progression pending. Alpha>=16 boundary check: bbox(16,480,1238,996), zero opaque left/right edge pixels; muzzle intact."
+    },
+    {
+      "jobIndex": 7,
+      "actorId": "mclsl_beast_yingying",
+      "action": "death",
+      "frame": 5,
+      "sourceSha256": "15ef01fd0b5c240dfb97e9f539190e0b089024237c0669cb6b3e1685a1e3cd7c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: purple wolf fully prone with closed eye, resting forepaws and folded hindquarters/tail, no apparent extra appendage. Muzzle may touch right boundary; clipping decision pending pixel-boundary check and full death progression pending. Alpha>=16 boundary check: bbox(23,474,1249,954), zero opaque left/right edge pixels; muzzle intact, clipping suspicion cleared."
+    },
+    {
+      "jobIndex": 8,
+      "actorId": "mclsl_beast_yingying",
+      "action": "icon",
+      "frame": 0,
+      "sourceSha256": "83f1798ed361927f0354b1de13de8a11c9cec0b5a4a2522966b06140976fea01",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native dedicated icon viewed: dark purple wolf with four legs/paws, two ears and long coiled tail, pale violet facial highlights retained; no extra appendage/clipping apparent. Actual button occupancy pending."
+    },
+    {
+      "jobIndex": 9,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "idle",
+      "frame": 1,
+      "sourceSha256": "54e0f510aa9af905fe317b1f4557a473f2e9981bd6361e90214e27b6e80c6183",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired adult woman, black/violet robe, pale lining and violet tassels match standard; two boots and coherent sleeve/arm chains, far hand occluded. No extra limb/clipping apparent. Breathing loop and anchor pending."
+    },
+    {
+      "jobIndex": 10,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "idle",
+      "frame": 2,
+      "sourceSha256": "c0a573818673f734998403cbb9d14100e6b483acf19222f7578d83d01a6f52f4",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired adult woman, black/violet robe, pale lining and violet tassels match standard; two boots and coherent sleeve/arm chains, far hand occluded. No extra limb/clipping apparent. Breathing loop and anchor pending."
+    },
+    {
+      "jobIndex": 11,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "idle",
+      "frame": 3,
+      "sourceSha256": "e1795bb9786db9268ecd3cccd2519ad29f0c63df8b6ae48537f812a1bb300e9f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired adult woman, black/violet robe, pale lining and violet tassels match standard; two boots and coherent sleeve/arm chains, far hand occluded. No extra limb/clipping apparent. Breathing loop and anchor pending."
+    },
+    {
+      "jobIndex": 12,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 0,
+      "sourceSha256": "a649e84f03c7f62abf4c41e660359e7e7e8f399f7cd31970ba1d032d413bb5f0",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 13,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "a67fc7e3cf7ea34e262ff3e8268382663a8089a5ea4b46a372b380a3c6166918",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 14,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 2,
+      "sourceSha256": "831648a85e7759837cb8c0077e2016b595bfbf8c74e313b45ab26815d4198b34",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 15,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 3,
+      "sourceSha256": "0fbad2d8591b577cc01ac1bad9156356203182732571fc17ef19b462219b17c0",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 16,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "d75e617ce9eabce6f4969507791ffe6d56d775885968dbeb2b1328e8b5d6e450",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 17,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "walk",
+      "frame": 5,
+      "sourceSha256": "b36231e55cdd40f53b3cdb7d6e5713793b268a4bef6d58d338f1f177cab6dfd4",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded dark-haired woman retains black/violet robe, pale lining and tassels, two connected arms/hands and two booted legs in broad ground-level stride, no raised knee or apparent extra limb/crop. Complete near/far leg alternation, anchors and loop remain pending."
+    },
+    {
+      "jobIndex": 18,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 0,
+      "sourceSha256": "cc4ee596e1f60354c21d3f60b7f2254659a9a4484cc4266f111e13e3b7496996",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: upright hooded woman with bowed head, closed eyes, two hanging hands and two boots. No apparent extra limb/crop; complete death progression pending."
+    },
+    {
+      "jobIndex": 19,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 1,
+      "sourceSha256": "7be3fc4b1bbc0e77a85a03df88df79b846a00631faf81ff0d137d4356b0bb4d7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded woman bows forward with knees beginning to fold, two lowered hands and two boots connected, same robe/hood identity, no apparent extra limb or crop. Progression from upright to final prone and anchors pending."
+    },
+    {
+      "jobIndex": 20,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 2,
+      "sourceSha256": "082debf1c2891dbf41ece36975c0f4ca3354d578dc0cf2dc10c1b2491ca3b433",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded woman bends forward with knees partly folding, two lowered hands and two connected booted legs; identity consistent, no apparent extra appendage/crop. Full death progression pending."
+    },
+    {
+      "jobIndex": 21,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 3,
+      "sourceSha256": "2c29685e31cb5bbc69c6f482eda2b6250dced0f178c1676fb4c5b8cd82a7eb0d",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded woman has descended to folded legs, two supporting hands on ground, coherent arm chains and boots folded behind. No apparent extra appendage/crop; collapse progression and anchor pending."
+    },
+    {
+      "jobIndex": 22,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 4,
+      "sourceSha256": "44a41d0018dedcc4c02d391347d48defdbe02d9c0e3a95640677ec74ec55e250",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded woman prone with head descending toward folded hands, two hands and coherent folded booted legs beneath robe. Full hood and boots appear intact despite narrow margin, no apparent extra appendage. Full death continuity pending."
+    },
+    {
+      "jobIndex": 23,
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "death",
+      "frame": 5,
+      "sourceSha256": "d3598526b1ea623fff178e81653e73a9eb21eb4a330ad82a346b9ac1acca254c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: hooded woman lies on side with head low on folded arms, one exposed hand and coherent second sleeve, folded legs/boots beneath robe. No apparent extra limb/crop; complete collapse continuity pending."
+    },
+    {
+      "jobIndex": 24,
+      "actorId": "mclsl_beast_goushou",
+      "action": "idle",
+      "frame": 1,
+      "sourceSha256": "3a5a1aeda6ba468a322d00bd67ad29a75868d039cfd4fa6a321c6a8385f0a811",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red tusked canine retains two pointed ears, four connected leg/paw chains, coiled tail and gold harness/tassels. No apparent extra appendage or clipped extremity. Breathing motion, anchor and idle loop pending."
+    },
+    {
+      "jobIndex": 25,
+      "actorId": "mclsl_beast_goushou",
+      "action": "idle",
+      "frame": 2,
+      "sourceSha256": "38b44874db4508c08a80d3db9d5e2756a20ef5d4a212f0212598d6f32738e4e4",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red tusked canine retains two pointed ears, four connected leg/paw chains, coiled tail and gold harness/tassels. No apparent extra appendage or clipped extremity. Breathing motion, anchor and idle loop pending."
+    },
+    {
+      "jobIndex": 26,
+      "actorId": "mclsl_beast_goushou",
+      "action": "idle",
+      "frame": 3,
+      "sourceSha256": "6653917d73d5af800562bcfe5b546c14e3e26c2213aed9078c04377c23583fc8",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red tusked canine retains two pointed ears, four connected leg/paw chains, coiled tail and gold harness/tassels. No apparent extra appendage or clipped extremity. Breathing motion, anchor and idle loop pending."
+    },
+    {
+      "jobIndex": 27,
+      "actorId": "mclsl_beast_goushou",
+      "action": "walk",
+      "frame": 0,
+      "sourceSha256": "70cf6e2fc9a2e903b7a34377160dbd86077a938d0ac07a8bdf3e5bc437bb06b9",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red canine with three visible paws; far foreleg is occluded behind near foreleg/chest rather than drawn as an extra paw. Ear/tail/tusk/harness identity retained, no apparent extra appendage. Full four-leg gait continuity and occlusion consistency pending."
+    },
+    {
+      "jobIndex": 28,
+      "actorId": "mclsl_beast_goushou",
+      "action": "walk",
+      "frame": 1,
+      "sourceSha256": "e36076024aa24b45e0907679fa5796600ba69b3cf0f03f8defa5417952cb50f9",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: tusked black/red canine in offset four-leg gait, four paws with coherent shoulder/elbow and hip/hock connections, curled tail and harness retained. No apparent extra appendage/crop. Full gait phase alternation and loop pending."
+    },
+    {
+      "jobIndex": 29,
+      "actorId": "mclsl_beast_goushou",
+      "action": "walk",
+      "frame": 2,
+      "sourceSha256": "64fa463fc0ad7b518bc7947b98032b473014db8948dfce14eb1e0451e5c08b0a",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: tusked black/red canine in offset four-leg gait, four paws with coherent shoulder/elbow and hip/hock connections, curled tail and harness retained. No apparent extra appendage/crop. Full gait phase alternation and loop pending."
+    },
+    {
+      "jobIndex": 30,
+      "actorId": "mclsl_beast_goushou",
+      "action": "walk",
+      "frame": 3,
+      "sourceSha256": "13dcd332e3b5dabb625d181a14c283a87e0f6cf1ce00ad5c5c1862fd7c34cdeb",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red canine in long offset stride with four visible leg/paw chains and intact tail, ears and harness. Near forepaw/muzzle approach right margin and need alpha boundary check before clearing crop. Complete gait continuity pending. Alpha>=16 bbox(64,237,1236,1114), zero opaque right-edge pixels; forepaw and muzzle remain intact."
+    },
+    {
+      "jobIndex": 31,
+      "actorId": "mclsl_beast_goushou",
+      "action": "walk",
+      "frame": 4,
+      "sourceSha256": "7df1a4c81a7fd351fd7f58ac8b20bbad980b2f2237c3d79862ee38d9de6fcd34",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "viewedFullNativeImage": true,
+      "limbConnectionsReviewed": true,
+      "extraLimbs": false,
+      "clippingDetected": false,
+      "identityConsistent": true,
+      "actionContinuityApproved": false,
+      "geometryApproved": false,
+      "notes": "Full native PNG viewed: black/red canine with four offset paws and coherent leg chains, two ears, coiled tail, tusks and gold harness retained. No apparent extra appendage/crop. Complete four-leg gait phase alternation, anchor and loop pending."
+    }
+  ],
+  "findings": [],
+  "reviewedAtUtc": "2026-10-15T09:10:26.698171+00:00",
+  "scope": "static anatomy of generated independent frames only",
+  "installed": false,
+  "finalFullReviewPassed": false
+}

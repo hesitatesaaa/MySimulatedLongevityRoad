@@ -8,7 +8,7 @@
   "sourceSha256": "a91ebf10c5f1fa8d05d64b7ae2f42c94836227af6f38f0ef99d6021e6cee8f1e",
   "outputFile": "NativeActorResources/actors/Beasts/hongmao/Beast/main/death_2.png",
   "outputSha256": "a91ebf10c5f1fa8d05d64b7ae2f42c94836227af6f38f0ef99d6021e6cee8f1e",
-  "prompt": "Use case: stylized-concept. Draw one NEW independent transparent 1254x1254 RGBA pixel-art game frame, 红毛兽·兽形 (mclsl_beast_hongmao), death_2. Reference image is preceding death_1 and establishes identity: right-facing fiery red/orange quadruped lion-wolf, cream mane and horn tips, four connected legs, crisp broad pixel clusters. In this next death pose the beast sinks lower: head hangs farther down, front shoulders and elbows buckle, body lowers toward the ground. CRITICAL: the large curled tail must DROP from death_1 and lie low behind the haunches, its highest visible tuft BELOW the topline of the back. It must never flare upward during the collapse. Draw tail with coherent attachment and full outline. Preserve recognizable size and body anchor, complete silhouette with clear transparent margin. Exactly one beast in one newly drawn pose. No copied or transformed pixels, no extra legs, no background, shadow, panel, text or glow.",
+  "prompt": "Use case: stylized-concept. Draw one NEW independent transparent 1254x1254 RGBA pixel-art game frame, \u7ea2\u6bdb\u517d\u00b7\u517d\u5f62 (mclsl_beast_hongmao), death_2. Reference image is preceding death_1 and establishes identity: right-facing fiery red/orange quadruped lion-wolf, cream mane and horn tips, four connected legs, crisp broad pixel clusters. In this next death pose the beast sinks lower: head hangs farther down, front shoulders and elbows buckle, body lowers toward the ground. CRITICAL: the large curled tail must DROP from death_1 and lie low behind the haunches, its highest visible tuft BELOW the topline of the back. It must never flare upward during the collapse. Draw tail with coherent attachment and full outline. Preserve recognizable size and body anchor, complete silhouette with clear transparent margin. Exactly one beast in one newly drawn pose. No copied or transformed pixels, no extra legs, no background, shadow, panel, text or glow.",
   "references": [
     "output/actor-redraw/frames/mclsl_beast_hongmao/main/death_1.png"
   ],
@@ -41,5 +41,5 @@
     "candidateProvenance": "output/actor-redraw/repair-candidates/forms_b/mclsl_beast_hongmao/death_2.provenance.json",
     "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_hongmao/death_2"
   },
-  "reviewStatus": "waived-by-user"
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

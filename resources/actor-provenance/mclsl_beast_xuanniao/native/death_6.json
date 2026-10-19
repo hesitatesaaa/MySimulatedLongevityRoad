@@ -8,7 +8,7 @@
   "sourceSha256": "3ab216451934da62c8eec6243c3a6ef400f13e0b4038e009a34bb3d6f145bb19",
   "outputFile": "NativeActorResources/actors/Beasts/xuanniao/Beast/main/death_6.png",
   "outputSha256": "3ab216451934da62c8eec6243c3a6ef400f13e0b4038e009a34bb3d6f145bb19",
-  "prompt": "Use case: stylized-concept. Draw ONE new independent 1254x1254 transparent RGBA pixel-art game frame: 玄鸟·兽形 (mclsl_beast_xuanniao), death_6. Reference is the PRECEDING death_5 pose: black and purple right-facing raven phoenix with gold head trim/chest ornament, two wings, two clawed legs, long trailing purple tail, crisp broad pixel clusters. Make the next death pose more exhausted and LOWER: belly and folded wings fully contact the ground, BOTH legs tuck under the body, head/eye/beak and crest SINK downward relative to death_5, with beak near the ground. Do not raise the head or recover from death_5. Preserve full anatomical parts and tail shape; no duplicate wings or feet, no clipping; 32px or more clear transparent canvas around the entire one-bird silhouette. The next death_7 will be the final flattened pose, so this is an intermediate settlement. Freshly draw all pixels; no copied, translated, rotated, scaled or recolored old sprite. Exactly one bird and one frame, no background, shadow, glow, text, panels or sprite sheet.",
+  "prompt": "Use case: stylized-concept. Draw ONE new independent 1254x1254 transparent RGBA pixel-art game frame: \u7384\u9e1f\u00b7\u517d\u5f62 (mclsl_beast_xuanniao), death_6. Reference is the PRECEDING death_5 pose: black and purple right-facing raven phoenix with gold head trim/chest ornament, two wings, two clawed legs, long trailing purple tail, crisp broad pixel clusters. Make the next death pose more exhausted and LOWER: belly and folded wings fully contact the ground, BOTH legs tuck under the body, head/eye/beak and crest SINK downward relative to death_5, with beak near the ground. Do not raise the head or recover from death_5. Preserve full anatomical parts and tail shape; no duplicate wings or feet, no clipping; 32px or more clear transparent canvas around the entire one-bird silhouette. The next death_7 will be the final flattened pose, so this is an intermediate settlement. Freshly draw all pixels; no copied, translated, rotated, scaled or recolored old sprite. Exactly one bird and one frame, no background, shadow, glow, text, panels or sprite sheet.",
   "references": [
     "output/actor-redraw/originals/mclsl_beast_xuanniao/death_5.png"
   ],
@@ -41,5 +41,5 @@
     "candidateProvenance": "output/actor-redraw/repair-candidates/forms_b/mclsl_beast_xuanniao/death_6.provenance.json",
     "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_beast_xuanniao/death_6"
   },
-  "reviewStatus": "waived-by-user"
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

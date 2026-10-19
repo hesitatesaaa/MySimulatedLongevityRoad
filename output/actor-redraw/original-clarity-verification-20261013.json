@@ -1,0 +1,113 @@
+{
+  "checkedAtUtc": "2026-10-13T04:07:06.721294+00:00",
+  "frames": [
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "attack",
+      "index": 7,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "50d24cc2bce8a2a20e072ff46193a87c1b96f4ee4365e8c141592ea39f16fa95",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "hit",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "d2d0527b20a6810757c961f7e4fbeaf3c44c42e101508c83d100b51bbb2e5578",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "hit",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "a3de8d93261c01be706141c1ab6348e32f662a98638541ac24829e8e4b98fb75",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 0,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "a0742fae3f60bb4f52d82696c27d324e8985df43c70e6ac6eb41ec1d2aa55a9f",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 1,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "2d913a44fb3a13c87c836d89015f9333babb2af479e22339c4965efa615497ba",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 2,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "ec993cfee6fa02ae8baa8019842cfcb20d8922f4b3565a960c8bebc74b13305b",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 3,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "05c89bce7869340a0d4b7446352affaca754325e31dfbf0cfeac7c640071d324",
+      "nativeResolution": true
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 4,
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sourceAndFrameByteIdentical": true,
+      "sha256": "3fe583fe1ff732c9afa24aac24150da272c8524c6fd7b7d3c3544dfe31cc26da",
+      "nativeResolution": true
+    }
+  ],
+  "checkedFrames": 8,
+  "imageSource": "built-in-imagegen-independent-per-frame",
+  "clarityReference": "output/actor-redraw/originals/mclsl_beast_zhuque_yuan/attack_2.png",
+  "lossyCompression": false,
+  "downsampling": false,
+  "reencoding": false,
+  "cropping": false,
+  "fileChecksPassed": true,
+  "completeActionReviewPassed": false,
+  "installedToRuntime": false,
+  "formalReleaseReady": false,
+  "archivedLowReferenceBatch": "output/actor-redraw/rejected/low-reference-20261013"
+}

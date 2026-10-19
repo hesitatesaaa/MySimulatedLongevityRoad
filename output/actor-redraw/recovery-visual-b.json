@@ -1,0 +1,799 @@
+{
+  "schemaVersion": 1,
+  "actorId": "mclsl_beast_xuanwu_yuan",
+  "actorName": "玄武·化形",
+  "scope": "offline-native-PNG-visual-review",
+  "targetFile": "resources/actor-redraw.targets.json",
+  "targetRequiredActions": [
+    {
+      "action": "idle",
+      "requiredCount": 4,
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "loop": true,
+      "reviewed": true,
+      "actionProblems": []
+    },
+    {
+      "action": "walk",
+      "requiredCount": 6,
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "loop": true,
+      "reviewed": true,
+      "actionProblems": [
+        "全6帧未能确认近远腿领步反转：衣摆遮挡膝踝，画面中右前脚持续显著；完整步态交替未通过。"
+      ]
+    },
+    {
+      "action": "attack",
+      "requiredCount": 8,
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loop": false,
+      "reviewed": true,
+      "actionProblems": [
+        "attack_2..4前伸攻击姿态重复保持数帧，整体进攻—回收轮廓仍可读。"
+      ]
+    },
+    {
+      "action": "hit",
+      "requiredCount": 2,
+      "frameOrder": [
+        0,
+        1
+      ],
+      "loop": false,
+      "reviewed": true,
+      "actionProblems": []
+    },
+    {
+      "action": "death",
+      "requiredCount": 6,
+      "frameOrder": [
+        0,
+        2,
+        1,
+        3,
+        4,
+        5
+      ],
+      "loop": false,
+      "reviewed": true,
+      "actionProblems": [
+        "death_1→death_3的身体高度/姿态变化明显，形成突出的单步塌落；death_4→death_5末段姿态变化很小。末段已卧倒，无回抬。"
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "action": "idle",
+      "index": 0,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/idle_0.png",
+      "sha256": "1b1018734fc22f1ab9ee805c4afafd6be3f175b65bb2453a0208215a71abff5d",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/idle_0.png",
+      "sourceSha256": "aa2ca087cbb295fe2c5a2b4b4de5abf947799224cb8763b9198809d5567a917f",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：人物头发、冠饰、长袍和武器整体可辨；双腿大部被衣摆遮住，未见明显多余肢体；轮廓与画布四边有留白，无明显触边或孤立杂点。",
+      "frameProblems": []
+    },
+    {
+      "action": "idle",
+      "index": 1,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/idle_1.png",
+      "sha256": "11d632f841fae5d066c666d8e0d87bffae73ec4655e28ffc5ab45ae45dc1507e",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/idle_1.png",
+      "sourceSha256": "22cb5e999c439c1372756e1f39eee438ff0c248fdb14b72ecd5e721771a23a92",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：与idle_0身份和体态连续，衣发有轻微姿态变化；手臂细节局部受袖袍遮挡，未见明确断接或多余肢体；外缘无明显裁切。",
+      "frameProblems": []
+    },
+    {
+      "action": "idle",
+      "index": 2,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/idle_2.png",
+      "sha256": "1c96afb35b710af26d35083172ee24bba8b897c7eedde133520ba0741413431a",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/idle_2.png",
+      "sourceSha256": "3dbd04b0f0458879b141176b80b6319b368cff325693ad12b56e144414ecdb71",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：全身轮廓完整，头饰、发束和衣摆细簇边缘清楚；腿部仍主要被长袍遮挡，未见明显孤立像素或触边。",
+      "frameProblems": []
+    },
+    {
+      "action": "idle",
+      "index": 3,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/idle_3.png",
+      "sha256": "91d8e7ff49899a89449394897caa589b2098aaf93a491e5ee94973cb57228167",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/idle_3.png",
+      "sourceSha256": "e52d071a24cb0a854acedc320fa66ca09fb7d632589d5ee269bd6351ebe21e43",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：与前三张维持相同人物比例和姿态，衣发有细微变化；肢体无明显重复，轮廓四周留白。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 0,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_0.png",
+      "sha256": "4d4bf36c5a7ebfe1b620b3825a069f8907371b329690d7bbb02648cb905a8510",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_0.png",
+      "sourceSha256": "22b19fc53e35827a496142b98037deaa043bed178eaa995c26b5183bf9bc2f8e",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：前后分开的双脚和摆动衣发可见，跨步幅度尚可；膝踝及近远腿身份大多被衣摆遮住，难以确认前后脚身份。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 1,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_1.png",
+      "sha256": "373dd21b5dd764a2611ecea926be173c81329a462ad8517c9fae83b698a932db",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_1.png",
+      "sourceSha256": "645ded6e7218a5f4d9d162da2d24064394113be98f06affa988c9ac6e266e5a1",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：双脚仍前后分开，未见明显高抬膝；可见前伸脚仍在角色右前方，尚未确认领步腿反转。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 2,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_2.png",
+      "sha256": "f7b841f1cc93ff12ead870bc8cc4e49e136fd56488c021c9e6df152f541a0eaf",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_2.png",
+      "sourceSha256": "4f00cbc34df82eea71571b8acd8945d83265be83c4da899b9ad61bcdd2fe87a4",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：有不同衣摆/手臂姿态，脚仍分置前后；袍摆遮挡关节，近远腿领步变化不清。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 3,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_3.png",
+      "sha256": "64a7e374b26d253cac3a0014fcb93716348419e85d238a2019cc3311b06a1e67",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_3.png",
+      "sourceSha256": "bf0dae1c9254d9aab97bf000f0ee01c6582b3b2bcfac3fdd9ec297a344bd8535",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：人物轮廓完整，双脚保持分离，未见悬空高抬膝；可见脚位与前帧相近，缺少明确反向领步证据。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 4,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_4.png",
+      "sha256": "9a4d49b7d559c266668c0b2ab6351cb34436ba11e911fa672450ea3d5f337e34",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_4.png",
+      "sourceSha256": "40c4bb21b7e1d844a63fe292477a38240e0b55b96e33b30f71f75c6d9c2638a5",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：衣发摆动变化，双脚前后分开；外轮廓未触边，腿部身份仍被袍摆遮挡，未确认领步反转。",
+      "frameProblems": []
+    },
+    {
+      "action": "walk",
+      "index": 5,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/walk_5.png",
+      "sha256": "0c190f3ca987710a6d48479776b9db89dcaf131fc7dced24c8299d174bd2cc92",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/walk_5.png",
+      "sourceSha256": "9563cb3379b0119a3eb38a387469d83cdbf5f957cb3c7d0dbd2f9148d2e59f35",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：回到接近walk_0的身体朝向和步幅；双脚分开但右前脚仍显著，循环近远腿交替无法从这组原图确认。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 0,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_0.png",
+      "sha256": "c5a92e6b7c8d14bb7b4aa2b6de04280ea2853d720a5040b3fa7ca6a73f8c6a42",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_0.png",
+      "sourceSha256": "0377895ea2efd3ba85992f61222f5e851b00095833c3e94f380bba42bb9cbdc8",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：攻击起始身体略前倾，手臂/袖袍仍收近躯干；双腿部分被衣摆遮住，无明显断接，轮廓留边。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 1,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_1.png",
+      "sha256": "d38e098ba51e5a17299e7d381e0aed7960f38454f97b40eff4948022b1a905a8",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_1.png",
+      "sourceSha256": "8fc00f4772a95cfc12c562933daa8c262baf82862093b4537b2ca99d52805195",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：与attack_0相邻，姿势变化小，发束和衣摆有轻微变化；未见多余肢体或边缘裁切。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 2,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_2.png",
+      "sha256": "1bcb66244c5a256052daf4c60a9dfea3f4f3765349c0cdb080a4bf5bbbb82924",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_2.png",
+      "sourceSha256": "ed12f8bc86b13dfce4931e4775b11a339209c2cb38df59648c306f01f669ed46",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：前伸手臂与袖口清楚，手部接近画布右侧但仍有透明留白；肩肘连接看起来连续。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 3,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_3.png",
+      "sha256": "2cd1765c0dd8eafb14c7c3dca288945aba18990bddeaa0b5a350cf189602d4d4",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_3.png",
+      "sourceSha256": "6d1f2a3c019d685b38443cc36c473592544d878d711bf13946e37eec1889dff2",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：维持前伸攻击姿势，躯干及衣发向后带动；外轮廓完整，未见手臂越界或重复。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 4,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_4.png",
+      "sha256": "89a42d848abe9e549ea82e91755107fb1c12af60e3740638dd0a7c5f0eaa0b52",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_4.png",
+      "sourceSha256": "0754e453fbd102119ffea70cae5e20bc867c49bcd5f13bd822b75fea229f3fc4",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：仍为前伸攻击段，袖袍形状变化；手部在右侧留白内，未见硬裁边。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 5,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_5.png",
+      "sha256": "24606c19d72bf6ec7b5260669d3b156af6d479f536087a750efefb0d20f9e148",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_5.png",
+      "sourceSha256": "bb8ff37171608a1cd2e337675500ade9166a49882e6ee2ea97f189935c8b30ad",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：手臂回收、身体恢复直立，肢体轮廓可辨；未见明显断接。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 6,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_6.png",
+      "sha256": "7a2db6c7ae6a8a9cc4b685bd8c5be5f8807206f2b6c5f532e30cc6d88b9674fd",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_6.png",
+      "sourceSha256": "5a472a09e80d1d4e574323f33abcc47552c93b4f97b1bae5e7001c620c667aa4",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：继续回收至接近中立姿态，衣发有残余摆动；画布边缘完整。",
+      "frameProblems": []
+    },
+    {
+      "action": "attack",
+      "index": 7,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/attack_7.png",
+      "sha256": "ae234ffe460d2280a6058cd802003308f1712bd0ed760cd159c4104a5cea7c38",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/attack_7.png",
+      "sourceSha256": "f3eab614629aaf446b9ef7233af4442725eb86e3ee7ace2b35cfd8dd6ba4287e",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：收势接近idle站姿，身份和比例一致；边缘无明显裁切。",
+      "frameProblems": []
+    },
+    {
+      "action": "hit",
+      "index": 0,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/hit_0.png",
+      "sha256": "5b9c96433c4fa3f5dba5fb5e7ec6a3e47bbb50b4da1b0802673a527b9cb31407",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/hit_0.png",
+      "sourceSha256": "30dc507c592a2f157aa34c771191826936a9fe478d0a8749243d166d6be1362f",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：受击时躯干前屈、衣发外扬，身体轮廓完整；袖袍遮住部分手臂和腿关节，未见明显多余肢体或裁边。",
+      "frameProblems": []
+    },
+    {
+      "action": "hit",
+      "index": 1,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/hit_1.png",
+      "sha256": "34ae3d2b1ca71ccdf6c92450c73cd23acb1ea8b67c0f14a1cb0348da621159f1",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/hit_1.png",
+      "sourceSha256": "432d1b543169abe53162c06b599e7d8e0285bc0525fe8acc7281e803a0b9d592",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧：回到较直立姿态，作为受击恢复帧可辨；轮廓留边，未见明确边缘缺损。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 0,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_0.png",
+      "sha256": "02a858a79f136472c9b0369d471961abb2d22f01f838c078750a2c321e83dfbc",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_0.png",
+      "sourceSha256": "7bfe76d885e93f0bc495e66903ad64698e337b26780907c175bd03a7392238da",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放首帧）：仍近直立，头部轻垂、膝部微屈；符合起始失去支撑姿态，完整留在画布内。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 2,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_2.png",
+      "sha256": "19454b4be9cbdde8c7c8112c9e6e269270ef0bde6737d6f38b84c615a6b2302e",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_2.png",
+      "sourceSha256": "4bb46b073cd9c5154721e861aa8484d8169c8ed6c3145abb01033ae7356624a1",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放第二帧）：身体继续前倾并略降低，发束/衣摆向后拖；轮廓完整。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 1,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_1.png",
+      "sha256": "2806742fbbc4ae20d99240c01e5a962f38a3c82f12e2033526081b4a97de58a4",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_1.png",
+      "sourceSha256": "2f8b321a621d4e3e7b02373035098ba8390bedfac25078717a5b1baf1c078923",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放第三帧）：比death_0更前倾，肢体松垂；较death_2的下沉程度差异不大，整体仍连续。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 3,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_3.png",
+      "sha256": "c6516adf20f7dffeb6e042de2e719a9fc3425e61d1a2a20bd25d97b0eb68d981",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_3.png",
+      "sourceSha256": "9181f355c58717bf92833b8a317a8ea40963e21709c927b11c94bbc515b51103",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放第四帧）：人物降至接近地面的横向倒伏姿态；与death_1相比高度变化明显，形成较突出的单步塌落。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 4,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_4.png",
+      "sha256": "9937d484e00ebc570b6693410d51e6d30696514eea4578599d60cdff9f5dc457",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_4.png",
+      "sourceSha256": "73acf0725af766d4e39e57a40a7a8dc902ab266235d32f73748a5fb815ed917b",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放第五帧）：已完全伏地，身体和衣发贴近地面；未见明显肢体缺失或画布裁切。",
+      "frameProblems": []
+    },
+    {
+      "action": "death",
+      "index": 5,
+      "path": "output/actor-redraw/frames/mclsl_beast_xuanwu_yuan/main/death_5.png",
+      "sha256": "6e01a2d827f0e2254fe34504622e071bd22b18ca2d80c51c2f8950e689ca267d",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/death_5.png",
+      "sourceSha256": "b3c52bc92ed4141e9235c3ff5d39444a4fe0caf19563cf7d9fa9d9f32209bf47",
+      "sourceSha256Verified": true,
+      "reviewed": true,
+      "observation": "原生帧（播放末帧）：保持伏地收势，轮廓与death_4接近，仅有小幅调整；没有重新抬起迹象。",
+      "frameProblems": []
+    }
+  ],
+  "unreviewedActions": [],
+  "unresolvedActionProblems": [
+    {
+      "action": "walk",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "issue": "六帧未能确认近远腿领步反转，右前脚在各帧持续显著，长袍遮挡膝踝；完整循环交替未通过。"
+    },
+    {
+      "action": "death",
+      "indices": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "issue": "death_1→death_3高度/姿态变化较大，death_4→death_5末段变化很小；卧倒收势可见但连续性未能确认。"
+    }
+  ],
+  "verifiedInGame": false,
+  "additionalForms": [
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "actorName": "墨麒麟·化形",
+      "frameOrderByAction": [
+        {
+          "action": "idle",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "action": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "action": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "action": "hit",
+          "indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "action": "death",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "action": "idle",
+          "index": 0,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/idle_0.png",
+          "sha256": "66fed253e9dd08ba51af7d3bf2f906ebbf81cdb3d1575cbe65b0dcc9cce9b304",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/idle_0.png",
+          "sourceSha256": "28eb9fbfbd6e1ae8a327eb916600d48818d493a93f301b1dc443b5902f31af96",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "全身站姿和头饰、长紫发、白紫衣与武器/饰件可辨；衣袖遮住部分关节，未见明显重复肢体、孤立杂点或触边。"
+        },
+        {
+          "action": "idle",
+          "index": 1,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/idle_1.png",
+          "sha256": "61e8d18f9ab9298e64cd3e898f3119d531fea2a2dcce32dbab3638dc172f0f02",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/idle_1.png",
+          "sourceSha256": "167d202ad80f81fee766421afed4d5633e7e4fc5cb9241ff90f13c5d347ba7b4",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "与idle_0身份、比例一致，发束和衣摆有轻微姿态变化；轮廓完整，肢体未见明显断接。"
+        },
+        {
+          "action": "idle",
+          "index": 2,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/idle_2.png",
+          "sha256": "c32bb7d2de19dc574ef03d790645134648692c68bb20280a3abaf6e156d8f67c",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/idle_2.png",
+          "sourceSha256": "e23f630a063a2de5935a6bc20c1aa2c053bee79eb5ad39a10273e540f9ad9481",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "站姿保持，衣发细节仍连贯；腿部被长袍遮挡较多，无明显裁切或额外肢体。"
+        },
+        {
+          "action": "idle",
+          "index": 3,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/idle_3.png",
+          "sha256": "8809da32c516faf47ae08f2efedb68048c4d245263ecaf5fee7d3be96a728fd4",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/idle_3.png",
+          "sourceSha256": "82258d07c53beedd5f93c3535b61f558a38dfa0f70dabc81c86bf8229ac2bd9b",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "中立姿势接近idle_0，发梢和衣摆有细微变化；四周留白，无明显边缘问题。"
+        },
+        {
+          "action": "walk",
+          "index": 0,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_0.png",
+          "sha256": "a8809603be878b9f199c995ebc30aa3ac68bc7564c88675ceca6a4a18205772e",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_0.png",
+          "sourceSha256": "a34c08d7813d5f206785f20665e07c33b4d0b296a678f97788a69d5400c85b2c",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "双脚前后分开，屏幕右前脚较显著，后脚部分藏于袍摆；动作幅度可见，但近远腿身份不清。"
+        },
+        {
+          "action": "walk",
+          "index": 1,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_1.png",
+          "sha256": "e6b20fd77faf4fab9c0ac8dffc06344faedf0528fce7635a4f77e16798b7e061",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_1.png",
+          "sourceSha256": "e282987a2ed7a70db6294eb1e7f4b93d2a4292ec696fd0a3a61227f329315a9c",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "衣发与手臂姿势变化，右前脚仍明显；袍摆遮膝踝，未看到明确换另一腿领步。"
+        },
+        {
+          "action": "walk",
+          "index": 2,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_2.png",
+          "sha256": "400fecdf448e37892f95318437b00e6d82c3a9d0358e06730d0a0305cc95b500",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_2.png",
+          "sourceSha256": "904632a3ac118ed1e1f8590536af6da86da00ce695408970dd07f66ed9376f57",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "两脚仍呈前后分置，衣摆外扩；前后腿连接被袍摆遮挡，步态相位不易辨认。"
+        },
+        {
+          "action": "walk",
+          "index": 3,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_3.png",
+          "sha256": "195b92f7854efa46d57bb8d3890858109e34e4f833ed1364abace6d80f09e5cd",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_3.png",
+          "sourceSha256": "ebf5b7d0d05991ebeccdd02394a76e50f91563a52535e642dc386618bc7e9336",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "姿态较walk_2变化，脚仍分开但屏幕右前脚持续显著；未能确认近远腿交替。"
+        },
+        {
+          "action": "walk",
+          "index": 4,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_4.png",
+          "sha256": "5acc59d6f4fbcb1cf7bc9e635ad3436a87446e19b512537c0f85869d22f267a9",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_4.png",
+          "sourceSha256": "2dc7a5d6082e275b6d9b33e745747b432c862b70480d82282964c1e2f040d230",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "头发和袍摆摆动，轮廓未触边；可见脚位与前帧相近，领步切换不明确。"
+        },
+        {
+          "action": "walk",
+          "index": 5,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/walk_5.png",
+          "sha256": "7823fbb01fe0bf49347d12e9f7185e643573d497405308acfc34ed429b8bf87b",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/walk_5.png",
+          "sourceSha256": "6ffc9b6e1bf2d3a66bba0b660ab536cc69120416056f496a517f570dbe461c58",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "姿势回到接近walk_0的朝向与步幅；循环末端仍看不到清楚的反向领步。"
+        },
+        {
+          "action": "attack",
+          "index": 0,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_0.png",
+          "sha256": "20b6debbb1b57cd0749ed25be68e87182a5b775557774e4a533c10f9689a6209",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_0.png",
+          "sourceSha256": "f4508b06c474bff1a2113c3c0507cba68168d04d77d2a879ce6b2dc52327d7e5",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "攻击起始身体前倾，袖袍和发束向后带动；上肢局部被衣料遮挡，无明显肢体越界。"
+        },
+        {
+          "action": "attack",
+          "index": 1,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_1.png",
+          "sha256": "408a574b56345f1b6a647863348c6c49441dc6527f790c268f2de2a1608fd1d2",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_1.png",
+          "sourceSha256": "5c12258e10cb41931efc05356d1a5103b214ca9cb0628a83581aac581a4e7c6d",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "躯干和手臂姿势继续变化，人物轮廓完整；武器/前伸手臂未触画布边缘。"
+        },
+        {
+          "action": "attack",
+          "index": 2,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_2.png",
+          "sha256": "540c6e5509295839d1d39d193451d98f1484c336764ce3a576999f6ca29a9c7d",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_2.png",
+          "sourceSha256": "a8705a9fbbc43d0b482a67daa06b796b71730f502501c021709bbdd5e6bc7d49",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "前伸手臂和宽袖清楚，手部接近画布右侧但仍留边；肩臂连接未见明显断裂。"
+        },
+        {
+          "action": "attack",
+          "index": 3,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_3.png",
+          "sha256": "0ab06639d08cf18b368c9580a23c564506974ac5c97141020bd36b2d29faab64",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_3.png",
+          "sourceSha256": "6809933706e448790dac35ee3ba14bc8cbc8765e8efd0fe328ce9bd8f56e8e44",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "延续前伸攻击姿势，发衣向后；外侧手部仍在画布内，无硬裁切。"
+        },
+        {
+          "action": "attack",
+          "index": 4,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_4.png",
+          "sha256": "f18521db1d2a1402ff17c080ce5e096e663381c4a9427d5f47ce0e2f48aa1815",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_4.png",
+          "sourceSha256": "3177c5db2ec72a63ddf53d32d46e05f9a550b1378258ef53a501f73ac154e0c7",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "前伸姿态持续，宽袖展开；手部靠近右侧留白，未见肢体重复。"
+        },
+        {
+          "action": "attack",
+          "index": 5,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_5.png",
+          "sha256": "21c096fad0340a2b1f74a9a592ec840856ee6d10fe2272da73b1e2a10b0cb8c2",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_5.png",
+          "sourceSha256": "83c21793c455f0e2fbd1ae6e2e03c7f3cd0868209fa3cbdaf119792efcb85171",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "手臂回收、身体回到较直立姿态；轮廓完整，未见异常边缘。"
+        },
+        {
+          "action": "attack",
+          "index": 6,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_6.png",
+          "sha256": "6bf6d2f1e0fdc681cb3995d58be7c5a5ee2b65fa884d46b7ce602031ee079691",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_6.png",
+          "sourceSha256": "7c610c5541b9535e04322562bb1af867af3a6474aab3c8b400a7df8fd5c76e55",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "继续回收至近中立姿势，衣发有残余摆动；无明显肢体或裁切问题。"
+        },
+        {
+          "action": "attack",
+          "index": 7,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/attack_7.png",
+          "sha256": "3a04fa462d6026c74bb808ea5c1f1024cb665af37bbca4bfe132a27937c8aaa9",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/attack_7.png",
+          "sourceSha256": "ea102b5984c1c1ff61f26d52a0ff854641c11bcf9fe1a4b8685e6ad56d59bb84",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "收势接近idle站姿，造型比例连续；四周留白。"
+        },
+        {
+          "action": "hit",
+          "index": 0,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/hit_0.png",
+          "sha256": "b79edfffc1785df896f7f5169dac3b738b228ecdfc668fa936942f620af98963",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/hit_0.png",
+          "sourceSha256": "62b0d7e69a899e67e65b5b213dfd543c98f6f1fd466a75f59f644a73e5623e58",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "受击时上身后仰、衣发向右外扬，姿势轮廓完整；未见明显多余肢体或硬裁边。"
+        },
+        {
+          "action": "hit",
+          "index": 1,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/hit_1.png",
+          "sha256": "1fe565f4a4bac29d18aaca10c29bd6cafbeb459872a6f5e224184eeb848683a9",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/hit_1.png",
+          "sourceSha256": "f3dbdafe73e03d2982686cee9459d439d4207aeed536876e47d94a52a25d9fbe",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "恢复至较直立姿态，作为回正帧可辨；头发、长袍轮廓完整。"
+        },
+        {
+          "action": "death",
+          "index": 0,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_0.png",
+          "sha256": "13cd65774aa89e1ec2b5f796e354308aea05bcfb24217ba7debad8adb84cb5de",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_0.png",
+          "sourceSha256": "5bb13d84cd1a4eef77ee14da546fa2e56fcd86c3046eda7059589245e113ef90",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "死亡首帧仍近直立，头部略垂、身体开始失去支撑；全身留在画布内。"
+        },
+        {
+          "action": "death",
+          "index": 1,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_1.png",
+          "sha256": "1de14febb28c7c7de20b87c88c151eabc12474bc6e90f9f718e5a078d2ec7db1",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_1.png",
+          "sourceSha256": "0a4f847d3f7feba2dc54575185d5bdba2310a89e93005c1ba5541dfad9a31d4d",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "较首帧前倾并降低，发衣随身体下坠；姿态继续进入倒下过程。"
+        },
+        {
+          "action": "death",
+          "index": 2,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_2.png",
+          "sha256": "32becb69eebe139ea74f952e82ae9c9fb802f2035da3998063f6c4f8788962f1",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_2.png",
+          "sourceSha256": "15eb0176b40752f058fe96e95509740226c85e8e6a5aa2200b1c9aa0e76ccde9",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "身体进一步折低，头肩下降；与death_1相比变化不大但方向仍向下。"
+        },
+        {
+          "action": "death",
+          "index": 3,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_3.png",
+          "sha256": "5eadcd7d3cb412bf5b7fd2404f6f7da6ff55abcf1079d5ceb6b79f8a244a12ee",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_3.png",
+          "sourceSha256": "813b07d48fbaeba583a680833d7c233d7549d1b93217912ad056cdfac9649766",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "身体迅速降至接近地面的横向倒伏姿态；相对death_2高度变化明显，单步塌落较突出。"
+        },
+        {
+          "action": "death",
+          "index": 4,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_4.png",
+          "sha256": "5d68c2e8d4ab8bfc2f2f2caeb1c08e4120b869f04a9caa39c85bfce1b5c16c1d",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_4.png",
+          "sourceSha256": "85f41396e9890fc74393f54acffc4b374b6a17a6294a15cb9410fbe65b2b6203",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "已呈伏地姿势，肢体、衣发沿地面展开；轮廓完整且未触边。"
+        },
+        {
+          "action": "death",
+          "index": 5,
+          "path": "output/actor-redraw/frames/mclsl_beast_moqilin_yuan/main/death_5.png",
+          "sha256": "389cc45b98476ff23cf9c01925e1ad447b90594f27aacfd4007f2a857b47006f",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_5.png",
+          "sourceSha256": "96161a4b087d1af43e00aebdc8d888839f80078bbbc3d51986bfb8204043644a",
+          "sourceSha256Verified": true,
+          "reviewed": true,
+          "observation": "保持伏地末态，姿势比death_4仅小幅调整；没有明显回抬。"
+        }
+      ],
+      "unreviewedActions": [],
+      "actionProblems": [
+        {
+          "action": "walk",
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "issue": "未能确认近远腿领步反转；长袍遮住膝踝，屏幕右前脚在各帧持续显著，完整步态交替未通过。"
+        },
+        {
+          "action": "death",
+          "indices": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "issue": "death_2→death_3下沉明显，形成突出单步塌落；death_4→death_5末段姿态变化很小，最终保持卧倒。"
+        }
+      ],
+      "verifiedInGame": false
+    }
+  ]
+}

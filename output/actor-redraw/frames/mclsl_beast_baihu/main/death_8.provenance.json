@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "death",
+  "index": 8,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/death_8.png",
+  "sourceSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_baihu/main/death_8.png",
+  "outputSha256": "b4ccd26a772b3a41da4c7424717ff15b498edb613f2af054eaa813a8ae2b5e56",
+  "createdAtUtc": "2026-10-09T06:06:48.048286+00:00",
+  "prompt": "Use case: game-asset. Independently draw exactly ONE transparent pixel-art game frame, Baihu death_8. Image 1 fixes identity: white and pale silver tiger, charcoal stripes, broad feline head, round ears, FOUR legs, curled striped tail. Image 2 shows the previous side-prone pose, retain its exact pixel scale and complete body outline. Fixed 1254x1254 transparent canvas. Whole tiger clear of all edges, within x140..1160. Pose: Almost motionless fully side-prone corpse. Cheek and torso touch ground, eyes closed. Only tail tip relaxes a small amount closer to the hip while retaining compact width. All four resting legs remain visible and correctly attached. Visible pale white belly, body rolled onto its side, all paws relaxed and folded rather than supporting body. Keep the cheek down. Do not grow, shrink or stretch anatomy. Crisp square pixel clusters, dark outlines, flat limited shading. Draw this NEW single frame, no old whole-sprite copy/paste or scaling/recolor as redraw, no sprite sheet, panels, multiple poses, text, aura, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/death_7.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.07639836289222374,
+    "translation": [
+      -1,
+      -5
+    ],
+    "canvas": [
+      96,
+      96
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 636.0,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 12696,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

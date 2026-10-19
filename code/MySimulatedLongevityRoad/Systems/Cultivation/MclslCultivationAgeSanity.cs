@@ -12,6 +12,8 @@ internal static class MclslCultivationAgeSanity
     internal static bool RepairImpossibleYouthCultivation(Actor actor, int year)
     {
         if (actor?.data == null || !MclslActorAccessor.Alive(actor)) return false;
+        // Ordinary beasts are born at their species' instinctive realm.
+        if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
 
         int age = SafeAge(actor);
         string realm = MclslActorAccessor.Realm(actor);

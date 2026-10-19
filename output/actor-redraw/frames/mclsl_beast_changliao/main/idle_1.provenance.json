@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_changliao",
+  "action": "idle",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_changliao/idle_1.png",
+  "sourceSha256": "e158a0a6ec5f3703ab1fa92ebaef8398713c39b570ad978da215717c1dd19e9d",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_changliao/main/idle_1.png",
+  "outputSha256": "e158a0a6ec5f3703ab1fa92ebaef8398713c39b570ad978da215717c1dd19e9d",
+  "prompt": "Use case: stylized-concept. Draw exactly ONE fresh independent 1254x1254 transparent RGBA pixel-art game frame for \u957f\u6f66\u517d\u00b7\u517d\u5f62 (mclsl_beast_changliao), idle_1. The reference image shows the required right-facing wolf-like beast identity, cream/brown fur, dark red accents, four coherent legs, broad clean pixel clusters and its quiet breathing pose. Re-draw this pose independently; do not paste, shift, scale or recolor the reference bitmap. Fix the known defect: the nose, open mouth, both long tusks and all teeth must be fully drawn, with clearly visible transparent padding at the RIGHT edge, at least 32 native pixels, and no body part clipped at any edge. Preserve the same apparent anatomical scale and body anchor within the square source canvas. Exactly one character, one pose, no other creature, sprite sheet, panel, ground shadow, text, glow or background. Clean native transparent PNG.",
+  "references": [
+    "E:\\\\0.6.0\\\\output\\\\actor-redraw\\\\frames\\\\mclsl_beast_changliao\\\\main\\\\idle_1.png"
+  ],
+  "createdAtUtc": "2026-10-19T02:18:24.968214+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      631.0,
+      1093
+    ],
+    "pixelsPerUnit": 13.678571428571427
+  },
+  "repair": {
+    "replacedSourceSha256": "c865ce94a5697b990681f85b02506a484de5dd57c87fb252e3c348979f913e73",
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-ba1b-78d1-874a-1ac0edfddb28\\exec-6b2e112d-3cfb-41d7-bc84-ab4fbd1b85f3.png",
+    "candidateProvenance": "output/actor-redraw/generated-frame-recovery.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  }
+}

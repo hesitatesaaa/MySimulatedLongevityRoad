@@ -1,0 +1,80 @@
+{
+  "acceptance": "user-accepted-existing-evidence",
+  "authorization": "2026-10-19 \u7528\u6237\uff1a\u73b0\u5728\u7684\u6d4b\u8bd5\u5df2\u7ecf\u53ef\u4ee5\u4e86",
+  "actualResults": {
+    "scenarios": [
+      {
+        "units": 100,
+        "averageFps": 29.970282630894275,
+        "frameP95Ms": 33.38659927248955,
+        "cpuMemoryBytes": 1456031215,
+        "peakDedicatedGpuBytes": 3244761088.0,
+        "gpuSamples": 24
+      },
+      {
+        "units": 500,
+        "averageFps": 59.62441785969825,
+        "frameP95Ms": 16.696399077773094,
+        "cpuMemoryBytes": 1459802374,
+        "peakDedicatedGpuBytes": 3419701248.0,
+        "gpuSamples": 23
+      },
+      {
+        "units": 1000,
+        "averageFps": 56.6998404756886,
+        "frameP95Ms": 21.45710028707981,
+        "cpuMemoryBytes": 1464700696,
+        "peakDedicatedGpuBytes": 3420696576.0,
+        "gpuSamples": 24
+      }
+    ],
+    "continuousRunSeconds": 1140.9666900634766,
+    "twentyMinuteRunCompleted": false,
+    "sizeForms": 62,
+    "placementIcons": 38,
+    "exactSaveReloadActors": 1000,
+    "currentNativeCoverage": 1.0
+  },
+  "manifestGeometrySha256": "4ee91fb31e6d2ea121d4456ec34db7c1b9140a60cbaa76902b6a7ccf17124a4b",
+  "sources": {
+    "native": {
+      "path": "output/runtime-validation/release-20261019/native-2g-full-detail-observation.json",
+      "sha256": "af6b159738259a55d4d6100c287c1081d79e0c9969e41ef64c9fb33944713079"
+    },
+    "nativeInput": {
+      "path": "output/runtime-validation/release-20261019/native-input.json",
+      "sha256": "ed28c4d1dfeba48f54f145aaca1518ed2018f3133db2099a797d8fb5bef26856"
+    },
+    "gpu": {
+      "path": "output/runtime-validation/release-20261019/native-2g-full-detail-gpu-memory.csv",
+      "sha256": "d9148e3b7e7e83b19574e195d1ec8336f44382689228c3d2f108226c8a8c0089"
+    },
+    "sizes": {
+      "path": "output/runtime-validation/release-20261019/size-normalized-observation.json",
+      "sha256": "5afff96f230959e4b01620a86283d7cd593749ca8ffa4c3aff9ac2ed9c9e7049"
+    },
+    "comparison": {
+      "path": "output/runtime-validation/release-20261019/size-normalized-observation-size-comparison.json",
+      "sha256": "956f5b36963ddf997247ceb5f2020a34a7a8f7c8a7e60c001fc72923da1be149"
+    },
+    "reload": {
+      "path": "output/runtime-validation/release-20261019/save-reload-age-fixed-observation.json",
+      "sha256": "7d6979e1f827600db73f8948ee06baa5903c4eea4b4d78c937b80c07a9d96816"
+    },
+    "gameplay": {
+      "path": "output/runtime-validation/release-20261019/gameplay-stable-runner-observation.json",
+      "sha256": "b47464ced3c574c6267fa57f0e3f6318449d2749ebc19d7f98b00fbba4262de0"
+    },
+    "baseline": {
+      "path": "output/runtime-validation/release-20261019/baseline-full-detail-observation.json",
+      "sha256": "078cdd09e45b75c4736faff97b638e3bc876aff4535869e30c1dc9e259c298d8"
+    }
+  },
+  "limitations": [
+    "Further image review waived by the user.",
+    "The last native run recorded approximately 19 minutes; automated 20-minute completion was not recorded.",
+    "Final matched baseline was not rerun after the last fixes; earlier baseline is informational.",
+    "Additional exhaustive recipe, spell and death sweeps were not rerun; existing scoped controlled checks and the 1000-actor save regression are retained.",
+    "New saves only; tested on GTX 1660 Ti 6 GiB at 1920x1080."
+  ]
+}

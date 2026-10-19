@@ -1,0 +1,110 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "jobs": [
+    [
+      "idle",
+      1,
+      "Early inhale: the pale chest expands very slightly, head stays in the standard position, dorsal mane lifts a little. Bottom tail coil remains fixed; whisker tips float upward about 15px."
+    ],
+    [
+      "idle",
+      2,
+      "Breath rises: head and upper neck lift about 15px, upper S bend tightens mildly, foreclaws relax open. Tail tip drifts a little right while lower coil remains at its usual position."
+    ],
+    [
+      "idle",
+      3,
+      "Continuing inhale: head lifts about 25px, mane fins rise, upper torso curve opens slightly. Tail plume angles outward about 20px. Keep all limb roots in place."
+    ],
+    [
+      "idle",
+      4,
+      "Peak inhale: head lifted about 30px above standard, chest subtly fuller, whiskers gently rising. Foreclaws curl lightly, lower body coil preserved. No major vertical translation."
+    ],
+    [
+      "idle",
+      5,
+      "Early exhale: head returns halfway to standard height, mane fins settle, chest relaxes. Tail plume moves back toward the reference direction."
+    ],
+    [
+      "idle",
+      6,
+      "Exhale near standard: head nearly at reference height, upper S bend relaxes. Long whisker tips drift down, lower tail coil tightens slightly."
+    ],
+    [
+      "idle",
+      7,
+      "Low breath: head about 10px below standard, chest slightly compressed, dorsal fins settle. Tail plume drifts gently left; no collapsed posture."
+    ],
+    [
+      "idle",
+      8,
+      "Return from low breath: head rises toward original height, foreclaws relaxed, mane and whiskers begin to lift. Tail coil loosens to standard curve."
+    ],
+    [
+      "idle",
+      9,
+      "End of idle breathing cycle: head, chest and S-shaped coil close to the standard pose, whisker and tail tips easing back to their original angles for a seamless return to idle_0."
+    ],
+    [
+      "walk",
+      0,
+      "Start of a serpentine gliding cycle. Retain tall compact S body. Upper neck curves slightly forward-right, lower body begins to curl back-left. Foreclaws angle forward, hind claws relaxed, whiskers stream mildly backward."
+    ],
+    [
+      "walk",
+      1,
+      "Glide wave advances down the neck. Head moves about 20px right without resizing, upper S bend tightens behind it, middle torso shifts slightly left. Tail coil starts opening."
+    ],
+    [
+      "walk",
+      2,
+      "Forward wave stronger. Neck projects modestly forward-right, upper foreclaws fold toward chest; midbody bend broadens left. Tail tip begins to sweep right. Entire dragon remains compact with clear margins."
+    ],
+    [
+      "walk",
+      3,
+      "Wave reaches upper torso. Head holds forward, mane streams gently backward, middle bend narrows while lower bend opens right. Hindclaws flex inward without walking on a floor."
+    ],
+    [
+      "walk",
+      4,
+      "First wave crest. Head begins curving back toward center, upper torso bends gently left. Lower body curves right, tail plume reaches rightmost modest sweep about 50px beyond standard, compact coil intact."
+    ],
+    [
+      "walk",
+      5,
+      "Wave passes into tail. Head centered, upper foreclaws relax outward; lower torso now bends strongly but smoothly right. Tail plume curls upward slightly on the right side of its bottom loop."
+    ],
+    [
+      "walk",
+      6,
+      "Opposite half-cycle begins. Upper neck bends subtly left, head about 15px left of standard, middle bend shifts right. Bottom tail plume returns through its standard center, claws fold loosely."
+    ],
+    [
+      "walk",
+      7,
+      "Opposite neck wave grows. Head remains modestly left, upper curve opens, middle S bend shifts a little right. Tail coil narrows, mane fins stream gently opposite direction."
+    ],
+    [
+      "walk",
+      8,
+      "Wave travels down opposite torso side. Head starts returning right, foreclaws extend slightly forward. Middle bend opens right while lower bend moves left. Tail plume begins sweeping left."
+    ],
+    [
+      "walk",
+      9,
+      "Opposite wave crest. Head almost centered, dorsal fins undulate, lower body curves left. Tail tip reaches a compact leftward sweep about 50px from standard. Hindclaws remain attached to same lower body segment."
+    ],
+    [
+      "walk",
+      10,
+      "Wave enters the lower tail. Neck nearly at standard S curve, foreclaws relax, tail plume curls slightly upward on the left of its bottom loop. Body proportions unchanged."
+    ],
+    [
+      "walk",
+      11,
+      "End of glide cycle: all major S bends return close to walk_0, head forward-right slightly, tail plume eases toward standard. Whiskers finish backward sway, creating a smooth loop."
+    ]
+  ]
+}

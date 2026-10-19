@@ -1,0 +1,63 @@
+{
+  "actorId": "mclsl_beast_kunpeng_yuan",
+  "action": "walk",
+  "index": 4,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_4.png",
+  "sourceSha256": "36b80e8bfb3ed8d543e315ea884e9dad7d6509c386547b4eb3ceb7472bb38696",
+  "outputFile": "GameResources/actors/Beasts/kunpeng/Human/main/walk_4.png",
+  "outputSha256": "36b80e8bfb3ed8d543e315ea884e9dad7d6509c386547b4eb3ceb7472bb38696",
+  "createdAtUtc": "2026-10-19T02:18:25.069382+00:00",
+  "prompt": "Create ONE transparent native 1254x1254 pixel-art walk frame of the same blue-white feather-robed woman, facing right. This is frame 4 directly after supplied reverse-stride frame 3. Maintain reversed leg identity: the viewer-near LEFT leg stays behind, extended toward x=430, and is visible in front of trailing robe; the viewer-far RIGHT leg steps forward toward x=1010 while its thigh is BEHIND the white front robe. Shift weight subtly forward from frame 3; both low shoes on same floor line, no raised knee. Preserve face, navy hair and blue braid, ornaments, feather sleeves, full silhouette, scale, crisp pixel art. One character, one pose, transparent background, no text/sheet/extra limbs.",
+  "references": [
+    {
+      "file": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_kunpeng_yuan/walk_3-v2.png",
+      "sha256": "4db061a60e7471c6a03fd9ae3954fbe00ecad87b8e67fc3e3fd5d8be1d28ea5a"
+    },
+    {
+      "file": "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_4.png",
+      "sha256": "195d8c35cbc486227706bf14516a22778708c3e80bb2eca981c0ec96c651b2da"
+    }
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      638.5,
+      1185
+    ],
+    "pixelsPerUnit": 11.897727272727273
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "repair": {
+    "replacedSourceSha256": "195d8c35cbc486227706bf14516a22778708c3e80bb2eca981c0ec96c651b2da",
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-a38a-7783-97c4-7799beba6b2f\\exec-dcc3e652-bbc2-4208-9a6b-ddd106616a2b.png",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_kunpeng_yuan/walk_4-v2.provenance.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  }
+}

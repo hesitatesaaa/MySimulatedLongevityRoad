@@ -1,0 +1,88 @@
+{
+  "threadId": "01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd",
+  "failedTurnId": "01a13dae-2a3b-77c0-bde2-eec70d17bc2e",
+  "error": {
+    "message": "You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 2:16 PM.",
+    "additionalDetails": null
+  },
+  "service": "codex-agent-limit-not-imagegen",
+  "images": [
+    {
+      "toolCallId": "exec-f1da48e5-6ce5-49f6-8e1f-fa4a9eb2d64f",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "walk",
+      "index": 1,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-f1da48e5-6ce5-49f6-8e1f-fa4a9eb2d64f.png"
+    },
+    {
+      "toolCallId": "exec-bbbe5b17-65d5-4caf-91f0-2be6602a51e0",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "walk",
+      "index": 2,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-bbbe5b17-65d5-4caf-91f0-2be6602a51e0.png"
+    },
+    {
+      "toolCallId": "exec-4e8983bb-6adb-479a-aecc-59476dd8ee6e",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "walk",
+      "index": 3,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-4e8983bb-6adb-479a-aecc-59476dd8ee6e.png"
+    },
+    {
+      "toolCallId": "exec-ac432863-59ee-49da-8e28-aad9c12a3b84",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "walk",
+      "index": 5,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-ac432863-59ee-49da-8e28-aad9c12a3b84.png"
+    },
+    {
+      "toolCallId": "exec-02dc30f3-06f9-4fca-bf73-35ebbe704eaa",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "walk",
+      "index": 4,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-02dc30f3-06f9-4fca-bf73-35ebbe704eaa.png"
+    },
+    {
+      "toolCallId": "exec-4d3ab3e8-5ea9-4754-9590-584440c1bbfe",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 0,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-4d3ab3e8-5ea9-4754-9590-584440c1bbfe.png"
+    },
+    {
+      "toolCallId": "exec-03f82b89-cab1-43fc-b764-3c7cda994885",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 2,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-03f82b89-cab1-43fc-b764-3c7cda994885.png"
+    },
+    {
+      "toolCallId": "exec-357d5808-c730-49b4-bd24-4aa1060d7c41",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 1,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-357d5808-c730-49b4-bd24-4aa1060d7c41.png"
+    },
+    {
+      "toolCallId": "exec-2b865792-7dc3-41e7-b7e5-7df115bf01c3",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 4,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-2b865792-7dc3-41e7-b7e5-7df115bf01c3.png"
+    },
+    {
+      "toolCallId": "exec-8e5bb840-d6b7-4e04-9b14-74eba864f47c",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 3,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-8e5bb840-d6b7-4e04-9b14-74eba864f47c.png"
+    },
+    {
+      "toolCallId": "exec-f5ba74c4-e4b0-4877-a45b-aa81b48f4ef8",
+      "actor": "mclsl_beast_qingluan_yuan",
+      "action": "death",
+      "index": 5,
+      "savedPath": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a13a2c-8f3d-7171-a3fa-e1fe3d2246dd\\exec-f5ba74c4-e4b0-4877-a45b-aa81b48f4ef8.png"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_fenghuang_yuan",
+  "action": "attack",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_fenghuang_yuan/attack_2.png",
+  "sourceSha256": "c5e91bfe691b07f3e8bb4c89772d2b21eb2567acccd0d3f12f63161ac77f4161",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_fenghuang_yuan/main/attack_2.png",
+  "outputSha256": "c5e91bfe691b07f3e8bb4c89772d2b21eb2567acccd0d3f12f63161ac77f4161",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 凤凰·化形 (mclsl_beast_fenghuang_yuan), attack_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, copper-red loose high bun, orange/cream feather mantle and restrained gold sash, flowing robe with a few broad folds. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Attack single-shot progress 0.286, stage release. Required pose: Extend the attacking arm/weapon forward from the bent elbow, leading knee bends and rear foot braces; sleeve opens behind the forearm. Species movement: weapon/spell gesture with a firmly attached hand, proper two-arm anatomy, trailing robe folds, bent leading knee and rear bracing foot. Follow ONLY this stage, not a generic peak attack pose. No detached projectiles, trails, particles or light effects. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang_yuan\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png"
+  ],
+  "createdAtUtc": "2026-10-13T05:48:22.662252+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

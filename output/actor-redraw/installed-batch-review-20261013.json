@@ -1,0 +1,38 @@
+{
+  "batch": "installed-frame-resume-20261013",
+  "providerRequests": 9,
+  "probeFrames": 1,
+  "parallelBatchFrames": 8,
+  "allSavedWithSourceAndPrompt": true,
+  "providerQuotaError": false,
+  "sourceProcessing": "single nearest-neighbor conversion to existing 128x128 installed canvas",
+  "runtimeResourceFilesChanged": false,
+  "productionInstalledForms": 15,
+  "productionInstalledFrames": 520,
+  "productionInstalledIcons": 9,
+  "offlineApproved": false,
+  "supersededByUserClarityRejection": true,
+  "allEightSmallReferenceCandidatesArchived": "output/actor-redraw/rejected/low-reference-20261013",
+  "replacementJobs": "output/actor-redraw/original-clarity-corrections-20261013.jobs.json",
+  "observedIssues": [
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "attack",
+      "index": 7,
+      "issue": "Final settle pose shrinks compared with attack_6 and reference idle; review requires targeted redraw at consistent anatomical source scale."
+    },
+    {
+      "actor": "mclsl_beast_zhuque_yuan",
+      "action": "death",
+      "index": 2,
+      "issue": "Head/torso rises compared with death_1; review entire six-frame death action before deciding targeted correction or a justified frame-order change."
+    }
+  ],
+  "nextActions": [
+    "Read this review before installing the new candidates; do not mark failed continuity as approved.",
+    "Preserve current source and proof of any specifically rejected candidate before targeted redraw.",
+    "For further batches use prepare-installed-frame-resume.py with installed-size references and numerical source anatomy guidance; do not reuse obsolete original-fraction prompts.",
+    "Continue actual missing death_5 and remaining queue. All current candidate reviews remain pending."
+  ],
+  "formalReleaseReady": false
+}

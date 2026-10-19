@@ -1,0 +1,206 @@
+{
+  "reviewType": "offline-independent-source-and-static-visual-review",
+  "frames": [
+    {
+      "actor": "mclsl_beast_xuanniao",
+      "frame": "walk_3",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_3.png",
+      "sourceSha256": "0234d58e0b9ce9c83b576bd642ffb9b0a9382a411d2feed38ad511822173422a",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        85,
+        116,
+        38,
+        136
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Two legs and a paired wing structure visible; flight phase still requires full loop review."
+    },
+    {
+      "actor": "mclsl_beast_xuanniao",
+      "frame": "walk_5",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanniao\\walk_5.png",
+      "sourceSha256": "bf7f5ca08f0e1ff7be961f5130d1e8c089a09f72c5124371019274797922adcc",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        50,
+        62,
+        33,
+        78
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Two legs and a paired wing structure visible; flight phase still requires full loop review."
+    },
+    {
+      "actor": "mclsl_beast_qingluan_yuan",
+      "frame": "idle_1",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan_yuan\\idle_1.png",
+      "sourceSha256": "be69e428010c2f804bad3324a27761dc648a769749b99d74ddbe9b97375db318",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        300,
+        106,
+        292,
+        52
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_qingluan_yuan",
+      "frame": "idle_2",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan_yuan\\idle_2.png",
+      "sourceSha256": "a0be9b3c229807944d39c417d09f30225187afbe5924bcb2874857314d74b247",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        289,
+        107,
+        264,
+        53
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_qingluan_yuan",
+      "frame": "idle_3",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan_yuan\\idle_3.png",
+      "sourceSha256": "4666575cf79cd9d03b45dd04d95bf697182c2a5e23011905ab0b1750c7b522c1",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        300,
+        105,
+        285,
+        52
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_qingluan_yuan",
+      "frame": "walk_0",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_qingluan_yuan\\walk_0.png",
+      "sourceSha256": "f33f217f0ab5a696a4de9cc3da262c5c82c23e39bb3aa440a8c69f1d67af46ec",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        225,
+        102,
+        222,
+        60
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_changliao",
+      "frame": "idle_1",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_changliao\\idle_1.png",
+      "sourceSha256": "c865ce94a5697b990681f85b02506a484de5dd57c87fb252e3c348979f913e73",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        63,
+        317,
+        53,
+        161
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_changliao",
+      "frame": "idle_2",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_changliao\\idle_2.png",
+      "sourceSha256": "4bf6c565b4cf2c3d451b73444345a2fd848c38133074e126a058419747646e38",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        66,
+        340,
+        58,
+        160
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    },
+    {
+      "actor": "mclsl_beast_changliao",
+      "frame": "idle_3",
+      "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_changliao\\idle_3.png",
+      "sourceSha256": "d665ce310308b95994e2cf51feee4f4449cd8fa519a539f355288964efb0b283",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "opaqueMargins": [
+        59,
+        331,
+        49,
+        159
+      ],
+      "parentViewedFullImage": true,
+      "staticAnatomy": "pass-visible-limbs-with-natural-occlusion",
+      "continuityApproved": false,
+      "anchorApproved": false,
+      "installed": false,
+      "notes": "Visible limb counts and joint connections coherent; full action continuity not yet approved."
+    }
+  ],
+  "fullActionsApproved": false,
+  "runtimeValidated": false,
+  "releaseReady": false
+}

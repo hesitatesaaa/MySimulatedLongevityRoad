@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 14,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/attack_14.png",
+  "sourceSha256": "b63d0165c6c6b63ce666d8d9e61c6b36b4c50def95a9011e3c434221c6869a79",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_qinglong/main/attack_14.png",
+  "outputSha256": "7893f348650fd8b4a75f3d45fb54fe7c30f3e90e9c62fa7bbcba193ab6d89f1f",
+  "createdAtUtc": "2026-10-09T07:40:14.379270+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE new transparent pixel-art Qinglong recovery frame attack14. Match reference identity, exact same1254x1254canvas, pixel size, right-facing side view. Pose intermediate between bite recovery and idle: reference head shifts FORWARD RIGHT just30px; two cream-lined whiskers curl slightly more widely to x1110, near forehand lowers slightly15px, tail plume tilts slightly. Preserve EXACT reference FOUR limbs and their roots: near forearm from left shoulder across chest terminating ONE hand nearx735y790; far forearm at right belly terminatingONEhandx900y700; near hindleg from lower coil toONEfootx600y950; far hindleg PARTLY HIDDEN behind this lower hind root aroundx500y930. No claw at midbody loop x600y770; that area is empty belly/fin, NOT another leg. Do not duplicate foreclaws or sprout an extra hidden hand. Same turquoise scales navy shadows cream belly gold antlers and crest cyan mane, cream whiskers withcyanedge, compactSbody. Whole body fits x230..1180,y90..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, flat palette. New independently drawn pose, no pasted/translated/scaled old sprite. No wings text effects ground shadow background multipleposes or sheets.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_13.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 53204,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

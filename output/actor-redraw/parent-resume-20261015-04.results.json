@@ -1,0 +1,520 @@
+{
+  "queue": "E:/0.6.0/output/actor-redraw/parent-resume-20261015-04.jobs.json",
+  "images": [
+    {
+      "jobIndex": 4,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "idle",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7f27cbec-357f-48e4-995a-d9e760fe219b.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\idle_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "2f3e92cc4d98c24b0ab22311fb0e18216bb1cf84ba8a4b6add042eff56e66605",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 0,
+      "actor": "mclsl_beast_hongmao_yuan",
+      "action": "death",
+      "index": 5,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-cce76a20-26e2-4c7b-991a-c31f8b312466.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao_yuan\\main\\death_5.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "ee873d776073ab741f719fc770b97484c0f190305ae740a8e600acf6e5235595",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 8,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-56311d4b-ca8b-439c-99d3-787e6ac50547.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "a6e436ea4ffd935e3fbb542419b7bd6b7cc59a14052e503b839906ca340e9c7a",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 2,
+      "actor": "mclsl_beast_feiqiu",
+      "action": "death",
+      "index": 5,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e8def793-8dfc-4c70-a529-1e4c36105acc.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu\\main\\death_5.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "84d9d2909231ad1bf3d7c7ad244c4f93ba9ccd5e60ea1182f5a0e712c8aeec6e",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 9,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-43190e24-c912-48ee-871e-86c5c71c6da5.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "12416899e1976458aeb369797333c914300d41eb123541faec6147097c9964a3",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 10,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-cc802a25-50cd-42aa-a21f-65c5049d4bc4.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "92f791a49cc3f64f84cb21c3c7362b72495564e57b32be14bac79987d69f64bc",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 6,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "idle",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-01ef0ec1-8037-4f84-a0b7-69efe0653113.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\idle_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "3169c504ead38b8f68693ee2131937871ecb5edf074b69f31363d0e7f36f955c",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 11,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 4,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-1b32367e-cc0e-47d1-9c4b-f1c1bf90f60d.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_4.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "e0f809247b2cd74f0bfcfb4cd9c08855844f3630184e0119991a2a94deded958",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 5,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "idle",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-78f97e40-b3c3-475d-abc3-644990833bd6.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\idle_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "690a70b99ba8f0f2fe4fca2592b7b3c16bee0ab32e77cccacc4ccf7ce6b874b0",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 12,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 5,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-57247b6d-ffbe-486f-8db1-14316ef34879.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_5.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "caefea2c64527c08d42d552c5cc76314a3e196bae503a0595112716b9105287f",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 3,
+      "actor": "mclsl_beast_feiqiu",
+      "action": "icon",
+      "index": 0,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-bd06eb34-1d0b-4ed2-9070-698d54f2a37f.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_feiqiu.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "ddbba94527800682bafc9b5700174648b7aa59637e05c950261e447f79aaf2e6",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 1,
+      "actor": "mclsl_beast_feiqiu",
+      "action": "death",
+      "index": 4,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-233a93e2-35df-48ba-9d43-aea18bca30ec.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu\\main\\death_4.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "84a80511319164d9227e98bacea2ca70bfa5ed7f89d95ea9638bc05fc62f8973",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 7,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "walk",
+      "index": 0,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-bb28a2a9-d421-4fe1-824c-080a8ce3a005.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_0.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "b4d47cc58693ecebf15606c5b345d93537da892d978ef5b6cfc3221e76c5160a",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 14,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-61a817b4-0077-4cd6-aad0-0b0d005c874a.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "80e9fd314ed328b6c0ad5aaa4bdd473b9f78efe8d16b9409ccc825809666cc17",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 19,
+      "actor": "mclsl_beast_yingying",
+      "action": "idle",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-fd925d0e-08dd-4d91-9285-48ff11d433b4.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\idle_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "1e9e034078c976e25cce67a4f6ce6fec4a98dfcbe8ab9b384b0fcd40de2c8f77",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 13,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 0,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-904b47e6-a27e-4c76-9daf-a24d2e98d413.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_0.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "76bc1a7a2ee2be22bc30da3a09abe3f8508106a6cad2703c2dfdc5f7792a3c57",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 16,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-dcbdf0a4-a727-42bd-a94f-b6935ea74217.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "cc8dda1f45b3cad75d434462e6fd2ed47adfc8bcbdf960d368b9a3051d08df29",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 17,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 4,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-b9e0e677-c3b4-4955-aaaf-b633ae24cf8f.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_4.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "4b12c7696adf6f01b19bdafeacf82ea492bb78c03adf34a7f4ef44b02563dc2e",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 21,
+      "actor": "mclsl_beast_yingying",
+      "action": "idle",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-7acf63bf-e3b8-400a-bd9d-fbf40685fb6d.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\idle_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "e4f3d0891973134784eebc887132693c9b6ba8811e69a0c374c8f4d26682ee52",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 15,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-602059c9-90a2-45e0-95c6-178b7e050139.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "eeef7800c04c2bfc1ab4f36e105fcd4efaf5f63828464834269e6a433d611fc0",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 20,
+      "actor": "mclsl_beast_yingying",
+      "action": "idle",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-dede25b3-eaf3-4984-80e3-1fbe9d523ddc.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\idle_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "6e01322b9b22b9eddbd73504eb10b5c38fb3ed272571112e062261947fa5a57f",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 22,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 0,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-25ff52e3-7ae8-40f8-b805-c573ca6f5a73.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_0.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "96470aea3893ffd8089b2f2ca135e9938b8cd0bd134ea3ed1aae058806853c00",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 23,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-78ae5726-6126-47bb-8ac9-a946a7958c25.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "10f0a07f843836c3435eb4c3d2a630aeeb892578b837a9519c21a26b51cdcf8c",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 18,
+      "actor": "mclsl_beast_feiqiu_yuan",
+      "action": "death",
+      "index": 5,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-66aabb30-380f-494c-834f-68e3322750c1.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\death_5.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "15a8341e6adb28ab168481376f2d1af0e838d788c5f078985cb4f5ead3ef20e6",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 28,
+      "actor": "mclsl_beast_yingying",
+      "action": "death",
+      "index": 0,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-e1f4e710-2ce4-49d3-8025-c23b474942a5.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\death_0.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "d928394dedd217a1001b33868f8caecf2e2624eb9b8ba5a160637e4103967c8f",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 24,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-3416863f-b3f1-4bdd-a264-30adde2a555d.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "c0dad47a786d9a3e17ac708c42dac0df628f04fe65293921099540031ccc1501",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 26,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 4,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-9cd14459-0c14-4cde-9449-540dfc508728.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_4.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "ac6877fc483737ed939b5eac89adb2b351194c47101565b4e42089b17edc2dfb",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 27,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 5,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-f4f364c3-7ccd-44c5-82d1-b77d8a447565.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_5.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "fc104f18ea54c63f32cb143516c6e84c472e3647250c2e58c1be06b2de06a609",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 29,
+      "actor": "mclsl_beast_yingying",
+      "action": "death",
+      "index": 1,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-ee3ba635-024f-4891-a501-42e7ae82161d.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\death_1.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "512790107aeb32a9ea5b61580ad83deb2230e48ac97438ae2fabc82fb3483d2f",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 30,
+      "actor": "mclsl_beast_yingying",
+      "action": "death",
+      "index": 2,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-79b4c3b7-5c1a-4ea9-933b-901afdcbcb0c.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\death_2.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "0e4041b413753acd579979851c3277ae36f61a63ab9bbb85df07e51023d5484f",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 25,
+      "actor": "mclsl_beast_yingying",
+      "action": "walk",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-a45c2f21-51c2-4ab7-80c0-080f83351766.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\walk_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "20a21b2571c44dc4474096aee06b395c040a17432d3101e08b0fa5c3a13af3e5",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    },
+    {
+      "jobIndex": 31,
+      "actor": "mclsl_beast_yingying",
+      "action": "death",
+      "index": 3,
+      "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a11e5c-c382-7b90-832c-511eb0cfc013\\exec-662eafc0-898b-4a67-a4f7-53f8048038a8.png",
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_yingying\\main\\death_3.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "sha256": "5e72cead80616f044f1e2985116bbc5ea8df951c5ac07e14eec2c807e7d7c0a4",
+      "resampling": "none",
+      "installed": false,
+      "status": "saved"
+    }
+  ],
+  "stop": false,
+  "next": 32,
+  "total": 32
+}

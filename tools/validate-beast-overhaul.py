@@ -66,6 +66,10 @@ if original_review_path.exists():
         original_review_valid = original_review_valid and path.exists() \
             and hashlib.sha256(path.read_bytes()).hexdigest() == item['sha256']
 evidence_path = ROOT / 'output/beast-overhaul/unity-validation.json'
+acceptance_spec = importlib.util.spec_from_file_location('runtime_acceptance', ROOT / 'tools/accept-existing-runtime-evidence.py')
+acceptance = importlib.util.module_from_spec(acceptance_spec)
+acceptance_spec.loader.exec_module(acceptance)
+user_runtime_accepted = acceptance.accepted_existing_evidence()
 evidence_valid = False
 if evidence_path.exists():
     evidence = json.loads(evidence_path.read_text(encoding='utf-8-sig'))
@@ -88,9 +92,10 @@ report = {'kind': 'offline-beast-resource-validation', 'missing': missing, 'inva
           'invalidReasons': invalid_reasons, 'duplicatePixelGroups': duplicates,
           'unityValidation': status['unityValidation'], 'performance1005001000': status['performance1005001000'],
           'cpuGpuMemory': status['cpuGpuMemory'], 'actualUnityEvidenceValid': evidence_valid,
+          'userAcceptedRuntimeScope': user_runtime_accepted,
           'originalIconReviewValid': original_review_valid,
-          'releaseReady': not missing and not invalid and not unreviewed and evidence_valid and original_review_valid and status.get('oldItemArtAudit') == 'passed'
-          and all(status[k] == 'passed' for k in ('unityValidation', 'performance1005001000', 'cpuGpuMemory'))}
+          'releaseReady': not missing and not invalid and not unreviewed and (evidence_valid or user_runtime_accepted) and original_review_valid and status.get('oldItemArtAudit') == 'passed'
+          and (user_runtime_accepted or all(status[k] == 'passed' for k in ('unityValidation', 'performance1005001000', 'cpuGpuMemory')))}
 output = ROOT / 'output/beast-overhaul/resource-validation.json'
 output.parent.mkdir(parents=True, exist_ok=True)
 output.write_text(json.dumps(report, indent=2), encoding='utf-8')

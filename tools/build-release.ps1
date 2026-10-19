@@ -2,18 +2,15 @@ param(
     [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
     [string]$OutputDirectory = '',
     [switch]$RequireFinalAssets,
-    [switch]$AllowUnreviewedAssets,
     [string]$PythonExecutable = 'python'
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $declaredVersion = (Get-Content (Join-Path $projectRoot 'mod.json') -Raw -Encoding UTF8 | ConvertFrom-Json).version
 if ($RequireFinalAssets -or $declaredVersion -eq '0.6.0') {
-    if ($AllowUnreviewedAssets) {
-        & $PythonExecutable (Join-Path $PSScriptRoot 'release_assets.py') validate
-    } else {
-        & $PythonExecutable (Join-Path $PSScriptRoot 'actor-redraw.py') validate --release
-    }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py') --release
+    if ($LASTEXITCODE -ne 0) { throw '0.6.0 beast overhaul release blocked: resources or actual Unity validation incomplete.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'actor-redraw.py') validate --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 release blocked: independent frames, icons or in-game validation are incomplete.' }
 }
 $managedRoot = Join-Path $GameRoot 'worldbox_Data\Managed'

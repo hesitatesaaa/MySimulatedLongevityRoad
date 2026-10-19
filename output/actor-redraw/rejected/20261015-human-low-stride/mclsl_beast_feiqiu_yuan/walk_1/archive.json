@@ -1,0 +1,23 @@
+{
+  "actorId": "mclsl_beast_feiqiu_yuan",
+  "action": "walk",
+  "index": 1,
+  "sourceSha256": "a6e436ea4ffd935e3fbb542419b7bd6b7cc59a14052e503b839906ca340e9c7a",
+  "reason": "User rejects high-knee passing steps; independently redraw broad low stride with alternating near/far lead.",
+  "archivedAtUtc": "2026-10-15T08:37:23.488755+00:00",
+  "files": [
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_1.png",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-human-low-stride\\mclsl_beast_feiqiu_yuan\\walk_1\\candidate\\walk_1.png"
+    },
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_feiqiu_yuan\\main\\walk_1.provenance.json",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-human-low-stride\\mclsl_beast_feiqiu_yuan\\walk_1\\candidate\\walk_1.provenance.json"
+    },
+    {
+      "from": "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_feiqiu_yuan\\walk_1.png",
+      "to": "E:\\0.6.0\\output\\actor-redraw\\rejected\\20261015-human-low-stride\\mclsl_beast_feiqiu_yuan\\walk_1\\originals\\walk_1.png"
+    }
+  ],
+  "installed": false
+}

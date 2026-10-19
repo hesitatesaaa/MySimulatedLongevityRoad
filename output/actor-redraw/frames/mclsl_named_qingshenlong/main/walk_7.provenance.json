@@ -1,0 +1,66 @@
+{
+  "actorId": "mclsl_named_qingshenlong",
+  "action": "walk",
+  "index": 7,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_named_qingshenlong/walk_7.png",
+  "sourceSha256": "55d04f8e09bbb9037525022c7933125cdb96c02f0c0453c0bda82cdbf7f196df",
+  "outputFile": "output/actor-redraw/frames/mclsl_named_qingshenlong/main/walk_7.png",
+  "outputSha256": "55d04f8e09bbb9037525022c7933125cdb96c02f0c0453c0bda82cdbf7f196df",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 青神龙·兽形 (mclsl_named_qingshenlong), walk_7. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: named blue divine Chinese SERPENTINE dragon: very long slender sapphire/cyan S-coiled snake torso and tapering tail, cream belly, ivory/gold antlers, flowing white mane and TWO whiskers, exactly four SMALL clawed limbs attached to that long torso. Body length at least four times its thickness. Sparse broad scale groups, no wings and no stout lion/qilin/tiger anatomy. Pose: Dragon moving/hovering cycle phase 0.875: smooth traveling wave through neck, S-shaped torso and tail; exactly four limbs alternate naturally, whiskers and mane lag. Retain torso thickness and anatomical length. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Retain exactly the reference creature anatomy, correct limb counts and coherent joint connections; do not invent extra appendages. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG. REFERENCE ARTIFACT EXCLUSION: Do not copy isolated gray, red or yellow flecks visible inside transparent gaps near the reference whiskers, jaw, throat or coils. Those isolated flecks are artifacts; these gaps must remain genuinely transparent with no stray colored dots.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_qingshenlong\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T07:21:05.516480+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "staticReview": {
+    "jobIndex": 1,
+    "actorId": "mclsl_named_qingshenlong",
+    "action": "walk",
+    "frame": 7,
+    "sourceSha256": "55d04f8e09bbb9037525022c7933125cdb96c02f0c0453c0bda82cdbf7f196df",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "reviewer": "main-thread",
+    "viewedFullNativeImage": true,
+    "limbConnectionsReviewed": true,
+    "extraLimbs": false,
+    "clippingDetected": false,
+    "identityConsistent": true,
+    "actionContinuityApproved": false,
+    "geometryApproved": false,
+    "visibleBoundsAtAlpha128": [
+      57,
+      80,
+      1235,
+      1217
+    ],
+    "notes": "Main thread viewed full original walk_7. Exactly four coherent clawed limbs, complete antlers, whiskers and white-tipped tail remain inside the canvas; no extra paw was observed. Neck/torso wave and claw positions differ from neighboring frames, but complete wave/limb alternation and loop seam have not been approved. Colored gap specks require alpha-aware review.",
+    "observedPawCount": 4
+  }
+}

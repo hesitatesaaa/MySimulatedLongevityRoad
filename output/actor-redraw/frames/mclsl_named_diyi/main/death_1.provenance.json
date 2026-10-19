@@ -1,0 +1,61 @@
+{
+  "actorId": "mclsl_named_diyi",
+  "action": "death",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_named_diyi/death_1.png",
+  "sourceSha256": "278b76651b803c4f024e78e8e62b4ae387b8843240e178af9af3ab92daa94745",
+  "outputFile": "output/actor-redraw/frames/mclsl_named_diyi/main/death_1.png",
+  "outputSha256": "278b76651b803c4f024e78e8e62b4ae387b8843240e178af9af3ab92daa94745",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 帝一·兽形 (mclsl_named_diyi), death_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: Diyi named red-orange beast, restrained gold-red bristling mane, wide powerful four-legged body and distinctive layered spiked crest; match the original named beast, not a generic dog. Pose: Death single-shot progress 0.200, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_diyi\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T06:34:38.740069+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "staticReview": {
+    "worker": "round3_a",
+    "sourceSha256": "278b76651b803c4f024e78e8e62b4ae387b8843240e178af9af3ab92daa94745",
+    "viewedFullNativeImage": true,
+    "reviewedAtUtc": "2026-10-16T06:34:58.465060+00:00",
+    "observation": "Eyes closed and head drooped, knees more bent and chest lowered while still supported on four paws. Gold-red layered crest, tail curl and cream beard retain Diyi identity. Right margin small but muzzle and crest intact; no obvious isolated particles. Tail remains curled high; full collapse continuity unapproved.",
+    "identity": true,
+    "limbs": true,
+    "clipping": false,
+    "obviousParticles": false,
+    "continuity": false,
+    "geometry": false,
+    "fullActionApproved": false
+  },
+  "promptEncodingRepair": {
+    "repairedAtUtc": "2026-10-16T06:43:53.906441+00:00",
+    "cause": "UTF-8 provenance read with implicit CP936 during staticReview update",
+    "previousCorruptPromptSha256": "0213335c79f5e7716e396567dfbef4f5da0c6e51b327bfcd2f8d2c0ead3144aa",
+    "restoredPromptSha256": "ad814f906defc3bfba9e870a9fdac8ccbabe2eec5b558446a6ea529dac9a1f3e",
+    "exactCp936CorruptionReproduced": true,
+    "actualGenerationPromptEvidence": "Worker round3_a retained store jobs; imagegen cell 6 passed job.prompt directly before corruption; worker read-only verification confirmed full prompt match."
+  }
+}

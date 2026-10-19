@@ -1,0 +1,521 @@
+{
+  "queue": "E:\\0.6.0\\output\\actor-redraw\\parent-resume-20261015-02.jobs.json",
+  "observedAtUtc": "2026-10-15T07:31:43.298541+00:00",
+  "images": [
+    {
+      "jobIndex": 0,
+      "actor": "mclsl_beast_mo",
+      "action": "death",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_2.provenance.json",
+      "sourceSha256": "96fb20aef4ba998bf8cdc44899c3f2ab3ffb38245443ebec617a3cc1138ac11f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 1,
+      "actor": "mclsl_beast_mo",
+      "action": "death",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_3.provenance.json",
+      "sourceSha256": "f881e8b46722eaa155b4f700b4632c28ce7a01b6b2ea85304c65b02ea1a98edd",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 2,
+      "actor": "mclsl_beast_mo",
+      "action": "death",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_4.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_4.provenance.json",
+      "sourceSha256": "376b5a18b6cfcaf305522c0eb7f8637dbfb5ea4e0a696718827a75251482d8c7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 3,
+      "actor": "mclsl_beast_mo",
+      "action": "death",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_5.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo\\main\\death_5.provenance.json",
+      "sourceSha256": "aa5f0fd76edd880c7cc4a10494d2692a9e69bfe4f1303d911a245a9a6f8b8629",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 4,
+      "actor": "mclsl_beast_mo",
+      "action": "icon",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_mo.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_mo.provenance.json",
+      "sourceSha256": "7f932eae8f8f2e6f538a8ca902e1a22ce53600d9bd6ebb769b9fd88f432f38da",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 5,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "idle",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_1.provenance.json",
+      "sourceSha256": "8129510c2f446280cbdd6326f49f4811791f14aaff57e417463a476f2cfe0beb",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 6,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "idle",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_2.provenance.json",
+      "sourceSha256": "f50541965249c12af694f67240e0fed223b74152448efd58ff7cd97a76467fd7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 7,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "idle",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\idle_3.provenance.json",
+      "sourceSha256": "9aeefd1b96f06bad0fe238a118984f9de9fb573af0c94969b5e4f6f726628462",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 8,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_0.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_0.provenance.json",
+      "sourceSha256": "24fad0161c998bbe5ec1bc5e6f9e112bdfc96099ecee84a990b9a0e92b9842ef",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 9,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_1.provenance.json",
+      "sourceSha256": "eb7dd4bcf8b0464a60f594de90b651b4b8147eaf1704db226e01199cb065c7f9",
+      "canvas": [
+        1246,
+        1263
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 10,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_2.provenance.json",
+      "sourceSha256": "c1a8ee1786571d39a1713983c91f49390e1786ac48689b7c7b73500cb2f6ce2c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 11,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_3.provenance.json",
+      "sourceSha256": "ed3c268e4b4f6349aebdd3bc02581b70130ba5fa8c3fe5a1c09f55d4996e3ca7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 12,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_4.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_4.provenance.json",
+      "sourceSha256": "9e1cb89460a80fc36b17469881962519287308f9695835b334706fad4af02cb0",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 13,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "walk",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_5.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\walk_5.provenance.json",
+      "sourceSha256": "1061b7dab11c23e0870cd5c3139857bcc0bd985f497bf1804e4f864e862b052c",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 14,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_0.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_0.provenance.json",
+      "sourceSha256": "75d4bb7d7cfe70038599493bcf916d00f52e4b5679122afbe52bc9a556cb86b3",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 15,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_1.provenance.json",
+      "sourceSha256": "0fc69ee6a3a50acba098e44dbc46779f3ff22f9a9ea1aa4473d736207d090921",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 16,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_2.provenance.json",
+      "sourceSha256": "dd5f677011040a16ef6d786c4528330c905b03286b898d8437134a621d9bb896",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 17,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_3.provenance.json",
+      "sourceSha256": "d32d2140efd70857ea4fd36b47323d3cb11be25317dbf65669e0eff74d6e34a7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 18,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_4.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_4.provenance.json",
+      "sourceSha256": "860c528e8ccbf396b16c09935b94ce75b9944ad48d68244cf5da9836926fb4ad",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 19,
+      "actor": "mclsl_beast_mo_yuan",
+      "action": "death",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_5.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_mo_yuan\\main\\death_5.provenance.json",
+      "sourceSha256": "ecc20f214ba5b0c5056e8dcff1f93879308670fc7661e1939849dc6e83b56d53",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 20,
+      "actor": "mclsl_beast_hongmao",
+      "action": "idle",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_1.provenance.json",
+      "sourceSha256": "6470a99102f63eac1f3e19bd9dcc7277b3ba695294238ebe36189c7d98f97b29",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 21,
+      "actor": "mclsl_beast_hongmao",
+      "action": "idle",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_2.provenance.json",
+      "sourceSha256": "8b069f2d2d8e201348755347b6b683b1351b2a25a5d4b28515502799be5d265f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 22,
+      "actor": "mclsl_beast_hongmao",
+      "action": "idle",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\idle_3.provenance.json",
+      "sourceSha256": "bb8877392d2ab4f131d10418e6b0761676f33652cd56a5602d9fa12304ae25d7",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 23,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_0.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_0.provenance.json",
+      "sourceSha256": "6d7196bae9104afb14301d1e1129de2c92c81498d4b2db222a88a7908c668d80",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 24,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_1.provenance.json",
+      "sourceSha256": "78970f452c9cbfcb06158305f03c3ee8ee91ae6b7011368677ea072579b97019",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 25,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_2.provenance.json",
+      "sourceSha256": "1468ebdbe1a62ef22c69a07e4e7540965f4c2ed090fb42aa2c4adec44efa8986",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 26,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_3.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_3.provenance.json",
+      "sourceSha256": "b2a2a8a302c5c44daeab887c707ce89c88b92fe8514c03258751f0bea14a39c4",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 27,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_4.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_4.provenance.json",
+      "sourceSha256": "2928c9acea47db201762095c60a8aa1b9caa2c047c735b1bf24466195926c72e",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 28,
+      "actor": "mclsl_beast_hongmao",
+      "action": "walk",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_5.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\walk_5.provenance.json",
+      "sourceSha256": "575a7ba09b2d6ba6142ce81b617b46ca6d25f361d6b1fd52ec435b34c715cab2",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 29,
+      "actor": "mclsl_beast_hongmao",
+      "action": "death",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_0.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_0.provenance.json",
+      "sourceSha256": "0d3cd0920bf12d881a4df2c5b4f7632b6942473d2fb88da9f67b9e3f86d48d50",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 30,
+      "actor": "mclsl_beast_hongmao",
+      "action": "death",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_1.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_1.provenance.json",
+      "sourceSha256": "af15d941b8f3583a1d0c71501db8e98afd823327ae195fb82c897488f590185f",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    },
+    {
+      "jobIndex": 31,
+      "actor": "mclsl_beast_hongmao",
+      "action": "death",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_2.png",
+      "provenance": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_hongmao\\main\\death_2.provenance.json",
+      "sourceSha256": "076d0651ef54e3ce639532bf22c767a6786ff385562520a0477fa30b9cd469a2",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "resampling": "none",
+      "status": "saved",
+      "installed": false
+    }
+  ],
+  "complete": true,
+  "installed": false,
+  "finalFullReviewPassed": false
+}

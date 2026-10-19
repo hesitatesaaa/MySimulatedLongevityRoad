@@ -1,0 +1,1685 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "checkedAtUtc": "2026-10-18T12:31:25.283685+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_0.png",
+          "sourceSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            164,
+            316,
+            1108,
+            1049
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1049
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_1.png",
+          "sourceSha256": "4f28e5affebe1f118d169f24da247018096e10f14d9ee43dcb9454b73d589b07",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            162,
+            310,
+            1142,
+            1068
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4f28e5affebe1f118d169f24da247018096e10f14d9ee43dcb9454b73d589b07",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1068
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_2.png",
+          "sourceSha256": "188e8b010eb8990df6f1123d797e3390e9278e8f776fd05784c2fdac95a1a09d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            168,
+            312,
+            1113,
+            1049
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "188e8b010eb8990df6f1123d797e3390e9278e8f776fd05784c2fdac95a1a09d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1049
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_3.png",
+          "sourceSha256": "067ef7549ccaa33d37e5b04b7139a71cddf2a227af4bf377b7d96aae69156c7f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            163,
+            315,
+            1112,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "067ef7549ccaa33d37e5b04b7139a71cddf2a227af4bf377b7d96aae69156c7f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1051
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_4.png",
+          "sourceSha256": "aba7687c109acf9994e0ac29d24120c3bc65c915ff8a1fff5dbecfc2ac1ee8dd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            146,
+            393,
+            1138,
+            1127
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "aba7687c109acf9994e0ac29d24120c3bc65c915ff8a1fff5dbecfc2ac1ee8dd",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1127
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_5.png",
+          "sourceSha256": "918dc18afa2d06870cc4db972a3f1a22aeefa485e2e5ae43b0701e81c61777a8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            159,
+            324,
+            1123,
+            1060
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "918dc18afa2d06870cc4db972a3f1a22aeefa485e2e5ae43b0701e81c61777a8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1060
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_6.png",
+          "sourceSha256": "9dfcdc6080e060bd46463e84ba69a6adc2fbc0951ad6b9ead50da107ea17edb8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            156,
+            314,
+            1110,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9dfcdc6080e060bd46463e84ba69a6adc2fbc0951ad6b9ead50da107ea17edb8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1051
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_7.png",
+          "sourceSha256": "cdc05bf0450549499f762a106dbdc761bbfd7abf6b7e9738ddb32d76c7892c9d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            160,
+            315,
+            1107,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cdc05bf0450549499f762a106dbdc761bbfd7abf6b7e9738ddb32d76c7892c9d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_0.png",
+          "sourceSha256": "fd5fdfcb2152dcc35b1c467a93639488b7fd0e78e3801ba670051cfd3cdb29b6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            137,
+            316,
+            1173,
+            1054
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "fd5fdfcb2152dcc35b1c467a93639488b7fd0e78e3801ba670051cfd3cdb29b6",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1054
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_3.png",
+          "sourceSha256": "8d90a4bcb2b09703fbd2edc7c3a4e927cf485160ebcf6a7483379dad36e28b4d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            129,
+            314,
+            1147,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "8d90a4bcb2b09703fbd2edc7c3a4e927cf485160ebcf6a7483379dad36e28b4d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_4.png",
+          "sourceSha256": "52779f102459a7126b55bcdf20bfc692a4722bfebddc497981618fc683161cae",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            151,
+            316,
+            1158,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "52779f102459a7126b55bcdf20bfc692a4722bfebddc497981618fc683161cae",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_8.png",
+          "sourceSha256": "6c7227965cbae451c38ed88d9d26cdb3da3ee6f1c2b5d5c194e91b494ec7517d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            164,
+            314,
+            1161,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6c7227965cbae451c38ed88d9d26cdb3da3ee6f1c2b5d5c194e91b494ec7517d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_5.png",
+          "sourceSha256": "0f0c3138c2a83289412aec87a6c6601a6e5b5ab7a904ecd6d7afe712cd64a4f8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            157,
+            319,
+            1134,
+            1035
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "0f0c3138c2a83289412aec87a6c6601a6e5b5ab7a904ecd6d7afe712cd64a4f8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1035
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_6.png",
+          "sourceSha256": "4c5d4317085c670e0b86cedc849da2923b808891752e1ffd358e2a99e5e7972c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            162,
+            317,
+            1126,
+            1043
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4c5d4317085c670e0b86cedc849da2923b808891752e1ffd358e2a99e5e7972c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1043
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_2.png",
+          "sourceSha256": "bbb239c87ca9fc2a854edad4415d9811eb3f08a5f8554721eabe95262ae32925",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            155,
+            312,
+            1116,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bbb239c87ca9fc2a854edad4415d9811eb3f08a5f8554721eabe95262ae32925",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_9.png",
+          "sourceSha256": "92c5f58cd92243cf2ce0b45e1db1856fa4a15b932834e50e6c93ddfd9a884f5f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            146,
+            314,
+            1113,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "92c5f58cd92243cf2ce0b45e1db1856fa4a15b932834e50e6c93ddfd9a884f5f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_1.png",
+          "sourceSha256": "83cbf42b2ab24cebc6c0803506944345e11deb8513b03e20e72fd9643d8b08aa",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            159,
+            314,
+            1109,
+            1049
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "83cbf42b2ab24cebc6c0803506944345e11deb8513b03e20e72fd9643d8b08aa",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1049
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\walk_7.png",
+          "sourceSha256": "84bdc4d48a80546462615e78d2dbd16bd5152ed43ec04bf98096dc96cfae7b5f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            159,
+            317,
+            1117,
+            1047
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "84bdc4d48a80546462615e78d2dbd16bd5152ed43ec04bf98096dc96cfae7b5f",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1047
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_0.png",
+          "sourceSha256": "7e80506c01570244d877dd403abb5860bedd23f0b1266c3009cbee51527e02dc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            154,
+            378,
+            1217,
+            1104
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7e80506c01570244d877dd403abb5860bedd23f0b1266c3009cbee51527e02dc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1104
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_1.png",
+          "sourceSha256": "8571834bc3a1a9309813f6a35aefebd1bd477ba9069320c7d107c20eb519c655",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            86,
+            372,
+            1218,
+            1065
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "8571834bc3a1a9309813f6a35aefebd1bd477ba9069320c7d107c20eb519c655",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1065
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_2.png",
+          "sourceSha256": "64db33d6225626b26372445ea1bc63f4a5ffc33f228f399c9397899cb39ccd88",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            119,
+            400,
+            1164,
+            1077
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "64db33d6225626b26372445ea1bc63f4a5ffc33f228f399c9397899cb39ccd88",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1077
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_3.png",
+          "sourceSha256": "d81cea0f228b1a702fdcbb6e746c77bc5aeb854fac3f344d252e7bea6677d535",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            127,
+            320,
+            1199,
+            1077
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d81cea0f228b1a702fdcbb6e746c77bc5aeb854fac3f344d252e7bea6677d535",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1077
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_4.png",
+          "sourceSha256": "8856e38ea52e2e94dd7ece18d94728f27526b19ccaecace76b136f8e2ed34772",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            112,
+            331,
+            1217,
+            1067
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "8856e38ea52e2e94dd7ece18d94728f27526b19ccaecace76b136f8e2ed34772",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1067
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_5.png",
+          "sourceSha256": "f67f25803ba013916c741f58c2e4f9fc9047665c949122d35a8fd944cf1526df",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            53,
+            357,
+            1224,
+            1076
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f67f25803ba013916c741f58c2e4f9fc9047665c949122d35a8fd944cf1526df",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1076
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_6.png",
+          "sourceSha256": "acc4a33437ac968f73957f6f0e010d61ffb0e24412fe5481991a18560ac3ab15",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            126,
+            348,
+            1149,
+            1042
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "acc4a33437ac968f73957f6f0e010d61ffb0e24412fe5481991a18560ac3ab15",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1042
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_7.png",
+          "sourceSha256": "eb0c0d9d39f7c7bb156a25afef9c9683c0dee124feed0e7fbbefa558c43502bf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            162,
+            315,
+            1111,
+            1043
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "eb0c0d9d39f7c7bb156a25afef9c9683c0dee124feed0e7fbbefa558c43502bf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1043
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_8.png",
+          "sourceSha256": "e7a572f95ab9f66485c91acda7f9fe5e5ea01853faf587e079602abc4294550c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            151,
+            333,
+            1133,
+            1066
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e7a572f95ab9f66485c91acda7f9fe5e5ea01853faf587e079602abc4294550c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1066
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_9.png",
+          "sourceSha256": "f48b336aee47e567dd60af3e28091cdaec63129e28ae778bbf9e19f8fdc111cc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            140,
+            330,
+            1150,
+            1111
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f48b336aee47e567dd60af3e28091cdaec63129e28ae778bbf9e19f8fdc111cc",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1111
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_10",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_10.png",
+          "sourceSha256": "f96cd3ca6a2e202b2e785bf6ccdfe60ebf1fab5dfe8153e369938d32307af786",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            166,
+            315,
+            1111,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f96cd3ca6a2e202b2e785bf6ccdfe60ebf1fab5dfe8153e369938d32307af786",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1051
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_11",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\attack_11.png",
+          "sourceSha256": "cdf6315a9925730096fd2d13f89c4934b00603da9890606e2069d891ecce967c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            162,
+            314,
+            1118,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "cdf6315a9925730096fd2d13f89c4934b00603da9890606e2069d891ecce967c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\hit_0.png",
+          "sourceSha256": "6c53c1f3f8495524e923af7d22189e093c32af0cd58f34d1495f1c2ab0b96ab2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            159,
+            328,
+            1182,
+            1057
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6c53c1f3f8495524e923af7d22189e093c32af0cd58f34d1495f1c2ab0b96ab2",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1057
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\hit_1.png",
+          "sourceSha256": "1d6bd3814b5a603991cc9554a5a302b1e0bc7bec4655aca7e13aa57f4f7049e7",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            156,
+            349,
+            1207,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "1d6bd3814b5a603991cc9554a5a302b1e0bc7bec4655aca7e13aa57f4f7049e7",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1050
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\hit_2.png",
+          "sourceSha256": "76a5cdc91a8b4d06627e5c9014e06598fea35e00e1cb2cca72fdd170a137e71b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            159,
+            322,
+            1129,
+            1049
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "76a5cdc91a8b4d06627e5c9014e06598fea35e00e1cb2cca72fdd170a137e71b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1049
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "hit_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\hit_3.png",
+          "sourceSha256": "f2aeac060a0f6b592d74c70e62b4d5b5afecdfbfa885a80303dc5da3e67be47b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            154,
+            313,
+            1109,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f2aeac060a0f6b592d74c70e62b4d5b5afecdfbfa885a80303dc5da3e67be47b",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1051
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_10",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_10.png",
+          "sourceSha256": "bf0be5fe8c1aef4afbb78af4c18efaa6c834bbfd1d4fc559c0ae20f16b7e7ab0",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            160,
+            350,
+            1149,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bf0be5fe8c1aef4afbb78af4c18efaa6c834bbfd1d4fc559c0ae20f16b7e7ab0",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1051
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_0.png",
+          "sourceSha256": "f219cfe113ccc74bae5ec6e8c23de662e3ae15ea4e834c58ef727227e4527860",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            104,
+            576,
+            1172,
+            1166
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "f219cfe113ccc74bae5ec6e8c23de662e3ae15ea4e834c58ef727227e4527860",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1166
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_1.png",
+          "sourceSha256": "ea535863f002cede022560a61f685ff2eac76920305280a4c5dc998b0e17d144",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            93,
+            717,
+            1176,
+            1190
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ea535863f002cede022560a61f685ff2eac76920305280a4c5dc998b0e17d144",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1190
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_2.png",
+          "sourceSha256": "d9bc816f0aa3ef3697adec9a38af5655786c235300146945d7d25163895a4b14",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            71,
+            738,
+            1195,
+            1172
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d9bc816f0aa3ef3697adec9a38af5655786c235300146945d7d25163895a4b14",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1172
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_3.png",
+          "sourceSha256": "ef811fb03f88f8c3ef40d9a4943a12f9a84dc3ab43d15413fa09ebcfad312e2e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            63,
+            760,
+            1229,
+            1155
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ef811fb03f88f8c3ef40d9a4943a12f9a84dc3ab43d15413fa09ebcfad312e2e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1155
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_4.png",
+          "sourceSha256": "0f22cd076bcd815f9157c89e6c71aec6081628fbc5a7f8ed8547db87bb0f00fe",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            113,
+            791,
+            1196,
+            1106
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "0f22cd076bcd815f9157c89e6c71aec6081628fbc5a7f8ed8547db87bb0f00fe",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1106
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_5.png",
+          "sourceSha256": "5a535ed6b1ed91d2ddfc26bab4bb217dcf5fcb28fc58b6eef50880a3359b077d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            77,
+            789,
+            1208,
+            1108
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5a535ed6b1ed91d2ddfc26bab4bb217dcf5fcb28fc58b6eef50880a3359b077d",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1108
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_6.png",
+          "sourceSha256": "5a504739fdd6be890a4a72c94b3dedfb485bc3d5c29e9e6e9fee28c51ac27fe2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            73,
+            798,
+            1204,
+            1109
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5a504739fdd6be890a4a72c94b3dedfb485bc3d5c29e9e6e9fee28c51ac27fe2",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1109
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_7.png",
+          "sourceSha256": "c8686a08ccd0c2f5139f7092d5788c838cb106796ea639919c3f5dda7f558005",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            69,
+            798,
+            1205,
+            1111
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c8686a08ccd0c2f5139f7092d5788c838cb106796ea639919c3f5dda7f558005",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1111
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_8",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_8.png",
+          "sourceSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            72,
+            796,
+            1206,
+            1112
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1112
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "death_9",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu\\death_9.png",
+          "sourceSha256": "75b3ce4e96bab4ee0d55419d6db3888cace54d3104d96cbce65ed4b40959cdd8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            62,
+            803,
+            1209,
+            1112
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "75b3ce4e96bab4ee0d55419d6db3888cace54d3104d96cbce65ed4b40959cdd8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "forms_a",
+            "verifiedInGame": false
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              636.0,
+              1112
+            ],
+            "pixelsPerUnit": 13.089285714285715,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 283052880,
+  "deathSilhouetteHeights": [
+    701,
+    590,
+    473,
+    434,
+    395,
+    315,
+    319,
+    311,
+    313,
+    316,
+    309
+  ],
+  "deathHeightRiseCandidates": [
+    6,
+    8,
+    9
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [],
+  "reviewerNotes": "Complete original-source frames individually reviewed by forms_a in authored target order. Parent checked terminal contact silhouette; proposed anchors remain offline only. No game validation claimed.",
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/baihu/Beast",
+    "frameCount": 45,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

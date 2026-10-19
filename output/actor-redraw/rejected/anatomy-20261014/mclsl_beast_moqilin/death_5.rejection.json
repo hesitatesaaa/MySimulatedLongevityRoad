@@ -1,0 +1,5 @@
+{
+  "reason": "Native final death pose touches both canvas edges; tail/head lack padding.",
+  "sourceSha256": "9ddbeee469348871f24ebb5cc0399eb0afd358d0e2004d6e58fe5780c5b1605b",
+  "atUtc": "2026-10-14T04:18:07.479835+00:00"
+}

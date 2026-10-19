@@ -1,0 +1,1032 @@
+Mono path[0] = 'E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Managed'
+Mono config path = 'E:/wol/gameversion/0_51_2_0.51.2/MonoBleedingEdge/etc'
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-000002539F00A0A0.dll
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-00000253A3F78040.dll
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+Initialize engine version: 2022.3.60f1 (5f63fdee6d95)
+[Subsystems] Discovering subsystems at path E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/UnitySubsystems
+Forcing GfxDevice: Direct3D 11
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1660 Ti (ID=0x2182)
+    Vendor:   NVIDIA
+    VRAM:     5966 MB
+    Driver:   32.0.15.9579
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.102 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Message:   BepInEx] BepInEx 5.4.22.0 - worldbox (2025/9/14 17:13:56)
+[Info   :   BepInEx] Running under Unity v2022.3.60.6251517
+[Info   :   BepInEx] CLR runtime version: 4.0.30319.42000
+[Info   :   BepInEx] Supports SRE: True
+[Info   :   BepInEx] System platform: Bits64, Windows
+[Message:   BepInEx] Preloader started
+[Info   :   BepInEx] Loaded 1 patcher method from [BepInEx.Preloader 5.4.22.0]
+[Info   :   BepInEx] 1 patcher plugin loaded
+[Info   :   BepInEx] Patching [UnityEngine.CoreModule] with [BepInEx.Chainloader]
+[Message:   BepInEx] Preloader finished
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 0.598300 ms
+INIT Progress
+INIT PlayerConfig
+Init PlayerConfig
+LOAD LANGUAGE cz
+LocalizedTextManager: total texts loaded: 0
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+[PhysX] Initialized MultithreadedTaskDispatcher with 16 workers.
+UnloadTime: 3.448200 ms
+Init PlotLibrary
+INIT ActorStats
+GENERATE ACTOR STATS 230
+Init Achievements
+InAppManager::Start
+[ap]
+InAppManager::End
+LOAD LANGUAGE cz
+LocalizedTextManager: total texts loaded: 44
+[NeoModLoader] Loading NeoModLoader.dll
+[NeoModLoader] Assembly: NeoModLoader, Version=1.2.0.1, Culture=neutral, PublicKeyToken=null
+[NeoModLoader] classes inside the mod:
+[NeoModLoader] Microsoft.CodeAnalysis.EmbeddedAttribute
+[NeoModLoader] System.Runtime.CompilerServices.NullableAttribute
+[NeoModLoader] System.Runtime.CompilerServices.NullableContextAttribute
+[NeoModLoader] System.Runtime.CompilerServices.RefSafetyRulesAttribute
+[NeoModLoader] ReflectionUtility.Reflection
+[NeoModLoader] NCMS.Core
+[NeoModLoader] NCMS.ModEntry
+[NeoModLoader] NCMS.ModLoader
+[NeoModLoader] NCMS.NCMod
+[NeoModLoader] NCMS.WorldBoxMod
+[NeoModLoader] NCMS.Utils.ButtonType
+[NeoModLoader] NCMS.Utils.GameObjects
+[NeoModLoader] NCMS.Utils.GameObjects+<>c__DisplayClass0_0
+[NeoModLoader] NCMS.Utils.Localization
+[NeoModLoader] NCMS.Utils.PowerButtons
+[NeoModLoader] NCMS.Utils.PowerButtons+<>c__DisplayClass3_0
+[NeoModLoader] NCMS.Utils.PowerTab
+[NeoModLoader] NCMS.Utils.ResourcesPatch
+[NeoModLoader] NCMS.Utils.Sprites
+[NeoModLoader] NCMS.Utils.Windows
+[NeoModLoader] NCMS.Extensions.DictionaryRange
+[NeoModLoader] ModDeclaration.Info
+[NeoModLoader] BepInEx.BaseUnityPlugin
+[NeoModLoader] BepInEx.BepInPlugin
+[NeoModLoader] NeoModLoader.WorldBoxMod
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>O
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_0
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_1
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_2
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_3
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_4
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_5
+[NeoModLoader] NeoModLoader.WorldBoxMod+<>c__DisplayClass10_6
+[NeoModLoader] NeoModLoader.utils.WrappedAssetBundle
+[NeoModLoader] NeoModLoader.utils.WrappedAssetBundle+AssetNode
+[NeoModLoader] NeoModLoader.utils.AssetBundleUtils
+[NeoModLoader] NeoModLoader.utils.BenchUtils
+[NeoModLoader] NeoModLoader.utils.AssetPatches
+[NeoModLoader] NeoModLoader.utils.DelegateExtentions
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass0_1
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.utils.HarmonyUtils+<>c__DisplayClass1_1
+[NeoModLoader] NeoModLoader.utils.HttpUtils
+[NeoModLoader] NeoModLoader.utils.InternalResourcesGetter
+[NeoModLoader] NeoModLoader.utils.ModDependencyNode
+[NeoModLoader] NeoModLoader.utils.ModDependencyGraph
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.ModDependencyUtils+<>c__DisplayClass4_1
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils+<>O
+[NeoModLoader] NeoModLoader.utils.ModInfoUtils+<>c
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils+<>c
+[NeoModLoader] NeoModLoader.utils.ModReloadUtils+<>c__DisplayClass19_0
+[NeoModLoader] NeoModLoader.utils.OtherUtils
+[NeoModLoader] NeoModLoader.utils.PriorityQueue`1[T]
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper+<>c
+[NeoModLoader] NeoModLoader.utils.ReflectionHelper+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+ResourceTree
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+ResourceTreeNode
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+<>c
+[NeoModLoader] NeoModLoader.utils.ResourcesPatch+<>c__DisplayClass11_0
+[NeoModLoader] NeoModLoader.utils.SoundType
+[NeoModLoader] NeoModLoader.utils.SoundMode
+[NeoModLoader] NeoModLoader.utils.WavContainer
+[NeoModLoader] NeoModLoader.utils.ChannelContainer
+[NeoModLoader] NeoModLoader.utils.CustomAudioManager
+[NeoModLoader] NeoModLoader.utils.TextureImporter
+[NeoModLoader] NeoModLoader.utils.SpriteSheet
+[NeoModLoader] NeoModLoader.utils.SingleSpriteMetaData
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+MetaFile
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+NCMSSpritesSettings
+[NeoModLoader] NeoModLoader.utils.SpriteLoadUtils+NCMSSpritesSettings+SpecificSetting
+[NeoModLoader] NeoModLoader.utils.SystemUtils
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializableAsset`1[A]
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializedActorTrait
+[NeoModLoader] NeoModLoader.utils.SerializedAssets.SerializedItemAsset
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.instpredictors.BaseInstPredictor+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.utils.installers.ACmdModInstaller
+[NeoModLoader] NeoModLoader.utils.installers.GBModInstaller
+[NeoModLoader] NeoModLoader.utils.installers.GBModInstaller+<CheckInstall>d__2
+[NeoModLoader] NeoModLoader.utils.Builders.ActorAssetBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.GetAdditionalBaseStatsMethod
+[NeoModLoader] NeoModLoader.utils.Builders.ActorTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.AssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.AugmentationAssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.BaseTraitBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.Builders.Builder
+[NeoModLoader] NeoModLoader.utils.Builders.ClanTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.CultureTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.CultureTraitBuilder+<>c
+[NeoModLoader] NeoModLoader.utils.Builders.GroupAssetBuilder`1[A]
+[NeoModLoader] NeoModLoader.utils.Builders.MasterBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.SubSpeciesTrait
+[NeoModLoader] NeoModLoader.utils.Builders.SubspeciesTraitBuilder
+[NeoModLoader] NeoModLoader.utils.Builders.SubspeciesTraitBuilder+<>c
+[NeoModLoader] NeoModLoader.utils.Builders.UnlockableAssetBuilder`2[A,AL]
+[NeoModLoader] NeoModLoader.utils.authentication.AuthenticaticationException
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordAutomaticRoleAuthUtils
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordCommonAuthLogic
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordCommonAuthLogic+<>c
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+TokenInfo
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>O
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>c
+[NeoModLoader] NeoModLoader.utils.authentication.DiscordRoleAuthViaUserLoginUtils+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+TokenInfo
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+UserInfo
+[NeoModLoader] NeoModLoader.utils.authentication.GithubOrgAuthUtils+DeviceFlow
+[NeoModLoader] NeoModLoader.ui.InformationWindow
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigGrid
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass6_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass7_0
+[NeoModLoader] NeoModLoader.ui.ModConfigureWindow+ModConfigListItem+<>c__DisplayClass8_0
+[NeoModLoader] NeoModLoader.ui.ModListWindow
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem+<>c__DisplayClass2_0
+[NeoModLoader] NeoModLoader.ui.ModListWindow+ModListItem+<WaitOpenWindow>d__1
+[NeoModLoader] NeoModLoader.ui.ModListWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>O
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadAuthenticationWindow+<>c__DisplayClass9_0
+[NeoModLoader] NeoModLoader.ui.ModUploadingProgressWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadingProgressWindow+UploadProgress
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>O
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>c
+[NeoModLoader] NeoModLoader.ui.ModUploadWindow+<>c__DisplayClass9_0
+[NeoModLoader] NeoModLoader.ui.NewModListWindow
+[NeoModLoader] NeoModLoader.ui.NewModListWindow+DisplayType
+[NeoModLoader] NeoModLoader.ui.NewModListWindow+<>c__DisplayClass15_0
+[NeoModLoader] NeoModLoader.ui.UIManager
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+WorkshopModListItem
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+WorkshopModListItem+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+<>O
+[NeoModLoader] NeoModLoader.ui.WorkshopModListWindow+<>c
+[NeoModLoader] NeoModLoader.ui.prefabs.ModInfoPanel
+[NeoModLoader] NeoModLoader.ui.prefabs.ModInfoPanel+<>c__DisplayClass0_0
+[NeoModLoader] NeoModLoader.ui.prefabs.ModListItem
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService+<>c
+[NeoModLoader] NeoModLoader.services.ExternalModInstallService+<CheckExternalModInstall>d__0
+[NeoModLoader] NeoModLoader.services.IPlatformSpecificModWorkshopService
+[NeoModLoader] NeoModLoader.services.LogService
+[NeoModLoader] NeoModLoader.services.LogService+LogType
+[NeoModLoader] NeoModLoader.services.LogService+WrappedMessage
+[NeoModLoader] NeoModLoader.services.LogService+ConcurrentLogHandle
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass11_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass17_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass6_0
+[NeoModLoader] NeoModLoader.services.ModCompileLoadService+<>c__DisplayClass6_1
+[NeoModLoader] NeoModLoader.services.ModDepenSolveService
+[NeoModLoader] NeoModLoader.services.ModReloadService
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService+<>c
+[NeoModLoader] NeoModLoader.services.ModUploadAuthenticationService+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopService
+[NeoModLoader] NeoModLoader.services.ModWorkshopService+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<FindSubscribedMods>d__5
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceUnix+<GetSubscribedItems>d__7
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c__DisplayClass3_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<>c__DisplayClass4_0
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<FindSubscribedMods>d__6
+[NeoModLoader] NeoModLoader.services.ModWorkshopServiceWindows+<GetSubscribedItems>d__7
+[NeoModLoader] NeoModLoader.ncms_compatible_layer.NCMSCompatibleLayer
+[NeoModLoader] NeoModLoader.ncms_compatible_layer.NCMSCompatibleLayer+<>c
+[NeoModLoader] NeoModLoader.General.LM
+[NeoModLoader] NeoModLoader.General.LM+<>c
+[NeoModLoader] NeoModLoader.General.OT
+[NeoModLoader] NeoModLoader.General.PowerButtonCreator
+[NeoModLoader] NeoModLoader.General.PowerTabNames
+[NeoModLoader] NeoModLoader.General.ResourcesFinder
+[NeoModLoader] NeoModLoader.General.RF
+[NeoModLoader] NeoModLoader.General.WindowCreator
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutElement`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutGroup`2[T,TElement]
+[NeoModLoader] NeoModLoader.General.UI.Window.AutoLayoutWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.MultiTabWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.MultiTabWindow`1+<>c__DisplayClass8_0[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.SingleAutoLayoutWindow`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Window.Utils.Extensions.AutoLayoutGroupExtension
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoGridLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoHoriLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Window.Layout.AutoVertLayoutGroup
+[NeoModLoader] NeoModLoader.General.UI.Tab.PowersTabExtension
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab+TabElement
+[NeoModLoader] NeoModLoader.General.UI.Tab.ReconstructedVanillaTab+<>c
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabBombs
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabCreatures
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabDrawing
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabKingdoms
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabMain
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass30_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass32_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabManager+<>c__DisplayClass36_0
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabNature
+[NeoModLoader] NeoModLoader.General.UI.Tab.TabOther
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+WrappedRectTransform
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+PlaceholdRegions
+[NeoModLoader] NeoModLoader.General.UI.Tab.WrappedPowersTab+PlaceholdRegions+SimpleRegion
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.APrefab`1[T]
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleButton
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleButton+<>c__DisplayClass16_0
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SimpleStatBar
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SliderBar
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SwitchButton
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.SwitchButton+<>c__DisplayClass13_0
+[NeoModLoader] NeoModLoader.General.UI.Prefabs.TextInput
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtension
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+LibraryState[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+<>c[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.AssetExtensionInternal`2+<>c__DisplayClass2_0[TAsset,TLibrary]
+[NeoModLoader] NeoModLoader.General.Game.extensions.DataExtension
+[NeoModLoader] NeoModLoader.General.Game.extensions.SerializedCustomData
+[NeoModLoader] NeoModLoader.General.Game.extensions.ICustomData
+[NeoModLoader] NeoModLoader.General.Game.extensions.BasicCustomData`1[TDataClass]
+[NeoModLoader] NeoModLoader.General.Event.AbstractHandler`1[THandler]
+[NeoModLoader] NeoModLoader.General.Event.BaseListener
+[NeoModLoader] NeoModLoader.General.Event.AbstractListener`2[TListener,THandler]
+[NeoModLoader] NeoModLoader.General.Event.ListenerManager
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ActorTryToAttackListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ActorTryToAttackListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.AllianceCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.CityCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.ClanCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.CultureCreateListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.KingdomSetupListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.PlotStartListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.PlotStartListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarEndListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarStartListener
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WarStartListener+<>c
+[NeoModLoader] NeoModLoader.General.Event.Listeners.WorldLogMessageListener
+[NeoModLoader] NeoModLoader.General.Event.Handlers.ActorTryToAttackHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.AllianceCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.CityCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.ClanCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.CultureCreateHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.KingdomSetupHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.PlotStartHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WarEndHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WarStartHandler
+[NeoModLoader] NeoModLoader.General.Event.Handlers.WorldLogMessageHandler
+[NeoModLoader] NeoModLoader.constants.CoreConstants
+[NeoModLoader] NeoModLoader.constants.Others
+[NeoModLoader] NeoModLoader.constants.Paths
+[NeoModLoader] NeoModLoader.constants.Paths+<>O
+[NeoModLoader] NeoModLoader.constants.Setting
+[NeoModLoader] NeoModLoader.api.AbstractListWindowItem`1[TItem]
+[NeoModLoader] NeoModLoader.api.AbstractListWindow`2[T,TItem]
+[NeoModLoader] NeoModLoader.api.AbstractWideWindow`1[T]
+[NeoModLoader] NeoModLoader.api.AbstractWindow`1[T]
+[NeoModLoader] NeoModLoader.api.AttachedModComponent
+[NeoModLoader] NeoModLoader.api.BasicMod`1[T]
+[NeoModLoader] NeoModLoader.api.BepinexMod
+[NeoModLoader] NeoModLoader.api.FeatureLoadException
+[NeoModLoader] NeoModLoader.api.IConfigurable
+[NeoModLoader] NeoModLoader.api.ICsvSepCustomized
+[NeoModLoader] NeoModLoader.api.IDecoratePanel
+[NeoModLoader] NeoModLoader.api.IFeatureLoadManaged
+[NeoModLoader] NeoModLoader.api.ILocalizable
+[NeoModLoader] NeoModLoader.api.IMod
+[NeoModLoader] NeoModLoader.api.IModFeature
+[NeoModLoader] NeoModLoader.api.IModFeatureManager
+[NeoModLoader] NeoModLoader.api.IReloadable
+[NeoModLoader] NeoModLoader.api.IStagedLoad
+[NeoModLoader] NeoModLoader.api.IUnloadable
+[NeoModLoader] NeoModLoader.api.ModCompilationCache
+[NeoModLoader] NeoModLoader.api.ConfigItemType
+[NeoModLoader] NeoModLoader.api.ModConfigItem
+[NeoModLoader] NeoModLoader.api.ModConfig
+[NeoModLoader] NeoModLoader.api.ModConfig+<>c__DisplayClass5_0
+[NeoModLoader] NeoModLoader.api.ModConfig+<>c__DisplayClass5_1
+[NeoModLoader] NeoModLoader.api.ModTypeEnum
+[NeoModLoader] NeoModLoader.api.ModState
+[NeoModLoader] NeoModLoader.api.ModDeclare
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_0
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_1
+[NeoModLoader] NeoModLoader.api.ModDeclareExtensions+<>c__DisplayClass1_2
+[NeoModLoader] NeoModLoader.api.ModFeature
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureTreeNode[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureLoadPathNode[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+FeatureLoadPathNode+PlaceholderRootModFeature[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass10_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass20_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureManager`1+<>c__DisplayClass8_0[TMod]
+[NeoModLoader] NeoModLoader.api.ModFeatureRequirementList
+[NeoModLoader] NeoModLoader.api.VirtualMod
+[NeoModLoader] NeoModLoader.api.features.ModAssetFeature`1[TAsset]
+[NeoModLoader] NeoModLoader.api.features.ModButtonFeature`1[TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.features.ModGodPowerButtonFeature`2[TGodPowerFeature,TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.features.ModObjectFeature`1[TObject]
+[NeoModLoader] NeoModLoader.api.features.ModPowerTabFeature
+[NeoModLoader] NeoModLoader.api.features.ModWindowButtonFeature`2[TWindowFeature,TPowersTabFeature]
+[NeoModLoader] NeoModLoader.api.exceptions.UnrecognizableResourceFileException
+[NeoModLoader] NeoModLoader.api.exceptions.UnsupportedFileTypeException
+[NeoModLoader] NeoModLoader.api.attributes.ExperimentalAttribute
+[NeoModLoader] NeoModLoader.api.attributes.HotfixableAttribute
+[NeoModLoader] <PrivateImplementationDetails>
+[NeoModLoader] <PrivateImplementationDetails>+__StaticArrayInitTypeSize=6
+[NeoModLoader] <PrivateImplementationDetails>+__StaticArrayInitTypeSize=16
+[NeoModLoader] Attempting to load NeoModLoader.WorldBoxMod
+[NeoModLoader] Was added
+[NeoModLoader.AutoUpdate] Loading NeoModLoader.AutoUpdate_memload.dll into memory
+[NeoModLoader.AutoUpdate] Failed to load mod from path : 
+[NeoModLoader.AutoUpdate] E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\StreamingAssets\mods\NeoModLoader.AutoUpdate_memload.dll
+0x000002539DF33EA0
+S:76561199358449126
+s:Detect - Steam detecting language
+s:Detect - Already have a language, not falling back to english
+s:Detect - language en
+[NML]: NeoModLoader Version: 02266fe8185d940c4065185de0a117c18975cf09
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+Unloading 659 unused Assets to reduce memory usage. Loaded Objects now: 32695.
+Total: 28.666100 ms (FindLiveObjects: 4.800400 ms CreateObjectMapping: 2.333000 ms MarkObjects: 20.227100 ms  DeleteObjects: 1.305000 ms)
+
+[NML]: Trying auto auth at 0...
+001: Preloading windows (1/5)            = 0.0364
+LocalizedTextManager: total texts loaded: 44
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.ActorTryToAttackListener+<>c
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.PlotStartListener+<>c
+[NML]: Failed to construct listener instance of NeoModLoader.General.Event.Listeners.WarStartListener+<>c
+002: Initialize NeoModLoader             = 0.0524
+[NML]: Checking ForceLoadMods, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\寒海的全解锁_1.2 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\玄鉴仙族 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\西幻世界 in Mods
+[NML]: No mod.json file for folder E:\wol\gameversion\0_51_2_0.51.2\Mods\鬼谷修仙[重制] in Mods
+[NML]: Workshop folder not found, skip loading workshop mods
+003: Load Mods Info And Prepare Mods     = 0.3759
+004: Compile Mods And Load resources     = 0.0019
+<color=red>005: Compile Mod FunBoost                = 2.0952</color>
+<color=yellow>006: Compile Mod Supower                 = 0.5660</color>
+<color=red>007: Compile Mod 西幻世界                    = 4.5822</color>
+008: Compile Mod 全文明种族版中文名（三词库独立版）       = 0.2657
+<color=red>009: Compile Mod 我的模拟长生路                 = 5.7882</color>
+010: Load Resources From Mod FunBoost    = 0.0011
+011: Load Resources From Mod Supower     = 0.0406
+<color=red>012: Load Resources From Mod 西幻世界        = 33.3270</color>
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+013: Load Resources From Mod 全文明种族版中文名（三词库独立版） = 0.0002
+<color=red>014: Load Resources From Mod 我的模拟长生路     = 9.8831</color>
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-000002581FAE4040.dll
+[NML]: [FunBoost]: OnLoad
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-000002566DBD2DB0.dll
+[NML]: [FunBoost]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-000002585D839A30.dll
+[NML]: [Supower]: OnLoad
+[NML]: Set sp_nw_plants toggle to True
+[NML]: Set sp_nw_trees toggle to True
+[NML]: Set sp_nw_minerals toggle to True
+[NML]: Set sp_nw_nests toggle to True
+[NML]: Set sp_nw_civ_buildings toggle to True
+[NML]: Set sp_nw_other_buildings toggle to True
+[NML]: Set sp_nw_smart_units toggle to True
+[NML]: Set sp_nw_civ_units toggle to True
+[NML]: Set sp_nw_animal_units toggle to True
+[NML]: Set sp_nw_zombie_units toggle to True
+[NML]: Set sp_nw_skeleton_units toggle to True
+[NML]: Set sp_nw_other_units toggle to True
+[NML]: Set sp_nw_frozen_land toggle to True
+[NML]: Set sp_nw_fire_layer toggle to True
+[NML]: Set sp_nw_lava_layer toggle to True
+[NML]: Set sp_nw_cities toggle to True
+[NML]: Set sp_category_kingdom toggle to True
+[NML]: Set sp_category_city toggle to False
+[NML]: Set sp_category_unit toggle to False
+[NML]: Set sp_species_human toggle to False
+[NML]: Set sp_species_elf toggle to False
+[NML]: Set sp_species_orc toggle to False
+[NML]: Set sp_species_dwarf toggle to False
+[NML]: Set sp_species_fox toggle to False
+[NML]: Set sp_species_buffalo toggle to False
+[NML]: Set sp_species_hyena toggle to False
+[NML]: Set sp_species_crocodile toggle to False
+[NML]: Set sp_species_monkey toggle to False
+[NML]: Set sp_species_rhino toggle to False
+[NML]: Set sp_species_frog toggle to False
+[NML]: Set sp_species_snake toggle to False
+[NML]: Set sp_species_dog toggle to False
+[NML]: Set sp_species_wolf toggle to False
+[NML]: Set sp_species_bear toggle to False
+[NML]: Set sp_species_rabbit toggle to False
+[NML]: Set sp_species_cat toggle to False
+[NML]: Set sp_species_raccoon toggle to False
+[NML]: Set sp_species_seal toggle to False
+[NML]: Set sp_species_ostrich toggle to False
+[NML]: Set sp_species_unicorn toggle to False
+[NML]: Set sp_species_rat toggle to False
+[NML]: Set sp_species_chicken toggle to False
+[NML]: Set sp_species_sheep toggle to False
+[NML]: Set sp_species_cow toggle to False
+[NML]: Set sp_species_penguin toggle to False
+[NML]: Set sp_species_armadillo toggle to False
+[NML]: Set sp_species_alpaca toggle to False
+[NML]: Set sp_species_capybara toggle to False
+[NML]: Set sp_species_goat toggle to False
+[NML]: Set sp_species_scorpion toggle to False
+[NML]: Set sp_species_turtle toggle to False
+[NML]: Set sp_species_crab toggle to False
+[NML]: Set sp_species_crystal_sword toggle to False
+[NML]: Set sp_species_smore toggle to False
+[NML]: Set sp_species_acid_blob toggle to False
+[NML]: Set sp_species_flower_bud toggle to False
+[NML]: Set sp_species_lemon_snail toggle to False
+[NML]: Set sp_species_garl toggle to False
+[NML]: Set sp_species_bee toggle to False
+[NML]: Set sp_species_fly toggle to False
+[NML]: Set sp_species_butterfly toggle to False
+[NML]: Set sp_species_grasshopper toggle to False
+[NML]: Set sp_species_beetle toggle to False
+[NML]: Set sp_species_cold_one toggle to False
+[NML]: Set sp_species_necromancer toggle to False
+[NML]: Set sp_species_druid toggle to False
+[NML]: Set sp_species_plague_doctor toggle to False
+[NML]: Set sp_species_white_mage toggle to False
+[NML]: Set sp_species_evil_mage toggle to False
+[NML]: Set sp_species_skeleton toggle to False
+[NML]: Set sp_species_jumpy_skull toggle to False
+[NML]: Set sp_species_ghost toggle to False
+[NML]: Set sp_species_fire_skull toggle to False
+[NML]: Set sp_species_demon toggle to False
+[NML]: Set sp_species_angle toggle to False
+[NML]: Set sp_species_fairy toggle to False
+[NML]: Set sp_species_bandit toggle to False
+[NML]: Set sp_species_snowman toggle to False
+[NML]: Set sp_species_alien toggle to False
+[NML]: Set sp_species_civ_cat toggle to False
+[NML]: Set sp_species_civ_dog toggle to False
+[NML]: Set sp_species_civ_chicken toggle to False
+[NML]: Set sp_species_civ_rabbit toggle to False
+[NML]: Set sp_species_civ_monkey toggle to False
+[NML]: Set sp_species_civ_fox toggle to False
+[NML]: Set sp_species_civ_sheep toggle to False
+[NML]: Set sp_species_civ_cow toggle to False
+[NML]: Set sp_species_civ_armadillo toggle to False
+[NML]: Set sp_species_civ_wolf toggle to False
+[NML]: Set sp_species_civ_bear toggle to False
+[NML]: Set sp_species_civ_rhino toggle to False
+[NML]: Set sp_species_civ_buffalo toggle to False
+[NML]: Set sp_species_civ_hyena toggle to False
+[NML]: Set sp_species_civ_rat toggle to False
+[NML]: Set sp_species_civ_alpaca toggle to False
+[NML]: Set sp_species_civ_capybara toggle to False
+[NML]: Set sp_species_civ_goat toggle to False
+[NML]: Set sp_species_civ_scorpion toggle to False
+[NML]: Set sp_species_civ_crab toggle to False
+[NML]: Set sp_species_civ_penguin toggle to False
+[NML]: Set sp_species_civ_turtle toggle to False
+[NML]: Set sp_species_civ_crocodile toggle to False
+[NML]: Set sp_species_civ_snake toggle to False
+[NML]: Set sp_species_civ_frog toggle to False
+[NML]: Set sp_species_civ_piranha toggle to False
+[NML]: Set sp_species_civ_liliar toggle to False
+[NML]: Set sp_species_civ_garlic_man toggle to False
+[NML]: Set sp_species_civ_lemon_man toggle to False
+[NML]: Set sp_species_civ_acid_gentleman toggle to False
+[NML]: Set sp_species_civ_crystal_golem toggle to False
+[NML]: Set sp_species_civ_candy_man toggle to False
+[NML]: Set sp_species_civ_beetle toggle to False
+[NML]: Set sp_species_civ_seal toggle to False
+[NML]: Set sp_species_civ_unicorn toggle to False
+[NML]: Set sp_species_greg toggle to False
+[NML]: [Supower]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-00000254F65A6040.dll
+[NML]: [西幻世界]: OnLoad
+LocalizedTextManager: total texts loaded: 52
+[Mythology] 英灵殿初始化完成
+[NML]: [西幻世界]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-000002586275F010.dll
+[NML]: [全文明种族版中文名（三词库独立版）]: OnLoad
+[NML]: [全文明种族版中文名（三词库独立版）]: Loaded
+Fallback handler could not load library E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/MonoBleedingEdge/data-00000258EA716040.dll
+[NML]: [我的模拟长生路]: OnLoad
+[模拟长生路][诊断][actor-icon:mclsl_bai_xiansheng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_bai_xiansheng
+[模拟长生路][诊断][actor-icon:mclsl_chuanfa_tianzun] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_chuanfa_tianzun
+[模拟长生路][诊断][actor-icon:mclsl_named_tianyi] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_tianyi
+[模拟长生路][诊断][actor-icon:mclsl_named_moruibin] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_moruibin
+[模拟长生路][诊断][actor-icon:mclsl_named_xuantianwang] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xuantianwang
+[模拟长生路][诊断][actor-icon:mclsl_named_xuke] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xuke
+[模拟长生路][诊断][actor-icon:mclsl_named_yefeipeng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_yefeipeng
+[模拟长生路][诊断][actor-icon:mclsl_named_xiaoheng] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xiaoheng
+[模拟长生路][诊断][actor-icon:mclsl_named_xubai] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_xubai
+[模拟长生路][诊断][actor-icon:mclsl_named_liping] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_liping
+[模拟长生路][诊断][actor-icon:mclsl_named_shanfan] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_shanfan
+[模拟长生路][诊断][actor-icon:mclsl_named_zhangfan] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_zhangfan
+[模拟长生路][诊断][actor-icon:mclsl_named_zhenshen] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_zhenshen
+[模拟长生路][诊断][actor-icon:mclsl_named_diyi] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_diyi
+[模拟长生路][诊断][actor-icon:mclsl_named_disanmo] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_disanmo
+[模拟长生路][诊断][actor-icon:mclsl_named_qingshenlong] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_named_qingshenlong
+[模拟长生路][诊断][actor-icon:mclsl_beast_xuanniao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_xuanniao
+[模拟长生路][诊断][actor-icon:mclsl_beast_changliao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_changliao
+[模拟长生路][诊断][actor-icon:mclsl_beast_mo] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_mo
+[模拟长生路][诊断][actor-icon:mclsl_beast_hongmao] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_hongmao
+[模拟长生路][诊断][actor-icon:mclsl_beast_feiqiu] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_feiqiu
+[模拟长生路][诊断][actor-icon:mclsl_beast_yingying] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_yingying
+[模拟长生路][诊断][actor-icon:mclsl_beast_goushou] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_goushou
+[模拟长生路][诊断][actor-icon:mclsl_beast_tianshou] 专用按钮图标尚未完成: ui/ActorIcons/mclsl_beast_tianshou
+[NML]: [我的模拟长生路]: Loaded
+[NML]: NCMS Compatible Layer has been initialized.
+<color=red>015: Load Mods                           = 57.3980</color>
+Curl error 35: Cert verify failed. Certificate could not be verified (either omitted or unsupported). UnityTls error code: 7
+016: Init Mod FunBoost                   = 0.0017
+017: Init Mod Supower                    = 0.0000
+018: Init Mod 西幻世界                       = 0.0000
+019: Init Mod 全文明种族版中文名（三词库独立版）          = 0.0002
+020: Init Mod 我的模拟长生路                    = 0.0000
+021: Post-Init Mod FunBoost              = 0.0013
+022: Post-Init Mod Supower               = 0.0000
+023: Post-Init Mod 西幻世界                  = 0.0000
+024: Post-Init Mod 全文明种族版中文名（三词库独立版）     = 0.0000
+025: Post-Init Mod 我的模拟长生路               = 0.0000
+LocalizedTextManager: total texts loaded: 78
+LocalizedTextManager: missing text: Guild Detail
+LocalizedTextManager: missing text: Squad Detail
+LocalizedTextManager: missing text: Bounty Detail
+LocalizedTextManager: missing text: Guild Rankings
+<color=red>026: NeoModLoader Post Initialize        = 1.5023</color>
+[NML]: -batchmode
+[NML]: -force-d3d11
+[NML]: -screen-width
+[NML]: 1280
+[NML]: -screen-height
+[NML]: 720
+[NML]: -logFile
+[NML]: E:\0.6.0\output\runtime-validation\visual-baihu-20261014\unit-sizes-18.log
+027: Check External Mods to Install      = 0.0396
+Total Preloaded Hand Renderer Sprites : 780 with colors 111
+<color=yellow>028: Preload hand item textures...       = 0.5119</color>
+Loaded unit related sprites: 24675
+<color=red>029: Preload main unit textures...       = 3.5825</color>
+Loaded unit related sprites: 26043
+030: Preload unit trait textures...      = 0.2521
+031: Preload building sprite lists...    = 0.0006
+<color=red>032: Preload building sprites...         = 1.9423</color>
+<color=yellow>033: Preload boat animations...          = 0.7470</color>
+<color=yellow>034: Preload unit animations...          = 0.7159</color>
+<color=red>035: Preload pixel bags units...         = 3.3939</color>
+<color=yellow>036: Preload pixel bags buildings...     = 0.6257</color>
+038: Close windows                       = 0.0101
+040: Quantum Clean                       = 0.0005
+041: Generate New Map (1/3)              = 0.0004
+043: Clearing World                      = 0.0788
+044: Clean old Tiles                     = 0.0004
+045: Generate New Map (2/3)              = 0.0000
+046: Generate New Map (3/3)              = 0.0004
+047: Recreate Sizes (1/4)                = 0.0045
+048: Recreate Sizes (2/4)                = 0.0006
+049: Prepare Tiles                       = 0.0004
+051: Create Tiles (65536)                = 0.0457
+053: Create Neighbours [65536] (1/3)     = 0.0001
+Firebase Starting Check
+055: Create Neighbours [65536] (2/3)     = 0.0025
+Firebase check continuing on thread
+Firebase check status
+Firebase is available
+Available
+057: Create Neighbours [65536] (3/3)     = 0.0902
+059: Create Zones                        = 0.0154
+061: Create Chunks                       = 0.0226
+063: Tile Manager                        = 0.0079
+064: Recreate Sizes (3/4) (1/13)         = 0.0026
+065: Recreate Sizes (3/4) (2/13)         = 0.0010
+066: Recreate Sizes (3/4) (3/13)         = 0.0010
+067: Recreate Sizes (3/4) (4/13)         = 0.0009
+068: Recreate Sizes (3/4) (5/13)         = 0.0010
+069: Recreate Sizes (3/4) (6/13)         = 0.0012
+070: Recreate Sizes (3/4) (7/13)         = 0.0014
+071: Recreate Sizes (3/4) (8/13)         = 0.0011
+072: Recreate Sizes (3/4) (9/13)         = 0.0011
+073: Recreate Sizes (3/4) (10/13)        = 0.0015
+074: Recreate Sizes (3/4) (11/13)        = 0.0013
+075: Recreate Sizes (3/4) (12/13)        = 0.0010
+076: Recreate Sizes (3/4) (13/13)        = 0.0010
+077: Recreate Sizes (4/4)                = 0.0033
+078: gen: World Laws                     = 0.0009
+079: gen: Generating Name                = 0.0072
+[SQLITE] new db C:/Users/Arthur.lu/AppData/LocalLow/mkarpenko/WorldBox/stats.s3db
+[SQLITE] opening db 3044002
+080: Creating Stats DB                   = 0.1339
+081: Creating Stats                      = 0.0290
+082: Creating Stats (WorldTable)         = 0.0428
+083: Creating Stats (AllianceTable)      = 0.0185
+084: Creating Stats (ClanTable)          = 0.0178
+085: Creating Stats (CityTable)          = 0.0237
+086: Creating Stats (CultureTable)       = 0.0149
+087: Creating Stats (FamilyTable)        = 0.0153
+088: Creating Stats (ArmyTable)          = 0.0152
+089: Creating Stats (KingdomTable)       = 0.0316
+090: Creating Stats (LanguageTable)      = 0.0161
+091: Creating Stats (ReligionTable)      = 0.0222
+092: Creating Stats (SubspeciesTable)    = 0.0198
+093: Creating Stats (WarTable)           = 0.0179
+094: Creating Triggers                   = 0.3505
+096: Preloading windows (2/5)            = 0.0009
+098: Preloading windows (3/5)            = 0.1070
+099: Preloading windows (4/5) (1/39)     = 0.0209
+Crash!!!
+SymInit: Symbol-SearchPath: '.;E:\wol\gameversion\0_51_2_0.51.2;E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Plugins\x86_64;E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Plugins;E:\wol\gameversion\0_51_2_0.51.2;C:\Windows;C:\Windows\system32;', symOptions: 534, UserName: 'Arthur.lu'
+OS-Version: 10.0.0
+E:\wol\gameversion\0_51_2_0.51.2\worldbox.exe:worldbox.exe (00007FF7D2D30000), size: 688128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.60.25597
+C:\Windows\SYSTEM32\ntdll.dll:ntdll.dll (00007FFA5FDE0000), size: 2519040 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFA5ED40000), size: 831488 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFA5D280000), size: 4202496 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\winahframe64.dll:winahframe64.dll (00007FFA58E50000), size: 1175552 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.88.1440.0
+E:\wol\gameversion\0_51_2_0.51.2\UnityPlayer.dll:UnityPlayer.dll (00007FF9D17C0000), size: 31969280 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2022.3.60.25597
+C:\Windows\System32\USER32.dll:USER32.dll (00007FFA5F360000), size: 1896448 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\win32u.dll:win32u.dll (00007FFA5D690000), size: 159744 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\GDI32.dll:GDI32.dll (00007FFA5FB90000), size: 176128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8328
+C:\Windows\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFA5E360000), size: 770048 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\gdi32full.dll:gdi32full.dll (00007FFA5CFE0000), size: 1216512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\msvcrt.dll:msvcrt.dll (00007FFA5E2B0000), size: 692224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 7.0.26100.9444
+C:\Windows\System32\msvcp_win.dll:msvcp_win.dll (00007FFA5D1D0000), size: 667648 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\ucrtbase.dll:ucrtbase.dll (00007FFA5D6C0000), size: 1359872 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\sechost.dll:sechost.dll (00007FFA5EC90000), size: 692224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\RPCRT4.dll:RPCRT4.dll (00007FFA5EE10000), size: 1146880 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\ole32.dll:ole32.dll (00007FFA5FBC0000), size: 1679360 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\combase.dll:combase.dll (00007FFA5F660000), size: 3690496 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFA5F170000), size: 417792 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\VERSION.dll:VERSION.dll (00007FFA58D20000), size: 45056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\Windows\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFA5E6B0000), size: 4747264 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\SHELL32.dll:SHELL32.dll (00007FFA5DB00000), size: 7962624 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFA5F550000), size: 888832 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\IMM32.dll:IMM32.dll (00007FFA5FD60000), size: 200704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FF9B62F0000), size: 1097728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\CRYPT32.dll:CRYPT32.dll (00007FFA5D820000), size: 1564672 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\WS2_32.dll:WS2_32.dll (00007FFA5EC00000), size: 524288 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\WINMM.dll:WINMM.dll (00007FFA58210000), size: 221184 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+E:\wol\gameversion\0_51_2_0.51.2\WINHTTP.dll:WINHTTP.dll (00007FFA58DF0000), size: 40960 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 3.4.0.0
+C:\Windows\SYSTEM32\HID.DLL:HID.DLL (00007FFA5B120000), size: 61440 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\bcrypt.dll:bcrypt.dll (00007FFA5CED0000), size: 172032 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\GLU32.dll:GLU32.dll (00007FF9E03B0000), size: 184320 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFA590D0000), size: 192512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\dxcore.dll:dxcore.dll (00007FFA595F0000), size: 278528 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\winahdcore64.dll:winahdcore64.dll (00007FFA582F0000), size: 9924608 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.88.1440.0
+C:\Windows\System32\COMDLG32.dll:COMDLG32.dll (00007FFA5F1E0000), size: 1003520 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\shcore.dll:shcore.dll (00007FFA5FA70000), size: 1028096 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\MPR.dll:MPR.dll (00007FFA58290000), size: 135168 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7019
+C:\Windows\SYSTEM32\OLEACC.dll:OLEACC.dll (00007FFA58190000), size: 479232 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 7.2.26100.9278
+C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.9278_none_3e0d1ba8e3303201\COMCTL32.dll:COMCTL32.dll (00007FFA57EF0000), size: 2686976 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 6.10.26100.9278
+C:\Windows\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (00007FFA5D110000), size: 704512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dtframe64.dll:dtframe64.dll (00007FFA569C0000), size: 2670592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.15.805.0
+C:\Windows\SYSTEM32\TIjtDrvd64.dll:TIjtDrvd64.dll (00007FFA56980000), size: 204800 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.16.625.0
+C:\Windows\SYSTEM32\DtActionFrame64.dll:DtActionFrame64.dll (00007FFA567F0000), size: 1581056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.3.828.0
+C:\Windows\SYSTEM32\WINSPOOL.DRV:WINSPOOL.DRV (00007FFA56730000), size: 720896 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (00007FFA5CBB0000), size: 335872 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\DtComFrame64.dll:DtComFrame64.dll (00007FFA56560000), size: 1884160 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.1.822.0
+C:\Windows\SYSTEM32\dtsframe64.dll:dtsframe64.dll (00007FFA56430000), size: 1216512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.15.807.0
+C:\Windows\SYSTEM32\mswsock.dll:mswsock.dll (00007FFA5C270000), size: 442368 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\psapi.dll:psapi.dll (00007FFA5F540000), size: 32768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8521
+C:\Windows\SYSTEM32\WinUsb.dll:WinUsb.dll (00007FFA57D90000), size: 53248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\mf.dll:mf.dll (00007FFA42680000), size: 622592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9457
+C:\Windows\SYSTEM32\MFCORE.DLL:MFCORE.DLL (00007FFA41390000), size: 4296704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9457
+C:\Windows\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFA5A860000), size: 9101312 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\TMailHook64.dll:TMailHook64.dll (00007FFA562C0000), size: 1507328 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.88.1440.0
+C:\Windows\SYSTEM32\winncap364.dll:winncap364.dll (00007FFA56060000), size: 2441216 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.87.2270.0
+C:\Windows\system32\WINHTTP.dll:WINHTTP.dll (00007FFA53F10000), size: 1220608 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\secur32.dll:secur32.dll (00007FFA58E30000), size: 53248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7705
+C:\Windows\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFA5BF70000), size: 299008 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFA5BCB0000), size: 110592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\system32\uxtheme.dll:uxtheme.dll (00007FFA58FD0000), size: 688128 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+E:\wol\gameversion\0_51_2_0.51.2\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FF9E7C70000), size: 10825728 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\SYSTEM32\profapi.dll:profapi.dll (00007FFA5CF00000), size: 167936 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\iphlpapi.dll:iphlpapi.dll (00007FFA5B400000), size: 208896 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\MSCTF.dll:MSCTF.dll (00000253A44F0000), size: 1421312 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\d3d11.dll:d3d11.dll (00007FFA5A470000), size: 2490368 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\dxgi.dll:dxgi.dll (00007FFA5A6E0000), size: 1290240 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\powrprof.dll:powrprof.dll (00007FFA5CC80000), size: 385024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.3912
+C:\Windows\SYSTEM32\UMPDC.dll:UMPDC.dll (00007FFA5CC60000), size: 86016 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8972
+C:\Windows\SYSTEM32\directxdatabasehelper.dll:directxdatabasehelper.dll (00007FFA554E0000), size: 385024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvldumdx.dll:nvldumdx.dll (00007FFA52CB0000), size: 802816 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9579
+C:\Windows\SYSTEM32\msasn1.dll:msasn1.dll (00007FFA5C5E0000), size: 77824 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFA527A0000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFA5C580000), size: 49152 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\wldp.dll:wldp.dll (00007FFA5C660000), size: 434176 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\drvstore.dll:drvstore.dll (00007FFA52620000), size: 1548288 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\devobj.dll:devobj.dll (00007FFA5CB70000), size: 192512 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\System32\wintrust.dll:wintrust.dll (00007FFA5DA70000), size: 532480 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\System32\imagehlp.dll:imagehlp.dll (00007FFA5F630000), size: 131072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.4202
+C:\Windows\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFA5C560000), size: 110592 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\system32\rsaenh.dll:rsaenh.dll (00007FFA5BC10000), size: 233472 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7705
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvgpucomp64.dll:nvgpucomp64.dll (00007FFA4CBC0000), size: 83193856 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9579
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\NvMemMapStoragex.dll:NvMemMapStoragex.dll (00007FFA4AF70000), size: 1290240 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvwgf2umx.dll:nvwgf2umx.dll (00007FFA43DF0000), size: 87707648 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9579
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvppex.dll:nvppex.dll (00007FFA39BD0000), size: 7491584 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 32.0.15.9579
+C:\Windows\System32\clbcatq.dll:clbcatq.dll (00007FFA5EB40000), size: 712704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 2001.12.10941.16384
+C:\Windows\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFA3E400000), size: 73728 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFA3E480000), size: 499712 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7920
+C:\Windows\system32\thooksv364.dll:thooksv364.dll (00007FFA32460000), size: 765952 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 4.88.1440.0
+C:\Windows\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFA3D370000), size: 86016 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\system32\wbem\fastprox.dll:fastprox.dll (00007FFA3D720000), size: 1003520 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\amsi.dll:amsi.dll (00007FFA3C520000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7309
+C:\Windows\SYSTEM32\dcomp.dll:dcomp.dll (00007FFA57440000), size: 2248704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\Microsoft.Internal.WarpPal.dll:Microsoft.Internal.WarpPal.dll (00007FFA57420000), size: 106496 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\SYSTEM32\textinputframework.dll:textinputframework.dll (00007FFA3AC60000), size: 1318912 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\CoreMessaging.dll:CoreMessaging.dll (00007FFA57C10000), size: 1224704 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\CoreUIComponents.dll:CoreUIComponents.dll (00007FFA540C0000), size: 3031040 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\wintypes.dll:wintypes.dll (00007FFA54AF0000), size: 1482752 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\system32\SogouTSF.ime:SogouTSF.ime (00007FF9E46E0000), size: 5468160 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 16.6.0.4952
+C:\Windows\system32\MSIMG32.dll:MSIMG32.dll (00007FFA42600000), size: 32768 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\system32\SogouPY.ime:SogouPY.ime (00007FF9E29E0000), size: 28680192 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 16.6.0.4952
+C:\Windows\SYSTEM32\USERENV.dll:USERENV.dll (00007FFA5C320000), size: 212992 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\ntmarta.dll:ntmarta.dll (00007FFA5BDE0000), size: 221184 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7019
+C:\Program Files (x86)\SogouInput\Components\IChat\1.0.2.3232\ichat_bundle64.dll:ichat_bundle64.dll (00007FF9E1B20000), size: 2965504 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.0.2.3232
+C:\Windows\SYSTEM32\PROPSYS.dll:PROPSYS.dll (00007FFA56C50000), size: 1003520 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 7.0.26100.9278
+C:\Program Files (x86)\SogouInput\16.6.0.4952\Resource.dll:Resource.dll (0000000010000000), size: 4857856 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 16.6.0.4952
+C:\Program Files (x86)\SogouInput\Components\isgpet\1.0.2.3152\isgpet_bundle64.dll:isgpet_bundle64.dll (00007FFA2EDE0000), size: 679936 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\SYSTEM32\d2d1.dll:d2d1.dll (00007FFA59640000), size: 6529024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dwrite.dll:dwrite.dll (00007FFA59C80000), size: 2531328 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\TextShaping.dll:TextShaping.dll (00007FFA3B3B0000), size: 1028096 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Program Files (x86)\SogouInput\Components\PicFace\1.1.0.3184\PicFace64.dll:PicFace64.dll (0000025456F20000), size: 4927488 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 1.1.0.3184
+C:\Program Files (x86)\SogouInput\Components\systembeautify\1.0.2.2868\systembeautify_bundle64.dll:systembeautify_bundle64.dll (00007FF9E04B0000), size: 524288 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\System32\NSI.dll:NSI.dll (00000254546F0000), size: 40960 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (00007FFA54730000), size: 118784 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (00007FFA54700000), size: 151552 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\DNSAPI.dll:DNSAPI.dll (00007FFA5B440000), size: 1409024 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\DSPARSE.dll:DSPARSE.dll (00007FFA5C050000), size: 53248 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.1
+C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (00007FFA52D80000), size: 45056 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.7920
+C:\Windows\System32\fwpuclnt.dll:fwpuclnt.dll (00007FFA54A20000), size: 548864 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\fmodstudio.dll:fmodstudio.dll (00007FFA12080000), size: 3461120 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 0.2.2.29
+C:\Windows\System32\MMDevApi.dll:MMDevApi.dll (00007FFA52FF0000), size: 675840 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (00007FFA49500000), size: 1798144 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\resourcepolicyclient.dll:resourcepolicyclient.dll (00007FFA59450000), size: 81920 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.8115
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\steam_api64.dll:steam_api64.dll (00007FFA33340000), size: 1900544 (result: 0), SymType: '-deferred-', PDB: ''
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\FirebaseCppApp-12_8_0.dll:FirebaseCppApp-12_8_0.dll (00007FF9C8F00000), size: 17506304 (result: 0), SymType: '-deferred-', PDB: ''
+C:\Windows\SYSTEM32\MSVCP140.dll:MSVCP140.dll (00007FFA34800000), size: 643072 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\VCRUNTIME140.dll:VCRUNTIME140.dll (00007FFA3EC40000), size: 180224 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\VCRUNTIME140_1.dll:VCRUNTIME140_1.dll (00007FFA58DE0000), size: 49152 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\icu.dll:icu.dll (00007FFA3C550000), size: 2748416 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 72.1.0.4
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\sqlite3.dll:sqlite3.dll (00007FFA0FCB0000), size: 3158016 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 3.44.2.0
+C:\Windows\SYSTEM32\DbgHelp.dll:DbgHelp.dll (00007FFA5A090000), size: 2408448 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dbgcore.DLL:dbgcore.DLL (00007FFA36CC0000), size: 241664 (result: 0), SymType: '-deferred-', PDB: '', fileVersion: 10.0.26100.9444
+
+========== OUTPUTTING STACK TRACE ==================
+
+SymInit: Symbol-SearchPath: '.;E:\wol\gameversion\0_51_2_0.51.2;E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Plugins\x86_64;E:/wol/gameversion/0_51_2_0.51.2/worldbox_Data/Plugins;E:\wol\gameversion\0_51_2_0.51.2;C:\Windows;C:\Windows\system32;', symOptions: 534, UserName: 'Arthur.lu'
+OS-Version: 10.0.0
+E:\wol\gameversion\0_51_2_0.51.2\worldbox.exe:worldbox.exe (00007FF7D2D30000), size: 688128 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\worldbox.exe', fileVersion: 2022.3.60.25597
+C:\Windows\SYSTEM32\ntdll.dll:ntdll.dll (00007FFA5FDE0000), size: 2519040 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ntdll.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\KERNEL32.DLL:KERNEL32.DLL (00007FFA5ED40000), size: 831488 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\KERNEL32.DLL', fileVersion: 10.0.26100.9444
+C:\Windows\System32\KERNELBASE.dll:KERNELBASE.dll (00007FFA5D280000), size: 4202496 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\KERNELBASE.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\winahframe64.dll:winahframe64.dll (00007FFA58E50000), size: 1175552 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\winahframe64.dll', fileVersion: 4.88.1440.0
+E:\wol\gameversion\0_51_2_0.51.2\UnityPlayer.dll:UnityPlayer.dll (00007FF9D17C0000), size: 31969280 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\UnityPlayer.dll', fileVersion: 2022.3.60.25597
+C:\Windows\System32\USER32.dll:USER32.dll (00007FFA5F360000), size: 1896448 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\USER32.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\win32u.dll:win32u.dll (00007FFA5D690000), size: 159744 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\win32u.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\GDI32.dll:GDI32.dll (00007FFA5FB90000), size: 176128 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\GDI32.dll', fileVersion: 10.0.26100.8328
+C:\Windows\System32\ADVAPI32.dll:ADVAPI32.dll (00007FFA5E360000), size: 770048 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ADVAPI32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\gdi32full.dll:gdi32full.dll (00007FFA5CFE0000), size: 1216512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\gdi32full.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\msvcrt.dll:msvcrt.dll (00007FFA5E2B0000), size: 692224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\msvcrt.dll', fileVersion: 7.0.26100.9444
+C:\Windows\System32\msvcp_win.dll:msvcp_win.dll (00007FFA5D1D0000), size: 667648 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\msvcp_win.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\ucrtbase.dll:ucrtbase.dll (00007FFA5D6C0000), size: 1359872 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ucrtbase.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\sechost.dll:sechost.dll (00007FFA5EC90000), size: 692224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\sechost.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\RPCRT4.dll:RPCRT4.dll (00007FFA5EE10000), size: 1146880 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\RPCRT4.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\ole32.dll:ole32.dll (00007FFA5FBC0000), size: 1679360 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ole32.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\combase.dll:combase.dll (00007FFA5F660000), size: 3690496 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\combase.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\SHLWAPI.dll:SHLWAPI.dll (00007FFA5F170000), size: 417792 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SHLWAPI.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\VERSION.dll:VERSION.dll (00007FFA58D20000), size: 45056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\VERSION.dll', fileVersion: 10.0.26100.1150
+C:\Windows\System32\SETUPAPI.dll:SETUPAPI.dll (00007FFA5E6B0000), size: 4747264 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SETUPAPI.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\SHELL32.dll:SHELL32.dll (00007FFA5DB00000), size: 7962624 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SHELL32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\OLEAUT32.dll:OLEAUT32.dll (00007FFA5F550000), size: 888832 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\OLEAUT32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\IMM32.dll:IMM32.dll (00007FFA5FD60000), size: 200704 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\IMM32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\OPENGL32.dll:OPENGL32.dll (00007FF9B62F0000), size: 1097728 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\OPENGL32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\CRYPT32.dll:CRYPT32.dll (00007FFA5D820000), size: 1564672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\CRYPT32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\WS2_32.dll:WS2_32.dll (00007FFA5EC00000), size: 524288 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\WS2_32.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\WINMM.dll:WINMM.dll (00007FFA58210000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINMM.dll', fileVersion: 10.0.26100.9278
+E:\wol\gameversion\0_51_2_0.51.2\WINHTTP.dll:WINHTTP.dll (00007FFA58DF0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\WINHTTP.dll', fileVersion: 3.4.0.0
+C:\Windows\SYSTEM32\HID.DLL:HID.DLL (00007FFA5B120000), size: 61440 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\HID.DLL', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\bcrypt.dll:bcrypt.dll (00007FFA5CED0000), size: 172032 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\bcrypt.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\GLU32.dll:GLU32.dll (00007FF9E03B0000), size: 184320 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\GLU32.dll', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\dwmapi.dll:dwmapi.dll (00007FFA590D0000), size: 192512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dwmapi.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\dxcore.dll:dxcore.dll (00007FFA595F0000), size: 278528 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dxcore.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\winahdcore64.dll:winahdcore64.dll (00007FFA582F0000), size: 9924608 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\winahdcore64.dll', fileVersion: 4.88.1440.0
+C:\Windows\System32\COMDLG32.dll:COMDLG32.dll (00007FFA5F1E0000), size: 1003520 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\COMDLG32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\shcore.dll:shcore.dll (00007FFA5FA70000), size: 1028096 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\shcore.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\MPR.dll:MPR.dll (00007FFA58290000), size: 135168 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MPR.dll', fileVersion: 10.0.26100.7019
+C:\Windows\SYSTEM32\OLEACC.dll:OLEACC.dll (00007FFA58190000), size: 479232 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\OLEACC.dll', fileVersion: 7.2.26100.9278
+C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.9278_none_3e0d1ba8e3303201\COMCTL32.dll:COMCTL32.dll (00007FFA57EF0000), size: 2686976 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.9278_none_3e0d1ba8e3303201\COMCTL32.dll', fileVersion: 6.10.26100.9278
+C:\Windows\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (00007FFA5D110000), size: 704512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\bcryptPrimitives.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dtframe64.dll:dtframe64.dll (00007FFA569C0000), size: 2670592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dtframe64.dll', fileVersion: 1.15.805.0
+C:\Windows\SYSTEM32\TIjtDrvd64.dll:TIjtDrvd64.dll (00007FFA56980000), size: 204800 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\TIjtDrvd64.dll', fileVersion: 1.16.625.0
+C:\Windows\SYSTEM32\DtActionFrame64.dll:DtActionFrame64.dll (00007FFA567F0000), size: 1581056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DtActionFrame64.dll', fileVersion: 1.3.828.0
+C:\Windows\SYSTEM32\WINSPOOL.DRV:WINSPOOL.DRV (00007FFA56730000), size: 720896 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINSPOOL.DRV', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (00007FFA5CBB0000), size: 335872 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\cfgmgr32.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\DtComFrame64.dll:DtComFrame64.dll (00007FFA56560000), size: 1884160 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DtComFrame64.dll', fileVersion: 1.1.822.0
+C:\Windows\SYSTEM32\dtsframe64.dll:dtsframe64.dll (00007FFA56430000), size: 1216512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dtsframe64.dll', fileVersion: 1.15.807.0
+C:\Windows\SYSTEM32\mswsock.dll:mswsock.dll (00007FFA5C270000), size: 442368 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\mswsock.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\psapi.dll:psapi.dll (00007FFA5F540000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\psapi.dll', fileVersion: 10.0.26100.8521
+C:\Windows\SYSTEM32\WinUsb.dll:WinUsb.dll (00007FFA57D90000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WinUsb.dll', fileVersion: 10.0.26100.1150
+C:\Windows\SYSTEM32\mf.dll:mf.dll (00007FFA42680000), size: 622592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\mf.dll', fileVersion: 10.0.26100.9457
+C:\Windows\SYSTEM32\MFCORE.DLL:MFCORE.DLL (00007FFA41390000), size: 4296704 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MFCORE.DLL', fileVersion: 10.0.26100.9457
+C:\Windows\SYSTEM32\windows.storage.dll:windows.storage.dll (00007FFA5A860000), size: 9101312 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\windows.storage.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\TMailHook64.dll:TMailHook64.dll (00007FFA562C0000), size: 1507328 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\TMailHook64.dll', fileVersion: 4.88.1440.0
+C:\Windows\SYSTEM32\winncap364.dll:winncap364.dll (00007FFA56060000), size: 2441216 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\winncap364.dll', fileVersion: 4.87.2270.0
+C:\Windows\system32\WINHTTP.dll:WINHTTP.dll (00007FFA53F10000), size: 1220608 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\WINHTTP.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\secur32.dll:secur32.dll (00007FFA58E30000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\secur32.dll', fileVersion: 10.0.26100.7705
+C:\Windows\SYSTEM32\SSPICLI.DLL:SSPICLI.DLL (00007FFA5BF70000), size: 299008 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\SSPICLI.DLL', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (00007FFA5BCB0000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\kernel.appcore.dll', fileVersion: 10.0.26100.9278
+C:\Windows\system32\uxtheme.dll:uxtheme.dll (00007FFA58FD0000), size: 688128 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\uxtheme.dll', fileVersion: 10.0.26100.9444
+E:\wol\gameversion\0_51_2_0.51.2\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll:mono-2.0-bdwgc.dll (00007FF9E7C70000), size: 10825728 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\MonoBleedingEdge\EmbedRuntime\mono-2.0-bdwgc.dll'
+C:\Windows\SYSTEM32\profapi.dll:profapi.dll (00007FFA5CF00000), size: 167936 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Windows\SYSTEM32\profapi.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\iphlpapi.dll:iphlpapi.dll (00007FFA5B400000), size: 208896 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\iphlpapi.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\MSCTF.dll:MSCTF.dll (00000253A44F0000), size: 1421312 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\MSCTF.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\d3d11.dll:d3d11.dll (00007FFA5A470000), size: 2490368 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\d3d11.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\dxgi.dll:dxgi.dll (00007FFA5A6E0000), size: 1290240 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dxgi.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\powrprof.dll:powrprof.dll (00007FFA5CC80000), size: 385024 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\powrprof.dll', fileVersion: 10.0.26100.3912
+C:\Windows\SYSTEM32\UMPDC.dll:UMPDC.dll (00007FFA5CC60000), size: 86016 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\UMPDC.dll', fileVersion: 10.0.26100.8972
+C:\Windows\SYSTEM32\directxdatabasehelper.dll:directxdatabasehelper.dll (00007FFA554E0000), size: 385024 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Windows\SYSTEM32\directxdatabasehelper.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvldumdx.dll:nvldumdx.dll (00007FFA52CB0000), size: 802816 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvldumdx.dll', fileVersion: 32.0.15.9579
+C:\Windows\SYSTEM32\msasn1.dll:msasn1.dll (00007FFA5C5E0000), size: 77824 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\msasn1.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\cryptnet.dll:cryptnet.dll (00007FFA527A0000), size: 241664 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\cryptnet.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\cryptbase.dll:cryptbase.dll (00007FFA5C580000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\cryptbase.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\wldp.dll:wldp.dll (00007FFA5C660000), size: 434176 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wldp.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\drvstore.dll:drvstore.dll (00007FFA52620000), size: 1548288 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\drvstore.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\devobj.dll:devobj.dll (00007FFA5CB70000), size: 192512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\devobj.dll', fileVersion: 10.0.26100.9278
+C:\Windows\System32\wintrust.dll:wintrust.dll (00007FFA5DA70000), size: 532480 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\wintrust.dll', fileVersion: 10.0.26100.9444
+C:\Windows\System32\imagehlp.dll:imagehlp.dll (00007FFA5F630000), size: 131072 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\imagehlp.dll', fileVersion: 10.0.26100.4202
+C:\Windows\SYSTEM32\CRYPTSP.dll:CRYPTSP.dll (00007FFA5C560000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\CRYPTSP.dll', fileVersion: 10.0.26100.9444
+C:\Windows\system32\rsaenh.dll:rsaenh.dll (00007FFA5BC10000), size: 233472 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\rsaenh.dll', fileVersion: 10.0.26100.7705
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvgpucomp64.dll:nvgpucomp64.dll (00007FFA4CBC0000), size: 83193856 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvgpucomp64.dll', fileVersion: 32.0.15.9579
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\NvMemMapStoragex.dll:NvMemMapStoragex.dll (00007FFA4AF70000), size: 1290240 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\NvMemMapStoragex.dll'
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvwgf2umx.dll:nvwgf2umx.dll (00007FFA43DF0000), size: 87707648 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvwgf2umx.dll', fileVersion: 32.0.15.9579
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvppex.dll:nvppex.dll (00007FFA39BD0000), size: 7491584 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_4bf4c17fa8a478b5\nvppex.dll', fileVersion: 32.0.15.9579
+C:\Windows\System32\clbcatq.dll:clbcatq.dll (00007FFA5EB40000), size: 712704 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\clbcatq.dll', fileVersion: 2001.12.10941.16384
+C:\Windows\system32\wbem\wbemprox.dll:wbemprox.dll (00007FFA3E400000), size: 73728 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\wbem\wbemprox.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\wbemcomn.dll:wbemcomn.dll (00007FFA3E480000), size: 499712 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wbemcomn.dll', fileVersion: 10.0.26100.7920
+C:\Windows\system32\thooksv364.dll:thooksv364.dll (00007FFA32460000), size: 765952 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\thooksv364.dll', fileVersion: 4.88.1440.0
+C:\Windows\system32\wbem\wbemsvc.dll:wbemsvc.dll (00007FFA3D370000), size: 86016 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\wbem\wbemsvc.dll', fileVersion: 10.0.26100.9278
+C:\Windows\system32\wbem\fastprox.dll:fastprox.dll (00007FFA3D720000), size: 1003520 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\wbem\fastprox.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\amsi.dll:amsi.dll (00007FFA3C520000), size: 118784 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\amsi.dll', fileVersion: 10.0.26100.7309
+C:\Windows\SYSTEM32\dcomp.dll:dcomp.dll (00007FFA57440000), size: 2248704 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dcomp.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\Microsoft.Internal.WarpPal.dll:Microsoft.Internal.WarpPal.dll (00007FFA57420000), size: 106496 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\Microsoft.Internal.WarpPal.dll'
+C:\Windows\SYSTEM32\textinputframework.dll:textinputframework.dll (00007FFA3AC60000), size: 1318912 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\textinputframework.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\CoreMessaging.dll:CoreMessaging.dll (00007FFA57C10000), size: 1224704 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\CoreMessaging.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\CoreUIComponents.dll:CoreUIComponents.dll (00007FFA540C0000), size: 3031040 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\CoreUIComponents.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\wintypes.dll:wintypes.dll (00007FFA54AF0000), size: 1482752 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wintypes.dll', fileVersion: 10.0.26100.9444
+C:\Windows\system32\SogouTSF.ime:SogouTSF.ime (00007FF9E46E0000), size: 5468160 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\SogouTSF.ime', fileVersion: 16.6.0.4952
+C:\Windows\system32\MSIMG32.dll:MSIMG32.dll (00007FFA42600000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\MSIMG32.dll', fileVersion: 10.0.26100.9444
+C:\Windows\system32\SogouPY.ime:SogouPY.ime (00007FF9E29E0000), size: 28680192 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\SogouPY.ime', fileVersion: 16.6.0.4952
+C:\Windows\SYSTEM32\USERENV.dll:USERENV.dll (00007FFA5C320000), size: 212992 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\USERENV.dll', fileVersion: 10.0.26100.9278
+C:\Windows\SYSTEM32\ntmarta.dll:ntmarta.dll (00007FFA5BDE0000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ntmarta.dll', fileVersion: 10.0.26100.7019
+C:\Program Files (x86)\SogouInput\Components\IChat\1.0.2.3232\ichat_bundle64.dll:ichat_bundle64.dll (00007FF9E1B20000), size: 2965504 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\SogouInput\Components\IChat\1.0.2.3232\ichat_bundle64.dll', fileVersion: 1.0.2.3232
+C:\Windows\SYSTEM32\PROPSYS.dll:PROPSYS.dll (00007FFA56C50000), size: 1003520 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\PROPSYS.dll', fileVersion: 7.0.26100.9278
+C:\Program Files (x86)\SogouInput\16.6.0.4952\Resource.dll:Resource.dll (0000000010000000), size: 4857856 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files (x86)\SogouInput\16.6.0.4952\Resource.dll', fileVersion: 16.6.0.4952
+C:\Program Files (x86)\SogouInput\Components\isgpet\1.0.2.3152\isgpet_bundle64.dll:isgpet_bundle64.dll (00007FFA2EDE0000), size: 679936 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\SogouInput\Components\isgpet\1.0.2.3152\isgpet_bundle64.dll'
+C:\Windows\SYSTEM32\d2d1.dll:d2d1.dll (00007FFA59640000), size: 6529024 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\d2d1.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dwrite.dll:dwrite.dll (00007FFA59C80000), size: 2531328 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dwrite.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\TextShaping.dll:TextShaping.dll (00007FFA3B3B0000), size: 1028096 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\TextShaping.dll', fileVersion: 10.0.26100.9444
+C:\Program Files (x86)\SogouInput\Components\PicFace\1.1.0.3184\PicFace64.dll:PicFace64.dll (0000025456F20000), size: 4927488 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\SogouInput\Components\PicFace\1.1.0.3184\PicFace64.dll', fileVersion: 1.1.0.3184
+C:\Program Files (x86)\SogouInput\Components\systembeautify\1.0.2.2868\systembeautify_bundle64.dll:systembeautify_bundle64.dll (00007FF9E04B0000), size: 524288 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\SogouInput\Components\systembeautify\1.0.2.2868\systembeautify_bundle64.dll'
+C:\Windows\System32\NSI.dll:NSI.dll (00000254546F0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\NSI.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (00007FFA54730000), size: 118784 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dhcpcsvc6.DLL', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (00007FFA54700000), size: 151552 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dhcpcsvc.DLL', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\DNSAPI.dll:DNSAPI.dll (00007FFA5B440000), size: 1409024 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DNSAPI.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\DSPARSE.dll:DSPARSE.dll (00007FFA5C050000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DSPARSE.dll', fileVersion: 10.0.26100.1
+C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (00007FFA52D80000), size: 45056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\rasadhlp.dll', fileVersion: 10.0.26100.7920
+C:\Windows\System32\fwpuclnt.dll:fwpuclnt.dll (00007FFA54A20000), size: 548864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\fwpuclnt.dll', fileVersion: 10.0.26100.9444
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\fmodstudio.dll:fmodstudio.dll (00007FFA12080000), size: 3461120 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\fmodstudio.dll', fileVersion: 0.2.2.29
+C:\Windows\System32\MMDevApi.dll:MMDevApi.dll (00007FFA52FF0000), size: 675840 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\MMDevApi.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (00007FFA49500000), size: 1798144 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\AUDIOSES.DLL', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\resourcepolicyclient.dll:resourcepolicyclient.dll (00007FFA59450000), size: 81920 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\resourcepolicyclient.dll', fileVersion: 10.0.26100.8115
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\steam_api64.dll:steam_api64.dll (00007FFA33340000), size: 1900544 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\steam_api64.dll'
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\FirebaseCppApp-12_8_0.dll:FirebaseCppApp-12_8_0.dll (00007FF9C8F00000), size: 17506304 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\FirebaseCppApp-12_8_0.dll'
+C:\Windows\SYSTEM32\MSVCP140.dll:MSVCP140.dll (00007FFA34800000), size: 643072 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSVCP140.dll', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\VCRUNTIME140.dll:VCRUNTIME140.dll (00007FFA3EC40000), size: 180224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\VCRUNTIME140.dll', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\VCRUNTIME140_1.dll:VCRUNTIME140_1.dll (00007FFA58DE0000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\VCRUNTIME140_1.dll', fileVersion: 14.51.36247.0
+C:\Windows\SYSTEM32\icu.dll:icu.dll (00007FFA3C550000), size: 2748416 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\icu.dll', fileVersion: 72.1.0.4
+E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\sqlite3.dll:sqlite3.dll (00007FFA0FCB0000), size: 3158016 (result: 0), SymType: '-exported-', PDB: 'E:\wol\gameversion\0_51_2_0.51.2\worldbox_Data\Plugins\x86_64\sqlite3.dll', fileVersion: 3.44.2.0
+C:\Windows\SYSTEM32\DbgHelp.dll:DbgHelp.dll (00007FFA5A090000), size: 2408448 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DbgHelp.dll', fileVersion: 10.0.26100.9444
+C:\Windows\SYSTEM32\dbgcore.DLL:dbgcore.DLL (00007FFA36CC0000), size: 241664 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dbgcore.DLL', fileVersion: 10.0.26100.9444
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1B197D0)
+0x00007FF9D1B197D0 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1B19BDA)
+0x00007FF9D1B19BDA (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1B21301)
+0x00007FF9D1B21301 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1B1D60A)
+0x00007FF9D1B1D60A (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1BF9DB2)
+0x00007FF9D1BF9DB2 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1C07C37)
+0x00007FF9D1C07C37 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D18C6F48)
+0x00007FF9D18C6F48 (UnityPlayer) (function-name not available)
+0x00000254FFB4CCA0 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.Object:Internal_InstantiateAsyncWithParams_Injected (UnityEngine.Object,int,UnityEngine.InstantiateParameters&,intptr,int,intptr,int)
+0x00000254FFB4CB93 (Mono JIT Code) UnityEngine.Object:Internal_InstantiateAsyncWithParams (UnityEngine.Object,int,UnityEngine.InstantiateParameters,intptr,int,intptr,int)
+0x00000254FFB4C8C3 (Mono JIT Code) UnityEngine.Object:InstantiateAsync<T_REF> (T_REF,int,System.ReadOnlySpan`1<UnityEngine.Vector3>,System.ReadOnlySpan`1<UnityEngine.Quaternion>,UnityEngine.InstantiateParameters)
+0x00000254FFB4C773 (Mono JIT Code) UnityEngine.Object:InstantiateAsync<T_REF> (T_REF,int,UnityEngine.InstantiateParameters)
+0x00000254FFB4C653 (Mono JIT Code) UnityEngine.Object:InstantiateAsync<T_REF> (T_REF,UnityEngine.InstantiateParameters)
+0x00000254FFB4C5A3 (Mono JIT Code) UnityEngine.Object:InstantiateAsync<T_REF> (T_REF,UnityEngine.Transform)
+0x00000254FFB4C463 (Mono JIT Code) [/github/workspace/Assets/UI/WindowPreloader.cs:149] WindowPreloader:instantiateWindow (string) 
+0x00000254FFB4C3C3 (Mono JIT Code) [/github/workspace/Assets/UI/WindowPreloader.cs:76] WindowPreloader/<>c__DisplayClass9_0:<addInstantiateWindows>b__1 () 
+0x0000025455B44D51 (Mono JIT Code) [/github/workspace/Assets/Scripts/assets/SmoothLoader.cs:202] SmoothLoader:doActions () 
+0x0000025455B44B43 (Mono JIT Code) [/github/workspace/Assets/Scripts/assets/SmoothLoader.cs:169] SmoothLoader:update (single) 
+0x00000254E51B8D83 (Mono JIT Code) (wrapper dynamic-method) MapBox:DMD<MapBox::Update> (MapBox)
+0x000002544DD241C8 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007FF9E7F04B7E (mono-2.0-bdwgc) mono_jit_set_domain
+0x00007FF9E7E3D204 (mono-2.0-bdwgc) mono_object_get_virtual_method
+0x00007FF9E7E3D37C (mono-2.0-bdwgc) mono_runtime_invoke
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1F40436)
+0x00007FF9D1F40436 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1F40571)
+0x00007FF9D1F40571 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1C109E0)
+0x00007FF9D1C109E0 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1D80048)
+0x00007FF9D1D80048 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1D80234)
+0x00007FF9D1D80234 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1D80752)
+0x00007FF9D1D80752 (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1FD277B)
+0x00007FF9D1FD277B (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1FD514B)
+0x00007FF9D1FD514B (UnityPlayer) (function-name not available)
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF9D1FD8333)
+0x00007FF9D1FD8333 (UnityPlayer) (function-name not available)
+0x00007FF9D1FD874B (UnityPlayer) UnityMain
+  ERROR: SymGetSymFromAddr64, GetLastError: '试图访问无效的地址。
+' (Address: 00007FF7D2D311F2)
+0x00007FF7D2D311F2 (worldbox) (function-name not available)
+0x00007FFA5ED6CD87 (KERNEL32) BaseThreadInitThunk
+0x00007FFA5FE8CAEC (ntdll) RtlUserThreadStart
+
+========== END OF STACKTRACE ===========
+
+A crash has been intercepted by the crash handler. For call stack and other details, see the latest crash report generated in:
+ * C:/Users/Arthur.lu/AppData/Local/Temp/mkarpenko/WorldBox/Crashes

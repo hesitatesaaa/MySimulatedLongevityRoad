@@ -35,5 +35,5 @@
   },
   "nativeResolution": true,
   "pendingNativeRuntimeIntegration": false,
-  "reviewStatus": "waived-by-user"
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

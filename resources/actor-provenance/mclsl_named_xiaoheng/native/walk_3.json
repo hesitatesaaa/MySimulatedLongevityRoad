@@ -12,7 +12,7 @@
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_xiaoheng\\idle_0.png"
   ],
-  "createdAtUtc": "2026-10-17T12:43:50.799371+08:00",
+  "createdAtUtc": "2026-10-19T02:18:25.123352+00:00",
   "normalization": {
     "resampling": "none",
     "sourceCanvas": [
@@ -36,9 +36,22 @@
     "anchor": false,
     "continuity": false
   },
-  "reviewStatus": "waived-by-user",
+  "integrationGeometry": {
+    "canvas": [
+      1254,
+      1254
+    ],
+    "anchor": [
+      639.0,
+      1176
+    ],
+    "pixelsPerUnit": 11.704545454545455
+  },
   "repair": {
     "replacedSourceSha256": "d16024051a911a1d69ca868914a9e336337b6ca95889baef419daf6eede04f3b",
-    "candidateProvenance": "resources/actor-provenance/mclsl_named_xiaoheng/native/walk_3.repair.json"
-  }
+    "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-d58a-7131-9cae-4a6e65bcb87c\\exec-70efad5e-c40f-4418-9a71-82da77f305e7.png",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_xiaoheng/walk_3_opposite_v2.provenance.json",
+    "selection": "latest-not-rejected-authorized-by-user"
+  },
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

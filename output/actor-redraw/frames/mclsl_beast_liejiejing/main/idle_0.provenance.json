@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_beast_liejiejing",
+  "action": "idle",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/idle_0.png",
+  "sourceSha256": "43292233c9db653264071ccd84c81c379113a1dae8e5d8e526232736a42eac0d",
+  "outputFile": "output/actor-redraw/frames/mclsl_beast_liejiejing/main/idle_0.png",
+  "outputSha256": "7bbdc381ea62cf56cfb0baa30e54be178fe5b924c95efa0a6e7034a0a610a0da",
+  "createdAtUtc": "2026-10-09T03:48:11.300629+00:00",
+  "prompt": "Use case: stylized-concept. Asset type: exactly ONE independent game sprite frame, 裂解鲸 Liejiejing idle_0. Redraw from scratch. Reference image 1: preserve the blue-cyan Chinese fantasy whale identity. Reference image 2: size and mass reference ONLY; do not copy elephant anatomy. Subject: A colossal supernatural blue whale of Chinese cultivation fantasy, deep blue and cyan body with pale belly, defined pectoral fins and split tail flukes, pale cyan fissure markings along the back, broad readable cetacean silhouette. One idle floating pose facing right, horizontal slightly arched body with tail flexed downward, no elephant anatomy and no legs. The Behemoth reference is ONLY size and mass reference, NOT anatomy. Longest body edge about 200 virtual pixels, within x28..228 y116..240. Render a 256x256 virtual pixel grid with crisp square pixels, dark outlines and flat pixel shading, suitable for nearest-neighbor reduction if delivered enlarged. Transparent RGBA background. Exactly ONE creature and ONE pose, complete silhouette, no sprite sheet, no panels, no text, no water, no shadow, no glow, no blur, no antialiasing. Large transparent margins.\n",
+  "references": [
+    "GameResources/actors/Beasts/liejiejing/Beast/main/idle_0.png",
+    "reference/western-fantasy/GameResources/actors/FantasyCreatures/MONSTER/Behemoth/Main/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.1638001638001638,
+    "translation": [
+      25,
+      79
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 48617,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

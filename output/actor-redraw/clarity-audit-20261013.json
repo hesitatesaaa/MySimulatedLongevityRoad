@@ -1,0 +1,6849 @@
+{
+  "checkedAtUtc": "2026-10-13T03:45:48.636652+00:00",
+  "scope": "0.6.0-origin-independently-redrawn-only",
+  "oldBaselineImagesChecked": false,
+  "checkedFrames": 520,
+  "downsampledFrames": 520,
+  "checkedForms": 15,
+  "originalsHashVerified": true,
+  "installedHashVerified": true,
+  "forms": [
+    {
+      "actorId": "mclsl_beast_kunpeng",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1654259718775848,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08404966571155682,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_qinglong",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_12",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_14",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_13",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_15",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_12",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        },
+        {
+          "frame": "death_13",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.16455696202531644,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08224299065420561,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_huanglong",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1446917808219178,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08568646543330087,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_zhuque",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.06308169596690796,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_baihu",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        },
+        {
+          "frame": "death_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.07639836289222374,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_qilin",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            96,
+            96
+          ],
+          "scale": 0.05720122574055159,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0825515947467167,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.0773966578715919,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.07665505226480836,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_qingluan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_12",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_13",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_12",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_13",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        },
+        {
+          "frame": "death_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            160,
+            160
+          ],
+          "scale": 0.08840579710144927,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            256,
+            256
+          ],
+          "scale": 0.1638001638001638,
+          "downsampled": true
+        }
+      ]
+    },
+    {
+      "actorId": "mclsl_named_lifan",
+      "frames": [
+        {
+          "frame": "idle_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "idle_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "walk_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_10",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "attack_11",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "hit_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_0",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_1",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_2",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_3",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_4",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_5",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_6",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_7",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_8",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        },
+        {
+          "frame": "death_9",
+          "originalCanvas": [
+            1254,
+            1254
+          ],
+          "installedCanvas": [
+            128,
+            128
+          ],
+          "scale": 0.08888888888888889,
+          "downsampled": true
+        }
+      ]
+    }
+  ],
+  "interpretation": "PNG encoding is lossless; recorded nearest-neighbor downsampling loses source detail. Runtime does not call Compress or enable mipmaps.",
+  "currentUserPolicy": "Use installed frames, retain existing installed resolution, one conversion from independent generated source; originals archive only."
+}

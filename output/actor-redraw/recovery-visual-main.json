@@ -1,0 +1,113 @@
+{
+  "actorId": "mclsl_beast_changliao_yuan",
+  "reviewer": "recovery-main",
+  "viewed": [
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/idle_0.png",
+      "sha256": "4dabe058759d454c769f6420c654386bbde0ee5f98fa5d4df430c5927a5c5b8c",
+      "observation": "Viewed native PNG: full hair, tusk ornaments, two hands and two boots visible; no obvious silhouette clipping. Idle posture consistent; game scale untested."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/idle_1.png",
+      "sha256": "f46b39b26253fd2ab2add5bcc8fe0aceccfeee174091ab4cae718601bc194b05",
+      "observation": "Viewed native PNG: full hair, tusk ornaments, two hands and two boots visible; no obvious silhouette clipping. Idle posture consistent; game scale untested."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/idle_2.png",
+      "sha256": "ed136c5ff52dc7cb6a8f7fdb851b012b98fc4ad0e80f901869c3f0aba1941dca",
+      "observation": "Viewed native PNG: full hair, tusk ornaments, two hands and two boots visible; no obvious silhouette clipping. Idle posture consistent; game scale untested."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/idle_3.png",
+      "sha256": "c169de026f5c3f29e5386ce526319e8656e5f20077046eb6c600a05d0eb58bc7",
+      "observation": "Viewed native PNG: full hair, tusk ornaments, two hands and two boots visible; no obvious silhouette clipping. Idle posture consistent; game scale untested."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_0.png",
+      "sha256": "42020ecdb5a6682aae3deecc4019c02e8a07fcf7c19b892861110f2227ec7787",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_1.png",
+      "sha256": "f04f9fb77ce9f7558d4f6fe9d0d4007f60c49edbbf4fc0fbdfa923b6534f22b2",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_2.png",
+      "sha256": "6668f75fc95d0671a6265024ad9151c1b8e3394c7255c5045ad49ed3e375eaf1",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_3.png",
+      "sha256": "c85af4e5532a0fd4544c391c742c3ea963c6a6d1a5b508fc2d1be26d2b305b84",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_4.png",
+      "sha256": "53c9e82fdd0d12a52be744bbe6772409953479459191c44979586ffc9071ca8c",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/walk_5.png",
+      "sha256": "e919c9a0a615b569d8c12ca1616d6bafa28a61b59b497c2e3e15e021cfdb47d2",
+      "observation": "Native PNG viewed. Forward boot remains on screen-right and trailing boot on screen-left; arm/hand phase also repeats. No convincing opposite near/far step across walk_0..5; complete walk cycle not approved. No obvious hard clipping."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_0.png",
+      "sha256": "3612077fdc9d6412ee31d6591ab73275e9020489c0b1aaecea86bbd0e55f53b8",
+      "observation": "Head bowed, standing with both boots on ground."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_1.png",
+      "sha256": "415e9ea1cd741c9e90ee99b23b29e9cdc88e0fae70ee8debaa4f5c1c469fbc2d",
+      "observation": "Torso lowers and knees bend outward."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_2.png",
+      "sha256": "b11992f0cc6a4e64ddb69532bd09a9e993c11ba0b6a40cce505296a9390cf646",
+      "observation": "Torso still near preceding height, bent stance."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_3.png",
+      "sha256": "bcf3848fcc32e1b9ef1df960cfdac6d436433779a409b1239cd4328859bbd0d5",
+      "observation": "Kneeling with cape spread; height drops."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_4.png",
+      "sha256": "3869af5e5fad8aeb266ee93c714cf3e43788ac72424e26f9e5b6efb79b014a73",
+      "observation": "Side prone; marked head drop from kneeling."
+    },
+    {
+      "path": "output/actor-redraw/originals/mclsl_beast_changliao_yuan/death_5.png",
+      "sha256": "558db841933bdc8b5e27427f39c76de6be68a1108470a30ea723bc64a6ae2e5d",
+      "observation": "Still prone but whole silhouette lower on canvas, hands and boots change location."
+    }
+  ],
+  "verifiedInGame": false,
+  "complete": true,
+  "updatedAtUtc": "2026-10-18T16:09:41.014669+00:00",
+  "actionIssues": [
+    {
+      "action": "walk",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "finding": "Near/far lead-leg reversal absent or not visually distinguishable across all six frames; arm phase repeats. Requires targeted opposite-step repair and complete cycle re-review."
+    },
+    {
+      "action": "death",
+      "frames": [
+        3,
+        4,
+        5
+      ],
+      "finding": "Kneeling to prone pose changes abruptly at 3->4; 4->5 shifts body and hands downward. Check anchored playback before approving continuity. No confirmed clipping from viewer alone."
+    }
+  ],
+  "unreviewed": []
+}

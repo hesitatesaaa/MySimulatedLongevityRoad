@@ -1,0 +1,145 @@
+{
+  "checkedAtUtc": "2026-10-15T06:16:11.074691+00:00",
+  "threadId": "01a13a2c-abe3-7340-ba6c-e34b575829c6",
+  "agentFailure": {
+    "message": "You\u2019ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 2:15 PM.",
+    "additionalDetails": null
+  },
+  "allReturnedImagesSaved": true,
+  "imagegenUsageLimitObserved": false,
+  "inFlight": 0,
+  "images": [
+    {
+      "jobIndex": 4,
+      "actor": "mclsl_beast_changliao",
+      "action": "walk",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\walk_1.png",
+      "sourceSha256": "7223c3900513ac640ffcd35d54b975ce159c5cfc076d781e17c41cd4ff1c06db",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-9746e86b-afb9-4d87-a59a-e45c59780a05"
+    },
+    {
+      "jobIndex": 5,
+      "actor": "mclsl_beast_changliao",
+      "action": "walk",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\walk_2.png",
+      "sourceSha256": "aecda916f846ac3bdb69897e9ac6c24d3c25dbe0dbbe45985f711a8fec286a09",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-024219f3-65c8-4523-87d4-33b60e1ca399"
+    },
+    {
+      "jobIndex": 6,
+      "actor": "mclsl_beast_changliao",
+      "action": "walk",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\walk_3.png",
+      "sourceSha256": "147ce3de573c4b10197fe8b5bb6d55b15f6f287ad3441a41c9696fbff3eef8a7",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-8b3214bf-af30-4a81-8f9d-27c5df4e3f36"
+    },
+    {
+      "jobIndex": 7,
+      "actor": "mclsl_beast_changliao",
+      "action": "walk",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\walk_4.png",
+      "sourceSha256": "0365f7d74e4b64414817f248b65d49ffc62fe9b107151123ced2d89028467d26",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-0245916f-9b56-437a-b621-ba383bdbcef2"
+    },
+    {
+      "jobIndex": 8,
+      "actor": "mclsl_beast_changliao",
+      "action": "walk",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\walk_5.png",
+      "sourceSha256": "7267e0b7571e844b7b6a14561350979987fef46821109435b7d6c6a3f934d846",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-7cff6d25-236c-4263-87e8-3455b5fe63f3"
+    },
+    {
+      "jobIndex": 9,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_0.png",
+      "sourceSha256": "472f7600e592bcea0f647b1667a599f296e2c4a3f83afd616b0fc74f3b7753d8",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-2c657598-a5b4-4083-a4f9-4e2b58736fe5"
+    },
+    {
+      "jobIndex": 10,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 1,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_1.png",
+      "sourceSha256": "e3da4881dfbe180bae42a58723f451ad71bde73484570a77be4f5cd7547ebe5c",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-3425e989-1934-4cbb-a1ce-7e249d2f81c8"
+    },
+    {
+      "jobIndex": 11,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 2,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_2.png",
+      "sourceSha256": "19c906a8d2a85be02a98c7171880fbb80e3d983ef1dbc7ff0c9147688586c047",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-6d6ba1bc-c358-445c-b4f7-8c344e179d84"
+    },
+    {
+      "jobIndex": 12,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 3,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_3.png",
+      "sourceSha256": "b7dca8f8b751c6452080b43865ffe001c29ca7e76138336777deec416a07e991",
+      "recoveredNow": false,
+      "reviewPending": false,
+      "toolCallId": "exec-74d2b149-2c0d-45f4-b060-5205508a364a"
+    },
+    {
+      "jobIndex": 13,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 4,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_4.png",
+      "sourceSha256": "47356e67a4f9d7082e1ea0b786fbee51cb902c7f5240b161c820eb48a0c8795b",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-0c680de9-8550-441b-b99c-1601426ae574"
+    },
+    {
+      "jobIndex": 14,
+      "actor": "mclsl_beast_changliao",
+      "action": "death",
+      "index": 5,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\frames\\mclsl_beast_changliao\\main\\death_5.png",
+      "sourceSha256": "2a44f26f36af1fec747f6dc3e81114243ada429a7c686c6eba495a327c79b31b",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-ad337ab3-8620-45e7-8477-31ae14edbbee"
+    },
+    {
+      "jobIndex": 15,
+      "actor": "mclsl_beast_changliao",
+      "action": "icon",
+      "index": 0,
+      "output": "E:\\0.6.0\\output\\actor-redraw\\icons\\mclsl_beast_changliao.png",
+      "sourceSha256": "43f70e2bb6cdc7b59338dffccb8ad811ca0aba82d6ac0ac87cfbfb9ac670315d",
+      "recoveredNow": true,
+      "reviewPending": true,
+      "toolCallId": "exec-4c5e00dd-621d-450d-ba4c-c9817a1ab98c"
+    }
+  ]
+}

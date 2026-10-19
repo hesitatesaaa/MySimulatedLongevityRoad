@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "actorId": "mclsl_beast_qilin_yuan",
+  "actorName": "麒麟·化形",
+  "targetSource": "resources/actor-redraw.targets.json",
+  "requiredActions": [
+    "idle",
+    "walk",
+    "death"
+  ],
+  "actionFrameOrder": {
+    "idle": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "walk": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "death": [
+      1,
+      2,
+      0,
+      3,
+      4,
+      5
+    ]
+  },
+  "reviewScope": "原生 sourceFile 逐帧静态审看",
+  "frames": [
+    {
+      "action": "idle",
+      "index": 0,
+      "playbackIndex": 0,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/idle_0.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/idle_0.png",
+      "sourceSha256": "bf28f52ddad8c35c3ef42151ac14740482051d6ac410cafec39aad8d4a9451bf",
+      "actualSourceSha256": "bf28f52ddad8c35c3ef42151ac14740482051d6ac410cafec39aad8d4a9451bf",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "已实际打开原生sourceFile；头饰、两袖、发尾、袍摆及双鞋均完整落在画布内，未见肢体缺失或硬裁边。"
+    },
+    {
+      "action": "idle",
+      "index": 1,
+      "playbackIndex": 1,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/idle_1.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/idle_1.png",
+      "sourceSha256": "6316d1f0c0d0ae650324b4f6dd3bad431b1b8c48e110ac8a48ec48895cb25d54",
+      "actualSourceSha256": "6316d1f0c0d0ae650324b4f6dd3bad431b1b8c48e110ac8a48ec48895cb25d54",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "已实际打开原生sourceFile；双脚和鞋底可辨，手臂在宽袖下自然遮挡，头饰与衣摆未触画布边，未见硬裁边。"
+    },
+    {
+      "action": "idle",
+      "index": 2,
+      "playbackIndex": 2,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/idle_2.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/idle_2.png",
+      "sourceSha256": "9b5404367865f51f9fcd2c50bde1e18bc066da49b496bd62c73f3e0af9617d40",
+      "actualSourceSha256": "9b5404367865f51f9fcd2c50bde1e18bc066da49b496bd62c73f3e0af9617d40",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "已实际打开原生sourceFile；头发、两臂袖口、袍摆和两只鞋完整，站姿肢体没有多余/缺失，未见硬裁边。"
+    },
+    {
+      "action": "idle",
+      "index": 3,
+      "playbackIndex": 3,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/idle_3.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/idle_3.png",
+      "sourceSha256": "be046a7f7d3102f7379f459188fa4e1fbcfb51e02ffb9bfdcdfbc15b71b8e0bf",
+      "actualSourceSha256": "be046a7f7d3102f7379f459188fa4e1fbcfb51e02ffb9bfdcdfbc15b71b8e0bf",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "已实际打开原生sourceFile；腿脚被长袍部分遮挡但两只鞋仍可见，头饰和发尾完整，未见硬裁边或重复肢体。"
+    },
+    {
+      "action": "walk",
+      "index": 0,
+      "playbackIndex": 0,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_0.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_0.png",
+      "sourceSha256": "0319c4bdd11433e89b911aa6d547a320704dfb22e032be63096ef47c2688c82a",
+      "actualSourceSha256": "0319c4bdd11433e89b911aa6d547a320704dfb22e032be63096ef47c2688c82a",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；两只鞋和腿均在画布内，画面右侧前脚明显前伸、左侧鞋后置；未见硬裁边。"
+    },
+    {
+      "action": "walk",
+      "index": 1,
+      "playbackIndex": 1,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_1.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_1.png",
+      "sourceSha256": "abd3488c16f9302dc64458cad217fe6cf768823ab29c1dfedc0a3f4eab481233",
+      "actualSourceSha256": "abd3488c16f9302dc64458cad217fe6cf768823ab29c1dfedc0a3f4eab481233",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；手臂与双腿轮廓完整，右侧前脚仍在前、另一鞋留后，未见明确反向领步；未见硬裁边。"
+    },
+    {
+      "action": "walk",
+      "index": 2,
+      "playbackIndex": 2,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_2.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_2.png",
+      "sourceSha256": "ad111f2d9194fa69f053839e80fd5303fefdf2e5d45694dac0d30039f4cf49b2",
+      "actualSourceSha256": "ad111f2d9194fa69f053839e80fd5303fefdf2e5d45694dac0d30039f4cf49b2",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；双脚分离且均可辨，右侧脚仍前伸、左侧鞋仍靠后；未见硬裁边或多余肢体。"
+    },
+    {
+      "action": "walk",
+      "index": 3,
+      "playbackIndex": 3,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_3.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_3.png",
+      "sourceSha256": "58d4127a0e1fa35602512f9218c47c9080b9557b05aab3455e899178dd4900ba",
+      "actualSourceSha256": "58d4127a0e1fa35602512f9218c47c9080b9557b05aab3455e899178dd4900ba",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；袍摆遮住部分膝部但两只鞋完整可见，右侧鞋继续前置，未见清晰换腿；未见硬裁边。"
+    },
+    {
+      "action": "walk",
+      "index": 4,
+      "playbackIndex": 4,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_4.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_4.png",
+      "sourceSha256": "4428e89f827e2e4dd810a7a089b6949cd374f6edfe1011ebd53b962a7b343520",
+      "actualSourceSha256": "4428e89f827e2e4dd810a7a089b6949cd374f6edfe1011ebd53b962a7b343520",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；双腿/鞋可辨，右侧前脚继续前伸、左侧脚在后，和前几帧领步关系相同；未见硬裁边。"
+    },
+    {
+      "action": "walk",
+      "index": 5,
+      "playbackIndex": 5,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/walk_5.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/walk_5.png",
+      "sourceSha256": "7fb6be595ad137a248d1236800aef971b2bb046e827a22182105411a0695a346",
+      "actualSourceSha256": "7fb6be595ad137a248d1236800aef971b2bb046e827a22182105411a0695a346",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "原生sourceFile已打开；双脚和腿无画布裁断，右侧鞋仍在前、左侧鞋在后；至循环末尾没有清楚反向领步。"
+    },
+    {
+      "action": "death",
+      "index": 1,
+      "playbackIndex": 0,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_1.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_1.png",
+      "sourceSha256": "05ed58b63adb5ac481d21e9a31f7f07743cea0cc268e0f554df0efc0aa33dd2f",
+      "actualSourceSha256": "05ed58b63adb5ac481d21e9a31f7f07743cea0cc268e0f554df0efc0aa33dd2f",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第1帧（索引1）：原生sourceFile已打开；人物开始屈身下沉，双臂与手可辨，头饰、发尾和袍摆仍在画布内，未见硬裁边。"
+    },
+    {
+      "action": "death",
+      "index": 2,
+      "playbackIndex": 1,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_2.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_2.png",
+      "sourceSha256": "a90192fb32d1fddade1c8cf75f6f18b94144bb9e8f76c0afa76a3c255fc76ef3",
+      "actualSourceSha256": "a90192fb32d1fddade1c8cf75f6f18b94144bb9e8f76c0afa76a3c255fc76ef3",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第2帧（索引2）：头与肩继续下压，双手降向地面，身体收势较前帧更低；肢体外轮廓完整，未见硬裁边。"
+    },
+    {
+      "action": "death",
+      "index": 0,
+      "playbackIndex": 2,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_0.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_0.png",
+      "sourceSha256": "5c4434451a0230fe947f5b80e463af012518670cef41be305ae4f06740983256",
+      "actualSourceSha256": "5c4434451a0230fe947f5b80e463af012518670cef41be305ae4f06740983256",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第3帧（索引0）：人物已接近坐/跪地，手掌支地，长袍铺开；衣摆接近下边缘但主体仍可辨，当前图内未见明确截断。"
+    },
+    {
+      "action": "death",
+      "index": 3,
+      "playbackIndex": 3,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_3.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_3.png",
+      "sourceSha256": "7dc2dbe66677c86147ac57399ef1d2ac55aef7eb75eb65e7d77cbaab2ad3a191",
+      "actualSourceSha256": "7dc2dbe66677c86147ac57399ef1d2ac55aef7eb75eb65e7d77cbaab2ad3a191",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第4帧（索引3）：原生sourceFile已打开；人物双手落地并继续下沉，头饰、双臂、发尾及铺地衣袍仍可辨，未见明确硬裁断。外沿补充扫描：alpha>0像素16，alpha>=128像素0。"
+    },
+    {
+      "action": "death",
+      "index": 4,
+      "playbackIndex": 4,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_4.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_4.png",
+      "sourceSha256": "fb7e7f2228897dd7d725d07bd7be558386a05850d0bf6831c9d975961f3106bd",
+      "actualSourceSha256": "fb7e7f2228897dd7d725d07bd7be558386a05850d0bf6831c9d975961f3106bd",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第5帧（索引4）：人物躯干已伏地，头和前臂降低，后方鞋仍可见；未见肢体硬裁断。外沿补充扫描：alpha>0像素58，alpha>=128像素0。"
+    },
+    {
+      "action": "death",
+      "index": 5,
+      "playbackIndex": 5,
+      "provenancePath": "output/actor-redraw/frames/mclsl_beast_qilin_yuan/main/death_5.provenance.json",
+      "sourceFile": "resources/actor-provenance/mclsl_beast_qilin_yuan/originals/death_5.png",
+      "sourceSha256": "71b5fb13f08563d3a30323af0ee2b80ac1477a1aba626053b8f87e4298ce5be0",
+      "actualSourceSha256": "71b5fb13f08563d3a30323af0ee2b80ac1477a1aba626053b8f87e4298ce5be0",
+      "sha256Matches": true,
+      "viewed": true,
+      "observation": "按播放顺序第6帧（索引5）：末帧为俯卧收势，头部贴近手臂/地面，身躯和袍摆稳定落地；未见明显回抬或硬裁断。外沿补充扫描：alpha>0像素44，alpha>=128像素0。"
+    }
+  ],
+  "unreviewed": [],
+  "actionIssues": [
+    {
+      "action": "walk",
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5"
+      ],
+      "issue": "整段步行中画面右侧脚持续明显领步，画面左侧脚持续后置或被袍摆遮挡；未见近远腿交替，也未见walk_5到walk_0的反向循环衔接。",
+      "status": "unresolved",
+      "verifiedInGame": false
+    }
+  ],
+  "verifiedInGame": false,
+  "actionReviews": [
+    {
+      "action": "death",
+      "playbackOrder": [
+        1,
+        2,
+        0,
+        3,
+        4,
+        5
+      ],
+      "result": "由屈身下沉、跪/坐地至俯卧，末帧收势明确；未见明显向上回抬。衣摆近画布外沿，alpha>=128外沿像素为0。"
+    }
+  ],
+  "visualReviewComplete": true,
+  "formPassed": false,
+  "additionalForms": [
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "actorName": "鲲鹏·化形",
+      "targetSource": "resources/actor-redraw.targets.json",
+      "requiredActions": [
+        "idle",
+        "walk",
+        "death"
+      ],
+      "actionFrameOrder": {
+        "idle": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "walk": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "death": [
+          0,
+          2,
+          1,
+          3,
+          4,
+          5
+        ]
+      },
+      "frames": [
+        {
+          "action": "idle",
+          "index": 0,
+          "playbackIndex": 0,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/idle_0.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/idle_0.png",
+          "sourceSha256": "3254eb4493a778f4aa1ead48137401c6cfa0ee1fd230effdada7890ba7dcedba",
+          "actualSourceSha256": "3254eb4493a778f4aa1ead48137401c6cfa0ee1fd230effdada7890ba7dcedba",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；头发、羽饰、衣袍和双鞋完整可见，站姿自然，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 57,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "idle",
+          "index": 1,
+          "playbackIndex": 1,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/idle_1.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/idle_1.png",
+          "sourceSha256": "ecf696ec5899c52974f7bff77dac53fa41cdd750f6b3a5cb341147031a31f032",
+          "actualSourceSha256": "ecf696ec5899c52974f7bff77dac53fa41cdd750f6b3a5cb341147031a31f032",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；双臂在袖下、双腿和鞋完整，头部羽饰及发尾在画布内，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 0,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "idle",
+          "index": 2,
+          "playbackIndex": 2,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/idle_2.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/idle_2.png",
+          "sourceSha256": "4e76b568081cfe0c72cf1e2fe158c9d335da10beeea4a25ee19eec7610794976",
+          "actualSourceSha256": "4e76b568081cfe0c72cf1e2fe158c9d335da10beeea4a25ee19eec7610794976",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；衣袖、长发和羽片轮廓完整，两只鞋均可辨，未见多余/缺失肢体或硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 21,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "idle",
+          "index": 3,
+          "playbackIndex": 3,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/idle_3.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/idle_3.png",
+          "sourceSha256": "de0e127981b0598f1847b78d9251b0aa47a0709e10727c1e8ea89721db11f906",
+          "actualSourceSha256": "de0e127981b0598f1847b78d9251b0aa47a0709e10727c1e8ea89721db11f906",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；发尾和羽饰边缘完整，双腿/鞋可见，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 0,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 0,
+          "playbackIndex": 0,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_0.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_0.png",
+          "sourceSha256": "1479e48be2ffcfac1182f390d00b961cbccd8e8ef4fd1fa35ea576bee11638c6",
+          "actualSourceSha256": "1479e48be2ffcfac1182f390d00b961cbccd8e8ef4fd1fa35ea576bee11638c6",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；两只手、腿和鞋均可辨，画面右侧脚前伸、左侧脚后置；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 13,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 1,
+          "playbackIndex": 1,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_1.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_1.png",
+          "sourceSha256": "e51ab52949d241399b9bc9ae48dcf94e7f0c96b59a2f05d5834f7b2a72ad81f2",
+          "actualSourceSha256": "e51ab52949d241399b9bc9ae48dcf94e7f0c96b59a2f05d5834f7b2a72ad81f2",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；双脚均完整，右侧鞋继续处于前方，另一鞋靠后，没有清晰换腿；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 0,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 2,
+          "playbackIndex": 2,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_2.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_2.png",
+          "sourceSha256": "bbbbb282377486fbf9d6c3c3a240c9f84ca811873e3b16c5851338ebcf7ec065",
+          "actualSourceSha256": "bbbbb282377486fbf9d6c3c3a240c9f84ca811873e3b16c5851338ebcf7ec065",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；双腿步幅打开、两鞋完整，右侧脚仍领步，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 3,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 3,
+          "playbackIndex": 3,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_3.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_3.png",
+          "sourceSha256": "04b11503ff772cb4b37215b6c2f318dc20d19607bc7f64b75c63fe5f1965fc30",
+          "actualSourceSha256": "04b11503ff772cb4b37215b6c2f318dc20d19607bc7f64b75c63fe5f1965fc30",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；两腿与鞋无缺失，右侧鞋仍在前，未显示明确的反向跨步；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 15,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 4,
+          "playbackIndex": 4,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_4.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_4.png",
+          "sourceSha256": "195d8c35cbc486227706bf14516a22778708c3e80bb2eca981c0ec96c651b2da",
+          "actualSourceSha256": "195d8c35cbc486227706bf14516a22778708c3e80bb2eca981c0ec96c651b2da",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；两只鞋均完整，右侧脚前置、另一脚后置，领步关系延续；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 0,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "walk",
+          "index": 5,
+          "playbackIndex": 5,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/walk_5.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/walk_5.png",
+          "sourceSha256": "dc1b36a77be950b577b0f856f572ef09e927a0868abdb7eb97b124ae827d57c3",
+          "actualSourceSha256": "dc1b36a77be950b577b0f856f572ef09e927a0868abdb7eb97b124ae827d57c3",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "原生sourceFile已逐张打开；双腿/鞋完整，结束帧仍由画面右侧脚领步，循环至walk_0无明确交替；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 6,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 0,
+          "playbackIndex": 0,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_0.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_0.png",
+          "sourceSha256": "b8bd2c8460f2ef8884deff2de353a796532d9273c80c079e3ecb8c9c336d67ce",
+          "actualSourceSha256": "b8bd2c8460f2ef8884deff2de353a796532d9273c80c079e3ecb8c9c336d67ce",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第1帧：原生sourceFile已打开；人物仍站立但头部开始下垂，双手、双鞋完整，无明显裁断。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 10,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 2,
+          "playbackIndex": 1,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_2.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_2.png",
+          "sourceSha256": "6891e09a6ee6dbc1aee20cf7b5492cc74b0b5e9e5dd15beaf3e2cb1b83fb8321",
+          "actualSourceSha256": "6891e09a6ee6dbc1aee20cf7b5492cc74b0b5e9e5dd15beaf3e2cb1b83fb8321",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第2帧：头肩继续向下，双臂松垂，双鞋仍接地；较death_0更低，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 10,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 1,
+          "playbackIndex": 2,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_1.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_1.png",
+          "sourceSha256": "0471cd6ed4a38703c8385f7fd8d2c1043086ce07e8c3f1eaa3b794ea023739f2",
+          "actualSourceSha256": "0471cd6ed4a38703c8385f7fd8d2c1043086ce07e8c3f1eaa3b794ea023739f2",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第3帧：人物进一步屈身下沉，双臂垂至膝侧，衣袍和鞋完整，无明显裁断。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 21,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 3,
+          "playbackIndex": 3,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_3.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_3.png",
+          "sourceSha256": "ee4b86d62a741019b65c1e9cd8b77bb594cb32f7dc3ad3715c7c488209ccdc83",
+          "actualSourceSha256": "ee4b86d62a741019b65c1e9cd8b77bb594cb32f7dc3ad3715c7c488209ccdc83",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第4帧：人物下蹲/跪地，头部低垂，长发和衣袍仍完整，未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 14,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 4,
+          "playbackIndex": 4,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_4.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_4.png",
+          "sourceSha256": "0a7e09c77428af0692f60c58383f782bcd9987e95ccd6c7ddb466cb305c0b1ef",
+          "actualSourceSha256": "0a7e09c77428af0692f60c58383f782bcd9987e95ccd6c7ddb466cb305c0b1ef",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第5帧：人物转为俯卧，头贴近地面，衣袍铺开；未见明显肢体截断。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 50,
+            "outerAlphaAtLeast128": 0
+          }
+        },
+        {
+          "action": "death",
+          "index": 5,
+          "playbackIndex": 5,
+          "provenancePath": "output/actor-redraw/frames/mclsl_beast_kunpeng_yuan/main/death_5.provenance.json",
+          "sourceFile": "resources/actor-provenance/mclsl_beast_kunpeng_yuan/originals/death_5.png",
+          "sourceSha256": "d87530520c813be2a70175bce6dc2d38ea49fc7028a0ac4df817dcedd1e68a7b",
+          "actualSourceSha256": "d87530520c813be2a70175bce6dc2d38ea49fc7028a0ac4df817dcedd1e68a7b",
+          "sha256Matches": true,
+          "viewed": true,
+          "observation": "按播放顺序第6帧：末帧为稳定俯卧收势，头部落在前臂附近，身体不再回抬；未见硬裁边。",
+          "boundaryScan": {
+            "method": "read-only scan of native PNG outer pixel rows/columns",
+            "outerAlphaGreaterThanZero": 106,
+            "outerAlphaAtLeast128": 0
+          }
+        }
+      ],
+      "unreviewed": [],
+      "actionIssues": [
+        {
+          "action": "walk",
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3",
+            "walk_4",
+            "walk_5"
+          ],
+          "issue": "六帧中画面右侧脚持续领步、另一脚持续后置或被袍摆部分遮挡，近远腿交替不清；walk_5到walk_0也没有明显反向衔接。",
+          "status": "unresolved"
+        }
+      ],
+      "visualReviewComplete": true,
+      "formPassed": false,
+      "actionReviews": [
+        {
+          "action": "death",
+          "playbackOrder": [
+            0,
+            2,
+            1,
+            3,
+            4,
+            5
+          ],
+          "result": "由站立低头、屈身下沉、跪地到俯卧，末帧收势明确；未见明显向上回抬。"
+        }
+      ],
+      "verifiedInGame": false,
+      "reviewScope": "原生sourceFile实际逐张查看；外沿alpha扫描仅辅助裁边判断"
+    }
+  ]
+}

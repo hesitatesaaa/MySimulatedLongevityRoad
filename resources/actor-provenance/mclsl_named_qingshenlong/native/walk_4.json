@@ -8,7 +8,7 @@
   "sourceSha256": "0a51cc879572026c8ffdd88872d7e1b1afd6a42b60e38d3b2ede7ecea3c8e829",
   "outputFile": "NativeActorResources/actors/Named/QingShenLong/Beast/main/walk_4.png",
   "outputSha256": "0a51cc879572026c8ffdd88872d7e1b1afd6a42b60e38d3b2ede7ecea3c8e829",
-  "prompt": "New independent transparent PNG pixel-art animation frame, 青神龙·兽形 walk_4, 1254×1254. Reference 1 supplies the blue serpentine dragon identity and pixel-art style, reference 2 supplies four-paw anatomy. Draw a right-facing long thin sapphire dragon with cream belly, white mane/tail, gold antlers and TWO whiskers. EXACTLY FOUR paws attached to torso: two at front chest and two at rear/mid body; absolutely no paw on the lowest tail coil and no extra paw on back coil. Smooth S-body walk phase between walk_3 and walk_5. CRITICAL CLEANUP: Draw a CLOSED MOUTH with no red, orange or yellow interior visible. All transparent gaps below chin and between gold whiskers must be EMPTY TRANSPARENT SPACE with alpha zero, no red/yellow/gray colored specks. Keep jaw silhouette crisp, no decorative mouth flames. Preserve native scale, right-facing perspective, lower anchor, broad square pixel clusters, intact limbs and margin around all silhouette. One character one frame, no sheet, background, shadow, particles, text, crop or reused pixels.",
+  "prompt": "New independent transparent PNG pixel-art animation frame, \u9752\u795e\u9f99\u00b7\u517d\u5f62 walk_4, 1254\u00d71254. Reference 1 supplies the blue serpentine dragon identity and pixel-art style, reference 2 supplies four-paw anatomy. Draw a right-facing long thin sapphire dragon with cream belly, white mane/tail, gold antlers and TWO whiskers. EXACTLY FOUR paws attached to torso: two at front chest and two at rear/mid body; absolutely no paw on the lowest tail coil and no extra paw on back coil. Smooth S-body walk phase between walk_3 and walk_5. CRITICAL CLEANUP: Draw a CLOSED MOUTH with no red, orange or yellow interior visible. All transparent gaps below chin and between gold whiskers must be EMPTY TRANSPARENT SPACE with alpha zero, no red/yellow/gray colored specks. Keep jaw silhouette crisp, no decorative mouth flames. Preserve native scale, right-facing perspective, lower anchor, broad square pixel clusters, intact limbs and margin around all silhouette. One character one frame, no sheet, background, shadow, particles, text, crop or reused pixels.",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_named_qingshenlong/idle_0.png",
     "E:/0.6.0/output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_qingshenlong/walk_6.png"
@@ -42,5 +42,5 @@
     "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_qingshenlong/walk_4_v3.provenance.json",
     "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_named_qingshenlong/walk_4"
   },
-  "reviewStatus": "waived-by-user"
+  "integrationStatus": "accepted-by-user-without-further-visual-review"
 }

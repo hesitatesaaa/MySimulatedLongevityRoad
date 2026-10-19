@@ -1,13 +1,9 @@
 # 我的模拟长生路 0.6.0
 
-WorldBox／NeoModLoader模组。此分支包含0.6.0运行代码和资源，发布包见 [v0.6.0](https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/tag/v0.6.0)。
+WorldBox / NeoModLoader 模组。发布附件见 [0.6.0 Release](https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/tag/v0.6.0)。
 
-本版包含62套角色形态、1374张独立动画帧、38张放置图标、111张物品图标及16种法术的48个阶段图集。已制作的后续修正版按当前清单接入。
+本版接入 62 套形态、1374 张动画帧、38 个角色图标、111 个物品图标及 48 个法术阶段图集，包含从 generated_images 补入的 9 张未判废最新修复图。图片继续审看按用户要求取消。
 
-玩家请下载player包；需要源码、工具、独立原图及制作来源时下载developer包。大于单附件限制的包以编号分卷提供，下载全部分卷后二进制拼接；核对SHA256后解压。
+玩家下载 player 包；源码、工具、原图、来源及回滚资料在完整 developer 包中。超过单附件限制的 ZIP 按编号分卷提供，全部下载后二进制拼接，核对 SHA256 再解压。
 
-安装、升级和已知问题见 [发布说明](resources/RELEASE-0.6.0.md)，构建方法见 [开发说明](resources/DEVELOPMENT-0.6.0.md)。运行时必需的源码保留，编译DLL不与源码一起重复分发。
-
-制作原图放在developer附件中，不把整个本地制作历史提交到GitHub。直接克隆此分支可以查看运行代码和资源；需要执行包含原图校验的完整构建流程时，使用developer包。
-
-图片人工审看按用户要求跳过，资源完整性、编译和解压校验与视觉验收分开记录。完整实机尺寸、CPU/GPU内存和100/500/1000单位性能未宣称通过，发布状态为预发布。
+仅适用于新存档。安装和实际验证范围见 [发布说明](resources/RELEASE-0.6.0.md)，构建见 [开发说明](resources/DEVELOPMENT-0.6.0.md)。
