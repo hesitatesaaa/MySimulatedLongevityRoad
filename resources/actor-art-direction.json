@@ -1,0 +1,48 @@
+{
+  "revision": 2,
+  "updatedAtUtc": "2026-10-09T09:56:07.771781+00:00",
+  "standard": "balanced-pixel-detail-matching-lifan-and-baihu",
+  "styleReferenceForms": [
+    "mclsl_named_lifan",
+    "mclsl_beast_baihu"
+  ],
+  "femaleHumanForms": [
+    "mclsl_beast_kunpeng_yuan",
+    "mclsl_beast_qinglong_yuan",
+    "mclsl_beast_huanglong_yuan",
+    "mclsl_beast_zhuque_yuan",
+    "mclsl_beast_baihu_yuan",
+    "mclsl_beast_qilin_yuan",
+    "mclsl_beast_fenghuang_yuan",
+    "mclsl_beast_dafeng_yuan",
+    "mclsl_beast_manman_yuan",
+    "mclsl_beast_xuanniao_yuan",
+    "mclsl_beast_qingluan_yuan",
+    "mclsl_beast_mo_yuan",
+    "mclsl_beast_feiqiu_yuan",
+    "mclsl_beast_yingying_yuan",
+    "mclsl_beast_liejiejing_yuan",
+    "mclsl_beast_tianshou_yuan",
+    "mclsl_named_disanmo_yuan",
+    "mclsl_named_qingshenlong_yuan"
+  ],
+  "femaleCount": 18,
+  "maleCount": 20,
+  "constraints": [
+    "clean-large-pixel-clusters",
+    "two-or-three-shade-levels-per-material",
+    "readable-silhouette",
+    "restrained-trim",
+    "no-dense-filigree-or-microtexture",
+    "no-geometric-placeholder-art",
+    "independent-one-PNG-per-frame"
+  ],
+  "saveAndGameplayGenderFieldsChanged": false,
+  "humanWalkDirection": {
+    "updatedAtUtc": "2026-10-15T08:26:01.044095+00:00",
+    "policy": "resources/actor-human-walk-policy.md",
+    "mode": "broad-low-stride-alternating-near-far",
+    "highKneePassingStep": false,
+    "preserveSuitableExistingBroadStrides": true
+  }
+}

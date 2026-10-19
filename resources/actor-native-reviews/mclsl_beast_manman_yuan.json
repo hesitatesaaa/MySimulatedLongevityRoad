@@ -1,0 +1,672 @@
+{
+  "actorId": "mclsl_beast_manman_yuan",
+  "checkedAtUtc": "2026-10-14T11:56:15.801698+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\idle_0.png",
+          "sourceSha256": "9065643c4d3184237d2e80f826e43088fdbc74adce301d02425de985dd7a85b6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            321,
+            143,
+            955,
+            1195
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9065643c4d3184237d2e80f826e43088fdbc74adce301d02425de985dd7a85b6",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.711187+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1195
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\idle_1.png",
+          "sourceSha256": "ed9122fc627c6dfe760753835566a62f9ee84d1003f6b480435375d0d5bbcf1e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            270,
+            84,
+            987,
+            1201
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "ed9122fc627c6dfe760753835566a62f9ee84d1003f6b480435375d0d5bbcf1e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.713206+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1201
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\idle_2.png",
+          "sourceSha256": "5cecbbde72a56cd7bad36de8981cd08ded0bb709adacc6854e583db947994af8",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            315,
+            140,
+            968,
+            1197
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5cecbbde72a56cd7bad36de8981cd08ded0bb709adacc6854e583db947994af8",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.715010+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1197
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\idle_3.png",
+          "sourceSha256": "371bd075bd826ac930e388e6639967993b495207d9de0de1ca3b3f6b138a05e9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            300,
+            132,
+            975,
+            1196
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "371bd075bd826ac930e388e6639967993b495207d9de0de1ca3b3f6b138a05e9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.716981+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1196
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_0.png",
+          "sourceSha256": "098b73c7056fe4d9c19825ac11265d4af057c2e92c28371f60a7057b2752c462",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            232,
+            106,
+            1024,
+            1200
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "098b73c7056fe4d9c19825ac11265d4af057c2e92c28371f60a7057b2752c462",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.719213+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1200
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_1.png",
+          "sourceSha256": "917afe0781cff30276e0c40dff305823569053a757cba52295ec0be0360cf87c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            206,
+            143,
+            1042,
+            1177
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "917afe0781cff30276e0c40dff305823569053a757cba52295ec0be0360cf87c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.721328+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1177
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_2.png",
+          "sourceSha256": "c9ede6ee5534503af94aa1776c69addf9bddc0e679c5fafe9f3e0e74971fe047",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            231,
+            118,
+            1033,
+            1192
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "c9ede6ee5534503af94aa1776c69addf9bddc0e679c5fafe9f3e0e74971fe047",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.723970+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1192
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_3.png",
+          "sourceSha256": "b0f938240555b1246958eebc08b098484b320b7aee361a5508ea2bcd35898ad0",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            234,
+            123,
+            1017,
+            1194
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b0f938240555b1246958eebc08b098484b320b7aee361a5508ea2bcd35898ad0",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.726657+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1194
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_4.png",
+          "sourceSha256": "81b86c35f846d232dbe6af4c97af8c90dab4e43aa2c04d8cb1872facdb833d3c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            229,
+            137,
+            1028,
+            1189
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "81b86c35f846d232dbe6af4c97af8c90dab4e43aa2c04d8cb1872facdb833d3c",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.729066+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1189
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\walk_5.png",
+          "sourceSha256": "db08931fe42b7d071b1941af20642110e33c56bd1286a328a6cc927eadba91a9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            238,
+            139,
+            1007,
+            1181
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "db08931fe42b7d071b1941af20642110e33c56bd1286a328a6cc927eadba91a9",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.731300+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1181
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 720.0
+    },
+    "hit": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 320.0
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_0.png",
+          "sourceSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            286,
+            132,
+            986,
+            1207
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.733556+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1207
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_1.png",
+          "sourceSha256": "d56c116c37c16e0d2a2febf084a2e9cc2a7594823b093802dd19115d2f348501",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            347,
+            227,
+            1031,
+            1190
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d56c116c37c16e0d2a2febf084a2e9cc2a7594823b093802dd19115d2f348501",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.735694+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1190
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_2.png",
+          "sourceSha256": "d22bbb7df1eea3dcef0e8ab8c35ea53eb1b835d3d270459c3240663169f6c164",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            230,
+            240,
+            1129,
+            1164
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d22bbb7df1eea3dcef0e8ab8c35ea53eb1b835d3d270459c3240663169f6c164",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.737731+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1164
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_3.png",
+          "sourceSha256": "a9f7806683ceb97125d64ac13f7a2e5d614e1e7f80bc786b158dcee4754ff96a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            62,
+            335,
+            1202,
+            1061
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "a9f7806683ceb97125d64ac13f7a2e5d614e1e7f80bc786b158dcee4754ff96a",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.739647+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1061
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_4.png",
+          "sourceSha256": "80e5f66ee8cfc22c4bfb855079f69fe5aa74a9059c34f71f003dcb4ec4d89d0e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            22,
+            644,
+            1234,
+            1019
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "80e5f66ee8cfc22c4bfb855079f69fe5aa74a9059c34f71f003dcb4ec4d89d0e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.741425+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1019
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\death_5.png",
+          "sourceSha256": "eb40c1a01439aa779842a6bbc68141dd199524893519c1834a39eab371e2e7a5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            44,
+            556,
+            1232,
+            1047
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "eb40c1a01439aa779842a6bbc68141dd199524893519c1834a39eab371e2e7a5",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T11:58:49.743354+00:00",
+            "scope": "Static visible anatomy with natural cloth occlusion only; action, anchor and runtime approval remain false."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              638.0,
+              1047
+            ],
+            "pixelsPerUnit": 11.954545454545455,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 100641024,
+  "deathSilhouetteHeights": [
+    1075,
+    963,
+    924,
+    726,
+    375,
+    491
+  ],
+  "deathHeightRiseCandidates": [
+    5
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": false,
+  "actionContinuityApproved": false,
+  "installed": false,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [
+    {
+      "action": "walk",
+      "frames": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "walk_4",
+        "walk_5"
+      ],
+      "severity": "action-review-required",
+      "reason": "All six viewed poses retain approximately the same leading-foot relationship; a complete alternating-leg gait has not been demonstrated. Do not approve or install solely because all six files exist. Resolve clip choreography before deciding which individual poses require new artwork."
+    },
+    {
+      "action": "death",
+      "frames": [
+        "death_4",
+        "death_5"
+      ],
+      "severity": "action-review-required",
+      "reason": "The nominal terminal frame raises the head/shoulders after a lower resting pose. Evaluate a reviewed ordering ending at death_4 and corresponding duration, or a genuinely settled terminal pose. No source was deleted or replaced."
+    }
+  ],
+  "reviewerNotes": [
+    "All 16 independently drawn native source PNGs individually viewed in this turn. Female identity, paired-bird robes and visible limb counts retained. Source files preserved unchanged.",
+    "Neither full action continuity nor per-frame world geometry has been approved. Missing alternating foot contact, death order, body anchors and Unity sizes remain pending. No baseline 0.5.4 image was scanned or edited."
+  ]
+}

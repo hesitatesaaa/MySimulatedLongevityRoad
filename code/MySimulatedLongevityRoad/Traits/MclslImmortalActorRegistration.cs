@@ -105,21 +105,17 @@ internal static class MclslImmortalActorRegistration
             asset.can_attack_brains = false;
             SetBool(asset, false, "can_attack", "canAttack", "can_fight", "canFight", "can_reproduce", "canReproduce", "can_marry", "canMarry");
             SetBool(asset, true, "can_attack", "canAttack", "can_fight", "canFight");
-            asset.animation_idle = new[] { "idle_0", "idle_1", "idle_2", "idle_3" };
-            asset.animation_walk = new[] { "walk_0", "walk_1", "walk_2", "walk_3" };
-            asset.animation_idle_speed = 0.14f;
-            asset.animation_walk_speed = 0.10f;
             string path = "actors/Immortals/" + folder + "/";
             asset.texture_asset = new ActorTextureSubAsset(path, false);
             asset.texture_asset.texture_path_main = path + "main";
-            Sprite first = MclslBeastAnimation.LoadSprite(path + "main/idle_0");
+            Sprite first = MclslBeastAnimation.ConfigureAsset(asset, path);
             if (first == null)
                 throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
             asset._cached_sprite = first;
             asset.cached_sprite = first;
             asset.get_override_sprite = MclslBeastAnimation.GetSprite;
             asset.has_override_sprite = true;
-            asset.base_stats["scale"] = 0.20f;
+            asset.base_stats["scale"] = MclslActorPixelResources.DisplayScale(path, 0.20f);
             asset.base_stats["size"] = 0.6f;
             AssetManager.actor_library.loadTexturesAndSprites(asset);
             asset._cached_sprite = first;
@@ -160,9 +156,10 @@ internal static class MclslImmortalActorRegistration
         }
         if (!Buttons.TryGetValue(powerId, out PowerButton button) || button == null)
         {
-            Sprite icon = MclslBeastAnimation.LoadSprite("actors/Immortals/" + folder + "/spawn_icon")
-                ?? MclslBeastAnimation.LoadSprite("actors/Immortals/" + folder + "/main/idle_0");
-            button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
+            button = PowerButtonCreator.CreateGodPowerButton(powerId, MclslActorPixelResources.PlacementIcon(id,
+                "actors/Immortals/" + folder + "/main/idle_0"));
+            if (button == null) return;
+            MclslActorPixelResources.ConfigurePlacementButton(button);
             Buttons[powerId] = button;
             PowersTabExtension.AddPowerButton(tab, "tab", button);
         }

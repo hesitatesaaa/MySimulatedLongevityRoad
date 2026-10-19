@@ -1,0 +1,892 @@
+{
+  "actorId": "mclsl_beast_moqilin",
+  "checkedAtUtc": "2026-10-14T05:31:21.150051+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_0.png",
+          "sourceSha256": "e25d2519c5a82be46f29a9edb13a83d07103da8c36b4e1e862d699e9906d27c3",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            89,
+            203,
+            1174,
+            1101
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1101
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_1.png",
+          "sourceSha256": "e38acabc484c7003d23d8ae7791f70ceec4c5b86fb638b98b2c70311fbc10015",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            90,
+            194,
+            1187,
+            1103
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1103
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_2.png",
+          "sourceSha256": "9816c1f564e374f35ca6effac3be6dafd25ef3d035ea28af1d26c43094f76ed2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            45,
+            156,
+            1221,
+            1137
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1137
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_3.png",
+          "sourceSha256": "629be08990df473b60d9f5dbd8b67103fbafada4428087216565bffbe6d0543c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            84,
+            175,
+            1205,
+            1109
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1109
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_0.png",
+          "sourceSha256": "00958dc3a8797220a209cc9a665f0289708a122836b62c0c7f59786d71c655fe",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            81,
+            199,
+            1206,
+            1115
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1115
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_1.png",
+          "sourceSha256": "fd542643e2397ff2044a437dfd29e87bee4e5cee8cba6713e1c56255ff2750af",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            47,
+            201,
+            1196,
+            1111
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1111
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_2.png",
+          "sourceSha256": "0677134d85b30ea4b92e222ccdfe6d1389f22aeacc626d29d8eb7ff075f5c67c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            57,
+            189,
+            1186,
+            1110
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1110
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_3.png",
+          "sourceSha256": "2d4b261473d227ad5a43c6c93edc550a768512e30abc6b718afb9039d28324e2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            67,
+            203,
+            1189,
+            1101
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1101
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_4.png",
+          "sourceSha256": "156daeef65563f1851fef8835497869deb51a96e254f9af2c538273401f6c41e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            31,
+            204,
+            1198,
+            1105
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1105
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\walk_5.png",
+          "sourceSha256": "c8974d5e6a47abf54f6609acef28f274c5d4642ac2918841ef0c110440659454",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            50,
+            192,
+            1180,
+            1092
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1092
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_0.png",
+          "sourceSha256": "f5f93c8f895154f89216d6cf34d5dc6994024d5cd9e577cdeb1433e7d349d061",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            63,
+            267,
+            1221,
+            1151
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1151
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_1.png",
+          "sourceSha256": "d455ba944169d7e64f27471cf3e1450c369baa2be8af180cb0824ed2840f2d1b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            61,
+            265,
+            1221,
+            1128
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1128
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_2.png",
+          "sourceSha256": "8d776b63e9a358cb2074805aabe5ab1eda2e901a155bb148f24b1adc1502968b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            40,
+            244,
+            1238,
+            1096
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1096
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_3.png",
+          "sourceSha256": "634ff1a6a2e9ba80d5d293f6761648506ba8dbfe107bd4ebd8529693fd0172c6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            23,
+            261,
+            1241,
+            1113
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1113
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_4.png",
+          "sourceSha256": "9020bd8d99d9e34156b210e2ff8d8ed6043161c1ed24d436b553c1e68020b1e7",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            38,
+            291,
+            1228,
+            1045
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1045
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_5.png",
+          "sourceSha256": "9d32a2b502e46f2b3a5478c9106a6313fb54ec5b9dfca4c2feab6e7657da251f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            60,
+            167,
+            1170,
+            1101
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1101
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_6.png",
+          "sourceSha256": "9cdde2b55d57629347ff3b6767fc2054199618d73df4b50f760b2a7514017b19",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            65,
+            212,
+            1179,
+            1090
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1090
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\attack_7.png",
+          "sourceSha256": "46f084940f9b64adb1cbed415e9a4dab1f7117d1928106740e72e5d10d4e1516",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            62,
+            158,
+            1207,
+            1135
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1135
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\hit_0.png",
+          "sourceSha256": "422a8092b632ae629e3d1fd71cd070b50b9d8b4a621d291767f2b76b9237ad93",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            40,
+            175,
+            1221,
+            1133
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1133
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\hit_1.png",
+          "sourceSha256": "9bbf8a1a882753fc73b3bd635c552fe3433d8fee086c9db4fb465f7c7e528b98",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            47,
+            138,
+            1204,
+            1124
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1124
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_0.png",
+          "sourceSha256": "0ff0cd13b52c8c30fcbed87315a529ca0fe0a0c146789620d246a12bbe329116",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            53,
+            287,
+            1201,
+            1140
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1140
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_1.png",
+          "sourceSha256": "add338b33d6d77265c235ec16ecbada4165f48ada14216df450d06ab0b2b25d5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            33,
+            359,
+            1225,
+            1107
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1107
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_2.png",
+          "sourceSha256": "0439a63233a9cebc2f4722e923fc8a416012c59969c88d832be62b1c3e1954d6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            39,
+            404,
+            1220,
+            1087
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1087
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_3.png",
+          "sourceSha256": "9d7250ed0bd20acff7e82ea2118a6511686e20a83b1e92c1797f561de42c124b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            23,
+            467,
+            1232,
+            1052
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1052
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_4.png",
+          "sourceSha256": "2343504bf7a6f579126a6cf9d5c13374eee1edf38317194d721d7f37119942c5",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            18,
+            577,
+            1236,
+            1047
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1047
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_5.png",
+          "sourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            39,
+            504,
+            1227,
+            1018
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "clippingDetected": false,
+            "reviewer": "Codex visual inspection of individual native PNG",
+            "reviewedAtUtc": "2026-10-14T05:22:17.177425+00:00",
+            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              631.5,
+              1018
+            ],
+            "pixelsPerUnit": 16.035714285714285,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 163541664,
+  "deathSilhouetteHeights": [
+    853,
+    748,
+    683,
+    585,
+    470,
+    514
+  ],
+  "deathHeightRiseCandidates": [
+    5
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": false,
+  "actionContinuityApproved": false,
+  "installed": false,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [
+    {
+      "severity": "needs-action-review",
+      "action": "death",
+      "frame": 5,
+      "previousFrame": 4,
+      "finding": "Visual review: death_4 lies flat with head on ground, but death_5 raises the head and torso and visibly recovers. Last death pose must remain settled low.",
+      "reviewedAtUtc": "2026-10-13T06:43:28.400647+00:00",
+      "originalSeverity": "needs-redraw",
+      "replacementSourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+      "replacementStaticAnatomyReviewed": true,
+      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
+    },
+    {
+      "severity": "needs-action-review",
+      "action": "death",
+      "frame": 5,
+      "sourceSha256": "9ddbeee469348871f24ebb5cc0399eb0afd358d0e2004d6e58fe5780c5b1605b",
+      "reason": "Native final death pose touches both canvas edges; tail/head lack padding.",
+      "originalSeverity": "needs-redraw",
+      "replacementSourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+      "replacementStaticAnatomyReviewed": true,
+      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
+    }
+  ],
+  "deathSequenceFollowup": {
+    "reviewedAtUtc": "2026-10-15T03:51:26.118666+00:00",
+    "individuallyViewed": [
+      {
+        "name": "death_3",
+        "sourceSha256": "9d7250ed0bd20acff7e82ea2118a6511686e20a83b1e92c1797f561de42c124b"
+      },
+      {
+        "name": "death_4",
+        "sourceSha256": "2343504bf7a6f579126a6cf9d5c13374eee1edf38317194d721d7f37119942c5"
+      },
+      {
+        "name": "death_5",
+        "sourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4"
+      }
+    ],
+    "proposedFrameOrder": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      4
+    ],
+    "finding": "Replacement death_5 has an intact silhouette and a curled low tail but its head/shoulders remain higher relative to the feet than death_4. Placing death_5 before death_4 may settle the face instead of lifting it at the end. Tail in death_4 is still curled upward; full action review is required.",
+    "approved": false,
+    "sourcePixelsChanged": false,
+    "targetOrderChanged": false
+  }
+}

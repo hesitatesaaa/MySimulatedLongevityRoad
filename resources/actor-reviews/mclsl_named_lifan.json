@@ -1,0 +1,316 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "offlinePassed": true,
+  "reviewMethod": "manual inspection of every independent PNG and all five labeled contact previews",
+  "notes": [
+    "Same navy-white-gold costume and tied hair across the five actions.",
+    "Idle and walk retain recognizable silhouette; feet remain at the ground anchor.",
+    "Attack shows gathering, release and recovery. Hit shows recoil and recovery.",
+    "Death poses 3, 4, 5, 6 and 8 were independently redrawn after continuity defects.",
+    "Authorized alpha cleanup removes only source alpha below 16/255; death frame 2 now aligns without its former one-pixel offset.",
+    "No real-game size, UI occupancy, sorting, motion or performance approval is claimed."
+  ],
+  "frames": {
+    "attack_0": {
+      "sha256": "b1161809bf5ae11b4c7b99d010f7f9068c844dad9140f5e1c598733716018e75",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_1": {
+      "sha256": "561ed5d31eb0b6aa7e2bcf79bd9ae800b4e4f0fcee0d99024583a160916c9ba6",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_10": {
+      "sha256": "f5cf2d0990b0b7dea6e842237ca246b998c8a95445991302451fbcbd76a9bd84",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_11": {
+      "sha256": "97f089a969d4e2d681dc31e74ce6e133b5cbab951e47958d126f3119090e7ad2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_2": {
+      "sha256": "de8d81190f9d67214faf441c8008e0aaa733b3d7e8922533f11fa2f73fb56dc3",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_3": {
+      "sha256": "b7ed5cae1b98fc9dda7144501c03b56713f177478512a75ad3e1dccc80ad8533",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_4": {
+      "sha256": "fbe9371d8c7221dcec308fd1680a2e9fb7196dee4c56330a4644d112a6a521d4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_5": {
+      "sha256": "a83b830fffde78277543e1984c95b3c9af9151000a01294967558500757ef4b0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_6": {
+      "sha256": "7d799bf692d38c9cd96c859817c5e56fda1b0a917cc38bf5d29d893cc2a55d56",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_7": {
+      "sha256": "637621eee50ac0ebba61460b88b407e85eb17dbc683928753ce1f0954fe93e21",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_8": {
+      "sha256": "fba31aaeb64168ccccb38bf034d8db547903f71f0e004750b673b5d6b0504370",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_9": {
+      "sha256": "dcfa7ce0d7a9abcdec0ef1f7ffee267fde7b6d6d9d6f4c678d6d7de653d7b6d2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_0": {
+      "sha256": "d8f3244e2a32ebc4bf5255688a9df10f5215a14142bf94d8983e7f90fe17293b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_1": {
+      "sha256": "413bffc419b74d98266278bcd01c5d592f75e43dee54b4c95852f9ed8b046d74",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_2": {
+      "sha256": "e56ce9f7b3de4626acb90158b419fdf435cb7050fc5cb8c2c239c116db5ed9a5",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_3": {
+      "sha256": "c23286faa7903036cd9f8905bf7ef128cd23ed901412f62dbbb23e7cfcfdc5b2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_4": {
+      "sha256": "6a781afbac89871c5e8101d522f605b159488e0881ba1eaf46070ca8b392abea",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_5": {
+      "sha256": "1c3e893eee817f0716cc04860dbc164f39c213aaed17f3c436bab72b4164b102",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_6": {
+      "sha256": "bfc10df8376d634b19c0d45a1e0c4844c12a1dccc0428355efc5c4b75109a3c2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_7": {
+      "sha256": "615e86823a8b538023266d836e503819f0a2470ba06b32c0b0ee2a1e30fed179",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_8": {
+      "sha256": "427301c03f36d4f6db477626fd5fb6572c8593150a2de6e9e874155a58cafce7",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_9": {
+      "sha256": "dd33b985a087e2ada9494dbb2e1a51b7d688ae849a3c47998d5d3f74c46b3526",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_0": {
+      "sha256": "9b1e317701aaa1c74d935e559ed6981aad2683475acd723ca261f76e0b4cdf92",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_1": {
+      "sha256": "1069e197c8fb573258935ed0b3d3ec2ec1ff26ac1371a7519223d4ef8d29d164",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_2": {
+      "sha256": "9780d1c65ac2a085bf28a12bf252a7f63b2d22176604ef19bec5c2382532435b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_3": {
+      "sha256": "e0f4cb440e9a8c2d868a397e3b3d024823308c2d2693651f85ce84d954bde2c5",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_0": {
+      "sha256": "209cabc1189d5d8caf99963af573fbbffed662cb723a44fe574cfc30561864b7",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_1": {
+      "sha256": "9fa91d28351f2a893c87f33a35464efc4aa57b72127f8c6fd84d4f675cd5ab26",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_2": {
+      "sha256": "cdef320eda25cb72821cd037d531201b78f037d5a403825d5275ef83a32338f1",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_3": {
+      "sha256": "0f36b9fcec572129774e60f4ce02a72afb145f0bf5807e38e6afd9a2874e878d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_4": {
+      "sha256": "c9cc17e708880ee8eb6b32ed9a0e0ba6e67f833310e08dafba3e79a29dc13f60",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_5": {
+      "sha256": "128764793158b836ccfd7d51a66dfef95bcd8cb71949f054378538eb80fd0944",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_6": {
+      "sha256": "af33413958de3600ec0fb39298f20ff0c1ba042461789a6402e6bd701d8de5b5",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_7": {
+      "sha256": "a6933f9835bca3404e338459371a3525642812b8782fe174f1f9c742d77a6277",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_0": {
+      "sha256": "ee35a74b78e6488c76514b66f19442f0d73101fda7d46aa794b84991596cdad9",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_1": {
+      "sha256": "cd45bab87623f78a4209e575a4d27faee98fab47d5f6bfc672b304ef204166ab",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_2": {
+      "sha256": "968db5e14add3703bf5dfc67350b846b173d697511e014ddc869a5d8d32e58e7",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_3": {
+      "sha256": "263b00e8458d7784ed4ea26ee347069a53ef14af124adcf3f766094d3326028b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_4": {
+      "sha256": "66a977045087ce51d80430b0c5bd0bb419b521d9aa2072907e2074b284c075e4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_5": {
+      "sha256": "9985b08f28602f9d71f77ce657291dd948cc044c8ff38b6f102f7032eeaa01f0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_6": {
+      "sha256": "6d9005b691c508bc7c3801633a02cc707d2ae56a26dc6873e2463aa4752ea335",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_7": {
+      "sha256": "2e2acaf51ded215fe6dbf31785b288e1f6db64edffed2bdfe3556e7a6ef15acf",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    }
+  },
+  "icon": {
+    "sha256": "a65d5ec6cf568bb3fe43fcfc8ff13cbeb7591a383d4e1695da1314ebbfa55c31",
+    "offlinePassed": true,
+    "bodyLongestEdgePixels": 94,
+    "independentlyDrawn": true
+  },
+  "verifiedInGame": false
+}

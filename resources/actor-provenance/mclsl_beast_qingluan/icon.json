@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "icon",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qingluan/originals/icon.png",
+  "sourceSha256": "157da90745261f1bfc3018e13bda557242674ea0fad035dab4f953158f9f9192",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_qingluan.png",
+  "outputSha256": "c23f3bf766bb658791a534057363177905789257495e77998d204c3c24b068f3",
+  "createdAtUtc": "2026-10-09T05:04:10.316180+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE independently drawn transparent pixel-art PLACEMENT BUTTON ICON for sacred Qingluan. Attached image is species identity only, not a frame to copy. Cyan, turquoise and deep navy feathers, bright white throat and breast, gold crest, beak, feet and accents. Proud three-quarter right-facing bird, wings CLOSED along torso; THREE distinct long tail plumes sweep left then curl upward into a compact graceful fan to occupy a roughly square silhouette. Strong recognizable head and gold crest, chest prominently readable at icon scale. Complete single bird centered on transparent 1254x1254 source canvas with generous clear margins. Crisp square pixel clusters, dark pixel outlines, flat shaded game sprite palette. Newly draw this unique compact icon pose; do not reuse, crop, transform or recolor the attached world animation. No panel, border, text, ground shadow, particles, aura, multiple poses, sheet, background or other characters.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.10184182015167931,
+    "translation": [
+      0,
+      -4
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": null,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 50298,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "sha256": "c23f3bf766bb658791a534057363177905789257495e77998d204c3c24b068f3",
+    "offlinePassed": true,
+    "bodyLongestEdgePixels": 94,
+    "independentlyDrawn": true
+  }
+}

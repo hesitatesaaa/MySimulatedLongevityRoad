@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "death",
+  "index": 9,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/death_9.png",
+  "sourceSha256": "67f45dedc800188becf71cd5b54382b8f2b483614a761bfbcb33e583300fe69c",
+  "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/death_9.png",
+  "outputSha256": "67f45dedc800188becf71cd5b54382b8f2b483614a761bfbcb33e583300fe69c",
+  "createdAtUtc": "2026-10-09T05:04:02.403810+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE independently drawn pixel-game sprite frame Qingluan death_9, frame 10/12. Image 1 is fixed species identity, original body scale, pixel size, palette, camera and source body layout. Image 2 is a REDUCED previous-pose preview for motion continuity only; NEVER use its reduced pixel size as body-size reference. Keep sacred Qingluan identity: cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and feather accents, exactly three main long tail plumes trailing left, three-quarter right-facing orthographic view. Preserve original anatomy dimensions and pixel clusters (standing identity body about 690 source pixels tall). Frame pose: side-lying body settles, no upright torso or raised neck, wings collapse and tail rests. While falling retain original anatomy and body pixel scale, never enlarge corpse to fill canvas. Ground line remains at the original feet level. From the lying phase onward both head and torso remain down; no return to a standing bird. Same 1254x1254 transparent RGBA source canvas, generous margins for complete wing, crest, beak and tail. Crisp square pixel art, dark outline and flat shades. ONE NEW pose only, draw it independently, never copy/paste/move/resize/recolor the entire old sprite. No aura, projectile, particles, text, panels, sheet, scene, ground shadow, smooth paint or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/death_8.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

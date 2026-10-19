@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_qinglong_yuan",
+  "sha256": "5a806906a9013897265ca9e02930e7adb85355494e8c74fae6ccd1daba4f07f2",
+  "sourceSha256": "695b495f683dd3cd80b320a2387427efbc6a0199a9ef94fc000065b3b1e6aa35",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-01.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:25:39.005871+00:00"
+}

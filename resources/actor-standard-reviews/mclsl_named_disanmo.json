@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_named_disanmo",
+  "sha256": "a9aa8776b12c327af3894ee22be5abefb39e777673fef95cf5170d144401b387",
+  "sourceSha256": "8b0bb73da606fd6891f03a9104940aec201dc8db0b8d01663d82da6bad7bc077",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": null,
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-05.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:40.736119+00:00"
+}

@@ -18,6 +18,9 @@ internal sealed class MclslFamilyRecord
     public long SettlementDuesStones { get; set; }
     public bool Extinct { get; set; }
     public bool EstateLiquidated { get; set; }
+    public int FoundedYear { get; set; }
+    public int HistoryCapacity { get; set; } = 60;
+    public string MergedIntoId { get; set; } = string.Empty;
     public List<MclslFamilyMemberRecord> Members { get; set; } = new();
     public List<MclslOwnedItem> Items { get; set; } = new();
     public List<string> TechniqueIds { get; set; } = new();
@@ -37,6 +40,9 @@ internal sealed class MclslFamilyMemberRecord
     public int Aptitude { get; set; }
     public long CityId { get; set; }
     public bool Alive { get; set; } = true;
+    public bool IsCultivator { get; set; } = true;
+    public bool Missing { get; set; }
+    public int DeathYear { get; set; } = -1;
     public bool DeathSettled { get; set; }
     public int LastDuesYear { get; set; }
 }

@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "attack",
+  "index": 1,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_baihu/originals/attack_1.png",
+  "sourceSha256": "8571834bc3a1a9309813f6a35aefebd1bd477ba9069320c7d107c20eb519c655",
+  "outputFile": "GameResources/actors/Beasts/baihu/Beast/main/attack_1.png",
+  "outputSha256": "75c4b603763d2f8977ad58a53cc369f8e0d0e433cba3012e9bc0118682c4e0f7",
+  "createdAtUtc": "2026-10-09T05:31:34.216414+00:00",
+  "prompt": "Use case: game-asset. Exactly ONE NEW independently drawn transparent pixel-art sprite frame: Chinese sacred white tiger Baihu attack_1. Image 1 is the fixed newly drawn identity. Preserve identical white/pale silver fur, charcoal tiger stripes, muscular feline head with gold eyes, round ears, curled striped tail, FOUR anatomically connected legs. No wings, jewelry or clothes. Fixed original anatomy scale and square pixel clusters: full STANDARD STANDING silhouette about 941 source pixels wide and 733 pixels tall, same 1254x1254 transparent source canvas; original paw contact level y1049 and source body center x636. Three-quarter side RIGHT-facing view, unchanged camera. Never enlarge crouching/lying shapes to fill the canvas. Image 2 if supplied is a REDUCED previous-pose guide for motion ONLY; never use its reduced size as body-size reference. Pose: Crouch deeper to gather force, belly and chest lower, hind knees flex, all paws planted. Ears flatten, jaw opens a little. Same anatomy size; lower posture, not a smaller tiger. Crisp square pixel clusters, dark pixel outlines and flat limited shades. Independently draw this one pose. No reuse, whole-sprite translation/scaling/recolor, sheet, panels, other poses, text, aura, particles, background, ground or shadow. Entire tail, head, paws and extended limbs must remain inside generous transparent margins.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_baihu/main/attack_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.07639836289222374,
+    "translation": [
+      -1,
+      -2
+    ],
+    "canvas": [
+      96,
+      96
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 636.0,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 25507,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

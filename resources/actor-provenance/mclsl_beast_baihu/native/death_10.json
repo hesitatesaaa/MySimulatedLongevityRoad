@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "death",
+  "index": 10,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/death_10.png",
+  "sourceSha256": "bf0be5fe8c1aef4afbb78af4c18efaa6c834bbfd1d4fc559c0ae20f16b7e7ab0",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/death_10.png",
+  "outputSha256": "bf0be5fe8c1aef4afbb78af4c18efaa6c834bbfd1d4fc559c0ae20f16b7e7ab0",
+  "createdAtUtc": "2026-10-09T06:10:07.138210+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame, Baihu sacred white tiger death_10, earliest collapse transition just after standing. Reference preserves the exact identity and anatomy: white/pale silver tiger fur, charcoal stripes, gold eyes, round ears, broad feline face and curled striped tail. FOUR limbs. Fixed 1254x1254 transparent canvas, three-quarter side RIGHT-facing camera. Keep head, torso and paws SAME size and SAME placement as reference: whole animal about 941px wide, standard 733px high, ground at y1049, center x636. Only lower shoulders and head by about 40px, with very slight front elbow flex and ear droop, eyelids partly lowered. Hind legs and curled tail mostly retain standing silhouette. No kneeling yet, no major crouch, no stretched neck. Whole animal clear of all edges. Crisp square pixel clusters, dark outline, flat limited shades. Independently DRAW a new single frame. No whole-sprite paste, resizing or recolor as redraw, no sprite sheet, multiple poses, text, aura, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

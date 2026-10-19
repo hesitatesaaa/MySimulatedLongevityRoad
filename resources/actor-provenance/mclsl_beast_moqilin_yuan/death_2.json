@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_moqilin_yuan",
+  "action": "death",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_2.png",
+  "sourceSha256": "15eb0176b40752f058fe96e95509740226c85e8e6a5aa2200b1c9aa0e76ccde9",
+  "outputFile": "GameResources/actors/Beasts/moqilin/Human/main/death_2.png",
+  "outputSha256": "32becb69eebe139ea74f952e82ae9c9fb802f2035da3998063f6c4f8788962f1",
+  "createdAtUtc": "2026-10-09T12:37:28.780164+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 墨麒麟·化形 (mclsl_beast_moqilin_yuan), death_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ONE humanoid Chinese cultivator in detailed layered robes, with exactly two arms and two legs and a fully human face. This is the ascended human form of ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, four legs and tufted tail. Preserve its palette and subtle identity through crest-like hair ornaments, horn motifs where appropriate, embroidered scale/fur/feather patterns, and a recognizable tail or shoulder mantle where present in source. Keep the baseline human hairstyle, costume silhouette and visible weapon; do not draw the animal itself or copy Li Fan's robe colors.. Visual gender: male, adult fully clothed human. Pose: Death single-shot progress 0.400, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin_yuan\\idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.0773966578715919,
+    "translation": [
+      15,
+      21
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 634.0,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 29347,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

@@ -1,0 +1,782 @@
+{
+  "actorId": "mclsl_beast_baihu_yuan",
+  "checkedAtUtc": "2026-10-14T09:31:33.376329+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\idle_0.png",
+          "sourceSha256": "52fe777ffc754036afbf9a640161cea184657199a1b67d3f87c77eb07f2b0219",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            289,
+            163,
+            963,
+            1204
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "52fe777ffc754036afbf9a640161cea184657199a1b67d3f87c77eb07f2b0219",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1204
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\idle_1.png",
+          "sourceSha256": "abb3ec3f13e9505ae587513a6cb79e42e3e4b3efb2da665966a05e2413e21a5e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            239,
+            111,
+            1002,
+            1208
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "abb3ec3f13e9505ae587513a6cb79e42e3e4b3efb2da665966a05e2413e21a5e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1208
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\idle_2.png",
+          "sourceSha256": "b62ed332fabea02c8defb61059014626d6e42a8e3e7562c78e69fd64a3881f5e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            248,
+            112,
+            997,
+            1210
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "b62ed332fabea02c8defb61059014626d6e42a8e3e7562c78e69fd64a3881f5e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1210
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\idle_3.png",
+          "sourceSha256": "05a3f3e9f4453888c06b6b67faee48d23d6ff6f0e00bda5d63c95902c8553d04",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            281,
+            113,
+            991,
+            1210
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "05a3f3e9f4453888c06b6b67faee48d23d6ff6f0e00bda5d63c95902c8553d04",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1210
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_0.png",
+          "sourceSha256": "6d1229cf5e172b42913832e38ea7fde41bf5c1cfb8de54a5db6e7b3fc79b74fe",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            147,
+            105,
+            1024,
+            1198
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6d1229cf5e172b42913832e38ea7fde41bf5c1cfb8de54a5db6e7b3fc79b74fe",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1198
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_1.png",
+          "sourceSha256": "6a191350f1708c38d10cfa2c0392cc8411404f42f4ea7c4d1d824f22e1c7e799",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            206,
+            160,
+            1042,
+            1197
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "6a191350f1708c38d10cfa2c0392cc8411404f42f4ea7c4d1d824f22e1c7e799",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1197
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_2.png",
+          "sourceSha256": "3e3cf326a9b0cea22ad1f4847049b1fc896227ba6abc1d5f5daa743490d33d66",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            202,
+            130,
+            1063,
+            1190
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "3e3cf326a9b0cea22ad1f4847049b1fc896227ba6abc1d5f5daa743490d33d66",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1190
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_3.png",
+          "sourceSha256": "d15010b4f5e464f467e7227abef578e11d52f24da0e59c6cf2c1f45c98f6ec94",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            193,
+            95,
+            1020,
+            1196
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "d15010b4f5e464f467e7227abef578e11d52f24da0e59c6cf2c1f45c98f6ec94",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1196
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_4.png",
+          "sourceSha256": "15860630b55bdff3622b3df0c5022fabdc626f564d2de151f80876b804e31daa",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            186,
+            96,
+            1074,
+            1181
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "15860630b55bdff3622b3df0c5022fabdc626f564d2de151f80876b804e31daa",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1181
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\walk_5.png",
+          "sourceSha256": "9e47a8fe59d70e84a62dd47bb8aeea4536bd72f98641f785c63eedb105226e1e",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            152,
+            115,
+            1079,
+            1207
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "9e47a8fe59d70e84a62dd47bb8aeea4536bd72f98641f785c63eedb105226e1e",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1207
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [],
+      "visualFallback": "idle",
+      "durationMs": 720.0
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\hit_0.png",
+          "sourceSha256": "4b1c41517e589a0b7384eb9c65a9e3b3416531c49c06e7b64fac7c865733ad70",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            103,
+            159,
+            1189,
+            1165
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "4b1c41517e589a0b7384eb9c65a9e3b3416531c49c06e7b64fac7c865733ad70",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1165
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\hit_1.png",
+          "sourceSha256": "73b4f22396d6d316d7160b4484a72beaaeff1f2842e1c7e9c3dab12c1643fe89",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            237,
+            112,
+            1062,
+            1203
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "73b4f22396d6d316d7160b4484a72beaaeff1f2842e1c7e9c3dab12c1643fe89",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1203
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_0.png",
+          "sourceSha256": "7c61db92a893b6190ecfa120a8fc7ffe4a36dda66b6aaff3c9b03acd51149dcf",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            277,
+            142,
+            965,
+            1202
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7c61db92a893b6190ecfa120a8fc7ffe4a36dda66b6aaff3c9b03acd51149dcf",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1202
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_1.png",
+          "sourceSha256": "196288a9259f876557fad0170498c3b67f2168c59e9fe79f69014a983e249bec",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            202,
+            346,
+            1177,
+            1154
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "196288a9259f876557fad0170498c3b67f2168c59e9fe79f69014a983e249bec",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1154
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_3.png",
+          "sourceSha256": "bf5ae82b44ac0ea1add27901e57ca943e4e4127d5547247c831a5ff3e14153a2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            29,
+            401,
+            1245,
+            1095
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "bf5ae82b44ac0ea1add27901e57ca943e4e4127d5547247c831a5ff3e14153a2",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1095
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_2.png",
+          "sourceSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            10,
+            516,
+            1250,
+            1149
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "clippingDetected": false,
+            "reviewer": "Codex visual inspection of individual native PNG",
+            "reviewedAtUtc": "2026-10-14T05:22:17.113325+00:00",
+            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1149
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_4.png",
+          "sourceSha256": "66d8f9ddc857419dd94d89ae80a99200a0bc610fb7023160023ab818bbb61add",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            11,
+            644,
+            1243,
+            1078
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "66d8f9ddc857419dd94d89ae80a99200a0bc610fb7023160023ab818bbb61add",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1078
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_5.png",
+          "sourceSha256": "88ef2c978d2fad2538f4f3b160cd1f548f7832117d40ab65b78c276445b08f08",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            22,
+            600,
+            1242,
+            1051
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "88ef2c978d2fad2538f4f3b160cd1f548f7832117d40ab65b78c276445b08f08",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "reviewer": "Codex individual native PNG visual review",
+            "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+            "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              626.0,
+              1051
+            ],
+            "pixelsPerUnit": 11.829545454545455,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 113221152,
+  "deathSilhouetteHeights": [
+    1060,
+    808,
+    694,
+    633,
+    434,
+    451
+  ],
+  "deathHeightRiseCandidates": [
+    5
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [
+    {
+      "severity": "resolved-offline",
+      "previousFrame": 1,
+      "action": "death",
+      "finding": "Visual inspection: death_1 kneels lower, but death_2 raises the torso and straightens the forward leg. The collapse sequence reverses before the next fall pose.",
+      "reviewedAtUtc": "2026-10-13T05:26:31.9790988Z",
+      "frame": 2,
+      "originalSeverity": "needs-redraw",
+      "replacementSourceSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
+      "replacementStaticAnatomyReviewed": true,
+      "resolution": "Independent replacement reviewed in corrected complete death order; game acceptance pending."
+    },
+    {
+      "severity": "resolved-by-combat-waiver",
+      "action": "attack",
+      "frame": 2,
+      "sourceSha256": "59a82313581b4e0eff76622199c0c5d3e0cf4fdc8eebac460ced3da4316ab836",
+      "reason": "Opaque sword blade reaches right canvas edge; tip clipped",
+      "archived": true,
+      "replacementGenerationRequired": false
+    },
+    {
+      "severity": "resolved-by-combat-waiver",
+      "action": "attack",
+      "frame": 4,
+      "sourceSha256": "6c6d8255404e19249b2a105d9809f7a01b50066148e2e049fd959d8df2dcf003",
+      "reason": "Opaque sword blade crosses right canvas edge; tip clipped",
+      "archived": true,
+      "replacementGenerationRequired": false
+    },
+    {
+      "severity": "resolved-by-combat-waiver",
+      "action": "attack",
+      "frame": 7,
+      "sourceSha256": "5a0da31426c50b5595a41188dcb418acfd54d0c1c9d3f03dbf0f5cf8ce1443ea",
+      "reason": "Three separate hands/arms: lowered near hand, hand at sword hilt, and additional lowered far hand",
+      "archived": true,
+      "replacementGenerationRequired": false
+    }
+  ],
+  "offlineReviewedAtUtc": "2026-10-14T09:33:27.299596+00:00",
+  "reviewerNotes": [
+    "All 26 raw originals individually viewed in this review; rejected attack_2/4 clipped blades and attack_7 third arm archived. Attack uses explicit idle visual fallback, with original 720ms total duration. No new attack generated.",
+    "Remaining 18 original PNGs: complete outlines and limbs; four idle poses, six walk poses, two recoil/recovery poses and six ordered collapse poses reviewed. Death order 0,1,3,2,4,5 avoids the old upward reversal; the final slight silhouette increase is hair, with the face resting lower relative to the ground.",
+    "Per-frame ground proposals checked against visible sole/robe/hand contacts; common reference horizontal origin retained. Original source pixels and canvas untouched.",
+    "Approval is offline developmental installation only. Actual Unity animation, traits, death position, size landmarks, FPS and CPU/GPU acceptance are still pending."
+  ],
+  "previewCalibration": {
+    "renderScale": 0.032386364931818186,
+    "previousRenderScale": 0.2,
+    "reference": "TenguSamurai",
+    "verifiedInGame": false,
+    "previewScaleApproved": true,
+    "measurementStatus": "offline-standing-height-match-to-approved-LiFan-preview; new-form-Unity-retest-pending",
+    "measurementEvidence": "resources/actor-runtime-reviews/size-comparison-after-human-20261013.json",
+    "note": "Reference standing size screening only, inherited through equal 88-world-unit unscaled silhouette height. Does not claim a new measured unit or body-landmark acceptance."
+  },
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/baihu/Human",
+    "frameCount": 18,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

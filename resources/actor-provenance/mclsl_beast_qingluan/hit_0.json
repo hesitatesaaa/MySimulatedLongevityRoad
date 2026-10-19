@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "hit",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qingluan/originals/hit_0.png",
+  "sourceSha256": "5063f17b9ade9de9b0338e095de3edba3933f35b67f2f2bc3153f625936fed1a",
+  "outputFile": "GameResources/actors/Beasts/qingluan/Beast/main/hit_0.png",
+  "outputSha256": "0f9c058a9096dd01c2f5b2d2d1a1dd65f622ba6068b3cb728d15d0f10089b18a",
+  "createdAtUtc": "2026-10-09T05:04:02.672230+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE independently drawn pixel-game sprite frame Qingluan hit_0, frame 1/4. Image 1 is fixed species identity, original body scale, pixel size, palette, camera and source body layout. Keep sacred Qingluan identity: cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and feather accents, exactly three main long tail plumes trailing left, three-quarter right-facing orthographic view. Preserve original anatomy dimensions and pixel clusters (standing identity body about 690 source pixels tall). Frame pose: small recoil: neck and head pull backward, feathers on breast and crest flare, one foot braces. Both golden feet stay planted at the original ground line. Wing tips stay above this ground line by bending the elbows naturally, so the feet remain the lowest body contact. Same 1254x1254 transparent RGBA source canvas, generous margins for complete wing, crest, beak and tail. Crisp square pixel art, dark outline and flat shades. ONE NEW pose only, draw it independently, never copy/paste/move/resize/recolor the entire old sprite. No aura, projectile, particles, text, panels, sheet, scene, ground shadow, smooth paint or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08840579710144927,
+    "translation": [
+      6,
+      32
+    ],
+    "canvas": [
+      160,
+      160
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 835.0,
+    "groundedFootBottom": 96,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 46687,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

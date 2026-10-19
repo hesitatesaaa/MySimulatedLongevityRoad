@@ -1,0 +1,41 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "action": "death",
+  "index": 6,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/death_6.png",
+  "sourceSha256": "3db02ab0ac73c8312a34b74b89a4bbe0524380c08ede3a1a4843219dd897660d",
+  "outputFile": "NativeActorResources/actors/Named/LiFan/main/death_6.png",
+  "outputSha256": "3db02ab0ac73c8312a34b74b89a4bbe0524380c08ede3a1a4843219dd897660d",
+  "createdAtUtc": "2026-10-09T03:48:17.184670+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE independently drawn replacement game pixel sprite frame, LiFan death_6. Image 1 fixes identity, original full-body scale, palette, costume and pixel density. Other images fix the adjacent poses, not the output resolution. New canvas exactly 1254x1254 with transparent RGBA; same body scale as identity image. Intermediate between image 2 (death_5 side fall) and image 3 (death_7 horizontal corpse). Pelvis and folded legs ALREADY TOUCH GROUND on the left; his right elbow touches ground under his chest on the right. Head on right is lowered and chest only slightly elevated, torso about 15 degrees above ground. He is sliding from elbow support to lying on his right side, not flying or jumping. Cloth drapes down toward ground, without huge flares. Same dark navy-and-white robes with gold trim/sash, long dark tied hair with gold ornament, boots. Crisp square pixels, dark outlines, flat shades, three-quarter right facing. Preserve generous transparent margins and full body. Draw this one new pose, never copy/paste/move or resize the complete old sprite. No scene, shadow, aura, text, panels or sheet. Same ground line as previous frames.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_lifan/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_named_lifan/main/death_5.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_named_lifan/main/death_7.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

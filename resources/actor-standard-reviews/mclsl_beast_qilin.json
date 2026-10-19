@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_qilin",
+  "sha256": "e29763af466fe69c1b6199810744c89c7dee8aa2f006fb23e3bc14b5c4ad8eef",
+  "sourceSha256": "769b0d931d06a3b795e13763be048db516533668d5b91e5a6c405d90b3a6eb76",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": null,
+  "note": "Inspected original and normalized PNG. Balanced Li Fan/Baihu cluster shading and readable identity. Female Qilin design has distinct feminine face and jade/cream fur mantle. Standard only; full actions need continuity review.",
+  "reviewedAtUtc": "2026-10-09T10:09:43.581922+00:00"
+}

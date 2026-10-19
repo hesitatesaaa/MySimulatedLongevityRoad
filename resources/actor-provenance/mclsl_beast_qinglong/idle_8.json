@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "idle",
+  "index": 8,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong/originals/idle_8.png",
+  "sourceSha256": "8259b17aea27eed33b92f797ced2746179d0d8f4d19a0ec6a7822f43b419ef76",
+  "outputFile": "GameResources/actors/Beasts/qinglong/Beast/main/idle_8.png",
+  "outputSha256": "f662d613c11eba6afb32a11d4f576ebc409dac2229cb192928f8c61668680590",
+  "createdAtUtc": "2026-10-09T06:25:25.201370+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE new transparent pixel-art frame, Qinglong idle_8. Identity and exact anatomical pixel scale from image 1: turquoise/cyan scales, navy shadows, pale cream belly, gold antlers and dorsal crest, cyan flowing mane, two long whiskers, Eastern serpentine S body, coiled tail with cyan plume. FOUR clawed limbs; three clearly visible and fourth partly occluded, same roots. NO wings. Right-facing three-quarter side orthographic camera. Same 1254x1254 transparent canvas. Standard silhouette x345..1060,y150..1180, body height1027px. Keep exact head size, neck thickness and torso length, preserve standard antlers and tail coil. Image 2 when supplied is preceding independent frame, motion guide only. Pose: Return from low breath: head rises toward original height, foreclaws relaxed, mane and whiskers begin to lift. Tail coil loosens to standard curve. Head and upper coil returning toward image 1, not a taller neck. Full head, antlers, whiskers, limbs and tail clear of every edge. Crisp square pixels, dark outline, limited flat shades. DRAW a new frame from scratch, no pasting whole old sprite, scaling or recolor as redraw, no sheet, multiple poses, panels, text, aura, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_7.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 81348,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

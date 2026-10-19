@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GameRoot Condition="'$(GameRoot)' == ''">E:/wol/gameversion/0_51_2_0.51.2</GameRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslAnimationClipData.cs" Link="MclslAnimationClipData.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorAnimationState.cs" Link="MclslActorAnimationState.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorAnimationTime.cs" Link="MclslActorAnimationTime.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorAnimationCatalog.cs" Link="MclslActorAnimationCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorFrameCache.cs" Link="MclslActorFrameCache.cs" />
+    <Reference Include="Newtonsoft.Json"><HintPath>$(GameRoot)/worldbox_Data/Managed/Newtonsoft.Json.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

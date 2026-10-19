@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_xuanniao_yuan",
+  "sha256": "7372fdb89b1400e0a7cf17cb0bad800d49058db2b5ace1adfe9d73a3c0d72feb",
+  "sourceSha256": "3a2ef4367c65530b0ebf7e9d834436b4fe197c32fea460c8cc3c0b173134de58",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-03.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:36.795199+00:00"
+}

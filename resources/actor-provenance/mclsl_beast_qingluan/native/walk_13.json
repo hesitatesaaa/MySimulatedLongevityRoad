@@ -1,0 +1,41 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "walk",
+  "index": 13,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/walk_13.png",
+  "sourceSha256": "b9c7a9d9e25ad87048f018adf794a7822caa2be9921c2761b5261fac9a22675e",
+  "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/walk_13.png",
+  "outputSha256": "b9c7a9d9e25ad87048f018adf794a7822caa2be9921c2761b5261fac9a22675e",
+  "createdAtUtc": "2026-10-09T05:04:07.975789+00:00",
+  "prompt": "Use case: stylized-concept. ONE independently drawn Qingluan pixel-art flight frame walk_13. Image 1 is flight identity, anatomy, palette, BODY SCALE, pixel cluster size and body position on the 1254x1254 source canvas. Image 2 is the immediately previous recovery pose. Image 3 is the raised wing pose to progress toward. Draw a NEW intermediate pose: Middle of upward recovery: near wing is HORIZONTAL to the left with the elbow bent and primary feathers partly folded, not spread straight upward yet. Far wing is horizontal behind body. Bird is flying and feet stay tucked. Keep long three-plume tail trailing left, white throat/chest, cyan/teal/navy feather markings with gold trim, crest/beak and folded feet, 3/4 right-facing fixed orthographic camera. Maintain chest/neck/head original position and anatomy size. Crisp square pixel clusters, dark outlines, flat shades. Draw exactly one pose on transparent RGBA 1254x1254 canvas with generous margins, full wing/feather/tail/crest inside. No copying/resizing/translating an entire old sprite, no text, sheets/panels, aura, glow, shadow, particles or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/walk_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/walk_7.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/walk_4.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

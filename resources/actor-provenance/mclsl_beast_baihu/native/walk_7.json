@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "walk",
+  "index": 7,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/walk_7.png",
+  "sourceSha256": "84bdc4d48a80546462615e78d2dbd16bd5152ed43ec04bf98096dc96cfae7b5f",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/walk_7.png",
+  "outputSha256": "84bdc4d48a80546462615e78d2dbd16bd5152ed43ec04bf98096dc96cfae7b5f",
+  "createdAtUtc": "2026-10-09T05:25:05.273401+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independent transparent pixel-art game sprite: Chinese sacred white tiger Baihu walk_7. Image 1 is the fixed newly drawn standard identity: preserve white/pale silver fur, charcoal stripes, muscular feline face with gold eyes, round ears and curled striped tail. Exactly four legs, no wings, jewelry, weapons or clothes. Preserve anatomy size and square pixel clusters: standard full standing silhouette around 941 source pixels wide and 733 source pixels high, on the SAME 1254x1254 transparent source canvas. Three-quarter side RIGHT facing, identical camera and lighting, paw ground level y1049, body centered around x636. Image 2 if supplied is a REDUCED previous pose for continuity ONLY, never use its reduced size as the body scale. Pose: Walk cycle phase 8, clean transition back to phase 1. Far front paw planted beneath chest, near front paw lifted forward; far hind paw swinging beneath hip and near hind paw trailing planted. Whole tiger must fit with generous transparent margins; during walking keep shoulder and head roughly at standard positions while legs move, no whole-body translation. Crisp square pixel art with flat limited shades and clean dark outline. Independently DRAW this one pose, never copy/paste, move, resize or recolor the old entire sprite. No sprite sheet, panels, other frames, text, particles, aura, ground shadow, scenery or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_baihu/main/walk_6.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

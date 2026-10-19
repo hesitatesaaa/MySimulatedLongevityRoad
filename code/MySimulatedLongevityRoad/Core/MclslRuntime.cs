@@ -28,6 +28,7 @@ internal static class MclslRuntime
     internal static void OnWorldLoaded()
     {
         Init();
+        MclslBeastAnimation.Clear();
         MclslRuntimeDriver.Ensure();
         int year = CurrentYear();
         MclslRuntimeChanges.Clear();
@@ -45,10 +46,15 @@ internal static class MclslRuntime
         int unityFrame = Time.frameCount;
         if (unityFrame == _lastFrame) return;
         _lastFrame = unityFrame;
+        MclslActorAnimationTime.Sample();
+        MclslNativeActorFrames.Tick();
+        MclslActorSizeProbe.Tick();
         long modFrameSample = MclslPerformanceProbe.Begin();
         MclslFrameDeadline.Begin(3d);
         try
         {
+            MclslDeferredUiWork.Tick();
+            if (MclslWorldArchiveStore.WriteLocked) return;
             MclslRuntimeWorkBudget.SampleFrame();
             MclslAnnualBackpressure.TickStatus();
             MclslRuntimeChanges.Drain(16);
@@ -83,6 +89,7 @@ internal static class MclslRuntime
             MclslPerformanceProbe.End("帧模块", frameSample);
             MclslRuntimeChanges.Drain(32);
             MclslBagSystem.FlushPending();
+            MclslFamilySystem.TickReconciliation();
 
         }
         finally
@@ -95,12 +102,14 @@ internal static class MclslRuntime
 
     internal static void PrepareForSave()
     {
+        if (MclslWorldArchiveStore.WriteLocked) return;
         MclslBagSystem.FlushForSave();
         MclslModuleHub.PrepareForSave();
     }
 
     internal static void ClearWorldState()
     {
+        MclslBeastAnimation.Clear();
         MclslDiagnostics.Clear();
         MclslPerformanceProbe.SetEnabled(MclslPerformanceProbe.Enabled);
         MclslFpsOverlay.ClearReport();

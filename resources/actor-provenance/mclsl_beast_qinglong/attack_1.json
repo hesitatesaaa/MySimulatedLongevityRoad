@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 1,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong/originals/attack_1.png",
+  "sourceSha256": "57e35ccfba782d0fda8b84695a950567a7f85aa07578336c16f172f4a6dab9c4",
+  "outputFile": "GameResources/actors/Beasts/qinglong/Beast/main/attack_1.png",
+  "outputSha256": "ff1b776831378a46fed4172123aa431ace22a7153114035ee3bf628e4a5f6da9",
+  "createdAtUtc": "2026-10-09T07:04:31.384342+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Qinglong eastern azure dragon attack_1 windup frame. Use the SINGLE reference to preserve the exact FOUR-limb anatomy, pixel scale and body silhouette: turquoise/cyan scales, navy shading, pale cream belly, gold antlers and crest, cyan mane and tail plume, two long whiskers. Same1254x1254 transparent canvas and right-facing camera. Pose just BEFORE the reference frame: close the mouth almost fully, head eases slightly forward by30px, and the existing raised near foreclaw is a little lower with its ONE hand around x805,y620 rather than x805,y550. Move the reference's raised arm smoothly, retaining its single unbranched connection from shoulder at x550,y650. All other limbs remain attached and resting exactly as reference: one far foreclaw on right of upper belly, two hindlegs on the low coil (far hind partly hidden). DO NOT introduce another hand below the raised arm or anywhere in the middle gap. There are only FOUR arms/legs in total, each with one hand/foot. No branching arms, floating claws or doubled hands. Keep full horns, whiskers and tail with generous transparent margins. Crisp square pixel clusters, dark outline and limited flat shades. Draw one NEW frame from scratch, no pasting whole old sprite or scaling/recolor as redraw, no wings, sprite sheet, multiple poses, panels, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_2.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 75129,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

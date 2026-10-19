@@ -612,6 +612,58 @@
       "MaxIntVal": 1000000,
       "StepIntVal": 1,
       "Callback": "MclslBeastConfig:ReloadInt"
+    },
+    {
+      "Id": "MCLSL_config_beast_waves",
+      "Type": "SWITCH",
+      "Callback": "MclslBeastConfig:ReloadBool",
+      "BoolVal": true
+    },
+    {
+      "Id": "MCLSL_config_spell_effects_enabled",
+      "Type": "SWITCH",
+      "Callback": "MclslBeastConfig:ReloadBool",
+      "BoolVal": true
+    },
+    {
+      "Id": "MCLSL_config_beast_wave_interval",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 5,
+      "MinIntVal": 1,
+      "MaxIntVal": 1000
+    },
+    {
+      "Id": "MCLSL_config_beast_wave_count_percent",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 100,
+      "MinIntVal": 10,
+      "MaxIntVal": 1000
+    },
+    {
+      "Id": "MCLSL_config_beast_wave_max_level",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 7,
+      "MinIntVal": 1,
+      "MaxIntVal": 7
+    },
+    {
+      "Id": "MCLSL_config_beast_auto_limit",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 512,
+      "MinIntVal": 1,
+      "MaxIntVal": 4096
+    },
+    {
+      "Id": "MCLSL_config_beast_natural_limit",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 128,
+      "MinIntVal": 1,
+      "MaxIntVal": 4096
     }
   ]
 }

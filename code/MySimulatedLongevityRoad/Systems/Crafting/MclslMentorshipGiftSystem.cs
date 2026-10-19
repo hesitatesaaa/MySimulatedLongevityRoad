@@ -183,6 +183,8 @@ internal static class MclslRecipeKnowledge
         MclslActorAccessor.Set(actor, MclslActorDataKeys.KnownRecipes, "v1:");
         SeedGrade(actor, profession, 0);
         SeedGrade(actor, profession, 1);
+        string common=profession==MclslProfessionSystem.Alchemist?"YD_common_1":profession==MclslProfessionSystem.TalismanMaker?"YF_common_1":"YB_common_1";
+        Learn(actor,common);
     }
 
     internal static void SeedGrade(Actor actor, string profession, int grade)

@@ -67,7 +67,8 @@ internal static class MclslNamedCharacterRegistration
                 asset.has_baby_form = false;
                 asset.use_phenotypes = false;
                 asset.has_advanced_textures = false;
-                asset.base_stats["scale"] = 0.20f;
+                asset.base_stats["scale"] = MclslActorPixelResources.DisplayScale(
+                    "actors/Named/" + definition.Folder, 0.20f);
                 asset.base_stats["birth_rate"] = 0f;
                 asset.base_stats["offspring"] = 0f;
                 asset.default_subspecies_traits = template.default_subspecies_traits == null
@@ -78,12 +79,7 @@ internal static class MclslNamedCharacterRegistration
                 asset.texture_id = asset.id;
                 asset.texture_asset = new ActorTextureSubAsset(path, false);
                 asset.texture_asset.texture_path_main = path + "main";
-                asset.animation_idle = new[] { "idle_0", "idle_1", "idle_2", "idle_3" };
-                asset.animation_walk = new[] { "walk_0", "walk_1", "walk_2", "walk_3" };
-                asset.animation_idle_speed = 0.14f;
-                asset.animation_walk_speed = 0.10f;
-                asset.animation_speed_based_on_walk_speed = false;
-                Sprite first = MclslBeastAnimation.LoadSprite(path + "main/idle_0");
+                Sprite first = MclslBeastAnimation.ConfigureAsset(asset, path);
                 if (first == null)
                     throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
                 asset.cached_sprite = first;
@@ -119,13 +115,13 @@ internal static class MclslNamedCharacterRegistration
                     ignore_cursor_icon = true
                 });
             if (Buttons.ContainsKey(powerId)) continue;
-            string folder = "actors/Named/" + definition.Folder
-                + (definition.Beast ? "/Beast" : "");
-            Sprite icon = MclslBeastAnimation.LoadSprite(folder + "/spawn_icon")
-                ?? MclslBeastAnimation.LoadSprite(folder + "/main/idle_0")
+            string iconPath = "actors/Named/" + definition.Folder
+                + (definition.Beast ? "/Beast/main/idle_0" : "/main/idle_0");
+            Sprite icon = MclslActorPixelResources.PlacementIcon(definition.AssetId, iconPath)
                 ?? AssetManager.actor_library.get(definition.AssetId)?.getSpriteIcon();
             PowerButton button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
             if (button == null) continue;
+            MclslActorPixelResources.ConfigurePlacementButton(button);
             Buttons.Add(powerId, button);
             PowersTabExtension.AddPowerButton(tab, "tab", button);
         }

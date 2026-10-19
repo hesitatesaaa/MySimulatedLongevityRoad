@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_xuanniao",
+  "sha256": "768b566c19c4f8a6ec38c7b7cb9054d917084366d25439b4faaa55a4d0d758c5",
+  "sourceSha256": "c849eab6e365bd02396081c03688d7ca998c36a3d009a123419a69d2e2abc533",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": null,
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-03.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:36.271430+00:00"
+}

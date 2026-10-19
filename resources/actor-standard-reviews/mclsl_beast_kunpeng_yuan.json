@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_kunpeng_yuan",
+  "sha256": "a5cd297e0d49fa0b2a37087dda891a8efe2d4c5f7008c9b5e500a17290b57184",
+  "sourceSha256": "3254eb4493a778f4aa1ead48137401c6cfa0ee1fd230effdada7890ba7dcedba",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-01.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:25:38.775458+00:00"
+}

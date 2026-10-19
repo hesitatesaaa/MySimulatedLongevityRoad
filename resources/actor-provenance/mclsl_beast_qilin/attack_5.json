@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_qilin",
+  "action": "attack",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qilin/originals/attack_5.png",
+  "sourceSha256": "6eb1c371dc6fe3d8b5d568b3a2fa3bc16af7d573f2608a60e8d9fee55191c703",
+  "outputFile": "GameResources/actors/Beasts/qilin/Beast/main/attack_5.png",
+  "outputSha256": "7ec2d0febf269e2200e4ae437f6ee5b7f80c909ede5ee1e42516c07fba84c05a",
+  "createdAtUtc": "2026-10-09T11:12:14.655317+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 麒麟·兽形 (mclsl_beast_qilin), attack_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: jade-green qilin with gold antlers, dragon-like muzzle and mane, scaled deer-lion quadruped body, four sturdy legs and flowing tufted tail. Pose: Attack single-shot progress 0.714, stage recovery: pounce/bite/head strike with articulated forelegs and hindlegs, body weight shifts forward then returns. Preparation gathers energy, peak fully extends, recovery returns toward neutral. No detached projectiles, trails, particles or light effects. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_qilin\\idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.05720122574055159,
+    "translation": [
+      12,
+      14
+    ],
+    "canvas": [
+      96,
+      96
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 630.0,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 65324,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

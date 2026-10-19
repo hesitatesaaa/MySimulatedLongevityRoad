@@ -1,0 +1,53 @@
+{
+  "kind": "paused-forced-visible-render-pipeline-population-diagnostic",
+  "capturedAtUtc": "2026-10-13T12:06:56.1383799Z",
+  "phaseCount": 3,
+  "complete": true,
+  "results": [
+    {
+      "requestedUnits": 100,
+      "placedUnits": 100,
+      "visibleUnits": 100,
+      "samples": 901,
+      "warmupSeconds": 10,
+      "observationSeconds": 15,
+      "renderPipelineMedianMs": 0.3398,
+      "renderPipelineP95Ms": 0.59620000000000006,
+      "unityAllocatedBytes": 5641682367,
+      "unityReservedBytes": 6432333824,
+      "managedBytes": 904396800
+    },
+    {
+      "requestedUnits": 500,
+      "placedUnits": 500,
+      "visibleUnits": 500,
+      "samples": 900,
+      "warmupSeconds": 10,
+      "observationSeconds": 15,
+      "renderPipelineMedianMs": 1.1299000000000001,
+      "renderPipelineP95Ms": 1.5162,
+      "unityAllocatedBytes": 5642851023,
+      "unityReservedBytes": 6432333824,
+      "managedBytes": 925003776
+    },
+    {
+      "requestedUnits": 1000,
+      "placedUnits": 1000,
+      "visibleUnits": 1000,
+      "samples": 896,
+      "warmupSeconds": 10,
+      "observationSeconds": 15,
+      "renderPipelineMedianMs": 2.1037,
+      "renderPipelineP95Ms": 3.3000000000000003,
+      "unityAllocatedBytes": 5644188991,
+      "unityReservedBytes": 6449111040,
+      "managedBytes": 878841856
+    }
+  ],
+  "visibilityForced": true,
+  "gamePaused": true,
+  "newUnsavedMapsOnly": true,
+  "fullGameplayFpsVerified": false,
+  "gpuMemoryVerified": false,
+  "limitation": "Pipeline call time excludes full game update and screen presentation; not a 30/60/144 FPS or accelerated-combat acceptance result."
+}

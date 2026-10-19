@@ -16,11 +16,13 @@ internal static class MclslWorldBootstrapLane
 {
     private static IReadOnlyList<Actor> _actors = Array.Empty<Actor>();
     private static int _cursor;
+    internal static bool Completed { get; private set; }
 
     internal static bool HasPending => _cursor < _actors.Count;
 
     internal static void ScheduleAfterLoad()
     {
+        Completed = false;
         _cursor = 0;
         try
         {
@@ -28,6 +30,7 @@ internal static class MclslWorldBootstrapLane
             if (actors == null || actors.Count == 0)
             {
                 _actors = Array.Empty<Actor>();
+                Completed = actors != null;
             }
             else
             {
@@ -96,10 +99,12 @@ internal static class MclslWorldBootstrapLane
         if (_cursor < _actors.Count) return;
         MclslWorldActorQuery.MarkDirty();
         Clear();
+        Completed = true;
     }
 
     internal static void Clear()
     {
+        Completed = false;
         _actors = Array.Empty<Actor>();
         _cursor = 0;
     }

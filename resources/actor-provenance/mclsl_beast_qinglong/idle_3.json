@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "idle",
+  "index": 3,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong/originals/idle_3.png",
+  "sourceSha256": "6de6c055dbffea0502a52d5a8fa572902124d91cd7f6783988462803c2a47341",
+  "outputFile": "GameResources/actors/Beasts/qinglong/Beast/main/idle_3.png",
+  "outputSha256": "76857d821d9dc273b2fe404bc98ccffe74f84def8979cfc6a2af12af639a79b3",
+  "createdAtUtc": "2026-10-09T06:19:02.221716+00:00",
+  "prompt": "Use case: game-asset. Draw ONE NEW independently drawn transparent pixel-art sprite frame, Qinglong eastern azure dragon idle_3. Image 1 fixes identity, anatomy and pixel scale: turquoise/cyan scales, navy shadows, pale cream belly, gold antlers and dorsal crest, flowing cyan mane, two long whiskers, serpentine S-shaped body, coiled tail with cyan plume. FOUR clawed limbs, three clearly visible and fourth partly occluded as in reference; preserve their attachment points. No wings. Right-facing three-quarter side camera. Same 1254x1254 transparent source canvas. Standard silhouette bounds roughly x345..1060,y150..1180, height about 1027px. Maintain anatomical scale rather than filling the canvas, and keep all antlers, whiskers, claws and tail within clear margins. Image 2 when supplied is previous separately drawn frame for continuity. Pose: Continuing inhale: head lifts about 25px, mane fins rise, upper torso curve opens slightly. Tail plume angles outward about 20px. Keep all limb roots in place. Crisp square pixel clusters with dark outline and flat limited shading. Independently DRAW this single new frame, no pasting an old whole sprite, resizing or recolor as redraw. No sheet, panels, multiple poses, text, particles, aura, shadow, floor or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_2.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 79421,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

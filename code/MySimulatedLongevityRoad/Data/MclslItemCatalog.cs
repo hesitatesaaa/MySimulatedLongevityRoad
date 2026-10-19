@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MySimulatedLongevityRoad.Data;
 
@@ -11,7 +12,8 @@ internal enum MclslMaterialSource : ushort
     Ruin = 1 << 1,
     Breakthrough = 1 << 2,
     Opportunity = 1 << 3,
-    Faction = 1 << 4
+    Faction = 1 << 4,
+    BeastKill = 1 << 5
 }
 
 [Flags]
@@ -88,7 +90,7 @@ internal sealed class MclslItemDefinition
 
 internal static class MclslItemCatalog
 {
-    internal static readonly MclslItemDefinition[] All =
+    internal static readonly MclslItemDefinition[] All = new MclslItemDefinition[]
     {
         new("A01", "琉璃珠", "SpiritObject", 0, "启灵、悟性、突破辅助；原著明确用于炼制琉璃丹。", "", "", 12, MclslMaterialTier.Xuan, AllMaterialSources, MclslMaterialHabitat.Mountain),
         new("A02", "蓝血珊瑚", "SpiritObject", 0, "冰寒、镇定、净体类药性；原著明确作为炼丹材料。", "", "", 12, MclslMaterialTier.Xuan, AllMaterialSources, MclslMaterialHabitat.Water),
@@ -278,7 +280,7 @@ internal static class MclslItemCatalog
         new("S024_SCROLL", "五行化生卷", "SpellScroll", 4, "使用后学会五行化生。制卷：灵符纸×6、太虚灵泉×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A19", 5120, iconPath: "ui/Spells/S024"),
         new("S025_SCROLL", "万灵回天卷", "SpellScroll", 4, "使用后学会万灵回天。制卷：灵符纸×8、万灵琼浆×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S025"),
         new("S026_SCROLL", "太初寂光卷", "SpellScroll", 4, "使用后学会太初寂光。制卷：灵符纸×8、万灵琼浆×1、辟邪金砂×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S026"),
-    };
+    }.Concat(MclslBeastContent.Items).ToArray();
 
     private const MclslMaterialSource AllMaterialSources = MclslMaterialSource.AnnualActivity
         | MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough
@@ -297,7 +299,7 @@ internal static class MclslItemCatalog
         int price = tier switch { MclslMaterialTier.Huang => 6, MclslMaterialTier.Xuan => 12,
             MclslMaterialTier.Di => 24, _ => 48 };
         return new MclslItemDefinition(id, name, category, 0, "用于仙道制作的" + name + "。", "", "", price,
-            tier, sources, habitat);
+            tier, id == "M25" ? MclslMaterialSource.BeastKill : sources, habitat);
     }
 
     private static MclslItemDefinition Art(string id, string name, int grade, string introduction, string family,
@@ -349,7 +351,7 @@ internal static class MclslItemCatalog
     internal static string NormalizeId(string id)
     {
         if (string.IsNullOrWhiteSpace(id)) return string.Empty;
-        if (ById.ContainsKey(id)) return id;
+        if (ById.TryGetValue(id,out var direct)) return direct.Id;
         string value = id.Trim();
         if (value.EndsWith(" Description", StringComparison.OrdinalIgnoreCase))
             value = value.Substring(0, value.Length - " Description".Length).Trim();
@@ -363,7 +365,7 @@ internal static class MclslItemCatalog
             value = value.Substring("item_".Length);
 
         string upper = value.ToUpperInvariant();
-        if (ById.ContainsKey(upper)) return upper;
+        if (ById.TryGetValue(upper,out var upperItem)) return upperItem.Id;
         if (DisplayNameIds.TryGetValue(value, out string canonical)
             || DisplayNameIds.TryGetValue(upper, out canonical)) return canonical;
         return string.Empty;
@@ -378,7 +380,7 @@ internal static class MclslItemCatalog
 
     private static Dictionary<string, MclslItemDefinition> BuildIndex()
     {
-        Dictionary<string, MclslItemDefinition> index = new(StringComparer.Ordinal);
+        Dictionary<string, MclslItemDefinition> index = new(StringComparer.OrdinalIgnoreCase);
         foreach (MclslItemDefinition item in All) index.Add(item.Id, item);
         return index;
     }

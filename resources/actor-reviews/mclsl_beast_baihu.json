@@ -1,0 +1,341 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "offlinePassed": true,
+  "reviewMethod": "Manual inspection of independently drawn originals and all five complete labeled contact previews, including the revised limb poses and added collapse transition.",
+  "notes": [
+    "White/silver fur, charcoal stripes, round ears, curled tail and four-legged tiger anatomy remain identifiable.",
+    "Idle frame 3 was independently redrawn to restore the standard silhouette.",
+    "Walking has ten independently drawn poses. Revised walk 8 preserves near/far hind-leg identities; playback order follows inspected poses.",
+    "Attack frames 2 and 3 were independently redrawn to use the same near forelimb as the subsequent claw strike.",
+    "The four hit frames show bracing, recoil and recovery to the standing silhouette.",
+    "Death has eleven independent poses. Extra death 10 starts the collapse; frame 4 was redrawn after a margin failure and now rolls onto the flank.",
+    "Final death poses remain side-prone with cheek and torso grounded. Fixed normalization scale is retained rather than stretching the corpse.",
+    "All five clips have unique RGBA frames and complete 96x96 canvases. Contact previews are inspection artifacts, never production slicing sources.",
+    "The dedicated full-animal icon is separately drawn, occupies a 94-pixel longest opaque edge, and has a complete 128x128 canvas.",
+    "Real-game motion, scale, sorting, UI occupancy and performance remain unverified."
+  ],
+  "frames": {
+    "attack_0": {
+      "sha256": "51f7d8575e61b745d16dd18e37a9187284594cb34128b5938ebf0e8ce83afe38",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_1": {
+      "sha256": "75c4b603763d2f8977ad58a53cc369f8e0d0e433cba3012e9bc0118682c4e0f7",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_10": {
+      "sha256": "055f9efcc20197cbf8d46d94b4ea78cfa0193f0c0bc7b7bdac66af3ac4e5eda8",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_11": {
+      "sha256": "a193d661f4be10d9cfca0b2781603dd02d3b78a71dbde57d7d5133c3852ff227",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_2": {
+      "sha256": "c3e7403e785b0c4f7c6ea63ff0171206b59d55eb82fb16bd0f68c8521d920818",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_3": {
+      "sha256": "853266777965d347715d1132a5016729c57794c1df1971858aa79d28c0271038",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_4": {
+      "sha256": "4cddd07767045bac8ffda3a943d3645f2bc5819af4cb6fd14d8043a074ffbbd0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_5": {
+      "sha256": "56c5aaef1568e88c2b85f3082805c870772b3c237acad974d93c7194e190c50e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_6": {
+      "sha256": "d6212ba8a28d815b321aafd6a87f231ad821c574c0024bd133438f850340fc06",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_7": {
+      "sha256": "40e1bfe022e0ee2b21bae1de39c4d8e2d8ce30cfb0d130aaf2dc33655dff25ef",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_8": {
+      "sha256": "720746f4f07f69e5ca00588155dfa8962b5b283f24daf4066e891026fa9826fd",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_9": {
+      "sha256": "32c89bdd52daa71e3ca378659094aec2d0c0b4fd4f239f4bee838f42356092c4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_0": {
+      "sha256": "cab6b4b1edfe7b2160cb8aa529aa22096e8762e21c4b204a968786ce3ce68e4c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_1": {
+      "sha256": "024d034d9966abd16282fa560e2d2b4aaf31f09560742530c1003500a66b5849",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_10": {
+      "sha256": "3621410fa7205755687d0c63c6796002cdd15f911f978003b19a15e0605fcd98",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_2": {
+      "sha256": "f9cbe2d37c5c16f8367c9f19514a9d33129292f652790c28711d3f9dd73000cd",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_3": {
+      "sha256": "1748655be925908a260f16e2cb6fbd9bd23d505a3dd03aa2fa38ae8b3a9fddd8",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_4": {
+      "sha256": "07ec7f3557ed2c3ff96aace61b1b1f0380566420e2392d9f9ee62117365d42e8",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_5": {
+      "sha256": "027c2758d7422da217c17c93a58d48978e74a3c65d82b1a3754072e51046aff9",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_6": {
+      "sha256": "eda5367bd2a01f81e236ae1eb3522bfb85f11b8dffa23d7a70bcbee355756994",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_7": {
+      "sha256": "8d88a3b59fe9c3dff03baec6f59a966ce046ff3c7db4f162e2db00bb998b42a5",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_8": {
+      "sha256": "b4ccd26a772b3a41da4c7424717ff15b498edb613f2af054eaa813a8ae2b5e56",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_9": {
+      "sha256": "554f273aeceb79650938178b75f6b0f0794ecc83651cf999e39c855509d971c0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_0": {
+      "sha256": "e4ea5424fc914c386dfcce5296398bc2a511217d1224753af11cfe727b0b29a2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_1": {
+      "sha256": "cbc311e0c9b3b211ecd540ba792f1645ca1e35e958f89fffd520c2dbb4e0ac09",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_2": {
+      "sha256": "ab0e16c2d9ad4741b6b10f64bf3fcd460a7c064a7485a636452b3cf3f8f7592c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_3": {
+      "sha256": "befbeb33d2b640a17e582b483796414ba0f8a60756bee637c4a1e3861c5bf58e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_0": {
+      "sha256": "9a07fa2e6e6285130006c6162d476d636b5d72f7354f53e2d91b8c503736759a",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_1": {
+      "sha256": "511341fc1595226846b0297164eca652969b5f15c09e1bb1b45e616d48a5d81d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_2": {
+      "sha256": "57dcf5cd2fd1e90d36bf49ff0131f4bf1bfdd8d7e0b28a3851ea66880b4e2019",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_3": {
+      "sha256": "72b0a6a45ff57bc4479f75233ec84bda8d543c004361da7de9e01785a52eb9dd",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_4": {
+      "sha256": "e1345f54bf4906f67ca47c33cce61496d734553bdf3797780f92c94eb3c4ba8b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_5": {
+      "sha256": "9bd19462c9f5aab5f99bc6c288f6e9094af4c66b87b67773c6fdceedb3df7ae3",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_6": {
+      "sha256": "5ebafe5ac1fead7fc267c6ce429a85fc854875c4ff60dd980c40fb2f2fa7dc11",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_7": {
+      "sha256": "4e688ef415356b71ec471a3eb09ec1e40f6b7ffbdb06d039497fe71309c3e57a",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_0": {
+      "sha256": "2cd89d6af321fb3e2a4c873ea9d4b3f3e49c8a7780d016f77d2855fec65f448f",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_1": {
+      "sha256": "147ebbcfdef2a9064876a57e92f85cf841838f2cbb34daebf11457f1cc794e98",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_2": {
+      "sha256": "138e02173b01fe2bbe4bacf67fae609260c4ca00dff9aa84560805a156409f41",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_3": {
+      "sha256": "6e33e1990a65176c0de113f040ed526877f60875fb0d7e0d8e74255726542b17",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_4": {
+      "sha256": "60a55e26c0da1825b6160cffe43b744de4c0fb19d6fe8deaf463b586d02b784f",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_5": {
+      "sha256": "a3d02bb83cc225b23cf98031bafff2bbf2943a1137cb37afa67b9c192cad599e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_6": {
+      "sha256": "5b9d7345b372259d21eff1c8cc08316ba92fd3e8223b17d9e913e5246e6bfa23",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_7": {
+      "sha256": "f9666a3f4d38cf99d40cfbbfc42533b96354ec88eb408370adf343cf4703b305",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_8": {
+      "sha256": "af55c6d9ca64bbe5c9bdc7585df64bca5ac542f625f5376930e44fe91cde9292",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_9": {
+      "sha256": "e63eacc588a21e01ddcc2b64b427502282dca76fa8ccfa0ab596358cd01073a0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    }
+  },
+  "icon": {
+    "sha256": "c798a46e9efa03a66aae64e77843180694c83945d37619ca30d92b067395ca11",
+    "offlinePassed": true,
+    "bodyLongestEdgePixels": 94,
+    "independentlyDrawn": true
+  },
+  "verifiedInGame": false
+}

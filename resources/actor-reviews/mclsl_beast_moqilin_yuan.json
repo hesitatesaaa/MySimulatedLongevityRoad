@@ -1,0 +1,197 @@
+{
+  "actorId": "mclsl_beast_moqilin_yuan",
+  "offlinePassed": true,
+  "verifiedInGame": false,
+  "reviewedAtUtc": "2026-10-09T13:01:22.814534+00:00",
+  "frames": {
+    "idle_0": {
+      "sha256": "66fed253e9dd08ba51af7d3bf2f906ebbf81cdb3d1575cbe65b0dcc9cce9b304",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_1": {
+      "sha256": "61e8d18f9ab9298e64cd3e898f3119d531fea2a2dcce32dbab3638dc172f0f02",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_2": {
+      "sha256": "c32bb7d2de19dc574ef03d790645134648692c68bb20280a3abaf6e156d8f67c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_3": {
+      "sha256": "8809da32c516faf47ae08f2efedb68048c4d245263ecaf5fee7d3be96a728fd4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_0": {
+      "sha256": "a8809603be878b9f199c995ebc30aa3ac68bc7564c88675ceca6a4a18205772e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_1": {
+      "sha256": "e6b20fd77faf4fab9c0ac8dffc06344faedf0528fce7635a4f77e16798b7e061",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_2": {
+      "sha256": "400fecdf448e37892f95318437b00e6d82c3a9d0358e06730d0a0305cc95b500",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_3": {
+      "sha256": "195b92f7854efa46d57bb8d3890858109e34e4f833ed1364abace6d80f09e5cd",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_4": {
+      "sha256": "5acc59d6f4fbcb1cf7bc9e635ad3436a87446e19b512537c0f85869d22f267a9",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_5": {
+      "sha256": "7823fbb01fe0bf49347d12e9f7185e643573d497405308acfc34ed429b8bf87b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_0": {
+      "sha256": "20b6debbb1b57cd0749ed25be68e87182a5b775557774e4a533c10f9689a6209",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_1": {
+      "sha256": "408a574b56345f1b6a647863348c6c49441dc6527f790c268f2de2a1608fd1d2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_2": {
+      "sha256": "540c6e5509295839d1d39d193451d98f1484c336764ce3a576999f6ca29a9c7d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_3": {
+      "sha256": "0ab06639d08cf18b368c9580a23c564506974ac5c97141020bd36b2d29faab64",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_4": {
+      "sha256": "f18521db1d2a1402ff17c080ce5e096e663381c4a9427d5f47ce0e2f48aa1815",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_5": {
+      "sha256": "21c096fad0340a2b1f74a9a592ec840856ee6d10fe2272da73b1e2a10b0cb8c2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_6": {
+      "sha256": "6bf6d2f1e0fdc681cb3995d58be7c5a5ee2b65fa884d46b7ce602031ee079691",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_7": {
+      "sha256": "3a04fa462d6026c74bb808ea5c1f1024cb665af37bbca4bfe132a27937c8aaa9",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_0": {
+      "sha256": "b79edfffc1785df896f7f5169dac3b738b228ecdfc668fa936942f620af98963",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_1": {
+      "sha256": "1fe565f4a4bac29d18aaca10c29bd6cafbeb459872a6f5e224184eeb848683a9",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_0": {
+      "sha256": "13cd65774aa89e1ec2b5f796e354308aea05bcfb24217ba7debad8adb84cb5de",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_1": {
+      "sha256": "1de14febb28c7c7de20b87c88c151eabc12474bc6e90f9f718e5a078d2ec7db1",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_2": {
+      "sha256": "32becb69eebe139ea74f952e82ae9c9fb802f2035da3998063f6c4f8788962f1",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_3": {
+      "sha256": "5eadcd7d3cb412bf5b7fd2404f6f7da6ff55abcf1079d5ceb6b79f8a244a12ee",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_4": {
+      "sha256": "5d68c2e8d4ab8bfc2f2f2caeb1c08e4120b869f04a9caa39c85bfce1b5c16c1d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_5": {
+      "sha256": "389cc45b98476ff23cf9c01925e1ad447b90594f27aacfd4007f2a857b47006f",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    }
+  },
+  "notes": [
+    "Manually viewed all five complete contact previews: 4 idle, 6 walk, 8 attack, 2 hit and 6 death.",
+    "Violet hair, crown, dark purple and white robes with restrained gold trim preserve the inspected male human identity.",
+    "Walking alternates leg contacts; attack gathers at chest, extends once, retracts and settles upright; impact recoils then returns.",
+    "Death proceeds from upright droop through kneeling to flat closed-eyed resting poses; no recovery after collapse.",
+    "Full-canvas scale and anchor retained. Actual game size, selection, FPS and shadow remain unverified."
+  ]
+}

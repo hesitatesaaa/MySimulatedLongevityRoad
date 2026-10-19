@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_qingluan_yuan",
+  "sha256": "e2b0d5e21d358e240e8b4331464f36b147ff7b6b60d710acd75889365dbff357",
+  "sourceSha256": "55c7ac116ddeae5b8f59c4c6522af7d15317901fe7873c991ffa38058f95425f",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-03.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:36.623749+00:00"
+}

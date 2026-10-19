@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_baihu_yuan",
+  "sha256": "575c85c7886923a4ae3a9b11389f9f2f016422bcbd5ac640e7166ba97897945f",
+  "sourceSha256": "52fe777ffc754036afbf9a640161cea184657199a1b67d3f87c77eb07f2b0219",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-01.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:27:31.326428+00:00"
+}

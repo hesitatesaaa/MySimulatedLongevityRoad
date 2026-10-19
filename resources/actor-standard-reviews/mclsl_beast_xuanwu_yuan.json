@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_xuanwu_yuan",
+  "sha256": "1b1018734fc22f1ab9ee805c4afafd6be3f175b65bb2453a0208215a71abff5d",
+  "sourceSha256": "aa2ca087cbb295fe2c5a2b4b4de5abf947799224cb8763b9198809d5567a917f",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "male",
+  "note": "Inspected source and normalized standard. Male human retains teal shell-and-snake motif; readable large folds and silhouette at Li Fan detail level. Animation still requires separate continuity review.",
+  "reviewedAtUtc": "2026-10-09T10:05:26.625727+00:00"
+}

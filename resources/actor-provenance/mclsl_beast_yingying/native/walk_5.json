@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_yingying",
+  "action": "walk",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_yingying/walk_5.png",
+  "sourceSha256": "fc104f18ea54c63f32cb143516c6e84c472e3647250c2e58c1be06b2de06a609",
+  "outputFile": "NativeActorResources/actors/Beasts/yingying/Beast/main/walk_5.png",
+  "outputSha256": "fc104f18ea54c63f32cb143516c6e84c472e3647250c2e58c1be06b2de06a609",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 阴影兽·兽形 (mclsl_beast_yingying), walk_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: dark purple shadow beast in a crouched lupine silhouette, four jointed legs, purple-black layered fur and pale violet facial highlights, long sweeping tail; draw an opaque readable animal, no halo or particles. Pose: Four-legged gait phase 0.833 (300 degrees): near front and opposite rear legs advance, other diagonal pair follows; jointed paws/hooves make clear alternating contact, shoulders and hips transfer weight, tail follows. Heavy beasts carry weight; no extra limbs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Retain exactly the reference creature anatomy, correct limb counts and coherent joint connections; do not invent extra appendages. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_yingying\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-15T08:25:50.963813+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "reviewStatus": "waived-by-user"
+}

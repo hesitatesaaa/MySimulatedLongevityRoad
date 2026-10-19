@@ -1,0 +1,121 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "name": "青鸾·兽形",
+  "family": "bird",
+  "identityReference": "output/baseline-0.5.4-20261009/GameResources/actors/Beasts/qingluan/Beast/main/idle_0.png",
+  "worldReference": {
+    "frame": "reference/western-fantasy/GameResources/actors/FantasyCreatures/MONSTER/Phoenix/Main/idle_0.png",
+    "canvas": [
+      120,
+      120
+    ],
+    "bodyBounds": [
+      30,
+      14,
+      86,
+      58
+    ],
+    "rgbaSha256": "7c1c4e47117f72b58965d0618f8bb42942eb6e8b3c59b6a3e544307c65a89f71",
+    "sha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c",
+    "scaleFactor": 1.0,
+    "baseTemplate": "$mob$",
+    "referencePPU": null,
+    "referenceBaseScale": null,
+    "verifiedInGame": false
+  },
+  "soulReferenceFolder": "GameResources/actors/Souls/Wind_Soul",
+  "constraints": [
+    "independent-generation-per-frame",
+    "no-spritesheet-slicing",
+    "preserve-identity-and-palette",
+    "consistent-canvas-and-anchor",
+    "pixel-art",
+    "five-actions"
+  ],
+  "calibration": {
+    "metric": "bodyLongestEdge",
+    "allowedRelativeError": 0.1,
+    "verifiedInGame": false
+  },
+  "plannedCanvas": [
+    160,
+    160
+  ],
+  "plannedAnchor": [
+    80,
+    128
+  ],
+  "plannedActions": {
+    "idle": {
+      "count": 10,
+      "durationMs": 140,
+      "loop": true
+    },
+    "walk": {
+      "count": 14,
+      "durationMs": 80,
+      "loop": true,
+      "frameOrder": [
+        0,
+        1,
+        9,
+        4,
+        3,
+        2,
+        5,
+        6,
+        7,
+        12,
+        13,
+        8,
+        10,
+        11
+      ]
+    },
+    "attack": {
+      "count": 14,
+      "durationMs": 60,
+      "loop": false,
+      "frameOrder": [
+        0,
+        11,
+        2,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13
+      ]
+    },
+    "hit": {
+      "count": 4,
+      "durationMs": 80,
+      "loop": false
+    },
+    "death": {
+      "count": 12,
+      "durationMs": 90,
+      "loop": false,
+      "frameOrder": [
+        0,
+        1,
+        2,
+        5,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  }
+}

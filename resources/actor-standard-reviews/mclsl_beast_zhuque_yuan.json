@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_zhuque_yuan",
+  "sha256": "799625a6a9ff71776ca746ef4b2eb84647e0079632ef9eba819e00b9e1f59414",
+  "sourceSha256": "da18cc69deadc99cabb0736fd0d6f3a9bd1676cd3503a1bcd18ee985db034cdd",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-01.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:25:38.514913+00:00"
+}

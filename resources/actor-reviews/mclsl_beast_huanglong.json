@@ -1,0 +1,301 @@
+{
+  "actorId": "mclsl_beast_huanglong",
+  "offlinePassed": true,
+  "verifiedInGame": false,
+  "reviewedAtUtc": "2026-10-09T15:53:07.466168+00:00",
+  "frames": {
+    "idle_0": {
+      "sha256": "fa188bf7abc299a0c8152543478a94e9d8c0a1710924a99feb2b2a3a99df3312",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_1": {
+      "sha256": "a80f25ad08bdbf8b2eb25aef08af9765a4f5f3fa5a1daaf8301f8a58ca5bdc4b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_2": {
+      "sha256": "8215e63f1e859e1ed7611c628ff24c6545864297f0e3f24cfdb9c0f7a9a4794d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_3": {
+      "sha256": "0a4eeda6984bd45674925ab73bf4140e88a930ebbc474ec2b9572dd462892613",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_4": {
+      "sha256": "89478761acf1f6b7d15c2d709c066cf8a74638b7828d8351e8e0b0212f894bf4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_5": {
+      "sha256": "7b9e51da735e904379169cd351b92f2c66f452e3659790e0d3720a569ca9357b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_0": {
+      "sha256": "e81fc71325d175cd6dfd3a8d99b30932e8229b8b11956226db541192a0adb201",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_1": {
+      "sha256": "9c20782d2358ba6cdf214873970da4c301afe9ed7cde7bca71ca369aac3b2844",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_2": {
+      "sha256": "c9e0a67f4d36263b961c4dedae4fdb57701f055c0dd3a266c9d913c6c6048738",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_3": {
+      "sha256": "9c6b938bc1bda643b0035a8818542c610f71c3b8712d009138ffed198f513980",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_4": {
+      "sha256": "b07b78755d4f6e3449e378add3a3488cd8d7f4794ac6d18302c4d3dc2a519c83",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_5": {
+      "sha256": "fff11f183965a295db7c0da74fec62aba6715732423c4a0d52adeb1e240e6f69",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_6": {
+      "sha256": "88f0a7e1fbb3d769cd6de4af04cf75fa23cbae5021d2e9821f68493cfcf5989c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_7": {
+      "sha256": "fc9e435362a20446e398d5cd08565e017ea940957e92bb05401cd09c8b61c615",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_0": {
+      "sha256": "4f07036f10f31219a33d27a02c2e3b36dba2e26ab2f3ad67bcb86684e534e96d",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_1": {
+      "sha256": "8658594e32c9c95855d09e546566e16e13caca248776ccfab18eb5bc71eae054",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_2": {
+      "sha256": "a0e9123003fa1a34f636d4dfe88bb6f9f9df5185ba97c8de41b0dcb8eb8de1e4",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_3": {
+      "sha256": "00fd29365c63a69a36c25b099b04ec594e9866f71b55e0a228262db64aa612b3",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_4": {
+      "sha256": "a19bd5e282477afaef7ec59454171ac3a98455313fa26c0cf583d7259897ac2e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_5": {
+      "sha256": "8682705ab24ae6be8a5f1732cc009973970263618c89fccdc9eafc6e052c3a7b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_6": {
+      "sha256": "aa7717bc63fd3852d6f9b644ead6be4e3a96e672b1f527c67814d643d61c28d7",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_7": {
+      "sha256": "5b35573420fcb0e77799212f660306239633cf2163502ebe2ec72020678a8c7b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_8": {
+      "sha256": "2d2ce9e65dae633c8b220937368cd539fbd72257856a9d8bcaf91f46ca91c961",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_9": {
+      "sha256": "bffb3cd0d49eee8ece9fb50dbf20351bd51351ca717e1cbc2a219bd3d0290987",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_10": {
+      "sha256": "8fa9e9d779c0c1d78b54195ec08c815049f7507808363ac0201a9f17c85923d2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_11": {
+      "sha256": "d44a7d32778fcdf27b68e0be2f5a9d254acfd39b9bd521b889776e6e6aa77c41",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_0": {
+      "sha256": "4c7242ca7d1df808b4a3855de553edbb663d931d4388112674c3eb6edeb5e57b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_1": {
+      "sha256": "143d9ed2d576437c201a9411a9602d7fd4d97ffdbe91244db95bc8408a2a431e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_2": {
+      "sha256": "b085ed6260509d188c262bcfcb664ab9a92abdbbec861fcc5eb1e61d5b3ef55a",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_3": {
+      "sha256": "3adbd91f642287a7425bdf07161381b53c9b0042af380510326ee5ae90e5a08b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_0": {
+      "sha256": "492ab14373fd938a22bb9ba5f28773184c5d4bd4b2c37b70a0511ac3e76e7076",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_1": {
+      "sha256": "ef371759dafa57f6b070e25e9fadb6171534ef4d27b39cb41d22da27f21fb5b1",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_3": {
+      "sha256": "b9a7f987a9c9f4f0700d363bd871c927238a51cface6374f34cc3dc479512b9a",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_2": {
+      "sha256": "5468a67bd6a7c540f61deec92dff3752a9000a834e921459a8fa8fe76a852b9b",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_4": {
+      "sha256": "fa3c249cfd4022a03c670c1362282f68c9b00c5d049387f222ab40f2168aabfe",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_5": {
+      "sha256": "61822d2e79522c1222b3201aa68f0260ab5ed18905f36810fd2d7d71d4d628a6",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_6": {
+      "sha256": "7f4661973d946bd0358e9b53427f2dd19c263aa4fd8d77c170bce10bab472794",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_8": {
+      "sha256": "a5c98c37b702b2d781dcdaec0fc39bff408144cc316a6b8dad4fdc60fd845b47",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_9": {
+      "sha256": "85a5ce7a4f782c01dd769a8b85b66e10c6b11b9ef9f935bd126823e74ca37eee",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_7": {
+      "sha256": "403d50588d526d178a3ef275f5f519d0673b8e17aed16d37f5f487a378c5482f",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    }
+  },
+  "notes": [
+    "Manually viewed all five full action contact previews and the dedicated icon: 6 idle, 8 movement, 12 attack, 4 hit and 10 death.",
+    "Amber-gold long serpentine body, cream belly, antlers, curled whiskers, small claws and mane retain the standard identity.",
+    "Movement articulates the coils and tail; attack prepares in a compact coil, extends the neck, opens the jaw and returns; hit recoils and recovers.",
+    "Death uses inspected order 0,1,3,2,4,5,6,8,9,7 to place raised-neck transitions before the final flattened closed-eye pose.",
+    "Clipped attack_4 original was archived and independently redrawn with inward-curled whiskers and full transparent padding; hash pinned.",
+    "Full canvas and fixed nearest-neighbor anatomical scale retained. World size, selection, shadows and icon occupancy still require game validation."
+  ],
+  "icon": {
+    "sha256": "4f910b2ae4103aaa56fb121d0461aeee2756075cae8ce5b2c365c70e9c4d7c22",
+    "offlinePassed": true,
+    "verifiedInGame": false
+  }
+}

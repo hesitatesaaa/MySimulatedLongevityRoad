@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "walk",
+  "index": 8,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/walk_8.png",
+  "sourceSha256": "6c7227965cbae451c38ed88d9d26cdb3da3ee6f1c2b5d5c194e91b494ec7517d",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/walk_8.png",
+  "outputSha256": "6c7227965cbae451c38ed88d9d26cdb3da3ee6f1c2b5d5c194e91b494ec7517d",
+  "createdAtUtc": "2026-10-09T05:43:44.439489+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame: Baihu sacred white tiger walk_8. Fixed identity in image 1: white and pale silver fur, charcoal tiger stripes, gold eyes, round ears, muscular feline head and curled striped tail. FOUR legs, no other anatomy or accessories. Same 1254x1254 transparent source canvas, fixed pixel scale and anatomy: standard standing full silhouette about 941px wide and 733px tall; original paws ground y1049, body center x636. Three-quarter side RIGHT-facing orthographic camera. Image 2 if supplied shows a separately drawn pose guide on the SAME source canvas. Pose: NEW CONTACT FRAME follows pose guide walk_4. Keep the EXACT SAME four leg identities and attachment points as image 2. The WHITE NEAR HIND thigh bends FORWARD down-right beneath the abdomen; its WHITE paw must land under the belly at x540,y1049. The GRAY FAR HIND leg extends BACKWARD down-left; its GRAY paw must stay behind hip at x280,y1049. Never swap these hind legs: white rear paw is ahead/right of gray rear paw. Forward front paw lands x1090,y1049 and supporting front paw remains x850,y1049. All four complete paws grounded. Tiger head, shoulder, hip and scale unchanged. Do not enlarge or shrink anatomy to fit a pose. Entire tiger and limbs within generous clear margins. Crisp square pixel art with flat shades and dark outline. Independently DRAW this new single frame. No copy/paste of the old whole sprite, scaling/recolor as redraw, sprite sheet, panels, text, effects, background, ground or shadow.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/walk_4.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

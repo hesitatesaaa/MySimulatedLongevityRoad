@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "action": "attack",
+  "index": 7,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/attack_7.png",
+  "sourceSha256": "45b1325e834b44a2fd7d5ef1d77bd2b6f3b38884b3ccd729a3b15c907eacf39c",
+  "outputFile": "NativeActorResources/actors/Named/LiFan/main/attack_7.png",
+  "outputSha256": "45b1325e834b44a2fd7d5ef1d77bd2b6f3b38884b3ccd729a3b15c907eacf39c",
+  "createdAtUtc": "2026-10-09T03:48:15.033719+00:00",
+  "prompt": "Use case: stylized-concept. Asset type: exactly ONE independently drawn pixel-game animation frame, LiFan attack_7, frame 8 of 12. Supplied image: fixed identity reference of LiFan, draw him anew in the requested pose. Keep the same dark navy/white Chinese robes, gold trim and sash, long dark hair tied with a gold ornament, face and boots. Preserve exact costume, colors, anatomy, pixel cluster size, three-quarter right-facing orientation, camera and original body scale. Canvas MUST stay 1254x1254 square with genuinely transparent RGBA background. It is a 128x128 virtual pixel-art game canvas shown enlarged; crisp square pixel clusters, hard edges, dark outlines and flat shading. Action: brief follow-through, attacking arm still extended. Root/feet stay at the same original ground point, allow clear articulated arm, shoulder and robe motion. Do NOT change body size. Draw ONE single pose ONLY. Do not copy/paste or translate the entire previous sprite. No projectile or spell particles, no text, no sheets, no panels, no duplicates, no backgrounds, no shadow, no glow, no blur, no smooth painting. Entire body and extended limbs must remain inside the canvas with generous transparent margins.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

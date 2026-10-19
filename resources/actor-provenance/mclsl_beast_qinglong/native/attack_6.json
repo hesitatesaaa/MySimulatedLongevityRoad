@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 6,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/attack_6.png",
+  "sourceSha256": "9eaf8ba7d092f5e92d075868babba7b4d986b4e07e5b116d773274b7ddc199a7",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_6.png",
+  "outputSha256": "9eaf8ba7d092f5e92d075868babba7b4d986b4e07e5b116d773274b7ddc199a7",
+  "createdAtUtc": "2026-10-09T07:16:34.188031+00:00",
+  "prompt": "Use case: game-asset. Independently DRAW exactly ONE NEW transparent pixel-art Qinglong attack_6, Eastern azure dragon. Single reference fixes identity and FOUR-limb anatomy: turquoise/cyan scales, navy shadows, pale cream belly, gold antlers and dorsal crest, cyan mane and tail plume, compact S-shaped serpent body and two whiskers. Same1254x1254 transparent canvas, same right-facing side camera, same exact anatomical pixel scale. Pose: Forward bite building: head about70px right of standard and neck curve partly straightens. Jaws open. Near foreclaw stays bent below the muzzle with ONE hand at x845,y640, well behind the nose. Far foreclaw and two hindlimbs retain their roots. Keep the existing NEAR FOREARM SHORT AND BENT, elbow near chest, claw hand ALWAYS CLOSE TO CHEST and STRICTLY BEHIND the muzzle. Do not lengthen upper arm or forearm; this is primarily a BITE attack, no extended claw swipe. The near arm attaches to left shoulder and crosses pale chest, same SINGLE limb as reference; far foreclaw remains right of upper belly, two hindlegs retain original attachment roots with far hind partly hidden. Exactly FOUR limbs, each with one hand/foot. Cyan fin beneath arm remains MANE, not a fifth arm. All body curves and tail coil retain reference thickness and lengths; forward motion comes from changing neck curve. Whiskers curve BACKWARD to stay within x1180, never projecting far ahead of head. Entire dragon, horns, claws and tail must fit x230..1180,y90..1190 with generous transparent margins; no contact with canvas boundary. Crisp square pixel clusters, dark outlines, limited flat shades. Draw a NEW single frame from scratch, no whole-sprite paste, scaling or recolor as redraw. No wings, sheets, panels, multiple poses, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_3.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "hit",
+  "index": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong/originals/hit_2.png",
+  "sourceSha256": "c20a1d9b48a42912e0ececf9233fff9bd7ce5a7701c3a7e98893a79e8259f81b",
+  "outputFile": "GameResources/actors/Beasts/qinglong/Beast/main/hit_2.png",
+  "outputSha256": "7d75008ebb7b706677f25aa79cb4e38cd00731bfaa8297a91b041bf0a159deb6",
+  "createdAtUtc": "2026-10-09T07:43:52.700733+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Qinglong hit_2 for five-frame damage recoil animation. Reference establishes standard appearance. Same1254x1254 transparent canvas and EXACT anatomical pixel scale, side facing RIGHT. Pose: Recoil settling: head60px left and20px down, eye starts opening, jaw nearly closed. Neck begins regaining original curve, both forelimbs relax half-way; body and tail settle. This is genuine pose change through neck/limb bending, not translated sprite or recolor. Azure Eastern dragon, turquoise/cyan scales/navy shadows/cream segmented belly/gold antlers crest/cyan mane and tail plume/TWO long CREAM-lined whiskers with cyan border. Compact S-shaped serpent body, exact original lengths thickness head size and four short limbs. ONE near forearm crossing chest and ONE far forearm at right upper belly; TWO hindlegs at lower curve, farhind partly hidden behind lower hindroot. No fifth limb, no ghost midbelly claw; fins are mane. Foreclaw anatomy one hand each. Original lower tail bottomy1177 and head aroundx850y400, except specified recoil. Fits x230..1180,y90..1190 with generous transparent margin. Crisp square pixel clusters, dark outlines, limited flat shades, no blur. Independently redraw all pixels. No wings blood particles aura ground shadow background text panels sheets or multipleposes.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 57221,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

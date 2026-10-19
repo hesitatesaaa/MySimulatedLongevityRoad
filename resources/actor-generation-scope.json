@@ -1,0 +1,453 @@
+{
+  "updatedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+  "generationActions": [
+    "idle",
+    "walk",
+    "death",
+    "icon"
+  ],
+  "noFutureAttackOrHitGeneration": true,
+  "targetedRepairOfDefectiveExistingCombatFramesAfterFinalReview": true,
+  "existingApprovedCombatFramesPreserved": true,
+  "waivedActions": [
+    {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_manman",
+      "action": "attack",
+      "formerlyRequiredFrames": 10
+    },
+    {
+      "actorId": "mclsl_beast_manman",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_manman_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_manman_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao",
+      "action": "attack",
+      "formerlyRequiredFrames": 10
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_changliao",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_changliao",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_mo",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_mo",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_mo_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_mo_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_hongmao",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_hongmao",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_yingying",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_yingying",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_goushou",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_goushou",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_tianshou",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_tianshou",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_diyi",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_diyi",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_diyi_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_diyi_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_disanmo",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_disanmo",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong",
+      "action": "attack",
+      "formerlyRequiredFrames": 12
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong",
+      "action": "hit",
+      "formerlyRequiredFrames": 4
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_tianyi",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_tianyi",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_moruibin",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_moruibin",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_xuantianwang",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_xuantianwang",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_xuke",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_xuke",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_yefeipeng",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_yefeipeng",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_xiaoheng",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_xiaoheng",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_xubai",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_xubai",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_liping",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_liping",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_shanfan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_shanfan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_zhangfan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_zhangfan",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_named_zhenshen",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_named_zhenshen",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_bai_xiansheng",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_bai_xiansheng",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "action": "attack",
+      "formerlyRequiredFrames": 8
+    },
+    {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "action": "hit",
+      "formerlyRequiredFrames": 2
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "formerlyRequiredFrames": 8,
+      "reason": "Complete old candidate clip failed review; user forbids future attack generation."
+    }
+  ],
+  "removedMissingJobs": 410,
+  "targetFrames": 1374,
+  "runtimePolicy": "For a waived incomplete combat action use a reviewed idle pose with the original non-loop action duration. Combat damage and frequency unchanged.",
+  "additionalReviewedCombatWaivers": [
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 2,
+      "sourceSha256": "59a82313581b4e0eff76622199c0c5d3e0cf4fdc8eebac460ced3da4316ab836",
+      "reason": "Opaque sword blade reaches right canvas edge; tip clipped",
+      "archivedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+      "generationRequested": false
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 4,
+      "sourceSha256": "6c6d8255404e19249b2a105d9809f7a01b50066148e2e049fd959d8df2dcf003",
+      "reason": "Opaque sword blade crosses right canvas edge; tip clipped",
+      "archivedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+      "generationRequested": false
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "action": "attack",
+      "frame": 7,
+      "sourceSha256": "5a0da31426c50b5595a41188dcb418acfd54d0c1c9d3f03dbf0f5cf8ce1443ea",
+      "reason": "Three separate hands/arms: lowered near hand, hand at sword hilt, and additional lowered far hand",
+      "archivedAtUtc": "2026-10-14T09:19:22.460010+00:00",
+      "generationRequested": false
+    }
+  ],
+  "humanWalkPolicy": "resources/actor-human-walk-policy.md"
+}

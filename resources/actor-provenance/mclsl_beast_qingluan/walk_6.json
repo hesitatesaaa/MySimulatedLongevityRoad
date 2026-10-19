@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "walk",
+  "index": 6,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qingluan/originals/walk_6.png",
+  "sourceSha256": "88e6e0abd141f4191e4e37430d298b5cb1784d5eb76eb2769c398ec70f13b2dd",
+  "outputFile": "GameResources/actors/Beasts/qingluan/Beast/main/walk_6.png",
+  "outputSha256": "bbad6455da8b89ae31834ec71e9e118e6ab7cc3cf07343d838284f42ed218494",
+  "createdAtUtc": "2026-10-09T05:04:09.262068+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE independently redrawn Qingluan pixel-game flight animation frame walk_6, frame 7/12. Image 1 fixes flight anatomy, opened-wing feather design, body size AND body position on source canvas. Image 2 fixes species identity and palette. Keep the same cyan/teal/navy feathers, white chest/throat, gold crest/beak/feet/trim, three long tail plumes trailing left, three-quarter right-facing camera, crisp square pixel clusters, dark outline, flat shades. New pose: bottom of downstroke, wings angle down 55 degrees, primaries sweep beneath belly without clipping, elbows bent. BOTH wings articulate from shoulder, far wing behind the body, same anatomy/number of primaries and markings throughout. Feet stay tucked below belly, head/chest/body keep the EXACT flight reference position and size; tail gently flows behind without huge body translation. Do not enlarge or shrink torso when wings unfold. Same 1254x1254 transparent RGBA source canvas with generous margins: every feather/wingtip/tailtip/crest stays inside. Draw one NEW pose independently, no copying/moving/scaling/recoloring the entire sprite. No scene, shadow, glow, effects, text, panels or sheet; outside bird alpha zero.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/walk_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08840579710144927,
+    "translation": [
+      18,
+      37
+    ],
+    "canvas": [
+      160,
+      160
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 763,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      5,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 45195,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

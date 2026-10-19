@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 13,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong/originals/attack_13.png",
+  "sourceSha256": "29c4a96b7869fc499e90989f4dfcce96295a307b779a2d848cb4a20046fbfad5",
+  "outputFile": "GameResources/actors/Beasts/qinglong/Beast/main/attack_13.png",
+  "outputSha256": "382b24acce6a2065663da6ddbdee7d44aeb576d0304c7e57df6e2a96e0f411c0",
+  "createdAtUtc": "2026-10-09T07:36:13.409398+00:00",
+  "prompt": "Use case: game-asset. Draw ONE independent NEW transparent pixel-art Qinglong attack_13 late recovery. Reference is exact standard anatomy, palette and pixel size. Same1254x1254 canvas, side right-facing, fullbody. Late recovery bridge: head x930,y450, closed jaw. Whiskers now curl tighter than peak: farthest tip x1150, cream inner stripe with cyan outer outline, like standard reference. Near claw at x760,y770 and far clawx900,y690. Upper neck halfway between stretched bite and standard. Bottom tail and two hindlimbs EXACT same positions as reference. Preserve turquoise scales navy shadows, cream segmented belly, gold antlers/crest, cyan mane/plume. TWO curling whiskers with CREAM INNER STRIPE and cyan border. Exactly FOUR short limbs, ONE forehand near crossing chest, ONE farforehand right belly, ONE nearhindfoot lower curve and ONE partly hidden farhindfoot. No duplicated foreclaw or ghost arm; mane fins are not limbs. Retain reference body thickness and lengths, claws and head dimensions, allow neck curve change for pose. Fits x230..1180,y90..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines and flat limited shades. Independently redraw pixels, no pasted/scaled/recolored sprite. No wings, sheets, text, aura, particles, ground, shadow, panels or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_15.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.16455696202531644,
+    "translation": [
+      12,
+      46
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 702.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 69313,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "hit",
+  "index": 1,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/hit_1.png",
+  "sourceSha256": "1d6bd3814b5a603991cc9554a5a302b1e0bc7bec4655aca7e13aa57f4f7049e7",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/hit_1.png",
+  "outputSha256": "1d6bd3814b5a603991cc9554a5a302b1e0bc7bec4655aca7e13aa57f4f7049e7",
+  "createdAtUtc": "2026-10-09T05:47:27.312280+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame: Baihu sacred white tiger hit_1. Fixed identity in image 1: white and pale silver fur, charcoal tiger stripes, gold eyes, round ears, muscular feline head and curled striped tail. FOUR legs, no other anatomy or accessories. Same 1254x1254 transparent source canvas, fixed pixel scale and anatomy: standard standing full silhouette about 941px wide and 733px tall; original paws ground y1049, body center x636. Three-quarter side RIGHT-facing orthographic camera. Image 2 if supplied shows a separately drawn pose guide on the SAME source canvas. Pose: Strongest hit recoil. Chest leans back modestly and elbows flex to absorb force; head recoils without turning away or changing size. All four connected legs brace planted, ears pressed down, eyes partly shut. Do not enlarge or shrink anatomy to fit a pose. Entire tiger and limbs within generous clear margins. Crisp square pixel art with flat shades and dark outline. Independently DRAW this new single frame. No copy/paste of the old whole sprite, scaling/recolor as redraw, sprite sheet, panels, text, effects, background, ground or shadow.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/hit_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

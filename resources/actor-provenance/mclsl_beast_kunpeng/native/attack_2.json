@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_kunpeng",
+  "action": "attack",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_kunpeng/attack_2.png",
+  "sourceSha256": "4a3e8a5838c22d2e51fd677bfef22c0b111b4839e1de779cd668324e57a249a5",
+  "outputFile": "NativeActorResources/actors/Beasts/kunpeng/Beast/main/attack_2.png",
+  "outputSha256": "4a3e8a5838c22d2e51fd677bfef22c0b111b4839e1de779cd668324e57a249a5",
+  "createdAtUtc": "2026-10-09T13:08:13.294920+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 鲲鹏·兽形 (mclsl_beast_kunpeng), attack_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: blue/cyan aquatic Kunpeng fish-bird hybrid: broad horizontal whale/fish torso, avian beaked head, paired large feathered pectoral swimming fins and a broad fish tail. Two small pelvic fins. NO walking legs, paws, lion body or griffin anatomy. Clean blue/cyan/white groups with restrained feather bands; no gold filigree. Preserve the original fish-bird identity and blue palette. Pose: Attack single-shot progress 0.222, stage preparation. Required pose: Keep head ABOVE the normal chest, limbs supporting the body. Gather weight over bent limbs; jaws closed and no forward lunge yet. Species movement: jaw/head thrust with paired fins bracing and tail powering the strike, mouth opens during release/peak and closes through recovery. Follow ONLY this stage, not a generic peak attack pose. No detached projectiles, trails, particles or light effects. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

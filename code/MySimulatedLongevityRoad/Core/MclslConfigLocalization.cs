@@ -10,6 +10,7 @@ internal static class MclslConfigLocalization
     {
         if (_initialized) return;
         _initialized = true;
+        MclslLocalizationBridge.RegisterKey("法术表", "法术表");
 
         Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认10%；只影响尚未完成五岁或六岁补判的小人。");
         Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");

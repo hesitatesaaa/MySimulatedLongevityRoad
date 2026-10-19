@@ -1,0 +1,105 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "name": "青龙·兽形",
+  "family": "dragon",
+  "identityReference": "output/baseline-0.5.4-20261009/GameResources/actors/Beasts/qinglong/Beast/main/idle_0.png",
+  "worldReference": {
+    "frame": "reference/western-fantasy/GameResources/actors/FantasyCreatures/Dragonkind/PrimordialFrostDragon/Main/idle_0.png",
+    "canvas": [
+      400,
+      400
+    ],
+    "bodyBounds": [
+      114,
+      24,
+      292,
+      371
+    ],
+    "rgbaSha256": "0bc008b81d27a4a67c0750c6f9f0ab5182c4f5dfcc47e51147e4769d972b1dd5",
+    "sha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930",
+    "scaleFactor": 0.6,
+    "baseTemplate": "$mob$",
+    "referencePPU": null,
+    "referenceBaseScale": null,
+    "verifiedInGame": false
+  },
+  "soulReferenceFolder": "GameResources/actors/Souls/Water_Soul",
+  "constraints": [
+    "independent-generation-per-frame",
+    "no-spritesheet-slicing",
+    "preserve-identity-and-palette",
+    "consistent-canvas-and-anchor",
+    "pixel-art",
+    "five-actions"
+  ],
+  "calibration": {
+    "metric": "bodyLongestEdge",
+    "allowedRelativeError": 0.1,
+    "verifiedInGame": false
+  },
+  "plannedCanvas": [
+    256,
+    256
+  ],
+  "plannedAnchor": [
+    128,
+    240
+  ],
+  "plannedActions": {
+    "idle": {
+      "count": 10,
+      "durationMs": 140,
+      "loop": true,
+      "frameOrder": [
+        0,
+        7,
+        6,
+        1,
+        2,
+        3,
+        4,
+        8,
+        5,
+        9
+      ]
+    },
+    "walk": {
+      "count": 12,
+      "durationMs": 90,
+      "loop": true
+    },
+    "attack": {
+      "count": 16,
+      "durationMs": 60,
+      "loop": false,
+      "frameOrder": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        7,
+        9,
+        10,
+        11,
+        12,
+        14,
+        13,
+        15
+      ]
+    },
+    "hit": {
+      "count": 5,
+      "durationMs": 80,
+      "loop": false
+    },
+    "death": {
+      "count": 14,
+      "durationMs": 90,
+      "loop": false
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_liejiejing",
+  "action": "idle",
+  "index": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_liejiejing/originals/idle_2.png",
+  "sourceSha256": "519a036aa15f5435aba20f6ca48c88d02f55211411e428e4959e8be1cdef7be4",
+  "outputFile": "GameResources/actors/Beasts/liejiejing/Beast/main/idle_2.png",
+  "outputSha256": "add1ffbe55e523436ad3f0356e7bd88d9b1dd7785a7be7f91c0f220f0a62efce",
+  "createdAtUtc": "2026-10-09T08:13:59.407425+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Liejiejing Chinese fantasy whale idle_2. SAME1254x1254 canvas, EXACT anatomical pixel scale and right-facing side view as reference. Mid inhale: ribcage fullest, near pectoral fin lifts another small angle, far fin trails below jaw. Split tail flukes flex gently up within canvas. Head remains standard height and jaw closed. Preserve deep blue/cyan broad whale body, cream-gray grooved belly, bright cyan fissure markings, flowing dorsal wavefins, gold facial ridge and cream horns, ONE pair of pectoral fins, split tail flukes. No legs. Body and head thickness, tail length, horn count and fin roots match reference. Entire silhouette stays within x20..1230,y300..1000, no clipping or canvas edge contact. Draw pose changes freshly, no old sprite paste translation scaling recolor. Crisp square pixel clusters, dark outlines, flat palette. Transparent RGBA; no water, background, glow, particles, shadow, ground, text, sheets, panels or multiple poses.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_liejiejing/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.1638001638001638,
+    "translation": [
+      25,
+      79
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 627.5,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 126305,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

@@ -66,7 +66,10 @@ internal static class MclslRealmSeatSystem
 
     private static bool CanAddAtLeast(string realm, int limit, string seatName, string sourceName, out string reason)
     {
-        int used = MclslCultivatorCandidateIndex.CountRealmAtLeast(realm);
+        int threshold=MclslRealmIds.Index(realm);
+        int used=MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot().Count(x=>MclslActorAccessor.Alive(x)
+            && !MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(x)
+            && MclslRealmIds.Index(MclslActorAccessor.Realm(x))>=threshold);
         if (used < limit)
         {
             reason = string.Empty;

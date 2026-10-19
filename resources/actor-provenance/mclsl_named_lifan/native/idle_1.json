@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "action": "idle",
+  "index": 1,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/idle_1.png",
+  "sourceSha256": "3311b408450a5ab121447ebb9da6fc68b3f148ddaf7e2abe7939fe87f80399ec",
+  "outputFile": "NativeActorResources/actors/Named/LiFan/main/idle_1.png",
+  "outputSha256": "3311b408450a5ab121447ebb9da6fc68b3f148ddaf7e2abe7939fe87f80399ec",
+  "createdAtUtc": "2026-10-09T03:48:19.661156+00:00",
+  "prompt": "Use case: stylized-concept. Asset type: EXACTLY ONE independent game animation frame, LiFan idle_1 of 8. The supplied image is the identity and pixel-art reference for this SAME character, not a sprite sheet. Draw one new full frame. Preserve exactly his dark navy-white robes, gold edging and belt, long dark hair tied with gold ornament, face, full body proportions, boots and right-facing three-quarter orientation. Keep the same square 1254x1254 source canvas and the same scale, camera, body position and pixel cluster size as the reference. Frame action: quiet standing breathing cycle phase 0.125, inhaling gently; shoulders slightly raised, a tiny natural robe fold change, sleeve hem and loose hair tips sway slightly outward. Feet remain planted at the reference ground line; no whole-body translation, no zoom, no costume changes. The face, head and boots should stay almost unchanged; meaningful small pose changes in torso, cloth and hair make this one frame of a coherent pixel animation. Hard crisp pixel edges and limited flat shading, transparent RGBA background. No antialiasing, glow, scene, shadow, blur, text, border, extra character, multiple poses or panels. Only this ONE pose in ONE image; never a sprite sheet.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

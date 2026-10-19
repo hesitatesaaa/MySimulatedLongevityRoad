@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_tianshou_yuan",
+  "sha256": "afa827ccf71b0c08b1143cdf67b61ad1dc412f8f3c461014cb1745005c93f390",
+  "sourceSha256": "13a8b3422d4db3c97afe65d04887f67ae94c5c4575b52976dff12b091fde13e7",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-05.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:40.040393+00:00"
+}

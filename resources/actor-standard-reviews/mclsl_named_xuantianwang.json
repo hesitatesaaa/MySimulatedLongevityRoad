@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_named_xuantianwang",
+  "sha256": "5267a1e41c36d132ecf55c335543378c55228571eaf8e81be7e5b39fbf53308e",
+  "sourceSha256": "0bad4498016561de54b81a87273cbd4a82c3e0477b23aa38cc7c0aa9bf2a1f4f",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "male",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-06.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:41.706272+00:00"
+}

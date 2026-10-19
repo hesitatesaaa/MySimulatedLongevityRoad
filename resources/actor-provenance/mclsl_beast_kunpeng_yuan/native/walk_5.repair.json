@@ -1,0 +1,31 @@
+{
+  "actorId": "mclsl_beast_kunpeng_yuan",
+  "action": "walk",
+  "frame": 5,
+  "status": "candidate-pending-review",
+  "originalFile": "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_5.png",
+  "originalSha256": "dc1b36a77be950b577b0f856f572ef09e927a0868abdb7eb97b124ae827d57c3",
+  "candidateFile": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_kunpeng_yuan/walk_5-v2.png",
+  "candidateSha256": "34d2167f1af8b1814c6cde22d9c921340a6df47345330424b6eabb1ce364ec02",
+  "generator": "built-in image_gen__imagegen",
+  "prompt": "Create ONE transparent native 1254x1254 pixel-art animation walk frame of the same blue-white feather-robed woman, facing right, for frame 5 of a six-frame loop. Follow reference corrected frame 4, continuing the OPPOSITE stride from frames 0-2 while beginning to close toward next frame 0. Her NEAR leg remains the one stepping BACK left, visible in front of trailing robe, shoe around x=470 at ground y=1160. Her FAR leg remains FORWARD right, partially hidden behind the white front robe, shoe x=940, ground y=1160. Both legs clearly connect to hips under the robe. Do not switch back to the original frame 0 front/back leg layering yet. Low grounded feet, natural opposite arms, no high knees. Match original identity, face, navy hair, blue braid, gold details, feather mantle, full scale and crisp pixel art. Exactly one character in one frame; no text, sheet, borders, extra limbs or background.",
+  "references": [
+    {
+      "file": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_kunpeng_yuan/walk_4-v2.png",
+      "sha256": "36b80e8bfb3ed8d543e315ea884e9dad7d6509c386547b4eb3ceb7472bb38696"
+    },
+    {
+      "file": "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_0.png",
+      "sha256": "1479e48be2ffcfac1182f390d00b961cbccd8e8ef4fd1fa35ea576bee11638c6"
+    }
+  ],
+  "recovery": {
+    "actorId": "mclsl_beast_kunpeng_yuan",
+    "frame": "walk_5",
+    "oldSha256": "dc1b36a77be950b577b0f856f572ef09e927a0868abdb7eb97b124ae827d57c3",
+    "sourceSha256": "34d2167f1af8b1814c6cde22d9c921340a6df47345330424b6eabb1ce364ec02",
+    "reviewStatus": "waived-by-user",
+    "candidate": "E:\\0.6.0\\output\\actor-redraw\\repair-candidates\\review_forms_a\\mclsl_beast_kunpeng_yuan\\walk_5-v2.png"
+  },
+  "visualReviewWaived": true
+}

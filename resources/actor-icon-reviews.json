@@ -1,0 +1,29 @@
+{
+  "mclsl_beast_moqilin": {
+    "identityApproved": true,
+    "canvasApproved": true,
+    "notes": "完整四足、金角紫鬃与墨麒麟身份一致，专用盘尾姿态，透明画布边缘完整。"
+  },
+  "mclsl_beast_xuanwu": {
+    "identityApproved": true,
+    "canvasApproved": true,
+    "notes": "龟蛇轮廓清晰，青金配色一致，四足完整；专用按钮姿态，世界帧未复用。"
+  },
+  "mclsl_beast_fenghuang": {
+    "identityApproved": true,
+    "canvasApproved": true,
+    "notes": "赤金羽冠及尾羽一致，两足解剖正常，适合按钮识别；与朱雀相似造型已获用户接受。"
+  },
+  "mclsl_beast_dafeng": {
+    "identityApproved": true,
+    "canvasApproved": true,
+    "sourceSha256": "e69d984771000066d13ca609a7f50995874cee4e895b9a1acd6ce95a25a9a01c",
+    "notes": "Individual native PNG viewed: blue-white storm-bird identity, two feet, paired wings, complete tail and transparent border. Dedicated image provenance; UI occupancy still pending."
+  },
+  "mclsl_beast_manman": {
+    "identityApproved": true,
+    "canvasApproved": true,
+    "sourceSha256": "e08c6a475c6bb5a65792c71278f36e0ddeee6a3796fe2ef107842c8d15915111",
+    "notes": "Independent native PNG individually reviewed: red/blue paired heads, total two claws including raised claw, folded wing pair, complete silhouette and transparent border. Dedicated icon source; UI occupancy and game verification pending."
+  }
+}

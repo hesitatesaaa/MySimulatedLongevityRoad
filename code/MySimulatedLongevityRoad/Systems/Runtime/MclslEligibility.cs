@@ -65,6 +65,7 @@ internal static class MclslEligibility
     internal static bool IsCivilizedActor(Actor actor)
     {
         if (actor?.asset == null) return false;
+        if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
         if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached;
         string id = actor.asset.id ?? string.Empty;
         if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
@@ -76,6 +77,7 @@ internal static class MclslEligibility
 
     internal static bool CanClaimWorldSoul(Actor actor)
     {
+        if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
         if (!CanCultivate(actor)) return false;
         if (!string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulEntityId, string.Empty))) return false;
         int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));

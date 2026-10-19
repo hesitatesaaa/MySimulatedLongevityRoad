@@ -271,6 +271,7 @@ internal static class MclslAncientMentorshipSystem
             itemId = grade switch { 1 => "A07", 2 => "A08", 3 => "A09", _ => "A05" };
         }
         MclslBagSystem.Add(student, itemId, acquiredYear: year);
+        if (itemId == "A07") MclslJulingMarrowMetrics.Record("获得/师徒赠予", 1);
         MclslWorldRunRepository.AddItemAcquisitionEvent(year, student, itemId, 1, "师徒赠予");
     }
 

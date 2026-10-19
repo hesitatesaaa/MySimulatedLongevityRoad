@@ -303,6 +303,11 @@ internal static class MclslCultivationSystem
     internal static void ApplyManualRealmGrant(Actor actor, string traitId, string realm, int year, bool forceAncient = false, bool forceNewLaw = false)
     {
         if (actor?.data == null || string.IsNullOrWhiteSpace(realm)) return;
+        if (MclslBeastActorRegistration.IsOrdinary(actor))
+        {
+            MclslBeastCultivation.SetRealm(actor, realm, year);
+            return;
+        }
         string guard = MclslActorAccessor.Id(actor) + "|" + realm + "|" + traitId;
         if (!ManualRealmGrantGuards.Add(guard)) return;
         try

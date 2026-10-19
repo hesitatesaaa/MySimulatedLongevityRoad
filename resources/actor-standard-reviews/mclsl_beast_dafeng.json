@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_dafeng",
+  "sha256": "7c817b1ac09bde6a6e7dd3d715ce7916ec55528daa8d1ce143f831c25b60af35",
+  "sourceSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": null,
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-02.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:31.634684+00:00"
+}

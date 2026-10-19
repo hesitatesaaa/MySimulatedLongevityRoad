@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_named_shanfan",
+  "sha256": "6be5d7aeaf74c800f6c0961fe05964789bb0c1b4baeddd071b0f28007eb7f437",
+  "sourceSha256": "9af6d5c464969cf6720f9cc0be9063b2377bb47ef1d9e5211c1480713c210ffa",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "male",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-06.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:42.211763+00:00"
+}

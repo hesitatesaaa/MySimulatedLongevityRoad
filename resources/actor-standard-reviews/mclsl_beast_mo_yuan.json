@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_mo_yuan",
+  "sha256": "391d6e1d80cc58391e3acb68206a80dc9cda9549896fead7d03e7af7c94cbbd0",
+  "sourceSha256": "f7d237672cd9af4d18f4719c6bf696f5f4b7d2d41b6e184a2fe85eab4bab2204",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-03.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:37.033964+00:00"
+}

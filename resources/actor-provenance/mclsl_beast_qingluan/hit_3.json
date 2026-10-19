@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "hit",
+  "index": 3,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_qingluan/originals/hit_3.png",
+  "sourceSha256": "692335a02785f0b437f254e3a190f4483b5167d5a2886dcfacaccd2fd74fda90",
+  "outputFile": "GameResources/actors/Beasts/qingluan/Beast/main/hit_3.png",
+  "outputSha256": "95012c8e7313c9d70dcd34f24209396732769f163c1bb182f1a2ef8a9042a63b",
+  "createdAtUtc": "2026-10-09T05:04:03.466585+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art sprite frame: sacred Qingluan hit_3 FINAL HIT RECOVERY. Refer to the attached STANDARD IDLE solely for identity, dimensions and folded-wing posture. Both wings MUST BE COMPLETELY FOLDED tight along the torso, no raised or extended feathers above the back. Neck returns to the identical relaxed idle S-curve, not tall straight neck. Gold crest/beak/feet, cyan/teal/navy feathers, white throat and breast, three long tail plumes flowing left, three-quarter RIGHT-facing orthographic view. Two feet planted. Same anatomy size as reference: complete standing silhouette approximately 665px wide by 690px tall on same 1254x1254 transparent source canvas; feet at y1028, gold foot center x763, head near x865 y480. Pose variation: neck returns to the exact standard idle height and curvature after a brief recoil, crest tilts two degrees, a tail tip settles, otherwise faithful idle proportions. Crisp square pixel clusters, dark pixel outline, flat limited shades. Independently draw this single pose, not a translated, scaled or recolored copy. No panels, other poses, sprite sheet, background, text, effects, glow or ground shadow.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.08840579710144927,
+    "translation": [
+      13,
+      37
+    ],
+    "canvas": [
+      160,
+      160
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 758,
+    "groundedFootBottom": 91,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 28832,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

@@ -1,0 +1,861 @@
+{
+  "actorId": "mclsl_beast_zhuque_yuan",
+  "checkedAtUtc": "2026-10-14T05:31:19.382013+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\idle_0.png",
+          "sourceSha256": "da18cc69deadc99cabb0736fd0d6f3a9bd1676cd3503a1bcd18ee985db034cdd",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            282,
+            117,
+            949,
+            1182
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1182
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\idle_1.png",
+          "sourceSha256": "c87a67d0affd7715dee7f5bac383bb33975c155e9664a7fd8331dbe25f5c725d",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            260,
+            81,
+            978,
+            1184
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1184
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\idle_2.png",
+          "sourceSha256": "aa4fcec8a011b09c98eb43bc50f81e6d3f9d1a533bd3a2eb42bd652306236736",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            301,
+            86,
+            961,
+            1183
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1183
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\idle_3.png",
+          "sourceSha256": "e504d599c8d93e4b8b033cd91e85e25a93e29632aa939342ddef3f96c8dd1f2a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            249,
+            63,
+            1009,
+            1183
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1183
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_0.png",
+          "sourceSha256": "49a6f851238fdd397a9d1bd36554b2324b662cdef1eca8f4f21f51d854e76055",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            244,
+            71,
+            1050,
+            1161
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1161
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_1.png",
+          "sourceSha256": "f7ddd5cb67986d364fe144ae0a82858b6616de6fc3cf6fd6342ec27040783243",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            261,
+            107,
+            1057,
+            1163
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1163
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_2.png",
+          "sourceSha256": "9bf21807aa3ef33b8b6d9d024527d35969d0697cd6c427669b2c04c0b4fd16f2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            201,
+            81,
+            1042,
+            1182
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1182
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_3.png",
+          "sourceSha256": "98e4b734a8d0ac2802a8fa53f204a11181ae5d2a1096e9d3908fb39fc32c62b2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            237,
+            110,
+            998,
+            1163
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1163
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_4.png",
+          "sourceSha256": "cf0fbf4b0de083944fb921b9d8bb1f4d53e3268955c3aa536dcbf44b51a37efb",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            175,
+            66,
+            1087,
+            1180
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1180
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\walk_5.png",
+          "sourceSha256": "9220348eda994ea45b455ae77764f1dea0464296f33161197e2d421af500970a",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            222,
+            122,
+            1037,
+            1160
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1160
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_0.png",
+          "sourceSha256": "ece8c2b2b8cc0c4a1adb06fd2e521b81048a173f70d294c32164cc176eaf6883",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            200,
+            100,
+            1068,
+            1177
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1177
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_1.png",
+          "sourceSha256": "50253ac0ca15c61ebe1fd93d527dc3ad81901fb2fa829edd1deb7ba52e3f3a57",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            179,
+            105,
+            1058,
+            1175
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1175
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png",
+          "sourceSha256": "05eff02e8c7a5b67643a80f94ad01ee10cf5cae4ef33d7ae8ff3c5a7e1d37195",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            127,
+            111,
+            1204,
+            1157
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1157
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_3.png",
+          "sourceSha256": "78295eb8da60996ac0245345f495a8e4657acff0b9feed34dfe459fe07341490",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            46,
+            170,
+            1209,
+            1084
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1084
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_4.png",
+          "sourceSha256": "974c161bcb5a0b2905465a148a603c61fec7b669d03ed35621a2403d45967ac9",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            55,
+            127,
+            1219,
+            1135
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1135
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_5.png",
+          "sourceSha256": "7c0d5a7ad32049e613c010003948156ad73c796441af0eab22f5b792961693f2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            63,
+            94,
+            1221,
+            1140
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {
+            "sourceSha256": "7c0d5a7ad32049e613c010003948156ad73c796441af0eab22f5b792961693f2",
+            "limbConnectionsReviewed": true,
+            "extraLimbs": false,
+            "clippingDetected": false,
+            "reviewer": "Codex visual inspection of individual native PNG",
+            "reviewedAtUtc": "2026-10-14T05:22:17.155427+00:00",
+            "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
+          },
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1140
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_6.png",
+          "sourceSha256": "72aa98891e6b635c23d75d0f18c3cefce09819e96a87bd8af8c72a2d28c81e08",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            251,
+            98,
+            983,
+            1181
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1181
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_7.png",
+          "sourceSha256": "50d24cc2bce8a2a20e072ff46193a87c1b96f4ee4365e8c141592ea39f16fa95",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            212,
+            57,
+            1041,
+            1203
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1203
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\hit_0.png",
+          "sourceSha256": "d2d0527b20a6810757c961f7e4fbeaf3c44c42e101508c83d100b51bbb2e5578",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            64,
+            91,
+            1227,
+            1166
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1166
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\hit_1.png",
+          "sourceSha256": "a3de8d93261c01be706141c1ab6348e32f662a98638541ac24829e8e4b98fb75",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            221,
+            106,
+            1100,
+            1184
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1184
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_0.png",
+          "sourceSha256": "a0742fae3f60bb4f52d82696c27d324e8985df43c70e6ac6eb41ec1d2aa55a9f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            252,
+            82,
+            1049,
+            1183
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1183
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_1.png",
+          "sourceSha256": "2d913a44fb3a13c87c836d89015f9333babb2af479e22339c4965efa615497ba",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            170,
+            121,
+            1167,
+            1193
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1193
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_2.png",
+          "sourceSha256": "ec993cfee6fa02ae8baa8019842cfcb20d8922f4b3565a960c8bebc74b13305b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            81,
+            124,
+            1219,
+            1164
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1164
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_3.png",
+          "sourceSha256": "05c89bce7869340a0d4b7446352affaca754325e31dfbf0cfeac7c640071d324",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            11,
+            257,
+            1245,
+            1160
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1160
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_4.png",
+          "sourceSha256": "3fe583fe1ff732c9afa24aac24150da272c8524c6fd7b7d3c3544dfe31cc26da",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            12,
+            427,
+            1246,
+            1018
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1018
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\death_5.png",
+          "sourceSha256": "17fa4594cfb55d2ee5ee2108c7400816bd9c7ec130b3c475134201a46be7cec4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            11,
+            490,
+            1247,
+            1011
+          ],
+          "sourceTouchesEdge": false,
+          "anatomyReview": {},
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              615.5,
+              1011
+            ],
+            "pixelsPerUnit": 12.102272727272728,
+            "anchorReviewed": false
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 163541664,
+  "deathSilhouetteHeights": [
+    1101,
+    1072,
+    1040,
+    903,
+    591,
+    521
+  ],
+  "deathHeightRiseCandidates": [],
+  "sourceFilesComplete": true,
+  "geometryApproved": false,
+  "actionContinuityApproved": false,
+  "installed": false,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "visualReviewFindings": [
+    {
+      "severity": "needs-action-review",
+      "action": "attack",
+      "frame": 5,
+      "previousFrame": 4,
+      "finding": "Visual review: attack_4 is the fully extended strike, but attack_5 abruptly returns to an almost idle standing pose. Redraw attack_5 as a partial recovery with the casting arm and flame sleeve still extended midway, then transition into attack_6 and attack_7.",
+      "reviewedAtUtc": "2026-10-13T06:42:28.875253+00:00",
+      "originalSeverity": "needs-redraw",
+      "replacementSourceSha256": "7c0d5a7ad32049e613c010003948156ad73c796441af0eab22f5b792961693f2",
+      "replacementStaticAnatomyReviewed": true,
+      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
+    },
+    {
+      "severity": "needs-action-review",
+      "action": "attack",
+      "frame": 5,
+      "sourceSha256": "25f89500772fde436eb28f669aa3a6188d1e7788588b5ef92d47cc9f70944b1c",
+      "reason": "Third leg/boot confirmed by user; native candidate archived, not installed.",
+      "originalSeverity": "needs-redraw",
+      "replacementSourceSha256": "7c0d5a7ad32049e613c010003948156ad73c796441af0eab22f5b792961693f2",
+      "replacementStaticAnatomyReviewed": true,
+      "resolution": "Original rejected image archived; independent replacement available, complete action continuity still unapproved"
+    }
+  ]
+}

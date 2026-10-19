@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_fenghuang_yuan",
+  "sha256": "a243262d4b23f38efd85230c5e1f962218335d5436452d9760e6a3cdf9e72e19",
+  "sourceSha256": "4dde59281270cd88bb591926121ff0aeed62fbcdc1745aee379ccf2f0065857f",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-02.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:31.199735+00:00"
+}

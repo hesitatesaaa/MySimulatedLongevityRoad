@@ -1,0 +1,258 @@
+{
+  "actorId": "mclsl_beast_zhuque",
+  "offlinePassed": true,
+  "verifiedInGame": false,
+  "reviewedAtUtc": "2026-10-09T12:45:19.591290+00:00",
+  "notes": [
+    "Inspected idle and hit previews and icon, then final complete flight, attack and death previews.",
+    "Red-gold paired wings, hooked beak, crest and tail retained; flying movement tucks legs and has upper and lower wingbeat poses.",
+    "Clipped flight candidate was rejected and separately redrawn with complete feathers inside canvas.",
+    "Final attack recovery folds wings and grounds both legs; reviewed death order 1,0,2,3,4,6,5,7 lowers head to prone rest.",
+    "Full-canvas nearest-neighbor normalization, independent source and fixed form anchor retained. Game size, shadows, selection, icon occupancy and actual FPS remain unverified."
+  ],
+  "frames": {
+    "idle_0": {
+      "sha256": "103bfa5e9e3232276beb3b0f1b7bb998242183f8bb8a8f7d1d58956f90477c76",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_1": {
+      "sha256": "44f81e1ad4bea6c15d18a8a09ca86028d9f9d6447a143c39fa265bcb4132cf44",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_2": {
+      "sha256": "7f3048f8c0cfecb45d29dcbba0d77a4678dc6fbd18919bf108df8c8551e03a47",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_3": {
+      "sha256": "fdcbf34988f11aea13ff2357dd03a3977b95b34c25b95d3a883dfd7eace6d6e8",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_4": {
+      "sha256": "88a60858bfe8f3e55da36d9774c01bba9286103da2eabbb4479b89ca087c616a",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "idle_5": {
+      "sha256": "75d3abcee854d80c7d117c8c38670f92b19b788a99ec87a495deb66b57606456",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_0": {
+      "sha256": "ea7a360f82cd2842a58ab91e88daeec23c407ee74fb8ff5b44028d2e50c00d18",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_1": {
+      "sha256": "545890dceb6c240c298700e23a1b79ef2a55bc714e0d9051f3df5fc96900abcf",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_2": {
+      "sha256": "8d65b7b19110ec17c53c7281fcd6105b2be911257314e784025a740e0b54ef23",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_3": {
+      "sha256": "33f2e5daaf3660a79d5393c1902db276357b51563d1ecd9fee7b1ce20809c2cd",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_4": {
+      "sha256": "ada3cb7a5d8bb4084f6a8f47b04dff2650f6409a1915d75af370b46097128be5",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_5": {
+      "sha256": "248f64413959691f3cf9ff4093da71935f171a0fc672eb4334d78b731002116e",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_6": {
+      "sha256": "86f4f16e44b833162830d9876b8feed4f36e5d4d353249ea6fbe0cca55925e79",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "walk_7": {
+      "sha256": "8e247b49c4cf3e7a96bf6a2a28c39450bc1e826dcdd21603877fb9b2d071de02",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_0": {
+      "sha256": "226d2626186206707c542de11ab6a2ca1c06fab6bf304fcf59eac008eed07848",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_1": {
+      "sha256": "0e58ccd4c533483e911aef4fdcbb962a53faa72badf2b41bd102380b128fea0c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_2": {
+      "sha256": "6439f3e06b9c91932185b5ee5569b20be7e56b655c2103928f87993337529243",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_3": {
+      "sha256": "3711f8624261438440ebbb25e0031d53d3e2d057ef27c65459db689ed948ecb2",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_4": {
+      "sha256": "2d51665f67a567d20559c06ab4658aa6f9d7bf9291593ca9b85e54cc1f8b7864",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_5": {
+      "sha256": "e8570d5b79b36a4845cf2696349f2db94504bc1c1180a39c36a3115cd4194759",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_6": {
+      "sha256": "1b53f0101bcce23e57ae250208fbacc72bc54364f57dcda5bfc071de9a760cf0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_7": {
+      "sha256": "75a79f041b1ce71590e3dd2f695e985d245c5b6ab720315185165d5605e2313f",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_8": {
+      "sha256": "c4d6f9b99db1a96c1044780bf8d7aa67d007b38aa9c0d11c4dfe695d86bd4990",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "attack_9": {
+      "sha256": "888c80728f4b1f31801c4f12475f6bbe32fbfbb618fd3cb0d881df16094501ad",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_0": {
+      "sha256": "10bcb37d4bc3ca40e5ec2cb9bc6d14c6964e7100eaa80a5f37008ff5a8610fff",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "hit_1": {
+      "sha256": "d79c7513d432c44c74392bd2a6b732a440be8af29e551e60853d0786acf4533c",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_1": {
+      "sha256": "9295a7ca9a832558bb661fc4545865320feaeb6d8e1cbe774803a187f38dddd3",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_0": {
+      "sha256": "eb2cfaa92582b11e3754734d6a74673c923676cfa891709eaaeba0886b2188b0",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_2": {
+      "sha256": "514e2cf55011679a0f0f3e58e3e6b52a75ce9a93294cf10a73e0c14da7eb8567",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_3": {
+      "sha256": "b270ce9d8abdf79107c63e9e1338d4744997c6f3cdd1c86db93539aedc052a68",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_4": {
+      "sha256": "c9db10b5ad11cf013151336335d732deb7642b7fde0d8851298d449a821e2f52",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_6": {
+      "sha256": "e52707208d384005c38524f3c321de246b3ca5d5d9a82343bc491b02b06e3320",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_5": {
+      "sha256": "87660c64305fe615d94833a2fbdf39535084cd31cfabcd4cd4f3d75e44318315",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    },
+    "death_7": {
+      "sha256": "6c1b298591e06f1dce89d31420611d06393e62849fd1cd4f56b422b790026852",
+      "identity": true,
+      "pixelEdges": true,
+      "anchor": true,
+      "continuity": true
+    }
+  },
+  "icon": {
+    "sha256": "1c59a52d666ff8ae1a809e7bf70c81c3662ca3910708d391dde0edda2538761c",
+    "offlinePassed": true,
+    "verifiedInGame": false
+  }
+}

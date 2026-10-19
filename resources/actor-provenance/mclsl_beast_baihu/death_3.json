@@ -1,0 +1,56 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "death",
+  "index": 3,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_baihu/originals/death_3.png",
+  "sourceSha256": "ef811fb03f88f8c3ef40d9a4943a12f9a84dc3ab43d15413fa09ebcfad312e2e",
+  "outputFile": "GameResources/actors/Beasts/baihu/Beast/main/death_3.png",
+  "outputSha256": "1748655be925908a260f16e2cb6fbd9bd23d505a3dd03aa2fa38ae8b3a9fddd8",
+  "createdAtUtc": "2026-10-09T05:59:45.557748+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame: Baihu sacred white tiger death_3. Identity in image 1: white and pale silver fur, charcoal tiger stripes, round ears, broad muscular feline head, FOUR legs and striped tail. Three-quarter side RIGHT-facing orthographic camera. Fixed 1254x1254 transparent canvas. Keep the same anatomical pixel scale as image 1, especially head size and torso length. Standing anatomy is 941px wide including curled tail, 733px high, original ground y1049, center x636. Do NOT enlarge the body because the pose is lower. Image 2 is preceding independently drawn death frame, for motion guide only. Pose: Chest and front elbows touch ground; hindquarters lose support and sink. Chin nearly touches ground at y1030. Hind legs fold beneath the flank. Body remains right facing with its torso lowered, not a normal standing crouch. Tail now rests in a low loose curl behind the hip. Keep relaxed tail compact and clear of edge. Entire head, legs and tail complete with clear margins. Crisp square pixel clusters, dark outline, limited flat shades. Independently DRAW this ONE frame. No old whole sprite copy/paste, resizing/recolor as redraw, sprite sheet, multiple poses, panels, text, effects, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/death_2.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.07639836289222374,
+    "translation": [
+      -1,
+      -8
+    ],
+    "canvas": [
+      96,
+      96
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": 636.0,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 12188,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

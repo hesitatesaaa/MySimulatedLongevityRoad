@@ -1,0 +1,38 @@
+{
+  "actorId": "mclsl_beast_huanglong",
+  "action": "death",
+  "frame": 8,
+  "status": "candidate-pending-review",
+  "defect": "Original death_8 raises head/neck after low death_7, then death_9 lowers again.",
+  "originalFile": "output/actor-redraw/originals/mclsl_beast_huanglong/death_8.png",
+  "originalSha256": "ce03000184e962606451819fb1f249541dcd7451f76a2a33f9b708f818895f2f",
+  "candidateFile": "output/actor-redraw/repair-candidates/review_forms_a/mclsl_beast_huanglong/death_8.png",
+  "candidateSha256": "6723e28346b897df7e0ab80d3202e831b1026cf328f50dbabf3135a6de60caf8",
+  "generator": "built-in image_gen__imagegen",
+  "prompt": "Draw ONE independent native 1254x1254 transparent RGBA pixel-art death animation frame of the EXACT same golden Chinese dragon in supplied original death_7 and death_9 images. This replaces death_8 between them. The long gold scaled body remains tightly coiled and COLLAPSED low to ground, neck and head lower than death_7 and slightly higher than death_9; no rebound or lifting the head. Eye closed, whiskers resting low, four claws naturally relaxed and correctly connected, tail curled at left. Match the original crisp pixel-art identity, antlers, mane, gold scale pattern, right-facing direction, canvas positioning and body scale. One complete dragon, one pose, no extra heads or claws, no cropped whiskers, text, border, ground art or background.",
+  "references": [
+    {
+      "file": "output/actor-redraw/originals/mclsl_beast_huanglong/death_7.png",
+      "sha256": "34e084ceb46c79bf2f8f4224ba5609811431e343e04c4a5f77cabdbb41847c2e"
+    },
+    {
+      "file": "output/actor-redraw/originals/mclsl_beast_huanglong/death_9.png",
+      "sha256": "ed09e2eb369203bbb7b88839d5c44f1eb62dbaf941848f74e18038ce5d3d4864"
+    }
+  ],
+  "alpha128Bbox": [
+    26,
+    568,
+    1243,
+    945
+  ],
+  "recovery": {
+    "actorId": "mclsl_beast_huanglong",
+    "frame": "death_8",
+    "oldSha256": "ce03000184e962606451819fb1f249541dcd7451f76a2a33f9b708f818895f2f",
+    "sourceSha256": "6723e28346b897df7e0ab80d3202e831b1026cf328f50dbabf3135a6de60caf8",
+    "reviewStatus": "waived-by-user",
+    "candidate": "E:\\0.6.0\\output\\actor-redraw\\repair-candidates\\review_forms_a\\mclsl_beast_huanglong\\death_8.png"
+  },
+  "visualReviewWaived": true
+}

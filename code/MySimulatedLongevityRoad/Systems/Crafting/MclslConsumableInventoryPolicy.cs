@@ -47,6 +47,14 @@ internal static class MclslConsumableInventoryPolicy
     {
         if (!MclslActorAccessor.Alive(actor) || item == null
             || (item.Category != "Pill" && item.Category != "Talisman")) return false;
+        if(MclslBeastItemEffects.IsConsumable(item.Id))
+        {
+            // New effects use the same automatic inventory age and grade
+            // policy as existing consumables. Manual use remains immediate.
+            if(trigger!=MclslConsumableUseTrigger.Manual
+                && (!IsOlderThanCurrentYear(acquiredYear,year)||!IsCurrentGradeUseful(actor,item)))return false;
+            return MclslBeastItemEffects.CanUse(actor,item,trigger);
+        }
 
         string breakthroughItem = BreakthroughPillForRealm(nextRealm ?? string.Empty);
         if (IsBreakthroughPill(item.Id))
@@ -126,6 +134,7 @@ internal static class MclslConsumableInventoryPolicy
         IReadOnlyDictionary<string, int> craftReserves)
     {
         if (item == null) return 0;
+        if(MclslBeastItemEffects.IsConsumable(item.Id)&&IsCurrentGradeUseful(actor,item))return PerItemReserveTarget;
         if (craftReserves != null && craftReserves.TryGetValue(item.Id, out int required)) return required;
         if (IsBreakthroughPill(item.Id)) return plan != null && plan.Contains(item.Id) ? 1 : 0;
         if (item.Category is "Pill" or "Talisman" && plan != null && plan.Contains(item.Id)

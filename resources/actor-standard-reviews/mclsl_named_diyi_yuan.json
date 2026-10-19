@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_named_diyi_yuan",
+  "sha256": "751aef3780be51c63ee1e41602c71abbd2b114792a9bfa0ef754047af40cf675",
+  "sourceSha256": "a89ac2e777465c5609f8c998b7a1c7ba7a216e216f3aa7892feb5652bc8a26a4",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "male",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-05.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:40.498727+00:00"
+}

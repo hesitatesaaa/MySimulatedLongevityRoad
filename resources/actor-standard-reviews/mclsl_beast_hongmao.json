@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_hongmao",
+  "sha256": "eed54327fda016f114a46098dc0ca85ce1c473b7e6e1dbb9ba67cd6724357b95",
+  "sourceSha256": "b2240412cd4d8d0dd125bde2e2e16b82b16aa6d8f7a1d5a780945d5828e81c96",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": null,
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-04.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:37.747657+00:00"
+}

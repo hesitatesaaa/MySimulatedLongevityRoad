@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_named_qingshenlong_yuan",
+  "sha256": "8f8291ee1fafca51e0252d5e483d91f1cf5a4e1826d7b73876cde9076f6ca805",
+  "sourceSha256": "2a90ed49dfb6e1a11699c41b5054dd670dde7629c4c71216da692159d23e3b58",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-05.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:41.209211+00:00"
+}

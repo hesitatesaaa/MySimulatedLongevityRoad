@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
@@ -7,155 +10,80 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslBeastSpawnSystem
 {
-    private const string LastCompletedYearKey = "mclsl.beasts.last_spawn_year";
-    private static WorldTile[] _tiles;
-    private static WorldTile[] _candidates;
-    private static int[] _candidateCounts;
-    private static int _cursor;
-    private static int _year = -1;
-
-    internal static void Clear()
-    {
-        _tiles = null;
-        _candidates = null;
-        _candidateCounts = null;
-        _cursor = 0;
-        _year = -1;
-    }
-
+    private static readonly Queue<(MclslBeastDefinition Beast,WorldTile Tile)> Pending=new();
+    private static int _preparedYear=-1;
+    internal static void Clear(){ Pending.Clear();_preparedYear=-1;MclslBeastHabitatIndex.Clear(); }
     internal static bool TickAnnual(int year)
     {
-        if (!MclslBeastConfig.NaturalSpawnEnabled || World.world?.units == null || year <= 0)
-            return true;
-        if (CompletedYear() >= year) return true;
-        if (_year != year || _tiles == null) Begin(year);
-        if (_tiles == null) return true;
-
-        int processed = 0;
-        while (_cursor < _tiles.Length && processed < 128 && !MclslAnnualFrameBudget.Expired)
+        if(MclslBeastWorld.WriteLocked || World.world?.units==null || year<=0)return true;
+        if(!MclslBeastHabitatIndex.Refresh(year))return false;
+        MclslBeastWorld.TickAnnual(year);
+        if(!MclslBeastConfig.NaturalSpawnEnabled)return true;
+        if(Pending.Count==0 && MclslBeastWorld.State.NaturalPending.Count>0)
         {
-            WorldTile tile = _tiles[_cursor++];
-            processed++;
-            if (tile?.Type == null) continue;
-            for (int i = 0; i < MclslBeastCatalog.All.Length; i++)
+            foreach(var saved in MclslBeastWorld.State.NaturalPending)
             {
-                MclslBeastDefinition beast = MclslBeastCatalog.All[i];
-                if (beast.Habitat == MclslBeastHabitat.RedMoon) continue;
-                if (!Matches(tile, beast.Habitat)) continue;
-                int seen = ++_candidateCounts[i];
-                if (PositiveHash(year, beast.Id, _cursor) % seen == 0) _candidates[i] = tile;
+                var beast=MclslBeastCatalog.All.FirstOrDefault(x=>x.Id==saved.Species);
+                if(beast!=null && saved.X>=0 && saved.Y>=0 && saved.X<MapBox.width && saved.Y<MapBox.height)
+                    Pending.Enqueue((beast,World.world.GetTileSimple(saved.X,saved.Y)));
             }
+            _preparedYear=year;
         }
-        if (_cursor < _tiles.Length) return false;
-
-        Finish(year);
-        Clear();
-        return true;
-    }
-
-    private static void Begin(int year)
-    {
-        _year = year;
-        _tiles = World.world?.tiles_list;
-        _cursor = 0;
-        _candidates = new WorldTile[MclslBeastCatalog.All.Length];
-        _candidateCounts = new int[MclslBeastCatalog.All.Length];
-    }
-
-    private static void Finish(int year)
-    {
-        bool redMoon = Pass(year, "red_moon", MclslBeastConfig.RedMoonChancePerMillion);
-        bool revival = Pass(year, "mountain_revival", MclslBeastConfig.RevivalChancePerMillion);
-        MclslBeastDefinition moqilin = null;
-        for (int i = 0; i < MclslBeastCatalog.All.Length; i++)
+        if(Pending.Count==0 && MclslBeastWorld.State.LastNaturalYear>=year)return true;
+        if(_preparedYear!=year)
         {
-            MclslBeastDefinition beast = MclslBeastCatalog.All[i];
-            if (beast.Id == "moqilin") { moqilin = beast; continue; }
-            WorldTile tile = _candidates[i];
-            if (beast.Habitat == MclslBeastHabitat.RedMoon)
+            _preparedYear=year;Pending.Clear();
+            int remaining=Math.Min(MclslBeastWorld.NaturalLimit-MclslBeastWorld.CountAutomatic(true),
+                MclslBeastWorld.AutomaticLimit-MclslBeastWorld.CountAutomatic()-MclslBeastWorld.State.Waves.Sum(x=>x.Count-x.Cursor));
+            var common=MclslBeastRules.CommonSpecies;
+            if(year%5==0)
+                foreach(int region in MclslBeastHabitatIndex.RegionIds.OrderBy(x=>x))
+                {
+                    if(remaining<=0)break;
+                    int regionCount=MclslBeastWorld.CountAutomatic(true,region);
+                    if(regionCount>=4 || !Pass(year,"region_"+region,200000))continue;
+                    var pool=MclslBeastCatalog.All.Where(b=>common.Contains(b.Id)
+                        && MclslBeastContent.BySpecies[b.Id].MinRealm<MclslBeastWorld.State.Unlocked
+                        && MclslBeastHabitatIndex.Find(b,year,region)!=null && MclslBeastConfig.Chance(b)>0).ToArray();
+                    int total=pool.Sum(b=>MclslBeastConfig.Chance(b));if(total<=0)continue;
+                    int roll=MclslBeastWorld.Roll(region+"|species|"+year,total);
+                    var selected=pool[0];foreach(var b in pool){if(roll<MclslBeastConfig.Chance(b)){selected=b;break;}roll-=MclslBeastConfig.Chance(b);}
+                    int amount=Math.Min(Math.Min(4-regionCount,remaining),1+MclslBeastWorld.Roll(region+"|count|"+year,2));
+                    for(int i=0;i<amount;i++)Pending.Enqueue((selected,MclslBeastHabitatIndex.Find(selected,year+i,region)));
+                    remaining-=amount;
+                }
+            foreach(var beast in MclslBeastCatalog.All)
             {
-                if (!redMoon) continue;
-                tile = FindRedMoonTile();
+                if(remaining<=0)break;
+                if(common.Contains(beast.Id)||beast.Id=="moqilin"||MclslBeastContent.BySpecies[beast.Id].MinRealm>=MclslBeastWorld.State.Unlocked)continue;
+                if(beast.Id=="yingying"&&!Pass(year,"red_moon",MclslBeastConfig.RedMoonChancePerMillion))continue;
+                if(beast.Id=="tianshou"&&!Pass(year,"revival",MclslBeastConfig.RevivalChancePerMillion))continue;
+                if(!Pass(year,beast.Id,MclslBeastConfig.Chance(beast)))continue;
+                var selected=beast;
+                if(beast.Id=="qilin"&&Pass(year,"moqilin_variant",MclslBeastConfig.Chance(MclslBeastCatalog.All.First(x=>x.Id=="moqilin"))))
+                    selected=MclslBeastCatalog.All.First(x=>x.Id=="moqilin");
+                var tile=MclslBeastHabitatIndex.Find(selected,year);
+                if(tile==null||MclslBeastWorld.CountAutomatic(true,MclslBeastHabitatIndex.Region(tile))>=4)continue;
+                int queuedInRegion=Pending.Count(x=>MclslBeastHabitatIndex.Region(x.Tile)==MclslBeastHabitatIndex.Region(tile));
+                if(queuedInRegion+MclslBeastWorld.CountAutomatic(true,MclslBeastHabitatIndex.Region(tile))>=4)continue;
+                Pending.Enqueue((selected,tile));remaining--;
             }
-            if (beast.Id == "tianshou" && !revival) continue;
-            if (tile == null || !Pass(year, beast.Id, MclslBeastConfig.Chance(beast))) continue;
-            if (beast.Id == "qilin" && moqilin != null
-                && Pass(year, "moqilin_variant", MclslBeastConfig.Chance(moqilin)))
-            {
-                if (TryChooseLineage(moqilin, out _)) beast = moqilin;
-            }
-            int group = beast.MinGroup + PositiveHash(year, beast.Id, 71)
-                % (beast.MaxGroup - beast.MinGroup + 1);
-            for (int member = 0; member < group; member++)
-            {
-                if (!TryChooseLineage(beast, out Subspecies lineage)) break;
-                WorldTile placement = member == 0 ? tile : Nearby(tile, beast.Habitat);
-                if (placement == null) break;
-                Actor actor = World.world.units.createNewUnit(beast.BeastAssetId, placement,
-                    false, 0f, lineage, null, true, false, false, false);
-                if (actor?.data == null) break;
-                MclslBeastActorRegistration.ReconcileForm(actor);
-                MclslBeastActorRegistration.EnsureCultivationSeed(actor);
-            }
+            MclslBeastWorld.State.NaturalPending=Pending.Where(x=>x.Tile!=null).Select(x=>new MclslNaturalBeastSpawn
+                { Species=x.Beast.Id,X=x.Tile.pos.x,Y=x.Tile.pos.y }).ToList();
+            MclslBeastWorld.State.LastNaturalYear=year;MclslBeastWorld.Save();
         }
-        try
+        var watch=Stopwatch.StartNew();int made=0;
+        while(Pending.Count>0 && made++<4 && watch.Elapsed.TotalMilliseconds<2 && !MclslAnnualFrameBudget.Expired)
         {
-            if (World.world.map_stats.custom_data == null)
-                World.world.map_stats.custom_data = new SaveCustomData();
-            World.world.map_stats.custom_data.set(LastCompletedYearKey, year);
+            var spawn=Pending.Dequeue();
+            if(MclslBeastWorld.State.NaturalPending.Count>0)MclslBeastWorld.State.NaturalPending.RemoveAt(0);
+            if(MclslBeastWorld.CountAutomatic()>=MclslBeastWorld.AutomaticLimit)continue;
+            MclslBeastWorld.Spawn(spawn.Beast,spawn.Tile,MclslBeastContent.BySpecies[spawn.Beast.Id].MinRealm,"natural",0);
         }
-        catch (Exception ex) { MclslDiagnostics.Error("beast-spawn-year", ex.Message); }
+        if(Pending.Count>0)return false;
+        MclslBeastWorld.State.LastNaturalYear=year;MclslBeastWorld.Save();return true;
     }
-
-    private static int CompletedYear()
-    {
-        try
-        {
-            if (World.world?.map_stats?.custom_data == null) return 0;
-            World.world.map_stats.custom_data.get(LastCompletedYearKey, out int value, 0);
-            return value;
-        }
-        catch { return 0; }
-    }
-
-    private static bool TryChooseLineage(MclslBeastDefinition beast, out Subspecies chosen)
-    {
-        chosen = null;
-        var list = World.world?.subspecies?.list;
-        if (list == null) return true;
-        bool found = false;
-        for (int i = 0; i < list.Count; i++)
-        {
-            Subspecies subspecies = list[i];
-            string assetId = subspecies?.getActorAsset()?.id;
-            if (assetId != beast.BeastAssetId && assetId != beast.AscendedAssetId) continue;
-            found = true;
-            if (subspecies.hasReachedPopulationLimit()) continue;
-            chosen = subspecies;
-            return true;
-        }
-        // The first spawn may create the species through the native pipeline.
-        // Once lineages exist, only a lineage below its own edited limit qualifies.
-        return !found;
-    }
-
-    private static WorldTile FindRedMoonTile()
-    {
-        for (int i = 0; i < _candidates.Length; i++)
-            if (_candidates[i] != null && !_candidates[i].Type.liquid) return _candidates[i];
-        return null;
-    }
-
-    private static WorldTile Nearby(WorldTile center, MclslBeastHabitat habitat)
-    {
-        WorldTile[] neighbours = center?.neighboursAll;
-        if (neighbours == null) return center;
-        for (int i = 0; i < neighbours.Length; i++)
-            if (Matches(neighbours[i], habitat)) return neighbours[i];
-        return center;
-    }
-
-    private static bool Matches(WorldTile tile, MclslBeastHabitat habitat)
+    internal static bool Matches(WorldTile tile, MclslBeastHabitat habitat)
     {
         if (tile?.Type == null) return false;
         var type = tile.Type;
@@ -185,6 +113,7 @@ internal static class MclslBeastSpawnSystem
             case MclslBeastHabitat.GrassHill: return !water && (grass || type.edge_hills);
             case MclslBeastHabitat.CorruptBorder: return !water && (Contains(biome, "corrupt") || Contains(biome, "waste"));
             case MclslBeastHabitat.SeaRift: return water && type.ocean && !coast && (Contains(biome, "deep") || Contains(id, "deep"));
+            case MclslBeastHabitat.RedMoon: return !water;
             case MclslBeastHabitat.HighMountain: return !water && type.mountains;
             default: return !water;
         }

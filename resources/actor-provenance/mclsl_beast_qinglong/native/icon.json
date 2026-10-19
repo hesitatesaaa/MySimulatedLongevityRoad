@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "icon",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/icon_0.png",
+  "sourceSha256": "7e90770436d1fe2f8b69d8b219d9a9e863949e960bd05fd1b76238fc2eceaf69",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_qinglong.png",
+  "outputSha256": "7e90770436d1fe2f8b69d8b219d9a9e863949e960bd05fd1b76238fc2eceaf69",
+  "createdAtUtc": "2026-10-09T08:14:00.951900+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art placement ICON for Qinglong, not a world animation reused. Reference only identity: turquoise azure Eastern dragon with navy shadows, cream segmented belly, gold antlers/crest, cyan mane/plume and two cream-lined whiskers. Dedicated placement icon: whole dragon in compact circular coil with head proudly looking right above coil, antlers, mane, cream whiskers and gold crest clearly readable. Exactly four short limbs naturally attached, far limbs partly hidden. A fresh icon pose filling the center, no frame or button background. Compact complete silhouette centered inside x160..1090,y140..1110 of1254x1254 transparent canvas. Render as128x128 virtual pixel icon with longest visible edge94 virtual pixels, crisp square clusters, dark outlines, limited flat palette. Independently draw all pixels, no paste scale recolor of old art. No wings, text, particles, halo, ground, shadow, background, UI border, sheets, panels or multiple poses.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

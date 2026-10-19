@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_yingying_yuan",
+  "sha256": "30ea0a8f6d499e150f5df8683e8a80426d3344ab1753e4f98934b1904336d290",
+  "sourceSha256": "ec88ffd44599400c39d83a2c3c3d53035f8dbd32326d9ea31344522cabc638ce",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized independent frame on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-04.png at full resolution. Readable identity and clean pixel silhouette at Li Fan/Baihu detail level; assigned human gender visible. Standard only; action continuity and game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:55:38.745239+00:00"
+}

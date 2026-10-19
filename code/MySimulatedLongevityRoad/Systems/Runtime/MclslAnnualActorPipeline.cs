@@ -40,6 +40,15 @@ internal static class MclslAnnualActorPipeline
             return false;
         }
 
+        if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(actor))
+        {
+            if (stage == MclslAnnualPipelineStage.Prepare && step == 0)
+                MclslBeastCultivation.TickAnnual(actor, annualYear);
+            MclslWorldActorQuery.Track(actor);
+            MclslActorProjectionIndex.Update(actor);
+            return false;
+        }
+
         bool bagStep = stage == MclslAnnualPipelineStage.Market
             || stage == MclslAnnualPipelineStage.Prepare && step is 0 or 1 or 3 or 5 or 6 or 7
             || stage == MclslAnnualPipelineStage.Progression && step is 1 or 2;

@@ -10,7 +10,7 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal sealed partial class MclslCodexWindow
 {
-    private static readonly string[] FamilyArchiveViews = { "家族总览", "在世族人", "家库传承", "城市影响", "家族纪事" };
+    private static readonly string[] FamilyArchiveViews = { "家族总览", "族人名录", "家库传承", "城市影响", "家族纪事" };
     private static readonly string[] FamilyArchiveViewKeys = { "mclsl_family_view_overview", "mclsl_family_view_members",
         "mclsl_family_view_inheritance", "mclsl_family_view_cities", "mclsl_family_view_history" };
     private string _familyArchiveView = "家族总览";
@@ -21,6 +21,8 @@ internal sealed partial class MclslCodexWindow
     private List<MclslFamilyRecord> _familyMatched = new();
     private string _familyCachedFilter, _familyCachedSearch;
     private int _familyCachedCount = -1;
+    private long _familyCachedRevision = -1;
+    private string _familyMemberFilter = "在世";
     private float _familyNextRefresh;
 
     private void DrawFamilies(MclslWorldRunState run)
@@ -30,7 +32,8 @@ internal sealed partial class MclslCodexWindow
         IReadOnlyList<MclslFamilyRecord> source = MclslFamilySystem.Families;
         if (source.Count == 0) { GUILayout.Label("尚无修士家族。有人入道后将建立家族档案。"); return; }
         if (!ReferenceEquals(_familyCachedRun, run) || _familyCachedCount != source.Count
-            || _familyCachedFilter != _familyRealmFilter || Time.unscaledTime >= _familyNextRefresh)
+            || _familyCachedFilter != _familyRealmFilter || _familyCachedRevision != MclslFamilySystem.Revision
+            || Time.unscaledTime >= _familyNextRefresh)
         {
             _familySorted = source.Where(x => x != null)
                 .Where(x => _familyRealmFilter == MclslEventCatalog.All || FamilyRealmBucket(x) == _familyRealmFilter)
@@ -39,6 +42,7 @@ internal sealed partial class MclslCodexWindow
                 .ThenBy(x => x.Name, StringComparer.Ordinal).ToList();
             _familyCachedRun = run;
             _familyCachedCount = source.Count;
+            _familyCachedRevision = MclslFamilySystem.Revision;
             _familyCachedFilter = _familyRealmFilter;
             _familyCachedSearch = null;
             _familyNextRefresh = Time.unscaledTime + 2f;
@@ -77,7 +81,7 @@ internal sealed partial class MclslCodexWindow
             MclslFamilyRecord family = matched[i];
             Color old = GUI.backgroundColor;
             GUI.backgroundColor = family.Id == _selectedFamilyId ? new Color(0.36f, 0.49f, 0.40f) : old;
-            if (GUILayout.Button(family.Name + "　·　在世", GUILayout.Height(34f)))
+            if (GUILayout.Button(family.Name + (family.Extinct ? "　·　绝嗣" : "　·　在世"), GUILayout.Height(34f)))
             {
                 _selectedFamilyId = family.Id;
                 _selectedFamilyMemberId = 0;
@@ -101,7 +105,8 @@ internal sealed partial class MclslCodexWindow
         int highest = -1;
         if (family?.Members == null) return highest;
         foreach (MclslFamilyMemberRecord member in family.Members)
-            if (member?.Alive == true && member.RealmIndex > highest && member.RealmIndex < MclslRealmIds.Ordered.Length)
+            if (member is { Alive: true, Missing: false, IsCultivator: true }
+                && member.RealmIndex > highest && member.RealmIndex < MclslRealmIds.Ordered.Length)
                 highest = member.RealmIndex;
         return highest;
     }
@@ -166,7 +171,7 @@ internal sealed partial class MclslCodexWindow
         GUILayout.Space(6f);
         switch (_familyArchiveView)
         {
-            case "在世族人": DrawFamilyMembersArchive(family); break;
+            case "族人名录": DrawFamilyMembersArchive(family); break;
             case "家库传承": DrawFamilyInheritanceArchive(family); break;
             case "城市影响": DrawFamilyCitiesArchive(family); break;
             case "家族纪事": DrawFamilyHistoryArchive(family); break;
@@ -183,7 +188,12 @@ internal sealed partial class MclslCodexWindow
             GUILayout.BeginHorizontal();
             DrawMiniStat("家主", head?.Name ?? "未定", "#FFD37A", GUILayout.Width(210f));
             DrawMiniStat("重点扶持", focus?.Name ?? "自动选择", "#9CD7FF", GUILayout.Width(210f));
-            DrawMiniStat("在世修士", family.Members.Count(x => x?.Alive == true).ToString(), "#A7E08A", GUILayout.Width(140f));
+            DrawMiniStat("在世修士", family.Members.Count(x => x is { Alive: true, Missing: false, IsCultivator: true }).ToString(), "#A7E08A", GUILayout.Width(140f));
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            DrawMiniStat("在世凡人", family.Members.Count(x => x is { Alive: true, Missing: false, IsCultivator: false }).ToString(), "#CFC7B2", GUILayout.Width(160f));
+            DrawMiniStat("在世总人数", family.Members.Count(x => x is { Alive: true, Missing: false }).ToString(), "#A7E08A", GUILayout.Width(160f));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
@@ -194,7 +204,7 @@ internal sealed partial class MclslCodexWindow
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("查看族人", GUILayout.Height(36f))) _familyArchiveView = "在世族人";
+            if (GUILayout.Button("查看族人", GUILayout.Height(36f))) _familyArchiveView = "族人名录";
             if (GUILayout.Button("查看传承", GUILayout.Height(36f))) _familyArchiveView = "家库传承";
             if (GUILayout.Button("查看城市", GUILayout.Height(36f))) _familyArchiveView = "城市影响";
             GUILayout.EndHorizontal();
@@ -212,7 +222,13 @@ internal sealed partial class MclslCodexWindow
 
     private void DrawFamilyMembersArchive(MclslFamilyRecord family)
     {
-        List<MclslFamilyMemberRecord> members = family.Members.Where(x => x?.Alive == true)
+        GUILayout.BeginHorizontal();
+        foreach (string filter in new[] { "在世", "已故/失联", "全部" })
+            if (GUILayout.Button(filter) && _familyMemberFilter != filter)
+            { _familyMemberFilter = filter; _familyMemberPage = 0; }
+        GUILayout.EndHorizontal();
+        List<MclslFamilyMemberRecord> members = family.Members.Where(x => x != null
+            && (_familyMemberFilter == "全部" || (_familyMemberFilter == "在世" ? x.Alive && !x.Missing : !x.Alive || x.Missing)))
             .OrderBy(x => x.Generation).ThenBy(x => x.Name, StringComparer.Ordinal).ToList();
         DrawInfoCard("族人名录", "#9CD7FF", () =>
         {
@@ -223,16 +239,19 @@ internal sealed partial class MclslCodexWindow
             if (_familyMemberPage > 0 && GUILayout.Button("上一页", GUILayout.Width(74f))) _familyMemberPage--;
             if (_familyMemberPage + 1 < pages && GUILayout.Button("下一页", GUILayout.Width(74f))) _familyMemberPage++;
             GUILayout.EndHorizontal();
-            if (members.Count == 0) GUILayout.Label("暂无在世族人。");
+            if (members.Count == 0) GUILayout.Label("暂无符合筛选条件的族人。");
             for (int i = _familyMemberPage * 16; i < Math.Min(members.Count, (_familyMemberPage + 1) * 16); i++)
             {
                 MclslFamilyMemberRecord member = members[i];
                 GUILayout.BeginHorizontal(GUI.skin.box);
                 GUILayout.Label(member.Name, GUILayout.Width(215f));
                 DrawTag("第" + member.Generation + "代", "#CFC7B2");
-                DrawTag(MclslRealmIds.Display(MclslRealmIds.Ordered[Math.Clamp(member.RealmIndex, 0, 6)]), "#9CD7FF");
+                DrawTag(member.Missing ? "失联" : !member.Alive ? "已故" : member.IsCultivator
+                    ? MclslRealmIds.Display(MclslRealmIds.Ordered[Math.Clamp(member.RealmIndex, 0, 6)]) : "凡人", "#9CD7FF");
                 GUILayout.FlexibleSpace();
                 if (member.ActorId == family.HeadActorId) DrawTag("家主", "#FFD37A");
+                bool previousEnabled = GUI.enabled;
+                GUI.enabled = previousEnabled && member.Alive && !member.Missing;
                 if (GUILayout.Button(LM.Get("mclsl_history_locate"), GUILayout.Width(68f))
                     && MclslActorRegistry.ResolveKnownOrWorld(member.ActorId, out Actor located)
                     && MclslActorAccessor.Alive(located))
@@ -240,12 +259,15 @@ internal sealed partial class MclslCodexWindow
                     CloseWindow();
                     MclslEventLocator.Locate(located);
                 }
+                GUI.enabled = previousEnabled && member.Alive && !member.Missing && member.IsCultivator;
                 if (GUILayout.Button("管理", GUILayout.Width(68f))) _selectedFamilyMemberId = member.ActorId;
+                GUI.enabled = previousEnabled;
                 GUILayout.EndHorizontal();
             }
         });
         MclslFamilyMemberRecord managed = family.Members.Find(x => x?.ActorId == _selectedFamilyMemberId);
-        if (managed?.Alive == true && MclslActorRegistry.ResolveKnownOrWorld(managed.ActorId, out Actor actor)
+        if (managed is { Alive: true, Missing: false, IsCultivator: true }
+            && MclslActorRegistry.ResolveKnownOrWorld(managed.ActorId, out Actor actor)
             && MclslActorAccessor.Alive(actor)) DrawFamilyMemberControls(family, actor);
     }
 
@@ -260,11 +282,12 @@ internal sealed partial class MclslCodexWindow
                 GUILayout.BeginHorizontal(GUI.skin.box);
                 GUILayout.Label((MclslItemCatalog.Get(item.ItemId)?.Name ?? "未知物品") + " ×" + item.Count);
                 GUILayout.FlexibleSpace();
-                if (managed?.Alive == true && MclslActorRegistry.ResolveKnownOrWorld(managed.ActorId, out Actor recipient)
+                if (managed is { Alive: true, Missing: false, IsCultivator: true }
+                    && MclslActorRegistry.ResolveKnownOrWorld(managed.ActorId, out Actor recipient)
                     && GUILayout.Button("领用一件", GUILayout.Width(86f))) MclslFamilySystem.TransferItem(family, recipient, item.ItemId, false);
                 GUILayout.EndHorizontal();
             }
-            GUILayout.Label("领用物品前，请先在“在世族人”中选择管理对象。");
+            GUILayout.Label("领用物品前，请先在“族人名录”中选择在世修士。");
         });
         DrawInfoCard("功法传承", "#B7A7FF", () =>
         {

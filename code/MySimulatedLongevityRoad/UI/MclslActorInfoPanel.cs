@@ -28,6 +28,9 @@ internal static class MclslActorInfoPanel
     internal static void Refresh(UnitWindow window, bool resetScrollForNewActor = false, bool forceContentRefresh = false)
     {
         if (window == null || !window.gameObject.activeInHierarchy) return;
+        SelectionWatcher watcher = window.GetComponent<SelectionWatcher>();
+        if (watcher == null) watcher = window.gameObject.AddComponent<SelectionWatcher>();
+        watcher.Window = window;
         OpenWindows.Add(window);
         long actorId = MclslActorAccessor.Id(window.actor);
         if (!forceContentRefresh && !resetScrollForNewActor
@@ -759,6 +762,25 @@ internal static class MclslActorInfoPanel
             catch { child.gameObject.SetActive(false); }
         }
         return kept;
+    }
+
+    private sealed class SelectionWatcher : MonoBehaviour
+    {
+        internal UnitWindow Window;
+        private int _selectionVersion = -1;
+        private long _actorId = -1;
+        private bool _alive;
+        private void LateUpdate()
+        {
+            if (Window == null || !Window.gameObject.activeInHierarchy) return;
+            int version = SelectedUnit.getSelectionVersion();
+            long id = MclslActorAccessor.Id(Window.actor);
+            bool alive = MclslActorAccessor.Alive(Window.actor);
+            if (version == _selectionVersion && id == _actorId && alive == _alive) return;
+            bool changedActor = id != _actorId;
+            _selectionVersion = version; _actorId = id; _alive = alive;
+            Refresh(Window, resetScrollForNewActor: changedActor, forceContentRefresh: true);
+        }
     }
 
     private sealed class PanelState : MonoBehaviour

@@ -31,8 +31,8 @@ internal sealed class MclslRankTooltipTrigger : MonoBehaviour, IPointerEnterHand
         _hovering = true;
         Tooltip.show(gameObject, "tip", new TooltipData
         {
-            tip_name = TooltipText,
-            tip_description = TooltipDescription ?? string.Empty
+            tip_name = MclslLocalizationBridge.RuntimeText(TooltipText),
+            tip_description = MclslLocalizationBridge.RuntimeText(TooltipDescription ?? string.Empty)
         });
     }
 

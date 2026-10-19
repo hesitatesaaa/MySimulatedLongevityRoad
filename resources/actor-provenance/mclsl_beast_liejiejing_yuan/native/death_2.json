@@ -1,0 +1,53 @@
+{
+  "actorId": "mclsl_beast_liejiejing_yuan",
+  "action": "death",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing_yuan/death_2.png",
+  "sourceSha256": "35b6ef3b2159e66904fe1c6c3720650f806e53d0928e37b2d11d06c43aea1bc1",
+  "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Human/main/death_2.png",
+  "outputSha256": "35b6ef3b2159e66904fe1c6c3720650f806e53d0928e37b2d11d06c43aea1bc1",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 裂解鲸·化形 (mclsl_beast_liejiejing_yuan), death_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, deep-blue side braid and silver wave comb, blue/cream-gray robe, fin-shaped shoulder mantle and simple wave cuffs, human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Death single-shot progress 0.400, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_liejiejing_yuan\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T04:06:06.666483+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "staticReview": {
+    "worker": "resume_liejiejing_tianshou",
+    "sourceSha256": "35b6ef3b2159e66904fe1c6c3720650f806e53d0928e37b2d11d06c43aea1bc1",
+    "viewedFullNativeImage": true,
+    "reviewedAtUtc": "2026-10-16T04:07:10.580609+00:00",
+    "observations": [
+      "Closed eyes and bent knees, two boots visible, slack arms and robe pooling. Head/comb appears higher than death_1, a potential death-stage rebound requiring sequence review."
+    ],
+    "continuityApproved": false,
+    "geometryApproved": false,
+    "completeActionReviewPassed": false,
+    "runtimeVerified": false
+  },
+  "reviewStatus": "waived-by-user"
+}

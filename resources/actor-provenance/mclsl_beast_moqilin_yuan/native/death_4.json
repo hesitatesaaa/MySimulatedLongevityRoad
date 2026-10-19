@@ -1,0 +1,40 @@
+{
+  "actorId": "mclsl_beast_moqilin_yuan",
+  "action": "death",
+  "index": 4,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "resources/actor-provenance/mclsl_beast_moqilin_yuan/originals/death_4.png",
+  "sourceSha256": "85f41396e9890fc74393f54acffc4b374b6a17a6294a15cb9410fbe65b2b6203",
+  "outputFile": "NativeActorResources/actors/Beasts/moqilin/Human/main/death_4.png",
+  "outputSha256": "85f41396e9890fc74393f54acffc4b374b6a17a6294a15cb9410fbe65b2b6203",
+  "createdAtUtc": "2026-10-09T12:35:48.525990+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for 墨麒麟·化形 (mclsl_beast_moqilin_yuan), death_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ONE humanoid Chinese cultivator in detailed layered robes, with exactly two arms and two legs and a fully human face. This is the ascended human form of ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, four legs and tufted tail. Preserve its palette and subtle identity through crest-like hair ornaments, horn motifs where appropriate, embroidered scale/fur/feather patterns, and a recognizable tail or shoulder mantle where present in source. Keep the baseline human hairstyle, costume silhouette and visible weapon; do not draw the animal itself or copy Li Fan's robe colors.. Visual gender: male, adult fully clothed human. Pose: Death single-shot progress 0.800, stage prone settling. Required pose: Rest FLAT and slack on the ground, head very low beside collapsed torso, limbs folded beneath or beside body. No upright kneeling torso; no support under shoulders. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep all limbs or fins slack against a flattened resting body, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin_yuan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

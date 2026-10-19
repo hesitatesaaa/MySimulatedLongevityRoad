@@ -43,6 +43,9 @@ internal static class MclslBeastActorRegistration
     internal static bool IsBeast(Actor actor)
         => MclslBeastCatalog.ForAsset(actor?.asset?.id) != null;
 
+    internal static bool IsOrdinary(Actor actor)
+        => IsBeast(actor) && actor.asset.id.StartsWith("mclsl_beast_", StringComparison.Ordinal);
+
     internal static void AddPowers(PowersTab tab)
     {
         Init();
@@ -61,11 +64,12 @@ internal static class MclslBeastActorRegistration
                     ignore_cursor_icon = true
                 });
             if (Buttons.ContainsKey(powerId)) continue;
-            Sprite icon = MclslBeastAnimation.LoadSprite(beast.ResourceFolder + "/Beast/spawn_icon")
-                ?? MclslBeastAnimation.LoadSprite(beast.ResourceFolder + "/Beast/main/idle_0")
+            Sprite icon = MclslActorPixelResources.PlacementIcon(beast.BeastAssetId,
+                beast.ResourceFolder + "/Beast/main/idle_0")
                 ?? AssetManager.actor_library.get(beast.BeastAssetId)?.getSpriteIcon();
             PowerButton button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
             if (button == null) continue;
+            MclslActorPixelResources.ConfigurePlacementButton(button);
             Buttons.Add(powerId, button);
             PowersTabExtension.AddPowerButton(tab, "tab", button);
         }
@@ -78,6 +82,8 @@ internal static class MclslBeastActorRegistration
             null, null, true, false, false, false);
         if (actor?.data == null) return false;
         EnsureCultivationSeed(actor);
+        if(IsOrdinary(actor))MclslBeastCultivation.SetRealm(actor,
+            MclslRealmIds.Ordered[Math.Clamp(MclslBeastWorld.ManualRealm,0,6)],MclslRuntime.CurrentYear());
         return true;
     }
 
@@ -88,6 +94,9 @@ internal static class MclslBeastActorRegistration
     }
 
     internal static bool HasYuanyingWisdom(Actor actor)
+        => IsBeast(actor) && !IsOrdinary(actor) && CanTransform(actor);
+
+    internal static bool CanTransform(Actor actor)
         => IsBeast(actor) && MclslRealmIds.Index(MclslActorAccessor.Realm(actor))
             >= MclslRealmIds.Index(MclslRealmIds.YuanYing);
 
@@ -105,7 +114,8 @@ internal static class MclslBeastActorRegistration
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0) <= 0)
             MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, 60);
         int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 60);
-        MclslTraitRegistration.SyncGiftTrait(actor, aptitude);
+        if(!IsOrdinary(actor))MclslTraitRegistration.SyncGiftTrait(actor, aptitude);
+        if (IsOrdinary(actor)) MclslBeastCultivation.Ensure(actor);
         MclslActorAccessor.ApplyDisplayName(actor, MclslActorAccessor.Realm(actor));
     }
 
@@ -114,7 +124,7 @@ internal static class MclslBeastActorRegistration
         if (actor?.asset == null || actor.data == null) return;
         MclslBeastDefinition beast = MclslBeastCatalog.ForAsset(actor.asset.id);
         if (beast == null) return;
-        string wanted = HasYuanyingWisdom(actor) ? beast.AscendedAssetId : beast.BeastAssetId;
+        string wanted = CanTransform(actor) ? beast.AscendedAssetId : beast.BeastAssetId;
         if (string.Equals(actor.asset.id, wanted, StringComparison.Ordinal)) return;
         ActorAsset target = AssetManager.actor_library.get(wanted);
         if (target == null) return;
@@ -131,7 +141,9 @@ internal static class MclslBeastActorRegistration
         MclslLocalizationBridge.RegisterKey(beast.BeastAssetId, beast.Name);
         MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId, beast.Name + "·元婴");
         MclslLocalizationBridge.RegisterKey(beast.BeastAssetId + " Description", "元婴前无智慧的修炼妖兽。");
-        MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId + " Description", "元婴后化形，可依兽人规则建立国家。");
+        bool named = beast.AssetPrefix == "mclsl_named_";
+        MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId + " Description", named
+            ? "具名妖兽，元婴后保留人物规则。" : "元婴后化形，仍无智慧，不建立国家。");
         ActorAsset template = AssetManager.actor_library.get(beast.AnimalTemplate)
             ?? AssetManager.actor_library.get("sheep");
         if (template == null || orc == null) throw new InvalidOperationException("缺少原版动物或兽人模板");
@@ -167,6 +179,27 @@ internal static class MclslBeastActorRegistration
         ascended.decision_ids = Copy(orc.decision_ids);
         ascended.architecture_id = orc.architecture_id;
         ascended.banner_id = orc.banner_id;
+        if (!named)
+        {
+            ActorAsset predator=AssetManager.actor_library.get(beast.AnimalTemplate=="piranha"?"piranha":"wolf")??template;
+            foreach (ActorAsset form in new[] { animal, ascended })
+            {
+                form.civ = false;
+                form.auto_civ = false;
+                form.unit_other = true;
+                form.kingdom_id_civilization = string.Empty;
+                form.kingdom_id_wild = "mclsl_wild_beasts";
+                form.job = predator.job;
+                form.job_kingdom = predator.job_kingdom;
+                form.job_baby = predator.job_baby;
+                form.decision_ids = Copy(predator.decision_ids);
+                form.default_subspecies_traits.RemoveAll(id => id == "prefrontal_cortex"
+                    || id == "advanced_hippocampus" || id.StartsWith("reproduction_", StringComparison.Ordinal));
+                form.base_stats["birth_rate"] = 0f;
+                form.base_stats["offspring"] = 0f;
+            }
+            MclslBeastWorld.EnsureWildKingdom();
+        }
     }
 
     private static void ConfigureShared(ActorAsset asset, MclslBeastDefinition beast,
@@ -195,22 +228,12 @@ internal static class MclslBeastActorRegistration
         asset.default_subspecies_traits = traits;
         asset.base_stats["birth_rate"] = 0.1f;
         asset.base_stats["offspring"] = 1f;
-        // World size is independent of source PNG resolution and spawn icon size.
-        asset.base_stats["scale"] = humanoid ? 0.20f : 0.11f;
         string path = beast.ResourceFolder + "/" + (humanoid ? "Human" : "Beast") + "/";
+        asset.base_stats["scale"] = MclslActorPixelResources.DisplayScale(path, humanoid ? 0.20f : 0.18f);
         asset.texture_id = asset.id;
         asset.texture_asset = new ActorTextureSubAsset(path, false);
         asset.texture_asset.texture_path_main = path + "main";
-        asset.animation_idle = new[] { "idle_0", "idle_1", "idle_2", "idle_3" };
-        asset.animation_walk = new[] { "walk_0", "walk_1", "walk_2", "walk_3" };
-        asset.animation_swim = asset.animation_walk;
-        asset.animation_idle_speed = 0.14f;
-        asset.animation_walk_speed = 0.10f;
-        asset.animation_swim_speed = 0.10f;
-        asset.animation_speed_based_on_walk_speed = false;
-        asset.get_override_sprite = MclslBeastAnimation.GetSprite;
-        asset.has_override_sprite = true;
-        Sprite first = MclslBeastAnimation.LoadSprite(path + "main/idle_0");
+        Sprite first = MclslBeastAnimation.ConfigureAsset(asset, path);
         if (first == null)
             throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
         asset.cached_sprite = first;

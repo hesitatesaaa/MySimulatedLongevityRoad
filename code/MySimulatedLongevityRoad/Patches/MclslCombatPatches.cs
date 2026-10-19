@@ -74,6 +74,10 @@ internal static class MclslCombatPatches
         out MclslNativeKillStatisticsSystem.MclslNativeKillAttemptState __state)
     {
         __state = MclslNativeKillStatisticsSystem.CapturePotentialDivertedHit(__instance, pAttacker);
+        MclslBeastLoot.ObserveHit(__instance,pAttacker);
+        pDamage*=MclslBeastItemEffects.DamageFactor(__instance,pAttackType);
+        if(!MclslSpellSystem.IsApplyingSpellDamage && pAttacker is Actor source && pAttackType==AttackType.Weapon)
+            pDamage*=1+MclslBeastItemEffects.ArtifactBonus(source,"physical");
         bool lifeSaved = MclslItemUseSystem.TryAutoLifeSave(__instance, pDamage);
         MclslItemUseSystem.TryAutoCombatConsumables(__instance, pDamage, lifeSaved);
         if (__instance.hasStatus("mclsl_item_D011")) pDamage *= 0.10f;

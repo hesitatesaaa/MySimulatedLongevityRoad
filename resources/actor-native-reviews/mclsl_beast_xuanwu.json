@@ -1,0 +1,872 @@
+{
+  "actorId": "mclsl_beast_xuanwu",
+  "checkedAtUtc": "2026-10-13T06:42:44.915997+00:00",
+  "actions": {
+    "idle": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "idle_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\idle_0.png",
+          "sourceSha256": "9dd125f60bae26f610a89eb29754069a7a062517c3bdc435734dc8b08024c7b4",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            187,
+            315,
+            1138,
+            1117
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1117
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": false
+        },
+        {
+          "name": "idle_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\idle_1.png",
+          "sourceSha256": "2d01de75ffd1de8e8844b608535254a4f2b1c13026b265497ca05a3a8cc89049",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            146,
+            278,
+            1205,
+            1145
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1145
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\idle_2.png",
+          "sourceSha256": "b52c0154944b55b574d4d6bca05de60c230cceacf67487f899bf9485875bd74c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            166,
+            322,
+            1150,
+            1117
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1117
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "idle_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\idle_3.png",
+          "sourceSha256": "13be98504617160756929e3bf711ab565d4696278d58b90cf9658d9b7e81d682",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            170,
+            256,
+            1201,
+            1137
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1137
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "walk": {
+      "loop": true,
+      "frames": [
+        {
+          "name": "walk_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_0.png",
+          "sourceSha256": "0b61569b0dc885f5f98f95d37da890357ef7ae0a4e7acc3781cf86b0350955df",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            77,
+            275,
+            1196,
+            1125
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1125
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_1.png",
+          "sourceSha256": "fa30c7474485b69191f12756230161e0f2780d8af425f8c63344358a5e5ab858",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            157,
+            311,
+            1178,
+            1128
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1128
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_2.png",
+          "sourceSha256": "b83eade1c06dcd425634b2bf4a63642a33de854289cb462f670ba9fa7e87c8e7",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            157,
+            301,
+            1171,
+            1096
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1096
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_3.png",
+          "sourceSha256": "356c2763ec9bfa86786e8dcd709723338882049e3349991c242f9b58f33d52aa",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            164,
+            290,
+            1199,
+            1126
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1126
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_4.png",
+          "sourceSha256": "02b630c489cfc35feb9cca06845494e25df09ed5993b2fc3f325ccb599d9cfbb",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            112,
+            289,
+            1187,
+            1134
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1134
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "walk_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\walk_5.png",
+          "sourceSha256": "55c3dd8c58d065496b2d53b540acd3647bc5f76a7e41f11d17105832cc73c35c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            80,
+            261,
+            1216,
+            1123
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1123
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "attack": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "attack_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_0.png",
+          "sourceSha256": "17a38882b38b5ecd5b7aa222baded689f01e37eff3e38e40672bd2320b1f94d6",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            152,
+            318,
+            1196,
+            1122
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1122
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_1.png",
+          "sourceSha256": "cc6a6902fdd5fae24536e604ca25477ccaf0445dee2fd409e5a09af4e03e1d6f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            91,
+            274,
+            1223,
+            1125
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1125
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_2.png",
+          "sourceSha256": "5b5c7ffee5240cc71821b42e6a42fee5830ddb130b08e3d8b399edddb3935d4b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            38,
+            308,
+            1221,
+            1103
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1103
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_3.png",
+          "sourceSha256": "748bb6c53f7a4d2ed3dafadbcb1f5d5aee40c6e833ae6833a389671e1a37616c",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            92,
+            320,
+            1216,
+            1071
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1071
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_4.png",
+          "sourceSha256": "0f1af099fbbfe4819131885e54e6a502655487eea3b16fc6249474cd30588874",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            41,
+            314,
+            1227,
+            1126
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1126
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_5.png",
+          "sourceSha256": "3160d03691d65e4fcf9b8dc1ee571bd928d950bab6d904f8a3a804edc2b5ffa7",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            198,
+            282,
+            1152,
+            1137
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1137
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_6.png",
+          "sourceSha256": "460e1378b3eada371f6dfe2c6226243f166a51479e42bf924315a56a0feceeef",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            194,
+            267,
+            1115,
+            1084
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1084
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "attack_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\attack_7.png",
+          "sourceSha256": "ed89e59e2759bcb79fe5ad8fbfb370325d424d574992a4756137655742d3a14f",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            186,
+            315,
+            1148,
+            1118
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1118
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "hit": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "hit_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\hit_0.png",
+          "sourceSha256": "76ff4dc1dcf46f6f6317049dbda7f49e40be2a273c0778b61297db0f01c37026",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            163,
+            176,
+            1130,
+            1129
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1129
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "hit_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\hit_1.png",
+          "sourceSha256": "a2dce7193b1673bedec7db2d04f407796be0f81e2f47d1f03da1e640b121b2e3",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            158,
+            289,
+            1176,
+            1136
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1136
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    },
+    "death": {
+      "loop": false,
+      "frames": [
+        {
+          "name": "death_0",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_0.png",
+          "sourceSha256": "2d5e69d677704b913f5b7545b6824d47c9f0647e2036392e54f6d0e57159f502",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            182,
+            342,
+            1148,
+            1127
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1127
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_1",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_1.png",
+          "sourceSha256": "a16d0c2aa8241d76bf4c224e4129bc45b4d2ba5764be3f000f99fb6470c16358",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            193,
+            314,
+            1157,
+            1116
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1116
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_2",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_2.png",
+          "sourceSha256": "b0a614b14b01485dcadab659702cf64645c5a6741fc7b45ed035c80d8d0e94b2",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            124,
+            406,
+            1175,
+            1109
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1109
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_3",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_3.png",
+          "sourceSha256": "fe5c90dee9fecc6f4960669d9f05d5adcfb93f68a069d4c5784d860c857026be",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            72,
+            422,
+            1190,
+            1036
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1036
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_4",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_4.png",
+          "sourceSha256": "e743abffa73d5bc1865d8c6fd13d551c4e200206ee23291e275fd901e1662364",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            80,
+            482,
+            1202,
+            1050
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1050
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_5",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_5.png",
+          "sourceSha256": "5d21778ca9b9be369c15edb69696de36e5747d3795323359949dfb8d39625e94",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            42,
+            440,
+            1212,
+            1006
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1006
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_6",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_6.png",
+          "sourceSha256": "eb80967649fa9209d38be4f33d344ab040504f160ddfec069ba97242445e0edc",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            33,
+            489,
+            1222,
+            1036
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1036
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        },
+        {
+          "name": "death_7",
+          "sourceFile": "output\\actor-redraw\\originals\\mclsl_beast_xuanwu\\death_7.png",
+          "sourceSha256": "e3e2c80ac9d6e23fd67acadb05ba89de81d0533945af1cb23d103e2c67fd677b",
+          "canvas": [
+            1254,
+            1254
+          ],
+          "visibleBoundsAtAlpha128": [
+            44,
+            525,
+            1230,
+            1103
+          ],
+          "sourceTouchesEdge": false,
+          "proposedGeometry": {
+            "canvas": [
+              1254,
+              1254
+            ],
+            "anchor": [
+              662.5,
+              1103
+            ],
+            "pixelsPerUnit": 9.547619047619047,
+            "anchorReviewed": true
+          },
+          "nativeCandidate": true
+        }
+      ]
+    }
+  },
+  "missingFrames": [],
+  "duplicateSources": [],
+  "rgba32SourceBytes": 176121792,
+  "deathSilhouetteHeights": [
+    785,
+    802,
+    703,
+    614,
+    568,
+    566,
+    547,
+    578
+  ],
+  "deathHeightRiseCandidates": [
+    1,
+    7
+  ],
+  "sourceFilesComplete": true,
+  "geometryApproved": true,
+  "actionContinuityApproved": true,
+  "installed": true,
+  "note": "Geometry is a proposal using existing normalization scale. Silhouette changes are review hints, not automatic rejection. Original PNGs remain untouched.",
+  "reviewerNotes": "逐帧审看全部28帧：龟蛇身份及青金配色一致，待机/步行支撑脚连续，攻击前探张口并收回，受击后回稳，死亡逐步伏地。死亡第7帧蛇颈比第6帧略高，但整体重心仍低且动作可接受。世界尺寸及内存仍待游戏内实测。",
+  "installation": {
+    "nativeResourcePath": "actors/Beasts/xuanwu/Beast",
+    "frameCount": 28,
+    "gameSizeVerified": false,
+    "gameMemoryVerified": false
+  }
+}

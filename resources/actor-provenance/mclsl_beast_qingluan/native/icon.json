@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "icon",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/icon_0.png",
+  "sourceSha256": "157da90745261f1bfc3018e13bda557242674ea0fad035dab4f953158f9f9192",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_qingluan.png",
+  "outputSha256": "157da90745261f1bfc3018e13bda557242674ea0fad035dab4f953158f9f9192",
+  "createdAtUtc": "2026-10-09T05:04:10.316180+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE independently drawn transparent pixel-art PLACEMENT BUTTON ICON for sacred Qingluan. Attached image is species identity only, not a frame to copy. Cyan, turquoise and deep navy feathers, bright white throat and breast, gold crest, beak, feet and accents. Proud three-quarter right-facing bird, wings CLOSED along torso; THREE distinct long tail plumes sweep left then curl upward into a compact graceful fan to occupy a roughly square silhouette. Strong recognizable head and gold crest, chest prominently readable at icon scale. Complete single bird centered on transparent 1254x1254 source canvas with generous clear margins. Crisp square pixel clusters, dark pixel outlines, flat shaded game sprite palette. Newly draw this unique compact icon pose; do not reuse, crop, transform or recolor the attached world animation. No panel, border, text, ground shadow, particles, aura, multiple poses, sheet, background or other characters.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

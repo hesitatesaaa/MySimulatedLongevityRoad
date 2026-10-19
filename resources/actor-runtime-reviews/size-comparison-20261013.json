@@ -1,0 +1,590 @@
+{
+  "kind": "actual-unity-size-comparison-screening",
+  "probeSha256": "938a1bc33f0d7ac8b11e7bb0729a532d631a33a9cc822574ef8a927254efe9ef",
+  "actualPlacedActors": true,
+  "forcedVisibility": true,
+  "pausedFromPlacement": true,
+  "comparedForms": 17,
+  "sizeComparisonPassed": false,
+  "framesChanged": false,
+  "results": [
+    {
+      "actorId": "mclsl_beast_kunpeng",
+      "reference": "Behemoth",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\kunpeng\\Beast\\main\\idle_0.png",
+        "sha256": "3e23d96c7c5002d97d3876071e0bf93ab2c8fbfe400d3dbf5ed37242f2925396",
+        "alphaBounds": [
+          28,
+          100,
+          227,
+          240
+        ],
+        "visibleWorldWidth": 35.82,
+        "visibleWorldHeight": 25.2
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\Behemoth\\main\\idle_0.png",
+        "sha256": "cbae3d764184877d8fbba44b764540ae7b838f8f2b7d040c02a9b418233d617f",
+        "alphaBounds": [
+          5,
+          71,
+          244,
+          256
+        ],
+        "visibleWorldWidth": 11.950000000000001,
+        "visibleWorldHeight": 9.25
+      },
+      "heightRatio": 2.724324324324324,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.06607142857142857,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\kunpeng\\Human\\main\\idle_0.png",
+        "sha256": "a5cd297e0d49fa0b2a37087dda891a8efe2d4c5f7008c9b5e500a17290b57184",
+        "alphaBounds": [
+          37,
+          24,
+          90,
+          112
+        ],
+        "visibleWorldWidth": 10.600000000000001,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_qinglong",
+      "reference": "PrimordialFrostDragon",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\qinglong\\Beast\\main\\idle_0.png",
+        "sha256": "6b80fed2a7c2e3bb7f08a392b5761b0f9d0d689977ce46d1cc4fb80ede8f5d58",
+        "alphaBounds": [
+          69,
+          71,
+          186,
+          239
+        ],
+        "visibleWorldWidth": 21.06,
+        "visibleWorldHeight": 30.24
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\Dragonkind\\PrimordialFrostDragon\\main\\idle_0.png",
+        "sha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930",
+        "alphaBounds": [
+          114,
+          24,
+          292,
+          371
+        ],
+        "visibleWorldWidth": 10.6800004272,
+        "visibleWorldHeight": 20.8200008328
+      },
+      "heightRatio": 1.4524495096253625,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.12392857638571429,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\qinglong\\Human\\main\\idle_0.png",
+        "sha256": "5a806906a9013897265ca9e02930e7adb85355494e8c74fae6ccd1daba4f07f2",
+        "alphaBounds": [
+          37,
+          24,
+          91,
+          112
+        ],
+        "visibleWorldWidth": 10.8,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_huanglong",
+      "reference": "PrimordialFrostDragon",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\huanglong\\Beast\\main\\idle_0.png",
+        "sha256": "fa188bf7abc299a0c8152543478a94e9d8c0a1710924a99feb2b2a3a99df3312",
+        "alphaBounds": [
+          66,
+          71,
+          190,
+          240
+        ],
+        "visibleWorldWidth": 22.32,
+        "visibleWorldHeight": 30.419999999999998
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\Dragonkind\\PrimordialFrostDragon\\main\\idle_0.png",
+        "sha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930",
+        "alphaBounds": [
+          114,
+          24,
+          292,
+          371
+        ],
+        "visibleWorldWidth": 10.6800004272,
+        "visibleWorldHeight": 20.8200008328
+      },
+      "heightRatio": 1.4610950424207514,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.12319527120000001,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\huanglong\\Human\\main\\idle_0.png",
+        "sha256": "40f09fa2c58161d230f6bf917fc40982b2e7604b435b7d558aba8cac40f25ceb",
+        "alphaBounds": [
+          38,
+          24,
+          90,
+          112
+        ],
+        "visibleWorldWidth": 10.4,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_zhuque",
+      "reference": "Phoenix",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\zhuque\\Beast\\main\\idle_0.png",
+        "sha256": "103bfa5e9e3232276beb3b0f1b7bb998242183f8bb8a8f7d1d58956f90477c76",
+        "alphaBounds": [
+          30,
+          51,
+          98,
+          112
+        ],
+        "visibleWorldWidth": 12.24,
+        "visibleWorldHeight": 10.98
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\Phoenix\\main\\idle_0.png",
+        "sha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c",
+        "alphaBounds": [
+          30,
+          14,
+          86,
+          58
+        ],
+        "visibleWorldWidth": 5.6000000000000005,
+        "visibleWorldHeight": 4.4
+      },
+      "heightRatio": 2.495454545454545,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.07213114754098361,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_baihu",
+      "reference": "NightWolf",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\baihu\\Beast\\main\\idle_0.png",
+        "sha256": "9a07fa2e6e6285130006c6162d476d636b5d72f7354f53e2d91b8c503736759a",
+        "alphaBounds": [
+          12,
+          24,
+          84,
+          80
+        ],
+        "visibleWorldWidth": 12.959999999999999,
+        "visibleWorldHeight": 10.08
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\NightWolf\\main\\idle_0.png",
+        "sha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8",
+        "alphaBounds": [
+          5,
+          18,
+          26,
+          32
+        ],
+        "visibleWorldWidth": 2.1,
+        "visibleWorldHeight": 1.4000000000000001
+      },
+      "heightRatio": 7.199999999999999,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.025,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_qilin",
+      "reference": "NightWolf",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\qilin\\Beast\\main\\idle_0.png",
+        "sha256": "e29763af466fe69c1b6199810744c89c7dee8aa2f006fb23e3bc14b5c4ad8eef",
+        "alphaBounds": [
+          16,
+          24,
+          80,
+          80
+        ],
+        "visibleWorldWidth": 11.52,
+        "visibleWorldHeight": 10.08
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\NightWolf\\main\\idle_0.png",
+        "sha256": "eb55c0e9af66a5a3d89d5abf56a4b4615836b8f76ff8fd686daf2eade9587fb8",
+        "alphaBounds": [
+          5,
+          18,
+          26,
+          32
+        ],
+        "visibleWorldWidth": 2.1,
+        "visibleWorldHeight": 1.4000000000000001
+      },
+      "heightRatio": 7.199999999999999,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.025,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\qilin\\Human\\main\\idle_0.png",
+        "sha256": "c040f71863a984653260a1513d9fe0e80922f1ba0724d544fa7de65f3595c3c3",
+        "alphaBounds": [
+          37,
+          24,
+          92,
+          112
+        ],
+        "visibleWorldWidth": 11.0,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\moqilin\\Human\\main\\idle_0.png",
+        "sha256": "66fed253e9dd08ba51af7d3bf2f906ebbf81cdb3d1575cbe65b0dcc9cce9b304",
+        "alphaBounds": [
+          36,
+          25,
+          92,
+          112
+        ],
+        "visibleWorldWidth": 11.200000000000001,
+        "visibleWorldHeight": 17.400000000000002
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.1052629136842205,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032758622,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu",
+      "reference": "StoneGolem",
+      "own": {
+        "file": "E:\\0.6.0\\NativeActorResources\\actors\\Beasts\\xuanwu\\Beast\\main\\idle_0.png",
+        "sha256": "9dd125f60bae26f610a89eb29754069a7a062517c3bdc435734dc8b08024c7b4",
+        "alphaBounds": [
+          187,
+          315,
+          1138,
+          1117
+        ],
+        "visibleWorldWidth": 17.929077396154998,
+        "visibleWorldHeight": 15.120000075411472
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\StoneGolem\\main\\idle_0.png",
+        "sha256": "3aaf3e569d59a867e736ee46f49b6370db79884a80996d351a56210e9f1581cf",
+        "alphaBounds": [
+          21,
+          23,
+          41,
+          46
+        ],
+        "visibleWorldWidth": 1.2000000480000002,
+        "visibleWorldHeight": 1.3800000552
+      },
+      "heightRatio": 10.956521355515575,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.01642857200377627,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\xuanwu\\Human\\main\\idle_0.png",
+        "sha256": "1b1018734fc22f1ab9ee805c4afafd6be3f175b65bb2453a0208215a71abff5d",
+        "alphaBounds": [
+          35,
+          24,
+          92,
+          112
+        ],
+        "visibleWorldWidth": 11.4,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang_yuan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\NativeActorResources\\actors\\Beasts\\fenghuang\\Human\\main\\idle_0.png",
+        "sha256": "4dde59281270cd88bb591926121ff0aeed62fbcdc1745aee379ccf2f0065857f",
+        "alphaBounds": [
+          284,
+          89,
+          986,
+          1210
+        ],
+        "visibleWorldWidth": 11.02158818259663,
+        "visibleWorldHeight": 17.60000050240858
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438525757399,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.03238636400731892,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_qingluan",
+      "reference": "Phoenix",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\qingluan\\Beast\\main\\idle_0.png",
+        "sha256": "4eb0894f950b343ecd43480c340b86bf6b5f6d7f3bda3984066e22e4b0db802e",
+        "alphaBounds": [
+          37,
+          68,
+          96,
+          129
+        ],
+        "visibleWorldWidth": 10.62,
+        "visibleWorldHeight": 10.98
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\Phoenix\\main\\idle_0.png",
+        "sha256": "f79bdeee3f86a3f0f061513706754e61df9350532c290d67d7a3286dd8d5bc2c",
+        "alphaBounds": [
+          30,
+          14,
+          86,
+          58
+        ],
+        "visibleWorldWidth": 5.6000000000000005,
+        "visibleWorldHeight": 4.4
+      },
+      "heightRatio": 2.495454545454545,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.07213114754098361,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing",
+      "reference": "Behemoth",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Beasts\\liejiejing\\Beast\\main\\idle_0.png",
+        "sha256": "7bbdc381ea62cf56cfb0baa30e54be178fe5b924c95efa0a6e7034a0a610a0da",
+        "alphaBounds": [
+          28,
+          138,
+          227,
+          240
+        ],
+        "visibleWorldWidth": 35.82,
+        "visibleWorldHeight": 18.36
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\Behemoth\\main\\idle_0.png",
+        "sha256": "cbae3d764184877d8fbba44b764540ae7b838f8f2b7d040c02a9b418233d617f",
+        "alphaBounds": [
+          5,
+          71,
+          244,
+          256
+        ],
+        "visibleWorldWidth": 11.950000000000001,
+        "visibleWorldHeight": 9.25
+      },
+      "heightRatio": 1.9848648648648648,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "silhouette-height-screening-only",
+      "proposedHeightScale": 0.09068627450980392,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    },
+    {
+      "actorId": "mclsl_named_lifan",
+      "reference": "TenguSamurai",
+      "own": {
+        "file": "E:\\0.6.0\\GameResources\\actors\\Named\\LiFan\\main\\idle_0.png",
+        "sha256": "209cabc1189d5d8caf99963af573fbbffed662cb723a44fe574cfc30561864b7",
+        "alphaBounds": [
+          38,
+          24,
+          91,
+          112
+        ],
+        "visibleWorldWidth": 10.600000000000001,
+        "visibleWorldHeight": 17.6
+      },
+      "referenceGeometry": {
+        "file": "E:\\wol\\gameversion\\0_51_2_0.51.2\\mods\\Thefantasyworld\\GameResources\\actors\\FantasyCreatures\\MONSTER\\TenguSamurai\\main\\idle_0.png",
+        "sha256": "6b1c79673ee58cf2d241f711002259737b636e4b0cf4974cb1fa17554e12f10c",
+        "alphaBounds": [
+          33,
+          33,
+          107,
+          128
+        ],
+        "visibleWorldWidth": 2.2200000888,
+        "visibleWorldHeight": 2.850000114
+      },
+      "heightRatio": 6.175438349473694,
+      "exceedsHeightTolerance": true,
+      "measurementKind": "human-body-height-proxy",
+      "proposedHeightScale": 0.032386364931818186,
+      "verifiedInGame": false,
+      "limitation": "Human head ornaments and beast wings/tails require reviewed body landmarks; no formal size pass from alpha bounds alone."
+    }
+  ]
+}

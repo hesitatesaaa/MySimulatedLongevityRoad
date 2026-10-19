@@ -1,0 +1,12 @@
+{
+  "actorId": "mclsl_beast_manman_yuan",
+  "sha256": "77ef3383550a41f7474c91d5686f5fcba4bb7c8364135d2429c997ccdf4aa4ed",
+  "sourceSha256": "9065643c4d3184237d2e80f826e43088fdbc74adce301d02425de985dd7a85b6",
+  "offlinePassed": true,
+  "reviewScope": "idle_0-character-standard-only",
+  "verifiedInGame": false,
+  "artDirectionRevision": 2,
+  "visualGender": "female",
+  "note": "Inspected normalized standard on E:\\0.6.0\\output\\actor-redraw\\previews\\detailed-standards\\page-03.png at full resolution. Readable silhouette, restrained pixel clusters and recognizable palette; human forms inspected for assigned gender. Single standard approval only; actions and in-game sizes remain unapproved.",
+  "reviewedAtUtc": "2026-10-09T10:30:36.656198+00:00"
+}

@@ -1,0 +1,39 @@
+{
+  "actorId": "mclsl_beast_liejiejing",
+  "action": "idle",
+  "index": 4,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/idle_4.png",
+  "sourceSha256": "f5f718c185369ba4450ca21664eaa721aa0ffcdcacbdb3da030837f8d705b8c5",
+  "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Beast/main/idle_4.png",
+  "outputSha256": "f5f718c185369ba4450ca21664eaa721aa0ffcdcacbdb3da030837f8d705b8c5",
+  "createdAtUtc": "2026-10-09T08:53:40.680056+00:00",
+  "prompt": "Use case: stylized-concept. Asset: ONE independent transparent pixel-art game animation frame, Liejiejing idle_4. Reference image is character identity and exact established detailed pixel-art style, not a bitmap to transform. Newly draw the next exhale pose: slightly narrower breathing chest, near pectoral fin folded mildly back toward belly with its visible tip higher than reference, far pectoral fin hanging slightly forward, tail stock curving down and two tail flukes slightly lower. Keep head/nose fixed and right-facing. Preserve thick deep-blue whale body, layered blue shadow clusters, cyan crack markings, cream-gray ribbed belly, ornate cream horns and gold facial ridge, recognizable curling dorsal wavefins, exactly ONE pair of pectoral fins and split tail flukes. No legs or extra appendages. Match reference rendering fidelity: individual pixel clusters, layered highlights, rich fin and horn contours, readable belly grooves, detailed markings; never replace with geometric shapes or flat silhouette. Same anatomical scale and 1254x1254 source canvas; entire silhouette comfortably inside x20..1230,y300..1030 with transparent padding. One character, one pose, one PNG only. Actual transparent RGBA background; no water, particles, lighting halo, shadow, text, panels, sprite sheet, multiple frames, clipping, image rotation, old-frame translate/scale/recolor.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_liejiejing/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "review": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": false,
+  "reviewStatus": "waived-by-user"
+}

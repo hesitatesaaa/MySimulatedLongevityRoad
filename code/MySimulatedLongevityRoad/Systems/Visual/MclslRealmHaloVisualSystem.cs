@@ -400,7 +400,11 @@ internal static class MclslRealmHaloVisualSystem
         try { entry?.Effect?.kill(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
         try
         {
-            if (entry?.GameObject != null) UnityEngine.Object.Destroy(entry.GameObject);
+            // Borrowed BaseEffects remain owned by the native controller's
+            // pool. Destroying their GameObjects leaves a dead pool entry
+            // that makes StackEffects.clear fail during the next world load.
+            if (entry?.Effect == null && entry?.GameObject != null)
+                UnityEngine.Object.Destroy(entry.GameObject);
         }
         catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
     }
