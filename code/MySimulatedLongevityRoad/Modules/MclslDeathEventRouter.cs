@@ -13,7 +13,7 @@ internal static class MclslDeathEventRouter
         // Patches only capture the native event; domain modules own all consequences.
         // A failing domain cannot prevent later death consequences or registry
         // cleanup. No per-death delegates or closures are allocated here.
-        for (int step = 0; step < 10; step++)
+        for (int step = 0; step < 12; step++)
         {
             try
             {
@@ -31,6 +31,12 @@ internal static class MclslDeathEventRouter
                     case 7: MclslWorldSoulSystem.ReleaseHolderOnDeath(actor); break;
                     case 8: MclslTechniqueOccupationSystem.Release(actor); break;
                     case 9: MclslHuanzhenSystem.CommitDeath(actor, state.HuanzhenDeath); break;
+                    case 10: MclslFamilySystem.OnDeath(actor); break;
+                    case 11:
+                        MclslBeastWorld.ForgetRank(MclslActorAccessor.Id(actor));
+                        if(state.HealthDepletedAtDeath)
+                            MclslBeastLoot.Commit(actor,state.CultivatorDeath.PendingCauseCode,attackType);
+                        break;
                 }
             }
             catch (Exception ex) { MclslDiagnostics.Error("death-domain-" + step, "人物死亡阶段 " + step + " 失败：" + ex.Message); }

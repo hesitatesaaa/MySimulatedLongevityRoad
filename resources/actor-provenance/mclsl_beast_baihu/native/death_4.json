@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "death",
+  "index": 4,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "0f22cd076bcd815f9157c89e6c71aec6081628fbc5a7f8ed8547db87bb0f00fe",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/death_4.png",
+  "outputSha256": "e8fcbb0396e27d6a9f58376d649d1953480e898ecc57320549c1449f16bd7449",
+  "createdAtUtc": "2026-10-09T06:02:30.324845+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW transparent pixel-art game frame, Baihu death_4. Image 1 fixes anatomical size: white and pale silver tiger, charcoal stripes, broad feline head, round ears, FOUR legs. Fixed 1254x1254 canvas. Image 2 guides previous collapse pose. Keep pixel scale of image 1; the head should remain about 300px across and torso about 550px from hip to shoulder, never enlarged. Original ground y1049, center x636. Pose: Tiger falling SIDEWAYS onto the visible flank. Clearly roll torso onto its SIDE, with the white abdomen now visible as a side surface; paws stop supporting it, legs folded against flank. Shoulder and hip contact ground. Head rolls onto cheek, eyes closed. Retain exact head size from image 1. Tail must curl compactly close beside hip, starting near x300, tip no farther left than x160. Whole silhouette must fit x150..1150 source pixels. Never occupy the entire canvas width. Do not depict a tiger calmly kneeling on four paws. Chest and head lower naturally in the fall, never stretched to standing height. Clear margins surrounding complete animal. Crisp square pixel clusters, dark outline, limited flat shading. Independently DRAW this new single frame from scratch, not copying the whole old sprite or resizing/recoloring as a redraw. No multiple poses, sprite sheet, panels, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/death_3.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "0f22cd076bcd815f9157c89e6c71aec6081628fbc5a7f8ed8547db87bb0f00fe",
+    "sourceAnchor": [
+      636.0,
+      1106
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

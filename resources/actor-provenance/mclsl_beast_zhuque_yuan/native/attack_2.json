@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_zhuque_yuan",
+  "action": "attack",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "05eff02e8c7a5b67643a80f94ad01ee10cf5cae4ef33d7ae8ff3c5a7e1d37195",
+  "outputFile": "NativeActorResources/actors/Beasts/zhuque/Human/main/attack_2.png",
+  "outputSha256": "369f44e5f435e39747097f1734da8780ed2eb12c410bc54feb5ab200716699cd",
+  "createdAtUtc": "2026-10-13T03:39:55.453899+00:00",
+  "prompt": "Use case: stylized-concept. Generate exactly ONE independent transparent game animation frame PNG: \u6731\u96c0\u00b7\u5316\u5f62, mclsl_beast_zhuque_yuan, attack_2. Image 1 is identity, clothing, palette, medium pixel-art detail and anatomical scale reference, not a bitmap to transform. Adult woman with red high ponytail and phoenix feather pin, vermilion and cream split robe, restrained golden sash, sharp human face. Face right, full body, same anatomical proportions and source-canvas composition as reference. Attack release pose: extend attacking RIGHT arm forward from bent elbow toward the right, sleeve opens behind forearm; leading knee bent, rear foot firmly braced, left hand naturally closer to torso. Clearly different action pose, properly attached two arms and two legs. Keep original face, hair, outfit, boots and phoenix motifs consistent. Clean readable pixel-art clusters with two or three shades per material, modest Li Fan/Baihu detail; no dense filigree, microtexture or painterly effects. Draw the frame independently at full native output resolution, with genuine transparent background and complete canvas. No downsampling or intentionally low resolution rendering. Entire character including sleeves, hands, hair and feet inside canvas with transparent padding. Exactly one character one pose one image, no panels, sprite sheets, grids, composites, text, background, ground shadow, particles, projectiles, glow, duplicates or detached limbs. Preserve fine pixel edge clarity at native resolution. PNG alpha.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_zhuque_yuan/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "05eff02e8c7a5b67643a80f94ad01ee10cf5cae4ef33d7ae8ff3c5a7e1d37195",
+    "sourceAnchor": [
+      615.5,
+      1157
+    ],
+    "sourcePixelsPerUnit": 373.68419557894794,
+    "ppuFactor": 1.3352374223908248,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

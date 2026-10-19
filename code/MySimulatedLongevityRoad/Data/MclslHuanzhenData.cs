@@ -232,11 +232,13 @@ internal readonly struct MclslDeathPatchState
     internal readonly Death.MclslDeathSnapshot CultivatorDeath;
     internal readonly MclslHuanzhenDeathSnapshot HuanzhenDeath;
     internal readonly MclslWorldSoulDeathSnapshot WorldSoulDeath;
+    internal readonly bool HealthDepletedAtDeath;
 
-    internal MclslDeathPatchState(Death.MclslDeathSnapshot cultivatorDeath, MclslHuanzhenDeathSnapshot huanzhenDeath, MclslWorldSoulDeathSnapshot worldSoulDeath)
+    internal MclslDeathPatchState(Death.MclslDeathSnapshot cultivatorDeath, MclslHuanzhenDeathSnapshot huanzhenDeath, MclslWorldSoulDeathSnapshot worldSoulDeath, bool healthDepletedAtDeath=false)
     {
         CultivatorDeath = cultivatorDeath;
         HuanzhenDeath = huanzhenDeath;
         WorldSoulDeath = worldSoulDeath;
+        HealthDepletedAtDeath = healthDepletedAtDeath;
     }
 }

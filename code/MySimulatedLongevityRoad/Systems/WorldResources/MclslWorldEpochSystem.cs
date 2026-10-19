@@ -139,13 +139,6 @@ internal static class MclslWorldEpochSystem
         if (run.NewLawStartYear <= 0) run.NewLawStartYear = run.TransmissionEndYear;
         if (run.NewLawPioneerStartYear <= 0)
             run.NewLawPioneerStartYear = Math.Max(run.EraOriginYear + 80, run.AncientLawEndYear - MclslNewLawPioneerSystem.PioneerLeadYears);
-        if (!run.FiredHistoricalEvents.Contains(EventChuanfaDao))
-        {
-            run.AncientLawEndYear = run.EraOriginYear + AncientLawDurationYears;
-            run.TransmissionEndYear = run.AncientLawEndYear + TransmissionDurationYears;
-            run.NewLawStartYear = run.TransmissionEndYear;
-            run.NewLawPioneerStartYear = Math.Max(run.EraOriginYear + 80, run.AncientLawEndYear - MclslNewLawPioneerSystem.PioneerLeadYears);
-        }
         if (string.IsNullOrWhiteSpace(run.CultivationEpoch)) run.CultivationEpoch = AncientLawEpoch;
     }
 

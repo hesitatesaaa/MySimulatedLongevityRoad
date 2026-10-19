@@ -144,6 +144,7 @@ internal static class MclslRuntimeChanges
                     if (repairStats)
                     {
                         MclslArtifactSystem.ApplyNativeStatCaps(actor);
+                        MclslBeastWorld.ApplyRankStats(actor);
                         MclslLongevityRules.ApplyRuntimeLifespan(actor);
                     }
                     Publish(actor, (MclslActorChange)flags);
@@ -157,6 +158,8 @@ internal static class MclslRuntimeChanges
                 { Remove(id); continue; }
                 try
                 {
+                    if ((flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0)
+                        MclslFamilySystem.Observe(actor);
                     if ((flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits)) != 0)
                         MclslCultivatorCandidateIndex.Observe(actor);
                     if ((flags & (int)(MclslActorChange.Data | MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0)

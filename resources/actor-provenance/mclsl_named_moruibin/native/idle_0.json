@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_named_moruibin",
+  "action": "idle",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "3fcf1d77929afe08f6369b9d829b0ee3f0ff6f663d964700db64bab64e514cb2",
+  "outputFile": "NativeActorResources/actors/Named/MoRuBin/main/idle_0.png",
+  "outputSha256": "a5fac7d26cb20c932294104e759356e9bf76cb23888c9d9bef92b22d53594af2",
+  "createdAtUtc": "2026-10-09T11:10:08.051584+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE fresh independent transparent PNG of \u58a8\u5112\u658c (mclsl_named_moruibin), idle_0. PRIMARY SUBJECT AND REQUIRED VISIBLE IDENTITY: Adult male scholarly cultivator. A visibly distinct BLACK SCHOLAR CAP completely covers the top bun. Brown/taupe long narrow robe and restrained cream cuffs. HOLD a clearly visible opened ivory folding fan at waist height, fan fan-shaped with few dark ribs. Near arm bent to display the fan. Long dark hair falls narrowly down the back, not a wide hero cape. Image 1 supplies ONLY this individual face, palette and moderate pixel detail. Replace its unsuitable bun, costume shape or absent prop as required by the subject description. Image 2 is Li Fan rendering STYLE ONLY: never copy his hairstyle, cape, ornaments, clothing composition or sword. Subject-specific hat, held object and silhouette take priority over BOTH images. Full relaxed right-facing three-quarter side view, coherent anatomy. Each described hat, staff, fan, axe, gourd or book MUST be plainly identifiable; never conceal or omit it. Match Li Fan/Baihu moderate pixel detail: crisp outline, broad clean square clusters and two or three shades per material, restrained trim. No dense embroidery, gold filigree, microtexture or painterly rendering. Render the WHOLE character afresh, never paste, transform or recolor existing sprite pixels. Square 1254x1254 transparent RGBA source. Neutral foot/body base near y1080, full silhouette within x100..1150,y100..1100, generous margins. Exactly one body and one pose, no grid, sprite sheet, frame panels, background, shadow, text, glow, particles, watermark or clipping.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\rejected\\mclsl_named_moruibin\\direction-20261009T105847302497\\output\\actor-redraw\\originals\\mclsl_named_moruibin\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "3fcf1d77929afe08f6369b9d829b0ee3f0ff6f663d964700db64bab64e514cb2",
+    "sourceAnchor": [
+      620.0,
+      1200
+    ],
+    "sourcePixelsPerUnit": 371.5789325052637,
+    "ppuFactor": 1.3366709886404327,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

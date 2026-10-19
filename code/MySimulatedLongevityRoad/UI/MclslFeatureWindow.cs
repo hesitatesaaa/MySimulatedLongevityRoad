@@ -71,6 +71,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
     private int _category;
     private int _guidePage;
     private int _marketView;
+    private bool _showJulingMetrics;
     private readonly int[] _marketCategoryCounts = new int[CategoryIds.Length];
     private readonly int[] _marketListingCounts = new int[CategoryIds.Length];
     private readonly int[] _marketListedCounts = new int[CategoryIds.Length];
@@ -482,7 +483,9 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
                 Sprite icon = SpriteTextureLoader.getSprite(spell.IconPath);
                 if (icon != null) GUILayout.Label(icon.texture, GUILayout.Width(38f), GUILayout.Height(38f));
                 GUILayout.Label(MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + spell.Name
-                    + "　" + progress + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
+                    + "　" + progress
+                    + (MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(_actor,spell.Id)?"":" · 异职高阶技能休眠")
+                    + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
                 if (studyTarget == spell.Id)
                 {
                     if (GUILayout.Button("停止参悟", _bagButton, GUILayout.Width(76f), GUILayout.Height(34f)))
@@ -622,8 +625,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         GUILayout.Space(8f);
         if (item.Category == "Artifact")
         {
-            GUILayout.Label("制作配方　" + MclslItemCatalog.IngredientDisplayName(item.IngredientA)
-                + " + " + MclslItemCatalog.IngredientDisplayName(item.IngredientB)
+            GUILayout.Label("制作配方　" + MclslRecipeCatalog.Describe(item.Id)
                 + "（炼器师品阶需达到" + DisplayGradeName(item) + "）", _muted);
             if (_detailRevision != _bagRevision || _detailItem != item.Id)
             {
@@ -735,6 +737,22 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         GUILayout.EndHorizontal();
         GUILayout.Space(5f);
         GUILayout.Label(_marketYearText, _muted, GUILayout.Height(22f));
+        if (GUILayout.Button(_showJulingMetrics ? "收起聚灵髓供需统计" : "聚灵髓供需统计", _marketTab, GUILayout.Height(24f)))
+            _showJulingMetrics = !_showJulingMetrics;
+        if (_showJulingMetrics)
+        {
+            var metrics = MclslWorldRunRepository.Current.JulingMarrowMetrics;
+            GUILayout.Label("本世累计获取：野外 " + metrics.GetValueOrDefault("获得/野外活动")
+                + " · 遗迹 " + metrics.GetValueOrDefault("获得/遗迹探索")
+                + " · 突破 " + metrics.GetValueOrDefault("获得/突破机缘")
+                + " · 天地机缘 " + metrics.GetValueOrDefault("获得/天地机缘")
+                + " · 委托 " + metrics.GetValueOrDefault("获得/势力委托")
+                + " · 师徒 " + metrics.GetValueOrDefault("获得/师徒赠予"), _muted);
+            GUILayout.Label("本世累计流通：成交 " + metrics.GetValueOrDefault("市场/Purchased")
+                + " · 退回 " + metrics.GetValueOrDefault("市场/Cancelled")
+                + " · 回收 " + metrics.GetValueOrDefault("市场/Recycled")
+                + " · 清理 " + metrics.GetValueOrDefault("市场/Destroyed"), _muted);
+        }
         GUILayout.Space(5f);
         if (narrow) DrawMarketCategoryTabs(contentWidth);
         GUILayout.BeginHorizontal(GUILayout.Width(contentWidth));

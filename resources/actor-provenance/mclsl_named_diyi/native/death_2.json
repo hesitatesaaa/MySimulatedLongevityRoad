@@ -1,0 +1,57 @@
+{
+  "actorId": "mclsl_named_diyi",
+  "action": "death",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "cb243b592d1942a2fde05d9c6edc58b7500a3bfe6f642a7fd08af95eaf2a0b23",
+  "outputFile": "NativeActorResources/actors/Named/DiYi/Beast/main/death_2.png",
+  "outputSha256": "d88c71feeb56028bdd224722bb9ec10f1ea4f02b8e3a56da8b01c734d77c53f9",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5e1d\u4e00\u00b7\u517d\u5f62 (mclsl_named_diyi), death_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: Diyi named red-orange beast, restrained gold-red bristling mane, wide powerful four-legged body and distinctive layered spiked crest; match the original named beast, not a generic dog. Pose: Death single-shot progress 0.400, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_diyi\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T06:34:41.012198+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "cb243b592d1942a2fde05d9c6edc58b7500a3bfe6f642a7fd08af95eaf2a0b23",
+    "sourceAnchor": [
+      638.0,
+      1091
+    ],
+    "sourcePixelsPerUnit": 576.4285714285714,
+    "ppuFactor": 0.10556250606448246,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "promptEncodingRepair": {
+    "repairedAtUtc": "2026-10-16T06:43:53.916526+00:00",
+    "cause": "UTF-8 provenance read with implicit CP936 during staticReview update",
+    "previousCorruptPromptSha256": "86678e9b48b5e2903cd1b908b3e87d4d164f3b456d0cc3dbcfb620d7633995e8",
+    "restoredPromptSha256": "e201811109ab2cf307185fa9a346ca9e1ec2a108f963e54357c0ae6cf8e4d606",
+    "exactCp936CorruptionReproduced": true,
+    "actualGenerationPromptEvidence": "Worker round3_a retained store jobs; imagegen cell 6 passed job.prompt directly before corruption; worker read-only verification confirmed full prompt match."
+  },
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

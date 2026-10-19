@@ -6,7 +6,7 @@ using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
 
-internal static class MclslFamilySystem
+internal static partial class MclslFamilySystem
 {
     private static string TreasuryAccount(MclslFamilyRecord family) => "family/" + family.Id;
 
@@ -33,6 +33,7 @@ internal static class MclslFamilySystem
     internal static void Clear()
     {
         _indexedRun = null;
+        ResetReconciliation();
         ById.Clear(); ByActor.Clear(); ByNative.Clear(); VisibleFamilies.Clear();
     }
 
@@ -45,24 +46,17 @@ internal static class MclslFamilySystem
         _indexedRun = run;
         run.Families ??= new List<MclslFamilyRecord>();
         bool repairedNames = false;
-        foreach (MclslFamilyRecord family in run.Families)
+        foreach (MclslFamilyRecord family in run.Families.OrderBy(x => x?.FoundedYear ?? 0))
         {
-            if (family == null || string.IsNullOrWhiteSpace(family.Id)) continue;
+            if (family == null || string.IsNullOrWhiteSpace(family.Id) || !string.IsNullOrEmpty(family.MergedIntoId)) continue;
             family.Members ??= new List<MclslFamilyMemberRecord>();
             family.Items ??= new List<MclslOwnedItem>();
             family.TechniqueIds ??= new List<string>();
             family.CityInfluence ??= new Dictionary<long, int>();
             family.History ??= new List<string>();
-            if (!family.Extinct && family.Members.Count > 0 && family.Members.All(x => x == null || !x.Alive))
-                family.Extinct = true;
-            if (family.Extinct)
-            {
-                TryLiquidateEstate(run, family);
-                continue;
-            }
             VisibleFamilies.Add(family);
             ById[family.Id] = family;
-            if (family.NativeFamilyId > 0) ByNative[family.NativeFamilyId] = family;
+            if (family.NativeFamilyId > 0 && !ByNative.ContainsKey(family.NativeFamilyId)) ByNative[family.NativeFamilyId] = family;
             foreach (MclslFamilyMemberRecord member in family.Members)
                 if (member != null && member.ActorId > 0) ByActor[member.ActorId] = family;
             repairedNames |= RepairFamilyNames(family);
@@ -94,11 +88,15 @@ internal static class MclslFamilySystem
 
     private static MclslFamilyRecord Observe(Actor actor, int depth)
     {
-        if (EnsureIndex() is not MclslWorldRunState run || !MclslActorAccessor.Alive(actor)
-            || !MclslActorAccessor.IsCultivator(actor) || depth > 8) return null;
+        if(MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(actor))return null;
+        if (MclslWorldArchiveStore.WriteLocked || EnsureIndex() is not MclslWorldRunState run
+            || !MclslActorAccessor.Alive(actor) || depth > 8) return null;
         long id = MclslActorAccessor.Id(actor);
         if (id <= 0) return null;
-        if (ByActor.TryGetValue(id, out MclslFamilyRecord known))
+        bool cultivator = MclslActorAccessor.IsCultivator(actor);
+        long nativeFamily = actor.data.family > 0 ? actor.data.family : actor.data.ancestor_family;
+        ByActor.TryGetValue(id, out MclslFamilyRecord known);
+        if (known != null && (nativeFamily <= 0 || known.NativeFamilyId == nativeFamily))
         {
             RefreshMember(known, actor);
             return known;
@@ -111,17 +109,18 @@ internal static class MclslFamilySystem
             : ParentOfSex(secondActor, second, ActorSex.Male) ? second : 0;
         long mother = ParentOfSex(firstActor, first, ActorSex.Female) ? first
             : ParentOfSex(secondActor, second, ActorSex.Female) ? second : 0;
-        MclslFamilyRecord family = ParentFamily(father, depth) ?? ParentFamily(mother, depth);
-        long nativeFamily = actor.data.family > 0 ? actor.data.family : actor.data.ancestor_family;
-        if (family == null && nativeFamily > 0) ByNative.TryGetValue(nativeFamily, out family);
+        MclslFamilyRecord family = null;
+        if (nativeFamily > 0) ByNative.TryGetValue(nativeFamily, out family);
+        else family = ParentFamily(father, depth) ?? ParentFamily(mother, depth);
         if (family == null)
         {
+            if (!cultivator && known == null) return null;
             string familyId = run.RunId + ":" + (nativeFamily > 0 ? "native:" + nativeFamily : "founder:" + id);
             family = new MclslFamilyRecord
             {
                 Id = familyId, Surname = MclslHonorificNameCatalog.StableFamilySurname(SafeName(actor), id),
                 FounderActorId = id,
-                NativeFamilyId = Math.Max(0, nativeFamily)
+                NativeFamilyId = Math.Max(0, nativeFamily), FoundedYear = Math.Max(0, MclslRuntime.CurrentYear())
             };
             family.Name = family.Surname + "氏";
             run.Families.Add(family);
@@ -130,25 +129,45 @@ internal static class MclslFamilySystem
             if (nativeFamily > 0) ByNative[nativeFamily] = family;
             AddHistory(family, MclslRuntime.CurrentYear() + "年 · " + family.Name + "立族");
         }
+        if (known != null && known != family)
+        {
+            MclslFamilyMemberRecord moved = Member(known, id);
+            if (moved != null)
+            {
+                known.Members.Remove(moved);
+                family.Members.Add(moved);
+                ByActor[id] = family;
+                if (known.PreferredHeadActorId == id) known.PreferredHeadActorId = 0;
+                if (known.FocusActorId == id) known.FocusActorId = 0;
+                MclslActorAccessor.Set(actor, MclslActorDataKeys.FamilyId, family.Id);
+                RefreshMember(family, actor);
+                EnsureHead(known);
+                NotifyChanged();
+                return family;
+            }
+        }
         int generation = 1;
         if (father > 0 && ByActor.TryGetValue(father, out MclslFamilyRecord fatherFamily) && fatherFamily == family)
             generation = Math.Max(generation, Member(family, father)?.Generation + 1 ?? 1);
         else if (mother > 0 && ByActor.TryGetValue(mother, out MclslFamilyRecord motherFamily) && motherFamily == family)
             generation = Math.Max(generation, Member(family, mother)?.Generation + 1 ?? 1);
-        string memberName = EnsureActorSurname(family, actor);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.FamilyId, family.Id);
+        string memberName = cultivator ? EnsureActorSurname(family, actor) : SafeName(actor);
         family.Members.Add(new MclslFamilyMemberRecord
         {
             ActorId = id, Name = memberName, ParentId1 = first, ParentId2 = second,
             Sex = (int)actor.data.sex,
             Generation = generation, RealmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor)),
             Aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50),
-            CityId = actor.city?.data?.id ?? 0
+            CityId = actor.city?.data?.id ?? 0,
+            IsCultivator = cultivator
         });
         ByActor[id] = family;
         MclslActorAccessor.Set(actor, MclslActorDataKeys.FamilyId, family.Id);
         RecordTechnique(family, actor);
+        family.Extinct = false;
         EnsureHead(family);
-        MclslWorldArchiveStore.MarkDirty();
+        NotifyChanged();
         return family;
     }
 
@@ -187,6 +206,7 @@ internal static class MclslFamilySystem
         foreach (MclslFamilyMemberRecord member in family.Members)
         {
             if (member == null || member.ActorId <= 0) continue;
+            if (!member.IsCultivator) continue;
             string previousName = member.Name;
             string corrected = MclslHonorificNameCatalog.ApplyFamilySurname(member.ActorId, member.Name, surname);
             if (!string.Equals(member.Name, corrected, StringComparison.Ordinal))
@@ -239,13 +259,24 @@ internal static class MclslFamilySystem
     {
         MclslFamilyMemberRecord member = Member(family, MclslActorAccessor.Id(actor));
         if (member == null || member.DeathSettled) return;
-        member.Name = EnsureActorSurname(family, actor);
+        bool wasAlive = member.Alive, wasMissing = member.Missing, wasCultivator = member.IsCultivator;
+        string previousName = member.Name;
+        long previousCity = member.CityId;
+        int previousRealm = member.RealmIndex;
+        member.IsCultivator = MclslActorAccessor.IsCultivator(actor);
+        member.Name = member.IsCultivator ? EnsureActorSurname(family, actor) : SafeName(actor);
         member.Sex = (int)actor.data.sex;
         member.RealmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
         member.Aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50);
         member.CityId = actor.city?.data?.id ?? 0;
         member.Alive = true;
-        RecordTechnique(family, actor);
+        member.Missing = false;
+        family.Extinct = false;
+        if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.FamilyId) != family.Id)
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.FamilyId, family.Id);
+        if (member.IsCultivator) RecordTechnique(family, actor);
+        if (!wasAlive || wasMissing || wasCultivator != member.IsCultivator || previousRealm != member.RealmIndex
+            || previousName != member.Name || previousCity != member.CityId) NotifyChanged();
     }
 
     private static void RecordTechnique(MclslFamilyRecord family, Actor actor)
@@ -288,7 +319,8 @@ internal static class MclslFamilySystem
 
     private static bool IsAdultLiveMember(MclslFamilyRecord family, long id)
     {
-        if (id <= 0 || Member(family, id)?.Alive != true || !MclslActorRegistry.ResolveKnownOrWorld(id, out Actor actor)
+        if (id <= 0 || Member(family, id) is not { Alive: true, Missing: false, IsCultivator: true }
+            || !MclslActorRegistry.ResolveKnownOrWorld(id, out Actor actor)
             || !MclslActorAccessor.Alive(actor)) return false;
         return actor.getAge() >= 16f;
     }
@@ -304,7 +336,7 @@ internal static class MclslFamilySystem
 
     internal static bool SetFocus(MclslFamilyRecord family, long actorId)
     {
-        if (family == null || Member(family, actorId)?.Alive != true) return false;
+        if (family == null || Member(family, actorId) is not { Alive: true, Missing: false, IsCultivator: true }) return false;
         family.FocusActorId = actorId;
         MclslWorldArchiveStore.MarkDirty();
         return true;
@@ -324,6 +356,8 @@ internal static class MclslFamilySystem
         while (batch.FamilyCursor < run.Families.Count && MclslAnnualFrameBudget.TryConsumeOperation())
         {
             MclslFamilyRecord family = run.Families[batch.FamilyCursor];
+            if (family != null && !string.IsNullOrEmpty(family.MergedIntoId))
+            { batch.FamilyCursor++; batch.FamilyMemberCursor = 0; continue; }
             if (family?.Extinct == true)
             {
                 TryLiquidateEstate(run, family);
@@ -343,6 +377,7 @@ internal static class MclslFamilySystem
                 if (member == null || !member.Alive || !MclslActorRegistry.ResolveKnownOrWorld(member.ActorId, out Actor actor)
                     || !MclslActorAccessor.Alive(actor)) continue;
                 RefreshMember(family, actor);
+                if (!member.IsCultivator || member.Missing) continue;
                 if (member.CityId > 0)
                 {
                     family.CityInfluence.TryGetValue(member.CityId, out int score);
@@ -390,7 +425,7 @@ internal static class MclslFamilySystem
     {
         if (family.LastAidYear == year || TreasuryStones(family) < 12) return;
         long focus = family.FocusActorId;
-        if (focus <= 0 || Member(family, focus)?.Alive != true) focus = PickJunior(family);
+        if (focus <= 0 || Member(family, focus) is not { Alive: true, Missing: false, IsCultivator: true }) focus = PickJunior(family);
         if (focus <= 0 || !MclslActorRegistry.ResolveKnownOrWorld(focus, out Actor actor)
             || !MclslActorAccessor.Alive(actor)) return;
         long before = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0);
@@ -411,7 +446,7 @@ internal static class MclslFamilySystem
         int bestAptitude = -1;
         foreach (MclslFamilyMemberRecord member in family.Members)
         {
-            if (member == null || !member.Alive || member.Generation <= headGeneration
+            if (member == null || !member.Alive || member.Missing || !member.IsCultivator || member.Generation <= headGeneration
                 || !MclslActorRegistry.ResolveKnownOrWorld(member.ActorId, out Actor actor)
                 || !MclslActorAccessor.Alive(actor) || actor.getAge() > 60f) continue;
             if (member.Aptitude > bestAptitude || member.Aptitude == bestAptitude && (best == 0 || member.ActorId < best))
@@ -470,6 +505,7 @@ internal static class MclslFamilySystem
 
     internal static void OnDeath(Actor actor)
     {
+        if (MclslWorldArchiveStore.WriteLocked || actor?.data == null || MclslActorAccessor.Alive(actor)) return;
         MclslFamilyRecord family = FamilyOf(actor);
         long id = MclslActorAccessor.Id(actor);
         MclslFamilyMemberRecord member = Member(family, id);
@@ -484,6 +520,15 @@ internal static class MclslFamilySystem
             MclslEconomyCommands.CloseDeadActorWallet(actor);
             return;
         }
+        bool firstDeath = member.Alive || member.Missing;
+        member.Alive = false;
+        member.Missing = false;
+        if (member.DeathYear < 0) member.DeathYear = Math.Max(0, MclslRuntime.CurrentYear());
+        if (family.PreferredHeadActorId == id) family.PreferredHeadActorId = 0;
+        if (family.FocusActorId == id) family.FocusActorId = 0;
+        if (firstDeath) AddHistory(family, member.DeathYear + "年 · " + member.Name + "陨落");
+        EnsureHead(family);
+        NotifyChanged();
         long stones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0);
         long inherited = Math.Min(stones / 2, long.MaxValue - TreasuryStones(family));
         bool settled = false;
@@ -506,7 +551,8 @@ internal static class MclslFamilySystem
             {
                 MclslEconomicResult result = MoveStones(family, actor, inherited, true,
                     Math.Max(0, MclslRuntime.CurrentYear()), "estate/" + MclslEconomyCommands.Account(actor), 1);
-                if (result != MclslEconomicResult.Applied) throw new InvalidOperationException("遗产资金结算失败：" + result);
+                if (result is not (MclslEconomicResult.Applied or MclslEconomicResult.AlreadyApplied))
+                    throw new InvalidOperationException("遗产资金结算失败：" + result);
             });
             member.DeathSettled = true;
             settled = true;
@@ -522,25 +568,20 @@ internal static class MclslFamilySystem
             }
             catch (Exception rollback) { MclslDiagnostics.Error("family-inheritance-rollback", "家族遗物回滚失败：" + rollback.Message); }
             MclslDiagnostics.Error("family-inheritance", "家族遗物转移失败：" + ex.Message);
+            RetryDeathLater(actor);
         }
         member.Alive = false;
         if (settled) MclslEconomyCommands.CloseDeadActorWallet(actor);
         if (family.PreferredHeadActorId == id) family.PreferredHeadActorId = 0;
         if (family.FocusActorId == id) family.FocusActorId = 0;
-        AddHistory(family, MclslRuntime.CurrentYear() + "年 · " + member.Name + "陨落"
-            + (settled ? "，遗灵石" + inherited + "入库" : "，遗物暂未入库"));
+        if (settled) AddHistory(family, MclslRuntime.CurrentYear() + "年 · " + member.Name + "遗产入库，灵石" + inherited);
         EnsureHead(family);
-        if (!family.Members.Any(x => x?.Alive == true
-            && MclslActorRegistry.ResolveKnownOrWorld(x.ActorId, out Actor living)
-            && MclslActorAccessor.Alive(living)))
+        if (_populationComplete && !family.Members.Any(x => x != null && (x.Alive || x.Missing)))
         {
             family.Extinct = true;
-            VisibleFamilies.Remove(family);
-            ById.Remove(family.Id);
-            if (family.NativeFamilyId > 0) ByNative.Remove(family.NativeFamilyId);
             TryLiquidateEstate(EnsureIndex(), family);
         }
-        MclslWorldArchiveStore.MarkDirty();
+        NotifyChanged();
     }
 
     private static void TryLiquidateEstate(MclslWorldRunState run, MclslFamilyRecord family)
@@ -592,6 +633,7 @@ internal static class MclslFamilySystem
     private static void AddHistory(MclslFamilyRecord family, string text)
     {
         family.History.Add(text);
-        if (family.History.Count > 60) family.History.RemoveRange(0, family.History.Count - 60);
+        int limit = Math.Max(60, family.HistoryCapacity);
+        if (family.History.Count > limit) family.History.RemoveRange(0, family.History.Count - limit);
     }
 }

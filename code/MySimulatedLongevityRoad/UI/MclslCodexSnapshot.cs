@@ -137,7 +137,7 @@ internal sealed class MclslCodexSnapshot
         snapshot.Cultivators = MclslCodexPopulationIndex.Count;
         snapshot.SensingQi = MclslCodexPopulationIndex.SensingQi;
         int realmRank = 1;
-        foreach (string realmId in MclslRealmIds.Ordered.Reverse())
+        foreach (string realmId in System.Linq.Enumerable.Reverse(MclslRealmIds.Ordered))
         {
             int count = snapshot.RealmCounts.TryGetValue(realmId, out int value) ? value : 0;
             if (count <= 0) continue;

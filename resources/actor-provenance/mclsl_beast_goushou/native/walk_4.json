@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_goushou",
+  "action": "walk",
+  "index": 4,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "7df1a4c81a7fd351fd7f58ac8b20bbad980b2f2237c3d79862ee38d9de6fcd34",
+  "outputFile": "NativeActorResources/actors/Beasts/goushou/Beast/main/walk_4.png",
+  "outputSha256": "1393b71fc6358884b55460ef442c1356c2f07e1ec4e1075c6a22e91bf9983c49",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u72d7\u9996\u5996\u517d\u00b7\u517d\u5f62 (mclsl_beast_goushou), walk_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: black/red dog-headed beast, sharp canine muzzle and ivory tusks, horn-like ears, dark red layered mane, powerful four-legged torso and long tail. Pose: Four-legged gait phase 0.667 (240 degrees): near front and opposite rear legs advance, other diagonal pair follows; jointed paws/hooves make clear alternating contact, shoulders and hips transfer weight, tail follows. Heavy beasts carry weight; no extra limbs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_goushou\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-15T09:08:38.352936+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "scale": 0.10207336523125997,
+    "inputSha256": "7df1a4c81a7fd351fd7f58ac8b20bbad980b2f2237c3d79862ee38d9de6fcd34",
+    "sourceAnchor": [
+      639.0,
+      1090
+    ],
+    "sourcePixelsPerUnit": 605.0,
+    "ppuFactor": 0.890625,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

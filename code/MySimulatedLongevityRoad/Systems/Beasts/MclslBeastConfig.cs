@@ -9,29 +9,23 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static class MclslBeastConfig
 {
     private const string EnableId = "MCLSL_config_beast_natural_spawn";
-    private const string RedMoonId = "MCLSL_config_beast_red_moon_chance";
-    private const string RevivalId = "MCLSL_config_beast_revival_chance";
-    private static readonly Dictionary<string, int> Chances = new(StringComparer.Ordinal);
     internal static bool NaturalSpawnEnabled { get; private set; } = true;
-    internal static int RedMoonChancePerMillion { get; private set; } = 10000;
-    internal static int RevivalChancePerMillion { get; private set; } = 100;
+    internal const int RedMoonChancePerMillion = 10000;
+    internal const int RevivalChancePerMillion = 100;
 
     internal static void Ensure(ModConfig config)
     {
         if (config == null) return;
         Dictionary<string, ModConfigItem> items = config["ConfigItems"];
-        AddSwitch(config, items, EnableId, "妖兽自然出现", "每个世界年按各妖兽概率判定一次。", true);
-        AddSlider(config, items, RedMoonId, "红月事件概率（百万分之）", "默认10000，即每年1%。", 10000);
-        AddSlider(config, items, RevivalId, "高山复苏事件概率（百万分之）", "默认100，即每年0.01%；成功时再判定兲兽。", 100);
-        foreach (MclslBeastDefinition beast in MclslBeastCatalog.All)
-        {
-            bool variant = beast.Id == "moqilin";
-            AddSlider(config, items, beast.ConfigId,
-                beast.Name + (variant ? "麒麟变种概率（百万分之）" : "自然出现概率（百万分之）"),
-                variant ? "麒麟出现成功后判定；默认100000，即10%。"
-                    : beast.Id == "tianshou" ? "仅高山复苏事件成功后判定；默认1000000，即100%。"
-                    : "每年一次；达到当前原版亚种种群限制时跳过。", beast.ChancePerMillion);
-        }
+        AddSwitch(config, items, EnableId, "妖兽自然出现", "常见妖兽每五年按栖息地补充；稀有妖兽每年独立判定。", true);
+        AddSwitch(config,items,"MCLSL_config_beast_waves","妖兽潮","按世界境界解锁七级兽潮。",true);
+        AddSwitch(config,items,"MCLSL_config_spell_effects_enabled","法术阶段特效","显示法术释放、飞行和命中特效。关闭后仍按正常时间结算。",true);
+        AddSlider(config,items,"MCLSL_config_battle_terrain","斗法地形破坏（0关／1痕迹／2完整）","元婴起指定重招局部毁地；完整模式会波及己方建筑，但不误伤友军单位。",2);
+        AddSlider(config,items,"MCLSL_config_beast_wave_interval","兽潮间隔（年）","默认五年。",5);
+        AddSlider(config,items,"MCLSL_config_beast_wave_count_percent","兽潮数量（百分比）","默认100，即一倍。",100);
+        AddSlider(config,items,"MCLSL_config_beast_wave_max_level","自动兽潮最高等级","一至七级，还受世界解锁限制。",7);
+        AddSlider(config,items,"MCLSL_config_beast_auto_limit","自动妖兽总上限","自然与兽潮共享上限。",512);
+        AddSlider(config,items,"MCLSL_config_beast_natural_limit","自然妖兽上限","默认128。",128);
         Load(config);
     }
 
@@ -39,17 +33,38 @@ internal static class MclslBeastConfig
     {
         if (config == null) return;
         Dictionary<string, ModConfigItem> items = config["ConfigItems"];
-        NaturalSpawnEnabled = !items.TryGetValue(EnableId, out ModConfigItem enabled) || enabled.BoolVal;
-        RedMoonChancePerMillion = ReadChance(items, RedMoonId, 10000);
-        RevivalChancePerMillion = ReadChance(items, RevivalId, 100);
+        bool removedProbabilitySettings = items.Remove("MCLSL_config_beast_red_moon_chance")
+            | items.Remove("MCLSL_config_beast_revival_chance");
         foreach (MclslBeastDefinition beast in MclslBeastCatalog.All)
-            Chances[beast.Id] = ReadChance(items, beast.ConfigId, beast.ChancePerMillion);
+            removedProbabilitySettings |= items.Remove(beast.ConfigId);
+        foreach (MclslBeastDefinition beast in MclslBeastCatalog.Named)
+            removedProbabilitySettings |= items.Remove(beast.ConfigId);
+        NaturalSpawnEnabled = !items.TryGetValue(EnableId, out ModConfigItem enabled) || enabled.BoolVal;
+        MclslBeastWorld.Enabled=!items.TryGetValue("MCLSL_config_beast_waves",out var waves)||waves.BoolVal;
+        MclslSpellEffect.SetEnabled(!items.TryGetValue("MCLSL_config_spell_effects_enabled",out var effects)||effects.BoolVal);
+        MclslSpellTerrain.Mode=Math.Clamp(ReadChance(items,"MCLSL_config_battle_terrain",2),0,2);
+        MclslBeastWorld.Interval=Math.Clamp(ReadChance(items,"MCLSL_config_beast_wave_interval",5),1,1000);
+        MclslBeastWorld.CountMultiplier=Math.Clamp(ReadChance(items,"MCLSL_config_beast_wave_count_percent",100),10,1000)/100f;
+        MclslBeastWorld.MaximumLevel=Math.Clamp(ReadChance(items,"MCLSL_config_beast_wave_max_level",7),1,7);
+        MclslBeastWorld.AutomaticLimit=Math.Clamp(ReadChance(items,"MCLSL_config_beast_auto_limit",512),1,4096);
+        MclslBeastWorld.NaturalLimit=Math.Clamp(ReadChance(items,"MCLSL_config_beast_natural_limit",128),1,4096);
+        if (removedProbabilitySettings) config.Save(null);
     }
 
     internal static int Chance(MclslBeastDefinition beast)
-        => beast != null && Chances.TryGetValue(beast.Id, out int value) ? value : beast?.ChancePerMillion ?? 0;
+        => beast?.ChancePerMillion ?? 0;
 
     public static void ReloadBool(bool _) => Load(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe() as ModConfig);
+    internal static void SetSwitch(string id,bool value)
+    {
+        if(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe() is not ModConfig config || !config["ConfigItems"].TryGetValue(id,out var item))return;
+        item.SetValue(value,false);Load(config);config.Save(null);
+    }
+    internal static void SetInt(string id,int value)
+    {
+        if(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe() is not ModConfig config || !config["ConfigItems"].TryGetValue(id,out var item))return;
+        item.SetValue(value,false);Load(config);config.Save(null);
+    }
     public static void ReloadInt(int _) => Load(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe() as ModConfig);
 
     private static int ReadChance(Dictionary<string, ModConfigItem> items, string id, int fallback)
@@ -74,6 +89,11 @@ internal static class MclslBeastConfig
             item = config.AddConfigItem("ConfigItems", id, ConfigItemType.INT_SLIDER, initial, null,
                 "MclslBeastConfig:ReloadInt");
         if (item == null) return;
+        if(id=="MCLSL_config_battle_terrain"){item.SetIntRange(0,2);return;}
+        if(id=="MCLSL_config_beast_wave_max_level"){item.SetIntRange(1,7);return;}
+        if(id=="MCLSL_config_beast_wave_interval"){item.SetIntRange(1,1000);return;}
+        if(id=="MCLSL_config_beast_wave_count_percent"){item.SetIntRange(10,1000);return;}
+        if(id is "MCLSL_config_beast_auto_limit" or "MCLSL_config_beast_natural_limit"){item.SetIntRange(1,4096);return;}
         typeof(ModConfigItem).GetField("<MinIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 0);
         typeof(ModConfigItem).GetField("<MaxIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 1000000);
     }

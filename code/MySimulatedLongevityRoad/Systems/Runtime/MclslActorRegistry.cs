@@ -155,6 +155,11 @@ internal static class MclslActorRegistry
     {
         if (actorId <= 0L) return;
         ActorsById.TryGetValue(actorId, out Actor removed);
+        if (removed?.data != null && !MclslActorAccessor.Alive(removed))
+        {
+            try { MclslFamilySystem.OnDeath(removed); }
+            catch (Exception ex) { MclslDiagnostics.Error("family-before-forget", "释放人物缓存前家族死亡核对失败：" + ex.Message); }
+        }
         bool existed = ActorsById.Remove(actorId);
         Ids.Remove(actorId);
         RemoveSecondaryIndexes(actorId);

@@ -346,6 +346,9 @@ internal static class MclslTianxuanMarket
                 actualRecipeCost += (long)IngredientStonePrice(ingredient.Key) * ingredient.Value;
             return MclslEconomicPolicy.CraftedStonePrice(item.Id, actualRecipeCost);
         }
+        var recipe=MclslRecipeCatalog.Get(item.Id);
+        if(recipe!=null && item.Category is "Pill" or "Talisman" or "Artifact")
+            return MclslEconomicPolicy.CraftedStonePrice(item.Id,recipe.Ingredients.Sum(x=>(long)IngredientStonePrice(x.ItemId)*x.Count));
         int first = IngredientStonePrice(item.IngredientA);
         int second = IngredientStonePrice(item.IngredientB);
         if (first > 0 && second > 0 && item.Category is "Pill" or "Talisman" or "Artifact")
@@ -383,6 +386,7 @@ internal static class MclslTianxuanMarket
             Year = year
         });
         RecordMarketFlow(action, item.Id, count, year);
+        if (item.Id == "A07") MclslJulingMarrowMetrics.Record("市场/" + action, count);
         if (Activities.Count > MaxActivityRecords)
             Activities.RemoveRange(0, Activities.Count - MaxActivityRecords);
         InvalidateActivitySnapshots();
@@ -1077,6 +1081,16 @@ internal static class MclslTianxuanMarket
                 continue;
             AddIfMissing(desired, bag, item.Id);
         }
+        bool liveCombat=HasLiveCombatTarget(actor);
+        foreach(string itemId in MclslBeastConsumables.SelectMarketNeeds(ByItem.Keys,
+            definition=>
+            {
+                var item=MclslItemCatalog.Get(definition.Id);
+                return (definition.Kind!="talisman"||liveCombat)
+                    && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor,item)
+                    && MclslBeastItemEffects.CanUse(actor,item,MclslConsumableUseTrigger.Combat);
+            },id=>MclslBagSystem.Count(bag,id),id=>MarketStonePrice(MclslItemCatalog.Get(id))))
+            AddIfMissing(desired,bag,itemId);
     }
 
     private static bool IsInjured(Actor actor)

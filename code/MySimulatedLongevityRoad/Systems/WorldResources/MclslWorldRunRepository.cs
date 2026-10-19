@@ -60,6 +60,7 @@ internal static class MclslWorldRunRepository
 
     private static void EnsureCurrentRunCore(int year)
     {
+        if (MclslWorldArchiveStore.WriteLocked) return;
         if (ReferenceEquals(_ensuredRun, _current) && _ensuredYear == year) return;
         NormalizeCurrentRun();
         MclslReincarnationProfile profile = MclslReincarnationProfileStore.Current;
@@ -148,15 +149,35 @@ internal static class MclslWorldRunRepository
     {
         if (bundle == null || bundle.Version != MclslSaveVersions.WorldArchive || bundle.CurrentRun == null)
             throw new InvalidOperationException("世界档案格式不匹配；本架构仅支持新格式存档");
-        _current = bundle.CurrentRun;
+        MclslWorldRunState candidate = bundle.CurrentRun;
+        if (string.IsNullOrWhiteSpace(candidate.RunId) || candidate.StartYear < 0
+            || candidate.AncientLawEndYear <= 0 || candidate.TransmissionEndYear <= 0 || candidate.NewLawStartYear <= 0
+            || candidate.EraOriginYear < 0 || candidate.AncientLawEndYear < candidate.EraOriginYear
+            || candidate.TransmissionEndYear < candidate.AncientLawEndYear
+            || candidate.NewLawStartYear < candidate.TransmissionEndYear)
+            throw new InvalidOperationException("世界档案缺少有效身份或时代时间线");
+        MclslWorldRunState previous = _current;
+        try
+        {
+            // Normalize the detached candidate without publishing a revision. Failed
+            // candidates must not become the source for saving or backup recovery.
+            _current = candidate;
+            Normalize();
+        }
+        catch
+        {
+            _current = previous;
+            InvalidateCurrentRunCaches();
+            MclslWorldRunRuntimeIndexes.Invalidate();
+            throw;
+        }
         InvalidateCurrentRunCaches();
         NotifyMapMarkerDataChanged();
-        Normalize();
         _normalizedRun = _current;
         InvalidateEventIndexes();
         EnsureEventIndexes();
         MclslWorldRunRuntimeIndexes.Invalidate();
-        return false;
+        return true;
     }
 
     private static void TrimSectRuinsToLimit()
@@ -1223,18 +1244,13 @@ internal static class MclslWorldRunRepository
         _current ??= new MclslWorldRunState();
         _current.Economy ??= new MclslEconomyState();
         _current.BackgroundFactions ??= new MclslBackgroundFactionState();
+        _current.JulingMarrowMetrics ??= new Dictionary<string, long>();
         _current.FiredHistoricalEvents ??= new List<string>();
         _current.PendingAncientCultivatorIds ??= new List<string>();
         if (_current.EraOriginYear <= 0) _current.EraOriginYear = Math.Max(0, _current.StartYear);
         if (_current.AncientLawEndYear <= 0) _current.AncientLawEndYear = _current.EraOriginYear + MclslWorldEpochSystem.AncientLawDurationYears;
         if (_current.TransmissionEndYear <= 0) _current.TransmissionEndYear = _current.AncientLawEndYear + MclslWorldEpochSystem.TransmissionDurationYears;
         if (_current.NewLawStartYear <= 0) _current.NewLawStartYear = _current.TransmissionEndYear;
-        if (!_current.FiredHistoricalEvents.Contains("epoch_chuanfa_dao"))
-        {
-            _current.AncientLawEndYear = _current.EraOriginYear + MclslWorldEpochSystem.AncientLawDurationYears;
-            _current.TransmissionEndYear = _current.AncientLawEndYear + MclslWorldEpochSystem.TransmissionDurationYears;
-            _current.NewLawStartYear = _current.TransmissionEndYear;
-        }
         if (string.IsNullOrWhiteSpace(_current.CultivationEpoch))
             _current.CultivationEpoch = _current.NewLawEnabled ? MclslWorldEpochSystem.TransmissionTransitionEpoch : MclslWorldEpochSystem.AncientLawEpoch;
         _current.CurrentBackgroundEraId ??= string.Empty;

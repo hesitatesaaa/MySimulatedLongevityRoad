@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "icon",
+  "index": 0,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "9742b7df7539d4a734f02be7c225455b8d212ce8e80f81530d2acb937603fd67",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_baihu.png",
+  "outputSha256": "c798a46e9efa03a66aae64e77843180694c83945d37619ca30d92b067395ca11",
+  "createdAtUtc": "2026-10-09T06:11:59.105335+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE dedicated placement-button ICON of Baihu, Chinese sacred white tiger, on a transparent square canvas. Reference defines identity only: white and pale silver fur, charcoal tiger stripes, broad feline face, GOLD eyes, small round ears, four paws and curled striped tail. Create a NEW icon pose distinct from the world idle frame: compact proud half-crouch viewed three-quarter FRONT-RIGHT, broad head turned slightly toward viewer, foreground white paw planted prominently forward, far forepaw behind it, hind legs tucked, tail curls tightly beside rump. Full animal, not a head-only portrait. Strong readable silhouette with complete ears, all paws and tail; no giant sprawling tail. Suitable for 128x128 virtual pixel canvas: intended longest visible dimension about 94 pixels, crisp square clusters, dark outline, flat limited shading. Generous transparent margin on every edge. Draw the icon independently from scratch; do not paste, crop, resize or recolor an animation frame. Exactly ONE icon and ONE animal. No sprite sheet, multiple poses, panels, border, button background, lettering, text, aura, ground, shadow or particles.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png"
+  ],
+  "normalization": {
+    "authorized": true,
+    "resampling": "nearest-neighbor",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "scale": 0.09978768577494693,
+    "translation": [
+      1,
+      3
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "groundAlignmentDelta": 0,
+    "horizontalAlignmentDelta": 0,
+    "sourceAnchorX": null,
+    "groundedFootBottom": null,
+    "poseAlignmentOffset": [
+      0,
+      0
+    ],
+    "alphaPreserved": false,
+    "alphaCleanup": {
+      "authorized": true,
+      "cutoffExclusive": 16,
+      "clearedSourcePixelCount": 34046,
+      "preservedAlphaAtOrAboveCutoff": true
+    },
+    "cropped": false,
+    "spritesheetSlicing": false
+  },
+  "review": {
+    "sha256": "c798a46e9efa03a66aae64e77843180694c83945d37619ca30d92b067395ca11",
+    "offlinePassed": true,
+    "bodyLongestEdgePixels": 94,
+    "independentlyDrawn": true
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
+}

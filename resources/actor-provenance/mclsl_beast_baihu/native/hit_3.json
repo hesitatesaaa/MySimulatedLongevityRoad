@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "hit",
+  "index": 3,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "f2aeac060a0f6b592d74c70e62b4d5b5afecdfbfa885a80303dc5da3e67be47b",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/hit_3.png",
+  "outputSha256": "9caac36d9b05437cf634b17fde9219390a2f62d94446db04bbfa1d05ccc838a5",
+  "createdAtUtc": "2026-10-09T05:49:22.514373+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame: Baihu sacred white tiger hit_3. Fixed identity in image 1: white and pale silver fur, charcoal tiger stripes, gold eyes, round ears, muscular feline head and curled striped tail. FOUR legs, no other anatomy or accessories. Same 1254x1254 transparent source canvas, fixed pixel scale and anatomy: standard standing full silhouette about 941px wide and 733px tall; original paws ground y1049, body center x636. Three-quarter side RIGHT-facing orthographic camera. Image 2 if supplied shows a separately drawn pose guide on the SAME source canvas. Pose: Final hit recovery at the original standard idle silhouette: exact calm chest and head height, planted four paws, no oversize neck or body, closed mouth, ears alert; subtle tail-tip settling only. Do not enlarge or shrink anatomy to fit a pose. Entire tiger and limbs within generous clear margins. Crisp square pixel art with flat shades and dark outline. Independently DRAW this new single frame. No copy/paste of the old whole sprite, scaling/recolor as redraw, sprite sheet, panels, text, effects, background, ground or shadow.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "f2aeac060a0f6b592d74c70e62b4d5b5afecdfbfa885a80303dc5da3e67be47b",
+    "sourceAnchor": [
+      636.0,
+      1051
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

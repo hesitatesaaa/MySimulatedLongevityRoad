@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_hongmao",
+  "action": "walk",
+  "index": 3,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "b2a2a8a302c5c44daeab887c707ce89c88b92fe8514c03258751f0bea14a39c4",
+  "outputFile": "NativeActorResources/actors/Beasts/hongmao/Beast/main/walk_3.png",
+  "outputSha256": "e5abf051092281bf3e1296018bf7de6ef12f228a554fc9f0a0e27f8c4d1c535a",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u7ea2\u6bdb\u5f02\u517d\u00b7\u517d\u5f62 (mclsl_beast_hongmao), walk_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: red-haired shaggy mythical quadruped with bulky muscular orange-red body, cream horns, layered bristling fur and flame-shaped mane, four legs and tufted tail. Pose: Four-legged gait phase 0.500 (180 degrees): near front and opposite rear legs advance, other diagonal pair follows; jointed paws/hooves make clear alternating contact, shoulders and hips transfer weight, tail follows. Heavy beasts carry weight; no extra limbs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_hongmao\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-15T07:22:09.280118+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "scale": 0.10207336523125997,
+    "inputSha256": "b2a2a8a302c5c44daeab887c707ce89c88b92fe8514c03258751f0bea14a39c4",
+    "sourceAnchor": [
+      634.5,
+      1100
+    ],
+    "sourcePixelsPerUnit": 600.7142857142857,
+    "ppuFactor": 0.8867860991379312,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

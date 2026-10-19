@@ -1,0 +1,59 @@
+{
+  "actorId": "mclsl_named_xuantianwang",
+  "action": "death",
+  "index": 2,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "05faa84e74330d9d474109c7a19892443044607bff1433c5eb6cfe733629943c",
+  "outputFile": "NativeActorResources/actors/Named/XuanTianWang/main/death_2.png",
+  "outputSha256": "8b5b00b4f23d4c267a71885e11ec41fb5132eb08be17228231172a1c3bd4dd3c",
+  "prompt": "Use case: stylized-concept. Draw exactly ONE independent transparent 1254x1254 pixel-art sprite: \u7384\u5929\u738b death_2, an intermediate SQUAT between the two supplied reference poses. Reference 1 death_1: crown top near canvas y=265, almost standing; reference 2 death_3: crown top near y=437, kneeling on the ground. THIS FRAME: crown top near y=345 (+/-20), clearly midway. Both boots planted at y\u22481180 and both knees bent to lower the hips halfway; torso leans forward, head and eyes droop, both hands slack. Crucially his knees have NOT touched the ground and neither knee is raised high. Keep his dark-purple long hair, gold crown and armor, violet gold-trimmed robe, white inner layer, belt and sheathed sword identical to neighbors. Precisely two attached legs and two arms, native scale and pixel style, full silhouette with transparent padding. Fresh independent pixels, one character, one frame, no sheet, background, shadow, text, crop, or transformation of source images.",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_xuantianwang/death_1.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_xuantianwang/death_3.png"
+  ],
+  "createdAtUtc": "2026-10-18T07:42:10.008420+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "05faa84e74330d9d474109c7a19892443044607bff1433c5eb6cfe733629943c",
+    "sourceAnchor": [
+      642.5,
+      1202
+    ],
+    "sourcePixelsPerUnit": 378.9473532631585,
+    "ppuFactor": 1.3287170468502303,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "repair": {
+    "replacedSourceSha256": "061774224741712e1941e065338e6458723baddbe1d677b62e960abb11d140ff",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_xuantianwang/death_2_v3.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_named_xuantianwang/death_2",
+    "generationRecord": {
+      "prompt": "Use case: stylized-concept. Draw exactly ONE independent transparent 1254x1254 pixel-art sprite: \u7384\u5929\u738b death_2, an intermediate SQUAT between the two supplied reference poses. Reference 1 death_1: crown top near canvas y=265, almost standing; reference 2 death_3: crown top near y=437, kneeling on the ground. THIS FRAME: crown top near y=345 (+/-20), clearly midway. Both boots planted at y\u22481180 and both knees bent to lower the hips halfway; torso leans forward, head and eyes droop, both hands slack. Crucially his knees have NOT touched the ground and neither knee is raised high. Keep his dark-purple long hair, gold crown and armor, violet gold-trimmed robe, white inner layer, belt and sheathed sword identical to neighbors. Precisely two attached legs and two arms, native scale and pixel style, full silhouette with transparent padding. Fresh independent pixels, one character, one frame, no sheet, background, shadow, text, crop, or transformation of source images.",
+      "method": "built-in-imagegen-independent-frame"
+    }
+  },
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

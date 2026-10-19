@@ -323,6 +323,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
     private string _knownRaw;
     private Coroutine _refresh;
     private bool _building;
+    private int _buildGeneration;
 
     private string _selectedConsumableId = string.Empty;
 
@@ -344,8 +345,14 @@ internal sealed class MclslBackpackTabElement : UnitElement
     {
         if (_building) yield break;
         _building = true;
+        int generation = ++_buildGeneration;
+        Actor selectedActor = actor;
         try
         {
+            // Native activation can start this iterator in OnEnable's call stack.
+            yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
+            MclslDeferredUiWork.Cancel(this);
             if (actor?.data == null) yield break;
             long actorId = MclslActorAccessor.Id(actor), revision = MclslBagSystem.Revision(actor);
             string known = MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells);
@@ -371,25 +378,40 @@ internal sealed class MclslBackpackTabElement : UnitElement
                 int index = category switch { "Artifact" => 0, "Pill" => 1, "Talisman" => 2,
                     "Plant" or "SpiritObject" or "TalismanMaterial" or "Material" => 3, _ => -1 };
                 if (index >= 0) _categories[index].Add(owned);
-                if ((i + 1) % 128 == 0) yield return null;
+                if ((i + 1) % 128 == 0)
+                {
+                    yield return null;
+                    if (!BuildIsCurrent(generation, selectedActor)) yield break;
+                }
             }
             LoadEquipmentAndArtifacts(bag); AddPages(_equipment, 0, _categories[0].Count); MclslBackpackTabSystem.FitSection(_equipment);
             yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
             LoadItems(bag, "Pill", _pills, true); AddPages(_pills, 1, _categories[1].Count); MclslBackpackTabSystem.FitSection(_pills);
             yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
             LoadItems(bag, "Talisman", _talismans, true); AddPages(_talismans, 2, _categories[2].Count); MclslBackpackTabSystem.FitSection(_talismans);
             yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
             LoadItems(bag, null, _materials, false); AddPages(_materials, 3, _categories[3].Count); MclslBackpackTabSystem.FitSection(_materials);
             yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
             LoadBooks(bag); AddPages(_books, 4, bag.Books.Count); MclslBackpackTabSystem.FitSection(_books);
             yield return null;
+            if (!BuildIsCurrent(generation, selectedActor)) yield break;
             int learnedSpells = MclslSpellSystem.KnownView(actor).Count;
             LoadSpells(bag); AddPages(_spells, 5, learnedSpells); MclslBackpackTabSystem.FitSection(_spells);
             MclslBackpackHeader.RefreshSlots();
             _revision = revision; _knownRaw = known; _spellRevision = spellRevision;
         }
-        finally { _building = false; _refresh = null; }
+        finally
+        {
+            if (_buildGeneration == generation) { _building = false; _refresh = null; }
+        }
     }
+
+    private bool BuildIsCurrent(int generation, Actor selectedActor)
+        => _buildGeneration == generation && isActiveAndEnabled && actor == selectedActor;
 
     private void Update()
     {
@@ -418,10 +440,13 @@ internal sealed class MclslBackpackTabElement : UnitElement
 
     public override void clear()
     {
+        // Native WindowMetaElementBase.OnDisable invokes this virtual method.
+        // Keep cleanup deferred here as well as in our own disable hook.
+        _buildGeneration++;
         StopAllCoroutines();
         _refresh = null; _building = false;
         _revision = -1;
-        ClearIcons();
+        MclslDeferredUiWork.Schedule(this);
         base.clear();
     }
 
@@ -434,8 +459,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
             MclslItemDefinition item = MclslItemCatalog.Get(owned?.ItemId);
             if (item?.Category != "Artifact") continue;
             bool equipped = MclslInventoryDataRules.IsEquipped(bag, owned);
-            string recipe = "\n制作配方：" + MclslItemCatalog.IngredientDisplayName(item.IngredientA)
-                + " + " + MclslItemCatalog.IngredientDisplayName(item.IngredientB);
+            string recipe = "\n制作配方：" + MclslRecipeCatalog.Describe(item.Id);
             AddIcon(_equipment, item.IconPath, item.Name + (equipped ? " · 已装备" : " · " + MclslArtifactSystem.SlotDisplayName(item.EquipmentSlot)),
                 item.EffectText + "\n品阶 " + Grade(item.Grade) + "\n槽位 " + MclslArtifactSystem.SlotDisplayName(item.EquipmentSlot)
                     + "\n数量 " + owned.Count + "\n耐久 " + owned.Durability + "%" + recipe + "\n点击装备或更换。",
@@ -579,12 +603,14 @@ internal sealed class MclslBackpackTabElement : UnitElement
             int xp = MclslSpellProgression.Experience(actor, spell.Id);
             int threshold = MclslSpellProgression.ExperienceThreshold(spell, level);
             string status = learned ? "等级 " + level + "/10" + (threshold > 0 ? "；精进 " + xp + "/" + threshold : "；已臻圆满") : "尚未学会";
+            if(!MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(actor,spell.Id))status+="；异职高阶技能休眠";
             if (target == spell.Id) status += "\n当前参悟：" + MclslSpellProgression.StudyProgress(actor) + "/"
                 + (learned ? threshold : MclslSpellProgression.StudyThreshold(spell));
             else status += "\n点击此法术，将其设为参悟目标。";
             AddIcon(_spells, spell.IconPath, spell.Name,
                 MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + status + "\n" + spell.Description
-                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒",
+                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒\n"
+                + MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.AcquisitionDescription(spell.Id),
                 () => { MclslSpellProgression.SetStudyTarget(actor, spell.Id); Refresh(force: true); });
             shown++;
         }
@@ -639,14 +665,42 @@ internal sealed class MclslBackpackTabElement : UnitElement
             _pool.Add(icon);
         }
         _icons.Clear(); _consumableIds.Clear(); _selectedConsumableId = string.Empty;
+        ResetOwnedLayoutCaches();
+    }
+
+    private void ResetOwnedLayoutCaches()
+    {
+        // The cloned genealogy layout retains child transforms and tween targets.
+        // Its own disable hook clears those caches and kills the old tweens. This
+        // runs only after deferred cleanup or a yielded rebuild, outside activation.
+        foreach (LayoutGroupExt.LayoutGroupExtended layout in GetComponentsInChildren<LayoutGroupExt.LayoutGroupExtended>(true))
+        {
+            if (layout == null || !layout.isActiveAndEnabled) continue;
+            layout.enabled = false;
+            layout.enabled = true;
+            if (layout.transform is RectTransform rect) LayoutRebuilder.MarkLayoutForRebuild(rect);
+        }
     }
 
     public override void OnDisable()
     {
+        _buildGeneration++;
         StopAllCoroutines();
         _refresh = null; _building = false; _revision = -1;
-        ClearIcons(); foreach (var category in _categories) category.Clear();
+        foreach (GameObject icon in _icons)
+        {
+            if (icon == null) continue;
+            icon.GetComponent<Button>()?.onClick.RemoveAllListeners();
+            icon.transform.Find("mclsl_backpack_use")?.GetComponent<Button>()?.onClick.RemoveAllListeners();
+        }
+        MclslDeferredUiWork.Schedule(this);
         base.OnDisable();
+    }
+
+    internal void CompleteDeferredCleanup()
+    {
+        ClearIcons();
+        foreach (var category in _categories) category.Clear();
     }
 
     private void UpdateConsumableSelection()

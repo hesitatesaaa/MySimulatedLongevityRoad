@@ -369,6 +369,7 @@ internal static class MclslProfessionSystem
 
     internal static void OnTraitGranted(Actor actor, string traitId)
     {
+        if(MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(actor))return;
         string previous = MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession);
         string profession = traitId == MclslTraitRegistration.AlchemistTraitId ? Alchemist
             : traitId == MclslTraitRegistration.RefinerTraitId ? Refiner : TalismanMaker;
@@ -398,6 +399,7 @@ internal static class MclslProfessionSystem
     internal static void ProcessAnnual(Actor actor, int year)
     {
         if (actor?.data == null || !MclslActorAccessor.Alive(actor)) return;
+        if(MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(actor))return;
         string previousProfession = MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession);
         int previousGrade = MclslProfessionSystem.GetGrade(actor);
         string profession = MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession);
@@ -484,10 +486,19 @@ internal static class MclslProfessionSystem
         if (profession is not (Alchemist or Refiner or TalismanMaker)) return;
         MclslItemDefinition recipe = PlannedRecipe(actor, bag, year <= 0 ? MclslRuntime.CurrentYear() : year);
         if (recipe == null) return;
-        if (MclslItemCatalog.Get(recipe.IngredientA) is { } first)
-            reserves[first.Id] = recipe.IngredientA == recipe.IngredientB ? 2 : 1;
-        if (MclslItemCatalog.Get(recipe.IngredientB) is { } second)
-            reserves[second.Id] = recipe.IngredientA == recipe.IngredientB ? 2 : 1;
+        foreach (var ingredient in MclslRecipeCatalog.Get(recipe.Id).Ingredients)
+            if (MclslItemCatalog.Get(ingredient.ItemId) is {} material)
+            {
+                int shortage=Math.Max(0,ingredient.Count-MclslBagSystem.Count(bag,material.Id));
+                foreach(string alternate in ingredient.Alternatives)
+                {
+                    int kept=Math.Min(shortage,MclslBagSystem.Count(bag,alternate));
+                    if(kept>0)reserves[alternate]=reserves.GetValueOrDefault(alternate)+kept;
+                    shortage-=kept;
+                }
+                int alternateReserved=ingredient.Count-MclslBagSystem.Count(bag,material.Id)-shortage;
+                reserves[material.Id] = ingredient.Count-Math.Max(0,alternateReserved);
+            }
     }
 
     private static MclslItemDefinition PlannedRecipe(Actor actor, MclslBagState bag, int year)
@@ -535,10 +546,10 @@ internal static class MclslProfessionSystem
         // Grade zero is a separate apprentice economy: only explicit WorldBox
         // town resources are valid, never Huang/Xuan/Di/Tian mod materials or
         // an unknown id that happens to be absent from the item catalog.
-        if (grade == 0)
-            return IsNativeIngredient(recipe.IngredientA) && IsNativeIngredient(recipe.IngredientB);
-        return IngredientFitsGrade(recipe.IngredientA, grade)
-            && IngredientFitsGrade(recipe.IngredientB, grade);
+        var definition=MclslRecipeCatalog.Get(recipe.Id);
+        if(definition==null)return false;
+        if (grade == 0) return definition.Ingredients.All(x=>IsNativeIngredient(x.ItemId));
+        return definition.Ingredients.All(x=>new[]{x.ItemId}.Concat(x.Alternatives).All(id=>IngredientFitsGrade(id,grade)));
     }
 
     private static bool IngredientFitsGrade(string itemId, int grade)
@@ -599,10 +610,9 @@ internal static class MclslProfessionSystem
         MclslItemDefinition item;
         try { item = PlannedRecipe(actor, bag, year); }
         finally { MclslPerformanceProbe.End("职业.选方", recipeSample); }
-        if (item != null && HasPair(actor, bag, item.IngredientA, item.IngredientB))
+        if (item != null && HasRecipe(actor, bag, item.Id))
         {
-            if (!ConsumeIngredient(actor, bag, item.IngredientA, 1)) return false;
-            if (!ConsumeIngredient(actor, bag, item.IngredientB, 1)) return false;
+            if (!ConsumeRecipe(actor, bag, item.Id)) return false;
             MclslBagSystem.Add(bag, item.Id, acquiredYear: year);
             MclslBagSystem.Write(actor, bag);
             // Mark delivery before optional history/equipment callbacks so an
@@ -627,9 +637,8 @@ internal static class MclslProfessionSystem
         for (int i = 0; i < recipes.Count; i++)
         {
             MclslItemDefinition recipe = recipes[i];
-            if (!HasPair(actor, bag, recipe.IngredientA, recipe.IngredientB)) continue;
-            if (!ConsumeIngredient(actor, bag, recipe.IngredientA, 1)
-                || !ConsumeIngredient(actor, bag, recipe.IngredientB, 1))
+            if (!HasRecipe(actor, bag, recipe.Id)) continue;
+            if (!ConsumeRecipe(actor, bag, recipe.Id))
                 throw new InvalidOperationException("职业练习材料扣除未完成");
             MclslBagSystem.Write(actor, bag);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.ProfessionLastCraftYear, year);
@@ -652,7 +661,7 @@ internal static class MclslProfessionSystem
         {
             MclslItemDefinition recipe = recipes[(start + i) % recipes.Length];
             fallback ??= recipe;
-            if (HasPair(actor, bag, recipe.IngredientA, recipe.IngredientB)) return recipe;
+            if (HasRecipe(actor, bag, recipe.Id)) return recipe;
         }
         return fallback;
     }
@@ -660,6 +669,29 @@ internal static class MclslProfessionSystem
     private static void GainExperience(Actor actor, int amount) => MclslActorAccessor.Set(actor,
         MclslActorDataKeys.ProfessionExperience,
         MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience) + Math.Max(0, amount));
+
+    private static MclslRecipeIngredient[] ResolveRecipe(Actor actor,MclslBagState bag,string product)
+    {
+        if(MclslBagSystem.IsLocked(actor))return null;
+        return MclslRecipeCatalog.Get(product)?.Resolve(
+            id=>id.StartsWith("native:",StringComparison.Ordinal)?actor.city?.getResourcesAmount(id.Substring(7))??0:MclslBagSystem.Count(bag,id),
+            id=>IsNativeIngredient(id)?"native:"+NativeResource(id):id);
+    }
+    internal static bool HasRecipe(Actor actor,MclslBagState bag,string product)=>ResolveRecipe(actor,bag,product)!=null;
+    internal static bool ConsumeRecipe(Actor actor,MclslBagState bag,string product)
+    {
+        var ingredients=ResolveRecipe(actor,bag,product);if(ingredients==null)return false;
+        string backup=Newtonsoft.Json.JsonConvert.SerializeObject(bag.Items);
+        try
+        {
+            foreach(var ingredient in ingredients.Where(x=>!x.ItemId.StartsWith("native:",StringComparison.Ordinal)))
+                if(!MclslBagSystem.Remove(bag,ingredient.ItemId,ingredient.Count))throw new InvalidOperationException("材料预检后扣除失败: "+ingredient.ItemId);
+        }
+        catch
+        {bag.Items=Newtonsoft.Json.JsonConvert.DeserializeObject<List<MclslOwnedItem>>(backup);throw;}
+        foreach(var ingredient in ingredients.Where(x=>x.ItemId.StartsWith("native:",StringComparison.Ordinal)))actor.city.takeResource(ingredient.ItemId.Substring(7),ingredient.Count);
+        return true;
+    }
 
     private static bool HasIngredient(Actor actor, MclslBagState bag, string id)
     {

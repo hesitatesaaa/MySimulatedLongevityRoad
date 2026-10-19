@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_qilin_yuan",
+  "action": "hit",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "29ab45d247832fa797878e1b43977c101d4178f7f68499939d96e44b5e064c45",
+  "outputFile": "NativeActorResources/actors/Beasts/qilin/Human/main/hit_0.png",
+  "outputSha256": "4e5660b9434e25d5280a840205be9b0fea2c68c992418a3061ab78f0184158b7",
+  "createdAtUtc": "2026-10-09T11:34:42.246380+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9e92\u9e9f\u00b7\u5316\u5f62 (mclsl_beast_qilin_yuan), hit_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, dark looped braids with small antler ornament, jade/cream robe, simple fur-trimmed shoulder cape, warm human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Impact recoil: head/shoulders bend back, face winces, limbs fold protectively, cloth/feathers/fins recoil, body remains recognizable. No damage effects. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_qilin_yuan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "29ab45d247832fa797878e1b43977c101d4178f7f68499939d96e44b5e064c45",
+    "sourceAnchor": [
+      633.0,
+      1181
+    ],
+    "sourcePixelsPerUnit": 374.03507275789525,
+    "ppuFactor": 1.3278935994092107,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

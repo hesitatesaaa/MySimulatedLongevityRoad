@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_named_zhenshen",
+  "action": "walk",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "cdb6ef4a1eea7889494d9556ae3c2b6960fac1b50bc54aca0438893ba19efaee",
+  "outputFile": "NativeActorResources/actors/Named/ZhenShen/main/walk_5.png",
+  "outputSha256": "15d173c3245c8a542d2d9d5e0f2ca9e45fe24b6a9977704803d7d8d52660bea8",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u771f\u795e (mclsl_named_zhenshen), walk_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: gold/white celestial sage, long white hair and crown, restrained staff and lightly trimmed layered robe with pale gold cloth shadows. Visual gender: male, adult fully clothed human. Pose: Walking cycle phase 0.833 (300 degrees): two-foot alternating gait, visible hip, knee and ankle articulation, opposing arm swing, trailing cloth and hair; maintain body height and grounded foot line. Near leg is recovering to front, far leg opposite. No extra hands or legs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_zhenshen\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T04:16:35.840680+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "cdb6ef4a1eea7889494d9556ae3c2b6960fac1b50bc54aca0438893ba19efaee",
+    "sourceAnchor": [
+      617.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 388.07015991579004,
+    "ppuFactor": 1.3268361663456598,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

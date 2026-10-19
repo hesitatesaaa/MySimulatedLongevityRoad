@@ -1,35 +1,24 @@
-# Build output
+# Generated packages, previews, and work products
+/build/
+/migration-export/
+/output/
+
+# Local reference material
+/reference/
+
+# Build and interpreter artefacts
 **/bin/
 **/obj/
-发布包/
-_archive/
-.codegraph/
-.codex/
-# IDE and user settings
-.vs/
-.idea/
+**/__pycache__/
+*.py[cod]
+*.pdb
+*.dll
+*.exe
 *.user
 *.suo
-*.userosscache
-*.sln.docstates
-# Local files
-scripts/beast_sprite_sources/
-scripts/individual_frame_sources/
-scripts/spell_vfx_concepts/
-*.log
-*.tmp
-*.bak
-*.cache
-TestResults/
-coverage*/
-.recovered/
-code_broken_*/
-xj_0_7_announce_scan/
-work/
-# 本地开发者工具会随本机发布包更新，但不进入 GitHub 仓库。
-DeveloperTools/
+.vs/
+
+# Editor and operating-system files
+.codex/
 .DS_Store
 Thumbs.db
-.env
-.env.*
-!.env.example

@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "death",
+  "index": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "0f7b6511e050d140ec38a235c2aa9499e79b0dca6ad950b6ad30c11b197e8a35",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/death_2.png",
+  "outputSha256": "425fa9b591192853cdf93afdd6cc0995263d720a9c63407410a82ff294d2947a",
+  "createdAtUtc": "2026-10-09T07:56:53.365040+00:00",
+  "prompt": "Use case: game-asset. Draw exactly ONE independently authored transparent pixel-art Qinglong death_2. Reference is previous stage of SAME dragon. Same1254x1254 transparent canvas, exact same anatomical pixel scale, side camera facing RIGHT. Next pose: Head lowers130px, eyes closed, upper neck folds toward chest; body begins collapsing downward through bending, not sprite translation. Forelimbs hang loosely, lower coil compresses. Draw new bent anatomy for progressive collapse. Preserve original head and body thickness, full serpent length represented by tightening coils; do not shrink anatomical size. Turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers and dorsal crest, cyan flowing mane/tail plume, two long cream-lined whiskers with cyan border. Exactly FOUR limbs with ONE hand/foot each: near and far forelegs from shoulders, near and far hindlegs from lower body. No branched arm, duplicated forehand or extra claw; far limbs may be occluded by coil. Cyan fins are mane. Body and head settle progressively downward; end is prone compact coil, eyes closed, head never rises again. Ground contact around source y1177, no drawn ground. Whole body, horns, whiskers, feet and plume stay inside x180..1180,y60..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw fresh frame, no sprite paste, translate, scale or recolor as redraw. No wings, blood, aura, particles, text, floor, shadow, background, sheets, panels or multiple poses.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/death_1.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "0f7b6511e050d140ec38a235c2aa9499e79b0dca6ad950b6ad30c11b197e8a35",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

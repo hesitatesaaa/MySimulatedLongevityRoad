@@ -17,6 +17,7 @@ internal sealed class MclslPersistenceModule : MclslModuleBase
     {
         MclslWorldStateModifierSystem.ClearCache();
         MclslWorldArchiveStore.Load();
+        if (MclslWorldArchiveStore.WriteLocked) return;
         MclslWorldRunRepository.EnsureCurrentRun(year);
         MclslNativeHistoryBridge.EnsureRegistered();
         MclslNativeKillStatisticsSystem.OnWorldLoaded(year);

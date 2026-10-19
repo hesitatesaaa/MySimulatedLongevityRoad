@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json"><HintPath>../animation-tests/bin/Debug/net10.0/Newtonsoft.Json.dll</HintPath></Reference>
+    <Compile Include="obj/ExtractedRepository.cs" />
+    <Compile Include="obj/ExtractedMarket.cs" />
+    <Compile Include="obj/ExtractedBackpack.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/UI/MclslDeferredUiWork.cs" Link="MclslDeferredUiWork.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslFamilyData.cs" Link="MclslFamilyData.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslEconomyState.cs" Link="MclslEconomyState.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslItemCatalog.cs" Link="MclslItemCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslBeastContent.cs" Link="MclslBeastContent.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Data/MclslBeastCatalog.cs" Link="MclslBeastCatalog.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Family/MclslFamilySystem.cs" Link="MclslFamilySystem.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Family/MclslFamilySystem.Reconciliation.cs" Link="MclslFamilySystem.Reconciliation.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/WorldResources/MclslWorldArchiveStore.cs" Link="MclslWorldArchiveStore.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Crafting/MclslMaterialDiscovery.cs" Link="MclslMaterialDiscovery.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Crafting/MclslEconomicPolicy.cs" Link="MclslEconomicPolicy.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Crafting/MclslJulingMarrowMetrics.cs" Link="MclslJulingMarrowMetrics.cs" />
+  </ItemGroup>
+</Project>

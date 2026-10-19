@@ -48,6 +48,7 @@ internal static class MclslItemUseSystem
 
     internal static void RegisterStatuses()
     {
+        MclslBeastItemEffects.RegisterStatuses();
         Register("F026", 15f, ("multiplier_damage", 0.05f));
         Register("F027", 15f, ("multiplier_speed", 0.05f));
         Register("F001", 30f, ("armor", 15f));
@@ -114,6 +115,9 @@ internal static class MclslItemUseSystem
     private static bool TryUseAutomatic(Actor actor, string itemId, MclslConsumableUseTrigger trigger, int year)
         => TryUseWithTrigger(actor, itemId, trigger, year);
 
+    internal static bool TryUseBeastAutomatic(Actor actor,string itemId,MclslConsumableUseTrigger trigger)
+        =>TryUseWithTrigger(actor,itemId,trigger,MclslRuntime.CurrentYear());
+
     private static bool TryUseWithTrigger(Actor actor, string itemId, MclslConsumableUseTrigger trigger, int year)
     {
         MclslItemDefinition item = MclslItemCatalog.Get(itemId);
@@ -122,6 +126,12 @@ internal static class MclslItemUseSystem
         MclslBagState bag = MclslBagSystem.Read(actor);
         MclslOwnedItem owned = MclslInventoryDataRules.FindOldest(bag.Items, itemId);
         if (owned == null || !MclslConsumableInventoryPolicy.CanUse(actor, item, owned.AcquiredYear, year, trigger)) return false;
+        if(MclslBeastItemEffects.IsConsumable(itemId))
+        {
+            if(!MclslBeastItemEffects.CanUse(actor,item,trigger)||!MclslBeastItemEffects.Use(actor,item))return false;
+            if(!MclslBagSystem.Remove(bag,itemId))throw new InvalidOperationException("兽材物品使用后扣除失败");
+            MclslBagSystem.Write(actor,bag);return true;
+        }
         if (itemId is "D006" or "D007" && !MclslItemEffectDriver.CanSchedule(actor)) return false;
         bool manaRestoreItem = itemId is "D013" or "D020" or "F020";
         double worldTime = 0d;
@@ -332,6 +342,9 @@ internal static class MclslItemUseSystem
 
     internal static void ShortenCommonNegativeStatus(Actor actor, StatusAsset status, ref float duration)
     {
+        if(actor!=null && status!=null && (status.id.Contains("bind",StringComparison.OrdinalIgnoreCase)
+            ||status.id.Contains("slow",StringComparison.OrdinalIgnoreCase)||status.id.Contains("stun",StringComparison.OrdinalIgnoreCase)||status.id.Contains("shock",StringComparison.OrdinalIgnoreCase)))
+            duration=(duration>0?duration:status.duration)*MclslBeastItemEffects.ControlFactor(actor);
         if (actor == null || status == null || !status.can_be_cured) return;
         float factor = actor.hasStatus(StatusPrefix + "D009") ? 0.70f : 1f;
         string id = status.id ?? string.Empty;
@@ -359,6 +372,7 @@ internal static class MclslItemUseSystem
     internal static void TryAutoCombatConsumables(Actor actor, float incomingDamage, bool lifeSaveUsed = false)
     {
         if (!MclslActorAccessor.Alive(actor) || incomingDamage <= 0f) return;
+        if(!lifeSaveUsed)MclslBeastItemEffects.TryAuto(actor,MclslConsumableUseTrigger.Combat,false);
         MclslBagState bag = MclslBagSystem.Peek(actor);
         if (bag.Items.Count == 0) return;
         bool consumedPill = lifeSaveUsed;
@@ -391,6 +405,7 @@ internal static class MclslItemUseSystem
     internal static void TryAutoCombatTalisman(Actor actor)
     {
         if (!MclslActorAccessor.Alive(actor)) return;
+        if(MclslBeastItemEffects.TryAuto(actor,MclslConsumableUseTrigger.Combat,true))return;
         MclslBagState bag = MclslBagSystem.Peek(actor);
         if (bag?.Items == null || bag.Items.Count == 0) return;
 

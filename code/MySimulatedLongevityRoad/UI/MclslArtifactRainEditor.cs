@@ -164,8 +164,7 @@ internal static class MclslArtifactRainEditor
         tip.textOnClick = MclslLocalizationBridge.RuntimeText(item.Name);
         tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText(item.EffectText + "\n品阶：" + GradeName(item.Grade)
             + "\n类别：" + SlotLabel(item.EquipmentSlot)
-            + "\n制作配方：" + MclslItemCatalog.IngredientDisplayName(item.IngredientA)
-            + " + " + MclslItemCatalog.IngredientDisplayName(item.IngredientB));
+            + "\n制作配方：" + MclslRecipeCatalog.Describe(item.Id));
         Cell cell = new() { Item = item, Background = background, Icon = icon };
         button.onClick.AddListener(() =>
         {

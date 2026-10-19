@@ -121,6 +121,7 @@ internal static class MclslEconomicPolicy
     internal static bool CanDiscardPublicStock(MclslItemDefinition item)
     {
         if (item == null) return false;
+        if (item.Id == "A07") return true;
         if (item.Category is "Material" or "Plant" or "TalismanMaterial")
             return item.MaterialTier is MclslMaterialTier.Huang or MclslMaterialTier.Xuan;
         if (item.Category == "Talisman") return item.Grade <= 2;

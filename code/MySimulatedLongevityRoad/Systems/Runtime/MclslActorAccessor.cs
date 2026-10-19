@@ -59,14 +59,18 @@ internal static class MclslActorAccessor
 
         ((BaseSystemData)actor.data).set(key, value ?? string.Empty);
         MclslRuntimeChanges.OnWrite(actor, key);
-        if (cultivationStateChanged || professionChanged) MclslProfessionSystem.ReconcileAndPromote(actor);
+        bool wildBeast = MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsOrdinary(actor);
+        if (!wildBeast && (cultivationStateChanged || professionChanged)) MclslProfessionSystem.ReconcileAndPromote(actor);
 
         if (techniqueChanged)
             MclslTechniqueOccupationSystem.OnTechniqueChanged(actor, oldTechniqueId, value ?? string.Empty);
         if (cultivationStateChanged)
         {
-            MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
-            MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
+            if (!wildBeast)
+            {
+                MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
+                MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
+            }
             MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.ReconcileForm(actor);
         }
         if (honorificSourceChanged)

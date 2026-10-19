@@ -20,6 +20,8 @@ internal sealed class MclslMod : BasicMod<MclslMod>
     {
         try
         {
+            // Actor registration can enqueue native frames before Runtime.Init.
+            MclslRuntimeChanges.BindMainThread();
             MclslLocalizationRuntimeMarker.MarkLoaded();
             MclslLocalizationBridge.LoadChineseCatalog();
             MclslConfigLocalization.Init();

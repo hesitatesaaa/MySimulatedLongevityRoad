@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 1,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "57e35ccfba782d0fda8b84695a950567a7f85aa07578336c16f172f4a6dab9c4",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_1.png",
+  "outputSha256": "71e54eb84897f5831724d75796be533e47287944b56424e0881a14c0a96cd7f9",
+  "createdAtUtc": "2026-10-09T07:04:31.384342+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Qinglong eastern azure dragon attack_1 windup frame. Use the SINGLE reference to preserve the exact FOUR-limb anatomy, pixel scale and body silhouette: turquoise/cyan scales, navy shading, pale cream belly, gold antlers and crest, cyan mane and tail plume, two long whiskers. Same1254x1254 transparent canvas and right-facing camera. Pose just BEFORE the reference frame: close the mouth almost fully, head eases slightly forward by30px, and the existing raised near foreclaw is a little lower with its ONE hand around x805,y620 rather than x805,y550. Move the reference's raised arm smoothly, retaining its single unbranched connection from shoulder at x550,y650. All other limbs remain attached and resting exactly as reference: one far foreclaw on right of upper belly, two hindlegs on the low coil (far hind partly hidden). DO NOT introduce another hand below the raised arm or anywhere in the middle gap. There are only FOUR arms/legs in total, each with one hand/foot. No branching arms, floating claws or doubled hands. Keep full horns, whiskers and tail with generous transparent margins. Crisp square pixel clusters, dark outline and limited flat shades. Draw one NEW frame from scratch, no pasting whole old sprite or scaling/recolor as redraw, no wings, sprite sheet, multiple poses, panels, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_2.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "57e35ccfba782d0fda8b84695a950567a7f85aa07578336c16f172f4a6dab9c4",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 14,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "b63d0165c6c6b63ce666d8d9e61c6b36b4c50def95a9011e3c434221c6869a79",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_14.png",
+  "outputSha256": "c0b60a79a29eff5f34435ca8206d74868871edd5a5d6623583d8021865e81a8e",
+  "createdAtUtc": "2026-10-09T07:40:14.379270+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE new transparent pixel-art Qinglong recovery frame attack14. Match reference identity, exact same1254x1254canvas, pixel size, right-facing side view. Pose intermediate between bite recovery and idle: reference head shifts FORWARD RIGHT just30px; two cream-lined whiskers curl slightly more widely to x1110, near forehand lowers slightly15px, tail plume tilts slightly. Preserve EXACT reference FOUR limbs and their roots: near forearm from left shoulder across chest terminating ONE hand nearx735y790; far forearm at right belly terminatingONEhandx900y700; near hindleg from lower coil toONEfootx600y950; far hindleg PARTLY HIDDEN behind this lower hind root aroundx500y930. No claw at midbody loop x600y770; that area is empty belly/fin, NOT another leg. Do not duplicate foreclaws or sprout an extra hidden hand. Same turquoise scales navy shadows cream belly gold antlers and crest cyan mane, cream whiskers withcyanedge, compactSbody. Whole body fits x230..1180,y90..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, flat palette. New independently drawn pose, no pasted/translated/scaled old sprite. No wings text effects ground shadow background multipleposes or sheets.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_13.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "b63d0165c6c6b63ce666d8d9e61c6b36b4c50def95a9011e3c434221c6869a79",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

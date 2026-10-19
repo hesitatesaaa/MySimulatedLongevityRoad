@@ -21,14 +21,14 @@ internal static class MclslMaterialDiscovery
     private const int RuinXuanChance = 300;  // 3% per material
 
     private static readonly string[] AllMaterialIds = MclslItemCatalog.All
-        .Where(x => x.MaterialTier != MclslMaterialTier.None).Select(x => x.Id).ToArray();
+        .Where(x => x.MaterialTier != MclslMaterialTier.None && x.MaterialSources != MclslMaterialSource.BeastKill).Select(x => x.Id).ToArray();
     static MclslMaterialDiscovery()
     {
         if (AllMaterialIds.Length > 64)
             throw new InvalidOperationException("材料发现记录最多支持 64 种材料；请先扩容位掩码。");
     }
     private static readonly Dictionary<MclslMaterialTier, int> MaterialCountByTier = MclslItemCatalog.All
-        .Where(x => x.MaterialTier != MclslMaterialTier.None)
+        .Where(x => x.MaterialTier != MclslMaterialTier.None && x.MaterialSources != MclslMaterialSource.BeastKill)
         .GroupBy(x => x.MaterialTier).ToDictionary(x => x.Key, x => x.Count());
 
     private static int ScaledChance(MclslMaterialTier tier, int original)
@@ -64,6 +64,7 @@ internal static class MclslMaterialDiscovery
 
             int chance = ScaledChance(item.MaterialTier,
                 item.MaterialTier == MclslMaterialTier.Huang ? AnnualHuangChance : AnnualXuanChance);
+            if (materialId == "A07") chance = 10; // 0.1%; habitat multiplier below makes mountains 0.2%.
             if (MatchesHabitat(item, woodland, water, mountain)) chance *= 2;
             if (Passes(seed, materialId, chance)) mask |= 1UL << i;
         }
@@ -300,6 +301,9 @@ internal static class MclslMaterialDiscovery
                 MclslAnnouncementSystem.Enqueue("天阶材料现世！" + actorName + "于" + place + "通过" + sourceName + "获得【" + item.Name + "】。", "#E7C878", 10f, 1);
         }
         MclslBagSystem.Write(actor, bag);
+        for (int i = 0; i < AllMaterialIds.Length; i++)
+            if ((mask & (1UL << i)) != 0 && AllMaterialIds[i] == "A07")
+                MclslJulingMarrowMetrics.Record("获得/" + sourceName, 1);
         if (recordable.Count > 0)
         {
             string title = actorName + "觅得灵材";

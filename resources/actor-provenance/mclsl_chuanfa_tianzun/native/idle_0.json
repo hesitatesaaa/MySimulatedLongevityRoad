@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_chuanfa_tianzun",
+  "action": "idle",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "e88bf839800cc20057f3249cd8e8474b40bbb380d6e720794cff77be1491b629",
+  "outputFile": "NativeActorResources/actors/Immortals/Chuanfa/main/idle_0.png",
+  "outputSha256": "fe9001164911e2d050a500d61311e5d8d3478af48884faf53ad8bbd65d869eaf",
+  "createdAtUtc": "2026-10-09T11:16:56.611137+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE fresh independent transparent PNG of \u4f20\u6cd5\u5929\u5c0a (mclsl_chuanfa_tianzun), idle_0. PRIMARY SUBJECT AND REQUIRED VISIBLE IDENTITY: Adult male Chuanfa Tianzun, immortal teacher wearing a prominently TALL ceremonial BLACK DAOIST HAT with a narrow gold border, full hat plainly visible above the head instead of a hair bun. Mostly BLACK layered robe with modest gold trim and muted ivory inner collar. One hand holds a CLOSED rectangular scripture BOOK with ivory pages, other hand rests beside it. Book plainly visible in front of the torso. No white floor-length central robe dominating the black costume. Image 1 supplies ONLY this individual face, palette and moderate pixel detail. Replace its unsuitable bun, costume shape or absent prop as required by the subject description. Image 2 is Li Fan rendering STYLE ONLY: never copy his hairstyle, cape, ornaments, clothing composition or sword. Subject-specific hat, held object and silhouette take priority over BOTH images. Full relaxed right-facing three-quarter side view, coherent anatomy. Each described hat, staff, fan, axe, gourd or book MUST be plainly identifiable; never conceal or omit it. Match Li Fan/Baihu moderate pixel detail: crisp outline, broad clean square clusters and two or three shades per material, restrained trim. No dense embroidery, gold filigree, microtexture or painterly rendering. Render the WHOLE character afresh, never paste, transform or recolor existing sprite pixels. Square 1254x1254 transparent RGBA source. Neutral foot/body base near y1080, full silhouette within x100..1150,y100..1100, generous margins. Exactly one body and one pose, no grid, sprite sheet, frame panels, background, shadow, text, glow, particles, watermark or clipping.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\rejected\\mclsl_chuanfa_tianzun\\direction-20261009T105847442773\\output\\actor-redraw\\originals\\mclsl_chuanfa_tianzun\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "e88bf839800cc20057f3249cd8e8474b40bbb380d6e720794cff77be1491b629",
+    "sourceAnchor": [
+      609.0,
+      1199
+    ],
+    "sourcePixelsPerUnit": 388.4210370947374,
+    "ppuFactor": 1.3315032320273803,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

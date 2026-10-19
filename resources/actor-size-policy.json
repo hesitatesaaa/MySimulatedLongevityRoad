@@ -1,0 +1,2861 @@
+{
+  "kind": "user-approved-fixed-species-size-policy",
+  "displaySizeAdjustment": {
+    "beastFormRule": "sqrt(previousVisibleWorldHeight * 5.0), rounded to 4 decimals",
+    "humanoidPreviousTargetVisibleWorldHeight": 2.6875,
+    "humanoidTargetVisibleWorldHeight": 3.2,
+    "humanoidReferenceMultiplier": 1.488372093,
+    "imagePixelsChanged": false,
+    "unityRetested": false
+  },
+  "noCropping": true,
+  "noColorQuantization": true,
+  "resampling": "lanczos-premultiplied-alpha",
+  "unityRetested": false,
+  "references": {
+    "archiveSha256": "7174cb4ff602a23358e9100cb5e04840140069e2dca984916891dc799aa6280c",
+    "tiers": {
+      "1": {
+        "visibleWorldHeight": 1.6,
+        "sampleCount": 27,
+        "members": [
+          "StoneGolem",
+          "SmallRockGolem",
+          "ArmoredRockGolem",
+          "SkeletonMiner",
+          "DualBladeSlayer",
+          "SkeletonWarrior",
+          "StickGoblin",
+          "DarkSpider",
+          "DarkTarantula",
+          "PumpkinMan",
+          "FloatingMushroomCreature",
+          "MushroomMonster",
+          "FlailSkeleton",
+          "VampireBat",
+          "DemonSlime",
+          "Imp",
+          "GreenSlime",
+          "BlueSlime",
+          "PurpleSlime",
+          "WaterSlime",
+          "FireSlime",
+          "IceSlime",
+          "PoisonSlime",
+          "RockSlime",
+          "SlimeQueen",
+          "SlimeKing",
+          "GrassSlime"
+        ],
+        "nearestReference": {
+          "name": "StickGoblin",
+          "canvas": [
+            32,
+            16
+          ],
+          "bounds": [
+            16,
+            0,
+            32,
+            16
+          ],
+          "pixelsPerUnit": 1,
+          "scale": 0.1,
+          "visibleWorldHeight": 1.6,
+          "pngSha256": "1c2e1ff53edc01633ba6a3a22b015a86c7ea3329800f620e57117ce21f1ba8d0"
+        }
+      },
+      "2": {
+        "visibleWorldHeight": 2.21,
+        "sampleCount": 44,
+        "members": [
+          "Construct",
+          "SkeletonCrawler",
+          "EarthGolem",
+          "EvilSpirit",
+          "EyeofCthulhu",
+          "GhostBull",
+          "GreenEnigmaWildman",
+          "PaleSpecterWildman",
+          "PaleEerieAvian",
+          "GoreEldritchSwordbearer",
+          "PaleEldritchBlade",
+          "NightWolf",
+          "DarkTreant",
+          "Werewolf",
+          "GoblinWarrior",
+          "GoblinRogue",
+          "IceboundKnight",
+          "GoblinKing",
+          "SkeletonKnight",
+          "LightningScorpion",
+          "WildIcePig",
+          "GhostStalker",
+          "Dragonborn",
+          "YoungGreenDragon",
+          "Horseman",
+          "Swordsman",
+          "Spearman",
+          "Shieldbearer",
+          "Archer",
+          "WarMage",
+          "WaterElemental",
+          "DarkElemental",
+          "DemonTotem",
+          "WaterSlimeLord",
+          "EarthSlimeLord",
+          "FireSlimeLord",
+          "WindSlimeLord",
+          "LightSlimeLord",
+          "DarkSlimeLord",
+          "LightningSlimeLord",
+          "PoisonSlimeLord",
+          "SlimeEmpress",
+          "SlimeEmperor",
+          "RottenSlime"
+        ],
+        "nearestReference": {
+          "name": "FireSlimeLord",
+          "canvas": [
+            256,
+            256
+          ],
+          "bounds": [
+            0,
+            30,
+            256,
+            248
+          ],
+          "pixelsPerUnit": 1,
+          "scale": 0.010000000000000002,
+          "visibleWorldHeight": 2.18,
+          "pngSha256": "15dc6399e30813745dd3fec38a06d0611ff4b7b1a1c7ed54b6bbd3570d354a2d"
+        }
+      },
+      "3": {
+        "visibleWorldHeight": 3.0749999999999997,
+        "sampleCount": 43,
+        "members": [
+          "Minotaur",
+          "AxeMinotaur",
+          "MinotaurMage",
+          "AvianWarrior",
+          "FemaleKitsune",
+          "TenguSamurai",
+          "AbyssalReaper",
+          "RagingStoneGolem",
+          "ForestTroll",
+          "RotTroll",
+          "MagitechHunter",
+          "AnimatedHat",
+          "GreenMedusa",
+          "PurpleMedusa",
+          "WhiteMedusa",
+          "NightboneWolf",
+          "Gargoyle",
+          "ShadowDrake",
+          "CarapaceHunter",
+          "FireRhino",
+          "SacredGargoyle",
+          "DeathOmenBird",
+          "LavaTurtle",
+          "Siren",
+          "SpearSnake",
+          "DualSwordSnake",
+          "MageSnake",
+          "Griffin",
+          "NightHarpy",
+          "FireElemental",
+          "EarthElemental",
+          "IceElemental",
+          "LightElemental",
+          "StormElemental",
+          "SpaceElemental",
+          "BloodfiendBlade",
+          "BloodfiendMage",
+          "BloodfiendCommander",
+          "TheBeholder",
+          "ThreeeyedDevilFish",
+          "Flyfiend",
+          "Dullahan",
+          "YoungBlackDragon"
+        ],
+        "nearestReference": {
+          "name": "SpearSnake",
+          "canvas": [
+            256,
+            256
+          ],
+          "bounds": [
+            52,
+            47,
+            207,
+            252
+          ],
+          "pixelsPerUnit": 1,
+          "scale": 0.015,
+          "visibleWorldHeight": 3.0749999999999997,
+          "pngSha256": "028ed1f6514ea326dbd2a27f15fbcd23a45527e968056e0b44478c80f65dff93"
+        }
+      },
+      "4": {
+        "visibleWorldHeight": 5.800000000000001,
+        "sampleCount": 27,
+        "members": [
+          "MinotaurLord",
+          "DualHeadPredator",
+          "GreaterStoneGolem",
+          "NecroticStoneGolem",
+          "Phoenix",
+          "OneeyedReaper",
+          "WraithLightningReaper",
+          "Cerberus",
+          "ShatteredBladeHowler",
+          "SpiritTraveler",
+          "FrostGuardian",
+          "WinterWalker",
+          "ForestGuardian",
+          "StormHound",
+          "FireDrake",
+          "RedDragon",
+          "FireLord",
+          "WindLord",
+          "IceLord",
+          "EarthLord",
+          "TwinHeadedDemon",
+          "InfernalLord",
+          "PrimordialDemon",
+          "IceDemonMage",
+          "FireDemonMage",
+          "PillarArcaneApostle",
+          "Behemoth"
+        ],
+        "nearestReference": {
+          "name": "PillarArcaneApostle",
+          "canvas": [
+            384,
+            224
+          ],
+          "bounds": [
+            124,
+            100,
+            258,
+            216
+          ],
+          "pixelsPerUnit": 1,
+          "scale": 0.05,
+          "visibleWorldHeight": 5.800000000000001,
+          "pngSha256": "7707bf1337c376cec59a3c083d02af4f790675f98a512c5bde5c4687e128ba22"
+        }
+      },
+      "5": {
+        "visibleWorldHeight": 15.54,
+        "sampleCount": 14,
+        "members": [
+          "PrimordialFrostDragon",
+          "PrimordialLightDragon",
+          "PrimordialFireDragon",
+          "PrimordialRockDragon",
+          "PrimordialThunderDragon",
+          "PrimordialDarkDragon",
+          "PrimordialWaterDragon",
+          "PrimordialWindDragon",
+          "TheAbyssalArchmage",
+          "AbyssalInquisitor",
+          "AbyssalFlameNaga",
+          "SlimeGod",
+          "DaylightChaser",
+          "DuskDevourer"
+        ],
+        "nearestReference": {
+          "name": "PrimordialFireDragon",
+          "canvas": [
+            320,
+            320
+          ],
+          "bounds": [
+            24,
+            37,
+            304,
+            315
+          ],
+          "pixelsPerUnit": 1,
+          "scale": 0.06,
+          "visibleWorldHeight": 16.68,
+          "pngSha256": "7c9c43f655bfcfdaa95cc052a731cd3d3951a13f114884627df1f193a97abf7b"
+        }
+      }
+    },
+    "human": {
+      "name": "SpiritTraveler",
+      "canvas": [
+        64,
+        64
+      ],
+      "bounds": [
+        24,
+        21,
+        44,
+        64
+      ],
+      "pixelsPerUnit": 1,
+      "scale": 0.05,
+      "visibleWorldHeight": 2.15,
+      "pngSha256": "fbfbeb563635c9624834bc5159ef7a4f4b07bfacc442bf199d0cc9ec51a656a1"
+    },
+    "named": {
+      "name": "PrimordialFrostDragon",
+      "canvas": [
+        400,
+        400
+      ],
+      "bounds": [
+        113,
+        24,
+        292,
+        372
+      ],
+      "pixelsPerUnit": 1,
+      "scale": 0.06,
+      "visibleWorldHeight": 20.880000000000003,
+      "pngSha256": "4138760845fe49a83c1760f5b054575f3a7e255d6f30c6b0cfe145b7d9b6e930"
+    },
+    "scaleBasis": "Reference $mob$ scale 0.1, sprite PPU 1; corroborated by historical placed reference units."
+  },
+  "forms": [
+    {
+      "actorId": "mclsl_beast_kunpeng",
+      "longEdge": 400,
+      "reference": "western-tier-5-median",
+      "targetVisibleWorldHeight": 8.8148,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.3189792663476874,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_4",
+          "attack_3",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_1",
+          "death_0",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_2",
+          "death_1",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qinglong",
+      "longEdge": 224,
+      "reference": "western-tier-3-median",
+      "targetVisibleWorldHeight": 3.9211,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.17862838915470494,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_7",
+          "idle_6",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_8",
+          "idle_5",
+          "idle_9"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7",
+          "walk_8",
+          "walk_9",
+          "walk_10",
+          "walk_11"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_8",
+          "attack_7",
+          "attack_9",
+          "attack_10",
+          "attack_11",
+          "attack_12",
+          "attack_14",
+          "attack_13",
+          "attack_15"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3",
+          "hit_4"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7",
+          "death_8",
+          "death_9",
+          "death_10",
+          "death_11",
+          "death_12",
+          "death_13"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_2",
+          "death_1",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_huanglong",
+      "longEdge": 224,
+      "reference": "western-tier-3-median",
+      "targetVisibleWorldHeight": 3.9211,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.17862838915470494,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9",
+          "attack_10",
+          "attack_11"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_3",
+          "death_2",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_8",
+          "death_9",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_2",
+          "death_1",
+          "death_3",
+          "death_5",
+          "death_4"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_zhuque",
+      "longEdge": 320,
+      "reference": "western-tier-4-median",
+      "targetVisibleWorldHeight": 5.3852,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.2551834130781499,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_1",
+          "death_0",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_6",
+          "death_5",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_zhuque_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_baihu",
+      "longEdge": 224,
+      "reference": "western-tier-3-median",
+      "targetVisibleWorldHeight": 3.9211,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.17862838915470494,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5",
+          "idle_6",
+          "idle_7"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_3",
+          "walk_4",
+          "walk_8",
+          "walk_5",
+          "walk_6",
+          "walk_2",
+          "walk_9",
+          "walk_1",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9",
+          "attack_10",
+          "attack_11"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3"
+        ],
+        "death": [
+          "death_10",
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7",
+          "death_8",
+          "death_9"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_3",
+          "death_2",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qilin",
+      "longEdge": 320,
+      "reference": "western-tier-4-median",
+      "targetVisibleWorldHeight": 5.3852,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.2551834130781499,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_6",
+          "attack_3",
+          "attack_5",
+          "attack_4",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_1",
+          "death_2",
+          "death_0",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_moqilin",
+      "longEdge": 320,
+      "reference": "western-tier-4-median",
+      "targetVisibleWorldHeight": 5.3852,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.2551834130781499,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu",
+      "longEdge": 224,
+      "reference": "western-tier-3-median",
+      "targetVisibleWorldHeight": 3.9211,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.17862838915470494,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_2",
+          "death_1",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang",
+      "longEdge": 320,
+      "reference": "western-tier-4-median",
+      "targetVisibleWorldHeight": 5.3852,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.2551834130781499,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_dafeng",
+      "longEdge": 160,
+      "reference": "western-tier-2-median",
+      "targetVisibleWorldHeight": 3.3242,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.12759170653907495,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_2",
+          "death_1",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_manman",
+      "longEdge": 128,
+      "reference": "western-tier-1-median",
+      "targetVisibleWorldHeight": 2.8284,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.10207336523125997,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_manman_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao",
+      "longEdge": 224,
+      "reference": "western-tier-3-median",
+      "targetVisibleWorldHeight": 3.9211,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.17862838915470494,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qingluan",
+      "longEdge": 160,
+      "reference": "western-tier-2-median",
+      "targetVisibleWorldHeight": 3.3242,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.12759170653907495,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5",
+          "idle_6",
+          "idle_7",
+          "idle_8",
+          "idle_9"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_9",
+          "walk_4",
+          "walk_3",
+          "walk_2",
+          "walk_5",
+          "walk_6",
+          "walk_7",
+          "walk_12",
+          "walk_13",
+          "walk_8",
+          "walk_10",
+          "walk_11"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_11",
+          "attack_2",
+          "attack_1",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9",
+          "attack_10",
+          "attack_12",
+          "attack_13"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_5",
+          "death_3",
+          "death_4",
+          "death_6",
+          "death_7",
+          "death_8",
+          "death_9",
+          "death_10",
+          "death_11"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_changliao",
+      "longEdge": 128,
+      "reference": "western-tier-1-median",
+      "targetVisibleWorldHeight": 2.8284,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.10207336523125997,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_mo",
+      "longEdge": 160,
+      "reference": "western-tier-2-median",
+      "targetVisibleWorldHeight": 3.3242,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.12759170653907495,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_mo_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_hongmao",
+      "longEdge": 128,
+      "reference": "western-tier-1-median",
+      "targetVisibleWorldHeight": 2.8284,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.10207336523125997,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu",
+      "longEdge": 128,
+      "reference": "western-tier-1-median",
+      "targetVisibleWorldHeight": 2.8284,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.10207336523125997,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_yingying",
+      "longEdge": 160,
+      "reference": "western-tier-2-median",
+      "targetVisibleWorldHeight": 3.3242,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.12759170653907495,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_goushou",
+      "longEdge": 128,
+      "reference": "western-tier-1-median",
+      "targetVisibleWorldHeight": 2.8284,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.10207336523125997,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing",
+      "longEdge": 400,
+      "reference": "western-tier-5-median",
+      "targetVisibleWorldHeight": 8.8148,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.3189792663476874,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_3",
+          "death_5",
+          "death_4",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_tianshou",
+      "longEdge": 400,
+      "reference": "western-tier-5-median",
+      "targetVisibleWorldHeight": 8.8148,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.3189792663476874,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_diyi",
+      "longEdge": 256,
+      "reference": "PrimordialFrostDragon",
+      "targetVisibleWorldHeight": 8.1741,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_diyi_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_disanmo",
+      "longEdge": 320,
+      "reference": "PrimordialFrostDragon",
+      "targetVisibleWorldHeight": 9.1389,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.2551834130781499,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong",
+      "longEdge": 400,
+      "reference": "PrimordialFrostDragon",
+      "targetVisibleWorldHeight": 10.2176,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.3189792663476874,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7",
+          "death_8",
+          "death_9"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_lifan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3",
+          "idle_4",
+          "idle_5",
+          "idle_6",
+          "idle_7"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5",
+          "walk_6",
+          "walk_7"
+        ],
+        "attack": [
+          "attack_0",
+          "attack_1",
+          "attack_2",
+          "attack_3",
+          "attack_4",
+          "attack_5",
+          "attack_6",
+          "attack_7",
+          "attack_8",
+          "attack_9",
+          "attack_10",
+          "attack_11"
+        ],
+        "hit": [
+          "hit_0",
+          "hit_1",
+          "hit_2",
+          "hit_3"
+        ],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5",
+          "death_6",
+          "death_7",
+          "death_8",
+          "death_9"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_tianyi",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_moruibin",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_xuantianwang",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_xuke",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_yefeipeng",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_xiaoheng",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_xubai",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_liping",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_shanfan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_zhangfan",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_named_zhenshen",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_bai_xiansheng",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    },
+    {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "longEdge": 256,
+      "reference": "SpiritTraveler",
+      "targetVisibleWorldHeight": 3.2,
+      "inputLongEdge": 1254,
+      "resizeScale": 0.20414673046251994,
+      "frameOrder": {
+        "idle": [
+          "idle_0",
+          "idle_1",
+          "idle_2",
+          "idle_3"
+        ],
+        "walk": [
+          "walk_0",
+          "walk_1",
+          "walk_2",
+          "walk_3",
+          "walk_4",
+          "walk_5"
+        ],
+        "attack": [],
+        "hit": [],
+        "death": [
+          "death_0",
+          "death_1",
+          "death_2",
+          "death_3",
+          "death_4",
+          "death_5"
+        ]
+      }
+    }
+  ],
+  "visibleBoundsAlpha": 16
+}

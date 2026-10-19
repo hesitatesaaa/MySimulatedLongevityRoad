@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "walk",
+  "index": 10,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "9297065aebdccc2bdb6ebcee43c7048c159efba3ab7b1d9d3e441b9cd6fccc33",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/walk_10.png",
+  "outputSha256": "eca19ffcf5397189b25e121ac988229524f350b2ccfbcfd73603b143f8e67a94",
+  "createdAtUtc": "2026-10-09T06:47:08.106814+00:00",
+  "prompt": "Use case: game-asset. Independently draw exactly ONE new transparent pixel-art game frame, Qinglong walk_10. Image 1 fixes identity and anatomical pixel scale: turquoise/cyan scales, navy shading, cream belly, gold antlers and dorsal crest, cyan mane and tail plume, two long whiskers, Eastern serpentine S body and compact lower tail loop. NO wings. Image 2 is the preceding independently drawn glide frame; keep body thickness, head size and anatomical lengths constant. Exactly TWO forelimbs and TWO hindlimbs total, no extra claw near chest: near foreclaw ahead of middle bend, far foreclaw right of upper belly, near hindclaw lower curve, far hindclaw partly hidden in middle coil. Each claw connects to its own limb. Right-facing three-quarter side orthographic camera on same1254x1254 transparent canvas. Pose: Wave enters the lower tail. Neck nearly at standard S curve, foreclaws relax, tail plume curls slightly upward on the left of its bottom loop. Body proportions unchanged.  Stay compact within x220..1160,y100..1190. Complete antlers, whiskers, all claws and tail with transparent margins. Crisp square pixel clusters, dark outline, limited flat shading. Independently DRAW from scratch, no pasted whole old sprite, scaling/recolor as redraw, sheets, panels, multiple poses, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/walk_9.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "9297065aebdccc2bdb6ebcee43c7048c159efba3ab7b1d9d3e441b9cd6fccc33",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

@@ -59,13 +59,14 @@ internal static class MclslPatches
         count += TryPatchPairOptional(harmony, "PlayerControl.checkClickTouchInspectSelect", typeof(PlayerControl), "checkClickTouchInspectSelect", Type.EmptyTypes, postfix: nameof(PlayerControl_CheckClickTouchInspectSelect_Postfix));
         count += TryPatchPair(harmony, "UnitStatsElement.showContent.safe", typeof(UnitStatsElement), "showContent", Type.EmptyTypes, finalizer: nameof(UnitStatsElement_ShowContent_Finalizer));
         count += TryPatchPair(harmony, "Actor.calculateMainSprite", typeof(Actor), "calculateMainSprite", Type.EmptyTypes, prefix: nameof(Actor_CalculateMainSprite_WorldSoul_Prefix));
+        count += TryPatchPair(harmony, "Actor.calculateColoredSprite.fullArt", typeof(Actor), "calculateColoredSprite", new[] { typeof(Sprite), typeof(bool) }, prefix: nameof(Actor_CalculateColoredSprite_FullArt_Prefix));
         count += TryPatchPair(harmony, "Actor.isSapient.beast", typeof(Actor), "isSapient", Type.EmptyTypes, postfix: nameof(Actor_IsSapient_Beast_Postfix));
         count += TryPatchPair(harmony, "Actor.attackTargetActions.animation", typeof(Actor), "attackTargetActions", new[] { typeof(BaseSimObject), typeof(WorldTile) }, postfix: nameof(Actor_AttackTargetActions_Animation_Postfix));
         count += TryPatchPair(harmony, "Actor.getHit.animation", typeof(Actor), "getHit", new[] { typeof(float), typeof(bool), typeof(AttackType), typeof(BaseSimObject), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(Actor_GetHit_Animation_Postfix));
         count += TryPatchPair(harmony, "ActorManager.createBabyActorFromData.beast", typeof(ActorManager), "createBabyActorFromData", new[] { typeof(ActorData), typeof(WorldTile), typeof(City) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
         count += TryPatchPair(harmony, "ActorManager.createNewUnit.beast", typeof(ActorManager), "createNewUnit", new[] { typeof(string), typeof(WorldTile), typeof(bool), typeof(float), typeof(Subspecies), typeof(Subspecies), typeof(bool), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
-        count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataParallel", typeof(ActorManager), "precalculateRenderDataParallel", Type.EmptyTypes, postfix: nameof(ActorManager_PrecalculateRenderDataParallel_Halo_Postfix));
-        count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataNormal", typeof(ActorManager), "precalculateRenderDataNormal", Type.EmptyTypes, postfix: nameof(ActorManager_PrecalculateRenderDataNormal_Halo_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataParallel", typeof(ActorManager), "precalculateRenderDataParallel", Type.EmptyTypes, prefix: nameof(ActorManager_PrecalculateRenderData_AnimationTime_Prefix), postfix: nameof(ActorManager_PrecalculateRenderDataParallel_Halo_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataNormal", typeof(ActorManager), "precalculateRenderDataNormal", Type.EmptyTypes, prefix: nameof(ActorManager_PrecalculateRenderData_AnimationTime_Prefix), postfix: nameof(ActorManager_PrecalculateRenderDataNormal_Halo_Postfix));
         count += TryPatchPair(harmony, "Actor.makeStunned", typeof(Actor), nameof(Actor.makeStunned), new[] { typeof(float) }, prefix: nameof(Actor_MakeStunned_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "Actor.makeSleep", typeof(Actor), nameof(Actor.makeSleep), new[] { typeof(float) }, prefix: nameof(Actor_MakeSleep_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "Actor.calculateForce", typeof(Actor), nameof(Actor.calculateForce), new[] { typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(bool) }, prefix: nameof(Actor_CalculateForce_WorldSoul_Prefix));
@@ -353,10 +354,12 @@ internal static class MclslPatches
                 MclslWorldSoulSystem.CaptureDeath(__instance));
             return false;
         }
+        MclslBeastAnimation.PrepareDeath(__instance);
         __state = new MclslDeathPatchState(
             MclslDeathSystem.Capture(__instance, __1),
             MclslHuanzhenSystem.CaptureDeath(__instance),
-            MclslWorldSoulSystem.CaptureDeath(__instance));
+            MclslWorldSoulSystem.CaptureDeath(__instance),
+            __instance?.data!=null&&__instance.getHealth()<=0);
         return true;
     }
 
@@ -498,6 +501,18 @@ internal static class MclslPatches
         }
     }
 
+    private static bool Actor_CalculateColoredSprite_FullArt_Prefix(Sprite __0, ref Sprite __result)
+    {
+        if (__0 == null || __0.texture == null) return true;
+        string textureName = __0.texture.name;
+        if (!textureName.StartsWith("mclsl_raw_", StringComparison.Ordinal)
+            && !textureName.StartsWith("mclsl_native_", StringComparison.Ordinal)) return true;
+        // These whole-body sprites already contain their authored skin/hair colors.
+        // ActorRenderData.colors still supplies damage/status tinting separately.
+        __result = __0;
+        return false;
+    }
+
     private static void Actor_IsSapient_Beast_Postfix(Actor __instance, ref bool __result)
     {
         if (MclslBeastActorRegistration.IsBeast(__instance))
@@ -519,6 +534,9 @@ internal static class MclslPatches
         MclslBeastActorRegistration.ReconcileForm(__result);
         MclslBeastActorRegistration.EnsureCultivationSeed(__result);
     }
+
+    private static void ActorManager_PrecalculateRenderData_AnimationTime_Prefix()
+        => MclslActorAnimationTime.Sample();
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ActorManager), "precalculateRenderDataParallel")]

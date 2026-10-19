@@ -59,6 +59,8 @@ internal sealed class MclslWorldRunState
     public List<MclslFactionMissionRecord> FactionMissions { get; set; } = new();
     public List<MclslFactionMissionRecord> AncientSectMissions { get; set; } = new();
     public List<MclslFamilyRecord> Families { get; set; } = new();
+    public int FamilyMembershipVersion { get; set; }
+    public Dictionary<string, long> JulingMarrowMetrics { get; set; } = new();
     public List<MclslFactionPressureRecord> FactionPressureEvents { get; set; } = new();
     public List<MclslResourceSpendRecord> ResourceSpendEvents { get; set; } = new();
     public List<MclslTechniqueLineageRecord> TechniqueLineages { get; set; } = new();

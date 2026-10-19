@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_beast_zhuque_yuan",
+  "action": "death",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "2d913a44fb3a13c87c836d89015f9333babb2af479e22339c4965efa615497ba",
+  "outputFile": "NativeActorResources/actors/Beasts/zhuque/Human/main/death_1.png",
+  "outputSha256": "1138a4a64c13b980d9c1575b621f5fd2fe7d9b3798cad99aa4bb7c820fbced18",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u6731\u96c0\u00b7\u5316\u5f62 (mclsl_beast_zhuque_yuan), death_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, red high ponytail and feather pin, vermilion/cream split robe and golden sash, sharp human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Death single-shot progress 0.200, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 transparent native source canvas. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is the approved full-resolution idle identity and anatomical-size reference. Image 2 is the user-approved attack_2 CLARITY reference only, not the required pose. Match the fine crisp pixel density, clear face, fingers, hair edges and fabric folds of Image 2. Keep the figure anatomically as large as Image 1 on the source canvas; do not draw a small rough sprite centered in a large canvas. Do not reinterpret either image as 96/128-pixel sprite art, do not add coarse enlarged pixel blocks. Keep moderate ornament detail and two or three useful shade levels; no photo realism or heavy microtexture. The pose requirements in this prompt take priority over the attacking pose of Image 2. Standing return poses must return to idle stature. Death stages continuously lose support and lower, no upright return. Generate just this independent frame, save native resolution; no downsampling, no cropping, no collage. Keep limbs and robe inside transparent padding, all body parts anatomically attached.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png"
+  ],
+  "createdAtUtc": "2026-10-13T04:04:57.032532+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "2d913a44fb3a13c87c836d89015f9333babb2af479e22339c4965efa615497ba",
+    "sourceAnchor": [
+      615.5,
+      1193
+    ],
+    "sourcePixelsPerUnit": 373.68419557894794,
+    "ppuFactor": 1.3352374223908248,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

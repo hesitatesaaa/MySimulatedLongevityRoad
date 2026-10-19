@@ -347,6 +347,8 @@ internal static class MclslAdventureSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, experience + 1 + progressGain / 15);
         MclslMaterialDiscovery.TryDiscover(actor, ruin, year, order);
         string reward = GrantRuinReward(actor, ruin, year, realmIndex, out string revivedTechniqueId, out string revivedTechniqueName, out string linkedLineageId);
+        string battle=Combat.MclslBattleProfessionSystem.TryTransmission(actor,year,"ruin|"+ruin.Id);
+        if(battle.Length>0)reward+="；"+battle;
         bool ancientPath = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;
         string relation = ancientPath

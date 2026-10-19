@@ -1,0 +1,11 @@
+{
+  "targetVersion": "0.6.0",
+  "visualReview": "waived-by-user",
+  "authorization": "2026-10-19: user requested direct integration without further image review, and formal release after actual Unity validation.",
+  "requireUnityValidation": true,
+  "candidateSelection": "latest-not-rejected",
+  "saveTestScope": "new-save-only",
+  "runtimeAcceptance": "historical-only",
+  "runtimeAcceptanceEvidence": "resources/history/20261019/runtime-acceptance.json",
+  "currentBuild": "local-compact-development-not-Unity-retested"
+}

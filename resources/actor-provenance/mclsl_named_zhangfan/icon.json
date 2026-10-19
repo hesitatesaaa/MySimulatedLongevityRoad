@@ -1,0 +1,76 @@
+{
+  "actorId": "mclsl_named_zhangfan",
+  "action": "icon",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "15a31bb42ae3fb31c43343094ff277dcbcb3bf970dbf81382949e7e16c3c6546",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_named_zhangfan.png",
+  "outputSha256": "15a31bb42ae3fb31c43343094ff277dcbcb3bf970dbf81382949e7e16c3c6546",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5f20\u51e1 (mclsl_named_zhangfan), icon_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: dark crimson/black armored cultivator, dark tied hair and headband, layered shoulder armor, trailing red sash and sword. Visual gender: male, adult fully clothed human. Pose: Dedicated square placement-icon pose: newly draw an attractive compact readable character, full recognizable silhouette with limbs, weapons and head included; long creatures coil their body/tail and birds fold wings to fit. This is an independent portrait pose, not a copy or crop of a world frame. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_zhangfan\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T04:06:45.910808+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "canvas": true,
+    "independentIcon": true
+  },
+  "staticReview": {
+    "jobIndex": 113,
+    "actorId": "mclsl_named_zhangfan",
+    "action": "icon",
+    "frame": 0,
+    "sourceSha256": "15a31bb42ae3fb31c43343094ff277dcbcb3bf970dbf81382949e7e16c3c6546",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "viewedFullNativeImage": true,
+    "limbConnectionsReviewed": true,
+    "extraLimbs": false,
+    "clippingDetected": false,
+    "identityConsistent": true,
+    "actionContinuityApproved": false,
+    "geometryApproved": false,
+    "reviewedBy": "draw_c",
+    "notes": "Male crimson-black swordsman identity and limbs clear in single icon; complete silhouette and blade, no visible clipping. Button occupancy untested."
+  },
+  "iconFinalReview": {
+    "sourceSha256": "15a31bb42ae3fb31c43343094ff277dcbcb3bf970dbf81382949e7e16c3c6546",
+    "reviewedBy": "main-conversation",
+    "reviewedAtUtc": "2026-10-17T10:22:31.096861+00:00",
+    "identityReferenceCompared": true,
+    "anatomyAndSilhouetteReviewed": true,
+    "hardClipping": false,
+    "confirmedDefects": [],
+    "visibleBoundsAtAlpha128": [
+      89,
+      156,
+      1181,
+      1197
+    ],
+    "buttonOccupancyVerifiedInGame": false,
+    "note": "Original icon and idle_0 identity reference viewed directly. Native PNG unchanged; runtime button occupancy remains unverified."
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
+}

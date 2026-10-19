@@ -47,6 +47,13 @@ internal static class MclslAnnualCultivationExecutor
         out string failureReason)
     {
         failureReason = string.Empty;
+        if(MclslBeastActorRegistration.IsOrdinary(actor))
+        {
+            bool pending=MclslActorAccessor.GetInt(actor,"mclsl.beast.growth_year",-1)<annualYear;
+            MclslBeastCultivation.TickAnnual(actor,annualYear);
+            MclslScheduler.CompleteFirstCultivation(actor);
+            return pending && MclslActorAccessor.Alive(actor);
+        }
         MclslCultivationAnnualSnapshot snapshot =
             MclslCultivationLocalCore.BuildAnnualSnapshot(actor, annualYear);
         MclslCultivationLocalCheckResult check =

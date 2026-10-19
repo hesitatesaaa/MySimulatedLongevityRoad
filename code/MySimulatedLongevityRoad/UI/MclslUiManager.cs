@@ -39,7 +39,7 @@ internal static class MclslUiManager
                 MclslNamedCharacterRegistration.AddPowers(_immortalTab);
             }
             MclslLocalizationBridge.RegisterKey("mclsl_beast_tab", "修炼妖兽");
-            MclslLocalizationBridge.RegisterKey("mclsl_beast_tab Description", "放置原著妖兽；种群规则可在原版亚种编辑器中调整。");
+            MclslLocalizationBridge.RegisterKey("mclsl_beast_tab Description", "放置原著妖兽；初始境界与生成上限可在妖兽与兽潮中调整。");
             _beastTab = TabManager.CreateTab("mclsl_beast_tab", "mclsl_beast_tab",
                 "mclsl_beast_tab Description", SpriteTextureLoader.getSprite("ui/Icons/TianDiZhiLi") ?? icon,
                 "hotkey_tip_tab_other");
@@ -49,6 +49,7 @@ internal static class MclslUiManager
                 MclslBeastActorRegistration.AddPowers(_beastTab);
             }
         AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
+        AddButton("mclsl.beast_control","妖兽与兽潮","调整自然妖兽、分级兽潮和手动放置境界。",MclslBeastControlWindow.Show,"ui/Icons/TianDiZhiBian");
         AddButton("mclsl.guide", "模组介绍／入道指南（QQ群：1049012706）", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
         AddButton("mclsl.tianxuan", "天玄镜", "打开万界交易所；修士会按自身需求自动挂牌、购入与结算。", () => MclslFeatureWindow.ShowMarket(), "ui/Icons/TianxuanMirrorEntrance", "ui/Icons/GongXianZhi");
         AddButton("mclsl.artifact_rain_editor", "法宝雨编辑", "选择法宝雨可以生成的法宝。", MclslArtifactRainEditor.ShowWindow, "ui/Icons/ArtifactRain");

@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "sourceCount": 248,
+  "compiler": "Microsoft.CodeAnalysis.CSharp, Version=4.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+  "errors": [],
+  "errorCount": 0,
+  "actualUnityStartupTested": false,
+  "cause": "NML recursively compiled visible tools test stubs together with production C#",
+  "fix": "C# developer projects moved to .dev-tools; NML ignores dot-prefixed directories",
+  "scannerRegression": "tools/test-nml-source-scan.py passed",
+  "sourceLog": "WorldBox Player.log 2026-10-19 17:19:57",
+  "installation": "Move the entire old mod directory out of mods before extracting; do not overlay the old tools directory"
+}

@@ -48,6 +48,7 @@ internal static class MclslModuleHub
         Register(new MclslTimelineModule());
         Register(new MclslWorldEpochModule());
         Register(new MclslWorldSoulModule());
+        Register(new MclslBeastModule());
         Register(new MclslMapMarkerModule());
         Register(new MclslInverseTruthModule());
         Register(new MclslFactionMissionModule());
@@ -66,6 +67,7 @@ internal static class MclslModuleHub
         _priorityFrame = -1;
         LoadRecoveryQueue.Clear();
         ForEach(coreEnabled, module => module.OnWorldLoaded(year), "OnWorldLoaded");
+        if (MclslWorldArchiveStore.WriteLocked) return;
         MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
         foreach (MclslModuleBase module in Modules)
         {
@@ -137,6 +139,7 @@ internal static class MclslModuleHub
         for (int i = 0; i < Modules.Count; i++)
         {
             MclslModuleBase module = Modules[i];
+            if (hook == "OnWorldLoaded" && MclslWorldArchiveStore.WriteLocked) break;
             if (!coreEnabled && !module.RunsWhenCoreDisabled) continue;
             try { action(module); }
             catch (Exception ex) { MclslDiagnostics.Error("module:" + module.Name + ":" + hook, module.Name + "." + hook + " 失败: " + ex.Message); }

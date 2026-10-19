@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_beast_qingluan",
+  "action": "walk",
+  "index": 12,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "4711c4a409dce2b9107cb6504cf8eb79eeb200e34e65a768e30b855790b1dcf5",
+  "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/walk_12.png",
+  "outputSha256": "7997018723f5b221199c66e4d6a2e5244046c1366a2bf37c535da8ba5563802a",
+  "createdAtUtc": "2026-10-09T05:04:07.729058+00:00",
+  "prompt": "Use case: stylized-concept. ONE independently drawn Qingluan pixel-art flight frame walk_12. Image 1 is flight identity, anatomy, palette, BODY SCALE, pixel cluster size and body position on the 1254x1254 source canvas. Image 2 is the immediately previous recovery pose. Image 3 is the raised wing pose to progress toward. Draw a NEW intermediate pose: Recovery immediately after the bottom wingbeat: near wing elbow is strongly bent, primaries only 25 degrees BELOW the horizontal, partly folded toward the bird. Far wing bends similarly behind body. Body remains flying and feet tucked. Keep long three-plume tail trailing left, white throat/chest, cyan/teal/navy feather markings with gold trim, crest/beak and folded feet, 3/4 right-facing fixed orthographic camera. Maintain chest/neck/head original position and anatomy size. Crisp square pixel clusters, dark outlines, flat shades. Draw exactly one pose on transparent RGBA 1254x1254 canvas with generous margins, full wing/feather/tail/crest inside. No copying/resizing/translating an entire old sprite, no text, sheets/panels, aura, glow, shadow, particles or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/walk_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/walk_7.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/walk_4.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      160,
+      160
+    ],
+    "scale": 0.12759170653907495,
+    "inputSha256": "4711c4a409dce2b9107cb6504cf8eb79eeb200e34e65a768e30b855790b1dcf5",
+    "sourceAnchor": [
+      763,
+      1028
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

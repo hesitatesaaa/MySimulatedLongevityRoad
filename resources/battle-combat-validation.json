@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "local-development-awaiting-Unity",
+  "clientDate": "2026-10-19",
+  "existingSpells": 26,
+  "professionSkills": 16,
+  "professionScrolls": 16,
+  "newTraitIcons": 4,
+  "offlineBattleChecks": 61,
+  "existingCatalogAssertions": 692,
+  "compiledAssemblySha256": "605e88e24bfa5b33deb8411023026bb92ba61e6f8deb490d9d70fbdcd7b38ee9",
+  "sources": {
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslBattleCombat.cs": "71cde0a597d530e038044e3b1b3bf6471311179b05a1bfb8b5da102cfc96690b",
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslBattlePrimitives.cs": "93730969ae12d2be3728b6228c18c77c4985fc0958a960d40d38b47f4ee1119b",
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslBattleProfessionSystem.cs": "a9e48273377f8ed587d96d453d7dcb056aa742756a72c70515eaa4a39fab92eb",
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslBattleRules.cs": "27b10f1ea377d37daeec06c100e0b0722dbf401e24e25b19bfcec94a666f4a4d",
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslBattleVisuals.cs": "b65fc52f837d20ff20de25a9addef619398ea1b639e91a56b1e313c003974cdc",
+    "code/MySimulatedLongevityRoad/Systems/Combat/MclslSpiritPact.cs": "7bc5c84276aa570c11b96e73a19244b15f6c8e3c2c1ed6d6773e98e8fdb6e3e2",
+    "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellSystem.cs": "99abfd9f6b93191bdb73723afb3cb00d55ed14496892ee325600496e02f2f73e",
+    "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellCasting.cs": "0ccc618730764e6a0c113a4fa4ec22e9aff628a991bedc438c08619399e58fc2"
+  },
+  "actualUnityStartupTested": false,
+  "actualInGameSizeTested": false,
+  "actualCpuMemoryMeasured": false,
+  "actualGpuMemoryMeasured": false,
+  "stressTests": [
+    {
+      "units": 100,
+      "status": "not-run",
+      "placedUnitsEvidence": null
+    },
+    {
+      "units": 500,
+      "status": "not-run",
+      "placedUnitsEvidence": null
+    },
+    {
+      "units": 1000,
+      "status": "not-run",
+      "placedUnitsEvidence": null
+    }
+  ],
+  "releaseReady": false
+}

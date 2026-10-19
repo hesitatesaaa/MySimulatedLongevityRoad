@@ -1,0 +1,76 @@
+{
+  "actorId": "mclsl_named_shanfan",
+  "action": "icon",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "07155cfa53719c2602dbd4621b94b7bd9d211d1ae37be5c76ba68e9b2e90c0cd",
+  "outputFile": "GameResources/ui/ActorIcons/mclsl_named_shanfan.png",
+  "outputSha256": "07155cfa53719c2602dbd4621b94b7bd9d211d1ae37be5c76ba68e9b2e90c0cd",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5584\u51e1 (mclsl_named_shanfan), icon_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: gold/cream Daoist sage, dark long hair and crown, staff, long embroidered robe with wide draped sleeves. Visual gender: male, adult fully clothed human. Pose: Dedicated square placement-icon pose: newly draw an attractive compact readable character, full recognizable silhouette with limbs, weapons and head included; long creatures coil their body/tail and birds fold wings to fit. This is an independent portrait pose, not a copy or crop of a world frame. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_shanfan\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T04:45:30.976488+00:00",
+  "normalization": {
+    "resampling": "none",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      1254,
+      1254
+    ],
+    "scale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "byteIdenticalToGeneratedSource": true
+  },
+  "nativeResolution": true,
+  "pendingNativeRuntimeIntegration": true,
+  "review": {
+    "identity": true,
+    "pixelEdges": true,
+    "canvas": true,
+    "independentIcon": true
+  },
+  "staticReview": {
+    "jobIndex": 97,
+    "actorId": "mclsl_named_shanfan",
+    "action": "icon",
+    "frame": 0,
+    "sourceSha256": "07155cfa53719c2602dbd4621b94b7bd9d211d1ae37be5c76ba68e9b2e90c0cd",
+    "canvas": [
+      1254,
+      1254
+    ],
+    "viewedFullNativeImage": true,
+    "limbConnectionsReviewed": true,
+    "extraLimbs": false,
+    "clippingDetected": false,
+    "identityConsistent": true,
+    "actionContinuityApproved": false,
+    "geometryApproved": false,
+    "notes": "\u56fe\u6807\u53ef\u8fa8\u5c71\u51e1\u7537\u6027\u3001\u91d1\u767d\u888d\u4e0e\u91d1\u6756\uff0c\u56db\u80a2\u5b8c\u6574\uff1b\u53d1\u5e26\u4e0e\u8863\u8fb9\u7ea2\u8272\u9700\u67e5alpha\uff0c\u6309\u94ae\u5360\u6bd4\u672a\u9a8c\u3002",
+    "reviewedBy": "draw_b"
+  },
+  "iconFinalReview": {
+    "sourceSha256": "07155cfa53719c2602dbd4621b94b7bd9d211d1ae37be5c76ba68e9b2e90c0cd",
+    "reviewedBy": "main-conversation",
+    "reviewedAtUtc": "2026-10-17T10:22:31.096861+00:00",
+    "identityReferenceCompared": true,
+    "anatomyAndSilhouetteReviewed": true,
+    "hardClipping": false,
+    "confirmedDefects": [],
+    "visibleBoundsAtAlpha128": [
+      80,
+      112,
+      1199,
+      1194
+    ],
+    "buttonOccupancyVerifiedInGame": false,
+    "note": "Original icon and idle_0 identity reference viewed directly. Native PNG unchanged; runtime button occupancy remains unverified."
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
+}

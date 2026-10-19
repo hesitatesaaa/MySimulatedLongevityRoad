@@ -37,7 +37,14 @@ internal static class MclslWorldArchiveStore
                 {
                     MclslWorldArchiveBundle bundle = JsonConvert.DeserializeObject<MclslWorldArchiveBundle>(raw);
                     if (bundle == null) continue;
-                    if (MclslWorldRunRepository.ImportArchive(bundle)) { imported = true; break; }
+                    if (MclslWorldRunRepository.ImportArchive(bundle))
+                    {
+                        imported = true;
+                        _writeLocked = false;
+                        Debug.Log("[模拟长生路][存档] " + (i == 0 ? "读取成功" : "主档不可用，已使用备份")
+                            + "，世界=" + bundle.CurrentRun.RunId + "，时代=" + bundle.CurrentRun.CultivationEpoch);
+                        break;
+                    }
                 }
                 catch (Exception candidateError)
                 {
@@ -50,7 +57,8 @@ internal static class MclslWorldArchiveStore
                 data.get("mclsl.architecture.v2", out string v2Archive, string.Empty);
                 _writeLocked = existingArchive || !string.IsNullOrWhiteSpace(v2Envelope) || !string.IsNullOrWhiteSpace(v2Archive);
                 MclslWorldRunRepository.ResetWorld();
-                if (_writeLocked) Debug.LogWarning("[模拟长生路][存档] 检测到不兼容或损坏的旧档，0.5.3 仅支持新世界；已禁止写入。");
+                if (_writeLocked) Debug.LogError("[模拟长生路][存档] 主档及备份均不可读取，或档案格式不兼容（支持版本 "
+                    + MclslSaveVersions.WorldArchive + "）；已暂停模组世界运行及写入，请恢复有效备份。");
             }
             _loaded = true;
         }

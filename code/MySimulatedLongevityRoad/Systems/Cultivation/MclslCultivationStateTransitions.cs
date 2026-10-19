@@ -153,11 +153,11 @@ internal static class MclslCultivationStateTransitions
             ancientPath,
             enforceRealmMinimum: true,
             resetFractionalRemainder: false);
-        MclslTechniqueRealmLimit.EnsureAtLeastRealm(actor, realm);
+        if(!MclslBeastActorRegistration.IsOrdinary(actor))MclslTechniqueRealmLimit.EnsureAtLeastRealm(actor, realm);
         MclslActorAccessor.ApplyDisplayName(actor, realm);
         if (realmChanged) RestoreHealthAfterPromotion(actor);
         RefreshIndexes(actor);
-        if (realmChanged)
+        if (realmChanged && !MclslBeastActorRegistration.IsOrdinary(actor))
         {
             MclslHuanzhenSystem.OnHostPromotion(actor, previousRealm, realm, normalizedYear, reason);
             MclslMaterialDiscovery.TryDiscoverBreakthrough(actor, previousRealm, realm, normalizedYear, reason);
