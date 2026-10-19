@@ -3,7 +3,6 @@
   "action": "icon",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_baihu/originals/icon.png",
   "sourceSha256": "9742b7df7539d4a734f02be7c225455b8d212ce8e80f81530d2acb937603fd67",
   "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_baihu.png",
   "outputSha256": "c798a46e9efa03a66aae64e77843180694c83945d37619ca30d92b067395ca11",
@@ -51,5 +50,6 @@
     "offlinePassed": true,
     "bodyLongestEdgePixels": 94,
     "independentlyDrawn": true
-  }
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
 }

@@ -4,10 +4,9 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_named_xiaoheng/idle_0.png",
   "sourceSha256": "f6344a9792e0bada562121b651b640c2005b8f82bcb9613ca2511677f73fce7e",
   "outputFile": "NativeActorResources/actors/Named/XiaoHeng/main/idle_0.png",
-  "outputSha256": "f6344a9792e0bada562121b651b640c2005b8f82bcb9613ca2511677f73fce7e",
+  "outputSha256": "0014834fcba310453fbb515559a51b6244e237a26f0e95e07203b199d50eaa2c",
   "createdAtUtc": "2026-10-09T11:12:15.388984+00:00",
   "prompt": "Use case: stylized-concept. Exactly ONE fresh independent transparent PNG of \u8427\u6052 (mclsl_named_xiaoheng), idle_0. PRIMARY SUBJECT AND REQUIRED VISIBLE IDENTITY: Adult male olive/cream traveling cultivator. A rounded traveler HAT with a short clearly visible brim covering the top hair bun, and a large recognizable brown GOURD hanging on the front of his waist sash. Practical shorter traveling robe with trousers and boots visible; modest narrow cloth silhouette, small luggage pouch. No long royal cape. Image 1 supplies ONLY this individual face, palette and moderate pixel detail. Replace its unsuitable bun, costume shape or absent prop as required by the subject description. Image 2 is Li Fan rendering STYLE ONLY: never copy his hairstyle, cape, ornaments, clothing composition or sword. Subject-specific hat, held object and silhouette take priority over BOTH images. Full relaxed right-facing three-quarter side view, coherent anatomy. Each described hat, staff, fan, axe, gourd or book MUST be plainly identifiable; never conceal or omit it. Match Li Fan/Baihu moderate pixel detail: crisp outline, broad clean square clusters and two or three shades per material, restrained trim. No dense embroidery, gold filigree, microtexture or painterly rendering. Render the WHOLE character afresh, never paste, transform or recolor existing sprite pixels. Square 1254x1254 transparent RGBA source. Neutral foot/body base near y1080, full silhouette within x100..1150,y100..1100, generous margins. Exactly one body and one pose, no grid, sprite sheet, frame panels, background, shadow, text, glow, particles, watermark or clipping.\n",
   "references": [
@@ -15,27 +14,37 @@
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "f6344a9792e0bada562121b651b640c2005b8f82bcb9613ca2511677f73fce7e",
+    "sourceAnchor": [
+      639.0,
+      1188
+    ],
+    "sourcePixelsPerUnit": 361.40349431579,
+    "ppuFactor": 1.330176341590434,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

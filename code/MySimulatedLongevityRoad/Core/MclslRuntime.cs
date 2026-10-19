@@ -48,7 +48,6 @@ internal static class MclslRuntime
         _lastFrame = unityFrame;
         MclslActorAnimationTime.Sample();
         MclslNativeActorFrames.Tick();
-        MclslActorSizeProbe.Tick();
         long modFrameSample = MclslPerformanceProbe.Begin();
         MclslFrameDeadline.Begin(3d);
         try

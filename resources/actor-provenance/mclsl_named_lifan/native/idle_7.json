@@ -3,37 +3,46 @@
   "action": "idle",
   "index": 7,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/idle_7.png",
   "sourceSha256": "e16b042b16e56879949e869ab3168d62aff1df301234cf2b4eeabe5e31c6664e",
   "outputFile": "NativeActorResources/actors/Named/LiFan/main/idle_7.png",
-  "outputSha256": "e16b042b16e56879949e869ab3168d62aff1df301234cf2b4eeabe5e31c6664e",
+  "outputSha256": "f398a4461ccd66e80cb00dd656f07e795a47711ab7cf5c647705ba8703345f05",
   "createdAtUtc": "2026-10-09T03:48:21.225489+00:00",
   "prompt": "Use case: stylized-concept. Asset type: EXACTLY ONE independent game animation frame, LiFan idle_7 of 8. The supplied image is the identity and pixel-art reference for this SAME character, not a sprite sheet. Draw one new full frame. Preserve exactly his dark navy-white robes, gold edging and belt, long dark hair tied with gold ornament, face, full body proportions, boots and right-facing three-quarter orientation. Keep the same square 1254x1254 source canvas and the same scale, camera, body position and pixel cluster size as the reference. Frame action: quiet standing breathing cycle phase 0.875, exhaling gently; shoulders relaxed, a tiny natural robe fold change, sleeve hem and loose hair tips sway slightly inward. Feet remain planted at the reference ground line; no whole-body translation, no zoom, no costume changes. The face, head and boots should stay almost unchanged; meaningful small pose changes in torso, cloth and hair make this one frame of a coherent pixel animation. Hard crisp pixel edges and limited flat shading, transparent RGBA background. No antialiasing, glow, scene, shadow, blur, text, border, extra character, multiple poses or panels. Only this ONE pose in ONE image; never a sprite sheet.\n",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "e16b042b16e56879949e869ab3168d62aff1df301234cf2b4eeabe5e31c6664e",
+    "sourceAnchor": [
+      607.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 347.36840715789526,
+    "ppuFactor": 1.331449907909157,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

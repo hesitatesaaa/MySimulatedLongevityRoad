@@ -3,10 +3,9 @@
   "action": "idle",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png",
   "sourceSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
   "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/idle_0.png",
-  "outputSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
+  "outputSha256": "00befea6765ba2d50d3c0d879161572f0fabd8839c2f235ae8eebcd58ead4374",
   "createdAtUtc": "2026-10-09T05:04:03.725787+00:00",
   "prompt": "Use case: stylized-concept. Asset type: ONE independent game sprite frame, \u9752\u9e3e Qingluan idle_0. Redraw this frame from scratch. Reference image 1 preserves identity, palette and Chinese fantasy species. Reference image 2 supplies only the Western fantasy mod's crisp pixel art presentation and proportions. Subject: A majestic azure-cyan Chinese luan bird, a phoenix-like sacred bird with an elegant crown, small golden beak, folded feather wings and three long blue tail plumes. Preserve the reference bird's cyan, deep blue, white highlight palette and distinct long-neck silhouette. Feet planted, one single idle standing pose facing right. Torso occupies about 50 virtual pixels high, tail sweep and folded wings contained within x20..108, overall body within y42..112. Render a 128x128 virtual pixel grid, with crisp square pixel clusters and dark outlines, flat limited shading. Transparent RGBA background. Exactly ONE character and ONE pose. Uniform virtual pixel size throughout. Do not draw a sheet, panels, sequential poses, text, ground, shadow, glow, blur, smooth painting, extra creatures or water. Full complete silhouette with generous transparent margins; nothing touches the canvas edges. If delivered enlarged, keep an exact square-pixel look suitable for nearest-neighbor reduction.\n",
   "references": [
@@ -14,27 +13,37 @@
     "reference/western-fantasy/GameResources/actors/FantasyCreatures/MONSTER/Phoenix/Main/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "431c7f77ce03af10dc79e37f0240babb9976c20460388491d739939e4d865e2d",
+    "sourceAnchor": [
+      763,
+      1028
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

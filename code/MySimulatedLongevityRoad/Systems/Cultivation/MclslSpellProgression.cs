@@ -70,7 +70,8 @@ internal static class MclslSpellProgression
             Touch(actor);
             return true;
         }
-        if (!MclslSpellSystem.TryGet(spellId, out MclslSpellDefinition spell)
+        if (!MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanStudy(actor,spellId)
+            || !MclslSpellSystem.TryGet(spellId, out MclslSpellDefinition spell)
             || (!MclslSpellSystem.Knows(actor, spellId) && MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < spell.MinRealm)
             || MclslSpellSystem.Knows(actor, spellId) && Level(actor, spellId) >= 10) return false;
         if (StudyTarget(actor) != spellId)
@@ -126,6 +127,7 @@ internal static class MclslSpellProgression
         int insight = Insight(actor);
         if (insight <= 0) return;
         string id = StudyTarget(actor);
+        if(!MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanStudy(actor,id))return;
         if (!MclslSpellSystem.TryGet(id, out MclslSpellDefinition spell)
             || MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < spell.MinRealm) return;
         if (!MclslSpellSystem.Knows(actor, id))

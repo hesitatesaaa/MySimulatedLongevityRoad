@@ -1,20 +1,7 @@
 # Generated packages, previews, and work products
 /build/
 /migration-export/
-/output/*
-!/output/actor-redraw/
-/output/actor-redraw/*
-!/output/actor-redraw/frames/
-!/output/actor-redraw/originals/
-!/output/actor-redraw/icons/
-!/output/actor-redraw/prompts/
-!/output/actor-redraw/rejected/
-/output/actor-redraw/rejected/*
-!/output/actor-redraw/rejected/low-reference-20261013/
-!/output/actor-redraw/*.json
-!/output/actor-redraw/*.md
-
-# Runtime PNGs and independent-frame sources are tracked for visual rollback.
+/output/
 
 # Local reference material
 /reference/

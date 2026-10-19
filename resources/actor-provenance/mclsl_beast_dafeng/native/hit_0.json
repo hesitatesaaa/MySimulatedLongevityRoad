@@ -4,46 +4,46 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_dafeng/hit_0.png",
   "sourceSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
   "outputFile": "NativeActorResources/actors/Beasts/dafeng/Beast/main/hit_0.png",
-  "outputSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
+  "outputSha256": "8937b3bcca567a514c1625f82367a07dc0e10890c0cc7c2e6c370f2df10c3b2f",
   "prompt": "Use case: stylized-concept. Independently redraw \u5927\u98ce\u00b7\u517d\u5f62 (mclsl_beast_dafeng) hit_0 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Redraw the startled backward recoil with EXACTLY TWO anatomical legs and two claws total. One leg supports the weight and the other folds toward the chest. Remove all additional legs/claws. Retain the blue-white wings, gold crest and identity; transition toward hit_1. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character\u2019s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5927\u98ce\u00b7\u517d\u5f62 (mclsl_beast_dafeng), hit_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: large azure blue storm bird, gold crest and beak, white/cyan breast, broad powerful paired wings, two",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_dafeng\\hit_1.png"
   ],
   "createdAtUtc": "2026-10-14T03:58:02.172805+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
+    "sourceAnchor": [
+      632.0,
+      1173
+    ],
+    "sourcePixelsPerUnit": 217.04545454545456,
+    "ppuFactor": 2.0097391675155767,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "c9290716c0c998ee89ce3ebfb1f4f3063161d7c0d063e4c5ea6690304d1e1eff",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "reviewer": "Codex visual inspection of individual native PNG",
-    "reviewedAtUtc": "2026-10-14T05:22:17.089150+00:00",
-    "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

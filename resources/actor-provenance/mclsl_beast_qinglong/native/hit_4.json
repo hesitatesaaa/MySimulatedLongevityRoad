@@ -3,37 +3,46 @@
   "action": "hit",
   "index": 4,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/hit_4.png",
   "sourceSha256": "56a6db0ad37ad6d5c6ce5c43285fae8dde28e9f6fa95e2bbc68d7c1ae0008c71",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/hit_4.png",
-  "outputSha256": "56a6db0ad37ad6d5c6ce5c43285fae8dde28e9f6fa95e2bbc68d7c1ae0008c71",
+  "outputSha256": "28daba6b8704fed8d5d1829d031513d241545818e068e64bd2d5d45e3a39813b",
   "createdAtUtc": "2026-10-09T07:49:23.238230+00:00",
   "prompt": "Use case game-asset. Independently DRAW ONE NEW transparent pixel-art Qinglong hit_4. Same1254x1254 canvas, right-facing sideview, same exact anatomical pixel scale and FOUR-limb anatomy as single reference. Pose: Final hit recovery matching standard reference head, neck, body curves and all four claw positions. Gold eye open and mouth closed. Only small settling of cream-lined whisker tips and cyan tail plume. No raised forehand, no extra claw. Preserve ONE near forearm from leftshoulder crossing pale upperbelly toONEhand; ONE farforearm from opposite shoulder toONEhand rightbelly; two hindlegs attached LOWERbody withfarhind partlyhidden. Fins are mane, no ghost fifth claw, no branched arm. Azurecyan scales navy shadows cream segmented belly goldantlers/crest cyan mane/plume, TWOcream-lined curling whiskers withcyanedge. CompactSbody, lower tailbottomy1177, unchanged bodylength/thickness. Fullsprite fitsx230..1180y90..1190 withcleartransparentmargins. Crisp squarepixel clusters darkoutlines limitedflatshades. Fresh independentdrawing, no pastedtranslatedscaledorrecoloredoldframe. No wings text effects background ground shadow panels sheets multipleposes.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_15.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "56a6db0ad37ad6d5c6ce5c43285fae8dde28e9f6fa95e2bbc68d7c1ae0008c71",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

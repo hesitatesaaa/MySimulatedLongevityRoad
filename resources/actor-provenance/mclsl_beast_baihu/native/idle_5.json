@@ -3,10 +3,9 @@
   "action": "idle",
   "index": 5,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/idle_5.png",
   "sourceSha256": "918dc18afa2d06870cc4db972a3f1a22aeefa485e2e5ae43b0701e81c61777a8",
   "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/idle_5.png",
-  "outputSha256": "918dc18afa2d06870cc4db972a3f1a22aeefa485e2e5ae43b0701e81c61777a8",
+  "outputSha256": "20c491f18ff50461028012e67cd25e3fbe89b0a2ad3b104810d2fdbf68512d8b",
   "createdAtUtc": "2026-10-09T05:15:58.419414+00:00",
   "prompt": "Use case: game-asset. Draw exactly ONE NEW independent transparent pixel-art game sprite: Chinese sacred white tiger Baihu idle_5. Image 1 is the fixed newly drawn standard identity: preserve white/pale silver fur, charcoal stripes, muscular feline face with gold eyes, round ears and curled striped tail. Exactly four legs, no wings, jewelry, weapons or clothes. Preserve anatomy size and square pixel clusters: standard full standing silhouette around 941 source pixels wide and 733 source pixels high, on the SAME 1254x1254 transparent source canvas. Three-quarter side RIGHT facing, identical camera and lighting, paw ground level y1049, body centered around x636. Image 2 if supplied is a REDUCED previous pose for continuity ONLY, never use its reduced size as the body scale. Pose: Late exhalation. Chest settles nearly to the standard height, muzzle level, tail tip curls inward, all four paws remain planted. Whole tiger must fit with generous transparent margins; during walking keep shoulder and head roughly at standard positions while legs move, no whole-body translation. Crisp square pixel art with flat limited shades and clean dark outline. Independently DRAW this one pose, never copy/paste, move, resize or recolor the old entire sprite. No sprite sheet, panels, other frames, text, particles, aura, ground shadow, scenery or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_baihu/main/idle_4.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "918dc18afa2d06870cc4db972a3f1a22aeefa485e2e5ae43b0701e81c61777a8",
+    "sourceAnchor": [
+      636.0,
+      1060
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

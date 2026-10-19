@@ -3,37 +3,46 @@
   "action": "death",
   "index": 1,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/death_1.png",
   "sourceSha256": "1b704f290ad732751d09e7f2f43b473cfe4dd26fef7c5e03537c86d6545bf43c",
   "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Beast/main/death_1.png",
-  "outputSha256": "1b704f290ad732751d09e7f2f43b473cfe4dd26fef7c5e03537c86d6545bf43c",
+  "outputSha256": "d344c63e2bb544f0b674e958986e3de8a5f637d53a1188395578676aca0b5eb9",
   "createdAtUtc": "2026-10-09T09:19:16.920994+00:00",
   "prompt": "Independently REDRAW exactly ONE detailed transparent pixel-art Liejiejing death_1 frame. Input reference gives identity, scale, texture, detailed contour and death continuity. Middle collapse transition, permanently CLOSED EYE: entire heavy whale body sags, neck and head visibly droop downward from reference, tail remains level and slack, near pectoral fin hangs limp with tip bent downward, far fin slack. Chest lower than reference and belly drooping. Eye must be just a DARK CLOSED EYELID stroke, no gold pupil, no round eye, no iris. Preserve deep-blue ornate Chinese whale, cyan fissure scale markings, cream-gray grooved belly, gold ridge and cream horns, wave-shaped dorsal fins, exactly one pair of pectoral fins and split tail. Match intricate stepped highlights, shadows and fin contours of reference; no simplified geometry. Entire new pose fits on same1254x1254 canvas with transparent margin, fixed body scale, right-facing. Draw the complete changed pose anew, no translating scaling rotating recoloring old image. Exactly one pose, one transparent RGBA PNG. No sheets, panels, text, glow, particles, shadow, water or background. No legs or new appendages. This character is dying or dead: strictly no open eye or gold pupil.\n",
   "references": [
     "output/actor-redraw/originals/mclsl_beast_liejiejing/death_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      400,
+      400
     ],
-    "scale": 1,
+    "scale": 0.3189792663476874,
+    "inputSha256": "1b704f290ad732751d09e7f2f43b473cfe4dd26fef7c5e03537c86d6545bf43c",
+    "sourceAnchor": [
+      627.5,
+      1118
+    ],
+    "sourcePixelsPerUnit": 67.67567567567568,
+    "ppuFactor": 0.596188954815153,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

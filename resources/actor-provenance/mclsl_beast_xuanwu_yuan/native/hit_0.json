@@ -4,37 +4,46 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_xuanwu_yuan/originals/hit_0.png",
   "sourceSha256": "30dc507c592a2f157aa34c771191826936a9fe478d0a8749243d166d6be1362f",
   "outputFile": "NativeActorResources/actors/Beasts/xuanwu/Human/main/hit_0.png",
-  "outputSha256": "30dc507c592a2f157aa34c771191826936a9fe478d0a8749243d166d6be1362f",
+  "outputSha256": "c9b9b68178cb84b6167b18704bfd6947bb3cd0a441b7220b406246cbd6b0e0e4",
   "createdAtUtc": "2026-10-09T12:51:13.184481+00:00",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u7384\u6b66\u00b7\u5316\u5f62 (mclsl_beast_xuanwu_yuan), hit_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ONE humanoid Chinese cultivator in detailed layered robes, with exactly two arms and two legs and a fully human face. This is the ascended human form of teal/dark green tortoise with restrained segmented heavy shell, four short weight-bearing legs, one tortoise head and a distinct coiled snake companion rising from its shell. Preserve its palette and subtle identity through crest-like hair ornaments, horn motifs where appropriate, embroidered scale/fur/feather patterns, and a recognizable tail or shoulder mantle where present in source. Keep the baseline human hairstyle, costume silhouette and visible weapon; do not draw the animal itself or copy Li Fan's robe colors.. Visual gender: male, adult fully clothed human. Pose: Impact recoil: head/shoulders bend back, face winces, limbs fold protectively, cloth/feathers/fins recoil, body remains recognizable. No damage effects. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_xuanwu_yuan\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "30dc507c592a2f157aa34c771191826936a9fe478d0a8749243d166d6be1362f",
+    "sourceAnchor": [
+      634.5,
+      1196
+    ],
+    "sourcePixelsPerUnit": 402.8070014315796,
+    "ppuFactor": 1.3291988683470306,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

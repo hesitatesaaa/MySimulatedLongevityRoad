@@ -1,7 +1,0 @@
-{
-  "actorId": "mclsl_beast_zhuque_yuan",
-  "frame": "attack_5",
-  "sourceSha256": "25f89500772fde436eb28f669aa3a6188d1e7788588b5ef92d47cc9f70944b1c",
-  "reason": "User identified third leg/foot in the new attack recovery frame. Rejected before installation.",
-  "atUtc": "2026-10-14T04:13:03.030821+00:00"
-}

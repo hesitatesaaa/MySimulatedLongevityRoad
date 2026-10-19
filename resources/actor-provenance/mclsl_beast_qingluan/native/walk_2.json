@@ -3,10 +3,9 @@
   "action": "walk",
   "index": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/walk_2.png",
   "sourceSha256": "fad60f7854f54923418ad3322109e31b21d94bf950462209fc8bbaf03d42f01a",
   "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/walk_2.png",
-  "outputSha256": "fad60f7854f54923418ad3322109e31b21d94bf950462209fc8bbaf03d42f01a",
+  "outputSha256": "3a1517cebc74340bef17caf749a9b2e17d6bde20b06320f93f030591dd52a040",
   "createdAtUtc": "2026-10-09T05:04:08.223534+00:00",
   "prompt": "Use case: stylized-concept. Exactly ONE independently redrawn Qingluan pixel-game flight animation frame walk_2, frame 3/12. Image 1 fixes flight anatomy, opened-wing feather design, body size AND body position on source canvas. Image 2 fixes species identity and palette. Keep the same cyan/teal/navy feathers, white chest/throat, gold crest/beak/feet/trim, three long tail plumes trailing left, three-quarter right-facing camera, crisp square pixel clusters, dark outline, flat shades. New pose: wings descend to 45 degrees above horizontal, clear two-wing silhouette. BOTH wings articulate from shoulder, far wing behind the body, same anatomy/number of primaries and markings throughout. Feet stay tucked below belly, head/chest/body keep the EXACT flight reference position and size; tail gently flows behind without huge body translation. Do not enlarge or shrink torso when wings unfold. Same 1254x1254 transparent RGBA source canvas with generous margins: every feather/wingtip/tailtip/crest stays inside. Draw one NEW pose independently, no copying/moving/scaling/recoloring the entire sprite. No scene, shadow, glow, effects, text, panels or sheet; outside bird alpha zero.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "fad60f7854f54923418ad3322109e31b21d94bf950462209fc8bbaf03d42f01a",
+    "sourceAnchor": [
+      763,
+      1028
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

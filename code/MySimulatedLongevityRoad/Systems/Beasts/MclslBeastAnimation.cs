@@ -28,30 +28,20 @@ internal static class MclslBeastAnimation
     internal sealed class Clip
     {
         internal readonly MclslAnimationClipData Data;
-        internal readonly Sprite[] Sprites;
         internal readonly bool Complete;
-        internal readonly bool Native;
         private readonly string _path;
         internal Clip(string path, MclslAnimationClipData data)
         {
             _path = path;
             Data = data;
-            Sprites = new Sprite[data?.Names.Length ?? 0];
-            Complete = Sprites.Length > 0;
+            Complete = data?.Names.Length > 0;
             MclslActorAnimationCatalog.Form form = MclslActorAnimationCatalog.Get(path);
-            Native = form?.NativeResourcePath != null;
-            for (int i = 0; i < Sprites.Length; i++)
+            if (form?.NativeResourcePath == null)
+                throw new InvalidOperationException("Current actor resource group is missing: " + path);
+            for (int i = 0; i < (data?.Names.Length ?? 0); i++)
             {
                 string resource = path + "/main/" + data.Names[i];
-                if (Native)
-                {
-                    MclslNativeActorFrames.Register(resource, form);
-                    continue;
-                }
-                Sprites[i] = LoadSprite(resource);
-                if (Sprites[i] != null) continue;
-                Complete = false;
-                MclslDiagnostics.Error("actor-animation-frame:" + resource, "动画帧缺失: " + resource + ".png");
+                MclslNativeActorFrames.Register(resource, form);
             }
         }
         internal double Duration => Data?.Duration ?? 0;
@@ -59,7 +49,7 @@ internal static class MclslBeastAnimation
         {
             if (!Complete) return null;
             int index = Data.FrameIndex(elapsed);
-            return Native ? MclslNativeActorFrames.Request(_path + "/main/" + Data.Names[index]) : Sprites[index];
+            return MclslNativeActorFrames.Request(_path + "/main/" + Data.Names[index]);
         }
     }
 
@@ -168,10 +158,10 @@ internal static class MclslBeastAnimation
     {
         if (!IsSupported(actor)) return actor?.asset?.cached_sprite;
         string path = PathFor(actor.asset.id);
-        if (path == null) return actor.asset.cached_sprite;
+        if (path == null) return null;
         Frames frames = GetFrames(path);
-        if (frames == null) return actor.asset.cached_sprite;
-        Sprite fallback = frames.Fallback ?? actor.asset.cached_sprite;
+        if (frames == null) return null;
+        Sprite fallback = frames.Fallback;
         if (!frames.Valid) return fallback;
         Clock clock = Clocks.GetOrCreateValue(actor);
         if (!actor.isAlive() && clock.DeathPlayed) return MclslActorPixelResources.TransparentSprite;
@@ -183,11 +173,14 @@ internal static class MclslBeastAnimation
         return frames.Actions[(int)action].At(elapsed) ?? fallback;
     }
 
-    internal static Sprite LoadSprite(string path)
-        => MclslActorPixelResources.Load(path);
-
     internal static Sprite ConfigureAsset(ActorAsset asset, string formPath)
     {
+        string iconId = asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id;
+        Sprite icon = MclslActorPixelResources.PlacementIcon(iconId);
+        if (icon == null) throw new InvalidOperationException("Current actor icon is missing: " + iconId);
+        asset.icon = asset.id;
+        asset.show_icon_inspect_window_id = asset.id;
+        SpriteTextureLoader._cached_sprites["ui/Icons/" + asset.id] = icon;
         // Whole-body authored frames have no separate phenotype/head palette.
         // Bypass both skin recoloring and its cached atlas of earlier frames.
         asset.need_colored_sprite = false;
@@ -197,12 +190,11 @@ internal static class MclslBeastAnimation
         Frames frames = GetFrames(formPath.TrimEnd('/'));
         Clip idle = frames.Actions[(int)MclslActorAction.Idle], walk = frames.Actions[(int)MclslActorAction.Walk];
         List<string> availableIdle = new();
-        for (int i = 0; i < idle.Sprites.Length; i++)
-            if (idle.Native || idle.Sprites[i] != null) availableIdle.Add(idle.Data.Names[i]);
+        availableIdle.AddRange(idle.Data.Names);
         asset.animation_idle = availableIdle.ToArray();
         asset.animation_walk = walk.Complete ? walk.Data.Names : asset.animation_idle;
         asset.animation_swim = asset.animation_walk;
-        asset.animation_idle_speed = (float)Math.Max(0.001d, idle.Duration > 0 ? idle.Duration / Math.Max(1, idle.Sprites.Length) : 0.14d);
+        asset.animation_idle_speed = (float)Math.Max(0.001d, idle.Duration > 0 ? idle.Duration / Math.Max(1, idle.Data.Names.Length) : 0.14d);
         asset.animation_walk_speed = walk.Complete
             ? (float)(walk.Duration / asset.animation_walk.Length) : asset.animation_idle_speed;
         asset.animation_swim_speed = asset.animation_walk_speed;
@@ -241,10 +233,8 @@ internal static class MclslBeastAnimation
             frames.Actions[i] = clip;
             frames.Valid &= clip.Complete;
         }
-        if (frames.Actions[0].Native && frames.Actions[0].Data?.Names.Length > 0)
-            frames.Fallback = SpriteTextureLoader.getSprite(path + "/main/" + frames.Actions[0].Data.Names[0]);
-        else foreach (Sprite sprite in frames.Actions[0].Sprites)
-            if (sprite != null) { frames.Fallback = sprite; break; }
+        if (frames.Actions[0].Data?.Names.Length > 0)
+            frames.Fallback = MclslNativeActorFrames.Initial(path + "/main/" + frames.Actions[0].Data.Names[0]);
         Sets[path] = frames;
         if (!frames.Valid)
             MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("actor-animation-asset",

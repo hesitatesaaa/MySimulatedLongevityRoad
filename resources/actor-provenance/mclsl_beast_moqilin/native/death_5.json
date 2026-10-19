@@ -4,10 +4,9 @@
   "index": 5,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_moqilin/death_5.png",
   "sourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
   "outputFile": "NativeActorResources/actors/Beasts/moqilin/Beast/main/death_5.png",
-  "outputSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+  "outputSha256": "821e7804bb87c0f36575f83e59ddf1b094af05168db65a8236ef6338132b5853",
   "prompt": "Use case: stylized-concept. Independently redraw \u58a8\u9e92\u9e9f\u00b7\u517d\u5f62 (mclsl_beast_moqilin) death_5 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Draw the final settled death pose after death_4. Head and chest stay ON the ground or lower, eyes closed, legs fully slack, tail and mane resting. Do not raise the head or torso or regain support. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character\u2019s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u58a8\u9e92\u9e9f\u00b7\u517d\u5f62 (mclsl_beast_moqilin), death_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, fou CRITICAL correction: Preserve the low prone settled pose, but independently DRAW a naturally compact, curled tail and tuck the muzzle slightly inward. Entire silhouette including mane and tail must fit inside a transparent border of at least 40px on all four sides. Do not crop or resize an old frame. Exactly four legs, folded slack, with head and chest remaining grounded.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin\\death_0.png",
@@ -15,36 +14,37 @@
   ],
   "createdAtUtc": "2026-10-14T04:30:29.416899+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      320,
+      320
     ],
-    "scale": 1,
+    "scale": 0.2551834130781499,
+    "inputSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
+    "sourceAnchor": [
+      631.5,
+      1018
+    ],
+    "sourcePixelsPerUnit": 641.4285714285713,
+    "ppuFactor": 0.24332304546501804,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "e151f0987aa0e4d5a459f8613cc34dc3a39c1870a415759483813778ec079ce4",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "reviewer": "Codex visual inspection of individual native PNG",
-    "reviewedAtUtc": "2026-10-14T05:22:17.177425+00:00",
-    "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

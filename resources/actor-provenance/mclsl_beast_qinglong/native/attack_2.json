@@ -3,10 +3,9 @@
   "action": "attack",
   "index": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/attack_2.png",
   "sourceSha256": "53d9a20a51a546f23e38977366788721675a21d6cbe842dff53aed35ac8db5d0",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_2.png",
-  "outputSha256": "53d9a20a51a546f23e38977366788721675a21d6cbe842dff53aed35ac8db5d0",
+  "outputSha256": "a419c3ded90316e14426c8de9e4b444fc7ae6af77094fd19d99f76037eec3092",
   "createdAtUtc": "2026-10-09T07:00:36.831422+00:00",
   "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Qinglong Eastern azure dragon attack_2. Image1 preserves exact anatomy and pixel scale: turquoise/cyan scales, cream belly, navy shading, gold antlers and dorsal crest, cyan mane and tail plume, two long whiskers, compact S-shaped serpentine body, FOUR limbs. Image2 shows the CORRECT raised near forelimb connection; use that same arm, not the opposite arm. Right-facing three-quarter side view, same1254x1254 transparent canvas. Pose: Windup midway between attack_1 and image2. Head pulled80px backward-left, jaw opens a little. Move the SAME EXISTING NEAR FORELIMB that begins at x550,y650, bends across pale chest with ONE claw hand raised to x770,y630. It replaces the old near hand near x750,y790; there must be NO hand remaining in the old position. Far forelimb stays low right of upper belly at x870,y720. Near hindclaw near x590,y970; far hindclaw partly hidden. Exactly FOUR limbs. Keep head size, body thickness and anatomical lengths identical to image1. No additional claw on chest or neck, no duplicated hand at its former position. Complete head, antlers, whiskers, claws and compact tail loop within clear margins. Crisp square pixel clusters, dark outline, limited flat shades. Independently DRAW one frame from scratch, no old whole-sprite copy/paste, scaling or recolor as redraw, no wings, sprite sheet, panels, multiple poses, text, aura, particles, floor, shadow or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_3.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "53d9a20a51a546f23e38977366788721675a21d6cbe842dff53aed35ac8db5d0",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

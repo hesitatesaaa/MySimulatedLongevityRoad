@@ -115,10 +115,8 @@ internal static class MclslNamedCharacterRegistration
                     ignore_cursor_icon = true
                 });
             if (Buttons.ContainsKey(powerId)) continue;
-            string iconPath = "actors/Named/" + definition.Folder
-                + (definition.Beast ? "/Beast/main/idle_0" : "/main/idle_0");
-            Sprite icon = MclslActorPixelResources.PlacementIcon(definition.AssetId, iconPath)
-                ?? AssetManager.actor_library.get(definition.AssetId)?.getSpriteIcon();
+            Sprite icon = MclslActorPixelResources.PlacementIcon(definition.AssetId);
+            if (icon == null) continue;
             PowerButton button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
             if (button == null) continue;
             MclslActorPixelResources.ConfigurePlacementButton(button);

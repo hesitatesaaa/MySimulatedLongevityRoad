@@ -4,10 +4,9 @@
   "index": 3,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_fenghuang/attack_3.png",
   "sourceSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
   "outputFile": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/attack_3.png",
-  "outputSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
+  "outputSha256": "43df58c8c1926b694015cd2606b668932792bfc456e2c4847e21523409add1b4",
   "prompt": "Use case: stylized-concept. Independently redraw \u51e4\u51f0\u00b7\u517d\u5f62 (mclsl_beast_fenghuang) attack_3 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Redraw the opening claw strike with EXACTLY TWO legs: one rear supporting leg and one forward raised striking leg. Remove the extra third leg. Retain the raised wings and forward-leaning torso between attack_2 and attack_4. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character\u2019s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u51e4\u51f0\u00b7\u517d\u5f62 (mclsl_beast_fenghuang), attack_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: orange/gold phoenix, recognizable fan crest, two feathered wings, two legs, long layered flame-l",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang\\attack_0.png",
@@ -16,36 +15,37 @@
   ],
   "createdAtUtc": "2026-10-14T04:10:53.235596+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      320,
+      320
     ],
-    "scale": 1,
+    "scale": 0.2551834130781499,
+    "inputSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
+    "sourceAnchor": [
+      627.5,
+      1143
+    ],
+    "sourcePixelsPerUnit": 208.18181818181816,
+    "ppuFactor": 0.7626839896099986,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "6db432b16116ee0b649d52e9779c34be8b05d7a411ce7548c9ce2bad05bd9d90",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "reviewer": "Codex visual inspection of individual native PNG",
-    "reviewedAtUtc": "2026-10-14T05:22:17.231503+00:00",
-    "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

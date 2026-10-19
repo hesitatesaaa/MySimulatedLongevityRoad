@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using MySimulatedLongevityRoad.Core;
 using Newtonsoft.Json.Linq;
@@ -54,7 +53,7 @@ internal static class MclslActorAnimationCatalog
     {
         Form form = Get(formPath);
         return form != null && form.Actions.TryGetValue(action, out MclslAnimationClipData clip)
-            ? clip : DiscoverLegacy(formPath, action);
+            ? clip : null;
     }
 
     internal static string ResolveFile(string resourcePath)
@@ -88,7 +87,7 @@ internal static class MclslActorAnimationCatalog
         {
             JObject manifest = JObject.Parse(File.ReadAllText(file));
             int version = (int?)manifest["schemaVersion"] ?? 0;
-            if (version != 1 && version != 2) throw new InvalidDataException("Unknown actor manifest schema");
+            if (version != 2) throw new InvalidDataException("Only the current actor manifest schema is supported");
             if (manifest["groups"] is not JArray groups) throw new InvalidDataException("Missing actor groups");
             foreach (JToken token in groups)
             {
@@ -206,41 +205,6 @@ internal static class MclslActorAnimationCatalog
             }
         }
         catch (Exception ex) { MclslDiagnostics.Error("actor-manifest", ex.Message); }
-    }
-
-    // A manifestless 0.5.4 installation remains usable; scan once per cached form/action.
-    private static readonly Dictionary<string, MclslAnimationClipData> Legacy = new(StringComparer.Ordinal);
-    private static MclslAnimationClipData DiscoverLegacy(string formPath, string action)
-    {
-        if (formPath == null) return null;
-        string key = formPath.TrimEnd('/') + "/main/" + action;
-        if (Legacy.TryGetValue(key, out MclslAnimationClipData cached)) return cached;
-        MclslAnimationClipData clip = null;
-        try
-        {
-            string directory = Path.GetDirectoryName(ResolveFile(key + "_0"));
-            var ordered = new SortedDictionary<int, string>();
-            if (Directory.Exists(directory))
-                foreach (string file in Directory.GetFiles(directory, action + "_*.png"))
-                {
-                    string name = Path.GetFileNameWithoutExtension(file);
-                    if (int.TryParse(name.Substring(action.Length + 1), NumberStyles.None,
-                        CultureInfo.InvariantCulture, out int index) && index >= 0) ordered[index] = name;
-                }
-            if (ordered.Count > 0)
-            {
-                string[] names = new string[ordered.Count];
-                ordered.Values.CopyTo(names, 0);
-                double seconds = action == "idle" ? 14d / 60 : action == "walk" ? 10d / 60
-                    : action == "attack" ? 6d / 60 : action == "hit" ? 5d / 60 : 7d / 60;
-                double[] durations = new double[names.Length];
-                for (int i = 0; i < durations.Length; i++) durations[i] = seconds;
-                clip = new MclslAnimationClipData(names, durations, action == "idle" || action == "walk");
-            }
-        }
-        catch (Exception ex) { MclslDiagnostics.Error("actor-legacy:" + key, ex.Message); }
-        Legacy[key] = clip;
-        return clip;
     }
 
     private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);

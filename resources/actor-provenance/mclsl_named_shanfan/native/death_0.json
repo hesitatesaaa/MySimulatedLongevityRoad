@@ -4,57 +4,46 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_named_shanfan/death_0.png",
   "sourceSha256": "ad17210ddf7dd27405acb35d6e22d3d69d011f9e2c6138c92102bdb0043394c0",
   "outputFile": "NativeActorResources/actors/Named/ShanFan/main/death_0.png",
-  "outputSha256": "ad17210ddf7dd27405acb35d6e22d3d69d011f9e2c6138c92102bdb0043394c0",
+  "outputSha256": "c5899015c491e77131b729536f09708b64914fb22881544123e0f4d691a6b6e4",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5584\u51e1 (mclsl_named_shanfan), death_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: gold/cream Daoist sage, dark long hair and crown, staff, long embroidered robe with wide draped sleeves. Visual gender: male, adult fully clothed human. Pose: Death single-shot progress 0.000, stage onset. Required pose: ONSET ONLY: body remains almost upright at normal idle height; slight forward head droop and small knee bend. Do not kneel or lie down yet. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_shanfan\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-17T04:39:18.237139+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "ad17210ddf7dd27405acb35d6e22d3d69d011f9e2c6138c92102bdb0043394c0",
+    "sourceAnchor": [
+      633.0,
+      1197
+    ],
+    "sourcePixelsPerUnit": 371.5789325052637,
+    "ppuFactor": 1.3366709886404327,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "jobIndex": 91,
-    "actorId": "mclsl_named_shanfan",
-    "action": "death",
-    "frame": 0,
-    "sourceSha256": "ad17210ddf7dd27405acb35d6e22d3d69d011f9e2c6138c92102bdb0043394c0",
-    "canvas": [
-      1254,
-      1254
-    ],
-    "viewedFullNativeImage": true,
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "identityConsistent": true,
-    "actionContinuityApproved": false,
-    "geometryApproved": false,
-    "notes": "\u6b7b\u4ea1\u8d77\u52bf\u4f4e\u5934\uff0c\u8eab\u4f53\u4e0e\u6756\u5b8c\u6574\uff1b\u53d1\u5e26\u53ca\u6756\u7a57\u65c1\u7ea2\u8fb9\u9700\u67e5alpha\u3002",
-    "reviewedBy": "draw_b"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -2,15 +2,22 @@ param(
     [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
     [string]$OutputDirectory = '',
     [switch]$RequireFinalAssets,
+    [switch]$LocalDevelopment,
     [string]$PythonExecutable = 'python'
 )
 $ErrorActionPreference = 'Stop'
+if ($LocalDevelopment -and $RequireFinalAssets) { throw 'Choose local development or formal release validation, not both.' }
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $declaredVersion = (Get-Content (Join-Path $projectRoot 'mod.json') -Raw -Encoding UTF8 | ConvertFrom-Json).version
-if ($RequireFinalAssets -or $declaredVersion -eq '0.6.0') {
+if ($LocalDevelopment) {
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Current actor resource validation failed.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Beast resource validation failed.' }
+} elseif ($RequireFinalAssets -or $declaredVersion -eq '0.6.0') {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 beast overhaul release blocked: resources or actual Unity validation incomplete.' }
-    & $PythonExecutable (Join-Path $PSScriptRoot 'actor-redraw.py') validate --release
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 release blocked: independent frames, icons or in-game validation are incomplete.' }
 }
 $managedRoot = Join-Path $GameRoot 'worldbox_Data\Managed'
@@ -35,8 +42,9 @@ $compilerArguments = @('/nostdlib+', '/target:library', '/langversion:latest', '
 $references = @(Get-ChildItem -LiteralPath $managedRoot -Filter '*.dll' | Where-Object Name -ne 'Assembly-CSharp.dll' | Sort-Object Name | ForEach-Object FullName)
 $references += @($gamePublicizedAssembly, $loaderAssembly, $harmonyAssembly)
 foreach ($assembly in $references) { $compilerArguments += "/reference:`"$assembly`"" }
-$sources = @((Join-Path $projectRoot 'InterestingTrait.cs'))
-$sources += @(Get-ChildItem -LiteralPath (Join-Path $projectRoot 'code') -Filter '*.cs' -Recurse | Sort-Object FullName | ForEach-Object FullName)
+$sourceSelection = & $PythonExecutable (Join-Path $PSScriptRoot 'check-nml-sources.py') --root $projectRoot --json
+if ($LASTEXITCODE -ne 0) { throw 'NML would compile unexpected or missing C# files.' }
+$sources = @(($sourceSelection | ConvertFrom-Json).sources)
 foreach ($source in $sources) { $compilerArguments += "`"$source`"" }
 [IO.File]::WriteAllLines($argumentsFile, $compilerArguments, [Text.UTF8Encoding]::new($false))
 & dotnet $compilerPath /noconfig "@$argumentsFile" 2>&1 | Tee-Object -FilePath (Join-Path $OutputDirectory 'build.log')

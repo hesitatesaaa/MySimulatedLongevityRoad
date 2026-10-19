@@ -4,57 +4,46 @@
   "index": 1,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_named_xubai/idle_1.png",
   "sourceSha256": "98447a7cb87f2b1394a17bda8e8a4b9abd06e43b92f42227d4977d3bdba59946",
   "outputFile": "NativeActorResources/actors/Named/XuBai/main/idle_1.png",
-  "outputSha256": "98447a7cb87f2b1394a17bda8e8a4b9abd06e43b92f42227d4977d3bdba59946",
+  "outputSha256": "d2e7988ddc95c7246c1643076ccadb3528e4243fae1d0cb66271c14e68643bd7",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u8bb8\u767d (mclsl_named_xubai), idle_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: white/pale-blue elegant scholar, long white hair and restrained hair band, embroidered white robes with blue shadows and folding fan. Visual gender: male, adult fully clothed human. Pose: Idle breathing cycle phase 0.250: chest and shoulders gently rise, cloth, hair, mane, tail or feather tips lag at phase angle 90 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_xubai\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-17T03:57:52.003300+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "98447a7cb87f2b1394a17bda8e8a4b9abd06e43b92f42227d4977d3bdba59946",
+    "sourceAnchor": [
+      638.5,
+      1221
+    ],
+    "sourcePixelsPerUnit": 385.26314248421113,
+    "ppuFactor": 1.3365034608181234,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "jobIndex": 50,
-    "actorId": "mclsl_named_xubai",
-    "action": "idle",
-    "frame": 1,
-    "sourceSha256": "98447a7cb87f2b1394a17bda8e8a4b9abd06e43b92f42227d4977d3bdba59946",
-    "canvas": [
-      1254,
-      1254
-    ],
-    "viewedFullNativeImage": true,
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "identityConsistent": true,
-    "actionContinuityApproved": false,
-    "geometryApproved": false,
-    "notes": "\u8bb8\u767d\u7537\u6027\u8eab\u4efd\u3001\u767d\u53d1\u84dd\u767d\u888d\u4e0e\u7af9\u6247\u4e00\u81f4\uff1b\u7ad9\u59ff\u548c\u56db\u80a2\u53ef\u8fa8\uff0c\u672a\u89c1\u4e3b\u4f53\u88c1\u65ad\u3002",
-    "reviewedBy": "draw_b"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -12,10 +12,10 @@
   "oldItemArtAudit": "passed",
   "builtInToolUsed": true,
   "generatedImages": 159,
-  "releaseReady": true,
-  "unityValidation": "user-accepted-existing-evidence",
-  "performance1005001000": "measured-native-three-scenarios",
-  "cpuGpuMemory": "measured-in-actual-engine",
+  "releaseReady": false,
+  "unityValidation": "historical-only; current compact build not retested",
+  "performance1005001000": "historical-only",
+  "cpuGpuMemory": "historical-only",
   "oldItemArtAuditScope": "offline inventory sprite review only",
   "oldItemIconsReviewed": 179,
   "candidateItemIcons": 0,
@@ -29,7 +29,7 @@
   "retainedNativeGenerationOutputs": 185,
   "previewPackage": "E:\\0.6.0\\build\\Beast-Development-Preview-20261014-runtime-verified-core\\MySimulatedLongevityRoad-0.6.0-beast-development-preview.zip",
   "previewPackageSha256": "A2697D2F49BF34CEA2E811097F389680DADC24F329E5B0A5A0B6D6F979842411",
-  "formalResourceGate": "passed-with-user-accepted-runtime-scope",
+  "formalResourceGate": "local-development-only",
   "marketPurchaseIntegration": "demand-offline-tested-four-category-trades-passed-controlled-unity",
   "controlledUnityEvidence": "output/beast-overhaul/controlled-unity-summary.json",
   "controlledUnityMorphs": 21,
@@ -55,5 +55,6 @@
     "lethal-hit-source-freeze",
     "guaranteed-spell-impact-bypasses-hit-shake"
   ],
-  "controlledUnityDeathAttributionRegression": "9-native-death-and-hit-shake-cases-passed"
+  "controlledUnityDeathAttributionRegression": "9-native-death-and-hit-shake-cases-passed",
+  "currentAssetProfile": "compact-current-art-20261019"
 }

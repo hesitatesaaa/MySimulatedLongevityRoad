@@ -4,10 +4,9 @@
   "index": 2,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu_yuan/death_2.png",
   "sourceSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
   "outputFile": "NativeActorResources/actors/Beasts/baihu/Human/main/death_2.png",
-  "outputSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
+  "outputSha256": "1078c619fa2a2eb3341c64f719b4a05d7a356f8262ed698efc3edac4fc6965f8",
   "prompt": "Use case: stylized-concept. Independently redraw \u767d\u864e\u00b7\u5316\u5f62 (mclsl_beast_baihu_yuan) death_2 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Draw a new middle collapse pose. Compared with death_1, the head, chest and hips must sink LOWER; front leg folds slack, with no rising torso or straightened supporting leg. It should transition naturally toward the lower death_3 pose. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character\u2019s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u767d\u864e\u00b7\u5316\u5f62 (mclsl_beast_baihu_yuan), death_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman warrior, white high ponytail, ivory/charcoal short layered robe over visible trouser",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_baihu_yuan\\death_0.png",
@@ -16,35 +15,37 @@
   ],
   "createdAtUtc": "2026-10-14T03:58:05.506535+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
+    "sourceAnchor": [
+      626.0,
+      1149
+    ],
+    "sourcePixelsPerUnit": 365.2631432842111,
+    "ppuFactor": 1.32859576137384,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "5d0e4fc28a62d00f4373bea71cf7377e2899d154a0d9cf2e789de6f38ef232c2",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "reviewer": "Codex individual native PNG visual review",
-    "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
-    "scope": "Static anatomy only. Original raw file viewed; full action/geometry approval separate."
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

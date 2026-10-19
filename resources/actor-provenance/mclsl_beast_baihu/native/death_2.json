@@ -3,10 +3,9 @@
   "action": "death",
   "index": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/death_2.png",
   "sourceSha256": "d9bc816f0aa3ef3697adec9a38af5655786c235300146945d7d25163895a4b14",
   "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/death_2.png",
-  "outputSha256": "d9bc816f0aa3ef3697adec9a38af5655786c235300146945d7d25163895a4b14",
+  "outputSha256": "334fb9e111819ff5a46e3c3933216c617a6a623b3e7f518989e28229d9b138ee",
   "createdAtUtc": "2026-10-09T05:58:23.742264+00:00",
   "prompt": "Use case: game-asset. Draw exactly ONE NEW independently drawn transparent pixel-art frame: Baihu sacred white tiger death_2. Identity in image 1: white and pale silver fur, charcoal tiger stripes, gold eyes, round ears, broad muscular feline head, curled striped tail, FOUR legs. Three-quarter side RIGHT-facing orthographic camera. Fixed 1254x1254 transparent source canvas and fixed pixel scale: standard standing anatomy is 941px wide and 733px high, center x636, paws ground y1049. Preserve anatomical body lengths while changing pose; lying body naturally becomes lower, never stretch it taller. Image 2 when supplied is the previous independently drawn frame on the same canvas. Pose: Both front knees bent fully, elbows near ground. Chest halfway lowered, muzzle low but not yet touching ground. Hind legs visibly crouch to lower the hip. All four limbs attached in the same near/far identities. Tail droops in a compact curl. Complete character within clear margins, including head, all limbs and tail. Crisp square pixel clusters, dark outlines and limited flat shades. DRAW this new single frame from scratch. No pasted whole old sprite, no recolor or scale as redraw, sprite sheets, panels, text, auras, particles, shadow, ground or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/death_1.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "d9bc816f0aa3ef3697adec9a38af5655786c235300146945d7d25163895a4b14",
+    "sourceAnchor": [
+      636.0,
+      1172
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -5,6 +5,7 @@
   "requireUnityValidation": true,
   "candidateSelection": "latest-not-rejected",
   "saveTestScope": "new-save-only",
-  "runtimeAcceptance": "user-accepted-existing-evidence",
-  "runtimeAcceptanceEvidence": "resources/runtime-acceptance-0.6.0.json"
+  "runtimeAcceptance": "historical-only",
+  "runtimeAcceptanceEvidence": "resources/history/20261019/runtime-acceptance.json",
+  "currentBuild": "local-compact-development-not-Unity-retested"
 }

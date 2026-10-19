@@ -4,37 +4,46 @@
   "index": 4,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_yingying_yuan/death_4.png",
   "sourceSha256": "44a41d0018dedcc4c02d391347d48defdbe02d9c0e3a95640677ec74ec55e250",
   "outputFile": "NativeActorResources/actors/Beasts/yingying/Human/main/death_4.png",
-  "outputSha256": "44a41d0018dedcc4c02d391347d48defdbe02d9c0e3a95640677ec74ec55e250",
+  "outputSha256": "830ce216cc4598ba4c9efe1cb9e10cda89ca6c33897e76f29b670926f1a6ed29",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9634\u5f71\u517d\u00b7\u5316\u5f62 (mclsl_beast_yingying_yuan), death_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, short dark hair partly under hood, midnight-purple split robe and practical trousers, subtle shadow-beast shoulder mantle, fully human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Death single-shot progress 0.800, stage prone settling. Required pose: Rest FLAT and slack on the ground, head very low beside collapsed torso, limbs folded beneath or beside body. No upright kneeling torso; no support under shoulders. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep all limbs or fins slack against a flattened resting body, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_yingying_yuan\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-15T09:04:35.388076+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "44a41d0018dedcc4c02d391347d48defdbe02d9c0e3a95640677ec74ec55e250",
+    "sourceAnchor": [
+      635.5,
+      1046
+    ],
+    "sourcePixelsPerUnit": 358.2455997052637,
+    "ppuFactor": 1.3355419725388216,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

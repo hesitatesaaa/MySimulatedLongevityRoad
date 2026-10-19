@@ -4,57 +4,46 @@
   "index": 4,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_named_zhenshen/walk_4.png",
   "sourceSha256": "5536ce0bea275bcd0e3bf213982881671c89e7184048cb8236683ffa84ee3c95",
   "outputFile": "NativeActorResources/actors/Named/ZhenShen/main/walk_4.png",
-  "outputSha256": "5536ce0bea275bcd0e3bf213982881671c89e7184048cb8236683ffa84ee3c95",
+  "outputSha256": "9daa149c4875c36c4edc9cb2bb0e8e166921c9854125ac5898ae7e93d1bce676",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u771f\u795e (mclsl_named_zhenshen), walk_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: gold/white celestial sage, long white hair and crown, restrained staff and lightly trimmed layered robe with pale gold cloth shadows. Visual gender: male, adult fully clothed human. Pose: Walking cycle phase 0.667 (240 degrees): two-foot alternating gait, visible hip, knee and ankle articulation, opposing arm swing, trailing cloth and hair; maintain body height and grounded foot line. Near leg is recovering to front, far leg opposite. No extra hands or legs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_zhenshen\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-17T04:15:32.535414+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "5536ce0bea275bcd0e3bf213982881671c89e7184048cb8236683ffa84ee3c95",
+    "sourceAnchor": [
+      617.5,
+      1194
+    ],
+    "sourcePixelsPerUnit": 388.07015991579004,
+    "ppuFactor": 1.3268361663456598,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "jobIndex": 121,
-    "actorId": "mclsl_named_zhenshen",
-    "action": "walk",
-    "frame": 4,
-    "sourceSha256": "5536ce0bea275bcd0e3bf213982881671c89e7184048cb8236683ffa84ee3c95",
-    "canvas": [
-      1254,
-      1254
-    ],
-    "viewedFullNativeImage": true,
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "identityConsistent": true,
-    "actionContinuityApproved": false,
-    "geometryApproved": false,
-    "reviewedBy": "draw_c",
-    "notes": "Right-side boot leads with left boot trailing; no clear alternating reversal. Colored fringe remains in hair/ribbon gaps."
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

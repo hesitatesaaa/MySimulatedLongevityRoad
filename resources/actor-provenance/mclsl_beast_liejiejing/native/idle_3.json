@@ -3,37 +3,46 @@
   "action": "idle",
   "index": 3,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/idle_3.png",
   "sourceSha256": "bb1765f85b10fde3e9ac45cf603aea7597d3641fc5dabd7b575773c6f763b7ff",
   "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Beast/main/idle_3.png",
-  "outputSha256": "bb1765f85b10fde3e9ac45cf603aea7597d3641fc5dabd7b575773c6f763b7ff",
+  "outputSha256": "779d18a48f4e2f3780b4e15e0e5f6d69f9e4c42e70a1f3248b28d6dbebdb8e2d",
   "createdAtUtc": "2026-10-09T08:14:00.159774+00:00",
   "prompt": "Use case: game-asset. Independently draw ONE NEW transparent pixel-art Liejiejing Chinese fantasy whale idle_3. SAME1254x1254 canvas, EXACT anatomical pixel scale and right-facing side view as reference. Beginning exhale: chest relaxes slightly, near pectoral fin starts bending downward, split tail flukes at modest upward crest; head and nose remain standard position. Preserve deep blue/cyan broad whale body, cream-gray grooved belly, bright cyan fissure markings, flowing dorsal wavefins, gold facial ridge and cream horns, ONE pair of pectoral fins, split tail flukes. No legs. Body and head thickness, tail length, horn count and fin roots match reference. Entire silhouette stays within x20..1230,y300..1000, no clipping or canvas edge contact. Draw pose changes freshly, no old sprite paste translation scaling recolor. Crisp square pixel clusters, dark outlines, flat palette. Transparent RGBA; no water, background, glow, particles, shadow, ground, text, sheets, panels or multiple poses.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_liejiejing/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      400,
+      400
     ],
-    "scale": 1,
+    "scale": 0.3189792663476874,
+    "inputSha256": "bb1765f85b10fde3e9ac45cf603aea7597d3641fc5dabd7b575773c6f763b7ff",
+    "sourceAnchor": [
+      627.5,
+      984
+    ],
+    "sourcePixelsPerUnit": 67.67567567567568,
+    "ppuFactor": 0.596188954815153,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

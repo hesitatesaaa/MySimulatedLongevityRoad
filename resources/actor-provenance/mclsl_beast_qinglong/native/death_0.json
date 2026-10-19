@@ -3,37 +3,46 @@
   "action": "death",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/death_0.png",
   "sourceSha256": "82094e932def15a9afe0f6f2aa43f0251db67b3aed35d6e4cfb6afe8e8f7c99f",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/death_0.png",
-  "outputSha256": "82094e932def15a9afe0f6f2aa43f0251db67b3aed35d6e4cfb6afe8e8f7c99f",
+  "outputSha256": "289352d7197900b2d1db815e0e7d1b09e5f1e7eb87ed1e8063a73c6ae0d0fdfd",
   "createdAtUtc": "2026-10-09T07:54:57.952193+00:00",
   "prompt": "Use case: game-asset. Draw exactly ONE independently authored transparent pixel-art Qinglong death_0. Reference is previous stage of SAME dragon. Same1254x1254 transparent canvas, exact same anatomical pixel scale, side camera facing RIGHT. Next pose: Fatal impact starts: head droops20px, gold eye narrows, neck loses some tension; foreclaws relax and lower slightly. Sbody still hovering, tail at originaly1177. Draw new bent anatomy for progressive collapse. Preserve original head and body thickness, full serpent length represented by tightening coils; do not shrink anatomical size. Turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers and dorsal crest, cyan flowing mane/tail plume, two long cream-lined whiskers with cyan border. Exactly FOUR limbs with ONE hand/foot each: near and far forelegs from shoulders, near and far hindlegs from lower body. No branched arm, duplicated forehand or extra claw; far limbs may be occluded by coil. Cyan fins are mane. Body and head settle progressively downward; end is prone compact coil, eyes closed, head never rises again. Ground contact around source y1177, no drawn ground. Whole body, horns, whiskers, feet and plume stay inside x180..1180,y60..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw fresh frame, no sprite paste, translate, scale or recolor as redraw. No wings, blood, aura, particles, text, floor, shadow, background, sheets, panels or multiple poses.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_15.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "82094e932def15a9afe0f6f2aa43f0251db67b3aed35d6e4cfb6afe8e8f7c99f",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

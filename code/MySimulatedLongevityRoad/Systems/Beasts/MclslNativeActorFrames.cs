@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.IO;
 using MySimulatedLongevityRoad.Core;
 using UnityEngine;
@@ -11,9 +12,12 @@ namespace MySimulatedLongevityRoad.Systems;
 // queue keys; only the main runtime tick creates or releases Unity textures.
 internal static class MclslNativeActorFrames
 {
-    // Development limit. Final value requires GPU-memory measurements in WorldBox.
     private const long BudgetBytes = 2L * 1024 * 1024 * 1024;
-    private static readonly MclslActorFrameCache<Sprite> Cache = new(BudgetBytes);
+    private const long InitialBudgetBytes = 64L * 1024 * 1024;
+    private static readonly MclslActorFrameCache<Sprite> Cache = new(BudgetBytes - InitialBudgetBytes);
+    // Asset initialization holds these current-art sprites across world loads.
+    private static readonly ConcurrentDictionary<string, Sprite> Initials = new(StringComparer.Ordinal);
+    private static long InitialBytes;
     private static readonly Dictionary<string, string> Files = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, MclslActorAnimationCatalog.FrameProfile> Profiles = new(StringComparer.Ordinal);
 
@@ -34,7 +38,43 @@ internal static class MclslNativeActorFrames
         Profiles[resourcePath] = profile;
     }
 
-    internal static Sprite Request(string resourcePath) => Cache.Request(resourcePath);
+    internal static Sprite Initial(string resourcePath)
+    {
+        if (!MclslRuntimeChanges.IsMainThread)
+            throw new InvalidOperationException("Initial actor sprites must load on the main thread");
+        if (Initials.TryGetValue(resourcePath, out Sprite existing)) return existing;
+        var profile = Profiles[resourcePath];
+        long bytes = checked((long)profile.Width * profile.Height * 4);
+        if (InitialBytes + bytes > InitialBudgetBytes)
+            throw new InvalidDataException("Initial actor sprites exceed their reserved budget");
+        Sprite sprite = MclslActorPixelResources.LoadNative(resourcePath, Files[resourcePath], profile);
+        if (sprite == null) throw new InvalidDataException("Current initial frame failed: " + resourcePath);
+        Initials.TryAdd(resourcePath, sprite);
+        InitialBytes += bytes;
+        // Populate engine frame metadata before overrides run. Waiting poses share
+        // this current-art texture; actual animation frames still load on demand.
+        string mainPath = resourcePath.Substring(0, resourcePath.LastIndexOf('/'));
+        var metadata = new List<Sprite>();
+        foreach (string key in Profiles.Keys)
+        {
+            if (!key.StartsWith(mainPath + "/", StringComparison.Ordinal)) continue;
+            Sprite entry = sprite;
+            if (key != resourcePath)
+            {
+                entry = Sprite.Create(sprite.texture, sprite.rect,
+                    new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height),
+                    sprite.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+                entry.name = Path.GetFileName(key);
+            }
+            SpriteTextureLoader._cached_sprites[key] = entry;
+            metadata.Add(entry);
+        }
+        SpriteTextureLoader._cached_sprite_list[mainPath] = metadata.ToArray();
+        return sprite;
+    }
+
+    internal static Sprite Request(string resourcePath)
+        => Initials.TryGetValue(resourcePath, out Sprite initial) ? initial : Cache.Request(resourcePath);
 
     internal static void Tick()
     {
@@ -43,7 +83,6 @@ internal static class MclslNativeActorFrames
             resource => MclslActorPixelResources.LoadNative(resource, Files[resource], Profiles[resource]), Release);
         if (loaded == 0 && Cache.PendingCount > 0 && Cache.ResidentBytes >= BudgetBytes)
             MclslDiagnostics.Once("native-frame-cache-full", "原生动画缓存已达到内存预算; 正等待未使用帧释放");
-        MclslNativeFrameProbe.Tick(Files.Keys, Request, Clear, Cache.ResidentBytes, Cache.PendingCount);
     }
 
     internal static void Clear() => Cache.Clear(Release);

@@ -3,10 +3,9 @@
   "action": "death",
   "index": 8,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/death_8.png",
   "sourceSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
   "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/death_8.png",
-  "outputSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
+  "outputSha256": "0805db1e67ba67ade62eaad58d90b6eadb7da1bb53031756700e3d51a1d74253",
   "createdAtUtc": "2026-10-09T06:06:48.048286+00:00",
   "prompt": "Use case: game-asset. Independently draw exactly ONE transparent pixel-art game frame, Baihu death_8. Image 1 fixes identity: white and pale silver tiger, charcoal stripes, broad feline head, round ears, FOUR legs, curled striped tail. Image 2 shows the previous side-prone pose, retain its exact pixel scale and complete body outline. Fixed 1254x1254 transparent canvas. Whole tiger clear of all edges, within x140..1160. Pose: Almost motionless fully side-prone corpse. Cheek and torso touch ground, eyes closed. Only tail tip relaxes a small amount closer to the hip while retaining compact width. All four resting legs remain visible and correctly attached. Visible pale white belly, body rolled onto its side, all paws relaxed and folded rather than supporting body. Keep the cheek down. Do not grow, shrink or stretch anatomy. Crisp square pixel clusters, dark outlines, flat limited shading. Draw this NEW single frame, no old whole-sprite copy/paste or scaling/recolor as redraw, no sprite sheet, panels, multiple poses, text, aura, floor, shadow or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/death_7.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "146a52c738ba87c2476ae3cedefa8e897f688b45bc5acc0f3de891fe6e67e10e",
+    "sourceAnchor": [
+      636.0,
+      1112
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

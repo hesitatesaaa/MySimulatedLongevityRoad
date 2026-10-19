@@ -4,37 +4,46 @@
   "index": 1,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong_yuan/originals/death_1.png",
   "sourceSha256": "6be4c5bf580d062b03755195a0d8b7c489ba774cb4366a4d7c2e602a3d076a17",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Human/main/death_1.png",
-  "outputSha256": "6be4c5bf580d062b03755195a0d8b7c489ba774cb4366a4d7c2e602a3d076a17",
+  "outputSha256": "37d0962925ff135c17c50e7ec45a62995428cac9ae98208074e8a29bf9870c54",
   "createdAtUtc": "2026-10-09T14:06:05.586907+00:00",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9752\u9f99\u00b7\u5316\u5f62 (mclsl_beast_qinglong_yuan), death_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, dark half-up hair with jade horn-shaped pins, teal/cream robe, restrained scale motif on shoulder cape, regal human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Death single-shot progress 0.200, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_qinglong_yuan\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "6be4c5bf580d062b03755195a0d8b7c489ba774cb4366a4d7c2e602a3d076a17",
+    "sourceAnchor": [
+      633.0,
+      1176
+    ],
+    "sourcePixelsPerUnit": 375.43858147368474,
+    "ppuFactor": 1.328997995183391,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

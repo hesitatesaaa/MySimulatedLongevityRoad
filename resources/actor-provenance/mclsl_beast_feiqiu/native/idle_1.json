@@ -4,37 +4,46 @@
   "index": 1,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_feiqiu/idle_1.png",
   "sourceSha256": "31773e4c505a97ae3f417645d479dfaa452372ce6c1969cd5d6b2d1a711c80fd",
   "outputFile": "NativeActorResources/actors/Beasts/feiqiu/Beast/main/idle_1.png",
-  "outputSha256": "31773e4c505a97ae3f417645d479dfaa452372ce6c1969cd5d6b2d1a711c80fd",
+  "outputSha256": "1146f5744781bc85a001b8cc81c046ce3534eafe98c6f1c1ae1143f3c2e6a851",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u98de\u7403\u517d\u00b7\u517d\u5f62 (mclsl_beast_feiqiu), idle_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: cream/pink round flying-ball beast, large purple edged ears, tiny horns, expressive pink muzzle, four small paws and slender curled tail; retain a richly shaded fleshy furry silhouette rather than a geometric circle. Pose: Idle breathing cycle phase 0.250: chest and shoulders gently rise, cloth, hair, mane, tail or feather tips lag at phase angle 90 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Retain exactly the reference creature anatomy, correct limb counts and coherent joint connections; do not invent extra appendages. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_feiqiu\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-15T07:49:49.552287+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      128,
+      128
     ],
-    "scale": 1,
+    "scale": 0.10207336523125997,
+    "inputSha256": "31773e4c505a97ae3f417645d479dfaa452372ce6c1969cd5d6b2d1a711c80fd",
+    "sourceAnchor": [
+      654.0,
+      986
+    ],
+    "sourcePixelsPerUnit": 300.93023255813955,
+    "ppuFactor": 1.3632533266518545,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -4,45 +4,46 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_manman_yuan/death_0.png",
   "sourceSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
   "outputFile": "NativeActorResources/actors/Beasts/manman/Human/main/death_0.png",
-  "outputSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
+  "outputSha256": "6ad47d7987310b226b725e4bcdb26a1ee8298207fc7eaa9f5c00f80ede1bc8b7",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u86ee\u86ee\u00b7\u5316\u5f62 (mclsl_beast_manman_yuan), death_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, two side braids, red/cream robe with paired-bird motifs, ONE human head and face, exactly two arms and two legs. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Death single-shot progress 0.000, stage onset. Required pose: ONSET ONLY: body remains almost upright at normal idle height; slight forward head droop and small knee bend. Do not kneel or lie down yet. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the complete pose with at least 32px transparent margins around all extremities. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_manman_yuan\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-14T08:53:25.252657+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
+    "sourceAnchor": [
+      638.0,
+      1207
+    ],
+    "sourcePixelsPerUnit": 369.1227922526321,
+    "ppuFactor": 1.3332205524887815,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "86a95656a8b1f515a5afabefab08b3825c64ffebb6b8578f1291709ce4bdd4eb",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "reviewer": "Codex individual native PNG visual review",
-    "reviewedAtUtc": "2026-10-14T09:19:22.460010+00:00",
-    "scope": "Static anatomy; one head, two arms/hands and two legs/boots, with legitimate cloth occlusion. Complete gait and terminal collapse continuity remain unapproved."
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

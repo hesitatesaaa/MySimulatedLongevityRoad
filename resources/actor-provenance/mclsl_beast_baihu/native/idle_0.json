@@ -3,10 +3,9 @@
   "action": "idle",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
   "sourceSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
   "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/idle_0.png",
-  "outputSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
+  "outputSha256": "ea11bb59948df95cfb7e59a3ab126aeab38b9306868ade832e1d785266165213",
   "createdAtUtc": "2026-10-09T03:48:11.010837+00:00",
   "prompt": "Use case: stylized-concept. Asset type: ONE independent game sprite frame, \u767d\u864e Baihu idle_0. Redraw this frame from scratch. Reference image 1 preserves identity, palette and Chinese fantasy species. Reference image 2 supplies only the Western fantasy mod's crisp pixel art presentation and proportions. Subject: A powerful Chinese sacred white tiger, four-legged, white and pale silver fur, clearly defined charcoal tiger stripes, a broad feline face and curled muscular tail. One calm alert standing idle pose facing right, planted paws, no wings, no accessories. Keep the white-black-silver identity of the original. Body about 56 virtual pixels high, whole silhouette within x9..88 y22..80. Render a 96x96 virtual pixel grid, with crisp square pixel clusters and dark outlines, flat limited shading. Transparent RGBA background. Exactly ONE character and ONE pose. Uniform virtual pixel size throughout. Do not draw a sheet, panels, sequential poses, text, ground, shadow, glow, blur, smooth painting, extra creatures or water. Full complete silhouette with generous transparent margins; nothing touches the canvas edges. If delivered enlarged, keep an exact square-pixel look suitable for nearest-neighbor reduction.\n",
   "references": [
@@ -14,27 +13,37 @@
     "reference/western-fantasy/GameResources/actors/FantasyCreatures/MONSTER/NightWolf/Main/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "88c366ecffde902f9b5ef34c7deef322446c4932d44a297d2db61468027308f4",
+    "sourceAnchor": [
+      636.0,
+      1049
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

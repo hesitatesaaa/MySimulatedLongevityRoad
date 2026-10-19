@@ -3,7 +3,6 @@
   "action": "icon",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/icon.png",
   "sourceSha256": "0031c514b4afb811ca1dab6ea6b9771a7969987fc6d39eee58e17cf2df99dee8",
   "outputFile": "GameResources/ui/ActorIcons/mclsl_named_lifan.png",
   "outputSha256": "a65d5ec6cf568bb3fe43fcfc8ff13cbeb7591a383d4e1695da1314ebbfa55c31",
@@ -45,5 +44,6 @@
     "offlinePassed": true,
     "bodyLongestEdgePixels": 94,
     "independentlyDrawn": true
-  }
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
 }

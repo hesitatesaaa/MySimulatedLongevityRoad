@@ -64,9 +64,8 @@ internal static class MclslBeastActorRegistration
                     ignore_cursor_icon = true
                 });
             if (Buttons.ContainsKey(powerId)) continue;
-            Sprite icon = MclslActorPixelResources.PlacementIcon(beast.BeastAssetId,
-                beast.ResourceFolder + "/Beast/main/idle_0")
-                ?? AssetManager.actor_library.get(beast.BeastAssetId)?.getSpriteIcon();
+            Sprite icon = MclslActorPixelResources.PlacementIcon(beast.BeastAssetId);
+            if (icon == null) continue;
             PowerButton button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
             if (button == null) continue;
             MclslActorPixelResources.ConfigurePlacementButton(button);

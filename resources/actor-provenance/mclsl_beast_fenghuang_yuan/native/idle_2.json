@@ -4,10 +4,9 @@
   "index": 2,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_fenghuang_yuan/idle_2.png",
   "sourceSha256": "487494eb4dfccad648bc13df277cba1146da4a7c2c2ac538119314f58d63bc3b",
   "outputFile": "NativeActorResources/actors/Beasts/fenghuang/Human/main/idle_2.png",
-  "outputSha256": "487494eb4dfccad648bc13df277cba1146da4a7c2c2ac538119314f58d63bc3b",
+  "outputSha256": "4649a7f40b24289a4a1b1750d3502dbd29b2f064f3f8133e9a064dd695754f9d",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u51e4\u51f0\u00b7\u5316\u5f62 (mclsl_beast_fenghuang_yuan), idle_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, copper-red loose high bun, orange/cream feather mantle and restrained gold sash, flowing robe with a few broad folds. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Idle breathing cycle phase 0.500: chest and shoulders gently settle, cloth, hair, mane, tail or feather tips lag at phase angle 180 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang_yuan\\idle_0.png",
@@ -15,27 +14,37 @@
   ],
   "createdAtUtc": "2026-10-13T05:40:26.278799+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "487494eb4dfccad648bc13df277cba1146da4a7c2c2ac538119314f58d63bc3b",
+    "sourceAnchor": [
+      635.0,
+      1210
+    ],
+    "sourcePixelsPerUnit": 393.33331760000056,
+    "ppuFactor": 1.3264590843945854,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

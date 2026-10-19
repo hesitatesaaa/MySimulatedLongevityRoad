@@ -4,10 +4,9 @@
   "index": 0,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_moqilin/death_0.png",
   "sourceSha256": "0ff0cd13b52c8c30fcbed87315a529ca0fe0a0c146789620d246a12bbe329116",
   "outputFile": "NativeActorResources/actors/Beasts/moqilin/Beast/main/death_0.png",
-  "outputSha256": "0ff0cd13b52c8c30fcbed87315a529ca0fe0a0c146789620d246a12bbe329116",
+  "outputSha256": "03313a69f9a45c24b066aa638c8563d9ae4bbd7077e602af4b7358d3472dad1f",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u58a8\u9e92\u9e9f\u00b7\u517d\u5f62 (mclsl_beast_moqilin), death_0. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, four legs and tufted tail. Pose: Death single-shot progress 0.000, stage onset. Required pose: ONSET ONLY: body remains almost upright at normal idle height; slight forward head droop and small knee bend. Do not kneel or lie down yet. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_0.png",
@@ -15,27 +14,37 @@
   ],
   "createdAtUtc": "2026-10-13T04:48:32.366639+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      320,
+      320
     ],
-    "scale": 1,
+    "scale": 0.2551834130781499,
+    "inputSha256": "0ff0cd13b52c8c30fcbed87315a529ca0fe0a0c146789620d246a12bbe329116",
+    "sourceAnchor": [
+      631.5,
+      1140
+    ],
+    "sourcePixelsPerUnit": 641.4285714285713,
+    "ppuFactor": 0.24332304546501804,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

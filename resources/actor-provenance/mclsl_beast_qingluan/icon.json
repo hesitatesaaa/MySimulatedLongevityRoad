@@ -3,7 +3,6 @@
   "action": "icon",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_qingluan/originals/icon.png",
   "sourceSha256": "157da90745261f1bfc3018e13bda557242674ea0fad035dab4f953158f9f9192",
   "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_qingluan.png",
   "outputSha256": "c23f3bf766bb658791a534057363177905789257495e77998d204c3c24b068f3",
@@ -51,5 +50,6 @@
     "offlinePassed": true,
     "bodyLongestEdgePixels": 94,
     "independentlyDrawn": true
-  }
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
 }

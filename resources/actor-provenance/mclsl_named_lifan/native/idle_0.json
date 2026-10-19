@@ -3,10 +3,9 @@
   "action": "idle",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/idle_0.png",
   "sourceSha256": "f939b3660d6134970cf70a04ccc9f925bbcc7075934d2f84de01e3684cd60197",
   "outputFile": "NativeActorResources/actors/Named/LiFan/main/idle_0.png",
-  "outputSha256": "f939b3660d6134970cf70a04ccc9f925bbcc7075934d2f84de01e3684cd60197",
+  "outputSha256": "ec6853fc458baac9f803eb76a244d961147a1a8522756486cb2c8003928b5faf",
   "createdAtUtc": "2026-10-09T03:48:19.424205+00:00",
   "prompt": "Use case: stylized-concept. Asset type: exactly ONE game animation frame, LiFan idle_0, for a Chinese cultivation WorldBox pixel art mod. Redraw from scratch, not enlarge or recolor the old tiny sprite. Reference image 1 is the existing LiFan identity, preserve dark navy/white layered Chinese robes, long dark hair, composed adult male silhouette; reference image 2 is Western fantasy Tengu, borrow only crisp low-resolution pixel rendering, bold readable outline and shading, not its species or costume. Output exactly 128 by 128 pixels, native-resolution pixel art, transparent RGBA background. One single full-body standing three-quarter character facing screen-right, foot anchor at pixel (64,112), visible body height about 88 pixels, head at y24. Hands relaxed, robe hem and long hair readable. Reserve margins for later attack poses. No text, no border, no ground shadow, no background, no particles. Hard pixel clusters, no antialiasing, no painted high-resolution artwork. EXACTLY ONE POSE in ONE IMAGE. Do not make a sprite sheet, contact sheet, multiple panels or multiple characters.\n",
   "references": [
@@ -14,27 +13,37 @@
     "reference/western-fantasy/GameResources/actors/FantasyCreatures/MONSTER/TenguSamurai/Main/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "f939b3660d6134970cf70a04ccc9f925bbcc7075934d2f84de01e3684cd60197",
+    "sourceAnchor": [
+      607.5,
+      1176
+    ],
+    "sourcePixelsPerUnit": 347.36840715789526,
+    "ppuFactor": 1.331449907909157,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

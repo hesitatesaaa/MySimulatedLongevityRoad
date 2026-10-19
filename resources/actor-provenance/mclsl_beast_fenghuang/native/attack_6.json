@@ -4,10 +4,9 @@
   "index": 6,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_fenghuang/attack_6.png",
   "sourceSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
   "outputFile": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/attack_6.png",
-  "outputSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
+  "outputSha256": "61c214bf726ec16d578514468b38489283921c003a3e782cf587c62f707cea59",
   "prompt": "Use case: stylized-concept. Independently redraw \u51e4\u51f0\u00b7\u517d\u5f62 (mclsl_beast_fenghuang) attack_6 as ONE animation frame. The attached images are identity and adjacent-pose references, not material to paste. Correction required: Redraw an intermediate recovery after attack_5: striking claw halfway retracts toward the body, wings lower gradually, torso remains slightly forward. Do not snap directly to the fully upright idle pose; attack_7 is the later standing recovery. Balanced high-resolution pixel art at the approved Li Fan/Baihu detail level: clear outline, broad clean pixel clusters, two or three readable shade levels per material; retain this character\u2019s unique anatomy, colors, ornaments and gender. Exactly one independently redrawn character in one transparent 1254x1254 PNG. One frame only; no sprite sheet, grid, panels, background, particles, shadows, text, clipping, resampling, reuse, transformation or recoloring of another frame. Preserve action sequence continuity; previous rejected frame must not be copied. Original context: Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u51e4\u51f0\u00b7\u517d\u5f62 (mclsl_beast_fenghuang), attack_6. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: orange/gold phoenix, recognizable fan crest, two feathered wings, two legs, long layered flame-l CRITICAL correction: ANATOMY: EXACTLY TWO legs total. Only ONE rear leg is planted on the ground. The OTHER leg is raised with its claw halfway retracting near the lower chest; that raised leg has NO second grounded foot. There must be exactly ONE claw on the ground and ONE raised claw, two claws TOTAL. Do not retain two grounded feet and add a third raised claw. Wings halfway lowered and torso recovering, not fully idle. Draw both legs with clear connection to the pelvis. All extremities inside 32px transparent margins.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang\\attack_0.png",
@@ -16,36 +15,37 @@
   ],
   "createdAtUtc": "2026-10-14T04:30:29.645910+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      320,
+      320
     ],
-    "scale": 1,
+    "scale": 0.2551834130781499,
+    "inputSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
+    "sourceAnchor": [
+      627.5,
+      1143
+    ],
+    "sourcePixelsPerUnit": 208.18181818181816,
+    "ppuFactor": 0.7626839896099986,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "867137080ed50f97a3e227425443fbdbf5812f47531be6e8b1507afdc4932757",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "clippingDetected": false,
-    "reviewer": "Codex visual inspection of individual native PNG",
-    "reviewedAtUtc": "2026-10-14T05:22:17.276586+00:00",
-    "scope": "Static anatomy only; action sequence and runtime geometry not approved by this record"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

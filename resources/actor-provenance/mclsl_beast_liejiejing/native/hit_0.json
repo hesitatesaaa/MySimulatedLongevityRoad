@@ -3,37 +3,46 @@
   "action": "hit",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing/hit_0.png",
   "sourceSha256": "97c68c6b3131fc0919a8107f083b8af89d582c495aeebb02e86ea598b8a57881",
   "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Beast/main/hit_0.png",
-  "outputSha256": "97c68c6b3131fc0919a8107f083b8af89d582c495aeebb02e86ea598b8a57881",
+  "outputSha256": "f084dc3568e853e9cb3e46f76ef3111d62f324391f5ab3d29612e9348fd59fe1",
   "createdAtUtc": "2026-10-09T09:03:48.245970+00:00",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independently redrawn transparent pixel-art game sprite, Liejiejing hit_0. Input reference: identity, proportions, palette and detailed pixel rendering standard ONLY, never an old bitmap to transform. New pose: Impact reaction: eye narrowed, head recoils slightly backward and lower, near fin curls protectively toward belly, tail flukes tense upward. No damage particles. Preserve broad Chinese fantasy deep-blue whale, layered blue and cyan stepped highlight clusters, intricate cyan fissure markings, cream-gray grooved belly, ornate cream horns and gold facial ridge, curling dorsal wavefins, exactly ONE pair of pectoral fins, split tail flukes, no legs or extra limbs. Match the reference's fine contour work, fin edging, horn shading, belly grooves and rich readable pixel clusters. No geometric simplification, no plain flat silhouette. Right-facing side view and same anatomical scale on square 1254x1254 source canvas. Hold main torso and head position stable except the described pose changes. Keep entire silhouette with generous transparent margin; no part touches any canvas edge. If tail bends widely, curl its tips inward rather than enlarge the character or cut off fins. Output one newly drawn character and one pose in one transparent RGBA PNG only. No water, background, light halo, particles, shadow, floor, text, panels, sprite sheet or multiple poses. Never translate, rotate, scale, recolor or paste an existing sprite as this frame.\n",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_liejiejing\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      400,
+      400
     ],
-    "scale": 1,
+    "scale": 0.3189792663476874,
+    "inputSha256": "97c68c6b3131fc0919a8107f083b8af89d582c495aeebb02e86ea598b8a57881",
+    "sourceAnchor": [
+      627.5,
+      984
+    ],
+    "sourcePixelsPerUnit": 67.67567567567568,
+    "ppuFactor": 0.596188954815153,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -3,10 +3,9 @@
   "action": "idle",
   "index": 5,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/idle_5.png",
   "sourceSha256": "00df4e6608f2fc55aef33745a0c3e54b2a196d67ae378f201ef0c339d45afc16",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/idle_5.png",
-  "outputSha256": "00df4e6608f2fc55aef33745a0c3e54b2a196d67ae378f201ef0c339d45afc16",
+  "outputSha256": "7b3a4b79cd36bdc8495210f8ad87db5b73ba8fd4ce62ece41e6b5113b149fd3e",
   "createdAtUtc": "2026-10-09T06:22:04.474600+00:00",
   "prompt": "Use case: game-asset. Independently draw ONE new transparent pixel-art frame, Qinglong idle_5. Identity and anatomical scale from image 1: turquoise/cyan scales, navy shading, cream belly, golden antlers and dorsal crest, cyan flowing mane, two long whiskers, long Eastern serpentine S body, coiled tail with cyan plume. FOUR clawed limbs with same attachments; three visible, fourth partly hidden. NO wings. Right-facing three-quarter side orthographic camera. Same 1254x1254 canvas. Keep head size, neck thickness and torso length exactly as identity image; changes in posture must not enlarge anatomy. Image 2 is previous independently drawn frame for continuity, not a scale reference. Pose: Early exhale: head returns halfway to standard height, mane fins settle, chest relaxes. Tail plume moves back toward the reference direction. Keep full silhouette inside x310..1140,y80..1190; preserve tail coil's bottom at about y1177. Breathing is subtle, not dramatic stretching. Complete antlers, whiskers, claws and tail with generous transparent margins. Crisp square pixel clusters, dark outline, flat limited shading. Draw ONE frame from scratch, no pasted whole old sprite, scaling or recolor as redraw, no sheet, panels, text, particles, aura, ground, shadow or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_4.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "00df4e6608f2fc55aef33745a0c3e54b2a196d67ae378f201ef0c339d45afc16",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

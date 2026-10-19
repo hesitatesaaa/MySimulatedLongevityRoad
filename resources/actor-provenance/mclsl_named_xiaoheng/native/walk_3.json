@@ -4,54 +4,55 @@
   "index": 3,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_named_xiaoheng/walk_3.png",
   "sourceSha256": "e80334399e4ff664fa129e714f59b3c4c54e4b226ae5d71be750b2cdddcd7dfc",
   "outputFile": "NativeActorResources/actors/Named/XiaoHeng/main/walk_3.png",
-  "outputSha256": "e80334399e4ff664fa129e714f59b3c4c54e4b226ae5d71be750b2cdddcd7dfc",
+  "outputSha256": "436360598301c4f37e377db6835999dc0bb4f313c71f8e379fb77dfbe25878c4",
   "prompt": "Generate a single 1254x1254 transparent PNG pixel-art sprite matching the reference's straw-hat male wanderer and outfit. This is a distinct full-body walk frame with an OPPOSITE footfall. Body pelvis near (730,850). FAR leg emerges from behind robe and extends RIGHT FRONT to boot near (1000,1160). NEAR leg overlaps the robe foreground and kicks LEFT REAR to boot near (450,1160). Boots share the same ground line and are horizontally far apart; no lifted knee. NEAR arm, marked by the visible foreground sleeve, swings forward RIGHT to fist near (950,650). FAR arm is behind torso, swung LEFT REAR toward (480,720), largely occluded. One character only; exact same pixel art style, clothing, hat, hair, olive scarf, backpack, two gourds, boots. No frame collage, added props, shadow, background, text, cropped limbs, or color flecks. Native transparent alpha.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_xiaoheng\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-19T02:18:25.123352+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "e80334399e4ff664fa129e714f59b3c4c54e4b226ae5d71be750b2cdddcd7dfc",
+    "sourceAnchor": [
+      639.0,
+      1177
+    ],
+    "sourcePixelsPerUnit": 361.40349431579,
+    "ppuFactor": 1.330176341590434,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
-    "identity": false,
-    "pixelEdges": false,
-    "anchor": false,
-    "continuity": false
-  },
-  "integrationGeometry": {
-    "canvas": [
-      1254,
-      1254
-    ],
-    "anchor": [
-      639.0,
-      1176
-    ],
-    "pixelsPerUnit": 11.704545454545455
-  },
+  "nativeResolution": false,
   "repair": {
     "replacedSourceSha256": "d16024051a911a1d69ca868914a9e336337b6ca95889baef419daf6eede04f3b",
     "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a14ccc-d58a-7131-9cae-4a6e65bcb87c\\exec-70efad5e-c40f-4418-9a71-82da77f305e7.png",
     "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_xiaoheng/walk_3_opposite_v2.provenance.json",
-    "selection": "latest-not-rejected-authorized-by-user"
+    "selection": "latest-not-rejected-authorized-by-user",
+    "generationRecord": {
+      "prompt": "Generate a single 1254x1254 transparent PNG pixel-art sprite matching the reference's straw-hat male wanderer and outfit. This is a distinct full-body walk frame with an OPPOSITE footfall. Body pelvis near (730,850). FAR leg emerges from behind robe and extends RIGHT FRONT to boot near (1000,1160). NEAR leg overlaps the robe foreground and kicks LEFT REAR to boot near (450,1160). Boots share the same ground line and are horizontally far apart; no lifted knee. NEAR arm, marked by the visible foreground sleeve, swings forward RIGHT to fist near (950,650). FAR arm is behind torso, swung LEFT REAR toward (480,720), largely occluded. One character only; exact same pixel art style, clothing, hat, hair, olive scarf, backpack, two gourds, boots. No frame collage, added props, shadow, background, text, cropped limbs, or color flecks. Native transparent alpha."
+    }
   },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
 }

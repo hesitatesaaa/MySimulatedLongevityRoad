@@ -3,10 +3,9 @@
   "action": "walk",
   "index": 3,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/walk_3.png",
   "sourceSha256": "2f62601550f81c8e9d491192c5487e748d07ed5943220767df6c4e80e527dddf",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/walk_3.png",
-  "outputSha256": "2f62601550f81c8e9d491192c5487e748d07ed5943220767df6c4e80e527dddf",
+  "outputSha256": "c026102b4ac5958bc45d8013f9a3d3132a87e5a7e4ada04832fa4fb8ff2c8dfb",
   "createdAtUtc": "2026-10-09T06:31:45.937092+00:00",
   "prompt": "Use case: game-asset. Draw ONE NEW independently drawn transparent pixel-art sprite, Qinglong walk_3. Identity and exact anatomical pixel scale from image 1: turquoise/cyan scales, navy shadows, cream belly, golden antlers and dorsal crest, flowing cyan mane, two long whiskers, long Eastern S-shaped serpentine body and coiled tail with cyan plume. FOUR clawed limbs with reference attachment points, three clearly visible and fourth partly occluded. NO wings. Right-facing three-quarter side orthographic camera. Same 1254x1254 transparent canvas. Standard silhouette x345..1060,y150..1180, height about1027px. Keep head size, body thickness and anatomical lengths constant; curves move rather than body enlarging. This is gliding in air, not walking on paws. Image 2 if supplied is preceding independently drawn glide frame, continuity guide only. Pose: Wave reaches upper torso. Head holds forward, mane streams gently backward, middle bend narrows while lower bend opens right. Hindclaws flex inward without walking on a floor. Stay compact inside x220..1160,y100..1190. Full antlers, whiskers, limbs and tail with clear margins. Crisp square pixel clusters, dark outline, limited flat shades. Independently DRAW one frame from scratch, no pasted whole old sprite, scaling/recolor as redraw, sheets, panels, multiple poses, text, aura, particles, ground, shadow or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/walk_2.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "2f62601550f81c8e9d491192c5487e748d07ed5943220767df6c4e80e527dddf",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

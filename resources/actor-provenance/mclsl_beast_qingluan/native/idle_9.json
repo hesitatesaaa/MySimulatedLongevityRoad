@@ -3,37 +3,46 @@
   "action": "idle",
   "index": 9,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/idle_9.png",
   "sourceSha256": "b163e51c356f34638c95e6be24cdd606e2af360a78fb6c56c602adb090be04be",
   "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/idle_9.png",
-  "outputSha256": "b163e51c356f34638c95e6be24cdd606e2af360a78fb6c56c602adb090be04be",
+  "outputSha256": "fe31774eabadb20977239e53e26bc7d7554c87d632aca549675e2424ee9cfd63",
   "createdAtUtc": "2026-10-09T05:04:06.341411+00:00",
   "prompt": "Use case: stylized-concept. ONE independently redrawn game pixel-sprite frame Qingluan idle_9, frame 10/10. Image 1 is identity AND fixed source layout reference: sacred blue-green Chinese luan bird, cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and accents, long curled three-plume tail to left, facing right. Preserve exact anatomy, feather markings, original body scale and pixel cluster size, fixed camera, neck/head placement and golden feet placement. Same 1254x1254 transparent RGBA source canvas. Pixel art with crisp hard square clusters, dark outline and flat shades. Both golden feet remain firmly planted at precisely the reference ground line; no whole-body translation. Idle pose: near starting pose for a clean loop, head/wing/tail almost match the reference with a slight breathing variation. Body changes are small. Independently draw one new pose, never copy/paste/resize/recolor the entire old sprite. Whole bird, tail, crest and feet inside generous margins. Outside subject alpha exactly zero, no shadow, glow, aura, background, text, panels, sheet or smooth shading.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qingluan/idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "b163e51c356f34638c95e6be24cdd606e2af360a78fb6c56c602adb090be04be",
+    "sourceAnchor": [
+      763,
+      1028
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

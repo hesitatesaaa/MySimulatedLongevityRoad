@@ -280,7 +280,22 @@ internal static class MclslItemCatalog
         new("S024_SCROLL", "五行化生卷", "SpellScroll", 4, "使用后学会五行化生。制卷：灵符纸×6、太虚灵泉×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A19", 5120, iconPath: "ui/Spells/S024"),
         new("S025_SCROLL", "万灵回天卷", "SpellScroll", 4, "使用后学会万灵回天。制卷：灵符纸×8、万灵琼浆×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S025"),
         new("S026_SCROLL", "太初寂光卷", "SpellScroll", 4, "使用后学会太初寂光。制卷：灵符纸×8、万灵琼浆×1、辟邪金砂×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S026"),
-    }.Concat(MclslBeastContent.Items).ToArray();
+    }.Concat(MclslBeastContent.Items).Concat(BattleScrolls()).ToArray();
+
+    private static IEnumerable<MclslItemDefinition> BattleScrolls()
+    {
+        string[] names={"掠影步","回锋诀","分光连斩","天门落剑","崩山靠","金罡架","撼岳三叠","法相镇岳",
+            "凝元弹","移形护元","五行连诀","五行天轮","灵契唤影","御灵标记","灵契护主","万灵奔袭"};
+        string[] icons={"S001","S001","S001","S001","S017","S020","S017","S017",
+            "S004","S003","S010","S010","S016","S016","S016","S016"};
+        for(int i=0;i<names.Length;i++)
+        {
+            int realm=i%4<2?0:i%4==2?2:4;
+            yield return new MclslItemDefinition("C"+(i+1).ToString("D3")+"_SCROLL",names[i]+"法门卷","SpellScroll",Math.Min(4,realm+1),
+                "使用后习得"+names[i]+"，仍需满足境界；异职高阶技能休眠。已掌握者可按法术制卷规则制作。",
+                "F01",realm==0?"A07":realm==2?"A16":"A18",160*(1<<realm),iconPath:"ui/Spells/"+icons[i]);
+        }
+    }
 
     private const MclslMaterialSource AllMaterialSources = MclslMaterialSource.AnnualActivity
         | MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough

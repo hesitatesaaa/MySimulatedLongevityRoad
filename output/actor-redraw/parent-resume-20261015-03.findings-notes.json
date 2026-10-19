@@ -1,7 +1,0 @@
-[
-  {
-    "jobIndex": 18,
-    "severity": "requires-independent-redraw",
-    "finding": "Final prone hair outline contacts right canvas edge: 6 alpha>=16 boundary pixels; preserve source evidence and redraw the complete outline without cropping/resizing."
-  }
-]

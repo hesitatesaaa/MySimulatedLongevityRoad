@@ -3,10 +3,9 @@
   "action": "death",
   "index": 1,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/death_1.png",
   "sourceSha256": "24d05476f35333e024237cd40a8e1cff551011ed9f107e3e9add6d7773e919a9",
   "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/death_1.png",
-  "outputSha256": "24d05476f35333e024237cd40a8e1cff551011ed9f107e3e9add6d7773e919a9",
+  "outputSha256": "eeae301f14dd42ef6f204754dc69f34ad60422aaf35f7df2a31f2e45ad2bdc67",
   "createdAtUtc": "2026-10-09T05:03:59.884577+00:00",
   "prompt": "Use case: stylized-concept. Exactly ONE independently drawn pixel-game sprite frame Qingluan death_1, frame 2/12. Image 1 is fixed species identity, original body scale, pixel size, palette, camera and source body layout. Image 2 is a REDUCED previous-pose preview for motion continuity only; NEVER use its reduced pixel size as body-size reference. Keep sacred Qingluan identity: cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and feather accents, exactly three main long tail plumes trailing left, three-quarter right-facing orthographic view. Preserve original anatomy dimensions and pixel clusters (standing identity body about 690 source pixels tall). Frame pose: legs buckle, body begins to lower, wings sag more and tail feathers rest lower. While falling retain original anatomy and body pixel scale, never enlarge corpse to fill canvas. Ground line remains at the original feet level. From the lying phase onward both head and torso remain down; no return to a standing bird. Same 1254x1254 transparent RGBA source canvas, generous margins for complete wing, crest, beak and tail. Crisp square pixel art, dark outline and flat shades. ONE NEW pose only, draw it independently, never copy/paste/move/resize/recolor the entire old sprite. No aura, projectile, particles, text, panels, sheet, scene, ground shadow, smooth paint or background.\n",
   "references": [
@@ -14,27 +13,37 @@
     "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/death_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "24d05476f35333e024237cd40a8e1cff551011ed9f107e3e9add6d7773e919a9",
+    "sourceAnchor": [
+      763,
+      1154
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

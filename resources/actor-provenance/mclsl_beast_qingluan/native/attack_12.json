@@ -3,10 +3,9 @@
   "action": "attack",
   "index": 12,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qingluan/attack_12.png",
   "sourceSha256": "7ef50ce994984a96ed6aded3063f90bb15ffe30fec952a4505f1868f543f6465",
   "outputFile": "NativeActorResources/actors/Beasts/qingluan/Beast/main/attack_12.png",
-  "outputSha256": "7ef50ce994984a96ed6aded3063f90bb15ffe30fec952a4505f1868f543f6465",
+  "outputSha256": "fd8742c87fbb95e32f11de66357affcbb3cab1e7a74d5c52ab80580ea864ee77",
   "createdAtUtc": "2026-10-09T05:03:56.899806+00:00",
   "prompt": "Use case: stylized-concept. Exactly ONE independently drawn pixel-game sprite frame Qingluan attack_12, frame 13/14. Image 1 is fixed species identity, original body scale, pixel size, palette, camera and source body layout. Image 2 ONLY fixes extended-wing feathers and colors, not flying posture. Image 3 is a REDUCED previous-pose preview for motion continuity only; NEVER use its reduced pixel size as body-size reference. Keep sacred Qingluan identity: cyan/teal/navy feathers, white throat and breast, gold crest/beak/feet and feather accents, exactly three main long tail plumes trailing left, three-quarter right-facing orthographic view. Preserve original anatomy dimensions and pixel clusters (standing identity body about 690 source pixels tall). Frame pose: wings fold fully and tail relaxes, head returns to neutral. Both golden feet stay planted at the original ground line. Wing tips stay above this ground line by bending the elbows naturally, so the feet remain the lowest body contact. Same 1254x1254 transparent RGBA source canvas, generous margins for complete wing, crest, beak and tail. Crisp square pixel art, dark outline and flat shades. ONE NEW pose only, draw it independently, never copy/paste/move/resize/recolor the entire old sprite. No aura, projectile, particles, text, panels, sheet, scene, ground shadow, smooth paint or background.\n",
   "references": [
@@ -15,27 +14,37 @@
     "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_qingluan/main/attack_11.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      160,
+      160
     ],
-    "scale": 1,
+    "scale": 0.12759170653907495,
+    "inputSha256": "7ef50ce994984a96ed6aded3063f90bb15ffe30fec952a4505f1868f543f6465",
+    "sourceAnchor": [
+      763,
+      1028
+    ],
+    "sourcePixelsPerUnit": 156.8181818181818,
+    "ppuFactor": 2.012699193389731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

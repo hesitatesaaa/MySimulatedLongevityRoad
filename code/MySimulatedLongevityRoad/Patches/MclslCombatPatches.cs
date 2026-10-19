@@ -33,6 +33,7 @@ internal static class MclslCombatPatches
     private static void Actor_AddForce_EarthTalisman_Prefix(Actor __instance,
         ref float __0, ref float __1, ref float __2)
     {
+        if(MclslBattleCombat.Braced(__instance)){__0*=.25f;__1*=.25f;__2*=.25f;}
         if (__instance?.hasStatus("mclsl_item_F022") != true) return;
         __0 *= 0.5f;
         __1 *= 0.5f;
@@ -54,6 +55,8 @@ internal static class MclslCombatPatches
     private static bool Actor_TryToAttack_Immortal_Prefix(Actor __instance, ref bool __result)
     {
         MclslRuntimeChanges.Publish(__instance, MclslActorChange.Native);
+        MclslBattleCombat.Observe(__instance);
+        if(MclslSpellCasting.IsBusy(__instance)||MclslBattleCombat.Controlled(__instance)){__result=false;return false;}
         if (!MclslImmortalActorRegistration.IsImmortal(__instance)) return true;
         __result = false;
         return false;
@@ -92,6 +95,8 @@ internal static class MclslCombatPatches
         }
         if (__instance.hasStatus("mclsl_item_F025")) pDamage *= 0.85f;
         MclslRealmSuppressionSystem.Apply(ref pDamage, __instance, pAttacker);
+        MclslBattleCombat.Defend(__instance,pAttacker as Actor,ref pDamage);
+        MclslBattleCombat.ObserveHit(__instance,pAttacker as Actor,pDamage);
     }
 
     [HarmonyPostfix]

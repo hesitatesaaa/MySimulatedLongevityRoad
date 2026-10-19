@@ -4,10 +4,9 @@
   "index": 3,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_moqilin/walk_3.png",
   "sourceSha256": "2d4b261473d227ad5a43c6c93edc550a768512e30abc6b718afb9039d28324e2",
   "outputFile": "NativeActorResources/actors/Beasts/moqilin/Beast/main/walk_3.png",
-  "outputSha256": "2d4b261473d227ad5a43c6c93edc550a768512e30abc6b718afb9039d28324e2",
+  "outputSha256": "b738623eb964d044bc0eef80fc060c9f2402088850ee1af82b858595d2be076f",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u58a8\u9e92\u9e9f\u00b7\u517d\u5f62 (mclsl_beast_moqilin), walk_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ink-purple qilin, gold horns, dark scaled lion-deer body, layered violet mane and cream claws, four legs and tufted tail. Pose: Four-legged gait phase 0.500 (180 degrees): near front and opposite rear legs advance, other diagonal pair follows; jointed paws/hooves make clear alternating contact, shoulders and hips transfer weight, tail follows. Heavy beasts carry weight; no extra limbs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_moqilin\\idle_0.png",
@@ -15,27 +14,37 @@
   ],
   "createdAtUtc": "2026-10-13T04:43:20.705623+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      320,
+      320
     ],
-    "scale": 1,
+    "scale": 0.2551834130781499,
+    "inputSha256": "2d4b261473d227ad5a43c6c93edc550a768512e30abc6b718afb9039d28324e2",
+    "sourceAnchor": [
+      631.5,
+      1101
+    ],
+    "sourcePixelsPerUnit": 641.4285714285713,
+    "ppuFactor": 0.24332304546501804,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -3,37 +3,46 @@
   "action": "attack",
   "index": 12,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/attack_12.png",
   "sourceSha256": "af034f82e517e818ef2bc7e3f6f921a287baad35375962a04cce0998c5448825",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_12.png",
-  "outputSha256": "af034f82e517e818ef2bc7e3f6f921a287baad35375962a04cce0998c5448825",
+  "outputSha256": "fdc16755b7f2e9115adc7fcbb60ac7b805eb85d625d3a589ae2a3e665dd3571f",
   "createdAtUtc": "2026-10-09T07:29:39.972365+00:00",
   "prompt": "Use case: game-asset. Independently DRAW exactly ONE NEW transparent pixel-art Qinglong attack_12 recovery frame. Same1254x1254 transparent canvas, exact anatomical pixel scale and right-facing side camera as reference. Azure Eastern dragon: turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers/crest, cyan flowing mane/tail plume, TWO long whiskers, compact S-shaped serpent body. Pose: Late recovery: head returns to standard height and position, jaw closed. Near foreclaw relaxes just above its original position with ONE hand x745,y780. Whiskers settle, tail loosens slightly. Exactly FOUR SHORT limbs with one hand/foot each: near forearm from left shoulder across upper pale chest, far forearm at right upper belly; two hindlimbs on lower curve with far hind partly hidden. Preserve limb lengths and body thickness. ONE near forehand; do not duplicate hands, add branch arms or elongate forearm. Cyan fin is mane. Head recoils progressively toward x850,y400 standard, lower tail at original x580,y1100. Whiskers stay inside x1180. Full dragon fits x230..1180,y90..1190 with ample transparent margin. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw new pose and pixels, no old sprite paste/scale/recolor. No wings, sheets, panels, multiple poses, text, aura, particles, floor, shadow or background.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_11.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "af034f82e517e818ef2bc7e3f6f921a287baad35375962a04cce0998c5448825",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

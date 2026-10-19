@@ -3,7 +3,6 @@
   "action": "icon",
   "index": 0,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_liejiejing/originals/icon.png",
   "sourceSha256": "b11b2ad66c77eb4c9ffd5937abef9366c49a48d86ce560c4136afc020de0a5a3",
   "outputFile": "GameResources/ui/ActorIcons/mclsl_beast_liejiejing.png",
   "outputSha256": "6981d4205999c6a19c0a7322215639e437c5956c17b26a01fbdcdb3cf1efebf8",
@@ -50,5 +49,6 @@
     "sha256": "6981d4205999c6a19c0a7322215639e437c5956c17b26a01fbdcdb3cf1efebf8",
     "offlinePassed": true,
     "verifiedInGame": false
-  }
+  },
+  "sourceRetention": "hash-and-prompt-only; installed icon unchanged"
 }

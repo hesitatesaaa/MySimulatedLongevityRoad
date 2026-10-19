@@ -1,9 +1,0 @@
-{
-  "actorId": "mclsl_beast_baihu_yuan",
-  "action": "attack",
-  "frame": 4,
-  "sourceSha256": "6c6d8255404e19249b2a105d9809f7a01b50066148e2e049fd959d8df2dcf003",
-  "reason": "Opaque sword blade crosses right canvas edge; tip clipped",
-  "archivedAtUtc": "2026-10-14T09:19:22.460010+00:00",
-  "generationRequested": false
-}

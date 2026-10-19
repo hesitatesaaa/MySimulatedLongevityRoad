@@ -4,45 +4,46 @@
   "index": 1,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_goushou_yuan/idle_1.png",
   "sourceSha256": "b1d443c7fb780a33ac94aaa463e167e89a47ea916d0a85083d274cde06b2f4fc",
   "outputFile": "NativeActorResources/actors/Beasts/goushou/Human/main/idle_1.png",
-  "outputSha256": "b1d443c7fb780a33ac94aaa463e167e89a47ea916d0a85083d274cde06b2f4fc",
+  "outputSha256": "e2346a6dcdb1cd86de1504866fef175f4f33eb11f3727edf849e96b5c6b5bf88",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u72d7\u9996\u5996\u517d\u00b7\u5316\u5f62 (mclsl_beast_goushou_yuan), idle_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: ONE humanoid Chinese cultivator in detailed layered robes, with exactly two arms and two legs and a fully human face. This is the ascended human form of black/red dog-headed beast, sharp canine muzzle and ivory tusks, horn-like ears, dark red layered mane, powerful four-legged torso and long tail. Preserve its palette and subtle identity through crest-like hair ornaments, horn motifs where appropriate, embroidered scale/fur/feather patterns, and a recognizable tail or shoulder mantle where present in source. Keep the baseline human hairstyle, costume silhouette and visible weapon; do not draw the animal itself or copy Li Fan's robe colors.. Visual gender: male, adult fully clothed human. Pose: Idle breathing cycle phase 0.250: chest and shoulders gently rise, cloth, hair, mane, tail or feather tips lag at phase angle 90 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_goushou_yuan\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-15T09:29:22.056754+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "b1d443c7fb780a33ac94aaa463e167e89a47ea916d0a85083d274cde06b2f4fc",
+    "sourceAnchor": [
+      636.5,
+      1206
+    ],
+    "sourcePixelsPerUnit": 382.45612505263216,
+    "ppuFactor": 1.3343983891984212,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "sourceSha256": "b1d443c7fb780a33ac94aaa463e167e89a47ea916d0a85083d274cde06b2f4fc",
-    "worker": "draw_goushou_yuan",
-    "viewedFullNativeImage": true,
-    "actionContinuityApproved": false,
-    "geometryApproved": false,
-    "notes": "Worker viewed full native image: male identity, black-red hair and robes retained; two hands and two boots visible; silhouette complete and no canvas clipping. Single idle frame only; full sequence and geometry not approved."
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -4,45 +4,46 @@
   "index": 1,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_manman/idle_1.png",
   "sourceSha256": "a0a6d478b5931dd566519a0e4b9144282d2e58179620e5cd2ab0f77820d5a546",
   "outputFile": "NativeActorResources/actors/Beasts/manman/Beast/main/idle_1.png",
-  "outputSha256": "a0a6d478b5931dd566519a0e4b9144282d2e58179620e5cd2ab0f77820d5a546",
+  "outputSha256": "496c8859043428b80cfb54205d375ab9952cdb4b4b94d3a92aa56527e40b93ac",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u86ee\u86ee\u00b7\u517d\u5f62 (mclsl_beast_manman), idle_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: paired red-brown and cream Manman birds joined in a recognizable paired silhouette, two distinct heads and balanced paired wings; retain the source's paired bird identity rather than make a single generic phoenix. Pose: Idle breathing cycle phase 0.167: chest and shoulders gently rise, cloth, hair, mane, tail or feather tips lag at phase angle 60 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two anatomical legs and two claws total, one pair of wings; a raised claw replaces a grounded claw, never adds a third leg. Every leg connects coherently to the body. Draw the complete pose with at least 32px transparent margins around all extremities. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_manman\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-14T06:02:44.822635+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      128,
+      128
     ],
-    "scale": 1,
+    "scale": 0.10207336523125997,
+    "inputSha256": "a0a6d478b5931dd566519a0e4b9144282d2e58179620e5cd2ab0f77820d5a546",
+    "sourceAnchor": [
+      638.5,
+      1141
+    ],
+    "sourcePixelsPerUnit": 202.7272727272727,
+    "ppuFactor": 2.7787100616591935,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "anatomyReview": {
-    "sourceSha256": "a0a6d478b5931dd566519a0e4b9144282d2e58179620e5cd2ab0f77820d5a546",
-    "limbConnectionsReviewed": true,
-    "extraLimbs": false,
-    "reviewer": "Codex individual native PNG visual review",
-    "reviewedAtUtc": "2026-10-14T06:34:01.415202+00:00",
-    "scope": "Static anatomy only; full action continuity pending"
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

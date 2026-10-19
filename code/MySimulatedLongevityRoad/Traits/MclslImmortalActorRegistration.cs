@@ -26,9 +26,7 @@ internal static class MclslImmortalActorRegistration
         {
             string id = subspecies?.getActorAsset()?.id;
             if (id is not BaiId and not ChuanfaId) return null;
-            return MclslBeastAnimation.LoadSprite("actors/Immortals/" + (id == BaiId ? "Bai" : "Chuanfa") + "/main/idle_0")
-                ?? AssetManager.actor_library.get(id)?.cached_sprite
-                ?? AssetManager.actor_library.get("sheep")?.cached_sprite;
+            return MclslActorPixelResources.PlacementIcon(id);
         }
         catch (Exception ex)
         {
@@ -75,8 +73,6 @@ internal static class MclslImmortalActorRegistration
             // Sheep supplies the vanilla peaceful-animal decision/job pipeline.
             ActorAsset asset = AssetManager.actor_library.get(id) ?? AssetManager.actor_library.clone(id, "sheep");
             asset.name_locale = id;
-            asset.icon = folder;
-            asset.show_icon_inspect_window_id = folder;
             asset.show_icon_inspect_window = true;
             asset.color_hex = color;
             asset.color = Toolbox.makeColor(color);
@@ -138,11 +134,11 @@ internal static class MclslImmortalActorRegistration
     internal static void AddPowers(PowersTab tab)
     {
         Init();
-        AddPower(tab, BaiId, "白先生", "Bai");
-        AddPower(tab, ChuanfaId, "传法天尊", "Chuanfa");
+        AddPower(tab, BaiId, "白先生");
+        AddPower(tab, ChuanfaId, "传法天尊");
     }
 
-    private static void AddPower(PowersTab tab, string id, string name, string folder)
+    private static void AddPower(PowersTab tab, string id, string name)
     {
         if (tab == null) return;
         string powerId = id + "_place";
@@ -156,8 +152,9 @@ internal static class MclslImmortalActorRegistration
         }
         if (!Buttons.TryGetValue(powerId, out PowerButton button) || button == null)
         {
-            button = PowerButtonCreator.CreateGodPowerButton(powerId, MclslActorPixelResources.PlacementIcon(id,
-                "actors/Immortals/" + folder + "/main/idle_0"));
+            Sprite icon = MclslActorPixelResources.PlacementIcon(id);
+            if (icon == null) return;
+            button = PowerButtonCreator.CreateGodPowerButton(powerId, icon);
             if (button == null) return;
             MclslActorPixelResources.ConfigurePlacementButton(button);
             Buttons[powerId] = button;

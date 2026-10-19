@@ -27,7 +27,7 @@ internal static class MclslActorPixelResources
         }
     }
 
-    internal static Sprite Load(string resourcePath)
+    private static Sprite Load(string resourcePath)
     {
         if (string.IsNullOrEmpty(resourcePath)) return null;
         if (Loaded.TryGetValue(resourcePath, out Sprite cached)) return cached;
@@ -38,7 +38,7 @@ internal static class MclslActorPixelResources
         {
             // Restrict reads to this mod's resource tree, including on Windows.
             string file = MclslActorAnimationCatalog.ResolveFile(resourcePath);
-            if (!File.Exists(file)) { Loaded[resourcePath] = original; return original; }
+            if (!File.Exists(file)) { Loaded[resourcePath] = null; return null; }
             texture = new Texture2D(2, 2, TextureFormat.RGBA32, false)
             {
                 name = "mclsl_raw_" + resourcePath,
@@ -57,26 +57,6 @@ internal static class MclslActorPixelResources
             Vector2 pivot = original == null ? new Vector2(0.5f, 0.5f)
                 : new Vector2(original.pivot.x / original.rect.width, original.pivot.y / original.rect.height);
             float pixelsPerUnit = original == null ? 1f : original.pixelsPerUnit;
-            string formPath = FormPath(resourcePath);
-            MclslActorAnimationCatalog.Form profile = MclslActorAnimationCatalog.Get(formPath);
-            string frameName = Path.GetFileName(resourcePath);
-            MclslActorAnimationCatalog.FrameProfile frameProfile = null;
-            profile?.FrameProfiles.TryGetValue(frameName, out frameProfile);
-            if (frameProfile != null)
-            {
-                if (!frameProfile.AnchorApproved || frameProfile.Width != texture.width || frameProfile.Height != texture.height)
-                    throw new InvalidDataException("Unreviewed/mismatched frame geometry: " + resourcePath);
-                pivot = new Vector2(frameProfile.AnchorX / texture.width, 1f - frameProfile.AnchorY / texture.height);
-                pixelsPerUnit = frameProfile.PixelsPerUnit;
-            }
-            else if (profile?.AnchorApproved == true)
-            {
-                if (profile.Width != texture.width || profile.Height != texture.height)
-                    throw new InvalidDataException("Approved canvas does not match PNG: " + resourcePath);
-                // Authoring coordinates are measured from the upper-left corner.
-                pivot = new Vector2(profile.AnchorX / texture.width, 1f - profile.AnchorY / texture.height);
-                if (profile.PixelsPerUnit > 0f) pixelsPerUnit = profile.PixelsPerUnit;
-            }
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                 pivot, pixelsPerUnit, 0, SpriteMeshType.FullRect);
             sprite.name = Path.GetFileName(resourcePath);
@@ -91,8 +71,8 @@ internal static class MclslActorPixelResources
         {
             if (texture != null) UnityEngine.Object.Destroy(texture);
             MclslDiagnostics.Error("pixel-load:" + resourcePath, ex.Message);
-            Loaded[resourcePath] = original;
-            return original;
+            Loaded[resourcePath] = null;
+            return null;
         }
     }
 
@@ -133,14 +113,12 @@ internal static class MclslActorPixelResources
         }
     }
 
-    internal static Sprite PlacementIcon(string actorId, string legacyFrame)
+    internal static Sprite PlacementIcon(string actorId)
     {
         Sprite icon = Load("ui/ActorIcons/" + actorId);
         if (icon != null) return icon;
-        // Transitional compatibility only: do not remove existing placement powers
-        // while their independently authored icon is still pending in the manifest.
         MclslDiagnostics.Error("actor-icon:" + actorId, "专用按钮图标尚未完成: ui/ActorIcons/" + actorId);
-        return Load(legacyFrame);
+        return null;
     }
 
     internal static void ConfigurePlacementButton(PowerButton button)
@@ -158,10 +136,5 @@ internal static class MclslActorPixelResources
         return profile?.ScaleApproved == true && profile.Scale > 0f ? profile.Scale : previousScale;
     }
 
-    private static string FormPath(string resourcePath)
-    {
-        int separator = resourcePath.LastIndexOf("/main/", StringComparison.Ordinal);
-        return separator < 0 ? null : resourcePath.Substring(0, separator);
-    }
 
 }

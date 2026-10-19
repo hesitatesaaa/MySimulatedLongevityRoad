@@ -3,37 +3,46 @@
   "action": "death",
   "index": 8,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_qinglong/death_8.png",
   "sourceSha256": "bb1c8a0dc9e7e6b705e1d30e226f6baea58ec6471f311d502ac8d90096891125",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/death_8.png",
-  "outputSha256": "bb1c8a0dc9e7e6b705e1d30e226f6baea58ec6471f311d502ac8d90096891125",
+  "outputSha256": "720a333ad42e0c12c54ba4accf544f58d404b258673b657b49742a86b81bffb1",
   "createdAtUtc": "2026-10-09T08:02:59.999580+00:00",
   "prompt": "Use case: game-asset. Draw exactly ONE independently authored transparent pixel-art Qinglong death_8. Reference is previous stage of SAME dragon. Same1254x1254 transparent canvas, exact same anatomical pixel scale, side camera facing RIGHT. Next pose: Body drops into prone compact coil: headrightx1030y1100, cheek touching groundliney1177. Ovalbody highpointy800; neck lies acrosscoils, closedeye, limpnearforefootbesidehead,nearhindfootleftofbody; farlimbsoccluded. Tailplumeleft atground. Draw new bent anatomy for progressive collapse. Preserve original head and body thickness, full serpent length represented by tightening coils; do not shrink anatomical size. Turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers and dorsal crest, cyan flowing mane/tail plume, two long cream-lined whiskers with cyan border. Exactly FOUR limbs with ONE hand/foot each: near and far forelegs from shoulders, near and far hindlegs from lower body. No branched arm, duplicated forehand or extra claw; far limbs may be occluded by coil. Cyan fins are mane. Body and head settle progressively downward; end is prone compact coil, eyes closed, head never rises again. Ground contact around source y1177, no drawn ground. Whole body, horns, whiskers, feet and plume stay inside x180..1180,y60..1190 with clear transparent margins. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw fresh frame, no sprite paste, translate, scale or recolor as redraw. No wings, blood, aura, particles, text, floor, shadow, background, sheets, panels or multiple poses.\n",
   "references": [
     "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/death_7.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      224,
+      224
     ],
-    "scale": 1,
+    "scale": 0.17862838915470494,
+    "inputSha256": "bb1c8a0dc9e7e6b705e1d30e226f6baea58ec6471f311d502ac8d90096891125",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -4,50 +4,46 @@
   "index": 4,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_liejiejing_yuan/walk_4.png",
   "sourceSha256": "cb3a7665a6eedb4ff3f05eefcea7663302fc83e55e520c09e567ad35b3c92196",
   "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Human/main/walk_4.png",
-  "outputSha256": "cb3a7665a6eedb4ff3f05eefcea7663302fc83e55e520c09e567ad35b3c92196",
+  "outputSha256": "1eb050b90357632c7bc26b307913670ce9768460da255f417df8b35c07479bed",
   "prompt": "PRIMARY ACTION POSE: OPPOSITE LOW BROAD STRIDE: far leg remains extended forward taking weight, near leg extends backward in toe push-off. Keep the feet widely separated along the ground line, knees relaxed. No raised knee or tucked boot beneath the pelvis. USER GAIT DIRECTION: broad alternating near/far strides, boots close to the ground, at most slight natural sole clearance. Never march with a high raised knee or bring the boots together beneath the torso. The reference gives identity, not the standing pose; newly draw the specified leg contact.\nUse case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u88c2\u89e3\u9cb8\u00b7\u5316\u5f62 (mclsl_beast_liejiejing_yuan), walk_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, deep-blue side braid and silver wave comb, blue/cream-gray robe, fin-shaped shoulder mantle and simple wave cuffs, human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Walking cycle phase 0.667 (240 degrees): two-foot alternating gait, visible hip, knee and ankle articulation, opposing arm swing, trailing cloth and hair; maintain body height and grounded foot line. No extra hands or legs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG. WALK CONTACT REQUIREMENT: OPPOSITE LOW BROAD STRIDE: far leg remains extended forward taking weight, near leg extends backward in toe push-off. Keep the feet widely separated along the ground line, knees relaxed. No raised knee or tucked boot beneath the pelvis. Make the alternating near/far boot contacts readable beneath the robe; do not draw every phase with the same leading leg. Opposite arm swing must not add hands.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_liejiejing_yuan\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-16T04:05:57.829174+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "cb3a7665a6eedb4ff3f05eefcea7663302fc83e55e520c09e567ad35b3c92196",
+    "sourceAnchor": [
+      650.5,
+      1172
+    ],
+    "sourcePixelsPerUnit": 367.3684063578953,
+    "ppuFactor": 1.3333856192380014,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "worker": "resume_liejiejing_tianshou",
-    "sourceSha256": "cb3a7665a6eedb4ff3f05eefcea7663302fc83e55e520c09e567ad35b3c92196",
-    "viewedFullNativeImage": true,
-    "reviewedAtUtc": "2026-10-16T04:07:10.535616+00:00",
-    "observations": [
-      "Very broad grounded stride with right-screen boot forward and left-screen toe trailing; no high knee. Opposite leading-leg identity is not independently clear under robe."
-    ],
-    "continuityApproved": false,
-    "geometryApproved": false,
-    "completeActionReviewPassed": false,
-    "runtimeVerified": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

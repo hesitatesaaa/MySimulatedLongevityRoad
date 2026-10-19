@@ -3,10 +3,9 @@
   "action": "death",
   "index": 3,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_named_lifan/originals/death_3.png",
   "sourceSha256": "8b03190e2fb30abea8f8e8d27894b98619aeb34548c7ce8bd9105242ea2eaa81",
   "outputFile": "NativeActorResources/actors/Named/LiFan/main/death_3.png",
-  "outputSha256": "8b03190e2fb30abea8f8e8d27894b98619aeb34548c7ce8bd9105242ea2eaa81",
+  "outputSha256": "239e94548c4cb603b76c361af04b87e984f1c51a1b9d1e7b425e12bead78b75d",
   "createdAtUtc": "2026-10-09T03:48:16.499979+00:00",
   "prompt": "Use case: stylized-concept. Exactly ONE independently drawn replacement game pixel sprite frame, LiFan death_3. Image 1 fixes identity, original full-body scale, palette, costume and pixel density. Other images fix the adjacent poses, not the output resolution. New canvas exactly 1254x1254 with transparent RGBA; same body scale as identity image. Intermediate pose between image 2 (death_2 crouch) and image 3 (death_4 kneel). Both knees sink toward the ground, body leans to the right, right hand starts supporting his weight. Head remains at the lowered crouch height, never rises upward again. Torso remains about 45 degrees above horizontal. Same dark navy-and-white robes with gold trim/sash, long dark tied hair with gold ornament, boots. Crisp square pixels, dark outlines, flat shades, three-quarter right facing. Preserve generous transparent margins and full body. Draw this one new pose, never copy/paste/move or resize the complete old sprite. No scene, shadow, aura, text, panels or sheet. Same ground line as previous frames.\n",
   "references": [
@@ -15,27 +14,37 @@
     "E:/0.6.0/output/actor-redraw/frames/mclsl_named_lifan/main/death_4.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "8b03190e2fb30abea8f8e8d27894b98619aeb34548c7ce8bd9105242ea2eaa81",
+    "sourceAnchor": [
+      607.5,
+      1152
+    ],
+    "sourcePixelsPerUnit": 347.36840715789526,
+    "ppuFactor": 1.331449907909157,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

@@ -4,37 +4,46 @@
   "index": 2,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "resources/actor-provenance/mclsl_beast_qinglong_yuan/originals/idle_2.png",
   "sourceSha256": "99e0929c748d0a7ab90e6f6559f696cbc527acc2d0b813fbf48c22a8df79025b",
   "outputFile": "NativeActorResources/actors/Beasts/qinglong/Human/main/idle_2.png",
-  "outputSha256": "99e0929c748d0a7ab90e6f6559f696cbc527acc2d0b813fbf48c22a8df79025b",
+  "outputSha256": "949ee07858523418f76e916999654afd95c1d290a424f95e0e8a6319e8d3ab52",
   "createdAtUtc": "2026-10-09T13:55:54.712217+00:00",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9752\u9f99\u00b7\u5316\u5f62 (mclsl_beast_qinglong_yuan), idle_2. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: adult woman, dark half-up hair with jade horn-shaped pins, teal/cream robe, restrained scale motif on shoulder cape, regal human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Idle breathing cycle phase 0.500: chest and shoulders gently settle, cloth, hair, mane, tail or feather tips lag at phase angle 180 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_qinglong_yuan\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "99e0929c748d0a7ab90e6f6559f696cbc527acc2d0b813fbf48c22a8df79025b",
+    "sourceAnchor": [
+      633.0,
+      1196
+    ],
+    "sourcePixelsPerUnit": 375.43858147368474,
+    "ppuFactor": 1.328997995183391,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": true,
     "pixelEdges": true,
     "anchor": true,
     "continuity": true
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

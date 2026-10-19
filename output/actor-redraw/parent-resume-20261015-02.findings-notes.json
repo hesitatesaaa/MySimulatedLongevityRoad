@@ -1,8 +1,0 @@
-[
-  {
-    "jobIndex": 31,
-    "relatedJobIndex": 30,
-    "severity": "needs-full-action-review",
-    "finding": "Tail visibly curls higher again from death_1 to death_2; review complete death clip for an inappropriate rebound before approval."
-  }
-]

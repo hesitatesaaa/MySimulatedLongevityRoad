@@ -4,49 +4,46 @@
   "index": 5,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_tianshou/death_5.png",
   "sourceSha256": "da70cc2db812ebbaed65be62b73fa1fc2d54df79a986956d3520af403f98be6f",
   "outputFile": "NativeActorResources/actors/Beasts/tianshou/Beast/main/death_5.png",
-  "outputSha256": "da70cc2db812ebbaed65be62b73fa1fc2d54df79a986956d3520af403f98be6f",
+  "outputSha256": "ae6e4fd365a7eca8da8bcd605b6a038b293cd7376d74d16fd3037a735a9a3b89",
   "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5172\u517d\u00b7\u517d\u5f62 (mclsl_beast_tianshou), death_5. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: heavy ivory/cream horned beast, broad weight-bearing quadruped body, dark brown markings and crest, four thick legs, restrained horns, thick mane and short heavy tail. Pose: Death single-shot progress 0.714, stage prone settling. Required pose: Rest FLAT and slack on the ground, head very low beside collapsed torso, limbs folded beneath or beside body. No upright kneeling torso; no support under shoulders. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep all limbs or fins slack against a flattened resting body, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_tianshou\\idle_0.png"
   ],
   "createdAtUtc": "2026-10-16T06:17:35.392698+00:00",
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      400,
+      400
     ],
-    "scale": 1,
+    "scale": 0.3189792663476874,
+    "inputSha256": "da70cc2db812ebbaed65be62b73fa1fc2d54df79a986956d3520af403f98be6f",
+    "sourceAnchor": [
+      635.0,
+      1023
+    ],
+    "sourcePixelsPerUnit": 92.43243243243244,
+    "ppuFactor": 0.5980158730158731,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
-  "review": {
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
-  },
-  "staticReview": {
-    "sourceSha256": "da70cc2db812ebbaed65be62b73fa1fc2d54df79a986956d3520af403f98be6f",
-    "reviewer": "worker-round2_b",
-    "viewedFullNativeImage": true,
-    "viewMethod": "tools.view_image full native PNG",
-    "reviewedAtUtc": "2026-10-16T06:18:21.249898+00:00",
-    "observations": "Worker viewed full native single frame: beast lying low with muzzle beside forepaws, closed eye, folded hindquarters and curled tail. Rightmost paw very close to edge; silhouette appears intact. No sequence or geometry approval.",
-    "continuity": false,
-    "geometry": false,
-    "passed": false,
-    "runtimeValidated": false
-  },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  }
 }

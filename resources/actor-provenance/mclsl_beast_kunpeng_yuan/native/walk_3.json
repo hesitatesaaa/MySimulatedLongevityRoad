@@ -4,10 +4,9 @@
   "index": 3,
   "artDirectionRevision": 2,
   "method": "built-in-imagegen-independent-frame",
-  "sourceFile": "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_3.png",
   "sourceSha256": "99588d892651fee79f0cad97ada1b1ff4e62756fe3cb2fe4a8ecabe040b75c49",
   "outputFile": "NativeActorResources/actors/Beasts/kunpeng/Human/main/walk_3.png",
-  "outputSha256": "99588d892651fee79f0cad97ada1b1ff4e62756fe3cb2fe4a8ecabe040b75c49",
+  "outputSha256": "7c75e4fefca5cd6450e8da6dd118b2c407df1c71aa33c8227786b10a27aacb26",
   "createdAtUtc": "2026-10-19T02:18:25.042070+00:00",
   "prompt": "Create ONE independently drawn transparent RGBA pixel art game animation frame: female adult Kunpeng human form walk_3. Use the two attached ORIGINAL high-resolution images for identity and exact pixel-cluster craft, face, navy side braid, navy blue/white layered feather-fin mantle, restrained gold trim and gold pin. Freshly draw a new pose, no bitmap transformation. Correct the second reference walk pose to the OPPOSITE HALF-CYCLE: camera-near leg clearly stretches BACK toward screen LEFT; far leg clearly stretches FORWARD toward screen RIGHT and bears weight. Camera-near arm and visible hand clearly swing FORWARD toward screen RIGHT, crossing in front of her waist; far arm swings back toward screen LEFT and is partially occluded. Near rear leg silhouette and front-facing gold boot side must remain identifiable across phases. Both boots close to same floor line, broad low grounded stride, no high knee, no feet gathered under body. Torso remains right-facing three-quarter, same height and anatomical scale as reference. Keep whole head, braid, hands, hair, robe and boots inside transparent canvas with margins. 1254x1254 native canvas, full character roughly y=130..1180. Exactly one character, one pose, transparent background. Crisp clean pixel clusters, two or three shades per material. No added limbs, no text, no shadow, no aura, no frames or panels, no cropping.",
   "references": [
@@ -15,44 +14,46 @@
     "output/actor-redraw/originals/mclsl_beast_kunpeng_yuan/walk_0.png"
   ],
   "normalization": {
-    "resampling": "none",
+    "resampling": "lanczos-premultiplied-alpha",
     "sourceCanvas": [
       1254,
       1254
     ],
     "canvas": [
-      1254,
-      1254
+      256,
+      256
     ],
-    "scale": 1,
+    "scale": 0.20414673046251994,
+    "inputSha256": "99588d892651fee79f0cad97ada1b1ff4e62756fe3cb2fe4a8ecabe040b75c49",
+    "sourceAnchor": [
+      638.5,
+      1193
+    ],
+    "sourcePixelsPerUnit": 367.3684063578953,
+    "ppuFactor": 1.3333856192380014,
+    "sourceRenderScale": 1,
     "cropped": false,
     "spritesheetSlicing": false,
-    "byteIdenticalToGeneratedSource": true
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
   },
-  "review": {
-    "identity": false,
-    "pixelEdges": false,
-    "anchor": false,
-    "continuity": false
-  },
-  "integrationGeometry": {
-    "canvas": [
-      1254,
-      1254
-    ],
-    "anchor": [
-      638.5,
-      1189
-    ],
-    "pixelsPerUnit": 11.897727272727273
-  },
-  "nativeResolution": true,
-  "pendingNativeRuntimeIntegration": false,
+  "nativeResolution": false,
   "repair": {
     "replacedSourceSha256": "04b11503ff772cb4b37215b6c2f318dc20d19607bc7f64b75c63fe5f1965fc30",
     "generatedSource": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a1507b-8feb-7ca2-86e8-43ae2230195f\\exec-f7994831-dbec-4364-b6f2-b1bba6ebdf4d.png",
     "candidateProvenance": "output/actor-redraw/repair-candidates/mclsl_beast_kunpeng_yuan/walk_3-native-reference-v1.provenance.json",
-    "selection": "latest-not-rejected-authorized-by-user"
+    "selection": "latest-not-rejected-authorized-by-user",
+    "generationRecord": {
+      "prompt": "Create ONE independently drawn transparent RGBA pixel art game animation frame: female adult Kunpeng human form walk_3. Use the two attached ORIGINAL high-resolution images for identity and exact pixel-cluster craft, face, navy side braid, navy blue/white layered feather-fin mantle, restrained gold trim and gold pin. Freshly draw a new pose, no bitmap transformation. Correct the second reference walk pose to the OPPOSITE HALF-CYCLE: camera-near leg clearly stretches BACK toward screen LEFT; far leg clearly stretches FORWARD toward screen RIGHT and bears weight. Camera-near arm and visible hand clearly swing FORWARD toward screen RIGHT, crossing in front of her waist; far arm swings back toward screen LEFT and is partially occluded. Near rear leg silhouette and front-facing gold boot side must remain identifiable across phases. Both boots close to same floor line, broad low grounded stride, no high knee, no feet gathered under body. Torso remains right-facing three-quarter, same height and anatomical scale as reference. Keep whole head, braid, hands, hair, robe and boots inside transparent canvas with margins. 1254x1254 native canvas, full character roughly y=130..1180. Exactly one character, one pose, transparent background. Crisp clean pixel clusters, two or three shades per material. No added limbs, no text, no shadow, no aura, no frames or panels, no cropping."
+    }
   },
-  "integrationStatus": "accepted-by-user-without-further-visual-review"
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
 }
