@@ -269,8 +269,6 @@ internal static class MclslFactionMissionSystem
             MclslMaterialDiscovery.TryDiscoverFactionReward(actor, year,
                 faction + "|" + order + "|" + roll, highestQuality: quality >= 4);
             MclslFactionExchangeSystem.TryExchangeTechnique(actor, faction, year, roll, out exchangeSummary);
-            string battle=Combat.MclslBattleProfessionSystem.TryTransmission(actor,year,"faction|"+faction+"|"+order);
-            if(battle.Length>0)exchangeSummary+=(exchangeSummary.Length>0?"；":"")+battle;
         }
         MclslFactionMissionRecord record = new()
         {

@@ -16,17 +16,19 @@ internal static class MclslRuntime
 
     internal static void Init()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/Runtime");
         if (_initialized) return;
-        _initialized = true;
         MclslRuntimeChanges.BindMainThread();
         MclslConfigLocalization.Init();
         MclslModuleHub.Init();
         MclslFpsOverlay.Ensure();
         MclslRuntimeDriver.Ensure();
+        _initialized = true;
     }
 
     internal static void OnWorldLoaded()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/WorldEntry");
         Init();
         MclslBeastAnimation.Clear();
         MclslRuntimeDriver.Ensure();
@@ -47,7 +49,6 @@ internal static class MclslRuntime
         if (unityFrame == _lastFrame) return;
         _lastFrame = unityFrame;
         MclslActorAnimationTime.Sample();
-        MclslNativeActorFrames.Tick();
         long modFrameSample = MclslPerformanceProbe.Begin();
         MclslFrameDeadline.Begin(3d);
         try
@@ -57,6 +58,13 @@ internal static class MclslRuntime
             MclslRuntimeWorkBudget.SampleFrame();
             MclslAnnualBackpressure.TickStatus();
             MclslRuntimeChanges.Drain(16);
+            // Native frame streaming is the only main-thread PNG decode in the
+            // loop. It now runs inside the probe scope and backs off with the
+            // same stress tiers as every other budgeted lane instead of always
+            // spending up to 4 ms outside the frame deadline.
+            MclslNativeActorFrames.Tick(
+                MclslRuntimeWorkBudget.ScaleMilliseconds(2.5d, 0.5d),
+                MclslRuntimeWorkBudget.ScaleCount(6, 1));
             if (MclslRuntimeSettings.CoreEnabled)
             {
                 _frameCounter++;

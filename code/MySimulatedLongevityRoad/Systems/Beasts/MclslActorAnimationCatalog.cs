@@ -78,6 +78,7 @@ internal static class MclslActorAnimationCatalog
 
     private static void EnsureLoaded()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/AnimationCatalog");
         if (_loaded) return;
         _loaded = true;
         string file = Path.Combine(MySimulatedLongevityRoad.MclslMod.I.GetDeclaration().FolderPath,

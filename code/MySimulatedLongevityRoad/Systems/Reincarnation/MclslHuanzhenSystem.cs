@@ -24,6 +24,8 @@ internal static class MclslHuanzhenSystem
     internal const int AnchorCost = 80;
     private static MclslHuanzhenExternalState _state = new();
     private static bool _loaded;
+    private static bool _writeLocked;
+    private static bool _preserveBackup;
     private static bool _applyingRestore;
     private static bool _rollbackQueued;
     private static int _rollbackDelayFrames;
@@ -59,18 +61,30 @@ internal static class MclslHuanzhenSystem
         {
             string tempPath = StatePath + ".tmp";
             if (!File.Exists(StatePath) && File.Exists(tempPath)) File.Move(tempPath, StatePath);
-            if (File.Exists(StatePath))
+            MclslArchiveReadResult result = MclslAtomicFile.Read(StatePath, json =>
             {
-                string json = File.ReadAllText(StatePath);
-                MclslHuanzhenExternalState loaded = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(json);
-                if (loaded == null || loaded.Version != MclslSaveVersions.HuanzhenExternalState)
+                MclslHuanzhenExternalState data = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(json);
+                if (data == null || data.Version != MclslSaveVersions.HuanzhenExternalState)
                     throw new InvalidDataException("还真空间格式不属于当前架构。");
+                return data;
+            }, out MclslHuanzhenExternalState loaded);
+            if (result == MclslArchiveReadResult.Invalid)
+                throw new InvalidDataException("还真外部状态主档及备份均无法读取: " + StatePath);
+            if (loaded != null)
+            {
                 _state = loaded;
-                _lastFlushedJson = json;
+                _lastFlushedJson = JsonConvert.SerializeObject(loaded, Formatting.None);
+                _preserveBackup = result == MclslArchiveReadResult.Backup;
+                if (_preserveBackup)
+                    Debug.LogWarning("[模拟长生路][还真] 主档无法读取，已恢复上一份有效备份: " + StatePath);
             }
             if (File.Exists(tempPath)) File.Delete(tempPath);
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路][还真] 外部状态读取失败: " + ex.Message); }
+        catch (Exception ex)
+        {
+            _writeLocked = true;
+            Debug.LogError("[模拟长生路][还真] 外部状态读取失败，已禁止覆盖: " + ex);
+        }
         Normalize();
     }
 
@@ -1412,22 +1426,14 @@ internal static class MclslHuanzhenSystem
     private static void Flush()
     {
         EnsureLoaded();
+        if (_writeLocked) throw new InvalidDataException("还真外部状态损坏，已禁止覆盖: " + StatePath);
         try
         {
             SyncCurrentEssenceLedger();
             string json = JsonConvert.SerializeObject(_state, Formatting.None);
             if (string.Equals(json, _lastFlushedJson, StringComparison.Ordinal)) return;
-            string dir = Path.GetDirectoryName(StatePath);
-            if (!string.IsNullOrWhiteSpace(dir)) Directory.CreateDirectory(dir);
-            string tempPath = StatePath + ".tmp";
-            File.WriteAllText(tempPath, json);
-            if (File.Exists(StatePath))
-            {
-                try { File.Replace(tempPath, StatePath, null); }
-                catch (PlatformNotSupportedException) { File.Copy(tempPath, StatePath, true); File.Delete(tempPath); }
-                catch (IOException) { File.Copy(tempPath, StatePath, true); File.Delete(tempPath); }
-            }
-            else File.Move(tempPath, StatePath);
+            MclslAtomicFile.Write(StatePath, json, _preserveBackup);
+            _preserveBackup = false;
             _lastFlushedJson = json;
         }
         catch (Exception ex) { Debug.LogWarning("[模拟长生路][还真] 外部状态写入失败: " + ex.Message); }

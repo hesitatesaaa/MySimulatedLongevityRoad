@@ -18,6 +18,7 @@ internal sealed class MclslMod : BasicMod<MclslMod>
 
     protected override void OnModLoad()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/OnModLoad");
         try
         {
             // Actor registration can enqueue native frames before Runtime.Init.
@@ -28,25 +29,34 @@ internal sealed class MclslMod : BasicMod<MclslMod>
             ModConfig config = GetConfig();
             MclslConfig.EnsurePhysiqueAutoCollectItem(config);
             MclslRuntimeSettings.LoadFromModConfig(config);
-            MclslTraitRegistration.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/Traits"))
+                MclslTraitRegistration.Init();
             MclslItemUseSystem.RegisterStatuses();
             MclslSpellSystem.RegisterStatuses();
             MclslArtifactSystem.RegisterEquipmentStatuses();
             MclslArtifactRain.Init();
-            MclslWorldSoulActorRegistration.Init();
-            MclslImmortalActorRegistration.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/WorldSouls"))
+                MclslWorldSoulActorRegistration.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/Immortals"))
+                MclslImmortalActorRegistration.Init();
             MclslBeastConfig.Ensure(config);
-            MclslBeastActorRegistration.Init();
-            MclslNamedCharacterRegistration.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/Beasts"))
+                MclslBeastActorRegistration.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/NamedActors"))
+                MclslNamedCharacterRegistration.Init();
             Harmony harmony = new Harmony(HarmonyId);
             int patchedCount = 0;
-            patchedCount += MclslPatches.ApplySafely(harmony);
-            patchedCount += MclslCombatPatches.ApplySafely(harmony);
+            using (MclslUnityProfiler.Sample("MCLS/Load/Harmony"))
+            {
+                patchedCount += MclslPatches.ApplySafely(harmony);
+                patchedCount += MclslCombatPatches.ApplySafely(harmony);
+            }
             if (MclslHarmonyPatchGuard.FailedRequiredCount > 0)
                 Debug.LogWarning("[模拟长生路] " + MclslHarmonyPatchGuard.FailedRequiredCount
                     + " 个关键补丁未挂载：" + MclslHarmonyPatchGuard.FailedRequiredSummary);
             MclslRuntime.Init();
-            MclslUiManager.Init();
+            using (MclslUnityProfiler.Sample("MCLS/Load/UI"))
+                MclslUiManager.Init();
             MclslNativeHistoryBridge.EnsureRegistered();
             if (MclslRuntimeSettings.DiagnosticsEnabled)
             {
@@ -59,6 +69,7 @@ internal sealed class MclslMod : BasicMod<MclslMod>
         catch (Exception ex)
         {
             Debug.LogError("[模拟长生路] 模组加载失败: " + ex);
+            throw;
         }
     }
 

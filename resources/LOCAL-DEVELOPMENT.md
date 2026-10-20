@@ -1,6 +1,8 @@
-# 0.6.0 本地精简开发版
+# 0.6.0 生物系统优化开发测试版
 
-本次只制作本地开发者包，不提交或推送 GitHub。安装需要 WorldBox 0.51.2 和 NeoModLoader，将包中的 MySimulatedLongevityRoad 文件夹放入 mods，避免重复安装；仅使用新存档。
+默认交付采用此前约50多MB版本的压缩玩家包：包含完整运行源码与资源，PNG最多256色，大图标最长边256；仅压缩包内副本，工作目录原素材保持不变。实际体积随资源变化，不强行压到固定大小。开发包仅在明确要求时制作，不提交或推送 GitHub。安装需要 WorldBox 0.51.2 和 NeoModLoader，将包中的 MySimulatedLongevityRoad 文件夹放入 mods，避免重复安装；建议先用新世界测试，已有存档应备份后验证迁移。
+
+2026-10-20 增量修改、尺寸比例、兽潮对照及验收限制见 beast-optimization-report.md。此次接入凤凰和大风共28张静止/移动重绘帧，并按 actor-size-policy.json 的 renderAdjustments 调整显示比例；下述PNG尺寸描述为原精简版资源基础，不代表新的游戏内实测。
 
 ## 图片与体型
 
@@ -19,13 +21,23 @@ tools/build-release.ps1 -LocalDevelopment -PythonExecutable <带Pillow的Python�
 tools/package-release.ps1 -LocalDevelopment -PythonExecutable <带Pillow的Python路径> -GameRoot <游戏目录> -OutputDirectory <项目内新目录>
 ```
 
-开发者包包含源码和资源，由 NeoModLoader 编译加载；编译验证输出不会作为多余 DLL 打进包。FILE-MANIFEST.json 记录所有包内源文件的 SHA256、基础提交及未提交状态；外部 SHA256SUMS.txt 用于检查 ZIP。
+默认的压缩玩家包包含运行源码和资源，由 NeoModLoader 编译加载；编译验证输出不会作为多余 DLL 打进包。FILE-MANIFEST.json 记录所有包内源文件的 SHA256、基础提交及未提交状态；外部 SHA256SUMS.txt 用于检查 ZIP。需要开发包时显式使用 tools/package-release.py --kind developer --local-development --output build/<新目录>。
 
 ## 验证范围
 
-资源校验、编译和离线加载/动画测试不等于 Unity 实测。此次不重新审图，不追加游戏内尺寸或性能测试。history/20261019 中的实际运行记录属于缩放前版本，本次没有沿用其“已通过”标记。正式发布校验继续阻止把本地开发包称作新实测通过版本。
+资源校验、编译和离线加载/动画测试不等于 Unity 实测。本次新增凤凰/大风静止和移动帧的离线审查，游戏内尺寸、状态切换、存读档迁移和性能仍未验证。history/20261019 中的实际运行记录属于旧版本，本次没有沿用其“已通过”标记。正式发布校验继续阻止把本地开发包称作新实测通过版本。
 
 可单独运行 `tools/validate-current-assets.py`、`tools/validate-beast-overhaul.py`、`tools/test-current-assets.py`，以及 `dotnet run --project .dev-tools/animation-tests`、`dotnet run --project .dev-tools/actor-loading-tests`。前两个 Python 工具使用 `--release` 时会拒绝此次未重新实测的版本。
+
+一条命令跑完全部离线检查：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/verify-all.ps1
+```
+
+默认依次检查 NML 源码选择、本地化、人物资源、兽潮资源，编译一次并运行 actor-loading / animation / death-visual 三个测试；报告与隔离的中间产物写入 `build/verify`。没有本机游戏目录时加 `-SkipBuild`，CI 工作流 `.github/workflows/verify.yml` 就是这样跑的。测试替身不再依赖 `build/`：`MCLSL_ACTOR_FIXTURE`、`MCLSL_ANIMATION_FIXTURE`、`MCLSL_WORKSPACE` 可重定向临时目录。
+
+性能面板（`MclslPerformanceProbe`）新增“贴图常驻 / 显卡报告显存 / 原生帧缓存与预算 / 待加载帧”一行，用于确认显存改动前后是否生效；这仍是采样读数，不能替代 Unity 实测结论。
 
 ## NML 加载修复
 

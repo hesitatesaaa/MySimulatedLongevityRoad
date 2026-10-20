@@ -40,8 +40,8 @@ internal static class MclslModuleHub
 
     internal static void Init()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/Modules");
         if (_initialized) return;
-        _initialized = true;
         Modules.Clear();
         Register(new MclslPersistenceModule());
         Register(new MclslHuanzhenModule());
@@ -56,7 +56,9 @@ internal static class MclslModuleHub
         Register(new MclslRuntimeCadenceModule());
         Register(new MclslAnnouncementModule());
         Modules.Sort((a, b) => a.Order != b.Order ? a.Order.CompareTo(b.Order) : string.CompareOrdinal(a.Name, b.Name));
-        ForEach(true, module => module.Init(), "Init");
+        foreach (MclslModuleBase module in Modules)
+            module.Init();
+        _initialized = true;
     }
 
     internal static void OnWorldLoaded(int year, bool coreEnabled)

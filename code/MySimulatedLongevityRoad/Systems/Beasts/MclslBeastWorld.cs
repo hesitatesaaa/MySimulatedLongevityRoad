@@ -37,11 +37,12 @@ internal static class MclslBeastWorld
     private static MapBox _wildWorld;
     private static int _auditFrame;
     private static int _manualRequest;
+    private static float _nextSpawnTime;
     private static bool _locked;
     private static readonly ConcurrentDictionary<long,byte> PendingRankStats=new();
     internal static bool WriteLocked=>_locked;
     internal static bool Enabled=true;
-    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,NaturalLimit=128,ManualRealm;
+    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,NaturalLimit=128,ManualRealm,MaximumWaveCount=64;
     internal static float CountMultiplier=1;
     internal static readonly int[] Weights=MclslBeastRules.Weights,Counts=MclslBeastRules.Counts;
     internal static IReadOnlyList<MclslBeastWaveState> Waves=>State.Waves;
@@ -79,7 +80,12 @@ internal static class MclslBeastWorld
             State.NaturalPending??=new();
             State.Unlocked=Math.Clamp(State.Unlocked,1,7);
             foreach(var wave in State.Waves)
-            { wave.Level=Math.Clamp(wave.Level,1,7); wave.Count=Math.Clamp(wave.Count,0,4096);wave.Cursor=Math.Clamp(wave.Cursor,0,wave.Count);wave.Actors??=new(); }
+            {
+                wave.Level=Math.Clamp(wave.Level,1,7); wave.Count=Math.Clamp(wave.Count,0,4096);
+                wave.Cursor=Math.Clamp(wave.Cursor,0,wave.Count);wave.Actors??=new();
+                wave.Count=Math.Min(wave.Count,Math.Max(wave.Cursor,MaximumWaveCount));
+                if(wave.Status=="已结束")wave.Actors.Clear();
+            }
         }
         catch(Exception ex) { _locked=true;MclslDiagnostics.Error("beast-world-load",ex.ToString()); }
     }
@@ -89,7 +95,7 @@ internal static class MclslBeastWorld
         World.world.map_stats.custom_data??=new SaveCustomData();
         World.world.map_stats.custom_data.set(SaveKey,JsonConvert.SerializeObject(State));
     }
-    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;_locked=false;PendingRankStats.Clear();MclslBeastSpawnSystem.Clear(); }
+    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;_nextSpawnTime=0;_locked=false;PendingRankStats.Clear();MclslBeastSpawnSystem.Clear(); }
     internal static void RequestManual(int level)=>_manualRequest=Math.Clamp(level,1,7);
     internal static void ObserveProgress()
     {
@@ -124,7 +130,8 @@ internal static class MclslBeastWorld
     }
     internal static bool Trigger(int level,int year,WorldTile requested=null)
     {
-        if(_locked || World.world?.units==null || State.Waves.Count(x=>x.Status!="已结束")>=8) return false;
+        if(_locked || World.world?.units==null || State.Waves.Any(x=>x.Status=="生成中" || x.Year==year && x.Status!="已结束")
+            || State.Waves.Count(x=>x.Status!="已结束")>=2) return false;
         level=Math.Clamp(level,1,7);
         var options=new List<(string Theme,WorldTile Tile)>();
         foreach(string theme in new[]{"山林","水域","阴影","神兽"})
@@ -138,7 +145,8 @@ internal static class MclslBeastWorld
         }
         if(options.Count==0) return false;
         var option=options[Roll(year+"|theme|"+State.Waves.Count,options.Count)];
-        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor)+State.NaturalPending.Count);
+        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor)+State.NaturalPending.Count,
+            MapBox.width*MapBox.height,MaximumWaveCount);
         if(count==0)return false;
         var wave=new MclslBeastWaveState { Id=Guid.NewGuid().ToString("N"),Level=level,Theme=option.Theme,
             X=option.Tile.pos.x,Y=option.Tile.pos.y,Count=count,Year=year };
@@ -171,6 +179,8 @@ internal static class MclslBeastWorld
     internal static void Tick()
     {
         if(_locked || World.world?.units==null || Config.paused)return;
+        if(UnityEngine.Time.time<_nextSpawnTime)return;
+        _nextSpawnTime=UnityEngine.Time.time+0.15f;
         if(_manualRequest>0 && MclslBeastHabitatIndex.Refresh(MclslRuntime.CurrentYear(),false))
         {
             int level=_manualRequest;_manualRequest=0;
@@ -180,7 +190,7 @@ internal static class MclslBeastWorld
         foreach(var wave in State.Waves)
         {
             if(wave.Status!="生成中")continue;
-            while(wave.Cursor<wave.Count && made<4 && watch.Elapsed.TotalMilliseconds<2)
+            while(wave.Cursor<wave.Count && made<2 && watch.Elapsed.TotalMilliseconds<2)
             {
                 int rank=MclslBeastRules.Role(wave.Cursor,wave.Count);
                 if(CountAutomatic()>=AutomaticLimit){wave.Cursor=wave.Count;break;}
@@ -205,12 +215,12 @@ internal static class MclslBeastWorld
                 wave.Cursor++;made++;
             }
             if(wave.Cursor>=wave.Count)wave.Status="活动中";
-            if(made>=4 || watch.Elapsed.TotalMilliseconds>=2)break;
+            if(made>=2 || watch.Elapsed.TotalMilliseconds>=2)break;
         }
-        if(++_auditFrame%120==0)
+        if(++_auditFrame%20==0)
         {
             foreach(var wave in State.Waves)
-                if(wave.Status=="活动中" && Remaining(wave)==0)wave.Status="已结束";
+                if(wave.Status=="活动中" && Remaining(wave)==0){wave.Status="已结束";wave.Actors.Clear();}
             if(State.Waves.Count>64)State.Waves.RemoveAll(x=>x.Status=="已结束" && x.Year<MclslRuntime.CurrentYear()-20);
         }
     }

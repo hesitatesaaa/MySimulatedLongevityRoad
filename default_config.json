@@ -397,6 +397,16 @@
       "MaxIntVal": 7
     },
     {
+      "Id": "MCLSL_config_beast_wave_limit",
+      "Name": "单次兽潮数量上限",
+      "Description": "按地图规模、等级及数量倍率计算后，单场最多生成的数量。",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 64,
+      "MinIntVal": 1,
+      "MaxIntVal": 256
+    },
+    {
       "Id": "MCLSL_config_beast_auto_limit",
       "Type": "INT_SLIDER",
       "Callback": "MclslBeastConfig:ReloadInt",

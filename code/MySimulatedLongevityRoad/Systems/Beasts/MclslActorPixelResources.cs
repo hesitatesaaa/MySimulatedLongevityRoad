@@ -33,6 +33,12 @@ internal static class MclslActorPixelResources
         if (Loaded.TryGetValue(resourcePath, out Sprite cached)) return cached;
         Sprite original = SpriteTextureLoader.getSprite(resourcePath)
             ?? SpriteTextureLoader.getSprite("GameResources/" + resourcePath);
+        // NeoModLoader caches one sprite per imported path. Decoding the same PNG
+        // again would keep a second full-size RGBA texture resident for the whole
+        // session (roughly 6 MB for a 1254x1254 icon), so reuse the imported
+        // texture and only rebuild the full-canvas sprite the UI expects.
+        Sprite shared = ReuseImported(resourcePath, original);
+        if (shared != null) { Loaded[resourcePath] = shared; return shared; }
         Texture2D texture = null;
         try
         {
@@ -76,11 +82,39 @@ internal static class MclslActorPixelResources
         }
     }
 
+    // Called only on the main thread by Load. Returns null when the imported
+    // sprite is missing or unusable, so the caller falls back to decoding.
+    private static Sprite ReuseImported(string resourcePath, Sprite original)
+    {
+        if (original == null) return null;
+        Texture2D texture;
+        try { texture = original.texture; }
+        catch (Exception ex) { MclslDiagnostics.Error("pixel-reuse:" + resourcePath, ex.Message); return null; }
+        if (texture == null || texture.width <= 0 || texture.height <= 0) return null;
+        try
+        {
+            Vector2 pivot = new(original.pivot.x / original.rect.width, original.pivot.y / original.rect.height);
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
+                pivot, original.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+            if (sprite == null) return null;
+            sprite.name = Path.GetFileName(resourcePath);
+            MclslDiagnostics.Once("pixel-reuse:" + resourcePath,
+                resourcePath + " 复用已导入贴图 " + texture.width + "x" + texture.height);
+            return sprite;
+        }
+        catch (Exception ex)
+        {
+            MclslDiagnostics.Error("pixel-reuse:" + resourcePath, "复用贴图失败: " + ex.Message);
+            return null;
+        }
+    }
+
     // Called only by the bounded cache's main-thread pump. This sprite is never
     // inserted into Loaded; eviction must be able to release its GPU texture.
     internal static Sprite LoadNative(string resourcePath, string file,
         MclslActorAnimationCatalog.FrameProfile profile)
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Resources/NativeFrame");
         Texture2D texture = null;
         try
         {
@@ -91,15 +125,23 @@ internal static class MclslActorPixelResources
                 wrapMode = TextureWrapMode.Clamp,
                 anisoLevel = 0
             };
-            if (!ImageConversion.LoadImage(texture, File.ReadAllBytes(file), true)
+            byte[] png;
+            using (MclslUnityProfiler.Sample("MCLS/Resources/ReadPNG"))
+                png = File.ReadAllBytes(file);
+            bool decoded;
+            using (MclslUnityProfiler.Sample("MCLS/Resources/DecodeAndUploadPNG"))
+                decoded = ImageConversion.LoadImage(texture, png, true);
+            if (!decoded
                 || texture.width != profile.Width || texture.height != profile.Height
                 || texture.mipmapCount != 1 ||
                 (texture.format != TextureFormat.RGBA32 && texture.format != TextureFormat.ARGB32
                  && texture.format != TextureFormat.RGB24))
                 throw new InvalidDataException("Native PNG format/canvas mismatch: " + resourcePath);
             Vector2 pivot = new(profile.AnchorX / texture.width, 1f - profile.AnchorY / texture.height);
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
-                pivot, profile.PixelsPerUnit, 0, SpriteMeshType.FullRect);
+            Sprite sprite;
+            using (MclslUnityProfiler.Sample("MCLS/Resources/CreateSprite"))
+                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
+                    pivot, profile.PixelsPerUnit, 0, SpriteMeshType.FullRect);
             if (sprite == null)
                 throw new InvalidDataException("Native sprite creation failed: " + resourcePath);
             sprite.name = Path.GetFileName(resourcePath);

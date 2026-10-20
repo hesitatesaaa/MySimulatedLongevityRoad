@@ -3,48 +3,53 @@
   "action": "walk",
   "index": 3,
   "artDirectionRevision": 2,
-  "method": "built-in-imagegen-independent-frame",
-  "sourceSha256": "9a0657805d8d7cb3793caa5b6b35028bf1ea003c17e1352b87d7bfc227d9e9c8",
+  "method": "built-in-imagegen-reviewed-sheet-cell",
+  "sourceSha256": "408b4cb77491bdc235ab13821435e5410ae22821da1dab2653f45ed170458dbd",
   "outputFile": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_3.png",
-  "outputSha256": "47016f9207ac13af87e5c3634b5b2fdf21fca53d99152e4472fc9591ca7a0d7b",
-  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u51e4\u51f0\u00b7\u517d\u5f62 (mclsl_beast_fenghuang), walk_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: orange/gold phoenix, recognizable fan crest, two feathered wings, two legs, long layered flame-like orange and golden tail with selective edging. Pose: FLYING wingbeat cycle phase 0.375: downstroke begins; articulate paired shoulder/elbow/wrist joints and layered feathers, tuck legs naturally, head stable, tail follows the beat. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
+  "outputSha256": "9b5bb4260bee4f298e9e4c2d3a3467930edd645ad39632d204eab11d4a2059bb",
+  "prompt": "User reference phoenix/Dafeng: six folded-wing idle poses and eight coordinated two-wing flying poses, right-facing WorldBox pixel art, true alpha, no third wing or wing ghosts. Generated with built-in image_gen; see retained source sheet.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang\\idle_0.png",
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png"
   ],
-  "createdAtUtc": "2026-10-13T05:29:41.734994+00:00",
+  "createdAtUtc": "2026-10-20T07:24:52.179Z",
   "normalization": {
-    "resampling": "lanczos-premultiplied-alpha",
-    "sourceCanvas": [
-      1254,
-      1254
-    ],
+    "resampling": "nearest",
     "canvas": [
       320,
       320
     ],
-    "scale": 0.2551834130781499,
-    "inputSha256": "9a0657805d8d7cb3793caa5b6b35028bf1ea003c17e1352b87d7bfc227d9e9c8",
-    "sourceAnchor": [
-      627.5,
-      1143
+    "sourceCanvas": [
+      313,
+      325
     ],
-    "sourcePixelsPerUnit": 208.18181818181816,
-    "ppuFactor": 0.7626839896099986,
-    "sourceRenderScale": 1,
+    "scale": 0.8577319587628867,
     "cropped": false,
-    "spritesheetSlicing": false,
+    "transparentPaddingTrimmed": true,
+    "spritesheetSlicing": true,
     "colorQuantized": false,
     "resizePasses": 1,
-    "visibleBoundsAlpha": 16
+    "visibleBoundsAlpha": 16,
+    "placement": [
+      41,
+      42
+    ]
   },
   "nativeResolution": false,
-  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
-  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "integrationStatus": "offline-integration-awaiting-Unity-review",
+  "sourceRetention": "full generated sheet retained in resources/bird-animation-sources",
   "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
+  },
+  "previousSourceSha256": "9a0657805d8d7cb3793caa5b6b35028bf1ea003c17e1352b87d7bfc227d9e9c8",
+  "sourceSheet": "resources/bird-animation-sources/fenghuang.png",
+  "sourceCell": {
+    "left": 314,
+    "top": 650,
+    "width": 313,
+    "height": 325
   }
 }

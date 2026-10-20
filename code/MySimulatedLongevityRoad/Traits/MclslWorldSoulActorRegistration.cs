@@ -20,22 +20,23 @@ internal static partial class MclslWorldSoulActorRegistration
     private static bool _initialized;
     private static readonly Dictionary<string, Sprite> TintedSpriteCache = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, SoulSpriteSet> SpriteSets = new(StringComparer.Ordinal);
-    private static readonly Dictionary<long, int> AttackUntilFrame = new();
+    private static readonly Dictionary<long, long> AttackUntilFrame = new();
     private static readonly Dictionary<long, int> NextPulseFrame = new();
     private static readonly Dictionary<long, int> AttackScanCursor = new();
     private static readonly Dictionary<long, int> LastSpriteX = new();
     private static readonly Dictionary<long, int> LastSpriteY = new();
-    private static readonly Dictionary<long, int> LastMovementFrame = new();
-    private static readonly Dictionary<long, int> HitStartedFrame = new();
+    private static readonly Dictionary<long, long> LastMovementFrame = new();
+    private static readonly Dictionary<long, long> HitStartedFrame = new();
+    private static long AnimationTick => (long)(MclslActorAnimationTime.Now * 60d);
     private static readonly Dictionary<long, SoulAnimationClock> AnimationClocks = new();
     private enum SoulAnimationAction : byte { Idle, Run, Attack, Hit, Death }
 
     private readonly struct SoulAnimationClock
     {
         internal readonly SoulAnimationAction Action;
-        internal readonly int StartedFrame;
+        internal readonly long StartedFrame;
 
-        internal SoulAnimationClock(SoulAnimationAction action, int startedFrame)
+        internal SoulAnimationClock(SoulAnimationAction action, long startedFrame)
         {
             Action = action;
             StartedFrame = startedFrame;
@@ -291,7 +292,7 @@ internal static partial class MclslWorldSoulActorRegistration
             asset.cached_sprite = asset._cached_sprite;
             asset.get_override_sprite = GetWorldSoulSprite;
             asset.has_override_sprite = true;
-            asset.base_stats["scale"] = 0.2f;
+            asset.base_stats["scale"] = 0.2f * 1.075f;
             asset.base_stats["size"] = 0.4f;
             ApplyDefaultSubspeciesTraits(asset);
             AssetManager.actor_library.loadTexturesAndSprites(asset);
@@ -306,6 +307,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 asset._cached_sprite = asset._cached_sprite ?? FallbackSprite(folder);
                 asset.cached_sprite = asset._cached_sprite;
             }
+            MclslActorPresentation.Configure(asset, asset._cached_sprite);
         }
         catch (Exception ex)
         {
@@ -456,7 +458,7 @@ internal static partial class MclslWorldSoulActorRegistration
             return FrameForActor(actor, set, set.Attack.Length > 0 ? set.Attack : set.Idle,
                 4, SoulAnimationAction.Attack) ?? FallbackSprite(folder);
         long actorId = ActorId(actor);
-        if (actorId > 0 && AttackUntilFrame.TryGetValue(actorId, out int attackUntil) && Time.frameCount <= attackUntil)
+        if (actorId > 0 && AttackUntilFrame.TryGetValue(actorId, out long attackUntil) && AnimationTick <= attackUntil)
             return FrameForActor(actor, set, set.Attack.Length > 0 ? set.Attack : set.Idle,
                 4, SoulAnimationAction.Attack) ?? FallbackSprite(folder);
         if (IsMovingForSprite(actor))
@@ -478,21 +480,21 @@ internal static partial class MclslWorldSoulActorRegistration
         if (set.Hit.Length == 0) return false;
         long actorId = ActorId(actor);
         if (actorId <= 0L) return false;
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         bool justHit = false;
         try { justHit = actor.isJustAttacked(); } catch { }
         int duration = set.Hit.Length * 4;
-        if (justHit && (!HitStartedFrame.TryGetValue(actorId, out int previous)
+        if (justHit && (!HitStartedFrame.TryGetValue(actorId, out long previous)
             || frame - previous >= duration))
             HitStartedFrame[actorId] = frame;
-        if (!HitStartedFrame.TryGetValue(actorId, out int started)) return false;
-        int elapsed = frame - started;
+        if (!HitStartedFrame.TryGetValue(actorId, out long started)) return false;
+        long elapsed = frame - started;
         if (elapsed < 0 || elapsed >= duration)
         {
             HitStartedFrame.Remove(actorId);
             return false;
         }
-        sprite = set.Hit[Math.Min(set.Hit.Length - 1, elapsed / 4)];
+        sprite = set.Hit[(int)Math.Min(set.Hit.Length - 1, elapsed / 4)];
         AnimationClocks[actorId] = new SoulAnimationClock(SoulAnimationAction.Hit, started);
         if (set.UsesGenericFallback) sprite = TintFrame(actor, sprite);
         return sprite != null;
@@ -503,11 +505,21 @@ internal static partial class MclslWorldSoulActorRegistration
         if (set.Idle.Length == 0 || set.Breathing.Length == 0)
             return FrameForActor(actor, set, set.Idle, 8, SoulAnimationAction.Idle);
         long actorId = ActorId(actor);
+        long frame = AnimationTick;
+        long started = frame;
         if (actorId > 0L)
-            AnimationClocks[actorId] = new SoulAnimationClock(SoulAnimationAction.Idle, Time.frameCount);
+        {
+            if (!AnimationClocks.TryGetValue(actorId, out SoulAnimationClock clock)
+                || clock.Action != SoulAnimationAction.Idle || frame < clock.StartedFrame)
+            {
+                clock = new SoulAnimationClock(SoulAnimationAction.Idle, frame);
+                AnimationClocks[actorId] = clock;
+            }
+            started = clock.StartedFrame;
+        }
         int idleTicks = set.Idle.Length * 8;
         int totalTicks = idleTicks + set.Breathing.Length * 8;
-        long phase = ((long)Time.frameCount + actorId) % totalTicks;
+        long phase = (frame - started) % totalTicks;
         if (phase < 0) phase += totalTicks;
         Sprite[] frames = phase < idleTicks ? set.Idle : set.Breathing;
         int index = (int)((phase < idleTicks ? phase : phase - idleTicks) / 8);
@@ -649,7 +661,7 @@ internal static partial class MclslWorldSoulActorRegistration
 
         int x = SafeX(actor);
         int y = SafeY(actor);
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         bool hasLastX = LastSpriteX.TryGetValue(actorId, out int lastX);
         bool hasLastY = LastSpriteY.TryGetValue(actorId, out int lastY);
         bool hasLast = hasLastX && hasLastY;
@@ -660,7 +672,7 @@ internal static partial class MclslWorldSoulActorRegistration
             LastMovementFrame[actorId] = frame;
 
         return movingByActorState
-            || (LastMovementFrame.TryGetValue(actorId, out int movedFrame) && frame - movedFrame <= 12);
+            || (LastMovementFrame.TryGetValue(actorId, out long movedFrame) && frame >= movedFrame && frame - movedFrame <= 12);
     }
 
     private static Sprite FirstFrame(Sprite[] frames)
@@ -675,7 +687,7 @@ internal static partial class MclslWorldSoulActorRegistration
         int ticksPerFrame, SoulAnimationAction action, bool loop = true)
     {
         if (frames == null || frames.Length == 0) return FallbackSprite(string.Empty);
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         long actorId = ActorId(actor);
         long elapsed = frame;
         if (actorId > 0L)
@@ -688,8 +700,8 @@ internal static partial class MclslWorldSoulActorRegistration
             }
             elapsed = (long)frame - clock.StartedFrame;
         }
-        int index = (int)(elapsed / Math.Max(1, ticksPerFrame));
-        index = loop ? index % frames.Length : Math.Min(index, frames.Length - 1);
+        long step = elapsed / Math.Max(1, ticksPerFrame);
+        int index = (int)(loop ? step % frames.Length : Math.Min(step, frames.Length - 1));
         Sprite sprite = frames[index] ?? FallbackSprite(string.Empty);
         return set.UsesGenericFallback ? TintFrame(actor, sprite) : sprite;
     }

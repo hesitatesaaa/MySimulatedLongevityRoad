@@ -77,6 +77,15 @@ for(int ceiling=1;ceiling<=7;ceiling++)
 Check(MclslBeastRules.PlannedCount(7,10,512,500,12)==0,"full reserved capacity rejects another wave");
 Check(MclslBeastRules.PlannedCount(7,10,512,500,10)==2,"truncated capacity keeps only two slots");
 Check(MclslBeastRules.Role(0,1)==2,"one-slot wave preserves boss");
+Check(MclslBeastRules.NaturalChance(200000)==80000,"common regional arrival is reduced by 60 percent");
+Check(MclslBeastRules.NaturalChance(1000000)==400000,"conditional guaranteed rare roll retains a 40 percent probability");
+foreach(var beast in MclslBeastCatalog.All)
+    Check(MclslBeastRules.NaturalChance(beast.ChancePerMillion)==beast.ChancePerMillion*0.4,"preserve species rarity ratios: "+beast.Id);
+Check(MclslBeastRules.PlannedCount(7,10,4096,0,0,1048576,64)==64,"large-map maximum multiplier obeys single-wave cap");
+Check(MclslBeastRules.PlannedCount(7,1,512,0,0,16384)==18,"small map reduces default wave size");
+Check(MclslBeastRules.PlannedCount(7,1,512,0,0,262144)==56,"large map retains bounded scale");
+Check(MclslBeastRules.PlannedCount(1,1,512,0,0,65536,1)==1,"one-unit setting keeps a single boss");
+Check(MclslBeastRules.NaturalChance(-1)==0 && MclslBeastRules.NaturalChance(int.MaxValue)==400000,"natural probability input is bounded");
 if(args.Length>0)
 {
     string destination=Path.GetFullPath(args[0]);Directory.CreateDirectory(destination);

@@ -15,9 +15,11 @@ internal static class MclslBeastControlWindow
     private static Transform _content;
     private static Text _summary;
     private static readonly System.Collections.Generic.List<GameObject> Records=new();
+    private static readonly System.Collections.Generic.List<Action> RefreshLabels=new();
     internal static void Show()
     {
         if(_window==null)Create();
+        foreach(var refresh in RefreshLabels)refresh();
         _summary.text="世界已解锁："+MclslBeastWorld.State.Unlocked+"级兽潮\n手动放置境界："+MclslRealmIds.Display(MclslRealmIds.Ordered[MclslBeastWorld.ManualRealm]);
         MclslWindowOpenGuard.Show(_window,Id,false);
     }
@@ -40,6 +42,7 @@ internal static class MclslBeastControlWindow
         Button(()=>"间隔："+MclslBeastWorld.Interval+"年（点击递增）",()=>MclslBeastConfig.SetInt("MCLSL_config_beast_wave_interval",MclslBeastWorld.Interval>=30?1:MclslBeastWorld.Interval+1));
         Button(()=>"数量倍率："+MclslBeastWorld.CountMultiplier.ToString("0.0"),()=>MclslBeastConfig.SetInt("MCLSL_config_beast_wave_count_percent",MclslBeastWorld.CountMultiplier>=3?50:(int)(MclslBeastWorld.CountMultiplier*100)+50));
         Button(()=>"自动最高等级："+MclslBeastWorld.MaximumLevel,()=>MclslBeastConfig.SetInt("MCLSL_config_beast_wave_max_level",MclslBeastWorld.MaximumLevel%7+1));
+        Button(()=>"单次兽潮上限："+MclslBeastWorld.MaximumWaveCount,()=>MclslBeastConfig.SetInt("MCLSL_config_beast_wave_limit",MclslBeastWorld.MaximumWaveCount>=256?16:Math.Min(256,MclslBeastWorld.MaximumWaveCount+16)));
         Button(()=>"自动妖兽上限："+MclslBeastWorld.AutomaticLimit,()=>MclslBeastConfig.SetInt("MCLSL_config_beast_auto_limit",MclslBeastWorld.AutomaticLimit>=2048?128:MclslBeastWorld.AutomaticLimit*2));
         Button(()=>"自然妖兽上限："+MclslBeastWorld.NaturalLimit,()=>MclslBeastConfig.SetInt("MCLSL_config_beast_natural_limit",MclslBeastWorld.NaturalLimit>=512?32:MclslBeastWorld.NaturalLimit*2));
         Button(()=>"手动放置："+MclslRealmIds.Display(MclslRealmIds.Ordered[MclslBeastWorld.ManualRealm]),()=>MclslBeastWorld.ManualRealm=(MclslBeastWorld.ManualRealm+1)%7);
@@ -53,12 +56,13 @@ internal static class MclslBeastControlWindow
         var label=go.GetComponent<Text>();label.text=text;label.font=_window.titleText.font;label.fontSize=13;label.color=Color.white;
         go.AddComponent<LayoutElement>().preferredHeight=45;return label;
     }
-    private static GameObject Button(Func<string> title,Action action)
+    private static GameObject Button(Func<string> title,Action action,bool persistent=true)
     {
         var go=DefaultControls.CreateButton(new DefaultControls.Resources());go.transform.SetParent(_content,false);
         go.GetComponent<Image>().color=new Color(0.22f,0.28f,0.34f,1);
         var text=go.GetComponentInChildren<Text>();text.font=_window.titleText.font;text.fontSize=13;text.color=Color.white;text.text=title();
         go.AddComponent<LayoutElement>().preferredHeight=32;
+        if(persistent) RefreshLabels.Add(()=>text.text=title());
         go.GetComponent<Button>().onClick.AddListener(()=>{action();text.text=title();});return go;
     }
     private static void ShowRecords()
@@ -69,7 +73,7 @@ internal static class MclslBeastControlWindow
         {
             var captured=wave;
             Records.Add(Button(()=>captured.Year+"年 "+captured.Level+"级"+captured.Theme+" · "+captured.Status+" · 剩余"+MclslBeastWorld.Remaining(captured),
-                ()=>MoveCamera.instance?.focusOn(new Vector3(captured.X,captured.Y,0))));
+                ()=>MoveCamera.instance?.focusOn(new Vector3(captured.X,captured.Y,0)),false));
         }
     }
 }

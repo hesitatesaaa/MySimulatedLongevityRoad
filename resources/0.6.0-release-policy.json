@@ -1,11 +1,11 @@
 {
   "targetVersion": "0.6.0",
-  "visualReview": "waived-by-user",
-  "authorization": "2026-10-19: user requested direct integration without further image review, and formal release after actual Unity validation.",
+  "visualReview": "20261020-bird-idle-walk-offline-reviewed; Unity-review-pending",
+  "authorization": "2026-10-20: user requested incremental creature/animation/wave fixes with offline review and actual Unity acceptance; no GitHub push.",
   "requireUnityValidation": true,
   "candidateSelection": "latest-not-rejected",
-  "saveTestScope": "new-save-only",
+  "saveTestScope": "new-and-existing-saves-required; current-migration-not-Unity-tested",
   "runtimeAcceptance": "historical-only",
   "runtimeAcceptanceEvidence": "resources/history/20261019/runtime-acceptance.json",
-  "currentBuild": "local-compact-development-not-Unity-retested"
+  "currentBuild": "20261020-beast-optimization-development-not-Unity-retested"
 }

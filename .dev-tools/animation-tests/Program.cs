@@ -93,8 +93,19 @@ state.Attack(41.6);
 Check(state.Select(41.7, false, .6, .9, out elapsed) == MclslActorAction.Hit, "suppression follows variable hit duration");
 Check(state.Select(41.91, false, .6, .9, out elapsed) == MclslActorAction.Idle, "long hit does not leave queued attack");
 
-string workspace = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../../"));
-string fixture = Path.Combine(workspace, "build/animation-test-fixtures");
+// The test resolves the repository by walking up to mod.json so that isolated
+// build outputs (verify-all redirects bin/obj) still find the real manifests.
+string workspace = Environment.GetEnvironmentVariable("MCLSL_WORKSPACE");
+if (string.IsNullOrEmpty(workspace))
+{
+    DirectoryInfo directory = new(AppContext.BaseDirectory);
+    while (directory != null && !File.Exists(Path.Combine(directory.FullName, "mod.json")))
+        directory = directory.Parent;
+    workspace = directory?.FullName
+        ?? Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../../"));
+}
+string fixture = Environment.GetEnvironmentVariable("MCLSL_ANIMATION_FIXTURE")
+    ?? Path.Combine(workspace, "build/animation-test-fixtures");
 Directory.CreateDirectory(Path.Combine(fixture, "resources"));
 Directory.CreateDirectory(Path.Combine(fixture, "GameResources/actors/Test/main"));
 MclslMod.Root = fixture;

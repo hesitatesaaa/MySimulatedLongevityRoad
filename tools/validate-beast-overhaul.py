@@ -12,6 +12,8 @@ inspection = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(inspection)
 parser = argparse.ArgumentParser()
 parser.add_argument('--release', action='store_true')
+parser.add_argument('--output', default='build/validation/beast-resources.json',
+                    help='Report path, relative to the project root')
 args = parser.parse_args()
 manifest = json.loads((ROOT / 'resources/beast-content.manifest.json').read_text(encoding='utf-8-sig'))
 effects = json.loads((ROOT / 'resources/beast-spell-effects.manifest.json').read_text(encoding='utf-8-sig'))
@@ -71,7 +73,8 @@ report = {'kind': 'offline-beast-resource-validation', 'missing': missing, 'inva
           'originalIconReviewValid': original_review_valid,
           'resourceValid': not missing and not invalid and not unreviewed and original_review_valid and status.get('oldItemArtAudit') == 'passed',
           'releaseReady': False}
-output = ROOT / 'build/validation/beast-resources.json'
+output = (ROOT / args.output).resolve()
+output.relative_to(ROOT)  # reports stay inside the workspace, like the package output
 output.parent.mkdir(parents=True, exist_ok=True)
 output.write_text(json.dumps(report, indent=2), encoding='utf-8')
 print(json.dumps({'icons':111,'attackSpellStages':len(effects['assets']),'missing':len(missing),

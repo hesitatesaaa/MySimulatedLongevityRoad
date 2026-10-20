@@ -4,8 +4,6 @@ using System.IO;
 using System.Reflection;
 using MySimulatedLongevityRoad.Core;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -19,51 +17,20 @@ internal static class MclslLocalizationBridge
 
     internal static void LoadChineseCatalog()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/ChineseCatalog");
         if (_chineseLoaded) return;
-        string json = FindChineseCatalog();
-        if (string.IsNullOrWhiteSpace(json))
+        string file = Path.Combine(MclslMod.I.GetDeclaration().FolderPath, "Locales", "ch.json");
+        Dictionary<string, string> entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+            File.ReadAllText(file));
+        if (entries == null || !entries.ContainsKey("mclsl_mod_tab"))
+            throw new InvalidDataException("简体中文目录缺少模组入口键: " + file);
+        foreach (KeyValuePair<string, string> entry in entries)
         {
-            Debug.LogWarning("[模拟长生路] 未找到 Locales/ch.json，界面将使用已注册的运行时中文。");
-            return;
+            if (string.IsNullOrWhiteSpace(entry.Value))
+                throw new InvalidDataException("简体中文目录存在空翻译: " + entry.Key);
+            RegisterKey(entry.Key, entry.Value);
         }
-        try
-        {
-            Dictionary<string, string> entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-            if (entries == null || !entries.ContainsKey("mclsl_mod_tab")) throw new InvalidDataException("缺少模组入口键");
-            foreach (KeyValuePair<string, string> entry in entries) RegisterKey(entry.Key, entry.Value);
-            _chineseLoaded = true;
-        }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 简体中文目录加载失败: " + ex); }
-    }
-
-    private static string FindChineseCatalog()
-    {
-        try
-        {
-            string gameRoot = Path.GetDirectoryName(Application.dataPath);
-            if (!string.IsNullOrWhiteSpace(gameRoot))
-            {
-                string modsRoot = Path.Combine(gameRoot, "Mods");
-                if (Directory.Exists(modsRoot))
-                {
-                    foreach (string directory in Directory.EnumerateDirectories(modsRoot))
-                    {
-                        string manifest = Path.Combine(directory, "mod.json");
-                        string locale = Path.Combine(directory, "Locales", "ch.json");
-                        if (!File.Exists(manifest) || !File.Exists(locale)) continue;
-                        JObject metadata = JObject.Parse(File.ReadAllText(manifest));
-                        if (!string.Equals((string)metadata["GUID"], "MY_SIMULATED_LONGEVITY_ROAD", StringComparison.Ordinal)) continue;
-                        return File.ReadAllText(locale);
-                    }
-                }
-            }
-            foreach (TextAsset asset in Resources.LoadAll<TextAsset>("locales/ch"))
-            {
-                if (asset?.text != null && asset.text.Contains("\"mclsl_mod_tab\"")) return asset.text;
-            }
-        }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 定位简体中文目录失败: " + ex.Message); }
-        return string.Empty;
+        _chineseLoaded = true;
     }
 
     internal static string RuntimeText(string text) => MclslTextValue.Encode(text);
@@ -92,20 +59,6 @@ internal static class MclslLocalizationBridge
         if (string.IsNullOrWhiteSpace(key)) return;
         string normalized = key.Underscore();
         if (TextByRuntimeKey.ContainsKey(normalized)) key = normalized;
-    }
-
-    internal static bool ShouldSuppressMissingTextLog(object message)
-    {
-        string text = message?.ToString() ?? string.Empty;
-        const string marker = "LocalizedTextManager: missing text:";
-        int index = text.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
-        if (index < 0) return false;
-        string key = text.Substring(index + marker.Length).Trim();
-        if (key.Length == 0) return false;
-        return key.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
-            || key.StartsWith("MCLSL_", StringComparison.Ordinal)
-            || key.StartsWith("trait_Mclsl", StringComparison.OrdinalIgnoreCase)
-            || key.StartsWith("Mclsl", StringComparison.Ordinal);
     }
 
     internal static bool IsRuntimeKey(string value)
@@ -147,12 +100,12 @@ internal static class MclslLocalizationBridge
             LocalizedTextManager.add(key, text, true, string.Empty, true);
             if (TryGetActiveText(key, out string registered) && registered == text)
                 RegisteredKeys.Add(key);
-            else MclslDiagnostics.Error("locale-register", "简体中文键注册后未出现在当前语言表；将使用模组文本兜底。");
+            else MclslDiagnostics.Error("locale-register:" + key, "简体中文键注册后未出现在当前语言表: " + key);
         }
-        catch
+        catch (Exception ex)
         {
             RegisteredKeys.Remove(key);
-            MclslDiagnostics.Error("locale-register", "简体中文键注册失败；将使用模组文本兜底。");
+            MclslDiagnostics.Error("locale-register:" + key, "简体中文键注册失败: " + key + " " + ex);
         }
     }
 

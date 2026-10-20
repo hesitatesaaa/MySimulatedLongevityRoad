@@ -1,5 +1,7 @@
 using System;
 using System.Reflection;
+using System.Reflection.Emit;
+using System.Collections.Generic;
 using HarmonyLib;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
@@ -20,12 +22,22 @@ internal static class MclslPatches
     internal static int ApplySafely(Harmony harmony)
     {
         int count = 0;
-        count += TryPatchPair(harmony, "Debug.LogError", typeof(Debug), nameof(Debug.LogError), new[] { typeof(object) }, prefix: nameof(Debug_LogError_FilterMclslMissingText_Prefix));
-        count += TryPatchPair(harmony, "Debug.LogWarning", typeof(Debug), nameof(Debug.LogWarning), new[] { typeof(object) }, prefix: nameof(Debug_LogWarning_FilterMclslMissingText_Prefix));
+        count += TryPatchPair(harmony, "UnitSelectionEffect.setVisible.custom", typeof(UnitSelectionEffect), "setVisible", new[] { typeof(bool) }, postfix: nameof(UnitSelectionEffect_SetVisible_Custom_Postfix));
+        foreach (string method in new[] { "drawSelectedUnits", "drawUnitsToBeSelectedBySquareTool" })
+            count += MclslHarmonyPatchGuard.TryPatch(harmony, "QuantumSpriteLibrary." + method,
+                AccessTools.Method(typeof(QuantumSpriteLibrary), method, new[] { typeof(QuantumSpriteAsset) }),
+                transpiler: AccessTools.Method(typeof(MclslPatches), nameof(SelectedUnits_Scale_Transpiler))) ? 1 : 0;
+        count += TryPatchPair(harmony, "ActorAsset.getSpriteIcon.custom", typeof(ActorAsset), "getSpriteIcon", Type.EmptyTypes, prefix: nameof(ActorAsset_GetSpriteIcon_Custom_Prefix));
+        count += TryPatchPair(harmony, "DynamicActorSpriteCreatorUI.getUnitSpriteForUI.custom", typeof(DynamicActorSpriteCreatorUI), "getUnitSpriteForUI",
+            new[] { typeof(ActorAsset), typeof(Sprite), typeof(AnimationContainerUnit), typeof(bool), typeof(ActorSex), typeof(int), typeof(int), typeof(ColorAsset), typeof(long), typeof(int), typeof(bool), typeof(bool), typeof(bool), typeof(bool) },
+            prefix: nameof(DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix));
+        count += TryPatchPair(harmony, "UnitAvatarLoader.loadItemSprites.custom", typeof(UnitAvatarLoader), "loadItemSprites", Type.EmptyTypes, prefix: nameof(UnitAvatarLoader_LoadItemSprites_Custom_Prefix));
+        count += TryPatchPair(harmony, "Image.SetNativeSize.custom", typeof(UnityEngine.UI.Image), "SetNativeSize", Type.EmptyTypes, postfix: nameof(Image_SetNativeSize_Custom_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.checkNewSpecies.beast", typeof(ActorManager), "checkNewSpecies", new[] { typeof(ActorAsset), typeof(WorldTile), typeof(Actor), typeof(Actor).MakeByRefType(), typeof(bool), typeof(bool), typeof(Subspecies) }, prefix: nameof(ActorManager_CheckNewSpecies_Beast_Prefix));
         count += TryPatchPair(harmony, "LocalizedTextManager.getText", typeof(LocalizedTextManager), nameof(LocalizedTextManager.getText), new[] { typeof(string), typeof(UnityEngine.UI.Text), typeof(bool) }, prefix: nameof(LocalizedTextManager_GetText_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_GetText_MclslFallback_Postfix));
         count += TryPatchPair(harmony, "LocalizedTextManager.stringExists", typeof(LocalizedTextManager), nameof(LocalizedTextManager.stringExists), new[] { typeof(string) }, prefix: nameof(LocalizedTextManager_StringExists_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_StringExists_MclslFallback_Postfix));
         count += TryPatchPair(harmony, "LocalizedTextManager.setLanguage", typeof(LocalizedTextManager), nameof(LocalizedTextManager.setLanguage), new[] { typeof(string) }, postfix: nameof(LocalizedTextManager_SetLanguage_RestoreMclslChinese_Postfix));
-        count += TryPatchPair(harmony, "Subspecies.generateName", typeof(Subspecies), "generateName", Type.EmptyTypes, postfix: nameof(Subspecies_GenerateName_WorldSoul_Postfix));
+        count += TryPatchPair(harmony, "Subspecies.generateName", typeof(Subspecies), "generateName", new[] { typeof(ActorAsset), typeof(WorldTile) }, postfix: nameof(Subspecies_GenerateName_WorldSoul_Postfix));
         count += TryPatchPair(harmony, "Subspecies.getUnitSpriteForBanner", typeof(Subspecies), "getUnitSpriteForBanner", Type.EmptyTypes, prefix: nameof(Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix));
         MethodInfo simulation = AccessTools.Method(typeof(MapBox), "updateSimulation", new[] { typeof(float) });
         bool protectedSimulation = MclslHarmonyPatchGuard.TryPatch(harmony, "MapBox.updateSimulation(float)", simulation,
@@ -114,20 +126,6 @@ internal static class MclslPatches
         return MclslHarmonyPatchGuard.TryPatch(harmony, key, original, prefixMethod, postfixMethod, finalizerMethod) ? 1 : 0;
     }
 
-    [HarmonyPrefix]
-    [HarmonyPatch(typeof(Debug), nameof(Debug.LogError), new Type[] { typeof(object) })]
-    private static bool Debug_LogError_FilterMclslMissingText_Prefix(object __0)
-    {
-        return !MclslLocalizationBridge.ShouldSuppressMissingTextLog(__0);
-    }
-
-    [HarmonyPrefix]
-    [HarmonyPatch(typeof(Debug), nameof(Debug.LogWarning), new Type[] { typeof(object) })]
-    private static bool Debug_LogWarning_FilterMclslMissingText_Prefix(object __0)
-    {
-        return !MclslLocalizationBridge.ShouldSuppressMissingTextLog(__0);
-    }
-
     private static bool LocalizedTextManager_GetText_NormalizeMclslKey_Prefix(ref string __0, ref string __result)
     {
         if (MclslTextValue.TryDecode(__0, out string inlineText)) { __result = inlineText; return false; }
@@ -167,6 +165,7 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(Subspecies), "generateName")]
     private static void Subspecies_GenerateName_WorldSoul_Postfix(Subspecies __instance)
     {
+        MclslActorPresentation.NormalizeSubspecies(__instance);
         MclslWorldSoulActorRegistration.NormalizeSubspecies(__instance);
     }
 
@@ -174,6 +173,9 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(Subspecies), "getUnitSpriteForBanner")]
     private static bool Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix(Subspecies __instance, ref UnityEngine.Sprite __result)
     {
+        MclslActorPresentation.NormalizeSubspecies(__instance);
+        __result = MclslActorPresentation.Portrait(__instance?.data?.species_id);
+        if (__result != null) return false;
         __result = MclslImmortalActorRegistration.TryGetBannerSprite(__instance);
         if (__result != null) return false;
         if (!MclslWorldSoulActorRegistration.IsWorldSoulSubspecies(__instance)) return true;
@@ -513,6 +515,73 @@ internal static class MclslPatches
         return false;
     }
 
+    private static void ActorManager_CheckNewSpecies_Beast_Prefix(ref ActorAsset __0)
+    {
+        string speciesId = MclslActorPresentation.CanonicalSpeciesId(__0?.id);
+        if (__0 == null || __0.id == speciesId) return;
+        // Generate the shared lineage directly, avoiding an orphan humanoid
+        // subspecies for every manual humanoid placement.
+        __0 = AssetManager.actor_library.get(speciesId) ?? __0;
+    }
+
+    private static void UnitSelectionEffect_SetVisible_Custom_Postfix(UnitSelectionEffect __instance, bool __0)
+    {
+        Actor actor = UnitSelectionEffect.last_actor;
+        if (!__0 || MclslActorPresentation.Portrait(actor?.asset?.id) == null) return;
+        // Native setVisible already supplies the ground position and visibility.
+        // Only detach its scale from the enlarged whole-body sprite.
+        float scale = MclslActorPresentation.SelectionScale(actor);
+        __instance.transform.localScale = new Vector3(scale, scale, 1f);
+    }
+
+    private static IEnumerable<CodeInstruction> SelectedUnits_Scale_Transpiler(IEnumerable<CodeInstruction> instructions)
+    {
+        var codes = new List<CodeInstruction>(instructions);
+        FieldInfo scale = AccessTools.Field(typeof(BaseSimObject), "current_scale");
+        FieldInfo y = AccessTools.Field(typeof(Vector3), "y");
+        int replaced = 0;
+        for (int i = 0; i + 1 < codes.Count; i++)
+        {
+            if (codes[i].opcode != OpCodes.Ldflda || !Equals(codes[i].operand, scale)
+                || !codes[i + 1].LoadsField(y)) continue;
+            codes[i].opcode = OpCodes.Call;
+            codes[i].operand = AccessTools.Method(typeof(MclslActorPresentation), nameof(MclslActorPresentation.SelectionScale));
+            codes[i + 1].opcode = OpCodes.Nop;
+            codes[i + 1].operand = null;
+            replaced++;
+        }
+        if (replaced != 1) throw new InvalidOperationException("原版选中标记缩放入口不匹配：" + replaced);
+        return codes;
+    }
+
+    private static bool ActorAsset_GetSpriteIcon_Custom_Prefix(ActorAsset __instance, ref Sprite __result)
+    {
+        __result = MclslActorPresentation.Portrait(__instance.id);
+        return __result == null;
+    }
+
+    private static bool DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix(ActorAsset __0, ref Sprite __result)
+    {
+        __result = MclslActorPresentation.Portrait(__0?.id);
+        return __result == null;
+    }
+
+    private static bool UnitAvatarLoader_LoadItemSprites_Custom_Prefix(UnitAvatarLoader __instance)
+    {
+        if (MclslActorPresentation.Portrait(__instance.getData()?.asset?.id) == null) return true;
+        __instance._show_item = false;
+        return false;
+    }
+
+    private static void Image_SetNativeSize_Custom_Postfix(UnityEngine.UI.Image __instance)
+    {
+        Sprite sprite = __instance.sprite;
+        if (sprite == null || !sprite.name.StartsWith("mclsl_ui_", StringComparison.Ordinal)) return;
+        float scale = 24f / Math.Max(sprite.rect.width, sprite.rect.height);
+        __instance.rectTransform.sizeDelta = sprite.rect.size * scale;
+        __instance.preserveAspect = true;
+    }
+
     private static void Actor_IsSapient_Beast_Postfix(Actor __instance, ref bool __result)
     {
         if (MclslBeastActorRegistration.IsBeast(__instance))
@@ -530,7 +599,9 @@ internal static class MclslPatches
 
     private static void ActorManager_CreateBabyActorFromData_Beast_Postfix(Actor __result)
     {
-        if (__result?.data == null || !MclslBeastActorRegistration.IsBeast(__result)) return;
+        if (__result?.data == null) return;
+        MclslActorPresentation.ReconcileLineage(__result);
+        if (!MclslBeastActorRegistration.IsBeast(__result)) return;
         MclslBeastActorRegistration.ReconcileForm(__result);
         MclslBeastActorRegistration.EnsureCultivationSeed(__result);
     }

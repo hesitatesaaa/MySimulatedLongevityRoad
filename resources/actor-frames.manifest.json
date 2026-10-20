@@ -1179,9 +1179,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -2260,9 +2260,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.27515447,
+        "renderScale": 2.55030894,
         "reference": "western-tier-3-median",
-        "targetVisibleWorldHeight": 3.9211,
+        "targetVisibleWorldHeight": 7.8422,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -2783,9 +2783,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -3558,9 +3558,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.27515447,
+        "renderScale": 2.55030894,
         "reference": "western-tier-3-median",
-        "targetVisibleWorldHeight": 3.9211,
+        "targetVisibleWorldHeight": 7.8422,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -4081,9 +4081,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -5271,9 +5271,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -6516,9 +6516,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -7039,9 +7039,9 @@
         }
       },
       "calibration": {
-        "renderScale": 0.92848276,
+        "renderScale": 0.812422415,
         "reference": "western-tier-4-median",
-        "targetVisibleWorldHeight": 5.3852,
+        "targetVisibleWorldHeight": 4.7120500000000005,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -7562,9 +7562,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -8085,9 +8085,9 @@
         }
       },
       "calibration": {
-        "renderScale": 0.92848276,
+        "renderScale": 0.812422415,
         "reference": "western-tier-4-median",
-        "targetVisibleWorldHeight": 5.3852,
+        "targetVisibleWorldHeight": 4.7120500000000005,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -8608,9 +8608,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -9690,9 +9690,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -9714,7 +9714,7 @@
         160.12759170653905,
         291.67464114832535
       ],
-      "pixelsPerUnit": 40.51724137931034,
+      "pixelsPerUnit": 33.62068965517241,
       "approved": true,
       "anchorReviewed": true,
       "actions": {
@@ -9724,8 +9724,8 @@
             {
               "name": "idle_0",
               "durationMs": 233.33333333333334,
-              "sha256": "5d34550c09c54b3598375f008b32b7f1eb14fb7b3405c8dc15044f215995bfd5",
-              "origin": "independently-redrawn",
+              "sha256": "f5e9c47ed5112c2116e34c93b4655f63d21ea4419d4d5c79c4f3a9e78dd9515c",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_0.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9737,13 +9737,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "idle_1",
               "durationMs": 233.33333333333334,
-              "sha256": "2c00c0dd6fcac5d86466ee5a753e95a34c10f961ead0f4565f351b6beb2f331e",
-              "origin": "independently-redrawn",
+              "sha256": "00eccc202959dfc6eea375f0479393ac24846cfcda8daec98633db3f92591f02",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_1.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9755,13 +9755,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "idle_2",
               "durationMs": 233.33333333333334,
-              "sha256": "01ad9105f2e074a8ab558e5a19695a4c9010fc7939f95f8c6aa4fe0c56f300f5",
-              "origin": "independently-redrawn",
+              "sha256": "417f9eef538e6d0cf9aa29d92d7d58f61ede220950b6b66dc44664b8b0b028ee",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_2.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9773,13 +9773,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "idle_3",
               "durationMs": 233.33333333333334,
-              "sha256": "da342d89796ae82e1a0d6e2cdd9fbc9854a756ca3d7ebd7226fba3c3e0086ef0",
-              "origin": "independently-redrawn",
+              "sha256": "31a16191dcea6f1cdd8c66c4f66cd5fd83d3c786be00c86c52c147b4494de6cc",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_3.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9791,13 +9791,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "idle_4",
               "durationMs": 233.33333333333334,
-              "sha256": "70ad8e7cbf3cc5d679132f39519b9c7b973c75be97ebe6e421044752666cab02",
-              "origin": "independently-redrawn",
+              "sha256": "369df00cbb5eddb610705cb80f8584595e81b81930fb3143446243ae9bddf1d5",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_4.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9809,13 +9809,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "idle_5",
               "durationMs": 233.33333333333334,
-              "sha256": "34a01b28132aad818d96014ee6230a11fd2386ad4356174fa1d9da9a28f31574",
-              "origin": "independently-redrawn",
+              "sha256": "555c134b869e6c5e8d684a91d1444cb22b302e27a89cdfa7f7c267eee8269285",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_5.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9827,7 +9827,7 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             }
           ]
         },
@@ -9837,8 +9837,8 @@
             {
               "name": "walk_0",
               "durationMs": 135.0,
-              "sha256": "62ba98ff4e5048a6d5fb0175b6fca62b9442d3e6204222eb61d1212b9fe69944",
-              "origin": "independently-redrawn",
+              "sha256": "8b9f71a908c6bb282c67aed17a71521f742a444bef5dc2d06bed2dc9419ba2b3",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_0.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9850,13 +9850,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_1",
               "durationMs": 135.0,
-              "sha256": "c4e8d9424bdafe4444dd34fc31df89309761b75e3696aeea28f6c06c9f0da6a4",
-              "origin": "independently-redrawn",
+              "sha256": "acf06bea637b8656b803a7f409a24297c7dd4370a9778edb2e5d5f09dfe4b5d8",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_1.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9868,13 +9868,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_2",
               "durationMs": 135.0,
-              "sha256": "8515b174581fdea89417f1b6dc60248e13a537f1bf682944ec2d3dff9b9f6a5f",
-              "origin": "independently-redrawn",
+              "sha256": "078e729ad03c3aa1e1f1dc6b43ab99ea4a947f8d0fb004ef612703bedd4ccfd9",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_2.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9886,13 +9886,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_3",
               "durationMs": 135.0,
-              "sha256": "47016f9207ac13af87e5c3634b5b2fdf21fca53d99152e4472fc9591ca7a0d7b",
-              "origin": "independently-redrawn",
+              "sha256": "9b5bb4260bee4f298e9e4c2d3a3467930edd645ad39632d204eab11d4a2059bb",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_3.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9904,13 +9904,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_4",
               "durationMs": 135.0,
-              "sha256": "2ba6436c9fe815bb99ab5bec3971c6ca71771891faf90d3adc2decefe26313e5",
-              "origin": "independently-redrawn",
+              "sha256": "2809316b965221e4618772be980f597a3320af3346e35ec6d7c3d6c9af5d2826",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_4.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9922,13 +9922,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_5",
               "durationMs": 135.0,
-              "sha256": "9b93bb9b03f0d72441631634f72b843ce4a519284f57e5369fb3128d9c674843",
-              "origin": "independently-redrawn",
+              "sha256": "8ed21bd17fe05e7e3923b3dfbfab90ec02fde5b6a5dd20ca537df29a10be5d20",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_5.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9940,13 +9940,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_6",
               "durationMs": 135.0,
-              "sha256": "951f291e14a34ee575c8606b1392451f1de93aef14bb4b8eea25f60eea2dcf1c",
-              "origin": "independently-redrawn",
+              "sha256": "a341b12e81471d95a692418a9c3f3bfdc0cdc51a9164c38adfecac933fef1c43",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_6.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9958,13 +9958,13 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             },
             {
               "name": "walk_7",
               "durationMs": 135.0,
-              "sha256": "f013a1de1b31a63a80ea21a008d3deb78c4687ee5c4885aad50c959662cf356a",
-              "origin": "independently-redrawn",
+              "sha256": "2fce1b0f383246df85ca00864a987925b6b88d7b8a4c6a44c37534c09240b8ab",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_7.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -9976,7 +9976,7 @@
                 160.12759170653905,
                 291.67464114832535
               ],
-              "pixelsPerUnit": 40.51724137931034
+              "pixelsPerUnit": 33.62068965517241
             }
           ]
         },
@@ -10362,7 +10362,7 @@
         "targetVisibleWorldHeight": 5.3852,
         "verifiedInGame": false,
         "previewScaleApproved": true,
-        "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
+        "measurementStatus": "render-ratio-and-redrawn-birds-awaiting-Unity",
         "measurementEvidence": "resources/actor-size-policy.json"
       },
       "nativeResourcePath": "actors/Beasts/fenghuang/Beast",
@@ -10880,9 +10880,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -10904,7 +10904,7 @@
         80.63795853269536,
         149.66507177033492
       ],
-      "pixelsPerUnit": 55.65610859728507,
+      "pixelsPerUnit": 37.10407239819004,
       "approved": true,
       "anchorReviewed": true,
       "actions": {
@@ -10914,8 +10914,8 @@
             {
               "name": "idle_0",
               "durationMs": 233.33333333333334,
-              "sha256": "862ac5c33e1a4d06990c07e3fcff72d191dd819d1099d4d417d5ff7c65394a92",
-              "origin": "independently-redrawn",
+              "sha256": "68197fbb02a30cf7f1db84d9ba18a45fa220cdfacfb016183a249394785410db",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_0.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -10927,13 +10927,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "idle_1",
               "durationMs": 233.33333333333334,
-              "sha256": "4d95e8101428ca9459c0b8a024b6d560c5802fe58a7397b696f831b4b949f8e7",
-              "origin": "independently-redrawn",
+              "sha256": "f7e26d40923963dd9f22fe257a222ea907f54e1c91fe7e36b3794be7a1572b33",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_1.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -10945,13 +10945,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "idle_2",
               "durationMs": 233.33333333333334,
-              "sha256": "dc28833f67423396649b2a06772d010a0e213891f1ff76c52cd0450e5bf53f14",
-              "origin": "independently-redrawn",
+              "sha256": "86db6297f228531311563f459eb26e87937a447f6b4b4475b4c8f28f4c40edf2",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_2.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -10963,13 +10963,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "idle_3",
               "durationMs": 233.33333333333334,
-              "sha256": "c96671825c519bce6efcd8084f3db0fc01095ba8e6cec9a34e4b70bd983028f8",
-              "origin": "independently-redrawn",
+              "sha256": "d6e518ec40b13cab4e21f29bde7ba9696d3a8943ae9e7186180efe393376a25c",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_3.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -10981,13 +10981,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "idle_4",
               "durationMs": 233.33333333333334,
-              "sha256": "0ff50a0d831ca0d4ec30edb218aadb961e4b8a70e04389d9301ba96795edc700",
-              "origin": "independently-redrawn",
+              "sha256": "ea087c02a9b61e1de41be6f91305cfb49f37dd935111f362aa023397dbcc31bf",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_4.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -10999,13 +10999,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "idle_5",
               "durationMs": 233.33333333333334,
-              "sha256": "c7229cca97c3b03bd822cda303946e8fece12893073eee0190d89864a40a6c1e",
-              "origin": "independently-redrawn",
+              "sha256": "396696e50e9585a6c4b83f497948693af23c9c9cd7212d141f3465a621511fb6",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_5.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11017,7 +11017,7 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             }
           ]
         },
@@ -11027,8 +11027,8 @@
             {
               "name": "walk_0",
               "durationMs": 135.0,
-              "sha256": "bd59f9060454485f4199522926cc5919073c6fd0ed899204ba6a321b2ae8e6d2",
-              "origin": "independently-redrawn",
+              "sha256": "4b9010dc7a4b62070e0500ab1c1a2f09f3305586124b5e2228a58c9575765101",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_0.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11040,13 +11040,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_1",
               "durationMs": 135.0,
-              "sha256": "856855a6464b9b6f0165f26448128f35cf2fc7bed36e72f878b8fff755d4ec84",
-              "origin": "independently-redrawn",
+              "sha256": "2bc8c33ce3bee3bb39322906946f4686d968b20870ebc429c1cbf92e7c0c3bbd",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_1.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11058,13 +11058,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_2",
               "durationMs": 135.0,
-              "sha256": "63796a4a0f4aef21d9fbf5849fe59bb0f0b80c9418b563c62d53630c9c2f4b24",
-              "origin": "independently-redrawn",
+              "sha256": "302243c51032248c56ec77780f41f6737c6376ec90c174d39edaa5e48625324a",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_2.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11076,13 +11076,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_3",
               "durationMs": 135.0,
-              "sha256": "5658af22199f3d286d98db8690f5eb616723c3d9a29cb84c3ad6031d6f4e9727",
-              "origin": "independently-redrawn",
+              "sha256": "9425a7c6c0277bca6d782213dc76fb205d678b28c8f68cc3a58ca17c3be9b17d",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_3.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11094,13 +11094,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_4",
               "durationMs": 135.0,
-              "sha256": "3872307d75628dae8aba8d009c4312849053206497d2cb52553eaa30fbd86214",
-              "origin": "independently-redrawn",
+              "sha256": "771c698fcb72b5dd46ec2944d7099d2f9c291f6cc525dd1a2b7414b487a8622c",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_4.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11112,13 +11112,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_5",
               "durationMs": 135.0,
-              "sha256": "796b225a0dd4c647d87d310b71ef975aae2182cb809fb74ced301ac43cb91511",
-              "origin": "independently-redrawn",
+              "sha256": "eb15f2e1c6865b1ee63416467bd251eddcbdbd49fb25b38dd67e020ad335f5c2",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_5.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11130,13 +11130,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_6",
               "durationMs": 135.0,
-              "sha256": "1764d5d288f038acea3ac42b2deac74d2527cf7c06f21817a07eb37fc276725e",
-              "origin": "independently-redrawn",
+              "sha256": "accdd0cbe9e7b734d8967a45da35dbadfce8821b871662e23ef3ff3ff6fefa55",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_6.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11148,13 +11148,13 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             },
             {
               "name": "walk_7",
               "durationMs": 135.0,
-              "sha256": "3b770d05251a8b689eaefbc06b6e8a66c55ffe607dd79ea5ac09d45b4453db54",
-              "origin": "independently-redrawn",
+              "sha256": "8067cd41031a45f3c809e5a8a3d16c987a30fc0e6f353b855db4929f14ebec8f",
+              "origin": "reference-redrawn-sheet-cell",
               "provenance": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_7.json",
               "geometryConfigured": true,
               "anchorReviewed": true,
@@ -11166,7 +11166,7 @@
                 80.63795853269536,
                 149.66507177033492
               ],
-              "pixelsPerUnit": 55.65610859728507
+              "pixelsPerUnit": 37.10407239819004
             }
           ]
         },
@@ -11552,7 +11552,7 @@
         "targetVisibleWorldHeight": 3.3242,
         "verifiedInGame": false,
         "previewScaleApproved": true,
-        "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
+        "measurementStatus": "render-ratio-and-redrawn-birds-awaiting-Unity",
         "measurementEvidence": "resources/actor-size-policy.json"
       },
       "nativeResourcePath": "actors/Beasts/dafeng/Beast",
@@ -11892,9 +11892,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -12690,9 +12690,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -13488,9 +13488,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -14860,9 +14860,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -15550,9 +15550,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -16240,9 +16240,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -16930,9 +16930,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -17275,9 +17275,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.76775,
+        "renderScale": 0.883875,
         "reference": "western-tier-1-median",
-        "targetVisibleWorldHeight": 2.8284,
+        "targetVisibleWorldHeight": 1.4142,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -17620,9 +17620,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -18310,9 +18310,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -19000,9 +19000,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -19976,9 +19976,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -20357,9 +20357,9 @@
         }
       },
       "calibration": {
-        "renderScale": 0.56723295,
+        "renderScale": 0.37815529999999997,
         "reference": "western-tier-5-median",
-        "targetVisibleWorldHeight": 8.8148,
+        "targetVisibleWorldHeight": 5.876533333333333,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -20702,9 +20702,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -21047,9 +21047,9 @@
         }
       },
       "calibration": {
-        "renderScale": 0.61168732,
+        "renderScale": 0.40779154666666667,
         "reference": "PrimordialFrostDragon",
-        "targetVisibleWorldHeight": 8.1741,
+        "targetVisibleWorldHeight": 5.449399999999999,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -21392,9 +21392,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -21737,9 +21737,9 @@
         }
       },
       "calibration": {
-        "renderScale": 0.54710848,
+        "renderScale": 0.36473898666666665,
         "reference": "PrimordialFrostDragon",
-        "targetVisibleWorldHeight": 9.1389,
+        "targetVisibleWorldHeight": 6.092599999999999,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -22082,9 +22082,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -22916,9 +22916,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -23727,9 +23727,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -24072,9 +24072,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -24417,9 +24417,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -24762,9 +24762,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -25107,9 +25107,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -25452,9 +25452,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -25797,9 +25797,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -26142,9 +26142,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -26487,9 +26487,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -26832,9 +26832,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -27177,9 +27177,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -27522,9 +27522,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -27867,9 +27867,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -28212,9 +28212,9 @@
         }
       },
       "calibration": {
-        "renderScale": 1.488372093023,
+        "renderScale": 1.599999999999725,
         "reference": "SpiritTraveler",
-        "targetVisibleWorldHeight": 3.2,
+        "targetVisibleWorldHeight": 3.44,
         "verifiedInGame": false,
         "previewScaleApproved": true,
         "measurementStatus": "user-requested-display-scale-adjustment; not-retested-in-game",
@@ -28229,7 +28229,7 @@
   "icons": [
     {
       "actorId": "mclsl_beast_kunpeng",
-      "name": "鲲鹏",
+      "name": "\u9cb2\u9e4f",
       "formPath": "actors/Beasts/kunpeng/Beast",
       "canvas": [
         128,
@@ -28245,7 +28245,7 @@
     },
     {
       "actorId": "mclsl_beast_qinglong",
-      "name": "青龙",
+      "name": "\u9752\u9f99",
       "formPath": "actors/Beasts/qinglong/Beast",
       "canvas": [
         128,
@@ -28261,7 +28261,7 @@
     },
     {
       "actorId": "mclsl_beast_huanglong",
-      "name": "黄龙",
+      "name": "\u9ec4\u9f99",
       "formPath": "actors/Beasts/huanglong/Beast",
       "canvas": [
         128,
@@ -28277,7 +28277,7 @@
     },
     {
       "actorId": "mclsl_beast_zhuque",
-      "name": "朱雀",
+      "name": "\u6731\u96c0",
       "formPath": "actors/Beasts/zhuque/Beast",
       "canvas": [
         128,
@@ -28293,7 +28293,7 @@
     },
     {
       "actorId": "mclsl_beast_baihu",
-      "name": "白虎",
+      "name": "\u767d\u864e",
       "formPath": "actors/Beasts/baihu/Beast",
       "canvas": [
         128,
@@ -28309,7 +28309,7 @@
     },
     {
       "actorId": "mclsl_beast_qilin",
-      "name": "麒麟",
+      "name": "\u9e92\u9e9f",
       "formPath": "actors/Beasts/qilin/Beast",
       "canvas": [
         128,
@@ -28325,7 +28325,7 @@
     },
     {
       "actorId": "mclsl_beast_moqilin",
-      "name": "墨麒麟",
+      "name": "\u58a8\u9e92\u9e9f",
       "formPath": "actors/Beasts/moqilin/Beast",
       "canvas": [
         1254,
@@ -28342,7 +28342,7 @@
     },
     {
       "actorId": "mclsl_beast_xuanwu",
-      "name": "玄武",
+      "name": "\u7384\u6b66",
       "formPath": "actors/Beasts/xuanwu/Beast",
       "canvas": [
         1254,
@@ -28359,7 +28359,7 @@
     },
     {
       "actorId": "mclsl_beast_fenghuang",
-      "name": "凤凰",
+      "name": "\u51e4\u51f0",
       "formPath": "actors/Beasts/fenghuang/Beast",
       "canvas": [
         1254,
@@ -28376,7 +28376,7 @@
     },
     {
       "actorId": "mclsl_beast_dafeng",
-      "name": "大风",
+      "name": "\u5927\u98ce",
       "formPath": "actors/Beasts/dafeng/Beast",
       "canvas": [
         1254,
@@ -28393,7 +28393,7 @@
     },
     {
       "actorId": "mclsl_beast_manman",
-      "name": "蛮蛮",
+      "name": "\u86ee\u86ee",
       "formPath": "actors/Beasts/manman/Beast",
       "canvas": [
         1254,
@@ -28410,7 +28410,7 @@
     },
     {
       "actorId": "mclsl_beast_xuanniao",
-      "name": "玄鸟",
+      "name": "\u7384\u9e1f",
       "formPath": "actors/Beasts/xuanniao/Beast",
       "canvas": [
         1254,
@@ -28427,7 +28427,7 @@
     },
     {
       "actorId": "mclsl_beast_qingluan",
-      "name": "青鸾",
+      "name": "\u9752\u9e3e",
       "formPath": "actors/Beasts/qingluan/Beast",
       "canvas": [
         128,
@@ -28443,7 +28443,7 @@
     },
     {
       "actorId": "mclsl_beast_changliao",
-      "name": "长獠凶犬",
+      "name": "\u957f\u7360\u51f6\u72ac",
       "formPath": "actors/Beasts/changliao/Beast",
       "canvas": [
         1254,
@@ -28460,7 +28460,7 @@
     },
     {
       "actorId": "mclsl_beast_mo",
-      "name": "貘",
+      "name": "\u8c98",
       "formPath": "actors/Beasts/mo/Beast",
       "canvas": [
         1254,
@@ -28477,7 +28477,7 @@
     },
     {
       "actorId": "mclsl_beast_hongmao",
-      "name": "红毛异兽",
+      "name": "\u7ea2\u6bdb\u5f02\u517d",
       "formPath": "actors/Beasts/hongmao/Beast",
       "canvas": [
         1254,
@@ -28494,7 +28494,7 @@
     },
     {
       "actorId": "mclsl_beast_feiqiu",
-      "name": "飞球兽",
+      "name": "\u98de\u7403\u517d",
       "formPath": "actors/Beasts/feiqiu/Beast",
       "canvas": [
         1254,
@@ -28511,7 +28511,7 @@
     },
     {
       "actorId": "mclsl_beast_yingying",
-      "name": "阴影兽",
+      "name": "\u9634\u5f71\u517d",
       "formPath": "actors/Beasts/yingying/Beast",
       "canvas": [
         1254,
@@ -28528,7 +28528,7 @@
     },
     {
       "actorId": "mclsl_beast_goushou",
-      "name": "狗首妖兽",
+      "name": "\u72d7\u9996\u5996\u517d",
       "formPath": "actors/Beasts/goushou/Beast",
       "canvas": [
         1254,
@@ -28545,7 +28545,7 @@
     },
     {
       "actorId": "mclsl_beast_liejiejing",
-      "name": "裂解鲸",
+      "name": "\u88c2\u89e3\u9cb8",
       "formPath": "actors/Beasts/liejiejing/Beast",
       "canvas": [
         128,
@@ -28561,7 +28561,7 @@
     },
     {
       "actorId": "mclsl_beast_tianshou",
-      "name": "兲兽",
+      "name": "\u5172\u517d",
       "formPath": "actors/Beasts/tianshou/Beast",
       "canvas": [
         1254,
@@ -28578,7 +28578,7 @@
     },
     {
       "actorId": "mclsl_named_diyi",
-      "name": "帝一",
+      "name": "\u5e1d\u4e00",
       "formPath": "actors/Named/DiYi/Beast",
       "canvas": [
         1254,
@@ -28595,7 +28595,7 @@
     },
     {
       "actorId": "mclsl_named_disanmo",
-      "name": "帝叁貘",
+      "name": "\u5e1d\u53c1\u8c98",
       "formPath": "actors/Named/DiSanMo/Beast",
       "canvas": [
         1254,
@@ -28612,7 +28612,7 @@
     },
     {
       "actorId": "mclsl_named_qingshenlong",
-      "name": "青神龙",
+      "name": "\u9752\u795e\u9f99",
       "formPath": "actors/Named/QingShenLong/Beast",
       "canvas": [
         1254,
@@ -28629,7 +28629,7 @@
     },
     {
       "actorId": "mclsl_named_lifan",
-      "name": "李凡",
+      "name": "\u674e\u51e1",
       "formPath": "actors/Named/LiFan",
       "canvas": [
         128,
@@ -28645,7 +28645,7 @@
     },
     {
       "actorId": "mclsl_named_tianyi",
-      "name": "天医",
+      "name": "\u5929\u533b",
       "formPath": "actors/Named/TianYi",
       "canvas": [
         1254,
@@ -28662,7 +28662,7 @@
     },
     {
       "actorId": "mclsl_named_moruibin",
-      "name": "墨儒斌",
+      "name": "\u58a8\u5112\u658c",
       "formPath": "actors/Named/MoRuBin",
       "canvas": [
         1254,
@@ -28679,7 +28679,7 @@
     },
     {
       "actorId": "mclsl_named_xuantianwang",
-      "name": "玄天王",
+      "name": "\u7384\u5929\u738b",
       "formPath": "actors/Named/XuanTianWang",
       "canvas": [
         1254,
@@ -28696,7 +28696,7 @@
     },
     {
       "actorId": "mclsl_named_xuke",
-      "name": "许克",
+      "name": "\u8bb8\u514b",
       "formPath": "actors/Named/XuKe",
       "canvas": [
         1254,
@@ -28713,7 +28713,7 @@
     },
     {
       "actorId": "mclsl_named_yefeipeng",
-      "name": "叶飞鹏",
+      "name": "\u53f6\u98de\u9e4f",
       "formPath": "actors/Named/YeFeiPeng",
       "canvas": [
         1254,
@@ -28730,7 +28730,7 @@
     },
     {
       "actorId": "mclsl_named_xiaoheng",
-      "name": "萧恒",
+      "name": "\u8427\u6052",
       "formPath": "actors/Named/XiaoHeng",
       "canvas": [
         1254,
@@ -28747,7 +28747,7 @@
     },
     {
       "actorId": "mclsl_named_xubai",
-      "name": "许白",
+      "name": "\u8bb8\u767d",
       "formPath": "actors/Named/XuBai",
       "canvas": [
         1254,
@@ -28764,7 +28764,7 @@
     },
     {
       "actorId": "mclsl_named_liping",
-      "name": "李平",
+      "name": "\u674e\u5e73",
       "formPath": "actors/Named/LiPing",
       "canvas": [
         1254,
@@ -28781,7 +28781,7 @@
     },
     {
       "actorId": "mclsl_named_shanfan",
-      "name": "善凡",
+      "name": "\u5584\u51e1",
       "formPath": "actors/Named/ShanFan",
       "canvas": [
         1254,
@@ -28798,7 +28798,7 @@
     },
     {
       "actorId": "mclsl_named_zhangfan",
-      "name": "张凡",
+      "name": "\u5f20\u51e1",
       "formPath": "actors/Named/ZhangFan",
       "canvas": [
         1254,
@@ -28815,7 +28815,7 @@
     },
     {
       "actorId": "mclsl_named_zhenshen",
-      "name": "真神",
+      "name": "\u771f\u795e",
       "formPath": "actors/Named/ZhenShen",
       "canvas": [
         1254,
@@ -28832,7 +28832,7 @@
     },
     {
       "actorId": "mclsl_bai_xiansheng",
-      "name": "白先生",
+      "name": "\u767d\u5148\u751f",
       "formPath": "actors/Immortals/Bai",
       "canvas": [
         1254,
@@ -28849,7 +28849,7 @@
     },
     {
       "actorId": "mclsl_chuanfa_tianzun",
-      "name": "传法天尊",
+      "name": "\u4f20\u6cd5\u5929\u5c0a",
       "formPath": "actors/Immortals/Chuanfa",
       "canvas": [
         1254,

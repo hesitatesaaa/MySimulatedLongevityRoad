@@ -417,6 +417,11 @@ internal static class MclslPerformanceProbe
             Buffer.Append((_frameAllocationTotal / _allocationFrameCount).ToString())
                 .Append('/').Append(_frameAllocationPeak).Append(" B/帧");
         else Buffer.Append("不可用");
+        Buffer.Append("\n贴图常驻 ").Append(TextureMemoryMegabytes()).Append(" MB / 显卡报告 ")
+            .Append(SafeGraphicsMemoryMegabytes()).Append(" MB；原生帧缓存/预算 ")
+            .Append(Megabytes(MclslNativeActorFrames.ResidentBytes)).Append('/')
+            .Append(Megabytes(MclslNativeActorFrames.NativeBudgetBytes)).Append(" MB；待加载帧 ")
+            .Append(MclslNativeActorFrames.PendingFrameCount);
         Buffer.Append("\n原生速度档位 ").Append(Config.time_scale_asset?.id ?? "未设置")
             .Append("；multiplier/ticks/sonic ").Append(Config.time_scale_asset?.multiplier ?? 0).Append('/')
             .Append(Config.time_scale_asset?.ticks ?? 0).Append('/').Append(Config.time_scale_asset?.sonic ?? false)
@@ -551,6 +556,21 @@ internal static class MclslPerformanceProbe
         }
         if (worst.Count == 0) Buffer.Append("暂无帧样本\n");
     }
+
+    private static long TextureMemoryMegabytes()
+    {
+        // Unity 2019.2+ reports live texture memory; older targets return 0.
+        try { return (long)Texture.currentTextureMemory / (1024L * 1024L); }
+        catch { return -1L; }
+    }
+
+    private static int SafeGraphicsMemoryMegabytes()
+    {
+        try { return SystemInfo.graphicsMemorySize; }
+        catch { return -1; }
+    }
+
+    private static long Megabytes(long bytes) => bytes / (1024L * 1024L);
 
     private static double FrameMillisecondsAverage() => _validFrameSamples <= 0
         ? 0d

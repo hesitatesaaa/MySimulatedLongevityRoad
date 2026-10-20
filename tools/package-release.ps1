@@ -16,9 +16,9 @@ if (Test-Path -LiteralPath $outputFullPath) { throw 'Package output already exis
 $compilerOutput = $outputFullPath + '-compiler'
 if ($LocalDevelopment) {
     & (Join-Path $PSScriptRoot 'build-release.ps1') -GameRoot $GameRoot -OutputDirectory $compilerOutput -LocalDevelopment -PythonExecutable $PythonExecutable
-    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind developer --local-development
+    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind player --compress-assets --local-development
 } else {
     & (Join-Path $PSScriptRoot 'build-release.ps1') -GameRoot $GameRoot -OutputDirectory $compilerOutput -RequireFinalAssets -PythonExecutable $PythonExecutable
-    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath
+    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind player --compress-assets
 }
 if ($LASTEXITCODE -ne 0) { throw 'Release package checks failed; no verified release is available.' }

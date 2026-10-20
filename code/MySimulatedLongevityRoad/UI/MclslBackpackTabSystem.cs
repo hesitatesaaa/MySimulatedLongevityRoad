@@ -603,14 +603,12 @@ internal sealed class MclslBackpackTabElement : UnitElement
             int xp = MclslSpellProgression.Experience(actor, spell.Id);
             int threshold = MclslSpellProgression.ExperienceThreshold(spell, level);
             string status = learned ? "等级 " + level + "/10" + (threshold > 0 ? "；精进 " + xp + "/" + threshold : "；已臻圆满") : "尚未学会";
-            if(!MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(actor,spell.Id))status+="；异职高阶技能休眠";
             if (target == spell.Id) status += "\n当前参悟：" + MclslSpellProgression.StudyProgress(actor) + "/"
                 + (learned ? threshold : MclslSpellProgression.StudyThreshold(spell));
             else status += "\n点击此法术，将其设为参悟目标。";
             AddIcon(_spells, spell.IconPath, spell.Name,
                 MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + status + "\n" + spell.Description
-                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒\n"
-                + MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.AcquisitionDescription(spell.Id),
+                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒",
                 () => { MclslSpellProgression.SetStudyTarget(actor, spell.Id); Refresh(force: true); });
             shown++;
         }

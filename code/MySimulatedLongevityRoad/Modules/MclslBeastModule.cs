@@ -1,7 +1,6 @@
 using MySimulatedLongevityRoad.Systems;
 using HarmonyLib;
 using System.Linq;
-using MySimulatedLongevityRoad.Systems.Combat;
 
 namespace MySimulatedLongevityRoad.Modules;
 
@@ -11,7 +10,6 @@ internal sealed class MclslBeastModule : MclslModuleBase
     internal override int Order=>65;
     internal override void Init()
     {
-        MclslSpellSystem.RegisterStatuses();
         // Publicized native overloads differ between game builds. Patch only
         // instance tile setters; the yearly audit remains the recovery path.
         var harmony=new Harmony("mclsl.beast.habitat");
@@ -36,8 +34,8 @@ internal sealed class MclslBeastModule : MclslModuleBase
         float gained=actor.getHealth()-before,bonus=MclslBeastItemEffects.ArtifactBonus(actor,"health_regen");
         if(gained>0 && bonus>0)actor.restoreHealth((int)System.Math.Round(gained*bonus));
     }
-    internal override void OnWorldLoaded(int year){MclslBeastWorld.Load();MclslBeastLoot.Load();MclslSpellCasting.Load();MclslBattleCombat.Load();MclslSpiritPact.Load();MclslSpellTerrain.Load();}
-    internal override void TickFrame(int frameCounter){MclslBeastWorld.Tick();MclslBeastLoot.Tick();MclslBattleCombat.Tick();MclslSpellCasting.Tick();MclslSpiritPact.Tick();MclslBattleVisuals.Tick();MclslSpellTerrain.Tick();}
-    internal override void PrepareForSave(){MclslBeastWorld.Save();MclslBeastLoot.Save();MclslSpellCasting.Save();MclslBattleCombat.Save();MclslSpiritPact.Save();MclslSpellTerrain.Save();}
-    internal override void Clear(){MclslBeastWorld.Clear();MclslBeastLoot.Clear();MclslSpellCasting.Clear();MclslSpiritPact.Clear();MclslBattleVisuals.Clear();MclslBattleCombat.Clear();MclslSpellTerrain.Clear();}
+    internal override void OnWorldLoaded(int year){MclslBeastWorld.Load();MclslBeastLoot.Load();MclslSpellCasting.Load();}
+    internal override void TickFrame(int frameCounter){MclslBeastWorld.Tick();MclslBeastLoot.Tick();MclslSpellCasting.Tick();}
+    internal override void PrepareForSave(){MclslBeastWorld.Save();MclslBeastLoot.Save();MclslSpellCasting.Save();}
+    internal override void Clear(){MclslBeastWorld.Clear();MclslBeastLoot.Clear();MclslSpellCasting.Clear();}
 }

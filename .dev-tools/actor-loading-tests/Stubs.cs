@@ -16,6 +16,7 @@ namespace UnityEngine
             => new() { texture = texture, rect = rect, pivot = pivot, pixelsPerUnit = ppu };
     }
     public static class Time { public static float realtimeSinceStartup; }
+    public static class SystemInfo { public const int graphicsMemorySize = 4096; }
 }
 public static class SpriteTextureLoader
 {
@@ -29,7 +30,11 @@ namespace MySimulatedLongevityRoad.Core
         internal static int Owner = Environment.CurrentManagedThreadId;
         internal static bool IsMainThread => Environment.CurrentManagedThreadId == Owner;
     }
-    internal static class MclslDiagnostics { internal static void Once(string key, string message) { } }
+    internal static class MclslDiagnostics
+    {
+        internal static void Once(string key, string message) { }
+        internal static void Error(string key, string message) { }
+    }
 }
 namespace MySimulatedLongevityRoad.Systems
 {

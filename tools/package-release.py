@@ -12,7 +12,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP = {'.git', '.codex', '__pycache__', 'bin', 'obj', '.vs'}
+SKIP = {'.git', '.codex', '__pycache__', 'bin', 'obj', '.vs', 'fantasy-reference'}
 BASE = ['code', 'GameResources', 'NativeActorResources', 'Locales', 'InterestingTrait.cs',
         'default_config.json', 'mod.json', 'icon.png']
 
@@ -160,11 +160,13 @@ def compress_player_assets(entries):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--kind', choices=('both', 'player', 'developer'), default='both')
+    parser.add_argument('--kind', choices=('both', 'player', 'developer'), default='player')
     parser.add_argument('--local-development', action='store_true')
-    parser.add_argument('--compress-assets', action='store_true',
+    parser.add_argument('--compress-assets', action='store_true', default=None,
                         help='Create a compact player archive with palette-optimized PNG assets')
     args = parser.parse_args()
+    if args.compress_assets is None:
+        args.compress_assets = args.kind == 'player'
     output = Path(args.output).resolve()
     output.relative_to(ROOT)
     assert not output.exists(), 'Choose a fresh package directory'
@@ -183,12 +185,13 @@ def main():
             command.append('--release')
         subprocess.run([sys.executable, *command], cwd=ROOT, check=True)
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    player = files(BASE + ['resources/actor-frames.manifest.json'])
+    player = [(relative, source) for relative, source in files(BASE + ['resources/actor-frames.manifest.json'])
+              if relative != 'code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs']
     developer = files(BASE + ['resources', 'tools', '.dev-tools', 'AGENTS.md', '.gitignore', 'README.md'])
     output.mkdir(parents=True)
     common = (f'MySimulatedLongevityRoad 0.6.0\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
-              'New saves only. Further image review was waived by the user.\n'
-              'Current compact art and code have not been retested in Unity; old measured results are historical only.\n'
+              'Fresh test worlds are recommended. Back up existing saves before testing migration.\n'
+              'Current art and code have not been retested in Unity; offline reviews do not certify gameplay or performance.\n'
               'Install NeoModLoader, extract this directory into the game mods directory, and avoid duplicate installations.\n')
     archives = []
     package_kinds = ([('player', player), ('developer', developer)] if args.kind == 'both'

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using MySimulatedLongevityRoad.Systems;
-using MySimulatedLongevityRoad.Systems.Combat;
 using NeoModLoader.General;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,25 +66,12 @@ internal static class MclslSpellCodexWindow
         _status.alignment = TextAnchor.MiddleCenter;
         _status.color = new Color(0.9f, 0.85f, 0.65f);
 
-        for(int i=0;i<4;i++)
-        {
-            string profession=MclslBattleProfessionSystem.Ids[i];
-            var choice=new GameObject("Main_"+profession,typeof(RectTransform),typeof(Image),typeof(Button),typeof(TipButton));
-            choice.transform.SetParent(background,false);
-            var rect=(RectTransform)choice.transform;rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(.5f,1);
-            rect.anchoredPosition=new Vector2(-66+i*44,-86);rect.sizeDelta=new Vector2(32,32);
-            choice.GetComponent<Image>().sprite=SpriteTextureLoader.getSprite("trait/"+MclslBattleProfessionSystem.Traits[i]);
-            var tip=choice.GetComponent<TipButton>();tip.textOnClick=MclslLocalizationBridge.RuntimeText(MclslBattleProfessionSystem.Names[i]);
-            tip.textOnClickDescription=MclslLocalizationBridge.RuntimeText("指定斗法主职；不赠送技能，不重置冷却。原职业高阶技休眠，基础技能可兼修。");
-            choice.GetComponent<Button>().onClick.AddListener(()=>{if(TryTargetActor(out var selected))MclslBattleProfessionSystem.SetMain(selected,profession);RefreshStatus();});
-        }
-
         GameObject scrollObject = new("SpellCodexScroll", typeof(RectTransform), typeof(Image), typeof(Mask), typeof(ScrollRect));
         scrollObject.transform.SetParent(background, false);
         RectTransform scrollRect = (RectTransform)scrollObject.transform;
         scrollRect.anchorMin = scrollRect.anchorMax = scrollRect.pivot = new Vector2(0.5f, 0.5f);
-        scrollRect.anchoredPosition = new Vector2(0f, -52f);
-        scrollRect.sizeDelta = new Vector2(340f, 316f);
+        scrollRect.anchoredPosition = new Vector2(0f, -30f);
+        scrollRect.sizeDelta = new Vector2(340f, 360f);
         scrollObject.GetComponent<Image>().color = new Color(0.04f, 0.23f, 0.23f, 0.95f);
         ScrollRect scroll = scrollObject.GetComponent<ScrollRect>();
         scroll.horizontal = false;
@@ -127,7 +113,7 @@ internal static class MclslSpellCodexWindow
             icon.raycastTarget = false;
             TipButton tip = cell.GetComponent<TipButton>();
             tip.textOnClick = MclslLocalizationBridge.RuntimeText(spell.Name);
-            tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText(spell.Description + "\n"+MclslBattleProfessionSystem.AcquisitionDescription(spell.Id)+"\n" + LM.Get("mclsl_spell_codex_tip"));
+            tip.textOnClickDescription = MclslLocalizationBridge.RuntimeText(spell.Description + "\n" + LM.Get("mclsl_spell_codex_tip"));
             cell.GetComponent<Button>().onClick.AddListener(() =>
             {
                 if (TryTargetActor(out Actor actor))
@@ -142,7 +128,7 @@ internal static class MclslSpellCodexWindow
     {
         if (_status == null) return;
         _status.text = TryTargetActor(out Actor actor)
-            ? actor.getName()+" · 主职："+MclslBattleProfessionSystem.Display(actor)+"\n基础可兼修；异职高阶技能休眠"
+            ? LM.Get("mclsl_spell_codex_selected") + actor.getName() + " · " + LM.Get("mclsl_spell_codex_click")
             : LM.Get("mclsl_spell_codex_select_first");
     }
 }

@@ -8,7 +8,8 @@ void Check(bool result, string scenario)
     assertions++;
 }
 _ = MclslRuntimeChanges.Owner;
-MclslActorAnimationCatalog.Root = Path.Combine(Directory.GetCurrentDirectory(), "build/actor-loading-fixture");
+MclslActorAnimationCatalog.Root = Environment.GetEnvironmentVariable("MCLSL_ACTOR_FIXTURE")
+    ?? Path.Combine(Directory.GetCurrentDirectory(), "build/actor-loading-fixture");
 string Register(string formPath, string name, MclslActorAnimationCatalog.FrameProfile profile = null)
 {
     var form = new MclslActorAnimationCatalog.Form { NativeResourcePath = formPath };
@@ -40,7 +41,7 @@ Task.WaitAll(parallel);
 Check(parallel.All(task => ReferenceEquals(task.Result, humanInitial)), "render workers reuse the current human initial frame");
 Check(MclslNativeActorFrames.Request(walk) == null && MclslNativeActorFrames.Request(human) == humanInitial,
     "pending animation uses the current-art waiting pose");
-MclslNativeActorFrames.Tick();
+MclslNativeActorFrames.Tick(4d, 4);
 Check(MclslNativeActorFrames.Request(walk) != null && MclslActorPixelResources.Loads[walk] == 1,
     "main-thread pump loads the pending current frame");
 MclslNativeActorFrames.Clear();
@@ -48,7 +49,7 @@ Check(MclslNativeActorFrames.Request(beast) == beastInitial && MclslNativeActorF
     "world reset preserves engine-held current initial sprites");
 MclslNativeActorFrames.Request(walk);
 UnityEngine.Time.realtimeSinceStartup = 1;
-MclslNativeActorFrames.Tick();
+MclslNativeActorFrames.Tick(4d, 4);
 Check(MclslActorPixelResources.Loads[walk] == 2 && MclslActorPixelResources.Loads[human] == 1,
     "only evictable animation frames reload after reset");
 string failed = Register("actors/Test/Failed", "idle_0");

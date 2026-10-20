@@ -73,6 +73,7 @@ internal static class MclslBeastAnimation
     internal static void Clear()
     {
         Clocks = new ConditionalWeakTable<Actor, Clock>();
+        MclslActorPresentation.ClearRuntime();
         // Immutable shared resources survive world loads without duplicate textures.
         MclslActorAnimationTime.Clear();
         MclslBeastDeathVisualSystem.Clear();
@@ -202,6 +203,7 @@ internal static class MclslBeastAnimation
         asset.disable_jump_animation = true;
         asset.get_override_sprite = GetSprite;
         asset.has_override_sprite = true;
+        MclslActorPresentation.Configure(asset, frames.Fallback);
         return frames.Fallback;
     }
 

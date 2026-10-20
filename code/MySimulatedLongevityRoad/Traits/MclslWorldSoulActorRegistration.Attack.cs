@@ -42,12 +42,12 @@ internal static partial class MclslWorldSoulActorRegistration
         int frame = Time.frameCount;
         if (NextPulseFrame.TryGetValue(actorId, out int nextFrame) && frame < nextFrame)
         {
-            AttackUntilFrame[actorId] = Math.Max(AttackUntilFrame.TryGetValue(actorId, out int existingUntil) ? existingUntil : 0, frame + AttackWindowFrames(set));
+            AttackUntilFrame[actorId] = Math.Max(AttackUntilFrame.TryGetValue(actorId, out long existingUntil) ? existingUntil : 0, AnimationTick + AttackWindowFrames(set));
             return;
         }
 
         NextPulseFrame[actorId] = frame + 22;
-        AttackUntilFrame[actorId] = frame + AttackWindowFrames(set);
+        AttackUntilFrame[actorId] = AnimationTick + AttackWindowFrames(set);
         ApplyAreaDamage(actor);
         QueueTerrainDamage(actor);
     }

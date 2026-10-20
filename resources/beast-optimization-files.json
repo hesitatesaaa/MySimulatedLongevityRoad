@@ -1,0 +1,329 @@
+{
+  "scope": "files touched by this request; excludes preexisting unrelated worktree changes",
+  "files": [
+    {
+      "path": "code/MySimulatedLongevityRoad/Data/MclslBeastRules.cs",
+      "sha256": "85ea73f492da5cba02da6bd15d6120f6ce854ef562e0c135468b57b459dbfddb"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Patches/MclslPatches.cs",
+      "sha256": "b489a38a412aa34abf52ea7477d239cf950bb47974c173dae80025786a29ae6c"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Traits/MclslBeastActorRegistration.cs",
+      "sha256": "7b4071556c0f8f8d39d2d365698b70a9424ffa8492b879e7465665972d1584a1"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs",
+      "sha256": "aa0b0e4ab1d54b640ea57d8030684839dcb67480c670aba38d04388ed048105c"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellSystem.cs",
+      "sha256": "c4308efd9735f73e6af0cd01b0ae9d35c6f9c2773af61292741b961fe1643e2d"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Systems/Beasts/MclslBeastConfig.cs",
+      "sha256": "ac287b0fb950b1a194a21c6579e63572a90f4ecfe58ebb79abf0d9826da071b8"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Systems/Beasts/MclslBeastSpawnSystem.cs",
+      "sha256": "fa32faba059f5ca6d9104a671c954a000d12ab8588b1c9de733d09b1615dbbb6"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/Systems/Beasts/MclslBeastWorld.cs",
+      "sha256": "7c006130e6710d8d64a08a57db3facd0343906736f4fadbf008fbc72bdf33ed9"
+    },
+    {
+      "path": "code/MySimulatedLongevityRoad/UI/MclslBeastControlWindow.cs",
+      "sha256": "6c3bf29963a8ab039c6630b54a77c3f17f76852f5fabefe4fc1225771c873c5c"
+    },
+    {
+      "path": "default_config.json",
+      "sha256": "a5cee73d0875dd912c03b755436995b297ef83736c9608de8dec2431a41b212d"
+    },
+    {
+      "path": ".dev-tools/beast-tests/Program.cs",
+      "sha256": "680d578320899c198d95f8e42b0515e0c081162585702e412916adb954eb4623"
+    },
+    {
+      "path": "resources/actor-frames.manifest.json",
+      "sha256": "e9831c34219e7687db9e36028f1e664000fe069f4c5e7f917016350953961e66"
+    },
+    {
+      "path": "resources/actor-size-policy.json",
+      "sha256": "ca889747d4846636c50e99892a3a107c83a1e78961c0c85c8b0a74557d6c00ff"
+    },
+    {
+      "path": "resources/0.6.0-release-policy.json",
+      "sha256": "7c92ec2cad0e2b59a0d86729e5fd44df1d854e6b84740eb9ee6b6f5c94a4149f"
+    },
+    {
+      "path": "resources/LOCAL-DEVELOPMENT.md",
+      "sha256": "4782ce4b109d14a632c8097b92e8cee09c5038ac6babe0fef2ef9e657990d82d"
+    },
+    {
+      "path": "resources/bird-animation-review.json",
+      "sha256": "9efc6740f71a64e6b797038e6a07f3ab286eda562e0adb8f26aa47ebace7f320"
+    },
+    {
+      "path": "resources/beast-optimization-size-comparison.json",
+      "sha256": "c4bf7ea361f7393ce4b76e1bd67f5639841dbde560841fb071bda5fba75685b9"
+    },
+    {
+      "path": "resources/beast-optimization-validation.json",
+      "sha256": "70fd377c310dda93f35d189e27b433aa9627de3ce1ad2e1be807f2b808470810"
+    },
+    {
+      "path": "tools/apply-beast-size-policy.py",
+      "sha256": "0808f175b1b8fa3a2bdfd82d406a48ba6daf4e9d80e5f424f5b8d547a8e2dee2"
+    },
+    {
+      "path": "tools/integrate-bird-animation.cjs",
+      "sha256": "9777920d3c50c3e651863a1e41ee4e6b3a602dcf2a8f48315286f0c458786729"
+    },
+    {
+      "path": "tools/validate-current-assets.py",
+      "sha256": "a3f2f688de549faba8ce64cc930cfb4c9bae775ca793bd20c0fec2de57c3e79f"
+    },
+    {
+      "path": "tools/package-release.py",
+      "sha256": "97bd7907781697cc684b2a3aea22aefa09683b3dc460ca64251e0f3fe5a13ae6"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_0.png",
+      "sha256": "f5e9c47ed5112c2116e34c93b4655f63d21ea4419d4d5c79c4f3a9e78dd9515c"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_0.json",
+      "sha256": "da26d8c7a92911dc53504e0c43a21961e48d9459b4f82b460c067e9464fc1740"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_1.png",
+      "sha256": "00eccc202959dfc6eea375f0479393ac24846cfcda8daec98633db3f92591f02"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_1.json",
+      "sha256": "ea98bb1079e608bf21df94a792000fbe913d3623fc9b90a2e86e3abb21582afb"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_2.png",
+      "sha256": "417f9eef538e6d0cf9aa29d92d7d58f61ede220950b6b66dc44664b8b0b028ee"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_2.json",
+      "sha256": "301bdba3e22f8df243f89036065297ff6d212286f7555f178427329ae3f0b4fa"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_3.png",
+      "sha256": "31a16191dcea6f1cdd8c66c4f66cd5fd83d3c786be00c86c52c147b4494de6cc"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_3.json",
+      "sha256": "1723cc263d929347e1766cfef0a06cc6f3761522a0174e163081d9143edae605"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_4.png",
+      "sha256": "369df00cbb5eddb610705cb80f8584595e81b81930fb3143446243ae9bddf1d5"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_4.json",
+      "sha256": "8f8f2385a4cacbbf5b95aa4a45c63284622dc3f743168ca1a05d67abb59d0b59"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/idle_5.png",
+      "sha256": "555c134b869e6c5e8d684a91d1444cb22b302e27a89cdfa7f7c267eee8269285"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/idle_5.json",
+      "sha256": "1d2ab4d365be2520b40860067ee9f3278389d8a58ce6d9ef5b8e56e68f49970c"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_0.png",
+      "sha256": "8b9f71a908c6bb282c67aed17a71521f742a444bef5dc2d06bed2dc9419ba2b3"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_0.json",
+      "sha256": "11008b6d290df531e3d1898dc5ef1adf3b2934d586808f736ec359d28129bfaf"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_1.png",
+      "sha256": "acf06bea637b8656b803a7f409a24297c7dd4370a9778edb2e5d5f09dfe4b5d8"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_1.json",
+      "sha256": "3d17b73cb20b80084769a6f2a251cf618db886925fc602cd04802fb74c8ce328"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_2.png",
+      "sha256": "078e729ad03c3aa1e1f1dc6b43ab99ea4a947f8d0fb004ef612703bedd4ccfd9"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_2.json",
+      "sha256": "71c294478c5e85108badc9f0866c28c131a9710c3ab7f9ce0031a04554959f91"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_3.png",
+      "sha256": "9b5bb4260bee4f298e9e4c2d3a3467930edd645ad39632d204eab11d4a2059bb"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_3.json",
+      "sha256": "a10aa41d99f03f7a0094c18bfa93c8b3cc9548aa01165df0a33f841f865128ea"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_4.png",
+      "sha256": "2809316b965221e4618772be980f597a3320af3346e35ec6d7c3d6c9af5d2826"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_4.json",
+      "sha256": "73587055ff4b56ea87897e67a49f5f37035474591b4b7d102b55922f49efa070"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_5.png",
+      "sha256": "8ed21bd17fe05e7e3923b3dfbfab90ec02fde5b6a5dd20ca537df29a10be5d20"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_5.json",
+      "sha256": "ed68e2becce94fa932e14c46f5dfb962edb5bfdcef44a1839c01c87426ae7fcd"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_6.png",
+      "sha256": "a341b12e81471d95a692418a9c3f3bfdc0cdc51a9164c38adfecac933fef1c43"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_6.json",
+      "sha256": "090c60206a41d7405df819b0b9b5c7db67a58c1e4dbad305fae3bb58ebcb789f"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_7.png",
+      "sha256": "2fce1b0f383246df85ca00864a987925b6b88d7b8a4c6a44c37534c09240b8ab"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_fenghuang/native/walk_7.json",
+      "sha256": "fe3e6e3dd49702241c23bb2c01e5f305d18b2b8762604fd765360dde7ab74ac0"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_0.png",
+      "sha256": "68197fbb02a30cf7f1db84d9ba18a45fa220cdfacfb016183a249394785410db"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_0.json",
+      "sha256": "28caade9240cde9d52246bec4a9c7eba668e3048f9cdab023561f1d68fc0e896"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_1.png",
+      "sha256": "f7e26d40923963dd9f22fe257a222ea907f54e1c91fe7e36b3794be7a1572b33"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_1.json",
+      "sha256": "eb5cd9236defeafe47278d4511638e5996e273c180115c480445d26a9889aa5c"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_2.png",
+      "sha256": "86db6297f228531311563f459eb26e87937a447f6b4b4475b4c8f28f4c40edf2"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_2.json",
+      "sha256": "e205f65a394bc1dc631cc1faf9bff76dbb442e94844731e10fc0853ca41a9207"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_3.png",
+      "sha256": "d6e518ec40b13cab4e21f29bde7ba9696d3a8943ae9e7186180efe393376a25c"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_3.json",
+      "sha256": "5c2bd980ae5057df40dae7f64bc2e559bad1138437bca3056201a69194d88c55"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_4.png",
+      "sha256": "ea087c02a9b61e1de41be6f91305cfb49f37dd935111f362aa023397dbcc31bf"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_4.json",
+      "sha256": "3e3673be91566a3389b29d9fbfdc34f5fbef10a4747a91f6d5904bab70b93234"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_5.png",
+      "sha256": "396696e50e9585a6c4b83f497948693af23c9c9cd7212d141f3465a621511fb6"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/idle_5.json",
+      "sha256": "b6e007c07a12be13cc9a5b5061b9621311fcb44a17baf9d044f83aae682f00fe"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_0.png",
+      "sha256": "4b9010dc7a4b62070e0500ab1c1a2f09f3305586124b5e2228a58c9575765101"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_0.json",
+      "sha256": "50cf1100ceb3f3d1cea92d5f6fcdf2cd59003a6ab2dd020f7182804854c600ee"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_1.png",
+      "sha256": "2bc8c33ce3bee3bb39322906946f4686d968b20870ebc429c1cbf92e7c0c3bbd"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_1.json",
+      "sha256": "ba698b32cd6f9c75e5dba0ebb47baf0a57ca6a86da0a5d29f6720ecc2dbe9fd1"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_2.png",
+      "sha256": "302243c51032248c56ec77780f41f6737c6376ec90c174d39edaa5e48625324a"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_2.json",
+      "sha256": "657b86167239a9c15de6ab27cc9d9e1ced67d6c1ebd2f18d60ed3093779f014b"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_3.png",
+      "sha256": "9425a7c6c0277bca6d782213dc76fb205d678b28c8f68cc3a58ca17c3be9b17d"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_3.json",
+      "sha256": "7b3e655ab70624011d7edf5e97e8b94b7ed9abff07dbc62f2e72279eb74def28"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_4.png",
+      "sha256": "771c698fcb72b5dd46ec2944d7099d2f9c291f6cc525dd1a2b7414b487a8622c"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_4.json",
+      "sha256": "2bfe44aca51e163933d558b0f79025d9a2b3944018858b9af75f8a4041477268"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_5.png",
+      "sha256": "eb15f2e1c6865b1ee63416467bd251eddcbdbd49fb25b38dd67e020ad335f5c2"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_5.json",
+      "sha256": "e7eb7381268b96c74c35cc294aa735b7740362c88c0db6859b4cc3dc1d1291c5"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_6.png",
+      "sha256": "accdd0cbe9e7b734d8967a45da35dbadfce8821b871662e23ef3ff3ff6fefa55"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_6.json",
+      "sha256": "6ee348764c996e9f39b816cc8f740a4bcceac3969211c24597dedb1a80ece5fd"
+    },
+    {
+      "path": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_7.png",
+      "sha256": "8067cd41031a45f3c809e5a8a3d16c987a30fc0e6f353b855db4929f14ebec8f"
+    },
+    {
+      "path": "resources/actor-provenance/mclsl_beast_dafeng/native/walk_7.json",
+      "sha256": "2bb2b2109e2141db7ec082c2544334e044a233a4ddc083d3a80408b54da8d242"
+    },
+    {
+      "path": "resources/bird-animation-sources/fenghuang.png",
+      "sha256": "408b4cb77491bdc235ab13821435e5410ae22821da1dab2653f45ed170458dbd"
+    },
+    {
+      "path": "resources/bird-animation-sources/dafeng.png",
+      "sha256": "0b7d9fada269b10ebf859814182b8cfef0d49772e8309aa3271924c90ebd5f00"
+    },
+    {
+      "path": "resources/beast-optimization-report.md",
+      "sha256": "ac934f9206e65472bc874445c06664acafa2f99f9b4f9c4ef2217a24d7dc0dee"
+    }
+  ]
+}

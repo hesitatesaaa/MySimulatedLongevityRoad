@@ -8,6 +8,8 @@ param(
 $ErrorActionPreference = 'Stop'
 if ($LocalDevelopment -and $RequireFinalAssets) { throw 'Choose local development or formal release validation, not both.' }
 $projectRoot = Split-Path -Parent $PSScriptRoot
+& $PythonExecutable (Join-Path $PSScriptRoot 'check-localization.py')
+if ($LASTEXITCODE -ne 0) { throw 'Localization display-path validation failed.' }
 $declaredVersion = (Get-Content (Join-Path $projectRoot 'mod.json') -Raw -Encoding UTF8 | ConvertFrom-Json).version
 if ($LocalDevelopment) {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py')

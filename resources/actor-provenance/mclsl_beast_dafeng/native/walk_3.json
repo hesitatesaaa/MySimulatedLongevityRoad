@@ -3,48 +3,53 @@
   "action": "walk",
   "index": 3,
   "artDirectionRevision": 2,
-  "method": "built-in-imagegen-independent-frame",
-  "sourceSha256": "6f31a17c2ac825243c9e6f502288ecf21de45281c81c997d9bcc4e119f33bd99",
+  "method": "built-in-imagegen-reviewed-sheet-cell",
+  "sourceSha256": "0b7d9fada269b10ebf859814182b8cfef0d49772e8309aa3271924c90ebd5f00",
   "outputFile": "NativeActorResources/actors/Beasts/dafeng/Beast/main/walk_3.png",
-  "outputSha256": "5658af22199f3d286d98db8690f5eb616723c3d9a29cb84c3ad6031d6f4e9727",
-  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5927\u98ce\u00b7\u517d\u5f62 (mclsl_beast_dafeng), walk_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: large azure blue storm bird, gold crest and beak, white/cyan breast, broad powerful paired wings, two legs and blue trailing tail feathers. Pose: FLYING wingbeat cycle phase 0.375: downstroke begins; articulate paired shoulder/elbow/wrist joints and layered feathers, tuck legs naturally, head stable, tail follows the beat. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. Image 1 is this form full-resolution identity and anatomical scale reference. Image 2 is the user-approved CLARITY and fine pixel density reference only: do not copy its human anatomy, clothes or palette into another character. Match clear facial/anatomical edges, hair/fur/feather/fins and material detail at native source resolution. No low-resolution installed-size reference or artificial coarse enlarged pixel blocks. Retain the same anatomical pixel scale as Image 1; posed limbs may fold but never shrink the skeleton. Moderate ornament detail and restrained shades; do not add excessive gold microtexture or photo realism. Exactly one independently drawn PNG with transparent full canvas; no grid, cutting, cropping, downsampling or interpolation. Native PNG will be retained without resampling and reviewed before runtime integration.",
+  "outputSha256": "9425a7c6c0277bca6d782213dc76fb205d678b28c8f68cc3a58ca17c3be9b17d",
+  "prompt": "User reference phoenix/Dafeng: six folded-wing idle poses and eight coordinated two-wing flying poses, right-facing WorldBox pixel art, true alpha, no third wing or wing ghosts. Generated with built-in image_gen; see retained source sheet.",
   "references": [
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_dafeng\\idle_0.png",
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png"
   ],
-  "createdAtUtc": "2026-10-13T05:58:43.165429+00:00",
+  "createdAtUtc": "2026-10-20T07:24:53.323Z",
   "normalization": {
-    "resampling": "lanczos-premultiplied-alpha",
-    "sourceCanvas": [
-      1254,
-      1254
-    ],
+    "resampling": "nearest",
     "canvas": [
       160,
       160
     ],
-    "scale": 0.12759170653907495,
-    "inputSha256": "6f31a17c2ac825243c9e6f502288ecf21de45281c81c997d9bcc4e119f33bd99",
-    "sourceAnchor": [
-      632.0,
-      1173
+    "sourceCanvas": [
+      313,
+      310
     ],
-    "sourcePixelsPerUnit": 217.04545454545456,
-    "ppuFactor": 2.0097391675155767,
-    "sourceRenderScale": 1,
+    "scale": 0.4394366197183099,
     "cropped": false,
-    "spritesheetSlicing": false,
+    "transparentPaddingTrimmed": true,
+    "spritesheetSlicing": true,
     "colorQuantized": false,
     "resizePasses": 1,
-    "visibleBoundsAlpha": 16
+    "visibleBoundsAlpha": 16,
+    "placement": [
+      22,
+      46
+    ]
   },
   "nativeResolution": false,
-  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
-  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "integrationStatus": "offline-integration-awaiting-Unity-review",
+  "sourceRetention": "full generated sheet retained in resources/bird-animation-sources",
   "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
+  },
+  "previousSourceSha256": "6f31a17c2ac825243c9e6f502288ecf21de45281c81c997d9bcc4e119f33bd99",
+  "sourceSheet": "resources/bird-animation-sources/dafeng.png",
+  "sourceCell": {
+    "left": 314,
+    "top": 610,
+    "width": 313,
+    "height": 310
   }
 }

@@ -19,6 +19,12 @@ namespace MySimulatedLongevityRoad.Core
     {
         internal static readonly System.Collections.Generic.List<string> Errors = new();
         internal static void Error(string key, string message) => Errors.Add(key + ": " + message);
+        internal static void Once(string key, string message) => Errors.Add(key + ": " + message);
+    }
+    internal static class MclslUnityProfiler
+    {
+        internal static Scope Sample(string name) => default;
+        internal readonly struct Scope : System.IDisposable { public void Dispose() { } }
     }
 }
 

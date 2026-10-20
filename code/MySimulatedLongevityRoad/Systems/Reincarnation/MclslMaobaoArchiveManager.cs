@@ -30,6 +30,8 @@ internal static class MclslMaobaoArchiveManager
     private static Dictionary<string, SavedActorPacket> _savedActors = new(StringComparer.Ordinal);
     private static string _selectedActorId = string.Empty;
     private static bool _initialized;
+    private static bool _writeLocked;
+    private static bool _preserveBackup;
 
     internal sealed class SavedActorPacket
     {
@@ -134,8 +136,15 @@ internal static class MclslMaobaoArchiveManager
                 ActorData = copy,
                 ModDataSnapshot = MclslMaobaoSnapshot.Capture(actor)
             };
+            _savedActors.TryGetValue(actorId, out SavedActorPacket previous);
             _savedActors[actorId] = packet;
-            SaveToFile();
+            try { SaveToFile(); }
+            catch
+            {
+                if (previous == null) _savedActors.Remove(actorId);
+                else _savedActors[actorId] = previous;
+                throw;
+            }
             message = "已将“" + packet.Name + "”完整刻入猫宝。";
             return true;
         }
@@ -161,13 +170,21 @@ internal static class MclslMaobaoArchiveManager
     internal static bool Remove(string actorId, out string message)
     {
         Init();
-        if (string.IsNullOrWhiteSpace(actorId) || !_savedActors.Remove(actorId))
+        if (string.IsNullOrWhiteSpace(actorId) || !_savedActors.TryGetValue(actorId, out SavedActorPacket previous))
         {
             message = "未找到这道猫宝完整档案。";
             return false;
         }
+        _savedActors.Remove(actorId);
+        try { SaveToFile(); }
+        catch (Exception ex)
+        {
+            _savedActors[actorId] = previous;
+            MclslDiagnostics.Error("maobao-remove-file", "猫宝档案移除失败: " + ex);
+            message = "猫宝档案移除失败：" + ex.Message;
+            return false;
+        }
         if (string.Equals(_selectedActorId, actorId, StringComparison.Ordinal)) _selectedActorId = string.Empty;
-        SaveToFile();
         message = "已从猫宝移除完整档案。";
         return true;
     }
@@ -254,45 +271,35 @@ internal static class MclslMaobaoArchiveManager
 
     private static void SaveToFile()
     {
-        string temp = SavePath + ".tmp";
-        string backup = SavePath + ".bak";
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(SavePath));
-            string json = JsonConvert.SerializeObject(_savedActors, Formatting.Indented, JsonSettings);
-            File.WriteAllText(temp, json);
-            if (File.Exists(SavePath)) File.Copy(SavePath, backup, true);
-            if (File.Exists(SavePath)) File.Delete(SavePath);
-            File.Move(temp, SavePath);
-        }
-        catch (Exception ex)
-        {
-            MclslDiagnostics.Error("maobao-save-file", "猫宝存档写入失败: " + ex.Message);
-            try { if (File.Exists(temp)) File.Delete(temp); } catch { }
-        }
+        if (_writeLocked) throw new InvalidDataException("猫宝存档主档及备份均损坏，已禁止覆盖: " + SavePath);
+        string json = JsonConvert.SerializeObject(_savedActors, Formatting.Indented, JsonSettings);
+        MclslAtomicFile.Write(SavePath, json, _preserveBackup);
+        _preserveBackup = false;
     }
 
     private static void LoadFromFile()
     {
-        string primary = SavePath;
-        string backup = SavePath + ".bak";
-        string source = File.Exists(primary) ? primary : File.Exists(backup) ? backup : string.Empty;
-        if (string.IsNullOrWhiteSpace(source)) return;
-        try
+        MclslArchiveReadResult result = MclslAtomicFile.Read(SavePath,
+            json => JsonConvert.DeserializeObject<Dictionary<string, SavedActorPacket>>(json, JsonSettings),
+            out Dictionary<string, SavedActorPacket> loaded);
+        if (result == MclslArchiveReadResult.Missing) return;
+        if (result == MclslArchiveReadResult.Invalid)
         {
-            _savedActors = JsonConvert.DeserializeObject<Dictionary<string, SavedActorPacket>>(File.ReadAllText(source), JsonSettings)
-                ?? new Dictionary<string, SavedActorPacket>(StringComparer.Ordinal);
-            List<string> invalid = new();
-            foreach (KeyValuePair<string, SavedActorPacket> pair in _savedActors)
-                if (pair.Value?.ActorData == null || pair.Value.SchemaVersion != 1) invalid.Add(pair.Key);
-            for (int i = 0; i < invalid.Count; i++) _savedActors.Remove(invalid[i]);
-            if (!string.Equals(source, primary, StringComparison.Ordinal)) SaveToFile();
+            _writeLocked = true;
+            MclslDiagnostics.Error("maobao-load-file", "猫宝存档主档及备份均无法读取，已禁止覆盖: " + SavePath);
+            return;
         }
-        catch (Exception ex)
-        {
-            MclslDiagnostics.Error("maobao-load-file", "猫宝存档读取失败: " + ex.Message);
-            _savedActors = new Dictionary<string, SavedActorPacket>(StringComparer.Ordinal);
-        }
+        _savedActors = loaded;
+        List<string> invalid = new();
+        foreach (KeyValuePair<string, SavedActorPacket> pair in _savedActors)
+            if (pair.Value?.ActorData == null || pair.Value.SchemaVersion != 1) invalid.Add(pair.Key);
+        for (int i = 0; i < invalid.Count; i++) _savedActors.Remove(invalid[i]);
+        if (invalid.Count > 0)
+            MclslDiagnostics.Error("maobao-load-packets", "猫宝存档存在无效或不支持的角色记录，已禁止覆盖: " + string.Join(", ", invalid));
+        _writeLocked = invalid.Count > 0;
+        _preserveBackup = result == MclslArchiveReadResult.Backup;
+        if (_preserveBackup)
+            MclslDiagnostics.Error("maobao-load-backup", "猫宝主档无法读取，已恢复上一份有效备份: " + SavePath);
     }
 
     private static ActorData DeepCopy(ActorData data)

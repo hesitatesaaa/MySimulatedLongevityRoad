@@ -41,7 +41,7 @@ internal static class MclslBeastSpawnSystem
                 {
                     if(remaining<=0)break;
                     int regionCount=MclslBeastWorld.CountAutomatic(true,region);
-                    if(regionCount>=4 || !Pass(year,"region_"+region,200000))continue;
+                    if(regionCount>=4 || !Pass(year,"region_"+region,MclslBeastRules.NaturalChance(200000)))continue;
                     var pool=MclslBeastCatalog.All.Where(b=>common.Contains(b.Id)
                         && MclslBeastContent.BySpecies[b.Id].MinRealm<MclslBeastWorld.State.Unlocked
                         && MclslBeastHabitatIndex.Find(b,year,region)!=null && MclslBeastConfig.Chance(b)>0).ToArray();
@@ -58,7 +58,7 @@ internal static class MclslBeastSpawnSystem
                 if(common.Contains(beast.Id)||beast.Id=="moqilin"||MclslBeastContent.BySpecies[beast.Id].MinRealm>=MclslBeastWorld.State.Unlocked)continue;
                 if(beast.Id=="yingying"&&!Pass(year,"red_moon",MclslBeastConfig.RedMoonChancePerMillion))continue;
                 if(beast.Id=="tianshou"&&!Pass(year,"revival",MclslBeastConfig.RevivalChancePerMillion))continue;
-                if(!Pass(year,beast.Id,MclslBeastConfig.Chance(beast)))continue;
+                if(!Pass(year,beast.Id,MclslBeastRules.NaturalChance(MclslBeastConfig.Chance(beast))))continue;
                 var selected=beast;
                 if(beast.Id=="qilin"&&Pass(year,"moqilin_variant",MclslBeastConfig.Chance(MclslBeastCatalog.All.First(x=>x.Id=="moqilin"))))
                     selected=MclslBeastCatalog.All.First(x=>x.Id=="moqilin");

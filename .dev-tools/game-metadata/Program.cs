@@ -70,6 +70,27 @@ void PrintIL(MethodDefinition method)
         Console.WriteLine($"    IL_{offset:x4} {op.Name} {operand}");
     }
 }
+var search = args.FirstOrDefault(a => a.StartsWith("--search="))?[9..];
+if (search != null)
+{
+    foreach (var handle in reader.TypeDefinitions)
+    {
+        var type = reader.GetTypeDefinition(handle);
+        foreach (var methodHandle in type.GetMethods())
+        {
+            var method = reader.GetMethodDefinition(methodHandle);
+            var stdout = Console.Out;
+            using var captured = new StringWriter();
+            try { Console.SetOut(captured); PrintIL(method); }
+            finally { Console.SetOut(stdout); }
+            var lines = captured.ToString().Split('\n').Where(line => line.Contains(search)).ToArray();
+            if (lines.Length == 0) continue;
+            Console.WriteLine(reader.GetString(type.Name) + "::" + reader.GetString(method.Name));
+            foreach (var line in lines) Console.WriteLine(line.Trim());
+        }
+    }
+    return;
+}
 foreach (var handle in reader.TypeDefinitions)
 {
     var type = reader.GetTypeDefinition(handle);

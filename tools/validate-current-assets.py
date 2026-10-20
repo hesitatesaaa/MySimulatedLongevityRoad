@@ -38,7 +38,8 @@ def validate():
     specs = {entry['actorId']: entry for entry in policy['forms']}
     assert len(specs) == 62 and {g['actorId'] for g in manifest['groups']} == set(specs)
     expected, proofs, source_hashes = set(), set(), set()
-    count = repairs = 0
+    count = repairs = sheet_frames = 0
+    sheet_cells = set()
     for group in manifest['groups']:
         spec = specs[group['actorId']]
         assert group['calibration']['verifiedInGame'] is False and group['calibration']['previewScaleApproved']
@@ -65,16 +66,36 @@ def validate():
                 proofs.add(proof_file)
                 assert sha(file) == frame['sha256'] == proof['outputSha256'], str(file)
                 assert within(proof['outputFile']) == file
-                assert proof['method'] == 'built-in-imagegen-independent-frame' and proof['prompt']
+                sheet = proof['method'] == 'built-in-imagegen-reviewed-sheet-cell'
+                assert proof['method'] in ('built-in-imagegen-independent-frame', 'built-in-imagegen-reviewed-sheet-cell') and proof['prompt']
                 assert proof['actorId'] == group['actorId'] and proof['action'] == action
                 assert proof['index'] == int(frame['name'].rsplit('_', 1)[1])
-                assert re.fullmatch('[a-f0-9]{64}', proof['sourceSha256']) and proof['sourceSha256'] not in source_hashes
-                source_hashes.add(proof['sourceSha256'])
+                assert re.fullmatch('[a-f0-9]{64}', proof['sourceSha256'])
+                if sheet:
+                    assert group['actorId'] in ('mclsl_beast_fenghuang', 'mclsl_beast_dafeng') and action in ('idle', 'walk')
+                    source = within(proof['sourceSheet'])
+                    assert sha(source) == proof['sourceSha256']
+                    cell = proof['sourceCell']
+                    identity = (proof['sourceSha256'], tuple(cell[k] for k in ('left', 'top', 'width', 'height')))
+                    assert identity not in sheet_cells
+                    sheet_cells.add(identity)
+                    with Image.open(source) as image:
+                        assert 0 <= cell['left'] < cell['left'] + cell['width'] <= image.width
+                        assert 0 <= cell['top'] < cell['top'] + cell['height'] <= image.height
+                    assert transform['spritesheetSlicing'] is True and transform['transparentPaddingTrimmed'] is True
+                    assert transform['resampling'] == 'nearest' and transform['resizePasses'] == 1
+                    assert transform['cropped'] is False and transform['colorQuantized'] is False
+                    assert list(frame['anchor']) == group['anchor'] and frame['pixelsPerUnit'] == group['pixelsPerUnit']
+                    sheet_frames += 1
+                else:
+                    assert proof['sourceSha256'] not in source_hashes
+                    source_hashes.add(proof['sourceSha256'])
                 assert 'sourceFile' not in proof and proof['sourceRetention']
-                assert transform['resampling'] == 'lanczos-premultiplied-alpha' and transform['resizePasses'] == 1
-                assert transform['cropped'] is False and transform['spritesheetSlicing'] is False
-                assert transform['colorQuantized'] is False and re.fullmatch('[a-f0-9]{64}', transform['inputSha256'])
-                assert transform['scale'] == spec['resizeScale'] < 1
+                if not sheet:
+                    assert transform['resampling'] == 'lanczos-premultiplied-alpha' and transform['resizePasses'] == 1
+                    assert transform['cropped'] is False and transform['spritesheetSlicing'] is False
+                    assert transform['colorQuantized'] is False and re.fullmatch('[a-f0-9]{64}', transform['inputSha256'])
+                    assert transform['scale'] == spec['resizeScale'] < 1
                 with Image.open(file) as image:
                     image.load()
                     assert image.format == 'PNG' and image.mode == 'RGBA'
@@ -84,12 +105,15 @@ def validate():
                     assert alpha.getextrema()[0] == 0 and bounds
                     maximum = max(maximum, *image.size)
                 old_canvas = transform['sourceCanvas']
-                assert frame['canvas'] == [max(1, round(v * transform['scale'])) for v in old_canvas]
                 ratios = [frame['canvas'][i] / old_canvas[i] for i in (0, 1)]
+                if not sheet:
+                    assert frame['canvas'] == [max(1, round(v * transform['scale'])) for v in old_canvas]
                 for axis in (0, 1):
-                    assert math.isclose(frame['anchor'][axis], transform['sourceAnchor'][axis] * ratios[axis], abs_tol=1e-7)
+                    if not sheet:
+                        assert math.isclose(frame['anchor'][axis], transform['sourceAnchor'][axis] * ratios[axis], abs_tol=1e-7)
                     assert 0 <= frame['anchor'][axis] <= frame['canvas'][axis]
-                assert math.isclose(frame['pixelsPerUnit'], transform['sourcePixelsPerUnit'] * ratios[1] * transform['ppuFactor'], rel_tol=1e-9)
+                if not sheet:
+                    assert math.isclose(frame['pixelsPerUnit'], transform['sourcePixelsPerUnit'] * ratios[1] * transform['ppuFactor'], rel_tol=1e-9)
                 assert math.isfinite(frame['pixelsPerUnit']) and frame['pixelsPerUnit'] > 0
                 assert math.isfinite(frame['durationMs']) and frame['durationMs'] > 0
                 if frame is group['actions']['idle']['frames'][0]:
@@ -99,6 +123,7 @@ def validate():
                 repairs += bool(proof.get('repair'))
         assert maximum == spec['longEdge'], group['actorId']
     assert count == 1374 and repairs == 18
+    assert sheet_frames == (28 if policy.get('birdAnimationRevision') else 0)
     assert {p.resolve() for p in (ROOT / 'NativeActorResources').rglob('*.png')} == expected
     for folder in ('Beasts', 'Named', 'Immortals'):
         assert not (ROOT / 'GameResources/actors' / folder).exists(), 'Legacy actor directory remains: ' + folder

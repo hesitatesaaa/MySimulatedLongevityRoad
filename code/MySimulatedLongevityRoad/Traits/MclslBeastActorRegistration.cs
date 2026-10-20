@@ -103,8 +103,26 @@ internal static class MclslBeastActorRegistration
     {
         MclslBeastDefinition beast = MclslBeastCatalog.ForAsset(actor?.asset?.id);
         if (beast == null) return null;
+        string name = beast.Name;
+        if (beast.AssetPrefix == "mclsl_beast_" && actor.data != null)
+        {
+            const string key = "mclsl.beast.individual_name";
+            name = MclslActorAccessor.GetString(actor, key);
+            if (string.IsNullOrEmpty(name))
+            {
+                long id = MclslActorAccessor.Id(actor);
+                const string first = "玄青苍赤云霜月星灵幽玉紫";
+                const string second = "岚霄渊羽辰霖岳华川尘澜珑";
+                int pairCount = first.Length * second.Length;
+                int roll = MclslBeastWorld.Roll(beast.Id + "|name|" + id, pairCount * pairCount);
+                int leading = roll / pairCount, trailing = roll % pairCount;
+                name = beast.Name + "·" + first[leading / second.Length] + second[leading % second.Length]
+                    + first[trailing / second.Length] + second[trailing % second.Length];
+                MclslActorAccessor.Set(actor, key, name);
+            }
+        }
         return MclslRealmIds.Index(realm) >= 0
-            ? beast.Name + "·" + MclslRealmIds.Display(realm) : beast.Name;
+            ? name + "·" + MclslRealmIds.Display(realm) : name;
     }
 
     internal static void EnsureCultivationSeed(Actor actor)
@@ -123,6 +141,7 @@ internal static class MclslBeastActorRegistration
         if (actor?.asset == null || actor.data == null) return;
         MclslBeastDefinition beast = MclslBeastCatalog.ForAsset(actor.asset.id);
         if (beast == null) return;
+        EnsureLineage(actor, beast);
         string wanted = CanTransform(actor) ? beast.AscendedAssetId : beast.BeastAssetId;
         if (string.Equals(actor.asset.id, wanted, StringComparison.Ordinal)) return;
         ActorAsset target = AssetManager.actor_library.get(wanted);
@@ -133,6 +152,11 @@ internal static class MclslBeastActorRegistration
         if (lineage != null && actor.subspecies != lineage) actor.setSubspecies(lineage);
         actor.registerDecisions();
         MclslBeastAnimation.Forget(actor);
+    }
+
+    private static void EnsureLineage(Actor actor, MclslBeastDefinition beast)
+    {
+        MclslActorPresentation.ReconcileLineage(actor);
     }
 
     private static void Register(MclslBeastDefinition beast, ActorAsset orc)
@@ -206,6 +230,7 @@ internal static class MclslBeastActorRegistration
     {
         asset.name_locale = humanoid ? beast.AscendedAssetId : beast.BeastAssetId;
         asset.can_edit_traits = true;
+        asset.can_have_subspecies = true;
         asset.can_evolve_into_new_species = false;
         asset.has_baby_form = false;
         asset.use_phenotypes = false;

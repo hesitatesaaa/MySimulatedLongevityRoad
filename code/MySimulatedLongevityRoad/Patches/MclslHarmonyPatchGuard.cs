@@ -16,7 +16,8 @@ internal static class MclslHarmonyPatchGuard
         MethodInfo original,
         MethodInfo prefix = null,
         MethodInfo postfix = null,
-        MethodInfo finalizer = null)
+        MethodInfo finalizer = null,
+        MethodInfo transpiler = null)
     {
         if (harmony == null || original == null)
         {
@@ -31,6 +32,7 @@ internal static class MclslHarmonyPatchGuard
             if (prefix != null) processor.AddPrefix(prefix);
             if (postfix != null) processor.AddPostfix(postfix);
             if (finalizer != null) processor.AddFinalizer(finalizer);
+            if (transpiler != null) processor.AddTranspiler(transpiler);
             processor.Patch();
             return true;
         }

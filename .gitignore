@@ -5,6 +5,8 @@
 
 # Local reference material
 /reference/
+# Third-party mod sources kept for reference only; not ours to publish.
+.dev-tools/fantasy-reference/
 
 # Build and interpreter artefacts
 **/bin/

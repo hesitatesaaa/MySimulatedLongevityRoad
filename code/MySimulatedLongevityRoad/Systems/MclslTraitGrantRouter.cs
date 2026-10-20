@@ -28,13 +28,6 @@ internal static class MclslTraitGrantRouter
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
 
-        int battle=Array.IndexOf(Combat.MclslBattleProfessionSystem.Traits,traitId);
-        if(battle>=0)
-        {
-            Combat.MclslBattleProfessionSystem.SetMain(actor,Combat.MclslBattleProfessionSystem.Ids[battle]);
-            MarkAndRefresh(actor);return;
-        }
-
         bool isHuanzhen = traitId == MclslTraitRegistration.HuanzhenTraitId;
         bool isGift = MclslTraitRegistration.IsGiftTrait(traitId);
         bool isRealm = MclslTraitRegistration.TryRealmForTrait(traitId, out string realm);
@@ -120,9 +113,6 @@ internal static class MclslTraitGrantRouter
         if (actor?.data == null || string.IsNullOrWhiteSpace(traitId)) return;
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
-        int battle=Array.IndexOf(Combat.MclslBattleProfessionSystem.Traits,traitId);
-        if(battle>=0 && Combat.MclslBattleProfessionSystem.Main(actor)==Combat.MclslBattleProfessionSystem.Ids[battle])
-        {Combat.MclslBattleProfessionSystem.ClearMain(actor);MarkAndRefresh(actor);return;}
         if (MclslProfessionSystem.IsProfessionTrait(traitId))
         {
             MclslProfessionSystem.OnTraitRemoved(actor, traitId);

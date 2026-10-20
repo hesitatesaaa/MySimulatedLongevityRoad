@@ -223,7 +223,6 @@ internal static class MclslTraitRegistration
         EnsureGroup(SpecialGroupId, "长生路特殊", "#D8C778");
         EnsureGroup(PhysiqueGroupId, "玄黄异禀", "#8FCBBF");
         EnsureGroup(ProfessionGroupId, "职业", "#D3B878");
-        EnsureGroup("MclslBattleProfessions", "斗法主职", "#81CDC3");
         EnsureGroup(ImmortalPathGroupId, "仙路", "#D3A8E7");
         EnsureGroup(XuanHuangHeavenGroupId, "玄黄天道", "#E0BE6E");
 
@@ -249,14 +248,6 @@ internal static class MclslTraitRegistration
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
         MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
-        for(int i=0;i<Systems.Combat.MclslBattleProfessionSystem.Ids.Length;i++)
-        {
-            string battleId=Systems.Combat.MclslBattleProfessionSystem.Traits[i];
-            string battleName=Systems.Combat.MclslBattleProfessionSystem.Names[i];
-            AddProfession(battleId,"trait/"+battleId,battleName,"斗法主职："+battleName+"。生产职业独立，基础技能可兼修。",
-                "一主职加兼修，以法门入道，以传承与斗法精进。","主职核心技金丹起、大神通化神起；换职保留所学与冷却，原主职高阶技休眠。赋予特质仅指定主职，不赠送技能。");
-            AssetManager.traits.get(battleId).group_id="MclslBattleProfessions";
-        }
         AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。",
             "辨材炼药，以丹助修。", "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度。");
         AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。",

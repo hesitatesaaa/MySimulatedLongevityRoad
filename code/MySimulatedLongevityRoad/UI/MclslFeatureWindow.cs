@@ -483,9 +483,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
                 Sprite icon = SpriteTextureLoader.getSprite(spell.IconPath);
                 if (icon != null) GUILayout.Label(icon.texture, GUILayout.Width(38f), GUILayout.Height(38f));
                 GUILayout.Label(MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + spell.Name
-                    + "　" + progress
-                    + (MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(_actor,spell.Id)?"":" · 异职高阶技能休眠")
-                    + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
+                    + "　" + progress + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
                 if (studyTarget == spell.Id)
                 {
                     if (GUILayout.Button("停止参悟", _bagButton, GUILayout.Width(76f), GUILayout.Height(34f)))

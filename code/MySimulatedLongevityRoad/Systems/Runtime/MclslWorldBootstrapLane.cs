@@ -58,6 +58,7 @@ internal static class MclslWorldBootstrapLane
             Actor actor = _actors[_cursor++];
             processed++;
             if (actor?.data == null || !MclslActorAccessor.Alive(actor)) continue;
+            MclslActorPresentation.ReconcileLineage(actor);
             MclslBeastActorRegistration.ReconcileForm(actor);
             MclslProfessionSystem.ReconcileAndPromote(actor);
 
