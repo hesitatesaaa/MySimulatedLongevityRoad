@@ -84,8 +84,9 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "Actor.calculateForce", typeof(Actor), nameof(Actor.calculateForce), new[] { typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(bool) }, prefix: nameof(Actor_CalculateForce_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "Actor.applyRandomForce", typeof(Actor), nameof(Actor.applyRandomForce), new[] { typeof(float), typeof(float) }, prefix: nameof(Actor_ApplyRandomForce_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "BaseSimObject.addStatusEffect", typeof(BaseSimObject), nameof(BaseSimObject.addStatusEffect), new[] { typeof(StatusAsset), typeof(float), typeof(bool) }, prefix: nameof(BaseSimObject_AddStatusEffect_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "ScrollWindow.hide", typeof(ScrollWindow), nameof(ScrollWindow.hide), Type.EmptyTypes, prefix: nameof(ScrollWindow_Hide_RankRightClickGuard_Prefix));
-        count += TryPatchPair(harmony, "ScrollWindow.hideAllEvent", typeof(ScrollWindow), "hideAllEvent", Type.EmptyTypes, prefix: nameof(ScrollWindow_HideAllEvent_RankRightClickGuard_Prefix));
+        count += TryPatchPair(harmony, "ScrollWindow.hide", typeof(ScrollWindow), nameof(ScrollWindow.hide), new[] { typeof(string), typeof(bool) }, prefix: nameof(ScrollWindow_Hide_RankRightClickGuard_Prefix));
+        count += TryPatchPair(harmony, "ScrollWindow.hideAllEvent", typeof(ScrollWindow), "hideAllEvent", new[] { typeof(bool) }, prefix: nameof(ScrollWindow_HideAllEvent_RankRightClickGuard_Prefix));
+        count += MclslUnitWindowLifecycle.Apply(harmony);
         return count;
     }
 
@@ -100,20 +101,9 @@ internal static class MclslPatches
 
     private static MethodInfo ResolveTargetMethod(Type targetType, string targetName, Type[] targetArgs)
     {
-        MethodInfo exact = AccessTools.Method(targetType, targetName, targetArgs);
-        if (exact != null || targetType == null || string.IsNullOrWhiteSpace(targetName)) return exact;
-
-        MethodInfo best = null;
-        MethodInfo[] methods = targetType.GetMethods(
-            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-        for (int i = 0; i < methods.Length; i++)
-        {
-            MethodInfo candidate = methods[i];
-            if (!string.Equals(candidate.Name, targetName, StringComparison.Ordinal)) continue;
-            if (best == null || candidate.GetParameters().Length < best.GetParameters().Length)
-                best = candidate;
-        }
-        return best;
+        if (targetType == null || string.IsNullOrWhiteSpace(targetName)) return null;
+        // A similarly named overload is not a compatible Harmony target.
+        return AccessTools.Method(targetType, targetName, targetArgs);
     }
 
     private static int TryPatchPairOptional(Harmony harmony, string key, Type targetType, string targetName, Type[] targetArgs, string prefix = null, string postfix = null, string finalizer = null)
@@ -123,7 +113,7 @@ internal static class MclslPatches
         MethodInfo prefixMethod = string.IsNullOrWhiteSpace(prefix) ? null : AccessTools.Method(typeof(MclslPatches), prefix);
         MethodInfo postfixMethod = string.IsNullOrWhiteSpace(postfix) ? null : AccessTools.Method(typeof(MclslPatches), postfix);
         MethodInfo finalizerMethod = string.IsNullOrWhiteSpace(finalizer) ? null : AccessTools.Method(typeof(MclslPatches), finalizer);
-        return MclslHarmonyPatchGuard.TryPatch(harmony, key, original, prefixMethod, postfixMethod, finalizerMethod) ? 1 : 0;
+        return MclslHarmonyPatchGuard.TryPatch(harmony, key, original, prefixMethod, postfixMethod, finalizerMethod, required: false) ? 1 : 0;
     }
 
     private static bool LocalizedTextManager_GetText_NormalizeMclslKey_Prefix(ref string __0, ref string __result)
@@ -462,7 +452,7 @@ internal static class MclslPatches
     [HarmonyPatch(typeof(UnitStatsElement), "showContent")]
     private static Exception UnitStatsElement_ShowContent_Finalizer(Exception __exception)
     {
-        return __exception is NullReferenceException ? null : __exception;
+        return __exception; // Do not conceal failures in native coroutine creation.
     }
 
     private static void TryPatch(string key, Action action)
@@ -505,10 +495,9 @@ internal static class MclslPatches
 
     private static bool Actor_CalculateColoredSprite_FullArt_Prefix(Sprite __0, ref Sprite __result)
     {
-        if (__0 == null || __0.texture == null) return true;
-        string textureName = __0.texture.name;
-        if (!textureName.StartsWith("mclsl_raw_", StringComparison.Ordinal)
-            && !textureName.StartsWith("mclsl_native_", StringComparison.Ordinal)) return true;
+        // Ownership survives imported textures with empty/native names. Workers
+        // consult only the registry; never read pixels or mutate textures here.
+        if (!MclslSpriteOwnership.Contains(__0)) return true;
         // These whole-body sprites already contain their authored skin/hair colors.
         // ActorRenderData.colors still supplies damage/status tinting separately.
         __result = __0;

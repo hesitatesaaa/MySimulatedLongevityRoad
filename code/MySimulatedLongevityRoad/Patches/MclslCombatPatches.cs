@@ -12,15 +12,17 @@ internal static class MclslCombatPatches
 {
     internal static int ApplySafely(Harmony harmony)
     {
-        MethodInfo original = AccessTools.Method(typeof(Actor), "getHit");
+        MethodInfo original = AccessTools.Method(typeof(Actor), "getHit", new[] {
+            typeof(float), typeof(bool), typeof(AttackType), typeof(BaseSimObject), typeof(bool), typeof(bool), typeof(bool) });
         MethodInfo prefix = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetHit_RealmSuppression_Prefix));
         MethodInfo postfix = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetHit_KillStatistics_Postfix));
         int count = MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.getHit", original, prefix, postfix) ? 1 : 0;
-        MethodInfo attack = AccessTools.Method(typeof(Actor), "tryToAttack");
+        MethodInfo attack = AccessTools.Method(typeof(Actor), "tryToAttack", new[] {
+            typeof(BaseSimObject), typeof(bool), typeof(System.Action), typeof(UnityEngine.Vector3), typeof(Kingdom), typeof(WorldTile), typeof(float) });
         MethodInfo attackTalisman = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_TryToAttack_Talisman_Postfix));
         MethodInfo attackGuard = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_TryToAttack_Immortal_Prefix));
         if (MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.tryToAttack.consumableTalisman", attack, attackGuard, attackTalisman)) count++;
-        MethodInfo cooldown = AccessTools.Method(typeof(Actor), "getAttackCooldown");
+        MethodInfo cooldown = AccessTools.Method(typeof(Actor), "getAttackCooldown", System.Type.EmptyTypes);
         MethodInfo talisman = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetAttackCooldown_Talisman_Postfix));
         if (MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.getAttackCooldown.talisman", cooldown, null, talisman)) count++;
         MethodInfo force = AccessTools.Method(typeof(Actor), "addForce", new[]
@@ -48,7 +50,7 @@ internal static class MclslCombatPatches
     {
         if (!__result) return;
         MclslItemUseSystem.TryAutoCombatTalisman(__instance);
-        MclslSpellSystem.TryCastCombat(__instance);
+        if (!MclslCareerCombat.TryCast(__instance)) MclslSpellSystem.TryCastCombat(__instance);
     }
 
     private static bool Actor_TryToAttack_Immortal_Prefix(Actor __instance, ref bool __result)

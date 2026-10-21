@@ -8,6 +8,8 @@ void Check(bool result, string scenario)
     assertions++;
 }
 _ = MclslRuntimeChanges.Owner;
+Check(Task.Run(() => MclslNativeActorFrames.Request("not-registered")).GetAwaiter().GetResult() == null,
+    "worker request before registration does not initialize Unity or capture cache ownership");
 MclslActorAnimationCatalog.Root = Environment.GetEnvironmentVariable("MCLSL_ACTOR_FIXTURE")
     ?? Path.Combine(Directory.GetCurrentDirectory(), "build/actor-loading-fixture");
 string Register(string formPath, string name, MclslActorAnimationCatalog.FrameProfile profile = null)
@@ -27,6 +29,8 @@ string walk = Register("actors/Test/Human", "walk_0");
 var beastInitial = MclslNativeActorFrames.Initial(beast);
 var humanInitial = MclslNativeActorFrames.Initial(human);
 Check(beastInitial != null && humanInitial != null && beastInitial != humanInitial, "forms own distinct current-art initial sprites");
+Check(MclslNativeActorFrames.ResidentBytes == 2L * 256 * 256 * 4,
+    "resident accounting includes both pinned initial textures");
 Check(SpriteTextureLoader._cached_sprite_list["actors/Test/Human/main"].Length == 2
     && SpriteTextureLoader._cached_sprites[walk].name == "walk_0"
     && ReferenceEquals(SpriteTextureLoader._cached_sprites[walk].texture, humanInitial.texture),
@@ -65,4 +69,11 @@ string oversized = Register("actors/Test/Oversized", "idle_0", new() { Width = 9
 bool budgetRejected = false;
 try { MclslNativeActorFrames.Initial(oversized); } catch (InvalidDataException) { budgetRejected = true; }
 Check(budgetRejected && !MclslActorPixelResources.Loads.ContainsKey(oversized), "reserved initial budget is enforced before decoding");
+var imported = new UnityEngine.Sprite { name = string.Empty };
+Check(!MclslSpriteOwnership.Contains(imported), "unregistered native sprites keep the native rendering path");
+MclslSpriteOwnership.Register(imported);
+imported.name = "renamed-without-a-prefix";
+Check(MclslSpriteOwnership.Contains(imported), "imported sprite ownership does not depend on texture or sprite names");
+MclslSpriteOwnership.Unregister(imported);
+Check(!MclslSpriteOwnership.Contains(imported), "evicted sprite identity is removed");
 Console.WriteLine($"PASS: {assertions} offline loading assertions; Unity texture decoding is stubbed.");

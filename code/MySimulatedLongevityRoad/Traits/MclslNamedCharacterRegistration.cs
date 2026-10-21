@@ -49,7 +49,6 @@ internal static class MclslNamedCharacterRegistration
         ActorAsset human = AssetManager.actor_library.get("human");
         ActorAsset orc = AssetManager.actor_library.get("orc");
         if (human == null || orc == null) return;
-        _initialized = true;
         foreach (Definition definition in All)
         {
             if (definition.Beast) continue; // registered as realm-gated beast forms
@@ -93,8 +92,10 @@ internal static class MclslNamedCharacterRegistration
             catch (Exception ex)
             {
                 MclslDiagnostics.Error("named-register:" + definition.Id, "具名人物注册失败: " + ex);
+                throw;
             }
         }
+        _initialized = true;
     }
 
     internal static void AddPowers(PowersTab tab)

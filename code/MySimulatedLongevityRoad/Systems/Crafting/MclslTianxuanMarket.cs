@@ -411,6 +411,7 @@ internal static class MclslTianxuanMarket
         MclslConsumableInventoryPolicy.BuildReservePlan(actor, ReservePlanScratch);
         MclslProfessionSystem.BuildCraftMaterialReserves(actor, bag, CraftReserveScratch, year);
         MclslSpellScrollCrafting.AddMaterialReserves(actor, CraftReserveScratch);
+        Combat.MclslCareerSupply.AddReserves(actor, CraftReserveScratch);
         MclslOwnedItem[] candidates = bag.Items.ToArray();
         MclslBagState before = MclslBagSystem.Copy(bag);
         Dictionary<string, int> remainingCounts = new(StringComparer.Ordinal);
@@ -434,7 +435,8 @@ internal static class MclslTianxuanMarket
             if (item == null) continue;
             if (item.Category == "Artifact") continue; // Individual artifacts use the equipment surplus path.
             if (owned.AcquiredYear >= 0 && year <= owned.AcquiredYear) continue;
-            int reserve = MclslConsumableInventoryPolicy.ReserveCount(actor, item, ReservePlanScratch, CraftReserveScratch);
+            int reserve = Math.Max(MclslConsumableInventoryPolicy.ReserveCount(actor, item, ReservePlanScratch, CraftReserveScratch),
+                Combat.MclslCareerSupply.Reserve(actor,item));
             int remaining = remainingCounts.TryGetValue(item.Id, out int total) ? total : 0;
             if (remaining <= reserve) continue;
             int count = Math.Min(MaxStackListingCount, Math.Min(owned.Count, remaining - reserve));
@@ -852,6 +854,7 @@ internal static class MclslTianxuanMarket
             Profession = CurrentProfession(actor), Grade = MclslProfessionSystem.GetGrade(actor) };
         MclslBagState bag = MclslBagSystem.Peek(actor);
         MclslProfessionSystem.BuildCraftMaterialReserves(actor, bag, CraftReserveScratch, year);
+        Combat.MclslCareerSupply.AddReserves(actor, CraftReserveScratch);
         List<MclslMarketPurchaseNeed> craft = CraftNeedsScratch;
         craft.Clear();
         CraftKeysScratch.Clear();
@@ -867,6 +870,7 @@ internal static class MclslTianxuanMarket
         MclslConsumableInventoryPolicy.BuildReservePlan(actor, ReservePlanScratch);
         BuildFinishedGoodsNeeds(actor, bag, DesiredItemIdsScratch);
         AddSpellScrollNeed(actor, bag, DesiredItemIdsScratch);
+        Combat.MclslCareerSupply.AddNeeds(actor, bag, DesiredItemIdsScratch);
         List<MclslMarketPurchaseNeed> finished = FinishedNeedsScratch;
         finished.Clear(); FinishedIdsScratch.Clear();
         foreach (string id in DesiredItemIdsScratch)

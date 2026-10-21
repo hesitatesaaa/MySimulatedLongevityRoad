@@ -17,11 +17,12 @@ internal static class MclslHarmonyPatchGuard
         MethodInfo prefix = null,
         MethodInfo postfix = null,
         MethodInfo finalizer = null,
-        MethodInfo transpiler = null)
+        MethodInfo transpiler = null,
+        bool required = true)
     {
         if (harmony == null || original == null)
         {
-            FailedRequiredPatches.Add(key ?? "unknown");
+            if (required) FailedRequiredPatches.Add(key ?? "unknown");
             MclslDiagnostics.Error("harmony-missing:" + key, "关键补丁目标缺失: " + key);
             return false;
         }
@@ -34,11 +35,12 @@ internal static class MclslHarmonyPatchGuard
             if (finalizer != null) processor.AddFinalizer(finalizer);
             if (transpiler != null) processor.AddTranspiler(transpiler);
             processor.Patch();
+            FailedRequiredPatches.Remove(key ?? "unknown");
             return true;
         }
         catch (System.Exception ex)
         {
-            FailedRequiredPatches.Add(key ?? "unknown");
+            if (required) FailedRequiredPatches.Add(key ?? "unknown");
             MclslDiagnostics.Error("harmony-failed:" + key, "补丁挂载失败 " + key + ": " + ex.Message);
             return false;
         }

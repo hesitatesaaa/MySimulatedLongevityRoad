@@ -23,6 +23,7 @@ internal static class MclslActorPixelResources
             texture.Apply(false, true);
             _transparent = Sprite.Create(texture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1f);
             _transparent.name = "mclsl_hidden_native_corpse";
+            MclslSpriteOwnership.Register(_transparent);
             return _transparent;
         }
     }
@@ -38,7 +39,7 @@ internal static class MclslActorPixelResources
         // session (roughly 6 MB for a 1254x1254 icon), so reuse the imported
         // texture and only rebuild the full-canvas sprite the UI expects.
         Sprite shared = ReuseImported(resourcePath, original);
-        if (shared != null) { Loaded[resourcePath] = shared; return shared; }
+        if (shared != null) { MclslSpriteOwnership.Register(shared); Loaded[resourcePath] = shared; return shared; }
         Texture2D texture = null;
         try
         {
@@ -66,6 +67,7 @@ internal static class MclslActorPixelResources
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                 pivot, pixelsPerUnit, 0, SpriteMeshType.FullRect);
             sprite.name = Path.GetFileName(resourcePath);
+            MclslSpriteOwnership.Register(sprite);
             Loaded[resourcePath] = sprite;
             MclslDiagnostics.Once("pixel-texture:" + resourcePath,
                 resourcePath + " " + texture.width + "x" + texture.height
@@ -145,6 +147,7 @@ internal static class MclslActorPixelResources
             if (sprite == null)
                 throw new InvalidDataException("Native sprite creation failed: " + resourcePath);
             sprite.name = Path.GetFileName(resourcePath);
+            MclslSpriteOwnership.Register(sprite);
             return sprite;
         }
         catch (Exception ex)

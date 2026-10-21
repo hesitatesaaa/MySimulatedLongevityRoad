@@ -3,5 +3,6 @@
   <ItemGroup>
     <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslNativeActorFrames.cs" Link="MclslNativeActorFrames.cs" />
     <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorFrameCache.cs" Link="MclslActorFrameCache.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslSpriteOwnership.cs" Link="MclslSpriteOwnership.cs" />
   </ItemGroup>
 </Project>

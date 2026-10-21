@@ -216,7 +216,6 @@ internal static class MclslTraitRegistration
     internal static void Init()
     {
         if (_initialized) return;
-        _initialized = true;
         EnsureGroup(RealmGroupId, "新法境界", "#8FD4C8");
         EnsureGroup(AncientRealmGroupId, "仙道境界", "#A6D8D1");
         EnsureGroup(GiftGroupId, "灵根品阶", "#C8D48F");
@@ -280,6 +279,7 @@ internal static class MclslTraitRegistration
         }
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
+        _initialized = true;
     }
 
     internal static string GiftTraitIdForAptitude(int aptitude) => MclslAptitudeGiftCatalog.ForAptitude(aptitude).TraitId;

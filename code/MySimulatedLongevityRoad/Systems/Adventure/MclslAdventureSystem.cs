@@ -346,6 +346,8 @@ internal static class MclslAdventureSystem
         ruin.RemainingValue = Math.Max(0, ruin.RemainingValue - (PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_value|" + year) % 100 < valueLossChance ? 1 : 0));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, experience + 1 + progressGain / 15);
         MclslMaterialDiscovery.TryDiscover(actor, ruin, year, order);
+        Combat.MclslCombatCareerSystem.Offer(actor, year, "遗迹传承", 1500);
+        Combat.MclslCareerSupply.GiveOpportunitySupply(actor, year);
         string reward = GrantRuinReward(actor, ruin, year, realmIndex, out string revivedTechniqueId, out string revivedTechniqueName, out string linkedLineageId);
         bool ancientPath = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;

@@ -85,6 +85,9 @@ internal static class MclslActorInfoPanel
                 formatted = MclslActorInfoFormatter.Format(window.actor);
         }
         finally { MclslPerformanceProbe.End("UI.人物侧栏", sample); }
+        if (Systems.Combat.MclslCombatCareerSystem.Applicable(window.actor))
+            formatted = (string.IsNullOrWhiteSpace(formatted) ? "<b>修行档案</b>\n" : formatted)
+                + Systems.Combat.MclslCombatCareerSystem.Overview(window.actor);
         if (string.IsNullOrWhiteSpace(formatted))
         {
             if (!MclslDeveloperBridge.IsAvailable)
@@ -153,6 +156,7 @@ internal static class MclslActorInfoPanel
             }
             RestoreScroll(scroll, keepScroll, keepContentPosition);
         }
+        MclslCareerSkillView.Bind(panel ?? background, window.actor);
     }
 
     internal static void RefreshOpenForActor(Actor actor)
@@ -296,6 +300,12 @@ internal static class MclslActorInfoPanel
         EnsureActionButton(bar.transform, "Biography", LM.Get("mclsl_xianlu_profile_biography"),
             () => MclslCodexWindow.ShowBiographyForActor(actor));
         EnsureBiographyArtwork(bar.transform.Find("Biography"));
+        RectTransform biographyRect = bar.transform.Find("Biography").GetComponent<RectTransform>();
+        biographyRect.anchorMax = new Vector2(0.5f, 1f);
+        EnsureActionButton(bar.transform, "Career", "职业技能", () => MclslCareerSkillView.Toggle(panel, actor));
+        RectTransform careerRect = bar.transform.Find("Career").GetComponent<RectTransform>();
+        careerRect.anchorMin = new Vector2(0.5f, 0f);
+        RefreshCareerButton(panel);
         MclslRankTooltipTrigger biographyTip = bar.transform.Find("Biography")?.GetComponent<MclslRankTooltipTrigger>();
         if (biographyTip == null) biographyTip = bar.transform.Find("Biography")?.gameObject.AddComponent<MclslRankTooltipTrigger>();
         if (biographyTip != null)
@@ -363,7 +373,14 @@ internal static class MclslActorInfoPanel
         if (labelText != null) labelText.text = label;
     }
 
-    private static void EnsureBiographyArtwork(Transform button)
+    internal static void RefreshCareerButton(Transform panel)
+    {
+        Transform button = panel.Find("MclslActorActions/Career");
+        if (button != null) EnsureBiographyArtwork(button,
+            MclslCareerSkillView.Showing(panel) ? "title_career_archive" : "title_career_skills");
+    }
+
+    private static void EnsureBiographyArtwork(Transform button, string artwork = "title_biography")
     {
         if (button == null) return;
         Outline border = button.GetComponent<Outline>();
@@ -384,7 +401,7 @@ internal static class MclslActorInfoPanel
         artRect.anchorMax = Vector2.one;
         artRect.offsetMin = new Vector2(3f, 2f);
         artRect.offsetMax = new Vector2(-3f, -2f);
-        XianLuUIResources.Apply(art, "title_biography", Color.clear);
+        XianLuUIResources.Apply(art, artwork, Color.clear);
         art.transform.SetAsLastSibling();
         Text fallback = button.Find("Text")?.GetComponent<Text>();
         if (fallback != null)
@@ -710,6 +727,7 @@ internal static class MclslActorInfoPanel
     private static bool ShouldShowFor(Actor actor)
     {
         if (actor?.data == null) return false;
+        if (Systems.Combat.MclslCombatCareerSystem.Applicable(actor)) return true;
         try { if (!actor.isAlive()) return false; } catch { return false; }
         if (IsWorldSoulEntity(actor)) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;

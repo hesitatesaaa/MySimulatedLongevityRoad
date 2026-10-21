@@ -36,6 +36,8 @@ internal sealed class MclslActorFrameCache<T> where T : class
         _grace = evictionGraceSeconds;
     }
 
+    internal bool IsBudgetBlocked { get; private set; }
+
     internal long ResidentBytes { get { lock (_gate) return _bytes; } }
     internal int PendingCount { get { lock (_gate) return _pending.Count; } }
     internal void Register(string key, long bytes)
@@ -76,6 +78,7 @@ internal sealed class MclslActorFrameCache<T> where T : class
         lock (_gate)
         {
             _now = unscaledNow;
+            IsBudgetBlocked = false;
             if (_requests.Count == 0) return 0;
         }
         long started = Stopwatch.GetTimestamp();
@@ -111,7 +114,7 @@ internal sealed class MclslActorFrameCache<T> where T : class
             }
             if (evicted != null)
                 foreach (T value in evicted) release(value);
-            if (blocked) return count;
+            if (blocked) { IsBudgetBlocked = true; return count; }
             T loaded = null;
             try { loaded = load(key); }
             finally
@@ -144,6 +147,7 @@ internal sealed class MclslActorFrameCache<T> where T : class
             _requests.Clear();
             _failed.Clear();
             _bytes = 0;
+            IsBudgetBlocked = false;
         }
         foreach (T value in values) release(value);
     }

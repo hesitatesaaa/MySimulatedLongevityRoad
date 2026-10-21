@@ -1,0 +1,1808 @@
+[
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/female_1",
+    "Atlas": "actors/Xuanhuang/female_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/female_1",
+    "Atlas": "actors/Xuanhuang/female_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/female_1",
+    "Atlas": "actors/Xuanhuang/female_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/male_1",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/warrior_1",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/king",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/leader",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/child",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang/zombie",
+    "Atlas": "actors/Xuanhuang/male_1",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/male_1",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/warrior_1",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/king",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/leader",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/child",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_front/zombie",
+    "Atlas": "actors/Xuanhuang/male_1_front",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/male_1",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/warrior_1",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/king",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/leader",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/child",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 2.5,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  },
+  {
+    "Path": "actors/species/civs/mclsl_xuanhuang_back/zombie",
+    "Atlas": "actors/Xuanhuang/male_1_back",
+    "Frames": [
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_0",
+        "PivotY": 0,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_1",
+        "PivotY": 0,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_2",
+        "PivotY": 0,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 28,
+        "Name": "walk_3",
+        "PivotY": 0,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_0",
+        "PivotY": 7,
+        "X": 0,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_1",
+        "PivotY": 7,
+        "X": 28,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_2",
+        "PivotY": 7,
+        "X": 56,
+        "PivotX": 14,
+        "Width": 28
+      },
+      {
+        "Height": 28,
+        "PixelsPerUnit": 1.8,
+        "Y": 0,
+        "Name": "swim_3",
+        "PivotY": 7,
+        "X": 84,
+        "PivotX": 14,
+        "Width": 28
+      }
+    ]
+  }
+]

@@ -19,14 +19,16 @@ internal static class MclslNativeActorFrames
     private const long MaximumBudgetBytes = 384L * 1024 * 1024;
     private const long FallbackBudgetBytes = 192L * 1024 * 1024;
     private const long InitialBudgetBytes = 64L * 1024 * 1024;
-    private static readonly long BudgetBytes = ResolveBudgetBytes();
-    private static readonly MclslActorFrameCache<Sprite> Cache = new(BudgetBytes - InitialBudgetBytes);
-    internal static long ResidentBytes => Cache.ResidentBytes;
+    private static long BudgetBytes;
+    private static volatile MclslActorFrameCache<Sprite> Cache;
+    internal static long ResidentBytes => (Cache?.ResidentBytes ?? 0) + InitialBytes;
+    internal static long StreamingResidentBytes => Cache?.ResidentBytes ?? 0;
     internal static long NativeBudgetBytes => BudgetBytes;
-    internal static int PendingFrameCount => Cache.PendingCount;
+    internal static int PendingFrameCount => Cache?.PendingCount ?? 0;
     // Asset initialization holds these current-art sprites across world loads.
     private static readonly ConcurrentDictionary<string, Sprite> Initials = new(StringComparer.Ordinal);
     private static long InitialBytes;
+    private static readonly Dictionary<string, List<string>> Groups = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, string> Files = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, MclslActorAnimationCatalog.FrameProfile> Profiles = new(StringComparer.Ordinal);
 
@@ -34,6 +36,7 @@ internal static class MclslNativeActorFrames
     {
         if (!MclslRuntimeChanges.IsMainThread)
             throw new InvalidOperationException("Native frame registration must run on the main thread");
+        EnsureCache();
         if (form?.NativeResourcePath == null)
             throw new InvalidDataException("Native resource group is missing");
         if (Files.ContainsKey(resourcePath)) return;
@@ -46,12 +49,16 @@ internal static class MclslNativeActorFrames
         Cache.Register(resourcePath, bytes);
         Files[resourcePath] = file;
         Profiles[resourcePath] = profile;
+        string group = resourcePath.Substring(0, resourcePath.LastIndexOf('/'));
+        if (!Groups.TryGetValue(group, out var keys)) Groups[group] = keys = new List<string>();
+        keys.Add(resourcePath);
     }
 
     internal static Sprite Initial(string resourcePath)
     {
         if (!MclslRuntimeChanges.IsMainThread)
             throw new InvalidOperationException("Initial actor sprites must load on the main thread");
+        EnsureCache();
         if (Initials.TryGetValue(resourcePath, out Sprite existing)) return existing;
         var profile = Profiles[resourcePath];
         long bytes = checked((long)profile.Width * profile.Height * 4);
@@ -65,9 +72,8 @@ internal static class MclslNativeActorFrames
         // this current-art texture; actual animation frames still load on demand.
         string mainPath = resourcePath.Substring(0, resourcePath.LastIndexOf('/'));
         var metadata = new List<Sprite>();
-        foreach (string key in Profiles.Keys)
+        foreach (string key in Groups[mainPath])
         {
-            if (!key.StartsWith(mainPath + "/", StringComparison.Ordinal)) continue;
             Sprite entry = sprite;
             if (key != resourcePath)
             {
@@ -75,6 +81,7 @@ internal static class MclslNativeActorFrames
                     new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height),
                     sprite.pixelsPerUnit, 0, SpriteMeshType.FullRect);
                 entry.name = Path.GetFileName(key);
+                MclslSpriteOwnership.Register(entry);
             }
             SpriteTextureLoader._cached_sprites[key] = entry;
             metadata.Add(entry);
@@ -84,7 +91,16 @@ internal static class MclslNativeActorFrames
     }
 
     internal static Sprite Request(string resourcePath)
-        => Initials.TryGetValue(resourcePath, out Sprite initial) ? initial : Cache.Request(resourcePath);
+        => Initials.TryGetValue(resourcePath, out Sprite initial) ? initial : Cache?.Request(resourcePath);
+
+    private static void EnsureCache()
+    {
+        if (Cache != null) return;
+        if (!MclslRuntimeChanges.IsMainThread)
+            throw new InvalidOperationException("Native cache initialization must run on the main thread");
+        BudgetBytes = ResolveBudgetBytes();
+        Cache = new MclslActorFrameCache<Sprite>(BudgetBytes - InitialBudgetBytes);
+    }
 
     // Called once on the main thread when the first frame registers. SystemInfo is
     // main-thread only, so this must not run from a static initializer off-thread.
@@ -103,15 +119,16 @@ internal static class MclslNativeActorFrames
         if (Files.Count == 0) return;
         int loaded = Cache.Pump(Time.realtimeSinceStartup, Math.Max(1, maxLoads), Math.Max(0.5d, maxMilliseconds),
             resource => MclslActorPixelResources.LoadNative(resource, Files[resource], Profiles[resource]), Release);
-        if (loaded == 0 && Cache.PendingCount > 0 && Cache.ResidentBytes >= BudgetBytes)
+        if (loaded == 0 && Cache.PendingCount > 0 && Cache.IsBudgetBlocked)
             MclslDiagnostics.Once("native-frame-cache-full", "原生动画缓存已达到显存预算; 正等待未使用帧释放");
     }
 
-    internal static void Clear() => Cache.Clear(Release);
+    internal static void Clear() => Cache?.Clear(Release);
 
     private static void Release(Sprite sprite)
     {
         if (sprite == null) return;
+        MclslSpriteOwnership.Unregister(sprite);
         Texture2D texture = sprite.texture;
         UnityEngine.Object.Destroy(sprite);
         if (texture != null) UnityEngine.Object.Destroy(texture);

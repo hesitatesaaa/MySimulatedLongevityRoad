@@ -635,6 +635,8 @@ internal static class MclslCultivationSystem
         // Version 2 snapshots preserve roots, resources, ancient-law stages and
         // post-longevity state through an allow-listed extensible state bag.
         MclslHuanzhenSystem.RestoreSupplementalState(actor, snapshot);
+        if(Combat.MclslCombatCareerSystem.Applicable(actor))
+            Combat.MclslCombatCareerSystem.SyncTraits(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, anchorYear - 1);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughYear, deathYear);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "还真保留死前境界与全部修行根基");

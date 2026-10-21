@@ -18,7 +18,7 @@ internal static class MclslEligibility
         "unit_human", "human",
         "unit_elf", "elf",
         "unit_dwarf", "dwarf",
-        "unit_orc", "orc"
+        "unit_orc", "orc", "mclsl_xuanhuang"
     };
 
     private static readonly string[] LockedIdTokens =
@@ -48,7 +48,7 @@ internal static class MclslEligibility
         eligible = false;
         if (actor?.data == null || actor.asset == null || MclslActorAccessor.Id(actor) <= 0L) return false;
         string id = actor.asset.id ?? string.Empty;
-        if (id.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
+        if (id != "mclsl_xuanhuang" && id.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
             || MclslWorldSoulActorRegistration.IsWorldSoulAssetId(id)) return true;
         // Native Actor.isSapient returns false before a subspecies is attached.
         // Treat that state as pending, not as a completed negative birth roll.

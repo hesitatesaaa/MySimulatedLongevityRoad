@@ -34,6 +34,9 @@ internal static class MclslRuntime
         MclslRuntimeDriver.Ensure();
         int year = CurrentYear();
         MclslRuntimeChanges.Clear();
+        Systems.Combat.MclslCombatCareerSystem.Clear();
+        Patches.MclslXuanhuangDirectionPatch.Clear();
+        Systems.Combat.MclslCareerCombat.Load();
         MclslModuleHub.OnWorldLoaded(year, MclslRuntimeSettings.CoreEnabled);
         MclslMaobaoArchiveManager.OnWorldLoaded();
         MclslAnnualBackpressure.InitializeAfterLoad();
@@ -90,6 +93,7 @@ internal static class MclslRuntime
             MclslTraitEditorEraFilter.RefreshVisibleEditors();
             MclslItemEffectDriver.Tick();
             if (!MclslRuntimeSettings.CoreEnabled) return;
+            Systems.Combat.MclslCareerCombat.Tick();
             long frameSample = MclslPerformanceProbe.Begin();
             using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
                 MclslModuleHub.TickFrame(_frameCounter, true);
@@ -111,6 +115,7 @@ internal static class MclslRuntime
     {
         if (MclslWorldArchiveStore.WriteLocked) return;
         MclslBagSystem.FlushForSave();
+        Systems.Combat.MclslCareerCombat.Save();
         MclslModuleHub.PrepareForSave();
     }
 
@@ -135,6 +140,8 @@ internal static class MclslRuntime
         MclslCodexWindow.ClearRuntime();
         MclslTianxuanMarket.ClearRuntime();
         MclslSpellSystem.ClearRuntime();
+        Systems.Combat.MclslCombatCareerSystem.Clear();
+        Patches.MclslXuanhuangDirectionPatch.Clear();
         MclslItemEffectDriver.ClearRuntime();
         MclslRecipeKnowledge.ClearRuntime();
         MclslSpiritualRootSystem.ClearRuntime();

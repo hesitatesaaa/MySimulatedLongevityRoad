@@ -28,6 +28,8 @@ internal static class MclslTraitGrantRouter
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
 
+        if (Combat.MclslCombatCareerSystem.HandleAdded(actor, traitId)) { MarkAndRefresh(actor); return; }
+
         bool isHuanzhen = traitId == MclslTraitRegistration.HuanzhenTraitId;
         bool isGift = MclslTraitRegistration.IsGiftTrait(traitId);
         bool isRealm = MclslTraitRegistration.TryRealmForTrait(traitId, out string realm);
@@ -113,6 +115,7 @@ internal static class MclslTraitGrantRouter
         if (actor?.data == null || string.IsNullOrWhiteSpace(traitId)) return;
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
+        if (Combat.MclslCombatCareerSystem.HandleRemoved(actor, traitId)) { MarkAndRefresh(actor); return; }
         if (MclslProfessionSystem.IsProfessionTrait(traitId))
         {
             MclslProfessionSystem.OnTraitRemoved(actor, traitId);

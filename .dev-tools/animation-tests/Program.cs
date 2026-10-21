@@ -287,7 +287,7 @@ Check(nativeCache.Pump(0, 2, 1000, key => { loadThread = Environment.CurrentMana
     "native frame loads on owner thread and becomes shared cache entry");
 nativeCache.Request("frame-b");
 Check(nativeCache.Pump(1, 2, 1000, key => key, released.Add) == 0
-    && nativeCache.PendingCount == 1 && nativeCache.ResidentBytes == 8,
+    && nativeCache.PendingCount == 1 && nativeCache.ResidentBytes == 8 && nativeCache.IsBudgetBlocked,
     "hot frame cannot be evicted to exceed memory budget");
 Check(nativeCache.Pump(6, 2, 1000, key => key, released.Add) == 1
     && released.SequenceEqual(new[] { "frame-a" }) && nativeCache.Request("frame-b") == "frame-b",
@@ -298,7 +298,7 @@ try { Task.Run(() => nativeCache.Pump(7, 1, 1000, key => key, released.Add)).Get
 catch (InvalidOperationException) { workerPumpRejected = true; }
 Check(workerPumpRejected, "render worker cannot decode or destroy Unity resources");
 nativeCache.Clear(released.Add);
-Check(nativeCache.ResidentBytes == 0 && released.Contains("frame-b"), "world reset releases resident native frames");
+Check(nativeCache.ResidentBytes == 0 && released.Contains("frame-b") && !nativeCache.IsBudgetBlocked, "world reset releases resident native frames");
 MclslMod.Root = workspace;
 ResetCatalog();
 JObject actualManifest = JObject.Parse(File.ReadAllText(Path.Combine(workspace, "resources/actor-frames.manifest.json")));

@@ -61,6 +61,7 @@ internal static class MclslWorldBootstrapLane
             MclslActorPresentation.ReconcileLineage(actor);
             MclslBeastActorRegistration.ReconcileForm(actor);
             MclslProfessionSystem.ReconcileAndPromote(actor);
+            if (Combat.MclslCombatCareerSystem.Applicable(actor)) Combat.MclslCombatCareerSystem.SyncTraits(actor);
 
             // 完整人口只恢复角色引用；修炼身份校正仅作用于有明确修炼标记的角色。
             MclslCultivatorCandidateIndex.Observe(actor);

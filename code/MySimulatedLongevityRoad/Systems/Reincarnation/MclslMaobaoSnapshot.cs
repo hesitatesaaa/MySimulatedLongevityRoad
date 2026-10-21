@@ -19,6 +19,8 @@ internal static class MclslMaobaoSnapshot
 
     internal static Dictionary<string, string> Capture(Actor actor)
     {
+        if (Combat.MclslCombatCareerSystem.Applicable(actor))
+            Combat.MclslCombatCareerSystem.Write(actor,Combat.MclslCombatCareerSystem.Read(actor));
         return actor?.data is BaseSystemData data
             ? CaptureFromBaseData(data)
             : new Dictionary<string, string>(StringComparer.Ordinal);

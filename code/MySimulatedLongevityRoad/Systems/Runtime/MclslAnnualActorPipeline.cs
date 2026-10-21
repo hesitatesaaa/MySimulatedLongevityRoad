@@ -108,7 +108,12 @@ internal static class MclslAnnualActorPipeline
             case 5:
             {
                 long sample = MclslPerformanceProbe.Begin();
-                try { MclslProfessionSystem.ProcessAnnual(actor, annualYear); }
+                try
+                {
+                    MclslProfessionSystem.ProcessAnnual(actor, annualYear);
+                    Combat.MclslCareerSupply.CraftAnnual(actor, annualYear);
+                    Combat.MclslCombatCareerSystem.ProcessAnnual(actor, annualYear);
+                }
                 finally { MclslPerformanceProbe.End("年度角色.职业判定制作", sample); }
                 break;
             }

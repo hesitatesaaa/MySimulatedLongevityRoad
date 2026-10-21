@@ -59,9 +59,9 @@ internal static class MclslImmortalActorRegistration
     internal static void Init()
     {
         if (_registered || AssetManager.actor_library == null) return;
-        _registered = true;
         Register(BaiId, "白先生", "Bai", "#E5EDF1");
         Register(ChuanfaId, "传法天尊", "Chuanfa", "#D5B66A");
+        _registered = true;
     }
 
     private static void Register(string id, string name, string folder, string color)
@@ -119,7 +119,7 @@ internal static class MclslImmortalActorRegistration
             asset.get_override_sprite = MclslBeastAnimation.GetSprite;
             asset.has_override_sprite = true;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 仙道人物注册失败 " + id + ": " + ex.Message); }
+        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 仙道人物注册失败 " + id + ": " + ex.Message); throw; }
     }
 
     private static void SetBool(object target, bool value, params string[] names)

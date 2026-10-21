@@ -20,6 +20,20 @@ internal static class MclslBackpackTabSystem
     private const string MentorshipTabId = "MclslMentorshipTab";
     private static readonly Dictionary<UnitWindow, WindowMetaTab> MentorshipTabs = new();
 
+    private static GameObject CloneInactive(GameObject source, Transform parent)
+    {
+        GameObject staging = new("MclslInactiveTemplate");
+        staging.SetActive(false);
+        try
+        {
+            GameObject clone = UnityEngine.Object.Instantiate(source, staging.transform);
+            clone.SetActive(false);
+            clone.transform.SetParent(parent, false);
+            return clone;
+        }
+        finally { UnityEngine.Object.Destroy(staging); }
+    }
+
     internal static void Bind(UnitWindow window)
     {
         if (window?.actor?.data == null || window.scroll_window?.tabs == null) return;
@@ -39,7 +53,7 @@ internal static class MclslBackpackTabSystem
         WindowMetaTab genealogyTab = tabsRoot.Find("Genealogy")?.GetComponent<WindowMetaTab>();
         if (template == null || contentParent == null || genealogyTab == null) return;
 
-        GameObject content = UnityEngine.Object.Instantiate(template, contentParent).gameObject;
+        GameObject content = CloneInactive(template.gameObject, contentParent);
         content.SetActive(false);
         content.name = ContentId;
         UnitGenealogyElement source = content.GetComponent<UnitGenealogyElement>();
@@ -95,13 +109,13 @@ internal static class MclslBackpackTabSystem
         }
 
         int insertAt = tabsRoot.Find("Genealogy").GetSiblingIndex();
-        WindowMetaTab tab = UnityEngine.Object.Instantiate(genealogyTab, tabsRoot);
+        WindowMetaTab tab = CloneInactive(genealogyTab.gameObject, tabsRoot).GetComponent<WindowMetaTab>();
         tab.name = TabId;
         tab.tab_action = new WindowMetaTabEvent();
         tab.tab_action.AddListener(clicked => window.scroll_window.tabs.showTab(clicked));
         tab.transform.SetSiblingIndex(insertAt);
         tab.container = window.scroll_window.tabs;
-        tab.tab_elements.RemoveAll(t => t.name.StartsWith("content_", StringComparison.OrdinalIgnoreCase));
+        tab.tab_elements = new List<Transform>(); // Never retain cloned native page references.
         Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/QiankunBagEntrance");
         if (icon != null)
         {
@@ -124,6 +138,7 @@ internal static class MclslBackpackTabSystem
         FieldInfo tabsField = typeof(WindowMetaTabButtonsContainer).GetField("_tabs", BindingFlags.NonPublic | BindingFlags.Instance);
         if (tabsField?.GetValue(window.scroll_window.tabs) is List<WindowMetaTab> tabs && !tabs.Contains(tab)) tabs.Add(tab);
         window.scroll_window.tabs.addTabContent(tab, content.transform);
+        tab.gameObject.SetActive(true);
         window.scroll_window.tabs.refillTabsWithContent();
         Tabs[window] = tab;
         MclslBackpackHeader.Bind(window);
@@ -145,7 +160,7 @@ internal static class MclslBackpackTabSystem
         Transform contentParent = window.transform.Find("Background/Scroll View/Viewport/Content");
         WindowMetaTab genealogyTab = tabsRoot.Find("Genealogy")?.GetComponent<WindowMetaTab>();
         if (template == null || contentParent == null || genealogyTab == null) return;
-        GameObject content = UnityEngine.Object.Instantiate(template, contentParent).gameObject;
+        GameObject content = CloneInactive(template.gameObject, contentParent);
         content.name = "content_mclsl_mentorship";
         content.SetActive(false);
         UnitGenealogyElement source = content.GetComponent<UnitGenealogyElement>();
@@ -170,13 +185,13 @@ internal static class MclslBackpackTabSystem
         SectionRoot(lineage)?.gameObject.SetActive(false);
         SectionRoot(books)?.gameObject.SetActive(false);
 
-        WindowMetaTab tab = UnityEngine.Object.Instantiate(genealogyTab, tabsRoot);
+        WindowMetaTab tab = CloneInactive(genealogyTab.gameObject, tabsRoot).GetComponent<WindowMetaTab>();
         tab.name = MentorshipTabId;
         tab.tab_action = new WindowMetaTabEvent();
         tab.tab_action.AddListener(clicked => window.scroll_window.tabs.showTab(clicked));
         tab.transform.SetSiblingIndex(tabsRoot.Find(TabId) != null ? tabsRoot.Find(TabId).GetSiblingIndex() + 1 : genealogyTab.transform.GetSiblingIndex());
         tab.container = window.scroll_window.tabs;
-        tab.tab_elements.RemoveAll(t => t.name.StartsWith("content_", StringComparison.OrdinalIgnoreCase));
+        tab.tab_elements = new List<Transform>(); // Never retain cloned native page references.
         Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/icon_spellbook") ?? SpriteTextureLoader.getSprite("ui/Icons/QiankunBagEntrance");
         if (icon != null)
         {
@@ -189,6 +204,7 @@ internal static class MclslBackpackTabSystem
         FieldInfo tabsField = typeof(WindowMetaTabButtonsContainer).GetField("_tabs", BindingFlags.NonPublic | BindingFlags.Instance);
         if (tabsField?.GetValue(window.scroll_window.tabs) is List<WindowMetaTab> tabs && !tabs.Contains(tab)) tabs.Add(tab);
         window.scroll_window.tabs.addTabContent(tab, content.transform);
+        tab.gameObject.SetActive(true);
         window.scroll_window.tabs.refillTabsWithContent();
         MentorshipTabs[window] = tab;
     }
@@ -376,7 +392,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
                 MclslOwnedItem owned = bag.Items[i];
                 string category = MclslItemCatalog.Get(owned?.ItemId)?.Category;
                 int index = category switch { "Artifact" => 0, "Pill" => 1, "Talisman" => 2,
-                    "Plant" or "SpiritObject" or "TalismanMaterial" or "Material" => 3, _ => -1 };
+                    "Plant" or "SpiritObject" or "TalismanMaterial" or "Material" or "CareerSupply" => 3, _ => -1 };
                 if (index >= 0) _categories[index].Add(owned);
                 if ((i + 1) % 128 == 0)
                 {
@@ -482,7 +498,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
             MclslOwnedItem owned = _categories[section][index];
             MclslItemDefinition item = MclslItemCatalog.Get(owned?.ItemId);
             if (item == null || (category == null
-                    ? item.Category is not ("Plant" or "SpiritObject" or "TalismanMaterial" or "Material")
+                    ? item.Category is not ("Plant" or "SpiritObject" or "TalismanMaterial" or "Material" or "CareerSupply")
                     : item.Category != category)) continue;
             string title = item.Name + (owned.Count > 1 ? " ×" + owned.Count : string.Empty);
             string description = item.EffectText + "\n数量 " + owned.Count;

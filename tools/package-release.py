@@ -1,6 +1,7 @@
 """Create verified release archives or an explicit local developer snapshot."""
 import argparse
 import hashlib
+import gzip
 import io
 import json
 import re
@@ -157,6 +158,72 @@ def compress_player_assets(entries):
                                   for relative, source in entries if source.suffix.lower() == '.png'))
 
 
+def pack_soul_atlas(entries, replacements, output):
+    """Merge already palette-optimized frames without any further pixel changes.
+
+    The compiled RGBA texture is outside GameResources, so NML does not decode
+    904 separate textures. Source PNGs remain untouched in the checkout.
+    """
+    frames = []
+    for relative, source in entries:
+        if relative.startswith('GameResources/actors/Souls/') and source.suffix.lower() == '.png':
+            original = source.read_bytes()
+            with Image.open(io.BytesIO(original)) as source_image:
+                # Preserve the existing metadata exceptions as standalone PNGs.
+                if PROFILE_INFO.intersection(source_image.info) or ancillary_chunks(original, {'caBX'}):
+                    continue
+            with Image.open(io.BytesIO(replacements.get(relative, source.read_bytes()))) as image:
+                frames.append((relative, image.convert('RGBA')))
+    if not frames:
+        return entries, replacements, dict(frames=0)
+    frames.sort(key=lambda item: (-item[1].height, item[0]))
+    width, padding, x, y, row = 2048, 2, 2, 2, 0
+    placements = []
+    for relative, image in frames:
+        if image.width + padding * 2 > width:
+            raise ValueError('Soul frame exceeds atlas row width: ' + relative)
+        if x + image.width + padding > width:
+            x, y, row = padding, y + row + padding, 0
+        placements.append((relative, image, x, y))
+        x += image.width + padding
+        row = max(row, image.height)
+    height = y + row + padding
+    # Rows are spaced by their tallest frame, so a frame may never cover another
+    # one; prove it on a mask instead of trusting the arithmetic.
+    occupied = Image.new('1', (width, height))
+    for relative, image, px, py in placements:
+        if occupied.crop((px, py, px + image.width, py + image.height)).getbbox():
+            raise ValueError('Soul atlas frames overlap: ' + relative)
+        occupied.paste(1, (px, py, px + image.width, py + image.height))
+    assert width * height * 4 <= 128 * 1024 * 1024, 'Soul atlas exceeds bounded decode limit'
+    atlas = Image.new('RGBA', (width, height))
+    rectangles = {}
+    for relative, image, x, y in placements:
+        atlas.paste(image, (x, y))
+        rectangles[relative[len('GameResources/'):-4]] = [x, height-y-image.height, image.width, image.height]
+    # Unity raw texture rows start at the bottom; PNG/Pillow rows start at top.
+    raw = atlas.transpose(Image.Transpose.FLIP_TOP_BOTTOM).tobytes()
+    compiled = gzip.compress(raw, compresslevel=9, mtime=0)
+    decoded = Image.frombytes('RGBA', (width, height), gzip.decompress(compiled)).transpose(Image.Transpose.FLIP_TOP_BOTTOM)
+    for relative, image, x, y in placements:
+        assert decoded.crop((x,y,x+image.width,y+image.height)).tobytes() == image.tobytes(), relative
+    manifest_path = 'resources/world-soul-frames.manifest.json'
+    manifest = json.loads(dict(entries)[manifest_path].read_text(encoding='utf-8-sig'))
+    manifest['atlas'] = dict(file='Souls/player-frames.rgba.gz', canvas=[width,height],
+        rgbaSha256=hashlib.sha256(raw).hexdigest(), rectangles=rectangles)
+    replacements[manifest_path] = (json.dumps(manifest,ensure_ascii=True,indent=2)+'\n').encode('utf-8')
+    packed_path = 'NativeActorResources/Souls/player-frames.rgba.gz'
+    compiled_file = output / 'soul-player-atlas.rgba.gz'
+    compiled_file.write_bytes(compiled)
+    originals = {relative for relative, _ in frames}
+    entries = [(relative, source) for relative, source in entries if relative not in originals]
+    entries.append((packed_path, compiled_file))
+    entries.sort(key=lambda item:item[0])
+    return entries, replacements, dict(frames=len(frames), canvas=[width,height], decodedBytes=len(raw),
+        compressedBytes=len(compiled), pixelIdenticalToExistingPlayerCompression=True,
+        automaticallyImportedTexturesRemoved=len(frames), eagerAtlasTextures=1)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True)
@@ -179,13 +246,15 @@ def main():
     worktree = subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=all'], cwd=ROOT)
     if not args.local_development:
         assert not worktree.strip(), 'Commit release inputs before packaging'
-    checks = [['tools/validate-current-assets.py'], ['tools/validate-beast-overhaul.py']]
+    checks = [['tools/build-soul-frame-catalog.py', '--check'], ['tools/validate-current-assets.py'], ['tools/validate-beast-overhaul.py']]
     for command in checks:
-        if not args.local_development:
+        if not args.local_development and command[0] != 'tools/build-soul-frame-catalog.py':
             command.append('--release')
         subprocess.run([sys.executable, *command], cwd=ROOT, check=True)
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    player = [(relative, source) for relative, source in files(BASE + ['resources/actor-frames.manifest.json'])
+    player = [(relative, source) for relative, source in files(BASE + ['resources/actor-frames.manifest.json',
+                                                                       'resources/world-soul-frames.manifest.json',
+                                                                       'resources/living-resources.json'])
               if relative != 'code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs']
     developer = files(BASE + ['resources', 'tools', '.dev-tools', 'AGENTS.md', '.gitignore', 'README.md'])
     output.mkdir(parents=True)
@@ -200,6 +269,11 @@ def main():
         replacements, compression = ({}, None)
         if args.compress_assets:
             replacements, compression = compress_player_assets(entries)
+            entries, replacements, atlas_stats = pack_soul_atlas(entries, replacements, output)
+            compression['soulAtlas'] = atlas_stats
+            compression['imageBytesAfter'] = sum(len(replacements[relative]) if relative in replacements
+                else source.stat().st_size for relative, source in entries if source.suffix.lower() == '.png')
+            compression['runtimeImageDataBytesAfter'] = compression['imageBytesAfter'] + atlas_stats.get('compressedBytes', 0)
         file_records = {}
         for relative, source in entries:
             data = replacements[relative] if relative in replacements else source.read_bytes()

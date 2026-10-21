@@ -80,7 +80,6 @@ internal static class MclslActorAnimationCatalog
     {
         using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/AnimationCatalog");
         if (_loaded) return;
-        _loaded = true;
         string file = Path.Combine(MySimulatedLongevityRoad.MclslMod.I.GetDeclaration().FolderPath,
             "resources", "actor-frames.manifest.json");
         if (!File.Exists(file)) return;
@@ -204,8 +203,13 @@ internal static class MclslActorAnimationCatalog
                 }
                 catch (Exception ex) { MclslDiagnostics.Error("actor-manifest-group", ex.Message); }
             }
+            _loaded = true;
         }
-        catch (Exception ex) { MclslDiagnostics.Error("actor-manifest", ex.Message); }
+        catch (Exception ex)
+        {
+            Forms.Clear();
+            MclslDiagnostics.Error("actor-manifest", ex.Message);
+        }
     }
 
     private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);

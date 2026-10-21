@@ -266,6 +266,8 @@ internal static class MclslFactionMissionSystem
         }
 
             (contribution, stones) = MclslResourceSystem.GrantFactionReward(actor, baseContribution, baseStones);
+            Combat.MclslCombatCareerSystem.Offer(actor, year, "宗门传承", 1000);
+            Combat.MclslCareerSupply.GiveOpportunitySupply(actor, year);
             MclslMaterialDiscovery.TryDiscoverFactionReward(actor, year,
                 faction + "|" + order + "|" + roll, highestQuality: quality >= 4);
             MclslFactionExchangeSystem.TryExchangeTechnique(actor, faction, year, roll, out exchangeSummary);

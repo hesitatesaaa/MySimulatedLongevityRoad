@@ -16,7 +16,7 @@ foreach(var property in group.GetProperty("actions").EnumerateObject())
     double start=0;
     for(int i=0;i<frames.Length;i++)
     {
-        Check(clip.FrameIndex(start+seconds[i]/2)==i,"Actual frame midpoint "+group.GetProperty("id")+"/"+property.Name);
+        Check(clip.FrameIndex(start+seconds[i]/2)==i,"Actual frame midpoint "+group.GetProperty("actorId").GetString()+"/"+property.Name);
         start+=seconds[i];
     }
     Check(clip.FrameIndex(0)==0,"Start frame");

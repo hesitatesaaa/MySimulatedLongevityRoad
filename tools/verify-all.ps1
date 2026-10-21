@@ -35,7 +35,7 @@ param(
     [string]$PythonExecutable = 'python',
     [string]$GameRoot = '',
     [string]$WorkDirectory = 'build/verify',
-    [string[]]$TestProjects = @('actor-loading-tests', 'animation-tests', 'death-visual-tests'),
+    [string[]]$TestProjects = @('actor-loading-tests', 'animation-tests', 'death-visual-tests', 'atomic-file-tests', 'storage-regression-tests'),
     [switch]$SkipBuild,
     [switch]$SkipTests
 )
@@ -62,7 +62,13 @@ function Invoke-Step {
     Write-Host ""
     Write-Host ("[{0}] {1}" -f $script:stepCount, $Name) -ForegroundColor Cyan
     $started = Get-Date
-    & $Body
+    # Native tools write progress and first-run banners to stderr, which
+    # $ErrorActionPreference='Stop' would turn into a terminating error even
+    # when the step succeeds. Keep stderr visible and decide on the exit code.
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try { & $Body }
+    finally { $ErrorActionPreference = $previousPreference }
     if ($LASTEXITCODE -ne 0) { throw "$Name failed (exit $LASTEXITCODE)" }
     Write-Host ("      ok in {0:N1}s" -f ((Get-Date) - $started).TotalSeconds) -ForegroundColor DarkGray
 }
@@ -72,6 +78,17 @@ function Invoke-Python {
     & $PythonExecutable @Arguments
 }
 
+$testEnvironmentNames=@('DOTNET_CLI_HOME','DOTNET_SKIP_FIRST_TIME_EXPERIENCE','DOTNET_ADD_GLOBAL_TOOLS_TO_PATH',
+    'DOTNET_GENERATE_ASPNET_CERTIFICATE','DOTNET_CLI_TELEMETRY_OPTOUT','APPDATA','MCLSL_ACTOR_FIXTURE','MCLSL_ANIMATION_FIXTURE')
+$previousTestEnvironment=@{}
+foreach($name in $testEnvironmentNames) { $previousTestEnvironment[$name]=[Environment]::GetEnvironmentVariable($name,'Process') }
+$env:DOTNET_CLI_HOME = Join-Path $work 'dotnet-home'
+$env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
+$env:DOTNET_ADD_GLOBAL_TOOLS_TO_PATH = 'false'
+$env:DOTNET_GENERATE_ASPNET_CERTIFICATE = 'false'
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
+$env:APPDATA = Join-Path $work 'test-appdata'
+New-Item -ItemType Directory -Force -Path $env:APPDATA | Out-Null
 $sw = [Diagnostics.Stopwatch]::StartNew()
 Push-Location $projectRoot
 try {
@@ -105,6 +122,15 @@ try {
     }
 
     if (-not $SkipTests) {
+        Invoke-Step 'Storage regression fixture' {
+            Invoke-Python @('tools/prepare-storage-regression.py')
+        }
+        Invoke-Step 'Soul catalog parity' {
+            Invoke-Python @('tools/test-soul-frame-catalog.py')
+        }
+        Invoke-Step 'Player soul atlas pixels' {
+            Invoke-Python @('tools/test-player-soul-atlas.py')
+        }
         $env:MCLSL_ACTOR_FIXTURE = Join-Path $work 'fixtures/actor-loading'
         $env:MCLSL_ANIMATION_FIXTURE = Join-Path $work 'fixtures/animation'
         foreach ($project in $TestProjects) {
@@ -114,7 +140,7 @@ try {
                 # Keep generated intermediate files inside the scratch directory so
                 # a verification run never dirties the source tree.
                 & dotnet run --project $projectDirectory `
-                    "-p:BaseIntermediateOutputPath=$work/obj/$project/" `
+                    "-p:GameRoot=$GameRoot" "-p:BaseIntermediateOutputPath=$work/obj/$project/" `
                     "-p:BaseOutputPath=$work/bin/$project/"
             }
         }
@@ -129,5 +155,6 @@ catch {
     exit 1
 }
 finally {
+    foreach($name in $testEnvironmentNames) { [Environment]::SetEnvironmentVariable($name,$previousTestEnvironment[$name],'Process') }
     Pop-Location
 }

@@ -72,6 +72,7 @@ internal static class MclslActorAccessor
                 MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
             }
             MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.ReconcileForm(actor);
+            if (Combat.MclslCombatCareerSystem.Applicable(actor)) Combat.MclslCombatCareerSystem.SyncTraits(actor);
         }
         if (honorificSourceChanged)
         {

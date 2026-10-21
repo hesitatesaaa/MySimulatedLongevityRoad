@@ -22,6 +22,8 @@ if ($LocalDevelopment) {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 release blocked: independent frames, icons or in-game validation are incomplete.' }
 }
+& $PythonExecutable (Join-Path $PSScriptRoot 'build-soul-frame-catalog.py') --check
+if ($LASTEXITCODE -ne 0) { throw 'Soul frame catalog is stale.' }
 $managedRoot = Join-Path $GameRoot 'worldbox_Data\Managed'
 $loaderRoot = Join-Path $GameRoot 'worldbox_Data\StreamingAssets\mods'
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'build\Release' }

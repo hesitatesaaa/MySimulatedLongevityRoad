@@ -11,6 +11,6 @@
     <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorAnimationTime.cs" Link="MclslActorAnimationTime.cs" />
     <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorAnimationCatalog.cs" Link="MclslActorAnimationCatalog.cs" />
     <Compile Include="../../code/MySimulatedLongevityRoad/Systems/Beasts/MclslActorFrameCache.cs" Link="MclslActorFrameCache.cs" />
-    <Reference Include="Newtonsoft.Json"><HintPath>$(GameRoot)/worldbox_Data/Managed/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>$(MSBuildBinPath)/Newtonsoft.Json.dll</HintPath></Reference>
   </ItemGroup>
 </Project>

@@ -39,6 +39,7 @@ internal static class MclslActorPresentation
         {
             Sprite portrait = Sprite.Create(first.texture, first.rect, new Vector2(.5f, .5f), 1f, 0, SpriteMeshType.FullRect);
             portrait.name = "mclsl_ui_" + asset.id;
+            MclslSpriteOwnership.Register(portrait);
             profile = new Profile { Avatar = new[] { portrait } };
             Profiles.Add(asset.id, profile);
         }

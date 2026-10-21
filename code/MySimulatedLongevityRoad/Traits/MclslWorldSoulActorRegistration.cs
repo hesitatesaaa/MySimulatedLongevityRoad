@@ -84,7 +84,6 @@ internal static partial class MclslWorldSoulActorRegistration
     internal static void Init()
     {
         if (_initialized) return;
-        _initialized = true;
         try
         {
             ActorAsset asset = AssetManager.actor_library.get(ActorAssetId);
@@ -101,7 +100,9 @@ internal static partial class MclslWorldSoulActorRegistration
         catch (Exception ex)
         {
             Debug.LogWarning("[模拟长生路] 天地之魄载体注册失败，已停止使用原生敌对单位兜底: " + ex.Message);
+            throw;
         }
+        _initialized = true;
     }
 
     internal static string ActorAssetIdFor(MclslWorldSoulRecord soul)
@@ -255,6 +256,7 @@ internal static partial class MclslWorldSoulActorRegistration
         catch (Exception ex)
         {
             Debug.LogWarning("[模拟长生路] 天地之魄载体 " + definition.ActorId + " 注册失败: " + ex.Message);
+            throw;
         }
     }
 
@@ -307,11 +309,13 @@ internal static partial class MclslWorldSoulActorRegistration
                 asset._cached_sprite = asset._cached_sprite ?? FallbackSprite(folder);
                 asset.cached_sprite = asset._cached_sprite;
             }
+            MclslSpriteOwnership.Register(asset._cached_sprite);
             MclslActorPresentation.Configure(asset, asset._cached_sprite);
         }
         catch (Exception ex)
         {
             Debug.LogWarning("[模拟长生路] 天地之魄载体贴图绑定失败，将使用天地之魄图标兜底: " + ex.Message);
+            throw;
         }
     }
 
@@ -790,6 +794,7 @@ internal static partial class MclslWorldSoulActorRegistration
             Vector2 pivot = new(source.pivot.x / source.rect.width, source.pivot.y / source.rect.height);
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), pivot, source.pixelsPerUnit, 0, SpriteMeshType.FullRect);
             sprite.name = source.name + "_mclsl_tinted_" + ColorKey(tint);
+            MclslSpriteOwnership.Register(sprite);
             return sprite;
         }
         catch
@@ -870,12 +875,12 @@ internal static partial class MclslWorldSoulActorRegistration
         folder ??= string.Empty;
         if (SpriteSets.TryGetValue(folder, out SoulSpriteSet cached)) return cached;
 
-        Sprite[] idle = LoadActionFrames(folder, new[] { "idle", "Idle" }, 128);
-        Sprite[] breathing = LoadActionFrames(folder, new[] { "breathing", "Breathing" }, 128);
-        Sprite[] run = LoadActionFrames(folder, new[] { "run", "walk", "Walk" }, 128);
-        Sprite[] attack = LoadActionFrames(folder, new[] { "attack", "BasicAtk" }, 128);
-        Sprite[] hit = LoadActionFrames(folder, new[] { "hit", "Hit" }, 128);
-        Sprite[] death = LoadActionFrames(folder, new[] { "death", "Dead" }, 128);
+        Sprite[] idle = MclslSoulFrameCatalog.Load(folder, "idle");
+        Sprite[] breathing = MclslSoulFrameCatalog.Load(folder, "breathing");
+        Sprite[] run = MclslSoulFrameCatalog.Load(folder, "run");
+        Sprite[] attack = MclslSoulFrameCatalog.Load(folder, "attack");
+        Sprite[] hit = MclslSoulFrameCatalog.Load(folder, "hit");
+        Sprite[] death = MclslSoulFrameCatalog.Load(folder, "death");
         bool genericFallback = false;
         if (folder.Length > 0 && idle.Length == 0 && breathing.Length == 0
             && run.Length == 0 && attack.Length == 0 && hit.Length == 0 && death.Length == 0)
@@ -901,68 +906,6 @@ internal static partial class MclslWorldSoulActorRegistration
             resolvedHit, resolvedDeath, genericFallback);
         SpriteSets[folder] = set;
         return set;
-    }
-
-    private static Sprite[] LoadFrames(string folder, string animation, string prefix, int count)
-    {
-        List<Sprite> frames = new();
-        string basePath = ActorPath(folder) + animation + "/";
-        for (int i = 1; i <= count; i++)
-        {
-            Sprite sprite = LoadFirstExistingSprite(
-                basePath + prefix + "_" + i.ToString("00"),
-                basePath + prefix + "_" + i,
-                basePath + i.ToString("00"),
-                basePath + i);
-            if (sprite != null) frames.Add(sprite);
-        }
-        return frames.ToArray();
-    }
-
-    private static Sprite[] LoadActionFrames(string folder, string[] actions, int count)
-    {
-        if (actions == null || actions.Length == 0) return Array.Empty<Sprite>();
-        for (int i = 0; i < actions.Length; i++)
-        {
-            Sprite[] flat = LoadFlatActionFrames(folder, actions[i], count);
-            if (flat.Length > 0) return flat;
-
-            Sprite[] legacy = LoadFrames(folder, actions[i], actions[i], count);
-            if (legacy.Length > 0) return legacy;
-        }
-        return Array.Empty<Sprite>();
-    }
-
-    private static Sprite[] LoadFlatActionFrames(string folder, string action, int count)
-    {
-        if (string.IsNullOrWhiteSpace(folder) || string.IsNullOrWhiteSpace(action)) return Array.Empty<Sprite>();
-        List<Sprite> frames = new();
-        string basePath = ActorPath(folder);
-        string lower = action.ToLowerInvariant();
-        string upper = char.ToUpperInvariant(lower[0]) + lower.Substring(1);
-        for (int i = 0; i < count; i++)
-        {
-            Sprite sprite = LoadFirstExistingSprite(
-                basePath + folder + "_" + lower + "_" + i.ToString("000"),
-                basePath + folder + "_" + lower + "_" + i.ToString("00"),
-                basePath + folder + "_" + lower + "_" + i,
-                basePath + folder + "_" + upper + "_" + i.ToString("000"),
-                basePath + folder + "_" + upper + "_" + i.ToString("00"),
-                basePath + folder + "_" + upper + "_" + i);
-            if (sprite != null) frames.Add(sprite);
-            else if (i > 0 && frames.Count > 0) break;
-        }
-        return frames.ToArray();
-    }
-
-    private static Sprite LoadFirstExistingSprite(params string[] paths)
-    {
-        for (int i = 0; i < paths.Length; i++)
-        {
-            Sprite sprite = LoadSprite(paths[i]);
-            if (sprite != null) return sprite;
-        }
-        return null;
     }
 
     private static Sprite LoadSprite(string path)

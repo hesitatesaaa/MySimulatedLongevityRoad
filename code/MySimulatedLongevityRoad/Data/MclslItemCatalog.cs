@@ -280,7 +280,7 @@ internal static class MclslItemCatalog
         new("S024_SCROLL", "五行化生卷", "SpellScroll", 4, "使用后学会五行化生。制卷：灵符纸×6、太虚灵泉×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A19", 5120, iconPath: "ui/Spells/S024"),
         new("S025_SCROLL", "万灵回天卷", "SpellScroll", 4, "使用后学会万灵回天。制卷：灵符纸×8、万灵琼浆×1、回灵草×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S025"),
         new("S026_SCROLL", "太初寂光卷", "SpellScroll", 4, "使用后学会太初寂光。制卷：灵符纸×8、万灵琼浆×1、辟邪金砂×1；仅已掌握者可制作，每年限一卷。", "F01", "A05", 10240, iconPath: "ui/Spells/S026"),
-    }.Concat(MclslBeastContent.Items).ToArray();
+    }.Concat(MclslBeastContent.Items).Concat(Systems.Combat.MclslCareerSupply.Items).ToArray();
 
     private const MclslMaterialSource AllMaterialSources = MclslMaterialSource.AnnualActivity
         | MclslMaterialSource.Ruin | MclslMaterialSource.Breakthrough

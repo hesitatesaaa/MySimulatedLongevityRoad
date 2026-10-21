@@ -18,7 +18,6 @@ internal static class MclslBeastActorRegistration
         if (_initialized || AssetManager.actor_library == null) return;
         ActorAsset orc = AssetManager.actor_library.get("orc");
         if (orc == null || AssetManager.actor_library.get("sheep") == null) return;
-        _initialized = true;
         foreach (MclslBeastDefinition beast in MclslBeastCatalog.All)
         {
             try
@@ -28,6 +27,7 @@ internal static class MclslBeastActorRegistration
             catch (Exception ex)
             {
                 MclslDiagnostics.Error("beast-register:" + beast.Id, "妖兽注册失败: " + ex);
+                throw;
             }
         }
         foreach (MclslBeastDefinition beast in MclslBeastCatalog.Named)
@@ -36,8 +36,10 @@ internal static class MclslBeastActorRegistration
             catch (Exception ex)
             {
                 MclslDiagnostics.Error("beast-register:" + beast.Id, "具名妖兽注册失败: " + ex);
+                throw;
             }
         }
+        _initialized = true;
     }
 
     internal static bool IsBeast(Actor actor)

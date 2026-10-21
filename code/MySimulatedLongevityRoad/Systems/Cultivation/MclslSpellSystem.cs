@@ -666,6 +666,13 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         foreach(var effect in Live.ToArray())if(effect!=null)effect.ReturnToPool();
         while(Pool.Count>0){var effect=Pool.Pop();if(effect!=null)UnityEngine.Object.Destroy(effect.gameObject);}
         Live.Clear();_activeCount=0;_camera=null;_nextCameraRefreshFrame=0;
+        MclslCareerEffectFrames.Clear();
+    }
+
+    internal static void CancelCareerCast(Actor actor,string skillId)
+    {
+        foreach(var effect in Live.ToArray())
+            if(effect._caster==actor&&effect._spellId==skillId&&effect._phase=="cast")effect.ReturnToPool();
     }
 
     internal static bool Show(Actor caster, Actor target, string spellId, WorldTile hitTile = null, string phase = null, float duration = 0f)
@@ -868,6 +875,8 @@ internal static class MclslSpellEffectFrames
 
     internal static int Count(string id,string phase=null)
     {
+        if (id.StartsWith("CP_",StringComparison.Ordinal))
+            return phase is "hit" or "cancel" ? 4 : 8;
         if (!MclslSpellSystem.TryGet(id, out MclslSpellDefinition spell)) return 0;
         if(phase is "cast" or "travel" or "area")return 8;
         if(phase=="hit")return id is "S001" or "S004" or "S007" or "S013" or "S015" or "S016"?16:24;
@@ -876,6 +885,7 @@ internal static class MclslSpellEffectFrames
 
     internal static Sprite Get(string id, int frame,string phase=null)
     {
+        if (id.StartsWith("CP_",StringComparison.Ordinal)) return MclslCareerEffectFrames.Get(id,frame,phase);
         if(phase=="area")phase="travel";
         string key=phase==null?id:id+"/"+phase;
         if(phase!=null && MissingStages.Contains(key))return Get(id,frame);

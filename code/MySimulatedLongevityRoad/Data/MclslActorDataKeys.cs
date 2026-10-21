@@ -22,6 +22,7 @@ internal static class MclslActorDataKeys
     internal const string SpellScrollLastCraftYear = "mclsl.architecture.v2.actor.spells.scroll_last_craft_year";
     internal const string LastSpellInsightRealm = "mclsl.architecture.v2.actor.spells.last_insight_realm";
     internal const string Profession = "mclsl.architecture.v2.actor.profession";
+    internal const string CombatCareer = "mclsl.combat_career.v1";
     internal const string ProfessionGrade = "mclsl.architecture.v2.actor.profession_grade";
     internal const string ProfessionExperience = "mclsl.architecture.v2.actor.profession_experience";
     internal const string ProfessionChecked = "mclsl.architecture.v2.actor.profession_checked";
