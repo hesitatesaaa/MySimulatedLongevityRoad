@@ -12,16 +12,23 @@ internal static class MclslLivingResources
         public string Name;
         public int X,Y,Width,Height;
         public float PivotX,PivotY,PixelsPerUnit;
+        public float ItemX,ItemY;
     }
     internal sealed class Group
     {
         public string Path,Atlas;
         public Frame[] Frames;
     }
+    internal sealed class Manifest
+    {
+        public Group[] Groups;
+    }
+    internal static Group[] Groups { get; private set; }
     internal static void Init()
     {
         string file=System.IO.Path.Combine(MclslMod.I.GetDeclaration().FolderPath,"resources","living-resources.json");
-        foreach(var group in JsonConvert.DeserializeObject<Group[]>(File.ReadAllText(file)))
+        Groups=JsonConvert.DeserializeObject<Manifest>(File.ReadAllText(file)).Groups;
+        foreach(var group in Groups)
         {
             Texture2D texture=SpriteTextureLoader.getSprite(group.Atlas).texture;
             texture.filterMode=FilterMode.Point;
@@ -31,6 +38,7 @@ internal static class MclslLivingResources
                 Sprite sprite=Sprite.Create(texture,new Rect(f.X,f.Y,f.Width,f.Height),
                     new Vector2(f.PivotX/f.Width,f.PivotY/f.Height),f.PixelsPerUnit);
                 sprite.name=f.Name;sprites.Add(sprite);
+                MclslSpriteOwnership.Register(sprite);
                 SpriteTextureLoader._cached_sprites[group.Path+"/"+f.Name]=sprite;
             }
             SpriteTextureLoader._cached_sprite_list[group.Path]=sprites.ToArray();
@@ -70,7 +78,8 @@ internal static class MclslCareerEffectFrames
             Frames[id]=sprites;
         }
         int offset=phase=="cast"?0:phase=="travel"||phase=="area"?8:phase=="cancel"?20:16;
-        return sprites[offset+Mathf.Clamp(frame,0,phase=="cancel"?3:7)];
+        int count=offset>=16?4:8;
+        return sprites[offset+Mathf.Clamp(frame,0,count-1)];
     }
     internal static void Clear()
     {

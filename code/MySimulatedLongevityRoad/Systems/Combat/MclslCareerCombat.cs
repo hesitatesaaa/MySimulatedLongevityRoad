@@ -60,7 +60,8 @@ internal static class MclslCareerCombat
             status.base_stats[id=="break"?"armor":"multiplier_speed"]=id=="break"?-12:id=="casting"?-1f:-0.35f;
             AssetManager.status.add(status);
         }
-        string[] templates={"wolf","turtle","chicken","sheep"};
+        // Templates supply native animal AI; living-resources binds the authored spirits.
+        string[] templates={"wolf","turtle","butterfly","sheep"};
         for(int i=0;i<4;i++)
         {
             var asset=AssetManager.actor_library.clone("mclsl_career_spirit_"+i,templates[i]);
@@ -71,13 +72,26 @@ internal static class MclslCareerCombat
             asset.default_subspecies_traits.Add("reproduction_none");
             asset.can_evolve_into_new_species=false;asset.source_meat=false;asset.source_meat_insect=false;
             asset.resources_given=new List<ResourceContainer>();asset.count_as_unit=false;
-            asset.animation_idle=ActorAnimationSequences.walk_0;
-            asset.animation_walk=ActorAnimationSequences.walk_0_3;
-            asset.animation_swim=ActorAnimationSequences.swim_0_3;
-            asset.texture_id=templates[i];asset.texture_asset=AssetManager.actor_library.get(templates[i]).texture_asset;
             asset.has_baby_form=false;asset.use_phenotypes=false;asset.has_advanced_textures=false;
-            asset.base_stats["scale"]=AssetManager.actor_library.get(templates[i]).base_stats["scale"];
+            string path="actors/CareerSpirits/"+i+"/";
+            asset.texture_id=asset.id;
+            asset.texture_asset=new ActorTextureSubAsset(path,false);
+            asset.texture_asset.texture_path_main=path+"main";
+            asset.texture_asset.loadShadow();
+            asset.need_colored_sprite=false;
+            asset.animation_idle=new[]{"idle_0","idle_1","idle_2","idle_3"};
+            asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3"};
+            asset.animation_swim=asset.animation_walk;
+            asset.animation_idle_speed=0.18f;asset.animation_walk_speed=0.12f;
+            asset.animation_swim_speed=0.12f;asset.animation_speed_based_on_walk_speed=false;
+            asset.base_stats["scale"]=1;
+            asset.icon=asset.id;
+            SpriteTextureLoader._cached_sprites["ui/Icons/"+asset.id]=
+                SpriteTextureLoader.getSprite("ui/CareerSkills/CP_spirit_"+(i+1)+"A");
+            Sprite first=SpriteTextureLoader.getSprite(path+"main/idle_0");
+            if(first==null)throw new InvalidOperationException("Missing spirit artwork: "+path);
             AssetManager.actor_library.loadTexturesAndSprites(asset);
+            asset.cached_sprite=first;asset._cached_sprite=first;
         }
     }
     internal static void Track(Actor actor)
@@ -213,7 +227,15 @@ internal static class MclslCareerCombat
         {
             var state=MclslCombatCareerSystem.Read(actor);
             int mana=MclslSpellSystem.CurrentMana(actor),cost=Mana(actor,skill);
-            if(mana<cost || skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(actor),skill.Item)<1){battle.Cast=null;return;}
+            if(state.Career!=battle.Career || state.Rank<skill.Tier
+                || !MclslActorAccessor.IsCultivator(actor)
+                || MclslRealmIds.Index(MclslActorAccessor.Realm(actor))<skill.Tier-1
+                || state.Cooldowns[skill.Tier-1]>Now || mana<cost
+                || skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(actor),skill.Item)<1)
+            {
+                MclslSpellEffect.CancelCareerCast(actor,skill.Id);
+                battle.Cast=null;actor.finishStatusEffect("mclsl_career_casting");return;
+            }
             if(skill.Item.Length>0)
             {
                 var bag=MclslBagSystem.Read(actor);MclslBagSystem.Remove(bag,skill.Item);MclslBagSystem.Write(actor,bag);
@@ -271,7 +293,7 @@ internal static class MclslCareerCombat
         }
         else
         {
-            Actor[] targets=(c==1&&t==3||t>=3)?Nearby(owner,target.current_tile,4).Where(a=>Enemy(owner,a)).OrderBy(a=>a==target?0:1).Take(skill.Targets).ToArray():new[]{target};
+            Actor[] targets=skill.Targets>1?Nearby(owner,target.current_tile,4).Where(a=>Enemy(owner,a)).OrderBy(a=>a==target?0:1).Take(skill.Targets).ToArray():new[]{target};
             foreach(Actor enemy in targets) Hit(owner,enemy,battle,skill);
         }
         MclslCombatCareerSystem.GainSkillExperience(state,t,1);

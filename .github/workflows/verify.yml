@@ -2,7 +2,7 @@ name: verify
 
 on:
   push:
-    branches: ['0.6.0', main]
+    branches: ['0.6.0', '0.7.0', 'codex/**', main]
   pull_request:
   workflow_dispatch:
 
@@ -32,3 +32,6 @@ jobs:
       # (animation-tests, ui-lineage-check) stay local.
       - name: Verify
         run: pwsh -NoProfile -File tools/verify-all.ps1 -SkipBuild -TestProjects actor-loading-tests,death-visual-tests
+
+      - name: Verify living and career resources
+        run: python tools/validate-living-assets.py

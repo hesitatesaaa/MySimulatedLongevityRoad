@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'build\Package-0.6.0' }
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'build\Package-0.7.0' }
 $outputFullPath = [IO.Path]::GetFullPath($OutputDirectory)
 $workspacePrefix = [IO.Path]::GetFullPath($projectRoot).TrimEnd('\') + '\'
 if (-not $outputFullPath.StartsWith($workspacePrefix, [StringComparison]::OrdinalIgnoreCase)) {

@@ -659,6 +659,7 @@ internal sealed class MclslSpellEffect : MonoBehaviour
     private Actor _caster;
     private Actor _target;
     private Vector3 _anchor;
+    private bool _fixedAnchor;
     private bool _active;
 
     internal static void ClearRuntime()
@@ -680,7 +681,9 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         if(!Enabled){ReportSuppressed("法术特效已关闭",spellId);return false;}
         if (caster?.data == null) { ReportSuppressed("施法者无效", spellId); return false; }
         if (_activeCount >= MaxVisibleEffects) { ReportSuppressed("同屏特效达到上限", spellId); return false; }
-        if (!TryPosition(phase=="cast"?caster:target ?? caster, out Vector3 position))
+        Vector3 position;
+        if(hitTile!=null && phase!="cast")position=hitTile.posV3;
+        else if (!TryPosition(phase=="cast"?caster:target ?? caster, out position))
         {
             if (hitTile == null) { ReportSuppressed("无法取得世界坐标", spellId); return false; }
             position = hitTile.posV3;
@@ -737,6 +740,7 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         component._caster = caster;
         component._target = target;
         component._anchor = position;
+        component._fixedAnchor = hitTile!=null && phase!="cast";
         component._active = true;
         component.transform.position = position + new Vector3(0f, 0.38f, -0.01f);
         component.transform.localScale = Vector3.one * ScreenScale(camera);
@@ -758,7 +762,8 @@ internal sealed class MclslSpellEffect : MonoBehaviour
     {
         if (MclslSpellCasting.Now >= _end) { ReturnToPool(); return; }
         if(_phase!=null && _phase!="hit" && !MclslActorAccessor.Alive(_caster)){ReturnToPool();return;}
-        if (!TryPosition(_phase=="cast"?_caster:_target ?? _caster, out Vector3 position)) position = _anchor;
+        Vector3 position=_anchor;
+        if(!_fixedAnchor && TryPosition(_phase=="cast"?_caster:_target ?? _caster,out Vector3 tracked))position=tracked;
         float progress = Mathf.Clamp01((float)((MclslSpellCasting.Now - _born) / _duration));
         _renderer.sprite = MclslSpellEffectFrames.Get(_spellId,
             Math.Min(_frameCount - 1, (int)(progress * _frameCount)),_phase);
@@ -767,7 +772,7 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         // Stage atlases already animate their scale; keep ground perspective and pivots fixed.
         transform.localScale = Vector3.one * scale * (_phase==null?1.0f+0.12f*Mathf.Sin(progress*Mathf.PI):1f);
         if(_phase=="travel")position=Vector3.Lerp(_start,position,progress);
-        bool ground=_phase!="cast" && (_spellId is "S010" or "S019" or "S022" or "S023");
+        bool ground=_phase=="area" || _phase!="cast" && (_spellId is "S010" or "S019" or "S022" or "S023");
         transform.position = position + new Vector3(0f,ground?0f:0.38f,-0.01f);
         transform.rotation = Quaternion.Euler(0f,0f,_phase==null && (_spellId is "S003" or "S010" or "S012" or "S019" or "S022" or "S023")?progress*90f:0f);
         if(_phase=="travel")

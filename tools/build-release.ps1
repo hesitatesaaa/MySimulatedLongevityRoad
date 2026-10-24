@@ -16,11 +16,22 @@ if ($LocalDevelopment) {
     if ($LASTEXITCODE -ne 0) { throw 'Current actor resource validation failed.' }
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py')
     if ($LASTEXITCODE -ne 0) { throw 'Beast resource validation failed.' }
+} elseif ($declaredVersion -eq '0.7.0') {
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Current actor resource validation failed.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Beast resource validation failed.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-living-assets.py') --release
+    if ($LASTEXITCODE -ne 0) { throw '0.7.0 release requires current Unity acceptance evidence.' }
 } elseif ($RequireFinalAssets -or $declaredVersion -eq '0.6.0') {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 beast overhaul release blocked: resources or actual Unity validation incomplete.' }
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 release blocked: independent frames, icons or in-game validation are incomplete.' }
+}
+if ($LocalDevelopment -and $declaredVersion -eq '0.7.0') {
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-living-assets.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Living resource validation failed.' }
 }
 & $PythonExecutable (Join-Path $PSScriptRoot 'build-soul-frame-catalog.py') --check
 if ($LASTEXITCODE -ne 0) { throw 'Soul frame catalog is stale.' }

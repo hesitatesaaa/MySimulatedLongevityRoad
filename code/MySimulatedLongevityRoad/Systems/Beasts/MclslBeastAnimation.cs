@@ -174,9 +174,9 @@ internal static class MclslBeastAnimation
         return frames.Actions[(int)action].At(elapsed) ?? fallback;
     }
 
-    internal static Sprite ConfigureAsset(ActorAsset asset, string formPath)
+    internal static Sprite ConfigureAsset(ActorAsset asset, string formPath, string iconSource = null)
     {
-        string iconId = asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id;
+        string iconId = iconSource ?? (asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id);
         Sprite icon = MclslActorPixelResources.PlacementIcon(iconId);
         if (icon == null) throw new InvalidOperationException("Current actor icon is missing: " + iconId);
         asset.icon = asset.id;

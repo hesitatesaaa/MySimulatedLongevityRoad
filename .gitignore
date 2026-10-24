@@ -19,6 +19,9 @@
 *.user
 *.suo
 .vs/
+/.codegraph/
+/.dev-tools/dotnet-home/
+/.dev-tools/nuget-home/
 
 # Editor and operating-system files
 .codex/

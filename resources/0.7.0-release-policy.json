@@ -1,0 +1,11 @@
+{
+  "targetVersion": "0.7.0",
+  "runtimeEvidence": "resources/runtime-acceptance-0.7.0.json",
+  "scope": "Current living beings, xuanhuang civilization and combat career changes. Historical size and performance claims remain unverified.",
+  "requiredChecks": [
+    "world-ready", "living-entries", "xuanhuang-directions-identities-colors",
+    "xuanhuang-buildings-boats", "career-icons-effects", "spirit-actors",
+    "career-progress-transfer-removal", "career-cast-costs", "career-save-load-inheritance", "career-skill-ui"
+  ],
+  "performanceBenchmarksRequired": false
+}

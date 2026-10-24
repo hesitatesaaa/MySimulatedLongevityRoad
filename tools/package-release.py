@@ -45,7 +45,7 @@ def archive(output, name, entries, readme, snapshot, replacements=None):
                 zipped.writestr(name, re.sub(rb'\b7656119\d{10}\b', b'[redacted-steam-id]', source.read_bytes()))
             else:
                 zipped.write(source, name)
-        zipped.writestr('MySimulatedLongevityRoad/README-0.6.0.txt', readme)
+        zipped.writestr('MySimulatedLongevityRoad/README.txt', readme)
         zipped.writestr('MySimulatedLongevityRoad/FILE-MANIFEST.json', json.dumps(snapshot, ensure_ascii=True, indent=2))
     with zipfile.ZipFile(destination) as zipped:
         for relative, record in snapshot['files'].items():
@@ -150,7 +150,14 @@ def compress_player_assets(entries):
         icon['sha256'] = hashlib.sha256(data).hexdigest()
         icon['verifiedInGame'] = False
     replacements[manifest_path] = (json.dumps(manifest, ensure_ascii=True, indent=2) + '\n').encode('utf-8')
-    return replacements, dict(optimizedImages=len(replacements) - 1, metadataImagesKept=skipped_metadata,
+    living_path = 'resources/living-resources.json'
+    living = json.loads(dict(entries)[living_path].read_text(encoding='utf-8-sig'))
+    for record in living['Outputs']:
+        relative = 'GameResources/' + record['Resource'] + '.png'
+        if relative in replacements:
+            record['SHA256'] = hashlib.sha256(replacements[relative]).hexdigest()
+    replacements[living_path] = (json.dumps(living, ensure_ascii=True, indent=2) + '\n').encode('utf-8')
+    return replacements, dict(optimizedImages=sum(name.endswith('.png') for name in replacements), metadataImagesKept=skipped_metadata,
                               imageBytesBefore=sum(source.stat().st_size for _, source in entries
                                   if source.suffix.lower() == '.png'),
                               imageBytesAfter=sum(len(replacements[relative]) if relative in replacements
@@ -238,7 +245,8 @@ def main():
     output.relative_to(ROOT)
     assert not output.exists(), 'Choose a fresh package directory'
     declaration = json.loads((ROOT / 'mod.json').read_text(encoding='utf-8-sig'))
-    assert declaration['version'] == '0.6.0'
+    version = declaration['version']
+    assert version == '0.7.0'
     if args.compress_assets and args.kind != 'player':
         parser.error('--compress-assets must be used with --kind player')
     if args.local_development and args.kind != 'developer' and not args.compress_assets:
@@ -247,20 +255,26 @@ def main():
     if not args.local_development:
         assert not worktree.strip(), 'Commit release inputs before packaging'
     checks = [['tools/build-soul-frame-catalog.py', '--check'], ['tools/validate-current-assets.py'], ['tools/validate-beast-overhaul.py']]
+    checks.append(['tools/validate-living-assets.py'])
     for command in checks:
-        if not args.local_development and command[0] != 'tools/build-soul-frame-catalog.py':
+        if not args.local_development and command[0] == 'tools/validate-living-assets.py':
             command.append('--release')
         subprocess.run([sys.executable, *command], cwd=ROOT, check=True)
     commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+    input_hash = subprocess.check_output([sys.executable, str(ROOT / 'tools/validate-living-assets.py'),
+                                         '--fingerprint'], cwd=ROOT, text=True).strip()
+    acceptance_path = ROOT / 'resources/runtime-acceptance-0.7.0.json'
+    acceptance = None if args.local_development else json.loads(acceptance_path.read_text(encoding='utf-8-sig'))
     player = [(relative, source) for relative, source in files(BASE + ['resources/actor-frames.manifest.json',
                                                                        'resources/world-soul-frames.manifest.json',
                                                                        'resources/living-resources.json'])
               if relative != 'code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs']
     developer = files(BASE + ['resources', 'tools', '.dev-tools', 'AGENTS.md', '.gitignore', 'README.md'])
     output.mkdir(parents=True)
-    common = (f'MySimulatedLongevityRoad 0.6.0\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
-              'Fresh test worlds are recommended. Back up existing saves before testing migration.\n'
-              'Current art and code have not been retested in Unity; offline reviews do not certify gameplay or performance.\n'
+    common = (f'MySimulatedLongevityRoad {version}\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
+              'Fresh test worlds are recommended. Back up existing saves before testing migration.\n' +
+              ('Local candidate: current 0.7.0 Unity acceptance is pending.\n' if args.local_development else
+               'Current 0.7.0 Unity acceptance passed; interactive visual review and performance are separately recorded.\n') +
               'Install NeoModLoader, extract this directory into the game mods directory, and avoid duplicate installations.\n')
     archives = []
     package_kinds = ([('player', player), ('developer', developer)] if args.kind == 'both'
@@ -281,12 +295,19 @@ def main():
                 data = re.sub(rb'\b7656119\d{10}\b', b'[redacted-steam-id]', data)
             file_records[relative] = dict(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
         snapshot = dict(baseCommit=commit, localDevelopment=args.local_development,
+            sourceInputSha256=input_hash,
             uncommittedChanges=bool(worktree.strip()), worktreeStatusSha256=hashlib.sha256(worktree).hexdigest(),
-            unityRetested=False, files=file_records)
+            unityRetested=not args.local_development, files=file_records)
+        if acceptance:
+            snapshot['unityAcceptance'] = dict(scope='0.7.0 living beings and combat careers',
+                evidenceSha256=hashlib.sha256(acceptance_path.read_bytes()).hexdigest(),
+                checks=len(acceptance['checks']), errors=len(acceptance['errors']),
+                interactiveVisualReview=acceptance['interactiveVisualReview'],
+                performanceTested=acceptance['performanceTested'])
         if compression:
             snapshot['compressionProfile'] = dict(pngColors=256, iconMaximumSide=256,
                 metadataPolicy='Preserve color-profile and text-metadata PNGs unchanged; retain caBX chunks.',
-                unityRetested=False)
+                unityRetested=not args.local_development)
             snapshot['compressionStats'] = compression
         suffix = ('-player-local-compressed' if args.local_development else '-player-compressed') \
             if args.compress_assets else ('-developer-local' if args.local_development else '-' + kind)
@@ -296,12 +317,12 @@ def main():
         if compression:
             readme += ('Package-only PNG optimization: up to 256 palette colors; actor icons larger than 256 pixels '
                        'were downscaled to a maximum side of 256. Color-profile and text-metadata PNGs remain unchanged.\n'
-                       'Image encoding changed slightly; the compressed package has not been retested in Unity.\n')
+                       'Image encoding is palette optimized; acceptance scope is recorded in FILE-MANIFEST.json.\n')
             readme += ('Recreate this package with tools/package-release.py --kind player --compress-assets '
                        '--local-development --output build/<fresh-directory>.\n')
         else:
             readme += 'Build: tools/build-release.ps1 -LocalDevelopment -PythonExecutable <Python-with-Pillow>\n'
-        archives.append(archive(output, 'MySimulatedLongevityRoad-0.6.0' + suffix + '.zip', entries,
+        archives.append(archive(output, 'MySimulatedLongevityRoad-' + version + suffix + '.zip', entries,
             readme, snapshot, replacements))
         (output / (kind + '-file-manifest.json')).write_text(json.dumps(snapshot, ensure_ascii=True, indent=2), encoding='utf-8')
     (output / 'worktree-status.txt').write_bytes(worktree)

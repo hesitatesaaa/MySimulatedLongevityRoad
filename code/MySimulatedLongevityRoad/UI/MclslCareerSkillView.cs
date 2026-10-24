@@ -13,7 +13,7 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
     private Actor _actor;
     private long _actorId;
     private bool _skills;
-    private string _raw, _expanded;
+    private string _raw, _expanded, _availability;
     private bool _cooling;
     private double _nextRefresh;
     private ScrollRect _original, _scroll;
@@ -74,7 +74,19 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
         if(!_skills||!MclslActorAccessor.Alive(_actor)||Time.unscaledTime<_nextRefresh)return;
         _nextRefresh=Time.unscaledTime+0.5;
         string raw=MclslActorAccessor.GetString(_actor,MclslCombatCareerCatalog.StateKey);
-        if(raw!=_raw || _cooling)Build();
+        if(raw!=_raw || _cooling || Availability()!=_availability)Build();
+    }
+    private string Availability()
+    {
+        var bag=MclslBagSystem.Read(_actor);
+        return MclslSpellSystem.CurrentMana(_actor)+"/"+MclslActorAccessor.Realm(_actor)
+            +"/"+MclslActorAccessor.IsCultivator(_actor)
+            +"/"+MclslBagSystem.Count(bag,"CP_Talisman_3")
+            +"/"+MclslBagSystem.Count(bag,"CP_Talisman_4")
+            +"/"+MclslBagSystem.Count(bag,"CP_Talisman_5")
+            +"/"+MclslBagSystem.Count(bag,"CP_Array_3")
+            +"/"+MclslBagSystem.Count(bag,"CP_Array_4")
+            +"/"+MclslBagSystem.Count(bag,"CP_Array_5");
     }
     private Text TextRow(string name,string text,int size=11)
     {
@@ -93,6 +105,7 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
         var state=MclslCombatCareerSystem.Read(_actor);
         _cooling=Array.Exists(state.Cooldowns,t=>t>MclslSpellCasting.Now);
         _raw=MclslActorAccessor.GetString(_actor,MclslCombatCareerCatalog.StateKey);
+        _availability=Availability();
         if(state.Career<0){TextRow("Admission",MclslCombatCareerSystem.Overview(_actor));return;}
         TextRow("Career","<b>"+MclslCombatCareerCatalog.Careers[state.Career].Name+" · "+MclslCombatCareerCatalog.Ranks[state.Rank]+"</b>",12);
         string[] realms={"炼气","筑基","金丹","元婴","化神"};
@@ -110,10 +123,10 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
         bool realm=MclslActorAccessor.IsCultivator(_actor)&&MclslRealmIds.Index(MclslActorAccessor.Realm(_actor))>=skill.Tier-1;
         string status=!unlocked?"未解锁":!realm?"修为不足":skill.Passive?"生效":"可用";
         double remaining=state.Cooldowns[skill.Tier-1]-MclslSpellCasting.Now;
-        if(unlocked&&realm&&!skill.Passive&&remaining>0)status="冷却 "+Math.Ceiling(remaining)+"秒";
-        if(unlocked&&realm&&!skill.Passive&&remaining<=0)
+        if(unlocked&&realm&&!skill.Passive)
         {
-            if(skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(_actor),skill.Item)<1)status="缺少道具";
+            if(remaining>0)status="冷却 "+Math.Ceiling(remaining)+"秒";
+            else if(skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(_actor),skill.Item)<1)status="缺少道具";
             else if(MclslSpellSystem.CurrentMana(_actor)<MclslCareerCombat.Mana(_actor,skill))status="灵力不足";
         }
         var go=new GameObject(skill.Id,typeof(RectTransform),typeof(Image),typeof(Button),typeof(LayoutElement));
@@ -127,7 +140,6 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
         var tr=(RectTransform)text.transform;tr.anchorMin=Vector2.zero;tr.anchorMax=Vector2.one;tr.offsetMin=new Vector2(33,0);tr.offsetMax=new Vector2(-2,0);
         Text label=text.GetComponent<Text>();label.font=LocalizedTextManager.current_font;label.fontSize=MclslUiTheme.ReadableFontSize(10);
         label.text=skill.Name+" · "+(skill.Passive?"被动":"主动")+"\n"+status;label.color=unlocked?Color.white:Color.gray;
-        if(!skill.Passive)label.text+=" · 熟练 "+state.Mastery[skill.Tier-1]+"/10";
         go.GetComponent<Button>().onClick.AddListener(()=>{_expanded=_expanded==skill.Id?null:skill.Id;Build();});
         if(_expanded!=skill.Id)return;
         string detail=skill.Description+"\n解锁："+MclslCombatCareerCatalog.Ranks[skill.Tier]+"，修为达到"+new[]{"炼气","筑基","金丹","元婴","化神"}[skill.Tier-1];

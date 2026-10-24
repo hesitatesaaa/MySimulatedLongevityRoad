@@ -26,7 +26,8 @@ internal sealed class MclslCareerSkill
     internal float Preparation => Career == 4 ? 0.2f + Tier * 0.15f
         : Tier == 5 ? 0.8f : Tier == 3 ? 0.35f : 0f;
     internal float Power => new[] { 1.05f, 1.25f, 1.55f, 1.8f, 2.3f }[Tier - 1];
-    internal int Targets => Career == 4 ? 2 + Tier : Tier >= 3 && Career != 1 ? Tier + 1 : 1;
+    internal int Targets => Career == 0 && Tier == 5 ? 1
+        : Career == 4 ? 2 + Tier : Tier >= 3 && Career != 1 ? Tier + 1 : 1;
     internal string Item => Career == 3 && Tier >= 3 ? "CP_Talisman_" + Tier
         : Career == 4 && Tier >= 3 ? "CP_Array_" + Tier : string.Empty;
     internal string Law => Career switch { 0 => "金", 1 => "physical", 2 => Tier switch { 1 => "火", 2 => "水", 3 => "雷", _ => "空间" }, 3 => "阳", 4 => "土", _ => "木" };

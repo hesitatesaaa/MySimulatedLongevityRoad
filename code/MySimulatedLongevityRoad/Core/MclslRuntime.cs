@@ -36,6 +36,8 @@ internal static class MclslRuntime
         MclslRuntimeChanges.Clear();
         Systems.Combat.MclslCombatCareerSystem.Clear();
         Patches.MclslXuanhuangDirectionPatch.Clear();
+        Traits.MclslXuanhuangRegistration.EnsureWildKingdom();
+        Patches.MclslXuanhuangDirectionPatch.PrepareWorldColors();
         Systems.Combat.MclslCareerCombat.Load();
         MclslModuleHub.OnWorldLoaded(year, MclslRuntimeSettings.CoreEnabled);
         MclslMaobaoArchiveManager.OnWorldLoaded();

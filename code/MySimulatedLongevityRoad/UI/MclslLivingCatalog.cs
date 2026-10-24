@@ -46,7 +46,7 @@ internal static class MclslLivingCatalog
     {
         MclslLocalizationBridge.RegisterKey(id,label);MclslLocalizationBridge.RegisterKey(id+" Description",label);
         var button=PowerButtonCreator.CreateSimpleButton(id,action,SpriteTextureLoader.getSprite(icon),null,default);
-        TipButton tip=button.GetComponent<TipButton>();tip.textOnClick=id;tip.textOnClickDescription=id+" Description";
+        TipButton tip=button.gameObject.AddComponent<TipButton>();tip.textOnClick=id;tip.textOnClickDescription=id+" Description";
         return button;
     }
     private static void Entry(PowersTab tab,string id,string label,string icon,UnityAction action)

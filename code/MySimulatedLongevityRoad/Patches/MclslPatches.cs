@@ -549,8 +549,16 @@ internal static class MclslPatches
         return __result == null;
     }
 
-    private static bool DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix(ActorAsset __0, ref Sprite __result)
+    private static bool DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix(ActorAsset __0, Sprite __1, long __8, ref Sprite __result)
     {
+        if (__0?.id is MclslXuanhuangRegistration.Id or "zombie_mclsl_xuanhuang")
+        {
+            // The authored body already includes its head. Live avatars also
+            // retain the prepared nation color; asset previews supply a body.
+            Actor actor=__8>0?World.world?.units?.get(__8):null;
+            __result=actor!=null?actor.calculateMainSprite():__1;
+            return false;
+        }
         __result = MclslActorPresentation.Portrait(__0?.id);
         return __result == null;
     }

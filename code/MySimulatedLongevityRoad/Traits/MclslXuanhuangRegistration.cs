@@ -21,8 +21,6 @@ internal static class MclslXuanhuangRegistration
         {
             string id=template=="human"?Id:"nomads_"+Id;
             var kingdom=AssetManager.kingdoms.clone(id,template);
-            kingdom.list_tags=new HashSet<string>(kingdom.list_tags);
-            kingdom.friendly_tags=new HashSet<string>(kingdom.friendly_tags);
             kingdom.list_tags.Remove("human");kingdom.list_tags.Add(Id);
             kingdom.friendly_tags.Remove("human");kingdom.friendly_tags.Add(Id);
             kingdom.path_icon="ui/Icons/Xuanhuang";
@@ -30,15 +28,13 @@ internal static class MclslXuanhuangRegistration
         ArchitectureAsset human=AssetManager.architecture_library.get("human");
         ArchitectureAsset architecture=AssetManager.architecture_library.clone(Id,"human");
         architecture.building_ids_for_construction=new Dictionary<string,string>();
-        var map=human.building_ids_for_construction.Values.Distinct().ToDictionary(x=>x,x=>Id+"_"+x);
-        foreach(var pair in map)
+        var shared=new HashSet<string>{"bonfire","statue","well","stockpile","mine","training_dummy"};
+        var map=human.building_ids_for_construction.Values.Distinct().ToDictionary(x=>x,x=>shared.Contains(x)?x:Id+"_"+x);
+        foreach(var pair in map.Where(p=>!shared.Contains(p.Key)))
         {
             BuildingAsset source=AssetManager.buildings.get(pair.Key);
             BuildingAsset building=AssetManager.buildings.clone(pair.Value,pair.Key);
-            // The human construction/upgrade animation is also the Xuanhuang one.
-            // The building asset remains independent so its upgrade chain is local.
-            building.sprite_path=source.sprite_path;
-            building.main_path=source.main_path;
+            building.sprite_path="buildings/civ_main/"+Id+"/"+pair.Key;
             building.group=Id;building.civ_kingdom=Id;
             building.sprites_are_initiated=false;building.building_sprites=null;
             building.upgrade_to=map.TryGetValue(source.upgrade_to??"",out string upgrade)?upgrade:source.upgrade_to;
@@ -59,32 +55,65 @@ internal static class MclslXuanhuangRegistration
         Asset.skin_citizen_female=new[]{"female_1"};
         Asset.skin_warrior=new[]{"warrior_1"};
         Asset.need_colored_sprite=false;
+        Asset.render_heads_for_babies=false;
         Asset.animation_idle=new[]{"walk_0"};
         Asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3"};
         Asset.animation_swim=new[]{"swim_0","swim_1","swim_2","swim_3"};
         Asset.texture_asset=new ActorTextureSubAsset("actors/species/civs/"+Id+"/",true);
-        ActorTextureSubAsset humanTexture=AssetManager.actor_library.get("human").texture_asset;
-        Asset.texture_asset.texture_heads_male=humanTexture.texture_heads_male;
-        Asset.texture_asset.texture_heads_female=humanTexture.texture_heads_female;
-        Asset.texture_asset.texture_heads_old_male=humanTexture.texture_heads_old_male;
-        Asset.texture_asset.texture_heads_old_female=humanTexture.texture_heads_old_female;
-        Asset.texture_asset.texture_head_king=humanTexture.texture_head_king;
-        Asset.texture_asset.texture_head_warrior=humanTexture.texture_head_warrior;
+        // Heads are already authored into these sprites; a separate native head
+        // would overlap the crown and ignore the authored facing direction.
+        ClearHeads(Asset.texture_asset);
+        Asset.texture_asset.loadShadow();
         Asset.phenotypes_dict=Asset.phenotypes_dict.ToDictionary(x=>x.Key,x=>new List<string>(x.Value));
         Asset.texture_path_zombie_for_auto_loader_main="actors/species/civs/"+Id+"/zombie";
-        Asset.texture_path_zombie_for_auto_loader_heads=
-            AssetManager.actor_library.get("human").texture_path_zombie_for_auto_loader_heads;
+        Asset.texture_path_zombie_for_auto_loader_heads="";
         SpriteTextureLoader._cached_sprites["ui/Icons/Xuanhuang"]=
             SpriteTextureLoader._cached_sprites["actors/species/civs/"+Id+"/male_1/walk_0"];
         AssetManager.actor_library.loadTexturesAndSprites(Asset);
+        string zombieId="zombie_"+Id;
+        Asset.setCanTurnIntoZombieAsset(zombieId,false);
+        ActorAsset zombie=AssetManager.actor_library.clone(zombieId,"zombie_human");
+        zombie.texture_id=zombieId;zombie.need_colored_sprite=false;zombie.dynamic_sprite_zombie=false;
+        zombie.render_heads_for_babies=false;
+        zombie.use_phenotypes=false;zombie.has_baby_form=false;
+        zombie.animation_idle=Asset.animation_idle;zombie.animation_walk=Asset.animation_walk;
+        zombie.animation_swim=Asset.animation_swim;
+        zombie.texture_asset=new ActorTextureSubAsset("actors/species/civs/"+Id+"/",false);
+        zombie.texture_asset.texture_path_main="actors/species/civs/"+Id+"/zombie";
+        ClearHeads(zombie.texture_asset);
+        zombie.texture_asset.loadShadow();
+        AssetManager.actor_library.loadTexturesAndSprites(zombie);
+    }
+    private static void ClearHeads(ActorTextureSubAsset texture)
+    {
+        texture.texture_heads="";texture.texture_heads_male="";texture.texture_heads_female="";
+        texture.texture_heads_old_male="";texture.texture_heads_old_female="";
+        texture.texture_head_king="";texture.texture_head_warrior="";
+        texture.has_old_heads=false;
     }
     private static string CloneBoat(string source)
     {
         string id=Id+"_"+source;
         var boat=AssetManager.actor_library.clone(id,source);
-        boat.texture_id=source;boat.name_locale=id;
+        boat.texture_id=id;boat.name_locale=id;
+        boat.has_advanced_textures=false;boat.need_colored_sprite=false;
+        boat.has_override_sprite=true;
+        boat.animation_idle=new[]{"normal"};
+        boat.animation_walk=boat.animation_idle;boat.animation_swim=boat.animation_idle;
+        string path="actors/boats/"+id;
+        boat.texture_asset=new ActorTextureSubAsset(path+"/",false);
+        boat.texture_asset.texture_path_main=path;
+        ClearHeads(boat.texture_asset);
+        boat.texture_asset.loadShadow();
+        AssetManager.actor_library.loadTexturesAndSprites(boat);
         MclslLocalizationBridge.RegisterKey(id,"玄黄族"+(source.Contains("trading")?"商船":source.Contains("transport")?"运输船":"渔船"));
         return id;
+    }
+    internal static void EnsureWildKingdom()
+    {
+        string id="nomads_"+Id;
+        if(World.world.kingdoms_wild.get(id)==null)
+            World.world.kingdoms_wild.newWildKingdom(AssetManager.kingdoms.get(id));
     }
     internal static void AddPowers(PowersTab tab)
     {
@@ -95,6 +124,7 @@ internal static class MclslXuanhuangRegistration
             click_action=(tile,_)=>
             {
                 if(tile==null)return false;
+                EnsureWildKingdom();
                 return World.world.units.createNewUnit(Id,tile,false,0,null,null,true,false,false,false)!=null;
             },ignore_cursor_icon=true });
         var button=PowerButtonCreator.CreateGodPowerButton(powerId,SpriteTextureLoader.getSprite("ui/Icons/Xuanhuang"));
