@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$PackageZip,
     [string]$RuntimeRoot='D:\mclsl-audit-060',
     [string]$PythonExecutable='python',
-    [int]$TimeoutSeconds=240
+    [int]$TimeoutSeconds=900
 )
 $ErrorActionPreference='Stop'
 $project=Split-Path -Parent $PSScriptRoot

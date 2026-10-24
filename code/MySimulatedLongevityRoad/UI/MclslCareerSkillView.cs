@@ -49,6 +49,13 @@ internal sealed class MclslCareerSkillView : MonoBehaviour
         if(_scroll==null)Create();
         _original.gameObject.SetActive(!_skills);_scroll.gameObject.SetActive(_skills);
     }
+    // Native unit-window refreshes rebuild the information body independently.
+    // Keep the selected page authoritative after those layout callbacks.
+    private void LateUpdate()
+    {
+        if(_original!=null&&_original.gameObject.activeSelf==_skills)_original.gameObject.SetActive(!_skills);
+        if(_scroll!=null&&_scroll.gameObject.activeSelf!=_skills)_scroll.gameObject.SetActive(_skills);
+    }
     private void Create()
     {
         var root=new GameObject("CareerSkillsBody",typeof(RectTransform),typeof(Image),typeof(Mask),typeof(ScrollRect));

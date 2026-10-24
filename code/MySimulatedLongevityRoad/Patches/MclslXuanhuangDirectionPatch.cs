@@ -76,7 +76,8 @@ internal static class MclslXuanhuangDirectionPatch
             foreach(var frame in group.Frames)
                 FrameData.Add(group.Path+"/"+frame.Name,new AnimationFrameData {
                     id=frame.Name,sheet_path=group.Path,size_unit=new Vector2(frame.Width,frame.Height),
-                    show_head=false,show_item=!group.Path.EndsWith("/child",StringComparison.Ordinal)
+                    show_head=false,show_item=!frame.Name.StartsWith("swim_",StringComparison.Ordinal)
+                        && !group.Path.EndsWith("/child",StringComparison.Ordinal)
                         && !group.Path.Contains("_child"),
                     pos_item=new Vector2((frame.ItemX-frame.PivotX)/frame.PixelsPerUnit,
                         (frame.ItemY-frame.PivotY)/frame.PixelsPerUnit)

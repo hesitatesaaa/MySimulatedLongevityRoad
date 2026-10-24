@@ -57,48 +57,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -159,48 +159,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -261,48 +261,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -363,48 +363,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -465,48 +465,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -567,48 +567,48 @@
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_0",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 0,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_1",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 28,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_2",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 56,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Height": 28,
           "PixelsPerUnit": 1.8,
           "Y": 0,
           "Name": "swim_3",
-          "PivotY": 7,
+          "PivotY": 2,
           "X": 84,
           "PivotX": 14,
           "Width": 28,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -1755,10 +1755,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -1767,10 +1767,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -1779,10 +1779,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -1791,10 +1791,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -1857,10 +1857,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -1869,10 +1869,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -1881,10 +1881,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -1893,10 +1893,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -1959,10 +1959,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -1971,10 +1971,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -1983,10 +1983,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -1995,10 +1995,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2061,10 +2061,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2073,10 +2073,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2085,10 +2085,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2097,10 +2097,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2163,10 +2163,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2175,10 +2175,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2187,10 +2187,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2199,10 +2199,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -2265,10 +2265,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2277,10 +2277,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2289,10 +2289,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2301,10 +2301,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2367,10 +2367,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2379,10 +2379,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2391,10 +2391,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2403,10 +2403,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2469,10 +2469,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2481,10 +2481,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2493,10 +2493,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2505,10 +2505,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -2571,10 +2571,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2583,10 +2583,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2595,10 +2595,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2607,10 +2607,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2673,10 +2673,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2685,10 +2685,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2697,10 +2697,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2709,10 +2709,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2775,10 +2775,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2787,10 +2787,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2799,10 +2799,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2811,10 +2811,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -2877,10 +2877,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2889,10 +2889,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -2901,10 +2901,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -2913,10 +2913,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -2979,10 +2979,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -2991,10 +2991,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3003,10 +3003,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3015,10 +3015,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3081,10 +3081,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3093,10 +3093,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3105,10 +3105,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3117,10 +3117,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -3183,10 +3183,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3195,10 +3195,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3207,10 +3207,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3219,10 +3219,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3285,10 +3285,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3297,10 +3297,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3309,10 +3309,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3321,10 +3321,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3387,10 +3387,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3399,10 +3399,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3411,10 +3411,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3423,10 +3423,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -3489,10 +3489,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3501,10 +3501,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3513,10 +3513,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3525,10 +3525,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3591,10 +3591,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3603,10 +3603,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3615,10 +3615,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3627,10 +3627,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3693,10 +3693,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3705,10 +3705,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3717,10 +3717,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3729,10 +3729,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -3795,10 +3795,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3807,10 +3807,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3819,10 +3819,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3831,10 +3831,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3897,10 +3897,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -3909,10 +3909,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -3921,10 +3921,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -3933,10 +3933,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -3999,10 +3999,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4011,10 +4011,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4023,10 +4023,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4035,10 +4035,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -4101,10 +4101,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4113,10 +4113,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4125,10 +4125,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4137,10 +4137,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4203,10 +4203,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4215,10 +4215,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4227,10 +4227,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4239,10 +4239,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4305,10 +4305,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4317,10 +4317,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4329,10 +4329,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4341,10 +4341,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -4407,10 +4407,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4419,10 +4419,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4431,10 +4431,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4443,10 +4443,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4509,10 +4509,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4521,10 +4521,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4533,10 +4533,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4545,10 +4545,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4611,10 +4611,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4623,10 +4623,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4635,10 +4635,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4647,10 +4647,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -4713,10 +4713,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4725,10 +4725,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4737,10 +4737,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4749,10 +4749,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4815,10 +4815,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4827,10 +4827,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4839,10 +4839,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4851,10 +4851,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -4917,10 +4917,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -4929,10 +4929,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -4941,10 +4941,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -4953,10 +4953,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -5019,10 +5019,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5031,10 +5031,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5043,10 +5043,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5055,10 +5055,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5121,10 +5121,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5133,10 +5133,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5145,10 +5145,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5157,10 +5157,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5223,10 +5223,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5235,10 +5235,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5247,10 +5247,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5259,10 +5259,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -5325,10 +5325,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5337,10 +5337,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5349,10 +5349,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5361,10 +5361,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5427,10 +5427,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5439,10 +5439,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5451,10 +5451,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5463,10 +5463,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5529,10 +5529,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5541,10 +5541,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5553,10 +5553,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5565,10 +5565,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5631,10 +5631,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5643,10 +5643,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5655,10 +5655,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5667,10 +5667,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5733,10 +5733,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5745,10 +5745,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5757,10 +5757,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5769,10 +5769,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5835,10 +5835,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5847,10 +5847,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5859,10 +5859,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5871,10 +5871,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 21,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -5937,10 +5937,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -5949,10 +5949,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -5961,10 +5961,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -5973,10 +5973,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -6039,10 +6039,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6051,10 +6051,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6063,10 +6063,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6075,10 +6075,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -6141,10 +6141,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6153,10 +6153,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6165,10 +6165,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6177,10 +6177,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -6243,10 +6243,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6255,10 +6255,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6267,10 +6267,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6279,10 +6279,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -6345,10 +6345,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6357,10 +6357,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6369,10 +6369,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6381,10 +6381,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
           "ItemX": 20,
-          "ItemY": 10
+          "ItemY": 5
         }
       ]
     },
@@ -6447,10 +6447,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6459,10 +6459,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6471,10 +6471,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6483,10 +6483,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -6549,10 +6549,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6561,10 +6561,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6573,10 +6573,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6585,10 +6585,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -6651,10 +6651,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6663,10 +6663,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6675,10 +6675,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6687,10 +6687,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -6753,10 +6753,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6765,10 +6765,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6777,10 +6777,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6789,10 +6789,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -6855,10 +6855,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_1",
@@ -6867,10 +6867,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_2",
@@ -6879,10 +6879,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         },
         {
           "Name": "swim_3",
@@ -6891,10 +6891,10 @@
           "Width": 28,
           "Height": 28,
           "PivotX": 14,
-          "PivotY": 7,
+          "PivotY": 2,
           "PixelsPerUnit": 1.8,
-          "ItemX": 8,
-          "ItemY": 10
+          "ItemX": 20,
+          "ItemY": 5
         }
       ]
     },
@@ -12854,7 +12854,7 @@
     {
       "Resource": "actors/Xuanhuang/male_1",
       "SourceSHA256": "2883d8d04e1270873074c44b3a1029cdec49f059d2a48fc557ae7795b75bff5b",
-      "SHA256": "1b7be7d4c5e3ca726db8559d9e5aad71c3f6cc59bcb0ca53bdab3ee8c4e13527",
+      "SHA256": "9190867de321171f05f8181de533eba413082ba2db4176e154591b150691ef05",
       "Size": [
         112,
         56
@@ -12910,12 +12910,13 @@
           766
         ]
       ],
-      "Scale": 0.0718232044198895
+      "Scale": 0.0718232044198895,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_front",
       "SourceSHA256": "6a8a75b32ffdc2e6b551f0990c28222522bd9e4445a2b5007c3acbc3d836eada",
-      "SHA256": "7e54d80f330e24352b0822fb366d5f2fd95502c1ffb58aa2ef419013c0cac793",
+      "SHA256": "07b2c4ed125f1ff906b698abea3f93b9ea1d884f1af3bd9d3c275176273f1787",
       "Size": [
         112,
         56
@@ -12971,12 +12972,13 @@
           792
         ]
       ],
-      "Scale": 0.06865671641791045
+      "Scale": 0.06865671641791045,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_back",
       "SourceSHA256": "c972197ee0715f518e4bf4a634633954750321fcb48a6885b5517ce6a00774d7",
-      "SHA256": "3d8d63a4d1775292f59872680b612218305276fd4d83e0dd245a2e16d2635d82",
+      "SHA256": "de77b4ccc4f5ab2b4b4146c1a2e3be6c836eff8bca98d729903d4250d8a2dfbc",
       "Size": [
         112,
         56
@@ -13032,12 +13034,13 @@
           818
         ]
       ],
-      "Scale": 0.071875
+      "Scale": 0.071875,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1",
       "SourceSHA256": "12c8d4acffe5a1e06ab356ca91de4cb2b34993da6c58dc31368c75b076ffd8f7",
-      "SHA256": "3c77062cdec9a4d28bd586acaa29f4e5d88af57f204ea50cad929b8418bd5e87",
+      "SHA256": "c990bec463f64ac16588e336e6043b2b1c95ea3a0c046f52a21efd918069d112",
       "Size": [
         112,
         56
@@ -13093,12 +13096,13 @@
           777
         ]
       ],
-      "Scale": 0.07027027027027027
+      "Scale": 0.07027027027027027,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_front",
       "SourceSHA256": "96c8694408561dca324cca3a2c653ea9275de9b359f5077d50efcb77c16fb3fb",
-      "SHA256": "66a7aaa0837e096678edb717bc323ba3bd3304b88656961d83f61631f87766b5",
+      "SHA256": "6f61ccf071b3fe1244caf408dd9127af4167d162e89f75693585fb50ca2029fc",
       "Size": [
         112,
         56
@@ -13154,12 +13158,13 @@
           816
         ]
       ],
-      "Scale": 0.060209424083769635
+      "Scale": 0.060209424083769635,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_back",
       "SourceSHA256": "ccaecb9e00df3c5208e0a201dc6175b48cdb7e441235e43bf8fc61d439022116",
-      "SHA256": "8df0c9041c02aef1cfd36b5f881678c06f3b90d1d2a4d18ece298881821cd376",
+      "SHA256": "ad4916c8c07a5e182069f34017667b8096048335580f46e46976529591ace74b",
       "Size": [
         112,
         56
@@ -13215,7 +13220,8 @@
           810
         ]
       ],
-      "Scale": 0.06534090909090909
+      "Scale": 0.06534090909090909,
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "buildings/Xuanhuang/library_human",
@@ -13654,7 +13660,7 @@
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior",
-      "SHA256": "b1d549f657794d47ef8fd9464dda10fac80f868ec07ea145c88ca6ae2ab5e019",
+      "SHA256": "d1475e6807a4eb30122bbc863e4043c91eea5af91ee48e5706e3f730e942ed51",
       "SourceSHA256": "012a27ba0a9a5386cebd5c9be4e3c9f248c4f9027631aec860f943b1474717fa",
       "Size": [
         112,
@@ -13720,11 +13726,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior_front",
-      "SHA256": "5bee923e6a11eec77e1f73a636533ce05bdf392013b62e2f93ccea3bf6beece8",
+      "SHA256": "171e0c05809da62db052210a77dbe4245bba88d51e4942d93fcb400c81764e99",
       "SourceSHA256": "012a27ba0a9a5386cebd5c9be4e3c9f248c4f9027631aec860f943b1474717fa",
       "Size": [
         112,
@@ -13790,11 +13797,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior_back",
-      "SHA256": "4e6572266f5f666d115406e1c468640a1563763f26dfa0a3f6671470fdc72071",
+      "SHA256": "860d0e8acce5bab7414a5946ea85ae35b245187b3d07c8a41f779ef5ccdde5e4",
       "SourceSHA256": "012a27ba0a9a5386cebd5c9be4e3c9f248c4f9027631aec860f943b1474717fa",
       "Size": [
         112,
@@ -13860,11 +13868,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior",
-      "SHA256": "29ce245eabd7195c5e0eff5f3c8efaa09ec73941385296408409a3f8ecd7d05b",
+      "SHA256": "4a09a0d6df2442b49b0a2ee8d47a1035200b0bad8d2afb94dd3ce5b8ecc18705",
       "SourceSHA256": "3ec59e4d40571ffcd8cc25bc8030be6208d96d23a4a2a6f5e17ddd35cbdb17b7",
       "Size": [
         112,
@@ -13930,11 +13939,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior_front",
-      "SHA256": "9bd0ce3371c59d22b37fba9e64c8cd12a7b7cc296efe0d94c17355df297dd233",
+      "SHA256": "ca9a44ebdb7780bcc4c1f30e8665c49ba8c290bf7dd56bfdbdbe31e37f0c43b1",
       "SourceSHA256": "3ec59e4d40571ffcd8cc25bc8030be6208d96d23a4a2a6f5e17ddd35cbdb17b7",
       "Size": [
         112,
@@ -14000,11 +14010,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior_back",
-      "SHA256": "5324d6710febac8dc1bfd9aa8a17cf34521fedee025511a52015ebd3b00f51c3",
+      "SHA256": "22f9afd3fd41c5f57252846614f8f0aad4b308f7dbca8d92c413dfd58b17e07b",
       "SourceSHA256": "3ec59e4d40571ffcd8cc25bc8030be6208d96d23a4a2a6f5e17ddd35cbdb17b7",
       "Size": [
         112,
@@ -14070,11 +14081,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king",
-      "SHA256": "22a402451199b8ded3e037dc9adca9e7911f55eaad1a1863d098e400f64298a0",
+      "SHA256": "4976dc61e91257615175cb5ae2038aba6afda8239f857ed1944b0fbe94b1f242",
       "SourceSHA256": "3c35e6f298815b99d7e9ed9abe5122a357b3be88e7875a349cb45b7fa80888a3",
       "Size": [
         112,
@@ -14140,11 +14152,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king_front",
-      "SHA256": "34f0fbd0cf20b04e7825f2405fd6bce65e8135a2b867107af67c961da667f92b",
+      "SHA256": "d4eac7a660b18067281e1e47061f506098fda674106f1ca3c45542b834f4be0b",
       "SourceSHA256": "3c35e6f298815b99d7e9ed9abe5122a357b3be88e7875a349cb45b7fa80888a3",
       "Size": [
         112,
@@ -14210,11 +14223,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king_back",
-      "SHA256": "e9afc3e33104e621822212fa3d03b09405fd2377e1dec7e8e87fe20c8b7984d7",
+      "SHA256": "e0ccb30457b3378106d66ebd633d60b496165817a576f909f9f1780393e08108",
       "SourceSHA256": "3c35e6f298815b99d7e9ed9abe5122a357b3be88e7875a349cb45b7fa80888a3",
       "Size": [
         112,
@@ -14280,11 +14294,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king",
-      "SHA256": "c13bba93ad64baf34353045ffd5d9a7c2bcf4ea6da68c4c4f552e348057bd94a",
+      "SHA256": "ff29f01cc036cdce27089377bebeb53e75b01845212eddac873be4615e6f5f07",
       "SourceSHA256": "b27faa6065fda3005de3d4967f2deae794a52fab65b2ec0bac19d83c492ec451",
       "Size": [
         112,
@@ -14350,11 +14365,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king_front",
-      "SHA256": "d38fcc3f3d266d8dbe3377397085988b78954501bc19e921aba58a39000effd8",
+      "SHA256": "bcfe10b9002abd5d973cb954ce2928bb5e7c1d61f8deb45d46ef8fd935a7e8ef",
       "SourceSHA256": "b27faa6065fda3005de3d4967f2deae794a52fab65b2ec0bac19d83c492ec451",
       "Size": [
         112,
@@ -14420,11 +14436,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king_back",
-      "SHA256": "10c31ef3f330883f568b16015f99fa2eacdbd10282917f0fe5f7e84549f36cce",
+      "SHA256": "a25058e33bfc3fada8e7392c58eb47a5627d0c40c202d7b72c23440bcd275f4c",
       "SourceSHA256": "b27faa6065fda3005de3d4967f2deae794a52fab65b2ec0bac19d83c492ec451",
       "Size": [
         112,
@@ -14490,11 +14507,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader",
-      "SHA256": "4ec1bdcbd413325e9e820436f30cab4206fb4182dbc74acede870323571a705c",
+      "SHA256": "484b5bd0d5ce6bcf9025b4323cd132aa25e9bbdaf2da464e31623729544ada12",
       "SourceSHA256": "c970a67802ce574dacd93500361fdd8614d2360e2dea8223fe5a9c495a9f9475",
       "Size": [
         112,
@@ -14560,11 +14578,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader_front",
-      "SHA256": "00b67ab590d8a60ce0109f041e8869c1f1c8a96377ada1bd354aecca13fa2ef5",
+      "SHA256": "81d299675dcca260c80e98536850e9c97a261d00bd82a33c5e4ba118e4fc4080",
       "SourceSHA256": "c970a67802ce574dacd93500361fdd8614d2360e2dea8223fe5a9c495a9f9475",
       "Size": [
         112,
@@ -14630,11 +14649,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader_back",
-      "SHA256": "f770497c8a5aa1b8dcf89a3614b7eeb301e20756d5ec31252a67a35110e5a96e",
+      "SHA256": "2725568ec94559915a1f90fd1cfcbcda7482564feca4783ed76e4fa509b20de9",
       "SourceSHA256": "c970a67802ce574dacd93500361fdd8614d2360e2dea8223fe5a9c495a9f9475",
       "Size": [
         112,
@@ -14700,11 +14720,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader",
-      "SHA256": "21805ca7c547b7bd0980db611b72ab34fa1dc0385938d546f2007f8c5e943888",
+      "SHA256": "ebd58bc4f3e62e8f01200aa8e4c510c42a4a17b011509124e2a20f135eb78ada",
       "SourceSHA256": "43a235c2ceb2f131757d862f4b6630056ea47a2d28f50d60f6462e3517de0a17",
       "Size": [
         112,
@@ -14770,11 +14791,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader_front",
-      "SHA256": "18a9fb265b031a1a65765cb692d775ff39f9d67b08784690cae44d2e5407c24d",
+      "SHA256": "29dc3f81ad671999812366270698b57392b356875b94f952a7beba5fdf1d5d13",
       "SourceSHA256": "43a235c2ceb2f131757d862f4b6630056ea47a2d28f50d60f6462e3517de0a17",
       "Size": [
         112,
@@ -14840,11 +14862,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader_back",
-      "SHA256": "5c7da368aff9a014144f85bf687e9be9c3980ffd940aed3a817bd5be60466ed5",
+      "SHA256": "67e8af01d9f3e4687f97b4ed36759e04f47c907b34699cde386c9f8c04a9e712",
       "SourceSHA256": "43a235c2ceb2f131757d862f4b6630056ea47a2d28f50d60f6462e3517de0a17",
       "Size": [
         112,
@@ -14910,11 +14933,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old",
-      "SHA256": "a541dd26353a4eba0b84566e5fd3c43ad935badb96e83531484b729d069c1cb7",
+      "SHA256": "c366ef031d8dccb4c474c0ade3d050cf89e206ecd59658651775ed36bfd78bc8",
       "SourceSHA256": "bd1b27b1a5b54074f48695b0b7c54a91ac2405a0c5f92418344a217d4a7d5f97",
       "Size": [
         112,
@@ -14980,11 +15004,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old_front",
-      "SHA256": "a5e7c892f99595291d94118c28bdb8414d610229e0f0e7c8a08d8117e68deec4",
+      "SHA256": "75a022a35d9ed0d86279a5b8f4d35131205d3fdf4c16247295d8761b9feade78",
       "SourceSHA256": "bd1b27b1a5b54074f48695b0b7c54a91ac2405a0c5f92418344a217d4a7d5f97",
       "Size": [
         112,
@@ -15050,11 +15075,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old_back",
-      "SHA256": "6e7989c18b1dfe54593143da254e6e642c936cf6366c7a8db72e52cc124e7191",
+      "SHA256": "d04435b5f69b46c13d4df05cf0d17b3701de3b247da6c9e4b9be1005829240eb",
       "SourceSHA256": "bd1b27b1a5b54074f48695b0b7c54a91ac2405a0c5f92418344a217d4a7d5f97",
       "Size": [
         112,
@@ -15120,11 +15146,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old",
-      "SHA256": "403cba85d8545e55b6e271450220d61d1f6818089273e0c59d55be5c17ae58d6",
+      "SHA256": "407cfd1f3b6e3305880637358d23a841c9979f01200903d07882f8533daca5f3",
       "SourceSHA256": "987eb3a62d785f880eb9b83ba8f93df0482b9c927f95ea85570e717e31514a9b",
       "Size": [
         112,
@@ -15190,11 +15217,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old_front",
-      "SHA256": "63b96e2c1ee34494cf5029be507a43b27d09f063a5de5db73eb9b4566da1f651",
+      "SHA256": "8c0f723ac649486888c54ebc5c5ad8353de78b4729cca55f7ad1721b0428dad7",
       "SourceSHA256": "987eb3a62d785f880eb9b83ba8f93df0482b9c927f95ea85570e717e31514a9b",
       "Size": [
         112,
@@ -15260,11 +15288,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old_back",
-      "SHA256": "d3f17d847431a3e22b506314f964263a5034e38c91d6eb88c43ffc5a1bb46e52",
+      "SHA256": "80477a4f22396f6055e7c473f4e58ee2d1d92cb0332dce85586ed5ae1bd10226",
       "SourceSHA256": "987eb3a62d785f880eb9b83ba8f93df0482b9c927f95ea85570e717e31514a9b",
       "Size": [
         112,
@@ -15330,11 +15359,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child",
-      "SHA256": "5600732ae6231c9edca21264e024ff23788ec3471cf5704744a9f8cf94c78c2d",
+      "SHA256": "5183460e11b2b007d93e0fc3deb810ee995beb4edccd936423ffc7fcfdffb5e9",
       "SourceSHA256": "9709f80f1651569fed131e271537e6bec90dd1f7f9cc8a925edabaa8c685524d",
       "Size": [
         112,
@@ -15400,11 +15430,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child_front",
-      "SHA256": "c6c9af49a78f62e121937a35789e7df7cc584ec5b0292f3a2923b70ffdd4e374",
+      "SHA256": "b2e1bac2b10e03a80a0e03fcab609693fdef2245d6858ae9b5413138ce86c66c",
       "SourceSHA256": "9709f80f1651569fed131e271537e6bec90dd1f7f9cc8a925edabaa8c685524d",
       "Size": [
         112,
@@ -15470,11 +15501,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child_back",
-      "SHA256": "80bad711130e24091f46b00d57152598d160ab5bfa0cf636ac43ff51339a454f",
+      "SHA256": "d6682d65c76485647638e98b098f1bc235147fcaccb12523476c2e64ee0d7fd8",
       "SourceSHA256": "9709f80f1651569fed131e271537e6bec90dd1f7f9cc8a925edabaa8c685524d",
       "Size": [
         112,
@@ -15540,11 +15572,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child",
-      "SHA256": "90e8427ee47fab3957718395b0fbd488031194c07617381f635227fb295d68ae",
+      "SHA256": "f2589f327b820b25b7487d90a965e0a6ddef58776fee545b903abfb5dc78610b",
       "SourceSHA256": "5f5212841e74c26c42a800b4c307c134754b621eca5f649f6f37e05cbbd0e8db",
       "Size": [
         112,
@@ -15610,11 +15643,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child_front",
-      "SHA256": "5e0a10f704d41366874eabc52543ff2d02e4bf59792e9c0608f4f55ab3d49fa4",
+      "SHA256": "6745f216fc31255315903722886e135edf02e0a78f7400c801c0c3e9460a874f",
       "SourceSHA256": "5f5212841e74c26c42a800b4c307c134754b621eca5f649f6f37e05cbbd0e8db",
       "Size": [
         112,
@@ -15680,11 +15714,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child_back",
-      "SHA256": "978c066087def0f5cd29ce35acc78d77d84037954f040975faa90e5f5bb9d6c0",
+      "SHA256": "bcbb4cf440446ef2db7649411d00c76c7aadac55083b581227f6d751315f6617",
       "SourceSHA256": "5f5212841e74c26c42a800b4c307c134754b621eca5f649f6f37e05cbbd0e8db",
       "Size": [
         112,
@@ -15750,11 +15785,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie",
-      "SHA256": "27e9434aa6917355b223b6a89d3cd5f82f815e8d74042713d02117b0f597d6b7",
+      "SHA256": "aa199c626da4d7311f54a95417fd65c420d8f48c274c46654ef4b04d9692cc28",
       "SourceSHA256": "06a7ae51e6482090bce71cc0656cabbbc5530226622a105eba59ee5ff567f6b3",
       "Size": [
         112,
@@ -15820,11 +15856,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie_front",
-      "SHA256": "b8aedf693050355fceebd6f30e0bb2e38150b909e7dfda4919e2af3434aca7d8",
+      "SHA256": "d09a4b2b76ae302b6c1ebfdc13784384be97d74897a6a5f4a7ebd44f6442f3d5",
       "SourceSHA256": "06a7ae51e6482090bce71cc0656cabbbc5530226622a105eba59ee5ff567f6b3",
       "Size": [
         112,
@@ -15890,11 +15927,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie_back",
-      "SHA256": "5d06467c31d674f081174fe9f1f66c90c8fcfd9ece072ac1de6e80417d112a2c",
+      "SHA256": "7dcdb6cbb45691024d0fc67718fe09a9bf8201ab9f001db1976254855516d0f5",
       "SourceSHA256": "06a7ae51e6482090bce71cc0656cabbbc5530226622a105eba59ee5ff567f6b3",
       "Size": [
         112,
@@ -15960,11 +15998,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie",
-      "SHA256": "62bf574c93c3727a3f0f61966164877377b060d8a10ff916689216f19a4a2489",
+      "SHA256": "d035f4b947a152ac546570a23b50e1cafd733fdbbf0fa0d0f5ad69e22d539c61",
       "SourceSHA256": "6cc676822a419a531b1657a3b93c9b942bbc1caf9776717f9230418f0e3e8204",
       "Size": [
         112,
@@ -16030,11 +16069,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie_front",
-      "SHA256": "54fcf0a5f09a73067641f0e37e0f79d24e99adb6369f65e0dc39ac87c8cba6b8",
+      "SHA256": "5efb5b6b9ed6f3f77130269d38b81ad761d37f2aa2a9003c02a5ae4fb3a1f63c",
       "SourceSHA256": "6cc676822a419a531b1657a3b93c9b942bbc1caf9776717f9230418f0e3e8204",
       "Size": [
         112,
@@ -16100,11 +16140,12 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie_back",
-      "SHA256": "4b7d45c9f8b8f64b38e6b33ea2ce27f5f664419711fe139a187162e27dd33112",
+      "SHA256": "7152d40eb94cb1595b8e982eb818d710eaff38c82eea05785722caff9004df80",
       "SourceSHA256": "6cc676822a419a531b1657a3b93c9b942bbc1caf9776717f9230418f0e3e8204",
       "Size": [
         112,
@@ -16170,7 +16211,8 @@
         "swim_1",
         "swim_2",
         "swim_3"
-      ]
+      ],
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Boats/Xuanhuang/boat_fishing",
@@ -16750,381 +16792,381 @@
     },
     {
       "Resource": "actors/Xuanhuang/female_1_robe_mask",
-      "SHA256": "4c1053824765e21046b3d7945ec28d7bba778c16371621d405d042e34ae9e070",
+      "SHA256": "871861059698a45da0548336b6c5abeb8447a2a09bab9ebf5ec27e2fb5e510e2",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_back_robe_mask",
-      "SHA256": "5c25d9fdb71ab21f582d44a70c52cf81a3f6f7a46a0ba49bd9f9e3b9a25c67ae",
+      "SHA256": "0cf0fedc8d25d37b7562ead2667afa93ae01eeccf17067f5d794418a78c0a70a",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child_robe_mask",
-      "SHA256": "f2fb50c81a53a060065c5190c8f4723e795a461c1a867839ef574208ee3dc8b3",
+      "SHA256": "d7cce341390889c192049be352b3a6fc17040e69acf5e109f465787cb3f8ea29",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child_back_robe_mask",
-      "SHA256": "615c1ff6280ac1b9d3defeeae38c8f5a7d946c15d603f317158227dd94478bcc",
+      "SHA256": "00a65137195594e1889c437f3e5648b6f733cf98b3f66a6808fb90e6960c3d50",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_child_front_robe_mask",
-      "SHA256": "1b0a2ba03ce458973551ff0f49a0f6d4759fddaf5a7814beafd32dd5186d5c1d",
+      "SHA256": "76f2fce8747afbe163fe564bc585df593d051b34e921b8407953fa64f1a298ce",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_front_robe_mask",
-      "SHA256": "1e6b3a2367f135cf62a6ead3734921bc9fbb4c06fbf28d52cbac148fa3b43a0e",
+      "SHA256": "398295b512c52019b9ed1e2201282c1d45a5cabcdcdb7982bf2681f40a90efbe",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king_robe_mask",
-      "SHA256": "b4ac441703c28ea9cb6638c248d6ae2ab51fdc1db33ae04086ea4c61c89160e1",
+      "SHA256": "c08a87ce5f7a96d76ab8cccd1c2b7075450d416d594bd741c4fb39ffc472c5fb",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king_back_robe_mask",
-      "SHA256": "d14e5931be129e846d2a661791ab3335db0df754499630178c04a83492c843ec",
+      "SHA256": "b818f34d2e3fbf29b566ba5f60819fd0d325a81b9e5e65b013f705846d6098ea",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_king_front_robe_mask",
-      "SHA256": "464da588fe4cbb3d6489f695d37ca8aa9cd1275311de098dedf8f288e3b31b10",
+      "SHA256": "39bf76b6447c473f57ff6d7db67e54d5aa9de6da5c5805a06096561a063e736a",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader_robe_mask",
-      "SHA256": "9372423e24fa9b7f8bbded6c87f119bd39be661e35017ad928ff556d972dc5a9",
+      "SHA256": "68f54bbaf40411520fddfd3b3dd3483c0547329f7891f6399c671ad0a47dcb66",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader_back_robe_mask",
-      "SHA256": "c96ece830da3bfa4420c7ea8f0ddc3b0b08b0a68ae940e9a645d40dbc9f35797",
+      "SHA256": "93b420dd2aa8b6858128b7be00e5c2a1e3aa370153709903618b20b467b53ce1",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_leader_front_robe_mask",
-      "SHA256": "251fefba1237426713525e1fb18897dd8114cbea259ec4f2c154539ffcaf2733",
+      "SHA256": "8c6074f1a470c78199dc432087a8b695769d1a704c777c11a04a458904a520ef",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old_robe_mask",
-      "SHA256": "b937bb6d74b1a8d16b7384de6b5674907d2fe8f100e013cf2b08ef1d9ca6c2d3",
+      "SHA256": "916fde440f19f8d8e1e61778bc148014dd77b7a78e4ef2d7416e0a59895afc66",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old_back_robe_mask",
-      "SHA256": "2846f36df1ddf6b766aac32c95f9f79b414a8e618f6f2b2c7ac1c8e5b8033662",
+      "SHA256": "54aa9b857dff8dfb72073c07ecfbc7d6ac64e2c9c70b7448d0a9d7241f91def4",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_old_front_robe_mask",
-      "SHA256": "32d6f38602a42823d3bb9cde25aec94b3f3352da0af0e1313858cc0f8624c242",
+      "SHA256": "39f95723104950adb0674b3228a967ce8fc9bbf2e5d9b277d74b912fedc544a4",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior_robe_mask",
-      "SHA256": "16639b4379f812fdd0c7e412ec42b2595fda2e46b1507f8c711dd3567dafbeb8",
+      "SHA256": "bbd26f53f1810739d9483cdb5f4d755c644f11886925d701f554994e05818884",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior_back_robe_mask",
-      "SHA256": "747f1a72a616eef79f8f595be09b2bb386c11c7bb1397afacaf5cf151b9d1bd6",
+      "SHA256": "616a1b21b992d80bddd4e9b1b92d7b792b519f20459df264fb54908c9efbabd3",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_warrior_front_robe_mask",
-      "SHA256": "b236c65819d076407d8e4539b084482ee3d4627ab2be5891d8cdb48f02dadc9a",
+      "SHA256": "ede594cec4d781e84631fe01fdc1d2c2e0dc8bcbb4e373a35d1b663c5b451000",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie_robe_mask",
-      "SHA256": "5faa1df06e881ae216b858aa9aeb933decf384106703a3a0751d66ad8dd1e315",
+      "SHA256": "92fbb66445349186e9141328e352112fc4e2a43bcfbcea43004174d4b0e08813",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie_back_robe_mask",
-      "SHA256": "c4c0eadb46b6e36db9255105ae4e407b832aff6e158e2cf60cebb953c53ea183",
+      "SHA256": "b7fa21f1bb20a671ec9dc4d98e8f1caa008fefd4ce95c32e89b89159d3e08c18",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/female_1_zombie_front_robe_mask",
-      "SHA256": "47dbf71446187bb709cc37f3cf51d4fbe418984790c383ca3f1a42d01fd9be16",
+      "SHA256": "08e5cbf08eeae783a57da3064c81def9ffcaa42c76e83666df4f2186eecff482",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_robe_mask",
-      "SHA256": "e0574c12fac84eca72e023d7df45df26994ce84d3cc97953f40d2b6cb4338b39",
+      "SHA256": "4938b0d68a751f1acd039929e9d4c4ecfe2f7751f8783cd69feeda1923fbbfbd",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_back_robe_mask",
-      "SHA256": "69e201337b7dc73b27ecb7715219f4bb2dec389457c06aab8d84e5f0ba8f0a51",
+      "SHA256": "961f4e43c0273bf32c1837863614650f8a89b48804bcbac0ca2d544bbd5c5db0",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child_robe_mask",
-      "SHA256": "dabb67f609bc7b8ea353c7c621ceb9e983f4c5a0b7d45bd65206a626bc2a2c8b",
+      "SHA256": "f04c6756da7541b23fcdc435ede3c70ce0caba0c308ef071768bce0bee67dfa3",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child_back_robe_mask",
-      "SHA256": "d64b301dd76113c27a125d8b2e01bfb08dfb0996713895f6ebeb608cf689be67",
+      "SHA256": "357e9d6eae54b027da00d58ec0349416eccf1beccd7fa67f3a5844e15ddfc806",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_child_front_robe_mask",
-      "SHA256": "42c774a7cc8fd1d65ff46c53f6a6dcfc98435d3618e8853f4587e2a24a905487",
+      "SHA256": "d28d2ceb5a9bbe967ae3970d005c09653a71f1d6ea1583a2c64e730097ddc2f3",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_front_robe_mask",
-      "SHA256": "34aa1507d4179dabdf233cf4ea63cb1df129959e6c87f8a8e769dac397c2bf19",
+      "SHA256": "44739e5d3e9379837095c146ed693aeeb18e120c3f5fdaa1d405468488913c14",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king_robe_mask",
-      "SHA256": "435ef64c81adb4e882f6823044fd7def475ca6e606f0a8ecaf9e3f8624d74437",
+      "SHA256": "741d3b1aec4a5936425db3be614aaf4ca8714198155a6c8cfb5e372667de8e7b",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king_back_robe_mask",
-      "SHA256": "739d1c964ecc4b3bb8da5ffb7575c88d0ababfa739ee7ec4b8f98148bc20a456",
+      "SHA256": "e7771c5494adf138e74f3db6b7b9e90f18ae905b06085cb5bc11f501c45a1dfe",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_king_front_robe_mask",
-      "SHA256": "bd59a5e94fd758bbda15551a7bb4bad47d231b3d29d7b2ec3a0d6ed61ae1ffc0",
+      "SHA256": "0e8b32f97b5e559bb0de726778c0c56e669baf57107a5860d12405cecc34e2af",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader_robe_mask",
-      "SHA256": "6ab772866bac95bdd715205708617ba48c68f1eb1e30322a46c62fb5b1eabc5c",
+      "SHA256": "0fca1b688f4d78a12359cd6bcdfcd083b880dfcf398edd7cfc4d7702c1bc854b",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader_back_robe_mask",
-      "SHA256": "13d7ff5f429e9d71c33ccae8e7bd1748dc3d3e383a8c23c8f250253865076a6c",
+      "SHA256": "ebbbd15858b95d9395331d1e99d6787406480b16b24f08c7811963c0eae7ac46",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_leader_front_robe_mask",
-      "SHA256": "d2ab7e98f040fd931c8e0025cec001659ec9ba526be215bb9f3b2605c7e85047",
+      "SHA256": "fd6a037283a2e069b12996a669abc6f7899d67ad9dbf1b308a011f096d1103e8",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old_robe_mask",
-      "SHA256": "a70ca8d7474758f39ae974d960c6a3c46b5c647a33541485eccd7f4d3cd4c04a",
+      "SHA256": "6cb4e0d4127852205e507740a94299193aa5c0b6ff4945eddf77cba3856f0bbf",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old_back_robe_mask",
-      "SHA256": "37b74320a300892cba1144862fbe308be9fe1c48759b9a5423c3dde9584fb749",
+      "SHA256": "9d6219a5aa597472070e5830fbd442f7cda1582b1ea2c9a3f270a6aa6fcc8b3e",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_old_front_robe_mask",
-      "SHA256": "f3de778c0321e2fa6f7d75ee231e6a2f4cd3bc7b26d9bc4d2c249ca30ef0ab6e",
+      "SHA256": "5b0829503bb47114da60245adcfc8bedb62489d2194d78da44775005a0182baf",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior_robe_mask",
-      "SHA256": "110531bedade5bde7a23bc59cc1ec9662b96a9ab327f6dbbba8154fdb90726fe",
+      "SHA256": "4159abcf4be4882de84220f0d298e258a6c04d4b4435a0e1ebc3b00b96615210",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior_back_robe_mask",
-      "SHA256": "5f67eb296a74b05acd642598c99203549062300c67938c72c3c008ad90d59927",
+      "SHA256": "41de0f961678e26689e4a132d97e00d4b3a27f73af7f10776d5bdd759b782ff6",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_warrior_front_robe_mask",
-      "SHA256": "f5893c28b49c5b942084177fc22a3c02c6183b1ef70035a2ef17899a374b5c39",
+      "SHA256": "545754e6ee721be9862766b430c2e28422adc0a200d05f70551f9d9a76cbe5bc",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie_robe_mask",
-      "SHA256": "b5c46317e623589bdc3255d053db45cfd8b2cb0188c9ad3099810666d6be8477",
+      "SHA256": "583ebcdfd56c7d15df2bbcfd5e52ad4352c9eea4756b3d360d06a4091a352b92",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie_back_robe_mask",
-      "SHA256": "5faacad20e490a7d413aa1873c5f91a1f7208d86875b408319b329b02c59b83b",
+      "SHA256": "43135ea6014beb2073c7b45c7d8d6eb9c17baf57fdd54b93f0891814dcb0c9c3",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/Xuanhuang/male_1_zombie_front_robe_mask",
-      "SHA256": "8aa992e259e883103e780aeadb98f6958c342accd28c2f3b6d94dd71ab7e1eee",
+      "SHA256": "cc5cddca3d8a308b8648a57d87f091ceb8b109122c7fb9a778794d4c4ca5e67d",
       "Size": [
         112,
         56
       ],
-      "Use": "\u660e\u786e\u8863\u670d\u67d3\u8272\u533a\u57df\u53ca\u4eae\u5ea6\uff1b\u4e0d\u5728\u6e32\u67d3\u56de\u8c03\u5206\u7c7b\u50cf\u7d20"
+      "Use": "\u539f\u7ed8\u884c\u8d70\u5e27\u4fdd\u6301\u4e0d\u53d8\uff1b\u72ec\u7acb\u751f\u6210\u56db\u5e27\u81ea\u7136\u6cf3\u59ff\uff0c\u540c\u8eab\u4efd\u3001\u540c\u65b9\u5411\uff0c\u900f\u660e\u6c34\u7ebf"
     },
     {
       "Resource": "actors/CareerSpirits/0",
@@ -17385,6 +17427,24 @@
         ]
       ],
       "Scale": 0.11570247933884298
+    },
+    {
+      "Resource": "ui/XuanhuangSkin/title_career_skills",
+      "SHA256": "7cf8c4601d62d3c3ad7c655041f8c8a3b52472bd7cf71bf6f031c3b2669f0a78",
+      "Size": [
+        1450,
+        441
+      ],
+      "Use": "\u804c\u4e1a\u6280\u80fd/\u8fd4\u56de\u4fe1\u606f\u91d1\u7389\u827a\u672f\u5b57\uff0c\u4e0e\u4fee\u58eb\u5217\u4f20\u914d\u5957"
+    },
+    {
+      "Resource": "ui/XuanhuangSkin/title_career_archive",
+      "SHA256": "e746f16b0d396fd853f47a8aa769a794462f92b2a0a16a463bddd5da70727625",
+      "Size": [
+        1438,
+        417
+      ],
+      "Use": "\u804c\u4e1a\u6280\u80fd/\u8fd4\u56de\u4fe1\u606f\u91d1\u7389\u827a\u672f\u5b57\uff0c\u4e0e\u4fee\u58eb\u5217\u4f20\u914d\u5957"
     }
   ],
   "Missing": [],
@@ -34444,5 +34504,236 @@
         ]
       }
     ]
+  },
+  "SwimmingSets": {
+    "male_1": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1.png",
+      "SHA256": "e44485e8e7e8abbb1d47ec9578c3be32d5ca5445ee26bcebbe901a07cf0d84ff",
+      "References": [
+        "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a15954-37fa-7381-886c-da8c0c1483d2\\exec-eea39d14-4d60-497c-ac93-1804f5e885c0.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_warrior": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_warrior.png",
+      "SHA256": "0bb9465e97496f195962fa33f99f52509b4486ca4835eb504073cb4822a4d7b2",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_warrior.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_king": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_king.png",
+      "SHA256": "3459afe81e075ea54f2660dd673b98f943ca6d723c6c5f41a20fca9deb00ae7b",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_king.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_leader": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_leader.png",
+      "SHA256": "565d347d44161b482b1909f9c81fbc98c0d754c867f4b6699a5eb5847dc5ae19",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_leader.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_old": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_old.png",
+      "SHA256": "cf4d48298405c1eaf73529dd9e3a9b9164384d85c235c21850e3e85e1b6ccfd3",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_old.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_child": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_child.png",
+      "SHA256": "16bff1e4d0fe6b267a504b7336de593d3bcb2884f42a53303c30a0b67fd0a4dc",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_child.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "male_1_zombie": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_male_1_zombie.png",
+      "SHA256": "957b05fe3f5b67de0e7e55b98f07223f53528f1867b37f028edcfd23ddc86e68",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\male_1_zombie.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1.png",
+      "SHA256": "1972abb9e4d04e1de7001cab2da44c033248dae311c795d1dbd3f17123575e97",
+      "References": [
+        "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a15954-37fa-7381-886c-da8c0c1483d2\\exec-18d065cc-f04b-40fe-b594-badc84b56d2b.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_warrior": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_warrior.png",
+      "SHA256": "672305ea9a74ea3b40040ce232cb9f3a14f840403d6f5d0c2a5ac0bf01f24b52",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_warrior.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_king": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_king.png",
+      "SHA256": "405e9d0011350f4995bac7a264e8f21a1389cab9c2085000e28287d322762fad",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_king.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_leader": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_leader.png",
+      "SHA256": "03fcab9d51a3501b3a96fab03ba1422a7cf3d5746460b3dcfd92570ee79791a8",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_leader.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_old": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_old.png",
+      "SHA256": "a6eb7aab24fcd9dfa639843425e1c1aadf8f593c8e3f690de52f63c3bfd055fa",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_old.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_child": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_child.png",
+      "SHA256": "e7f47bd948143e4a1671d7e4e2c81ee2c5fc7807e969f76dc32bf6e6b0a27c42",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_child.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    },
+    "female_1_zombie": {
+      "Source": ".dev-tools/combat-art/0.7.0/swim_female_1_zombie.png",
+      "SHA256": "fc86a8f43d3d58cef6fb1571d1deb2cb87171bcbdfc2595543253b3e4144db83",
+      "References": [
+        ".dev-tools\\combat-art\\0.7.0\\female_1_zombie.png"
+      ],
+      "Method": "individually-generated-natural-strokes",
+      "Frames": 12,
+      "Directions": [
+        "side",
+        "front",
+        "back"
+      ],
+      "WaterlinePixelY": 26,
+      "PivotY": 2
+    }
+  },
+  "CareerTitleSource": {
+    "Source": ".dev-tools/combat-art/0.7.0/career_titles.png",
+    "SHA256": "59f987e5f43cdce582d12361d424a072c5bc5069c3af1dae99aef9c838e5be26",
+    "Reference": "ui/XuanhuangSkin/title_biography"
   }
 }

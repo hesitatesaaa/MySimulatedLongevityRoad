@@ -46,7 +46,14 @@ internal static class MclslXuanhuangRegistration
         architecture.actor_asset_id_boat_fishing=CloneBoat(human.actor_asset_id_boat_fishing);
         architecture.actor_asset_id_trading=CloneBoat(human.actor_asset_id_trading);
         architecture.actor_asset_id_transport=CloneBoat(human.actor_asset_id_transport);
+        ActorAsset humanActor=AssetManager.actor_library.get("human");
         Asset=AssetManager.actor_library.clone(Id,"human");
+        Asset.default_subspecies_traits=new List<string>(humanActor.default_subspecies_traits);
+        Asset.decision_ids=humanActor.decision_ids==null?null:new List<string>(humanActor.decision_ids);
+        Asset.job=(string[])humanActor.job?.Clone();
+        Asset.job_citizen=(string[])humanActor.job_citizen?.Clone();
+        Asset.job_kingdom=(string[])humanActor.job_kingdom?.Clone();
+        Asset.job_baby=(string[])humanActor.job_baby?.Clone();
         Asset.name_locale=Id;Asset.kingdom_id_wild="nomads_"+Id;Asset.kingdom_id_civilization=Id;
         Asset.architecture_id=Id;Asset.architecture_asset=architecture;
         Asset.icon="Xuanhuang";Asset.banner_id="human";
@@ -125,7 +132,9 @@ internal static class MclslXuanhuangRegistration
             {
                 if(tile==null)return false;
                 EnsureWildKingdom();
-                return World.world.units.createNewUnit(Id,tile,false,0,null,null,true,false,false,false)!=null;
+                // Use the same adult placement path as native civilization powers.
+                // A newborn has no adult settlement decisions until it grows up.
+                return World.world.units.createNewUnit(Id,tile,pAdultAge:true)!=null;
             },ignore_cursor_icon=true });
         var button=PowerButtonCreator.CreateGodPowerButton(powerId,SpriteTextureLoader.getSprite("ui/Icons/Xuanhuang"));
         PowersTabExtension.AddPowerButton(tab,"tab",button);

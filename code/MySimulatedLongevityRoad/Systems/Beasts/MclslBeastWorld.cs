@@ -37,6 +37,8 @@ internal static class MclslBeastWorld
     private static MapBox _wildWorld;
     private static int _auditFrame;
     private static int _manualRequest;
+    internal static string ManualFeedback {get;private set;}="";
+    private static string TriggerFailure="";
     private static float _nextSpawnTime;
     private static bool _locked;
     private static readonly ConcurrentDictionary<long,byte> PendingRankStats=new();
@@ -95,8 +97,15 @@ internal static class MclslBeastWorld
         World.world.map_stats.custom_data??=new SaveCustomData();
         World.world.map_stats.custom_data.set(SaveKey,JsonConvert.SerializeObject(State));
     }
-    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;_nextSpawnTime=0;_locked=false;PendingRankStats.Clear();MclslBeastSpawnSystem.Clear(); }
-    internal static void RequestManual(int level)=>_manualRequest=Math.Clamp(level,1,7);
+    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;ManualFeedback="";_nextSpawnTime=0;_locked=false;PendingRankStats.Clear();MclslBeastSpawnSystem.Clear(); }
+    internal static void RequestManual(int level)
+    {
+        if(_locked){ManualFeedback="兽潮存档异常，暂不能召潮。";return;}
+        if(World.world?.units==null){ManualFeedback="请先进入世界。";return;}
+        if(_manualRequest>0){ManualFeedback="已有召潮请求排队，请等待处理。";return;}
+        _manualRequest=Math.Clamp(level,1,7);
+        ManualFeedback="已排队："+_manualRequest+"级兽潮"+(Config.paused?"，继续时间后生成。":"，正在寻找栖息地。");
+    }
     internal static void ObserveProgress()
     {
         foreach(var actor in World.world.units.getSimpleList())
@@ -130,8 +139,12 @@ internal static class MclslBeastWorld
     }
     internal static bool Trigger(int level,int year,WorldTile requested=null)
     {
-        if(_locked || World.world?.units==null || State.Waves.Any(x=>x.Status=="生成中" || x.Year==year && x.Status!="已结束")
-            || State.Waves.Count(x=>x.Status!="已结束")>=2) return false;
+        TriggerFailure="";
+        if(_locked)return CannotTrigger("兽潮存档异常。");
+        if(World.world?.units==null)return CannotTrigger("请先进入世界。");
+        if(State.Waves.Any(x=>x.Status=="生成中"))return CannotTrigger("已有兽潮正在生成，请稍候。");
+        if(State.Waves.Any(x=>x.Year==year&&x.Status!="已结束"))return CannotTrigger("本年已有活动兽潮，请待其结束或进入下一年。");
+        if(State.Waves.Count(x=>x.Status!="已结束")>=2)return CannotTrigger("同时活动兽潮已达两场上限。");
         level=Math.Clamp(level,1,7);
         var options=new List<(string Theme,WorldTile Tile)>();
         foreach(string theme in new[]{"山林","水域","阴影","神兽"})
@@ -143,11 +156,11 @@ internal static class MclslBeastWorld
                 if(tile!=null){options.Add((theme,tile));break;}
             }
         }
-        if(options.Count==0) return false;
+        if(options.Count==0)return CannotTrigger("没有符合该等级与主题的栖息地。");
         var option=options[Roll(year+"|theme|"+State.Waves.Count,options.Count)];
         int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor)+State.NaturalPending.Count,
             MapBox.width*MapBox.height,MaximumWaveCount);
-        if(count==0)return false;
+        if(count==0)return CannotTrigger("已达自动妖兽总上限，暂无生成名额。");
         var wave=new MclslBeastWaveState { Id=Guid.NewGuid().ToString("N"),Level=level,Theme=option.Theme,
             X=option.Tile.pos.x,Y=option.Tile.pos.y,Count=count,Year=year };
         Actor cityActor=MclslActorRegistry.CityRepresentatives.OrderBy(x=>x.current_tile==null?float.MaxValue:
@@ -157,6 +170,7 @@ internal static class MclslBeastWorld
         MclslWorldRunRepository.AddEvent(year,"beast_tide",level+"级"+option.Theme+"兽潮", "妖兽潮在("+wave.X+","+wave.Y+")出现，计划生成"+count+"只妖兽。",cityActor);
         Save();return true;
     }
+    private static bool CannotTrigger(string reason){TriggerFailure=reason;return false;}
     private static IEnumerable<MclslBeastDefinition> Pool(string theme,int realm)
         =>MclslBeastCatalog.All.Where(b=>MclslBeastContent.BySpecies[b.Id].MinRealm<=realm && theme switch
         {
@@ -184,7 +198,8 @@ internal static class MclslBeastWorld
         if(_manualRequest>0 && MclslBeastHabitatIndex.Refresh(MclslRuntime.CurrentYear(),false))
         {
             int level=_manualRequest;_manualRequest=0;
-            if(!Trigger(level,MclslRuntime.CurrentYear()))MclslDiagnostics.Error("manual-beast-wave","没有符合主题的栖息地，或已达妖兽上限。");
+            ManualFeedback=Trigger(level,MclslRuntime.CurrentYear())
+                ?level+"级兽潮已引动，正在分批生成。":"召潮未成功："+TriggerFailure;
         }
         var watch=Stopwatch.StartNew();int made=0;
         foreach(var wave in State.Waves)

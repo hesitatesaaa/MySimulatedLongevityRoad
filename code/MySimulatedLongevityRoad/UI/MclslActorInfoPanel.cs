@@ -74,7 +74,7 @@ internal static class MclslActorInfoPanel
         WindowStates[window] = state;
         Transform panel = text.transform.parent?.parent?.parent;
         EnsureActionBar(panel ?? background, window.actor);
-        if (scroll != null) scroll.gameObject.SetActive(true);
+        if (scroll != null) scroll.gameObject.SetActive(!MclslCareerSkillView.Showing(panel ?? background));
         bool actorChanged = state != null && state.ActorId != actorId;
 
         string formatted;
@@ -157,6 +157,7 @@ internal static class MclslActorInfoPanel
             RestoreScroll(scroll, keepScroll, keepContentPosition);
         }
         MclslCareerSkillView.Bind(panel ?? background, window.actor);
+        RefreshCareerButton(panel ?? background);
     }
 
     internal static void RefreshOpenForActor(Actor actor)
@@ -376,8 +377,11 @@ internal static class MclslActorInfoPanel
     internal static void RefreshCareerButton(Transform panel)
     {
         Transform button = panel.Find("MclslActorActions/Career");
-        if (button != null) EnsureBiographyArtwork(button,
-            MclslCareerSkillView.Showing(panel) ? "title_career_archive" : "title_career_skills");
+        if (button == null) return;
+        bool showing=MclslCareerSkillView.Showing(panel);
+        Text label=button.Find("Text")?.GetComponent<Text>();
+        if(label!=null)label.text=showing?"返回信息":"职业技能";
+        EnsureBiographyArtwork(button,showing ? "title_career_archive" : "title_career_skills");
     }
 
     private static void EnsureBiographyArtwork(Transform button, string artwork = "title_biography")
@@ -430,7 +434,7 @@ internal static class MclslActorInfoPanel
             body = new GameObject(BodyName, typeof(RectTransform), typeof(Image), typeof(ScrollRect));
             body.transform.SetParent(panel, false);
         }
-        body.SetActive(true);
+        body.SetActive(!MclslCareerSkillView.Showing(panel));
         RectTransform rect = body.GetComponent<RectTransform>();
         rect.anchorMin = Vector2.zero;
         rect.anchorMax = Vector2.one;

@@ -60,6 +60,11 @@ def validate(root=ROOT, release=False):
         group = groups["actors/boats/mclsl_xuanhuang_" + boat]
         original = next(r for r in native["resources"] if r["path"] == "actors/boats/"+boat)
         assert {f["Name"] for f in group["Frames"]} == {f["name"] for f in original["frames"]}
+    expected_swimming = {f"{sex}_1{role}" for sex in ("male", "female")
+                         for role in ("", "_child", "_warrior", "_king", "_leader", "_old", "_zombie")}
+    assert set(manifest.get("SwimmingSets", {})) == expected_swimming, "Every identity needs individually generated swimming art"
+    for record in manifest["SwimmingSets"].values():
+        assert record["Method"] == "individually-generated-natural-strokes" and record["Frames"] == 12
     for sex in ("male", "female"):
         for role in ("", "_child", "_warrior", "_king", "_leader", "_old", "_zombie"):
             for direction in ("", "_front", "_back"):
@@ -67,6 +72,16 @@ def validate(root=ROOT, release=False):
                 assert {f["Name"] for f in group["Frames"]} == {f"{action}_{i}" for action in ("walk", "swim") for i in range(4)}
                 mask = group["Atlas"] + "_robe_mask"
                 assert mask in outputs
+                with Image.open(root / "GameResources" / (group["Atlas"] + ".png")) as sheet:
+                    frames = {f["Name"]: f for f in group["Frames"]}
+                    def bounds(f):
+                        return sheet.crop((f["X"],sheet.height-f["Y"]-f["Height"],
+                                           f["X"]+f["Width"],sheet.height-f["Y"])).getchannel("A").getbbox()
+                    for i in range(4):
+                        swim=frames[f"swim_{i}"]
+                        water=bounds(swim);walk=bounds(frames[f"walk_{i}"])
+                        assert water and walk and water[3]==26 and swim["PivotY"]==2
+                        assert .35 <= (water[3]-water[1])/(walk[3]-walk[1]) <= .7, group["Path"]
     for kind in range(4):
         assert len(groups[f"actors/CareerSpirits/{kind}/main"]["Frames"]) == 8
     for career in CAREERS:
@@ -87,6 +102,7 @@ def validate(root=ROOT, release=False):
         assert runtime["actualUnity"] and runtime["version"] == "0.7.0" and runtime["units"], "Actual Unity unit placement evidence is required"
         assert runtime["inputSha256"] == result["inputSha256"], "Unity evidence is stale"
         assert set(policy["requiredChecks"]).issubset(runtime["checks"]), "Unity checks incomplete"
+        assert len(runtime["naturalWorlds"]) == 3 and all(w["humanFounded"] for w in runtime["naturalWorlds"]), "Natural founding needs three independent worlds and human controls"
         result["unityRetested"] = True
         result["interactiveVisualReview"] = runtime["interactiveVisualReview"]
         result["performanceTested"] = runtime["performanceTested"]

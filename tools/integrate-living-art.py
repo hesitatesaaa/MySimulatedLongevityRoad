@@ -55,6 +55,82 @@ def save_image(image, relative):
     return path
 
 
+def swimming(source, asset, references):
+    """Import one independently generated identity, with 3 directions x 4 strokes."""
+    data = load_manifest()
+    image = Image.open(source).convert("RGBA")
+    assert image.getextrema()[3][0] == 0, "Swimming source must be transparent"
+    # Remove only low-opacity generation glow; never synthesize a walking crop.
+    image.putalpha(image.getchannel("A").point(lambda a: a if a >= 160 else 0))
+    rows = row_bounds(image, 3)
+    raw = ROOT / ".dev-tools/combat-art/0.7.0" / ("swim_" + asset + ".png")
+    shutil.copyfile(source, raw)
+    cells = []
+    for top, bottom in rows:
+        for column in range(4):
+            cell = image.crop((round(column*image.width/4), top, round((column+1)*image.width/4), bottom))
+            box = cell.getchannel("A").getbbox()
+            if box is None:
+                raise ValueError("Empty swim stroke")
+            cells.append(cell.crop(box))
+    child = asset.endswith("_child")
+    height = 9 if child else 13
+    scale = min(height / max(c.height for c in cells), 26 / max(c.width for c in cells))
+    outputs = {o["Resource"]: o for o in data["Outputs"]}
+    for direction, suffix in enumerate(("", "_front", "_back")):
+        group = next(g for g in data["Groups"] if g["Path"] == "actors/species/civs/mclsl_xuanhuang"+suffix+"/"+asset)
+        atlas = group["Atlas"]
+        sheet = Image.open(ROOT / "GameResources" / (atlas+".png")).convert("RGBA")
+        mask = Image.open(ROOT / "GameResources" / (atlas+"_robe_mask.png")).convert("RGBA")
+        for frame in group["Frames"]:
+            if not frame["Name"].startswith("swim_"):
+                continue
+            pose = cells[direction*4+int(frame["Name"][-1])]
+            pose = pose.resize((max(1,round(pose.width*scale)),max(1,round(pose.height*scale))),Image.Resampling.NEAREST)
+            pose = pose.crop(pose.getchannel("A").getbbox())
+            x,y=frame["X"],sheet.height-frame["Y"]-frame["Height"]
+            px,py=x+(28-pose.width)//2,y+26-pose.height
+            sheet.paste((0,0,0,0),(x,y,x+28,y+28));sheet.paste(pose,(px,py))
+            mask.paste((0,0,0,0),(x,y,x+28,y+28))
+            pixels=mask.load()
+            for iy in range(pose.height):
+                for ix in range(pose.width):
+                    r,g,b,a=pose.getpixel((ix,iy))
+                    selected=(iy>=round(pose.height*.60) and g>r*1.25 and g>b*1.15) if asset.startswith("female") else (r>70 and r>g*1.6 and r>b*1.5)
+                    if a and selected:
+                        shade=min(255,round(g*190/115)) if asset.startswith("female") else r
+                        pixels[px+ix,py+iy]=(shade,shade,shade,255)
+            frame.update(PivotX=14,PivotY=2,ItemX=20,ItemY=5)
+        for tail,content in (("",sheet),("_robe_mask",mask)):
+            resource=atlas+tail
+            path=save_image(content,resource)
+            outputs[resource]["SHA256"]=digest(path)
+            outputs[resource]["Use"]="原绘行走帧保持不变；独立生成四帧自然泳姿，同身份、同方向，透明水线"
+    data.pop("Swimming",None)
+    data.setdefault("SwimmingSets",{})[asset]={"Source":raw.relative_to(ROOT).as_posix(),"SHA256":digest(raw),
+        "References":[str(r) for r in references],"Method":"individually-generated-natural-strokes",
+        "Frames":12,"Directions":["side","front","back"],"WaterlinePixelY":26,"PivotY":2}
+    write_manifest(data)
+
+
+def career_titles(source):
+    data=load_manifest()
+    image=Image.open(source).convert("RGBA")
+    raw=ROOT/".dev-tools/combat-art/0.7.0/career_titles.png"
+    shutil.copyfile(source,raw)
+    for index,asset in enumerate(("title_career_skills","title_career_archive")):
+        cell=image.crop((0,index*image.height//2,image.width,(index+1)*image.height//2))
+        box=cell.getchannel("A").point(lambda a:255 if a>=80 else 0).getbbox()
+        assert box
+        cell=cell.crop(box)
+        path=save_image(cell,"ui/XuanhuangSkin/"+asset)
+        resource="ui/XuanhuangSkin/"+asset
+        data["Outputs"]=[o for o in data["Outputs"] if o["Resource"]!=resource]
+        data["Outputs"].append({"Resource":resource,"SHA256":digest(path),"Size":list(cell.size),"Use":"职业技能/返回信息金玉艺术字，与修士列传配套"})
+    data["CareerTitleSource"]={"Source":raw.relative_to(ROOT).as_posix(),"SHA256":digest(raw),"Reference":"ui/XuanhuangSkin/title_biography"}
+    write_manifest(data)
+
+
 def robe_masks():
     """Bake explicit, reviewable garment pixels rather than classifying during rendering."""
     data = load_manifest()
@@ -565,6 +641,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--originals", type=Path)
     parser.add_argument("--robe-masks", action="store_true")
+    parser.add_argument("--swimming")
+    parser.add_argument("--career-titles", type=Path)
     parser.add_argument("--building")
     parser.add_argument("--effect")
     parser.add_argument("--icon")
@@ -582,6 +660,10 @@ if __name__ == "__main__":
         import_originals(args.originals)
     if args.robe_masks:
         robe_masks()
+    if args.swimming:
+        swimming(args.source,args.swimming,args.reference)
+    if args.career_titles:
+        career_titles(args.career_titles)
     if args.building:
         building(args.source, args.building, args.reference)
     if args.effect:
