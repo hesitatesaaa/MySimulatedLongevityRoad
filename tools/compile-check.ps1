@@ -27,7 +27,7 @@ $references = @(Get-ChildItem -LiteralPath $managedRoot -Filter '*.dll' |
 $references += @($gamePublicizedAssembly, $loaderAssembly, $harmonyAssembly)
 foreach ($assembly in $references) { $compilerArguments += "/reference:`"$assembly`"" }
 $sources = @(Get-ChildItem -LiteralPath $projectRoot -Recurse -Filter '*.cs' |
-    Where-Object { $_.FullName.Substring($projectRoot.Length) -notmatch '(^|[\\/])(build|obj|bin)([\\/]|$)' } |
+    Where-Object { $_.FullName.Substring($projectRoot.Length) -notmatch '(^|[\\/])(build|obj|bin|\.archive|\.tests|\.dev-tools|\.codegraph)([\\/]|$)' } |
     Sort-Object FullName | ForEach-Object FullName)
 if ($sources.Count -eq 0) { throw 'No C# sources found under the project root.' }
 foreach ($source in $sources) { $compilerArguments += "`"$source`"" }
