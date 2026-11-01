@@ -126,7 +126,7 @@ internal static class MclslDeathSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max * 0.38f));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #1: " + mclslEmptyCatchEx.Message); }
 
         string name = SafeName(actor);
         MclslWorldRunRepository.AddEvent(year, "nascent_cave_death_divert", name + "洞天代死", detail, actor);
@@ -195,7 +195,7 @@ internal static class MclslDeathSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max * 0.55f));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #2: " + mclslEmptyCatchEx.Message); }
 
         TrySetNumber(actor?.data, "hunger", 100f);
         TrySetNumber(actor?.data, "_hunger", 100f);
@@ -709,7 +709,7 @@ internal static class MclslDeathSystem
                     value = property?.GetValue(source);
                     if (value is Actor propertyActor && propertyActor != actor) return SafeName(propertyActor);
                 }
-                catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+                catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #4: " + mclslEmptyCatchEx.Message); }
             }
         }
         return string.Empty;

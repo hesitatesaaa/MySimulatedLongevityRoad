@@ -379,22 +379,22 @@ internal static class MclslRankSnapshotSource
     private static MclslRankEntry BuildMinimalEntry(Actor actor)
     {
         long actorId = 0L;
-        try { actorId = MclslActorAccessor.Id(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", "榜单快照：读取人物 ID 失败: " + mclslEmptyCatchEx.Message); }
+        try { actorId = MclslActorAccessor.Id(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", "榜单快照：读取人物 ID 失败: " + mclslEmptyCatchEx.Message); }
         string name = "修士" + actorId;
         try
         {
             string candidate = actor?.getName();
             if (!string.IsNullOrWhiteSpace(candidate)) name = candidate.Trim();
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", "榜单快照：读取人物姓名失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", "榜单快照：读取人物姓名失败: " + mclslEmptyCatchEx.Message); }
         string realm = string.Empty;
-        try { realm = MclslActorAccessor.Realm(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", "榜单快照：读取境界失败: " + mclslEmptyCatchEx.Message); }
+        try { realm = MclslActorAccessor.Realm(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", "榜单快照：读取境界失败: " + mclslEmptyCatchEx.Message); }
         int essence = 0;
-        try { essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", "榜单快照：读取真元失败: " + mclslEmptyCatchEx.Message); }
+        try { essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", "榜单快照：读取真元失败: " + mclslEmptyCatchEx.Message); }
         float progress = 0f;
         int taishangProgress = 0;
-        try { progress = ReadRankProgress(actor, realm, essence); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-5", "榜单快照：读取境界进度失败: " + mclslEmptyCatchEx.Message); }
-        try { taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-6", "榜单快照：读取太上进度失败: " + mclslEmptyCatchEx.Message); }
+        try { progress = ReadRankProgress(actor, realm, essence); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-5", "榜单快照：读取境界进度失败: " + mclslEmptyCatchEx.Message); }
+        try { taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-6", "榜单快照：读取太上进度失败: " + mclslEmptyCatchEx.Message); }
         string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
         bool minimalBeast = false;
@@ -410,7 +410,7 @@ internal static class MclslRankSnapshotSource
                 minimalSpeciesName = minimalSpecies.Name;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", "榜单快照：读取妖兽种类失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", "榜单快照：读取妖兽种类失败: " + mclslEmptyCatchEx.Message); }
         return new MclslRankEntry
         {
             Actor = actor,

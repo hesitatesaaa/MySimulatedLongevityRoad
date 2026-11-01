@@ -550,3 +550,10 @@ M0-B 仓库整理 + 编译基线记录
 - 验证：compile error=0、warning=16；8 个离线测试 exit=0。
 - 注意：按 AGENTS.md，离线/桩测试不构成实机通过；新世界/读档/切换世界及 WriteLocked 场景仍需 Unity 实机回归（用户已确认具备条件）。
 - 下一步：M3-D 空 catch 规范化。
+
+### M3-D 空 catch 规范化：已完成
+
+- 变更：157 处 empty-catch-code-* 的 MclslDiagnostics.Error 统一降级为 Probe（诊断关闭静默、开启每 key 一次），覆盖 41 个文件；Error(empty-catch) 归零，Probe(empty-catch)=157。
+- 说明：这些本就是空 catch（预期失败/防御分支），归为 Probe 比 Error 更符合原意；key 保留路径式命名（仅内部去重用，不显示），语义化 key 作为可选后续。
+- 验证：compile error=0、warning=16；8 个离线测试 exit=0。
+- 下一步：M3-H 指标/文档。

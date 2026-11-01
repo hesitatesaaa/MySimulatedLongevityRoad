@@ -632,13 +632,13 @@ internal static class MclslWorldRunRepository
                 record.MapX = actor.data.x;
                 record.MapY = actor.data.y;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", "材料发现事件坐标读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", "材料发现事件坐标读取失败: " + mclslEmptyCatchEx.Message); }
             try
             {
                 record.LocationName = actor.city?.data?.name ?? string.Empty;
                 record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", "材料发现事件归属读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", "材料发现事件归属读取失败: " + mclslEmptyCatchEx.Message); }
         }
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
                 MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
@@ -732,7 +732,7 @@ internal static class MclslWorldRunRepository
             if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
             MclslWorldArchiveStore.MarkDirty();
         }
-        catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
+        catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
     }
 
     internal static void AddEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string eventKey = null)

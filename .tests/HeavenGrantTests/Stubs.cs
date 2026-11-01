@@ -58,6 +58,12 @@ namespace MySimulatedLongevityRoad.Core
     {
         internal static int Errors;
         internal static void Error(string id, string text) => Errors++;
+        internal static void Fatal(string id, string text) => Errors++;
+        internal static void Probe(string id, string text) { }
+        internal static void Log(string id, string text) { }
+        internal static void Warn(string id, string text) { }
+        internal static void Alert(string id, string text) { }
+        internal static void Notify(string id, string text) { }
         internal static void Cultivation(string id, string text) { }
     }
 }

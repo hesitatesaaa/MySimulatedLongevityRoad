@@ -71,10 +71,10 @@ internal static class MclslGenderToggleButton
         if (actor.data.sex == ActorSex.None) return;
 
         actor.data.sex = actor.data.sex == ActorSex.Male ? ActorSex.Female : ActorSex.Male;
-        try { actor.clearSprites(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #1: " + mclslEmptyCatchEx.Message); }
-        try { window._avatar_element?.show(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #2: " + mclslEmptyCatchEx.Message); }
+        try { actor.clearSprites(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #1: " + mclslEmptyCatchEx.Message); }
+        try { window._avatar_element?.show(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #2: " + mclslEmptyCatchEx.Message); }
         Refresh(window);
-        try { MclslActorInfoPanel.Refresh(window); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #3: " + mclslEmptyCatchEx.Message); }
+        try { MclslActorInfoPanel.Refresh(window); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void RefreshImage(Actor actor, Image image, Button button)

@@ -129,7 +129,7 @@ internal sealed partial class MclslCodexWindow
         GUILayout.Label("<b><size=23>" + MclslActorAccessor.DisplayName(actor) + "</size></b>");
         GUILayout.FlexibleSpace();
         if (GUILayout.Button(LM.Get("mclsl_biography_open_actor"), GUILayout.Width(92f), GUILayout.Height(34f)))
-            try { ActionLibrary.openUnitWindow(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-BiographyArchive-cs-1", "仙录传记：打开人物窗口失败: " + mclslEmptyCatchEx.Message); }
+            try { ActionLibrary.openUnitWindow(actor); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-BiographyArchive-cs-1", "仙录传记：打开人物窗口失败: " + mclslEmptyCatchEx.Message); }
         GUILayout.EndHorizontal();
         GUILayout.Label("<color=#9CD7FF>" + LM.Get("mclsl_history_year_span") + " · "
             + (recorded.Count == 0 ? LM.Get("mclsl_history_no_record") : recorded[0].Year + "—" + recorded[recorded.Count - 1].Year)

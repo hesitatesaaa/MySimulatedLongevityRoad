@@ -18,7 +18,7 @@ namespace MySimulatedLongevityRoad.Traits {
 namespace MySimulatedLongevityRoad.Core {
  static class MclslWorldContext { public static long Generation = 1; }
  static class MclslPerformanceProbe { public static void RecordChangeQueueMerged() {} public static long Begin()=>0; public static void RecordChangeQueueDrained(int n){} public static void End(string s,long n){} }
- static class MclslDiagnostics { public static void Error(string a,string b)=>throw new Exception(b); }
+ static class MclslDiagnostics { public static void Error(string a,string b)=>throw new Exception(b); public static void Fatal(string a,string b){} public static void Probe(string a,string b){} public static void Log(string a,string b){} public static void Warn(string a,string b){} public static void Alert(string a,string b){} public static void Notify(string a,string b){} }
 }
 namespace MySimulatedLongevityRoad.Systems {
  static class MclslActorAccessor { public static long Id(Actor a)=>a?.data?.id??0; public static bool Alive(Actor a)=>a?.Alive==true; public static string Realm(Actor a)=>""; public static string GetString(Actor a,string k)=>a.Source; }

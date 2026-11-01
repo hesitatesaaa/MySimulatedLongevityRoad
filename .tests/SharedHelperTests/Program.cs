@@ -20,6 +20,12 @@ namespace MySimulatedLongevityRoad.Core {
     public static class MclslDiagnostics {
         public static int Errors;
         public static void Error(string key, string value) { Errors++; }
+        public static void Fatal(string key, string value) { Errors++; }
+        public static void Probe(string key, string value) { }
+        public static void Log(string key, string value) { }
+        public static void Warn(string key, string value) { }
+        public static void Alert(string key, string value) { }
+        public static void Notify(string key, string value) { }
     }
 }
 namespace MySimulatedLongevityRoad.Systems {

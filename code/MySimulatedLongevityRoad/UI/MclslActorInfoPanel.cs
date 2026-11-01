@@ -272,7 +272,7 @@ internal static class MclslActorInfoPanel
             try { UnityEngine.Object.Destroy(existing.gameObject); }
             catch
             {
-                try { existing.gameObject.SetActive(false); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorInfoPanel-cs-1", "人物面板：隐藏旧操作栏失败: " + mclslEmptyCatchEx.Message); }
+                try { existing.gameObject.SetActive(false); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorInfoPanel-cs-1", "人物面板：隐藏旧操作栏失败: " + mclslEmptyCatchEx.Message); }
             }
         }
         Transform actions = parent.Find("MclslActorActions");

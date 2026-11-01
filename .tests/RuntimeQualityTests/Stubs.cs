@@ -54,6 +54,12 @@ namespace MySimulatedLongevityRoad.Core
     {
         internal static int Errors;
         internal static void Error(string key,string message)=>Errors++;
+        internal static void Fatal(string key,string message)=>Errors++;
+        internal static void Probe(string key,string message){}
+        internal static void Log(string key,string message){}
+        internal static void Warn(string key,string message){}
+        internal static void Alert(string key,string message){}
+        internal static void Notify(string key,string message){}
     }
     internal static class MclslActorAccessor
     {

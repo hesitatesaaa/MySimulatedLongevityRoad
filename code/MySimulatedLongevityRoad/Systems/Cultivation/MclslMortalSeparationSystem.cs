@@ -27,7 +27,7 @@ internal static class MclslMortalSeparationSystem
         long id = MclslActorAccessor.Id(actor);
         int hash = PositiveHash(id + "|mortal_separation|" + year);
         int threshold = 18 + PositiveHash(actor.asset?.id ?? string.Empty) % 8;
-        try { if (actor.city != null) threshold += 4; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslMortalSeparationSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslMortalSeparationSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        try { if (actor.city != null) threshold += 4; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslMortalSeparationSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslMortalSeparationSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         if (hash % 100 >= threshold) return 0;
         return 20 + PositiveHash(id + "|immortal_fate") % 81;
     }

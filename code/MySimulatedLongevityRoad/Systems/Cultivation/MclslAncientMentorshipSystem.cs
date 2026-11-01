@@ -436,7 +436,7 @@ internal static class MclslAncientMentorshipSystem
         if (actorId <= 0L) return null;
         if (MclslCultivatorCandidateIndex.Resolve(actorId, out Actor indexed))
             return indexed;
-        try { return World.world?.units?.get(actorId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientMentorshipSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        try { return World.world?.units?.get(actorId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientMentorshipSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         return null;
     }
 

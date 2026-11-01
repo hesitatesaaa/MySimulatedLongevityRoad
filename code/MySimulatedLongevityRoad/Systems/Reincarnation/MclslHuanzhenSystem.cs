@@ -486,7 +486,7 @@ internal static class MclslHuanzhenSystem
                 float max = host.getMaxHealth();
                 if (max > 0f) host.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #2: " + mclslEmptyCatchEx.Message); }
         }
         finally { _applyingRestore = false; }
 
@@ -509,7 +509,7 @@ internal static class MclslHuanzhenSystem
         if (!Flush()) { return; }
         if (!string.IsNullOrWhiteSpace(originalPath))
         {
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message); }
         }
         string hostName = MclslActorAccessor.DisplayName(host);
         string eventType = manualRestore ? "huanzhen_manual_return" : "huanzhen_return";
@@ -987,13 +987,13 @@ internal static class MclslHuanzhenSystem
             reason = "刚完成还真回溯，需等待至" + (_state.LastRestoreYear + MclslRuntimeSettings.HuanzhenSafetyGapYears) + "年后再锚定。";
             return false;
         }
-        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #4: " + mclslEmptyCatchEx.Message); }
         try
         {
             float max = host.getMaxHealth();
             if (max > 0f && host.data.health / max < 0.85f) { reason = "宿主伤势过重，生命恢复至85%以上才能锚定。"; return false; }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #5: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #5: " + mclslEmptyCatchEx.Message); }
         return true;
     }
 
@@ -1082,7 +1082,7 @@ internal static class MclslHuanzhenSystem
         {
             _state = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(_lastCommittedJson) ?? new();
             MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.anchor", "[模拟长生路][还真] 建立锚点失败: " + ex.Message);
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message); }
+            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message); }
             MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
             DeleteAnchorFolder(relative);
             message = "建立锚点失败：" + ex.Message;
@@ -1245,7 +1245,7 @@ internal static class MclslHuanzhenSystem
                 string folder = ResolveAnchorSavePath(anchor.RelativeSavePath);
                 if (!string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder)) Directory.Delete(folder, true);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #8: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #8: " + mclslEmptyCatchEx.Message); }
         }
     }
 

@@ -133,7 +133,7 @@ internal static class MclslUiManager
         }
         Sprite sprite = null;
         foreach (string path in icons) { sprite = SpriteTextureLoader.getSprite(path); if (sprite != null) break; }
-        PowerButton button = PowerButtonCreator.CreateSimpleButton(id, () => { try { PowerButtonSelector.instance?.unselectAll(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #1: " + mclslEmptyCatchEx.Message); } action?.Invoke(); }, sprite, null, default);
+        PowerButton button = PowerButtonCreator.CreateSimpleButton(id, () => { try { PowerButtonSelector.instance?.unselectAll(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #1: " + mclslEmptyCatchEx.Message); } action?.Invoke(); }, sprite, null, default);
         SetupButtonTooltip(button, id, title, description);
         PowersTabExtension.AddPowerButton(_tab, "tab", button);
     }
@@ -166,6 +166,6 @@ internal static class MclslUiManager
             tip.textOnClick = titleKey;
             tip.textOnClickDescription = descriptionKey;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #2: " + mclslEmptyCatchEx.Message); }
     }
 }

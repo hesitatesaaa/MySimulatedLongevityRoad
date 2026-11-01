@@ -101,7 +101,7 @@ internal static class MclslVisibleActorRenderLane
                 cameraSize = _cachedMainCamera.orthographicSize;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #1: " + mclslEmptyCatchEx.Message); }
 
         if (visibleCount > MediumVisibleCount || cameraSize >= FarCameraSize) return 2;
         if (visibleCount > NearVisibleCount || cameraSize >= MediumCameraSize) return 1;
@@ -137,7 +137,7 @@ internal static class MclslVisibleActorRenderLane
             position = actor.current_position;
             return true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #3: " + mclslEmptyCatchEx.Message); }
 
         try
         {
@@ -148,7 +148,7 @@ internal static class MclslVisibleActorRenderLane
                 return true;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #4: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #4: " + mclslEmptyCatchEx.Message); }
         return false;
     }
 }

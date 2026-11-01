@@ -181,7 +181,7 @@ internal static class MclslTechniqueOccupationSystem
             MclslWorldRunRepository.AddEvent(year, "law_conflict_hunt", MclslActorAccessor.DisplayName(resolver) + "寻同法者论生死",
                 MclslActorAccessor.DisplayName(resolver) + "久受《" + MclslActorAccessor.GetString(resolver, MclslActorDataKeys.TechniqueName, "无名功法") + "》同修所阻，遂向附近的" + MclslActorAccessor.DisplayName(rival) + "发起法争。", resolver);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslTechniqueOccupationSystem-cs-1", "功法占据：发起同法争斗失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslTechniqueOccupationSystem-cs-1", "功法占据：发起同法争斗失败: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void EnsureAnnualResolutionBudget(int year)

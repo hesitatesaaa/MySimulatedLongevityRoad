@@ -300,7 +300,7 @@ internal static class MclslRealmHaloVisualSystem
                 if (!string.IsNullOrWhiteSpace(newLawTrait) && actor.hasTrait(newLawTrait)) realm = candidate;
                 if (!string.IsNullOrWhiteSpace(ancientTrait) && actor.hasTrait(ancientTrait)) realm = candidate;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         }
 
         return realm ?? string.Empty;
@@ -406,14 +406,14 @@ internal static class MclslRealmHaloVisualSystem
             position = actor.current_position;
             return;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #2: " + mclslEmptyCatchEx.Message); }
 
         try
         {
             WorldTile tile = ((BaseSimObject)actor).current_tile;
             if (tile != null) position = tile.posV3;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void ScheduleCleanup(HaloEntry entry)
@@ -463,7 +463,7 @@ internal static class MclslRealmHaloVisualSystem
 
     private static void DestroyEntry(HaloEntry entry)
     {
-        try { MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try { MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
         try
         {
             // Borrowed BaseEffects remain owned by the native controller's
@@ -472,7 +472,7 @@ internal static class MclslRealmHaloVisualSystem
             if (entry?.Effect == null && entry?.GameObject != null)
                 UnityEngine.Object.Destroy(entry.GameObject);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void DisableNativeAnimator(BaseEffect effect)
@@ -490,7 +490,7 @@ internal static class MclslRealmHaloVisualSystem
             Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
             if (animator != null) animator.enabled = false;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #6: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #6: " + mclslEmptyCatchEx.Message); }
     }
 
     private readonly struct Qualification
