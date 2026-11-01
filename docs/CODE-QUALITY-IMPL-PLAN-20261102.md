@@ -526,3 +526,11 @@ M0-B 仓库整理 + 编译基线记录
 - 验证：compile error=0、warning=16（等于基线，全部 CS0649 DTO）；8 个离线测试项目全部 exit=0（EconomyPlanScope/LineageCleanup/SharedHelper/RuntimeQuality/NativeFeedback/HeavenGrant/BeastPopulation/EventArchive）。
 - 已知问题（转 M3-J 修）：.tests/run.ps1 因 BaseIntermediateOutputPath/APPDATA 重定向导致 dotnet run 失败；本次改用逐项目 dotnet run 取得回归结果。
 - 下一步：M2-C 反射缓存。
+
+### M2-C 反射缓存：已完成
+
+- 变更：MclslReflectionNumbers.cs 增加按 (Type, 成员名) 的 ConcurrentDictionary 缓存与 Resolve()；TrySetNumber 改用缓存访问器；新增 FactoryCalls/CacheCount/ResetCacheCounters 供观测。
+- 测试：SharedHelperTests 增加缓存命中断言（同 type+name 只解析一次；missing 成员也缓存），检查数 38→41。
+- 验证：compile error=0、warning=16（基线）；8 个离线测试项目全部 exit=0。
+- 说明：全项目 AccessTools 87 / GetField 35 / GetProperty 24 的其余反射点分批收敛留待后续；本次先改唯一共享实现，收益最集中。
+- 下一步：M2-F 日志统一。

@@ -67,6 +67,15 @@ public static class Program {
         Check(n.Unsupported==4 && n.ReadOnly==3,"unsupported, readonly, missing and null targets");
         MclslReflectionNumbers.TrySetNumber(n,"Bad",9,"test");
         Check(MclslDiagnostics.Errors==1,"throwing setter is diagnosed without escaping");
+        // M2-C: accessor cached per (Type, member name) — repeated writes resolve only once.
+        MclslReflectionNumbers.ResetCacheCounters();
+        MclslReflectionNumbers.TrySetNumber(n,"Health",4.5f,"test");
+        int factoryAfterFirst = MclslReflectionNumbers.FactoryCalls;
+        MclslReflectionNumbers.TrySetNumber(n,"Health",5.5f,"test");
+        Check(factoryAfterFirst==1 && MclslReflectionNumbers.FactoryCalls==1 && MclslReflectionNumbers.CacheCount==1,"reflection accessor cached (single resolve per type+name)");
+        Check(n.Health==5.5f,"cached accessor still writes");
+        MclslReflectionNumbers.TrySetNumber(n,"Missing",9,"test");
+        Check(MclslReflectionNumbers.CacheCount==2,"missing member cached too");
         Check(MclslRankTextFormat.AssetDisplayName(null)=="未知生物","null asset fallback");
         var a=new ActorAsset { Name="原生名", name_locale="asset" };
         NeoModLoader.General.LM.Values["asset"]="翻译名";

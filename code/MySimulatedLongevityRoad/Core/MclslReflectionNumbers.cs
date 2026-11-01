@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Concurrent;
 using System.Reflection;
+using System.Threading;
 
 namespace MySimulatedLongevityRoad.Core;
 
@@ -10,11 +12,39 @@ namespace MySimulatedLongevityRoad.Core;
 /// <paramref name="diagnosticKey"/> and <paramref name="messagePrefix"/> let a
 /// caller that already had a different log line keep it without keeping a second
 /// implementation.
+///
+/// Results are cached per (Type, member name): repeated per-actor/per-year lookups
+/// no longer re-run GetField/GetProperty. The cache is process-wide (type metadata
+/// does not change with the world) and is thread-safe because native callbacks can
+/// reach this from worker threads.
 /// </summary>
 internal static class MclslReflectionNumbers
 {
     private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public
         | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
+
+    private readonly struct MemberAccessor
+    {
+        internal readonly FieldInfo Field;
+        internal readonly PropertyInfo Property;
+        internal MemberAccessor(FieldInfo field, PropertyInfo property) { Field = field; Property = property; }
+    }
+
+    private static readonly ConcurrentDictionary<(Type, string), MemberAccessor> Cache = new();
+    private static int _factoryCalls;
+
+    internal static int FactoryCalls => Volatile.Read(ref _factoryCalls);
+    internal static int CacheCount => Cache.Count;
+    internal static void ResetCacheCounters() { Cache.Clear(); Volatile.Write(ref _factoryCalls, 0); }
+
+    private static MemberAccessor Resolve(Type type, string name)
+        => Cache.GetOrAdd((type, name), static key =>
+        {
+            Interlocked.Increment(ref _factoryCalls);
+            FieldInfo field = key.Item1.GetField(key.Item2, Flags);
+            PropertyInfo property = field == null ? key.Item1.GetProperty(key.Item2, Flags) : null;
+            return new MemberAccessor(field, property);
+        });
 
     internal static void TrySetNumber(object target, string name, float value, string site,
         string diagnosticKey = null, string messagePrefix = null)
@@ -22,14 +52,14 @@ internal static class MclslReflectionNumbers
         if (target == null || string.IsNullOrWhiteSpace(name)) return;
         try
         {
-            FieldInfo field = target.GetType().GetField(name, Flags);
-            if (field != null)
+            MemberAccessor accessor = Resolve(target.GetType(), name);
+            if (accessor.Field != null)
             {
-                if (field.FieldType == typeof(float)) field.SetValue(target, value);
-                else if (field.FieldType == typeof(int)) field.SetValue(target, (int)value);
+                if (accessor.Field.FieldType == typeof(float)) accessor.Field.SetValue(target, value);
+                else if (accessor.Field.FieldType == typeof(int)) accessor.Field.SetValue(target, (int)value);
                 return;
             }
-            PropertyInfo property = target.GetType().GetProperty(name, Flags);
+            PropertyInfo property = accessor.Property;
             if (property != null && property.CanWrite)
             {
                 if (property.PropertyType == typeof(float)) property.SetValue(target, value);
