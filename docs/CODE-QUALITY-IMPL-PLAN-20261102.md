@@ -18,6 +18,10 @@
   ```
 - 基线要求：先跑一次记录 `error=0`、`warning=N`（历史基线 16 条，全部为 `MclslLivingResources.cs` 的 CS0649 DTO 噪声）。
   之后每个阶段结束后重跑同一命令，**warning 不得增加**。
+- **执行策略约束（已发现）**：本机 `LocalMachine` 执行策略为 `Restricted`，运行 `tools/*.ps1`、`.tests/run.ps1` 需加 `-ExecutionPolicy Bypass`，否则报"禁止运行脚本"。上述命令实际应写成：
+  ```powershell
+  pwsh -NoProfile -ExecutionPolicy Bypass -File tools/compile-check.ps1 -GameRoot 'D:\owl\gameversion\worldbox-ab712b72f394'
+  ```
 
 ### 0.2 验收口径（遵循 AGENTS.md）
 

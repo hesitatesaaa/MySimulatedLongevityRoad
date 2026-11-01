@@ -21,20 +21,24 @@ git add -A
 git commit -m "..."
 ```
 
-资源仓通过封装脚本操作（因为它用的是独立 git 目录与显式工作区）：
-
-```powershell
-pwsh tools/git-assets.ps1 status
-pwsh tools/git-assets.ps1 add -A
-pwsh tools/git-assets.ps1 commit -m "update art"
-pwsh tools/git-assets.ps1 log --oneline -5
-```
-
-等价的原生命令：
+资源仓使用独立 git 目录与显式工作区，**用原生 git 命令**（任何 shell 都可用）：
 
 ```powershell
 git --git-dir=".git-assets" --work-tree="." status
+git --git-dir=".git-assets" --work-tree="." add -A
+git --git-dir=".git-assets" --work-tree="." commit -m "update art"
+git --git-dir=".git-assets" --work-tree="." log --oneline -5
 ```
+
+也可用封装脚本 `tools/git-assets.ps1`（参数原样透传给 git）：
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File tools/git-assets.ps1 status
+pwsh -NoProfile -ExecutionPolicy Bypass -File tools/git-assets.ps1 add -A
+pwsh -NoProfile -ExecutionPolicy Bypass -File tools/git-assets.ps1 commit -m "update art"
+```
+
+> 本机 `LocalMachine` 执行策略为 `Restricted`，直接运行 `.ps1` 会被拒绝；需加 `-ExecutionPolicy Bypass`（对所有 `tools/*.ps1`、`.tests/run.ps1` 同样适用）。因此上表以原生 git 命令为主。
 
 ## 忽略规则如何分工
 
