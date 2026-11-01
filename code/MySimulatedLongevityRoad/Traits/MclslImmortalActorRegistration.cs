@@ -30,7 +30,7 @@ internal static class MclslImmortalActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 仙道人物旗帜取图失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("immortal.banner", "[模拟长生路] 仙道人物旗帜取图失败: " + ex.Message);
             return null;
         }
     }
@@ -52,7 +52,7 @@ internal static class MclslImmortalActorRegistration
             MclslCultivationSystem.ApplyManualRealmGrant(actor, traitId, expected, year,
                 forceAncient: !newLaw, forceNewLaw: newLaw));
         if (MclslActorAccessor.Realm(actor) != expected)
-            Debug.LogWarning("[模拟长生路] 仙道人物旧档境界修复失败: " + actor.asset.id
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("immortal.legacy-realm", "[模拟长生路] 仙道人物旧档境界修复失败: " + actor.asset.id
                 + " 目标=" + expected + " 当前=" + MclslActorAccessor.Realm(actor));
     }
 
@@ -119,7 +119,7 @@ internal static class MclslImmortalActorRegistration
             asset.get_override_sprite = MclslBeastAnimation.GetSprite;
             asset.has_override_sprite = true;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 仙道人物注册失败 " + id + ": " + ex.Message); throw; }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("immortal.register", "[模拟长生路] 仙道人物注册失败 " + id + ": " + ex.Message); throw; }
     }
 
     private static void SetBool(object target, bool value, params string[] names)
@@ -217,17 +217,17 @@ internal static class MclslImmortalActorRegistration
             TracePlacement(trace, id, "awake.done", watch);
             if (MclslActorAccessor.Realm(actor) != realm)
             {
-                Debug.LogWarning("[模拟长生路] 仙道人物放置后境界不符: " + id
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("immortal.place-realm-mismatch", "[模拟长生路] 仙道人物放置后境界不符: " + id
                     + " 目标=" + realm + " 当前=" + MclslActorAccessor.Realm(actor));
                 return false;
             }
             return true;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 仙道人物放置失败 " + id + ": " + ex); return false; }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("immortal.place", "[模拟长生路] 仙道人物放置失败 " + id + ": " + ex); return false; }
     }
 
     private static void TracePlacement(bool enabled, string id, string stage, Stopwatch watch)
     {
-        if (enabled) Debug.Log("[模拟长生路][人物放置] " + id + " " + stage + " " + watch.ElapsedMilliseconds + "ms");
+        if (enabled) MySimulatedLongevityRoad.Core.MclslDiagnostics.Log("immortal.place-timing", "[模拟长生路][人物放置] " + id + " " + stage + " " + watch.ElapsedMilliseconds + "ms");
     }
 }

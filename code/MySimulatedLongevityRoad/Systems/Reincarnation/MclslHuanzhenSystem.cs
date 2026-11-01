@@ -77,7 +77,7 @@ internal static class MclslHuanzhenSystem
                 _lastFlushedJson = JsonConvert.SerializeObject(loaded, Formatting.None);
                 _preserveBackup = result == MclslArchiveReadResult.Backup;
                 if (_preserveBackup)
-                    Debug.LogWarning("[模拟长生路][还真] 主档无法读取，已恢复上一份有效备份: " + StatePath);
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.main-fallback", "[模拟长生路][还真] 主档无法读取，已恢复上一份有效备份: " + StatePath);
             }
 
         }
@@ -85,7 +85,7 @@ internal static class MclslHuanzhenSystem
         {
             _writeLocked = true;
             _storageFailure = ex.Message;
-            Debug.LogError("[模拟长生路][还真] 外部状态读取失败，已禁止覆盖: " + ex);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.external-read", "[模拟长生路][还真] 外部状态读取失败，已禁止覆盖: " + ex);
         }
         Normalize();
         _lastCommittedJson = JsonConvert.SerializeObject(_state, Formatting.None);
@@ -161,7 +161,7 @@ internal static class MclslHuanzhenSystem
             {
                 CancelPendingRestore(pending, "读档失败：" + ex.Message);
             }
-            Debug.LogError("[模拟长生路][还真] 回载锚点失败: " + ex);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.reload-anchor", "[模拟长生路][还真] 回载锚点失败: " + ex);
         }
     }
 
@@ -274,7 +274,7 @@ internal static class MclslHuanzhenSystem
         {
             _state.NextNaturalArrivalYear = year + 5;
             if (!Flush()) { return; }
-            Debug.LogWarning("[模拟长生路][还真] 自然降临失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.natural-descent", "[模拟长生路][还真] 自然降临失败: " + ex.Message);
         }
     }
 
@@ -1081,7 +1081,7 @@ internal static class MclslHuanzhenSystem
         catch (Exception ex)
         {
             _state = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(_lastCommittedJson) ?? new();
-            Debug.LogWarning("[模拟长生路][还真] 建立锚点失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.anchor", "[模拟长生路][还真] 建立锚点失败: " + ex.Message);
             try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message); }
             MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
             DeleteAnchorFolder(relative);
@@ -1327,7 +1327,7 @@ internal static class MclslHuanzhenSystem
         AddHistory(pending.DeathYear, pending.AnchorYear, pending.HostName, pending.Cultivation?.RealmId, pending.LoopDepth, reason);
         _state.PendingRestore = new MclslHuanzhenPendingRestore();
         if (!Flush()) { return; }
-        Debug.LogWarning("[模拟长生路][还真] " + reason);
+        MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.reason", "[模拟长生路][还真] " + reason);
     }
 
     private static MclslHuanzhenCultivationSnapshot CaptureCultivation(Actor a)
@@ -1515,7 +1515,7 @@ internal static class MclslHuanzhenSystem
             _writeLocked = true;
             _storageFailure = ex.GetType().Name + ": " + ex.Message;
             ClearRuntime();
-            Debug.LogError("[模拟长生路][还真] 外部状态写入失败，已暂停还真并保留已有档案: " + _storageFailure);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.external-write", "[模拟长生路][还真] 外部状态写入失败，已暂停还真并保留已有档案: " + _storageFailure);
             return false;
         }
     }

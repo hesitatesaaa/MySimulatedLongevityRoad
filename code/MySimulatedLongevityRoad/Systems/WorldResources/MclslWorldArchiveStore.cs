@@ -41,26 +41,26 @@ internal static class MclslWorldArchiveStore
                     {
                         imported = true;
                         _writeLocked = false;
-                        Debug.Log("[模拟长生路][存档] " + (i == 0 ? "读取成功" : "主档不可用，已使用备份")
+                        MySimulatedLongevityRoad.Core.MclslDiagnostics.Log("archive.read", "[模拟长生路][存档] " + (i == 0 ? "读取成功" : "主档不可用，已使用备份")
                             + "，世界=" + bundle.CurrentRun.RunId + "，时代=" + bundle.CurrentRun.CultivationEpoch);
                         break;
                     }
                 }
                 catch (Exception candidateError)
                 {
-                    Debug.LogWarning("[模拟长生路][存档] 档案键" + ReadKeys[i] + "读取失败，继续尝试备份: " + candidateError.Message);
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("archive.key-read", "[模拟长生路][存档] 档案键" + ReadKeys[i] + "读取失败，继续尝试备份: " + candidateError.Message);
                 }
             }
             if (!imported)
             {
                 _writeLocked = existingArchive;
                 MclslWorldRunRepository.ResetWorld();
-                if (_writeLocked) Debug.LogError("[模拟长生路][存档] 主档及备份均不可读取，或档案格式不兼容（支持版本 "
+                if (_writeLocked) MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("archive.read-both-fail", "[模拟长生路][存档] 主档及备份均不可读取，或档案格式不兼容（支持版本 "
                     + MclslSaveVersions.WorldArchive + "）；已暂停模组世界运行及写入，请恢复有效备份。");
             }
             _loaded = true;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路][存档] 读取失败，将等待下一次载入: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("archive.read-deferred", "[模拟长生路][存档] 读取失败，将等待下一次载入: " + ex.Message); }
     }
 
     internal static long Revision { get; private set; }
@@ -97,7 +97,7 @@ internal static class MclslWorldArchiveStore
             if (string.IsNullOrWhiteSpace(oldRaw)) data.set(BackupKey, raw);
             MclslPerformanceProbe.End("存档.SaveCustomData写入", writeSample);
         }
-        catch (Exception ex) { Debug.LogError("[模拟长生路][存档] 写入失败: " + ex); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("archive.write", "[模拟长生路][存档] 写入失败: " + ex); }
     }
 
     internal static void Clear()

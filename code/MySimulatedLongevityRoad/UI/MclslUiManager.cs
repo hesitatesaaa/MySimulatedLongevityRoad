@@ -60,7 +60,7 @@ internal static class MclslUiManager
         catch (Exception ex)
         {
             _initialized = false;
-            Debug.LogError("[模拟长生路][UI] 初始化失败: " + ex);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("ui.init", "[模拟长生路][UI] 初始化失败: " + ex);
             throw;
         }
     }
@@ -128,7 +128,7 @@ internal static class MclslUiManager
         if (_tab == null) return;
         if (!ContainsChinese(title) || !ContainsChinese(description))
         {
-            Debug.LogError("[模拟长生路][界面] 已拒绝缺少中文名称或说明的功能入口: " + id);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("ui.reject-feature", "[模拟长生路][界面] 已拒绝缺少中文名称或说明的功能入口: " + id);
             return;
         }
         Sprite sprite = null;

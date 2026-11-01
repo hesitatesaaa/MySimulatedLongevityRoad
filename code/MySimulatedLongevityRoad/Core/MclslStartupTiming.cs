@@ -28,7 +28,7 @@ internal static class MclslStartupTiming
             _profile.Dispose();
             Milliseconds[_name] = (Stopwatch.GetTimestamp() - _start) * 1000d / Stopwatch.Frequency;
             if (_name == "MCLS/Load/OnModLoad")
-                UnityEngine.Debug.Log("[MCLSL/Startup/ms] " + JsonConvert.SerializeObject(Milliseconds));
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Log("startup.timing", "[MCLSL/Startup/ms] " + JsonConvert.SerializeObject(Milliseconds));
         }
     }
 }

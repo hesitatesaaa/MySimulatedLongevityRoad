@@ -98,7 +98,7 @@ internal static class MclslAnnouncementSystem
         LastShownByText[string.IsNullOrEmpty(pending.DedupKey)?displayText:pending.DedupKey] = _lastShown;
         Cleanup();
         try { WorldTip.showNow(displayText, false, "top", pending.Duration, pending.Color); }
-        catch { Debug.Log("[模拟长生路][公告] " + displayText); }
+        catch { MySimulatedLongevityRoad.Core.MclslDiagnostics.Notify("announcement.fallback", "[模拟长生路][公告] " + displayText); }
     }
 
     internal static void Clear()

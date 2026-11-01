@@ -26,17 +26,38 @@ internal static class MclslDiagnostics
     internal static void Error(string key, string message)
     {
         if (!Enabled) return;
-        LogTick("error:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogWarning);
+        if (LogTick("error:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogWarning))
+            return;
     }
 
     /// <summary>
-    /// Critical error: always emitted (not gated by the diagnostics switch) and
-    /// throttled per key. Reserved for存档损坏、外部状态写入失败等必须可见的问题。
+    /// Critical error: always emitted (not gated by the diagnostics switch), throttled
+    /// per key. Message is written verbatim. Reserved for存档损坏、外部状态写入失败等必须可见的问题.
     /// </summary>
     internal static void Fatal(string key, string message)
+        => LogTick("fatal:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogError);
+
+    /// <summary>Informational diagnostic log: gated by the diagnostics switch, message verbatim.</summary>
+    internal static void Log(string key, string message)
     {
-        LogTick("fatal:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogError);
+        if (!Enabled) return;
+        Debug.Log(message);
     }
+
+    /// <summary>Diagnostic warning: gated by the diagnostics switch, message verbatim.</summary>
+    internal static void Warn(string key, string message)
+    {
+        if (!Enabled) return;
+        Debug.LogWarning(message);
+    }
+
+    /// <summary>Important warning that must stay visible regardless of the diagnostics switch, throttled per key.</summary>
+    internal static void Alert(string key, string message)
+        => LogTick("alert:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogWarning);
+
+    /// <summary>User-facing notification: always shown, not throttled by diagnostics, message verbatim.</summary>
+    internal static void Notify(string key, string message)
+        => Debug.Log(message);
 
     /// <summary>
     /// One-shot probe: fully silent while diagnostics are disabled, and emitted at
@@ -68,13 +89,14 @@ internal static class MclslDiagnostics
         Debug.Log("[模拟长生路][诊断] " + message);
     }
 
-    private static void LogTick(string key, string message, Action<string> log)
+    private static bool LogTick(string key, string message, Action<string> log)
     {
         int now = Environment.TickCount;
-        if (LastTickByKey.TryGetValue(key, out int last) && unchecked(now - last) < 60000) return;
+        if (LastTickByKey.TryGetValue(key, out int last) && unchecked(now - last) < 60000) return false;
         if (LastTickByKey.Count >= MaxRememberedKeys && !LastTickByKey.ContainsKey(key)) LastTickByKey.Clear();
         LastTickByKey[key] = now;
-        log("[模拟长生路][诊断][" + key + "] " + message);
+        log(message);
+        return true;
     }
 
     private static void RememberFrame(string key, int clock)

@@ -355,7 +355,7 @@ internal static class MclslTraitRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 长生不朽特质授予失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("trait.immortal-grant", "[模拟长生路] 长生不朽特质授予失败: " + ex.Message);
         }
     }
 
@@ -593,7 +593,7 @@ internal static class MclslTraitRegistration
             group.name = localeKey;
             group.color = color;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 特质分组注册失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("trait.group-register", "[模拟长生路] 特质分组注册失败: " + ex.Message); }
     }
 
     internal static void SyncRealmTraitFamily(Actor actor, string realm)

@@ -534,3 +534,11 @@ M0-B 仓库整理 + 编译基线记录
 - 验证：compile error=0、warning=16（基线）；8 个离线测试项目全部 exit=0。
 - 说明：全项目 AccessTools 87 / GetField 35 / GetProperty 24 的其余反射点分批收敛留待后续；本次先改唯一共享实现，收益最集中。
 - 下一步：M2-F 日志统一。
+
+### M2-F 日志统一：已完成
+
+- 变更：MclslDiagnostics 新增 Log/Warn/Alert/Notify；Fatal 改为原样输出（不叠加前缀）。语义：Log/Warn 受诊断开关控制；Alert 为始终可见警告（30s 节流）；Notify 为始终可见提示；Fatal 为始终可见错误。
+- 替换 34 处裸 Debug.Log*（12 个文件）：Debug.Log→Log、Debug.LogWarning→Warn/Alert、Debug.LogError→Fatal；诊断类之外裸 Debug.Log* 归零。
+- 分级：存档/还真写入失败→Fatal；渲染/注册失败→Alert；启动计时/放置耗时/存档读取成功→Log；开发者提示/公告兜底→Notify。
+- 验证：compile error=0、warning=16；8 个离线测试全部 exit=0。
+- 下一步：M2-G 初始化去重。

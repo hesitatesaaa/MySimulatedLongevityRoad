@@ -30,7 +30,7 @@ internal static class MclslNativeHistoryBridge
     {
         if (_disabled) return;
         try { EnsureAssets(); }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 原生历史分栏注册失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("nativehistory.register", "[模拟长生路] 原生历史分栏注册失败: " + ex.Message); }
     }
 
     internal static bool Add(MclslRunEventRecord record)
@@ -59,7 +59,7 @@ internal static class MclslNativeHistoryBridge
         catch (Exception ex)
         {
             _disabled = true;
-            Debug.LogWarning("[模拟长生路] 原生历史记录桥接关闭: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("nativehistory.bridge-closed", "[模拟长生路] 原生历史记录桥接关闭: " + ex.Message);
             return false;
         }
     }

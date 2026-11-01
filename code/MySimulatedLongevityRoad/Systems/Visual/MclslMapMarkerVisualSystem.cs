@@ -291,7 +291,7 @@ internal static class MclslMapMarkerVisualSystem
         string[] kinds = { "ruin", "secret_realm", "spiritual_convergence", "earthfire", "meteor_stone" };
         for (int i = 0; i < kinds.Length; i++)
             if (LoadMarkerSprite(kinds[i]) == null)
-                Debug.LogWarning("[模拟长生路][地图贴图] 缺少资源 GameResources/map/markers/" + kinds[i] + ".png");
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("mapmarker.missing-asset", "[模拟长生路][地图贴图] 缺少资源 GameResources/map/markers/" + kinds[i] + ".png");
     }
 
     private static bool IsUsable(MarkerEntry entry) => entry?.Transform != null && entry.Renderer != null && entry.GameObject != null;

@@ -51,7 +51,7 @@ internal static class MclslDeveloperBridge
         if (actor != null) SetSelectedActor(actor);
         if (!IsAvailable || _selectedActor?.data == null)
         {
-            UnityEngine.Debug.Log("[模拟长生路] 请先点击一个人物，再打开开发者工具。");
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Notify("dev-bridge.hint", "[模拟长生路] 请先点击一个人物，再打开开发者工具。");
             return false;
         }
 

@@ -99,7 +99,7 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体注册失败，已停止使用原生敌对单位兜底: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.registration-fallback", "[模拟长生路] 天地之魄载体注册失败，已停止使用原生敌对单位兜底: " + ex.Message);
             throw;
         }
         _initialized = true;
@@ -255,7 +255,7 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体 " + definition.ActorId + " 注册失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.carrier-register", "[模拟长生路] 天地之魄载体 " + definition.ActorId + " 注册失败: " + ex.Message);
             throw;
         }
     }
@@ -314,7 +314,7 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体贴图绑定失败，将使用天地之魄图标兜底: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.texture-fallback", "[模拟长生路] 天地之魄载体贴图绑定失败，将使用天地之魄图标兜底: " + ex.Message);
             throw;
         }
     }

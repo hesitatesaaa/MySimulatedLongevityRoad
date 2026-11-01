@@ -502,7 +502,7 @@ internal static class MclslPatches
         }
         catch (Exception ex)
         {
-            UnityEngine.Debug.LogWarning("[模拟长生路] 自定义角色主贴图刷新失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("patches.main-texture", "[模拟长生路] 自定义角色主贴图刷新失败: " + ex.Message);
             return true;
         }
     }
@@ -701,7 +701,7 @@ internal static class MclslPatches
     private static void ActorManager_PrecalculateRenderDataParallel_Halo_Postfix(ActorManager __instance)
     {
         try { MclslVisibleActorRenderLane.Apply(__instance); }
-        catch (Exception ex) { UnityEngine.Debug.LogWarning("[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("patches.realm-halo", "[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
     }
 
     [HarmonyPostfix]
@@ -709,7 +709,7 @@ internal static class MclslPatches
     private static void ActorManager_PrecalculateRenderDataNormal_Halo_Postfix(ActorManager __instance)
     {
         try { MclslVisibleActorRenderLane.Apply(__instance); }
-        catch (Exception ex) { UnityEngine.Debug.LogWarning("[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("patches.realm-halo", "[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
     }
 
     [HarmonyPrefix]
