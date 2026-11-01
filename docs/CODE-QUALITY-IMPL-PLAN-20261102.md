@@ -557,3 +557,12 @@ M0-B 仓库整理 + 编译基线记录
 - 说明：这些本就是空 catch（预期失败/防御分支），归为 Probe 比 Error 更符合原意；key 保留路径式命名（仅内部去重用，不显示），语义化 key 作为可选后续。
 - 验证：compile error=0、warning=16；8 个离线测试 exit=0。
 - 下一步：M3-H 指标/文档。
+
+### M3-H 指标/文档：已完成
+
+- 新增 tools/report-code-metrics.py，生成 docs/CODE-METRICS.json（文件数/行数/目录分布/最大文件/catch/诊断调用/反射/编译警告等）。
+- 修正：compile.log 为 UTF-16LE，脚本按 BOM 识别编码；catchTotal 只统计 catch(/catch {，排除消息文本"空 catch"。
+- 当前指标：288 文件 / 73,407 行；500+行 37、800+行 16；catch 445、catch(Exception) 305；emptyCatchCode 157（均转 Probe）；diagnostics Error 131 / Probe 157；裸 Debug.Log 0；AccessTools 88 / GetField 35 / GetProperty 24；compile error 0 / warning 16。
+- 文档：README-DEVELOPER.md、docs/PROJECT-STRUCTURE.md 增加"以 docs/CODE-METRICS.json 为准"的说明。
+- 验证：脚本可重复运行、JSON 有效。
+- 下一步：M3-I 分析器/CI。

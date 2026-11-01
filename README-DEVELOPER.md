@@ -11,3 +11,5 @@
 源码编译检查：278 个 C# 文件（含开发者角色编辑器）使用本机 WorldBox 0.51.2/build 115 依赖编译通过，有既有编译警告。游戏内画面与实际运行尚未验证。可按本机环境配置 GameRoot 后使用 tools/compile-check.ps1 进行源码编译检查。
 
 本次性能优化以更新后的 0.8.1 开发者包为基线，减少年度经济计划、市场库存统计及档案补齐的重复工作，合并共享反射写入与排行名称解析；详见 resources/performance-optimization-20261030.md。未进行游戏内性能复测。
+
+> 实时指标（源码文件数/行数/编译警告/catch 统计等）以 docs/CODE-METRICS.json 为准，由 tools/report-code-metrics.py 生成；上文手写数字可能滞后。

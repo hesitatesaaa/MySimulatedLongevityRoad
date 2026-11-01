@@ -14,3 +14,5 @@
 检查：NML 源码扫描通过（284 个源码文件）；本地化和灵兽天赋资源验证通过。完整资源验证发现既有 kunpeng idle_0.png 与 actor-frames 清单或来源证明哈希不一致，未篡改来源证明以掩盖问题；尚未完成 Unity 运行验收。
 
 本次整合尚未提交 Git。
+
+> 实时指标（源码文件数/行数/编译警告/catch 统计等）以 docs/CODE-METRICS.json 为准，由 tools/report-code-metrics.py 生成；上文手写数字可能滞后。

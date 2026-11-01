@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-11-02T00:53:44+08:00",
+  "version": "0.8.4",
+  "scope": "code/MySimulatedLongevityRoad",
+  "sourceFiles": 288,
+  "totalLines": 73407,
+  "linesPerTopDir": {
+    "Systems": 40358,
+    "UI": 19099,
+    "Data": 5098,
+    "Traits": 3679,
+    "Core": 3206,
+    "Patches": 1609,
+    "Queries": 328,
+    "Interop": 30
+  },
+  "filesOver500Lines": 37,
+  "filesOver800Lines": 16,
+  "largestFiles": [
+    {
+      "file": "UI/MclslCodexWindow.cs",
+      "lines": 2456
+    },
+    {
+      "file": "UI/MclslRankWindow.cs",
+      "lines": 2129
+    },
+    {
+      "file": "UI/MclslFeatureWindow.cs",
+      "lines": 1691
+    },
+    {
+      "file": "Systems/Crafting/MclslTianxuanMarket.cs",
+      "lines": 1608
+    },
+    {
+      "file": "Systems/Reincarnation/MclslHuanzhenSystem.cs",
+      "lines": 1576
+    },
+    {
+      "file": "Systems/WorldResources/MclslWorldRunRepository.cs",
+      "lines": 1507
+    },
+    {
+      "file": "Traits/MclslTraitRegistration.cs",
+      "lines": 1125
+    },
+    {
+      "file": "Systems/Runtime/MclslScheduler.cs",
+      "lines": 1085
+    },
+    {
+      "file": "Systems/Cultivation/MclslSpellSystem.cs",
+      "lines": 1045
+    },
+    {
+      "file": "Traits/MclslWorldSoulActorRegistration.cs",
+      "lines": 1002
+    }
+  ],
+  "catchTotal": 445,
+  "catchException": 305,
+  "emptyCatchCode": 157,
+  "diagnosticsErrorCalls": 131,
+  "diagnosticsProbeCalls": 157,
+  "rawDebugLogOutsideDiagnostics": 0,
+  "reflection": {
+    "accessTools": 88,
+    "getField": 35,
+    "getProperty": 24
+  },
+  "compileError": 0,
+  "compileWarning": 16
+}
