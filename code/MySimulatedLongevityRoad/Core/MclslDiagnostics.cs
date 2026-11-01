@@ -13,34 +13,42 @@ internal static class MclslDiagnostics
     // Dictionary would race with the main-thread writers.
     private static readonly ConcurrentDictionary<string, byte> OnceKeys = new(StringComparer.Ordinal);
     private static readonly ConcurrentDictionary<string, int> LastFrameByKey = new(StringComparer.Ordinal);
+    private static readonly ConcurrentDictionary<string, int> LastTickByKey = new(StringComparer.Ordinal);
 
-    internal static int CacheCount => OnceKeys.Count + LastFrameByKey.Count;
-    internal static void Clear() { OnceKeys.Clear(); LastFrameByKey.Clear(); }
+    internal static int CacheCount => OnceKeys.Count + LastFrameByKey.Count + LastTickByKey.Count;
+    internal static void Clear() { OnceKeys.Clear(); LastFrameByKey.Clear(); LastTickByKey.Clear(); }
 
     /// <summary>
-    /// Throttle clock. <c>Time.frameCount</c> is a native query and is only
-    /// safe on the main thread; worker callbacks fall back to a monotonic
-    /// tick so repeats still collapse without touching the frame counter.
-    /// The fallback is only used for throttling, never for correctness.
+    /// Diagnostic-level error: gated by <see cref="Enabled"/> and throttled to at
+    /// most one line per key per 60 seconds. Uses Environment.TickCount (ms) so the
+    /// window has the same meaning on the main thread and on worker callbacks.
     /// </summary>
-    private static int Clock
+    internal static void Error(string key, string message)
     {
-        get
-        {
-            try
-            {
-                if (MclslRuntimeChanges.IsMainThread) return Time.frameCount;
-            }
-            catch { }
-            return Environment.TickCount;
-        }
+        if (!Enabled) return;
+        LogTick("error:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogWarning);
     }
 
-    private static void RememberFrame(string key, int clock)
+    /// <summary>
+    /// Critical error: always emitted (not gated by the diagnostics switch) and
+    /// throttled per key. Reserved for存档损坏、外部状态写入失败等必须可见的问题。
+    /// </summary>
+    internal static void Fatal(string key, string message)
     {
-        if (LastFrameByKey.Count >= MaxRememberedKeys && !LastFrameByKey.ContainsKey(key))
-            LastFrameByKey.Clear();
-        LastFrameByKey[key] = clock;
+        LogTick("fatal:" + (string.IsNullOrWhiteSpace(key) ? (message ?? "unknown") : key), message, Debug.LogError);
+    }
+
+    /// <summary>
+    /// One-shot probe: fully silent while diagnostics are disabled, and emitted at
+    /// most once per key while enabled. Intended for expected failures of optional
+    /// reflection/member probes (replaces treating them as errors).
+    /// </summary>
+    internal static void Probe(string key, string message)
+    {
+        if (!Enabled || string.IsNullOrWhiteSpace(key)) return;
+        if (OnceKeys.Count >= MaxRememberedKeys && !OnceKeys.ContainsKey(key)) OnceKeys.Clear();
+        if (!OnceKeys.TryAdd(key, 0)) return;
+        Debug.Log("[模拟长生路][诊断][probe] " + message);
     }
 
     internal static void Once(string key, string message)
@@ -60,13 +68,20 @@ internal static class MclslDiagnostics
         Debug.Log("[模拟长生路][诊断] " + message);
     }
 
-    internal static void Error(string key, string message)
+    private static void LogTick(string key, string message, Action<string> log)
     {
-        if (string.IsNullOrWhiteSpace(key)) key = message ?? "unknown";
-        int frame = Clock;
-        if (LastFrameByKey.TryGetValue("error:" + key, out int last) && frame - last < 3600) return;
-        RememberFrame("error:" + key, frame);
-        Debug.LogWarning("[模拟长生路][诊断][" + key + "] " + message);
+        int now = Environment.TickCount;
+        if (LastTickByKey.TryGetValue(key, out int last) && unchecked(now - last) < 60000) return;
+        if (LastTickByKey.Count >= MaxRememberedKeys && !LastTickByKey.ContainsKey(key)) LastTickByKey.Clear();
+        LastTickByKey[key] = now;
+        log("[模拟长生路][诊断][" + key + "] " + message);
+    }
+
+    private static void RememberFrame(string key, int clock)
+    {
+        if (LastFrameByKey.Count >= MaxRememberedKeys && !LastFrameByKey.ContainsKey(key))
+            LastFrameByKey.Clear();
+        LastFrameByKey[key] = clock;
     }
 
     // 修炼链逐角色日志属于编译期诊断能力。发布包未定义该符号时，

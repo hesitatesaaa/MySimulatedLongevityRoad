@@ -515,3 +515,14 @@ M0-B 仓库整理 + 编译基线记录
 - 待办（可选）：确认 bundle 可用后，删除 .archive/git-legacy-20261102 回收约 1.2 GB。
 
 > 备注：重建过程中发现旧 .git 带有 Windows 拒绝权限项，直接删除/改名被拒；最终通过把内容移入 .archive 得到完整备份，并在空 .git 上 git init 完成分仓（详见 docs/REPO-LAYOUT.md）。
+### M1-A 诊断开关：已完成
+
+- 变更：
+  - MclslDiagnostics.cs：Error 改为受 DiagnosticsEnabled 控制；新增 Fatal（始终记录，用于存档/外部状态等关键错误）与 Probe（一次性探针，诊断关闭即静默）；节流改用 Environment.TickCount 毫秒，修正主/工作线程单位不一致。
+  - MclslConfig.cs：新增 DiagnosticsCallBack。
+  - default_config.json：新增 MCLSL_config_enable_diagnostics（SWITCH，默认 false，设置面板可见）。
+- 决策3：不定义 MCLSL_CULTIVATION_DIAGNOSTICS，50 处 Cultivation 调用保持编译期剥离。
+- 顺带修复构建链路：tools/compile-check.ps1 的源码发现排除 .archive/.tests/.dev-tools/.codegraph。原因：.archive 内有一份旧源码副本，被一起编译导致 sources=619 与大量 CS0111 重复类型；修复后 sources=290。
+- 验证：compile error=0、warning=16（等于基线，全部 CS0649 DTO）；8 个离线测试项目全部 exit=0（EconomyPlanScope/LineageCleanup/SharedHelper/RuntimeQuality/NativeFeedback/HeavenGrant/BeastPopulation/EventArchive）。
+- 已知问题（转 M3-J 修）：.tests/run.ps1 因 BaseIntermediateOutputPath/APPDATA 重定向导致 dotnet run 失败；本次改用逐项目 dotnet run 取得回归结果。
+- 下一步：M2-C 反射缓存。

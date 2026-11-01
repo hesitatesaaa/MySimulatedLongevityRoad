@@ -329,6 +329,14 @@
       "Callback": "MclslConfig:PerformanceMonitorCallBack"
     },
     {
+      "Id": "MCLSL_config_enable_diagnostics",
+      "Name": "诊断日志",
+      "Description": "输出模组内部诊断日志（反射探测、防御分支等）。默认关闭；排查问题时开启，会影响性能与日志量。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:DiagnosticsCallBack"
+    },
+    {
       "Id": "MCLSL_config_show_fps",
       "Name": "显示帧率",
       "Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
