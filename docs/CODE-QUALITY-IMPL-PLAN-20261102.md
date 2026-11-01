@@ -495,3 +495,19 @@ M0-B 仓库整理 + 编译基线记录
 | 5 | 实机条件 | **具备** | M2-G、M4-E 可按计划推进实机回归；仍需留存 Unity 运行证据 |
 
 > 注：第 4 项需注意当前 `validation/` 目录**全仓不存在**，`skill_package_audit.py` / `test_skill_package.py` 需新建或从既有来源补齐，属实际工作量。
+
+---
+
+## 7. 执行记录（2026-11-02）
+
+### M0-B 仓库分仓：已完成
+
+- 旧 .git（1.2 GB，历史 2 个旧 import 提交）已完整移入 .archive/git-legacy-20261102（HEAD e8082fb，4111 文件）；另有 build/_git-backup-20261102/repo-backup-20261102.bundle（76.9 MB，git bundle verify 通过）。
+- 源码仓 .git：重建为全新历史，跟踪 1,893 个文件，.git 体积 7.7 MB；不含三个美术目录、无 dll/pdb/exe。首个提交信息：chore: import source/tools/docs/resources under version control (0.8.4; assets in separate repo)。
+- 资源仓 .git-assets：独立 git 目录、共享工作区，跟踪 2,232 个文件（GameResources 833 / NativeActorResources 1,375 / InterfaceResources 23 / .gitattributes 1），.git 体积 71.8 MB。
+- 忽略分工：共享 .gitignore 只放构建产物/临时物；源码仓 .git/info/exclude 排除三个美术目录与 .git-assets/；资源仓 .git-assets/info/exclude 反向只保留三个美术目录。
+- 操作封装：tools/git-assets.ps1；分仓说明：docs/REPO-LAYOUT.md。
+- 两仓 git status 均干净；git log 各 1 个初始提交。
+- 待办（可选）：确认 bundle 可用后，删除 .archive/git-legacy-20261102 回收约 1.2 GB。
+
+> 备注：重建过程中发现旧 .git 带有 Windows 拒绝权限项，直接删除/改名被拒；最终通过把内容移入 .archive 得到完整备份，并在空 .git 上 git init 完成分仓（详见 docs/REPO-LAYOUT.md）。
