@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
-cd "D:\模拟长胜路\code"
-$base = "D:\模拟长胜路\code"
+# 路径由脚本自身位置推导，避免硬编码本机绝对路径
+$base = Join-Path (Split-Path -Parent $PSScriptRoot) "code"
+Set-Location $base
 
 $dirs = @(
   "Systems","Data","Traits","Patches","Interop"

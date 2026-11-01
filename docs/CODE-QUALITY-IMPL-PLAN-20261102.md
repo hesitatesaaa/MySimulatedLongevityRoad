@@ -581,3 +581,10 @@ M0-B 仓库整理 + 编译基线记录
 - 桩一致性：4 个测试项目的 MclslDiagnostics 桩已补齐 Probe/Fatal/Log/Warn/Alert/Notify（M3-D 引入）。评估后不合并为单一共享桩：各项目桩刻意模拟不同原生边界，合并会降低可读性并增加耦合。
 - 验证：run.ps1 全绿；compile error=0、warning=16。
 - 下一步：M5-K 工具卫生。
+### M5-K 工具卫生：已完成（部分）
+
+- 归位根目录一次性文件：_deadcode_scan.ps1 → tools/deadcode-scan.ps1（并把硬编码 D:\模拟长胜路\code 改为按 $PSScriptRoot 推导）；清理报告-20261031.md/.csv → docs/history/CLEANUP-REPORT-20261031.*。
+- 新增 validation/check_tool_hygiene.py（报告式）：列出缺少 __main__ 守卫的 py 与硬编码绝对路径。当前硬编码路径 0；缺 __main__ 守卫 14 个（含新脚本 report-code-metrics.py）。
+- __main__ 守卫批量补齐：评估后本轮不做——多为过程式脚本，需逐文件把顶层语句移入 main()，机械改写风险高于收益；已在报告中登记，后续按需处理。
+- Conditional 说明：MCLSL_CULTIVATION_DIAGNOSTICS 全项目未定义，50 处 Cultivation 调用编译期剥离（决策3：不使用）。
+- 验证：仓库根目录不再有一次性脚本/报告；compile 与 run.ps1 不受影响（仅文件移动 + 新增报告脚本）。
