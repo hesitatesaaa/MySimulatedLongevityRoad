@@ -1,6 +1,7 @@
 param(
     [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
-    [string]$OutputDirectory = ''
+    [string]$OutputDirectory = '',
+    [int]$MaxWarnings = 16
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -35,4 +36,14 @@ foreach ($source in $sources) { $compilerArguments += "`"$source`"" }
 & dotnet $compilerPath /noconfig "@$argumentsFile" 2>&1 | Tee-Object -FilePath (Join-Path $OutputDirectory 'compile.log')
 $code = $LASTEXITCODE
 Write-Output "sources=$($sources.Count) exit=$code"
+$logPath = Join-Path $OutputDirectory 'compile.log'
+if (Test-Path -LiteralPath $logPath) {
+    $logText = [IO.File]::ReadAllText($logPath)
+    $warnCount = ([regex]::Matches($logText, '(?im):\s*warning ')).Count
+    Write-Output "warnings=$warnCount budget=$MaxWarnings"
+    if ($code -eq 0 -and $warnCount -gt $MaxWarnings) {
+        Write-Output "WARNING BUDGET EXCEEDED: $warnCount > $MaxWarnings"
+        exit 2
+    }
+}
 exit $code

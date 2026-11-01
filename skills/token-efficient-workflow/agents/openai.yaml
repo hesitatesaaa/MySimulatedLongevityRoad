@@ -1,0 +1,6 @@
+interface:
+  display_name: "Token-Efficient Workflow"
+  short_description: "Save Codex tokens without lowering task quality."
+  default_prompt: "Use $token-efficient-workflow to handle this task with minimal unnecessary context while preserving correctness."
+policy:
+  allow_implicit_invocation: true

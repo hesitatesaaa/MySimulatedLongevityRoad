@@ -566,3 +566,11 @@ M0-B 仓库整理 + 编译基线记录
 - 文档：README-DEVELOPER.md、docs/PROJECT-STRUCTURE.md 增加"以 docs/CODE-METRICS.json 为准"的说明。
 - 验证：脚本可重复运行、JSON 有效。
 - 下一步：M3-I 分析器/CI。
+### M3-I .editorconfig/分析器/CI：已完成
+
+- 新增 .editorconfig（UTF-8、4 空格；.cs/.ps1 CRLF、.py LF、json/yml 2 空格）。
+- compile-check.ps1 增加 -MaxWarnings（默认 16）与警告预算：warning 超预算则 exit 2（当前 warnings=16 budget=16 exit 0）。
+- 技能包迁移：deliverables/token-efficient-workflow → skills/token-efficient-workflow（受跟踪）；新增 validation/skill_package_audit.py、validation/test_skill_package.py；.gitignore 移除 validation/ 忽略；skill-quality.yml 的 --skill-dir 改为 skills/。
+- 验证：compile error=0、warnings=16（未超预算）；validation 脚本 py_compile 通过；离线 audit = OK（结构/UTF-8/token 预算通过）。
+- 说明：CI 完整执行仍需 runner 安装 tiktoken/pytest；本地已用无 tiktoken 回退路径验证 audit 可用。
+- 下一步：M3-J 测试收敛。

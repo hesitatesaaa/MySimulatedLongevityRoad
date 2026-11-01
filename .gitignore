@@ -18,7 +18,6 @@ upstream-*/
 .codegraph/
 _ref/
 source/
-validation/
 
 # Editor / OS noise
 .DS_Store

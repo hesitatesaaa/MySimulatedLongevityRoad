@@ -17,7 +17,7 @@ jobs:
       - name: Compile validation scripts
         run: python -m py_compile validation/skill_package_audit.py validation/test_skill_package.py
       - name: Audit package structure, encoding, and token budgets
-        run: python validation/skill_package_audit.py --skill-dir deliverables/token-efficient-workflow --max-skill-tokens 800 --max-runtime-tokens 1200 --json
+        run: python validation/skill_package_audit.py --skill-dir skills/token-efficient-workflow --max-skill-tokens 800 --max-runtime-tokens 1200 --json
       - name: Run skill smoke tests
         run: python -m pytest -q validation/test_skill_package.py
 
