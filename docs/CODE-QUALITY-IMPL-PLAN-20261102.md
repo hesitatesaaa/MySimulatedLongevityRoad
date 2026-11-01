@@ -574,3 +574,10 @@ M0-B 仓库整理 + 编译基线记录
 - 验证：compile error=0、warnings=16（未超预算）；validation 脚本 py_compile 通过；离线 audit = OK（结构/UTF-8/token 预算通过）。
 - 说明：CI 完整执行仍需 runner 安装 tiktoken/pytest；本地已用无 tiktoken 回退路径验证 audit 可用。
 - 下一步：M3-J 测试收敛。
+### M3-J 测试收敛：已完成
+
+- 修复 .tests/run.ps1：去掉导致 dotnet run 失败的 -p:BaseIntermediateOutputPath/BaseOutputPath 与 APPDATA 重定向；改为直接 dotnet run，并用 2>&1 兜住原生 stderr（避免 -ErrorAction Stop 把 stderr 当终止错误）。端到端运行输出 ALL TEST PROJECTS PASSED，exit=0（8 个项目）。
+- 核对：LineageCleanupTests 引用的 MclslCleanupPolicy.cs 实际存在（旧计划 §1.2 的失效引用已不存在）。
+- 桩一致性：4 个测试项目的 MclslDiagnostics 桩已补齐 Probe/Fatal/Log/Warn/Alert/Notify（M3-D 引入）。评估后不合并为单一共享桩：各项目桩刻意模拟不同原生边界，合并会降低可读性并增加耦合。
+- 验证：run.ps1 全绿；compile error=0、warning=16。
+- 下一步：M5-K 工具卫生。
