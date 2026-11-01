@@ -542,3 +542,11 @@ M0-B 仓库整理 + 编译基线记录
 - 分级：存档/还真写入失败→Fatal；渲染/注册失败→Alert；启动计时/放置耗时/存档读取成功→Log；开发者提示/公告兜底→Notify。
 - 验证：compile error=0、warning=16；8 个离线测试全部 exit=0。
 - 下一步：M2-G 初始化去重。
+
+### M2-G 初始化去重：已完成（未实机验证）
+
+- 变更：MclslRuntime.cs 将 OnWorldLoaded 与 Tick 分支中重复的"核心世界初始化"7 步序列抽为 TryInitializeCoreWorld(year)（返回 false 表示 WriteLocked，需要中止）；LoadCoreModules 去掉重复的 _coreWorldInitialized 置位。
+- 语义保持：每世界仅尝试一次（含异常）、WriteLocked 早退、LoadCoreModules 在 MclslHuanzhenSystem.OnWorldLoaded() 之后调用的原顺序。
+- 验证：compile error=0、warning=16；8 个离线测试 exit=0。
+- 注意：按 AGENTS.md，离线/桩测试不构成实机通过；新世界/读档/切换世界及 WriteLocked 场景仍需 Unity 实机回归（用户已确认具备条件）。
+- 下一步：M3-D 空 catch 规范化。

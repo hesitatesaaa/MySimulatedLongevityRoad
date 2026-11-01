@@ -52,13 +52,7 @@ internal static class MclslRuntime
         Patches.MclslXuanhuangDirectionPatch.PrepareWorldColors();
         if (MclslRuntimeSettings.CoreEnabled)
         {
-            _coreWorldInitialized = true;
-            MclslWorldStateModifierSystem.ClearCache();
-            MclslWorldArchiveStore.Load();
-            if (MclslWorldArchiveStore.WriteLocked) return;
-            MclslWorldRunRepository.EnsureCurrentRun(year);
-            MclslNativeHistoryBridge.EnsureRegistered();
-            Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
+            if (!TryInitializeCoreWorld(year)) return;
         }
         MclslHuanzhenSystem.OnWorldLoaded();
         if (MclslRuntimeSettings.CoreEnabled)
@@ -74,11 +68,25 @@ internal static class MclslRuntime
         _displayClock = 0d;
     }
 
+    /// <summary>
+    /// Runs the one-time core-world initialization shared by OnWorldLoaded and the
+    /// Tick fallback. Attempts at most once per world (including faults); returns
+    /// false when the archive store is write-locked so the caller can abort.
+    /// </summary>
+    private static bool TryInitializeCoreWorld(int year)
+    {
+        _coreWorldInitialized = true;
+        MclslWorldStateModifierSystem.ClearCache();
+        MclslWorldArchiveStore.Load();
+        if (MclslWorldArchiveStore.WriteLocked) return false;
+        MclslWorldRunRepository.EnsureCurrentRun(year);
+        MclslNativeHistoryBridge.EnsureRegistered();
+        Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
+        return true;
+    }
+
     private static void LoadCoreModules(int year)
     {
-        // Attempt once per world, including faults; configuration callbacks never
-        // parse archives or repeatedly retry a bad module on the frame path.
-        _coreWorldInitialized = true;
         Systems.Combat.MclslCareerCombat.Load();
         MclslTimelineSystem.TickAnnual(year);
         MclslWorldRunRepository.EnsureAnnualWorldState(year);
@@ -107,15 +115,8 @@ internal static class MclslRuntime
             MclslDeferredUiWork.Tick();
             if(MclslRuntimeSettings.CoreEnabled && !_coreWorldInitialized && World.world?.map_stats!=null)
             {
-                _coreWorldInitialized = true;
                 int year = CurrentYear();
-                MclslWorldStateModifierSystem.ClearCache();
-                MclslWorldArchiveStore.Load();
-                if(MclslWorldArchiveStore.WriteLocked)return;
-                MclslWorldRunRepository.EnsureCurrentRun(year);
-                MclslNativeHistoryBridge.EnsureRegistered();
-                Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
-                LoadCoreModules(year);
+                if (TryInitializeCoreWorld(year)) LoadCoreModules(year);
             }
             if (MclslWorldArchiveStore.WriteLocked) return;
             MclslFrameLoadMonitor.SampleFrame();
