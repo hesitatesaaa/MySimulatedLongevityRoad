@@ -1,0 +1,81 @@
+{
+  "scope": "Relocation only; original file bytes retained. Runtime sprite geometry and visual validation pending.",
+  "files": [
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_biography.png",
+      "sha256": "9cd2770f141c748ccf31f9358372c84c86ac5ba2ac6e6c60ae717cbf9aa2cecb"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_character_panel.png",
+      "sha256": "89427fa29dd447a54d13468080d899f193502cd72b9df59d4c180415d2b82096"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_huanzhen_space.png",
+      "sha256": "1481ae4ede657fd221e987688212420b5894d2de8007d3528eff3535f8bf3870"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_mod_intro.png",
+      "sha256": "43c8d11cf357f9de5ddb490a4f9eb9ed220fb972c731e1e05b28e1b7e99a32d8"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_ranking.png",
+      "sha256": "d06006da24d9c372fa5bc2726ef735a3c2f6f94ccf30e0746c2588d7d4200aaa"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_tianxuanjing.png",
+      "sha256": "89154618dea4a3db6fcaf8c21de8ba525ad64f6a7d0b0105363259a287f43eb2"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/frame_xuanhuang_record.png",
+      "sha256": "39c3ac67bf0c9268a11c188524598677a5c822e7bf96abd9f6decc958a380486"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/guardian_bai.png",
+      "sha256": "b8c827368a59e2e675cfcb48c2fcca419b24fa1f73190b6c03341d50b14ce931"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/guardian_chuanfa.png",
+      "sha256": "94c56ebb61a50cac1d59484f50a947f1b59535a3302d229b9f7124cb4c0b0423"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/manifest.json",
+      "sha256": "fa03c667f592195617734ab5bb918fde66631f9d13132db64db8908c1b4505ce"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_biography.png",
+      "sha256": "a300689d3eea4181512477190563bb404da54845899ede729567ad64b5eb628d"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_career_archive.png",
+      "sha256": "e746f16b0d396fd853f47a8aa769a794462f92b2a0a16a463bddd5da70727625"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_career_skills.png",
+      "sha256": "7cf8c4601d62d3c3ad7c655041f8c8a3b52472bd7cf71bf6f031c3b2669f0a78"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_character_panel.png",
+      "sha256": "1f7466810b646a0b2e7a37c855b02c86ca263ade47f7aab60c04f27716af94d6"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_huanzhen_space.png",
+      "sha256": "19f2e922a77b845d27a5afa82230c80f9e1c7136e8ed2e0bf8ea8bcef42f3e9a"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_mod_intro.png",
+      "sha256": "cccf813c9e7197af38cd0316c0f259c33b91867cdd40fb68f72d2dc6b4b8e8e3"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_ranking.png",
+      "sha256": "040b5d4ed356e5cbed69410a9d0d079fa1d231576642ef107e842229a19551af"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_tianxuanjing.png",
+      "sha256": "2a4081cd8e7fa662acabffba4728e0b06e48342ac63046d1a1c7f4caeed643f8"
+    },
+    {
+      "file": "InterfaceResources/XuanhuangSkin/title_xuanhuang_record.png",
+      "sha256": "3e4d8fc009787450074a0eaf32e98713c7b0182c31f204d8bd4f594334e4cc8d"
+    }
+  ]
+}

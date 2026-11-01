@@ -1,0 +1,473 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Queries;
+using MySimulatedLongevityRoad.Systems;
+using MySimulatedLongevityRoad.Traits;
+using NeoModLoader.General;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace MySimulatedLongevityRoad.UI;
+
+internal static class MclslActorOverviewStatsFormatter
+{
+    private sealed class WindowState { internal long ActorId, Revision = -1; internal bool Visible, NewLaw; }
+    private static ConditionalWeakTable<UnitWindow, WindowState> States = new();
+    private sealed class IconTextBinding { internal bool Initialized; internal Text Value; }
+    private static ConditionalWeakTable<Transform, IconTextBinding> IconTextBindings = new();
+    internal static void ClearRuntime() { States = new(); IconTextBindings = new(); }
+    internal static void OnClosed(UnitWindow window) { if (window != null) States.Remove(window); }
+    private static readonly OverviewStatIcon[] Icons =
+    {
+        new("MclslImmortalFate", "仙缘", "ui/Icons/XuanHuangXianLu"),
+        new("MclslAptitude", "资质", "ui/Icons/Aptitude"),
+        new("MclslSpellInsight", "悟性", "ui/Icons/WuXing"),
+        new("MclslMindState", "心境", "ui/Icons/XinJing", "ui/Icons/HuanZhen"),
+        new("MclslMortalMiasma", "仙凡瘴", "ui/Icons/XianFanZhang"),
+        new("MclslTrueEssence", "真元", "ui/Icons/ZhenQi"),
+        new("MclslContribution", "贡献", "ui/Icons/GongXianZhi"),
+        new("MclslSpiritStones", "灵石", "ui/Icons/LingShi")
+    };
+
+    internal static void Refresh(UnitWindow window)
+    {
+        if (window == null || !window.gameObject.activeInHierarchy) return;
+        Actor actor = window.actor;
+        long id = MclslActorAccessor.Id(actor), revision = MclslRuntimeChanges.DataRevision(id);
+        WindowState state = States.GetOrCreateValue(window);
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        if (state.ActorId == id && state.Revision == revision && state.NewLaw == newLaw) return;
+        if (!ShouldShowOverview(actor))
+        {
+            HideMclslOverview(window);
+            state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = false;
+            return;
+        }
+
+        MclslActorCultivationView cultivation = MclslActorCultivationQuery.Build(actor);
+        if (!EnsureIconGroup(window)) return;
+
+        SetIconValue(window, "MclslAptitude", Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100));
+        SetIconVisibility(window, "MclslQi", false);
+        SetIconValue(window, "MclslSpellInsight", MclslSpellProgression.Insight(actor));
+        SetIconValue(window, "MclslImmortalFate", cultivation.ImmortalFate);
+        SetIconValue(window, "MclslMindState", cultivation.MindState);
+        if (ShouldShowMiasma(cultivation)) SetIconText(window, "MclslMortalMiasma", cultivation.MortalMiasma + "/" + cultivation.MortalMiasmaLimit);
+        else SetIconVisibility(window, "MclslMortalMiasma", false);
+        if (cultivation.NextRealmMinimum <= 0 && !string.IsNullOrWhiteSpace(cultivation.RealmId)) SetIconText(window, "MclslTrueEssence", "-");
+        else SetIconValue(window, "MclslTrueEssence", cultivation.TrueEssence);
+        SetIconText(window, "MclslContribution", cultivation.Contribution.ToString());
+        SetIconText(window, "MclslSpiritStones", cultivation.SpiritStones.ToString());
+        ArrangeOverviewRows(window);
+        RefreshFactionAffiliationRow(window, actor, cultivation);
+        state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = true;
+    }
+
+    // 与右侧修士档案共用同一显示口径：无根骨凡人连仙缘/资质图标行也不出现。
+    private static bool ShouldShowOverview(Actor actor) => MclslActorInfoPanel.HasArchiveFor(actor);
+
+    private static void HideMclslOverview(UnitWindow window)
+    {
+        if (window == null) return;
+        for (int i = 0; i < Icons.Length; i++) SetIconVisibility(window, Icons[i].Id, false);
+        SetIconVisibility(window, "MclslAptitude", false);
+        SetIconVisibility(window, "MclslQi", false);
+        HideFactionAffiliationRow(window);
+    }
+
+    private static bool ShouldShowMiasma(MclslActorCultivationView cultivation)
+    {
+        if (cultivation == null || cultivation.IsSpiritualRootPath || cultivation.MortalMiasmaLimit <= 0) return false;
+        MclslWorldRunState run = MclslWorldRunRepository.Current;
+        return run != null && !string.Equals(run.CultivationEpoch, MclslWorldEpochSystem.AncientLawEpoch, StringComparison.Ordinal);
+    }
+
+    private static void RefreshFactionAffiliationRow(UnitWindow window, Actor actor, MclslActorCultivationView cultivation)
+    {
+        Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content");
+        if (content == null) return;
+        bool show = cultivation != null && !string.IsNullOrWhiteSpace(cultivation.RealmId);
+        if (!show) { HideFactionAffiliationRow(window); return; }
+        MclslFamilySystem.Observe(actor);
+        SetAffiliationRow(content, "MclslFamilyRow", "所属家族：", MclslFamilySystem.FamilyOf(actor)?.Name ?? "无");
+        string sect = MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear());
+        SetAffiliationRow(content, "MclslCurrentSectRow", "所属宗门：", string.IsNullOrWhiteSpace(sect) ? "无" : sect);
+        bool newLaw = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear());
+        Transform factionRow = content.Find("MclslFactionAffiliationRow");
+        if (newLaw) SetAffiliationRow(content, "MclslFactionAffiliationRow", "所属组织：", FactionAffiliationName(actor));
+        else if (factionRow != null) factionRow.gameObject.SetActive(false);
+        string origin = MclslFactionMissionSystem.DisplaySectText(
+            MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty));
+        Transform originRow = content.Find("MclslAncientSectOriginRow");
+        if (newLaw && !string.IsNullOrWhiteSpace(origin))
+            SetAffiliationRow(content, "MclslAncientSectOriginRow", "旧法宗门出身：", origin);
+        else if (originRow != null) originRow.gameObject.SetActive(false);
+    }
+
+    private static void SetAffiliationRow(Transform content, string rowName, string label, string value)
+    {
+        Transform row = content.Find(rowName);
+        if (row == null) row = CreateFactionAffiliationRow(content, rowName);
+        if (row == null) return;
+        row.gameObject.SetActive(true);
+        Text text = row.GetComponentInChildren<Text>(true);
+        if (text != null) text.text = "<color=#D8CDAA>" + label + "</color><color=#F1D17A>"
+            + (string.IsNullOrWhiteSpace(value) ? "无" : value) + "</color>";
+        row.SetAsLastSibling();
+    }
+
+    private static void HideFactionAffiliationRow(UnitWindow window)
+    {
+        Transform content = window == null ? null : ((Component)window).transform.Find("Background/Scroll View/Viewport/Content");
+        if (content == null) return;
+        foreach (string name in new[] { "MclslFactionAffiliationRow", "MclslFamilyRow", "MclslCurrentSectRow", "MclslAncientSectOriginRow" })
+        {
+            Transform row = content.Find(name);
+            if (row != null) row.gameObject.SetActive(false);
+        }
+    }
+
+    private static Transform CreateFactionAffiliationRow(Transform content, string rowName)
+    {
+        GameObject row = new GameObject(rowName, typeof(RectTransform), typeof(LayoutElement));
+        row.transform.SetParent(content, false);
+        RectTransform rowRect = row.GetComponent<RectTransform>();
+        rowRect.anchorMin = new Vector2(0f, 1f);
+        rowRect.anchorMax = new Vector2(1f, 1f);
+        rowRect.pivot = new Vector2(0.5f, 1f);
+        rowRect.sizeDelta = new Vector2(0f, 28f);
+        LayoutElement layout = row.GetComponent<LayoutElement>();
+        layout.minHeight = 26f;
+        layout.preferredHeight = 28f;
+
+        GameObject textObject = new GameObject("Text", typeof(RectTransform), typeof(Text));
+        textObject.transform.SetParent(row.transform, false);
+        RectTransform textRect = textObject.GetComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.offsetMin = new Vector2(12f, 0f);
+        textRect.offsetMax = new Vector2(-12f, 0f);
+        Text text = textObject.GetComponent<Text>();
+        text.font = LocalizedTextManager.current_font ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.fontSize = MclslUiTheme.ReadableFontSize(15);
+        text.alignment = TextAnchor.MiddleLeft;
+        text.horizontalOverflow = HorizontalWrapMode.Overflow;
+        text.verticalOverflow = VerticalWrapMode.Truncate;
+        text.supportRichText = true;
+        return row.transform;
+    }
+
+    private static string FactionAffiliationName(Actor actor)
+    {
+        string value = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty);
+        return value switch
+        {
+            "wanxian" => "万仙盟",
+            "five_elders" => "五老会",
+            _ => string.Empty
+        };
+    }
+
+    private static bool EnsureIconGroup(UnitWindow window)
+    {
+        Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content/content_more_icons");
+        if (content == null) return false;
+        Transform targetGroup = FindKillsGroup(content);
+        if (targetGroup == null) return false;
+        Transform templateIcon = targetGroup.Find("i_kills");
+        if (templateIcon == null && targetGroup.childCount > 0) templateIcon = targetGroup.GetChild(0);
+        if (templateIcon == null) return false;
+
+        for (int i = 0; i < Icons.Length; i++)
+        {
+            if (targetGroup.Find(Icons[i].Id) != null) continue;
+            Transform iconTransform = UnityEngine.Object.Instantiate(templateIcon, targetGroup);
+            ConfigureIcon(iconTransform, Icons[i]);
+        }
+
+        ArrangeKillsRow(content, targetGroup);
+        return true;
+    }
+
+    private static Transform FindKillsGroup(Transform content)
+    {
+        if (content == null) return null;
+        for (int i = 0; i < content.childCount; i++)
+        {
+            Transform child = content.GetChild(i);
+            if (child != null && child.Find("i_kills") != null) return child;
+        }
+        return content.childCount > 4 ? content.GetChild(4) : (content.childCount > 0 ? content.GetChild(content.childCount - 1) : null);
+    }
+
+    private static void ArrangeKillsRow(Transform content, Transform targetGroup)
+    {
+        if (targetGroup == null) return;
+        Transform[] orderedIcons = BuildOrderedIcons(targetGroup);
+        for (int i = 0; i < orderedIcons.Length; i++)
+            if (orderedIcons[i] != null) orderedIcons[i].SetSiblingIndex(i);
+
+        Transform templateGroup = FindTemplateIconRow(content, targetGroup);
+        AlignRowLayout(targetGroup, templateGroup);
+        RectTransform targetRect = targetGroup as RectTransform;
+        RectTransform templateRect = templateGroup as RectTransform;
+        if (targetRect != null && templateRect != null)
+        {
+            CopyRowRectTransform(targetRect, templateRect);
+            EnsureRowHeight(targetRect, templateGroup, orderedIcons.Length);
+        }
+
+        RectTransform[] columns = GetTemplateColumns(templateGroup);
+        for (int i = 0; i < orderedIcons.Length; i++)
+        {
+            RectTransform iconRect = orderedIcons[i] as RectTransform;
+            if (iconRect == null) continue;
+            if (columns != null && columns.Length > 0 && i < columns.Length && columns[i] != null)
+            {
+                CopyRectTransform(iconRect, columns[i]);
+                ApplyRowOffset(iconRect, templateGroup, i, columns.Length);
+            }
+            else ApplyBackupColumn(iconRect, i);
+        }
+    }
+
+    private static Transform[] BuildOrderedIcons(Transform targetGroup)
+    {
+        List<Transform> ordered = new(Icons.Length + 1);
+        Transform kills = targetGroup.Find("i_kills");
+        if (kills != null && kills.gameObject.activeSelf) ordered.Add(kills);
+        for (int i = 0; i < Icons.Length; i++)
+        {
+            Transform icon = targetGroup.Find(Icons[i].Id);
+            if (icon != null && icon.gameObject.activeSelf) ordered.Add(icon);
+        }
+        return ordered.ToArray();
+    }
+
+    private static Transform FindTemplateIconRow(Transform content, Transform targetGroup)
+    {
+        if (content == null) return null;
+        for (int i = 0; i < content.childCount; i++)
+        {
+            Transform child = content.GetChild(i);
+            if (child == null || child == targetGroup) continue;
+            if (GetTemplateColumns(child)?.Length >= 4) return child;
+        }
+        return null;
+    }
+
+    private static void AlignRowLayout(Transform targetGroup, Transform templateGroup)
+    {
+        if (targetGroup == null) return;
+        HorizontalLayoutGroup targetHorizontal = targetGroup.GetComponent<HorizontalLayoutGroup>();
+        HorizontalLayoutGroup templateHorizontal = templateGroup != null ? templateGroup.GetComponent<HorizontalLayoutGroup>() : null;
+        if (targetHorizontal != null)
+        {
+            if (templateHorizontal != null)
+            {
+                targetHorizontal.padding = templateHorizontal.padding;
+                targetHorizontal.spacing = templateHorizontal.spacing;
+                targetHorizontal.childControlWidth = templateHorizontal.childControlWidth;
+                targetHorizontal.childControlHeight = templateHorizontal.childControlHeight;
+                targetHorizontal.childForceExpandWidth = templateHorizontal.childForceExpandWidth;
+                targetHorizontal.childForceExpandHeight = templateHorizontal.childForceExpandHeight;
+            }
+            targetHorizontal.childAlignment = TextAnchor.MiddleLeft;
+        }
+        GridLayoutGroup targetGrid = targetGroup.GetComponent<GridLayoutGroup>();
+        GridLayoutGroup templateGrid = templateGroup != null ? templateGroup.GetComponent<GridLayoutGroup>() : null;
+        if (targetGrid != null)
+        {
+            if (templateGrid != null)
+            {
+                targetGrid.cellSize = templateGrid.cellSize;
+                targetGrid.spacing = templateGrid.spacing;
+                targetGrid.padding = templateGrid.padding;
+            }
+            targetGrid.startCorner = GridLayoutGroup.Corner.UpperLeft;
+            targetGrid.startAxis = GridLayoutGroup.Axis.Horizontal;
+            targetGrid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            targetGrid.constraintCount = 5;
+            targetGrid.childAlignment = TextAnchor.UpperLeft;
+        }
+    }
+
+    private static void EnsureRowHeight(RectTransform target, Transform templateGroup, int itemCount)
+    {
+        if (target == null || itemCount <= 0) return;
+        int columnCount = Math.Min(5, Math.Max(1, GetTemplateColumns(templateGroup)?.Length ?? 5));
+        int rowCount = Math.Max(1, (int)Math.Ceiling(itemCount / (double)columnCount));
+        if (rowCount <= 1) return;
+        float rowStep = ResolveRowStep(templateGroup);
+        Vector2 size = target.sizeDelta;
+        size.y = Math.Max(size.y, rowStep * rowCount);
+        target.sizeDelta = size;
+        LayoutElement layout = target.GetComponent<LayoutElement>() ?? target.gameObject.AddComponent<LayoutElement>();
+        layout.minHeight = Math.Max(layout.minHeight, size.y);
+        layout.preferredHeight = Math.Max(layout.preferredHeight, size.y);
+    }
+
+    private static void ApplyRowOffset(RectTransform target, Transform templateGroup, int index, int columnCount)
+    {
+        if (target == null || columnCount <= 0) return;
+        int row = index / columnCount;
+        if (row <= 0) return;
+        Vector2 position = target.anchoredPosition;
+        position.y -= ResolveRowStep(templateGroup) * row;
+        target.anchoredPosition = position;
+    }
+
+    private static float ResolveRowStep(Transform templateGroup)
+    {
+        GridLayoutGroup grid = templateGroup != null ? templateGroup.GetComponent<GridLayoutGroup>() : null;
+        if (grid != null) return Math.Max(1f, grid.cellSize.y + grid.spacing.y);
+        RectTransform[] columns = GetTemplateColumns(templateGroup);
+        if (columns != null && columns.Length > 0 && columns[0] != null) return Math.Max(1f, columns[0].sizeDelta.y + 8f);
+        return 34f;
+    }
+
+    private static RectTransform[] GetTemplateColumns(Transform group)
+    {
+        if (group == null || group.childCount == 0) return null;
+        RectTransform[] columns = new RectTransform[Math.Min(5, group.childCount)];
+        int count = 0;
+        for (int i = 0; i < group.childCount && count < columns.Length; i++)
+        {
+            RectTransform rect = group.GetChild(i) as RectTransform;
+            if (rect != null) columns[count++] = rect;
+        }
+        if (count == columns.Length) return columns;
+        RectTransform[] trimmed = new RectTransform[count];
+        Array.Copy(columns, trimmed, count);
+        return trimmed;
+    }
+
+    private static void CopyRectTransform(RectTransform target, RectTransform source)
+    {
+        if (target == null || source == null) return;
+        target.anchorMin = source.anchorMin;
+        target.anchorMax = source.anchorMax;
+        target.pivot = source.pivot;
+        target.sizeDelta = source.sizeDelta;
+        target.anchoredPosition = source.anchoredPosition;
+        target.localScale = source.localScale;
+    }
+
+    private static void CopyRowRectTransform(RectTransform target, RectTransform source)
+    {
+        if (target == null || source == null) return;
+        float rowY = target.anchoredPosition.y;
+        CopyRectTransform(target, source);
+        Vector2 position = target.anchoredPosition;
+        position.y = rowY;
+        target.anchoredPosition = position;
+    }
+
+    private static void ApplyBackupColumn(RectTransform target, int column)
+    {
+        if (target == null) return;
+        Vector2 position = target.anchoredPosition;
+        position.x = column * 102f;
+        target.anchoredPosition = position;
+    }
+
+    private static void ConfigureIcon(Transform iconTransform, OverviewStatIcon icon)
+    {
+        if (iconTransform == null) return;
+        iconTransform.name = icon.Id;
+        StatsIcon statsIcon = iconTransform.GetComponent<StatsIcon>();
+        if (statsIcon != null)
+        {
+            statsIcon.name = icon.Id;
+            Image iconImage = statsIcon.getIcon();
+            Sprite sprite = LoadSprite(icon.ResourcePaths);
+            if (sprite != null && iconImage != null) iconImage.sprite = sprite;
+        }
+        TipButton tip = iconTransform.GetComponent<TipButton>();
+        if (tip != null)
+        {
+            tip.textOnClick = icon.Id;
+            if (icon.Id == "MclslSpellInsight")
+                tip.textOnClickDescription = "mclsl_spell_insight_description";
+            else if (icon.Id == "MclslAptitude")
+                tip.textOnClickDescription = "mclsl_aptitude_description";
+        }
+    }
+
+    private static Sprite LoadSprite(string[] resourcePaths)
+    {
+        if (resourcePaths == null) return null;
+        for (int i = 0; i < resourcePaths.Length; i++)
+        {
+            string path = resourcePaths[i]?.Trim().Replace("\\", "/");
+            if (string.IsNullOrWhiteSpace(path)) continue;
+            Sprite sprite = SpriteTextureLoader.getSprite(path)
+                ?? SpriteTextureLoader.getSprite("GameResources/" + path)
+                ?? SpriteTextureLoader.getSprite("GameResources/" + path + ".png")
+                ?? Resources.Load<Sprite>(path)
+                ?? Resources.Load<Sprite>("GameResources/" + path);
+            if (sprite != null) return sprite;
+        }
+        return null;
+    }
+
+    private static void SetIconValue(UnitWindow window, string id, int value)
+    {
+        SetIconVisibility(window, id, true);
+        try { window.setIconValue(id, value, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #1: " + mclslEmptyCatchEx.Message); }
+    }
+
+    private static void SetIconText(UnitWindow window, string id, string value)
+    {
+        SetIconVisibility(window, id, true);
+        try { window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message); }
+        Transform icon = FindOverviewIcon(window, id);
+        if (icon == null) return;
+        IconTextBinding binding = IconTextBindings.GetOrCreateValue(icon);
+        if (!binding.Initialized)
+        {
+            Text[] texts = icon.GetComponentsInChildren<Text>(true);
+            binding.Value = texts.Length > 0 ? texts[texts.Length - 1] : null;
+            binding.Initialized = true;
+        }
+        if (binding.Value != null) binding.Value.text = value ?? string.Empty;
+    }
+
+    private static void SetIconVisibility(UnitWindow window, string id, bool visible)
+    {
+        Transform icon = FindOverviewIcon(window, id);
+        if (icon != null) icon.gameObject.SetActive(visible);
+    }
+
+    private static Transform FindOverviewIcon(UnitWindow window, string id)
+    {
+        if (window == null || string.IsNullOrWhiteSpace(id)) return null;
+        Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content/content_more_icons");
+        Transform targetGroup = FindKillsGroup(content);
+        return targetGroup == null ? null : targetGroup.Find(id);
+    }
+
+    private static void ArrangeOverviewRows(UnitWindow window)
+    {
+        Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content/content_more_icons");
+        Transform targetGroup = FindKillsGroup(content);
+        if (content != null && targetGroup != null) ArrangeKillsRow(content, targetGroup);
+    }
+
+    private readonly struct OverviewStatIcon
+    {
+        internal readonly string Id;
+        internal readonly string DisplayName;
+        internal readonly string[] ResourcePaths;
+
+        internal OverviewStatIcon(string id, string displayName, params string[] resourcePaths)
+        {
+            Id = id ?? string.Empty;
+            DisplayName = displayName ?? string.Empty;
+            ResourcePaths = resourcePaths ?? Array.Empty<string>();
+        }
+    }
+}

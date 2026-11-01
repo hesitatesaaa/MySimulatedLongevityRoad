@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><LangVersion>latest</LangVersion><EnableDefaultCompileItems>false</EnableDefaultCompileItems><Production>../../code/MySimulatedLongevityRoad</Production></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="$(Production)/Systems/MclslHeavenGrantActions.cs" />
+    <Compile Include="$(Production)/Systems/Runtime/MclslActorAccessor.cs" />
+    <Compile Include="$(Production)/Systems/Cultivation/MclslTechniqueRealmLimit.cs" />
+    <Compile Include="$(Production)/Systems/Cultivation/MclslTechniqueStageSystem.cs" />
+    <Compile Include="$(Production)/Systems/Cultivation/MclslMortalSeparationSystem.cs" />
+    <Compile Include="$(Production)/Systems/Cultivation/MclslCultivationSystemIds.cs" />
+    <Compile Include="$(Production)/Data/MclslActorDataKeys.cs" />
+    <Compile Include="$(Production)/Data/MclslCultivationCatalog.cs" />
+    <Compile Include="$(Production)/Core/MclslStableHash.cs" />
+  </ItemGroup>
+</Project>

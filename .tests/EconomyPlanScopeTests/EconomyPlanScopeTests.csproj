@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Defaults to the local SDK's target pack; override with
+         -p:MclslTestTfm=net8.0 when that pack is available offline. -->
+    <MclslTestTfm Condition="'$(MclslTestTfm)' == ''">net10.0</MclslTestTfm>
+    <TargetFramework>$(MclslTestTfm)</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>EconomyPlanScopeTests</AssemblyName>
+    <RootNamespace>EconomyPlanScopeTests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <!-- The real production type is compiled from the source tree, not copied. -->
+    <Compile Include="..\..\code\MySimulatedLongevityRoad\Systems\Crafting\MclslAnnualEconomyPlan.cs"
+             Link="Production\MclslAnnualEconomyPlan.cs" />
+  </ItemGroup>
+</Project>

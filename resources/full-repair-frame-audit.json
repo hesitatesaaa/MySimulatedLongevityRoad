@@ -1,0 +1,126 @@
+{
+  "runtimeImagesDecoded": 3085,
+  "atlases": 72,
+  "mappedFrames": 694,
+  "effectFrames": 720,
+  "geometryErrors": [],
+  "edgeContactsForReview": [],
+  "buildings": [
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/library_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/market_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/barracks_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/windmill_human_0",
+      "frames": 7,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/windmill_human_1",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/docks_human",
+      "frames": 8,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/fishing_docks_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/tent_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_0",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_1",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_2",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_3",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_4",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/house_human_5",
+      "frames": 6,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_0",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_1",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_2",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/watch_tower_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/temple_human",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/statue",
+      "frames": 26,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/well",
+      "frames": 4,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/mine",
+      "frames": 17,
+      "edgeContacts": 0
+    },
+    {
+      "path": "buildings/civ_main/mclsl_xuanhuang/training_dummy",
+      "frames": 8,
+      "edgeContacts": 0
+    }
+  ],
+  "scope": "Offline geometry and PNG integrity only; no Unity visual/performance claim"
+}

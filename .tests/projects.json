@@ -1,0 +1,10 @@
+[
+  "EconomyPlanScopeTests",
+  "LineageCleanupTests",
+  "SharedHelperTests",
+  "RuntimeQualityTests",
+  "NativeFeedbackTests",
+  "HeavenGrantTests",
+  "BeastPopulationTests",
+  "EventArchiveTests"
+]

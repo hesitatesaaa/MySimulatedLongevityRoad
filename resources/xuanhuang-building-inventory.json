@@ -1,0 +1,427 @@
+[
+  {
+    "id": "tent_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_0",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/tent_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "house_human_0",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_1",
+    "previous": "tent_human",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_0",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "house_human_1",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_2",
+    "previous": "house_human_0",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_1",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "house_human_2",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_3",
+    "previous": "house_human_1",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_2",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "house_human_3",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_4",
+    "previous": "house_human_2",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_3",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "house_human_4",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "house_human_5",
+    "previous": "house_human_3",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_4",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "house_human_5",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "house_human_4",
+    "path": "buildings/civ_main/mclsl_xuanhuang/house_human_5",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "mini_0",
+      "ruin_0",
+      "ruin_1"
+    ]
+  },
+  {
+    "id": "hall_human_0",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "hall_human_1",
+    "previous": "tent_human",
+    "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_0",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "hall_human_1",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "hall_human_2",
+    "previous": "hall_human_0",
+    "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_1",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "hall_human_2",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "hall_human_1",
+    "path": "buildings/civ_main/mclsl_xuanhuang/hall_human_2",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "library_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/library_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "market_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/market_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "barracks_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/barracks_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "windmill_human_0",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "windmill_human_1",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/windmill_human_0",
+    "frames": [
+      "construction_0",
+      "main_0_0",
+      "main_0_1",
+      "main_0_2",
+      "main_0_3",
+      "mini_0",
+      "ruin_0_0"
+    ]
+  },
+  {
+    "id": "windmill_human_1",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "windmill_human_0",
+    "path": "buildings/civ_main/mclsl_xuanhuang/windmill_human_1",
+    "frames": [
+      "main_0_0",
+      "main_0_1",
+      "main_0_2",
+      "main_0_3",
+      "mini_0",
+      "ruin_0_0"
+    ]
+  },
+  {
+    "id": "docks_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "docks_human",
+    "previous": "fishing_docks_human",
+    "path": "buildings/civ_main/mclsl_xuanhuang/docks_human",
+    "frames": [
+      "construction_0",
+      "disabled_0",
+      "main_0_0",
+      "main_0_1",
+      "main_0_2",
+      "main_0_3",
+      "mini_0",
+      "ruin_0_0"
+    ]
+  },
+  {
+    "id": "fishing_docks_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "docks_human",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/fishing_docks_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "watch_tower_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/watch_tower_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "temple_human",
+    "redrawn": true,
+    "new": false,
+    "previouslyShared": false,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/temple_human",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "bonfire",
+    "redrawn": false,
+    "new": false,
+    "previouslyShared": true,
+    "sharedByUserRequest": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_general/bonfire"
+  },
+  {
+    "id": "statue",
+    "redrawn": false,
+    "new": true,
+    "previouslyShared": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/statue",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "main_10",
+      "main_11",
+      "main_2",
+      "main_3",
+      "main_4",
+      "main_5",
+      "main_6",
+      "main_7",
+      "main_8",
+      "main_9",
+      "mini_0",
+      "ruin_0",
+      "ruin_1",
+      "ruin_10",
+      "ruin_11",
+      "ruin_2",
+      "ruin_3",
+      "ruin_4",
+      "ruin_5",
+      "ruin_6",
+      "ruin_7",
+      "ruin_8",
+      "ruin_9"
+    ]
+  },
+  {
+    "id": "well",
+    "redrawn": false,
+    "new": true,
+    "previouslyShared": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/well",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "stockpile",
+    "redrawn": false,
+    "new": false,
+    "previouslyShared": true,
+    "sharedByUserRequest": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_general/stockpile"
+  },
+  {
+    "id": "mine",
+    "redrawn": false,
+    "new": true,
+    "previouslyShared": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/mine",
+    "frames": [
+      "construction_0",
+      "main_0_0",
+      "main_0_1",
+      "main_0_2",
+      "main_0_3",
+      "main_0_4",
+      "main_0_5",
+      "main_0_6",
+      "main_0_7",
+      "main_0_8",
+      "main_0_9",
+      "main_0_10",
+      "main_0_11",
+      "main_0_12",
+      "main_0_13",
+      "mini_0",
+      "ruin_0"
+    ]
+  },
+  {
+    "id": "training_dummy",
+    "redrawn": false,
+    "new": true,
+    "previouslyShared": true,
+    "upgrade": "",
+    "previous": "",
+    "path": "buildings/civ_main/mclsl_xuanhuang/training_dummy",
+    "frames": [
+      "construction_0",
+      "main_0",
+      "main_1",
+      "main_2",
+      "mini_0",
+      "ruin_0",
+      "ruin_1",
+      "ruin_2"
+    ]
+  }
+]

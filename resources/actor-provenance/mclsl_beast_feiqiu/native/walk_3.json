@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_feiqiu",
+  "action": "walk",
+  "index": 3,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "1961391650e0b86b3319d0956a74b176b8425675df3aba3114c636e6e5704ba0",
+  "outputFile": "NativeActorResources/actors/Beasts/feiqiu/Beast/main/walk_3.png",
+  "outputSha256": "c29a27eb46e1686b4b1b2a70ea4b025fb913494bf681aafadbe54da3370af646",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u98de\u7403\u517d\u00b7\u517d\u5f62 (mclsl_beast_feiqiu), walk_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: cream/pink round flying-ball beast, large purple edged ears, tiny horns, expressive pink muzzle, four small paws and slender curled tail; retain a richly shaded fleshy furry silhouette rather than a geometric circle. Pose: Flying-ball moving cycle phase 0.500: body buoyantly flexes, ears and tail sway, four little paws alternate and curl; preserve round volume, not a translated duplicate. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Retain exactly the reference creature anatomy, correct limb counts and coherent joint connections; do not invent extra appendages. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_feiqiu\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-15T07:52:51.925123+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      128,
+      128
+    ],
+    "scale": 0.10207336523125997,
+    "inputSha256": "1961391650e0b86b3319d0956a74b176b8425675df3aba3114c636e6e5704ba0",
+    "sourceAnchor": [
+      654.0,
+      986
+    ],
+    "sourcePixelsPerUnit": 300.93023255813955,
+    "ppuFactor": 1.3632533266518545,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

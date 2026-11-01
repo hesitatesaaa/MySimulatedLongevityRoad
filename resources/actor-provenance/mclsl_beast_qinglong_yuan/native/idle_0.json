@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_beast_qinglong_yuan",
+  "action": "idle",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "695b495f683dd3cd80b320a2387427efbc6a0199a9ef94fc000065b3b1e6aa35",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Human/main/idle_0.png",
+  "outputSha256": "87afb7b97b0424bf27b8dcbad6d7f41e6363135d4fdb29906f8e5da50abfa081",
+  "createdAtUtc": "2026-10-09T10:19:38.865772+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9752\u9f99\u00b7\u5316\u5f62 (mclsl_beast_qinglong_yuan), idle_0. Image 1 is the old identity reference: preserve species, palette, hairstyle, costume and recognizable silhouette, but freshly redraw all pixels. Image 2 is balanced pixel rendering STYLE ONLY: match its clean clusters, contours and limited shading. Its anatomy, proportions, identity, costume and colors MUST NOT transfer to the new species or person. Character: adult woman, dark half-up hair with jade horn-shaped pins, teal/cream robe, restrained scale motif on shoulder cape, regal human face. Preserve the original beast palette and identifying motifs, but draw a clearly female adult human. The old male-looking reference does not override this female design. Distinct feminine face, hair and outfit; not a recolored male sprite.. Visual gender: female, adult fully clothed human. Pose: Standard neutral idle pose, relaxed coherent anatomy, full clear silhouette, right-facing three-quarter side view and all identifying details visible. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Full character centered with comfortable transparent margins on all four sides; neutral body base/feet near source y1080, silhouette within x100..1150,y100..1100; avoid a tiny character surrounded by empty padding. Reserve room for limb/weapon extensions. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\baseline-0.5.4-20261009\\GameResources\\actors\\Beasts\\qinglong\\Human\\main\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "695b495f683dd3cd80b320a2387427efbc6a0199a9ef94fc000065b3b1e6aa35",
+    "sourceAnchor": [
+      633.0,
+      1194
+    ],
+    "sourcePixelsPerUnit": 375.43858147368474,
+    "ppuFactor": 1.328997995183391,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

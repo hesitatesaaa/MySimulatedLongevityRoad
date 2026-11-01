@@ -1,0 +1,284 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Systems;
+
+namespace MySimulatedLongevityRoad.Systems.Death;
+
+/// <summary>
+/// Keeps WorldBox's native kill counter aligned with deaths that really completed.
+/// The game can credit a lethal hit before Actor.die is diverted by a survival rule;
+/// in that case the credited kill must be rolled back.
+/// </summary>
+internal static class MclslNativeKillStatisticsSystem
+{
+    private static readonly Dictionary<long, int> ObservedKillCounts = new();
+    private static readonly string[] KillMemberNames =
+    {
+        "kills", "_kills", "kill_count", "killCount", "units_killed", "unitsKilled"
+    };
+    private static readonly string[] KillerMemberNames =
+    {
+        "last_attacker", "lastAttacker", "_last_attacker", "attacked_by", "attackedBy", "killer", "last_hit_actor", "lastHitActor"
+    };
+    internal static void OnWorldLoaded(int year)
+    {
+        ObservedKillCounts.Clear();
+    }
+
+    internal static void Observe(Actor actor)
+    {
+        if (actor?.data == null) return;
+        long actorId = MclslActorAccessor.Id(actor);
+        if (actorId <= 0L || ObservedKillCounts.ContainsKey(actorId)) return;
+        if (TryReadNativeKills(actor, out int kills)) ObservedKillCounts[actorId] = Math.Max(0, kills);
+    }
+
+    internal static void RollbackDivertedDeath(Actor victim)
+    {
+        Actor killer = TryGetKiller(victim);
+        if (killer?.data == null || killer == victim) return;
+        long killerId = MclslActorAccessor.Id(killer);
+        if (killerId <= 0L || !TryReadNativeKills(killer, out int current)) return;
+
+        if (!ObservedKillCounts.TryGetValue(killerId, out int confirmed))
+        {
+            // No trustworthy baseline yet. Keep the current value and begin tracking;
+            // subsequent diverted hits use this observed baseline.
+            ObservedKillCounts[killerId] = Math.Max(0, current);
+            return;
+        }
+
+        if (current > confirmed)
+            TryWriteNativeKills(killer, confirmed);
+        else if (current < confirmed)
+            ObservedKillCounts[killerId] = Math.Max(0, current);
+    }
+
+    internal static void RecordCommittedDeath(Actor victim)
+    {
+        long victimId = MclslActorAccessor.Id(victim);
+        if (victimId > 0L) ObservedKillCounts.Remove(victimId);
+        RefreshKiller(TryGetKiller(victim));
+    }
+
+    internal static Actor ResolveKiller(Actor victim) => TryGetKiller(victim);
+
+    internal static MclslNativeKillAttemptState CapturePotentialDivertedHit(Actor victim, BaseSimObject attacker)
+    {
+        if (!(attacker is Actor killer) || killer?.data == null || killer == victim)
+            return MclslNativeKillAttemptState.Empty;
+        if (!MclslDeathSystem.HasPotentialCombatDeathDiversion(victim))
+            return MclslNativeKillAttemptState.Empty;
+        if (!TryReadNativeKills(killer, out int baseline))
+            return MclslNativeKillAttemptState.Empty;
+
+        long killerId = MclslActorAccessor.Id(killer);
+        if (killerId <= 0L) return MclslNativeKillAttemptState.Empty;
+        ObservedKillCounts[killerId] = Math.Max(0, baseline);
+        return new MclslNativeKillAttemptState(true, killer, Math.Max(0, baseline));
+    }
+
+    internal static void CompletePotentialDivertedHit(Actor victim, in MclslNativeKillAttemptState state)
+    {
+        if (!state.Found || state.Killer?.data == null) return;
+        bool victimAlive;
+        try { victimAlive = victim?.data != null && victim.isAlive(); }
+        catch { victimAlive = false; }
+
+        if (!victimAlive)
+        {
+            RefreshKiller(state.Killer);
+            return;
+        }
+
+        if (!TryReadNativeKills(state.Killer, out int current)) return;
+        if (current > state.BaselineKills)
+            TryWriteNativeKills(state.Killer, state.BaselineKills);
+        RefreshKiller(state.Killer);
+    }
+
+    internal static void Forget(long actorId) => ObservedKillCounts.Remove(actorId);
+
+    internal static Actor DetachScriptedDeathAttacker(Actor actor)
+    {
+        if (actor == null) return null;
+        Actor prior = null;
+        try { prior = actor.attackedBy as Actor; actor.attackedBy = null; }
+        catch (Exception ex) { MclslDiagnostics.Error("kill-stat-detach-scripted-attacker", "清理脚本死亡攻击者引用失败: " + ex.Message); }
+        return prior;
+    }
+
+    internal static void RestoreScriptedDeathAttacker(Actor actor, Actor prior)
+    {
+        if (actor == null || prior == null) return;
+        try { actor.attackedBy = prior; }
+        catch (Exception ex) { MclslDiagnostics.Error("kill-stat-restore-scripted-attacker", "恢复脚本死亡攻击者引用失败: " + ex.Message); }
+    }
+
+    internal static void Clear()
+    {
+        ObservedKillCounts.Clear();
+    }
+
+    private static void RefreshKiller(Actor killer)
+    {
+        if (killer?.data == null) return;
+        long killerId = MclslActorAccessor.Id(killer);
+        if (killerId <= 0L || !TryReadNativeKills(killer, out int current)) return;
+        ObservedKillCounts[killerId] = Math.Max(0, current);
+    }
+
+    private static Actor TryGetKiller(Actor victim)
+    {
+        if (victim == null) return null;
+        try
+        {
+            Actor direct = victim.attackedBy as Actor;
+            if (direct != null && direct != victim) return direct;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-1", "击杀统计：读取 attackedBy 失败: " + mclslEmptyCatchEx.Message); }
+
+        object target = victim;
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
+        for (int i = 0; i < KillerMemberNames.Length; i++)
+        {
+            string name = KillerMemberNames[i];
+            try
+            {
+                FieldInfo field = target.GetType().GetField(name, flags);
+                if (field?.GetValue(target) is Actor fieldActor && fieldActor != victim) return fieldActor;
+                PropertyInfo property = target.GetType().GetProperty(name, flags);
+                if (property?.CanRead == true && property.GetValue(target, null) is Actor propertyActor && propertyActor != victim) return propertyActor;
+            }
+            catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-2", "击杀统计：反射读取击杀者字段失败: " + mclslEmptyCatchEx.Message); }
+        }
+        return null;
+    }
+
+    private static bool TryReadNativeKills(Actor actor, out int value)
+    {
+        value = 0;
+        object data = actor?.data;
+        if (data == null) return false;
+        for (int i = 0; i < KillMemberNames.Length; i++)
+        {
+            if (TryReadNumericMember(data, KillMemberNames[i], out long numeric))
+            {
+                value = (int)Math.Clamp(numeric, 0L, int.MaxValue);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static bool TryWriteNativeKills(Actor actor, int value)
+    {
+        object data = actor?.data;
+        if (data == null) return false;
+        int safe = Math.Max(0, value);
+        for (int i = 0; i < KillMemberNames.Length; i++)
+        {
+            if (TryWriteNumericMember(data, KillMemberNames[i], safe)) return true;
+        }
+        return false;
+    }
+
+    private static bool TryReadNumericMember(object target, string name, out long value)
+    {
+        value = 0L;
+        if (target == null || string.IsNullOrWhiteSpace(name)) return false;
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
+        try
+        {
+            FieldInfo field = target.GetType().GetField(name, flags);
+            if (field != null && TryConvertNumeric(field.GetValue(target), out value)) return true;
+            PropertyInfo property = target.GetType().GetProperty(name, flags);
+            if (property?.CanRead == true && TryConvertNumeric(property.GetValue(target, null), out value)) return true;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-3", "击杀统计：反射读取数值成员失败: " + mclslEmptyCatchEx.Message); }
+        return false;
+    }
+
+    private static bool TryWriteNumericMember(object target, string name, long value)
+    {
+        if (target == null || string.IsNullOrWhiteSpace(name)) return false;
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
+        try
+        {
+            FieldInfo field = target.GetType().GetField(name, flags);
+            if (field != null && TryConvertForType(value, field.FieldType, out object convertedField))
+            {
+                field.SetValue(target, convertedField);
+                return true;
+            }
+            PropertyInfo property = target.GetType().GetProperty(name, flags);
+            if (property?.CanWrite == true && TryConvertForType(value, property.PropertyType, out object convertedProperty))
+            {
+                property.SetValue(target, convertedProperty, null);
+                return true;
+            }
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-4", "击杀统计：反射写入数值成员失败: " + mclslEmptyCatchEx.Message); }
+        return false;
+    }
+
+    private static bool TryConvertNumeric(object raw, out long value)
+    {
+        value = 0L;
+        if (raw == null) return false;
+        try
+        {
+            switch (raw)
+            {
+                case byte v: value = v; return true;
+                case sbyte v: value = Math.Max(0L, (long)v); return true;
+                case short v: value = Math.Max(0L, (long)v); return true;
+                case ushort v: value = v; return true;
+                case int v: value = Math.Max(0, v); return true;
+                case uint v: value = v; return true;
+                case long v: value = Math.Max(0L, v); return true;
+                case ulong v: value = v > long.MaxValue ? long.MaxValue : (long)v; return true;
+                case float v when !float.IsNaN(v): value = Math.Max(0L, (long)v); return true;
+                case double v when !double.IsNaN(v): value = Math.Max(0L, (long)v); return true;
+                default: return false;
+            }
+        }
+        catch { return false; }
+    }
+
+    private static bool TryConvertForType(long value, Type type, out object converted)
+    {
+        converted = null;
+        long safe = Math.Max(0L, value);
+        if (type == typeof(int)) converted = (int)Math.Min(int.MaxValue, safe);
+        else if (type == typeof(long)) converted = safe;
+        else if (type == typeof(uint)) converted = (uint)Math.Min(uint.MaxValue, (ulong)safe);
+        else if (type == typeof(ulong)) converted = (ulong)safe;
+        else if (type == typeof(short)) converted = (short)Math.Min(short.MaxValue, safe);
+        else if (type == typeof(ushort)) converted = (ushort)Math.Min(ushort.MaxValue, safe);
+        else if (type == typeof(byte)) converted = (byte)Math.Min(byte.MaxValue, safe);
+        else if (type == typeof(float)) converted = (float)safe;
+        else if (type == typeof(double)) converted = (double)safe;
+        else return false;
+        return true;
+    }
+
+    internal readonly struct MclslNativeKillAttemptState
+    {
+        internal static readonly MclslNativeKillAttemptState Empty = new(false, null, 0);
+        internal readonly bool Found;
+        internal readonly Actor Killer;
+        internal readonly int BaselineKills;
+
+        internal MclslNativeKillAttemptState(bool found, Actor killer, int baselineKills)
+        {
+            Found = found;
+            Killer = killer;
+            BaselineKills = baselineKills;
+        }
+    }
+
+}

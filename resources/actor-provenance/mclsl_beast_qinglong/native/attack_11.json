@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "attack",
+  "index": 11,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "5bed5012ab4bd12b35b2247a470d608c5eae82bb52346e58894adbaa7e16741d",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/attack_11.png",
+  "outputSha256": "4bb57e1311c4bffbbac8a3e5107734840a60efdaafec99ab5c45358d774c6fd9",
+  "createdAtUtc": "2026-10-09T07:28:33.217196+00:00",
+  "prompt": "Use case: game-asset. Independently DRAW exactly ONE NEW transparent pixel-art Qinglong attack_11 recovery frame. Same1254x1254 transparent canvas, exact anatomical pixel scale and right-facing side camera as reference. Azure Eastern dragon: turquoise/cyan scales, navy shadows, cream segmented belly, gold antlers/crest, cyan flowing mane/tail plume, TWO long whiskers, compact S-shaped serpent body. Pose: Recovery: head30px forward of standard, jaw almost closed. Near foreclaw lowers toward its original chest position, ONE hand x770,y760; elbow remains bent. Original upper S neck reforms. Exactly FOUR SHORT limbs with one hand/foot each: near forearm from left shoulder across upper pale chest, far forearm at right upper belly; two hindlimbs on lower curve with far hind partly hidden. Preserve limb lengths and body thickness. ONE near forehand; do not duplicate hands, add branch arms or elongate forearm. Cyan fin is mane. Head recoils progressively toward x850,y400 standard, lower tail at original x580,y1100. Whiskers stay inside x1180. Full dragon fits x230..1180,y90..1190 with ample transparent margin. Crisp square pixel clusters, dark outlines, limited flat shades. Independently draw new pose and pixels, no old sprite paste/scale/recolor. No wings, sheets, panels, multiple poses, text, aura, particles, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/attack_10.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "5bed5012ab4bd12b35b2247a470d608c5eae82bb52346e58894adbaa7e16741d",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

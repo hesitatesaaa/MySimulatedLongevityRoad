@@ -1,0 +1,31 @@
+{
+  "files": 212,
+  "changed": 129,
+  "beforeBytes": 123112778,
+  "candidateBytes": 121347533,
+  "beforeDecodeMs": null,
+  "candidateDecodeMs": null,
+  "accepted": true,
+  "losslessRGBA": true,
+  "benchmark": "Not run; lossless pixel verification only",
+  "groups": {
+    "icons": {
+      "processed": 83,
+      "changed": 0,
+      "beforeBytes": 82416741,
+      "afterBytes": 82416741
+    },
+    "effects": {
+      "processed": 125,
+      "changed": 125,
+      "beforeBytes": 39842800,
+      "afterBytes": 38082169
+    },
+    "spirits": {
+      "processed": 4,
+      "changed": 4,
+      "beforeBytes": 853237,
+      "afterBytes": 848623
+    }
+  }
+}

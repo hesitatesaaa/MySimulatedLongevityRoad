@@ -1,0 +1,904 @@
+{
+  "kind": "offline-existing-item-icon-review",
+  "visualReview": "passed",
+  "reviewMethod": "view_image: all 179 original PNGs inspected individually in 8 groups",
+  "scope": "inventory sprite style, silhouettes, alpha and missing/placeholder/duplicate audit; not game size or Unity validation",
+  "reviewedAtUtc": "2026-10-13T11:27:48.739714+00:00",
+  "items": [
+    {
+      "id": "A01",
+      "path": "GameResources/ui/Items/A01.png",
+      "sha256": "da3046212ea293502dea4deca7d9b5951f7f3e48a25b1ae2584c9eb5c2555ddb"
+    },
+    {
+      "id": "A02",
+      "path": "GameResources/ui/Items/A02.png",
+      "sha256": "53ed83238def95d5f13d692a104d4b36d02f4ed46093dffdb5228e246e3940ae"
+    },
+    {
+      "id": "A03",
+      "path": "GameResources/ui/Items/A03.png",
+      "sha256": "247b6b7f6e9b5358fa64bdb735971eae0621bef13a48cf6502cf7dcfbfe002f2"
+    },
+    {
+      "id": "A04",
+      "path": "GameResources/ui/Items/A04.png",
+      "sha256": "f7f8821bf4605b9a4c0378b659b2518bb76b398795ac5164160fa44d5b26bb8b"
+    },
+    {
+      "id": "A05",
+      "path": "GameResources/ui/Items/A05.png",
+      "sha256": "163c86bc0f27eb73569ab5e3c57dcd3d4c8c60672c76842b3df51622e49fa7ee"
+    },
+    {
+      "id": "A06",
+      "path": "GameResources/ui/Items/A06.png",
+      "sha256": "dd32c36e6da19216dfdd7566b24dee74e14e9ea0ada9cf071a9bbe43e58ce1fb"
+    },
+    {
+      "id": "A07",
+      "path": "GameResources/ui/Items/A07.png",
+      "sha256": "51e4a139f6cd4d9e341f88ae1b0b6425662db68ab8f978442a585ee65dc7ef8a"
+    },
+    {
+      "id": "A08",
+      "path": "GameResources/ui/Items/A08.png",
+      "sha256": "5ec95b9fa20871895d65ee8dbb580de881cf4acd118bfe3292c6c8e5d08e9feb"
+    },
+    {
+      "id": "A09",
+      "path": "GameResources/ui/Items/A09.png",
+      "sha256": "9061f646a7fc288b833e066cb3bfc5b394af14e8cdece162e7d55b9ca35089bb"
+    },
+    {
+      "id": "F01",
+      "path": "GameResources/ui/Items/F01.png",
+      "sha256": "fbe94cec068eb242c55c76fc4dcb6a4cf1eabf9e5cd0ba35ca8b0a9a04e9552e"
+    },
+    {
+      "id": "A10",
+      "path": "GameResources/ui/Items/A10.png",
+      "sha256": "4422ceffc9b24c4dd91954de25b7e2008ae4a601b206a0a855b599f82ec15b28"
+    },
+    {
+      "id": "A11",
+      "path": "GameResources/ui/Items/A11.png",
+      "sha256": "aa4cada0d32b16e86d0df8846b8dde46d0bea928af395209527086ab369e7bb8"
+    },
+    {
+      "id": "A12",
+      "path": "GameResources/ui/Items/A12.png",
+      "sha256": "8b2abf97fc110de11063b7f9488d5ca36e621b047c7df0db4d00de59b476ee7f"
+    },
+    {
+      "id": "A13",
+      "path": "GameResources/ui/Items/A13.png",
+      "sha256": "183c1c246290a9fa7c7c324948b5d0d09d504bea717784e86f08514e1ec5ca16"
+    },
+    {
+      "id": "A14",
+      "path": "GameResources/ui/Items/A14.png",
+      "sha256": "09e47ffc375f2ff2de660bbab465ffc4af8116d866c20411f6237db753684ed6"
+    },
+    {
+      "id": "A15",
+      "path": "GameResources/ui/Items/A15.png",
+      "sha256": "78d46957e24d174dae047af7d86ea851da550ec6c527e857021531abb86f193f"
+    },
+    {
+      "id": "A16",
+      "path": "GameResources/ui/Items/A16.png",
+      "sha256": "811cd674a6a0d0b60dc7fec6872c90f6c08b2e67da8a7925eea7c000dba03c7a"
+    },
+    {
+      "id": "A17",
+      "path": "GameResources/ui/Items/A17.png",
+      "sha256": "c0689f8f32932ab2572dc6f2ae499c3e763021c752097ef19fd2aada8c5aea13"
+    },
+    {
+      "id": "A18",
+      "path": "GameResources/ui/Items/A18.png",
+      "sha256": "69dabaf1d29c6f08db6160a292d10b85ac96241babde89f048b763f107c4ec66"
+    },
+    {
+      "id": "A19",
+      "path": "GameResources/ui/Items/A19.png",
+      "sha256": "c6e4bbe40efeec8d07c50a1e5d2504d65430d2caca3107787ab13824fd91c738"
+    },
+    {
+      "id": "F010",
+      "path": "GameResources/ui/Items/F010.png",
+      "sha256": "c015fcabe3ff85b18cce1bb60081b0ea9ac81e258a35a7bf06174bca6120b331"
+    },
+    {
+      "id": "F011",
+      "path": "GameResources/ui/Items/F011.png",
+      "sha256": "a23345451507897707044a942144a411db775aecd09190bd191ca3d5d5efa61b"
+    },
+    {
+      "id": "F012",
+      "path": "GameResources/ui/Items/F012.png",
+      "sha256": "47886e04f78d469d096e12989b86d7f624babcbde366603142f36790b1836c90"
+    },
+    {
+      "id": "F013",
+      "path": "GameResources/ui/Items/F013.png",
+      "sha256": "380296428abbf1e80b4a364296d48c7ab81439f0461e47451d7449efa5476aab"
+    },
+    {
+      "id": "F014",
+      "path": "GameResources/ui/Items/F014.png",
+      "sha256": "a82b9f6e0c21e26aeb1aff8f73ef51e3c9508292ac57c4cb403da73cc0676674"
+    },
+    {
+      "id": "F015",
+      "path": "GameResources/ui/Items/F015.png",
+      "sha256": "93e84da9a62aae53e650d0a0a596624a83ed093eaa79493c4940d9e5d07b6ba3"
+    },
+    {
+      "id": "F016",
+      "path": "GameResources/ui/Items/F016.png",
+      "sha256": "45122ad55ab8dd2bbf069a024cb4523e21357fb11cfe5cf5e9b35d60d910a3b6"
+    },
+    {
+      "id": "F017",
+      "path": "GameResources/ui/Items/F017.png",
+      "sha256": "fd32b747cabbfa89e443b0d0b007a4c1ab89c120073b5314e857a1bc45b26a0d"
+    },
+    {
+      "id": "F018",
+      "path": "GameResources/ui/Items/F018.png",
+      "sha256": "aaf055decb9080281a7981a991abf407ea92a43b8ee1925736bd233bd6601175"
+    },
+    {
+      "id": "F019",
+      "path": "GameResources/ui/Items/F019.png",
+      "sha256": "f87295cff3148eb9a0230847e12465e4437c6ac0fc799ec0a4e2e68772164ef5"
+    },
+    {
+      "id": "M01",
+      "path": "GameResources/ui/Items/M01.png",
+      "sha256": "e91052d90b13c070f0c901c341a0d06e087f6de9019777d80a8d45479b84fa09"
+    },
+    {
+      "id": "M02",
+      "path": "GameResources/ui/Items/M02.png",
+      "sha256": "a97d08a017da5d84e4e2b6161a410c04755d92289d677bbf3d41404346df5ff5"
+    },
+    {
+      "id": "M03",
+      "path": "GameResources/ui/Items/M03.png",
+      "sha256": "c47842335bb5947b3abc5a1ac1e2e008ea2ecc2e93e28fca86a6649c16c59038"
+    },
+    {
+      "id": "M04",
+      "path": "GameResources/ui/Items/M04.png",
+      "sha256": "574021602d9f5a627ded96b6727058b5ce660ed9ee3c58b8e02b1cb30c561817"
+    },
+    {
+      "id": "M05",
+      "path": "GameResources/ui/Items/M05.png",
+      "sha256": "4edf8a5915babef59d79f665072dc6c2c38497baee0256df1dc06a013700733d"
+    },
+    {
+      "id": "M06",
+      "path": "GameResources/ui/Items/M06.png",
+      "sha256": "ba53f2d681b08390a5133069cae39735e65e3a814eae9004e5796b4d73d70881"
+    },
+    {
+      "id": "M07",
+      "path": "GameResources/ui/Items/M07.png",
+      "sha256": "c00f927bb0051305a6f67073047350e88008f9193145430be86fa28389935d2d"
+    },
+    {
+      "id": "M08",
+      "path": "GameResources/ui/Items/M08.png",
+      "sha256": "6755cdb097a45091a09675f3077581172ef42f98c99a46085d2f4ea1894a0cad"
+    },
+    {
+      "id": "M09",
+      "path": "GameResources/ui/Items/M09.png",
+      "sha256": "464638e39507d28da25afe8176490d60b9b6653547108161396ad432c508ce95"
+    },
+    {
+      "id": "M10",
+      "path": "GameResources/ui/Items/M10.png",
+      "sha256": "6b7e5691570eb99f05e8f2edfda9f6aa7084b5157d4ccc30e5508e4ea163f9eb"
+    },
+    {
+      "id": "M11",
+      "path": "GameResources/ui/Items/M11.png",
+      "sha256": "10b1c971502882085a061d9077c0b691583a9b284315117690ecb23321096e03"
+    },
+    {
+      "id": "M12",
+      "path": "GameResources/ui/Items/M12.png",
+      "sha256": "4f786f99ffaefabb016e67727101447b607887fce2709c00ddd143a6b2fc9d83"
+    },
+    {
+      "id": "M13",
+      "path": "GameResources/ui/Items/M13.png",
+      "sha256": "fdc29ccfee965126f88d631ade991d646b715b8547d017b9cade9d3ebcc64b6f"
+    },
+    {
+      "id": "M14",
+      "path": "GameResources/ui/Items/M14.png",
+      "sha256": "6016297121b6daac5614b1497096908dfc3553f44f745420cf64af23bd7ff166"
+    },
+    {
+      "id": "M15",
+      "path": "GameResources/ui/Items/M15.png",
+      "sha256": "d5b4d53be50acd07a70e68480040d927b921673a528ccd3d44bf92e91860b454"
+    },
+    {
+      "id": "M16",
+      "path": "GameResources/ui/Items/M16.png",
+      "sha256": "f9c6c58e5962f2ae6ad05191078ab16bdb78330f07d04913d7d386a2f5df5911"
+    },
+    {
+      "id": "M17",
+      "path": "GameResources/ui/Items/M17.png",
+      "sha256": "c9a4765c39d26df775e050b01f78fa7a03ad4ec7cf0f25a5220b3386382ccfc0"
+    },
+    {
+      "id": "M18",
+      "path": "GameResources/ui/Items/M18.png",
+      "sha256": "9d653d082216a1013ff9df23120e4aa95541e56536b0903cdd631b9cfb93aaae"
+    },
+    {
+      "id": "M19",
+      "path": "GameResources/ui/Items/M19.png",
+      "sha256": "c8d3ad6b4f70f7ff4111de33dab78e50ba3918ea8a1e4594b7a1f634a023a68d"
+    },
+    {
+      "id": "M20",
+      "path": "GameResources/ui/Items/M20.png",
+      "sha256": "f79cd3239c3ef33d791db3edf934fe8931d1c264d7ba3d6df37aea6e41a86d74"
+    },
+    {
+      "id": "M21",
+      "path": "GameResources/ui/Items/M21.png",
+      "sha256": "30c64518a7b0d308bc222bec9a481f261c98c6ea781e4a82baf181c8f47bca3d"
+    },
+    {
+      "id": "M22",
+      "path": "GameResources/ui/Items/M22.png",
+      "sha256": "2aba547d0f4ae40a117cad90829dbc1cffea66b03480347cdef90f4569cba438"
+    },
+    {
+      "id": "M23",
+      "path": "GameResources/ui/Items/M23.png",
+      "sha256": "4ed56f933e3acb47105c7dc6be014b1028adb9e29630226fe79a332fdc3d9a76"
+    },
+    {
+      "id": "M24",
+      "path": "GameResources/ui/Items/M24.png",
+      "sha256": "baaf0d54e8aaa7faace670d146829a2476cc035075dd36ff44f8a5945a96cb30"
+    },
+    {
+      "id": "M25",
+      "path": "GameResources/ui/Items/M25.png",
+      "sha256": "a0668e8b5b6101ed132c4406bcabe43dd9cfa05263ae773fbf923498f3a61bd9"
+    },
+    {
+      "id": "M26",
+      "path": "GameResources/ui/Items/M26.png",
+      "sha256": "b370ca62024da666d2c8e9be4eb08edf650d609514fd8d815ef25096d8179405"
+    },
+    {
+      "id": "M27",
+      "path": "GameResources/ui/Items/M27.png",
+      "sha256": "d6da9fa9012f26c05db1d427fb5948057a4d8a8ea8ca29f3166cd6f31d8c87d9"
+    },
+    {
+      "id": "M28",
+      "path": "GameResources/ui/Items/M28.png",
+      "sha256": "a03cce7b5af1db94aa92344a488d859b93048b7cf511e34c178978be714a5e03"
+    },
+    {
+      "id": "M29",
+      "path": "GameResources/ui/Items/M29.png",
+      "sha256": "ca8fceeb44adba6109852b143a1cf207d2d12b64997a4f91d2366c15d18d96ff"
+    },
+    {
+      "id": "M30",
+      "path": "GameResources/ui/Items/M30.png",
+      "sha256": "24a7a5d324d65ce7a790869e671f629da999955e245990de891cbb4d020b3c07"
+    },
+    {
+      "id": "M31",
+      "path": "GameResources/ui/Items/M31.png",
+      "sha256": "f2e9d2fd8fe2f4868e79e12d31231032207253f428d4d1c02bec3038ca60f5fd"
+    },
+    {
+      "id": "M32",
+      "path": "GameResources/ui/Items/M32.png",
+      "sha256": "986e57797a8bf8d60be2e60246aec37dcf8f9594a321e01e1d95562ce4d5e2cc"
+    },
+    {
+      "id": "D019",
+      "path": "GameResources/ui/Items/D019.png",
+      "sha256": "e0406ef2d4b1344740dd4d68d48d4153e20957e85f5cb13e47dde0ad2c8897e3"
+    },
+    {
+      "id": "D020",
+      "path": "GameResources/ui/Items/D020.png",
+      "sha256": "727143fc8b231f1c36b801ba44bd87af2cc7ad8800a3b8e99212672af5b78a53"
+    },
+    {
+      "id": "F026",
+      "path": "GameResources/ui/Items/F026.png",
+      "sha256": "93a9092c00c36c0ce00633a2dda78ec3ede83d5ccab9807fd22a8bf758282577"
+    },
+    {
+      "id": "F027",
+      "path": "GameResources/ui/Items/F027.png",
+      "sha256": "73b0bb38a8918b9fdc8c4eaae313f6ecabc77a8d5d9f304b04ddd2fa6528fb58"
+    },
+    {
+      "id": "B082",
+      "path": "GameResources/ui/Items/B082.png",
+      "sha256": "9e0a68e790e8603032e350df891bc1b645aed7d4e69821e3c7d658ddf1052e3c"
+    },
+    {
+      "id": "B083",
+      "path": "GameResources/ui/Items/B083.png",
+      "sha256": "956017c99f044d949ce27b95f0428aa049767088969d6c1278b10b3bac059794"
+    },
+    {
+      "id": "D001",
+      "path": "GameResources/ui/Items/D001.png",
+      "sha256": "9f1eccbf2041f98d34883fd08b9126de0c49f294b8fdc8c2515ea1950f3c89a3"
+    },
+    {
+      "id": "D006",
+      "path": "GameResources/ui/Items/D006.png",
+      "sha256": "3d70d897798b653a958a19ecbe580b0feec10d5c83653fdc9252291121bfd11a"
+    },
+    {
+      "id": "D009",
+      "path": "GameResources/ui/Items/D009.png",
+      "sha256": "c1cb2b95375b2e3f7fddfd23f036b9d6328d050049e0439e16ceb3093d4833c9"
+    },
+    {
+      "id": "D002",
+      "path": "GameResources/ui/Items/D002.png",
+      "sha256": "29a2bd243505b1b483c848d8b334d8528b102e1f9e488c3f8965a487640fc241"
+    },
+    {
+      "id": "D004",
+      "path": "GameResources/ui/Items/D004.png",
+      "sha256": "a320af23297ffd978763c2725792ce23371195caeb83685ffb88ccf301642af3"
+    },
+    {
+      "id": "D008",
+      "path": "GameResources/ui/Items/D008.png",
+      "sha256": "fb0207b94663b24e863ae134ed70623d1ed01cd70ec25dfc5bf8e546ef27a3b4"
+    },
+    {
+      "id": "D010",
+      "path": "GameResources/ui/Items/D010.png",
+      "sha256": "84fc4470b198a8d6c8a625b1cf22fd8ae9351afebb908491055be6412e87baa7"
+    },
+    {
+      "id": "D003",
+      "path": "GameResources/ui/Items/D003.png",
+      "sha256": "10ee6713d36e3259591d119e129adfead83a7be80cdb6dd68620c341d2374c4c"
+    },
+    {
+      "id": "D005",
+      "path": "GameResources/ui/Items/D005.png",
+      "sha256": "382609df04ab6da3b47dc93f87edd1f1cca05401380aba7849adacd85e20b7cc"
+    },
+    {
+      "id": "D007",
+      "path": "GameResources/ui/Items/D007.png",
+      "sha256": "b01c461d085d734a1ec945208b60097a716f6444d0bd9cb484d360f923e0d09e"
+    },
+    {
+      "id": "D011",
+      "path": "GameResources/ui/Items/D011.png",
+      "sha256": "e09ea8a63b63889da4389c1b26e816e20bf62de5936c64b30f4bc96203c8b467"
+    },
+    {
+      "id": "D012",
+      "path": "GameResources/ui/Items/D012.png",
+      "sha256": "192ea11ced0eeeeae016beca4371591079fd1550082c8ad1ee3e82f3d3b4c05f"
+    },
+    {
+      "id": "D013",
+      "path": "GameResources/ui/Items/D013.png",
+      "sha256": "fcd746182301d5edd6eace152c612dda1fb66d3eff82dd1fb92dd45111d6351a"
+    },
+    {
+      "id": "D014",
+      "path": "GameResources/ui/Items/D014.png",
+      "sha256": "6ac70843af40af2850a5a1dc6f8addcf091b743de151dda6f3979f38785bbce6"
+    },
+    {
+      "id": "D015",
+      "path": "GameResources/ui/Items/D015.png",
+      "sha256": "b1c0055290dc37b0a122c3613a47ab3a17ce83a7fee93f2e95405cb2e64dd25d"
+    },
+    {
+      "id": "D016",
+      "path": "GameResources/ui/Items/D016.png",
+      "sha256": "0cf694f1c66a6684500b456089376d97ed90312318d2ad6672992e8d5af1c369"
+    },
+    {
+      "id": "D017",
+      "path": "GameResources/ui/Items/D017.png",
+      "sha256": "9decb3e2ce5b9a3d3cbcb5a556bb338e58f6049723daecefe034ec6d400270cf"
+    },
+    {
+      "id": "D018",
+      "path": "GameResources/ui/Items/D018.png",
+      "sha256": "4a2c87aebadea423e7e4f01c9fc162fd7aa84e5ff37eac56fab074f21237e514"
+    },
+    {
+      "id": "F002",
+      "path": "GameResources/ui/Items/F002.png",
+      "sha256": "0c390edf892aab13eff7e217d38d8a3718a42693c2084a7af986de64dc4bc0de"
+    },
+    {
+      "id": "F003",
+      "path": "GameResources/ui/Items/F003.png",
+      "sha256": "c8034d5d63a8b8aa1a3e2459a548a263cbb23a27401c06ffc7a3007a0c9e1759"
+    },
+    {
+      "id": "F001",
+      "path": "GameResources/ui/Items/F001.png",
+      "sha256": "01dd08efbe3d0c9fda2d12fb12e626c389c79559593538d6cd7da22013e97e68"
+    },
+    {
+      "id": "F004",
+      "path": "GameResources/ui/Items/F004.png",
+      "sha256": "f93189089c3f166cb072c9cdd3c621c13ed75afdd1197d542708cc149e40423f"
+    },
+    {
+      "id": "F005",
+      "path": "GameResources/ui/Items/F005.png",
+      "sha256": "4f82f88921c93e3939b7cbf9aedebfc7d27b40428ef72b2dedaa193a11c8049a"
+    },
+    {
+      "id": "F006",
+      "path": "GameResources/ui/Items/F006.png",
+      "sha256": "ce2ac9afda823b05d03e55f21b6c503ba8def3e668add08786038e433ec458a5"
+    },
+    {
+      "id": "F007",
+      "path": "GameResources/ui/Items/F007.png",
+      "sha256": "374361ab5b01a037aa62bb520d8ddf1cf3b1ca8bea30a88cf1bf8921f6cb181a"
+    },
+    {
+      "id": "F020",
+      "path": "GameResources/ui/Items/F020.png",
+      "sha256": "b4b35e2c17129fc31f72d81557d81142528e30ca209a9903a4443f03c32d75df"
+    },
+    {
+      "id": "F021",
+      "path": "GameResources/ui/Items/F021.png",
+      "sha256": "5cd516ea67541b52f3bf183b088e795941db0342f5c9ac45b6531aa13d5fdfc1"
+    },
+    {
+      "id": "F022",
+      "path": "GameResources/ui/Items/F022.png",
+      "sha256": "df38ae4c1fac3d1ba3b4614b5498212e4ab7ad744f82e7427bf03ca9baa73be8"
+    },
+    {
+      "id": "F023",
+      "path": "GameResources/ui/Items/F023.png",
+      "sha256": "d19ca92404f8e6b4a958e110250e48cb08bd56cfae74614a8f54227b481910a0"
+    },
+    {
+      "id": "F024",
+      "path": "GameResources/ui/Items/F024.png",
+      "sha256": "0a94ab84f4ce296660b2419efdf258e7f29208ef461d789e948e9a6c599ef5db"
+    },
+    {
+      "id": "F025",
+      "path": "GameResources/ui/Items/F025.png",
+      "sha256": "5efe8d2171bb40f9ba2d996f82a0bcf1f64504c1b766e0d9497ae2bf1416ecc0"
+    },
+    {
+      "id": "B002",
+      "path": "GameResources/ui/Items/B002.png",
+      "sha256": "f438d09f8359386f59bb389d1f76cb19ef270c05e7038466550cc3ab44bfba4b"
+    },
+    {
+      "id": "B004",
+      "path": "GameResources/ui/Items/B004.png",
+      "sha256": "1dd0f2c03bbd1988258a47578bf158bea62d19d3e1ae7105792e414d68ef8478"
+    },
+    {
+      "id": "B009",
+      "path": "GameResources/ui/Items/B009.png",
+      "sha256": "bfe2874e8a790c4bbc31f6ab5baf04a3fc5f3b683a6ecfa471ee8c7b1adfcfe7"
+    },
+    {
+      "id": "B003",
+      "path": "GameResources/ui/Items/B003.png",
+      "sha256": "0ab33a097a669a10476f57d4f8c7d6f074be353b94d087a7c2f3e1928ecb1c52"
+    },
+    {
+      "id": "B005",
+      "path": "GameResources/ui/Items/B005.png",
+      "sha256": "e9fa3f55a37552f18e20fb430b4e0fbec7b1c9b6480f5dd7eceab0343b67353c"
+    },
+    {
+      "id": "B006",
+      "path": "GameResources/ui/Items/B006.png",
+      "sha256": "1fffa504d53fc0491022275e5e0caff38ff7bf032939198a3c28a38f3162ac8d"
+    },
+    {
+      "id": "B007",
+      "path": "GameResources/ui/Items/B007.png",
+      "sha256": "a36a1f11d86c581aede9ce317fad448782219e91abad45b5e777e4ff4898ce2b"
+    },
+    {
+      "id": "B008",
+      "path": "GameResources/ui/Items/B008.png",
+      "sha256": "2a86e7ecf0b8ac10a159c1b81d1cea1153a6e47c4838e5c4b4ac166f80fce290"
+    },
+    {
+      "id": "B010",
+      "path": "GameResources/ui/Items/B010.png",
+      "sha256": "c54f679c255c477306556c0f28372f7d29e1d87ab06d8ba12df900ef048a511b"
+    },
+    {
+      "id": "B011",
+      "path": "GameResources/ui/Items/B011.png",
+      "sha256": "d138abdd0f53db293635cb6c9f98f5793ad9f8ef73d55908b296980a6b1fbbe1"
+    },
+    {
+      "id": "B012",
+      "path": "GameResources/ui/Items/B012.png",
+      "sha256": "4ad3dcf773db18504748f0d6555379f7468d1fc5c87da8689c6600fb8b8898b9"
+    },
+    {
+      "id": "B013",
+      "path": "GameResources/ui/Items/B013.png",
+      "sha256": "4163ce24bc905d3220d1cbd9a9b797945e051c0d6fba7004a4b4f337a7950c88"
+    },
+    {
+      "id": "B014",
+      "path": "GameResources/ui/Items/B014.png",
+      "sha256": "67cd03a391408b2a813e3341f5115f8821fea2e1efb6196599511110f408644d"
+    },
+    {
+      "id": "B015",
+      "path": "GameResources/ui/Items/B015.png",
+      "sha256": "6535d81b13a638d1865748bde16d3ba89c838f35595a29cbb5293f6434e6960f"
+    },
+    {
+      "id": "B016",
+      "path": "GameResources/ui/Items/B016.png",
+      "sha256": "9ad7df77a3ef03de4bd8f59ae1b340bf7c39253f4657c419e7c23a9cc42312ff"
+    },
+    {
+      "id": "B017",
+      "path": "GameResources/ui/Items/B017.png",
+      "sha256": "dc6af9cecc8b85b277b47ee8548873462262b1cca0dc785e5c362daa70ee4040"
+    },
+    {
+      "id": "B018",
+      "path": "GameResources/ui/Items/B018.png",
+      "sha256": "b0e72ff5e1e384534d3618710daee0c43f91eb8f0178192093adc987701e1408"
+    },
+    {
+      "id": "B019",
+      "path": "GameResources/ui/Items/B019.png",
+      "sha256": "d17c9f1cb4b8accd69d9be9e35bf776f9119cd8f700f4ccf5e3983a682e5f240"
+    },
+    {
+      "id": "B020",
+      "path": "GameResources/ui/Items/B020.png",
+      "sha256": "7a3bd6f2e8a20f634616b7f190b7e0eedf3ea6a9d7095bbfa8aacad572afec32"
+    },
+    {
+      "id": "B021",
+      "path": "GameResources/ui/Items/B021.png",
+      "sha256": "42518b699cce2c1a7e78fca0a5c3ccf2d5fe53975a09ef8d50045be2deb16224"
+    },
+    {
+      "id": "B022",
+      "path": "GameResources/ui/Items/B022.png",
+      "sha256": "a0bafa03c49406a3b9d35165ef06e2caa95d0a44f6f61c61cce598750e471169"
+    },
+    {
+      "id": "B023",
+      "path": "GameResources/ui/Items/B023.png",
+      "sha256": "bab039b3991e06d2003b8d89538faa205a2a7b28b6edc24df42b765fda3bd001"
+    },
+    {
+      "id": "B024",
+      "path": "GameResources/ui/Items/B024.png",
+      "sha256": "a8a782a6e18277942c98ffb91f8403d707b6e722daf10f08b6999cffbe36b2be"
+    },
+    {
+      "id": "B025",
+      "path": "GameResources/ui/Items/B025.png",
+      "sha256": "9f67b4e42e86ae798be23647d33580cda0d32d31f690d63859851092990df48e"
+    },
+    {
+      "id": "B026",
+      "path": "GameResources/ui/Items/B026.png",
+      "sha256": "b18ab5d34d02b4d1ff50c14c82836f865d9255189de5f82583e666e11ad6f0e2"
+    },
+    {
+      "id": "B027",
+      "path": "GameResources/ui/Items/B027.png",
+      "sha256": "27d68a764c385c8c84346d5e1dd5bc0f9bd113c62e5f4e6498722fcf6a44d567"
+    },
+    {
+      "id": "B028",
+      "path": "GameResources/ui/Items/B028.png",
+      "sha256": "448947a78e242c793e9a70a11063524229a05554b1ff65242805399430320982"
+    },
+    {
+      "id": "B029",
+      "path": "GameResources/ui/Items/B029.png",
+      "sha256": "6b2c6ffb9737505fc22f058bd359521d5ac66e1cd39979c12eb13fa185fbbb56"
+    },
+    {
+      "id": "B030",
+      "path": "GameResources/ui/Items/B030.png",
+      "sha256": "0bab6aa0af9198280bfbf40d981643e4aec7aeefc0a6a51c4578871047aa6973"
+    },
+    {
+      "id": "B031",
+      "path": "GameResources/ui/Items/B031.png",
+      "sha256": "35ef459c411a74e7fa1e7d6ee681b5647c05e327b68e15b95ec2253941ab4f61"
+    },
+    {
+      "id": "B032",
+      "path": "GameResources/ui/Items/B032.png",
+      "sha256": "e93a613da62556277a6c200a4e970cedf3fcfae9bfce2e59e6e2793a46e3bbca"
+    },
+    {
+      "id": "B033",
+      "path": "GameResources/ui/Items/B033.png",
+      "sha256": "615b476b0950682b82c29411dfb7eb9b84ac6f9190c9677eb5982ef8f53e4039"
+    },
+    {
+      "id": "B034",
+      "path": "GameResources/ui/Items/B034.png",
+      "sha256": "e5d1aa5e6a62a74a1433b3b0f944b4e55999beffd623a878b7e540f5f83951f8"
+    },
+    {
+      "id": "B035",
+      "path": "GameResources/ui/Items/B035.png",
+      "sha256": "f6733461eee2d704bf6f42a855c24f8313771414d598adb235635adce2f19424"
+    },
+    {
+      "id": "B036",
+      "path": "GameResources/ui/Items/B036.png",
+      "sha256": "431c36b9f313a2e0633d200bd8ab69a3913496580e574500c912419f0a4d374f"
+    },
+    {
+      "id": "B037",
+      "path": "GameResources/ui/Items/B037.png",
+      "sha256": "0c1b5fac53d4c47fb7fce50bd75691b4d44bac9f30e4eb9a05f26d905ae6389c"
+    },
+    {
+      "id": "B038",
+      "path": "GameResources/ui/Items/B038.png",
+      "sha256": "d24f070ab11bf0ddff3c31e23868a4d543317d93b71106c686b4a4475d353215"
+    },
+    {
+      "id": "B039",
+      "path": "GameResources/ui/Items/B039.png",
+      "sha256": "82727021d1ff6fdd7650657307119cc62ec3311b3cdf90922d987fbb86981294"
+    },
+    {
+      "id": "B040",
+      "path": "GameResources/ui/Items/B040.png",
+      "sha256": "4de474973608d655451e793353065840ee8520ca54ead97c4c79d786992623d9"
+    },
+    {
+      "id": "B041",
+      "path": "GameResources/ui/Items/B041.png",
+      "sha256": "b7689a07385c7cf02410c2558d7fbf024e713982008a25b5b78e5915b93ade80"
+    },
+    {
+      "id": "B042",
+      "path": "GameResources/ui/Items/B042.png",
+      "sha256": "1ae37dc096c851b809f6079591360cb1f05cd9b5b485f3da00a765d3b12c2410"
+    },
+    {
+      "id": "B043",
+      "path": "GameResources/ui/Items/B043.png",
+      "sha256": "d21647cf21865af430b31ff068808cfc6d48954291d6eb774b9cbc58697df5f4"
+    },
+    {
+      "id": "B044",
+      "path": "GameResources/ui/Items/B044.png",
+      "sha256": "da4a4734067336966195e19b45ba8153f2aee589bc5a1a7f2d733aad9ba7ccbe"
+    },
+    {
+      "id": "B045",
+      "path": "GameResources/ui/Items/B045.png",
+      "sha256": "fa6bc0ab92f48cdac98e20599bb0295ea172867b585fc69c809dda41d1a6d1a1"
+    },
+    {
+      "id": "B046",
+      "path": "GameResources/ui/Items/B046.png",
+      "sha256": "7eaaff91d97f2d68a587de251470d66ce1af8e916bd317459e45bd5aa510f83e"
+    },
+    {
+      "id": "B047",
+      "path": "GameResources/ui/Items/B047.png",
+      "sha256": "4ac70019a7b26d10a2ee242d9681a3671a1ca113b1f436cc531ac8e273933d1d"
+    },
+    {
+      "id": "B048",
+      "path": "GameResources/ui/Items/B048.png",
+      "sha256": "444729a5e40861e0085973e8c4a7d93c99e682c1c607d1905ada6177ba280526"
+    },
+    {
+      "id": "B049",
+      "path": "GameResources/ui/Items/B049.png",
+      "sha256": "54f7ed6c057ad57bd5a38ad06fd27111f79b153313b6891081941b9a58d2ecf5"
+    },
+    {
+      "id": "B050",
+      "path": "GameResources/ui/Items/B050.png",
+      "sha256": "29701aac69b3ff0c44ecfa076b22a0cb1b5df7d5b18fef71b72b89022b90c1a1"
+    },
+    {
+      "id": "B051",
+      "path": "GameResources/ui/Items/B051.png",
+      "sha256": "44f0913751841bf84e1c2620f36f67daee1f4ce1e9c1a9f5a074daac5e875c8a"
+    },
+    {
+      "id": "B052",
+      "path": "GameResources/ui/Items/B052.png",
+      "sha256": "dc1c63bc935f7842d407ff2864815796c74bef3f5259486f5f830ccc07116939"
+    },
+    {
+      "id": "B053",
+      "path": "GameResources/ui/Items/B053.png",
+      "sha256": "49d33a868700d1b94a6ea2eb49195e90edbc0b9f43a48d4af4873945466d2516"
+    },
+    {
+      "id": "B054",
+      "path": "GameResources/ui/Items/B054.png",
+      "sha256": "686f3a6aa6b498ce1cc838222424b6876a9ea3c070dfd67f995e08273327f448"
+    },
+    {
+      "id": "B055",
+      "path": "GameResources/ui/Items/B055.png",
+      "sha256": "333a33ba8757379c5c51c3ab0c7df094b9c76bf7157b5be280cfda9b8610adfb"
+    },
+    {
+      "id": "B056",
+      "path": "GameResources/ui/Items/B056.png",
+      "sha256": "d5db9cf851a790344ec4331517426e702d277a50c5388005d0f434db5b5151c6"
+    },
+    {
+      "id": "B057",
+      "path": "GameResources/ui/Items/B057.png",
+      "sha256": "ecc070e4dd62c2061225d6bde7e5de8fe730bd2893972d8f64338a071ef80202"
+    },
+    {
+      "id": "B058",
+      "path": "GameResources/ui/Items/B058.png",
+      "sha256": "4f6d4d38e16d3a3a1cd27e308e0b567e8fa60cf0c9f5ea139304b067a390be5f"
+    },
+    {
+      "id": "B059",
+      "path": "GameResources/ui/Items/B059.png",
+      "sha256": "ef43f4b776686f22f33facd083df405210a986015ce730bd5a32193dfda6aba1"
+    },
+    {
+      "id": "B060",
+      "path": "GameResources/ui/Items/B060.png",
+      "sha256": "0f3dcdba35c8b54b90cb8e4a13f2f9e765e973a6606dd5a67dc5e52ac116d378"
+    },
+    {
+      "id": "B061",
+      "path": "GameResources/ui/Items/B061.png",
+      "sha256": "5db240c737e0438a1644426e4e2682d6d20c8c7103355bc505cfc73ab059ef9e"
+    },
+    {
+      "id": "B062",
+      "path": "GameResources/ui/Items/B062.png",
+      "sha256": "614f56524ac02c7375efa17e4fdb0de520140c04bc912eadb3e53884a9d879c0"
+    },
+    {
+      "id": "B063",
+      "path": "GameResources/ui/Items/B063.png",
+      "sha256": "97c288e3c10481748a6ff409892cd41d5fb270d15940242b2d5f8bf7c7b74cab"
+    },
+    {
+      "id": "B064",
+      "path": "GameResources/ui/Items/B064.png",
+      "sha256": "793eea06da64f7d9166f2c120d469208527f507a5e3031033010416b99a7481a"
+    },
+    {
+      "id": "B065",
+      "path": "GameResources/ui/Items/B065.png",
+      "sha256": "a0e4203779cedb938ac00008f27499812bc47e4628056dc228b732acc898eba2"
+    },
+    {
+      "id": "B066",
+      "path": "GameResources/ui/Items/B066.png",
+      "sha256": "7dd94744e838423db658f6e76b2aea8eabea7812695ae0977f5c68ac538a161e"
+    },
+    {
+      "id": "B067",
+      "path": "GameResources/ui/Items/B067.png",
+      "sha256": "bd2e71294de3c4bec24c00d6beb2a572a3221f16402b1f7dba938cf98acddfd1"
+    },
+    {
+      "id": "B068",
+      "path": "GameResources/ui/Items/B068.png",
+      "sha256": "f7a6666861aac27be5a4caafe9340edbf07addc94520004fcbdad91823300e79"
+    },
+    {
+      "id": "B069",
+      "path": "GameResources/ui/Items/B069.png",
+      "sha256": "1253d2a6e5317fd93e378824fcceb3cc7a59d3008f769fa749341287d1c41d72"
+    },
+    {
+      "id": "B070",
+      "path": "GameResources/ui/Items/B070.png",
+      "sha256": "2df2772f7baa238a0d1e36fa5f52bbbcb79d0a0f4f62f94c842e173089612bb0"
+    },
+    {
+      "id": "B071",
+      "path": "GameResources/ui/Items/B071.png",
+      "sha256": "73ebd1970a83f25f143a3a53185adf6824e9021c45f133cd47cc4b990ff34762"
+    },
+    {
+      "id": "B072",
+      "path": "GameResources/ui/Items/B072.png",
+      "sha256": "88a59e7c8ebcf8771bb09f358cc54545f6961e44314383cbbd835e6deca80ba2"
+    },
+    {
+      "id": "B073",
+      "path": "GameResources/ui/Items/B073.png",
+      "sha256": "0557025836601bdf78fc17fa9a8471208542a355918587fc6d17f5e2fbf2f30e"
+    },
+    {
+      "id": "B074",
+      "path": "GameResources/ui/Items/B074.png",
+      "sha256": "d4470ed127a11b044c872cb9cbcb0a04a57e8bb8d06743d3afd7664ffad66395"
+    },
+    {
+      "id": "B075",
+      "path": "GameResources/ui/Items/B075.png",
+      "sha256": "6ef2e4e547d89c15ef59f951fe4e2f1c427e7a4b47a66d2aca068aeb017cbede"
+    },
+    {
+      "id": "B076",
+      "path": "GameResources/ui/Items/B076.png",
+      "sha256": "fdc970becd3793fb4447d44849caeb042a0b7f9c339b1971f9cd02c5c87a527d"
+    },
+    {
+      "id": "B077",
+      "path": "GameResources/ui/Items/B077.png",
+      "sha256": "112a94a4083bfa0b8ac5b1b3e0722e0ec5b4284d334368c6eef42195ca28ce05"
+    },
+    {
+      "id": "B078",
+      "path": "GameResources/ui/Items/B078.png",
+      "sha256": "a05e6257d71e034e594027821c595dd3747c898db8db9e17399d6ffe3620398c"
+    },
+    {
+      "id": "B079",
+      "path": "GameResources/ui/Items/B079.png",
+      "sha256": "7f14031bb603ee6845e15b48e2e4dafa32701c3a4c417a8c1d7c8be54b6af377"
+    },
+    {
+      "id": "B080",
+      "path": "GameResources/ui/Items/B080.png",
+      "sha256": "ebe047f8479d8256f1f1fdabf74893c7a4d460bdfcdaf37c380649c3cba0254c"
+    },
+    {
+      "id": "B081",
+      "path": "GameResources/ui/Items/B081.png",
+      "sha256": "83d3e44a9eeafc9447475ea74e335266cf4ea56919d01f1fb0a608a94dccc6dc"
+    }
+  ]
+}

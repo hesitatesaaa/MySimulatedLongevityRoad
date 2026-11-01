@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "attack",
+  "index": 10,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "f96cd3ca6a2e202b2e785bf6ccdfe60ebf1fab5dfe8153e369938d32307af786",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/attack_10.png",
+  "outputSha256": "f55b41a694c3d1d3c4f2406fd121d0668478d9377e0df45a8ba4aff738675bf9",
+  "createdAtUtc": "2026-10-09T05:39:52.723549+00:00",
+  "prompt": "Use case: game-asset. Exactly ONE NEW independently drawn transparent pixel-art sprite frame: Chinese sacred white tiger Baihu attack_10. Image 1 is the fixed newly drawn identity. Preserve identical white/pale silver fur, charcoal tiger stripes, muscular feline head with gold eyes, round ears, curled striped tail, FOUR anatomically connected legs. No wings, jewelry or clothes. Fixed original anatomy scale and square pixel clusters: full STANDARD STANDING silhouette about 941 source pixels wide and 733 pixels tall, same 1254x1254 transparent source canvas; original paw contact level y1049 and source body center x636. Three-quarter side RIGHT-facing view, unchanged camera. Never enlarge crouching/lying shapes to fill the canvas. Image 2 if supplied is a REDUCED previous-pose guide for motion ONLY; never use its reduced size as body-size reference. Pose: Quiet late recovery. All four paws planted at standard positions, head and shoulders settle to almost standard idle, tail tip sways slightly. Crisp square pixel clusters, dark pixel outlines and flat limited shades. Independently draw this one pose. No reuse, whole-sprite translation/scaling/recolor, sheet, panels, other poses, text, aura, particles, background, ground or shadow. Entire tail, head, paws and extended limbs must remain inside generous transparent margins.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_baihu/main/attack_9.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "f96cd3ca6a2e202b2e785bf6ccdfe60ebf1fab5dfe8153e369938d32307af786",
+    "sourceAnchor": [
+      636.0,
+      1051
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

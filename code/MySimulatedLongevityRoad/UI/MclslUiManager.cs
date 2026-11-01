@@ -1,0 +1,171 @@
+using System;
+using System.Linq;
+using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Systems;
+using MySimulatedLongevityRoad.Traits;
+using NeoModLoader.General;
+using NeoModLoader.General.UI.Tab;
+using UnityEngine;
+
+namespace MySimulatedLongevityRoad.UI;
+
+internal static class MclslUiManager
+{
+    private static bool ShowAuthorDebugButtons => MclslDeveloperBridge.IsAvailable;
+
+    private static bool _initialized;
+    private static PowersTab _tab;
+
+    internal static void Init()
+    {
+        if (_initialized) return;
+        _initialized = true;
+        try
+        {
+            Sprite icon = SpriteTextureLoader.getSprite("ui/icon") ?? SpriteTextureLoader.getSprite("ui/Icons/XuanHuangXianLu") ?? SpriteTextureLoader.getSprite("ui/icons/iconBook");
+            MclslLocalizationBridge.RegisterKey("mclsl_mod_tab", "我的模拟长生路");
+            MclslLocalizationBridge.RegisterKey("mclsl_mod_tab Description", "新法修行、玄黄仙录与轮回档案");
+            _tab = TabManager.CreateTab("mclsl_mod_tab", "mclsl_mod_tab", "mclsl_mod_tab Description", icon, "hotkey_tip_tab_other");
+            if (_tab == null) throw new InvalidOperationException("无法创建模拟长生路功能页签");
+            // NML clones a vanilla tab; rebind navigation to this tab's own button.
+            _tab.powerButton = UnityEngine.Object.FindObjectsOfType<UnityEngine.UI.Button>(true)
+                .Single(button => button.name == "Button_mclsl_mod_tab");
+            PowersTabExtension.SetLayout(_tab, new System.Collections.Generic.List<string> { "tab" });
+            MclslLivingCatalog.Init();
+        AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
+        AddButton("mclsl.beast_control","妖兽与兽潮","调整自然妖兽、分级兽潮和手动放置境界。",MclslBeastControlWindow.Show,"ui/Icons/TianDiZhiBian");
+        AddButton("mclsl.guide", "模组介绍／入道指南（QQ群：1049012706）", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
+        AddButton("mclsl.tianxuan", "天玄镜", "打开万界交易所；修士会按自身需求自动挂牌、购入与结算。", () => MclslFeatureWindow.ShowMarket(), "ui/Icons/TianxuanMirrorEntrance", "ui/Icons/GongXianZhi");
+        AddButton("mclsl.artifact_rain_editor", "法宝雨编辑", "选择法宝雨可以生成的法宝。", MclslArtifactRainEditor.ShowWindow, "ui/Icons/ArtifactRain");
+        AddArtifactRainPower();
+            AddButton("mclsl.rank", "玄黄修士榜", "按境界、灵根、国家、种属和人物特征筛选本世修士。", MclslRankWindow.ShowWindow, "ui/Icons/XuanHuangXiuShiBang", "ui/Icons/TianDiZhiLi", "ui/icon");
+            AddButton("mclsl.beast_rank", "神兽榜", "按物种、境界与神通等级查看本世普通妖兽（含元婴化形）的独立榜单。", MclslBeastRankWindow.ShowWindow, "ui/Icons/ShenShouBang");
+            AddButton("mclsl.huanzhen_space", "还真之门", "进入独立还真空间，选择前世遗产并进行万界推演。", MclslCodexWindow.ShowHuanzhenSpace, "ui/Icons/HuanZhenEntrance", "ui/Icons/HuanZhen", "ui/icon");
+            // 入口位置、按钮创建和窗口打开流程对齐鬼谷“时光长河”；只替换为猫宝图标和文案。
+            AddButton("mclsl.maobao", "猫宝·时光长河", "打开猫宝时光长河，保存、放置或移除完整人物快照。", MclslMaobaoWindow.ShowWindow, "ui/Icons/MaobaoEntrance");
+            AddButton("mclsl.force_new_law", "跳转至新法时代", "立即进入新法时代；已开启时保持当前纪元。", () => MclslWorldEpochSystem.ForceNewLawNow(MclslRuntime.CurrentYear()), "ui/Icons/TianDiZhiLi");
+            AddButton("mclsl.memory_cleanup", "清理内存", "清理超过一分钟未使用的模组动画帧，保留活跃资源。", MclslMemoryMaintenance.CleanManual, "ui/icons/iconOptions");
+            if (ShowAuthorDebugButtons)
+            {
+                AddButton("mclsl.developer_tools", "开发者工具", "点击人物后打开本机角色编辑器；也可按 F8。", () => MclslDeveloperBridge.OpenSelectedActorEditor(), "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
+                AddButton("mclsl.force_transmission", "传法变世测试", "直接触发传法天尊证道，使本世从仙道纪元进入传法变世阶段，便于测试。", ForceTransmissionForTesting, "ui/Icons/TianDiZhiLi", "ui/Icons/XuanHuangXianLu", "ui/icon");
+                AddButton("mclsl.trigger_ancient_disaster", "触发灵机灾变", "手动记录一次仙道灵机、地火或星石事件，便于测试仙道机缘。", TriggerAncientDisaster, "ui/Icons/TianDiZhiBian", "ui/icon");
+                AddButton("mclsl.trigger_ancient_secret_realm", "触发秘境", "手动记录一次秘境开启，便于测试仙道事件页。", TriggerAncientSecretRealm, "ui/Icons/ZongMenYiJi", "ui/icon");
+                AddButton("mclsl.trigger_ancient_ruin", "触发遗府", "手动生成一处遗府并写入玄黄仙录。", TriggerAncientRuin, "ui/Icons/ZongMenYiJi", "ui/icon");
+                AddWorldSoulButtons();
+            }
+            AddButton("mclsl.settings", "模拟长生路设置", "调整新法修行、历史锚点、死亡公告、遗迹游历与还真参数。", ShowSettings, "ui/icons/iconOptions", "ui/icons/iconBook");
+            AddButton("mclsl.restore_defaults", "恢复默认设置", "将全部模拟长生路设置恢复为初始默认值。", () => MclslSettingsReset.Restore(), "ui/icons/iconOptions", "ui/icons/iconBook");
+        }
+        catch (Exception ex)
+        {
+            _initialized = false;
+            Debug.LogError("[模拟长生路][UI] 初始化失败: " + ex);
+            throw;
+        }
+    }
+
+    private static void ShowSettings()
+    {
+        if (MySimulatedLongevityRoad.MclslMod.I != null)
+        {
+            NeoModLoader.ui.ModConfigureWindow.ShowWindow(MySimulatedLongevityRoad.MclslMod.I.GetConfig());
+        }
+    }
+
+    private static void ForceTransmissionForTesting()
+    {
+        MclslWorldEpochSystem.ForceTransmissionForTesting(MclslRuntime.CurrentYear());
+    }
+
+    private static void TriggerAncientDisaster()
+    {
+        MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
+        MclslAncientLawEventSystem.ManualTriggerSpiritualDisaster(MclslRuntime.CurrentYear());
+    }
+
+    private static void TriggerAncientSecretRealm()
+    {
+        MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
+        MclslAncientLawEventSystem.ManualTriggerSecretRealm(MclslRuntime.CurrentYear());
+    }
+
+    private static void TriggerAncientRuin()
+    {
+        MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
+        MclslAncientLawEventSystem.ManualTriggerAncientRuin(MclslRuntime.CurrentYear());
+    }
+
+    private static void AddWorldSoulButtons()
+    {
+        AddWorldSoulButton("metal", "金魄", "soul_attr_metal", "Jin_Soul");
+        AddWorldSoulButton("wood", "木魄", "soul_attr_wood", "Wood_Soul");
+        AddWorldSoulButton("water", "水魄", "soul_attr_water", "Water_Soul");
+        AddWorldSoulButton("fire", "火魄", "soul_attr_fire", "Fire_Soul");
+        AddWorldSoulButton("earth", "土魄", "soul_attr_earth", "Earth_Soul");
+        AddWorldSoulButton("wind", "风魄", "soul_attr_wind", "Wind_Soul");
+        AddWorldSoulButton("thunder", "雷魄", "soul_attr_thunder", "Thunder_Soul");
+        AddWorldSoulButton("yin", "阴魄", "soul_attr_yin", "Yin_Soul");
+        AddWorldSoulButton("yang", "阳魄", "soul_attr_yang", "Yang_Soul");
+        AddWorldSoulButton("space", "空魄", "soul_attr_space", "Kong_Soul");
+    }
+
+    private static void AddWorldSoulButton(string buttonSuffix, string displayName, string soulId, string soulFolder)
+    {
+        AddButton(
+            "mclsl.spawn_soul_" + buttonSuffix,
+            "生成" + displayName,
+            "牵引天地之魄·" + displayName + "临世。",
+            () => MclslWorldSoulSystem.TryManualManifest(soulId),
+            "Souls/" + soulFolder + "/Idle/1",
+            "actors/Souls/" + soulFolder + "/Idle/1",
+            "ui/Icons/TianDiZhiPo",
+            "ui/icon");
+    }
+
+    private static void AddButton(string id, string title, string description, Action action, params string[] icons)
+    {
+        if (_tab == null) return;
+        if (!ContainsChinese(title) || !ContainsChinese(description))
+        {
+            Debug.LogError("[模拟长生路][界面] 已拒绝缺少中文名称或说明的功能入口: " + id);
+            return;
+        }
+        Sprite sprite = null;
+        foreach (string path in icons) { sprite = SpriteTextureLoader.getSprite(path); if (sprite != null) break; }
+        PowerButton button = PowerButtonCreator.CreateSimpleButton(id, () => { try { PowerButtonSelector.instance?.unselectAll(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #1: " + mclslEmptyCatchEx.Message); } action?.Invoke(); }, sprite, null, default);
+        SetupButtonTooltip(button, id, title, description);
+        PowersTabExtension.AddPowerButton(_tab, "tab", button);
+    }
+
+    private static void AddArtifactRainPower()
+    {
+        MclslArtifactRain.Init();
+        Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/ArtifactRain");
+        PowerButton button = PowerButtonCreator.CreateGodPowerButton(MclslArtifactRain.PowerId, icon);
+        if (button != null) PowersTabExtension.AddPowerButton(_tab, "tab", button);
+    }
+
+    private static bool ContainsChinese(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return false;
+        for (int i = 0; i < value.Length; i++)
+            if (value[i] >= '\u4e00' && value[i] <= '\u9fff') return true;
+        return false;
+    }
+
+    private static void SetupButtonTooltip(PowerButton button, string id, string title, string description)
+    {
+        try
+        {
+            if (button == null) return;
+            string titleKey = MclslLocalizationBridge.RegisterKey(id, title);
+            string descriptionKey = MclslLocalizationBridge.RegisterKey(id + " Description", description);
+            TipButton tip = button.GetComponent<TipButton>();
+            if (tip == null) tip = button.gameObject.AddComponent<TipButton>();
+            tip.textOnClick = titleKey;
+            tip.textOnClickDescription = descriptionKey;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslUiManager-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslUiManager.cs #2: " + mclslEmptyCatchEx.Message); }
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "idle",
+  "index": 9,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "6944cbf36acbc2ff56805909feaca25202f8d091c8f5da6fa21cc6ca8a99ffa2",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/idle_9.png",
+  "outputSha256": "b0f44314fd608a1ee6e4d035578dc141ffb8070725649b97acc33c3f0b0ac527",
+  "createdAtUtc": "2026-10-09T06:26:16.870852+00:00",
+  "prompt": "Use case: game-asset. Independently draw ONE new transparent pixel-art frame, Qinglong idle_9. Identity and exact anatomical pixel scale from image 1: turquoise/cyan scales, navy shadows, pale cream belly, gold antlers and dorsal crest, cyan flowing mane, two long whiskers, Eastern serpentine S body, coiled tail with cyan plume. FOUR clawed limbs; three clearly visible and fourth partly occluded, same roots. NO wings. Right-facing three-quarter side orthographic camera. Same 1254x1254 transparent canvas. Standard silhouette x345..1060,y150..1180, body height1027px. Keep exact head size, neck thickness and torso length, preserve standard antlers and tail coil. Image 2 when supplied is preceding independent frame, motion guide only. Pose: End of idle breathing cycle: head, chest and S-shaped coil close to the standard pose, whisker and tail tips easing back to their original angles for a seamless return to idle_0. Head and upper coil returning toward image 1, not a taller neck. Full head, antlers, whiskers, limbs and tail clear of every edge. Crisp square pixels, dark outline, limited flat shades. DRAW a new frame from scratch, no pasting whole old sprite, scaling or recolor as redraw, no sheet, multiple poses, panels, text, aura, floor, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "6944cbf36acbc2ff56805909feaca25202f8d091c8f5da6fa21cc6ca8a99ffa2",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

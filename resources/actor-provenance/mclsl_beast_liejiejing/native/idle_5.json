@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_beast_liejiejing",
+  "action": "idle",
+  "index": 5,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "4655bfab545a073a48e085bb9b7434f112d61c6cef0163975ce3388c3445f746",
+  "outputFile": "NativeActorResources/actors/Beasts/liejiejing/Beast/main/idle_5.png",
+  "outputSha256": "221b5b798200a1506da498992aa87e61197a416c3234d5521138c6bfcc200009",
+  "createdAtUtc": "2026-10-09T08:53:44.576741+00:00",
+  "prompt": "Use case: stylized-concept. Asset: ONE independent transparent pixel-art game animation frame, Liejiejing idle_5. Reference image is character identity and exact established detailed pixel-art style, not a bitmap to transform. Newly draw relaxed breathing returning toward initial pose: chest re-expands slightly from exhale, near pectoral fin angled a little forward rather than reference backward, far fin partially visible beneath head, tail stock at level neutral and split tail flukes spread wider. Head and nose retain same right-facing position. Preserve broad deep-blue whale body, carefully stepped layered cyan/blue pixel highlights, cyan fissure markings, cream-gray ribbed belly, cream horns and gold facial ridge, ornate curling wavefins on back, exactly ONE pair of pectoral fins, split tail flukes. No legs. Maintain source proportions and detailed contour craftsmanship; not primitive geometric illustration, not simplified low-detail sprite. Same anatomical scale and 1254x1254 source canvas; full character inside x20..1230,y300..1030 with transparent padding. Output exactly one transparent RGBA PNG with one newly drawn pose; no water, background, glow, particles, ground, shadow, text, sheets, panels, multi-pose image, clipping or transform of old sprite.\n",
+  "references": [
+    "output/actor-redraw/originals/mclsl_beast_liejiejing/idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      400,
+      400
+    ],
+    "scale": 0.3189792663476874,
+    "inputSha256": "4655bfab545a073a48e085bb9b7434f112d61c6cef0163975ce3388c3445f746",
+    "sourceAnchor": [
+      627.5,
+      984
+    ],
+    "sourcePixelsPerUnit": 67.67567567567568,
+    "ppuFactor": 0.596188954815153,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

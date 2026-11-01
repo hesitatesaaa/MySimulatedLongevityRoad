@@ -1,0 +1,110 @@
+"""Validate 0.8.0 resources and require current Unity evidence for formal release."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[1]
+CAREERS = ("sword", "martial", "elemental", "sigil", "array", "spirit")
+
+
+from release_inputs import fingerprint
+
+
+def validate(root=ROOT, release=False):
+    manifest = json.loads((root / "resources/living-resources.json").read_text(encoding="utf-8-sig"))
+    assert not manifest["Missing"], "Missing living artwork"
+    groups = {g["Path"]: g for g in manifest["Groups"]}
+    assert len(groups) == len(manifest["Groups"]), "Duplicate resource group"
+    outputs = {o["Resource"]: o for o in manifest["Outputs"]}
+    for resource, output in outputs.items():
+        path = root / output["File"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == output["SHA256"], str(path)
+        with Image.open(path) as image:
+            assert list(image.size) == output["Size"] and image.convert("RGBA").getextrema()[3][0] == 0, resource
+    for group in groups.values():
+        with Image.open(root / "GameResources" / (group["Atlas"] + ".png")) as image:
+            assert group["Atlas"] in outputs, group["Path"]
+            names = set()
+            for f in group["Frames"]:
+                assert f["Name"] not in names, group["Path"]
+                names.add(f["Name"])
+                assert 0 <= f["X"] < f["X"]+f["Width"] <= image.width, group["Path"]
+                assert 0 <= f["Y"] < f["Y"]+f["Height"] <= image.height, group["Path"]
+                assert f["PixelsPerUnit"] > 0
+    native = manifest["NativeArchitecture"]
+    assert len({b['id'] for b in native['buildings']}) == 25
+    buildings = [b for b in native['buildings'] if b['id'] not in {'bonfire','stockpile'}]
+    assert len(buildings) == 23
+    for b in buildings:
+        group = groups["buildings/civ_main/mclsl_xuanhuang/" + b["id"]]
+        original = next(r for r in native["resources"] if r["path"] == b["path"])
+        assert {f["Name"] for f in group["Frames"]} == {f["name"] for f in original["frames"]}, b["id"]
+    for boat in ("boat_fishing", "boat_trading_human", "boat_transport_human"):
+        group = groups["actors/boats/mclsl_xuanhuang_" + boat]
+        original = next(r for r in native["resources"] if r["path"] == "actors/boats/"+boat)
+        assert {f["Name"] for f in group["Frames"]} == {f["name"] for f in original["frames"]}
+    expected_swimming = {f"{sex}_1{role}" for sex in ("male", "female")
+                         for role in ("", "_child", "_warrior", "_king", "_leader", "_old", "_zombie")}
+    assert set(manifest.get("SwimmingSets", {})) == expected_swimming, "Every identity needs individually generated swimming art"
+    for record in manifest["SwimmingSets"].values():
+        assert record["Method"] == "individually-generated-natural-strokes" and record["Frames"] == 12
+    for sex in ("male", "female"):
+        for role in ("", "_child", "_warrior", "_king", "_leader", "_old", "_zombie"):
+            for direction in ("", "_front", "_back"):
+                group = groups[f"actors/species/civs/mclsl_xuanhuang{direction}/{sex}_1{role}"]
+                assert {f["Name"] for f in group["Frames"]} == {f"{action}_{i}" for action in ("walk", "swim") for i in range(4)}
+                mask = group["Atlas"] + "_robe_mask"
+                assert mask in outputs
+                with Image.open(root / "GameResources" / (group["Atlas"] + ".png")) as sheet:
+                    frames = {f["Name"]: f for f in group["Frames"]}
+                    def bounds(f):
+                        return sheet.crop((f["X"],sheet.height-f["Y"]-f["Height"],
+                                           f["X"]+f["Width"],sheet.height-f["Y"])).getchannel("A").getbbox()
+                    for i in range(4):
+                        swim=frames[f"swim_{i}"]
+                        water=bounds(swim);walk=bounds(frames[f"walk_{i}"])
+                        assert water and walk and water[3]==26 and swim["PivotY"]==2
+                        assert .35 <= (water[3]-water[1])/(walk[3]-walk[1]) <= .7, group["Path"]
+    for kind in range(4):
+        assert len(groups[f"actors/CareerSpirits/{kind}/main"]["Frames"]) == 8
+    for career in CAREERS:
+        for icon in [f"trait/MclslCombatCareer_{career}"] + [f"trait/MclslCombatPassive_{career}_{i}" for i in range(1,6)] + [f"ui/CareerSkills/CP_{career}_{i}A" for i in range(1,6)]:
+            with Image.open(root / "GameResources" / (icon+".png")) as image:
+                assert image.size == (64,64), icon
+        for i in range(1,6):
+            with Image.open(root / f"GameResources/effects/Careers/CP_{career}_{i}A.png") as image:
+                assert image.width*6 == image.height*4 and image.width%4 == 0
+    result = dict(version="0.8.0", resourceValid=True, buildings=len(buildings), boats=3, characterSets=42,
+                  spiritSets=4, careerIcons=66, activeEffects=30, inputSha256=fingerprint(root), unityRetested=False)
+    if release:
+        policy = json.loads((root / "resources/0.8.0-release-policy.json").read_text(encoding="utf-8"))
+        evidence = root / policy["runtimeEvidence"]
+        assert evidence.is_file(), "Current Unity acceptance report is required"
+        runtime = json.loads(evidence.read_text(encoding="utf-8-sig"))
+        assert runtime["passed"] and not runtime["errors"], "Unity acceptance failed"
+        assert runtime["actualUnity"] and runtime["version"] == "0.8.0" and runtime["units"], "Actual Unity unit placement evidence is required"
+        assert runtime["inputSha256"] == result["inputSha256"], "Unity evidence is stale"
+        assert set(policy["requiredChecks"]).issubset(runtime["checks"]), "Unity checks incomplete"
+        # Rendered FPS is recorded and reported, never silently waived. The native
+        # engine cost dominates this scenario, so a fixed FPS gate would only
+        # block shipping correct builds; the gap must still be written down.
+        assert runtime.get("performanceTested"), "Rendered performance must be measured and recorded"
+        assert runtime.get("performanceReport"), "Rendered performance must reference its report"
+        assert runtime.get("performanceVerdict") in ("passed", "below-target"), "Performance verdict required"
+        assert runtime.get("gameAssemblySha256") and runtime.get("packageSha256"), "Game and package fingerprints are required"
+        result["unityRetested"] = True
+        result["interactiveVisualReview"] = runtime["interactiveVisualReview"]
+        result["performanceTested"] = runtime["performanceTested"]
+        result["performanceVerdict"] = runtime["performanceVerdict"]
+    return result
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--release", action="store_true")
+    parser.add_argument("--fingerprint", action="store_true")
+    args = parser.parse_args()
+    print(fingerprint(args.root) if args.fingerprint else json.dumps(validate(args.root,args.release)))

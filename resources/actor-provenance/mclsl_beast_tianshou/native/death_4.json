@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_tianshou",
+  "action": "death",
+  "index": 4,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "15cc9ab37a622751b960a1b7746f4671ec5516bcd859056805df3a6f38abdd4c",
+  "outputFile": "NativeActorResources/actors/Beasts/tianshou/Beast/main/death_4.png",
+  "outputSha256": "29f6ca9a8e08eb5f64bb5bbc86fa840b547799b5cc03986c583791ef99a6adc8",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5172\u517d\u00b7\u517d\u5f62 (mclsl_beast_tianshou), death_4. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: heavy ivory/cream horned beast, broad weight-bearing quadruped body, dark brown markings and crest, four thick legs, restrained horns, thick mane and short heavy tail. Pose: Death single-shot progress 0.571, stage collapse. Required pose: Body falls onto folded limbs, torso angles downward, head drops close to the body; never lift the head from the previous stage. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep all limbs or fins slack against a flattened resting body, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly four anatomical legs, with any hidden legs consistently occluded by the body; no extra paws. Trace all visible joints coherently. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_tianshou\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T04:10:48.463578+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      400,
+      400
+    ],
+    "scale": 0.3189792663476874,
+    "inputSha256": "15cc9ab37a622751b960a1b7746f4671ec5516bcd859056805df3a6f38abdd4c",
+    "sourceAnchor": [
+      635.0,
+      1095
+    ],
+    "sourcePixelsPerUnit": 92.43243243243244,
+    "ppuFactor": 0.5980158730158731,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

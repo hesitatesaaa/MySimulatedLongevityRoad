@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_kunpeng",
+  "action": "hit",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "c1e6f4f492f09a01ff4b9a617b98f3386367e0540b0bf21f3e62d7c13a02f97d",
+  "outputFile": "NativeActorResources/actors/Beasts/kunpeng/Beast/main/hit_1.png",
+  "outputSha256": "32ce9c6184c05c0acdc976d57e7ceb5e3a355b11bbf938e61b55c780c557ce61",
+  "createdAtUtc": "2026-10-09T13:09:13.224994+00:00",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u9cb2\u9e4f\u00b7\u517d\u5f62 (mclsl_beast_kunpeng), hit_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: blue/cyan aquatic Kunpeng fish-bird hybrid: broad horizontal whale/fish torso, avian beaked head, paired large feathered pectoral swimming fins and a broad fish tail. Two small pelvic fins. NO walking legs, paws, lion body or griffin anatomy. Clean blue/cyan/white groups with restrained feather bands; no gold filigree. Preserve the original fish-bird identity and blue palette. Pose: Recovery from impact: torso straightens partway, folded limbs unfold, face relaxes and appendages settle toward idle without a new attack. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_kunpeng\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      400,
+      400
+    ],
+    "scale": 0.3189792663476874,
+    "inputSha256": "c1e6f4f492f09a01ff4b9a617b98f3386367e0540b0bf21f3e62d7c13a02f97d",
+    "sourceAnchor": [
+      632.5,
+      1148
+    ],
+    "sourcePixelsPerUnit": 91.45945945945947,
+    "ppuFactor": 0.5977604694360014,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

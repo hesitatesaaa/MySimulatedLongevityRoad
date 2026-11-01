@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_baihu",
+  "action": "attack",
+  "index": 5,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "f67f25803ba013916c741f58c2e4f9fc9047665c949122d35a8fd944cf1526df",
+  "outputFile": "NativeActorResources/actors/Beasts/baihu/Beast/main/attack_5.png",
+  "outputSha256": "828f9e3b602a4300011533c6d125b65ff79ce0e1bd6942640fa9998fb82cd934",
+  "createdAtUtc": "2026-10-09T05:35:09.961423+00:00",
+  "prompt": "Use case: game-asset. Exactly ONE NEW independently drawn transparent pixel-art sprite frame: Chinese sacred white tiger Baihu attack_5. Image 1 is the fixed newly drawn identity. Preserve identical white/pale silver fur, charcoal tiger stripes, muscular feline head with gold eyes, round ears, curled striped tail, FOUR anatomically connected legs. No wings, jewelry or clothes. Fixed original anatomy scale and square pixel clusters: full STANDARD STANDING silhouette about 941 source pixels wide and 733 pixels tall, same 1254x1254 transparent source canvas; original paw contact level y1049 and source body center x636. Three-quarter side RIGHT-facing view, unchanged camera. Never enlarge crouching/lying shapes to fill the canvas. Image 2 if supplied is a REDUCED previous-pose guide for motion ONLY; never use its reduced size as body-size reference. Pose: Peak claw strike. Near front paw extends fully toward the RIGHT, sweeping slightly downward with visible claws. Head thrusts forward, jaw open. Far front and hind paws remain grounded. Keep the extended paw inside source x1200 and all body pixels inside margins; do not add strike effects. Crisp square pixel clusters, dark pixel outlines and flat limited shades. Independently draw this one pose. No reuse, whole-sprite translation/scaling/recolor, sheet, panels, other poses, text, aura, particles, background, ground or shadow. Entire tail, head, paws and extended limbs must remain inside generous transparent margins.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_baihu/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/frames/mclsl_beast_baihu/main/attack_4.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "f67f25803ba013916c741f58c2e4f9fc9047665c949122d35a8fd944cf1526df",
+    "sourceAnchor": [
+      636.0,
+      1076
+    ],
+    "sourcePixelsPerUnit": 523.5714285714286,
+    "ppuFactor": 0.4589891192227066,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "actorId": "mclsl_named_disanmo",
+  "action": "death",
+  "index": 4,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "88457b904fa074adca80a065278a761ff890d767407c5ffa148a24e949dd95b0",
+  "outputFile": "NativeActorResources/actors/Named/DiSanMo/Beast/main/death_4.png",
+  "outputSha256": "c7bf4700dfec4a8f9d99410b8a0859d9a0d8081c04177150c974e2342cd94f09",
+  "prompt": "Use case: stylized-concept. Create one independently newly illustrated transparent PNG game frame for \u5e1d\u53c1\u8c98\u00b7\u517d\u5f62 death_4, native 1254x1254 pixel art. Identity from the reference: massive right-facing purple tapir beast with curled tail, lavender mane, gold swirls and ornaments, long purple trunk, exactly two ivory tusks. Match the low dying/resting pose between reference death_3 and death_5. Critical correction: the existing death_4 clipped the tip of the RIGHTMOST SMALL UPPER TUSK against the right border. Place the entire beast slightly farther LEFT within the native canvas and draw BOTH TUSKS COMPLETELY with at least 45 fully transparent pixels between the rightmost tusk/trunk silhouette and the canvas right edge. Keep all tail, feet and body intact and grounded. Same scale, palette, square pixel clusters and anatomy; head sinking slightly from death_3 toward death_5. One character one pose, actual transparent RGBA background, no sheet, crop, clipping, text, effects, shadow or pasted source pixels.",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_disanmo/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_disanmo/death_3.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_named_disanmo/death_5.png"
+  ],
+  "createdAtUtc": "2026-10-18T02:39:58.352680+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      320,
+      320
+    ],
+    "scale": 0.2551834130781499,
+    "inputSha256": "88457b904fa074adca80a065278a761ff890d767407c5ffa148a24e949dd95b0",
+    "sourceAnchor": [
+      674.5,
+      1056
+    ],
+    "sourcePixelsPerUnit": 553.5714285714286,
+    "ppuFactor": 0.08433473535409715,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "repair": {
+    "replacedSourceSha256": "28c9741b10a402c4b4f74d772258f56ad1fe5e09dc68480205d45e74e832ad72",
+    "candidateProvenance": "output/actor-redraw/repair-candidates/review_forms_c/mclsl_named_disanmo/death_4.provenance.json",
+    "rollbackArchive": "output/actor-redraw/rejected/final-review-20261018/mclsl_named_disanmo/death_4",
+    "generationRecord": {
+      "prompt": "Use case: stylized-concept. Create one independently newly illustrated transparent PNG game frame for \u5e1d\u53c1\u8c98\u00b7\u517d\u5f62 death_4, native 1254x1254 pixel art. Identity from the reference: massive right-facing purple tapir beast with curled tail, lavender mane, gold swirls and ornaments, long purple trunk, exactly two ivory tusks. Match the low dying/resting pose between reference death_3 and death_5. Critical correction: the existing death_4 clipped the tip of the RIGHTMOST SMALL UPPER TUSK against the right border. Place the entire beast slightly farther LEFT within the native canvas and draw BOTH TUSKS COMPLETELY with at least 45 fully transparent pixels between the rightmost tusk/trunk silhouette and the canvas right edge. Keep all tail, feet and body intact and grounded. Same scale, palette, square pixel clusters and anatomy; head sinking slightly from death_3 toward death_5. One character one pose, actual transparent RGBA background, no sheet, crop, clipping, text, effects, shadow or pasted source pixels.",
+      "method": "built-in-imagegen-independent-frame"
+    }
+  },
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

@@ -1,0 +1,3323 @@
+{
+  "kind": "worldbox-placed-unit-size-probe",
+  "saveTestScope": "new-unsaved-map",
+  "geometrySource": "ActorManager.render_data.main_sprite_colored/main_sprites + scales",
+  "samples": {
+    "mclsl_beast_kunpeng": {
+      "actorId": "mclsl_beast_kunpeng",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/kunpeng/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/kunpeng/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 91.45946,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        13.7109928,
+        13.7109928
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        13.5738831,
+        13.5738831
+      ]
+    },
+    "mclsl_beast_kunpeng_yuan": {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/kunpeng/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/kunpeng/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 367.3684,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.41346717,
+        3.41346741
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.37933254,
+        3.37933278
+      ]
+    },
+    "mclsl_beast_qinglong": {
+      "actorId": "mclsl_beast_qinglong",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qinglong/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qinglong/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 49.3275681,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        25.42189,
+        25.42189
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        25.42189,
+        25.42189
+      ]
+    },
+    "mclsl_beast_qinglong_yuan": {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qinglong/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qinglong/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 375.438568,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.34009361,
+        3.34009361
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.3066926,
+        3.3066926
+      ]
+    },
+    "mclsl_beast_huanglong": {
+      "actorId": "mclsl_beast_huanglong",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/huanglong/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/huanglong/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 56.0999031,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        22.35298,
+        22.35298
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        22.35298,
+        22.35298
+      ]
+    },
+    "mclsl_beast_huanglong_yuan": {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/huanglong/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/huanglong/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 360.350861,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.47994184,
+        3.47994184
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.44514251,
+        3.44514251
+      ]
+    },
+    "mclsl_beast_zhuque": {
+      "actorId": "mclsl_beast_zhuque",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/zhuque/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/zhuque/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 219.77272,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        5.70589447,
+        5.70589447
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        5.64883566,
+        5.64883566
+      ]
+    },
+    "mclsl_beast_zhuque_yuan": {
+      "actorId": "mclsl_beast_zhuque_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/zhuque/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/zhuque/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 373.6842,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.35577464,
+        3.35577464
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.322217,
+        3.322217
+      ]
+    },
+    "mclsl_beast_baihu": {
+      "actorId": "mclsl_beast_baihu",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/baihu/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/baihu/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 523.5714,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.39508867,
+        2.39508867
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.39508867,
+        2.39508867
+      ]
+    },
+    "mclsl_beast_baihu_yuan": {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/baihu/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/baihu/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 365.263153,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.43314123,
+        3.43314123
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.39881,
+        3.39881
+      ]
+    },
+    "mclsl_beast_qilin": {
+      "actorId": "mclsl_beast_qilin",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qilin/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qilin/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 699.2857,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        1.79325843,
+        1.79325843
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        1.77532589,
+        1.77532589
+      ]
+    },
+    "mclsl_beast_qilin_yuan": {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qilin/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qilin/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 374.035065,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.3526268,
+        3.3526268
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.31910062,
+        3.31910062
+      ]
+    },
+    "mclsl_beast_moqilin": {
+      "actorId": "mclsl_beast_moqilin",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/moqilin/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/moqilin/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 641.4286,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        1.95501113,
+        1.95501113
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        1.935461,
+        1.935461
+      ]
+    },
+    "mclsl_beast_moqilin_yuan": {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/moqilin/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/moqilin/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 398.947357,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.143272,
+        3.143272
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.11183929,
+        3.11183929
+      ]
+    },
+    "mclsl_beast_xuanwu": {
+      "actorId": "mclsl_beast_xuanwu",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/xuanwu/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/xuanwu/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 581.1594,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.15775561,
+        2.15775561
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.15775561,
+        2.15775561
+      ]
+    },
+    "mclsl_beast_xuanwu_yuan": {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/xuanwu/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/xuanwu/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 402.807,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.11315346,
+        3.11315346
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.082022,
+        3.082022
+      ]
+    },
+    "mclsl_beast_fenghuang": {
+      "actorId": "mclsl_beast_fenghuang",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/fenghuang/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/fenghuang/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 208.181824,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        6.02358055,
+        6.02358055
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        5.96334457,
+        5.96334457
+      ]
+    },
+    "mclsl_beast_fenghuang_yuan": {
+      "actorId": "mclsl_beast_fenghuang_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/fenghuang/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/fenghuang/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 393.3333,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.18813586,
+        3.188136
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.15625453,
+        3.15625477
+      ]
+    },
+    "mclsl_beast_dafeng": {
+      "actorId": "mclsl_beast_dafeng",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/dafeng/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/dafeng/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 217.045456,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        5.77759171,
+        5.77759171
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        5.77759171,
+        5.77759171
+      ]
+    },
+    "mclsl_beast_dafeng_yuan": {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/dafeng/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/dafeng/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 361.4035,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.469806,
+        3.46980619
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.435108,
+        3.43510818
+      ]
+    },
+    "mclsl_beast_manman": {
+      "actorId": "mclsl_beast_manman",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/manman/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/manman/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 202.72728,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        6.18565,
+        6.18565
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        6.18565,
+        6.18565
+      ]
+    },
+    "mclsl_beast_manman_yuan": {
+      "actorId": "mclsl_beast_manman_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/manman/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/manman/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 369.1228,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.3972435,
+        3.3972435
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.363271,
+        3.363271
+      ]
+    },
+    "mclsl_beast_xuanniao": {
+      "actorId": "mclsl_beast_xuanniao",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/xuanniao/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/xuanniao/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 205.681824,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        6.09679556,
+        6.09679556
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        6.09679556,
+        6.09679556
+      ]
+    },
+    "mclsl_beast_xuanniao_yuan": {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/xuanniao/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/xuanniao/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 373.6842,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.35577464,
+        3.35577464
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.322217,
+        3.322217
+      ]
+    },
+    "mclsl_beast_qingluan": {
+      "actorId": "mclsl_beast_qingluan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qingluan/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qingluan/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 156.818176,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        7.996522,
+        7.996522
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        7.996522,
+        7.996522
+      ]
+    },
+    "mclsl_beast_qingluan_yuan": {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/qingluan/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/qingluan/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 382.807,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.27580214,
+        3.27580214
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.24304414,
+        3.24304414
+      ]
+    },
+    "mclsl_beast_changliao": {
+      "actorId": "mclsl_beast_changliao",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/changliao/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/changliao/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 547.1429,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.29190588,
+        2.29190588
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.29190588,
+        2.29190588
+      ]
+    },
+    "mclsl_beast_changliao_yuan": {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/changliao/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/changliao/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 379.6491,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.30305,
+        3.30305
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.27001953,
+        3.27001953
+      ]
+    },
+    "mclsl_beast_mo": {
+      "actorId": "mclsl_beast_mo",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/mo/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/mo/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 548.5714,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.28593755,
+        2.28593755
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.28593755,
+        2.28593755
+      ]
+    },
+    "mclsl_beast_mo_yuan": {
+      "actorId": "mclsl_beast_mo_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/mo/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/mo/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 372.631561,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.3652544,
+        3.3652544
+      ],
+      "actualRenderScale": [
+        0.97,
+        0.97,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.26429677,
+        3.26429677
+      ]
+    },
+    "mclsl_beast_hongmao": {
+      "actorId": "mclsl_beast_hongmao",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/hongmao/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/hongmao/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 600.7143,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.08751488,
+        2.08751488
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.08751488,
+        2.08751488
+      ]
+    },
+    "mclsl_beast_hongmao_yuan": {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/hongmao/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/hongmao/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 403.508759,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.10773921,
+        3.107739
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.07666183,
+        3.07666159
+      ]
+    },
+    "mclsl_beast_feiqiu": {
+      "actorId": "mclsl_beast_feiqiu",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/feiqiu/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/feiqiu/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 300.930237,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        4.167079,
+        4.167079
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        4.167079,
+        4.167079
+      ]
+    },
+    "mclsl_beast_feiqiu_yuan": {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/feiqiu/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/feiqiu/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 361.4035,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.469806,
+        3.469806
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.435108,
+        3.435108
+      ]
+    },
+    "mclsl_beast_yingying": {
+      "actorId": "mclsl_beast_yingying",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/yingying/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/yingying/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 352.558136,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.55686021,
+        3.55686021
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.55686021,
+        3.55686021
+      ]
+    },
+    "mclsl_beast_yingying_yuan": {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/yingying/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/yingying/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 358.2456,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.500392,
+        3.500392
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.465388,
+        3.465388
+      ]
+    },
+    "mclsl_beast_goushou": {
+      "actorId": "mclsl_beast_goushou",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/goushou/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/goushou/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 605.0,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.0727272,
+        2.0727272
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.0727272,
+        2.0727272
+      ]
+    },
+    "mclsl_beast_goushou_yuan": {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/goushou/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/goushou/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 382.456116,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.27880764,
+        3.27880764
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.2460196,
+        3.2460196
+      ]
+    },
+    "mclsl_beast_liejiejing": {
+      "actorId": "mclsl_beast_liejiejing",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/liejiejing/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/liejiejing/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 67.6756744,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        18.5295525,
+        18.5295525
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        18.3442574,
+        18.3442574
+      ]
+    },
+    "mclsl_beast_liejiejing_yuan": {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/liejiejing/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/liejiejing/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 367.3684,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.41346717,
+        3.41346741
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.37933254,
+        3.37933278
+      ]
+    },
+    "mclsl_beast_tianshou": {
+      "actorId": "mclsl_beast_tianshou",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/tianshou/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/tianshou/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 92.4324341,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        13.5666666,
+        13.5666666
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        13.431,
+        13.431
+      ]
+    },
+    "mclsl_beast_tianshou_yuan": {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Beasts/tianshou/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Beasts/tianshou/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 367.3684,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.41346717,
+        3.41346717
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.37933254,
+        3.37933254
+      ]
+    },
+    "mclsl_named_diyi": {
+      "actorId": "mclsl_named_diyi",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/DiYi/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/DiYi/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 576.4286,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.17546463,
+        2.17546463
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.17546463,
+        2.17546463
+      ]
+    },
+    "mclsl_named_diyi_yuan": {
+      "actorId": "mclsl_named_diyi_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/DiYi/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/DiYi/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 379.6491,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.30305,
+        3.30305
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.27001953,
+        3.27001953
+      ]
+    },
+    "mclsl_named_disanmo": {
+      "actorId": "mclsl_named_disanmo",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/DiSanMo/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/DiSanMo/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 553.5714,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        2.2652905,
+        2.2652905
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        2.2652905,
+        2.2652905
+      ]
+    },
+    "mclsl_named_disanmo_yuan": {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/DiSanMo/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/DiSanMo/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 387.017517,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.24016333,
+        3.24016333
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.20776176,
+        3.20776176
+      ]
+    },
+    "mclsl_named_qingshenlong": {
+      "actorId": "mclsl_named_qingshenlong",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/QingShenLong/Beast/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/QingShenLong/Beast/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 54.8511,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        22.8618927,
+        22.8618927
+      ],
+      "actualRenderScale": [
+        0.98,
+        0.98,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        22.4046555,
+        22.4046555
+      ]
+    },
+    "mclsl_named_qingshenlong_yuan": {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/QingShenLong/Human/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/QingShenLong/Human/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 359.6491,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.48673177,
+        3.48673177
+      ],
+      "actualRenderScale": [
+        0.99,
+        0.99,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.45186448,
+        3.45186448
+      ]
+    },
+    "mclsl_named_lifan": {
+      "actorId": "mclsl_named_lifan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/LiFan/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/LiFan/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 347.3684,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.61000013,
+        3.61000013
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.61000013,
+        3.61000013
+      ]
+    },
+    "Behemoth": {
+      "actorId": "Behemoth",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.05,
+      "texturePath": "actors/FantasyCreatures/MONSTER/Behemoth/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        0.0,
+        0.0,
+        256.0,
+        256.0
+      ],
+      "spriteBounds": [
+        256.0,
+        256.0
+      ],
+      "actualRenderScale": [
+        0.05,
+        0.05,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        12.8,
+        12.8
+      ]
+    },
+    "TenguSamurai": {
+      "actorId": "TenguSamurai",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.0300000012,
+      "texturePath": "actors/FantasyCreatures/MONSTER/TenguSamurai/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        257.0,
+        0.0,
+        128.0,
+        128.0
+      ],
+      "spriteBounds": [
+        128.0,
+        128.0
+      ],
+      "actualRenderScale": [
+        0.0300000012,
+        0.0300000012,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.84000015,
+        3.84000015
+      ]
+    },
+    "PrimordialFrostDragon": {
+      "actorId": "PrimordialFrostDragon",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.0600000024,
+      "texturePath": "actors/FantasyCreatures/Dragonkind/PrimordialFrostDragon/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        386.0,
+        0.0,
+        400.0,
+        400.0
+      ],
+      "spriteBounds": [
+        400.0,
+        400.0
+      ],
+      "actualRenderScale": [
+        0.0600000024,
+        0.0600000024,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        24.0,
+        24.0
+      ]
+    },
+    "Phoenix": {
+      "actorId": "Phoenix",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.1,
+      "texturePath": "actors/FantasyCreatures/MONSTER/Phoenix/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        787.0,
+        0.0,
+        120.0,
+        120.0
+      ],
+      "spriteBounds": [
+        120.0,
+        120.0
+      ],
+      "actualRenderScale": [
+        0.1,
+        0.1,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        12.0,
+        12.0
+      ]
+    },
+    "NightWolf": {
+      "actorId": "NightWolf",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.1,
+      "texturePath": "actors/FantasyCreatures/MONSTER/NightWolf/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        908.0,
+        0.0,
+        32.0,
+        32.0
+      ],
+      "spriteBounds": [
+        32.0,
+        32.0
+      ],
+      "actualRenderScale": [
+        0.1,
+        0.1,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.2,
+        3.2
+      ]
+    },
+    "StoneGolem": {
+      "actorId": "StoneGolem",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.0600000024,
+      "texturePath": "actors/FantasyCreatures/MONSTER/StoneGolem/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        941.0,
+        0.0,
+        64.0,
+        64.0
+      ],
+      "spriteBounds": [
+        64.0,
+        64.0
+      ],
+      "actualRenderScale": [
+        0.0600000024,
+        0.0600000024,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.84000015,
+        3.84000015
+      ]
+    },
+    "SpiritTraveler": {
+      "actorId": "SpiritTraveler",
+      "sprite": "gen_idle_0",
+      "texture": "Units_big_atlas",
+      "alive": true,
+      "authoredBaseScale": 0.05,
+      "texturePath": "actors/FantasyCreatures/Character/SpiritTraveler/main",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "ppu": 1.0,
+      "filter": "Point",
+      "mipmaps": 11,
+      "readable": true,
+      "textureFormat": "RGBA32",
+      "rect": [
+        0.0,
+        401.0,
+        64.0,
+        64.0
+      ],
+      "spriteBounds": [
+        64.0,
+        64.0
+      ],
+      "actualRenderScale": [
+        0.05,
+        0.05,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.2,
+        3.2
+      ]
+    },
+    "mclsl_named_tianyi": {
+      "actorId": "mclsl_named_tianyi",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/TianYi/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/TianYi/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 393.6842,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.18529415,
+        3.18529415
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.18529415,
+        3.18529415
+      ]
+    },
+    "mclsl_named_moruibin": {
+      "actorId": "mclsl_named_moruibin",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/MoRuBin/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/MoRuBin/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 371.578918,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.37478781,
+        3.37478781
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.37478781,
+        3.37478781
+      ]
+    },
+    "mclsl_named_xuantianwang": {
+      "actorId": "mclsl_named_xuantianwang",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/XuanTianWang/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/XuanTianWang/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 378.947357,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.30916667,
+        3.30916667
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.30916667,
+        3.30916667
+      ]
+    },
+    "mclsl_named_xuke": {
+      "actorId": "mclsl_named_xuke",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/XuKe/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/XuKe/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 391.578918,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.20241952,
+        3.20241952
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.20241952,
+        3.20241952
+      ]
+    },
+    "mclsl_named_yefeipeng": {
+      "actorId": "mclsl_named_yefeipeng",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/YeFeiPeng/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/YeFeiPeng/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 379.6491,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.30305,
+        3.30305
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.30305,
+        3.30305
+      ]
+    },
+    "mclsl_named_xiaoheng": {
+      "actorId": "mclsl_named_xiaoheng",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/XiaoHeng/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/XiaoHeng/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 361.4035,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.469806,
+        3.46980619
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.469806,
+        3.46980619
+      ]
+    },
+    "mclsl_named_xubai": {
+      "actorId": "mclsl_named_xubai",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/XuBai/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/XuBai/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 385.263153,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.254918,
+        3.254918
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.254918,
+        3.254918
+      ]
+    },
+    "mclsl_named_liping": {
+      "actorId": "mclsl_named_liping",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/LiPing/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/LiPing/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 411.9298,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.044208,
+        3.044208
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.044208,
+        3.044208
+      ]
+    },
+    "mclsl_named_shanfan": {
+      "actorId": "mclsl_named_shanfan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/ShanFan/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/ShanFan/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 371.578918,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.37478781,
+        3.37478781
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.37478781,
+        3.37478781
+      ]
+    },
+    "mclsl_named_zhangfan": {
+      "actorId": "mclsl_named_zhangfan",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/ZhangFan/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/ZhangFan/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 365.263153,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.43314123,
+        3.43314123
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.43314123,
+        3.43314123
+      ]
+    },
+    "mclsl_named_zhenshen": {
+      "actorId": "mclsl_named_zhenshen",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Named/ZhenShen/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Named/ZhenShen/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 388.07016,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.2313745,
+        3.2313745
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.2313745,
+        3.2313745
+      ]
+    },
+    "mclsl_bai_xiansheng": {
+      "actorId": "mclsl_bai_xiansheng",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Immortals/Bai/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Immortals/Bai/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 396.8421,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.159947,
+        3.159947
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.159947,
+        3.159947
+      ]
+    },
+    "mclsl_chuanfa_tianzun": {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "sprite": "idle_0",
+      "texture": "mclsl_native_actors/Immortals/Chuanfa/main/idle_0",
+      "alive": true,
+      "authoredBaseScale": 1.0,
+      "texturePath": "actors/Immortals/Chuanfa/main",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "ppu": 388.421051,
+      "filter": "Point",
+      "mipmaps": 1,
+      "readable": false,
+      "textureFormat": "ARGB32",
+      "rect": [
+        0.0,
+        0.0,
+        1254.0,
+        1254.0
+      ],
+      "spriteBounds": [
+        3.22845531,
+        3.22845531
+      ],
+      "actualRenderScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualCanvasWorldSize": [
+        3.22845531,
+        3.22845531
+      ]
+    }
+  },
+  "expectedUnits": 69,
+  "renderDataPipelineExecuted": true,
+  "observed": {
+    "mclsl_beast_kunpeng": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/kunpeng/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/kunpeng",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_kunpeng_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/kunpeng/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/kunpeng",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_qinglong": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qinglong/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qinglong",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_qinglong_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qinglong/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qinglong",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_huanglong": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/huanglong/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/huanglong",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_huanglong_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/huanglong/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/huanglong",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_zhuque": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/zhuque/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/zhuque",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_zhuque_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/zhuque/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/zhuque",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_baihu": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/baihu/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/baihu",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_baihu_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/baihu/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/baihu",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_qilin": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qilin/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qilin",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_qilin_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qilin/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qilin",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_moqilin": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/moqilin/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/moqilin",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_moqilin_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/moqilin/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/moqilin",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_xuanwu": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/xuanwu/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/xuanwu",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_xuanwu_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/xuanwu/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/xuanwu",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_fenghuang": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/fenghuang/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/fenghuang",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_fenghuang_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/fenghuang/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/fenghuang",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_dafeng": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/dafeng/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/dafeng",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_dafeng_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/dafeng/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/dafeng",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_manman": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/manman/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/manman",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_manman_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/manman/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/manman",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_xuanniao": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/xuanniao/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/xuanniao",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_xuanniao_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/xuanniao/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/xuanniao",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_qingluan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qingluan/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qingluan",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_qingluan_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/qingluan/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/qingluan",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_changliao": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/changliao/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/changliao",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_changliao_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/changliao/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/changliao",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_mo": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/mo/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/mo",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_mo_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/mo/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/mo",
+      "nativeDetails": null,
+      "scale": "(0.97, 0.97, 1.00)"
+    },
+    "mclsl_beast_hongmao": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/hongmao/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/hongmao",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_hongmao_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/hongmao/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/hongmao",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_feiqiu": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/feiqiu/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/feiqiu",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_feiqiu_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/feiqiu/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/feiqiu",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_yingying": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/yingying/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/yingying",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_yingying_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/yingying/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/yingying",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_goushou": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/goushou/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/goushou",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_beast_goushou_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/goushou/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/goushou",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_liejiejing": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/liejiejing/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/liejiejing",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_liejiejing_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/liejiejing/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/liejiejing",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_tianshou": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/tianshou/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/tianshou",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_beast_tianshou_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Beasts/tianshou/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Beasts/tianshou",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_named_diyi": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/DiYi/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/DiYi",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_diyi_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/DiYi/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/DiYi",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_named_disanmo": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/DiSanMo/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/DiSanMo",
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_disanmo_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/DiSanMo/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/DiSanMo",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_named_qingshenlong": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/QingShenLong/Beast/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/QingShenLong",
+      "nativeDetails": null,
+      "scale": "(0.98, 0.98, 1.00)"
+    },
+    "mclsl_named_qingshenlong_yuan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/QingShenLong/Human/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": "actors/Named/QingShenLong",
+      "nativeDetails": null,
+      "scale": "(0.99, 0.99, 1.00)"
+    },
+    "mclsl_named_lifan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/LiFan/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_tianyi": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/TianYi/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_moruibin": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/MoRuBin/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_xuantianwang": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/XuanTianWang/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_xuke": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/XuKe/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_yefeipeng": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/YeFeiPeng/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_xiaoheng": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/XiaoHeng/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_xubai": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/XuBai/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_liping": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/LiPing/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_shanfan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/ShanFan/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_zhangfan": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/ZhangFan/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_named_zhenshen": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Named/ZhenShen/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_bai_xiansheng": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Immortals/Bai/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "mclsl_chuanfa_tianzun": {
+      "alive": true,
+      "main": "idle_0",
+      "colored": "idle_0",
+      "requestedTexture": "mclsl_native_actors/Immortals/Chuanfa/main/idle_0",
+      "hasOverride": true,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(1.00, 1.00, 1.00)"
+    },
+    "Behemoth": {
+      "alive": true,
+      "main": "idle_7",
+      "colored": "gen_idle_7",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.05, 0.05, 1.00)"
+    },
+    "TenguSamurai": {
+      "alive": true,
+      "main": "idle_7",
+      "colored": "gen_idle_7",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.03, 0.03, 1.00)"
+    },
+    "PrimordialFrostDragon": {
+      "alive": true,
+      "main": "idle_7",
+      "colored": "gen_idle_7",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.06, 0.06, 1.00)"
+    },
+    "Phoenix": {
+      "alive": true,
+      "main": "idle_7",
+      "colored": "gen_idle_7",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.10, 0.10, 1.00)"
+    },
+    "NightWolf": {
+      "alive": true,
+      "main": "idle_1",
+      "colored": "gen_idle_1",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.10, 0.10, 1.00)"
+    },
+    "StoneGolem": {
+      "alive": true,
+      "main": "idle_7",
+      "colored": "gen_idle_7",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.06, 0.06, 1.00)"
+    },
+    "SpiritTraveler": {
+      "alive": true,
+      "main": "idle_1",
+      "colored": "gen_idle_1",
+      "requestedTexture": null,
+      "hasOverride": false,
+      "beastFolder": null,
+      "nativeDetails": null,
+      "scale": "(0.05, 0.05, 1.00)"
+    }
+  },
+  "visibilityForcedForDiagnostic": true,
+  "pausedFromPlacement": true,
+  "maximumPlacedPerMap": 24,
+  "finalPlacedStates": [
+    {
+      "id": 1,
+      "asset": "mclsl_named_lifan",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 2,
+      "asset": "mclsl_named_tianyi",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 3,
+      "asset": "mclsl_named_moruibin",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 4,
+      "asset": "mclsl_named_xuantianwang",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 5,
+      "asset": "mclsl_named_xuke",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 6,
+      "asset": "mclsl_named_yefeipeng",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 7,
+      "asset": "mclsl_named_xiaoheng",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 8,
+      "asset": "mclsl_named_xubai",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 9,
+      "asset": "mclsl_named_liping",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 10,
+      "asset": "mclsl_named_shanfan",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 11,
+      "asset": "mclsl_named_zhangfan",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 12,
+      "asset": "mclsl_named_zhenshen",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 13,
+      "asset": "mclsl_bai_xiansheng",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 14,
+      "asset": "mclsl_chuanfa_tianzun",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 15,
+      "asset": "Behemoth",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 16,
+      "asset": "TenguSamurai",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 17,
+      "asset": "PrimordialFrostDragon",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 18,
+      "asset": "Phoenix",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 19,
+      "asset": "NightWolf",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 20,
+      "asset": "StoneGolem",
+      "realm": "",
+      "alive": true
+    },
+    {
+      "id": 21,
+      "asset": "SpiritTraveler",
+      "realm": "",
+      "alive": true
+    }
+  ],
+  "capturedUnits": 69,
+  "capturedAtUtc": "2026-10-19T03:43:33.9936181Z",
+  "cameraSize": 35.0,
+  "cameraPosition": "(57.00, 47.00, 0.00)",
+  "visibleUnitCount": 21,
+  "sizeComparisonPassed": false,
+  "populationPerformanceVerified": false
+}

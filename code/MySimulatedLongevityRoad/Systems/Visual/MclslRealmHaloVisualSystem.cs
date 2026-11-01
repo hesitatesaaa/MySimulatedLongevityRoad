@@ -1,0 +1,573 @@
+using System;
+using System.Collections.Generic;
+using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
+using MySimulatedLongevityRoad.Systems;
+using MySimulatedLongevityRoad.Traits;
+using UnityEngine;
+
+namespace MySimulatedLongevityRoad.Systems.Visual;
+
+internal static class MclslRealmHaloVisualSystem
+{
+    private const float BackZOffset = -0.05f;
+    private const float FrameIntervalSeconds = 0.08f;
+    private const int VisibleScanCadenceFrames = 10;
+    private const int CleanupQueueBudget = 12;
+    private const int StaleFrameThreshold = 24;
+
+    private static readonly Dictionary<string, Sprite[]> FramesByFolder = new(StringComparer.Ordinal);
+    private static readonly Dictionary<long, HaloEntry> EntriesByActorId = new(64);
+    // Only positive qualifications live here. Registration and mutation notices
+    // maintain it; the render lane never traverses traits or resolves a realm.
+    private static readonly Dictionary<long, Qualification> Qualifications = new(64);
+    internal static long QualificationUpdates { get; private set; }
+    internal static long RealmResolutions { get; private set; }
+    internal static int VisibleCandidates { get; private set; }
+    internal static int VisibleQualified { get; private set; }
+    // Positive qualifications only. The render lane uses this to skip the whole
+    // visible-actor scan when no actor can possibly own a halo (behaviour-neutral:
+    // with zero qualifications there is nothing to observe or refresh).
+    internal static int QualificationCount => Qualifications.Count;
+    internal static int HaloCount => EntriesByActorId.Count;
+    internal static int ActiveHaloCount => ActiveEntries.Count;
+
+    internal static void RecordVisibleCounts(int candidates, int qualified)
+    { VisibleCandidates = candidates; VisibleQualified = qualified; }
+
+    internal static bool HasQualification(Actor actor)
+    {
+        if (actor?.data == null || !Qualifications.TryGetValue(actor.data.id, out var cached)) return false;
+        return ReferenceEquals(cached.Actor, actor) && ReferenceEquals(cached.Asset, actor.asset);
+    }
+
+    internal static void RefreshQualification(Actor actor)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            QualificationUpdates++;
+            long id = MclslActorAccessor.Id(actor);
+            if (id <= 0) return;
+            if (!TryResolveProfile(actor, out _, out HaloProfile profile)) { Forget(id); return; }
+            if (Qualifications.TryGetValue(id, out var previous)
+                && (!ReferenceEquals(previous.Actor, actor) || previous.Profile.Folder != profile.Folder))
+                RemoveHalo(id);
+            Qualifications[id] = new Qualification(actor, profile);
+        }
+        finally { MclslPerformanceProbe.End("光环资格更新", sample); }
+    }
+
+    internal static void ObserveTaishangProgress(Actor actor)
+    {
+        if (actor?.data == null || !Qualifications.TryGetValue(actor.data.id, out var cached)) return;
+        bool supreme = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0) >= 100;
+        if ((cached.Profile.Folder == "ChangSheng" && supreme)
+            || (cached.Profile.Folder == "TaiShang" && !supreme)) RefreshQualification(actor);
+    }
+
+    internal static void Forget(long id)
+    { Qualifications.Remove(id); RemoveHalo(id); }
+
+    private static void RemoveHalo(long id)
+    {
+        if (!EntriesByActorId.TryGetValue(id, out HaloEntry entry)) return;
+        EntriesByActorId.Remove(id);
+        ActiveEntries.Remove(entry);
+        CancelCleanup(entry);
+        entry.IsActive = false;
+        DestroyEntry(entry);
+    }
+    private static readonly List<HaloEntry> ActiveEntries = new(64);
+    private static readonly Queue<CleanupTicket> CleanupQueue = new(128);
+    private static int _lastVisibleScanFrame = -1;
+
+    internal static bool BeginRenderFrame(int frame)
+    {
+        int cadence = CurrentVisibleScanCadence();
+        bool shouldScan = _lastVisibleScanFrame < 0
+            || frame - _lastVisibleScanFrame >= cadence;
+        if (shouldScan) _lastVisibleScanFrame = frame;
+        return shouldScan;
+    }
+
+    internal static void ObserveVisibleActor(Actor actor, Vector3 position, int frame)
+    {
+        if (!HasQualification(actor)) return;
+        long actorId = actor.data.id;
+        HaloProfile profile = Qualifications[actorId].Profile;
+
+        Sprite[] frames = GetFrames(profile.Folder);
+        if (frames == null || frames.Length == 0) return;
+
+        HaloEntry entry = GetOrCreateEntry(actor, actorId, profile, position, frames);
+        if (entry == null) return;
+        entry.Actor = actor;
+        entry.Profile = profile;
+        entry.LastSeenFrame = frame;
+        entry.LastRenderPosition = position;
+        if (!entry.IsActive)
+        {
+            entry.IsActive = true;
+            ActiveEntries.Add(entry);
+        }
+        CancelCleanup(entry);
+
+        if (!string.Equals(entry.Folder, profile.Folder, StringComparison.Ordinal)
+            || !ReferenceEquals(entry.BoundFrames, frames))
+        {
+            if (MclslWorldSpriteRenderLayer.TryBindLoopAnimation(
+                    entry.Effect,
+                    frames,
+                    FrameIntervalSeconds,
+                    (int)(actorId % frames.Length)))
+            {
+                entry.Folder = profile.Folder;
+                entry.BoundFrames = frames;
+                DisableNativeAnimator(entry.Effect);
+            }
+        }
+    }
+
+    internal static void EndRenderFrame(int frame, int lodLevel)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        using (MclslUnityProfiler.Sample("MCLS/Visual/HaloActiveUpdates"))
+            UpdateExistingEntries(frame, lodLevel);
+        MclslPerformanceProbe.End("光环活动更新", sample);
+        if (CleanupQueue.Count > 0)
+        {
+            sample = MclslPerformanceProbe.Begin();
+            using (MclslUnityProfiler.Sample("MCLS/Visual/HaloStaleCleanupBatch"))
+                Cleanup(frame);
+            MclslPerformanceProbe.End("光环清理", sample);
+        }
+    }
+
+    internal static void Clear()
+    {
+        foreach (HaloEntry entry in EntriesByActorId.Values) DestroyEntry(entry);
+        EntriesByActorId.Clear();
+        Qualifications.Clear();
+        ActiveEntries.Clear();
+        CleanupQueue.Clear();
+        FramesByFolder.Clear();
+        _lastVisibleScanFrame = -1;
+        QualificationUpdates = RealmResolutions = 0;
+        VisibleCandidates = VisibleQualified = 0;
+        MclslWorldSpriteRenderLayer.ResetActorLayerCache();
+    }
+
+    private static void UpdateExistingEntries(int frame, int lodLevel)
+    {
+        int visibleScanCadence = CurrentVisibleScanCadence();
+        int updateStride = CurrentUpdateStride(lodLevel);
+        for (int i = ActiveEntries.Count - 1; i >= 0; i--)
+        {
+            HaloEntry entry = ActiveEntries[i];
+            if (entry == null || entry.Transform == null || entry.Renderer == null
+                || !MclslActorAccessor.Alive(entry.Actor) || !HasQualification(entry.Actor))
+            {
+                if (entry != null)
+                {
+                    entry.IsActive = false;
+                    if (entry.GameObject != null && entry.GameObject.activeSelf) entry.GameObject.SetActive(false);
+                    ScheduleCleanup(entry);
+                }
+                ActiveEntries.RemoveAt(i);
+                continue;
+            }
+
+            if (frame - entry.LastSeenFrame > visibleScanCadence + 2)
+            {
+                if (entry.GameObject != null && entry.GameObject.activeSelf) entry.GameObject.SetActive(false);
+                entry.IsActive = false;
+                ScheduleCleanup(entry);
+                ActiveEntries.RemoveAt(i);
+                continue;
+            }
+
+            long actorId = MclslActorAccessor.Id(entry.Actor);
+            HaloProfile profile = entry.Profile;
+
+            if (updateStride > 1 && (frame + (int)(actorId % updateStride)) % updateStride != 0)
+                continue;
+
+            Sprite[] frames = entry.BoundFrames;
+            if (frames == null || frames.Length == 0) continue;
+
+            bool updatePosition = lodLevel < 2 || ((frame + (int)(actorId & 1L)) & 1) == 0;
+            Vector3 position = entry.LastRenderPosition;
+            if (updatePosition)
+            {
+                TryGetActorPosition(entry.Actor, ref position);
+                entry.LastRenderPosition = position;
+                Vector3 anchor = AnchorPosition(position, profile);
+                if (entry.Transform.position != anchor) entry.Transform.position = anchor;
+            }
+
+            int animationStride = lodLevel >= 2 ? 6 : lodLevel == 1 ? 3 : 1;
+            // Fixed display speed: the frame index follows the presentation clock
+            // (one authored frame per FrameIntervalSeconds) so halos keep their pace
+            // at any simulation speed. LOD stride only throttles update frequency.
+            int advance = (int)(MclslRuntime.DisplayClock / FrameIntervalSeconds);
+            int spriteIndex = Math.Abs(advance / animationStride
+                + (int)(actorId % frames.Length)) % frames.Length;
+
+            Sprite sprite = frames[spriteIndex];
+            if (!ReferenceEquals(entry.Renderer.sprite, sprite)) entry.Renderer.sprite = sprite;
+            if (entry.Renderer.color != Color.white) entry.Renderer.color = Color.white;
+            if (Math.Abs(entry.LastAppliedScale - profile.Scale) > 0.000001f)
+            {
+                entry.Transform.localScale = new Vector3(profile.Scale, profile.Scale, 1f);
+                entry.LastAppliedScale = profile.Scale;
+            }
+            if (entry.GameObject != null && !entry.GameObject.activeSelf) entry.GameObject.SetActive(true);
+        }
+    }
+
+    private static int CurrentVisibleScanCadence()
+    {
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return VisibleScanCadenceFrames;
+        return MclslFrameLoadMonitor.StressTier switch
+        {
+            MclslRuntimeStressTier.Mild => 15,
+            MclslRuntimeStressTier.Severe => 20,
+            MclslRuntimeStressTier.Critical => 30,
+            _ => VisibleScanCadenceFrames
+        };
+    }
+
+    private static int CurrentUpdateStride(int lodLevel)
+    {
+        int stride = lodLevel >= 2 ? 4 : lodLevel == 1 ? 2 : 1;
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return stride;
+        return MclslFrameLoadMonitor.StressTier switch
+        {
+            MclslRuntimeStressTier.Mild => Math.Max(stride, 2),
+            MclslRuntimeStressTier.Severe => Math.Max(stride, 4),
+            MclslRuntimeStressTier.Critical => Math.Max(stride, 6),
+            _ => stride
+        };
+    }
+
+    private static bool TryResolveProfile(Actor actor, out long actorId, out HaloProfile profile)
+    {
+        actorId = 0L;
+        profile = default;
+        if (!MclslActorAccessor.Alive(actor)) return false;
+
+        // Beast identity is independent of its current animal/humanoid artwork.
+        // Reject it before any realm access, including the legacy trait fallback.
+        if (MclslBeastActorRegistration.IsBeast(actor) || !MclslEligibility.CanCultivate(actor)) return false;
+
+        actorId = MclslActorAccessor.Id(actor);
+        if (actorId <= 0L) return false;
+
+        RealmResolutions++;
+        string realm = ResolveRealmForHalo(actor);
+        if (string.Equals(realm, MclslRealmIds.HuaShen, StringComparison.Ordinal))
+        {
+            profile = new HaloProfile("HuaShen", 0.00020f, 0.11f);
+            return true;
+        }
+
+        if (string.Equals(realm, MclslRealmIds.HeDao, StringComparison.Ordinal))
+        {
+            profile = new HaloProfile("HeDao", 0.00022f, 0.12f);
+            return true;
+        }
+
+        if (!string.Equals(realm, MclslRealmIds.ChangSheng, StringComparison.Ordinal)) return false;
+        int taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0);
+        profile = taishangProgress >= 100
+            ? new HaloProfile("TaiShang", 0.00026f, 0.14f)
+            : new HaloProfile("ChangSheng", 0.00024f, 0.13f);
+        return true;
+    }
+
+    private static string ResolveRealmForHalo(Actor actor)
+    {
+        string realm = MclslActorAccessor.Realm(actor);
+        if (!string.IsNullOrWhiteSpace(realm)) return realm;
+
+        foreach (string candidate in MclslRealmIds.Ordered)
+        {
+            string newLawTrait = MclslTraitRegistration.TraitIdForRealm(candidate);
+            string ancientTrait = MclslTraitRegistration.LegacyTraitIdForRealm(candidate);
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(newLawTrait) && actor.hasTrait(newLawTrait)) realm = candidate;
+                if (!string.IsNullOrWhiteSpace(ancientTrait) && actor.hasTrait(ancientTrait)) realm = candidate;
+            }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        }
+
+        return realm ?? string.Empty;
+    }
+
+    private static HaloEntry GetOrCreateEntry(
+        Actor actor,
+        long actorId,
+        HaloProfile profile,
+        Vector3 position,
+        Sprite[] frames)
+    {
+        if (EntriesByActorId.TryGetValue(actorId, out HaloEntry entry)
+            && entry != null
+            && entry.Transform != null
+            && entry.Renderer != null)
+        {
+            return entry;
+        }
+
+        try
+        {
+            if (!MclslWorldSpriteRenderLayer.TrySpawnActorBackEffect(
+                    AnchorPosition2D(position, profile),
+                    profile.Scale,
+                    -1,
+                    out BaseEffect effect,
+                    out SpriteRenderer renderer))
+            {
+                return null;
+            }
+
+            Component component = effect as Component;
+            if (component == null)
+            {
+                MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(effect);
+                return null;
+            }
+
+            component.gameObject.name = "mclsl_realm_halo_" + actorId;
+            component.gameObject.hideFlags = HideFlags.DontSave;
+            if (!MclslWorldSpriteRenderLayer.TryBindLoopAnimation(
+                    effect,
+                    frames,
+                    FrameIntervalSeconds,
+                    (int)(actorId % frames.Length)))
+            {
+                MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(effect);
+                return null;
+            }
+            DisableNativeAnimator(effect);
+
+            renderer.color = Color.white;
+            entry = new HaloEntry(actorId, actor, effect, component.gameObject, component.transform, renderer, profile, frames, position);
+            EntriesByActorId[actorId] = entry;
+            return entry;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static Vector3 AnchorPosition(Vector3 actorPosition, HaloProfile profile)
+    {
+        return new Vector3(actorPosition.x, actorPosition.y + profile.YOffset, actorPosition.z + BackZOffset);
+    }
+
+    private static Vector2 AnchorPosition2D(Vector3 actorPosition, HaloProfile profile)
+    {
+        return new Vector2(actorPosition.x, actorPosition.y + profile.YOffset);
+    }
+
+    private static Sprite[] GetFrames(string folder)
+    {
+        if (FramesByFolder.TryGetValue(folder, out Sprite[] cached)) return cached;
+
+        List<Sprite> frames = new(24);
+        for (int i = 1; i <= 64; i++)
+        {
+            Sprite sprite = MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("effects/halo/" + folder + "/" + i)
+                ?? MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("effects/halo/" + folder + "/" + i + ".png");
+            if (sprite != null)
+            {
+                frames.Add(sprite);
+                continue;
+            }
+
+            if (frames.Count > 0) break;
+        }
+
+        Sprite[] result = frames.Count > 0 ? frames.ToArray() : Array.Empty<Sprite>();
+        FramesByFolder[folder] = result;
+        return result;
+    }
+
+
+
+    private static void TryGetActorPosition(Actor actor, ref Vector3 position)
+    {
+        try
+        {
+            position = actor.current_position;
+            return;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+
+        try
+        {
+            WorldTile tile = ((BaseSimObject)actor).current_tile;
+            if (tile != null) position = tile.posV3;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+    }
+
+    private static void ScheduleCleanup(HaloEntry entry)
+    {
+        if (entry == null || entry.CleanupPending) return;
+        entry.CleanupPending = true;
+        entry.CleanupGeneration = unchecked(entry.CleanupGeneration + 1);
+        CleanupQueue.Enqueue(new CleanupTicket(entry.ActorId, entry.CleanupGeneration));
+    }
+
+    private static void CancelCleanup(HaloEntry entry)
+    {
+        if (entry == null || !entry.CleanupPending) return;
+        entry.CleanupPending = false;
+        entry.CleanupGeneration = unchecked(entry.CleanupGeneration + 1);
+    }
+
+    private static void Cleanup(int frame)
+    {
+        int budget = Math.Min(CleanupQueueBudget, CleanupQueue.Count);
+        for (int i = 0; i < budget; i++)
+        {
+            CleanupTicket ticket = CleanupQueue.Dequeue();
+            long actorId = ticket.ActorId;
+            if (!EntriesByActorId.TryGetValue(actorId, out HaloEntry entry)
+                || entry == null
+                || !entry.CleanupPending
+                || ticket.Generation != entry.CleanupGeneration) continue;
+
+            bool remove = entry.Actor?.data == null
+                || !entry.Actor.isAlive()
+                || frame - entry.LastSeenFrame > StaleFrameThreshold;
+            if (!remove)
+            {
+                // Keep active actors eligible for reuse if they become visible
+                // again before the stale-entry cleanup reaches them.
+                CleanupQueue.Enqueue(ticket);
+                continue;
+            }
+
+            entry.CleanupPending = false;
+            entry.IsActive = false;
+            EntriesByActorId.Remove(actorId);
+            DestroyEntry(entry);
+        }
+    }
+
+    private static void DestroyEntry(HaloEntry entry)
+    {
+        try { MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            // Borrowed BaseEffects remain owned by the native controller's
+            // pool. Destroying their GameObjects leaves a dead pool entry
+            // that makes StackEffects.clear fail during the next world load.
+            if (entry?.Effect == null && entry?.GameObject != null)
+                UnityEngine.Object.Destroy(entry.GameObject);
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
+    }
+
+    private static void DisableNativeAnimator(BaseEffect effect)
+    {
+        try
+        {
+            Component component = effect as Component;
+            SpriteAnimation spriteAnimation = component != null ? component.GetComponent<SpriteAnimation>() : null;
+            if (spriteAnimation != null)
+            {
+                spriteAnimation.isOn = false;
+                if (spriteAnimation is Behaviour spriteAnimationBehaviour)
+                    spriteAnimationBehaviour.enabled = false;
+            }
+            Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
+            if (animator != null) animator.enabled = false;
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #6: " + mclslEmptyCatchEx.Message); }
+    }
+
+    private readonly struct Qualification
+    {
+        internal Qualification(Actor actor, HaloProfile profile)
+        { Actor = actor; Asset = actor.asset; Profile = profile; }
+        internal Actor Actor { get; }
+        internal ActorAsset Asset { get; }
+        internal HaloProfile Profile { get; }
+    }
+
+    private readonly struct HaloProfile
+    {
+        internal HaloProfile(string folder, float scale, float yOffset)
+        {
+            Folder = folder;
+            Scale = scale;
+            YOffset = yOffset;
+        }
+
+        internal string Folder { get; }
+        internal float Scale { get; }
+        internal float YOffset { get; }
+    }
+
+    private readonly struct CleanupTicket
+    {
+        internal CleanupTicket(long actorId, int generation)
+        {
+            ActorId = actorId;
+            Generation = generation;
+        }
+
+        internal long ActorId { get; }
+        internal int Generation { get; }
+    }
+
+    private sealed class HaloEntry
+    {
+        internal HaloEntry(
+            long actorId,
+            Actor actor,
+            BaseEffect effect,
+            GameObject gameObject,
+            Transform transform,
+            SpriteRenderer renderer,
+            HaloProfile profile,
+            Sprite[] frames,
+            Vector3 position)
+        {
+            ActorId = actorId;
+            Actor = actor;
+            Effect = effect;
+            GameObject = gameObject;
+            Transform = transform;
+            Renderer = renderer;
+            Profile = profile;
+            Folder = profile.Folder;
+            BoundFrames = frames;
+            LastRenderPosition = position;
+            LastSeenFrame = Time.frameCount;
+        }
+
+        internal long ActorId { get; }
+        internal Actor Actor { get; set; }
+        internal BaseEffect Effect { get; }
+        internal GameObject GameObject { get; }
+        internal Transform Transform { get; }
+        internal SpriteRenderer Renderer { get; }
+        internal string Folder { get; set; }
+        internal HaloProfile Profile { get; set; }
+        internal Sprite[] BoundFrames { get; set; }
+        internal Vector3 LastRenderPosition { get; set; }
+        internal int LastSeenFrame { get; set; }
+        internal float LastAppliedScale { get; set; }
+        internal bool IsActive { get; set; }
+        internal bool CleanupPending { get; set; }
+        internal int CleanupGeneration { get; set; }
+    }
+}

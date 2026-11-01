@@ -1,0 +1,45 @@
+{
+  "status": "historical-only; not acceptance for resized assets or current code",
+  "sources": [
+    {
+      "originalPath": "output/runtime-validation/release-20261019/native-2g-full-detail-observation.json",
+      "archivedPath": "resources/history/20261019/native-2g-full-detail-observation.json",
+      "sha256": "af6b159738259a55d4d6100c287c1081d79e0c9969e41ef64c9fb33944713079"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/native-input.json",
+      "archivedPath": "resources/history/20261019/native-input.json",
+      "sha256": "ed28c4d1dfeba48f54f145aaca1518ed2018f3133db2099a797d8fb5bef26856"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/native-2g-full-detail-gpu-memory.csv",
+      "archivedPath": "resources/history/20261019/native-2g-full-detail-gpu-memory.csv",
+      "sha256": "d9148e3b7e7e83b19574e195d1ec8336f44382689228c3d2f108226c8a8c0089"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/size-normalized-observation.json",
+      "archivedPath": "resources/history/20261019/size-normalized-observation.json",
+      "sha256": "5afff96f230959e4b01620a86283d7cd593749ca8ffa4c3aff9ac2ed9c9e7049"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/size-normalized-observation-size-comparison.json",
+      "archivedPath": "resources/history/20261019/size-normalized-observation-size-comparison.json",
+      "sha256": "956f5b36963ddf997247ceb5f2020a34a7a8f7c8a7e60c001fc72923da1be149"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/save-reload-age-fixed-observation.json",
+      "archivedPath": "resources/history/20261019/save-reload-age-fixed-observation.json",
+      "sha256": "7d6979e1f827600db73f8948ee06baa5903c4eea4b4d78c937b80c07a9d96816"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/gameplay-stable-runner-observation.json",
+      "archivedPath": "resources/history/20261019/gameplay-stable-runner-observation.json",
+      "sha256": "b47464ced3c574c6267fa57f0e3f6318449d2749ebc19d7f98b00fbba4262de0"
+    },
+    {
+      "originalPath": "output/runtime-validation/release-20261019/baseline-full-detail-observation.json",
+      "archivedPath": "resources/history/20261019/baseline-full-detail-observation.json",
+      "sha256": "078cdd09e45b75c4736faff97b638e3bc876aff4535869e30c1dc9e259c298d8"
+    }
+  ]
+}

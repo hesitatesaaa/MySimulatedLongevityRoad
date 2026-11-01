@@ -1,0 +1,713 @@
+{
+  "version": "0.7.0",
+  "sourceInputSha256": "5c2e511b3b0d75d32996b608810229ef0e4145dede6a5107f60b899882e1a832",
+  "archives": [
+    {
+      "kind": "player",
+      "name": "MySimulatedLongevityRoad-0.7.0-player-local-compressed.zip",
+      "path": "D:\\\u6a21\u62df\u957f\u80dc\u8def\\upstream-0.6.0\\build\\full-repair-release\\MySimulatedLongevityRoad-0.7.0-player-local-compressed.zip",
+      "bytes": 71918679,
+      "MiB": 68.59,
+      "sha256": "d27616e8e2ed76c13072f9c1eb4335babd3285a2239841655449d76fe01e4244",
+      "entries": 2457,
+      "productionSources": 264,
+      "independentBuildings": 23,
+      "archiveGeometryVerified": true,
+      "developerEditorIncluded": false
+    },
+    {
+      "kind": "developer",
+      "name": "MySimulatedLongevityRoad-0.7.0-developer-local-compressed.zip",
+      "path": "D:\\\u6a21\u62df\u957f\u80dc\u8def\\upstream-0.6.0\\build\\full-repair-release\\MySimulatedLongevityRoad-0.7.0-developer-local-compressed.zip",
+      "bytes": 78247243,
+      "MiB": 74.62,
+      "sha256": "7cfa5774ecd6d3b0eb13feec2ecbbe9d048c4a81ed2ffbcb0a454ae283c3157e",
+      "entries": 3952,
+      "productionSources": 265,
+      "independentBuildings": 23,
+      "archiveGeometryVerified": true,
+      "developerEditorIncluded": true
+    }
+  ],
+  "build": {
+    "configuration": "Release",
+    "version": "0.7.0",
+    "gameRoot": "D:\\owl\\gameversion\\0_51_2_imported",
+    "sources": 265,
+    "builtAtUtc": "2026-10-25T06:55:52.5280881Z",
+    "assemblySha256": "7E69D26FAE9956A1D1C412E8CA22830DAC0550A0ED65B30BB4BE6B363BFE0D85",
+    "references": [
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\AppStoreSettings.dll",
+        "sha256": "C94EA6661B3282226445BD1978EA097BB965B6F8AE3B1A495C3FF71AC4F401AD"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Assembly-CSharp-firstpass.dll",
+        "sha256": "C958110133770000A0ED23E71B95E240EF2638D4D46132BF8BEF515E347F721E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\AWSSDK.CognitoIdentity.dll",
+        "sha256": "4DA6DCCAE2F4A74C1CA496CC7D49B5C27E1818688B4FDB5BDA66F2A2FB213F68"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\AWSSDK.Core.dll",
+        "sha256": "C9D37B03FE7003655976A9AEFA81F5BA3F6D8E38D315465250DFE9B9C09B1CD6"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\AWSSDK.S3.dll",
+        "sha256": "0CD51C3F49E4D63172471B506FDD6B63A83C0C03D1EA9F240A8E222118C66907"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\AWSSDK.SecurityToken.dll",
+        "sha256": "C996452D5FBB5DD19323AAC6A778602681D042EAA59A5A3BDE551E2883139046"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Beebyte.Obfuscator.dll",
+        "sha256": "65A721FAE63290FFD2F64E5BEE0334CAE5F0E0B2B46EFEFF472129DAA69BAB6D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\C5.dll",
+        "sha256": "9BE1068913D8C9311E04F91AE33A2D7C582B35926C15209A5CABBE0D672ED531"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\db.tables.dll",
+        "sha256": "0D14CD76E33C1F781B33B70DE23B42DFFA2018BABA3A846F00144D97E7167500"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\DOTween.dll",
+        "sha256": "8E90FC43AB564A5A51424AF56531AB074A5A2E9CAB271B2D653D287954237B83"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Facepunch.Steamworks.Win64.dll",
+        "sha256": "7F4E025564E9B2DD6AC248727B37C9767212C567B18A422629256737524D23B8"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Firebase.Analytics.dll",
+        "sha256": "753135A156BB99F6943DECEA3CFAD14A7C7987AADE36B3EF0FB08C5C826EFB5C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Firebase.App.dll",
+        "sha256": "3FACF04B770A0F5D243A3919A9BC92FBF3406F84174DD14DE35AAC010D627D5E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Firebase.Platform.dll",
+        "sha256": "E59F55E9AAF07F6F54E4BBBD1243008ECF78CA18ABF700AEBB07FCD2903FC691"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Firebase.TaskExtension.dll",
+        "sha256": "AC520C93582571B3E0C4C3B5814572FE9F0EBF8792B3E58A092D8B1149313907"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\FMODUnity.dll",
+        "sha256": "7CBF5CBFACBC808CDE99D706D3B2919D59FFD302DFA93D5C91EFA2C0024022AF"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\FMODUnityResonance.dll",
+        "sha256": "E7816DCC7AEF9F61AA936031F4B3913A123286356CEF569511B0E90950A53235"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Google.MiniJson.dll",
+        "sha256": "BB6D85982479405344538A47519A26B0709B70D02D8E665F6EC2DFC964A012EF"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\GoogleMobileAds.Common.dll",
+        "sha256": "9AF86B42DF13B2B277959C48B4DA12C5798FA20D333F6358337C7540E9C498C7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\GoogleMobileAds.Core.dll",
+        "sha256": "6FEFD3D34B379F97B9A729E54D6CAEAF054F49CA10FBD427F480EAFD51CEF03D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\GoogleMobileAds.dll",
+        "sha256": "B714FAE5CB7F2D88C6827F7CB30F5C15D2DDA17674ECAA309EAA9191399BA7DC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\GoogleMobileAds.Ump.dll",
+        "sha256": "6742C38074BEE621E69A0AD886E6126DE72CBBF010659773316409C16B63D087"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\GraphAndChart.dll",
+        "sha256": "0FD575002B434CC563DD2CBBC8F406F96BCE18E17EC78F080512E8C210C5E6AC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Ionic.Zlib.CF.dll",
+        "sha256": "29E3708AA002D1496BF1A0511B29FB92CF760885E758FBBCE3820ABC9C0B0A48"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Mono.Security.dll",
+        "sha256": "2FEB707FACFBC8EE954CAA053F1B2683E8B6106771A17DD09803291B3EF2F0EE"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\mscorlib.dll",
+        "sha256": "C854E3EB3AE54A544F02F9454FF989680C3287447831FDE87F09F387F054C6C2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\netstandard.dll",
+        "sha256": "6AE62E082DC494A2433984177F60CA4DB5FAE69B1F360A8B33754172B310B8C5"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Newtonsoft.Json.dll",
+        "sha256": "A56146202232958F46BD6A28B5A7DA166AEA123EE0D646735A46E5C341DFBF1F"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Newtonsoft.Json.UnityConverters.dll",
+        "sha256": "EB872FF45438C654AC6AC466CA84BF39B25C70F9614B5DC464022A0C847F1E9C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\nunit.framework.dll",
+        "sha256": "E388E140954DE12970384331D1730E95B4613EF53C3326B6F8FA0FFFDBC9314F"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Proyecto26.dll",
+        "sha256": "2610AF6CF246BD0FD7061DEEF39545D969A7171E8EE4B1EB3F31747AA700691E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Purchasing.Common.dll",
+        "sha256": "A9DDF78BD1CBEC70F34278E33444407F9AE6640EACE4C8271B80A1D360B92C36"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\RSG.dll",
+        "sha256": "0C438E87CDD793CA36584ACE4DC532CCEF6BFB08F4DA671D4ADEEA80EBC144FF"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\SimpleZip.dll",
+        "sha256": "B6296E64F636A9A214933E7D94E559935648D5A8DC0C6DD5566BE370BC624A3B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\SleekRender.dll",
+        "sha256": "C1F05153817804C3B3DE826032BF348D5589F35B673B89BE1B534B2934EFFD35"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\SQLite.dll",
+        "sha256": "09E3822B15B49F6E69D6D5A3E0CB0A68E025834CFC270A1A19678E497F042C38"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\strings.dll",
+        "sha256": "7630243FFA46F17C67AB63EE84DD7E701483839D7570C7E97FEB05A93DD3975D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.ComponentModel.Composition.dll",
+        "sha256": "89077D651CAFD2494B30BCBD3C494D39227A8E8E6708D4CB97D9031428D91854"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Configuration.dll",
+        "sha256": "1D6C08CD785853D261AB600A60090A1FB01DBA587677C72BD7B691E3DE69752B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Core.dll",
+        "sha256": "EC9AF23752FC3B693029C05F8E2A9F75E89B404A4A96D2476B67BC25F7D47ACD"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Data.DataSetExtensions.dll",
+        "sha256": "39BBE7534FF01F286F913DD85EDC8BA43287B7F1953941A6064407905E544D13"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Data.dll",
+        "sha256": "3C9900B0ED80E3B0B9D0592AC99561D534E9FE047EAF02BDBD764612E583FFD1"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.dll",
+        "sha256": "A5A48D67DE3A346011389252503E34799F841ECCDAF2B08F6260B967DFC0571E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Drawing.dll",
+        "sha256": "0BF971F08F363B4877210E4FC6BB47203DC009AA5395D6F7A4A79560966FDDAA"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.EnterpriseServices.dll",
+        "sha256": "561359F0F9C1AE5FFC284899EEC185F6F2AFE5DB62F0EE82BA8EC030FD90D0A0"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.IO.Compression.dll",
+        "sha256": "D4CACC87007DB73796655A4C049E208E1BB8DF8BA5E8EA0D29EFC68794ABC36A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.IO.Compression.FileSystem.dll",
+        "sha256": "0273FDBDE566EFCD5F7D547888FBED2A6297D45D978BC1665B6E9F984F83C99B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Net.Http.dll",
+        "sha256": "8D5CC67FEFF4DC6B1128405AF7D76DE7A3ADAD6BE94CB6DF53562ADA084EB12D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Numerics.dll",
+        "sha256": "D8A04850F135E09A63FF8B4E2082B922BF254FC2A1A10A01D3A411A06A1B3248"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Runtime.Serialization.dll",
+        "sha256": "7A1092ECDDC69D81C6D27AF615CF7BBC63EC46EFBCC98BFE27BEF7C232193A11"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Security.dll",
+        "sha256": "25DE3071F4D6FA609905E814912D6D76583237390FA89A6FEA5576E7DB796CD8"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.ServiceModel.Internals.dll",
+        "sha256": "BD1C5AB9FC3946B2131E96ABA14A50BCC971D15416867D43C6AA919BE4AA276A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Transactions.dll",
+        "sha256": "8620630E57B2196965B77FA0A1615400CF09B25D42AE19B2CCDCF753B6B63C82"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Xml.dll",
+        "sha256": "CB26664F4B5E9AF1E0D8D1FA9CE767DA69FFB3235DF857776A0A2BFDAAE85749"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\System.Xml.Linq.dll",
+        "sha256": "A20F1E88F2597B15FABBDAFC1313BFAB4A0CFABDC1B7F83C8F70B38D50166A62"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Tayx.Graphy.dll",
+        "sha256": "A5BD2575DA78FC1753160758C11618CB7D89B7ABA12BF187306BC442513DD8C7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\TNRD.Humanizr.dll",
+        "sha256": "FAA9784C25D927746E415FEF460F03B66E6E35B07CAA43EAECC541533195CC36"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UDP.dll",
+        "sha256": "E9316D2E71E2D404C2674E5804C63A10FCF2FC2FC7F0452D5C0136F9EFF8FE55"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UltimateJoystick.dll",
+        "sha256": "874ABE76E44D3164E4B3C1FB642EBF8B9A042E6C76BB24B697DC926F7351A9AC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Analytics.DataPrivacy.dll",
+        "sha256": "0024A2892037DFB12065063FFDA2DE570F22FA19054BF072E742E53CF126C25F"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Analytics.StandardEvents.dll",
+        "sha256": "A3DDBF7C0E530E85FB371F16EAF519FB70CBA8A0A733513F73E063F43569F89A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Analytics.Tracker.dll",
+        "sha256": "85B955249E49C19EE309CF00CDBE76DE9EC3ADACFE70B1FBCB778D13EC3D32DC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.LevelPlay.dll",
+        "sha256": "C09A7F58D968A462D61685103B3EFE9DC850934EDD1C7B8262286FFC881B16C1"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Mathematics.dll",
+        "sha256": "B7D0AB410CC87EC774107A33C0661E299ACADE4C497A68531EBC98679B4B0F07"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Postprocessing.Runtime.dll",
+        "sha256": "08BB600DA360A65FDD501222B6539496D5BEEDCCB8DB714E920E7972646DDCBE"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Analytics.dll",
+        "sha256": "B907448FECFC1CB82E55D0E821EADDFF6FD963A1F6BFDA72BF363572820B11C4"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Analytics.dll",
+        "sha256": "CDE5B45BCD64D0037B4A9F01A1332451B69CFE0859F2B67A5BCCA424711EAEAB"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Components.dll",
+        "sha256": "F5A6AD8878D331B7148CFF57C75A74EAB6CF2644D218AD16F1CD23BB13C21E9C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Configuration.dll",
+        "sha256": "BED0D26F376572DF4F3579C6655C7A37AB56721BBE5FD98D6327C98978F91B7F"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Device.dll",
+        "sha256": "9BDD806778277033C6A628DEDE89867886DB06780F95C4A709BA331013CA00EB"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.dll",
+        "sha256": "5C856BD66A3FC0140053FF7B13066F13A0367C9EA473DD6FE1E99AC0F167CDE7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Environments.dll",
+        "sha256": "D004B1E96296D9E39040A5E670A3378DE31CA564C0B6F10D12E6D2874EC4BEB7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Environments.Internal.dll",
+        "sha256": "107E574A310E17517B0C348D5B2E3F68E7B64F23235406EF52D4E6809C8EA7BA"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Internal.dll",
+        "sha256": "D1443A40E8C4628C883DE00EB985EA05DF237DEDE937A8A4E722C6831C123D5E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Networking.dll",
+        "sha256": "D0A637E25BB00236066B274620FC7EA095202B91E2DBD038B016D96615454634"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Registration.dll",
+        "sha256": "3D8A7991DE3643CB6C8BF8E90E7E988C27839452A8CCFAFDAFA8045C6174324E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Scheduler.dll",
+        "sha256": "05F281E446261150D452FE77316D682DC46809043E03982E56D9B45979F6F3D8"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Telemetry.dll",
+        "sha256": "F987743D9BC39AD93258FD1758A6FC6E5C3737912B3736924D3A7D80A8777107"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Services.Core.Threading.dll",
+        "sha256": "378CA7088A2881AD2CB8569961E69AD62AD555E84ED8175FE3CBEEB0DF8A73C8"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\Unity.Timeline.dll",
+        "sha256": "8D85604ABFBA9D83ED24AD9B88372C3EBCBCD99064A6ECB4080C7229EF792DF4"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AccessibilityModule.dll",
+        "sha256": "D63C503591F1BDB5300BB1E69614E1FEC064BA5ADBACB64DA49C3032A81B191B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AIModule.dll",
+        "sha256": "87019C3E448938A1950F37E5DC010AF3B1E1DEBF9A1D6744754310C746DE1C90"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AndroidJNIModule.dll",
+        "sha256": "2B90AFA1DBEFF05F7F6A8A65CC1BC7127D98A23FF375742E84510287529FEAA9"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AnimationModule.dll",
+        "sha256": "1B6ACEBFAB5D65BFEDA79CFA18E8E2BD42C2C261DBF05BD7A0FA48D0A31DB8FE"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ARModule.dll",
+        "sha256": "048D9FCF2B506846F99E137D1234A8C3E163B86642F9C73F6B02EF26F109DAF7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AssetBundleModule.dll",
+        "sha256": "8B0AFBEDA0F0F67DFF30291A27919631DF7CC07D99AADECD006E1E67D631233A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.AudioModule.dll",
+        "sha256": "DFE5126D3A3C795D757610894AC0F7C086180A543C4EB84132DDCEFA39288903"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ClothModule.dll",
+        "sha256": "6B5391084D4ECAAA075D92226C94397879C0E52718C70EC31DA662781C948A61"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ClusterInputModule.dll",
+        "sha256": "C7DADCE154D261C53E485A990B12B0D9CD8F8A72903967EDC6D21E9DC6DA77C6"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ClusterRendererModule.dll",
+        "sha256": "70FBE29215CB855B2BF25F4CF524F147E3C0DA0C5C2E89BE342E7774F596C43B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ContentLoadModule.dll",
+        "sha256": "5CCEEB94AE7B979B3EC7023D6353A24D874130ECDFA25518335E6614A654C81D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.CoreModule.dll",
+        "sha256": "CA5B6EA1A048EFC7D9C4D200C743EEE97984C44A17CB1ED131F9E307A6F1BD71"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.CrashReportingModule.dll",
+        "sha256": "0563C0ED9BE1495B8E286887AEF8B3A770D7A12C5037C833CCC717CE557B69FF"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.DirectorModule.dll",
+        "sha256": "3331733AB020D02608C0F6EBA45DAE05423E57B68A244A2BF73301B8FB02A25C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.dll",
+        "sha256": "1F34EE9967EF0DA405B79F7BDEDFA82477B379CCCC940789F71DDFF678831163"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.DSPGraphModule.dll",
+        "sha256": "D2F3F45927A636555A51C68CBD6A0720CC45BD8408D9F0B70628EE2AE1DA7FAB"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.GameCenterModule.dll",
+        "sha256": "EBD16DA92DBBB3B791DA88C1ED305FDB1C24DEFD8671881E7493737D6EEC4AD2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.GIModule.dll",
+        "sha256": "1273FB4E43EBF31F49A21557BBE3119A90280B75DD49181312DD480103B03012"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.GridModule.dll",
+        "sha256": "450AEB82411A544E16C879A92F5061F3A5425E5D1335ECA6CF7B0F54100FDA2C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.HotReloadModule.dll",
+        "sha256": "DB5070A0960FFEA917F71845C952D747BF94F3C5D9B52ABAFD2E6CE68A3B5BDC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ImageConversionModule.dll",
+        "sha256": "1D41A61B482DBB34E7A8D759AB56247EF5199FD877A5E51E5D34C3941EBCFF1D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.IMGUIModule.dll",
+        "sha256": "12E4AA7E6F9D0C2682FB8DD6E93AD511697D1AFABA445E73FA76C682D5CE19F2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.InputLegacyModule.dll",
+        "sha256": "CAB7E02C749C122B08D2A29F17DB9DA678BE1C4097D6D8C4D491115316DC89F0"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.InputModule.dll",
+        "sha256": "B322AEB1E54476C15A1CB2FF2ECABFB467BFEA24CF4036654BC9F51E3F59DC12"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.JSONSerializeModule.dll",
+        "sha256": "0BE5CB0D53C29A00BA14FE5A16124B0922F076C0DB769A5DA3D47848C3400D72"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.LocalizationModule.dll",
+        "sha256": "FF0514AD38C6288E7BBD936B85187FA4590033D4F649D7669EEB9F11F74063F9"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.NVIDIAModule.dll",
+        "sha256": "CC1F62AF9A863BDF6E4EC5795473BC1E5CABAF1B63D7CF9D2ED72460CE9B5A86"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ParticleSystemModule.dll",
+        "sha256": "78C56026663F647BFF3C72C4ADA406EAEBDA1302E91E78EEDEC845E9228D383B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.PerformanceReportingModule.dll",
+        "sha256": "07DE89D9E550EF4E29F2A28057D9E9423FB41CAB283F6339CF34EC3FB16567FC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Physics2DModule.dll",
+        "sha256": "BB4995E4EC07AAC6EBD8E40C987AA5A095C7C321228DCC2D1DC2AB800BD3A826"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.PhysicsModule.dll",
+        "sha256": "B4A00A6249CC8ABF99F47E08C208C325CBBA92E37EF0779951FA60295CBF46D2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ProfilerModule.dll",
+        "sha256": "D5C78DA1A9305EF158A17E5224ED81EA10A8734929BC6168E7E480E49B023BF7"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.PropertiesModule.dll",
+        "sha256": "FDE1F679A3E0907803C57BFC7B102313355413244C875090639A97A443124DB0"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.AppleCore.dll",
+        "sha256": "AE5D8E19517050992BB3119B5847ED316CBA8A43F17B975B57F6B8586711E15C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.AppleMacosStub.dll",
+        "sha256": "0EE045F63C2EEA3DEA3DE64729B32CF97FFF80386B297D0FF0C7ACEE20B920ED"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.AppleStub.dll",
+        "sha256": "968F76A30561D45681E8E90D6089A49E0F4B7F8EC1AF93971B548E3EE7064FC3"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.Codeless.dll",
+        "sha256": "8E3B98D4640D44317C3F72D647D40AFD086A14533F0E0FC05052E0A5AE9E5FA6"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.dll",
+        "sha256": "3A5E91140BB5B3D108E1352220452B4EE8C1CDC2121C58965DF56E9FB9CCB921"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.SecurityCore.dll",
+        "sha256": "0CE4404832E44FFB30CEE23E126CA5014A6C04BC72F7D76ABDDC0DFA6A781B03"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.SecurityStub.dll",
+        "sha256": "F52206F552A9C9D56C4433CB99390DF0D41143E7D780202D6AAF7BF471FA860C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.Stores.dll",
+        "sha256": "2D17097DB2B6B7CB1EADF8FCCF5391D0EAE610C07AC985273968434DEBCA5B73"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.WinRTCore.dll",
+        "sha256": "D35D3E38DCF1EBFF42A85C9228EF72E7764606B272B3176EB0F7E5D3E80276D2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.Purchasing.WinRTStub.dll",
+        "sha256": "CC43B6EF04D759D8F90BB8D5A939AF3DA077DA896F663F1409C41B7CF81EF282"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+        "sha256": "F06962036CD7C77818487DC042D98A830BD660C1E6E110E2EF3E9842474862C5"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.ScreenCaptureModule.dll",
+        "sha256": "391164BAF7D2DFFF070B715E20E85BAD2E4D87E56212C1BEBE0B2FA50E149751"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.SharedInternalsModule.dll",
+        "sha256": "E9D0AC7391AFA0F6C93378A4A7644E0C4775E37C7314AF4F8A4A89D44EF313A3"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.SpriteMaskModule.dll",
+        "sha256": "CA9ACD49128A7CEF1B9ADA81CE574A3E424AD3ADB72C5C0DE96A0CE39C704C3D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.SpriteShapeModule.dll",
+        "sha256": "16F9EDB2B0B471AC78517D659DCBF65F7BE8FC92EC234C6E01CDAD0C952C0319"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.StreamingModule.dll",
+        "sha256": "0D982B87C8A5A8AC673C3EBE3977628677C68CC4CA802066C58B8860DFF239F2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.SubstanceModule.dll",
+        "sha256": "8019A4BFD1553B21A95AB899B79423C4A0C86D90C89D087E3739A884AFE64CDC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.SubsystemsModule.dll",
+        "sha256": "345084BB0841F0EFEA79C019565783613EBDA92374E8D515DA7B4212AE7417FB"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TerrainModule.dll",
+        "sha256": "B719D03ED31EBA97E6A30C2FF3C74D0C50ECD6F3BB8DF15FA587FF416A8E41D5"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TerrainPhysicsModule.dll",
+        "sha256": "B10714EA69E840078C69B6BE641CE63415E5318DC45714CE47594A38823AF635"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TextCoreFontEngineModule.dll",
+        "sha256": "8390939E2C1A8A9AB8C9C0E7E7ED44042A9B1FDD282F1B43CD3CDF3F2B9D738D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TextCoreTextEngineModule.dll",
+        "sha256": "3527F952081265ABAA8FBF48F10E1E14CD2E90CBFF6E770054FA48036B6DE865"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TextRenderingModule.dll",
+        "sha256": "BA8C20BC0DDF40F988576F93D2EEC8495292410B0695732236EC8F7BA008732C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TilemapModule.dll",
+        "sha256": "E064E77D9A2D927550F68277B9C78EAF6E4A7D0AA665D2A7F669DBE8B5218616"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.TLSModule.dll",
+        "sha256": "09C3BBAF83BE8A34800178B1815500643E6D39CF9FEAA0B293688B300B0E0577"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UI.dll",
+        "sha256": "7BB46F72D603062568A0046C0A055E6496844129FA143AC1ADDF2A11FEA812FC"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UIElementsModule.dll",
+        "sha256": "60919C4979818519D50BA123457C7D64906447BF7FF895773BADBCE93A527ABB"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UIModule.dll",
+        "sha256": "A0F349100A277233CA649E692E27EE6B0D7CA4D3BD52B9F263F71483227981F5"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UmbraModule.dll",
+        "sha256": "C05345DDA0FE894DBE4061391D37C2B4600B54331DEFEA17B28F6FB9F1CCD43B"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityAnalyticsCommonModule.dll",
+        "sha256": "61DC8FCB81D1BA69EF08B094E24EF5D81F001E604294D3D72BA4420F566A2F9A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityAnalyticsModule.dll",
+        "sha256": "79B7CA160459A4294CAE531B4B0D6961B90CD8E87EBB9FBBBDD2131F7DA98D51"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityConnectModule.dll",
+        "sha256": "63CA531CC546C5D6E921CDCCC677B316564554384A754D085B9C2DFF65E77757"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityCurlModule.dll",
+        "sha256": "EC27DCF17641FB18CC81A2EFBE21D1D9065F6A753CF2CE4F572CDEDDB136DC2C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityTestProtocolModule.dll",
+        "sha256": "BA0809709B7CC4F3F2627759224B433A3B47DDA1C1CF9277422E9123C560985E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityWebRequestAssetBundleModule.dll",
+        "sha256": "40E064CE9D677E5F768DD82FD92A0578325A8802E355989B58B63D72C6E603B3"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityWebRequestAudioModule.dll",
+        "sha256": "D18882FA5898E00138C55B28D7485979ED6C35B395971E898333BB98505AFA9A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityWebRequestModule.dll",
+        "sha256": "C3CA14689EDAC9D9539EA0AE2FE172E07F1FC9C866867F0D47EA7DFF24784103"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityWebRequestTextureModule.dll",
+        "sha256": "7940A47DB6401442B37CAC9BC43729399DD31AD3C667ACE3AE10024EE9ACD9B2"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.UnityWebRequestWWWModule.dll",
+        "sha256": "A67E9F62C1158B5CFCCB597DF827FC2F18E5E1C33FC7AE75FF94577004619CF9"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.VehiclesModule.dll",
+        "sha256": "9255881CE55334A37407A4E65BBDD0C2B9520F78D6828C775E01792C4E548DCD"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.VFXModule.dll",
+        "sha256": "3D68A1801C4A11DF2FEF466434E2434DC92D89532794AFAE01A07FA1A37441C4"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.VideoModule.dll",
+        "sha256": "14CB60FC53F15CB05D6BD82FB99E13C401DB5FE11E67E5A6C58D5EF497DDE266"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.VirtualTexturingModule.dll",
+        "sha256": "80406F9CE5A66DA3354CDDFB57DE446EE2498983E2D9523406A546C353F8AAF1"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.VRModule.dll",
+        "sha256": "67D740F9393A53A3649BB455E14D2AA52490D16B8314FAACD22775569C95F56E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.WindModule.dll",
+        "sha256": "F19B7A6E5C09038180F13A4849FBE87E0523665CEFFD31728DC124C127D85E0D"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityEngine.XRModule.dll",
+        "sha256": "9BB775691FEB1C76E58EACD744486731FCF9E48104A85A6CDEF5EC27592F9F7E"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UnityPools.dll",
+        "sha256": "9CC8CE925B9CD3EDAFD875637CE7136F1D01046767E930937059E0A9973B8DA9"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\Managed\\UPersian.dll",
+        "sha256": "666D35E1C803775AFDE1CB58E2DFB85219E181FB749E5A554C17EF43FC9EE97C"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\StreamingAssets\\mods\\NML\\Assembly-CSharp-Publicized.dll",
+        "sha256": "8C54A0B93A3B929834FB426FCE8CE66344444E7709484956DDF04267DE718234"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\StreamingAssets\\mods\\NeoModLoader.dll",
+        "sha256": "930DEF6E7F888A2809DE734975EE42925E91A2ACC01EBBADCE81E5A3FE95F74A"
+      },
+      {
+        "path": "D:\\owl\\gameversion\\0_51_2_imported\\worldbox_Data\\StreamingAssets\\mods\\NML\\Assemblies\\0Harmony.dll",
+        "sha256": "DFBD444EA824F2C2D2C67A69FFBE13695FA740981E08A3EA04845582F901B0F2"
+      }
+    ]
+  },
+  "unityRepair": {
+    "checks": 440,
+    "errors": 0,
+    "path": "build/runtime-070/20261025_064601/result.json"
+  },
+  "unityPlayer": {
+    "checks": 17,
+    "errors": 0,
+    "path": "build/runtime-070/20261025_064447/result.json"
+  },
+  "limits": [
+    "Targeted Unity acceptance only; full 0.7.0 release gate not claimed",
+    "No long-run FPS/CPU/GPU or 100/500/1000-unit performance acceptance",
+    "Only sampled 1280x720 UI and windmill visuals reviewed"
+  ]
+}

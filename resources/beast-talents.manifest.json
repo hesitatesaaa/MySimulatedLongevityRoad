@@ -1,0 +1,8134 @@
+{
+  "version": 1,
+  "generatedWith": "image_gen",
+  "transparentBackground": true,
+  "frameCount": 24,
+  "phaseFrames": {
+    "cast": [
+      0,
+      7
+    ],
+    "active": [
+      8,
+      15
+    ],
+    "hit": [
+      16,
+      19
+    ],
+    "dissipate": [
+      20,
+      23
+    ]
+  },
+  "authoredSpecies": 21,
+  "species": [
+    {
+      "species": "baihu",
+      "id": "BT_baihu",
+      "name": "\u5e9a\u91d1\u864e\u715e",
+      "source": ".dev-tools/combat-art/beast-talents/baihu.png",
+      "sourceSHA256": "787d17f8563c9e611285f65cde6360b6a5a7dc33bd3eb3664e2761da0702defa",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u767d\u864e innate supernatural ability \u5e9a\u91d1\u864e\u715e. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: white tiger fang, fierce silver tiger phantom strikes crossing metallic gold claw cuts. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-e191b0ac-911b-4653-80f8-61754d5f35ef.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_baihu.png",
+      "atlasSHA256": "a157780be8842a5152bd7f0fe8c91d91e1a4497bdf3b50d81452f01d4c6f2fa9",
+      "icon": "GameResources/ui/BeastTalents/BT_baihu.png",
+      "iconSHA256": "3998bab39e9df0d9609eb1cd5d89a9219fb204dc265d00f14f018df928585c95",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "changliao",
+      "id": "BT_changliao",
+      "name": "\u7360\u6bd2\u566c\u9aa8",
+      "source": ".dev-tools/combat-art/beast-talents/changliao.png",
+      "sourceSHA256": "5205060e655e41afdec8d86ab1e713e0dc8ae189d235b3d0197b89103d851538",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u957f\u7360\u51f6\u72ac innate supernatural ability \u7360\u6bd2\u566c\u9aa8. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: long vicious canine fangs dripping green venom, jaw shadow bite and sharp bone-marked poisonous scars burst. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-94c43e46-cbed-4f69-97da-dbca5e9cb33b.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_changliao.png",
+      "atlasSHA256": "b1970c5fe5511592e68916b27b0da28a740157984a76a99a01525d3b52294e51",
+      "icon": "GameResources/ui/BeastTalents/BT_changliao.png",
+      "iconSHA256": "c74424fb14c0dedd7547d2459bc7a84189ad26de4e72cb0ac01d4a5a37f6bc2e",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "dafeng",
+      "id": "BT_dafeng",
+      "name": "\u4e5d\u9704\u98ce\u7262",
+      "source": ".dev-tools/combat-art/beast-talents/dafeng.png",
+      "sourceSHA256": "0354870625dd42fe6ea9e94693ee810244a6b01e5b806de9395b72d95494517a",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u5927\u98ce innate supernatural ability \u4e5d\u9704\u98ce\u7262. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: great dark bird wind eye, twisting teal white tornado cage with rotating curved blade feathers. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-1114089a-fe55-4345-85cd-f7da07cbd126.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_dafeng.png",
+      "atlasSHA256": "2e647efc97ead93e4be27d6af4cb1ead6b051ee9e6ffd546141a12c298a9bbcd",
+      "icon": "GameResources/ui/BeastTalents/BT_dafeng.png",
+      "iconSHA256": "d0aba859af64ed25661d517aaf21904e38b6605a6c269184dadcc3e8ec1ff3c2",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "feiqiu",
+      "id": "BT_feiqiu",
+      "name": "\u6d6e\u7a7a\u9707\u8361",
+      "source": ".dev-tools/combat-art/beast-talents/feiqiu.png",
+      "sourceSHA256": "eb89c5c18e4cf25eedcda9efa107d0b9e2fe456cbce3285a196c839982c61d75",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u98de\u7403\u517d innate supernatural ability \u6d6e\u7a7a\u9707\u8361. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: round fluffy hovering beast ball, ivory peach fluff swells then circular transparent air shockwave pushes outward. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-91492a43-00fa-47ff-aa20-ef7ffb0291d6.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_feiqiu.png",
+      "atlasSHA256": "908ce3ab945e64971c0f983f3e8a1443b94dbc4197929402bd4c418184c39a10",
+      "icon": "GameResources/ui/BeastTalents/BT_feiqiu.png",
+      "iconSHA256": "fe994ae6b2fa6f12c38fcb75f09ac6ef37fb8dafadfeda24dd94a3a69232d957",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "fenghuang",
+      "id": "BT_fenghuang",
+      "name": "\u6d85\u706b\u56de\u751f",
+      "source": ".dev-tools/combat-art/beast-talents/fenghuang.png",
+      "sourceSHA256": "9e543524f7ab29bc99ecf073e10d8b925ef6505780203fc14ef3366eb4f486cb",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u51e4\u51f0 innate supernatural ability \u6d85\u706b\u56de\u751f. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: phoenix heart ember, red gold flame cocoon closes then opens into a radiant healing phoenix wing fan. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-923bf93f-1128-4512-ae79-686d53576c93.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_fenghuang.png",
+      "atlasSHA256": "0fc2981838b4f8eb329d31278e03dc7800f95b61e054dc0587a9846c8b69c10d",
+      "icon": "GameResources/ui/BeastTalents/BT_fenghuang.png",
+      "iconSHA256": "8c401166f7b2721b869978401592bea3d170804d80c043b0dd822b53476c5fcb",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "goushou",
+      "id": "BT_goushou",
+      "name": "\u72ac\u795f\u5c01\u751f",
+      "source": ".dev-tools/combat-art/beast-talents/goushou.png",
+      "sourceSHA256": "778fccc5f0cfff11dcaa30a80c5fe5885b446d58321fd08850b9aa646884b54d",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u72d7\u9996\u5996\u517d innate supernatural ability \u72ac\u795f\u5c01\u751f. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: bone white canine skull spits dark red binding curse seal, crimson toothed circular prohibition glyph. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-3bfd384a-499d-42a3-b159-b14f8ada24aa.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_goushou.png",
+      "atlasSHA256": "23b1406102238c6cdfd7804f8f8ce1712b27c7fec447cde51d818be94e6b6fb9",
+      "icon": "GameResources/ui/BeastTalents/BT_goushou.png",
+      "iconSHA256": "da92130f4250185c99e3354f2ebac3c7f8f6a806ff0e11e46a4e1f8808ff1c0e",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "hongmao",
+      "id": "BT_hongmao",
+      "name": "\u8d64\u8840\u72c2\u9b03",
+      "source": ".dev-tools/combat-art/beast-talents/hongmao.png",
+      "sourceSHA256": "98f85dbb473d9de3543d9c157ef317eda59a150761d522a0b928491da25fbe65",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u7ea2\u6bdb\u5f02\u517d innate supernatural ability \u8d64\u8840\u72c2\u9b03. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: scarlet beast mane and blood rune, red bristles stand on end as blood energy runs along a fiery spine. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-3204a7a5-412b-4c16-9e3b-7d16641710ea.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_hongmao.png",
+      "atlasSHA256": "b478657135029bbbb21e0e6434be1602f1cf4d4c92e2616bf3777ab6355f1a4b",
+      "icon": "GameResources/ui/BeastTalents/BT_hongmao.png",
+      "iconSHA256": "50e6e3b6eb2fc34f1067064897ec30819f1ae473b863bba2f848abee82338548",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "huanglong",
+      "id": "BT_huanglong",
+      "name": "\u5730\u8109\u9f99\u9707",
+      "source": ".dev-tools/combat-art/beast-talents/huanglong.png",
+      "sourceSHA256": "dbf997557b63a924864568fdfa91e43a62d771b25fa1833f40953671f8a0b1c1",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9ec4\u9f99 innate supernatural ability \u5730\u8109\u9f99\u9707. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: ochre yellow dragon horns and golden earth veins illuminate, dragon silhouette bursts out of concentric earth fractures. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-2beb29b2-5773-4d2c-95e2-94cd70a3f103.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_huanglong.png",
+      "atlasSHA256": "7aa21aabbad292f0d7b078670ed85d868b57cbef212e220b4c0f62df8b9b10ba",
+      "icon": "GameResources/ui/BeastTalents/BT_huanglong.png",
+      "iconSHA256": "b1e174eb243cf4c8eff46b38ec6710afa675583c8b58069c8159feee22cd7457",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "kunpeng",
+      "id": "BT_kunpeng",
+      "name": "\u6276\u6447\u5782\u5929",
+      "source": ".dev-tools/combat-art/beast-talents/kunpeng.png",
+      "sourceSHA256": "916b6e72a4678a58fed1efdff2ee9a4d64656c67bcfa541f61a1ac94586fd64a",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9cb2\u9e4f innate supernatural ability \u6276\u6447\u5782\u5929. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: colossal black and ivory peng wings unfold, blue sky pressure, fan-shaped curved wind wall, feather tips curling. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-b66152b6-c9bc-46e8-ba7c-94a0d567ca38.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_kunpeng.png",
+      "atlasSHA256": "a509c8ad5c78e20bdfe1a04bebb23a4e9632521a0312bdbeff5b94bdfc9cb72b",
+      "icon": "GameResources/ui/BeastTalents/BT_kunpeng.png",
+      "iconSHA256": "f71e62937b29f0b3ea924c9fb86da586223f43a244eba680b540da1d2b3dd5aa",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "liejiejing",
+      "id": "BT_liejiejing",
+      "name": "\u88c2\u754c\u9cb8\u9e23",
+      "source": ".dev-tools/combat-art/beast-talents/liejiejing.png",
+      "sourceSHA256": "1d4baeb425603ef76a41fe360e75e685c240e2e30f478411a1383453061976bf",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u88c2\u89e3\u9cb8 innate supernatural ability \u88c2\u754c\u9cb8\u9e23. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: midnight blue whale tail and fractured space crystal, whale silhouette sings as angular cyan violet spatial cracks converge then explode twice. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-298af600-cd83-49a1-914b-145edaaad3f5.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_liejiejing.png",
+      "atlasSHA256": "cc304b144cc8e9ecfad426f6af26efbf65250ba1e3f93faf07f219f44550d198",
+      "icon": "GameResources/ui/BeastTalents/BT_liejiejing.png",
+      "iconSHA256": "fb5d4539081cf817ec20cd220ae291c0d8099905c360001fd66e7c94a62658e4",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "manman",
+      "id": "BT_manman",
+      "name": "\u6bd4\u7ffc\u540c\u5fc3",
+      "source": ".dev-tools/combat-art/beast-talents/manman.png",
+      "sourceSHA256": "1941790b2a5ee07e73c4feaad9926b17e894c16b47c830d6d4f7197d6a9c235c",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u86ee\u86ee innate supernatural ability \u6bd4\u7ffc\u540c\u5fc3. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: two inseparable paired birds and intertwined feathers, magenta ivory paired wings cross into two coordinated feather strikes. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-4a7d2aac-b5ce-4d83-93c2-d6a13b558a48.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_manman.png",
+      "atlasSHA256": "973edbab0e9c60f7fea4d8e5692115fd6c7824fe69837f4f61b34518a33eee1a",
+      "icon": "GameResources/ui/BeastTalents/BT_manman.png",
+      "iconSHA256": "2cead42afdd162b8b5ef25eb79c62c6d872d54eb1b99a39e49a662526b5a5f9e",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "mo",
+      "id": "BT_mo",
+      "name": "\u541e\u68a6\u5165\u5bd0",
+      "source": ".dev-tools/combat-art/beast-talents/mo.png",
+      "sourceSHA256": "43a2d82ded811bd27134e9f49905079b6ecf4d2153b5d1be6a77da7a7ee7a36c",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u8c98 innate supernatural ability \u541e\u68a6\u5165\u5bd0. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: sleeping tapir eye and lavender dream pearl, soft indigo dream mist wraps and flows back in a spiral. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-ad8d45d1-e56f-470d-bbf9-f76aeb4ae955.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_mo.png",
+      "atlasSHA256": "859d24f3072645566a932035cd6ea74c0918d6727e79e287314eb62dae5eacbe",
+      "icon": "GameResources/ui/BeastTalents/BT_mo.png",
+      "iconSHA256": "133f38b43d52779e53631079957f864a447e28ca9676dfb549c5552ed2b689a3",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "moqilin",
+      "id": "BT_moqilin",
+      "name": "\u58a8\u9e9f\u8680\u5149",
+      "source": ".dev-tools/combat-art/beast-talents/moqilin.png",
+      "sourceSHA256": "352e2b5c9fdd19c2de383f215ae002b63f6380a0ac93cbd2510728ac07df7e15",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u58a8\u9e92\u9e9f innate supernatural ability \u58a8\u9e9f\u8680\u5149. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: black qilin scales eclipse a pale sun, ink-black smoke domain with violet dimming ripples. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-8de9d4e8-e77e-42b8-840f-18f60a0bc712.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_moqilin.png",
+      "atlasSHA256": "e7c98f53e21d22d55922bfc3c3de529d4e475fd1a21c96c683f27eca5c1d1d05",
+      "icon": "GameResources/ui/BeastTalents/BT_moqilin.png",
+      "iconSHA256": "7a254e5ffdc7054a2ebdfb51df5be958a313def49d3bfd3bc1f7e362d65d6ce1",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "qilin",
+      "id": "BT_qilin",
+      "name": "\u745e\u9e9f\u62a4\u751f",
+      "source": ".dev-tools/combat-art/beast-talents/qilin.png",
+      "sourceSHA256": "03a91ccb46f5d80986253195c29b24bcace81862fb752947b1a4a56baf8d3fb2",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9e92\u9e9f innate supernatural ability \u745e\u9e9f\u62a4\u751f. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: auspicious jade qilin antler with warm green living light, twin gentle healing light streams and soft sprouting motes. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-762b6c36-60e9-45f4-9dd4-7a1d923df0e3.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_qilin.png",
+      "atlasSHA256": "ad0c07f59ac833011c78a4b0c912ebda40156d153403cdb0a0bfa7aaeb105611",
+      "icon": "GameResources/ui/BeastTalents/BT_qilin.png",
+      "iconSHA256": "2ff4c4e7fd852d0df23a56de76ae4db165bcf9a28ebf1257c5632551a9a281e9",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "qinglong",
+      "id": "BT_qinglong",
+      "name": "\u82cd\u9f99\u5fa1\u6f9c",
+      "source": ".dev-tools/combat-art/beast-talents/qinglong.png",
+      "sourceSHA256": "97dbe3fc908921f68fe789d0439dc807299dbcbf03bc70b9847eb3d0f75588fc",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9752\u9f99 innate supernatural ability \u82cd\u9f99\u5fa1\u6f9c. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: jade azure dragon head inside a water pearl, coiling dragon water stream chaining three splashes. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-4aca47bf-35f2-4980-a296-8e83804bd5f5.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_qinglong.png",
+      "atlasSHA256": "714f708088176f72a734d36b3c25df6c73e10d97d715a44fe42a9f17a38d5032",
+      "icon": "GameResources/ui/BeastTalents/BT_qinglong.png",
+      "iconSHA256": "dba0e104e1205032c14cf9d49f7874b12a61a69377d746a2cca8107c00ec5704",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "qingluan",
+      "id": "BT_qingluan",
+      "name": "\u9752\u7fbd\u51c0\u969c",
+      "source": ".dev-tools/combat-art/beast-talents/qingluan.png",
+      "sourceSHA256": "263ec2b1922b64031dafa72e46344f91e2359da3e914f123727a7074ff37bbef",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9752\u9e3e innate supernatural ability \u9752\u7fbd\u51c0\u969c. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: elegant cyan green luan tail feathers, cleansing turquoise feathers rise through a clear luminous ring. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-220090d2-c365-4dcb-9350-b191b83569c3.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_qingluan.png",
+      "atlasSHA256": "f403b41abad1ab1939a146e57884e497e9e964bb34bee3675866244bc196aa4d",
+      "icon": "GameResources/ui/BeastTalents/BT_qingluan.png",
+      "iconSHA256": "63335254e22daafaa42dc2f4e32e6673746bf412304dde3a2ee162b24bb4a8c4",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "tianshou",
+      "id": "BT_tianshou",
+      "name": "\u9547\u5929\u91cd\u538b",
+      "source": ".dev-tools/combat-art/beast-talents/tianshou.png",
+      "sourceSHA256": "bc1601e7619a75c20b0be38b6c36f298da9121738cd7134fc0cddccff598892b",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u5172\u517d innate supernatural ability \u9547\u5929\u91cd\u538b. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: massive ancient stone shell seal, heavy bronze and stone armor lines expand outward in periodically descending gravity ripples. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-686dd8a0-1d61-41a7-828a-771c0bf86a0f.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_tianshou.png",
+      "atlasSHA256": "74ea4694967d99dc0aeea44dbae7c85001d9c5a6a4791fa7f53940ecd634fc59",
+      "icon": "GameResources/ui/BeastTalents/BT_tianshou.png",
+      "iconSHA256": "d18f6545be88f5e025e0b93486bc786492a0d64c5fc644be2a6d19b7ef70abdc",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "xuanniao",
+      "id": "BT_xuanniao",
+      "name": "\u7384\u97f3\u593a\u9b44",
+      "source": ".dev-tools/combat-art/beast-talents/xuanniao.png",
+      "sourceSHA256": "9060962d0f90539face7066a18a19cdd63de8c5d443b9d6701433ff63a24bdf0",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u7384\u9e1f innate supernatural ability \u7384\u97f3\u593a\u9b44. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: mysterious black sacred bird sings, dark gold concentric sound rings strip blue spirit wisps. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-16774d8f-9b8e-4328-a034-2f83f7e949d0.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_xuanniao.png",
+      "atlasSHA256": "47aaec09f5b7d34f8d5794361c131f8e5c35fe0e01645c56bcdedcdc12b24040",
+      "icon": "GameResources/ui/BeastTalents/BT_xuanniao.png",
+      "iconSHA256": "f41f6624ebc895a1b1744eca2e00f90b084c87da53b028075fecdad648586c60",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "xuanwu",
+      "id": "BT_xuanwu",
+      "name": "\u9f9f\u86c7\u7384\u7532",
+      "source": ".dev-tools/combat-art/beast-talents/xuanwu.png",
+      "sourceSHA256": "058a029cd5cd4becd8f7c6cce295d69900fe7d7583794a310646ddddd5cd8073",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u7384\u6b66 innate supernatural ability \u9f9f\u86c7\u7384\u7532. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: black tortoise shell and coiled turquoise serpent, hexagonal armored dome fractures to release sweeping serpent shadow. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-f741c744-037a-4551-ae7d-ce4caa991d67.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_xuanwu.png",
+      "atlasSHA256": "adb464316a94e849a72d38dceed9aec540c37166933fb1877e67ddd15d4fbae0",
+      "icon": "GameResources/ui/BeastTalents/BT_xuanwu.png",
+      "iconSHA256": "2aab209dcf5dcc12124b9014482fdd7bebdb13067dc7cf0649cdd9290f435370",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "yingying",
+      "id": "BT_yingying",
+      "name": "\u9010\u5f71\u730e\u5370",
+      "source": ".dev-tools/combat-art/beast-talents/yingying.png",
+      "sourceSHA256": "e35ba8b3f0469831c231dc83a8e379ef9bb5c8a30aba349691b7e9e74da206d5",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u9634\u5f71\u517d innate supernatural ability \u9010\u5f71\u730e\u5370. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: violet shadow eye hunting mark, layered black shadow claws close around a dark purple delayed burst. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-7ad0fecd-e17b-4756-a957-26635bfc8b25.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_yingying.png",
+      "atlasSHA256": "a9918a6130fa1fbbf4004eff847289e501b730d6f7c5c8ed525b88c3597358d5",
+      "icon": "GameResources/ui/BeastTalents/BT_yingying.png",
+      "iconSHA256": "230d1c349caecf5596f98e152e59d54549772b30868340e2b70f01079b8e6ed4",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    },
+    {
+      "species": "zhuque",
+      "id": "BT_zhuque",
+      "name": "\u79bb\u706b\u711a\u90aa",
+      "source": ".dev-tools/combat-art/beast-talents/zhuque.png",
+      "sourceSHA256": "360158b1aca317fcb88896440657c0fdc3866b86222bd4c2cac33bea41753d3d",
+      "prompt": "Create one production game sprite sheet asset for a Chinese xianxia WorldBox mod, \u6731\u96c0 innate supernatural ability \u79bb\u706b\u711a\u90aa. Hand-painted pixel-inspired miniature fantasy VFX, crisp silhouette, richly authored but readable at small size, genuine transparent RGBA background. Subject design: vermilion sacred bird fire feathers shoot in a piercing linear volley, red and orange feather-shaped burn sigils. STRICT LAYOUT: 5 columns by 5 rows, 25 equal square cells, edge-to-edge regular grid with NO drawn grid lines, NO text, NO labels, NO opaque background. Every cell must have transparent padding with the motif entirely inside its own cell. Row-major first 24 cells are a coherent animation: cells 0-7 preparation/cast grows, cells 8-15 active movement travels/loops, cells 16-19 impact bloom, cells 20-23 dissipate. Cell 24 (bottom-right) is the dedicated square ability icon with the same unique motif, no frame or lettering. Keep frame subject position and scale consistent, effects occupy middle 65% of every cell, no overlap between cells. Do not use generic sword spell, profession skill icon, placeholder shapes, or another animal. Sheet square, preferably 1536x1536 or 1024x1024.",
+      "originalSource": "C:\\Users\\\u5362\u4f73\u5947\\.codex\\generated_images\\01a171da-19fd-7393-ba5b-9425b3f46570\\exec-3cd361d8-0083-40c7-94ab-57bc4f0f4676.png",
+      "atlas": "GameResources/effects/BeastTalents/BT_zhuque.png",
+      "atlasSHA256": "df7375774413d68289d39839904b141ae90f84bfc24153737d79f62a22eb1b60",
+      "icon": "GameResources/ui/BeastTalents/BT_zhuque.png",
+      "iconSHA256": "4d2735f9c197f7148c3c57b24a34e1c30b0a1d67ce392e140fff9c4aa0a9e8d4",
+      "frames": [
+        {
+          "index": 0,
+          "sourceRect": [
+            0,
+            0,
+            251,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 1,
+          "sourceRect": [
+            251,
+            0,
+            502,
+            251
+          ],
+          "runtimeRect": [
+            192,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 2,
+          "sourceRect": [
+            502,
+            0,
+            752,
+            251
+          ],
+          "runtimeRect": [
+            384,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 3,
+          "sourceRect": [
+            752,
+            0,
+            1003,
+            251
+          ],
+          "runtimeRect": [
+            576,
+            960,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 4,
+          "sourceRect": [
+            1003,
+            0,
+            1254,
+            251
+          ],
+          "runtimeRect": [
+            0,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 5,
+          "sourceRect": [
+            0,
+            251,
+            251,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 6,
+          "sourceRect": [
+            251,
+            251,
+            502,
+            502
+          ],
+          "runtimeRect": [
+            384,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 7,
+          "sourceRect": [
+            502,
+            251,
+            752,
+            502
+          ],
+          "runtimeRect": [
+            576,
+            768,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 8,
+          "sourceRect": [
+            752,
+            251,
+            1003,
+            502
+          ],
+          "runtimeRect": [
+            0,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 9,
+          "sourceRect": [
+            1003,
+            251,
+            1254,
+            502
+          ],
+          "runtimeRect": [
+            192,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 10,
+          "sourceRect": [
+            0,
+            502,
+            251,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 11,
+          "sourceRect": [
+            251,
+            502,
+            502,
+            752
+          ],
+          "runtimeRect": [
+            576,
+            576,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 12,
+          "sourceRect": [
+            502,
+            502,
+            752,
+            752
+          ],
+          "runtimeRect": [
+            0,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 13,
+          "sourceRect": [
+            752,
+            502,
+            1003,
+            752
+          ],
+          "runtimeRect": [
+            192,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 14,
+          "sourceRect": [
+            1003,
+            502,
+            1254,
+            752
+          ],
+          "runtimeRect": [
+            384,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 15,
+          "sourceRect": [
+            0,
+            752,
+            251,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            384,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 16,
+          "sourceRect": [
+            251,
+            752,
+            502,
+            1003
+          ],
+          "runtimeRect": [
+            0,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 17,
+          "sourceRect": [
+            502,
+            752,
+            752,
+            1003
+          ],
+          "runtimeRect": [
+            192,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 18,
+          "sourceRect": [
+            752,
+            752,
+            1003,
+            1003
+          ],
+          "runtimeRect": [
+            384,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 19,
+          "sourceRect": [
+            1003,
+            752,
+            1254,
+            1003
+          ],
+          "runtimeRect": [
+            576,
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 20,
+          "sourceRect": [
+            0,
+            1003,
+            251,
+            1254
+          ],
+          "runtimeRect": [
+            0,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 21,
+          "sourceRect": [
+            251,
+            1003,
+            502,
+            1254
+          ],
+          "runtimeRect": [
+            192,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 22,
+          "sourceRect": [
+            502,
+            1003,
+            752,
+            1254
+          ],
+          "runtimeRect": [
+            384,
+            0,
+            192,
+            192
+          ]
+        },
+        {
+          "index": 23,
+          "sourceRect": [
+            752,
+            1003,
+            1003,
+            1254
+          ],
+          "runtimeRect": [
+            576,
+            0,
+            192,
+            192
+          ]
+        }
+      ],
+      "iconSourceRect": [
+        1003,
+        1003,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "review": "pending-Unity"
+    }
+  ],
+  "releaseReady": false
+}

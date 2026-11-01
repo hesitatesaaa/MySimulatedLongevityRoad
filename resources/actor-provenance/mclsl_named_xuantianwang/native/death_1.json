@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_named_xuantianwang",
+  "action": "death",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "f6c1f7cb16e09ffd6da67cc02e319a79113d13398cf1041efc94e621884fe0a9",
+  "outputFile": "NativeActorResources/actors/Named/XuanTianWang/main/death_1.png",
+  "outputSha256": "c92381a8cf60d9d910af6398aea444cf427db7a9680f21362674b24204249efe",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u7384\u5929\u738b (mclsl_named_xuantianwang), death_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: regal warrior in deep purple embroidered robes and articulated armor, dark hair and restrained crown, restrained gold details and a sword. Visual gender: male, adult fully clothed human. Pose: Death single-shot progress 0.200, stage slump. Required pose: The body begins to buckle; head below idle height, knees/limbs noticeably bend, chest lowers but remains above the fully collapsed pose. Eye CLOSED as a dark eyelid, no bright pupil or iris. Body loses support and lowers progressively, limbs fold slack, head droops, cloth/fins/wings/mane sag. Early poses transition from idle, collapse bends the body anatomically, late poses remain low/prone and never stand, fly or swim again. At this progress keep some weight on bent legs or drooping fin/wings, retain full identity and all body parts. No gore, disappearing pixels, fragments or particles. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs. ANATOMY acceptance: Exactly two arms, two hands, two legs, two feet, one head and one torso. Trace each leg continuously from one pelvis through its knee and ankle to its boot. Cloth hems must not resemble extra feet or boots. Hands join exactly two wrists. No duplicated joints or extra limb-shaped fabric. Draw the entire pose inside the canvas; aim for 32px transparent padding. A smaller intact transparent margin alone is not a defect or a reason to redraw. Do not crop. This is ONE newly drawn standalone PNG.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_xuantianwang\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-16T15:02:05.650942+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "f6c1f7cb16e09ffd6da67cc02e319a79113d13398cf1041efc94e621884fe0a9",
+    "sourceAnchor": [
+      642.5,
+      1195
+    ],
+    "sourcePixelsPerUnit": 378.9473532631585,
+    "ppuFactor": 1.3287170468502303,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

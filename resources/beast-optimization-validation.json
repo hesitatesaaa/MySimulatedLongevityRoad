@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-20",
+  "gameBuild": "0.51.2",
+  "nmlCompiler": {
+    "success": true,
+    "sourceCount": 248,
+    "compiler": "Microsoft.CodeAnalysis.CSharp, Version=4.9.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+    "errors": [],
+    "errorCount": 0,
+    "actualUnityStartupTested": false
+  },
+  "offlineAssertions": {
+    "beastRulesAndCatalog": 720,
+    "animationTimingAndManifest": 596,
+    "actorLoading": 12,
+    "deathVisualLifecycle": 804
+  },
+  "resourceCoverage": {
+    "forms": 62,
+    "frames": 1374,
+    "placementIcons": 38,
+    "itemIcons": 111,
+    "spellStageAtlases": 48
+  },
+  "nativeInspectionEvidence": [
+    "build/selection-base.txt",
+    "build/beast-native-api.txt",
+    "build/beast-lineage-il.txt"
+  ],
+  "unityRetested": false,
+  "performance1005001000": false,
+  "cpuGpuMemoryMeasured": false,
+  "subspeciesSaveReloadInUnity": false,
+  "namePersistenceInUnity": false,
+  "gameWindowObservation": "WorldBox not returned by sky.list_windows; game process subsequently absent. Existing installed mod was not replaced."
+}

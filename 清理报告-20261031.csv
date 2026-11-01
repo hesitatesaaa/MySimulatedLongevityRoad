@@ -1,0 +1,16 @@
+组,路径,大小MB,说明
+C1,validation,736.4,0.7.0 运行时验收快照（已被 0.8.1 取代）
+C2,upstream-0.6.0\.dev-tools\combat-art,260.6,第三方战斗美术参考素材
+C3,source,113.7,上游 mod 素材（诡秘之主等）
+C4,_ref,11.2,WorldBox 反编译参考
+C5,.codegraph,8.1,代码索引缓存（可重建）
+D1,_acl-recovery,0.1,ACL 修复备份
+D1,dsh-acl-recovery,0.1,ACL 诊断报告
+D1,optimization-0.8.1-20261030\acl-recovery,0.1,ACL 修复备份
+D2,upstream-0.6.0\zzz-child-probe,0.0,空探针目录
+D2,upstream-0.6.0\.dotnet-home,0.0,空 dotnet 目录
+D2,upstream-0.6.0\.mclsl-reflect,0.9,反射探针临时文件
+D3,清理报告-20261025.csv,0.0,旧清理记录
+D3,清理报告-20261025.md,0.0,旧清理记录
+D3,清理报告-20261030.csv,0.0,旧清理记录
+D3,清理报告-20261030.md,0.0,旧清理记录

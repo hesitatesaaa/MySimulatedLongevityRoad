@@ -1,0 +1,18 @@
+{
+  "releaseVersion": "0.8.1",
+  "date": "2026-10-30",
+  "csharpSources": 274,
+  "compiledSourceFingerprint": "90661cb899a9a75ddd7a334a0269f7d58f93dd85ca2df1f43f0ec935468bd74f",
+  "compileExitCode": 0,
+  "existingWarnings": true,
+  "beastSurfaceIndexRegression": "PASS",
+  "pngFiles": 2228,
+  "resizedStaticIcons": 83,
+  "animationPixelsDimensionsAndLayoutsUnchanged": true,
+  "allOtherPNGPixelExact": true,
+  "minimumDisplayPSNR": 33.633,
+  "displayMetric": "Pillow/Lanczos 32px and 64px, minimum RGB PSNR over black/grey/white; proxy, not Unity visual certification",
+  "storageVersion": "0.8.0",
+  "savePrefix": "mclsl.080.",
+  "unityRetested": false
+}

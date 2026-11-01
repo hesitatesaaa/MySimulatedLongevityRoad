@@ -1,0 +1,1076 @@
+[
+  {
+    "id": "A01",
+    "name": "\u7409\u7483\u73E0",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A01.png"
+  },
+  {
+    "id": "A02",
+    "name": "\u84DD\u8840\u73CA\u745A",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A02.png"
+  },
+  {
+    "id": "A03",
+    "name": "\u7075\u865A\u8349",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A03.png"
+  },
+  {
+    "id": "A04",
+    "name": "\u957F\u751F\u9752\u529B",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A04.png"
+  },
+  {
+    "id": "A05",
+    "name": "\u4E07\u7075\u743C\u6D46",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A05.png"
+  },
+  {
+    "id": "A06",
+    "name": "\u957F\u751F\u836F\u6750",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A06.png"
+  },
+  {
+    "id": "A07",
+    "name": "\u805A\u7075\u9AD3",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A07.png"
+  },
+  {
+    "id": "A08",
+    "name": "\u62A4\u8109\u8349",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A08.png"
+  },
+  {
+    "id": "A09",
+    "name": "\u6D17\u9AD3\u6DB2",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A09.png"
+  },
+  {
+    "id": "F01",
+    "name": "\u7075\u7B26\u7EB8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F01.png"
+  },
+  {
+    "id": "A10",
+    "name": "\u56DE\u7075\u8349",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A10.png"
+  },
+  {
+    "id": "A11",
+    "name": "\u6E05\u5FC3\u82B1",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A11.png"
+  },
+  {
+    "id": "A12",
+    "name": "\u7384\u971C\u9732",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A12.png"
+  },
+  {
+    "id": "A13",
+    "name": "\u8D64\u9633\u829D",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A13.png"
+  },
+  {
+    "id": "A14",
+    "name": "\u7389\u9AD3\u83B2",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A14.png"
+  },
+  {
+    "id": "A15",
+    "name": "\u5730\u8109\u7075\u4E73",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A15.png"
+  },
+  {
+    "id": "A16",
+    "name": "\u661F\u9B42\u85E4",
+    "category": "Plant",
+    "path": "GameResources/ui/Items/A16.png"
+  },
+  {
+    "id": "A17",
+    "name": "\u4E5D\u8F6C\u91D1\u6DB2",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A17.png"
+  },
+  {
+    "id": "A18",
+    "name": "\u5929\u9732\u743C\u534E",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A18.png"
+  },
+  {
+    "id": "A19",
+    "name": "\u592A\u865A\u7075\u6CC9",
+    "category": "SpiritObject",
+    "path": "GameResources/ui/Items/A19.png"
+  },
+  {
+    "id": "F010",
+    "name": "\u6731\u7802\u7075\u58A8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F010.png"
+  },
+  {
+    "id": "F011",
+    "name": "\u8F7B\u98CE\u7B26\u7802",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F011.png"
+  },
+  {
+    "id": "F012",
+    "name": "\u575A\u5CA9\u7B26\u7802",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F012.png"
+  },
+  {
+    "id": "F013",
+    "name": "\u6C34\u955C\u7075\u58A8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F013.png"
+  },
+  {
+    "id": "F014",
+    "name": "\u96F7\u7EB9\u6676\u7C89",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F014.png"
+  },
+  {
+    "id": "F015",
+    "name": "\u9547\u9B42\u58A8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F015.png"
+  },
+  {
+    "id": "F016",
+    "name": "\u9752\u6728\u7B26\u9AA8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F016.png"
+  },
+  {
+    "id": "F017",
+    "name": "\u8F9F\u90AA\u91D1\u7802",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F017.png"
+  },
+  {
+    "id": "F018",
+    "name": "\u661F\u6CB3\u58A8",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F018.png"
+  },
+  {
+    "id": "F019",
+    "name": "\u7384\u9EC4\u7B26\u80C6",
+    "category": "TalismanMaterial",
+    "path": "GameResources/ui/Items/F019.png"
+  },
+  {
+    "id": "M01",
+    "name": "\u7075\u6728\u5668\u80DA",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M01.png"
+  },
+  {
+    "id": "M02",
+    "name": "\u7384\u94C1\u5668\u80DA",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M02.png"
+  },
+  {
+    "id": "M03",
+    "name": "\u5730\u8109\u5668\u80DA",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M03.png"
+  },
+  {
+    "id": "M04",
+    "name": "\u5929\u661F\u5668\u80DA",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M04.png"
+  },
+  {
+    "id": "M05",
+    "name": "\u9752\u94DC\u7075\u7802",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M05.png"
+  },
+  {
+    "id": "M06",
+    "name": "\u8D64\u7EB9\u77FF",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M06.png"
+  },
+  {
+    "id": "M07",
+    "name": "\u7075\u6728\u82AF",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M07.png"
+  },
+  {
+    "id": "M08",
+    "name": "\u9752\u5CA9\u6676",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M08.png"
+  },
+  {
+    "id": "M09",
+    "name": "\u4E91\u7EB9\u94DC",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M09.png"
+  },
+  {
+    "id": "M10",
+    "name": "\u677E\u9B44\u6728",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M10.png"
+  },
+  {
+    "id": "M11",
+    "name": "\u8D64\u7802\u94C1",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M11.png"
+  },
+  {
+    "id": "M12",
+    "name": "\u7384\u94C1\u6676",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M12.png"
+  },
+  {
+    "id": "M13",
+    "name": "\u5BD2\u6C34\u7389",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M13.png"
+  },
+  {
+    "id": "M14",
+    "name": "\u7D2B\u7535\u7802",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M14.png"
+  },
+  {
+    "id": "M15",
+    "name": "\u6708\u7EB9\u6728",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M15.png"
+  },
+  {
+    "id": "M16",
+    "name": "\u78A7\u6CE2\u94F6",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M16.png"
+  },
+  {
+    "id": "M17",
+    "name": "\u5E7D\u5149\u77F3",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M17.png"
+  },
+  {
+    "id": "M18",
+    "name": "\u96F7\u7EB9\u94DC",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M18.png"
+  },
+  {
+    "id": "M19",
+    "name": "\u5730\u9AD3\u7CBE\u91D1",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M19.png"
+  },
+  {
+    "id": "M20",
+    "name": "\u5E7D\u51A5\u9AA8",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M20.png"
+  },
+  {
+    "id": "M21",
+    "name": "\u8D64\u708E\u6676",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M21.png"
+  },
+  {
+    "id": "M22",
+    "name": "\u6CA7\u6D77\u9B44",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M22.png"
+  },
+  {
+    "id": "M23",
+    "name": "\u5C71\u6CB3\u77F3\u9AD3",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M23.png"
+  },
+  {
+    "id": "M24",
+    "name": "\u7384\u51A5\u5BD2\u94C1",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M24.png"
+  },
+  {
+    "id": "M25",
+    "name": "\u6731\u96C0\u706B\u7FBD",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M25.png"
+  },
+  {
+    "id": "M26",
+    "name": "\u661F\u9668\u795E\u94C1",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M26.png"
+  },
+  {
+    "id": "M27",
+    "name": "\u592A\u865A\u6676",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M27.png"
+  },
+  {
+    "id": "M28",
+    "name": "\u4E5D\u9704\u96F7\u9AD3",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M28.png"
+  },
+  {
+    "id": "M29",
+    "name": "\u9020\u5316\u7389",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M29.png"
+  },
+  {
+    "id": "M30",
+    "name": "\u5929\u6CB3\u94F6\u7802",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M30.png"
+  },
+  {
+    "id": "M31",
+    "name": "\u6DF7\u5143\u91D1\u9AD3",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M31.png"
+  },
+  {
+    "id": "M32",
+    "name": "\u4E7E\u5764\u7075\u6728",
+    "category": "Material",
+    "path": "GameResources/ui/Items/M32.png"
+  },
+  {
+    "id": "D019",
+    "name": "\u7C97\u70BC\u56DE\u6625\u4E38",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D019.png"
+  },
+  {
+    "id": "D020",
+    "name": "\u5F15\u6C14\u6563",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D020.png"
+  },
+  {
+    "id": "F026",
+    "name": "\u5FAE\u529B\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F026.png"
+  },
+  {
+    "id": "F027",
+    "name": "\u8F7B\u8EAB\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F027.png"
+  },
+  {
+    "id": "B082",
+    "name": "\u51E1\u94C1\u77ED\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B082.png"
+  },
+  {
+    "id": "B083",
+    "name": "\u7D20\u6728\u62A4\u5FC3\u4F69",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B083.png"
+  },
+  {
+    "id": "D001",
+    "name": "\u7B51\u57FA\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D001.png"
+  },
+  {
+    "id": "D006",
+    "name": "\u6D3B\u6C14\u62B1\u5143\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D006.png"
+  },
+  {
+    "id": "D009",
+    "name": "\u51C0\u4F53\u62C2\u5C18\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D009.png"
+  },
+  {
+    "id": "D002",
+    "name": "\u7D2B\u97F5\u70BC\u9053\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D002.png"
+  },
+  {
+    "id": "D004",
+    "name": "\u592A\u4E0A\u5960\u57FA\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D004.png"
+  },
+  {
+    "id": "D008",
+    "name": "\u8865\u9B42\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D008.png"
+  },
+  {
+    "id": "D010",
+    "name": "\u5929\u6108\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D010.png"
+  },
+  {
+    "id": "D003",
+    "name": "\u601D\u609F\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D003.png"
+  },
+  {
+    "id": "D005",
+    "name": "\u8865\u7F3A\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D005.png"
+  },
+  {
+    "id": "D007",
+    "name": "\u767E\u6108\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D007.png"
+  },
+  {
+    "id": "D011",
+    "name": "\u9020\u5316\u7D2B\u91D1\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D011.png"
+  },
+  {
+    "id": "D012",
+    "name": "\u5316\u795E\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D012.png"
+  },
+  {
+    "id": "D013",
+    "name": "\u56DE\u7075\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D013.png"
+  },
+  {
+    "id": "D014",
+    "name": "\u6E05\u5FC3\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D014.png"
+  },
+  {
+    "id": "D015",
+    "name": "\u7384\u971C\u517B\u8109\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D015.png"
+  },
+  {
+    "id": "D016",
+    "name": "\u8D64\u9633\u57F9\u5143\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D016.png"
+  },
+  {
+    "id": "D017",
+    "name": "\u661F\u9B42\u5B9A\u9B44\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D017.png"
+  },
+  {
+    "id": "D018",
+    "name": "\u592A\u865A\u7EED\u547D\u4E39",
+    "category": "Pill",
+    "path": "GameResources/ui/Items/D018.png"
+  },
+  {
+    "id": "F002",
+    "name": "\u5DE8\u529B\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F002.png"
+  },
+  {
+    "id": "F003",
+    "name": "\u795E\u884C\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F003.png"
+  },
+  {
+    "id": "F001",
+    "name": "\u62A4\u4F53\u7B26\u7B93",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F001.png"
+  },
+  {
+    "id": "F004",
+    "name": "\u8FC5\u51FB\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F004.png"
+  },
+  {
+    "id": "F005",
+    "name": "\u5065\u4F53\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F005.png"
+  },
+  {
+    "id": "F006",
+    "name": "\u51DD\u795E\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F006.png"
+  },
+  {
+    "id": "F007",
+    "name": "\u805A\u7075\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F007.png"
+  },
+  {
+    "id": "F020",
+    "name": "\u56DE\u7075\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F020.png"
+  },
+  {
+    "id": "F021",
+    "name": "\u5FA1\u98CE\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F021.png"
+  },
+  {
+    "id": "F022",
+    "name": "\u9547\u5CA9\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F022.png"
+  },
+  {
+    "id": "F023",
+    "name": "\u6C34\u955C\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F023.png"
+  },
+  {
+    "id": "F024",
+    "name": "\u96F7\u5F15\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F024.png"
+  },
+  {
+    "id": "F025",
+    "name": "\u5929\u5E55\u7B26",
+    "category": "Talisman",
+    "path": "GameResources/ui/Items/F025.png"
+  },
+  {
+    "id": "B002",
+    "name": "\u4E07\u5934\u5E61",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B002.png"
+  },
+  {
+    "id": "B004",
+    "name": "\u6DF7\u5143\u7D2B\u91D1\u846B\u82A6",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B004.png"
+  },
+  {
+    "id": "B009",
+    "name": "\u5B9A\u6D77\u795E\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B009.png"
+  },
+  {
+    "id": "B003",
+    "name": "\u88C2\u754C\u795E\u5175",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B003.png"
+  },
+  {
+    "id": "B005",
+    "name": "\u58A8\u67D3\u6076\u4E66",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B005.png"
+  },
+  {
+    "id": "B006",
+    "name": "\u8FDE\u5C71\u6756",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B006.png"
+  },
+  {
+    "id": "B007",
+    "name": "\u5F52\u6D77\u94F2",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B007.png"
+  },
+  {
+    "id": "B008",
+    "name": "\u4F17\u751F\u68CD",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B008.png"
+  },
+  {
+    "id": "B010",
+    "name": "\u9752\u950B\u7075\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B010.png"
+  },
+  {
+    "id": "B011",
+    "name": "\u7384\u94C1\u9547\u5CB3\u5200",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B011.png"
+  },
+  {
+    "id": "B012",
+    "name": "\u9752\u6728\u62A4\u5FC3\u7532",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B012.png"
+  },
+  {
+    "id": "B013",
+    "name": "\u7384\u6C34\u6D41\u5149\u7532",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B013.png"
+  },
+  {
+    "id": "B014",
+    "name": "\u5730\u715E\u7384\u7F61\u7532",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B014.png"
+  },
+  {
+    "id": "B015",
+    "name": "\u4E5D\u66DC\u5929\u8FB0\u7532",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B015.png"
+  },
+  {
+    "id": "B016",
+    "name": "\u6E05\u5FC3\u7389\u51A0",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B016.png"
+  },
+  {
+    "id": "B017",
+    "name": "\u7384\u971C\u5B9A\u795E\u51A0",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B017.png"
+  },
+  {
+    "id": "B018",
+    "name": "\u5730\u9B42\u9547\u5FF5\u76D4",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B018.png"
+  },
+  {
+    "id": "B019",
+    "name": "\u592A\u865A\u89C2\u5929\u5195",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B019.png"
+  },
+  {
+    "id": "B020",
+    "name": "\u8E0F\u98CE\u5C65",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B020.png"
+  },
+  {
+    "id": "B021",
+    "name": "\u7384\u5F71\u8FFD\u4E91\u9774",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B021.png"
+  },
+  {
+    "id": "B022",
+    "name": "\u5730\u8109\u632A\u79FB\u9774",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B022.png"
+  },
+  {
+    "id": "B023",
+    "name": "\u5929\u6DAF\u54AB\u5C3A\u5C65",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B023.png"
+  },
+  {
+    "id": "B024",
+    "name": "\u805A\u7075\u6212",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B024.png"
+  },
+  {
+    "id": "B025",
+    "name": "\u7384\u706B\u6218\u6212",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B025.png"
+  },
+  {
+    "id": "B026",
+    "name": "\u5730\u5143\u5F52\u771F\u6212",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B026.png"
+  },
+  {
+    "id": "B027",
+    "name": "\u5468\u5929\u661F\u8FB0\u6212",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B027.png"
+  },
+  {
+    "id": "B028",
+    "name": "\u62A4\u8109\u7389\u7B26",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B028.png"
+  },
+  {
+    "id": "B029",
+    "name": "\u7384\u9F9F\u62A4\u8EAB\u4F69",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B029.png"
+  },
+  {
+    "id": "B030",
+    "name": "\u5730\u85CF\u56DE\u751F\u5760",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B030.png"
+  },
+  {
+    "id": "B031",
+    "name": "\u957F\u751F\u62A4\u9053\u7B26",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B031.png"
+  },
+  {
+    "id": "B032",
+    "name": "\u9752\u7FBD\u7075\u5F13",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B032.png"
+  },
+  {
+    "id": "B033",
+    "name": "\u9010\u6708\u7384\u5F13",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B033.png"
+  },
+  {
+    "id": "B034",
+    "name": "\u7834\u4E91\u5730\u5F13",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B034.png"
+  },
+  {
+    "id": "B035",
+    "name": "\u5929\u6CB3\u661F\u5F13",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B035.png"
+  },
+  {
+    "id": "B036",
+    "name": "\u5F00\u5C71\u7075\u65A7",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B036.png"
+  },
+  {
+    "id": "B037",
+    "name": "\u65AD\u5CB3\u7384\u65A7",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B037.png"
+  },
+  {
+    "id": "B038",
+    "name": "\u88C2\u6D77\u5730\u65A7",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B038.png"
+  },
+  {
+    "id": "B039",
+    "name": "\u4E7E\u5764\u5929\u65A7",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B039.png"
+  },
+  {
+    "id": "B040",
+    "name": "\u9547\u519B\u7075\u94BA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B040.png"
+  },
+  {
+    "id": "B041",
+    "name": "\u7384\u7AE0\u6CD5\u94BA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B041.png"
+  },
+  {
+    "id": "B042",
+    "name": "\u5730\u9619\u738B\u94BA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B042.png"
+  },
+  {
+    "id": "B043",
+    "name": "\u5929\u5F8B\u5723\u94BA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B043.png"
+  },
+  {
+    "id": "B044",
+    "name": "\u7D22\u5F71\u7075\u94A9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B044.png"
+  },
+  {
+    "id": "B045",
+    "name": "\u7384\u4E1D\u6708\u94A9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B045.png"
+  },
+  {
+    "id": "B046",
+    "name": "\u5730\u7F1A\u9501\u94A9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B046.png"
+  },
+  {
+    "id": "B047",
+    "name": "\u5929\u7F57\u661F\u94A9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B047.png"
+  },
+  {
+    "id": "B048",
+    "name": "\u5206\u6F6E\u7075\u53C9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B048.png"
+  },
+  {
+    "id": "B049",
+    "name": "\u4E09\u5143\u7384\u53C9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B049.png"
+  },
+  {
+    "id": "B050",
+    "name": "\u9547\u6E0A\u5730\u53C9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B050.png"
+  },
+  {
+    "id": "B051",
+    "name": "\u56DB\u6D77\u5929\u53C9",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B051.png"
+  },
+  {
+    "id": "B052",
+    "name": "\u971C\u7EB9\u7075\u5200",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B052.png"
+  },
+  {
+    "id": "B053",
+    "name": "\u8D64\u971E\u7384\u5200",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B053.png"
+  },
+  {
+    "id": "B054",
+    "name": "\u65AD\u5FF5\u5730\u5200",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B054.png"
+  },
+  {
+    "id": "B055",
+    "name": "\u5F52\u5BC2\u5929\u5200",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B055.png"
+  },
+  {
+    "id": "B056",
+    "name": "\u70B9\u661F\u7075\u67AA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B056.png"
+  },
+  {
+    "id": "B057",
+    "name": "\u6E38\u9F99\u7384\u67AA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B057.png"
+  },
+  {
+    "id": "B058",
+    "name": "\u8D2F\u5CB3\u5730\u67AA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B058.png"
+  },
+  {
+    "id": "B059",
+    "name": "\u592A\u865A\u5929\u67AA",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B059.png"
+  },
+  {
+    "id": "B060",
+    "name": "\u6E05\u5149\u7075\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B060.png"
+  },
+  {
+    "id": "B061",
+    "name": "\u78A7\u9704\u7384\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B061.png"
+  },
+  {
+    "id": "B062",
+    "name": "\u9547\u9B44\u5730\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B062.png"
+  },
+  {
+    "id": "B063",
+    "name": "\u4E07\u6CD5\u5929\u5251",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B063.png"
+  },
+  {
+    "id": "B064",
+    "name": "\u6A2A\u4E91\u7075\u621F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B064.png"
+  },
+  {
+    "id": "B065",
+    "name": "\u9010\u96F7\u7384\u621F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B065.png"
+  },
+  {
+    "id": "B066",
+    "name": "\u7834\u9635\u5730\u621F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B066.png"
+  },
+  {
+    "id": "B067",
+    "name": "\u5468\u5929\u795E\u621F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B067.png"
+  },
+  {
+    "id": "B068",
+    "name": "\u62A4\u5FC3\u7075\u949F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B068.png"
+  },
+  {
+    "id": "B069",
+    "name": "\u5B9A\u795E\u7384\u949F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B069.png"
+  },
+  {
+    "id": "B070",
+    "name": "\u9547\u6D77\u5730\u949F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B070.png"
+  },
+  {
+    "id": "B071",
+    "name": "\u65E0\u91CF\u5929\u949F",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B071.png"
+  },
+  {
+    "id": "B072",
+    "name": "\u805A\u5143\u7075\u5370",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B072.png"
+  },
+  {
+    "id": "B073",
+    "name": "\u4F0F\u5CB3\u7384\u5370",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B073.png"
+  },
+  {
+    "id": "B074",
+    "name": "\u5C71\u6CB3\u5730\u5370",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B074.png"
+  },
+  {
+    "id": "B075",
+    "name": "\u7384\u9EC4\u5929\u5370",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B075.png"
+  },
+  {
+    "id": "B076",
+    "name": "\u907F\u96E8\u7075\u4F1E",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B076.png"
+  },
+  {
+    "id": "B077",
+    "name": "\u6D41\u4E91\u7384\u4F1E",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B077.png"
+  },
+  {
+    "id": "B078",
+    "name": "\u4E07\u8C61\u5730\u4F1E",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B078.png"
+  },
+  {
+    "id": "B079",
+    "name": "\u5929\u5E55\u5B9D\u4F1E",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B079.png"
+  },
+  {
+    "id": "B080",
+    "name": "\u6D4E\u4E16\u836F\u5323",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B080.png"
+  },
+  {
+    "id": "B081",
+    "name": "\u4F20\u6CD5\u7389\u7B80",
+    "category": "Artifact",
+    "path": "GameResources/ui/Items/B081.png"
+  }
+]

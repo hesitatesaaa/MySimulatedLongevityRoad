@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_chuanfa_tianzun",
+  "action": "walk",
+  "index": 1,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "5a0ad42a1d48bd7647441d7f85b0dc21263a08da4e9795ae71b4340e47e0f01a",
+  "outputFile": "NativeActorResources/actors/Immortals/Chuanfa/main/walk_1.png",
+  "outputSha256": "a3bca59b92cafee858f7082de8f86a44baf1a63b1d2e9370f88c42260ede983c",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u4f20\u6cd5\u5929\u5c0a (mclsl_chuanfa_tianzun), walk_1. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: Chuanfa Tianzun, black/gold immortal teacher with tall ceremonial Daoist hat, layered dark robes with fine gold edging, dark long hair and a scripture book. Visual gender: male, adult fully clothed human. Pose: Walking cycle phase 0.167 (60 degrees): two-foot alternating gait, visible hip, knee and ankle articulation, opposing arm swing, trailing cloth and hair; maintain body height and grounded foot line. Near leg is passing and lifting, far leg opposite. No extra hands or legs. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_chuanfa_tianzun\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T04:47:19.556341+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "5a0ad42a1d48bd7647441d7f85b0dc21263a08da4e9795ae71b4340e47e0f01a",
+    "sourceAnchor": [
+      609.0,
+      1188
+    ],
+    "sourcePixelsPerUnit": 388.4210370947374,
+    "ppuFactor": 1.3315032320273803,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

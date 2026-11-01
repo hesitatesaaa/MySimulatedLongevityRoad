@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_beast_qinglong",
+  "action": "walk",
+  "index": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "e06c73b108ab8a6ac089133b35d56d8b51258319834a7ea96d8c48cb982e261b",
+  "outputFile": "NativeActorResources/actors/Beasts/qinglong/Beast/main/walk_2.png",
+  "outputSha256": "723c0a9294e0c7b02e75db50f72bcfbedaaa59d1b22fa0e6bf9ef28070d6ebd6",
+  "createdAtUtc": "2026-10-09T06:36:56.446953+00:00",
+  "prompt": "Use case: game-asset. Independently draw exactly ONE new transparent pixel-art Qinglong Eastern azure dragon walk_2. Image 1 fixes anatomy and exact pixel scale; image 2 is preceding glide pose. Turquoise/cyan scales, navy shading, pale cream belly, gold antlers and dorsal crest, cyan mane, two long whiskers, compact serpentine S-shaped body and coiled tail plume. Right-facing three-quarter side view on same1254x1254 transparent canvas. Pose: neck projects modestly forward-right, upper curve tightens, midbody opens left, bottom tail plume starts sweeping right. Keep standard head size. CRITICAL ANATOMY: exactly FOUR limbs total, never an extra claw arm on chest. Only TWO FORELIMBS: near forelimb from left/front shoulder about x630,y650 curves down-right ending ONE claw hand x775,y790; far forelimb from right/back shoulder x820,y605 folds toward chest ending ONE claw hand x920,y670. Do NOT draw another claw above or below the far forelimb. Two HINDLIMBS attached to lower body: near hindleg x520,y865 ending claw x595,y960, far hindleg partly occluded behind middle coil with only small claw glimpse near x560,y770. Claw roots and hands must connect, no disconnected floating paws. Whole dragon remains compact within x220..1160,y100..1190. Complete antlers, whiskers and tail with clear margins. Crisp square pixels and dark outline, limited flat shades. Draw a NEW single frame from scratch, no whole-sprite paste, resizing/recolor as redraw, no wings, sheets, panels, text, aura, particles, ground, shadow or background.\n",
+  "references": [
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/idle_0.png",
+    "E:/0.6.0/output/actor-redraw/originals/mclsl_beast_qinglong/walk_1.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      224,
+      224
+    ],
+    "scale": 0.17862838915470494,
+    "inputSha256": "e06c73b108ab8a6ac089133b35d56d8b51258319834a7ea96d8c48cb982e261b",
+    "sourceAnchor": [
+      702.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 49.327567671469815,
+    "ppuFactor": 6.827888578080097,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

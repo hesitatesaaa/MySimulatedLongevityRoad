@@ -1,0 +1,49 @@
+{
+  "actorId": "mclsl_named_zhangfan",
+  "action": "idle",
+  "index": 3,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "5696e18c1ae6c5c4ee7e352a37b57fde4811b3577d5f40798bb117d7c295948a",
+  "outputFile": "NativeActorResources/actors/Named/ZhangFan/main/idle_3.png",
+  "outputSha256": "9b3122eca44286cb249fe01168c9d2b0b66f64b2a0138a8a882d4a89b1c4bb17",
+  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5f20\u51e1 (mclsl_named_zhangfan), idle_3. Image 1 is this form's newly reviewed standard identity, detail, palette and anatomical scale. Freshly draw the specified new pose; never paste/transform the reference bitmap. Character: dark crimson/black armored cultivator, dark tied hair and headband, layered shoulder armor, trailing red sash and sword. Visual gender: male, adult fully clothed human. Pose: Idle breathing cycle phase 0.750: chest and shoulders gently settle, cloth, hair, mane, tail or feather tips lag at phase angle 270 degrees. Feet/body base remain fixed; changes are newly drawn joint/cloth poses, not whole-sprite movement. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Keep the standard's exact anatomical pixel scale, source canvas, body anchor and right-facing view. Entire pose must remain inside the image with transparent padding; curl long tails and bend limbs naturally to retain all parts. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_zhangfan\\idle_0.png"
+  ],
+  "createdAtUtc": "2026-10-17T04:48:23.975465+00:00",
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "5696e18c1ae6c5c4ee7e352a37b57fde4811b3577d5f40798bb117d7c295948a",
+    "sourceAnchor": [
+      624.5,
+      1196
+    ],
+    "sourcePixelsPerUnit": 365.2631432842111,
+    "ppuFactor": 1.3348333001596326,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}

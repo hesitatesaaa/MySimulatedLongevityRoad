@@ -1,0 +1,2675 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "S001_cast",
+      "spell": "S001",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S001/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S001: gold sword qi, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S001_cast-v3.png",
+        "sourceSha256": "4c58bf2c5022f277b92679c6536bc4aa5b7554c18e1f68cde3f370b1941ca8d0",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. TWO rows, EIGHT frames, sheet aspect ratio 2:1. A small gold spark condenses into an UPRIGHT golden sword of qi; keep every sword vertical, tip upward, center pivot fixed, no diagonal final sword.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S001_cast.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "df7a1a5f4da9fb644304f0318ad0cea1ed6baa66c339385b327976313ad6a493",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S001_travel",
+      "spell": "S001",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S001/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S001: gold sword qi, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S001_travel-v3.png",
+        "sourceSha256": "401cbfda1783f5c092e4a4fd1e68c37ea4b56cce9969bac8ff6c5683f206f441",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. TWO rows, EIGHT frames, sheet aspect ratio 2:1. A compact horizontal golden sword qi projectile pointing RIGHT in all eight frames, loop its thin wind streaks to the LEFT; keep sword blade size and pivot fixed throughout.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S001_travel.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "b60c1659368b21c08c6cd3b524a857014ed808424571649f9dcbf2bcf550ac59",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S001_hit",
+      "spell": "S001",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S001/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S001: gold sword qi, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S001_hit-v3.png",
+        "sourceSha256": "1370dcdfcef433b0c6224afc02f6a28a1ed450639bb6b7af8b93cc35af4e50bc",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. FOUR rows, SIXTEEN frames, square sheet. A gold impact flash followed by angular golden crack lines expanding briefly, then fading into tiny gold particles; all sixteen frames are distinct chronological states; no chunky rock explosion.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S001_hit.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "21e244b7c86730e36f3fa5ea3cc1c3a3dc277ce2a5f49b620ffdef55787f1e95",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S004_cast",
+      "spell": "S004",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S004/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S004: red fire orb, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S004_cast-v3.png",
+        "sourceSha256": "6f29af8ea48cd07367df768803709643754528be27e6b7c775dba92ba7c7ad02",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. TWO rows, EIGHT frames, sheet aspect ratio 2:1. Scattered tiny sparks converge into a compact palm-sized red-orange fire orb, growing gradually in eight steps around the same center, no huge spiral disk.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S004_cast.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "9ca6b860ec7428dc37e30da34198f383f1b3d9907fdd205329c46d28f24ce14d",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S004_travel",
+      "spell": "S004",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S004/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S004: red fire orb, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S004_travel-v3.png",
+        "sourceSha256": "a2ea57e9383a088f5ea43165c04e687804519c1148f12cc3de3b28341c8c3064",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. TWO rows, EIGHT frames, sheet aspect ratio 2:1. A compact round fireball core at fixed center with short flame tail pointing LEFT, movement direction RIGHT in every frame; stable core scale, animate flame flicker in eight frames.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S004_travel.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "2544d9d11f84677fb636236a5e6b2c4c0e6d3849d89c9c2f28230c829c01c166",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S004_hit",
+      "spell": "S004",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S004/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S004: red fire orb, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S004_hit-v3.png",
+        "sourceSha256": "38aace032fdcfc57c80b026ea049cb731c69968551032ecbeaab64d59cd8485e",
+        "prompt": "Rework this Chinese cultivation spell sprite sheet into a production animation atlas. Retain its spell identity and palette but simplify the noisy soft glow into clean readable pixel-shaded forms with restrained highlights. TRANSPARENT alpha background. Exactly FOUR equal columns and equally sized cells; no borders, labels, characters, or scenery. All visible pixels including glow in each cell must stay within the central 72% of its width and height, leaving at least 14% empty transparent margin on every side. Absolutely no glow bridging cells or cut-off shapes. Fixed center pivot at exact cell center throughout. Frames read left-to-right then top-to-bottom. Maintain coherent subject scale and orientation. FOUR rows, SIXTEEN frames, square sheet. A compact bright fire impact blossoms into curling flame petals and glowing embers, then fades, in sixteen distinct chronological frames.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/generated-spell-originals/S004_hit.png"
+        ],
+        "revision": 3,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T05:41:21.418750+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "sha256": "cd8c793eaf23dc3022c3198d3e621e7d9ae06a03b0e4ce376b11d461808eb43b",
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S007_cast",
+      "spell": "S007",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S007/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S007: vertical thunder pillar, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "e3c741d0bdd89caed5a1d3eb40be0a4e4b203f89aed0db30e8f76d5049ff2b4f",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S007_cast-v1.png",
+        "sourceSha256": "9bf0b0bfa25d576950a5aa33effc460592cde6d5c41756e1d911b9da8afc002f",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 \u96f7\u5f15\u8bc0, ONLY the cast stage. Visual design: \u7d27\u51d1\u96f7\u5370\u805a\u4eae. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S007_travel",
+      "spell": "S007",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S007/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S007: vertical thunder pillar, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "986916513163f3d3587a532b06c82a9e17f481197b3324eadd8a122c4caf4953",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S007_travel-v1.png",
+        "sourceSha256": "3b3059ec1be0c17630ea8c43ad0564d7e89e5e5634133909bfbcdfee1c4a499e",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 \u96f7\u5f15\u8bc0, ONLY the travel stage. Visual design: \u4e0a\u65b9\u96f7\u4e91\u805a\u96f7\uff0c\u5782\u76f4\u96f7\u67f1\u5411\u4e0b. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S007_hit",
+      "spell": "S007",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S007/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S007: vertical thunder pillar, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "da626ef191f3cf15e8c9e5a84164c705315f9b7848be1505c9cebd9ab81cf2d6",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:43:29.696634+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S007_hit-v4.png",
+        "sourceSha256": "b6e51992107d9a9cffbf5238c733cadfb2cb1257a6a14f58e661102002ee72ce",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S007 \u96f7\u5f15\u8bc0: compact blue-white electrical contact flash at the center, short branching arcs around it, a short narrow VERTICAL lightning segment wholly inside each cell. NO full-height column entering from outside the cell. 16 frames, 4 rows: flash begins, expands into arcs, then dissipates. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/spell-candidates/S007_hit-v1.png"
+        ],
+        "revision": 4,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S008_cast",
+      "spell": "S008",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S008/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S008: dark yin binding rings, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "feb009e93fdff337b98c29a179f7c4662581800b4486388aebdab6fd1e639df3",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S008_cast-v1.png",
+        "sourceSha256": "c740ab4e0b03d2251495ba9d2021392a03ce1ed03558c632cc5fffa2b3f74f03",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 \u7384\u9634\u7f1a, ONLY the cast stage. Visual design: \u9ed1\u7d2b\u9634\u7eb9\u805a\u6210\u73af. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S008_travel",
+      "spell": "S008",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S008/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S008: dark yin binding rings, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "83015d8bdfedd89239f675fa7a44567ea300ac9a0b313683be6fb57484b7c1f1",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S008_travel-v1.png",
+        "sourceSha256": "6920a5241cde2d7fb28404987a79cd5c394cb916ec7a9885b2b213bf06d2fc17",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 \u7384\u9634\u7f1a, ONLY the travel stage. Visual design: \u56f4\u7ed5\u8eab\u4f53\u951a\u70b9\u7684\u9634\u7eb9\u5c55\u5f00\uff0c\u4e0d\u753b\u4eba\u4f53. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S008_hit",
+      "spell": "S008",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S008/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S008: dark yin binding rings, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "f071af68e156c09aef00dd0295bc9df799efa32e11c6b12852228f480ef10308",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T07:05:21.944747+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S008_hit-v6.png",
+        "sourceSha256": "b3e90eff56335ce701e7148993be607c014503dfb63ecacfae3813552d12ef8f",
+        "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S008 hit segment 1 of three. Design: Black-purple yin binding: two small circular spectral chains tighten around a central purple spark, then break into faint wisps. No tall vortex or solid body. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nCreate exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S008 hit segment 2 of three. Design: Black-purple yin binding: two small circular spectral chains tighten around a central purple spark, then break into faint wisps. No tall vortex or solid body. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nDraw only the disappearing tail of this already finished S008 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+        "references": [
+          "E:/0.6.0/GameResources/effects/Spells/Stages/S008/cast.png",
+          "E:/0.6.0/output/beast-overhaul/tail-references/S008_hit.png"
+        ],
+        "revision": 6,
+        "parts": [
+          {
+            "id": "S008_hit_p1",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S008_hit_p1-v5.png",
+            "sourceSha256": "f901883b271c6c72b58aa73a3a68249c8d69bf70c757e4ffdd55aa0a78a97c82",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S008 hit segment 1 of three. Design: Black-purple yin binding: two small circular spectral chains tighten around a central purple spark, then break into faint wisps. No tall vortex or solid body. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S008/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:51:13.809803+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S008_hit_p2",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S008_hit_p2-v5.png",
+            "sourceSha256": "0311d8f3355f39454a5e36654cd5e842cfb53640df417dd5896c3663750cab79",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S008 hit segment 2 of three. Design: Black-purple yin binding: two small circular spectral chains tighten around a central purple spark, then break into faint wisps. No tall vortex or solid body. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S008/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:51:13.916903+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S008_hit_p3",
+            "revision": 6,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S008_hit_p3-v6.png",
+            "sourceSha256": "29791550133f3bfc05b6a7de6a6e28267c45bf56af5caf5a1af021edc0cad53c",
+            "prompt": "Draw only the disappearing tail of this already finished S008 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+            "references": [
+              "E:/0.6.0/output/beast-overhaul/tail-references/S008_hit.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:59:42.039415+08:00",
+            "status": "candidate-unreviewed"
+          }
+        ],
+        "assembly": {
+          "method": "Three full four-column two-row sheets in chronological vertical order; no per-frame crop or size normalization",
+          "frames": 24,
+          "tool": "System.Drawing"
+        },
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S009_cast",
+      "spell": "S009",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S009/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S009: gold-white barrier-breaking beam, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "ec96aab2e7bbc82b7d0bb89f7c5ffbdecfdf05cb8dd51c310e410f585b26c65f",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S009_cast-v1.png",
+        "sourceSha256": "4c28e19e8087837692d44fe1ff007b8a72b971901e001b81defc567803a3d91c",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 \u9633\u534e\u7834\u969c, ONLY the cast stage. Visual design: \u91d1\u767d\u9633\u7eb9\u6210\u73af. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S009_travel",
+      "spell": "S009",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S009/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S009: gold-white barrier-breaking beam, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "3075e5d9c04d7a355de47ceba239cc592434c6821dcf784b57c5064bd20df1a6",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S009_travel-v1.png",
+        "sourceSha256": "1fb368f89d2ac134bd1572f3eebfd63a9162e38decab919ee18ad1231ca847e7",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 \u9633\u534e\u7834\u969c, ONLY the travel stage. Visual design: \u6c34\u5e73\u5411\u53f3\u7684\u91d1\u767d\u5149\u675f. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S009_hit",
+      "spell": "S009",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S009/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S009: gold-white barrier-breaking beam, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "6eb6d4accf83bc9d9a2f57d820a181e7e625eebe91cffcad9fe74f9c3657849c",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T07:05:21.944747+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S009_hit-v6.png",
+        "sourceSha256": "10b1fe381aaf7f579919a4bdd73f3df315fa43f2f2467cba78f102f0244d0a93",
+        "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S009 hit segment 1 of three. Design: Gold-white ward breaking: a compact translucent silver circular shield develops golden cracks and breaks into tiny curved shards, which fade. No rock or opaque backdrop. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nCreate exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S009 hit segment 2 of three. Design: Gold-white ward breaking: a compact translucent silver circular shield develops golden cracks and breaks into tiny curved shards, which fade. No rock or opaque backdrop. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nDraw only the disappearing tail of this already finished S009 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+        "references": [
+          "E:/0.6.0/GameResources/effects/Spells/Stages/S009/cast.png",
+          "E:/0.6.0/output/beast-overhaul/tail-references/S009_hit.png"
+        ],
+        "revision": 6,
+        "parts": [
+          {
+            "id": "S009_hit_p1",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S009_hit_p1-v5.png",
+            "sourceSha256": "f018b3b73435e433c8c22f6ee06feedd2b0b0fbe02cb70ad646ea53a44a8a751",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S009 hit segment 1 of three. Design: Gold-white ward breaking: a compact translucent silver circular shield develops golden cracks and breaks into tiny curved shards, which fade. No rock or opaque backdrop. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S009/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:47:52.230093+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S009_hit_p2",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S009_hit_p2-v5.png",
+            "sourceSha256": "8b2ff42e6d2db91a3ace157bebd9c51ff7f80608246158bd2becc2f02c00bacd",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S009 hit segment 2 of three. Design: Gold-white ward breaking: a compact translucent silver circular shield develops golden cracks and breaks into tiny curved shards, which fade. No rock or opaque backdrop. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S009/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:48:32.714205+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S009_hit_p3",
+            "revision": 6,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S009_hit_p3-v6.png",
+            "sourceSha256": "cb138948a1ff78ae10cd7b7957f9726ddf79418fcb1343729f4f3af90703070e",
+            "prompt": "Draw only the disappearing tail of this already finished S009 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+            "references": [
+              "E:/0.6.0/output/beast-overhaul/tail-references/S009_hit.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:59:47.140285+08:00",
+            "status": "candidate-unreviewed"
+          }
+        ],
+        "assembly": {
+          "method": "Three full four-column two-row sheets in chronological vertical order; no per-frame crop or size normalization",
+          "frames": 24,
+          "tool": "System.Drawing"
+        },
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S010_cast",
+      "spell": "S010",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S010/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S010: five-element turning sigil, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "9483b40764d74ac00bcbefebb966550d072f58111bdf7b859133e35d8ab9e20b",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S010_cast-v1.png",
+        "sourceSha256": "51d190dbd69ec2ad2e71641f0e6d89158b2e21d10cc615802663bfcd812a51ae",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the cast stage. Visual design: \u4e94\u884c\u5370\u6309\u987a\u5e8f\u4eae\u8d77. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S010_travel",
+      "spell": "S010",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S010/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S010: five-element turning sigil, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "600401dae45decb010f2532c1e20df9daf2f5497ce6575364ad6ddc663d4b03a",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S010_travel-v1.png",
+        "sourceSha256": "76b8fd63a4142393a93b2ac4891131f987d2d713def21bab8cb41694e071075e",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the travel stage. Visual design: \u811a\u4e0b\u4e94\u884c\u6cd5\u9635\u9010\u6b65\u5c55\u5f00\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S010_hit",
+      "spell": "S010",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S010/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S010: five-element turning sigil, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "edc6a52679bd9a5bb59a6b47a5c3f70406ff4815883feeded6176be8b96cbfc6",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S010_hit-v1.png",
+        "sourceSha256": "3f8c6cfc70aa4415064a3ddc9860e168ad613c59b2897c55750b2e5d876c4bd6",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the hit stage. Visual design: \u4e94\u884c\u8f6e\u8f6c\u6cd5\u9635\u4e2d\u5fc3\u7206\u53d1. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S012_cast",
+      "spell": "S012",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S012/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S012: converging myriad seals, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "36815a6541d5749bfb0f288ffa317bedfb66fd19f330a6b91b4aeae89e659ef0",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S012_cast-v1.png",
+        "sourceSha256": "5e71dc8d4eef3e505fa7336373ba60066bf16c984cafba8d0144be281d4e51a7",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S012 \u4e07\u8c61\u5f52\u4e00, ONLY the cast stage. Visual design: \u5468\u56f4\u7075\u5149\u5411\u4e2d\u5fc3\u805a\u5408. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S012_travel",
+      "spell": "S012",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S012/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S012: converging myriad seals, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "76b452f5316d5d0ccc924feba4bbf85273ec3b82b3917713f5e08489f12d815d",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:43:29.696634+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S012_travel-v4.png",
+        "sourceSha256": "f93112c399398d24d280457c23187f35b76a027c1e00d4fd5809d9bc37e25d95",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S012 \u4e07\u8c61\u5f52\u4e00: silver-blue and pale-gold wisps converge symmetrically into a small central yin-yang light orb, compressing inward over 8 frames, TWO rows. Stationary centered compression; NEVER a projectile, arrowhead, flight trail, comet, or one-way movement. Final orb smaller and brighter than first frame. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/spell-candidates/S012_travel-v1.png"
+        ],
+        "revision": 4,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S012_hit",
+      "spell": "S012",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S012/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S012: converging myriad seals, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "05bf1ed2360aea96fd4eea5c129266c23789598ef736dd99a5487bda15f11dd1",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T07:05:21.944747+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S012_hit-v6.png",
+        "sourceSha256": "b616c6f36905f4a8042c2676bd6412b3bd902c9ec1b79994cc8e44711feb4c12",
+        "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S012 hit segment 1 of three. Design: Silver-blue and gold compression impact: a central white-blue flash with two delicate thin gold binding rings expands briefly then fades into tiny light motes. No purple or dark vortex. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nCreate exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S012 hit segment 2 of three. Design: Silver-blue and gold compression impact: a central white-blue flash with two delicate thin gold binding rings expands briefly then fades into tiny light motes. No purple or dark vortex. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.\r\n\r\nDraw only the disappearing tail of this already finished S012 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+        "references": [
+          "E:/0.6.0/GameResources/effects/Spells/Stages/S012/cast.png",
+          "E:/0.6.0/output/beast-overhaul/tail-references/S012_hit.png"
+        ],
+        "revision": 6,
+        "parts": [
+          {
+            "id": "S012_hit_p1",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S012_hit_p1-v5.png",
+            "sourceSha256": "38438ed94623263ef6dbb2cd6700a74d99f8e717315e6184ce854657fa6b22b2",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S012 hit segment 1 of three. Design: Silver-blue and gold compression impact: a central white-blue flash with two delicate thin gold binding rings expands briefly then fades into tiny light motes. No purple or dark vortex. The first third of a 24-frame impact: from small contact flash to peak compact effect. Increase the visible intensity smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S012/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:49:50.929895+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S012_hit_p2",
+            "revision": 5,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S012_hit_p2-v5.png",
+            "sourceSha256": "1068975cd46a49c9dfb7ece681e0042c37bb97987d21e8e2be4d8d1b9f3329c7",
+            "prompt": "Create exactly EIGHT independent successive animation sprites in ONE 2:1 transparent sprite sheet, FOUR equal columns and exactly TWO equal rows. Never add a third row or a ninth sprite. Chinese cultivation spell S012 hit segment 2 of three. Design: Silver-blue and gold compression impact: a central white-blue flash with two delicate thin gold binding rings expands briefly then fades into tiny light motes. No purple or dark vortex. The middle third: begin with the compact peak effect and gradually reduce it, tighten the ring or scatter ward shards as appropriate. Decrease size and brightness smoothly across these eight frames. Reference ONLY the palette and visual vocabulary of the uploaded cast sheet; do NOT copy its casting sequence. Each sprite centered on the center of its cell, contained in central 50% of cell width and height, with 25% empty transparent border on all sides INCLUDING all faint particles. No cross-cell pixels or clipped pieces, no shifted row centers. Crisp pixel-shaded game effect, delicate limited glow, no text, borders, grid lines, people or scenery. True transparent alpha PNG. Read order left-to-right then top-to-bottom. ALL eight frames should remain separate and clearly countable.",
+            "references": [
+              "E:/0.6.0/GameResources/effects/Spells/Stages/S012/cast.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:50:27.024685+08:00",
+            "status": "candidate-unreviewed"
+          },
+          {
+            "id": "S012_hit_p3",
+            "revision": 6,
+            "kind": "spell",
+            "tool": "built-in-imagegen",
+            "source": "output/beast-overhaul/generated-spell-originals/S012_hit_p3-v6.png",
+            "sourceSha256": "11d71a287cb1d649aa97a3a780a61fb08c5476a44f4a1e534059be48fb22392f",
+            "prompt": "Draw only the disappearing tail of this already finished S012 spell effect. Reference is the last actual frame before this tail; start with the same FEW FAINT REMNANT PARTICLES and fade them out, not a new spell. Exactly EIGHT square cells, FOUR columns and TWO equal rows, a 2:1 transparent sheet. Frame 1 only 5 faint disconnected particles; frame 2 only 4; frame 3 only 3; frame 4 only 3 even dimmer; frame 5 only 2 dim particles; frame 6 only 2 very dim particles; frame 7 one tiny dim particle; frame 8 one almost invisible speck. Every frame weaker than preceding frame. ABSOLUTELY NO orb, ring, complete sigil, full shield, starburst, new impact, new formation, or renewed growth. Use the reference palette and miniature fragment shapes only. Each sprite occupies at most central 30% of its cell, clear transparent empty gaps everywhere else. Fixed center, no cross-cell pixels. True transparent alpha. No labels, numbers, lettering, grid, scene, background, border or checkerboard.",
+            "references": [
+              "E:/0.6.0/output/beast-overhaul/tail-references/S012_hit.png"
+            ],
+            "generatedAtUtc": "2026-10-14T14:59:41.994051+08:00",
+            "status": "candidate-unreviewed"
+          }
+        ],
+        "assembly": {
+          "method": "Three full four-column two-row sheets in chronological vertical order; no per-frame crop or size normalization",
+          "frames": 24,
+          "tool": "System.Drawing"
+        },
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S013_cast",
+      "spell": "S013",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S013/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S013: frost needle, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "9df3fe6fd235826993c67367044371b53f860d89a7f821bd3f78d8ecf72dfaf0",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S013_cast-v1.png",
+        "sourceSha256": "1425df2caf07f4eea74c986db9619f5c274a283f74f3a1b1f87b2f8717b3c704",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the cast stage. Visual design: \u51b0\u6676\u51dd\u6210\u9510\u7ec6\u51b0\u9488. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S013_travel",
+      "spell": "S013",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S013/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S013: frost needle, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "7595aca01bbf66127c3a36383ebe65cce435f5fc86c3d0a7edd5d370e6bca8cd",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S013_travel-v1.png",
+        "sourceSha256": "adfc871ac8c8e67324502c18b8c36ccd95ef2c7d9fe1b8bf3b03e9936ef4a75e",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u51b0\u9488\uff0c\u51b0\u5c51\u5c3e\u8ff9\u5411\u5de6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S013_hit",
+      "spell": "S013",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S013/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S013: frost needle, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "767b0b58860f0545cddd3b54a446092542038f5a55c4eac7d501e0a8df7990c2",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S013_hit-v1.png",
+        "sourceSha256": "bfc19fd24bcd5e6c164769a77aa4be5d8709abbccc1d51e8c168f3da9b0e37a2",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the hit stage. Visual design: \u971c\u82b1\u7efd\u5f00\u4e0e\u77ed\u6682\u51b0\u7eb9. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S015_cast",
+      "spell": "S015",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S015/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S015: two crescent wind blades, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "7324b71f541e25489344fdd24b564f5eaa226a6948018fc9afd1363b2d15bf28",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S015_cast-v1.png",
+        "sourceSha256": "4089c26ecb0c87534d08fc43ff731759e27967889227ed9973f3a07245840419",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the cast stage. Visual design: \u5f27\u5f62\u98ce\u5203\u51dd\u805a. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S015_travel",
+      "spell": "S015",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S015/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S015: two crescent wind blades, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "cde8a3d4bbac267b795f273c73b87773776c33e3beadaf8e0053f625e0b13c8f",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S015_travel-v1.png",
+        "sourceSha256": "355372549b33583f94a4bffaed7466ab6826338ae559b9d97be781c0ef5f95ac",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u5355\u679a\u5f27\u5f62\u98ce\u5203\uff0c\u4e0d\u753b\u4e24\u76ee\u6807. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S015_hit",
+      "spell": "S015",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S015/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S015: two crescent wind blades, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "6c41ec17a187bf946ad2ea37634570495246a9d895dc887a90ac81bdf0605096",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S015_hit-v1.png",
+        "sourceSha256": "ae9c6808fb56cd18a66589edb3484f8a802d15917f405c602645284dd5ff7a07",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the hit stage. Visual design: \u98ce\u5203\u5207\u5f00\u540e\u7684\u65cb\u6d41\u788e\u5c51. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S016_cast",
+      "spell": "S016",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S016/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S016: climbing green vine restraint, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "ce9b24f390f308ef085769ae4582d62d0706e26e119f7acbc723bbd079675f8a",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S016_cast-v1.png",
+        "sourceSha256": "cfc9ef73ef2b00fd05de67bb561c0e847c9235ac186b18450f6c0f94693900e5",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the cast stage. Visual design: \u7ec6\u5c0f\u9752\u85e4\u7b26\u7eb9\u840c\u751f. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S016_travel",
+      "spell": "S016",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S016/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S016: climbing green vine restraint, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "489087f118bcc1a6e60f6cf12326387b2bafe3ae57acdd2b1209628664b7770d",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S016_travel-v1.png",
+        "sourceSha256": "b3410ff8312ed5e45f2f7f2f76ce0f9074fa87134de17ccff6813864193f678e",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the travel stage. Visual design: \u811a\u4e0b\u85e4\u7eb9\u5c55\u5f00\uff0c\u9752\u85e4\u5347\u8d77\uff0c\u4e0d\u753b\u4eba\u4f53. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S016_hit",
+      "spell": "S016",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S016/hit.png",
+      "width": 768,
+      "height": 768,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 16,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S016: climbing green vine restraint, hit stage. Exactly 16 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "59cfc3a98ba63e50e1a0b5692e3368aae6ac1b7d1874773a7fb44cfeb3c390ab",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S016_hit-v1.png",
+        "sourceSha256": "ebbfac7a299bc228040ba97f0e058de540faff14be26fae8f0895146d943ffb0",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the hit stage. Visual design: \u9752\u85e4\u56f4\u7ed5\u8eab\u4f53\u951a\u70b9\u5408\u62e2\u5e76\u6d88\u6563. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S017_cast",
+      "spell": "S017",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S017/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S017: purple armor-breaking lightning spear, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "520a8c9733c9313bd4639647f83b4aa3a19488ea566b561a558a0851619f95db",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S017_cast-v1.png",
+        "sourceSha256": "a938f77c94ab3bdf7bc41c2548302f05b3ceb0c88873d18b809347568d329a73",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the cast stage. Visual design: \u7d2b\u96f7\u5370\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S017_travel",
+      "spell": "S017",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S017/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S017: purple armor-breaking lightning spear, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "651baf244e42e367af891e649f5d9292bfb237aa32d40eddd16985944aa1eaf6",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S017_travel-v1.png",
+        "sourceSha256": "bc0aa78d62f4893c63fd6d10e85311bfdee0615884dea6aa6ea855c9f0f38eec",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u7d2b\u8272\u96f7\u77db. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S017_hit",
+      "spell": "S017",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S017/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S017: purple armor-breaking lightning spear, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "0fec13f0fc2158e36005abd97b6ab08d76b9311891d21b46946778c410855e3b",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S017_hit-v1.png",
+        "sourceSha256": "c94379cce6e0cd417e420d232058204b557ec2cbae87d338037b2d4102ea6b67",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the hit stage. Visual design: \u96f7\u77db\u523a\u5165\u540e\u7684\u7834\u7532\u88c2\u7eb9. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S019_cast",
+      "spell": "S019",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S019/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S019: spinning flame wheel, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "7726cea498b7e4d554c3e3f0ee7a04870f395e3f4211688c48e5a3d7c924905d",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S019_cast-v1.png",
+        "sourceSha256": "01092dba7703857921b2c47506a3cadfa89d942f1df5340afd89910327ae73d2",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the cast stage. Visual design: \u73af\u5f62\u706b\u8f6e\u9010\u6b65\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S019_travel",
+      "spell": "S019",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S019/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S019: spinning flame wheel, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "a831cf86e1c76e83d69f7c107776eebbd54e44acbd6726ec33f031034db7fbab",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S019_travel-v1.png",
+        "sourceSha256": "260d00244fa9982bf6a9cd0059f888d4363df11e745afdb5f9c9d379453ba049",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the travel stage. Visual design: \u76ee\u6807\u811a\u4e0b\u533a\u57df\u706b\u8f6e\u56de\u65cb\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S019_hit",
+      "spell": "S019",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S019/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S019: spinning flame wheel, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "c420c4cd836a459783e7c6ba3ad717fe0e3c6cb59298eeec99a94e62ae80cd81",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S019_hit-v1.png",
+        "sourceSha256": "d29d3d2783d706bb5d1e618ca84f55ee6e9b816c0ea406198585394a3b67dab5",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the hit stage. Visual design: \u707c\u7130\u4ece\u706b\u8f6e\u4e2d\u5fc3\u7edf\u4e00\u7206\u53d1. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S021_cast",
+      "spell": "S021",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S021/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S021: lunar soul-binding glyph, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "3ca66c5ba31b260e7f0d6536fd7afa32d05825a9a0f3d97a4eb10b0cbf018cdf",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S021_cast-v1.png",
+        "sourceSha256": "3f85cccc78880504a5933b4a029bab6bf2754d744766a51fc2cad3a037d829ed",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the cast stage. Visual design: \u6708\u5f71\u6cd5\u5370\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S021_travel",
+      "spell": "S021",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S021/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S021: lunar soul-binding glyph, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "674cbd2e910ac812e0078210852f85a0f84a01fbad30db925c81be36f9eb42a0",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S021_travel-v1.png",
+        "sourceSha256": "9b4422ab2aa2ba885ca93d2eb663bd22571223585d85df021972c54d3c13e84c",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the travel stage. Visual design: \u6708\u5f71\u7275\u51fa\u9634\u5149\u56f4\u7ed5\u8eab\u4f53\u951a\u70b9. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S021_hit",
+      "spell": "S021",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S021/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S021: lunar soul-binding glyph, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "037f3be55de9defcc4b5eeff7d101a71707f3c35fc92f0a1337bc607e28b4883",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S021_hit-v1.png",
+        "sourceSha256": "4159b6b1e604cc2486d198940a7805d480858a7aba30d63c0c67dff2f1220f4c",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the hit stage. Visual design: \u9b42\u7eb9\u5411\u4e2d\u5fc3\u6536\u7d27\uff0c\u4e0d\u753b\u4eba\u7269\u7075\u9b42. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S022_cast",
+      "spell": "S022",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S022/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S022: star-position flying sword array, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "ce510c675962939b9eebf0edf485805a0b9e9d5813ff52c0bb18c60a501222fd",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S022_cast-v1.png",
+        "sourceSha256": "85d5b6d600b0a7ccdcfb7e53d0f1b98f372d93ee5fcd781d9b61fab5d72ec135",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the cast stage. Visual design: \u661f\u4f4d\u7b26\u5370\u9010\u4e00\u4eae\u8d77. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S022_travel",
+      "spell": "S022",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S022/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S022: star-position flying sword array, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "195ea6a6a86707d09fbcb9fecbaa00c9ad8f45c0f0f056c06ad89861ee62ca57",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S022_travel-v1.png",
+        "sourceSha256": "c2a816704103ea54753a84693ed6016cbfa038fea3acca10f2b1d590651005e2",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the travel stage. Visual design: \u76ee\u6807\u533a\u57df\u661f\u4f4d\u5c55\u5f00\u3001\u98de\u5251\u6309\u9635\u4f4d\u843d\u4e0b\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S022_hit",
+      "spell": "S022",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S022/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S022: star-position flying sword array, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "e5f56a3f61de04b45569c408dad8e69ed4cbd244e72ddc89c157d8d0786c173d",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S022_hit-v1.png",
+        "sourceSha256": "3146c1ef285d51a18ddce23cd4d7dfacbf23ee9be4b6fcccafda34a235bd60b1",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the hit stage. Visual design: \u5251\u9635\u7edf\u4e00\u51b2\u51fb\u6ce2\u4e0e\u661f\u5149\u788e\u7247. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S023_cast",
+      "spell": "S023",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S023/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S023: heaven-earth suppression domain, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "47d0e8bbe9de3d6c1d533a70b06d5a7f764f24b1c19d1ba6ae0a9f995bb07ad6",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S023_cast-v1.png",
+        "sourceSha256": "49e74268d71b4f3ae021bcd660bd91d9810586e9f980f41da854553278e3624f",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the cast stage. Visual design: \u5730\u9762\u9547\u57df\u5370\u6210\u5f62\uff0c\u659c\u4fef\u89c6. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S023_travel",
+      "spell": "S023",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S023/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S023: heaven-earth suppression domain, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "f3164282e9461454b62dad10d46adab1a4a9ce7e22c1098fbf0536bb78336960",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S023_travel-v1.png",
+        "sourceSha256": "ca06ff4e09f5c1fa215e770f3db926bf0d2e6b99c92e1851cfc6d09c2d11c7fe",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the travel stage. Visual design: \u9547\u57df\u8fb9\u754c\u9010\u6b65\u5347\u8d77\uff0c\u4e2d\u592e\u7eb9\u7406\u51dd\u805a. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S023_hit",
+      "spell": "S023",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S023/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S023: heaven-earth suppression domain, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "b2fd66f771296c67acf529faae6a0046f3707cbfdef4528e95b21b7ce320cdea",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S023_hit-v1.png",
+        "sourceSha256": "b648e56e9f5218363181531c61fe7826c0e2cddb6fdc68be32d7d43e93289431",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the hit stage. Visual design: \u4e2d\u592e\u9547\u538b\u6ce2\u6cbf\u5730\u9762\u6269\u6563. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S026_cast",
+      "spell": "S026",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S026/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S026: primordial white-gold directed radiance, cast stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "cc0e421aed10e5e743b7cece9ac57958fc39a8c10b51557eecf2e04918988e87",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S026_cast-v1.png",
+        "sourceSha256": "5238eb8cfa339126c57fd5f9ff0ccf4aaa14103cfe5749f6e6386e34c7fd1bec",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 \u592a\u521d\u5bc2\u5149, ONLY the cast stage. Visual design: \u767d\u91d1\u9633\u7eb9\u84c4\u4eae\u540e\u6536\u675f. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S026_travel",
+      "spell": "S026",
+      "phase": "travel",
+      "path": "GameResources/effects/Spells/Stages/S026/travel.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S026: primordial white-gold directed radiance, travel stage. Exactly 8 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "d1ef9d211ff4b3031a93821c28febe5bf1f6434da6e72e91cdd47b7cb3577492",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:43:29.696634+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S026_travel-v4.png",
+        "sourceSha256": "2c86b630ac7cee3a268ecd4569523715ad283442129be13110aa26e5e492ba11",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S026 \u592a\u521d\u5bc2\u5149: WHITE and PALE GOLD straight horizontal radiant beam, pointed light tip RIGHT, subtle thin white-gold ray trailing LEFT, a clean narrow continuous line, no physical sword or swirling dark orb. 8 frames, TWO rows; beam width pulses subtly, stable straight orientation. NO purple, black, moon symbol, or comet body. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "references": [
+          "E:/0.6.0/output/beast-overhaul/spell-candidates/S026_travel-v1.png"
+        ],
+        "revision": 4,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    },
+    {
+      "id": "S026_hit",
+      "spell": "S026",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S026/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "target",
+      "status": "approved",
+      "prompt": "Independent transparent sprite animation atlas for Chinese cultivation WorldBox mod. S026: primordial white-gold directed radiance, hit stage. Exactly 24 192x192 frames, four columns, ordered left-to-right and top-to-bottom, coherent motion and scale, transparent gutters and backdrop. Chinese xianxia spell language, crisp shaded pixel silhouettes, restrained glow. Spell-specific design, not a recolor. No lettering or labels. Each frame centered on a consistent pivot.",
+      "sha256": "1ec7e6eb34c1e02490fab432c4262e6296057ca1a21b6ff89ae6e139b303d4a0",
+      "review": {
+        "kind": "offline-stage-atlas-review",
+        "result": "passed",
+        "reviewedAtUtc": "2026-10-14T06:12:03.407395+00:00",
+        "checked": [
+          "spell-identity",
+          "phase-sequence",
+          "cell-boundaries",
+          "direction",
+          "pivot",
+          "alpha"
+        ],
+        "unityValidation": "pending"
+      },
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "output/beast-overhaul/generated-spell-originals/S026_hit-v1.png",
+        "sourceSha256": "fe326ff9c55cc071cd651a30cbec70d81f463d0a36a3274e3877ed9959d9c873",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 \u592a\u521d\u5bc2\u5149, ONLY the hit stage. Visual design: \u77ed\u6682\u767d\u91d1\u5149\u75d5\u3001\u7a7a\u95f4\u88c2\u7eb9\u4e0e\u8870\u51cf\u5149\u5c51. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "references": [],
+        "revision": 1,
+        "conversion": {
+          "tool": "System.Drawing",
+          "frameSize": 192,
+          "columns": 4,
+          "paddingPixels": 16,
+          "scale": "fixed-whole-cell"
+        }
+      },
+      "playback": {
+        "mode": "once-over-phase-duration",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "frameOrder": "left-to-right-top-to-bottom"
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+# Local build/packaging artefacts (large, reproducible binaries)
+_pkg_build/
+deliverables/
+baseline-*/
+optimization-*/
+optimization-*/MySimulatedLongevityRoad/build/
+
+# Third-party upstream sources kept for reference only (embedded git repo)
+upstream-*/
+
+# Per-run compile/verification outputs
+**/_compile-check*/
+**/_baseline-compile/
+**/_pre-change-backup/
+**/delivery/
+
+# Local reference and tool caches
+.codegraph/
+_ref/
+source/
+validation/
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+**/__probe*.txt
+# Canonical mod workspace outputs
+/build/
+**/bin/
+**/obj/
+**/__pycache__/
+*.pyc
+*.pyo
+*.dll
+*.pdb
+*.exe
+debug.log
+.archive/

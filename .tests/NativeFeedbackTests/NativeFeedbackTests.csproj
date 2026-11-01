@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems><LangVersion>latest</LangVersion>
+    <GameRoot Condition="'$(GameRoot)' == ''">D:\owl\gameversion\worldbox-ab712b72f394</GameRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Patches/MclslNativeFeedbackPatches.cs" />
+    <Reference Include="0Harmony"><HintPath>$(GameRoot)/worldbox_Data/StreamingAssets/mods/NML/Assemblies/0Harmony.dll</HintPath></Reference>
+    <Reference Include="Mono.Cecil"><HintPath>$(GameRoot)/BepInEx/core/Mono.Cecil.dll</HintPath></Reference>
+  </ItemGroup>
+  <Target Name="CopyGameInput" AfterTargets="Build">
+    <Copy SourceFiles="$(GameRoot)/worldbox_Data/Managed/Assembly-CSharp.dll" DestinationFiles="$(OutDir)GameInput.dll" />
+  </Target>
+</Project>

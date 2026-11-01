@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Defaults to the local SDK's target pack; override with
+         -p:MclslTestTfm=net8.0 when that pack is available offline. -->
+    <MclslTestTfm Condition="'$(MclslTestTfm)' == ''">net10.0</MclslTestTfm>
+    <TargetFramework>$(MclslTestTfm)</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>LineageCleanupTests</AssemblyName>
+    <RootNamespace>LineageCleanupTests</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <!-- Real production types are compiled from the source tree, not copied. -->
+    <Compile Include="..\..\code\MySimulatedLongevityRoad\Data\MclslEventCatalog.cs"
+             Link="Production\MclslEventCatalog.cs" />
+    <Compile Include="..\..\code\MySimulatedLongevityRoad\Data\MclslCleanupPolicy.cs"
+             Link="Production\MclslCleanupPolicy.cs" />
+  </ItemGroup>
+</Project>

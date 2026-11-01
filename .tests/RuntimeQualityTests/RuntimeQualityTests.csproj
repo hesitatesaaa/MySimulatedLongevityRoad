@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion><EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <UseAppHost>false</UseAppHost>
+    <GameRoot Condition="'$(GameRoot)' == ''">D:\owl\gameversion\worldbox-ab712b72f394</GameRoot>
+    <Production>../../code/MySimulatedLongevityRoad</Production>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="$(Production)/Core/MclslOwnerRound.cs" />
+    <Compile Include="$(Production)/Core/MclslModuleLoadState.cs" />
+    <Compile Include="$(Production)/Data/MclslCombatCareerCatalog.cs" />
+    <Compile Include="$(Production)/Systems/Combat/MclslCareerBattleState.cs" />
+    <Compile Include="$(Production)/Systems/Combat/MclslCareerStateValidation.cs" />
+    <Compile Include="$(Production)/Systems/Combat/MclslCombatCareerPersistence.cs" />
+    <Compile Include="$(Production)/Systems/Cultivation/MclslSpellCasting.cs" />
+    <Reference Include="Newtonsoft.Json"><HintPath>$(GameRoot)/worldbox_Data/Managed/Newtonsoft.Json.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

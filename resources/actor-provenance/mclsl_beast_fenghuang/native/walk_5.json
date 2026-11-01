@@ -1,0 +1,55 @@
+{
+  "actorId": "mclsl_beast_fenghuang",
+  "action": "walk",
+  "index": 5,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-reviewed-sheet-cell",
+  "sourceSha256": "408b4cb77491bdc235ab13821435e5410ae22821da1dab2653f45ed170458dbd",
+  "outputFile": "NativeActorResources/actors/Beasts/fenghuang/Beast/main/walk_5.png",
+  "outputSha256": "8ed21bd17fe05e7e3923b3dfbfab90ec02fde5b6a5dd20ca537df29a10be5d20",
+  "prompt": "User reference phoenix/Dafeng: six folded-wing idle poses and eight coordinated two-wing flying poses, right-facing WorldBox pixel art, true alpha, no third wing or wing ghosts. Generated with built-in image_gen; see retained source sheet.",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_fenghuang\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_zhuque_yuan\\attack_2.png"
+  ],
+  "createdAtUtc": "2026-10-20T07:24:52.246Z",
+  "normalization": {
+    "resampling": "nearest",
+    "canvas": [
+      320,
+      320
+    ],
+    "sourceCanvas": [
+      313,
+      325
+    ],
+    "scale": 0.8577319587628867,
+    "cropped": false,
+    "transparentPaddingTrimmed": true,
+    "spritesheetSlicing": true,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16,
+    "placement": [
+      39,
+      98
+    ]
+  },
+  "nativeResolution": false,
+  "integrationStatus": "offline-integration-awaiting-Unity-review",
+  "sourceRetention": "full generated sheet retained in resources/bird-animation-sources",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  },
+  "previousSourceSha256": "6424882e4b7b57473eddb4fb62000876c66fae7a968ae06cf18b75c07c12c686",
+  "sourceSheet": "resources/bird-animation-sources/fenghuang.png",
+  "sourceCell": {
+    "left": 941,
+    "top": 650,
+    "width": 313,
+    "height": 325
+  }
+}

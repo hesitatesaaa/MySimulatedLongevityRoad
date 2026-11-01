@@ -1,0 +1,48 @@
+{
+  "actorId": "mclsl_named_lifan",
+  "action": "attack",
+  "index": 10,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "1f1eb5ca86e1419a276f4cb96dbc68728dbf85d4809ea4f3160fbbc971bbb1f8",
+  "outputFile": "NativeActorResources/actors/Named/LiFan/main/attack_10.png",
+  "outputSha256": "1d6a321145be1173e1d1c7f8852879669fb43379e6526e1744a672bc13b79d16",
+  "createdAtUtc": "2026-10-09T03:48:13.220016+00:00",
+  "prompt": "Use case: stylized-concept. Asset type: exactly ONE independently drawn pixel-game animation frame, LiFan attack_10, frame 11 of 12. Supplied image: fixed identity reference of LiFan, draw him anew in the requested pose. Keep the same dark navy/white Chinese robes, gold trim and sash, long dark hair tied with a gold ornament, face and boots. Preserve exact costume, colors, anatomy, pixel cluster size, three-quarter right-facing orientation, camera and original body scale. Canvas MUST stay 1254x1254 square with genuinely transparent RGBA background. It is a 128x128 virtual pixel-art game canvas shown enlarged; crisp square pixel clusters, hard edges, dark outlines and flat shading. Action: right hand lowers toward its idle location. Root/feet stay at the same original ground point, allow clear articulated arm, shoulder and robe motion. Do NOT change body size. Draw ONE single pose ONLY. Do not copy/paste or translate the entire previous sprite. No projectile or spell particles, no text, no sheets, no panels, no duplicates, no backgrounds, no shadow, no glow, no blur, no smooth painting. Entire body and extended limbs must remain inside the canvas with generous transparent margins.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "1f1eb5ca86e1419a276f4cb96dbc68728dbf85d4809ea4f3160fbbc971bbb1f8",
+    "sourceAnchor": [
+      607.5,
+      1177
+    ],
+    "sourcePixelsPerUnit": 347.36840715789526,
+    "ppuFactor": 1.331449907909157,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": true,
+    "pixelEdges": true,
+    "anchor": true,
+    "continuity": true
+  }
+}

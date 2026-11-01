@@ -1,0 +1,50 @@
+{
+  "actorId": "mclsl_named_zhenshen",
+  "action": "idle",
+  "index": 0,
+  "artDirectionRevision": 2,
+  "method": "built-in-imagegen-independent-frame",
+  "sourceSha256": "ad20629475472988590e7197faaabab57be4d289e5a928a61079ad4ed6d8bcea",
+  "outputFile": "NativeActorResources/actors/Named/ZhenShen/main/idle_0.png",
+  "outputSha256": "ed478ee7be9cbad116e8d236fe77f598ec97b32f9a549b8dc5b321d61f55b5d2",
+  "createdAtUtc": "2026-10-09T11:16:55.552186+00:00",
+  "prompt": "Use case: stylized-concept. Exactly ONE fresh independent transparent PNG of \u771f\u795e (mclsl_named_zhenshen), idle_0. PRIMARY SUBJECT AND REQUIRED VISIBLE IDENTITY: Adult male celestial sage, long WHITE hair and simple pale-gold crown. Long ivory/white robe with limited pale-gold trim and broad light shadows. Near hand holds an upright staff with a recognizably large gold celestial finial beside the body, staff and hand connection clearly visible. Dignified slender elder silhouette, no sword hilt substituted for the staff. Image 1 supplies ONLY this individual face, palette and moderate pixel detail. Replace its unsuitable bun, costume shape or absent prop as required by the subject description. Image 2 is Li Fan rendering STYLE ONLY: never copy his hairstyle, cape, ornaments, clothing composition or sword. Subject-specific hat, held object and silhouette take priority over BOTH images. Full relaxed right-facing three-quarter side view, coherent anatomy. Each described hat, staff, fan, axe, gourd or book MUST be plainly identifiable; never conceal or omit it. Match Li Fan/Baihu moderate pixel detail: crisp outline, broad clean square clusters and two or three shades per material, restrained trim. No dense embroidery, gold filigree, microtexture or painterly rendering. Render the WHOLE character afresh, never paste, transform or recolor existing sprite pixels. Square 1254x1254 transparent RGBA source. Neutral foot/body base near y1080, full silhouette within x100..1150,y100..1100, generous margins. Exactly one body and one pose, no grid, sprite sheet, frame panels, background, shadow, text, glow, particles, watermark or clipping.\n",
+  "references": [
+    "E:\\0.6.0\\output\\actor-redraw\\rejected\\mclsl_named_zhenshen\\direction-20261009T105847403066\\output\\actor-redraw\\originals\\mclsl_named_zhenshen\\idle_0.png",
+    "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_named_lifan\\idle_0.png"
+  ],
+  "normalization": {
+    "resampling": "lanczos-premultiplied-alpha",
+    "sourceCanvas": [
+      1254,
+      1254
+    ],
+    "canvas": [
+      256,
+      256
+    ],
+    "scale": 0.20414673046251994,
+    "inputSha256": "ad20629475472988590e7197faaabab57be4d289e5a928a61079ad4ed6d8bcea",
+    "sourceAnchor": [
+      617.5,
+      1199
+    ],
+    "sourcePixelsPerUnit": 388.07015991579004,
+    "ppuFactor": 1.3268361663456598,
+    "sourceRenderScale": 1,
+    "cropped": false,
+    "spritesheetSlicing": false,
+    "colorQuantized": false,
+    "resizePasses": 1,
+    "visibleBoundsAlpha": 16
+  },
+  "nativeResolution": false,
+  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
+  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "historicalReview": {
+    "identity": false,
+    "pixelEdges": false,
+    "anchor": false,
+    "continuity": false
+  }
+}
