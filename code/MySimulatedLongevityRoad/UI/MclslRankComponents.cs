@@ -83,15 +83,15 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
                 _ => MclslUiTheme.RankRowOdd
             };
         }
-        SetText("RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
-        SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, MclslUiTheme.RankTextPrimary);
+        MclslRankTextFormat.SetText(transform, "RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
+        MclslRankTextFormat.SetText(transform, "NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名修士" : item.Name, index < 3 ? RankColor(index) : MclslUiTheme.RankTextPrimary);
         string detail = string.IsNullOrWhiteSpace(item.RootAttributes) ? item.RootText : item.RootAttributes;
         if (!string.IsNullOrWhiteSpace(item.ExtraText) && !string.Equals(detail, item.ExtraText, StringComparison.Ordinal))
             detail += " · " + item.ExtraText;
-        SetText("DetailText", detail, MclslUiTheme.RankTextMuted);
-        SetText("PowerText", sortValue, MclslUiTheme.RankAccentPrimary);
-        SetText("RightText", string.IsNullOrWhiteSpace(item.KingdomName) ? "无归属" : item.KingdomName, MclslUiTheme.RankAccentSecondary);
-        SetText("RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", ""), MclslUiTheme.RankTextPrimary);
+        MclslRankTextFormat.SetText(transform, "DetailText", detail, MclslUiTheme.RankTextMuted);
+        MclslRankTextFormat.SetText(transform, "PowerText", sortValue, MclslUiTheme.RankAccentPrimary);
+        MclslRankTextFormat.SetText(transform, "RightText", string.IsNullOrWhiteSpace(item.KingdomName) ? "无归属" : item.KingdomName, MclslUiTheme.RankAccentSecondary);
+        MclslRankTextFormat.SetText(transform, "RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", ""), MclslUiTheme.RankTextPrimary);
 
         UiUnitAvatarElement avatar = GetComponentInChildren<UiUnitAvatarElement>(true);
         if (avatar != null)
@@ -127,14 +127,6 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
     {
         _actor = null;
         Tooltip.hideTooltip();
-    }
-
-    private void SetText(string childName, string value, Color color)
-    {
-        Text text = transform.Find(childName)?.GetComponent<Text>();
-        if (text == null) return;
-        text.text = value ?? string.Empty;
-        text.color = color;
     }
 
     private static Color RankColor(int rank)

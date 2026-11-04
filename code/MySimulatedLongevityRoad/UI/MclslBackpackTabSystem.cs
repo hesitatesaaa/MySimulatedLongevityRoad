@@ -20,15 +20,37 @@ internal static class MclslBackpackTabSystem
     private const string MentorshipTabId = "MclslMentorshipTab";
     private static readonly Dictionary<UnitWindow, WindowMetaTab> MentorshipTabs = new();
 
+    private static GameObject CloneInactive(GameObject source, Transform parent)
+    {
+        GameObject staging = new("MclslInactiveTemplate");
+        staging.SetActive(false);
+        try
+        {
+            GameObject clone = UnityEngine.Object.Instantiate(source, staging.transform);
+            clone.SetActive(false);
+            clone.transform.SetParent(parent, false);
+            return clone;
+        }
+        finally { UnityEngine.Object.Destroy(staging); }
+    }
+
     internal static void Bind(UnitWindow window)
     {
         if (window?.actor?.data == null || window.scroll_window?.tabs == null) return;
         Transform tabsRoot = window.transform.Find("Background/Tabs");
         if (tabsRoot == null) return;
+        bool supported=MclslBagSystem.Supports(window.actor);
+        tabsRoot.Find(TabId)?.gameObject.SetActive(supported);
+        if(!supported)
+        {
+            window.transform.Find("Background/Scroll View/Viewport/Content/"+ContentId)?.gameObject.SetActive(false);
+            return;
+        }
         WindowMetaTab existing = tabsRoot.Find(TabId)?.GetComponent<WindowMetaTab>();
         if (existing != null)
         {
             Tabs[window] = existing;
+            MclslBackpackHeader.RegisterCustomTab(window, TabId);
             MclslBackpackHeader.Bind(window);
             BindMentorship(window, tabsRoot);
             return;
@@ -39,7 +61,7 @@ internal static class MclslBackpackTabSystem
         WindowMetaTab genealogyTab = tabsRoot.Find("Genealogy")?.GetComponent<WindowMetaTab>();
         if (template == null || contentParent == null || genealogyTab == null) return;
 
-        GameObject content = UnityEngine.Object.Instantiate(template, contentParent).gameObject;
+        GameObject content = CloneInactive(template.gameObject, contentParent);
         content.SetActive(false);
         content.name = ContentId;
         UnitGenealogyElement source = content.GetComponent<UnitGenealogyElement>();
@@ -95,13 +117,13 @@ internal static class MclslBackpackTabSystem
         }
 
         int insertAt = tabsRoot.Find("Genealogy").GetSiblingIndex();
-        WindowMetaTab tab = UnityEngine.Object.Instantiate(genealogyTab, tabsRoot);
+        WindowMetaTab tab = CloneInactive(genealogyTab.gameObject, tabsRoot).GetComponent<WindowMetaTab>();
         tab.name = TabId;
         tab.tab_action = new WindowMetaTabEvent();
         tab.tab_action.AddListener(clicked => window.scroll_window.tabs.showTab(clicked));
         tab.transform.SetSiblingIndex(insertAt);
         tab.container = window.scroll_window.tabs;
-        tab.tab_elements.RemoveAll(t => t.name.StartsWith("content_", StringComparison.OrdinalIgnoreCase));
+        tab.tab_elements = new List<Transform>(); // Never retain cloned native page references.
         Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/QiankunBagEntrance");
         if (icon != null)
         {
@@ -124,8 +146,10 @@ internal static class MclslBackpackTabSystem
         FieldInfo tabsField = typeof(WindowMetaTabButtonsContainer).GetField("_tabs", BindingFlags.NonPublic | BindingFlags.Instance);
         if (tabsField?.GetValue(window.scroll_window.tabs) is List<WindowMetaTab> tabs && !tabs.Contains(tab)) tabs.Add(tab);
         window.scroll_window.tabs.addTabContent(tab, content.transform);
+        tab.gameObject.SetActive(true);
         window.scroll_window.tabs.refillTabsWithContent();
         Tabs[window] = tab;
+        MclslBackpackHeader.RegisterCustomTab(window, TabId);
         MclslBackpackHeader.Bind(window);
         BindMentorship(window, tabsRoot);
     }
@@ -140,12 +164,17 @@ internal static class MclslBackpackTabSystem
     private static void BindMentorship(UnitWindow window, Transform tabsRoot)
     {
         WindowMetaTab existing = tabsRoot.Find(MentorshipTabId)?.GetComponent<WindowMetaTab>();
-        if (existing != null) { MentorshipTabs[window] = existing; return; }
+        if (existing != null)
+        {
+            MentorshipTabs[window] = existing;
+            MclslBackpackHeader.RegisterCustomTab(window, MentorshipTabId);
+            return;
+        }
         UnitGenealogyElement template = window.transform.GetComponentInChildren<UnitGenealogyElement>(true);
         Transform contentParent = window.transform.Find("Background/Scroll View/Viewport/Content");
         WindowMetaTab genealogyTab = tabsRoot.Find("Genealogy")?.GetComponent<WindowMetaTab>();
         if (template == null || contentParent == null || genealogyTab == null) return;
-        GameObject content = UnityEngine.Object.Instantiate(template, contentParent).gameObject;
+        GameObject content = CloneInactive(template.gameObject, contentParent);
         content.name = "content_mclsl_mentorship";
         content.SetActive(false);
         UnitGenealogyElement source = content.GetComponent<UnitGenealogyElement>();
@@ -170,13 +199,13 @@ internal static class MclslBackpackTabSystem
         SectionRoot(lineage)?.gameObject.SetActive(false);
         SectionRoot(books)?.gameObject.SetActive(false);
 
-        WindowMetaTab tab = UnityEngine.Object.Instantiate(genealogyTab, tabsRoot);
+        WindowMetaTab tab = CloneInactive(genealogyTab.gameObject, tabsRoot).GetComponent<WindowMetaTab>();
         tab.name = MentorshipTabId;
         tab.tab_action = new WindowMetaTabEvent();
         tab.tab_action.AddListener(clicked => window.scroll_window.tabs.showTab(clicked));
         tab.transform.SetSiblingIndex(tabsRoot.Find(TabId) != null ? tabsRoot.Find(TabId).GetSiblingIndex() + 1 : genealogyTab.transform.GetSiblingIndex());
         tab.container = window.scroll_window.tabs;
-        tab.tab_elements.RemoveAll(t => t.name.StartsWith("content_", StringComparison.OrdinalIgnoreCase));
+        tab.tab_elements = new List<Transform>(); // Never retain cloned native page references.
         Sprite icon = SpriteTextureLoader.getSprite("ui/Icons/icon_spellbook") ?? SpriteTextureLoader.getSprite("ui/Icons/QiankunBagEntrance");
         if (icon != null)
         {
@@ -189,8 +218,10 @@ internal static class MclslBackpackTabSystem
         FieldInfo tabsField = typeof(WindowMetaTabButtonsContainer).GetField("_tabs", BindingFlags.NonPublic | BindingFlags.Instance);
         if (tabsField?.GetValue(window.scroll_window.tabs) is List<WindowMetaTab> tabs && !tabs.Contains(tab)) tabs.Add(tab);
         window.scroll_window.tabs.addTabContent(tab, content.transform);
+        tab.gameObject.SetActive(true);
         window.scroll_window.tabs.refillTabsWithContent();
         MentorshipTabs[window] = tab;
+        MclslBackpackHeader.RegisterCustomTab(window, MentorshipTabId);
     }
 
     private static Transform SectionRoot(Transform section)
@@ -376,7 +407,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
                 MclslOwnedItem owned = bag.Items[i];
                 string category = MclslItemCatalog.Get(owned?.ItemId)?.Category;
                 int index = category switch { "Artifact" => 0, "Pill" => 1, "Talisman" => 2,
-                    "Plant" or "SpiritObject" or "TalismanMaterial" or "Material" => 3, _ => -1 };
+                    "Plant" or "SpiritObject" or "TalismanMaterial" or "Material" or "CareerSupply" => 3, _ => -1 };
                 if (index >= 0) _categories[index].Add(owned);
                 if ((i + 1) % 128 == 0)
                 {
@@ -401,7 +432,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
             if (!BuildIsCurrent(generation, selectedActor)) yield break;
             int learnedSpells = MclslSpellSystem.KnownView(actor).Count;
             LoadSpells(bag); AddPages(_spells, 5, learnedSpells); MclslBackpackTabSystem.FitSection(_spells);
-            MclslBackpackHeader.RefreshSlots();
+            MclslBackpackHeader.RefreshSlots(unit_window);
             _revision = revision; _knownRaw = known; _spellRevision = spellRevision;
         }
         finally
@@ -482,7 +513,7 @@ internal sealed class MclslBackpackTabElement : UnitElement
             MclslOwnedItem owned = _categories[section][index];
             MclslItemDefinition item = MclslItemCatalog.Get(owned?.ItemId);
             if (item == null || (category == null
-                    ? item.Category is not ("Plant" or "SpiritObject" or "TalismanMaterial" or "Material")
+                    ? item.Category is not ("Plant" or "SpiritObject" or "TalismanMaterial" or "Material" or "CareerSupply")
                     : item.Category != category)) continue;
             string title = item.Name + (owned.Count > 1 ? " ×" + owned.Count : string.Empty);
             string description = item.EffectText + "\n数量 " + owned.Count;
@@ -603,14 +634,12 @@ internal sealed class MclslBackpackTabElement : UnitElement
             int xp = MclslSpellProgression.Experience(actor, spell.Id);
             int threshold = MclslSpellProgression.ExperienceThreshold(spell, level);
             string status = learned ? "等级 " + level + "/10" + (threshold > 0 ? "；精进 " + xp + "/" + threshold : "；已臻圆满") : "尚未学会";
-            if(!MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(actor,spell.Id))status+="；异职高阶技能休眠";
             if (target == spell.Id) status += "\n当前参悟：" + MclslSpellProgression.StudyProgress(actor) + "/"
                 + (learned ? threshold : MclslSpellProgression.StudyThreshold(spell));
             else status += "\n点击此法术，将其设为参悟目标。";
             AddIcon(_spells, spell.IconPath, spell.Name,
                 MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + status + "\n" + spell.Description
-                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒\n"
-                + MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.AcquisitionDescription(spell.Id),
+                + "\n灵力消耗：" + spell.ManaCost + "\n冷却：" + spell.Cooldown + " 秒",
                 () => { MclslSpellProgression.SetStudyTarget(actor, spell.Id); Refresh(force: true); });
             shown++;
         }

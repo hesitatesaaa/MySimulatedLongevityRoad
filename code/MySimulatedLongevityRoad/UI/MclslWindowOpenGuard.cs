@@ -5,7 +5,7 @@ namespace MySimulatedLongevityRoad.UI;
 
 internal static class MclslWindowOpenGuard
 {
-    internal static void Show(ScrollWindow window, string windowId, bool createdNow)
+    internal static void Show(ScrollWindow window, string windowId, bool createdNow, bool updateCanvas = true)
     {
         if (window == null || string.IsNullOrWhiteSpace(windowId))
         {
@@ -21,7 +21,7 @@ internal static class MclslWindowOpenGuard
         ScrollWindow.showWindow(windowId);
         if (gameObject != null && gameObject.GetComponent<MclslNativeWindowBlocker>() == null)
             gameObject.AddComponent<MclslNativeWindowBlocker>();
-        Canvas.ForceUpdateCanvases();
+        if (updateCanvas) Canvas.ForceUpdateCanvases();
     }
 }
 

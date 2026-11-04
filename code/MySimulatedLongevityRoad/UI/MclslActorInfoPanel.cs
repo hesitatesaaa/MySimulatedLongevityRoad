@@ -25,6 +25,17 @@ internal static class MclslActorInfoPanel
     private static readonly HashSet<UnitWindow> OpenWindows = new();
     private static readonly Dictionary<UnitWindow, PanelState> WindowStates = new();
 
+    internal static Actor DisplayedModActor()
+    {
+        foreach (UnitWindow window in OpenWindows)
+            if (window != null && window.gameObject.activeInHierarchy
+                && MclslActorAccessor.Alive(window.actor)
+                && (MclslBeastAnimation.IsSupported(window.actor)
+                    || window.actor.asset.id is "mclsl_xuanhuang" or "zombie_mclsl_xuanhuang"))
+                return window.actor;
+        return null;
+    }
+
     internal static void Refresh(UnitWindow window, bool resetScrollForNewActor = false, bool forceContentRefresh = false)
     {
         if (window == null || !window.gameObject.activeInHierarchy) return;
@@ -36,7 +47,8 @@ internal static class MclslActorInfoPanel
         if (!forceContentRefresh && !resetScrollForNewActor
             && WindowStates.TryGetValue(window, out PanelState cached) && cached != null
             && MclslActorAccessor.Alive(window.actor)
-            && cached.Initialized && cached.ActorId == actorId && cached.gameObject.activeInHierarchy)
+            && cached.Initialized && cached.ActorId == actorId && cached.gameObject.activeInHierarchy
+            && ShouldShowFor(window.actor))
         {
             XianLuScreenGuardianOverlay.Ensure(window.transform);
             return;
@@ -61,9 +73,12 @@ internal static class MclslActorInfoPanel
 
         MclslMaobaoShortcutButton.Refresh(window);
         MclslSpellCodexShortcutButton.Refresh(window);
+        bool hasArchive = HasArchiveFor(window.actor);
         if (!ShouldShowFor(window.actor) && !MclslDeveloperBridge.IsAvailable)
         {
             XianLuScreenGuardianOverlay.Hide(window.transform);
+            MclslMaobaoShortcutButton.Hide(window);
+            MclslSpellCodexShortcutButton.Hide(window);
             HidePanel(background);
             return;
         }
@@ -74,7 +89,7 @@ internal static class MclslActorInfoPanel
         WindowStates[window] = state;
         Transform panel = text.transform.parent?.parent?.parent;
         EnsureActionBar(panel ?? background, window.actor);
-        if (scroll != null) scroll.gameObject.SetActive(true);
+        if (scroll != null) scroll.gameObject.SetActive(!MclslCareerSkillView.Showing(panel ?? background));
         bool actorChanged = state != null && state.ActorId != actorId;
 
         string formatted;
@@ -85,6 +100,9 @@ internal static class MclslActorInfoPanel
                 formatted = MclslActorInfoFormatter.Format(window.actor);
         }
         finally { MclslPerformanceProbe.End("UI.人物侧栏", sample); }
+        if (hasArchive)
+            formatted = (string.IsNullOrWhiteSpace(formatted) ? "<b>修行档案</b>\n" : formatted)
+                + Systems.Combat.MclslCombatCareerSystem.Overview(window.actor);
         if (string.IsNullOrWhiteSpace(formatted))
         {
             if (!MclslDeveloperBridge.IsAvailable)
@@ -153,6 +171,8 @@ internal static class MclslActorInfoPanel
             }
             RestoreScroll(scroll, keepScroll, keepContentPosition);
         }
+        MclslCareerSkillView.Bind(panel ?? background, window.actor);
+        RefreshCareerButton(panel ?? background);
     }
 
     internal static void RefreshOpenForActor(Actor actor)
@@ -164,6 +184,7 @@ internal static class MclslActorInfoPanel
             Refresh(window, resetScrollForNewActor: false, forceContentRefresh: true);
         }
     }
+    internal static bool HasAnyOpenWindow => OpenWindows.Count > 0;
     internal static bool HasOpenActor(Actor actor)
     {
         foreach (UnitWindow window in OpenWindows)
@@ -251,7 +272,14 @@ internal static class MclslActorInfoPanel
             try { UnityEngine.Object.Destroy(existing.gameObject); }
             catch
             {
-                try { existing.gameObject.SetActive(false); } catch { }
+                try
+                {
+                    existing.gameObject.SetActive(false);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorInfoPanel-cs-1", "人物面板：隐藏旧操作栏失败: " + mclslEmptyCatchEx.Message);
+                }
             }
         }
         Transform actions = parent.Find("MclslActorActions");
@@ -282,7 +310,7 @@ internal static class MclslActorInfoPanel
         barRect.pivot = new Vector2(0.5f, 0f);
         // Move the button with the document's lower edge, retaining its 30px height.
         barRect.offsetMin = new Vector2(17f, 31f);
-        barRect.offsetMax = new Vector2(-17f, 61f);
+        barRect.offsetMax = new Vector2(-17f, 67f);
         barRect.localScale = Vector3.one;
         Image barImage = bar.GetComponent<Image>();
         // The footer is now a layout-only container.  Keep the green Biography
@@ -296,6 +324,12 @@ internal static class MclslActorInfoPanel
         EnsureActionButton(bar.transform, "Biography", LM.Get("mclsl_xianlu_profile_biography"),
             () => MclslCodexWindow.ShowBiographyForActor(actor));
         EnsureBiographyArtwork(bar.transform.Find("Biography"));
+        RectTransform biographyRect = bar.transform.Find("Biography").GetComponent<RectTransform>();
+        biographyRect.anchorMax = new Vector2(0.5f, 1f);
+        EnsureActionButton(bar.transform, "Career", "职业技能", () => MclslCareerSkillView.Toggle(panel, actor));
+        RectTransform careerRect = bar.transform.Find("Career").GetComponent<RectTransform>();
+        careerRect.anchorMin = new Vector2(0.5f, 0f);
+        RefreshCareerButton(panel);
         MclslRankTooltipTrigger biographyTip = bar.transform.Find("Biography")?.GetComponent<MclslRankTooltipTrigger>();
         if (biographyTip == null) biographyTip = bar.transform.Find("Biography")?.gameObject.AddComponent<MclslRankTooltipTrigger>();
         if (biographyTip != null)
@@ -360,10 +394,30 @@ internal static class MclslActorInfoPanel
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
         Text labelText = buttonObject.transform.Find("Text")?.GetComponent<Text>();
-        if (labelText != null) labelText.text = label;
+        if (labelText != null)
+        {
+            labelText.text = label;
+            labelText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            labelText.verticalOverflow = VerticalWrapMode.Overflow;
+            labelText.resizeTextForBestFit = false;
+        }
     }
 
-    private static void EnsureBiographyArtwork(Transform button)
+    internal static void RefreshCareerButton(Transform panel)
+    {
+        Transform button = panel.Find("MclslActorActions/Career");
+        if (button == null) return;
+        bool showing=MclslCareerSkillView.Showing(panel);
+        bool talent=MclslBeastTalentSystem.Definition(DisplayedModActor())!=null;
+        Text label=button.Find("Text")?.GetComponent<Text>();
+        if(label!=null)label.text=showing?"返回信息":talent?"本命神通":"职业技能";
+        // The return state always reuses the archive title. Entering the beast
+        // talent page shows its own art; ordinary cultivators keep the career art.
+        EnsureBiographyArtwork(button,showing ? "title_career_archive"
+            :talent ? "title_beast_talents" : "title_career_skills");
+    }
+
+    private static void EnsureBiographyArtwork(Transform button, string artwork = "title_biography")
     {
         if (button == null) return;
         Outline border = button.GetComponent<Outline>();
@@ -384,7 +438,7 @@ internal static class MclslActorInfoPanel
         artRect.anchorMax = Vector2.one;
         artRect.offsetMin = new Vector2(3f, 2f);
         artRect.offsetMax = new Vector2(-3f, -2f);
-        XianLuUIResources.Apply(art, "title_biography", Color.clear);
+        XianLuUIResources.Apply(art, artwork, Color.clear);
         art.transform.SetAsLastSibling();
         Text fallback = button.Find("Text")?.GetComponent<Text>();
         if (fallback != null)
@@ -413,13 +467,13 @@ internal static class MclslActorInfoPanel
             body = new GameObject(BodyName, typeof(RectTransform), typeof(Image), typeof(ScrollRect));
             body.transform.SetParent(panel, false);
         }
-        body.SetActive(true);
+        body.SetActive(!MclslCareerSkillView.Showing(panel));
         RectTransform rect = body.GetComponent<RectTransform>();
         rect.anchorMin = Vector2.zero;
         rect.anchorMax = Vector2.one;
-        // Keep a 7px gap above the lowered button and expose 12px more text.
-        rect.offsetMin = new Vector2(17f, 60f);
-        rect.offsetMax = new Vector2(-17f, -65f);
+        // 正文区扩大：左右贴近画框内侧，顶部贴分隔线、底部贴按钮上方。
+        rect.offsetMin = new Vector2(11f, 70f);
+        rect.offsetMax = new Vector2(-11f, -66f);
         rect.localScale = Vector3.one;
         Image image = body.GetComponent<Image>();
         image.color = new Color(0.01f, 0.04f, 0.045f, 0.10f);
@@ -662,8 +716,8 @@ internal static class MclslActorInfoPanel
         text.font = LocalizedTextManager.current_font ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
         text.supportRichText = true;
         text.resizeTextForBestFit = false;
-        text.fontSize = MclslUiTheme.ReadableFontSize(10);
-        text.lineSpacing = 0.95f;
+        text.fontSize = MclslUiTheme.ActorPanelTextSize;
+        text.lineSpacing = MclslUiTheme.ActorPanelTextLineSpacing;
         text.color = MclslUiTheme.ActorPanelText;
         text.alignment = TextAnchor.UpperLeft;
         text.horizontalOverflow = HorizontalWrapMode.Wrap;
@@ -707,20 +761,21 @@ internal static class MclslActorInfoPanel
         return window.transform;
     }
 
-    private static bool ShouldShowFor(Actor actor)
+    private static bool ShouldShowFor(Actor actor) => MclslDeveloperBridge.IsAvailable || HasArchiveFor(actor);
+
+    /// <summary>
+    /// 右侧修士档案的唯一显示口径：没有灵根档案、也未入道、更无感气真元或
+    /// 还真记录的凡人一律不显示侧栏（即使其具备斗法传承潜质）。
+    /// </summary>
+    internal static bool HasArchiveFor(Actor actor)
     {
         if (actor?.data == null) return false;
         try { if (!actor.isAlive()) return false; } catch { return false; }
         if (IsWorldSoulEntity(actor)) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
-        return HasCultivationSignal(actor);
-    }
-
-    private static bool HasCultivationSignal(Actor actor)
-    {
-        if (!string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return true;
         if (MclslSpiritualRootSystem.HasCultivationPotential(actor)) return true;
-        return HasTrait(actor, MclslTraitRegistration.HuanzhenTraitId);
+        if (HasTrait(actor, MclslTraitRegistration.HuanzhenTraitId)) return true;
+        return MclslActorAccessor.HasCultivationPath(actor);
     }
 
     private static bool HasTrait(Actor actor, string traitId)

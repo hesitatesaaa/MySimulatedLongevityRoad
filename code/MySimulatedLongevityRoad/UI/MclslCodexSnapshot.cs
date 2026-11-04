@@ -4,7 +4,6 @@ using System.Collections;
 using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
-using MySimulatedLongevityRoad.Modules;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 
@@ -48,8 +47,6 @@ internal sealed class MclslCodexSnapshot
     internal int AnnualCandidates;
     internal int AnnualActorBacklog;
     internal int AnnualActorStates;
-    internal int AnnualModuleBacklog;
-    internal int LoadRecoveryBacklog;
     internal bool AnnualWorldWorkPending;
     internal string BackgroundEraName = string.Empty;
     internal string BackgroundEraSummary = string.Empty;
@@ -122,8 +119,6 @@ internal sealed class MclslCodexSnapshot
         snapshot.AnnualCandidates = MclslCultivatorCandidateIndex.AnnualCandidateCount;
         snapshot.AnnualActorBacklog = MclslScheduler.AnnualActorBacklogCount;
         snapshot.AnnualActorStates = MclslScheduler.AnnualActorStateCount;
-        snapshot.AnnualModuleBacklog = MclslModuleHub.AnnualModuleBacklogCount;
-        snapshot.LoadRecoveryBacklog = MclslModuleHub.LoadRecoveryBacklogCount;
         snapshot.AnnualWorldWorkPending = MclslScheduler.AnnualWorldWorkPending;
         MclslBackgroundEraInfo backgroundEra = MclslWorldEraCycleSystem.Current(snapshot.Year);
         snapshot.BackgroundEraName = backgroundEra.Name;
@@ -166,7 +161,7 @@ internal sealed class MclslCodexSnapshot
         foreach (MclslDeathRecord death in deathOrder)
         {
             if ((deathRank & 15) == 0) yield return null;
-            snapshot.DeathRankLines.Add("第" + deathRank + "名｜" + Blank(death.ActorName) + "｜" + Blank(death.RealmName) + "｜" + death.Year + "年｜" + ShortCause(death.CauseText));
+            snapshot.DeathRankLines.Add("第" + deathRank + "名｜" + MclslActorArchiveText.Blank(death.ActorName) + "｜" + MclslActorArchiveText.Blank(death.RealmName) + "｜" + death.Year + "年｜" + ShortCause(death.CauseText));
             deathRank++;
         }
 
@@ -182,7 +177,7 @@ internal sealed class MclslCodexSnapshot
         foreach (MclslWorldSoulRecord soul in soulOrder)
         {
             if ((soulRank & 15) == 0) yield return null;
-            string holder = soul.HolderActorId > 0 ? Blank(soul.HolderActorName) : "无主";
+            string holder = soul.HolderActorId > 0 ? MclslActorArchiveText.Blank(soul.HolderActorName) : "无主";
             snapshot.WorldSoulRankLines.Add("第" + soulRank + "位｜" + soul.Name + "｜" + Quality(soul.Quality) + "｜" + soul.State + "｜" + holder + "｜天职" + soul.DutyProgress + "%｜反噬" + soul.DutyBacklash + "%");
             soulRank++;
         }
@@ -215,7 +210,7 @@ internal sealed class MclslCodexSnapshot
         for (int i = 0; i < snapshot.VisibleEventsSorted.Count; i++)
         {
             if (i > 0 && (i & 31) == 0) yield return null;
-            string category = EventCategory(snapshot.VisibleEventsSorted[i]);
+            string category = MySimulatedLongevityRoad.Data.MclslEventCatalog.EventCategory(snapshot.VisibleEventsSorted[i]);
             if (string.Equals(category, MclslEventCatalog.DaoStruggle, StringComparison.Ordinal)
                 && snapshot.DaoStruggleEventsSorted.Count < 120)
                 snapshot.DaoStruggleEventsSorted.Add(snapshot.VisibleEventsSorted[i]);
@@ -526,8 +521,7 @@ internal sealed class MclslCodexSnapshot
         target.Sort((a, b) => (b?.Year ?? 0).CompareTo(a?.Year ?? 0));
     }
 
-    private static string Blank(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value;
-    private static string Quality(int q) => q switch { 4 => "玄奇", 3 => "天奇", 2 => "地奇", _ => "凡奇" };
+    internal static string Quality(int q) => q switch { 4 => "玄奇", 3 => "天奇", 2 => "地奇", _ => "凡奇" };
     private static string ShortCause(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "未载";
@@ -535,10 +529,10 @@ internal sealed class MclslCodexSnapshot
         return text.Length <= 32 ? text : text.Substring(0, 32) + "...";
     }
 
-    private static int SoulStateOrder(string state) => state switch { "显化" => 0, "已祭炼" => 1, "沉寂" => 2, "散逸" => 3, _ => 4 };
-    private static int CaveStateOrder(string state) => state switch { "活跃" => 0, "衰退" => 1, "枯竭" => 2, _ => 3 };
-    private static int WorldChangeStateOrder(string state) => state switch { "活跃" => 0, "衰减" => 1, "平息" => 2, _ => 3 };
-    private static int RuinStateOrder(string state) => state switch { "显世" => 0, "探索中" => 1, "搜尽" => 2, "崩毁" => 3, _ => 4 };
+    internal static int SoulStateOrder(string state) => state switch { "显化" => 0, "已祭炼" => 1, "沉寂" => 2, "散逸" => 3, _ => 4 };
+    internal static int CaveStateOrder(string state) => state switch { "活跃" => 0, "衰退" => 1, "枯竭" => 2, _ => 3 };
+    internal static int WorldChangeStateOrder(string state) => state switch { "活跃" => 0, "衰减" => 1, "平息" => 2, _ => 3 };
+    internal static int RuinStateOrder(string state) => state switch { "显世" => 0, "探索中" => 1, "搜尽" => 2, "崩毁" => 3, _ => 4 };
     private static int LineageStateOrder(string state) => state switch
     {
         "道统鼎盛" => 0,
@@ -552,12 +546,8 @@ internal sealed class MclslCodexSnapshot
         "道统断绝" => 8,
         _ => 8
     };
-    private static bool IsRuinOpen(MclslSectRuinRecord ruin) => ruin != null && ruin.RemainingValue > 0 && ruin.State != "搜尽" && ruin.State != "封绝";
-    private static string EventCategory(MclslRunEventRecord record)
-    {
-        if (record == null) return MclslEventCatalog.NativeWorld;
-        return string.IsNullOrWhiteSpace(record.Category) ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
-    }
+    internal static bool IsRuinOpen(MclslSectRuinRecord ruin) => ruin != null && ruin.RemainingValue > 0 && ruin.State != "搜尽" && ruin.State != "封绝";
+
 
 
 }

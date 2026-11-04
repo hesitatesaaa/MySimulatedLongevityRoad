@@ -64,7 +64,7 @@ internal static partial class MclslWorldSoulActorRegistration
         if (PendingTerrainTasks.Count == 0) return;
         MapBox world = World.world;
         if ((UnityEngine.Object)(object)world == (UnityEngine.Object)null) return;
-        int remaining = MclslRuntimeWorkBudget.ScaleCount(24, 4);
+        int remaining = 24;
         int tasksThisPass = PendingTerrainTasks.Count;
         for (int i = 0; i < tasksThisPass && remaining > 0 && PendingTerrainTasks.Count > 0; i++)
         {
@@ -91,7 +91,7 @@ internal static partial class MclslWorldSoulActorRegistration
     private static string TerrainEffectFor(Actor source)
     {
         string soulId = MclslActorAccessor.GetString(source, MclslActorDataKeys.WorldSoulEntityId, string.Empty).ToLowerInvariant();
-        MclslWorldSoulRecord record = FindWorldSoulById(soulId);
+        MclslWorldSoulRecord record = MySimulatedLongevityRoad.Systems.MclslWorldRunRepository.FindWorldSoulById(soulId);
         string tags = ((record?.LawTags ?? string.Empty) + "|" + soulId).ToLowerInvariant();
         if (tags.Contains("雷") || tags.Contains("thunder")) return "CommonLeiFaTerrain";
         if (tags.Contains("火") || tags.Contains("阳") || tags.Contains("fire") || tags.Contains("yang")) return "FireTerrain";

@@ -54,12 +54,12 @@ internal static class MclslAncientLawSystem
         {
             if (requiredEssence > 0)
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult,
-                    SpiritualPathLabel(year) + "真元未达下境最低要求：" + essence + "/" + requiredEssence);
+                    MySimulatedLongevityRoad.Systems.MclslWorldEpochSystem.SpiritualPathLabel(year) + "真元未达下境最低要求：" + essence + "/" + requiredEssence);
             return;
         }
         if (!MclslCultivationAgeSanity.CanAttemptNextRealm(actor, realm, out string ageReason))
         {
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, SpiritualPathLabel(year) + ageReason);
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, MySimulatedLongevityRoad.Systems.MclslWorldEpochSystem.SpiritualPathLabel(year) + ageReason);
             return;
         }
 
@@ -88,16 +88,16 @@ internal static class MclslAncientLawSystem
         {
             if (MclslRuntimeSettings.AncientLineageAnnouncementsEnabled
                 && strength >= 85
-                && PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_lineage_notice|" + year) % 100 < 3)
+                && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_lineage_notice|" + year) % 100 < 3)
                 MclslWorldRunRepository.AddEvent(year, "ancient_lineage_flourish", MclslActorAccessor.DisplayName(actor) + "仙道法脉兴盛", "其所修《" + MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "仙道功法") + "》渐成一支传承，声势日隆。");
             return;
         }
 
         string status = strength <= 10 ? "旧法传承将绝" : strength <= 35 ? "旧法衰微" : RemnantLabel(year);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawStatus, status);
-        if (strength <= 0 && PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_lineage_ruin|" + year) % 100 < 12)
+        if (strength <= 0 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_lineage_ruin|" + year) % 100 < 12)
             MclslAdventureSystem.CreateAncientLawRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "旧法传承"));
-        if (strength <= 8 && PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_retire|" + year) % 1000 < 8)
+        if (strength <= 8 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_retire|" + year) % 1000 < 8)
         {
             MclslAdventureSystem.CreateAncientLawRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "旧法传承"));
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "旧法传承近绝，遗修闭死关前留下残存传承");
@@ -115,10 +115,10 @@ internal static class MclslAncientLawSystem
         long actorId = MclslActorAccessor.Id(actor);
         int incomeChance = MclslCultivatorIncomePolicy.AncientIncomeChance(realmIndex, aptitude);
         int income = 0;
-        if (PositiveHash(actorId + "|ancient_spirit_stone_income|" + year) % 100 < incomeChance)
+        if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(actorId + "|ancient_spirit_stone_income|" + year) % 100 < incomeChance)
         {
             income = MclslCultivatorIncomePolicy.AncientIncome(realmIndex, aptitude,
-                PositiveHash(actorId + "|ancient_spirit_stone_amount|" + year));
+                MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(actorId + "|ancient_spirit_stone_amount|" + year));
             stones = checked(stones + income);
         }
 
@@ -127,7 +127,7 @@ internal static class MclslAncientLawSystem
         // Keep two full maintenance payments available so the annual sink does
         // not consume every stone before market settlement can use the wallet.
         int spent = stones >= (long)cost * 3L
-            && PositiveHash(actorId + "|ancient_spirit_stone_spend|" + year) % 100 < spendChance ? cost : 0;
+            && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(actorId + "|ancient_spirit_stone_spend|" + year) % 100 < spendChance ? cost : 0;
         MclslEconomicResult result = MclslEconomyCommands.Commit(year, new[]
         {
             new MclslEconomicOperation(MclslEconomicKind.Issue, MclslCurrency.SpiritStone, income, toAccount: account),
@@ -159,13 +159,9 @@ internal static class MclslAncientLawSystem
         return Math.Clamp(bonus, 0, 60);
     }
 
-    private static string SpiritualPathLabel(int year)
-    {
-        if (!MclslWorldEpochSystem.IsNewLawActive(year)) return "仙道";
-        return MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法" : "旧法";
-    }
 
-    private static string RemnantLabel(int year) => MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+
+    private static string RemnantLabel(int year) => MclslWorldEpochSystem.RemnantLabel(year);
 
     private static void StabilizeAncientSurvival(Actor actor, string realm)
     {
@@ -182,34 +178,12 @@ internal static class MclslAncientLawSystem
                 TrySetNumber(actor.data, "nutrition", 100f);
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientLawSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientLawSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientLawSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientLawSystem.cs #1: " + mclslEmptyCatchEx.Message); }
     }
 
+    private const string ReflectionSite = "Systems/Cultivation/MclslAncientLawSystem.cs #2";
     private static void TrySetNumber(object target, string name, float value)
-    {
-        if (target == null) return;
-        const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.IgnoreCase;
-        try
-        {
-            System.Reflection.FieldInfo field = target.GetType().GetField(name, flags);
-            if (field != null)
-            {
-                if (field.FieldType == typeof(float)) field.SetValue(target, value);
-                else if (field.FieldType == typeof(int)) field.SetValue(target, (int)value);
-                return;
-            }
-            System.Reflection.PropertyInfo property = target.GetType().GetProperty(name, flags);
-            if (property != null && property.CanWrite)
-            {
-                if (property.PropertyType == typeof(float)) property.SetValue(target, value);
-                else if (property.PropertyType == typeof(int)) property.SetValue(target, (int)value);
-            }
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientLawSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientLawSystem.cs #2: " + mclslEmptyCatchEx.Message); }
-    }
+        => MclslReflectionNumbers.TrySetNumber(target, name, value, ReflectionSite);
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int hash = 79; foreach (char c in value ?? string.Empty) hash = hash * 43 + c; return hash & int.MaxValue; }
-    }
+
 }

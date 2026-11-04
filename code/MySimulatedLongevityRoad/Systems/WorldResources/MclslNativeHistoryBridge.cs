@@ -30,13 +30,13 @@ internal static class MclslNativeHistoryBridge
     {
         if (_disabled) return;
         try { EnsureAssets(); }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 原生历史分栏注册失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("nativehistory.register", "[模拟长生路] 原生历史分栏注册失败: " + ex.Message); }
     }
 
     internal static bool Add(MclslRunEventRecord record)
     {
         if (_disabled || record == null || string.IsNullOrWhiteSpace(record.Title)) return false;
-        if (!MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType, record.Importance,
+        if (!MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType, MclslEventCatalog.EffectiveImportance(record),
                 MclslRuntimeSettings.LineageNativeHistoryEnabled)) return false;
         try
         {
@@ -51,7 +51,7 @@ internal static class MclslNativeHistoryBridge
                 timestamp = MclslEventCatalog.NativeTimestampForYear(record.Year),
                 special1 = definition.Name,
                 special2 = record.Title,
-                special3 = TrimForNative(record.Body)
+                special3 = record.EventType is "beast_tide" or "beast_tide_end" ? Sanitize(record.Body) : TrimForNative(record.Body)
             };
             WorldLogMessageExtensions.add(message);
             return true;
@@ -59,7 +59,7 @@ internal static class MclslNativeHistoryBridge
         catch (Exception ex)
         {
             _disabled = true;
-            Debug.LogWarning("[模拟长生路] 原生历史记录桥接关闭: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("nativehistory.bridge-closed", "[模拟长生路] 原生历史记录桥接关闭: " + ex.Message);
             return false;
         }
     }
@@ -150,7 +150,7 @@ internal static class MclslNativeHistoryBridge
         string category = string.IsNullOrWhiteSpace(message.special1) ? "玄黄" : message.special1;
         string title = string.IsNullOrWhiteSpace(message.special2) ? "玄黄异动" : message.special2;
         string body = string.IsNullOrWhiteSpace(message.special3) ? string.Empty : "：" + message.special3;
-        text = "[玄黄·" + category + "] " + TrimForNative(title + body);
+        text = "[玄黄·" + category + "] " + Sanitize(title + body);
     }
 
     private static string TrimForNative(string body)

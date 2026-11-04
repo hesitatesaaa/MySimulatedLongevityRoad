@@ -55,10 +55,10 @@ internal sealed partial class MclslCodexWindow
     private void DrawSameTechniqueCard(MclslTechniqueLineageRecord lineage)
     {
         if (lineage == null) return; int count=Math.Max(1,lineage.CurrentPractitioners); int efficiency=Math.Max(1,(int)Math.Round(100f/count));
-        DrawInfoCard("《"+Blank(lineage.Name)+"》",count>=10?"#FF8E8E":"#FFD37A",()=>
+        DrawInfoCard("《"+MclslActorArchiveText.Blank(lineage.Name)+"》",count>=10?"#FF8E8E":"#FFD37A",()=>
         {
             GUILayout.BeginHorizontal(); DrawTag("同修"+count+"人","#FFD37A"); DrawTag("效率"+efficiency+"%",count>=5?"#FF8E8E":"#A7E08A"); DrawTag("最高 "+MclslRealmIds.Display(lineage.PeakRealm),"#9CD7FF"); DrawTag("上限 "+MclslRealmIds.Display(AncientLineageDisplayMaxRealm(lineage)),"#B7A7FF"); GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
-            GUILayout.Label("法则：<color=#B7A7FF>"+ReplaceTags(lineage.LawTags)+"</color>");
+            GUILayout.Label("法则：<color=#B7A7FF>"+MclslActorArchiveText.ReplaceTags(lineage.LawTags)+"</color>");
         });
     }
 

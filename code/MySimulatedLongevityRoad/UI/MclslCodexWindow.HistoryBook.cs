@@ -27,12 +27,7 @@ internal sealed partial class MclslCodexWindow
     private Vector2 _historyFamilyListScroll;
     private Vector2 _historyFamilyDetailScroll;
 
-    private static string EventCategory(MclslRunEventRecord record)
-    {
-        if (record == null) return MclslEventCatalog.NativeWorld;
-        return string.IsNullOrWhiteSpace(record.Category)
-            ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
-    }
+
 
     private void DrawHistoryBook(MclslWorldRunState run)
     {
@@ -133,6 +128,7 @@ internal sealed partial class MclslCodexWindow
             DrawHistoryCategoryButton("disaster", LM.Get("mclsl_history_group_disaster"));
             DrawHistoryCategoryButton("secret", LM.Get("mclsl_history_group_secret"));
             DrawHistoryCategoryButton("observation", LM.Get("mclsl_history_group_observation"));
+            DrawHistoryCategoryButton(MclslEventCatalog.BeastTide, MclslEventCatalog.Category(MclslEventCatalog.BeastTide).Name);
             DrawHistoryCategoryButton("other", LM.Get("mclsl_history_group_other"));
         }
         else
@@ -169,7 +165,7 @@ internal sealed partial class MclslCodexWindow
         if (_historyLocatableOnly && !MclslEventLocator.CanLocate(record)) return false;
         if (_historyEventCategory == MclslEventCatalog.All) return true;
         return ancient ? AncientHistoryGroup(record.EventType) == _historyEventCategory
-            : EventCategory(record) == _historyEventCategory;
+            : MySimulatedLongevityRoad.Data.MclslEventCatalog.EventCategory(record) == _historyEventCategory;
     }
 
     private static string AncientHistoryGroup(string eventType)
@@ -184,12 +180,13 @@ internal sealed partial class MclslCodexWindow
             or "ancient_new_method_branch" or "ancient_technique_recorded" or "ancient_technique_revived"
             or "ancient_famous_technique" or "ancient_lineage_flourish" or "ancient_lineage_ruin_born"
             or "ancient_lineage_remembered") return "teaching";
+        if (type is "beast_tide" or "beast_tide_end") return MclslEventCatalog.BeastTide;
         return "other";
     }
 
     private static void DrawHistoryEventCard(MclslRunEventRecord record)
     {
-        MclslEventCategoryDefinition category = MclslEventCatalog.Category(EventCategory(record));
+        MclslEventCategoryDefinition category = MclslEventCatalog.Category(MySimulatedLongevityRoad.Data.MclslEventCatalog.EventCategory(record));
         int importance = MclslEventCatalog.EffectiveImportance(record);
         string stars = new string('★', importance) + new string('☆', 5 - importance);
         DrawInfoCard(record.Year + "年 · " + MclslFactionMissionSystem.DisplaySectText(record.Title),

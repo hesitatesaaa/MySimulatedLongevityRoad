@@ -1,5 +1,5 @@
 param(
-    [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
+    [string]$GameRoot = 'D:\owl\gameversion\worldbox-ab712b72f394',
     [string]$OutputDirectory = '',
     [switch]$RequireFinalAssets,
     [switch]$LocalDevelopment,
@@ -8,18 +8,35 @@ param(
 $ErrorActionPreference = 'Stop'
 if ($LocalDevelopment -and $RequireFinalAssets) { throw 'Choose local development or formal release validation, not both.' }
 $projectRoot = Split-Path -Parent $PSScriptRoot
+& $PythonExecutable (Join-Path $PSScriptRoot 'check-localization.py')
+if ($LASTEXITCODE -ne 0) { throw 'Localization display-path validation failed.' }
 $declaredVersion = (Get-Content (Join-Path $projectRoot 'mod.json') -Raw -Encoding UTF8 | ConvertFrom-Json).version
 if ($LocalDevelopment) {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py')
     if ($LASTEXITCODE -ne 0) { throw 'Current actor resource validation failed.' }
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py')
     if ($LASTEXITCODE -ne 0) { throw 'Beast resource validation failed.' }
+} elseif ($declaredVersion -eq '0.8.0') {
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Current actor resource validation failed.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Beast resource validation failed.' }
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-living-assets.py') --release
+    if ($LASTEXITCODE -ne 0) { throw '0.8.0 release requires current Unity acceptance evidence.' }
 } elseif ($RequireFinalAssets -or $declaredVersion -eq '0.6.0') {
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-overhaul.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 beast overhaul release blocked: resources or actual Unity validation incomplete.' }
     & $PythonExecutable (Join-Path $PSScriptRoot 'validate-current-assets.py') --release
     if ($LASTEXITCODE -ne 0) { throw '0.6.0 release blocked: independent frames, icons or in-game validation are incomplete.' }
 }
+if ($LocalDevelopment -and $declaredVersion -eq '0.8.0') {
+    & $PythonExecutable (Join-Path $PSScriptRoot 'validate-living-assets.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Living resource validation failed.' }
+}
+& $PythonExecutable (Join-Path $PSScriptRoot 'validate-beast-talents.py')
+if ($LASTEXITCODE -ne 0) { throw 'Independent beast talent asset validation failed.' }
+& $PythonExecutable (Join-Path $PSScriptRoot 'build-soul-frame-catalog.py') --check
+if ($LASTEXITCODE -ne 0) { throw 'Soul frame catalog is stale.' }
 $managedRoot = Join-Path $GameRoot 'worldbox_Data\Managed'
 $loaderRoot = Join-Path $GameRoot 'worldbox_Data\StreamingAssets\mods'
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'build\Release' }
@@ -42,7 +59,7 @@ $compilerArguments = @('/nostdlib+', '/target:library', '/langversion:latest', '
 $references = @(Get-ChildItem -LiteralPath $managedRoot -Filter '*.dll' | Where-Object Name -ne 'Assembly-CSharp.dll' | Sort-Object Name | ForEach-Object FullName)
 $references += @($gamePublicizedAssembly, $loaderAssembly, $harmonyAssembly)
 foreach ($assembly in $references) { $compilerArguments += "/reference:`"$assembly`"" }
-$sourceSelection = & $PythonExecutable (Join-Path $PSScriptRoot 'check-nml-sources.py') --root $projectRoot --json
+$sourceSelection = & $PythonExecutable (Join-Path $PSScriptRoot 'check-nml-sources.py') --root $projectRoot --repository --json
 if ($LASTEXITCODE -ne 0) { throw 'NML would compile unexpected or missing C# files.' }
 $sources = @(($sourceSelection | ConvertFrom-Json).sources)
 foreach ($source in $sources) { $compilerArguments += "`"$source`"" }

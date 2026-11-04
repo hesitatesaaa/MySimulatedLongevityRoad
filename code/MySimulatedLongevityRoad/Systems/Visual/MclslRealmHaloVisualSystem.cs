@@ -11,7 +11,6 @@ namespace MySimulatedLongevityRoad.Systems.Visual;
 internal static class MclslRealmHaloVisualSystem
 {
     private const float BackZOffset = -0.05f;
-    private const int FrameStep = 3;
     private const float FrameIntervalSeconds = 0.08f;
     private const int VisibleScanCadenceFrames = 10;
     private const int CleanupQueueBudget = 12;
@@ -19,6 +18,66 @@ internal static class MclslRealmHaloVisualSystem
 
     private static readonly Dictionary<string, Sprite[]> FramesByFolder = new(StringComparer.Ordinal);
     private static readonly Dictionary<long, HaloEntry> EntriesByActorId = new(64);
+    // Only positive qualifications live here. Registration and mutation notices
+    // maintain it; the render lane never traverses traits or resolves a realm.
+    private static readonly Dictionary<long, Qualification> Qualifications = new(64);
+    internal static long QualificationUpdates { get; private set; }
+    internal static long RealmResolutions { get; private set; }
+    internal static int VisibleCandidates { get; private set; }
+    internal static int VisibleQualified { get; private set; }
+    // Positive qualifications only. The render lane uses this to skip the whole
+    // visible-actor scan when no actor can possibly own a halo (behaviour-neutral:
+    // with zero qualifications there is nothing to observe or refresh).
+    internal static int QualificationCount => Qualifications.Count;
+    internal static int HaloCount => EntriesByActorId.Count;
+    internal static int ActiveHaloCount => ActiveEntries.Count;
+
+    internal static void RecordVisibleCounts(int candidates, int qualified)
+    { VisibleCandidates = candidates; VisibleQualified = qualified; }
+
+    internal static bool HasQualification(Actor actor)
+    {
+        if (actor?.data == null || !Qualifications.TryGetValue(actor.data.id, out var cached)) return false;
+        return ReferenceEquals(cached.Actor, actor) && ReferenceEquals(cached.Asset, actor.asset);
+    }
+
+    internal static void RefreshQualification(Actor actor)
+    {
+        long sample = MclslPerformanceProbe.Begin();
+        try
+        {
+            QualificationUpdates++;
+            long id = MclslActorAccessor.Id(actor);
+            if (id <= 0) return;
+            if (!TryResolveProfile(actor, out _, out HaloProfile profile)) { Forget(id); return; }
+            if (Qualifications.TryGetValue(id, out var previous)
+                && (!ReferenceEquals(previous.Actor, actor) || previous.Profile.Folder != profile.Folder))
+                RemoveHalo(id);
+            Qualifications[id] = new Qualification(actor, profile);
+        }
+        finally { MclslPerformanceProbe.End("光环资格更新", sample); }
+    }
+
+    internal static void ObserveTaishangProgress(Actor actor)
+    {
+        if (actor?.data == null || !Qualifications.TryGetValue(actor.data.id, out var cached)) return;
+        bool supreme = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0) >= 100;
+        if ((cached.Profile.Folder == "ChangSheng" && supreme)
+            || (cached.Profile.Folder == "TaiShang" && !supreme)) RefreshQualification(actor);
+    }
+
+    internal static void Forget(long id)
+    { Qualifications.Remove(id); RemoveHalo(id); }
+
+    private static void RemoveHalo(long id)
+    {
+        if (!EntriesByActorId.TryGetValue(id, out HaloEntry entry)) return;
+        EntriesByActorId.Remove(id);
+        ActiveEntries.Remove(entry);
+        CancelCleanup(entry);
+        entry.IsActive = false;
+        DestroyEntry(entry);
+    }
     private static readonly List<HaloEntry> ActiveEntries = new(64);
     private static readonly Queue<CleanupTicket> CleanupQueue = new(128);
     private static int _lastVisibleScanFrame = -1;
@@ -34,7 +93,9 @@ internal static class MclslRealmHaloVisualSystem
 
     internal static void ObserveVisibleActor(Actor actor, Vector3 position, int frame)
     {
-        if (!TryResolveProfile(actor, out long actorId, out HaloProfile profile)) return;
+        if (!HasQualification(actor)) return;
+        long actorId = actor.data.id;
+        HaloProfile profile = Qualifications[actorId].Profile;
 
         Sprite[] frames = GetFrames(profile.Folder);
         if (frames == null || frames.Length == 0) return;
@@ -70,12 +131,16 @@ internal static class MclslRealmHaloVisualSystem
 
     internal static void EndRenderFrame(int frame, int lodLevel)
     {
+        long sample = MclslPerformanceProbe.Begin();
         using (MclslUnityProfiler.Sample("MCLS/Visual/HaloActiveUpdates"))
             UpdateExistingEntries(frame, lodLevel);
+        MclslPerformanceProbe.End("光环活动更新", sample);
         if (CleanupQueue.Count > 0)
         {
+            sample = MclslPerformanceProbe.Begin();
             using (MclslUnityProfiler.Sample("MCLS/Visual/HaloStaleCleanupBatch"))
                 Cleanup(frame);
+            MclslPerformanceProbe.End("光环清理", sample);
         }
     }
 
@@ -83,10 +148,13 @@ internal static class MclslRealmHaloVisualSystem
     {
         foreach (HaloEntry entry in EntriesByActorId.Values) DestroyEntry(entry);
         EntriesByActorId.Clear();
+        Qualifications.Clear();
         ActiveEntries.Clear();
         CleanupQueue.Clear();
         FramesByFolder.Clear();
         _lastVisibleScanFrame = -1;
+        QualificationUpdates = RealmResolutions = 0;
+        VisibleCandidates = VisibleQualified = 0;
         MclslWorldSpriteRenderLayer.ResetActorLayerCache();
     }
 
@@ -97,12 +165,13 @@ internal static class MclslRealmHaloVisualSystem
         for (int i = ActiveEntries.Count - 1; i >= 0; i--)
         {
             HaloEntry entry = ActiveEntries[i];
-            if (entry == null || entry.Transform == null || entry.Renderer == null || entry.Actor?.data == null)
+            if (entry == null || entry.Transform == null || entry.Renderer == null
+                || !MclslActorAccessor.Alive(entry.Actor) || !HasQualification(entry.Actor))
             {
                 if (entry != null)
                 {
                     entry.IsActive = false;
-                    if (entry.GameObject != null) entry.GameObject.SetActive(false);
+                    if (entry.GameObject != null && entry.GameObject.activeSelf) entry.GameObject.SetActive(false);
                     ScheduleCleanup(entry);
                 }
                 ActiveEntries.RemoveAt(i);
@@ -111,7 +180,7 @@ internal static class MclslRealmHaloVisualSystem
 
             if (frame - entry.LastSeenFrame > visibleScanCadence + 2)
             {
-                if (entry.GameObject != null) entry.GameObject.SetActive(false);
+                if (entry.GameObject != null && entry.GameObject.activeSelf) entry.GameObject.SetActive(false);
                 entry.IsActive = false;
                 ScheduleCleanup(entry);
                 ActiveEntries.RemoveAt(i);
@@ -133,11 +202,16 @@ internal static class MclslRealmHaloVisualSystem
             {
                 TryGetActorPosition(entry.Actor, ref position);
                 entry.LastRenderPosition = position;
-                entry.Transform.position = AnchorPosition(position, profile);
+                Vector3 anchor = AnchorPosition(position, profile);
+                if (entry.Transform.position != anchor) entry.Transform.position = anchor;
             }
 
             int animationStride = lodLevel >= 2 ? 6 : lodLevel == 1 ? 3 : 1;
-            int spriteIndex = Math.Abs((frame / (FrameStep * animationStride))
+            // Fixed display speed: the frame index follows the presentation clock
+            // (one authored frame per FrameIntervalSeconds) so halos keep their pace
+            // at any simulation speed. LOD stride only throttles update frequency.
+            int advance = (int)(MclslRuntime.DisplayClock / FrameIntervalSeconds);
+            int spriteIndex = Math.Abs(advance / animationStride
                 + (int)(actorId % frames.Length)) % frames.Length;
 
             Sprite sprite = frames[spriteIndex];
@@ -148,14 +222,14 @@ internal static class MclslRealmHaloVisualSystem
                 entry.Transform.localScale = new Vector3(profile.Scale, profile.Scale, 1f);
                 entry.LastAppliedScale = profile.Scale;
             }
-            if (entry.GameObject != null) entry.GameObject.SetActive(true);
+            if (entry.GameObject != null && !entry.GameObject.activeSelf) entry.GameObject.SetActive(true);
         }
     }
 
     private static int CurrentVisibleScanCadence()
     {
         if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return VisibleScanCadenceFrames;
-        return MclslRuntimeWorkBudget.StressTier switch
+        return MclslFrameLoadMonitor.StressTier switch
         {
             MclslRuntimeStressTier.Mild => 15,
             MclslRuntimeStressTier.Severe => 20,
@@ -168,7 +242,7 @@ internal static class MclslRealmHaloVisualSystem
     {
         int stride = lodLevel >= 2 ? 4 : lodLevel == 1 ? 2 : 1;
         if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return stride;
-        return MclslRuntimeWorkBudget.StressTier switch
+        return MclslFrameLoadMonitor.StressTier switch
         {
             MclslRuntimeStressTier.Mild => Math.Max(stride, 2),
             MclslRuntimeStressTier.Severe => Math.Max(stride, 4),
@@ -183,9 +257,14 @@ internal static class MclslRealmHaloVisualSystem
         profile = default;
         if (!MclslActorAccessor.Alive(actor)) return false;
 
+        // Beast identity is independent of its current animal/humanoid artwork.
+        // Reject it before any realm access, including the legacy trait fallback.
+        if (MclslBeastActorRegistration.IsBeast(actor) || !MclslEligibility.CanCultivate(actor)) return false;
+
         actorId = MclslActorAccessor.Id(actor);
         if (actorId <= 0L) return false;
 
+        RealmResolutions++;
         string realm = ResolveRealmForHalo(actor);
         if (string.Equals(realm, MclslRealmIds.HuaShen, StringComparison.Ordinal))
         {
@@ -221,7 +300,7 @@ internal static class MclslRealmHaloVisualSystem
                 if (!string.IsNullOrWhiteSpace(newLawTrait) && actor.hasTrait(newLawTrait)) realm = candidate;
                 if (!string.IsNullOrWhiteSpace(ancientTrait) && actor.hasTrait(ancientTrait)) realm = candidate;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         }
 
         return realm ?? string.Empty;
@@ -257,7 +336,7 @@ internal static class MclslRealmHaloVisualSystem
             Component component = effect as Component;
             if (component == null)
             {
-                effect.kill();
+                MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(effect);
                 return null;
             }
 
@@ -269,7 +348,7 @@ internal static class MclslRealmHaloVisualSystem
                     FrameIntervalSeconds,
                     (int)(actorId % frames.Length)))
             {
-                effect.kill();
+                MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(effect);
                 return null;
             }
             DisableNativeAnimator(effect);
@@ -302,8 +381,8 @@ internal static class MclslRealmHaloVisualSystem
         List<Sprite> frames = new(24);
         for (int i = 1; i <= 64; i++)
         {
-            Sprite sprite = LoadSprite("effects/halo/" + folder + "/" + i)
-                ?? LoadSprite("effects/halo/" + folder + "/" + i + ".png");
+            Sprite sprite = MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("effects/halo/" + folder + "/" + i)
+                ?? MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("effects/halo/" + folder + "/" + i + ".png");
             if (sprite != null)
             {
                 frames.Add(sprite);
@@ -318,20 +397,7 @@ internal static class MclslRealmHaloVisualSystem
         return result;
     }
 
-    private static Sprite LoadSprite(string path)
-    {
-        try
-        {
-            return SpriteTextureLoader.getSprite(path)
-                ?? SpriteTextureLoader.getSprite("GameResources/" + path)
-                ?? Resources.Load<Sprite>("GameResources/" + path)
-                ?? Resources.Load<Sprite>(path);
-        }
-        catch
-        {
-            return null;
-        }
-    }
+
 
     private static void TryGetActorPosition(Actor actor, ref Vector3 position)
     {
@@ -340,14 +406,14 @@ internal static class MclslRealmHaloVisualSystem
             position = actor.current_position;
             return;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #2: " + mclslEmptyCatchEx.Message); }
 
         try
         {
             WorldTile tile = ((BaseSimObject)actor).current_tile;
             if (tile != null) position = tile.posV3;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void ScheduleCleanup(HaloEntry entry)
@@ -397,7 +463,14 @@ internal static class MclslRealmHaloVisualSystem
 
     private static void DestroyEntry(HaloEntry entry)
     {
-        try { entry?.Effect?.kill(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             // Borrowed BaseEffects remain owned by the native controller's
@@ -406,7 +479,7 @@ internal static class MclslRealmHaloVisualSystem
             if (entry?.Effect == null && entry?.GameObject != null)
                 UnityEngine.Object.Destroy(entry.GameObject);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #5: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void DisableNativeAnimator(BaseEffect effect)
@@ -424,7 +497,16 @@ internal static class MclslRealmHaloVisualSystem
             Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
             if (animator != null) animator.enabled = false;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #6: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #6: " + mclslEmptyCatchEx.Message); }
+    }
+
+    private readonly struct Qualification
+    {
+        internal Qualification(Actor actor, HaloProfile profile)
+        { Actor = actor; Asset = actor.asset; Profile = profile; }
+        internal Actor Actor { get; }
+        internal ActorAsset Asset { get; }
+        internal HaloProfile Profile { get; }
     }
 
     private readonly struct HaloProfile

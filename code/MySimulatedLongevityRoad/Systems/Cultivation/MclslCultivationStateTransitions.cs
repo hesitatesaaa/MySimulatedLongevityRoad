@@ -153,6 +153,7 @@ internal static class MclslCultivationStateTransitions
             ancientPath,
             enforceRealmMinimum: true,
             resetFractionalRemainder: false);
+        MclslBeastCultivation.EnsureTalent(actor);
         if(!MclslBeastActorRegistration.IsOrdinary(actor))MclslTechniqueRealmLimit.EnsureAtLeastRealm(actor, realm);
         MclslActorAccessor.ApplyDisplayName(actor, realm);
         if (realmChanged) RestoreHealthAfterPromotion(actor);

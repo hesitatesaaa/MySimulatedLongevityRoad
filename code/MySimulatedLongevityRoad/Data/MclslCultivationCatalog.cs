@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MySimulatedLongevityRoad.Core;
 
 namespace MySimulatedLongevityRoad.Data;
 
@@ -145,7 +146,7 @@ internal static class MclslCultivationCatalog
     internal static MclslTechniqueDefinition StartingTechnique(string seed, int aptitude, bool ancient)
     {
         MclslTechniqueDefinition[] pool = StartingTechniquePool(seed, aptitude, ancient);
-        int index = PositiveHash((seed ?? string.Empty) + "|starting_technique|" + (ancient ? "ancient" : "new")) % Math.Max(1, pool.Length);
+        int index = MclslStableHash.Positive31x37((seed ?? string.Empty) + "|starting_technique|" + (ancient ? "ancient" : "new")) % Math.Max(1, pool.Length);
         return pool.Length == 0 ? Techniques[0] : pool[index];
     }
 
@@ -158,7 +159,7 @@ internal static class MclslCultivationCatalog
             : aptitude >= 65 ? MclslRealmIds.Index(MclslRealmIds.YuanYing)
             : aptitude >= 38 ? MclslRealmIds.Index(MclslRealmIds.JinDan)
             : MclslRealmIds.Index(MclslRealmIds.ZhuJi);
-        int roll = PositiveHash((seed ?? string.Empty) + "|starting_tier|" + aptitude + "|" + (ancient ? "ancient" : "new")) % 100;
+        int roll = MclslStableHash.Positive31x37((seed ?? string.Empty) + "|starting_tier|" + aptitude + "|" + (ancient ? "ancient" : "new")) % 100;
         int selectedIndex = roll < 68 ? targetIndex : roll < 92 ? Math.Max(1, targetIndex - 1) : -1;
         MclslTechniqueDefinition[] pool = selectedIndex >= 1
             ? Techniques.Where(x => MclslRealmIds.Index(x.MaxRealm) == selectedIndex).ToArray()
@@ -171,7 +172,7 @@ internal static class MclslCultivationCatalog
     {
         // 旧法时代的功法来源是前人传承，不应只由入门者资质决定上限。
         // 资质只略微影响获得高阶传承的概率，保证仙道纪元早期自然存在金丹、元婴法。
-        int roll = PositiveHash((seed ?? string.Empty) + "|ancient_starting_realm|" + aptitude) % 1000;
+        int roll = MclslStableHash.Positive31x37((seed ?? string.Empty) + "|ancient_starting_realm|" + aptitude) % 1000;
         int aptitudeShift = aptitude >= 95 ? 180
             : aptitude >= 85 ? 130
             : aptitude >= 70 ? 80
@@ -238,16 +239,6 @@ internal static class MclslCultivationCatalog
     }
 
     private static MclslTechniqueDefinition T(string id, string name, string maxRealm, params string[] laws) => new() { Id = id, Name = name, MaxRealm = maxRealm, LawPool = laws };
-
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 31;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
 }
 
 internal static class MclslGeneratedKinds

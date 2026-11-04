@@ -1,0 +1,51 @@
+{
+  "version": "0.8.0",
+  "actualUnity": true,
+  "diagnosticOnly": true,
+  "performanceAcceptance": false,
+  "scope": "Native and NML-only floor, 5000 initial adults; 60s warmup and 60s sample, naturally growing population. No cultivators. Separate generated worlds; not a controlled final comparison.",
+  "nativeCpuScope": "Rolling native Bench buffers include any hooked call costs; not whole-run exclusive CPU.",
+  "nmlErrorScope": "NML autoupdate loader reported the retained raw error during startup; this run is not error-free acceptance.",
+  "runs": [
+    {
+      "mode": "vanilla",
+      "complete": true,
+      "fps": 29.582500980364085,
+      "p95Milliseconds": 52.113800000000765,
+      "finalPopulation": 6262,
+      "actualWorldSecondsPerRealSecond": 11.832999686843849,
+      "renderedFrames": 9234,
+      "errors": [],
+      "rawReport": "D:\\模拟长胜路\\upstream-0.6.0\\build\\refactor-080\\engine-floor\\20261026_122721-vanilla\\result.json",
+      "rawReportSha256": "d8fcc9716ecd00ecc2870c079d23999eddff75cf7a46576bef44fea4fa5ab55b",
+      "instrumentation": {
+        "probeSha256": "54e077f8d96fe0de61bb590917e876ba2bde18f2a005931cda8de4879b522722",
+        "instrumentedAssemblySha256": "15acedcec5b0be2013c547b249451b1ea591e6376ef0aba2c63e4a8b71201d39",
+        "instrumentation": "One MapBox.Awake bootstrap call; no game method replacement or access modifier changes.",
+        "originalAssemblySha256": "51d275f0168be2f6ca26341ab292406714e694e0270eafcb25b999d5df6dd69f",
+        "mode": "vanilla"
+      }
+    },
+    {
+      "mode": "nml",
+      "complete": true,
+      "fps": 28.713471335864842,
+      "p95Milliseconds": 50.125500000000045,
+      "finalPopulation": 6520,
+      "actualWorldSecondsPerRealSecond": 11.485387849763434,
+      "renderedFrames": 8644,
+      "errors": [
+        "0x000001C00BE47B00\n"
+      ],
+      "rawReport": "D:\\模拟长胜路\\upstream-0.6.0\\build\\refactor-080\\engine-floor\\20261026_123017-nml\\result.json",
+      "rawReportSha256": "772c158a32a1fd65b130fed6d7a23fe241f760344b17cc89a393f84c13e0c2d2",
+      "instrumentation": {
+        "probeSha256": "54e077f8d96fe0de61bb590917e876ba2bde18f2a005931cda8de4879b522722",
+        "mode": "nml",
+        "instrumentedAssemblySha256": "15acedcec5b0be2013c547b249451b1ea591e6376ef0aba2c63e4a8b71201d39",
+        "instrumentation": "One MapBox.Awake bootstrap call; no game method replacement or access modifier changes.",
+        "originalAssemblySha256": "51d275f0168be2f6ca26341ab292406714e694e0270eafcb25b999d5df6dd69f"
+      }
+    }
+  ]
+}

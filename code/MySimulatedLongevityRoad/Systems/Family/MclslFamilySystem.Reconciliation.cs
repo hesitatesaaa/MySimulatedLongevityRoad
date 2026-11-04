@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
-using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems;
 
@@ -11,154 +10,90 @@ internal static partial class MclslFamilySystem
 {
     internal static long Revision { get; private set; }
     private static bool _populationComplete;
-    private static int _reconcilePhase, _reconcileActor, _reconcileFamily, _reconcileMember;
-    private static float _nextReconcile;
-    private static IReadOnlyList<Actor> _reconcileActors = Array.Empty<Actor>();
-    private static readonly Dictionary<long, MclslDeathRecord> ReconcileDeaths = new();
-    private static readonly Queue<Actor> PendingDeaths = new();
-    private static readonly HashSet<long> PendingDeathIds = new();
-
-    private static void NotifyChanged()
+    private static readonly Queue<long> PendingMembers = new();
+    private static readonly HashSet<long> PendingMemberIds = new();
+    private static readonly Queue<MclslFamilyRecord> ChangedFamilies = new();
+    private static readonly HashSet<string> ChangedFamilyIds = new(StringComparer.Ordinal);
+    private static readonly HashSet<string> StateChangedFamilyIds = new(StringComparer.Ordinal);
+    private static readonly HashSet<string> ActiveFamilies = new(StringComparer.Ordinal);
+    internal static bool HasWork => PendingMembers.Count != 0 || ChangedFamilies.Count != 0;
+    internal static int ActiveFamilyCount => ActiveFamilies.Count;
+    internal static long ReconciledMembers { get; private set; }
+    internal static long FullPopulationPasses => 0;
+    private static void NotifyChanged() { Revision++; MclslWorldArchiveStore.MarkDirty(); }
+    private static void QueueFamily(MclslFamilyRecord family, bool stateChanged = true)
     {
-        Revision++;
-        MclslWorldArchiveStore.MarkDirty();
+        if (family == null) return;
+        if (stateChanged) StateChangedFamilyIds.Add(family.Id);
+        if (ChangedFamilyIds.Add(family.Id)) ChangedFamilies.Enqueue(family);
     }
-
+    private static void QueueMember(long id)
+    { if (id > 0 && PendingMemberIds.Add(id)) PendingMembers.Enqueue(id); }
+    private static void QueueRelatives(MclslFamilyRecord family, long actorId)
+    {
+        if (family.NativeFamilyId > 0)
+            foreach (long id in MclslActorRelations.Family(family.NativeFamilyId)) QueueMember(id);
+        foreach (long id in MclslActorRelations.Descendants(actorId)) QueueMember(id);
+    }
+    internal static void InitializeAfterLoad() => EnsureIndex();
     private static void ResetReconciliation()
     {
         _populationComplete = false;
-        _reconcilePhase = _reconcileActor = _reconcileFamily = _reconcileMember = 0;
-        _nextReconcile = 0;
-        _reconcileActors = Array.Empty<Actor>();
-        ReconcileDeaths.Clear();
-        PendingDeaths.Clear(); PendingDeathIds.Clear();
-        Revision++;
+        PendingMembers.Clear(); PendingMemberIds.Clear();
+        ChangedFamilies.Clear(); ChangedFamilyIds.Clear(); StateChangedFamilyIds.Clear(); ActiveFamilies.Clear();
+        ReconciledMembers = 0; Revision++;
     }
-
-    // Use the existing population index, only after load bootstrap finishes.
-    // A second actor pass picks up mortals encountered before their cultivating founder.
     internal static void TickReconciliation()
     {
         if (MclslWorldArchiveStore.WriteLocked || !MclslWorldBootstrapLane.Completed) return;
         MclslWorldRunState run = EnsureIndex();
-        for (int retry = 0, limit = Math.Min(2, PendingDeaths.Count); retry < limit; retry++)
+        _populationComplete = true;
+        for (int work = 0; work < 64 && !MclslFrameDeadline.Expired && PendingMembers.Count > 0; work++)
         {
-            Actor dead = PendingDeaths.Dequeue();
-            PendingDeathIds.Remove(MclslActorAccessor.Id(dead));
-            if (dead?.data != null) OnDeath(dead);
+            long id = PendingMembers.Dequeue(); PendingMemberIds.Remove(id); ReconciledMembers++;
+            if (MclslActorRegistry.ResolveKnownOrWorld(id, out Actor actor) && actor?.data != null)
+            {
+                if (MclslActorAccessor.Alive(actor)) Observe(actor);
+                else OnDeath(actor);
+            }
+            else if (ByActor.TryGetValue(id, out var family))
+            {
+                var member = Member(family, id);
+                if (member != null && member.Alive) { member.Alive = false; member.Missing = true; InvalidateMemberView(family); NotifyChanged(); QueueFamily(family); }
+            }
         }
-        if (run == null || string.IsNullOrWhiteSpace(run.RunId) || Time.unscaledTime < _nextReconcile) return;
-        for (int work = 0; work < 12 && !MclslFrameDeadline.Expired; work++)
+        if (PendingMembers.Count > 0) return;
+        for (int work = 0; work < 16 && !MclslFrameDeadline.Expired && ChangedFamilies.Count > 0; work++)
         {
-            if (_reconcilePhase == 0)
+            var family = ChangedFamilies.Dequeue(); ChangedFamilyIds.Remove(family.Id);
+            bool stateChanged = StateChangedFamilyIds.Remove(family.Id);
+            if (!ById.ContainsKey(family.Id)) continue;
+            RefreshQueuedTechniqueDetails(family);
+            if (!stateChanged) continue;
+            EnsureHead(family);
+            long focusBefore = family.FocusActorId;
+            bool manualBefore = family.FocusIsManual;
+            EnsureFocus(family);
+            if (family.FocusActorId != focusBefore || family.FocusIsManual != manualBefore) NotifyChanged();
+            bool active = false, hasLiving = false;
+            foreach (var member in family.Members)
             {
-                if (_reconcileFamily < run.Families.Count)
-                {
-                    MclslFamilyRecord family = run.Families[_reconcileFamily++];
-                    if (family == null || !string.IsNullOrEmpty(family.MergedIntoId) || family.NativeFamilyId <= 0) continue;
-                    if (ByNative.TryGetValue(family.NativeFamilyId, out MclslFamilyRecord canonical) && canonical != family)
-                        MergeFamily(run, family, canonical);
-                    continue;
-                }
-                if (run.FamilyMembershipVersion < 1) { run.FamilyMembershipVersion = 1; NotifyChanged(); }
-                _reconcileFamily = 0;
-                _reconcileActors = MclslActorRegistry.Snapshot();
-                _reconcilePhase = 1;
-            }
-            if (_reconcilePhase is 1 or 2)
-            {
-                if (_reconcileActor < _reconcileActors.Count)
-                {
-                    Actor actor = _reconcileActors[_reconcileActor++];
-                    if (MclslActorAccessor.Alive(actor)) Observe(actor);
-                    continue;
-                }
-                _reconcileActor = 0;
-                if (_reconcilePhase++ == 1) continue;
-                _populationComplete = true;
-                ReconcileDeaths.Clear();
-                foreach (MclslDeathRecord death in run.DeathRecords)
-                    if (death != null) ReconcileDeaths[death.ActorId] = death;
-            }
-            if (_reconcileFamily >= run.Families.Count)
-            {
-                _reconcilePhase = _reconcileFamily = _reconcileMember = 0;
-                _nextReconcile = Time.unscaledTime + 5f;
-                return;
-            }
-            MclslFamilyRecord current = run.Families[_reconcileFamily];
-            if (current == null || !string.IsNullOrEmpty(current.MergedIntoId))
-            { _reconcileFamily++; _reconcileMember = 0; continue; }
-            if (_reconcileMember < current.Members.Count)
-            {
-                MclslFamilyMemberRecord member = current.Members[_reconcileMember++];
                 if (member == null) continue;
-                if (MclslActorRegistry.ResolveKnownOrWorld(member.ActorId, out Actor actor) && actor?.data != null)
-                {
-                    if (MclslActorAccessor.Alive(actor)) Observe(actor);
-                    else if (!member.DeathSettled) OnDeath(actor);
-                }
-                else if (member.Alive || member.Missing)
-                {
-                    bool confirmed = ReconcileDeaths.TryGetValue(member.ActorId, out MclslDeathRecord death);
-                    bool changed = member.Alive || member.Missing == confirmed;
-                    member.Alive = false;
-                    member.Missing = !confirmed;
-                    if (confirmed) member.DeathYear = death.Year;
-                    if (changed) NotifyChanged();
-                }
-                continue;
+                hasLiving |= member.Alive || member.Missing;
+                if (member.Alive && !member.Missing && member.IsCultivator
+                    && MclslActorRegistry.Resolve(member.ActorId, out var actor) && MclslEligibility.CanCultivate(actor)) active = true;
             }
-            EnsureHead(current);
-            if (Member(current, current.FocusActorId) is not { Alive: true, Missing: false, IsCultivator: true })
+            if (active) ActiveFamilies.Add(family.Id);
+            else
             {
-                if (current.FocusActorId != 0) { current.FocusActorId = 0; NotifyChanged(); }
+                ActiveFamilies.Remove(family.Id);
+                if (family.CityInfluence.Count > 0) { family.CityInfluence.Clear(); InvalidateCityInfluenceViews(); NotifyChanged(); }
             }
-            bool extinct = current.Members.Count > 0 && !current.Members.Any(x => x != null && (x.Alive || x.Missing));
-            if (current.Extinct != extinct) { current.Extinct = extinct; NotifyChanged(); }
-            if (extinct) TryLiquidateEstate(run, current);
-            _reconcileFamily++;
-            _reconcileMember = 0;
+            // Records are created with their founder, so an empty member list
+            // means the last member left: settle the treasury as extinct.
+            bool extinct = !hasLiving;
+            if (family.Extinct != extinct) { family.Extinct = extinct; NotifyChanged(); }
+            if (extinct) TryLiquidateEstate(run, family);
         }
-    }
-
-    private static void RetryDeathLater(Actor actor)
-    {
-        long id = MclslActorAccessor.Id(actor);
-        if (id > 0 && PendingDeathIds.Add(id)) PendingDeaths.Enqueue(actor);
-    }
-
-    private static void MergeFamily(MclslWorldRunState run, MclslFamilyRecord source, MclslFamilyRecord target)
-    {
-        // Stage all collections before the currency commit. The tombstone and cursor
-        // make the transfer idempotent across repeated loads and interrupted sweeps.
-        var members = target.Members.Concat(source.Members).Where(x => x != null)
-            .GroupBy(x => x.ActorId).Select(g => g.OrderByDescending(x => x.DeathSettled)
-                .ThenByDescending(x => x.Alive).First()).ToList();
-        var items = target.Items.Concat(source.Items).Where(x => x != null).ToList();
-        var techniques = target.TechniqueIds.Concat(source.TechniqueIds).Distinct(StringComparer.Ordinal).ToList();
-        var history = target.History.Concat(source.History).Distinct(StringComparer.Ordinal).ToList();
-        long balance = TreasuryStones(source);
-        MclslEconomicResult result = MclslEconomyCommands.Commit(Math.Max(0, MclslRuntime.CurrentYear()), new[]
-        {
-            new MclslEconomicOperation(MclslEconomicKind.Transfer, MclslCurrency.SpiritStone, balance,
-                TreasuryAccount(source), TreasuryAccount(target))
-        }, "family-merge/" + source.Id, 1);
-        if (result is not (MclslEconomicResult.Applied or MclslEconomicResult.AlreadyApplied))
-            throw new InvalidOperationException("同谱家族资金合并失败：" + result);
-        target.Members = members; target.Items = items; target.TechniqueIds = techniques; target.History = history;
-        target.HistoryCapacity = Math.Max(target.HistoryCapacity, history.Count);
-        target.LastAidYear = Math.Max(target.LastAidYear, source.LastAidYear);
-        target.Extinct = !members.Any(x => x.Alive || x.Missing);
-        if (target.PreferredHeadActorId == 0) target.PreferredHeadActorId = source.PreferredHeadActorId;
-        if (target.FocusActorId == 0) target.FocusActorId = source.FocusActorId;
-        foreach (var city in source.CityInfluence)
-            target.CityInfluence[city.Key] = target.CityInfluence.GetValueOrDefault(city.Key) + city.Value;
-        source.MergedIntoId = target.Id;
-        source.Members.Clear(); source.Items.Clear(); source.TechniqueIds.Clear(); source.CityInfluence.Clear();
-        source.Extinct = true; source.EstateLiquidated = true;
-        VisibleFamilies.Remove(source); ById.Remove(source.Id);
-        foreach (MclslFamilyMemberRecord member in members) ByActor[member.ActorId] = target;
-        NotifyChanged();
     }
 }

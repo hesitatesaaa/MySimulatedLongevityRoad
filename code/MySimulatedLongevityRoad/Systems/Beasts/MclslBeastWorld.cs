@@ -19,29 +19,37 @@ internal sealed class MclslBeastWaveState
 }
 internal sealed class MclslBeastWorldState
 {
-    public int Version=1,Unlocked=1,LastWaveYear,LastNaturalYear;
+    public int Version=1,Unlocked=1,LastWaveYear;
     public List<MclslBeastWaveState> Waves=new();
-    public List<MclslNaturalBeastSpawn> NaturalPending=new();
-}
-internal sealed class MclslNaturalBeastSpawn
-{
-    public string Species;
-    public int X,Y;
 }
 
 internal static class MclslBeastWorld
 {
-    private const string SaveKey="mclsl.beasts.world.v1";
+    private const string SaveKey="mclsl.080.beasts.world.v1";
     internal const string SourceKey="mclsl.beast.source", RankKey="mclsl.beast.rank";
     internal static MclslBeastWorldState State=new();
     private static MapBox _wildWorld;
     private static int _auditFrame;
+    // Set only when a manual summon could not finish its habitat scan inside
+    // the click. It outranks scheduled spawning so the player command is never
+    // delayed by an ordinary wave.
     private static int _manualRequest;
+    internal static string ManualFeedback {get;private set;}="";
+    private static string TriggerFailure="";
+    private static float _nextSpawnTime;
     private static bool _locked;
+    private static MclslModuleLoadState _loadState;
     private static readonly ConcurrentDictionary<long,byte> PendingRankStats=new();
+    // Catalogue membership and per-species MinRealm are static for the process
+    // lifetime, so a (theme, realm) eligibility scan is cached instead of being
+    // re-filtered on every wave-spawn attempt. Per-spawn candidate tuples are
+    // collected into a reusable buffer rather than a fresh LINQ array.
+    private static readonly Dictionary<(string Theme,int Realm),MclslBeastDefinition[]> PoolCache=new();
+    private static readonly List<(MclslBeastDefinition Beast,WorldTile Tile)> WaveCandidates=new(16);
     internal static bool WriteLocked=>_locked;
+    internal static bool HasManualRequest=>_manualRequest>0;
     internal static bool Enabled=true;
-    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,NaturalLimit=128,ManualRealm;
+    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,ManualRealm,MaximumWaveCount=64;
     internal static float CountMultiplier=1;
     internal static readonly int[] Weights=MclslBeastRules.Weights,Counts=MclslBeastRules.Counts;
     internal static IReadOnlyList<MclslBeastWaveState> Waves=>State.Waves;
@@ -68,51 +76,53 @@ internal static class MclslBeastWorld
     internal static void Load()
     {
         Clear();EnsureWildKingdom();
-        if(World.world?.map_stats?.custom_data==null) return;
+        if(World.world?.map_stats==null) return;
+        if(World.world.map_stats.custom_data==null){_loadState.Ready();return;}
         World.world.map_stats.custom_data.get(SaveKey,out string saved,"");
-        if(saved.Length==0) return;
+        if(saved.Length==0){_loadState.Ready();return;}
         try
         {
             var loaded=JsonConvert.DeserializeObject<MclslBeastWorldState>(saved);
             if(loaded?.Version!=1 || loaded.Waves==null) throw new InvalidOperationException("兽潮存档格式错误");
             State=loaded;
-            State.NaturalPending??=new();
             State.Unlocked=Math.Clamp(State.Unlocked,1,7);
             foreach(var wave in State.Waves)
-            { wave.Level=Math.Clamp(wave.Level,1,7); wave.Count=Math.Clamp(wave.Count,0,4096);wave.Cursor=Math.Clamp(wave.Cursor,0,wave.Count);wave.Actors??=new(); }
+            {
+                wave.Level=Math.Clamp(wave.Level,1,7); wave.Count=Math.Clamp(wave.Count,0,4096);
+                wave.Cursor=Math.Clamp(wave.Cursor,0,wave.Count);wave.Actors??=new();
+                wave.Count=Math.Min(wave.Count,Math.Max(wave.Cursor,MaximumWaveCount));
+                if(wave.Status=="已结束")wave.Actors.Clear();
+            }
+            _loadState.Ready();
         }
-        catch(Exception ex) { _locked=true;MclslDiagnostics.Error("beast-world-load",ex.ToString()); }
+        catch(Exception ex) { State=new();_locked=true;_loadState.Fault();MclslDiagnostics.Error("beast-world-load",ex.ToString()); }
     }
     internal static void Save()
     {
-        if(_locked || World.world?.map_stats==null) return;
+        if(!_loadState.CanSave || _locked || World.world?.map_stats==null) return;
         World.world.map_stats.custom_data??=new SaveCustomData();
         World.world.map_stats.custom_data.set(SaveKey,JsonConvert.SerializeObject(State));
     }
-    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;_locked=false;PendingRankStats.Clear();MclslBeastSpawnSystem.Clear(); }
-    internal static void RequestManual(int level)=>_manualRequest=Math.Clamp(level,1,7);
-    internal static void ObserveProgress()
+    internal static void Clear() { State=new();_wildWorld=null;_auditFrame=0;_manualRequest=0;ManualFeedback="";_nextSpawnTime=0;_locked=false;_loadState.Clear();PendingRankStats.Clear();PoolCache.Clear();WaveCandidates.Clear();MclslBeastSpawnSystem.Clear(); }
+    internal static void RequestManual(int level)
     {
-        foreach(var actor in World.world.units.getSimpleList())
-            if(MclslActorAccessor.Alive(actor) && MclslEligibility.IsCivilizedActor(actor)
-                && !actor.asset.id.StartsWith("mclsl_named_",StringComparison.Ordinal)
-                && !MclslImmortalActorRegistration.IsImmortal(actor))
-                State.Unlocked=Math.Max(State.Unlocked,MclslRealmIds.Index(MclslActorAccessor.Realm(actor))+1);
-    }
-    internal static int CountAutomatic(bool naturalOnly=false,int region=-1)
-    {
-        int count=0;
-        foreach(var actor in World.world.units.getSimpleList())
+        if(_locked){ManualFeedback="兽潮存档异常，暂不能召潮。";return;}
+        if(World.world?.units==null){ManualFeedback="请先进入世界。";return;}
+        level=Math.Clamp(level,1,7);
+        int year=MclslRuntime.CurrentYear();
+        if(!MclslBeastSurfaceIndex.Ready)
         {
-            if(!MclslActorAccessor.Alive(actor)||!MclslBeastActorRegistration.IsOrdinary(actor))continue;
-            string source=MclslActorAccessor.GetString(actor,SourceKey);
-            if(source!="natural" && !source.StartsWith("wave:",StringComparison.Ordinal))continue;
-            if(naturalOnly && source!="natural")continue;
-            if(region>=0 && MclslBeastHabitatIndex.Region(actor.current_tile)!=region)continue;
-            count++;
+            _manualRequest=level;
+            ManualFeedback="正在扫描栖息地，随后立即引动"+level+"级兽潮。";
+            return;
         }
-        return count;
+        _manualRequest=0;
+        ManualFeedback=Trigger(level,year)
+            ?level+"级兽潮已引动，正在分批生成。":"召潮未成功："+TriggerFailure;
     }
+    internal static void ObserveProgress() => MclslBeastPopulationIndex.PublishProgress();
+    internal static int CountAutomatic(int region=-1)
+        => MclslBeastPopulationIndex.Count(region);
     internal static void TickAnnual(int year)
     {
         ObserveProgress();
@@ -124,7 +134,12 @@ internal static class MclslBeastWorld
     }
     internal static bool Trigger(int level,int year,WorldTile requested=null)
     {
-        if(_locked || World.world?.units==null || State.Waves.Count(x=>x.Status!="已结束")>=8) return false;
+        TriggerFailure="";
+        if(_locked)return CannotTrigger("兽潮存档异常。");
+        if(World.world?.units==null)return CannotTrigger("请先进入世界。");
+        if(State.Waves.Any(x=>x.Status=="生成中"))return CannotTrigger("已有兽潮正在生成，请稍候。");
+        if(State.Waves.Any(x=>x.Year==year&&x.Status!="已结束"))return CannotTrigger("本年已有活动兽潮，请待其结束或进入下一年。");
+        if(State.Waves.Count(x=>x.Status!="已结束")>=2)return CannotTrigger("同时活动兽潮已达两场上限。");
         level=Math.Clamp(level,1,7);
         var options=new List<(string Theme,WorldTile Tile)>();
         foreach(string theme in new[]{"山林","水域","阴影","神兽"})
@@ -132,68 +147,116 @@ internal static class MclslBeastWorld
             if(theme=="神兽" && level<3)continue;
             foreach(var beast in Pool(theme,level-1))
             {
-                var tile=requested!=null && MclslBeastSpawnSystem.Matches(requested,beast.Habitat)?requested:MclslBeastHabitatIndex.Find(beast,year+level);
+                var tile=requested!=null && MclslBeastSpawnSystem.Matches(requested,beast.Surface)?requested:MclslBeastSurfaceIndex.Find(beast,year+level);
                 if(tile!=null){options.Add((theme,tile));break;}
             }
         }
-        if(options.Count==0) return false;
+        if(options.Count==0)return CannotTrigger("没有符合该等级与主题的海陆生成位置。");
         var option=options[Roll(year+"|theme|"+State.Waves.Count,options.Count)];
-        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor)+State.NaturalPending.Count);
-        if(count==0)return false;
+        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor),
+            MapBox.width*MapBox.height,MaximumWaveCount);
+        if(count==0)return CannotTrigger("已达自动妖兽总上限，暂无生成名额。");
         var wave=new MclslBeastWaveState { Id=Guid.NewGuid().ToString("N"),Level=level,Theme=option.Theme,
             X=option.Tile.pos.x,Y=option.Tile.pos.y,Count=count,Year=year };
         Actor cityActor=MclslActorRegistry.CityRepresentatives.OrderBy(x=>x.current_tile==null?float.MaxValue:
             ((UnityEngine.Vector3)x.current_position-option.Tile.posV3).sqrMagnitude).FirstOrDefault();
         wave.TargetCityId=cityActor?.city?.data?.id??0;
         State.Waves.Add(wave);
-        MclslWorldRunRepository.AddEvent(year,"beast_tide",level+"级"+option.Theme+"兽潮", "妖兽潮在("+wave.X+","+wave.Y+")出现，计划生成"+count+"只妖兽。",cityActor);
+        string title=level+"级"+option.Theme+"兽潮";
+        string species=string.Join("、",Pool(option.Theme,level-1).Select(b=>b.Name));
+        MclslWorldRunRepository.AddEvent(year,"beast_tide",title,
+            year+"年，妖兽潮在("+wave.X+","+wave.Y+")出现，计划生成"+count+"只；妖兽："+species+"。",
+            wave.X,wave.Y,"兽潮发生地",cityActor?.city?.kingdom?.data?.name??string.Empty,"beast_tide|"+wave.Id);
+        if(level>=6)MclslAnnouncementSystem.Enqueue(title+"于("+wave.X+","+wave.Y+")来袭！", "#FFB15E",10f,1,"beast_tide|"+wave.Id);
         Save();return true;
     }
+    private static bool CannotTrigger(string reason){TriggerFailure=reason;return false;}
     private static IEnumerable<MclslBeastDefinition> Pool(string theme,int realm)
-        =>MclslBeastCatalog.All.Where(b=>MclslBeastContent.BySpecies[b.Id].MinRealm<=realm && theme switch
+    {
+        // Cache the filtered eligibility list per (theme, realm). Returning the
+        // same array keeps Trigger/Tick/title building behaviour identical while
+        // eliminating a catalogue-wide Where scan on every spawn attempt.
+        if(!PoolCache.TryGetValue((theme,realm),out var cached))
         {
-            "水域"=>b.Habitat is MclslBeastHabitat.DeepSea or MclslBeastHabitat.RiverLake or MclslBeastHabitat.SeaRift,
-            "阴影"=>b.Id is "yingying" or "mo" or "moqilin" or "goushou",
-            "神兽"=>MclslBeastContent.BySpecies[b.Id].MinRealm>=2,
-            _=>b.Habitat is not (MclslBeastHabitat.DeepSea or MclslBeastHabitat.RiverLake or MclslBeastHabitat.SeaRift or MclslBeastHabitat.RedMoon)
-        });
+            cached=MclslBeastCatalog.All.Where(b=>MclslBeastContent.BySpecies[b.Id].MinRealm<=realm && theme switch
+            {
+                "水域"=>b.Surface==MclslBeastSurface.Water,
+                "阴影"=>b.Id is "yingying" or "mo" or "moqilin" or "goushou",
+                "神兽"=>MclslBeastContent.BySpecies[b.Id].MinRealm>=2,
+                _=>b.Surface==MclslBeastSurface.Land && b.Id!="yingying"
+            }).ToArray();
+            PoolCache[(theme,realm)]=cached;
+        }
+        return cached;
+    }
+    // Fill the reusable candidate buffer with every (beast, valid habitat tile)
+    // pair for one spawn attempt. The caller previously built this with
+    // Select(...).Where(...).ToArray() on every attempt, allocating closures and
+    // arrays; the tuple set and ordering are unchanged.
+    private static void FillWaveCandidates(string theme,int realm,WorldTile center,int seed)
+    {
+        WaveCandidates.Clear();
+        foreach(var b in Pool(theme,realm))
+        {
+            var tile=MclslBeastSurfaceIndex.FindNear(b,center,seed);
+            if(tile!=null)WaveCandidates.Add((b,tile));
+        }
+    }
     internal static Actor Spawn(MclslBeastDefinition beast,WorldTile tile,int realm,string source,int rank)
     {
-        if(tile==null || !MclslBeastSpawnSystem.Matches(tile,beast.Habitat))return null;
+        if(tile==null || !MclslBeastSpawnSystem.Matches(tile,beast.Surface))return null;
         var actor=World.world.units.createNewUnit(beast.BeastAssetId,tile,false,0f,null,null,true,false,false,false);
         if(actor?.data==null)return null;
         MclslActorAccessor.Set(actor,SourceKey,source);MclslActorAccessor.Set(actor,RankKey,rank);
         MclslBeastActorRegistration.EnsureCultivationSeed(actor);
-        MclslBeastCultivation.SetRealm(actor,MclslRealmIds.Ordered[Math.Clamp(realm,0,6)],MclslRuntime.CurrentYear());
+        string wantedRealm=MclslRealmIds.Ordered[Math.Clamp(realm,0,6)];
+        if(MclslActorAccessor.Realm(actor)!=wantedRealm)
+            MclslBeastCultivation.SetRealm(actor,wantedRealm,MclslRuntime.CurrentYear());
         ApplyRankStats(actor);
+        MclslBeastPopulationIndex.Observe(actor);
         return actor;
     }
     internal static void Tick()
     {
-        if(_locked || World.world?.units==null || Config.paused)return;
-        if(_manualRequest>0 && MclslBeastHabitatIndex.Refresh(MclslRuntime.CurrentYear(),false))
+        long sample=MclslPerformanceProbe.Begin();
+        try { TickCore(); }
+        finally { MclslPerformanceProbe.End("灵兽.兽潮刷新",sample); }
+    }
+    private static void TickCore()
+    {
+        if(_locked || World.world?.units==null)return;
+        MclslBeastPopulationIndex.ValidateSome(8);
+        // A manual request prepares the sea/land index before ordinary spawning.
+        if(_manualRequest>0)
         {
-            int level=_manualRequest;_manualRequest=0;
-            if(!Trigger(level,MclslRuntime.CurrentYear()))MclslDiagnostics.Error("manual-beast-wave","没有符合主题的栖息地，或已达妖兽上限。");
+            int year=MclslRuntime.CurrentYear();
+            if(MclslBeastSurfaceIndex.Refresh(false)||MclslBeastSurfaceIndex.Ready)
+            {
+                int level=_manualRequest;_manualRequest=0;
+                ManualFeedback=Trigger(level,year)
+                    ?level+"级兽潮已引动，正在分批生成。":"召潮未成功："+TriggerFailure;
+            }
         }
+        if(Config.paused || UnityEngine.Time.time<_nextSpawnTime)return;
+        _nextSpawnTime=UnityEngine.Time.time+0.15f;
         var watch=Stopwatch.StartNew();int made=0;
         foreach(var wave in State.Waves)
         {
             if(wave.Status!="生成中")continue;
-            while(wave.Cursor<wave.Count && made<4 && watch.Elapsed.TotalMilliseconds<2)
+            while(wave.Cursor<wave.Count && made<2 && watch.Elapsed.TotalMilliseconds<2)
             {
                 int rank=MclslBeastRules.Role(wave.Cursor,wave.Count);
                 if(CountAutomatic()>=AutomaticLimit){wave.Cursor=wave.Count;break;}
                 int realm=rank==0?Math.Max(0,wave.Level-2):wave.Level-1;
                 var center=World.world.GetTileSimple(wave.X,wave.Y);
-                var candidates=Pool(wave.Theme,realm).Select(b=>(Beast:b,Tile:MclslBeastHabitatIndex.FindNear(b,center,wave.Cursor))).Where(x=>x.Tile!=null).ToArray();
-                if(candidates.Length==0)
+                FillWaveCandidates(wave.Theme,realm,center,wave.Cursor);
+                if(WaveCandidates.Count==0)
                 {
                     realm=wave.Level-1;
-                    candidates=Pool(wave.Theme,realm).Select(b=>(Beast:b,Tile:MclslBeastHabitatIndex.FindNear(b,center,wave.Cursor))).Where(x=>x.Tile!=null).ToArray();
+                    FillWaveCandidates(wave.Theme,realm,center,wave.Cursor);
                 }
-                if(candidates.Length==0){wave.Cursor=wave.Count;break;}
-                var selected=candidates[Roll(wave.Id+"|"+wave.Cursor,candidates.Length)];
+                if(WaveCandidates.Count==0){wave.Cursor=wave.Count;break;}
+                var selected=WaveCandidates[Roll(wave.Id+"|"+wave.Cursor,WaveCandidates.Count)];
                 var beast=selected.Beast;var tile=selected.Tile;
                 var actor=Spawn(beast,tile,Math.Max(realm,MclslBeastContent.BySpecies[beast.Id].MinRealm),"wave:"+wave.Id,rank);
                 if(actor!=null)
@@ -205,16 +268,47 @@ internal static class MclslBeastWorld
                 wave.Cursor++;made++;
             }
             if(wave.Cursor>=wave.Count)wave.Status="活动中";
-            if(made>=4 || watch.Elapsed.TotalMilliseconds>=2)break;
+            if(made>=2 || watch.Elapsed.TotalMilliseconds>=2)break;
         }
-        if(++_auditFrame%120==0)
+        if(++_auditFrame%20==0)
         {
-            foreach(var wave in State.Waves)
-                if(wave.Status=="活动中" && Remaining(wave)==0)wave.Status="已结束";
-            if(State.Waves.Count>64)State.Waves.RemoveAll(x=>x.Status=="已结束" && x.Year<MclslRuntime.CurrentYear()-20);
+            int auditYear=MclslRuntime.CurrentYear();
+            for(int w=0;w<State.Waves.Count;w++)
+            {
+                var wave=State.Waves[w];
+                if(wave.Status=="已结束")continue;
+                if(wave.Cursor<wave.Count)continue;            // 还在生成，跳过
+                // 只要还有存活妖兽就保持"活动中"；只有全部死亡才结束（不做超时强制收场）。
+                if(Remaining(wave)!=0)continue;
+                wave.Status="已结束";
+                MclslWorldRunRepository.AddEvent(auditYear,"beast_tide_end",
+                    wave.Level+"级"+wave.Theme+"兽潮结束",
+                    wave.Year+"年始于("+wave.X+","+wave.Y+")，实际生成"+wave.Actors.Count+"只，已无存活妖兽。",
+                    wave.X,wave.Y,"兽潮发生地",string.Empty,"beast_tide_end|"+wave.Id);
+                wave.Actors.Clear();Save();
+            }
+            if(State.Waves.Count>64)State.Waves.RemoveAll(x=>x.Status=="已结束" && x.Year<auditYear-20);
         }
     }
-    internal static int Remaining(MclslBeastWaveState wave)=>wave.Actors.Count(id=>MclslActorRegistry.ResolveKnownOrWorld(id,out var actor)&&MclslActorAccessor.Alive(actor));
+    internal static int Remaining(MclslBeastWaveState wave)
+        => wave.Actors.Count(id => MclslActorRegistry.TryPeekAlive(id, out _));
+
+    /// <summary>妖兽死亡：立刻从所属兽潮摘除并同步人口索引，不等周期性注册表清理。</summary>
+    internal static void OnBeastDeath(Actor actor)
+    {
+        try
+        {
+            long id = MclslActorAccessor.Id(actor);
+            if (id <= 0L) return;
+            MclslBeastPopulationIndex.Forget(id);
+            string source = MclslActorAccessor.GetString(actor, SourceKey);
+            if (!source.StartsWith("wave:", StringComparison.Ordinal)) return;
+            string waveId = source.Substring(5);
+            for (int i = 0; i < State.Waves.Count; i++)
+                if (State.Waves[i].Id == waveId) { State.Waves[i].Actors.Remove(id); break; }
+        }
+        catch (Exception ex) { MclslDiagnostics.Error("beast-on-death", "妖兽死亡剪枝失败: " + ex.Message); }
+    }
     internal static void ApplyRankStats(Actor actor)
     {
         if(!MclslBeastActorRegistration.IsOrdinary(actor)||actor.stats==null)return;
@@ -227,11 +321,11 @@ internal static class MclslBeastWorld
         if(oldMaximum>0)actor.data.health=(int)Math.Min(int.MaxValue,actor.data.health*(actor.getMaxHealth()/oldMaximum));
         PendingRankStats.TryRemove(id,out _);
     }
-    internal static void ObserveDirtyStats(Actor actor)
+    internal static void MarkRankStatsDirty(Actor actor)
     {
         // Worker callbacks enqueue only an id. Never touch UI, caches, or
         // gameplay state until the native calculation has returned.
-        if(actor!=null && actor.isStatsDirty() && MclslBeastActorRegistration.IsOrdinary(actor))
+        if(MclslBeastActorRegistration.IsOrdinary(actor))
             PendingRankStats[MclslActorAccessor.Id(actor)]=0;
     }
     internal static void ForgetRank(long id)=>PendingRankStats.TryRemove(id,out _);

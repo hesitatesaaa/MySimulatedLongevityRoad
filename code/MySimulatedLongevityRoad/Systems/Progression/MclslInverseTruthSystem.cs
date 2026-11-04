@@ -262,7 +262,7 @@ internal static class MclslInverseTruthSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Progression-MclslInverseTruthSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Progression/MclslInverseTruthSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Progression-MclslInverseTruthSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Progression/MclslInverseTruthSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         string displayName = MclslActorAccessor.DisplayName(actor, MclslRealmIds.ChangSheng);
         MclslWorldRunRepository.AddEvent(year, "longevity_achieved", displayName + "证得长生", "其以合道天职为根，完成逆理工程，令“" + truth.Name + "”在本世出现可被仙鉴承认的例外。", actor);
         MclslAnnouncementSystem.Enqueue(displayName + "逆反“" + truth.Name + "”，证得长生。", "#D8C778", 12f, 1);
@@ -311,44 +311,44 @@ internal static class MclslInverseTruthSystem
             if (chuanfa && chuanfaCount < 80 && !cultivator && canCultivate
                 && PassesLimitedRoll(actorId, "truth_chuanfa_new_law", year))
             {
-                AddClamped(actor, MclslActorDataKeys.ImmortalFate, 2, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.ImmortalFate, 2, 0, 100);
                 chuanfaCount++;
                 changed = true;
             }
             if (oneHeart && oneHeartCount < 80 && cultivator
                 && PassesLimitedRoll(actorId, "truth_one_heart", year))
             {
-                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 1, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 1, 0, 9999);
                 oneHeartCount++;
                 changed = true;
             }
             if (wuyou && wuyouCount < 80 && cultivator
                 && PassesLimitedRoll(actorId, "truth_wuyou", year))
             {
-                AddClamped(actor, MclslActorDataKeys.MindState, 2, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, 2, 0, 100);
                 wuyouCount++;
                 changed = true;
             }
             if (wangsheng && wangshengCount < 50 && cultivator
                 && PassesLimitedRoll(actorId, "truth_wangsheng", year))
             {
-                AddClamped(actor, MclslActorDataKeys.MindState, 1, 0, 100);
-                AddClamped(actor, MclslActorDataKeys.HeartTemperingProgress, 1, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, 1, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.HeartTemperingProgress, 1, 0, 100);
                 wangshengCount++;
                 changed = true;
             }
             if (humanWill && humanWillCount < 80 && canCultivate
                 && PassesLimitedRoll(actorId, "truth_human_will", year))
             {
-                if (cultivator) AddClamped(actor, MclslActorDataKeys.Contribution, 2, 0, 999999);
-                else AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
+                if (cultivator) MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 2, 0, 999999);
+                else MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
                 humanWillCount++;
                 changed = true;
             }
             if (trueUnreal && trueUnrealCount < 60 && cultivator
                 && PassesLimitedRoll(actorId, "truth_true_unreal", year))
             {
-                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
                 trueUnrealCount++;
                 changed = true;
             }
@@ -359,14 +359,14 @@ internal static class MclslInverseTruthSystem
                 if (failureSteps && failureCount < 80 && realm == MclslRealmIds.JinDan
                     && PassesLimitedRoll(actorId, "truth_player_failure_steps", year))
                 {
-                    AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 100);
                     failureCount++;
                     changed = true;
                 }
                 if (failureSteps && failureDivineCount < 80 && realm == MclslRealmIds.YuanYing
                     && PassesLimitedRoll(actorId, "truth_player_failure_steps_divine", year))
                 {
-                    AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 100);
                     failureDivineCount++;
                     changed = true;
                 }
@@ -375,7 +375,7 @@ internal static class MclslInverseTruthSystem
                     && realmIndex >= MclslRealmIds.Index(MclslRealmIds.HeDao)
                     && PassesLimitedRoll(actorId, "truth_player_duty_not_fixed", year))
                 {
-                    AddClamped(actor, MclslActorDataKeys.HarmonyStability, 1, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.HarmonyStability, 1, 0, 100);
                     dutyCount++;
                     changed = true;
                 }
@@ -383,7 +383,7 @@ internal static class MclslInverseTruthSystem
             if (weakNotFixed && weakCount < 100 && !cultivator && MclslEligibility.CanClaimWorldSoul(actor)
                 && PassesLimitedRoll(actorId, "truth_player_weak_not_fixed", year))
             {
-                AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.ImmortalFate, 1, 0, 100);
                 weakCount++;
                 changed = true;
             }
@@ -392,16 +392,16 @@ internal static class MclslInverseTruthSystem
             if (flawedDao && flawedCount < 80 && newLaw
                 && PassesLimitedRoll(actorId, "truth_player_flawed_dao", year))
             {
-                AddClamped(actor, MclslActorDataKeys.FoundationChanceBonus, 1, 0, 90);
-                AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 95);
-                AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 95);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.FoundationChanceBonus, 1, 0, 90);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.CaveClaimBonus, 1, 0, 95);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.DivineClaimBonus, 1, 0, 95);
                 flawedCount++;
                 changed = true;
             }
             if (allLawsOne && allLawsCount < 80 && newLaw
                 && PassesLimitedRoll(actorId, "truth_player_all_laws_one", year))
             {
-                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2, 0, 9999);
                 allLawsCount++;
                 changed = true;
             }
@@ -471,12 +471,7 @@ internal static class MclslInverseTruthSystem
 
     private static bool PassesLimitedRoll(long actorId, string truthId, int year) => StableHash(actorId, truthId, year) % 100 < 35;
 
-    private static void AddClamped(Actor actor, string key, int delta, int min, int max)
-    {
-        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
-        int current = MclslActorAccessor.GetInt(actor, key, min);
-        MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
-    }
+
 
     private static MclslInverseTruthContext BuildContext(MclslWorldRunState run, int year)
     {
@@ -514,7 +509,7 @@ internal static class MclslInverseTruthSystem
     {
         string soulId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulId, string.Empty);
         if (string.IsNullOrWhiteSpace(soulId)) return 0;
-        MclslWorldSoulRecord soul = FindWorldSoulById(soulId);
+        MclslWorldSoulRecord soul = MySimulatedLongevityRoad.Systems.MclslWorldRunRepository.FindWorldSoulById(soulId);
         return Math.Clamp(soul?.DutyProgress ?? 0, 0, 100);
     }
 
@@ -522,7 +517,7 @@ internal static class MclslInverseTruthSystem
     {
         string soulId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulId, string.Empty);
         if (string.IsNullOrWhiteSpace(soulId)) return 0;
-        MclslWorldSoulRecord soul = FindWorldSoulById(soulId);
+        MclslWorldSoulRecord soul = MySimulatedLongevityRoad.Systems.MclslWorldRunRepository.FindWorldSoulById(soulId);
         return Math.Clamp(soul?.DutyBacklash ?? MclslActorAccessor.GetInt(actor, MclslActorDataKeys.HeavenlyDutyBacklash, 0), 0, 100);
     }
 
@@ -633,17 +628,7 @@ internal static class MclslInverseTruthSystem
         return count;
     }
 
-    private static MclslWorldSoulRecord FindWorldSoulById(string soulId)
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.WorldSouls == null || string.IsNullOrWhiteSpace(soulId)) return null;
-        for (int i = 0; i < run.WorldSouls.Count; i++)
-        {
-            MclslWorldSoulRecord soul = run.WorldSouls[i];
-            if (soul != null && soul.Id == soulId) return soul;
-        }
-        return null;
-    }
+
 
     private static int SafeAge(Actor actor)
     {

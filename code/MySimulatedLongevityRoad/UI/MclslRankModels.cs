@@ -39,6 +39,13 @@ internal sealed class MclslRankEntry
     internal int MindState;
     internal int MortalMiasma;
     internal int MortalMiasmaLimit;
+    // 神兽榜专用：普通妖兽身份、物种与独立本命神通等级。
+    // 共享快照同时保留修士和普通妖兽，两个榜单各自按此区分筛选。
+    internal bool IsOrdinaryBeast;
+    internal string SpeciesId = string.Empty;
+    internal string SpeciesName = string.Empty;
+    internal string TalentName = string.Empty;
+    internal int TalentLevel;
 }
 
 /// <summary>Numeric presentation data; text is allocated only for displayed rows.</summary>

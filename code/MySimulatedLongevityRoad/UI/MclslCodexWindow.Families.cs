@@ -17,18 +17,6 @@ internal sealed partial class MclslCodexWindow
     private string _familyRealmFilter = MclslEventCatalog.All;
     private string _familyStoneAmount = "10";
 
-    private static string FamilyCityName(MclslFamilyRecord family, long cityId)
-    {
-        if (World.world?.cities != null)
-            foreach (City city in World.world.cities)
-                if (city?.data?.id == cityId) return string.IsNullOrWhiteSpace(city.data.name) ? "未名城镇" : city.data.name;
-        foreach (MclslFamilyMemberRecord member in family.Members)
-            if (member != null && member.CityId == cityId
-                && MclslActorRegistry.ResolveKnownOrWorld(member.ActorId, out Actor actor)
-                && actor.city?.data?.id == cityId) return actor.city.data.name;
-        return "城池 " + cityId;
-    }
-
     private void DrawFamilyMemberControls(MclslFamilyRecord family, Actor actor)
     {
         DrawInfoCard("管理 · " + actor.getName(), "#FFD37A", () =>
@@ -56,7 +44,7 @@ internal sealed partial class MclslCodexWindow
                 GUILayout.Label((MclslItemCatalog.Get(item.ItemId)?.Name ?? "未知物品") + " ×" + item.Count);
                 GUILayout.FlexibleSpace();
                 if (GUILayout.Button(LM.Get("mclsl_family_deposit_item"), GUILayout.Width(88)))
-                    MclslFamilySystem.TransferItem(family, actor, item.ItemId, true);
+                    MclslFamilySystem.TransferItem(family, actor, item, true);
                 GUILayout.EndHorizontal();
             }
         });

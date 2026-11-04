@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
+using Visual = MySimulatedLongevityRoad.Systems.Visual;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Core;
@@ -15,6 +16,17 @@ internal static class MclslPerformanceProbe
     private const int RecentLaneSamples = 1024;
     private const int FrameHistoryCapacity = 4096;
     private const int ContextRefreshFrames = 60;
+    private struct SlowOperation
+    {
+        internal string Lane;
+        internal int Frame, Year, AnnualYear, Stage, Step, Flags, Queue;
+        internal long ActorId, Ticks;
+    }
+    private static readonly SlowOperation[] SlowOperations = new SlowOperation[128];
+    private static int _slowCursor, _slowCount, _maximumAnnualLag;
+    private static int _sampleStartYear, _lastCompletedCycleYear;
+    private static long _annualCompletions, _nonIncreasingCompletions;
+    private static readonly long[] AnnualLagHistogram = new long[256];
 
     private sealed class SpeedFrames
     {
@@ -96,6 +108,7 @@ internal static class MclslPerformanceProbe
         internal int DiagnosticCache;
         internal int LatestRequestedYear;
         internal int OldestPendingYear;
+        internal int CompletedYear, ActiveYear, AnnualLag, Ready, Waiting, TransitionSeed, TransitionActors;
         internal string Era;
         internal string WorldStage;
         internal string TopLane;
@@ -147,6 +160,23 @@ internal static class MclslPerformanceProbe
     private static long _cultivatorPollActors;
     private static int _archiveMainBytes;
     private static int _archiveBackupBytes;
+    // Phased, opt-in counters for the modules named in this optimization round.
+    // They are only incremented while the probe is enabled, so a normal run pays
+    // at most one boolean branch per call site and never allocates.
+    private static long _combatHits;
+    private static long _combatShieldConsumed;
+    private static long _combatTargetScans;
+    private static long _annualDemandBuilds;
+    private static long _annualDemandNeeds;
+    private static long _annualDemandReused;
+    private static long _spriteComputes;
+    private static long _spriteReuses;
+    private static long _spriteMainCalls;
+    private static long _spriteMainCustom;
+    private static long _beastSurfaceClassified;
+    private static long _beastSurfaceIncremental;
+    private static long _changeQueueDrained;
+    private static long _changeQueueMerged;
 
     internal static bool Enabled { get; private set; }
 
@@ -158,6 +188,12 @@ internal static class MclslPerformanceProbe
         QuantileSamples.Clear(); _quantileCursor = 0; _frameP95 = _frameP99 = 0;
         Array.Clear(FrameMilliseconds, 0, FrameMilliseconds.Length);
         Array.Clear(FrameContexts, 0, FrameContexts.Length);
+        Array.Clear(SlowOperations, 0, SlowOperations.Length);
+        Array.Clear(AnnualLagHistogram, 0, AnnualLagHistogram.Length);
+        _slowCursor = _slowCount = _maximumAnnualLag = 0;
+        _sampleStartYear = MclslRuntime.CurrentYear();
+        _lastCompletedCycleYear = 0;
+        _annualCompletions = _nonIncreasingCompletions = 0;
         _sampleStartFrame = Time.frameCount;
         _sampleStartGc0 = GC.CollectionCount(0);
         _sampleStartGc1 = GC.CollectionCount(1);
@@ -185,6 +221,20 @@ internal static class MclslPerformanceProbe
         _cultivatorPollActors = 0L;
         _archiveMainBytes = 0;
         _archiveBackupBytes = 0;
+        _combatHits = 0L;
+        _combatShieldConsumed = 0L;
+        _combatTargetScans = 0L;
+        _annualDemandBuilds = 0L;
+        _annualDemandNeeds = 0L;
+        _annualDemandReused = 0L;
+        _spriteComputes = 0L;
+        _spriteReuses = 0L;
+        _spriteMainCalls = 0L;
+        _spriteMainCustom = 0L;
+        _beastSurfaceClassified = 0L;
+        _beastSurfaceIncremental = 0L;
+        _changeQueueDrained = 0L;
+        _changeQueueMerged = 0L;
         _lastAllocatedBytes = enabled ? ReadAllocatedBytes() : -1L;
     }
 
@@ -208,11 +258,81 @@ internal static class MclslPerformanceProbe
         if (Enabled && count > 0) _cultivatorPollActors += count;
     }
 
+    // ---- Phased diagnostics for this round (all no-ops unless the probe is on) ----
+    internal static void RecordCombatHit()
+    {
+        if (Enabled) _combatHits++;
+    }
+
+    internal static void RecordCombatShieldConsumed()
+    {
+        if (Enabled) _combatShieldConsumed++;
+    }
+
+    internal static void RecordCombatTargetScan(int candidates)
+    {
+        if (Enabled && candidates > 0) _combatTargetScans += candidates;
+    }
+
+    internal static void RecordAnnualDemandBuild(int needs)
+    {
+        if (!Enabled) return;
+        _annualDemandBuilds++;
+        if (needs > 0) _annualDemandNeeds += needs;
+    }
+
+    internal static void RecordAnnualDemandReused()
+    {
+        if (Enabled) _annualDemandReused++;
+    }
+
+    internal static void RecordSpriteResolve(bool reused)
+    {
+        if (!Enabled) return;
+        if (reused) _spriteReuses++;
+        else _spriteComputes++;
+    }
+
+    internal static void RecordSpriteMainCall()
+    {
+        if (Enabled) _spriteMainCalls++;
+    }
+
+    internal static void RecordSpriteMainCustom()
+    {
+        if (Enabled) _spriteMainCustom++;
+    }
+
+    internal static void RecordBeastSurfaceClassified(int tiles, bool incremental)
+    {
+        if (!Enabled || tiles <= 0) return;
+        _beastSurfaceClassified += tiles;
+        if (incremental) _beastSurfaceIncremental += tiles;
+    }
+
+    internal static void RecordChangeQueueDrained(int count)
+    {
+        if (Enabled && count > 0) _changeQueueDrained += count;
+    }
+
+    internal static void RecordChangeQueueMerged()
+    {
+        if (Enabled) _changeQueueMerged++;
+    }
+
     internal static void RecordArchiveBytes(int mainBytes, int backupBytes)
     {
         if (!Enabled) return;
         _archiveMainBytes = Math.Max(0, mainBytes);
         _archiveBackupBytes = Math.Max(0, backupBytes);
+    }
+
+    internal static void RecordAnnualCompletion(int year)
+    {
+        if (!Enabled) return;
+        _annualCompletions++;
+        if (year <= _lastCompletedCycleYear) _nonIncreasingCompletions++;
+        _lastCompletedCycleYear = Math.Max(_lastCompletedCycleYear, year);
     }
 
     internal static long Begin()
@@ -231,7 +351,8 @@ internal static class MclslPerformanceProbe
         return token;
     }
 
-    internal static void End(string lane, long started, bool acrossFrames = false)
+    internal static void End(string lane, long started, bool acrossFrames = false,
+        long actorId = 0, int annualYear = 0, int stage = 0, int step = 0, int flags = 0)
     {
         if (!Enabled || started == 0L || string.IsNullOrWhiteSpace(lane)) return;
         if (!Samples.TryGetValue(lane, out Sample sample))
@@ -254,6 +375,17 @@ internal static class MclslPerformanceProbe
         }
         long elapsed = Math.Max(0L, Stopwatch.GetTimestamp() - started);
         sample.Add(elapsed);
+        if (!acrossFrames && elapsed >= Stopwatch.Frequency * 8 / 1000)
+        {
+            SlowOperations[_slowCursor] = new SlowOperation
+            {
+                Lane = lane, Frame = Time.frameCount, Year = MclslRuntime.CurrentYear(),
+                ActorId = actorId, AnnualYear = annualYear, Stage = stage, Step = step,
+                Flags = flags, Queue = MclslRuntimeChanges.Count, Ticks = elapsed
+            };
+            _slowCursor = (_slowCursor + 1) % SlowOperations.Length;
+            _slowCount = Math.Min(_slowCount + 1, SlowOperations.Length);
+        }
         if (string.Equals(lane, "模组每帧CPU", StringComparison.Ordinal))
             _currentFrameModTicks += elapsed;
     }
@@ -326,9 +458,15 @@ internal static class MclslPerformanceProbe
         }
 
         int year = MclslRuntime.CurrentYear();
+        MclslAnnualBatchState annualBatch = MclslWorldRunRepository.Current.AnnualBatch;
+        int annualLag = annualBatch.LastCompletedYear > 0 ? Math.Max(0, year - annualBatch.LastCompletedYear) : -1;
+        if (annualLag >= 0)
+        {
+            _maximumAnnualLag = Math.Max(_maximumAnnualLag, annualLag);
+            AnnualLagHistogram[Math.Min(AnnualLagHistogram.Length - 1, annualLag)]++;
+        }
         string era = ResolveEra(year);
-        int population = -1;
-        try { population = World.world?.units?.getSimpleList()?.Count ?? 0; } catch { }
+        int population = ReadPopulationCount();
         FrameContexts[_frameHistoryCursor] = new FrameContext
         {
             Frame = frame,
@@ -352,6 +490,11 @@ internal static class MclslPerformanceProbe
             DiagnosticCache = MclslDiagnostics.CacheCount,
             LatestRequestedYear = _latestRequestedYear,
             OldestPendingYear = _oldestPendingYear,
+            CompletedYear = annualBatch.LastCompletedYear, ActiveYear = annualBatch.ActiveYear,
+            AnnualLag = annualLag, Ready = MclslScheduler.AnnualReadyCount,
+            Waiting = MclslScheduler.AnnualWaitingCount,
+            TransitionSeed = MclslWorldEpochSystem.PendingTransitionSeedCount,
+            TransitionActors = MclslWorldEpochSystem.PendingTransitionActorCount,
             Era = era,
             WorldStage = MclslAnnualWorldRuntimeLane.CurrentStageName,
             TopLane = topLane,
@@ -398,8 +541,30 @@ internal static class MclslPerformanceProbe
             .Append("；年度世界阶段 ").Append(MclslAnnualWorldRuntimeLane.CurrentStageName)
             .Append("；天玄镜挂单 ").Append(MclslTianxuanMarket.ActiveListingCount).Append('\n')
             ;
+        MclslAnnualBatchState annualBatch = MclslWorldRunRepository.Current.AnnualBatch;
+        Buffer.Append("世界年/活动年/请求年/完成年 ").Append(MclslRuntime.CurrentYear()).Append('/')
+            .Append(annualBatch.ActiveYear).Append('/').Append(annualBatch.LatestRequestedYear).Append('/')
+            .Append(annualBatch.LastCompletedYear).Append("；实际年差 当前/最大/P95 ")
+            .Append(annualBatch.LastCompletedYear > 0 ? Math.Max(0, MclslRuntime.CurrentYear() - annualBatch.LastCompletedYear).ToString() : "尚无完成游标").Append('/')
+            .Append(_maximumAnnualLag).Append('/').Append(AnnualLagPercentile())
+            .Append("；转换seed/角色 ").Append(MclslWorldEpochSystem.PendingTransitionSeedCount).Append('/')
+            .Append(MclslWorldEpochSystem.PendingTransitionActorCount).Append('\n');
+        Buffer.Append("计时口径：主循环区间墙钟耗时，父项包含子项；不等于全部模组CPU。外部回调、GPU、GC停顿需另行采样。完成游标为0的样本不计入年差分位。\n")
+            .Append("加载程序集MVID：").Append(typeof(MclslPerformanceProbe).Assembly.ManifestModule.ModuleVersionId).Append('\n');
+        Buffer.Append("采样世界起止年 ").Append(_sampleStartYear).Append('/').Append(MclslRuntime.CurrentYear())
+            .Append("；年度完成次数 ").Append(_annualCompletions).Append("；完成年份不递增次数 ")
+            .Append(_nonIncreasingCompletions).Append("；最高完成年份 ").Append(_lastCompletedCycleYear).Append('\n');
         Buffer.Append("天玄镜已检查挂单 ").Append(_marketOffersInspected)
             .Append("；未完成采购批次 ").Append(MclslTianxuanMarket.PendingPurchaseBatchCount).Append('\n');
+        Buffer.Append("光环可见候选/合资格/实例/活动 ")
+            .Append(Visual.MclslRealmHaloVisualSystem.VisibleCandidates).Append('/')
+            .Append(Visual.MclslRealmHaloVisualSystem.VisibleQualified).Append('/')
+            .Append(Visual.MclslRealmHaloVisualSystem.HaloCount).Append('/')
+            .Append(Visual.MclslRealmHaloVisualSystem.ActiveHaloCount)
+            .Append("；资格更新/境界解析 ")
+            .Append(Visual.MclslRealmHaloVisualSystem.QualificationUpdates).Append('/')
+            .Append(Visual.MclslRealmHaloVisualSystem.RealmResolutions)
+            .Append("；光环分项为CPU统计，GPU需Unity采样。\n");
         Buffer
             .Append("战斗法术快速拒绝/符箓背包单扫/修士轮询人数 ")
             .Append(_combatSpellFastRejects).Append('/').Append(_combatBagSingleScans).Append('/')
@@ -417,6 +582,24 @@ internal static class MclslPerformanceProbe
             Buffer.Append((_frameAllocationTotal / _allocationFrameCount).ToString())
                 .Append('/').Append(_frameAllocationPeak).Append(" B/帧");
         else Buffer.Append("不可用");
+        Buffer.Append("\n贴图常驻 ").Append(TextureMemoryMegabytes()).Append(" MB / 显卡报告 ")
+            .Append(SafeGraphicsMemoryMegabytes()).Append(" MB；原生帧缓存/预算 ")
+            .Append(Megabytes(MclslNativeActorFrames.ResidentBytes)).Append('/')
+            .Append(Megabytes(MclslNativeActorFrames.NativeBudgetBytes)).Append(" MB；待加载帧 ")
+            .Append(MclslNativeActorFrames.PendingFrameCount);
+        Buffer.Append("\n分阶段诊断（仅在开启性能监视时累计，正常帧只有一次布尔分支）\n")
+            .Append("战斗命中/护盾吸收/目标扫描候选 ").Append(_combatHits).Append('/').Append(_combatShieldConsumed)
+            .Append('/').Append(_combatTargetScans)
+            .Append("；年度需求清单生成/需求项/复用批次 ").Append(_annualDemandBuilds).Append('/')
+            .Append(_annualDemandNeeds).Append('/').Append(_annualDemandReused)
+            .Append("\n玄黄精灵解析 计算/复用 ").Append(_spriteComputes).Append('/').Append(_spriteReuses)
+            .Append("；主贴图调用/自定义 ").Append(_spriteMainCalls).Append('/').Append(_spriteMainCustom)
+            .Append("；地表索引处理(增量) ").Append(_beastSurfaceClassified).Append('(').Append(_beastSurfaceIncremental).Append(')')
+            .Append("；变化出队/同键合并 ").Append(_changeQueueDrained).Append('/').Append(_changeQueueMerged)
+            .Append("\n年度等待队列 就绪/等待/最旧年/最新年 ")
+            .Append(MclslScheduler.AnnualReadyCount).Append('/').Append(MclslScheduler.AnnualWaitingCount)
+            .Append('/').Append(MclslScheduler.OldestWaitingYear).Append('/').Append(MclslScheduler.NewestWaitingYear)
+            .Append("；变化队列积压 ").Append(MclslRuntimeChanges.Count).Append('\n');
         Buffer.Append("\n原生速度档位 ").Append(Config.time_scale_asset?.id ?? "未设置")
             .Append("；multiplier/ticks/sonic ").Append(Config.time_scale_asset?.multiplier ?? 0).Append('/')
             .Append(Config.time_scale_asset?.ticks ?? 0).Append('/').Append(Config.time_scale_asset?.sonic ?? false)
@@ -493,7 +676,35 @@ internal static class MclslPerformanceProbe
                 .Append(ToMilliseconds(Percentile(sample, 0.99)).ToString("F2")).Append(" ms\n");
         }
         AppendWorstFrames();
+        AppendSlowOperations();
         return Buffer.ToString();
+    }
+
+    private static string AnnualLagPercentile()
+    {
+        long total = 0, seen = 0;
+        foreach (long count in AnnualLagHistogram) total += count;
+        if (total == 0) return "无样本";
+        long target = (long)Math.Ceiling(total * 0.95);
+        for (int i = 0; i < AnnualLagHistogram.Length; i++)
+        {
+            seen += AnnualLagHistogram[i];
+            if (seen >= target) return i == AnnualLagHistogram.Length - 1 ? ">=255" : i.ToString();
+        }
+        return "无样本";
+    }
+
+    private static void AppendSlowOperations()
+    {
+        Buffer.Append("\n最近慢操作（>=8ms，最多128条，墙钟含子调用；无actor的项为聚合或未附上下文）\n");
+        for (int i = 0; i < _slowCount; i++)
+        {
+            SlowOperation item = SlowOperations[(_slowCursor - _slowCount + i + SlowOperations.Length) % SlowOperations.Length];
+            Buffer.Append(item.Frame).Append(" year=").Append(item.Year).Append(" actor=").Append(item.ActorId)
+                .Append(" annual=").Append(item.AnnualYear).Append(" stage/step=").Append(item.Stage).Append('/')
+                .Append(item.Step).Append(" flags=").Append(item.Flags).Append(" queue=").Append(item.Queue)
+                .Append(' ').Append(item.Lane).Append(' ').Append(ToMilliseconds(item.Ticks).ToString("F2")).Append("ms\n");
+        }
     }
 
     private static void AppendLaneTable(List<KeyValuePair<string, Sample>> ranked, bool useFramePeak)
@@ -539,6 +750,9 @@ internal static class MclslPerformanceProbe
                 .Append(" protect=").Append(sample.BackpressureFactor.ToString("F2")).Append('/')
                 .Append(sample.Population).Append(' ').Append(sample.Cultivators).Append('/')
                 .Append(sample.AnnualQueue).Append(' ').Append(sample.AnnualStates).Append(" gap=").Append(yearGap).Append('/')
+                .Append("completed=").Append(sample.CompletedYear).Append(" active=").Append(sample.ActiveYear)
+                .Append(" actualLag=").Append(sample.AnnualLag).Append(" ready/waiting=").Append(sample.Ready).Append('/').Append(sample.Waiting)
+                .Append(" seed/actors=").Append(sample.TransitionSeed).Append('/').Append(sample.TransitionActors).Append('/')
                 .Append("changes=").Append(sample.ChangeQueue).Append(" writes=").Append(sample.InventoryWrites)
                 .Append(" bags=").Append(sample.InventoryCache).Append(" ranks=").Append(sample.RankCache)
                 .Append(" projections=").Append(sample.ProjectionCache)
@@ -551,6 +765,21 @@ internal static class MclslPerformanceProbe
         }
         if (worst.Count == 0) Buffer.Append("暂无帧样本\n");
     }
+
+    private static long TextureMemoryMegabytes()
+    {
+        // Unity 2019.2+ reports live texture memory; older targets return 0.
+        try { return (long)Texture.currentTextureMemory / (1024L * 1024L); }
+        catch { return -1L; }
+    }
+
+    private static int SafeGraphicsMemoryMegabytes()
+    {
+        try { return SystemInfo.graphicsMemorySize; }
+        catch { return -1; }
+    }
+
+    private static long Megabytes(long bytes) => bytes / (1024L * 1024L);
 
     private static double FrameMillisecondsAverage() => _validFrameSamples <= 0
         ? 0d

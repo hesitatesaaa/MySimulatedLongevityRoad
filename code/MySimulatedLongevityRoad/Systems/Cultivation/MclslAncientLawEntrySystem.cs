@@ -9,7 +9,7 @@ internal static class MclslAncientLawEntrySystem
 {
     internal static bool ShouldAttemptMortalEntry(Actor actor, int year)
     {
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
@@ -17,7 +17,7 @@ internal static class MclslAncientLawEntrySystem
         if (system == MclslCultivationSystemIds.AncientLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return hasGift;
         if (MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (hasGift) return true;
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age != 5) return false;
         return MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1
             && hasGift;
@@ -25,7 +25,7 @@ internal static class MclslAncientLawEntrySystem
 
     internal static bool TryBeginFromMortal(Actor actor, int year)
     {
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (!ShouldAttemptMortalEntry(actor, year)) return false;
         if (MclslNewLawPioneerSystem.TryBeginMortalPioneer(actor, year)) return true;
         BeginAncientCultivation(actor, year);
@@ -35,7 +35,7 @@ internal static class MclslAncientLawEntrySystem
     internal static bool TryBeginFromKnownRoot(Actor actor, int year)
     {
         if (actor?.data == null) return false;
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
         if (MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (!string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return false;
@@ -65,11 +65,14 @@ internal static class MclslAncientLawEntrySystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLineageStrength, 35 + aptitude / 2);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential, 20 + aptitude / 4);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, aptitude);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, "spiritual_" + technique.Id);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
-            MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+            if (MclslRealmIds.Index(technique.MaxRealm) >= MclslTechniqueRealmLimit.OwnedTechniqueCeiling(actor))
+            {
+                MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
+                MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+                MclslTechniqueStageSystem.SetProgress(actor, Math.Clamp(10 + aptitude / 8, 10, 28));
+                MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, "spiritual_" + technique.Id);
+            }
             MclslMindSystem.EnsureMindState(actor);
-            MclslTechniqueStageSystem.SetProgress(actor, Math.Clamp(10 + aptitude / 8, 10, 28));
             MclslTraitRegistration.SyncGiftTrait(actor, aptitude);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "灵根感应，开始感气");
         }
@@ -82,9 +85,4 @@ internal static class MclslAncientLawEntrySystem
         return MclslAptitudeGiftCatalog.RollAptitude(actorId + "|ancient_apt");
     }
 
-    private static int SafeAgeYear(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
 }

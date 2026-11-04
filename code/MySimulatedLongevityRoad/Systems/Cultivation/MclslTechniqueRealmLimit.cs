@@ -6,6 +6,39 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslTechniqueRealmLimit
 {
+    // Owned transmission only: path bonuses and attained realms are not books.
+    // Read-only, so rejected rewards cannot rewrite the original source or progress.
+    internal static int OwnedTechniqueCeiling(Actor actor) => OwnedTechniqueCeiling(actor, out _);
+
+    internal static int OwnedTechniqueCeiling(Actor actor, out MclslTechniqueDefinition definition)
+    {
+        definition = null;
+        if (actor?.data == null) return -1;
+        string id = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId);
+        string normalized = MclslCultivationCatalog.NormalizeTechniqueId(id);
+        bool known = MclslCultivationCatalog.TryTechnique(id, out definition);
+        bool branch = normalized.StartsWith("branch_", StringComparison.Ordinal)
+            && !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName));
+        if (!known && !branch) return -1;
+        int ceiling = MclslRealmIds.Index(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueMaxRealm));
+        if (known && !normalized.StartsWith("legacy_", StringComparison.Ordinal))
+            ceiling = Math.Max(ceiling, MclslRealmIds.Index(definition.MaxRealm));
+        return ceiling;
+    }
+
+    internal static bool TryAssignDiscoveredTechnique(Actor actor, MclslTechniqueDefinition technique, int completeness)
+    {
+        if (actor?.data == null || technique == null
+            || MclslRealmIds.Index(technique.MaxRealm) < 0
+            || MclslRealmIds.Index(technique.MaxRealm) < OwnedTechniqueCeiling(actor)) return false;
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
+        OnTechniqueAssigned(actor, technique);
+        MclslTechniqueStageSystem.SetProgress(actor, Math.Max(MclslTechniqueStageSystem.Progress(actor), completeness));
+        // Notify the index once, with all other fields already committed.
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, technique.Id);
+        return true;
+    }
+
     internal static void EnsureFromDefinition(Actor actor, MclslTechniqueDefinition technique)
     {
         if (actor?.data == null || technique == null) return;

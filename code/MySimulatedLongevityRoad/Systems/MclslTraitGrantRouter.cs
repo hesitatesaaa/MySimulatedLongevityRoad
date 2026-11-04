@@ -10,6 +10,15 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static class MclslTraitGrantRouter
 {
     private static int _suppressionDepth;
+    // Small set of actor ids currently holding Heaven's Favor. Kept so uniqueness
+    // enforcement iterates only over current favor holders instead of the whole
+    // population (World.world.units.getSimpleList()). The set is the source of
+    // truth for "who already has the trait": members are added/removed on trait
+    // add/remove via the same routing hooks that apply the favor. The trait id is
+    // authoritative; if the set and the world ever drift (e.g. a different code
+    // path removes the trait), the scan fallback below still reconciles.
+    private static readonly System.Collections.Generic.HashSet<long> HeavenFavorHolders
+        = new System.Collections.Generic.HashSet<long>();
 
     internal static bool IsSuppressed => _suppressionDepth > 0;
 
@@ -24,16 +33,12 @@ internal static class MclslTraitGrantRouter
     internal static void HandleAddedTrait(Actor actor, string traitId)
     {
         if (IsSuppressed) return;
+        if (MclslHeavenGrantActions.HandleAdded(actor, traitId)) return;
         if (actor?.data == null || string.IsNullOrWhiteSpace(traitId)) return;
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
 
-        int battle=Array.IndexOf(Combat.MclslBattleProfessionSystem.Traits,traitId);
-        if(battle>=0)
-        {
-            Combat.MclslBattleProfessionSystem.SetMain(actor,Combat.MclslBattleProfessionSystem.Ids[battle]);
-            MarkAndRefresh(actor);return;
-        }
+        if (Combat.MclslCombatCareerSystem.HandleAdded(actor, traitId)) { MarkAndRefresh(actor); return; }
 
         bool isHuanzhen = traitId == MclslTraitRegistration.HuanzhenTraitId;
         bool isGift = MclslTraitRegistration.IsGiftTrait(traitId);
@@ -55,7 +60,9 @@ internal static class MclslTraitGrantRouter
         }
         if (isHeavenFavor)
         {
-            EnforceUniqueHeavenFavor(actor);
+            long recipientId = MclslActorAccessor.Id(actor);
+            EnforceUniqueHeavenFavor(recipientId);
+            if (recipientId > 0L) HeavenFavorHolders.Add(recipientId);
             MclslTraitRegistration.TryMarkFavorite(actor);
             MclslTechniqueStageSystem.AddProgress(actor, 10);
             MarkAndRefresh(actor);
@@ -98,17 +105,39 @@ internal static class MclslTraitGrantRouter
         HandleWorldSoulEntityGrant(actor);
     }
 
-    private static void EnforceUniqueHeavenFavor(Actor recipient)
+    private static void EnforceUniqueHeavenFavor(long recipientId)
     {
         try
         {
+            // Iterate the tracked holder set only. Normally this is one element
+            // (uniqueness is invariant), so the cost is O(holders) instead of
+            // O(world population). Fall back to a population scan only when the
+            // returned set is empty yet a favor grant is happening — meaning the
+            // set may have desynced (e.g. favor granted outside the router); a
+            // full scan once reconciles the world's existing holder.
+            if (HeavenFavorHolders.Count > 0)
+            {
+                foreach (long previousId in HeavenFavorHolders)
+                {
+                    if (previousId <= 0L || previousId == recipientId) continue;
+                    if (!MclslActorRegistry.Resolve(previousId, out Actor previous) || previous?.data == null) continue;
+                    if (!previous.hasTrait(MclslTraitRegistration.HeavenFavorTraitId)) { HeavenFavorHolders.Remove(previousId); continue; }
+                    SuppressRouting(() => previous.removeTrait(MclslTraitRegistration.HeavenFavorTraitId));
+                    HeavenFavorHolders.Remove(previousId);
+                }
+                return;
+            }
+            // Reconcile fallback (set desync): scan the world once to pick up an
+            // existing holder granted outside this router, then enforce uniqueness.
             var actors = World.world?.units?.getSimpleList();
             if (actors == null) return;
-            for (int i = 0; i < actors.Count; i++)
+            foreach (Actor previous in actors)
             {
-                Actor previous = actors[i];
-                if (previous == null || previous == recipient || !previous.hasTrait(MclslTraitRegistration.HeavenFavorTraitId)) continue;
+                if (previous?.data == null || MclslActorAccessor.Id(previous) == recipientId) continue;
+                if (!previous.hasTrait(MclslTraitRegistration.HeavenFavorTraitId)) continue;
                 SuppressRouting(() => previous.removeTrait(MclslTraitRegistration.HeavenFavorTraitId));
+                HeavenFavorHolders.Remove(MclslActorAccessor.Id(previous));
+                return; // heaven favor is unique; at most one other holder can exist
             }
         }
         catch (Exception ex) { MclslDiagnostics.Error("heaven-favor-unique", ex.Message); }
@@ -120,9 +149,9 @@ internal static class MclslTraitGrantRouter
         if (actor?.data == null || string.IsNullOrWhiteSpace(traitId)) return;
         traitId = MclslTraitRegistration.NormalizeTraitId(traitId);
         if (!LooksLikeMclslTraitId(traitId)) return;
-        int battle=Array.IndexOf(Combat.MclslBattleProfessionSystem.Traits,traitId);
-        if(battle>=0 && Combat.MclslBattleProfessionSystem.Main(actor)==Combat.MclslBattleProfessionSystem.Ids[battle])
-        {Combat.MclslBattleProfessionSystem.ClearMain(actor);MarkAndRefresh(actor);return;}
+        if (traitId == MclslTraitRegistration.HeavenFavorTraitId)
+            HeavenFavorHolders.Remove(MclslActorAccessor.Id(actor));
+        if (Combat.MclslCombatCareerSystem.HandleRemoved(actor, traitId)) { MarkAndRefresh(actor); return; }
         if (MclslProfessionSystem.IsProfessionTrait(traitId))
         {
             MclslProfessionSystem.OnTraitRemoved(actor, traitId);

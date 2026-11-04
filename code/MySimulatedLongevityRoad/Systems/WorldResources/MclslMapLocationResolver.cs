@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using MySimulatedLongevityRoad.Data;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems;
@@ -39,8 +41,8 @@ internal static class MclslMapLocationResolver
         int spanY = Math.Max(1, MapBox.height - minY - 5);
         for (int attempt = 0; attempt < 96; attempt++)
         {
-            int x = minX + PositiveHash(seed + "|x|" + attempt) % spanX;
-            int y = minY + PositiveHash(seed + "|y|" + attempt) % spanY;
+            int x = minX + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|x|" + attempt) % spanX;
+            int y = minY + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|y|" + attempt) % spanY;
             if (!TryUseCoordinate(x, y, out mapX, out mapY)) continue;
             location = DescribeTile(mapX, mapY);
             kingdom = "无主";
@@ -74,13 +76,32 @@ internal static class MclslMapLocationResolver
 
     private static string DescribeTile(int x, int y) => "地图坐标(" + x + "," + y + ")";
 
-    private static int PositiveHash(string value)
+
+    internal sealed class LocationSeed
     {
-        unchecked
+        internal string Location;
+        internal string Kingdom;
+        internal int X = -1;
+        internal int Y = -1;
+    }
+    internal static LocationSeed PickLocation(int hash)
+    {
+        List<LocationSeed> locations = new();
+        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
+        if (units != null)
         {
-            int result = 43;
-            foreach (char c in value ?? string.Empty) result = result * 53 + c;
-            return result & int.MaxValue;
+            HashSet<string> seen = new(StringComparer.Ordinal);
+            for (int i = 0; i < units.Count && locations.Count < 64; i++)
+            {
+                Actor actor = units[i];
+                if (actor?.city == null) continue;
+                string city = actor.city?.data?.name;
+                if (string.IsNullOrWhiteSpace(city) || !seen.Add(city)) continue;
+                string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无主" : actor.kingdom.data.name;
+                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom, X = actor.data.x, Y = actor.data.y });
+            }
         }
+        if (locations.Count > 0) return locations[(hash & int.MaxValue) % locations.Count];
+        return new LocationSeed { Location = MclslProceduralLexicon.CaveOrigins[(hash & int.MaxValue) % MclslProceduralLexicon.CaveOrigins.Length], Kingdom = "无主" };
     }
 }

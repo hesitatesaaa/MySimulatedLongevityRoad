@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Core;
 
@@ -72,6 +71,7 @@ internal static class MclslActorAccessor
                 MclslSpellSystem.OnRealmAdvanced(actor, oldRealm, value);
             }
             MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.ReconcileForm(actor);
+            if (Combat.MclslCombatCareerSystem.Applicable(actor)) Combat.MclslCombatCareerSystem.SyncTraits(actor);
         }
         if (honorificSourceChanged)
         {
@@ -138,20 +138,35 @@ internal static class MclslActorAccessor
         MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.DisplayName(actor, realmId)
         ?? MclslHonorificNameCatalog.Format(actor, ResolveNameStage(actor, realmId));
 
+    internal static string SafeName(Actor actor, string fallback)
+    {
+        try { return DisplayName(actor); } catch { return fallback; }
+    }
+
+    /// <summary>Floor age in whole years; a null or throwing actor reads as 0.</summary>
+    internal static int Age(Actor actor)
+    {
+        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
+        catch { return 0; }
+    }
+
+    /// <summary>Clamped stat read; a missing stat or throwing actor reads as 0.</summary>
+    internal static float StatValue(Actor actor, string statId)
+    {
+        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
+        catch { return 0f; }
+    }
+
+    /// <summary>Registry lookup that yields null instead of a false-returning out parameter.</summary>
+    internal static Actor Resolve(long actorId)
+        => MclslActorRegistry.ResolveKnownOrWorld(actorId, out Actor actor) ? actor : null;
+
     internal static void ApplyDisplayName(Actor actor, string realmId)
     {
         if (actor?.data == null) return;
         string displayName = DisplayName(actor, realmId);
         if (string.IsNullOrWhiteSpace(displayName)) return;
-        try
-        {
-            string current = actor.getName();
-            if (string.Equals(current, displayName, StringComparison.Ordinal)) return;
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Runtime-MclslActorAccessor-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Runtime/MclslActorAccessor.cs #1: " + mclslEmptyCatchEx.Message); }
-
-        if (TryInvokeSetName(actor, displayName)) return;
-        TrySetDataName(actor, displayName);
+        if (!string.Equals(actor.getName(), displayName, StringComparison.Ordinal)) actor.name = displayName;
     }
 
 
@@ -163,56 +178,4 @@ internal static class MclslActorAccessor
             : string.Empty;
     }
 
-    private static bool TryInvokeSetName(Actor actor, string displayName)
-    {
-        try
-        {
-            MethodInfo method = actor.GetType().GetMethod("setName", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new[] { typeof(string) }, null);
-            if (method != null)
-            {
-                method.Invoke(actor, new object[] { displayName });
-                return true;
-            }
-        }
-        catch { return false; }
-        try
-        {
-            MethodInfo method = actor.GetType().GetMethod("setName", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new[] { typeof(string), typeof(bool) }, null);
-            if (method == null) return false;
-            method.Invoke(actor, new object[] { displayName, true });
-            return true;
-        }
-        catch { return false; }
-    }
-
-    private static void TrySetDataName(Actor actor, string displayName)
-    {
-        try
-        {
-            object data = actor.data;
-            Type type = data.GetType();
-            TrySetStringMember(type, data, "name", displayName);
-            TrySetStringMember(type, data, "customName", displayName);
-            TrySetStringMember(type, data, "nameLocale", displayName);
-            TrySetStringMember(type, data, "nameTemplate", displayName);
-            TrySetStringMember(type, data, "localizedName", displayName);
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Runtime-MclslActorAccessor-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Runtime/MclslActorAccessor.cs #2: " + mclslEmptyCatchEx.Message); }
-    }
-
-    private static void TrySetStringMember(Type type, object target, string memberName, string value)
-    {
-        try
-        {
-            FieldInfo field = type.GetField(memberName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (field != null && field.FieldType == typeof(string)) field.SetValue(target, value);
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Runtime-MclslActorAccessor-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Runtime/MclslActorAccessor.cs #3: " + mclslEmptyCatchEx.Message); }
-        try
-        {
-            PropertyInfo property = type.GetProperty(memberName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (property?.CanWrite == true && property.PropertyType == typeof(string)) property.SetValue(target, value, null);
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Runtime-MclslActorAccessor-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Runtime/MclslActorAccessor.cs #4: " + mclslEmptyCatchEx.Message); }
-    }
 }

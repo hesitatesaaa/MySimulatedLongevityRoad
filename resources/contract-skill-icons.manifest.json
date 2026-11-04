@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "CP_spirit_1A",
+      "name": "契印击",
+      "path": "GameResources/ui/CareerSkills/CP_spirit_1A.png",
+      "width": 64,
+      "height": 64,
+      "sha256": "0753f392d6fc313cec653b8ffc657b994f6f485b295b64621eab02ccc14fbb0d",
+      "previousSha256": "0fd0f7bb882e4b5987cf1c3b4265870ed53e9e548c4818da88edf7b97a80745d",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/imagegen-originals/CP_spirit_1A.png",
+        "sourceSha256": "e8754cd59292554ff4252f5a250959cf80737768358457f1aa1f0930aecbc324",
+        "prompt": "Create ONE 64x64 logical-pixel transparent skill icon for a Chinese cultivation WorldBox mod, CP_spirit_1A 契印击. First reference: existing career skill icon STYLE, match its fine stepped pixel outlines, crisp pale mint highlights, dark jade shading and restrained amber-gold rune accents, not a chunky generic mobile-game badge. Second reference: real existing career effect frames, use their turquoise spirit currents and gold contract-rune material, not literal multiple animation panels. Third reference: existing passive icon STYLE only, keep matching visual family. New skill subject: a sharp mint-white contract rune strikes a small golden target seal, three decisive pointed strokes and one short curved spirit trail; one focused impact emblem, NOT a wolf head. Clear silhouette readable at 32 and64px. Centered within80% of canvas, fully transparent background with clean empty margin; no lettering, labels, border, solid backdrop or fog. Pixel-art rendering, limited palette, deliberate individual pixels and four-tone shading. No copied old animal portrait. Produce one emblem only.",
+        "references": [
+          "build/contract-rework/CP_spirit_1A-effect-reference.png",
+          "GameResources/trait/MclslCombatPassive_spirit_3.png"
+        ],
+        "processing": "alpha>=128; crop; nearest-neighbor fit52x52; center64x64;64-color quantization"
+      }
+    },
+    {
+      "id": "CP_spirit_2A",
+      "name": "灵息灌注",
+      "path": "GameResources/ui/CareerSkills/CP_spirit_2A.png",
+      "width": 64,
+      "height": 64,
+      "sha256": "20a57edb2f41fb0b40fdc20eb650beef2ed54c66e9e371d2e90201ffa1c12fce",
+      "previousSha256": "1ab9b84a22e9563d440b24524c6300d124d037e5a2aee05db46cde9eac35a378",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/imagegen-originals/CP_spirit_2A.png",
+        "sourceSha256": "e5240b2199e82e0e3414547b502e4d578084f6f11b859bcba843ca6a2dfdccaa",
+        "prompt": "Create ONE 64x64 logical-pixel transparent skill icon for a Chinese cultivation WorldBox mod, CP_spirit_2A 灵息灌注. First reference: existing career skill icon STYLE, match its fine stepped pixel outlines, crisp pale mint highlights, dark jade shading and restrained amber-gold rune accents, not a chunky generic mobile-game badge. Second reference: real existing career effect frames, use their turquoise spirit currents and gold contract-rune material, not literal multiple animation panels. Third reference: existing passive icon STYLE only, keep matching visual family. New skill subject: three jade-turquoise spirit streams converge inward into one luminous gold-core spirit pearl, small upward aura curls, clear inward energy. Clear silhouette readable at 32 and64px. Centered within80% of canvas, fully transparent background with clean empty margin; no lettering, labels, border, solid backdrop or fog. Pixel-art rendering, limited palette, deliberate individual pixels and four-tone shading. No copied old animal portrait. Produce one emblem only.",
+        "references": [
+          "build/contract-rework/CP_spirit_2A-effect-reference.png",
+          "GameResources/trait/MclslCombatPassive_spirit_3.png"
+        ],
+        "processing": "alpha>=128; crop; nearest-neighbor fit52x52; center64x64;64-color quantization"
+      }
+    },
+    {
+      "id": "CP_spirit_3A",
+      "name": "御灵破势",
+      "path": "GameResources/ui/CareerSkills/CP_spirit_3A.png",
+      "width": 64,
+      "height": 64,
+      "sha256": "552fb582b9d51d9e9dbb8b36beeb9d4e1ce22ad23a38b132c0cffc2ad8dbe8a9",
+      "previousSha256": "032aededbd0c48635be4616215e4b3893b8ebf9d4512d5b14d22270f4ccc0dfd",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/imagegen-originals/CP_spirit_3A.png",
+        "sourceSha256": "8bb4e01ccc23cd16b8af9c4ca755242ceb0bb2b469029f3fbad6d189815437bb",
+        "prompt": "Create ONE 64x64 logical-pixel transparent skill icon for a Chinese cultivation WorldBox mod, CP_spirit_3A 御灵破势. First reference: existing career skill icon STYLE, match its fine stepped pixel outlines, crisp pale mint highlights, dark jade shading and restrained amber-gold rune accents, not a chunky generic mobile-game badge. Second reference: real existing career effect frames, use their turquoise spirit currents and gold contract-rune material, not literal multiple animation panels. Third reference: existing passive icon STYLE only, keep matching visual family. New skill subject: a single abstract mint-white spirit claw or paw surges diagonally through a small cracked golden seal, sharp forward momentum and a short lightning-like gold edge; not a specific bird species. Clear silhouette readable at 32 and64px. Centered within80% of canvas, fully transparent background with clean empty margin; no lettering, labels, border, solid backdrop or fog. Pixel-art rendering, limited palette, deliberate individual pixels and four-tone shading. No copied old animal portrait. Produce one emblem only.",
+        "references": [
+          "build/contract-rework/CP_spirit_3A-effect-reference.png",
+          "GameResources/trait/MclslCombatPassive_spirit_3.png"
+        ],
+        "processing": "alpha>=128; crop; nearest-neighbor fit52x52; center64x64;64-color quantization"
+      }
+    },
+    {
+      "id": "CP_spirit_4A",
+      "name": "守契回生",
+      "path": "GameResources/ui/CareerSkills/CP_spirit_4A.png",
+      "width": 64,
+      "height": 64,
+      "sha256": "188edc9b5ee425491245e12b6d5b38e06618b1dbee6676e52273f02ae83ea2b7",
+      "previousSha256": "89bcdae4f155f31765aa4c6de6956ba330f562dbd633be803e0a1c584843221d",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/imagegen-originals/CP_spirit_4A.png",
+        "sourceSha256": "0b3bb64c9814c16cf83de05df93e19bc5ad745159aa65f02b895c6a1a707c0e9",
+        "prompt": "Create ONE 64x64 logical-pixel transparent skill icon for a Chinese cultivation WorldBox mod, CP_spirit_4A 守契回生. First reference: existing career skill icon STYLE, match its fine stepped pixel outlines, crisp pale mint highlights, dark jade shading and restrained amber-gold rune accents, not a chunky generic mobile-game badge. Second reference: real existing career effect frames, use their turquoise spirit currents and gold contract-rune material, not literal multiple animation panels. Third reference: existing passive icon STYLE only, keep matching visual family. New skill subject: a small green life bud inside a jade-white protective curved contract rune, two gold healing sparks and inward curling green wisps, clearly protective restorative. Clear silhouette readable at 32 and64px. Centered within80% of canvas, fully transparent background with clean empty margin; no lettering, labels, border, solid backdrop or fog. Pixel-art rendering, limited palette, deliberate individual pixels and four-tone shading. No copied old animal portrait. Produce one emblem only.",
+        "references": [
+          "build/contract-rework/CP_spirit_4A-effect-reference.png",
+          "GameResources/trait/MclslCombatPassive_spirit_3.png"
+        ],
+        "processing": "alpha>=128; crop; nearest-neighbor fit52x52; center64x64;64-color quantization"
+      }
+    },
+    {
+      "id": "CP_spirit_5A",
+      "name": "灵契共鸣",
+      "path": "GameResources/ui/CareerSkills/CP_spirit_5A.png",
+      "width": 64,
+      "height": 64,
+      "sha256": "ff93c6f91a15c27979940aff174ff24926389f149b8a35b16e2a9efc9de6bad9",
+      "previousSha256": "31daa8668d535861f1560cbf3a18f61c978f1b6091865b4249397c2a31e7f7a0",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/imagegen-originals/CP_spirit_5A.png",
+        "sourceSha256": "127c09dcd283c5b383de90ec4203ecf5217f1a4cf812367106c6b690e99838fc",
+        "prompt": "Create ONE 64x64 logical-pixel transparent skill icon for a Chinese cultivation WorldBox mod, CP_spirit_5A 灵契共鸣. First reference: existing career skill icon STYLE, match its fine stepped pixel outlines, crisp pale mint highlights, dark jade shading and restrained amber-gold rune accents, not a chunky generic mobile-game badge. Second reference: real existing career effect frames, use their turquoise spirit currents and gold contract-rune material, not literal multiple animation panels. Third reference: existing passive icon STYLE only, keep matching visual family. New skill subject: two small gold-centered spirit lights linked by one continuous turquoise-white infinity-shaped contract current; one subtle cultivator-soul flame and ONE abstract beast-spirit flame facing each other, no crowd or multiple animals. Clear silhouette readable at 32 and64px. Centered within80% of canvas, fully transparent background with clean empty margin; no lettering, labels, border, solid backdrop or fog. Pixel-art rendering, limited palette, deliberate individual pixels and four-tone shading. No copied old animal portrait. Produce one emblem only.",
+        "references": [
+          "build/contract-rework/CP_spirit_5A-effect-reference.png",
+          "GameResources/trait/MclslCombatPassive_spirit_3.png"
+        ],
+        "processing": "alpha>=128; crop; nearest-neighbor fit52x52; center64x64;64-color quantization"
+      }
+    }
+  ]
+}

@@ -16,6 +16,12 @@ public static class MclslLocalizationRuntimeMarker
 	public static bool IsRuntimeLoaded { get; private set; }
 	public static DateTime LoadedAtUtc { get; private set; }
 
+    internal static void MarkFailed()
+    {
+        IsRuntimeLoaded = false;
+        LoadedAtUtc = default;
+    }
+
 	internal static void MarkLoaded()
 	{
 		IsRuntimeLoaded = true;

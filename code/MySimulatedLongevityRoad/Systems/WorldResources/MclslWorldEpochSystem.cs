@@ -54,6 +54,9 @@ internal static class MclslWorldEpochSystem
         return run != null && run.ImmortalMortalMiasmaEnabled && IsNewLawActive(year);
     }
 
+    /// <summary>Ancient-law remnant label for the current epoch.</summary>
+    internal static string RemnantLabel(int year) => IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+
     internal static int YearsUntilNewLaw(int year)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
@@ -87,6 +90,7 @@ internal static class MclslWorldEpochSystem
         if (run == null || string.IsNullOrWhiteSpace(run.RunId)) return;
 
         NormalizeEra(run);
+        if (run.NewLawTransitionResolved && run.CultivationEpoch == NewLawEpoch) return;
         run.AncientLawEndYear = year;
         run.TransmissionEndYear = year;
         run.NewLawStartYear = year;
@@ -214,8 +218,9 @@ internal static class MclslWorldEpochSystem
 
     internal static bool HasPendingTransitionWork => _ancientQueueSeedCursor < _ancientQueueSeedActors.Count
         || (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0) > 0;
-    internal static int PendingTransitionWorkCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor)
-        + (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0);
+    internal static int PendingTransitionSeedCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor);
+    internal static int PendingTransitionActorCount => MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0;
+    internal static int PendingTransitionWorkCount => PendingTransitionSeedCount + PendingTransitionActorCount;
 
     /// <summary>
     /// 用数量和时间双预算消化旧法修士队列。队列数据保存在世界档案中，存档或读档
@@ -230,8 +235,8 @@ internal static class MclslWorldEpochSystem
 
         long started = Stopwatch.GetTimestamp();
         bool annualBudget = MclslAnnualFrameBudget.Active;
-        int seedBudget = annualBudget ? int.MaxValue : MclslRuntimeWorkBudget.ScaleCount(TransitionSeedBudget, 2);
-        int conversionBudget = annualBudget ? int.MaxValue : MclslRuntimeWorkBudget.ScaleCount(TransitionConversionBudget, 1);
+        int seedBudget = annualBudget ? int.MaxValue : TransitionSeedBudget;
+        int conversionBudget = annualBudget ? int.MaxValue : TransitionConversionBudget;
         int seeded = 0;
         using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionSeedBatch"))
         {
@@ -476,12 +481,12 @@ internal static class MclslWorldEpochSystem
 
     private static void MarkAncientRemnant(Actor actor, int year)
     {
-        string remnantLabel = IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+        string remnantLabel = RemnantLabel(year);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawProcessed, 1);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawStatus, remnantLabel);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential, Math.Max(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLegacyPotential, 0), 20 + Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 10));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, remnantLabel);
-        if (StableHash(MclslActorAccessor.Id(actor) + "|ancient_remnant_notice|" + year) % 100 >= 8) return;
+        if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive83x47(MclslActorAccessor.Id(actor) + "|ancient_remnant_notice|" + year) % 100 >= 8) return;
         MclslWorldRunRepository.AddEvent(year, "ancient_remnant", MclslActorAccessor.DisplayName(actor) + "隐为" + remnantLabel, "前代道影，渐入风尘。", actor);
     }
 
@@ -525,20 +530,14 @@ internal static class MclslWorldEpochSystem
         }
     }
 
-    private static int SafeAge(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
-
-    private static int StableHash(string value)
-    {
-        unchecked { int hash = 83; foreach (char c in value ?? string.Empty) hash = hash * 47 + c; return hash & int.MaxValue; }
-    }
-
     private static bool HasExceededTransitionBudget(long startedTimestamp)
     {
-        double budgetMs = MclslRuntimeWorkBudget.ScaleMilliseconds(TransitionWorkBudgetMs, 0.08d);
+        double budgetMs = TransitionWorkBudgetMs;
         return Stopwatch.GetTimestamp() - startedTimestamp > budgetMs * Stopwatch.Frequency / 1000d;
+    }
+    internal static string SpiritualPathLabel(int year)
+    {
+        if (!MclslWorldEpochSystem.IsNewLawActive(year)) return "仙道";
+        return MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法" : "旧法";
     }
 }

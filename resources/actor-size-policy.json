@@ -381,7 +381,7 @@
       "actorId": "mclsl_beast_kunpeng_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -427,7 +427,7 @@
       "actorId": "mclsl_beast_qinglong",
       "longEdge": 224,
       "reference": "western-tier-3-median",
-      "targetVisibleWorldHeight": 3.9211,
+      "targetVisibleWorldHeight": 7.8422,
       "inputLongEdge": 1254,
       "resizeScale": 0.17862838915470494,
       "frameOrder": {
@@ -504,7 +504,7 @@
       "actorId": "mclsl_beast_qinglong_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -550,7 +550,7 @@
       "actorId": "mclsl_beast_huanglong",
       "longEdge": 224,
       "reference": "western-tier-3-median",
-      "targetVisibleWorldHeight": 3.9211,
+      "targetVisibleWorldHeight": 7.8422,
       "inputLongEdge": 1254,
       "resizeScale": 0.17862838915470494,
       "frameOrder": {
@@ -610,7 +610,7 @@
       "actorId": "mclsl_beast_huanglong_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -710,7 +710,7 @@
       "actorId": "mclsl_beast_zhuque_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -821,7 +821,7 @@
       "actorId": "mclsl_beast_baihu_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -858,7 +858,7 @@
       "actorId": "mclsl_beast_qilin",
       "longEdge": 320,
       "reference": "western-tier-4-median",
-      "targetVisibleWorldHeight": 5.3852,
+      "targetVisibleWorldHeight": 4.7120500000000005,
       "inputLongEdge": 1254,
       "resizeScale": 0.2551834130781499,
       "frameOrder": {
@@ -904,7 +904,7 @@
       "actorId": "mclsl_beast_qilin_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -950,7 +950,7 @@
       "actorId": "mclsl_beast_moqilin",
       "longEdge": 320,
       "reference": "western-tier-4-median",
-      "targetVisibleWorldHeight": 5.3852,
+      "targetVisibleWorldHeight": 4.7120500000000005,
       "inputLongEdge": 1254,
       "resizeScale": 0.2551834130781499,
       "frameOrder": {
@@ -996,7 +996,7 @@
       "actorId": "mclsl_beast_moqilin_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1090,7 +1090,7 @@
       "actorId": "mclsl_beast_xuanwu_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1190,7 +1190,7 @@
       "actorId": "mclsl_beast_fenghuang_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1290,7 +1290,7 @@
       "actorId": "mclsl_beast_dafeng_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1364,7 +1364,7 @@
       "actorId": "mclsl_beast_manman_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1438,7 +1438,7 @@
       "actorId": "mclsl_beast_xuanniao_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1546,7 +1546,7 @@
       "actorId": "mclsl_beast_qingluan_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1614,7 +1614,7 @@
       "actorId": "mclsl_beast_changliao_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1682,7 +1682,7 @@
       "actorId": "mclsl_beast_mo_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1750,7 +1750,7 @@
       "actorId": "mclsl_beast_hongmao_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1784,7 +1784,7 @@
       "actorId": "mclsl_beast_feiqiu",
       "longEdge": 128,
       "reference": "western-tier-1-median",
-      "targetVisibleWorldHeight": 2.8284,
+      "targetVisibleWorldHeight": 1.4142,
       "inputLongEdge": 1254,
       "resizeScale": 0.10207336523125997,
       "frameOrder": {
@@ -1818,7 +1818,7 @@
       "actorId": "mclsl_beast_feiqiu_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1886,7 +1886,7 @@
       "actorId": "mclsl_beast_yingying_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -1954,7 +1954,7 @@
       "actorId": "mclsl_beast_goushou_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2040,7 +2040,7 @@
       "actorId": "mclsl_beast_liejiejing_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2074,7 +2074,7 @@
       "actorId": "mclsl_beast_tianshou",
       "longEdge": 400,
       "reference": "western-tier-5-median",
-      "targetVisibleWorldHeight": 8.8148,
+      "targetVisibleWorldHeight": 5.876533333333333,
       "inputLongEdge": 1254,
       "resizeScale": 0.3189792663476874,
       "frameOrder": {
@@ -2110,7 +2110,7 @@
       "actorId": "mclsl_beast_tianshou_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2144,7 +2144,7 @@
       "actorId": "mclsl_named_diyi",
       "longEdge": 256,
       "reference": "PrimordialFrostDragon",
-      "targetVisibleWorldHeight": 8.1741,
+      "targetVisibleWorldHeight": 5.449399999999999,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2178,7 +2178,7 @@
       "actorId": "mclsl_named_diyi_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2212,7 +2212,7 @@
       "actorId": "mclsl_named_disanmo",
       "longEdge": 320,
       "reference": "PrimordialFrostDragon",
-      "targetVisibleWorldHeight": 9.1389,
+      "targetVisibleWorldHeight": 6.092599999999999,
       "inputLongEdge": 1254,
       "resizeScale": 0.2551834130781499,
       "frameOrder": {
@@ -2246,7 +2246,7 @@
       "actorId": "mclsl_named_disanmo_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2322,7 +2322,7 @@
       "actorId": "mclsl_named_qingshenlong_yuan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2356,7 +2356,7 @@
       "actorId": "mclsl_named_lifan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2418,7 +2418,7 @@
       "actorId": "mclsl_named_tianyi",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2452,7 +2452,7 @@
       "actorId": "mclsl_named_moruibin",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2486,7 +2486,7 @@
       "actorId": "mclsl_named_xuantianwang",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2520,7 +2520,7 @@
       "actorId": "mclsl_named_xuke",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2554,7 +2554,7 @@
       "actorId": "mclsl_named_yefeipeng",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2588,7 +2588,7 @@
       "actorId": "mclsl_named_xiaoheng",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2622,7 +2622,7 @@
       "actorId": "mclsl_named_xubai",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2656,7 +2656,7 @@
       "actorId": "mclsl_named_liping",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2690,7 +2690,7 @@
       "actorId": "mclsl_named_shanfan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2724,7 +2724,7 @@
       "actorId": "mclsl_named_zhangfan",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2758,7 +2758,7 @@
       "actorId": "mclsl_named_zhenshen",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2792,7 +2792,7 @@
       "actorId": "mclsl_bai_xiansheng",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2826,7 +2826,7 @@
       "actorId": "mclsl_chuanfa_tianzun",
       "longEdge": 256,
       "reference": "SpiritTraveler",
-      "targetVisibleWorldHeight": 3.2,
+      "targetVisibleWorldHeight": 3.44,
       "inputLongEdge": 1254,
       "resizeScale": 0.20414673046251994,
       "frameOrder": {
@@ -2857,5 +2857,377 @@
       }
     }
   ],
-  "visibleBoundsAlpha": 16
+  "visibleBoundsAlpha": 16,
+  "optimizationRevision": "20261020",
+  "renderAdjustments": [
+    {
+      "actorId": "mclsl_beast_kunpeng_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_qinglong",
+      "ratio": 2,
+      "renderScaleBefore": 1.27515447,
+      "renderScaleAfter": 2.55030894,
+      "targetVisibleWorldHeight": 7.8422,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_qinglong_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_huanglong",
+      "ratio": 2,
+      "renderScaleBefore": 1.27515447,
+      "renderScaleAfter": 2.55030894,
+      "targetVisibleWorldHeight": 7.8422,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_huanglong_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_zhuque_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_baihu_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_qilin",
+      "ratio": 0.875,
+      "renderScaleBefore": 0.92848276,
+      "renderScaleAfter": 0.812422415,
+      "targetVisibleWorldHeight": 4.7120500000000005,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_qilin_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_moqilin",
+      "ratio": 0.875,
+      "renderScaleBefore": 0.92848276,
+      "renderScaleAfter": 0.812422415,
+      "targetVisibleWorldHeight": 4.7120500000000005,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_moqilin_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_xuanwu_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_fenghuang_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_dafeng_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_manman_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_xuanniao_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_qingluan_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_changliao_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_mo_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_hongmao_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu",
+      "ratio": 0.5,
+      "renderScaleBefore": 1.76775,
+      "renderScaleAfter": 0.883875,
+      "targetVisibleWorldHeight": 1.4142,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_feiqiu_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_yingying_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_goushou_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_liejiejing_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_tianshou",
+      "ratio": 0.6666666666666666,
+      "renderScaleBefore": 0.56723295,
+      "renderScaleAfter": 0.37815529999999997,
+      "targetVisibleWorldHeight": 5.876533333333333,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_beast_tianshou_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_diyi",
+      "ratio": 0.6666666666666666,
+      "renderScaleBefore": 0.61168732,
+      "renderScaleAfter": 0.40779154666666667,
+      "targetVisibleWorldHeight": 5.449399999999999,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_diyi_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_disanmo",
+      "ratio": 0.6666666666666666,
+      "renderScaleBefore": 0.54710848,
+      "renderScaleAfter": 0.36473898666666665,
+      "targetVisibleWorldHeight": 6.092599999999999,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_disanmo_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_qingshenlong_yuan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_lifan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_tianyi",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_moruibin",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_xuantianwang",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_xuke",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_yefeipeng",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_xiaoheng",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_xubai",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_liping",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_shanfan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_zhangfan",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_named_zhenshen",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_bai_xiansheng",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    },
+    {
+      "actorId": "mclsl_chuanfa_tianzun",
+      "ratio": 1.075,
+      "renderScaleBefore": 1.488372093023,
+      "renderScaleAfter": 1.599999999999725,
+      "targetVisibleWorldHeight": 3.44,
+      "unityVerified": false
+    }
+  ],
+  "birdAnimationRevision": "20261020"
 }

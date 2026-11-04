@@ -15,7 +15,7 @@ internal static class MclslChildhoodRootSystem
         if (!MclslEligibility.CanCultivate(actor)) return;
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1) return;
 
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (!IsRootCheckAgeDeadlineYear(age)) return;
 
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ChildhoodRootChecked, 1);
@@ -61,12 +61,12 @@ internal static class MclslChildhoodRootSystem
 
     internal static bool IsRootCheckAge(Actor actor)
     {
-        return IsRootCheckAgeYear(SafeAgeYear(actor));
+        return IsRootCheckAgeYear(MclslActorAccessor.Age(actor));
     }
 
     internal static bool IsRootCheckAgeDeadline(Actor actor)
     {
-        return IsRootCheckAgeDeadlineYear(SafeAgeYear(actor));
+        return IsRootCheckAgeDeadlineYear(MclslActorAccessor.Age(actor));
     }
 
     internal static int ExistingOrRollAptitude(Actor actor, string salt)
@@ -102,21 +102,5 @@ internal static class MclslChildhoodRootSystem
     {
         long id = MclslActorAccessor.Id(actor);
         return MclslAptitudeGiftCatalog.RollAptitude(id + "|" + salt);
-    }
-
-    private static int SafeAgeYear(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
-
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 29;
-            foreach (char c in value ?? string.Empty) hash = hash * 43 + c;
-            return hash & int.MaxValue;
-        }
     }
 }

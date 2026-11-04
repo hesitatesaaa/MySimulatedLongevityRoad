@@ -26,7 +26,7 @@ internal static class MclslSpellCodexShortcutButton
 
     internal static void Refresh(UnitWindow window)
     {
-        if (window?.actor?.data == null || !window.actor.isAlive())
+        if (window?.actor?.data == null || !window.actor.isAlive() || Traits.MclslBeastActorRegistration.IsBeast(window.actor))
         {
             Hide(window);
             return;

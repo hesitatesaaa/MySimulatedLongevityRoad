@@ -1,12 +1,13 @@
-param(
-    [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
+﻿param(
+    [string]$GameRoot = 'D:\owl\gameversion\0_51_2_imported',
     [string]$OutputDirectory = '',
     [switch]$LocalDevelopment,
     [string]$PythonExecutable = 'python'
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'build\Package-0.6.0' }
+$declaration=Get-Content -LiteralPath (Join-Path $projectRoot 'mod.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot ('build/Package-'+$declaration.version) }
 $outputFullPath = [IO.Path]::GetFullPath($OutputDirectory)
 $workspacePrefix = [IO.Path]::GetFullPath($projectRoot).TrimEnd('\') + '\'
 if (-not $outputFullPath.StartsWith($workspacePrefix, [StringComparison]::OrdinalIgnoreCase)) {
@@ -16,9 +17,9 @@ if (Test-Path -LiteralPath $outputFullPath) { throw 'Package output already exis
 $compilerOutput = $outputFullPath + '-compiler'
 if ($LocalDevelopment) {
     & (Join-Path $PSScriptRoot 'build-release.ps1') -GameRoot $GameRoot -OutputDirectory $compilerOutput -LocalDevelopment -PythonExecutable $PythonExecutable
-    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind developer --local-development
+    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind player --compress-assets --local-development
 } else {
     & (Join-Path $PSScriptRoot 'build-release.ps1') -GameRoot $GameRoot -OutputDirectory $compilerOutput -RequireFinalAssets -PythonExecutable $PythonExecutable
-    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath
+    & $PythonExecutable (Join-Path $PSScriptRoot 'package-release.py') --output $outputFullPath --kind player --compress-assets
 }
 if ($LASTEXITCODE -ne 0) { throw 'Release package checks failed; no verified release is available.' }

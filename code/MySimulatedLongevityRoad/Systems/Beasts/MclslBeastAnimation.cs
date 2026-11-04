@@ -73,6 +73,7 @@ internal static class MclslBeastAnimation
     internal static void Clear()
     {
         Clocks = new ConditionalWeakTable<Actor, Clock>();
+        MclslActorPresentation.ClearRuntime();
         // Immutable shared resources survive world loads without duplicate textures.
         MclslActorAnimationTime.Clear();
         MclslBeastDeathVisualSystem.Clear();
@@ -173,9 +174,9 @@ internal static class MclslBeastAnimation
         return frames.Actions[(int)action].At(elapsed) ?? fallback;
     }
 
-    internal static Sprite ConfigureAsset(ActorAsset asset, string formPath)
+    internal static Sprite ConfigureAsset(ActorAsset asset, string formPath, string iconSource = null)
     {
-        string iconId = asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id;
+        string iconId = iconSource ?? (asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id);
         Sprite icon = MclslActorPixelResources.PlacementIcon(iconId);
         if (icon == null) throw new InvalidOperationException("Current actor icon is missing: " + iconId);
         asset.icon = asset.id;
@@ -202,6 +203,19 @@ internal static class MclslBeastAnimation
         asset.disable_jump_animation = true;
         asset.get_override_sprite = GetSprite;
         asset.has_override_sprite = true;
+        // Native render textures release CPU pixels. Decode only the standing
+        // reference temporarily for body measurement, never on the render path.
+        var form = MclslActorAnimationCatalog.Get(formPath.TrimEnd('/'));
+        string file = MclslActorAnimationCatalog.ResolveNativeFile(form.NativeResourcePath + "/main/" + idle.Data.Names[0]);
+        Texture2D reference = new(2, 2, TextureFormat.RGBA32, false);
+        try
+        {
+            if (!ImageConversion.LoadImage(reference, System.IO.File.ReadAllBytes(file), false))
+                throw new InvalidOperationException("Standing reference decode failed: " + file);
+            MclslActorPresentation.Configure(asset, frames.Fallback,
+                MclslActorPresentation.VisibleBounds(reference, frames.Fallback.rect));
+        }
+        finally { UnityEngine.Object.Destroy(reference); }
         return frames.Fallback;
     }
 
@@ -212,7 +226,16 @@ internal static class MclslBeastAnimation
         clock.LastNow = now;
         int x = actor.data.x, y = actor.data.y;
         bool moving = actor.is_moving;
-        try { moving |= actor.isUsingPath(); } catch { }
+        // Reached from the native sprite override, which Parallel.For may call
+        // off the main thread; diagnostics are only emitted there.
+        try
+        {
+            moving |= actor.isUsingPath();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            if (MclslRuntimeChanges.IsMainThread) MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Beasts-MclslBeastAnimation-cs-1", "妖兽动画：读取寻路状态失败: " + mclslEmptyCatchEx.Message);
+        }
         if (clock.PositionKnown && (clock.X != x || clock.Y != y)) moving = true;
         if (moving) clock.LastMove = now;
         clock.X = x;
@@ -242,7 +265,7 @@ internal static class MclslBeastAnimation
         return frames;
     }
 
-    private static bool IsSupported(Actor actor)
+    internal static bool IsSupported(Actor actor)
         => actor?.asset != null && (MclslBeastCatalog.ForAsset(actor.asset.id) != null
             || MclslNamedCharacterRegistration.IsNamedAsset(actor.asset.id)
             || MclslImmortalActorRegistration.IsImmortal(actor));

@@ -168,7 +168,7 @@ internal static class MclslArtifactSystem
     }
 
     internal static bool HasEquippedArtifact(Actor actor)
-        => MclslBagSystem.Peek(actor)?.EquippedArtifactSlots?.Count > 0;
+        => MclslBagSystem.PeekExisting(actor)?.EquippedArtifactSlots?.Count > 0;
 
     internal static void ApplyNativeStatCaps(Actor actor)
     {
@@ -187,7 +187,7 @@ internal static class MclslArtifactSystem
             if (!float.IsNaN(current) && !float.IsInfinity(current) && current > maximum)
                 actor.stats[id] = maximum;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Crafting-MclslArtifactEquipmentSystem-cs-1", "法器装备：封顶原生属性失败: " + mclslEmptyCatchEx.Message); }
     }
 
     internal static bool NeedsSuitableArtifact(Actor actor, MclslBagState bag, string preferredItemId)
@@ -278,6 +278,14 @@ internal static class MclslArtifactSystem
         return changed;
     }
 
+    internal static bool NeedsAnnualPass(Actor actor)
+    {
+        if (actor?.data == null) return false;
+        EquipmentState state = _initializedActors.GetOrCreateValue(actor);
+        return !state.Initialized
+            || (state.NeedsOwnershipSweep && MclslTianxuanMarket.HasDeferredArtifactCapacity);
+    }
+
     internal static void OnActorInitialized(Actor actor)
     {
         if (actor?.data == null) return;
@@ -292,7 +300,8 @@ internal static class MclslArtifactSystem
             return;
         }
         state.Initialized = true;
-        MclslBagState bag = MclslBagSystem.Peek(actor);
+        MclslBagState bag = MclslBagSystem.PeekExisting(actor);
+        if (bag == null) return;
         if (bag.Items.Count > 0)
         {
             bool moved = NormalizeOwnership(actor, bag, MclslRuntime.CurrentYear(), out bool needsRetry);

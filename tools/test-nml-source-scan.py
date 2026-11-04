@@ -8,7 +8,7 @@ scan = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(scan)
 with tempfile.TemporaryDirectory() as temp:
     root = Path(temp)
-    for relative in ('InterestingTrait.cs', 'code/Actor.cs', 'tools/tests/Stubs.cs'):
+    for relative in ('MclslMod.cs', 'code/Actor.cs', 'tools/tests/Stubs.cs'):
         path = root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text('// fixture', encoding='utf-8')

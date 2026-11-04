@@ -4,18 +4,6 @@ using System.Linq;
 
 namespace MySimulatedLongevityRoad.Core;
 
-internal static class MclslAnnualResiliencePolicy
-{
-    internal const int MaxSafeAttempts = 3;
-    internal const int RetryFrames = 30;
-
-    internal static bool ShouldRetry(int attempts, bool sideEffectsStarted)
-        => !sideEffectsStarted && attempts < MaxSafeAttempts;
-
-    internal static int RetryAtFrame(int currentFrame)
-        => currentFrame > int.MaxValue - RetryFrames ? int.MaxValue : currentFrame + RetryFrames;
-}
-
 internal enum MclslRecoverySource : byte
 {
     Primary,

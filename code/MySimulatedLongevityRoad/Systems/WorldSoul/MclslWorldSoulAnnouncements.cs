@@ -5,11 +5,7 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static partial class MclslWorldSoulSystem
 {
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名者"; }
-    }
+    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名者");
 
     private static string SafeNameOrEmpty(Actor actor)
     {

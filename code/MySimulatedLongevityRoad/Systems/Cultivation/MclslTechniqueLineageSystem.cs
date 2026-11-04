@@ -92,6 +92,8 @@ internal static class MclslTechniqueLineageSystem
                 record = CreateRecord(year, snapshot);
                 run.TechniqueLineages.Add(record);
                 changed = true;
+                // 法脉新增：只通知实际依赖该法脉补全资料的家族。
+                MclslFamilySystem.NotifyTechniqueLineageChanged(record);
                 MclslWorldRunRepository.AddEvent(year, EventPrefix(record) + "technique_recorded", "《" + record.Name + "》入录", "此法初见于玄黄世间，法脉尚浅，传承由修士自行授受。");
             }
             else
@@ -140,7 +142,10 @@ internal static class MclslTechniqueLineageSystem
             changed |= CarryAncientLineagesIntoNewLaw(year, run);
 
         while (finalize && run.TechniqueLineages.Count > 500)
-            RemoveOldestOverflowLineage(run.TechniqueLineages);
+        {
+            MclslTechniqueLineageRecord removed = RemoveOldestOverflowLineage(run.TechniqueLineages);
+            if (removed != null) MclslFamilySystem.NotifyTechniqueLineageChanged(removed);
+        }
 
         if (changed) MclslWorldArchiveStore.MarkDirty();
     }
@@ -152,7 +157,8 @@ internal static class MclslTechniqueLineageSystem
         {
             if (!MclslAnnualFrameBudget.TryConsumeOperation()) return i;
             Actor actor = actors[i];
-            if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)) continue;
+            if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)
+                || !MclslEligibility.CanCultivate(actor)) continue;
             string id = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty);
             string name = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty);
             if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(name)) continue;
@@ -238,11 +244,11 @@ internal static class MclslTechniqueLineageSystem
 
     private static bool UpdateRecord(MclslTechniqueLineageRecord record, int year, TechniqueSnapshot snapshot)
     {
-        bool changed = false;
-        if (record.Name != snapshot.Name) { record.Name = snapshot.Name; changed = true; }
-        if (record.SystemId != snapshot.SystemId) { record.SystemId = snapshot.SystemId; changed = true; }
-        if (record.LawTags != snapshot.LawTags) { record.LawTags = snapshot.LawTags; changed = true; }
-        if (record.MaxRealm != snapshot.MaxRealm) { record.MaxRealm = snapshot.MaxRealm; changed = true; }
+        bool changed = false, displayChanged = false;
+        if (record.Name != snapshot.Name) { record.Name = snapshot.Name; changed = displayChanged = true; }
+        if (record.SystemId != snapshot.SystemId) { record.SystemId = snapshot.SystemId; changed = displayChanged = true; }
+        if (record.LawTags != snapshot.LawTags) { record.LawTags = snapshot.LawTags; changed = displayChanged = true; }
+        if (record.MaxRealm != snapshot.MaxRealm) { record.MaxRealm = snapshot.MaxRealm; changed = displayChanged = true; }
         if (record.FirstSeenYear <= 0) { record.FirstSeenYear = year; changed = true; }
         if (record.LastSeenYear != year) { record.LastSeenYear = year; changed = true; }
         if (record.CurrentPractitioners != snapshot.Count) { record.CurrentPractitioners = snapshot.Count; changed = true; }
@@ -255,6 +261,8 @@ internal static class MclslTechniqueLineageSystem
             changed = true;
         }
         changed |= EnsureLifecycle(record, year);
+        // 仅资料字段（名称/体系/法则/上限）实际变化才定向通知；人数/年限变化不重建功法视图。
+        if (displayChanged) MclslFamilySystem.NotifyTechniqueLineageChanged(record);
         return changed;
     }
 
@@ -344,14 +352,14 @@ internal static class MclslTechniqueLineageSystem
 
         MclslTechniqueLineageRecord picked = null;
         int pickedScore = int.MinValue;
-        int salt = StableHash((seed ?? string.Empty) + "|inherit|" + year) & int.MaxValue;
+        int salt = MclslStableHash.Stable17x31((seed ?? string.Empty) + "|inherit|" + year) & int.MaxValue;
         for (int i = 0; i < run.TechniqueLineages.Count; i++)
         {
             MclslTechniqueLineageRecord record = run.TechniqueLineages[i];
             if (!IsUsableAncientLineage(record)) continue;
             int score = Math.Max(1, FameScore(record)) + Math.Max(0, MclslRealmIds.Index(record.MaxRealm)) * 25
                 + Math.Clamp(record.Completeness, 0, 100) / 4
-                + (StableHash(record.Id + "|" + salt) & int.MaxValue) % 97;
+                + (MclslStableHash.Stable17x31(record.Id + "|" + salt) & int.MaxValue) % 97;
             if (actor != null)
             {
                 string[] lawPool = MclslGeneratedObjectFactory.SplitTags(record.LawTags);
@@ -369,7 +377,7 @@ internal static class MclslTechniqueLineageSystem
         if (string.IsNullOrWhiteSpace(sourceTechniqueId)
             || !MclslCultivationCatalog.TryTechnique(sourceTechniqueId, out sourceTechnique))
         {
-            sourceTechnique = MclslCultivationCatalog.Techniques[(StableHash(picked.Id + "|legacy_source") & int.MaxValue) % MclslCultivationCatalog.Techniques.Count];
+            sourceTechnique = MclslCultivationCatalog.Techniques[(MclslStableHash.Stable17x31(picked.Id + "|legacy_source") & int.MaxValue) % MclslCultivationCatalog.Techniques.Count];
             sourceTechniqueId = sourceTechnique.Id;
         }
         string[] laws = MclslGeneratedObjectFactory.SplitTags(picked.LawTags);
@@ -377,7 +385,7 @@ internal static class MclslTechniqueLineageSystem
         string maxRealm = InheritedMaxRealm(picked.MaxRealm, aptitude);
         technique = new MclslTechniqueDefinition
         {
-            Id = "legacy_" + (StableHash(picked.Id) & int.MaxValue).ToString() + "__" + sourceTechniqueId,
+            Id = "legacy_" + (MclslStableHash.Stable17x31(picked.Id) & int.MaxValue).ToString() + "__" + sourceTechniqueId,
             Name = picked.Name,
             LawPool = laws,
             MaxRealm = maxRealm
@@ -391,7 +399,7 @@ internal static class MclslTechniqueLineageSystem
         if (run?.TechniqueLineages == null || !MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (run.TechniqueLineages.Count < 2) return false;
 
-        int start = (StableHash((run.RunId ?? string.Empty) + "|all_laws_one|" + year) & int.MaxValue) % run.TechniqueLineages.Count;
+        int start = (MclslStableHash.Stable17x31((run.RunId ?? string.Empty) + "|all_laws_one|" + year) & int.MaxValue) % run.TechniqueLineages.Count;
         for (int offset = 0; offset < run.TechniqueLineages.Count; offset++)
         {
             MclslTechniqueLineageRecord primary = run.TechniqueLineages[(start + offset) % run.TechniqueLineages.Count];
@@ -422,6 +430,8 @@ internal static class MclslTechniqueLineageSystem
                 if (string.IsNullOrWhiteSpace(secondary.SectDisplayName))
                     secondary.SectDisplayName = BuildSectDisplayName(secondary.Name);
                 secondary.Summary = "此法部分法意并入《" + primary.Name + "》，余脉仍可独立流传。";
+                // 融合改变母法法则/上限等资料字段，定向通知依赖它的家族。
+                MclslFamilySystem.NotifyTechniqueLineageChanged(primary);
                 MclslWorldRunRepository.AddEvent(year, "inverse_truth_all_laws_one_fusion", "《" + primary.Name + "》融合法脉",
                     "《" + primary.Name + "》与《" + secondary.Name + "》法意相通，万法归一之势渐显。");
                 MclslWorldArchiveStore.MarkDirty();
@@ -444,13 +454,16 @@ internal static class MclslTechniqueLineageSystem
 
         string key = StableTechniqueKey(id, name);
         MclslTechniqueLineageRecord record = FindLineageRecord(run, key);
-        if (record == null)
+        bool lineageCreated = record == null;
+        if (lineageCreated)
         {
             TechniqueSnapshot snapshot = BuildInitialSnapshot(actor, key, id, name);
             if (!string.IsNullOrWhiteSpace(createdLawTags)) snapshot.LawTags = createdLawTags;
             record = CreateRecord(year, snapshot);
             run.TechniqueLineages.Add(record);
         }
+        string beforeName = record.Name, beforeSystem = record.SystemId;
+        string beforeTags = record.LawTags, beforeMax = record.MaxRealm;
 
         string realm = MclslActorAccessor.Realm(actor);
         record.SystemId = MclslCultivationSystemIds.AncientLaw;
@@ -498,6 +511,12 @@ internal static class MclslTechniqueLineageSystem
             EnsureLifecycle(record, year);
         }
 
+        if (lineageCreated
+            || !string.Equals(beforeName, record.Name, StringComparison.Ordinal)
+            || !string.Equals(beforeSystem, record.SystemId, StringComparison.Ordinal)
+            || !string.Equals(beforeTags, record.LawTags, StringComparison.Ordinal)
+            || !string.Equals(beforeMax, record.MaxRealm, StringComparison.Ordinal))
+            MclslFamilySystem.NotifyTechniqueLineageChanged(record);
         MclslWorldArchiveStore.MarkDirty();
     }
 
@@ -649,6 +668,7 @@ internal static class MclslTechniqueLineageSystem
             ruin.LinkedLineageId = record.Id;
             ruin.SourceTechniqueRevivedYear = year;
         }
+        MclslFamilySystem.NotifyTechniqueLineageChanged(record);
         MclslWorldArchiveStore.MarkDirty();
         return record.Id;
     }
@@ -660,7 +680,10 @@ internal static class MclslTechniqueLineageSystem
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
         int quality = Math.Clamp(1 + MclslRealmIds.Index(record.PeakRealm) / 2, 2, 4);
         bool newLaw = MclslWorldEpochSystem.IsNewLawActive(year);
+        string beforeMaxRealm = record.MaxRealm;
         record.MaxRealm = MaxRealmAtLeast(record.MaxRealm, MclslRealmIds.JinDan);
+        if (!string.Equals(beforeMaxRealm, record.MaxRealm, StringComparison.Ordinal))
+            MclslFamilySystem.NotifyTechniqueLineageChanged(record);
         MclslMapLocationResolver.TryPickValidTile(sequence + year, out int mapX, out int mapY, out string location, out _);
         string mapLocation = string.IsNullOrWhiteSpace(location) ? (newLaw ? "仙道传承断绝处" : "山河遗脉") : location;
         MclslSectRuinRecord ruin = MclslGeneratedObjectFactory.CreateSectRuin(year, sequence, mapLocation, "无主", MclslGeneratedObjectFactory.SplitTags(record.LawTags), quality, "散修遗府", mapX, mapY);
@@ -778,10 +801,10 @@ internal static class MclslTechniqueLineageSystem
         // 大人口新法异法在角色修炼与法不可同修计数中保持独立；
         // 玄黄仙录的传承档案按母法汇总，避免生成上千条重复法脉档案。
         if (!string.IsNullOrWhiteSpace(id)) return MclslCultivationCatalog.BaseTechniqueId(id);
-        return "name_" + Math.Abs(StableHash(name)).ToString();
+        return "name_" + Math.Abs(MclslStableHash.Stable17x31(name)).ToString();
     }
 
-    private static MclslTechniqueLineageRecord FindLineageRecord(MclslWorldRunState run, string id)
+    internal static MclslTechniqueLineageRecord FindLineageRecord(MclslWorldRunState run, string id)
     {
         if (run?.TechniqueLineages == null || string.IsNullOrWhiteSpace(id)) return null;
         for (int i = 0; i < run.TechniqueLineages.Count; i++)
@@ -792,9 +815,9 @@ internal static class MclslTechniqueLineageSystem
         return null;
     }
 
-    private static void RemoveOldestOverflowLineage(List<MclslTechniqueLineageRecord> records)
+    private static MclslTechniqueLineageRecord RemoveOldestOverflowLineage(List<MclslTechniqueLineageRecord> records)
     {
-        if (records == null || records.Count == 0) return;
+        if (records == null || records.Count == 0) return null;
         int bestIndex = -1;
         int bestStateRank = int.MaxValue;
         int bestLastSeen = int.MaxValue;
@@ -815,7 +838,10 @@ internal static class MclslTechniqueLineageSystem
                 bestLastSeen = lastSeen;
             }
         }
-        if (bestIndex >= 0) records.RemoveAt(bestIndex);
+        if (bestIndex < 0) return null;
+        MclslTechniqueLineageRecord removed = records[bestIndex];
+        records.RemoveAt(bestIndex);
+        return removed;
     }
 
     private static string EventPrefix(MclslTechniqueLineageRecord record)
@@ -835,15 +861,5 @@ internal static class MclslTechniqueLineageSystem
         return string.Equals(value, "上古散修", StringComparison.Ordinal)
             || string.Equals(value, "未知修士", StringComparison.Ordinal)
             || string.Equals(value, "无名修士", StringComparison.Ordinal);
-    }
-
-    private static int StableHash(string value)
-    {
-        unchecked
-        {
-            int hash = 17;
-            foreach (char c in value ?? string.Empty) hash = hash * 31 + c;
-            return hash;
-        }
     }
 }

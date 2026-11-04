@@ -329,6 +329,14 @@
       "Callback": "MclslConfig:PerformanceMonitorCallBack"
     },
     {
+      "Id": "MCLSL_config_enable_diagnostics",
+      "Name": "诊断日志",
+      "Description": "输出模组内部诊断日志（反射探测、防御分支等）。默认关闭；排查问题时开启，会影响性能与日志量。",
+      "Type": "SWITCH",
+      "BoolVal": false,
+      "Callback": "MclslConfig:DiagnosticsCallBack"
+    },
+    {
       "Id": "MCLSL_config_show_fps",
       "Name": "显示帧率",
       "Description": "在游戏主界面左上角显示实时帧率；关闭后立即隐藏。",
@@ -351,14 +359,6 @@
       "Type": "SWITCH",
       "BoolVal": false,
       "Callback": "MclslConfig:RecordLowMaterialAcquisitionHistoryCallBack"
-    },
-    {
-      "Id": "MCLSL_config_beast_natural_spawn",
-      "Name": "妖兽自然出现",
-      "Description": "妖兽自然出现按固定概率判定，概率不能调整。",
-      "Type": "SWITCH",
-      "BoolVal": true,
-      "Callback": "MclslBeastConfig:ReloadBool"
     },
     {
       "Id": "MCLSL_config_beast_waves",
@@ -397,18 +397,20 @@
       "MaxIntVal": 7
     },
     {
+      "Id": "MCLSL_config_beast_wave_limit",
+      "Name": "单次兽潮数量上限",
+      "Description": "按地图规模、等级及数量倍率计算后，单场最多生成的数量。",
+      "Type": "INT_SLIDER",
+      "Callback": "MclslBeastConfig:ReloadInt",
+      "IntVal": 64,
+      "MinIntVal": 1,
+      "MaxIntVal": 256
+    },
+    {
       "Id": "MCLSL_config_beast_auto_limit",
       "Type": "INT_SLIDER",
       "Callback": "MclslBeastConfig:ReloadInt",
       "IntVal": 512,
-      "MinIntVal": 1,
-      "MaxIntVal": 4096
-    },
-    {
-      "Id": "MCLSL_config_beast_natural_limit",
-      "Type": "INT_SLIDER",
-      "Callback": "MclslBeastConfig:ReloadInt",
-      "IntVal": 128,
       "MinIntVal": 1,
       "MaxIntVal": 4096
     }

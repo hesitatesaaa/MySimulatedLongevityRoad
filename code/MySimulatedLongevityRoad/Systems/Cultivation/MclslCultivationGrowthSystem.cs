@@ -58,10 +58,12 @@ internal static class MclslCultivationGrowthSystem
             : 1f;
         if (applyWorldState) gain *= worldRate;
         if (applySameLaw) gain *= sameLawRate;
-        if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0) gain *= 1.08f;
+        if (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") > 0) gain *= 1.08f;
         if (MclslArtifactSystem.EquippedArtifactId(actor, MclslArtifactEquipmentSlot.Amulet) == "B081") gain *= 1.20f;
         if (actor.hasStatus("mclsl_item_F007")) gain *= 1.15f;
         if (annualCultivation) gain *= 1f + MclslPhysiqueSystem.AnnualPercent(actor) / 100f;
+        if (annualCultivation && actor.asset?.id == MclslXuanhuangRegistration.Id
+            && MclslActorAccessor.Alive(actor)) gain *= 1.10f;
         gain = Math.Max(1f, gain);
 
         float remainder = Math.Clamp(
@@ -70,11 +72,17 @@ internal static class MclslCultivationGrowthSystem
             0.999999f);
         float total = remainder + gain;
         int whole = Math.Max(0, (int)Math.Floor(total + 0.000001f));
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TrueEssenceRemainder,
-            Math.Clamp(total - whole, 0f, 0.999999f));
+        // 新余数与随后诊断读取的值完全相同，缓存一次即可，避免重复 GetFloat。
+        float newRemainder = Math.Clamp(total - whole, 0f, 0.999999f);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.TrueEssenceRemainder, newRemainder);
 
+        // 只读一次当前真元；写入值与随后诊断读取的值相同，避免重复 GetInt。
+        int newEssence = CurrentTrueEssence(actor);
         if (whole > 0)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.TrueEssence, CurrentTrueEssence(actor) + whole);
+        {
+            newEssence += whole;
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.TrueEssence, newEssence);
+        }
 
         SyncProgress(actor, realm, ancientLaw);
         MclslDiagnostics.Cultivation(
@@ -89,8 +97,8 @@ internal static class MclslCultivationGrowthSystem
             + " finalGain=" + gain
             + " oldRemainder=" + remainder
             + " whole=" + whole
-            + " newEssence=" + CurrentTrueEssence(actor)
-            + " newRemainder=" + MclslActorAccessor.GetFloat(actor, MclslActorDataKeys.TrueEssenceRemainder, 0f));
+            + " newEssence=" + newEssence
+            + " newRemainder=" + newRemainder);
         return whole;
     }
 

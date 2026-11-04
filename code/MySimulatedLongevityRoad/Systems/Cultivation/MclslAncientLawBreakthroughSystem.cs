@@ -13,7 +13,7 @@ internal static class MclslAncientLawBreakthroughSystem
         int index = MclslRealmIds.Index(realm);
         if (index < 0 || index >= MclslRealmIds.Ordered.Length - 2)
         {
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, SpiritualPathLabel(year) + "止于此境，天地已不许旧法再上长生");
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, MySimulatedLongevityRoad.Systems.MclslWorldEpochSystem.SpiritualPathLabel(year) + "止于此境，天地已不许旧法再上长生");
             return;
         }
 
@@ -32,15 +32,15 @@ internal static class MclslAncientLawBreakthroughSystem
         // 功法参悟只修正年度真元效率，不是破境硬门槛，也不直接叠加破境成功率。
         int fieldBonus = AncientBreakthroughBonus(actor, nextRealm);
         int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, nextRealm, year);
-        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_break_bonus");
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.080.actor.buque_break_bonus");
         int chance = Math.Clamp(24 + aptitude / 4 + fieldBonus + pillBonus + buqueBonus
-            + (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0 ? 5 : 0)
+            + (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") > 0 ? 5 : 0)
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year)
             - nextIndex * 8 + MclslPhysiqueSystem.BreakthroughPoints(actor), 8, 100);
         if (MclslWorldEpochSystem.IsNewLawActive(year)) chance = Math.Max(3, chance / 2);
-        int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_break|" + realm + "|" + year) % 100;
-        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_break_bonus", 0);
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_break|" + realm + "|" + year) % 100;
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.080.actor.buque_break_bonus", 0);
         if (roll >= chance && !MclslImmortalPathSystem.AllowsBreakthrough(actor, nextRealm))
         {
             ResolveAncientBreakthroughFailure(actor, nextRealm, year, chance, roll);
@@ -76,7 +76,7 @@ internal static class MclslAncientLawBreakthroughSystem
             + MclslPhysiqueSystem.BreakthroughPoints(actor), 6, 100);
         if (MclslWorldEpochSystem.IsNewLawActive(year)) chance = Math.Max(3, chance / 2);
 
-        int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_limit_bottleneck|" + nextRealm + "|" + year) % 100;
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_limit_bottleneck|" + nextRealm + "|" + year) % 100;
         if (roll >= chance)
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult,
@@ -92,8 +92,8 @@ internal static class MclslAncientLawBreakthroughSystem
         }
 
         MclslTechniqueStageSystem.AddProgress(actor, 4 + currentIndex);
-        AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 4 + currentIndex, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 2 + Math.Max(0, currentIndex - 1), 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 4 + currentIndex, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 2 + Math.Max(0, currentIndex - 1), 0, 100);
 
         string technique = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "所修功法");
         string name = MclslActorAccessor.DisplayName(actor);
@@ -129,8 +129,8 @@ internal static class MclslAncientLawBreakthroughSystem
         progressLoss *= MclslItemUseSystem.FailureSetbackFactor(actor, nextRealm, year);
         MclslCultivationGrowthSystem.ApplyProgressSetback(
             actor, MclslActorAccessor.Realm(actor), progressLoss, ancientLaw: true, minimumProgressPercent: 20f);
-        AddClamped(actor, MclslActorDataKeys.MindState, -(2 + nextIndex), 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, -Math.Max(1, nextIndex - 1), 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, -(2 + nextIndex), 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, -Math.Max(1, nextIndex - 1), 0, 100);
 
         string result = nextRealm switch
         {
@@ -142,7 +142,7 @@ internal static class MclslAncientLawBreakthroughSystem
             _ => "仙道突破失败，修炼进度回落"
         };
         DamageAncientField(actor, nextRealm, nextIndex);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, SpiritualPathLabel(year) + result);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, MySimulatedLongevityRoad.Systems.MclslWorldEpochSystem.SpiritualPathLabel(year) + result);
         if (ShouldRecordBreakthroughFailure(actor, nextRealm))
             MclslWorldRunRepository.AddEvent(year, "ancient_breakthrough_failed", MclslActorAccessor.DisplayName(actor) + "仙道破境失败", result + "。", actor);
 
@@ -151,7 +151,7 @@ internal static class MclslAncientLawBreakthroughSystem
             int deathChance = Math.Clamp(2 + nextIndex * 3 - MclslMindSystem.StabilityBonus(actor) / 8, 1, 18);
             if (nextRealm == MclslRealmIds.HuaShen && MclslItemUseSystem.ConsumedBreakthroughPill(actor, "D012", year))
                 deathChance = Math.Max(1, (int)MathF.Round(deathChance * 0.30f));
-            int deathRoll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_break_death|" + nextRealm + "|" + year) % 100;
+            int deathRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_break_death|" + nextRealm + "|" + year) % 100;
             if (deathRoll < deathChance)
             {
                 MclslAdventureSystem.CreateAncientLawRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "上古功法"));
@@ -172,18 +172,18 @@ internal static class MclslAncientLawBreakthroughSystem
     private static void DamageAncientField(Actor actor, string nextRealm, int nextIndex)
     {
         if (nextRealm == MclslRealmIds.JinDan)
-            AddClamped(actor, MclslActorDataKeys.AncientFoundationStability, -8, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientFoundationStability, -8, 0, 100);
         else if (nextRealm == MclslRealmIds.YuanYing)
-            AddClamped(actor, MclslActorDataKeys.AncientCorePurity, -7, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientCorePurity, -7, 0, 100);
         else if (nextRealm == MclslRealmIds.HuaShen)
         {
-            AddClamped(actor, MclslActorDataKeys.AncientSoulStrength, -10, 0, 100);
-            AddClamped(actor, MclslActorDataKeys.AncientBodyFit, -8, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientSoulStrength, -10, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientBodyFit, -8, 0, 100);
         }
         else if (nextRealm == MclslRealmIds.HeDao)
         {
-            AddClamped(actor, MclslActorDataKeys.AncientSoulFusion, -10, 0, 100);
-            AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, -10, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientSoulFusion, -10, 0, 100);
+            MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, -10, 0, 100);
         }
     }
 
@@ -212,7 +212,7 @@ internal static class MclslAncientLawBreakthroughSystem
     {
         string[] tags = AncientLawTags(actor);
         string primary = tags.Length > 0 ? tags[0] : "灵";
-        int nameSeed = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_root_word|" + nextRealm);
+        int nameSeed = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_root_word|" + nextRealm);
         string stageName = MclslProceduralLexicon.AncientStageName(nextRealm, tags, nameSeed);
         int mind = MclslMindSystem.EnsureMindState(actor);
 
@@ -264,13 +264,9 @@ internal static class MclslAncientLawBreakthroughSystem
         _ => "仙道修行突破"
     };
 
-    private static string SpiritualPathLabel(int year)
-    {
-        if (!MclslWorldEpochSystem.IsNewLawActive(year)) return "仙道";
-        return MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法" : "旧法";
-    }
 
-    private static string RemnantLabel(int year) => MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+
+    private static string RemnantLabel(int year) => MclslWorldEpochSystem.RemnantLabel(year);
 
     private static string[] AncientLawTags(Actor actor)
     {
@@ -284,15 +280,7 @@ internal static class MclslAncientLawBreakthroughSystem
         return MclslGeneratedObjectFactory.NormalizeTags(technique.LawPool);
     }
 
-    private static void AddClamped(Actor actor, string key, int delta, int min, int max)
-    {
-        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
-        int current = MclslActorAccessor.GetInt(actor, key, min);
-        MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
-    }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int hash = 79; foreach (char c in value ?? string.Empty) hash = hash * 43 + c; return hash & int.MaxValue; }
-    }
+
+
 }

@@ -9,20 +9,23 @@ ROOT = Path(__file__).resolve().parents[1]
 IGNORED = {'bin', 'obj', 'Properties', 'packages', 'packages.config', 'packages-lock.json', 'packages-lock.xml'}
 
 
-def selected_sources(root):
+def selected_sources(root, repository=False):
     result = set()
     for directory, folders, names in os.walk(root):
-        folders[:] = [name for name in folders if not name.startswith('.') and name not in IGNORED]
+        # build/ is repository scratch output only; an installed mod folder must
+        # not be able to hide a staged probe behind the same name.
+        folders[:] = [name for name in folders if not name.startswith('.') and name not in IGNORED
+                      and not (repository and name == 'build')]
         for name in names:
             if name.endswith('.cs') and not name.startswith('.'):
                 result.add((Path(directory) / name).resolve())
     return result
 
 
-def validate(root):
+def validate(root, repository=False):
     root = root.resolve()
-    actual = selected_sources(root)
-    expected = {path.resolve() for path in (root / 'code').rglob('*.cs')} | {root / 'InterestingTrait.cs'}
+    actual = selected_sources(root, repository)
+    expected = {path.resolve() for path in (root / 'code').rglob('*.cs')} | {root / 'MclslMod.cs'}
     extras, missing = actual - expected, expected - actual
     if extras or missing:
         raise ValueError(json.dumps(dict(
@@ -36,7 +39,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=ROOT)
     parser.add_argument('--json', action='store_true')
+    parser.add_argument('--repository', action='store_true',
+                        help='Select build inputs; build/ is excluded only in the repository, never in installed packages')
     args = parser.parse_args()
-    sources = validate(args.root)
+    sources = validate(args.root, args.repository)
     print(json.dumps(dict(sourceCount=len(sources), sources=[str(p) for p in sources]) if args.json
                      else dict(sourceCount=len(sources), developerToolsExcluded=True), ensure_ascii=True))

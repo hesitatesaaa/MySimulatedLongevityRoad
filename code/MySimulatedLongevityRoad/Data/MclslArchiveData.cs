@@ -11,6 +11,10 @@ internal sealed class MclslWorldArchiveBundle
 internal sealed class MclslWorldRunState
 {
     public MclslEconomyState Economy { get; set; } = new();
+    // 内部存档清理策略标记（族史/死亡个人历史持续清理）。
+    // 新建世界初始化为 true；缺少该字段的既有 v24 存档在载入时解析为 false，
+    // 保存后仍保持关闭。该标记不参与 v24 以前的格式兼容，也不触发旧档回扫。
+    public bool? PersistentCleanupEnabled { get; set; }
     public int LastCalamityPulseYear { get; set; } = -1;
     public string LastCalamityPulseState { get; set; } = string.Empty;
     public string RunId { get; set; } = string.Empty;
@@ -59,7 +63,8 @@ internal sealed class MclslWorldRunState
     public List<MclslFactionMissionRecord> FactionMissions { get; set; } = new();
     public List<MclslFactionMissionRecord> AncientSectMissions { get; set; } = new();
     public List<MclslFamilyRecord> Families { get; set; } = new();
-    public int FamilyMembershipVersion { get; set; }
+    public MclslFamilyRuleMode FamilyRuleMode { get; set; }
+    public int FamilyFeatureVersion { get; set; }
     public Dictionary<string, long> JulingMarrowMetrics { get; set; } = new();
     public List<MclslFactionPressureRecord> FactionPressureEvents { get; set; } = new();
     public List<MclslResourceSpendRecord> ResourceSpendEvents { get; set; } = new();
@@ -107,7 +112,6 @@ internal sealed class MclslAnnualBatchState
     public List<MclslAnnualClaimRecord> CaveClaims { get; set; } = new();
     public List<MclslAnnualClaimRecord> ChangeClaims { get; set; } = new();
     public List<MclslAnnualClaimRecord> AdventureCandidates { get; set; } = new();
-    public Dictionary<string, int> ModuleCompletedYears { get; set; } = new();
     public Dictionary<string, int> ModuleBlockedYears { get; set; } = new();
     public byte WorldFailureStage { get; set; }
     public int WorldFailureCount { get; set; }
@@ -128,6 +132,7 @@ internal sealed class MclslAnnualBatchState
     public int FamilyCursor { get; set; }
     public int FamilyMemberCursor { get; set; }
     public int FamilySettlementYear { get; set; }
+    public List<string> FamilySettlementIds { get; set; } = new();
 }
 
 /// <summary>Only IDs, counters and rule values survive an interrupted world settlement.</summary>

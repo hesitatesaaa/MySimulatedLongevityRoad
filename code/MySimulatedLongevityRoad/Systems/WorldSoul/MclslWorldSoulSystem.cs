@@ -530,28 +530,10 @@ internal static partial class MclslWorldSoulSystem
     }
 
     private static void TrySetNumber(object target, string name, float value)
-    {
-        if (target == null || string.IsNullOrWhiteSpace(name)) return;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        Type type = target.GetType();
-        try
-        {
-            FieldInfo field = type.GetField(name, flags);
-            if (field != null)
-            {
-                if (field.FieldType == typeof(float)) field.SetValue(target, value);
-                else if (field.FieldType == typeof(int)) field.SetValue(target, (int)value);
-                return;
-            }
-            PropertyInfo property = type.GetProperty(name, flags);
-            if (property != null && property.CanWrite)
-            {
-                if (property.PropertyType == typeof(float)) property.SetValue(target, value);
-                else if (property.PropertyType == typeof(int)) property.SetValue(target, (int)value);
-            }
-        }
-        catch (Exception ex) { MclslDiagnostics.Error("world-soul-set-number-member", "设置天地之魄数值成员失败: " + ex.Message); }
-    }
+        => MclslReflectionNumbers.TrySetNumber(target, name, value,
+            "Systems/WorldSoul/MclslWorldSoulSystem.cs #1",
+            diagnosticKey: "world-soul-set-number-member",
+            messagePrefix: "设置天地之魄数值成员失败: ");
 
     private static void Reconcile(int year)
     {

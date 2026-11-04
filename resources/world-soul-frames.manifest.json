@@ -1,0 +1,6491 @@
+{
+ "schemaVersion": 1,
+ "groups": {
+  "": {
+   "idle": [],
+   "breathing": [],
+   "run": [],
+   "attack": [],
+   "hit": [],
+   "death": []
+  },
+  "Earth_Soul": {
+   "idle": [
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_002",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_003",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_004",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_005",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_006",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_007",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_008",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_009",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_010",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_011",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_012",
+    "actors/Souls/Earth_Soul/Earth_Soul_idle_013"
+   ],
+   "breathing": [
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_002",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_003",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_004",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_005",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_006",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_007",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_008",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_009",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_010",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_011",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_012",
+    "actors/Souls/Earth_Soul/Earth_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Earth_Soul/Earth_Soul_run_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_002",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_003",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_004",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_005",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_006",
+    "actors/Souls/Earth_Soul/Earth_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_002",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_003",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_004",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_005",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_006",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_007",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_008",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_009",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_010",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_011",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_012",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_013",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_014",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_015",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_016",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_017",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_018",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_019",
+    "actors/Souls/Earth_Soul/Earth_Soul_attack_020"
+   ],
+   "hit": [
+    "actors/Souls/Earth_Soul/Earth_Soul_hit_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_hit_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Earth_Soul/Earth_Soul_death_000",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_001",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_002",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_003",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_004",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_005",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_006",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_007",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_008",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_009",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_010",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_011",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_012",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_013",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_014",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_015",
+    "actors/Souls/Earth_Soul/Earth_Soul_death_016"
+   ]
+  },
+  "Fire_Soul": {
+   "idle": [
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_002",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_003",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_004",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_005",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_006",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_007",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_008",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_009",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_010",
+    "actors/Souls/Fire_Soul/Fire_Soul_idle_011"
+   ],
+   "breathing": [
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_002",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_003",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_004",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_005",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_006",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_007",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_008",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_009",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_010",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_011",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_012",
+    "actors/Souls/Fire_Soul/Fire_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Fire_Soul/Fire_Soul_run_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_002",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_003",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_004",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_005",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_006",
+    "actors/Souls/Fire_Soul/Fire_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_002",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_003",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_004",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_005",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_006",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_007",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_008",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_009",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_010",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_011",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_012",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_013",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_014",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_015",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_016",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_017",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_018",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_019",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_020",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_021",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_022",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_023",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_024",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_025",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_026",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_027",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_028",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_029",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_030",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_031",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_032",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_033",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_034",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_035",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_036",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_037",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_038",
+    "actors/Souls/Fire_Soul/Fire_Soul_attack_039"
+   ],
+   "hit": [
+    "actors/Souls/Fire_Soul/Fire_Soul_hit_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_hit_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Fire_Soul/Fire_Soul_death_000",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_001",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_002",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_003",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_004",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_005",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_006",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_007",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_008",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_009",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_010",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_011",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_012",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_013",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_014",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_015",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_016",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_017",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_018",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_019",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_020",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_021",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_022",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_023",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_024",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_025",
+    "actors/Souls/Fire_Soul/Fire_Soul_death_026"
+   ]
+  },
+  "Jin_Soul": {
+   "idle": [
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_002",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_003",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_004",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_005",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_006",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_007",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_008",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_009",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_010",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_011",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_012",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_013",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_014",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_015",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_016",
+    "actors/Souls/Jin_Soul/Jin_Soul_idle_017"
+   ],
+   "breathing": [
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_002",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_003",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_004",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_005",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_006",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_007",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_008",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_009",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_010",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_011",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_012",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_013",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_014",
+    "actors/Souls/Jin_Soul/Jin_Soul_breathing_015"
+   ],
+   "run": [
+    "actors/Souls/Jin_Soul/Jin_Soul_run_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_run_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_run_002",
+    "actors/Souls/Jin_Soul/Jin_Soul_run_003",
+    "actors/Souls/Jin_Soul/Jin_Soul_run_004",
+    "actors/Souls/Jin_Soul/Jin_Soul_run_005"
+   ],
+   "attack": [
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_002",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_003",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_004",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_005",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_006",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_007",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_008",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_009",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_010",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_011",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_012",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_013",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_014",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_015",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_016",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_017",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_018",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_019",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_020",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_021",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_022",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_023",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_024",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_025",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_026",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_027",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_028",
+    "actors/Souls/Jin_Soul/Jin_Soul_attack_029"
+   ],
+   "hit": [
+    "actors/Souls/Jin_Soul/Jin_Soul_hit_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_hit_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Jin_Soul/Jin_Soul_death_000",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_001",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_002",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_003",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_004",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_005",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_006",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_007",
+    "actors/Souls/Jin_Soul/Jin_Soul_death_008"
+   ]
+  },
+  "Kong_Soul": {
+   "idle": [
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_002",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_003",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_004",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_005",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_006",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_007",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_008",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_009",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_010",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_011",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_012",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_013",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_014",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_015",
+    "actors/Souls/Kong_Soul/Kong_Soul_idle_016"
+   ],
+   "breathing": [
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_002",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_003",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_004",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_005",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_006",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_007",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_008",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_009",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_010",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_011",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_012",
+    "actors/Souls/Kong_Soul/Kong_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Kong_Soul/Kong_Soul_run_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_002",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_003",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_004",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_005",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_006",
+    "actors/Souls/Kong_Soul/Kong_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_002",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_003",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_004",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_005",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_006",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_007",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_008",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_009",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_010",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_011",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_012",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_013",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_014",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_015",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_016",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_017",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_018",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_019",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_020",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_021",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_022",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_023",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_024",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_025",
+    "actors/Souls/Kong_Soul/Kong_Soul_attack_026"
+   ],
+   "hit": [
+    "actors/Souls/Kong_Soul/Kong_Soul_hit_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_hit_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Kong_Soul/Kong_Soul_death_000",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_001",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_002",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_003",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_004",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_005",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_006",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_007",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_008",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_009",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_010",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_011",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_012",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_013",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_014",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_015",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_016",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_017",
+    "actors/Souls/Kong_Soul/Kong_Soul_death_018"
+   ]
+  },
+  "Thunder_Soul": {
+   "idle": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_002",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_003",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_004",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_005",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_006",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_007",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_008",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_009",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_010",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_idle_011"
+   ],
+   "breathing": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_002",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_003",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_004",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_005",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_006",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_007",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_008",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_009",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_010",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_011"
+   ],
+   "run": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_002",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_003",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_004",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_005",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_006",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_002",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_003",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_004",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_005",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_006",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_007",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_008",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_009",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_010",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_011",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_012",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_013",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_014",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_015",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_016",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_017",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_018",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_019",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_020",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_021",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_022",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_023",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_attack_024"
+   ],
+   "hit": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_hit_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_hit_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_000",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_001",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_002",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_003",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_004",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_005",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_006",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_007",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_008",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_009",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_010",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_011",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_012",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_013",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_014",
+    "actors/Souls/Thunder_Soul/Thunder_Soul_death_015"
+   ]
+  },
+  "Water_Soul": {
+   "idle": [
+    "actors/Souls/Water_Soul/Water_Soul_idle_000",
+    "actors/Souls/Water_Soul/Water_Soul_idle_001",
+    "actors/Souls/Water_Soul/Water_Soul_idle_002",
+    "actors/Souls/Water_Soul/Water_Soul_idle_003",
+    "actors/Souls/Water_Soul/Water_Soul_idle_004",
+    "actors/Souls/Water_Soul/Water_Soul_idle_005",
+    "actors/Souls/Water_Soul/Water_Soul_idle_006",
+    "actors/Souls/Water_Soul/Water_Soul_idle_007",
+    "actors/Souls/Water_Soul/Water_Soul_idle_008",
+    "actors/Souls/Water_Soul/Water_Soul_idle_009",
+    "actors/Souls/Water_Soul/Water_Soul_idle_010",
+    "actors/Souls/Water_Soul/Water_Soul_idle_011",
+    "actors/Souls/Water_Soul/Water_Soul_idle_012",
+    "actors/Souls/Water_Soul/Water_Soul_idle_013"
+   ],
+   "breathing": [
+    "actors/Souls/Water_Soul/Water_Soul_breathing_000",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_001",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_002",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_003",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_004",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_005",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_006",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_007",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_008",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_009",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_010",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_011",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_012",
+    "actors/Souls/Water_Soul/Water_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Water_Soul/Water_Soul_run_000",
+    "actors/Souls/Water_Soul/Water_Soul_run_001",
+    "actors/Souls/Water_Soul/Water_Soul_run_002",
+    "actors/Souls/Water_Soul/Water_Soul_run_003",
+    "actors/Souls/Water_Soul/Water_Soul_run_004",
+    "actors/Souls/Water_Soul/Water_Soul_run_005"
+   ],
+   "attack": [
+    "actors/Souls/Water_Soul/Water_Soul_attack_000",
+    "actors/Souls/Water_Soul/Water_Soul_attack_001",
+    "actors/Souls/Water_Soul/Water_Soul_attack_002",
+    "actors/Souls/Water_Soul/Water_Soul_attack_003",
+    "actors/Souls/Water_Soul/Water_Soul_attack_004",
+    "actors/Souls/Water_Soul/Water_Soul_attack_005",
+    "actors/Souls/Water_Soul/Water_Soul_attack_006",
+    "actors/Souls/Water_Soul/Water_Soul_attack_007",
+    "actors/Souls/Water_Soul/Water_Soul_attack_008",
+    "actors/Souls/Water_Soul/Water_Soul_attack_009",
+    "actors/Souls/Water_Soul/Water_Soul_attack_010",
+    "actors/Souls/Water_Soul/Water_Soul_attack_011",
+    "actors/Souls/Water_Soul/Water_Soul_attack_012",
+    "actors/Souls/Water_Soul/Water_Soul_attack_013",
+    "actors/Souls/Water_Soul/Water_Soul_attack_014",
+    "actors/Souls/Water_Soul/Water_Soul_attack_015",
+    "actors/Souls/Water_Soul/Water_Soul_attack_016",
+    "actors/Souls/Water_Soul/Water_Soul_attack_017",
+    "actors/Souls/Water_Soul/Water_Soul_attack_018",
+    "actors/Souls/Water_Soul/Water_Soul_attack_019",
+    "actors/Souls/Water_Soul/Water_Soul_attack_020",
+    "actors/Souls/Water_Soul/Water_Soul_attack_021",
+    "actors/Souls/Water_Soul/Water_Soul_attack_022",
+    "actors/Souls/Water_Soul/Water_Soul_attack_023",
+    "actors/Souls/Water_Soul/Water_Soul_attack_024",
+    "actors/Souls/Water_Soul/Water_Soul_attack_025",
+    "actors/Souls/Water_Soul/Water_Soul_attack_026",
+    "actors/Souls/Water_Soul/Water_Soul_attack_027",
+    "actors/Souls/Water_Soul/Water_Soul_attack_028",
+    "actors/Souls/Water_Soul/Water_Soul_attack_029"
+   ],
+   "hit": [
+    "actors/Souls/Water_Soul/Water_Soul_hit_000",
+    "actors/Souls/Water_Soul/Water_Soul_hit_001",
+    "actors/Souls/Water_Soul/Water_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Water_Soul/Water_Soul_death_000",
+    "actors/Souls/Water_Soul/Water_Soul_death_001",
+    "actors/Souls/Water_Soul/Water_Soul_death_002",
+    "actors/Souls/Water_Soul/Water_Soul_death_003",
+    "actors/Souls/Water_Soul/Water_Soul_death_004",
+    "actors/Souls/Water_Soul/Water_Soul_death_005",
+    "actors/Souls/Water_Soul/Water_Soul_death_006",
+    "actors/Souls/Water_Soul/Water_Soul_death_007",
+    "actors/Souls/Water_Soul/Water_Soul_death_008",
+    "actors/Souls/Water_Soul/Water_Soul_death_009",
+    "actors/Souls/Water_Soul/Water_Soul_death_010",
+    "actors/Souls/Water_Soul/Water_Soul_death_011",
+    "actors/Souls/Water_Soul/Water_Soul_death_012",
+    "actors/Souls/Water_Soul/Water_Soul_death_013"
+   ]
+  },
+  "Wind_Soul": {
+   "idle": [
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_002",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_003",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_004",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_005",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_006",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_007",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_008",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_009",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_010",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_011",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_012",
+    "actors/Souls/Wind_Soul/Wind_Soul_idle_013"
+   ],
+   "breathing": [
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_002",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_003",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_004",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_005",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_006",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_007",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_008",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_009",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_010",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_011",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_012",
+    "actors/Souls/Wind_Soul/Wind_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Wind_Soul/Wind_Soul_run_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_002",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_003",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_004",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_005",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_006",
+    "actors/Souls/Wind_Soul/Wind_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_002",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_003",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_004",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_005",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_006",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_007",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_008",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_009",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_010",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_011",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_012",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_013",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_014",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_015",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_016",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_017",
+    "actors/Souls/Wind_Soul/Wind_Soul_attack_018"
+   ],
+   "hit": [
+    "actors/Souls/Wind_Soul/Wind_Soul_hit_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_hit_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Wind_Soul/Wind_Soul_death_000",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_001",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_002",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_003",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_004",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_005",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_006",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_007",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_008",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_009",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_010",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_011",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_012",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_013",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_014",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_015",
+    "actors/Souls/Wind_Soul/Wind_Soul_death_016"
+   ]
+  },
+  "Wood_Soul": {
+   "idle": [
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_002",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_003",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_004",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_005",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_006",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_007",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_008",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_009",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_010",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_011",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_012",
+    "actors/Souls/Wood_Soul/Wood_Soul_idle_013"
+   ],
+   "breathing": [
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_002",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_003",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_004",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_005",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_006",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_007",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_008",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_009",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_010",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_011",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_012",
+    "actors/Souls/Wood_Soul/Wood_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Wood_Soul/Wood_Soul_run_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_002",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_003",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_004",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_005",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_006",
+    "actors/Souls/Wood_Soul/Wood_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_002",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_003",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_004",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_005",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_006",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_007",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_008",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_009",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_010",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_011",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_012",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_013",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_014",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_015",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_016",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_017",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_018",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_019",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_020",
+    "actors/Souls/Wood_Soul/Wood_Soul_attack_021"
+   ],
+   "hit": [
+    "actors/Souls/Wood_Soul/Wood_Soul_hit_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_hit_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Wood_Soul/Wood_Soul_death_000",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_001",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_002",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_003",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_004",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_005",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_006",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_007",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_008",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_009",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_010",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_011",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_012",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_013",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_014",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_015",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_016",
+    "actors/Souls/Wood_Soul/Wood_Soul_death_017"
+   ]
+  },
+  "Yang_Soul": {
+   "idle": [
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_002",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_003",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_004",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_005",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_006",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_007",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_008",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_009",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_010",
+    "actors/Souls/Yang_Soul/Yang_Soul_idle_011"
+   ],
+   "breathing": [
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_002",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_003",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_004",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_005",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_006",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_007",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_008",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_009",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_010",
+    "actors/Souls/Yang_Soul/Yang_Soul_breathing_011"
+   ],
+   "run": [
+    "actors/Souls/Yang_Soul/Yang_Soul_run_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_002",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_003",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_004",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_005",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_006",
+    "actors/Souls/Yang_Soul/Yang_Soul_run_007"
+   ],
+   "attack": [
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_002",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_003",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_004",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_005",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_006",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_007",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_008",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_009",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_010",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_011",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_012",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_013",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_014",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_015",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_016",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_017",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_018",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_019",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_020",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_021",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_022",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_023",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_024",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_025",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_026",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_027",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_028",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_029",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_030",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_031",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_032",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_033",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_034",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_035",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_036",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_037",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_038",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_039",
+    "actors/Souls/Yang_Soul/Yang_Soul_attack_040"
+   ],
+   "hit": [
+    "actors/Souls/Yang_Soul/Yang_Soul_hit_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_hit_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Yang_Soul/Yang_Soul_death_000",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_001",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_002",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_003",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_004",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_005",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_006",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_007",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_008",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_009",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_010",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_011",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_012",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_013",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_014",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_015",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_016",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_017",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_018",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_019",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_020",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_021",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_022",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_023",
+    "actors/Souls/Yang_Soul/Yang_Soul_death_024"
+   ]
+  },
+  "Yin_Soul": {
+   "idle": [
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_002",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_003",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_004",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_005",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_006",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_007",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_008",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_009",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_010",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_011",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_012",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_013",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_014",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_015",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_016",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_017",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_018",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_019",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_020",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_021",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_022",
+    "actors/Souls/Yin_Soul/Yin_Soul_idle_023"
+   ],
+   "breathing": [
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_002",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_003",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_004",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_005",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_006",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_007",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_008",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_009",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_010",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_011",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_012",
+    "actors/Souls/Yin_Soul/Yin_Soul_breathing_013"
+   ],
+   "run": [
+    "actors/Souls/Yin_Soul/Yin_Soul_run_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_002",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_003",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_004",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_005",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_006",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_007",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_008",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_009",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_010",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_011",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_012",
+    "actors/Souls/Yin_Soul/Yin_Soul_run_013"
+   ],
+   "attack": [
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_002",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_003",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_004",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_005",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_006",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_007",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_008",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_009",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_010",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_011",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_012",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_013",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_014",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_015",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_016",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_017",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_018",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_019",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_020",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_021",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_022",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_023",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_024",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_025",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_026",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_027",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_028",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_029",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_030",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_031",
+    "actors/Souls/Yin_Soul/Yin_Soul_attack_032"
+   ],
+   "hit": [
+    "actors/Souls/Yin_Soul/Yin_Soul_hit_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_hit_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_hit_002"
+   ],
+   "death": [
+    "actors/Souls/Yin_Soul/Yin_Soul_death_000",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_001",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_002",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_003",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_004",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_005",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_006",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_007",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_008",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_009",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_010",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_011",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_012",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_013",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_014",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_015",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_016",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_017",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_018",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_019",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_020",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_021",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_022",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_023",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_024",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_025",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_026",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_027",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_028",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_029",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_030",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_031",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_032",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_033",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_034",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_035",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_036",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_037",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_038",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_039",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_040",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_041",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_042",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_043",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_044",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_045",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_046",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_047",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_048",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_049",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_050",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_051",
+    "actors/Souls/Yin_Soul/Yin_Soul_death_052"
+   ]
+  }
+ },
+ "atlas": {
+  "file": "Souls/player-frames.rgba.gz",
+  "canvas": [
+   2048,
+   6208
+  ],
+  "rgbaSha256": "c8fa11ec017b0cfe436268cdfdef2ca14ddbff3aab0603e038d5f1091e531cd5",
+  "rectangles": {
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_000": [
+    2,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_001": [
+    134,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_002": [
+    266,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_003": [
+    398,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_004": [
+    530,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_005": [
+    662,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_006": [
+    794,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_007": [
+    926,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_008": [
+    1058,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_009": [
+    1190,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_010": [
+    1322,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_011": [
+    1454,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_012": [
+    1586,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_013": [
+    1718,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_014": [
+    1850,
+    6076,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_015": [
+    2,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_016": [
+    134,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_017": [
+    266,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_018": [
+    398,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_019": [
+    530,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_020": [
+    662,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_021": [
+    794,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_022": [
+    926,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_023": [
+    1058,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_024": [
+    1190,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_025": [
+    1322,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_026": [
+    1454,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_027": [
+    1586,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_028": [
+    1718,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_029": [
+    1850,
+    5944,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_030": [
+    2,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_031": [
+    134,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_032": [
+    266,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_033": [
+    398,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_034": [
+    530,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_035": [
+    662,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_036": [
+    794,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_037": [
+    926,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_038": [
+    1058,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_attack_039": [
+    1190,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_000": [
+    1322,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_001": [
+    1454,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_002": [
+    1586,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_003": [
+    1718,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_004": [
+    1850,
+    5812,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_005": [
+    2,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_006": [
+    134,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_007": [
+    266,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_008": [
+    398,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_009": [
+    530,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_010": [
+    662,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_011": [
+    794,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_012": [
+    926,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_breathing_013": [
+    1058,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_000": [
+    1190,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_001": [
+    1322,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_002": [
+    1454,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_003": [
+    1586,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_004": [
+    1718,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_005": [
+    1850,
+    5680,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_006": [
+    2,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_007": [
+    134,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_008": [
+    266,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_009": [
+    398,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_010": [
+    530,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_011": [
+    662,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_012": [
+    794,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_013": [
+    926,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_014": [
+    1058,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_015": [
+    1190,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_016": [
+    1322,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_017": [
+    1454,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_018": [
+    1586,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_019": [
+    1718,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_020": [
+    1850,
+    5548,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_021": [
+    2,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_022": [
+    134,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_023": [
+    266,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_024": [
+    398,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_025": [
+    530,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_death_026": [
+    662,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_hit_000": [
+    794,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_hit_001": [
+    926,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_hit_002": [
+    1058,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_000": [
+    1190,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_001": [
+    1322,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_002": [
+    1454,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_003": [
+    1586,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_004": [
+    1718,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_005": [
+    1850,
+    5416,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_006": [
+    2,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_007": [
+    134,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_008": [
+    266,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_009": [
+    398,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_010": [
+    530,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_idle_011": [
+    662,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_000": [
+    794,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_001": [
+    926,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_002": [
+    1058,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_003": [
+    1190,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_004": [
+    1322,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_005": [
+    1454,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_006": [
+    1586,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Fire_Soul/Fire_Soul_run_007": [
+    1718,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_000": [
+    1850,
+    5284,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_001": [
+    2,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_002": [
+    134,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_003": [
+    266,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_004": [
+    398,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_005": [
+    530,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_006": [
+    662,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_007": [
+    794,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_008": [
+    926,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_009": [
+    1058,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_010": [
+    1190,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_011": [
+    1322,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_012": [
+    1454,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_013": [
+    1586,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_014": [
+    1718,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_015": [
+    1850,
+    5152,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_016": [
+    2,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_017": [
+    134,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_018": [
+    266,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_019": [
+    398,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_020": [
+    530,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_021": [
+    662,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_022": [
+    794,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_023": [
+    926,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_024": [
+    1058,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_025": [
+    1190,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_026": [
+    1322,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_027": [
+    1454,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_028": [
+    1586,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_attack_029": [
+    1718,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_000": [
+    1850,
+    5020,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_001": [
+    2,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_002": [
+    134,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_003": [
+    266,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_004": [
+    398,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_005": [
+    530,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_006": [
+    662,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_007": [
+    794,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_008": [
+    926,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_009": [
+    1058,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_010": [
+    1190,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_011": [
+    1322,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_012": [
+    1454,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_013": [
+    1586,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_014": [
+    1718,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_breathing_015": [
+    1850,
+    4888,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_000": [
+    2,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_001": [
+    134,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_002": [
+    266,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_003": [
+    398,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_004": [
+    530,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_005": [
+    662,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_006": [
+    794,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_007": [
+    926,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_death_008": [
+    1058,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_hit_000": [
+    1190,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_hit_001": [
+    1322,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_hit_002": [
+    1454,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_000": [
+    1586,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_001": [
+    1718,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_002": [
+    1850,
+    4756,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_003": [
+    2,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_004": [
+    134,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_005": [
+    266,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_006": [
+    398,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_007": [
+    530,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_008": [
+    662,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_009": [
+    794,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_010": [
+    926,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_011": [
+    1058,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_012": [
+    1190,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_013": [
+    1322,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_014": [
+    1454,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_015": [
+    1586,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_016": [
+    1718,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_idle_017": [
+    1850,
+    4624,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_000": [
+    2,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_001": [
+    134,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_002": [
+    266,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_003": [
+    398,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_004": [
+    530,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Jin_Soul/Jin_Soul_run_005": [
+    662,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_000": [
+    794,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_001": [
+    926,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_002": [
+    1058,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_003": [
+    1190,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_004": [
+    1322,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_005": [
+    1454,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_006": [
+    1586,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_007": [
+    1718,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_008": [
+    1850,
+    4492,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_009": [
+    2,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_010": [
+    134,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_011": [
+    266,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_012": [
+    398,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_013": [
+    530,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_014": [
+    662,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_015": [
+    794,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_016": [
+    926,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_017": [
+    1058,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_018": [
+    1190,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_019": [
+    1322,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_020": [
+    1454,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_021": [
+    1586,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_022": [
+    1718,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_023": [
+    1850,
+    4360,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_024": [
+    2,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_025": [
+    134,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_026": [
+    266,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_027": [
+    398,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_028": [
+    530,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_attack_029": [
+    662,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_000": [
+    794,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_001": [
+    926,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_002": [
+    1058,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_003": [
+    1190,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_004": [
+    1322,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_005": [
+    1454,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_006": [
+    1586,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_007": [
+    1718,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_008": [
+    1850,
+    4228,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_009": [
+    2,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_010": [
+    134,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_011": [
+    266,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_012": [
+    398,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_breathing_013": [
+    530,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_000": [
+    662,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_001": [
+    794,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_002": [
+    926,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_003": [
+    1058,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_004": [
+    1190,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_005": [
+    1322,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_006": [
+    1454,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_007": [
+    1586,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_008": [
+    1718,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_009": [
+    1850,
+    4096,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_010": [
+    2,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_011": [
+    134,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_012": [
+    266,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_death_013": [
+    398,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_hit_000": [
+    530,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_hit_001": [
+    662,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_hit_002": [
+    794,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_000": [
+    926,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_001": [
+    1058,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_002": [
+    1190,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_003": [
+    1322,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_004": [
+    1454,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_005": [
+    1586,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_006": [
+    1718,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_007": [
+    1850,
+    3964,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_008": [
+    2,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_009": [
+    134,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_010": [
+    266,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_011": [
+    398,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_012": [
+    530,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_idle_013": [
+    662,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_000": [
+    794,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_001": [
+    926,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_002": [
+    1058,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_003": [
+    1190,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_004": [
+    1322,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Water_Soul/Water_Soul_run_005": [
+    1454,
+    3832,
+    130,
+    130
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_000": [
+    1586,
+    3842,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_001": [
+    1708,
+    3842,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_002": [
+    1830,
+    3842,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_003": [
+    2,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_004": [
+    124,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_005": [
+    246,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_006": [
+    368,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_007": [
+    490,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_008": [
+    612,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_009": [
+    734,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_010": [
+    856,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_011": [
+    978,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_012": [
+    1100,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_013": [
+    1222,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_014": [
+    1344,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_015": [
+    1466,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_016": [
+    1588,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_017": [
+    1710,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_018": [
+    1832,
+    3710,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_019": [
+    2,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_attack_020": [
+    124,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_000": [
+    246,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_001": [
+    368,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_002": [
+    490,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_003": [
+    612,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_004": [
+    734,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_005": [
+    856,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_006": [
+    978,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_007": [
+    1100,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_008": [
+    1222,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_009": [
+    1344,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_010": [
+    1466,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_011": [
+    1588,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_012": [
+    1710,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_breathing_013": [
+    1832,
+    3588,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_000": [
+    2,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_001": [
+    124,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_002": [
+    246,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_003": [
+    368,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_004": [
+    490,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_005": [
+    612,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_006": [
+    734,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_007": [
+    856,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_008": [
+    978,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_009": [
+    1100,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_010": [
+    1222,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_011": [
+    1344,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_012": [
+    1466,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_013": [
+    1588,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_014": [
+    1710,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_015": [
+    1832,
+    3466,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_death_016": [
+    2,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_hit_000": [
+    124,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_hit_001": [
+    246,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_hit_002": [
+    368,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_000": [
+    490,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_001": [
+    612,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_002": [
+    734,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_003": [
+    856,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_004": [
+    978,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_005": [
+    1100,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_006": [
+    1222,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_007": [
+    1344,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_008": [
+    1466,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_009": [
+    1588,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_010": [
+    1710,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_011": [
+    1832,
+    3344,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_012": [
+    2,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_idle_013": [
+    124,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_000": [
+    246,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_001": [
+    368,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_002": [
+    490,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_003": [
+    612,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_004": [
+    734,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_005": [
+    856,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_006": [
+    978,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Earth_Soul/Earth_Soul_run_007": [
+    1100,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_000": [
+    1222,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_001": [
+    1344,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_002": [
+    1466,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_003": [
+    1588,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_004": [
+    1710,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_005": [
+    1832,
+    3222,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_006": [
+    2,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_007": [
+    124,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_008": [
+    246,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_009": [
+    368,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_010": [
+    490,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_011": [
+    612,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_012": [
+    734,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_013": [
+    856,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_014": [
+    978,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_015": [
+    1100,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_016": [
+    1222,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_017": [
+    1344,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_018": [
+    1466,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_019": [
+    1588,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_020": [
+    1710,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_021": [
+    1832,
+    3100,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_022": [
+    2,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_023": [
+    124,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_024": [
+    246,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_025": [
+    368,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_attack_026": [
+    490,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_000": [
+    612,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_001": [
+    734,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_002": [
+    856,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_003": [
+    978,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_004": [
+    1100,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_005": [
+    1222,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_006": [
+    1344,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_007": [
+    1466,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_008": [
+    1588,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_009": [
+    1710,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_010": [
+    1832,
+    2978,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_011": [
+    2,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_012": [
+    124,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_breathing_013": [
+    246,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_000": [
+    368,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_001": [
+    490,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_002": [
+    612,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_003": [
+    734,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_004": [
+    856,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_005": [
+    978,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_006": [
+    1100,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_007": [
+    1222,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_008": [
+    1344,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_009": [
+    1466,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_010": [
+    1588,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_011": [
+    1710,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_012": [
+    1832,
+    2856,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_013": [
+    2,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_014": [
+    124,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_015": [
+    246,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_016": [
+    368,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_017": [
+    490,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_death_018": [
+    612,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_hit_000": [
+    734,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_hit_001": [
+    856,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_hit_002": [
+    978,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_000": [
+    1100,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_001": [
+    1222,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_002": [
+    1344,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_003": [
+    1466,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_004": [
+    1588,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_005": [
+    1710,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_006": [
+    1832,
+    2734,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_007": [
+    2,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_008": [
+    124,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_009": [
+    246,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_010": [
+    368,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_011": [
+    490,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_012": [
+    612,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_013": [
+    734,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_014": [
+    856,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_015": [
+    978,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_idle_016": [
+    1100,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_000": [
+    1222,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_001": [
+    1344,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_002": [
+    1466,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_003": [
+    1588,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_004": [
+    1710,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_005": [
+    1832,
+    2612,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_006": [
+    2,
+    2490,
+    120,
+    120
+   ],
+   "actors/Souls/Kong_Soul/Kong_Soul_run_007": [
+    124,
+    2490,
+    120,
+    120
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_000": [
+    246,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_001": [
+    358,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_002": [
+    470,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_003": [
+    582,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_004": [
+    694,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_005": [
+    806,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_006": [
+    918,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_007": [
+    1030,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_008": [
+    1142,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_009": [
+    1254,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_010": [
+    1366,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_011": [
+    1478,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_012": [
+    1590,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_013": [
+    1702,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_014": [
+    1814,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_015": [
+    1926,
+    2500,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_016": [
+    2,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_017": [
+    114,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_018": [
+    226,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_019": [
+    338,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_020": [
+    450,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_attack_021": [
+    562,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_000": [
+    674,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_001": [
+    786,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_002": [
+    898,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_003": [
+    1010,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_004": [
+    1122,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_005": [
+    1234,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_006": [
+    1346,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_007": [
+    1458,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_008": [
+    1570,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_009": [
+    1682,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_010": [
+    1794,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_011": [
+    1906,
+    2378,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_012": [
+    2,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_breathing_013": [
+    114,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_000": [
+    226,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_001": [
+    338,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_002": [
+    450,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_003": [
+    562,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_004": [
+    674,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_005": [
+    786,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_006": [
+    898,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_007": [
+    1010,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_008": [
+    1122,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_009": [
+    1234,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_010": [
+    1346,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_011": [
+    1458,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_012": [
+    1570,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_013": [
+    1682,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_014": [
+    1794,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_015": [
+    1906,
+    2266,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_016": [
+    2,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_death_017": [
+    114,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_hit_000": [
+    226,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_hit_001": [
+    338,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_hit_002": [
+    450,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_000": [
+    562,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_001": [
+    674,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_002": [
+    786,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_003": [
+    898,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_004": [
+    1010,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_005": [
+    1122,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_006": [
+    1234,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_007": [
+    1346,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_008": [
+    1458,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_009": [
+    1570,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_010": [
+    1682,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_011": [
+    1794,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_012": [
+    1906,
+    2154,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_idle_013": [
+    2,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_000": [
+    114,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_001": [
+    226,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_002": [
+    338,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_003": [
+    450,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_004": [
+    562,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_005": [
+    674,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_006": [
+    786,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Wood_Soul/Wood_Soul_run_007": [
+    898,
+    2042,
+    110,
+    110
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_000": [
+    1010,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_001": [
+    1112,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_002": [
+    1214,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_003": [
+    1316,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_004": [
+    1418,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_005": [
+    1520,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_006": [
+    1622,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_007": [
+    1724,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_008": [
+    1826,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_009": [
+    1928,
+    2052,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_010": [
+    2,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_011": [
+    104,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_012": [
+    206,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_013": [
+    308,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_014": [
+    410,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_015": [
+    512,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_016": [
+    614,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_017": [
+    716,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_018": [
+    818,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_019": [
+    920,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_020": [
+    1022,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_021": [
+    1124,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_022": [
+    1226,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_023": [
+    1328,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_attack_024": [
+    1430,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_000": [
+    1532,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_001": [
+    1634,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_002": [
+    1736,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_003": [
+    1838,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_004": [
+    1940,
+    1940,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_005": [
+    2,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_006": [
+    104,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_007": [
+    206,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_008": [
+    308,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_009": [
+    410,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_010": [
+    512,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_breathing_011": [
+    614,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_000": [
+    716,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_001": [
+    818,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_002": [
+    920,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_003": [
+    1022,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_004": [
+    1124,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_005": [
+    1226,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_006": [
+    1328,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_007": [
+    1430,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_008": [
+    1532,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_009": [
+    1634,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_010": [
+    1736,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_011": [
+    1838,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_012": [
+    1940,
+    1838,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_013": [
+    2,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_014": [
+    104,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_death_015": [
+    206,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_hit_000": [
+    308,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_hit_001": [
+    410,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_hit_002": [
+    512,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_000": [
+    614,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_001": [
+    716,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_002": [
+    818,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_003": [
+    920,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_004": [
+    1022,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_005": [
+    1124,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_006": [
+    1226,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_007": [
+    1328,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_008": [
+    1430,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_009": [
+    1532,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_010": [
+    1634,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_idle_011": [
+    1736,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_000": [
+    1838,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_001": [
+    1940,
+    1736,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_002": [
+    2,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_003": [
+    104,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_004": [
+    206,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_005": [
+    308,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_006": [
+    410,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Thunder_Soul/Thunder_Soul_run_007": [
+    512,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_000": [
+    614,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_001": [
+    716,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_002": [
+    818,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_003": [
+    920,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_004": [
+    1022,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_005": [
+    1124,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_006": [
+    1226,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_007": [
+    1328,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_008": [
+    1430,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_009": [
+    1532,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_010": [
+    1634,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_011": [
+    1736,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_012": [
+    1838,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_013": [
+    1940,
+    1634,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_014": [
+    2,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_015": [
+    104,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_016": [
+    206,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_017": [
+    308,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_attack_018": [
+    410,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_000": [
+    512,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_001": [
+    614,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_002": [
+    716,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_003": [
+    818,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_004": [
+    920,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_005": [
+    1022,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_006": [
+    1124,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_007": [
+    1226,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_008": [
+    1328,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_009": [
+    1430,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_010": [
+    1532,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_011": [
+    1634,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_012": [
+    1736,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_breathing_013": [
+    1838,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_000": [
+    1940,
+    1532,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_001": [
+    2,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_002": [
+    104,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_003": [
+    206,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_004": [
+    308,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_005": [
+    410,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_006": [
+    512,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_007": [
+    614,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_008": [
+    716,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_009": [
+    818,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_010": [
+    920,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_011": [
+    1022,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_012": [
+    1124,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_013": [
+    1226,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_014": [
+    1328,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_015": [
+    1430,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_death_016": [
+    1532,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_hit_000": [
+    1634,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_hit_001": [
+    1736,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_hit_002": [
+    1838,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_000": [
+    1940,
+    1430,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_001": [
+    2,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_002": [
+    104,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_003": [
+    206,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_004": [
+    308,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_005": [
+    410,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_006": [
+    512,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_007": [
+    614,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_008": [
+    716,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_009": [
+    818,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_010": [
+    920,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_011": [
+    1022,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_012": [
+    1124,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_idle_013": [
+    1226,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_000": [
+    1328,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_001": [
+    1430,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_002": [
+    1532,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_003": [
+    1634,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_004": [
+    1736,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_005": [
+    1838,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_006": [
+    1940,
+    1328,
+    100,
+    100
+   ],
+   "actors/Souls/Wind_Soul/Wind_Soul_run_007": [
+    2,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_000": [
+    104,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_001": [
+    206,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_002": [
+    308,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_003": [
+    410,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_004": [
+    512,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_005": [
+    614,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_006": [
+    716,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_007": [
+    818,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_008": [
+    920,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_009": [
+    1022,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_010": [
+    1124,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_011": [
+    1226,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_012": [
+    1328,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_013": [
+    1430,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_014": [
+    1532,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_015": [
+    1634,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_016": [
+    1736,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_017": [
+    1838,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_018": [
+    1940,
+    1226,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_019": [
+    2,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_020": [
+    104,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_021": [
+    206,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_022": [
+    308,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_023": [
+    410,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_024": [
+    512,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_025": [
+    614,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_026": [
+    716,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_027": [
+    818,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_028": [
+    920,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_029": [
+    1022,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_030": [
+    1124,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_031": [
+    1226,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_032": [
+    1328,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_033": [
+    1430,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_034": [
+    1532,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_035": [
+    1634,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_036": [
+    1736,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_037": [
+    1838,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_038": [
+    1940,
+    1124,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_039": [
+    2,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_attack_040": [
+    104,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_000": [
+    206,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_001": [
+    308,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_002": [
+    410,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_003": [
+    512,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_004": [
+    614,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_005": [
+    716,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_006": [
+    818,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_007": [
+    920,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_008": [
+    1022,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_009": [
+    1124,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_010": [
+    1226,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_breathing_011": [
+    1328,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_000": [
+    1430,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_001": [
+    1532,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_002": [
+    1634,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_003": [
+    1736,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_004": [
+    1838,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_005": [
+    1940,
+    1022,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_006": [
+    2,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_007": [
+    104,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_008": [
+    206,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_009": [
+    308,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_010": [
+    410,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_011": [
+    512,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_012": [
+    614,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_013": [
+    716,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_014": [
+    818,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_015": [
+    920,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_016": [
+    1022,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_017": [
+    1124,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_018": [
+    1226,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_019": [
+    1328,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_020": [
+    1430,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_021": [
+    1532,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_022": [
+    1634,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_023": [
+    1736,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_death_024": [
+    1838,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_hit_000": [
+    1940,
+    920,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_hit_001": [
+    2,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_hit_002": [
+    104,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_000": [
+    206,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_001": [
+    308,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_002": [
+    410,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_003": [
+    512,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_004": [
+    614,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_005": [
+    716,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_006": [
+    818,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_007": [
+    920,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_008": [
+    1022,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_009": [
+    1124,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_010": [
+    1226,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_idle_011": [
+    1328,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_000": [
+    1430,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_001": [
+    1532,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_002": [
+    1634,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_003": [
+    1736,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_004": [
+    1838,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_005": [
+    1940,
+    818,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_006": [
+    2,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yang_Soul/Yang_Soul_run_007": [
+    104,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_000": [
+    206,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_001": [
+    308,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_002": [
+    410,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_003": [
+    512,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_004": [
+    614,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_005": [
+    716,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_006": [
+    818,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_007": [
+    920,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_008": [
+    1022,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_009": [
+    1124,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_010": [
+    1226,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_011": [
+    1328,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_012": [
+    1430,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_013": [
+    1532,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_014": [
+    1634,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_015": [
+    1736,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_016": [
+    1838,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_017": [
+    1940,
+    716,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_018": [
+    2,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_019": [
+    104,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_020": [
+    206,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_021": [
+    308,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_022": [
+    410,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_023": [
+    512,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_024": [
+    614,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_025": [
+    716,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_026": [
+    818,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_027": [
+    920,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_028": [
+    1022,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_029": [
+    1124,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_030": [
+    1226,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_031": [
+    1328,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_attack_032": [
+    1430,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_000": [
+    1532,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_001": [
+    1634,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_002": [
+    1736,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_003": [
+    1838,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_004": [
+    1940,
+    614,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_005": [
+    2,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_006": [
+    104,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_007": [
+    206,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_008": [
+    308,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_009": [
+    410,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_010": [
+    512,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_011": [
+    614,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_012": [
+    716,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_breathing_013": [
+    818,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_000": [
+    920,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_001": [
+    1022,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_002": [
+    1124,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_003": [
+    1226,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_004": [
+    1328,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_005": [
+    1430,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_006": [
+    1532,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_007": [
+    1634,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_008": [
+    1736,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_009": [
+    1838,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_010": [
+    1940,
+    512,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_011": [
+    2,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_012": [
+    104,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_013": [
+    206,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_014": [
+    308,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_015": [
+    410,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_016": [
+    512,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_017": [
+    614,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_018": [
+    716,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_019": [
+    818,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_020": [
+    920,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_021": [
+    1022,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_022": [
+    1124,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_023": [
+    1226,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_024": [
+    1328,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_025": [
+    1430,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_026": [
+    1532,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_027": [
+    1634,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_028": [
+    1736,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_029": [
+    1838,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_030": [
+    1940,
+    410,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_031": [
+    2,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_032": [
+    104,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_033": [
+    206,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_034": [
+    308,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_035": [
+    410,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_036": [
+    512,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_037": [
+    614,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_038": [
+    716,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_039": [
+    818,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_040": [
+    920,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_041": [
+    1022,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_042": [
+    1124,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_043": [
+    1226,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_044": [
+    1328,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_045": [
+    1430,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_046": [
+    1532,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_047": [
+    1634,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_048": [
+    1736,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_049": [
+    1838,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_050": [
+    1940,
+    308,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_051": [
+    2,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_death_052": [
+    104,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_hit_000": [
+    206,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_hit_001": [
+    308,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_hit_002": [
+    410,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_000": [
+    512,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_001": [
+    614,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_002": [
+    716,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_003": [
+    818,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_004": [
+    920,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_005": [
+    1022,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_006": [
+    1124,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_007": [
+    1226,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_008": [
+    1328,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_009": [
+    1430,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_010": [
+    1532,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_011": [
+    1634,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_012": [
+    1736,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_013": [
+    1838,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_014": [
+    1940,
+    206,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_015": [
+    2,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_016": [
+    104,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_017": [
+    206,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_018": [
+    308,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_019": [
+    410,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_020": [
+    512,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_021": [
+    614,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_022": [
+    716,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_idle_023": [
+    818,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_000": [
+    920,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_001": [
+    1022,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_002": [
+    1124,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_003": [
+    1226,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_004": [
+    1328,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_005": [
+    1430,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_006": [
+    1532,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_007": [
+    1634,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_008": [
+    1736,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_009": [
+    1838,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_010": [
+    1940,
+    104,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_011": [
+    2,
+    2,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_012": [
+    104,
+    2,
+    100,
+    100
+   ],
+   "actors/Souls/Yin_Soul/Yin_Soul_run_013": [
+    206,
+    2,
+    100,
+    100
+   ]
+  }
+ }
+}

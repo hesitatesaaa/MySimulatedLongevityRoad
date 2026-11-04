@@ -35,12 +35,18 @@ internal static class MclslVisibleActorRenderLane
         _lastFrame = frame;
         _lastRenderData = manager.render_data;
 
+        // Native held tool/weapon transforms inherit the whole-body current_scale.
+        // Bring the mod immortals' vanilla held items back to the authored body
+        // proportion before the draw pass consumes item_scale.
+        MclslHeldItemRenderScale.Normalize(manager);
+
         bool scanHalo = MclslRealmHaloVisualSystem.BeginRenderFrame(frame);
         Actor[] actors = manager.visible_units.array;
         int count = actors == null ? 0 : Math.Min(manager.visible_units.count, actors.Length);
         int lodLevel = ResolveLodLevel(frame, count);
         if (count <= 0)
         {
+            MclslRealmHaloVisualSystem.RecordVisibleCounts(0, 0);
             MclslRealmHaloVisualSystem.EndRenderFrame(frame, lodLevel);
             MySimulatedLongevityRoad.Core.MclslPerformanceProbe.End("境界光环", sample);
             return;
@@ -48,17 +54,29 @@ internal static class MclslVisibleActorRenderLane
 
         if (scanHalo)
         {
-            Vector3[] renderPositions = TryGetRenderPositions(manager.render_data);
-            using (MclslUnityProfiler.Sample("MCLS/Visual/HaloVisibleActorScan"))
+            long scanSample = MclslPerformanceProbe.Begin();
+            int qualified = 0;
+            // With no halo-qualified actor the per-visible-actor scan can neither
+            // create nor refresh a halo, so skip it along with the render-position
+            // reflection lookup. Active-entry updates and cleanup still run in
+            // EndRenderFrame below.
+            if (MclslRealmHaloVisualSystem.QualificationCount > 0)
             {
-                for (int i = 0; i < count; i++)
+                Vector3[] renderPositions = TryGetRenderPositions(manager.render_data);
+                using (MclslUnityProfiler.Sample("MCLS/Visual/HaloVisibleActorScan"))
                 {
-                    Actor actor = actors[i];
-                    if (actor?.data == null) continue;
-                    if (!TryGetRenderPosition(renderPositions, i, actor, out Vector3 position)) continue;
-                    MclslRealmHaloVisualSystem.ObserveVisibleActor(actor, position, frame);
+                    for (int i = 0; i < count; i++)
+                    {
+                        Actor actor = actors[i];
+                        if (!MclslRealmHaloVisualSystem.HasQualification(actor)) continue;
+                        qualified++;
+                        if (!TryGetRenderPosition(renderPositions, i, actor, out Vector3 position)) continue;
+                        MclslRealmHaloVisualSystem.ObserveVisibleActor(actor, position, frame);
+                    }
                 }
             }
+            MclslRealmHaloVisualSystem.RecordVisibleCounts(count, qualified);
+            MclslPerformanceProbe.End("光环可见扫描", scanSample);
         }
 
         MclslRealmHaloVisualSystem.EndRenderFrame(frame, lodLevel);
@@ -71,6 +89,7 @@ internal static class MclslVisibleActorRenderLane
         _lastRenderData = null;
         _cachedMainCamera = null;
         _nextCameraRefreshFrame = 0;
+        MclslHeldItemRenderScale.Clear();
     }
 
     private static int ResolveLodLevel(int frame, int visibleCount)
@@ -88,7 +107,7 @@ internal static class MclslVisibleActorRenderLane
                 cameraSize = _cachedMainCamera.orthographicSize;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #1: " + mclslEmptyCatchEx.Message); }
 
         if (visibleCount > MediumVisibleCount || cameraSize >= FarCameraSize) return 2;
         if (visibleCount > NearVisibleCount || cameraSize >= MediumCameraSize) return 1;
@@ -124,7 +143,7 @@ internal static class MclslVisibleActorRenderLane
             position = actor.current_position;
             return true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #3: " + mclslEmptyCatchEx.Message); }
 
         try
         {
@@ -135,7 +154,7 @@ internal static class MclslVisibleActorRenderLane
                 return true;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #4: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslVisibleActorRenderLane.cs #4: " + mclslEmptyCatchEx.Message); }
         return false;
     }
 }

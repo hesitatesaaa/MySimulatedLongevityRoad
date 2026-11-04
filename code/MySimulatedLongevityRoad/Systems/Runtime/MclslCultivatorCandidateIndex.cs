@@ -42,7 +42,10 @@ internal static class MclslCultivatorCandidateIndex
             return;
         }
 
+        bool wasCandidate = AnnualCandidateIds.Contains(actorId);
         if (ObserveCultivationState(actor)) MclslWorldActorQuery.MarkDirty();
+        if (!wasCandidate && AnnualCandidateIds.Contains(actorId))
+            MclslScheduler.RegisterAndEnqueueAnnualActor(actor);
     }
 
     internal static bool Resolve(long actorId, out Actor actor)
@@ -77,26 +80,13 @@ internal static class MclslCultivatorCandidateIndex
         changed |= SetAnnualCandidate(actorId, false);
         changed |= SetRealm(actorId, string.Empty);
         MclslTechniqueOccupationSystem.Forget(actorId);
+        MclslSpellSystem.SuspendSelfCasting(actorId);
         if (changed) MclslWorldActorQuery.MarkDirty();
     }
 
     internal static IReadOnlyList<long> GetAnnualCandidateIds()
     {
         return AnnualCandidateIds;
-    }
-
-    internal static void AuditRegisteredActors()
-    {
-        MclslActorRegistry.Audit(64, actor =>
-        {
-            if (actor?.data == null) return;
-            if (!MclslActorAccessor.Alive(actor)) { Remove(MclslActorAccessor.Id(actor)); return; }
-            MclslRuntimeChanges.Publish(actor, MclslActorChange.Native);
-            bool wasCandidate = AnnualCandidateIds.Contains(MclslActorAccessor.Id(actor));
-            if (ObserveCultivationState(actor)) MclslWorldActorQuery.MarkDirty();
-            if (!wasCandidate && AnnualCandidateIds.Contains(MclslActorAccessor.Id(actor)))
-                MclslScheduler.RegisterAndEnqueueAnnualActor(actor);
-        });
     }
 
     internal static IReadOnlyList<Actor> GetKnownActorsSnapshot()
@@ -140,7 +130,13 @@ internal static class MclslCultivatorCandidateIndex
         if (CultivatorIds.Count == 0) return removed;
         if (_cleanupCursor >= CultivatorIds.Count) _cleanupCursor = 0;
         int checks = Math.Min(Math.Max(16, budget * 2), CultivatorIds.Count);
-        for (int i = 0; i < checks && !MclslFrameDeadline.Expired; i++)
+        // Cooperation with the shared annual budget: the scheduler only enters
+        // this loop when budget remains, but a single cleanup pass could still
+        // overshoot a nearly spent budget. MclslAnnualFrameBudget.Expired also
+        // tracks MclslFrameDeadline while the annual budget is inactive, so the
+        // external (UI) caller keeps its previous frame-deadline-only behaviour.
+        for (int i = 0; i < checks && !MclslFrameDeadline.Expired
+            && !MclslAnnualFrameBudget.Expired; i++)
         {
             if (_cleanupCursor >= CultivatorIds.Count) _cleanupCursor = 0;
             long actorId = CultivatorIds[_cleanupCursor++];
@@ -178,15 +174,14 @@ internal static class MclslCultivatorCandidateIndex
         bool cultivator = eligible && IsCultivationSnapshotActor(actor);
         bool annualCandidate = eligible && MclslCultivationActorMarker.IsAnnualCandidate(actor);
         if (!annualCandidate) MclslScheduler.ForgetAnnualActor(actorId);
+        MclslSpellSystem.ObserveSelfCaster(actor);
         bool changed = SetCultivator(actorId, cultivator);
         changed |= SetAnnualCandidate(actorId, annualCandidate);
         changed |= SetRealm(actorId, cultivator ? MclslActorAccessor.Realm(actor) : string.Empty);
 
         if (cultivator)
         {
-            // Reconcile the technique index while the annual known-actor scan is
-            // already visiting this actor. This replaces a full index rebuild once
-            // per year and also catches state changes made outside our own writers.
+            // Cultivation change notifications maintain the technique index as well.
             MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
         }
         return changed;

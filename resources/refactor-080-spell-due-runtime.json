@@ -1,0 +1,25 @@
+{
+  "version": "0.8.0",
+  "actualUnity": true,
+  "complete": true,
+  "passed": true,
+  "inputSha256": "ca389dafc7ba7adb8fb5abf64e5c0d2393e0fd610b5353272eb4994dc0281d5e",
+  "scope": "ordinary spell deadline scheduling, pause, save reload and cleansing",
+  "checks": [
+    "paused-world-does-not-advance-pending-spells",
+    "only-due-hit-completes",
+    "travel-phase-rescheduled-for-impact",
+    "future-cast-remains-untouched",
+    "save-reload-does-not-replay-completed-hit",
+    "cleanse-removes-due-and-future-burns",
+    "equal-deadline-spells-remain-distinct",
+    "equal-deadline-spells-both-complete"
+  ],
+  "errors": [],
+  "classifiedTiles": 0,
+  "performanceTested": false,
+  "packageAcceptance": false,
+  "evidenceDirectory": "D:\\模拟长胜路\\upstream-0.6.0\\build\\runtime-070\\20261025_165113",
+  "scopeNote": "Current workspace sources in isolated Unity with candidate-3 compressed resources; not final package or FPS acceptance.",
+  "rawReportSha256": "13409dbc025dccc9d85bb7b78aa3a63ef6d79b1db619ddd458b16df43b2b5f96"
+}

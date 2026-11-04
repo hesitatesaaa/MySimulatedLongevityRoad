@@ -32,7 +32,7 @@ internal static class MclslDeathSystem
         return new MclslDeathSnapshot(
             true,
             actorId,
-            SafeName(actor),
+            MclslActorAccessor.SafeName(actor, "无名修士"),
             MclslActorAccessor.Realm(actor),
             MclslRuntime.CurrentYear(),
             SafeCultivationYears(actor),
@@ -126,9 +126,9 @@ internal static class MclslDeathSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max * 0.38f));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #1: " + mclslEmptyCatchEx.Message); }
 
-        string name = SafeName(actor);
+        string name = MclslActorAccessor.SafeName(actor, "无名修士");
         MclslWorldRunRepository.AddEvent(year, "nascent_cave_death_divert", name + "洞天代死", detail, actor);
         if (MclslRuntimeSettings.SurvivalAnnouncementsEnabled) MclslAnnouncementSystem.Enqueue(name + "借元婴洞天避过死劫，洞天根基受损。", "#79B6B0", 8f, 1);
         MclslWorldArchiveStore.MarkDirty();
@@ -154,7 +154,7 @@ internal static class MclslDeathSystem
         string detail = "寿尽之劫被修行寿元修正，按" + MclslRealmIds.Display(realm) + "寿元上限" + MclslLongevityRules.ExpectedLifespan(actor, realm) + "年继续存世。";
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, detail);
         if (lastDivertYear != year)
-            MclslWorldRunRepository.AddEvent(year, "native_death_divert", SafeName(actor) + "避过早衰", detail, actor);
+            MclslWorldRunRepository.AddEvent(year, "native_death_divert", MclslActorAccessor.SafeName(actor, "无名修士") + "避过早衰", detail, actor);
         MclslWorldArchiveStore.MarkDirty();
         return true;
     }
@@ -195,7 +195,7 @@ internal static class MclslDeathSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max * 0.55f));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #2: " + mclslEmptyCatchEx.Message); }
 
         TrySetNumber(actor?.data, "hunger", 100f);
         TrySetNumber(actor?.data, "_hunger", 100f);
@@ -203,28 +203,9 @@ internal static class MclslDeathSystem
         TrySetNumber(actor?.data, "nutrition", 100f);
     }
 
+    private const string ReflectionSite = "Systems/Death/MclslDeathSystem.cs #3";
     private static void TrySetNumber(object target, string name, float value)
-    {
-        if (target == null) return;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        try
-        {
-            FieldInfo field = target.GetType().GetField(name, flags);
-            if (field != null)
-            {
-                if (field.FieldType == typeof(float)) field.SetValue(target, value);
-                else if (field.FieldType == typeof(int)) field.SetValue(target, (int)value);
-                return;
-            }
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
-            if (property != null && property.CanWrite)
-            {
-                if (property.PropertyType == typeof(float)) property.SetValue(target, value);
-                else if (property.PropertyType == typeof(int)) property.SetValue(target, (int)value);
-            }
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #3: " + mclslEmptyCatchEx.Message); }
-    }
+        => MclslReflectionNumbers.TrySetNumber(target, name, value, ReflectionSite);
 
     internal static void Commit(Actor actor, in MclslDeathSnapshot snapshot)
     {
@@ -723,12 +704,12 @@ internal static class MclslDeathSystem
                 {
                     FieldInfo field = type.GetField(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase);
                     object value = field?.GetValue(source);
-                    if (value is Actor fieldActor && fieldActor != actor) return SafeName(fieldActor);
+                    if (value is Actor fieldActor && fieldActor != actor) return MclslActorAccessor.SafeName(fieldActor, "无名修士");
                     PropertyInfo property = type.GetProperty(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase);
                     value = property?.GetValue(source);
-                    if (value is Actor propertyActor && propertyActor != actor) return SafeName(propertyActor);
+                    if (value is Actor propertyActor && propertyActor != actor) return MclslActorAccessor.SafeName(propertyActor, "无名修士");
                 }
-                catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+                catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs #4: " + mclslEmptyCatchEx.Message); }
             }
         }
         return string.Empty;
@@ -739,21 +720,11 @@ internal static class MclslDeathSystem
         try { return actor?.data != null && actor.isAlive(); } catch { return false; }
     }
 
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); } catch { return "无名修士"; }
-    }
-
-    private static int SafeAge(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); } catch { return 0; }
-    }
-
     private static int SafeCultivationYears(Actor actor)
     {
         int year = MclslRuntime.CurrentYear();
         int start = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0);
         if (start > 0 && year >= start) return Math.Max(0, year - start);
-        return SafeAge(actor);
+        return MclslActorAccessor.Age(actor);
     }
 }

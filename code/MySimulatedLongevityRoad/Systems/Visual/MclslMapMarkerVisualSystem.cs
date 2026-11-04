@@ -72,7 +72,7 @@ internal static class MclslMapMarkerVisualSystem
     private static int CurrentAnimationCadence()
     {
         if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return AnimationCadenceFrames;
-        return MclslRuntimeWorkBudget.StressTier switch
+        return MclslFrameLoadMonitor.StressTier switch
         {
             MclslRuntimeStressTier.Mild => 6,
             MclslRuntimeStressTier.Severe => 8,
@@ -224,11 +224,14 @@ internal static class MclslMapMarkerVisualSystem
 
     private static void AnimateTemporaryMarkers(int frame)
     {
+        // The pulse follows the fixed-speed presentation clock, expressed in
+        // 60 Hz frame units so the authored sine phases stay unchanged.
+        float displayFrame = (float)(MclslRuntime.DisplayClock * 60d);
         foreach (MarkerEntry entry in Entries.Values)
         {
             if (entry == null || !entry.Temporary || entry.Transform == null || entry.Renderer == null) continue;
-            float wave = 0.90f + 0.12f * (0.5f + 0.5f * Mathf.Sin((frame + entry.Phase) * 0.12f));
-            float alpha = entry.BaseColor.a * (0.76f + 0.24f * (0.5f + 0.5f * Mathf.Sin((frame + entry.Phase) * 0.10f)));
+            float wave = 0.90f + 0.12f * (0.5f + 0.5f * Mathf.Sin((displayFrame + entry.Phase) * 0.12f));
+            float alpha = entry.BaseColor.a * (0.76f + 0.24f * (0.5f + 0.5f * Mathf.Sin((displayFrame + entry.Phase) * 0.10f)));
             entry.Transform.localScale = new Vector3(entry.BaseScale * wave, entry.BaseScale * wave, 1f);
             entry.Renderer.color = new Color(entry.BaseColor.r, entry.BaseColor.g, entry.BaseColor.b, alpha);
         }
@@ -267,7 +270,7 @@ internal static class MclslMapMarkerVisualSystem
             texture.wrapMode = TextureWrapMode.Clamp;
             texture.anisoLevel = 0;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-1", "地图标记：贴图参数设置失败: " + mclslEmptyCatchEx.Message); }
     }
 
     private static float GetMarkerScale(Sprite sprite, float targetWorldSize)
@@ -288,7 +291,7 @@ internal static class MclslMapMarkerVisualSystem
         string[] kinds = { "ruin", "secret_realm", "spiritual_convergence", "earthfire", "meteor_stone" };
         for (int i = 0; i < kinds.Length; i++)
             if (LoadMarkerSprite(kinds[i]) == null)
-                Debug.LogWarning("[模拟长生路][地图贴图] 缺少资源 GameResources/map/markers/" + kinds[i] + ".png");
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("mapmarker.missing-asset", "[模拟长生路][地图贴图] 缺少资源 GameResources/map/markers/" + kinds[i] + ".png");
     }
 
     private static bool IsUsable(MarkerEntry entry) => entry?.Transform != null && entry.Renderer != null && entry.GameObject != null;
@@ -299,7 +302,7 @@ internal static class MclslMapMarkerVisualSystem
         {
             if (entry?.GameObject != null) UnityEngine.Object.Destroy(entry.GameObject);
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-2", "地图标记：销毁标记对象失败: " + mclslEmptyCatchEx.Message); }
     }
 
     private static bool ShouldShowRuin(MclslSectRuinRecord ruin)
@@ -350,15 +353,7 @@ internal static class MclslMapMarkerVisualSystem
         return "event:" + record.Year + "|" + record.EventType + "|" + record.Title + "|" + record.Body;
     }
 
-    private static int StablePhase(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
+    private static int StablePhase(string value) => MclslStableHash.Positive23x37(value);
 
     private readonly struct MarkerDescriptor
     {

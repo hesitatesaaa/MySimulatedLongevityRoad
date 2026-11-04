@@ -65,9 +65,18 @@ internal static class MclslBagSystem
     internal static int CacheCount => _readCache.Count;
     internal static int PendingWriteCount => PendingWrites.Count;
     private static readonly MclslBagState Empty = new();
+    internal static bool Supports(Actor actor)=>actor?.data!=null&&!MclslBeastActorRegistration.IsBeast(actor);
+
+    internal static MclslBagState PeekExisting(Actor actor)
+    {
+        if (!Supports(actor)) return null;
+        if (_readCache.TryGetValue(actor.data.id, out var entry) && entry.Dirty) return entry.Bag;
+        string json = ReadStoredJson(actor);
+        return string.IsNullOrWhiteSpace(json) && !HasBackup(actor) ? null : GetCachedBag(actor, json, false);
+    }
 
     internal static MclslBagState Peek(Actor actor)
-        => actor?.data == null ? Empty : GetCachedBag(actor, ReadStoredJson(actor), false);
+        => !Supports(actor) ? new MclslBagState() : GetCachedBag(actor, ReadStoredJson(actor), false);
     internal static bool IsLocked(Actor actor)
     {
         if (actor?.data == null) return false;
@@ -75,7 +84,7 @@ internal static class MclslBagSystem
         return Cache(actor).Invalid;
     }
     internal static MclslBagState Read(Actor actor)
-        => actor?.data == null ? new MclslBagState() : GetCachedBag(actor, ReadStoredJson(actor), true);
+        => !Supports(actor) ? new MclslBagState() : GetCachedBag(actor, ReadStoredJson(actor), true);
 
     internal static MclslBagState Copy(MclslBagState source)
     {
@@ -95,7 +104,7 @@ internal static class MclslBagSystem
     internal static void Forget(long id) { _readCache.Remove(id); PendingWrites.Cancel(id); }
     internal static void BeginTransaction(Actor actor)
     {
-        if (actor?.data == null) return;
+        if (!Supports(actor)) return;
         Read(actor); Cache(actor).TransactionDepth++;
     }
     internal static void EndTransaction(Actor actor)
@@ -183,7 +192,8 @@ internal static class MclslBagSystem
     internal static void CompactMatureStacks(Actor actor, int year)
     {
         if (actor?.data == null) return;
-        MclslBagState bag = Peek(actor);
+        MclslBagState bag = PeekExisting(actor);
+        if (bag == null) return;
         CachedBag cache = Cache(actor);
         if (cache.Invalid || cache.CompactedYear == year) return;
         cache.CompactedYear = year;
@@ -226,7 +236,7 @@ internal static class MclslBagSystem
 
     internal static void Write(Actor actor, MclslBagState bag)
     {
-        if (actor?.data == null || bag == null) return;
+        if (!Supports(actor) || bag == null) return;
         string current = ReadStoredJson(actor);
         if (!string.IsNullOrWhiteSpace(current) || HasBackup(actor)) GetCachedBag(actor, current, true);
         CachedBag entry = Cache(actor);
@@ -258,7 +268,7 @@ internal static class MclslBagSystem
 
     internal static void Add(Actor actor, string itemId, int count = 1, int acquiredYear = -1)
     {
-        if (actor?.data == null || MclslItemCatalog.Get(itemId) == null || count <= 0) return;
+        if (!Supports(actor) || MclslItemCatalog.Get(itemId) == null || count <= 0) return;
         MclslBagState bag = Read(actor);
         Add(bag, itemId, count, acquiredYear: acquiredYear);
         Write(actor, bag);
@@ -442,10 +452,15 @@ internal static class MclslProfessionSystem
             SyncTrait(actor, profession);
         }
         finally { MclslPerformanceProbe.End("职业.身份与晋升", identitySample); }
-        long knowledgeSample = MclslPerformanceProbe.Begin();
-        try { MclslRecipeKnowledge.EnsureUsableRecipe(actor, profession,
-            MclslProfessionSystem.GetGrade(actor)); }
-        finally { MclslPerformanceProbe.End("职业.配方知识", knowledgeSample); }
+        int craftGrade = MclslProfessionSystem.GetGrade(actor);
+        // Recipe knowledge only needs repair when the stored list cannot serve
+        // the current grade; the known-recipe string is the cheap guard.
+        if (MclslRecipeKnowledge.NeedsUsableRecipe(actor, profession, craftGrade))
+        {
+            long knowledgeSample = MclslPerformanceProbe.Begin();
+            try { MclslRecipeKnowledge.EnsureUsableRecipe(actor, profession, craftGrade); }
+            finally { MclslPerformanceProbe.End("职业.配方知识", knowledgeSample); }
+        }
         if (!MclslProfessionCraftingPolicy.CanCraftInYear(year,
             MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionLastCraftYear, -1)))
         {
@@ -509,10 +524,13 @@ internal static class MclslProfessionSystem
         {
             string selectedId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.InventoryPlanRecipeId, string.Empty);
             MclslItemDefinition selected = recipes.FirstOrDefault(x => x.Id == selectedId);
-            return selected != null && RecipeStillNeeded(actor, bag, selected) ? selected : null;
+            return selected != null && RecipeStillNeeded(actor, bag, selected, year) ? selected : null;
         }
-        List<string> needs = new();
-        MclslConsumableInventoryPolicy.BuildReservePlan(actor, needs);
+        // The reserve plan and market snapshot are shared through the per-operation
+        // memo and the market revision cache, so the unrelated market demand pass
+        // in the same operation reuses them instead of rebuilding both.
+        IReadOnlyList<string> needs = MclslAnnualEconomyPlan.ReservePlan(actor, year);
+        IReadOnlyDictionary<string, int> marketCounts = MclslTianxuanMarket.ActiveItemCountsSnapshot();
         int start = (int)(unchecked((ulong)MclslActorAccessor.Id(actor)) % (uint)recipes.Count);
         MclslItemDefinition planned = null;
         for (int offset = 0; offset < recipes.Count; offset++)
@@ -522,24 +540,22 @@ internal static class MclslProfessionSystem
             int personalTarget = recipe.Category == "Artifact" ? 1
                 : MclslConsumableInventoryPolicy.ReserveCount(actor, recipe, needs, null);
             if (MclslEconomicPolicy.ShouldProduce(owned, personalTarget,
-                MclslTianxuanMarket.ActiveItemCount(recipe.Id))) { planned = recipe; break; }
+                marketCounts.GetValueOrDefault(recipe.Id))) { planned = recipe; break; }
         }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.InventoryPlanRecipeId, planned?.Id ?? string.Empty);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.InventoryPlanYear, year);
         return planned;
     }
 
-    private static bool RecipeStillNeeded(Actor actor, MclslBagState bag, MclslItemDefinition recipe)
+    private static bool RecipeStillNeeded(Actor actor, MclslBagState bag, MclslItemDefinition recipe, int year)
     {
-        List<string> needs = new();
-        MclslConsumableInventoryPolicy.BuildReservePlan(actor, needs);
+        IReadOnlyList<string> needs = MclslAnnualEconomyPlan.ReservePlan(actor, year);
         int owned = MclslBagSystem.Count(bag, recipe.Id);
         int personalTarget = recipe.Category == "Artifact" ? 1
             : MclslConsumableInventoryPolicy.ReserveCount(actor, recipe, needs, null);
         return MclslEconomicPolicy.ShouldProduce(owned, personalTarget,
-            MclslTianxuanMarket.ActiveItemCount(recipe.Id));
+            MclslTianxuanMarket.ActiveItemCountsSnapshot().GetValueOrDefault(recipe.Id));
     }
-
     internal static bool RecipeFitsGrade(MclslItemDefinition recipe, int grade)
     {
         if (recipe == null || grade < 0) return false;
@@ -610,22 +626,28 @@ internal static class MclslProfessionSystem
         MclslItemDefinition item;
         try { item = PlannedRecipe(actor, bag, year); }
         finally { MclslPerformanceProbe.End("职业.选方", recipeSample); }
-        if (item != null && HasRecipe(actor, bag, item.Id))
+        if (item != null)
         {
-            if (!ConsumeRecipe(actor, bag, item.Id)) return false;
-            MclslBagSystem.Add(bag, item.Id, acquiredYear: year);
-            MclslBagSystem.Write(actor, bag);
-            // Mark delivery before optional history/equipment callbacks so an
-            // exception there cannot let the same year's recipe run twice.
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.ProfessionLastCraftYear, year);
-            int experience = MclslProfessionCraftingPolicy.ExperienceGain(grade, item.Grade);
-            if (experience > 0)
+            // Resolve the ingredients once: HasRecipe and ConsumeRecipe used to
+            // resolve the same recipe twice for every successful craft.
+            MclslRecipeIngredient[] ingredients = ResolveRecipe(actor, bag, item.Id);
+            if (ingredients != null)
             {
-                GainExperience(actor, experience);
+                ConsumeResolvedRecipe(actor, bag, ingredients);
+                MclslBagSystem.Add(bag, item.Id, acquiredYear: year);
+                MclslBagSystem.Write(actor, bag);
+                // Mark delivery before optional history/equipment callbacks so an
+                // exception there cannot let the same year's recipe run twice.
+                MclslActorAccessor.Set(actor, MclslActorDataKeys.ProfessionLastCraftYear, year);
+                int experience = MclslProfessionCraftingPolicy.ExperienceGain(grade, item.Grade);
+                if (experience > 0)
+                {
+                    GainExperience(actor, experience);
+                }
+                if (item.Category == "Artifact") MclslArtifactSystem.OnArtifactAcquired(actor);
+                MclslWorldRunRepository.AddItemAcquisitionEvent(year, actor, item.Id, 1, "职业制作");
+                return true;
             }
-            if (item.Category == "Artifact") MclslArtifactSystem.OnArtifactAcquired(actor);
-            MclslWorldRunRepository.AddItemAcquisitionEvent(year, actor, item.Id, 1, "职业制作");
-            return true;
         }
         if (item == null) return TryPractice(actor, year, bag);
         return false;
@@ -637,9 +659,13 @@ internal static class MclslProfessionSystem
         for (int i = 0; i < recipes.Count; i++)
         {
             MclslItemDefinition recipe = recipes[i];
-            if (!HasRecipe(actor, bag, recipe.Id)) continue;
-            if (!ConsumeRecipe(actor, bag, recipe.Id))
-                throw new InvalidOperationException("职业练习材料扣除未完成");
+            // Resolve once: HasRecipe and ConsumeRecipe each resolved the same
+            // product against the same untouched bag, so the second scan was the
+            // same array of ingredients. Consuming the resolved array keeps the
+            // pre-check-before-consume order and the rollback copy unchanged.
+            MclslRecipeIngredient[] ingredients = ResolveRecipe(actor, bag, recipe.Id);
+            if (ingredients == null) continue;
+            ConsumeResolvedRecipe(actor, bag, ingredients);
             MclslBagSystem.Write(actor, bag);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.ProfessionLastCraftYear, year);
             int experience = MclslProfessionCraftingPolicy.ExperienceGain(GetGrade(actor), recipe.Grade);
@@ -680,17 +706,49 @@ internal static class MclslProfessionSystem
     internal static bool HasRecipe(Actor actor,MclslBagState bag,string product)=>ResolveRecipe(actor,bag,product)!=null;
     internal static bool ConsumeRecipe(Actor actor,MclslBagState bag,string product)
     {
-        var ingredients=ResolveRecipe(actor,bag,product);if(ingredients==null)return false;
-        string backup=Newtonsoft.Json.JsonConvert.SerializeObject(bag.Items);
+        var ingredients=ResolveRecipe(actor,bag,product);
+        if(ingredients==null)return false;
+        ConsumeResolvedRecipe(actor,bag,ingredients);
+        return true;
+    }
+
+    /// <summary>
+    /// Consumes already-resolved ingredients with a structural rollback copy. The
+    /// previous implementation serialized the entire item list to JSON before
+    /// every craft and threw the string away on success; cloning the few held
+    /// stacks gives the identical restore-on-failure guarantee without the round
+    /// trip or its allocations.
+    /// </summary>
+    private static void ConsumeResolvedRecipe(Actor actor,MclslBagState bag,MclslRecipeIngredient[] ingredients)
+    {
+        List<MclslOwnedItem> backup=new(bag.Items.Count);
+        for(int i=0;i<bag.Items.Count;i++)
+        {
+            MclslOwnedItem held=bag.Items[i];
+            backup.Add(new MclslOwnedItem{ItemId=held.ItemId,InstanceId=held.InstanceId,Count=held.Count,
+                Durability=held.Durability,AcquiredYear=held.AcquiredYear});
+        }
         try
         {
-            foreach(var ingredient in ingredients.Where(x=>!x.ItemId.StartsWith("native:",StringComparison.Ordinal)))
-                if(!MclslBagSystem.Remove(bag,ingredient.ItemId,ingredient.Count))throw new InvalidOperationException("材料预检后扣除失败: "+ingredient.ItemId);
+            foreach(MclslRecipeIngredient ingredient in ingredients)
+                if(!ingredient.ItemId.StartsWith("native:",StringComparison.Ordinal)
+                    &&!MclslBagSystem.Remove(bag,ingredient.ItemId,ingredient.Count))
+                    throw new InvalidOperationException("材料预检后扣除失败: "+ingredient.ItemId);
         }
         catch
-        {bag.Items=Newtonsoft.Json.JsonConvert.DeserializeObject<List<MclslOwnedItem>>(backup);throw;}
-        foreach(var ingredient in ingredients.Where(x=>x.ItemId.StartsWith("native:",StringComparison.Ordinal)))actor.city.takeResource(ingredient.ItemId.Substring(7),ingredient.Count);
-        return true;
+        {
+            bag.Items.Clear();
+            bag.Items.AddRange(backup);
+            // The content changed twice (removal, restore). MclslBagSystem's count
+            // index and the artifact/equipment caches key on MutationVersion, so
+            // advance it or a later read could still serve the removed counts.
+            // It is a runtime-only field and is not part of the saved bag JSON.
+            bag.MutationVersion++;
+            throw;
+        }
+        foreach(MclslRecipeIngredient ingredient in ingredients)
+            if(ingredient.ItemId.StartsWith("native:",StringComparison.Ordinal))
+                actor.city.takeResource(ingredient.ItemId.Substring(7),ingredient.Count);
     }
 
     private static bool HasIngredient(Actor actor, MclslBagState bag, string id)

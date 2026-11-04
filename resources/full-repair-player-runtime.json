@@ -1,0 +1,63 @@
+{
+  "version": "0.7.0",
+  "actualUnity": true,
+  "passed": true,
+  "inputSha256": "5c2e511b3b0d75d32996b608810229ef0e4145dede6a5107f60b899882e1a832",
+  "checks": [
+    "player-world-ready",
+    "player-developer-editor-absent",
+    "other-developer-buttons-absent",
+    "player-jump-visible-chinese:active=True,text=跳转至新法时代",
+    "player-jump-click-executes",
+    "player-jump-repeat-idempotent",
+    "player-memory-visible-chinese",
+    "player-memory-cache-consistent-after-click",
+    "native-city-for-operational-animation",
+    "player-windmill-placed:mclsl_xuanhuang_windmill_human_0",
+    "native-windmill-operational:mclsl_xuanhuang_windmill_human_0",
+    "native-windmill-animation-advances:mclsl_xuanhuang_windmill_human_0",
+    "player-windmill-placed:mclsl_xuanhuang_windmill_human_1",
+    "native-windmill-operational:mclsl_xuanhuang_windmill_human_1",
+    "native-windmill-animation-advances:mclsl_xuanhuang_windmill_human_1",
+    "player-character-window-renders",
+    "player-no-runtime-errors"
+  ],
+  "errors": [],
+  "buildings": [
+    {
+      "id": "mclsl_xuanhuang_windmill_human_0",
+      "x": 110,
+      "y": 15,
+      "frames": [
+        "main_0_3",
+        "main_0_0",
+        "main_0_1",
+        "main_0_2"
+      ]
+    },
+    {
+      "id": "mclsl_xuanhuang_windmill_human_1",
+      "x": 106,
+      "y": 18,
+      "frames": [
+        "main_0_2",
+        "main_0_3",
+        "main_0_0",
+        "main_0_1"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": 6,
+      "asset": "mclsl_beast_kunpeng_yuan",
+      "x": 112,
+      "y": 15
+    }
+  ],
+  "interactiveVisualReview": false,
+  "performanceTested": false,
+  "product": "MCLSLAud",
+  "persistentDataPath": "C:/Users/卢佳奇/AppData/LocalLow/mkarpenko/MCLSLAud",
+  "atUtc": "2026-10-25T06:46:00.4602094Z"
+}

@@ -231,7 +231,7 @@ internal static class MclslFactionPressureSystem
         {
             Actor actor = actors[i];
             if (!MclslActorAccessor.Alive(actor)) continue;
-            names.Add(SafeName(actor));
+            names.Add(MclslActorAccessor.SafeName(actor, "无名者"));
         }
         return string.Join("、", names);
     }
@@ -298,12 +298,6 @@ internal static class MclslFactionPressureSystem
     {
         int baseInterval = min + PositiveHash(run.RunId + "|next_pressure|" + year + "|" + run.FactionPressureEvents.Count) % Math.Max(1, span);
         return year + MclslWorldStateModifierSystem.ScaleFactionPressureInterval(baseInterval, year);
-    }
-
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名者"; }
     }
 
     private static int PositiveHash(string value)

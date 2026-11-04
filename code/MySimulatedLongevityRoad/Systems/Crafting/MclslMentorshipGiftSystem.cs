@@ -8,9 +8,9 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslMentorshipGiftSystem
 {
-    private const string ArtifactGiftYearKey = "mclsl.architecture.v2.actor.mentor_artifact_gift_year";
-    private const string ConsumableGiftYearKey = "mclsl.architecture.v2.actor.mentor_consumable_gift_year";
-    private const string RecipeGiftYearKey = "mclsl.architecture.v2.actor.mentor_recipe_gift_year";
+    private const string ArtifactGiftYearKey = "mclsl.080.actor.mentor_artifact_gift_year";
+    private const string ConsumableGiftYearKey = "mclsl.080.actor.mentor_consumable_gift_year";
+    private const string RecipeGiftYearKey = "mclsl.080.actor.mentor_recipe_gift_year";
 
     internal static void TryGift(Actor student, Actor teacher, int year)
     {
@@ -195,6 +195,14 @@ internal static class MclslRecipeKnowledge
         if (recipes.Length == 0) return;
         int index = (int)((Math.Max(0L, MclslActorAccessor.Id(actor)) + grade) % recipes.Length);
         Learn(actor, recipes[index].Id);
+    }
+
+    internal static bool NeedsUsableRecipe(Actor actor, string profession, int grade)
+    {
+        string known = MclslActorAccessor.GetString(actor, MclslActorDataKeys.KnownRecipes);
+        if (grade < 0) return false;
+        if (known.Length == 0 || !known.StartsWith("v1:", StringComparison.Ordinal)) return true;
+        return CraftCandidates(actor, CategoryForProfession(profession), grade).Length == 0;
     }
 
     internal static void EnsureUsableRecipe(Actor actor, string profession, int grade)

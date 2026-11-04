@@ -3,48 +3,53 @@
   "action": "idle",
   "index": 0,
   "artDirectionRevision": 2,
-  "method": "built-in-imagegen-independent-frame",
-  "sourceSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
+  "method": "built-in-imagegen-reviewed-sheet-cell",
+  "sourceSha256": "0b7d9fada269b10ebf859814182b8cfef0d49772e8309aa3271924c90ebd5f00",
   "outputFile": "NativeActorResources/actors/Beasts/dafeng/Beast/main/idle_0.png",
-  "outputSha256": "862ac5c33e1a4d06990c07e3fcff72d191dd819d1099d4d417d5ff7c65394a92",
-  "createdAtUtc": "2026-10-09T10:17:06.714589+00:00",
-  "prompt": "Use case: stylized-concept. Asset: exactly ONE independent transparent pixel-art game frame for \u5927\u98ce\u00b7\u517d\u5f62 (mclsl_beast_dafeng), idle_0. Image 1 is the old identity reference: preserve species, palette, hairstyle, costume and recognizable silhouette, but freshly redraw all pixels. Image 2 is balanced pixel rendering STYLE ONLY: match its clean clusters, contours and limited shading. Its anatomy, proportions, identity, costume and colors MUST NOT transfer to the new species or person. Character: large azure blue storm bird, gold crest and beak, white/cyan breast, broad powerful paired wings, two legs and blue trailing tail feathers. Pose: Standard neutral idle pose, relaxed coherent anatomy, full clear silhouette, right-facing three-quarter side view and all identifying details visible. Balanced pixel detail EXACTLY like the approved Li Fan or Baihu style reference: clear crisp outline, broad clean square pixel clusters, two or three readable shade levels per material, restrained trim and a few useful cloth/fur/feather/scale details. Avoid dense individual-scale microtexture, crowded gold filigree, excessive ornaments, tiny highlight speckles and painterly rendering. Retain proper anatomy and crafted silhouettes; never substitute primitive geometric shapes or a plain flat silhouette. Full character centered with comfortable transparent margins on all four sides; neutral body base/feet near source y1080, silhouette within x100..1150,y100..1100; avoid a tiny character surrounded by empty padding. Reserve room for limb/weapon extensions. Square 1254x1254 source canvas, transparent RGBA. Exactly one character and one pose in one PNG; no multi-frame image, panels, grid, sprite sheet, background, ground shadow, text, watermark, glow or particles. Each frame is independently drawn, never achieved by translating, scaling, rotating or recoloring an old sprite. No clipping, malformed joints or duplicate limbs.\n",
+  "outputSha256": "68197fbb02a30cf7f1db84d9ba18a45fa220cdfacfb016183a249394785410db",
+  "createdAtUtc": "2026-10-20T07:24:53.075Z",
+  "prompt": "User reference phoenix/Dafeng: six folded-wing idle poses and eight coordinated two-wing flying poses, right-facing WorldBox pixel art, true alpha, no third wing or wing ghosts. Generated with built-in image_gen; see retained source sheet.",
   "references": [
     "E:\\0.6.0\\output\\baseline-0.5.4-20261009\\GameResources\\actors\\Beasts\\dafeng\\Beast\\main\\idle_0.png",
     "E:\\0.6.0\\output\\actor-redraw\\originals\\mclsl_beast_baihu\\idle_0.png"
   ],
   "normalization": {
-    "resampling": "lanczos-premultiplied-alpha",
-    "sourceCanvas": [
-      1254,
-      1254
-    ],
+    "resampling": "nearest",
     "canvas": [
       160,
       160
     ],
-    "scale": 0.12759170653907495,
-    "inputSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
-    "sourceAnchor": [
-      632.0,
-      1173
+    "sourceCanvas": [
+      314,
+      320
     ],
-    "sourcePixelsPerUnit": 217.04545454545456,
-    "ppuFactor": 2.0097391675155767,
-    "sourceRenderScale": 1,
+    "scale": 0.4394366197183099,
     "cropped": false,
-    "spritesheetSlicing": false,
+    "transparentPaddingTrimmed": true,
+    "spritesheetSlicing": true,
     "colorQuantized": false,
     "resizePasses": 1,
-    "visibleBoundsAlpha": 16
+    "visibleBoundsAlpha": 16,
+    "placement": [
+      24,
+      68
+    ]
   },
   "nativeResolution": false,
-  "integrationStatus": "local-resized-build-awaiting-gameplay-observation",
-  "sourceRetention": "hash-and-prompt-only; original/rollback copies removed by user request",
+  "integrationStatus": "offline-integration-awaiting-Unity-review",
+  "sourceRetention": "full generated sheet retained in resources/bird-animation-sources",
   "historicalReview": {
     "identity": false,
     "pixelEdges": false,
     "anchor": false,
     "continuity": false
+  },
+  "previousSourceSha256": "73f2d44fb59902769ec403662c115859ed65d0fb3ef4677f7d52fb3eaa1aedba",
+  "sourceSheet": "resources/bird-animation-sources/dafeng.png",
+  "sourceCell": {
+    "left": 0,
+    "top": 0,
+    "width": 314,
+    "height": 320
   }
 }

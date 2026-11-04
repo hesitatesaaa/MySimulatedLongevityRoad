@@ -357,7 +357,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S007_cast-v1.png",
         "sourceSha256": "9bf0b0bfa25d576950a5aa33effc460592cde6d5c41756e1d911b9da8afc002f",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 \u96f7\u5f15\u8bc0, ONLY the cast stage. Visual design: \u7d27\u51d1\u96f7\u5370\u805a\u4eae. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 雷引诀, ONLY the cast stage. Visual design: 紧凑雷印聚亮. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -409,7 +409,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S007_travel-v1.png",
         "sourceSha256": "3b3059ec1be0c17630ea8c43ad0564d7e89e5e5634133909bfbcdfee1c4a499e",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 \u96f7\u5f15\u8bc0, ONLY the travel stage. Visual design: \u4e0a\u65b9\u96f7\u4e91\u805a\u96f7\uff0c\u5782\u76f4\u96f7\u67f1\u5411\u4e0b. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S007 雷引诀, ONLY the travel stage. Visual design: 上方雷云聚雷，垂直雷柱向下. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -461,7 +461,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S007_hit-v4.png",
         "sourceSha256": "b6e51992107d9a9cffbf5238c733cadfb2cb1257a6a14f58e661102002ee72ce",
-        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S007 \u96f7\u5f15\u8bc0: compact blue-white electrical contact flash at the center, short branching arcs around it, a short narrow VERTICAL lightning segment wholly inside each cell. NO full-height column entering from outside the cell. 16 frames, 4 rows: flash begins, expands into arcs, then dissipates. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S007 雷引诀: compact blue-white electrical contact flash at the center, short branching arcs around it, a short narrow VERTICAL lightning segment wholly inside each cell. NO full-height column entering from outside the cell. 16 frames, 4 rows: flash begins, expands into arcs, then dissipates. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
         "references": [
           "E:/0.6.0/output/beast-overhaul/spell-candidates/S007_hit-v1.png"
         ],
@@ -515,7 +515,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S008_cast-v1.png",
         "sourceSha256": "c740ab4e0b03d2251495ba9d2021392a03ce1ed03558c632cc5fffa2b3f74f03",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 \u7384\u9634\u7f1a, ONLY the cast stage. Visual design: \u9ed1\u7d2b\u9634\u7eb9\u805a\u6210\u73af. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 玄阴缚, ONLY the cast stage. Visual design: 黑紫阴纹聚成环. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -567,7 +567,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S008_travel-v1.png",
         "sourceSha256": "6920a5241cde2d7fb28404987a79cd5c394cb916ec7a9885b2b213bf06d2fc17",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 \u7384\u9634\u7f1a, ONLY the travel stage. Visual design: \u56f4\u7ed5\u8eab\u4f53\u951a\u70b9\u7684\u9634\u7eb9\u5c55\u5f00\uff0c\u4e0d\u753b\u4eba\u4f53. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S008 玄阴缚, ONLY the travel stage. Visual design: 围绕身体锚点的阴纹展开，不画人体. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -723,7 +723,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S009_cast-v1.png",
         "sourceSha256": "4c28e19e8087837692d44fe1ff007b8a72b971901e001b81defc567803a3d91c",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 \u9633\u534e\u7834\u969c, ONLY the cast stage. Visual design: \u91d1\u767d\u9633\u7eb9\u6210\u73af. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 阳华破障, ONLY the cast stage. Visual design: 金白阳纹成环. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -775,7 +775,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S009_travel-v1.png",
         "sourceSha256": "1fb368f89d2ac134bd1572f3eebfd63a9162e38decab919ee18ad1231ca847e7",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 \u9633\u534e\u7834\u969c, ONLY the travel stage. Visual design: \u6c34\u5e73\u5411\u53f3\u7684\u91d1\u767d\u5149\u675f. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S009 阳华破障, ONLY the travel stage. Visual design: 水平向右的金白光束. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -931,7 +931,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S010_cast-v1.png",
         "sourceSha256": "51d190dbd69ec2ad2e71641f0e6d89158b2e21d10cc615802663bfcd812a51ae",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the cast stage. Visual design: \u4e94\u884c\u5370\u6309\u987a\u5e8f\u4eae\u8d77. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 五行轮转, ONLY the cast stage. Visual design: 五行印按顺序亮起. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -983,7 +983,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S010_travel-v1.png",
         "sourceSha256": "76b8fd63a4142393a93b2ac4891131f987d2d713def21bab8cb41694e071075e",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the travel stage. Visual design: \u811a\u4e0b\u4e94\u884c\u6cd5\u9635\u9010\u6b65\u5c55\u5f00\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 五行轮转, ONLY the travel stage. Visual design: 脚下五行法阵逐步展开，斜俯视. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1035,7 +1035,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S010_hit-v1.png",
         "sourceSha256": "3f8c6cfc70aa4415064a3ddc9860e168ad613c59b2897c55750b2e5d876c4bd6",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 \u4e94\u884c\u8f6e\u8f6c, ONLY the hit stage. Visual design: \u4e94\u884c\u8f6e\u8f6c\u6cd5\u9635\u4e2d\u5fc3\u7206\u53d1. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S010 五行轮转, ONLY the hit stage. Visual design: 五行轮转法阵中心爆发. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1087,7 +1087,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S012_cast-v1.png",
         "sourceSha256": "5e71dc8d4eef3e505fa7336373ba60066bf16c984cafba8d0144be281d4e51a7",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S012 \u4e07\u8c61\u5f52\u4e00, ONLY the cast stage. Visual design: \u5468\u56f4\u7075\u5149\u5411\u4e2d\u5fc3\u805a\u5408. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S012 万象归一, ONLY the cast stage. Visual design: 周围灵光向中心聚合. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1139,7 +1139,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S012_travel-v4.png",
         "sourceSha256": "f93112c399398d24d280457c23187f35b76a027c1e00d4fd5809d9bc37e25d95",
-        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S012 \u4e07\u8c61\u5f52\u4e00: silver-blue and pale-gold wisps converge symmetrically into a small central yin-yang light orb, compressing inward over 8 frames, TWO rows. Stationary centered compression; NEVER a projectile, arrowhead, flight trail, comet, or one-way movement. Final orb smaller and brighter than first frame. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S012 万象归一: silver-blue and pale-gold wisps converge symmetrically into a small central yin-yang light orb, compressing inward over 8 frames, TWO rows. Stationary centered compression; NEVER a projectile, arrowhead, flight trail, comet, or one-way movement. Final orb smaller and brighter than first frame. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
         "references": [
           "E:/0.6.0/output/beast-overhaul/spell-candidates/S012_travel-v1.png"
         ],
@@ -1297,7 +1297,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S013_cast-v1.png",
         "sourceSha256": "1425df2caf07f4eea74c986db9619f5c274a283f74f3a1b1f87b2f8717b3c704",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the cast stage. Visual design: \u51b0\u6676\u51dd\u6210\u9510\u7ec6\u51b0\u9488. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 霜针诀, ONLY the cast stage. Visual design: 冰晶凝成锐细冰针. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1349,7 +1349,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S013_travel-v1.png",
         "sourceSha256": "adfc871ac8c8e67324502c18b8c36ccd95ef2c7d9fe1b8bf3b03e9936ef4a75e",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u51b0\u9488\uff0c\u51b0\u5c51\u5c3e\u8ff9\u5411\u5de6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 霜针诀, ONLY the travel stage. Visual design: 向右飞行的冰针，冰屑尾迹向左. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1401,7 +1401,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S013_hit-v1.png",
         "sourceSha256": "bfc19fd24bcd5e6c164769a77aa4be5d8709abbccc1d51e8c168f3da9b0e37a2",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 \u971c\u9488\u8bc0, ONLY the hit stage. Visual design: \u971c\u82b1\u7efd\u5f00\u4e0e\u77ed\u6682\u51b0\u7eb9. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S013 霜针诀, ONLY the hit stage. Visual design: 霜花绽开与短暂冰纹. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1453,7 +1453,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S015_cast-v1.png",
         "sourceSha256": "4089c26ecb0c87534d08fc43ff731759e27967889227ed9973f3a07245840419",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the cast stage. Visual design: \u5f27\u5f62\u98ce\u5203\u51dd\u805a. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 巽风刃, ONLY the cast stage. Visual design: 弧形风刃凝聚. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1505,7 +1505,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S015_travel-v1.png",
         "sourceSha256": "355372549b33583f94a4bffaed7466ab6826338ae559b9d97be781c0ef5f95ac",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u5355\u679a\u5f27\u5f62\u98ce\u5203\uff0c\u4e0d\u753b\u4e24\u76ee\u6807. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 巽风刃, ONLY the travel stage. Visual design: 向右飞行的单枚弧形风刃，不画两目标. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1557,7 +1557,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S015_hit-v1.png",
         "sourceSha256": "ae9c6808fb56cd18a66589edb3484f8a802d15917f405c602645284dd5ff7a07",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 \u5dfd\u98ce\u5203, ONLY the hit stage. Visual design: \u98ce\u5203\u5207\u5f00\u540e\u7684\u65cb\u6d41\u788e\u5c51. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S015 巽风刃, ONLY the hit stage. Visual design: 风刃切开后的旋流碎屑. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1609,7 +1609,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S016_cast-v1.png",
         "sourceSha256": "cfc9ef73ef2b00fd05de67bb561c0e847c9235ac186b18450f6c0f94693900e5",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the cast stage. Visual design: \u7ec6\u5c0f\u9752\u85e4\u7b26\u7eb9\u840c\u751f. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 青藤缚, ONLY the cast stage. Visual design: 细小青藤符纹萌生. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1661,7 +1661,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S016_travel-v1.png",
         "sourceSha256": "b3410ff8312ed5e45f2f7f2f76ce0f9074fa87134de17ccff6813864193f678e",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the travel stage. Visual design: \u811a\u4e0b\u85e4\u7eb9\u5c55\u5f00\uff0c\u9752\u85e4\u5347\u8d77\uff0c\u4e0d\u753b\u4eba\u4f53. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 青藤缚, ONLY the travel stage. Visual design: 脚下藤纹展开，青藤升起，不画人体. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1713,7 +1713,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S016_hit-v1.png",
         "sourceSha256": "ebbfac7a299bc228040ba97f0e058de540faff14be26fae8f0895146d943ffb0",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 \u9752\u85e4\u7f1a, ONLY the hit stage. Visual design: \u9752\u85e4\u56f4\u7ed5\u8eab\u4f53\u951a\u70b9\u5408\u62e2\u5e76\u6d88\u6563. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S016 青藤缚, ONLY the hit stage. Visual design: 青藤围绕身体锚点合拢并消散. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 16 frames, FOUR equal columns and 4 equal rows, aspect ratio 1:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x768; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1765,7 +1765,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S017_cast-v1.png",
         "sourceSha256": "a938f77c94ab3bdf7bc41c2548302f05b3ceb0c88873d18b809347568d329a73",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the cast stage. Visual design: \u7d2b\u96f7\u5370\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 紫霄破甲, ONLY the cast stage. Visual design: 紫雷印成形. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1817,7 +1817,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S017_travel-v1.png",
         "sourceSha256": "bc0aa78d62f4893c63fd6d10e85311bfdee0615884dea6aa6ea855c9f0f38eec",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the travel stage. Visual design: \u5411\u53f3\u98de\u884c\u7684\u7d2b\u8272\u96f7\u77db. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 紫霄破甲, ONLY the travel stage. Visual design: 向右飞行的紫色雷矛. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1869,7 +1869,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S017_hit-v1.png",
         "sourceSha256": "c94379cce6e0cd417e420d232058204b557ec2cbae87d338037b2d4102ea6b67",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 \u7d2b\u9704\u7834\u7532, ONLY the hit stage. Visual design: \u96f7\u77db\u523a\u5165\u540e\u7684\u7834\u7532\u88c2\u7eb9. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S017 紫霄破甲, ONLY the hit stage. Visual design: 雷矛刺入后的破甲裂纹. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1921,7 +1921,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S019_cast-v1.png",
         "sourceSha256": "01092dba7703857921b2c47506a3cadfa89d942f1df5340afd89910327ae73d2",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the cast stage. Visual design: \u73af\u5f62\u706b\u8f6e\u9010\u6b65\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 离火轮, ONLY the cast stage. Visual design: 环形火轮逐步成形. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -1973,7 +1973,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S019_travel-v1.png",
         "sourceSha256": "260d00244fa9982bf6a9cd0059f888d4363df11e745afdb5f9c9d379453ba049",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the travel stage. Visual design: \u76ee\u6807\u811a\u4e0b\u533a\u57df\u706b\u8f6e\u56de\u65cb\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 离火轮, ONLY the travel stage. Visual design: 目标脚下区域火轮回旋，斜俯视. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2025,7 +2025,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S019_hit-v1.png",
         "sourceSha256": "d29d3d2783d706bb5d1e618ca84f55ee6e9b816c0ea406198585394a3b67dab5",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 \u79bb\u706b\u8f6e, ONLY the hit stage. Visual design: \u707c\u7130\u4ece\u706b\u8f6e\u4e2d\u5fc3\u7edf\u4e00\u7206\u53d1. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S019 离火轮, ONLY the hit stage. Visual design: 灼焰从火轮中心统一爆发. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2077,7 +2077,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S021_cast-v1.png",
         "sourceSha256": "3f85cccc78880504a5933b4a029bab6bf2754d744766a51fc2cad3a037d829ed",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the cast stage. Visual design: \u6708\u5f71\u6cd5\u5370\u6210\u5f62. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 太阴摄魂, ONLY the cast stage. Visual design: 月影法印成形. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2129,7 +2129,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S021_travel-v1.png",
         "sourceSha256": "9b4422ab2aa2ba885ca93d2eb663bd22571223585d85df021972c54d3c13e84c",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the travel stage. Visual design: \u6708\u5f71\u7275\u51fa\u9634\u5149\u56f4\u7ed5\u8eab\u4f53\u951a\u70b9. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 太阴摄魂, ONLY the travel stage. Visual design: 月影牵出阴光围绕身体锚点. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2181,7 +2181,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S021_hit-v1.png",
         "sourceSha256": "4159b6b1e604cc2486d198940a7805d480858a7aba30d63c0c67dff2f1220f4c",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 \u592a\u9634\u6444\u9b42, ONLY the hit stage. Visual design: \u9b42\u7eb9\u5411\u4e2d\u5fc3\u6536\u7d27\uff0c\u4e0d\u753b\u4eba\u7269\u7075\u9b42. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S021 太阴摄魂, ONLY the hit stage. Visual design: 魂纹向中心收紧，不画人物灵魂. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2233,7 +2233,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S022_cast-v1.png",
         "sourceSha256": "85d5b6d600b0a7ccdcfb7e53d0f1b98f372d93ee5fcd781d9b61fab5d72ec135",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the cast stage. Visual design: \u661f\u4f4d\u7b26\u5370\u9010\u4e00\u4eae\u8d77. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 星移剑阵, ONLY the cast stage. Visual design: 星位符印逐一亮起. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2285,7 +2285,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S022_travel-v1.png",
         "sourceSha256": "c2a816704103ea54753a84693ed6016cbfa038fea3acca10f2b1d590651005e2",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the travel stage. Visual design: \u76ee\u6807\u533a\u57df\u661f\u4f4d\u5c55\u5f00\u3001\u98de\u5251\u6309\u9635\u4f4d\u843d\u4e0b\uff0c\u659c\u4fef\u89c6. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 星移剑阵, ONLY the travel stage. Visual design: 目标区域星位展开、飞剑按阵位落下，斜俯视. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2337,7 +2337,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S022_hit-v1.png",
         "sourceSha256": "3146c1ef285d51a18ddce23cd4d7dfacbf23ee9be4b6fcccafda34a235bd60b1",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 \u661f\u79fb\u5251\u9635, ONLY the hit stage. Visual design: \u5251\u9635\u7edf\u4e00\u51b2\u51fb\u6ce2\u4e0e\u661f\u5149\u788e\u7247. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S022 星移剑阵, ONLY the hit stage. Visual design: 剑阵统一冲击波与星光碎片. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2389,7 +2389,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S023_cast-v1.png",
         "sourceSha256": "49e74268d71b4f3ae021bcd660bd91d9810586e9f980f41da854553278e3624f",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the cast stage. Visual design: \u5730\u9762\u9547\u57df\u5370\u6210\u5f62\uff0c\u659c\u4fef\u89c6. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 乾坤镇域, ONLY the cast stage. Visual design: 地面镇域印成形，斜俯视. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2441,7 +2441,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S023_travel-v1.png",
         "sourceSha256": "ca06ff4e09f5c1fa215e770f3db926bf0d2e6b99c92e1851cfc6d09c2d11c7fe",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the travel stage. Visual design: \u9547\u57df\u8fb9\u754c\u9010\u6b65\u5347\u8d77\uff0c\u4e2d\u592e\u7eb9\u7406\u51dd\u805a. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 乾坤镇域, ONLY the travel stage. Visual design: 镇域边界逐步升起，中央纹理凝聚. A coherent looping motion or a gradually unfolding array. For horizontal projectiles, point RIGHT in every frame, tail LEFT, fixed projectile core and scale. For ground arrays, fixed slight top-down perspective and stable ground-center pivot. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2493,7 +2493,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S023_hit-v1.png",
         "sourceSha256": "b648e56e9f5218363181531c61fe7826c0e2cddb6fdc68be32d7d43e93289431",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 \u4e7e\u5764\u9547\u57df, ONLY the hit stage. Visual design: \u4e2d\u592e\u9547\u538b\u6ce2\u6cbf\u5730\u9762\u6269\u6563. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S023 乾坤镇域, ONLY the hit stage. Visual design: 中央镇压波沿地面扩散. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2545,7 +2545,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S026_cast-v1.png",
         "sourceSha256": "5238eb8cfa339126c57fd5f9ff0ccf4aaa14103cfe5749f6e6386e34c7fd1bec",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 \u592a\u521d\u5bc2\u5149, ONLY the cast stage. Visual design: \u767d\u91d1\u9633\u7eb9\u84c4\u4eae\u540e\u6536\u675f. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 太初寂光, ONLY the cast stage. Visual design: 白金阳纹蓄亮后收束. Chronological sequence of small scattered sparks or sigil fragments gathering and condensing into a completed compact form. Exactly 8 frames, FOUR equal columns and 2 equal rows, aspect ratio 2:1, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x384; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2597,7 +2597,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S026_travel-v4.png",
         "sourceSha256": "2c86b630ac7cee3a268ecd4569523715ad283442129be13110aa26e5e492ba11",
-        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S026 \u592a\u521d\u5bc2\u5149: WHITE and PALE GOLD straight horizontal radiant beam, pointed light tip RIGHT, subtle thin white-gold ray trailing LEFT, a clean narrow continuous line, no physical sword or swirling dark orb. 8 frames, TWO rows; beam width pulses subtly, stable straight orientation. NO purple, black, moon symbol, or comet body. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
+        "prompt": "Completely REDRAW the reference stage atlas to repair incorrect frame layout and clipped pieces. Reference is only for general Chinese cultivation pixel-shaded spell style; discard clipped remnants and wrong geometry. S026 太初寂光: WHITE and PALE GOLD straight horizontal radiant beam, pointed light tip RIGHT, subtle thin white-gold ray trailing LEFT, a clean narrow continuous line, no physical sword or swirling dark orb. 8 frames, TWO rows; beam width pulses subtly, stable straight orientation. NO purple, black, moon symbol, or comet body. Exact FOUR equal columns; sheet aspect 2:1 for TWO rows, 1:1 for FOUR rows, 2:3 for SIX rows. Every frame fixed at its exact cell center. Each entire sprite including glow ONLY fills central 55% width and height of its cell, surrounded by 22.5% empty transparent padding on EACH side. Fully separated sprites: no pixels crossing grid cells, no chopped fragments left at a neighboring frame's top or bottom. Do not use uneven rows or squeeze five rows into six. Smooth single chronological animation from left to right then top to bottom. Crisp clean shapes, restrained glow, no people, scenery, text, labels, grid lines, borders or checkerboard. True transparent alpha PNG.",
         "references": [
           "E:/0.6.0/output/beast-overhaul/spell-candidates/S026_travel-v1.png"
         ],
@@ -2651,7 +2651,7 @@
         "tool": "built-in-imagegen",
         "source": "output/beast-overhaul/generated-spell-originals/S026_hit-v1.png",
         "sourceSha256": "fe326ff9c55cc071cd651a30cbec70d81f463d0a36a3274e3877ed9959d9c873",
-        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 \u592a\u521d\u5bc2\u5149, ONLY the hit stage. Visual design: \u77ed\u6682\u767d\u91d1\u5149\u75d5\u3001\u7a7a\u95f4\u88c2\u7eb9\u4e0e\u8870\u51cf\u5149\u5c51. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
+        "prompt": "Create ONE independent production spell-animation atlas for Chinese cultivation pixel game: S026 太初寂光, ONLY the hit stage. Visual design: 短暂白金光痕、空间裂纹与衰减光屑. One continuous impact sequence: contact flash, expansion, peak, fading and sparse final particles. Each frame is a distinct successive instant. No repeated impacts and no repeated full-intensity peak. Exactly 24 frames, FOUR equal columns and 6 equal rows, aspect ratio 2:3, chronological left-to-right then top-to-bottom. Equal square cells, exact fixed center pivot. ALL content including faint glow must fit inside the central 70% of EACH cell, leaving 15% truly empty transparent margin on each side; no clipping, no cross-cell glow or stray pixels. The complete grid must fill the canvas evenly with no extra outer title area. Crisp shaded pixel-art silhouette, restrained tiny highlights and clean palette, Chinese xianxia spell vocabulary. Each spell has its own specific geometry; no recoloring a generic explosion. No rocky chunks except earth-themed effects. No people, landscapes, readable text, numbering, grid lines, borders, watermark, or painted checkerboard. TRUE transparent alpha PNG. Target installation cells 192x192, sheet 768x1152; native larger output is fine if the exact grid and aspect are maintained.",
         "references": [],
         "revision": 1,
         "conversion": {
@@ -2670,6 +2670,626 @@
         ],
         "frameOrder": "left-to-right-top-to-bottom"
       }
+    },
+    {
+      "id": "S002_cast",
+      "spell": "S002",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S002/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "S002 青木回春 cast: eight frames, jade leaves and healing life motes condense luminous bud; referenced S016/cast.",
+      "sha256": "82bd7e228fbe2656370e762a1d347503151ff1c29274ec526c3b57404fdc544c",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S002_cast.png",
+        "sourceSha256": "650dce5c3a3b6a93f76aefc2d4995ceef0d2b22e04ec93b67a29b2bde5a42b5f",
+        "prompt": "S002 青木回春 cast: eight frames, jade leaves and healing life motes condense luminous bud; referenced S016/cast.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8993288590604027,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S002_hit",
+      "spell": "S002",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S002/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Generate a TRANSPARENT PNG game sprite sheet. Exactly SIX COLUMNS and FOUR ROWS, 24 isolated small sprites on a transparent canvas. Wide landscape 3:2 aspect ratio. The grid is only implicit; no borders or lines. Every sprite centered in its equal SQUARE cell, ample empty padding. Chinese xianxia healing spell S002: jade green leaves opening around pale golden life seed then dissolving to tiny motes. READ LEFT TO RIGHT: row1 six frames faint particles grow into leafy vortex; row2 six frames vortex unfolds into healing flower; row3 six frames flower softly pulses then begins dissolving; row4 six frames leaf fragments fade to almost nothing. Match supplied reference crisp shaded pixel art. NO ambient haze. NO background. NO scene. NO colored canvas. Completely clear gutters. ALL sprite pixels including glow confined to central60% of cell. You must output actual alpha transparency. Each frame stays aligned around cell center. Only sprites, NO captions.",
+      "sha256": "841826862530c4d1fcbfd8ccc9166a11739ab358ae6656d0656ec2315cb68042",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S002_hit.png",
+        "sourceSha256": "bbde515a553b6f6b8173219c1a1735eaee06dfaa88f7d3f9351f8928d42bc561",
+        "prompt": "Generate a TRANSPARENT PNG game sprite sheet. Exactly SIX COLUMNS and FOUR ROWS, 24 isolated small sprites on a transparent canvas. Wide landscape 3:2 aspect ratio. The grid is only implicit; no borders or lines. Every sprite centered in its equal SQUARE cell, ample empty padding. Chinese xianxia healing spell S002: jade green leaves opening around pale golden life seed then dissolving to tiny motes. READ LEFT TO RIGHT: row1 six frames faint particles grow into leafy vortex; row2 six frames vortex unfolds into healing flower; row3 six frames flower softly pulses then begins dissolving; row4 six frames leaf fragments fade to almost nothing. Match supplied reference crisp shaded pixel art. NO ambient haze. NO background. NO scene. NO colored canvas. Completely clear gutters. ALL sprite pixels including glow confined to central60% of cell. You must output actual alpha transparency. Each frame stays aligned around cell center. Only sprites, NO captions.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8993288590604027,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S003_cast",
+      "spell": "S003",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S003/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "NEW production transparent sprite animation atlas: S003 水镜护身, CAST preparation. Match supplied WorldBox Chinese cultivation staged spell atlas style: readable crisp shaded pixel silhouettes, layered highlights, restrained glow. Spell identity: an upright translucent circular WATER MIRROR, liquid silver-blue rim, concentric ripples, watery protective surface, tiny suspended droplets; not snow or ice. Exactly FOUR equal columns x TWO equal rows, EIGHT chronological frames, wide canvas 2:1. Begin with faint particles, smoothly condense the spell motif, final frame ready for beneficial manifestation. Read left-to-right then top-to-bottom. Fixed exact cell center, no per-frame camera motion. Keep ALL visible pixels and glow within central 68% of EACH cell, with at least16% empty transparent margin on EVERY side. Genuine transparent alpha backdrop. No checkerboard, matte, background, ground, characters, text, grid lines, borders, numbers or UI. Independent design, not a recolor or duplicate reference. No projectile or violent impact. Full single atlas only.",
+      "sha256": "ab18050b5262aeec958f5c827cc998647f4bc24422997f32dcc40b077a1c76e5",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S003_cast.png",
+        "sourceSha256": "5c2c96452c8fa0fdfba18e76d2e74c66d663e665a7a1e06c8713bdc65cdfb341",
+        "prompt": "NEW production transparent sprite animation atlas: S003 水镜护身, CAST preparation. Match supplied WorldBox Chinese cultivation staged spell atlas style: readable crisp shaded pixel silhouettes, layered highlights, restrained glow. Spell identity: an upright translucent circular WATER MIRROR, liquid silver-blue rim, concentric ripples, watery protective surface, tiny suspended droplets; not snow or ice. Exactly FOUR equal columns x TWO equal rows, EIGHT chronological frames, wide canvas 2:1. Begin with faint particles, smoothly condense the spell motif, final frame ready for beneficial manifestation. Read left-to-right then top-to-bottom. Fixed exact cell center, no per-frame camera motion. Keep ALL visible pixels and glow within central 68% of EACH cell, with at least16% empty transparent margin on EVERY side. Genuine transparent alpha backdrop. No checkerboard, matte, background, ground, characters, text, grid lines, borders, numbers or UI. Independent design, not a recolor or duplicate reference. No projectile or violent impact. Full single atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8589743589743589,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S003_hit",
+      "spell": "S003",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S003/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "NEW production transparent sprite animation atlas: S003 水镜护身, BENEFICIAL EFFECT manifestation and fade. Match supplied WorldBox Chinese cultivation staged spell atlas style: readable crisp shaded pixel silhouettes, layered highlights, restrained glow. Spell identity: an upright translucent circular WATER MIRROR, liquid silver-blue rim, concentric ripples, watery protective surface, tiny suspended droplets; not snow or ice. Exactly FOUR equal columns x SIX equal rows, TWENTY-FOUR chronological frames, portrait canvas 2:3. First four frames softly appear, next eight unfold into full beneficial motif, next six gently settle and pulse, final six dissolve coherently into very faint sparse motes; final frame nearly transparent. Read left-to-right then top-to-bottom. Fixed exact cell center, no per-frame camera motion. Keep ALL visible pixels and glow within central 68% of EACH cell, with at least16% empty transparent margin on EVERY side. Genuine transparent alpha backdrop. No checkerboard, matte, background, ground, characters, text, grid lines, borders, numbers or UI. Independent design, not a recolor or duplicate reference. No projectile or violent impact. Full single atlas only.",
+      "sha256": "106d12fd12f22e2cdca5529671600a643c32ce2f3d01156c60bd91764cd6f822",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S003_hit.png",
+        "sourceSha256": "b54c3e4d385b007dd9043b0ee558c3fed2711db6acc4360a3fcbe1792abcc5a9",
+        "prompt": "NEW production transparent sprite animation atlas: S003 水镜护身, BENEFICIAL EFFECT manifestation and fade. Match supplied WorldBox Chinese cultivation staged spell atlas style: readable crisp shaded pixel silhouettes, layered highlights, restrained glow. Spell identity: an upright translucent circular WATER MIRROR, liquid silver-blue rim, concentric ripples, watery protective surface, tiny suspended droplets; not snow or ice. Exactly FOUR equal columns x SIX equal rows, TWENTY-FOUR chronological frames, portrait canvas 2:3. First four frames softly appear, next eight unfold into full beneficial motif, next six gently settle and pulse, final six dissolve coherently into very faint sparse motes; final frame nearly transparent. Read left-to-right then top-to-bottom. Fixed exact cell center, no per-frame camera motion. Keep ALL visible pixels and glow within central 68% of EACH cell, with at least16% empty transparent margin on EVERY side. Genuine transparent alpha backdrop. No checkerboard, matte, background, ground, characters, text, grid lines, borders, numbers or UI. Independent design, not a recolor or duplicate reference. No projectile or violent impact. Full single atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8589743589743589,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S005_cast",
+      "spell": "S005",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S005/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "Create independent game sprite animation sheet for S005 厚土壁, preparation: ochre earthen slabs and small stone fragments rising into a compact curved protective wall, layered amber earth qi, grounded heavy stone shapes. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. EIGHT frames in EXACTLY FOUR columns TWO rows, 2:1 wide canvas. Faint spark -> compact energy gathering -> motif condensed. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+      "sha256": "deb4e1e670ea88bd084ae8a0348b782cfbde87a7f51c5de954b6e1eead2dba23",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S005_cast.png",
+        "sourceSha256": "c7059c1ab4035dcf53a653b58642cdfccf7b04ba0b48262a7e67654f8083a651",
+        "prompt": "Create independent game sprite animation sheet for S005 厚土壁, preparation: ochre earthen slabs and small stone fragments rising into a compact curved protective wall, layered amber earth qi, grounded heavy stone shapes. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. EIGHT frames in EXACTLY FOUR columns TWO rows, 2:1 wide canvas. Faint spark -> compact energy gathering -> motif condensed. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8023952095808383,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S005_hit",
+      "spell": "S005",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S005/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create independent game sprite animation sheet for S005 厚土壁, beneficial manifestation then dissolution: ochre earthen slabs and small stone fragments rising into a compact curved protective wall, layered amber earth qi, grounded heavy stone shapes. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. TWENTY FOUR frames in EXACTLY FOUR columns SIX rows, 2:3 portrait canvas. 4frames appear, 8 unfold, 6 settle, 6 dissolve to nearly invisible sparse motes. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+      "sha256": "fb2d928f2fd90edec8571abe0fd03c99e062f5658d777a01c2008e0818daca67",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S005_hit.png",
+        "sourceSha256": "7ad66ed562a7a508ac75f53a5f008488cfc33359fbaa4ad5aed0fab3f68b5aed",
+        "prompt": "Create independent game sprite animation sheet for S005 厚土壁, beneficial manifestation then dissolution: ochre earthen slabs and small stone fragments rising into a compact curved protective wall, layered amber earth qi, grounded heavy stone shapes. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. TWENTY FOUR frames in EXACTLY FOUR columns SIX rows, 2:3 portrait canvas. 4frames appear, 8 unfold, 6 settle, 6 dissolve to nearly invisible sparse motes. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8023952095808383,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S006_cast",
+      "spell": "S006",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S006/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "Create independent game sprite animation sheet for S006 御风行, preparation: lightweight emerald-white wind ribbons curling into two sweeping ankle-height arcs, flowing breeze trails and tiny air motes, clear open center, swift movement blessing. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. EIGHT frames in EXACTLY FOUR columns TWO rows, 2:1 wide canvas. Faint spark -> compact energy gathering -> motif condensed. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+      "sha256": "8503db702e34d1181a5462c76725868259cb3a505427e5ee9a27ee0a5f8066d2",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S006_cast.png",
+        "sourceSha256": "de9925e7b900f66efc4e82b0a9b5773dd8c6bb0fcd5bd4260ffccfeade9bdf88",
+        "prompt": "Create independent game sprite animation sheet for S006 御风行, preparation: lightweight emerald-white wind ribbons curling into two sweeping ankle-height arcs, flowing breeze trails and tiny air motes, clear open center, swift movement blessing. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. EIGHT frames in EXACTLY FOUR columns TWO rows, 2:1 wide canvas. Faint spark -> compact energy gathering -> motif condensed. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7127659574468085,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S006_hit",
+      "spell": "S006",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S006/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create independent game sprite animation sheet for S006 御风行, beneficial manifestation then dissolution: lightweight emerald-white wind ribbons curling into two sweeping ankle-height arcs, flowing breeze trails and tiny air motes, clear open center, swift movement blessing. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. TWENTY FOUR frames in EXACTLY FOUR columns SIX rows, 2:3 portrait canvas. 4frames appear, 8 unfold, 6 settle, 6 dissolve to nearly invisible sparse motes. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+      "sha256": "f268313d1c92842876a65d537a690e918cf580c41c9b5b4e543de0720d4ecf74",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S006_hit.png",
+        "sourceSha256": "88d4940a5eac14df782540ba7e0b53b5857ad57a151a79753286267be341b721",
+        "prompt": "Create independent game sprite animation sheet for S006 御风行, beneficial manifestation then dissolution: lightweight emerald-white wind ribbons curling into two sweeping ankle-height arcs, flowing breeze trails and tiny air motes, clear open center, swift movement blessing. Match supplied Chinese cultivation pixel-shaded spell style, NOT reference motif. TWENTY FOUR frames in EXACTLY FOUR columns SIX rows, 2:3 portrait canvas. 4frames appear, 8 unfold, 6 settle, 6 dissolve to nearly invisible sparse motes. Same fixed CENTER pivot in every cell; chronological left-right top-bottom. All sprites isolated CUTOUTS with REAL ALPHA TRANSPARENCY, completely empty zero-alpha gutters. NO ambient glow cloud, NO painted background, NO opaque or translucent full-sheet color wash, no checkerboard, no ground, no text, grid, characters, frame labels. Keep entire effect including tiny particles within central 64% of each cell, minimum18% EMPTY margin all four sides. Restrained local glow inside sprite silhouette only. Cohesive clean silhouettes, detailed pixel shading, coherent motion. Not a projectile, weapon or explosion; protective/movement blessing. Return full atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7127659574468085,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S011_cast",
+      "spell": "S011",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S011/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S011 咫尺遁光 preparation: violet-silver spatial light folding into a narrow portal-like shimmer with two short fading displaced light echoes, compact geometric spatial ripples, swift escape blessing. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+      "sha256": "f2c6a24abe3d07df942e4a198a1851d26dd18143fa7d7041b59a3609807452f7",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S011_cast.png",
+        "sourceSha256": "10d174159b3a8b123b4df0accb1ca5620b4d51fccc8d2b2bb1d236bf66fc065c",
+        "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S011 咫尺遁光 preparation: violet-silver spatial light folding into a narrow portal-like shimmer with two short fading displaced light echoes, compact geometric spatial ripples, swift escape blessing. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8701298701298701,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S011_hit",
+      "spell": "S011",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S011/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create full BENEFICIAL animation S011 咫尺遁光: violet-silver spatial light folding into a narrow portal-like shimmer with two short fading displaced light echoes, compact geometric spatial ripples, swift escape blessing. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+      "sha256": "6b5222b90620fa6a721a1a453fe7568de902a279dec71c294e5398b52f5c71f4",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S011_hit.png",
+        "sourceSha256": "46901f0173fbc9f611f430d6310af1322cec6acdd5f89dc801e6fc0d92e61c8b",
+        "prompt": "Create full BENEFICIAL animation S011 咫尺遁光: violet-silver spatial light folding into a narrow portal-like shimmer with two short fading displaced light echoes, compact geometric spatial ripples, swift escape blessing. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.8701298701298701,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S014_cast",
+      "spell": "S014",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S014/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S014 纳灵术 preparation: many small turquoise spirit motes and thin jade light streams converging inward into a bright pearl, quiet breathing energy absorption, delicate open spiral. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+      "sha256": "6e93c5fbc49a39d71510ba39a57a976dbfbdcc2f0667e238aab50b65873b7739",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S014_cast.png",
+        "sourceSha256": "86454158b4f7066ecf8cd2cd04db2a7c58d2bb16f6ac4bf27e57af39710bde65",
+        "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S014 纳灵术 preparation: many small turquoise spirit motes and thin jade light streams converging inward into a bright pearl, quiet breathing energy absorption, delicate open spiral. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7976190476190477,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S014_hit",
+      "spell": "S014",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S014/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create full BENEFICIAL animation S014 纳灵术: many small turquoise spirit motes and thin jade light streams converging inward into a bright pearl, quiet breathing energy absorption, delicate open spiral. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+      "sha256": "5e13bab354085a50745975f2412ade9e3ec26f3ac829386204faf4ed1eae3cf3",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S014_hit.png",
+        "sourceSha256": "ffb253987c0a8a2e14969c5918cbd79cd37c030163f5043230304a11c0b19d0c",
+        "prompt": "Create full BENEFICIAL animation S014 纳灵术: many small turquoise spirit motes and thin jade light streams converging inward into a bright pearl, quiet breathing energy absorption, delicate open spiral. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7976190476190477,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S018_cast",
+      "spell": "S018",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S018/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S018 灵泉归元 preparation: a small turquoise healing spring rising as a gentle fountain, silver-blue droplets cascading into concentric restorative water rings, healing and mana renewal. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+      "sha256": "401ef4d2710517b85e15a9866ff1bf229e6483b7bdfed94021e0663e66920795",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S018_cast.png",
+        "sourceSha256": "d655c9978425ab247d4d624a4528d77f5e839c0483f081c8c577bf75842c6632",
+        "prompt": "Create NEW transparent WorldBox xianxia game spell sprite sheet S018 灵泉归元 preparation: a small turquoise healing spring rising as a gentle fountain, silver-blue droplets cascading into concentric restorative water rings, healing and mana renewal. Reference ONLY supplied pixel-shaded art style, create independent spell-specific artwork. EXACTLY FOUR COLUMNS and TWO ROWS, EIGHT chronologically ordered frames. WIDE LANDSCAPE2:1 canvas, each cell square. Small faint fragments condense into this spell's motif over8frames. Fixed cell-center pivot, equal motif scale, coherent smooth changes. Each entire sprite within middle60% of its cell with20% FULLY TRANSPARENT padding all4sides. Actual alpha transparency like supplied sheet; empty gutters, no ambient haze or background wash. No characters, letters, lines, frame labels, scenery, weapon or projectile. Clear pixel-shaded silhouette, restrained highlights. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.864516129032258,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S018_hit",
+      "spell": "S018",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S018/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create full BENEFICIAL animation S018 灵泉归元: a small turquoise healing spring rising as a gentle fountain, silver-blue droplets cascading into concentric restorative water rings, healing and mana renewal. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+      "sha256": "320ab97895d798d599d260111a18048f1ecbe202798da9ce0dd7559dbfb17c4f",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S018_hit.png",
+        "sourceSha256": "c70749ee0c7f117c2f9883d5d5df9d6e8b7b839ee65915f056787c05c4a93bd3",
+        "prompt": "Create full BENEFICIAL animation S018 灵泉归元: a small turquoise healing spring rising as a gentle fountain, silver-blue droplets cascading into concentric restorative water rings, healing and mana renewal. Match supplied reference design palette and pixel-shaded WorldBox xianxia style, with refined clear shape, restrained lighting. EXACTLY FOUR COLUMNS by SIX ROWS =24 sequential frames, PORTRAIT2:3 canvas, equal SQUARE cells. row1 begins at compact reference final motif and unfolds; rows2-3 full beneficial energy, row4 gently settles, row5 fragments and dissipates, row6 very few small fragments ending one tiny mote. Fixed cell center. No weapons/projectiles or damage explosion. Entire sprite and glow confined to central60% each cell with20%padding. TRUE transparent background with NO atmosphere, coloredwash, whitebackground or fog. No text, gridlines, characters, scenery or marks. Unique independent spell artwork, coherent 24frame motion. Output atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.864516129032258,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S020_cast",
+      "spell": "S020",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S020/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "NEW sprite sheet S020 山岳护体, CAST phase: a dark amber miniature mountain silhouette with layered rocky facets inside a compact gold-brown protective halo, solid solemn mountain aura. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+      "sha256": "36af33f676a75e37c78ef6471c90f96c35f8238398498abf824b41f770ff6417",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S020_cast.png",
+        "sourceSha256": "c03964fa7250136f13f454aded249bfb1aada8084207dd29cf4d624521258899",
+        "prompt": "NEW sprite sheet S020 山岳护体, CAST phase: a dark amber miniature mountain silhouette with layered rocky facets inside a compact gold-brown protective halo, solid solemn mountain aura. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.881578947368421,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S020_hit",
+      "spell": "S020",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S020/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create24frame BENEFICIAL manifestation sprite animation S020 山岳护体: a dark amber miniature mountain silhouette with layered rocky facets inside a compact gold-brown protective halo, solid solemn mountain aura. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+      "sha256": "97e69eaf23af3533ced27211af1a42d2c95ae742f67af606fbe9bb131c7a1f89",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S020_hit.png",
+        "sourceSha256": "a3558b9b4e20971927dc4350d1c6257116368d1f760df8f7697f5eeeefb3a276",
+        "prompt": "Create24frame BENEFICIAL manifestation sprite animation S020 山岳护体: a dark amber miniature mountain silhouette with layered rocky facets inside a compact gold-brown protective halo, solid solemn mountain aura. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.881578947368421,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S024_cast",
+      "spell": "S024",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S024/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "NEW sprite sheet S024 五行化生, CAST phase: five distinct elemental strands gold green blue red ochre orbiting a luminous white-green seed, fivefold balanced circular arrangement transforms into blossoming life light. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+      "sha256": "d0784f1cb1f4160613780074ffa0866e078a7f14227303a2b457792e61e6a5dc",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S024_cast.png",
+        "sourceSha256": "73e22138692ee0b673c824a8f07a128293cd1ee9d545a176e7763cea00677650",
+        "prompt": "NEW sprite sheet S024 五行化生, CAST phase: five distinct elemental strands gold green blue red ochre orbiting a luminous white-green seed, fivefold balanced circular arrangement transforms into blossoming life light. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.788235294117647,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S024_hit",
+      "spell": "S024",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S024/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create24frame BENEFICIAL manifestation sprite animation S024 五行化生: five distinct elemental strands gold green blue red ochre orbiting a luminous white-green seed, fivefold balanced circular arrangement transforms into blossoming life light. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+      "sha256": "bd1277a1da2982077b105ecbfecedf163711ec020685c2ec9407712b33f5edf4",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S024_hit.png",
+        "sourceSha256": "2a4cb54583a904aa7d2b6e6e98772fba2d37fbf00efc0ccf5d9e7538823c0706",
+        "prompt": "Create24frame BENEFICIAL manifestation sprite animation S024 五行化生: five distinct elemental strands gold green blue red ochre orbiting a luminous white-green seed, fivefold balanced circular arrangement transforms into blossoming life light. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 128,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.788235294117647,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 8
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S025_cast",
+      "spell": "S025",
+      "phase": "cast",
+      "path": "GameResources/effects/Spells/Stages/S025/cast.png",
+      "width": 768,
+      "height": 384,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 8,
+      "anchor": "caster",
+      "status": "offline-reviewed",
+      "prompt": "NEW sprite sheet S025 万灵回天, CAST phase: a radiant jade-gold many-petaled healing lotus opening with upward leaf-shaped life sparks, majestic restorative blessing, warm central light, no weapon or projectile. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+      "sha256": "0738f3726f2d97d1bfd1f73f88f9b45d91faeae7eefcb48ff6567d4a38b7fe83",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S025_cast.png",
+        "sourceSha256": "1b1f47d9762585df9b76bc39e7561289b81e8b7356421c54b5cbfd0d8e086403",
+        "prompt": "NEW sprite sheet S025 万灵回天, CAST phase: a radiant jade-gold many-petaled healing lotus opening with upward leaf-shaped life sparks, majestic restorative blessing, warm central light, no weapon or projectile. Chinese cultivation WorldBox clean shaded pixel-art style matching supplied reference only. Exactly FOUR COLUMNS by TWO ROWS =8frames on wide landscape2:1 TRANSPARENT canvas. Each cell is square, fixed center pivot, all visible artwork in middle60% with20% empty transparent padding. Coherent energy forms from faint fragments to fully gathered spell. Real alpha transparent empty backdrop and gutters just like reference, no global fog, no colored canvas, no text, no grid, characters or scene. Spell-specific independent design not recolor. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7657142857142857,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 0
+        }
+      },
+      "unityRetested": false
+    },
+    {
+      "id": "S025_hit",
+      "spell": "S025",
+      "phase": "hit",
+      "path": "GameResources/effects/Spells/Stages/S025/hit.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "anchor": "beneficiary",
+      "status": "offline-reviewed",
+      "prompt": "Create24frame BENEFICIAL manifestation sprite animation S025 万灵回天: a radiant jade-gold many-petaled healing lotus opening with upward leaf-shaped life sparks, majestic restorative blessing, warm central light, no weapon or projectile. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+      "sha256": "4da4f578e0e73776a1d4d2c43095ac6b6cee946c64681b3a0002aa77434c8eda",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/support-spell-upgrade/generated-originals/S025_hit.png",
+        "sourceSha256": "bac55725087b87f4aba4011aff7dc7976ca43f3af17ad81f243cafe84c0128d1",
+        "prompt": "Create24frame BENEFICIAL manifestation sprite animation S025 万灵回天: a radiant jade-gold many-petaled healing lotus opening with upward leaf-shaped life sparks, majestic restorative blessing, warm central light, no weapon or projectile. Use reference same spell identity palette pixel-shaded style. EXACTLY4COLUMNS x6ROWS, equal SQUARE cells, PORTRAIT2:3. row1 compact final reference motif unfolds, rows2-3 fully manifested, row4 settles, row5 fragments, row6 few tiny fragments disappear down to1mote. Consistent fixed cell center, no camera changes. All artwork central60% percell20%empty padding. Transparent alpha backdrop, no atmosphere, coloredwash, diffuse background fog or white matte. Clean readable shaded pixel silhouettes, restrained highlights, independent motif. No text, borders, characters, scenery, projectile or damage burst. Return atlas only.",
+        "conversion": {
+          "tool": "Pillow",
+          "alphaCutoff": 32,
+          "premultipliedResize": true,
+          "sharedSpellScale": 0.7657142857142857,
+          "centerPivot": true,
+          "minimumPaddingPixels": 27,
+          "sourceTimelineStartFrame": 4
+        }
+      },
+      "unityRetested": false
     }
   ]
 }

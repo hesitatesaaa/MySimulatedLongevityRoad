@@ -9,7 +9,7 @@ namespace MySimulatedLongevityRoad.Systems;
 
 /// <summary>
 /// Stable, event-driven sources for crafting materials. Ordinary activity is checked
-/// once in the existing annual actor pipeline; all other entry points are successful
+/// once every two years in the annual actor pipeline; all other entry points are successful
 /// reward events, never per-frame scans.
 /// </summary>
 internal static class MclslMaterialDiscovery
@@ -19,9 +19,13 @@ internal static class MclslMaterialDiscovery
     private const int AnnualXuanChance = 30;   // 0.30% per material
     private const int RuinHuangChance = 800;  // 8% per material
     private const int RuinXuanChance = 300;  // 3% per material
+    // A07（聚灵髓）随机选中后的保留率：25%（期望产出降低 75%）。只作用于随机入口，
+    // 使用与其它材料相互独立的来源/事件判定，不替换其它材料，不改动其它材料权重。
+    private const int JulingMarrowKeepChance = 2500; // 25% of RollRange
 
     private static readonly string[] AllMaterialIds = MclslItemCatalog.All
         .Where(x => x.MaterialTier != MclslMaterialTier.None && x.MaterialSources != MclslMaterialSource.BeastKill).Select(x => x.Id).ToArray();
+    private static readonly int JulingMarrowIndex = Array.IndexOf(AllMaterialIds, "A07");
     static MclslMaterialDiscovery()
     {
         if (AllMaterialIds.Length > 64)
@@ -40,6 +44,8 @@ internal static class MclslMaterialDiscovery
     internal static void TryAnnualActivity(Actor actor, int year)
     {
         if (!MclslActorAccessor.Alive(actor) || !MclslEligibility.CanCultivate(actor)) return;
+        // Spread biennial checks across actors instead of concentrating them in one year.
+        if (((MclslActorAccessor.Id(actor) ^ year) & 1L) != 0) return;
         WorldTile tile = actor.current_tile;
         if (tile?.Type == null) return;
 
@@ -66,7 +72,7 @@ internal static class MclslMaterialDiscovery
                 item.MaterialTier == MclslMaterialTier.Huang ? AnnualHuangChance : AnnualXuanChance);
             if (materialId == "A07") chance = 10; // 0.1%; habitat multiplier below makes mountains 0.2%.
             if (MatchesHabitat(item, woodland, water, mountain)) chance *= 2;
-            if (Passes(seed, materialId, chance)) mask |= 1UL << i;
+            if (Passes(seed, materialId, chance * 2)) mask |= 1UL << i;
         }
 
         Commit(actor, year, "野外活动", sourceKey, mask);
@@ -272,8 +278,24 @@ internal static class MclslMaterialDiscovery
         }
     }
 
+    /// <summary>
+    /// Applies the A07（聚灵髓）random-output reduction to an already-built award mask.
+    /// The keep roll is derived from the source/event key plus an independent tag, so it
+    /// never touches the per-material or selection RNG used by every other material.
+    /// When A07 is not kept its bit is simply cleared (no substitute material is chosen).
+    /// </summary>
+    private static ulong FilterJulingMarrow(ulong mask, string sourceKey)
+    {
+        if (JulingMarrowIndex < 0 || JulingMarrowIndex >= 64) return mask;
+        ulong bit = 1UL << JulingMarrowIndex;
+        if ((mask & bit) == 0) return mask;
+        if (StableRoll(sourceKey, "juling_marrow_keep") % RollRange < JulingMarrowKeepChance) return mask;
+        return mask & ~bit;
+    }
+
     private static void Commit(Actor actor, int year, string sourceName, string sourceKey, ulong mask)
     {
+        mask = FilterJulingMarrow(mask, sourceKey);
         if (mask == 0 || !MclslActorAccessor.Alive(actor)) return;
         if (!MclslWorldRunRepository.TryClaimMaterialAwardEventKey(sourceKey)) return;
 

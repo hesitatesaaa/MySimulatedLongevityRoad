@@ -18,6 +18,19 @@ internal static class MclslBeastItemEffects
             definitions.Add(item.Id,(item.Kind,item.Effect,item.Grade));
         return definitions;
     }
+    // Reusable scratch for TryAuto. Combat calls this every hit; the old LINQ
+    // Where/OrderBy/ThenBy/ToArray allocated several temporaries per hit. The list
+    // only ever holds references to existing stacks, so reusing it allocates nothing
+    // after warm-up. A reentrancy guard keeps a nested call (via a use callback) from
+    // clobbering the outer iteration; that rare case falls back to the allocating path.
+    private static readonly List<MclslOwnedItem> TryAutoScratch = new(16);
+    private static readonly Comparison<MclslOwnedItem> TryAutoOrder = CompareTryAuto;
+    private static bool _tryAutoScratchBusy;
+    private static int CompareTryAuto(MclslOwnedItem left, MclslOwnedItem right)
+    {
+        int gradeDelta = MclslItemCatalog.Get(right.ItemId).Grade - MclslItemCatalog.Get(left.ItemId).Grade;
+        return gradeDelta != 0 ? gradeDelta : string.CompareOrdinal(left.ItemId, right.ItemId);
+    }
     internal static bool IsConsumable(string id)=>id!=null&&Definitions.ContainsKey(id);
     private static string Status(string kind,string effect,int grade)=>"mclsl_beast_"+kind+"_"+effect+"_"+grade;
     internal static void RegisterStatuses()
@@ -109,6 +122,28 @@ internal static class MclslBeastItemEffects
         }
         return Math.Min(0.4f,value);
     }
+    // Same per-effect matching and per-effect 0.4 clamp as ArtifactBonus, but one
+    // equipment traversal accumulates every guard effect DamageFactor needs. Raw sums
+    // are summed in the identical slot order and clamped/capped by the caller, so the
+    // resulting damage reduction is bit-for-bit what the separate ArtifactBonus calls
+    // produced while the equipment slots are read once instead of up to three times.
+    private static void GuardArtifactSums(Actor actor,string primary,bool needYin,bool needDot,
+        out float primarySum,out float yinSum,out float dotSum)
+    {
+        primarySum=0f;yinSum=0f;dotSum=0f;
+        if(actor==null||MclslBeastActorRegistration.IsOrdinary(actor)||!MclslArtifactSystem.HasEquippedArtifact(actor))return;
+        foreach(var slot in MclslArtifactSystem.EquipmentSlots)
+        {
+            string item=MclslArtifactSystem.EquippedArtifactId(actor,slot);
+            if(!item.StartsWith("YB_",StringComparison.Ordinal))continue;
+            if(!MclslBeastContent.BySpecies.TryGetValue(item.Substring(3),out var row))continue;
+            float bonus=MclslBeastContent.Bonus(row.Grade);
+            string artifactEffect=row.ArtifactEffect;
+            if(artifactEffect==primary)primarySum+=bonus;
+            if(needYin&&artifactEffect=="阴_guard")yinSum+=bonus;
+            if(needDot&&artifactEffect=="dot_guard")dotSum+=bonus;
+        }
+    }
     internal static float ManaRecoveryBonus(Actor actor)=>ArtifactBonus(actor,"mana_regen")+MclslBeastContent.Bonus(ActiveGrade(actor,"pill","mana"))* (ActiveGrade(actor,"pill","mana")>0?1:0);
     internal static float ControlFactor(Actor actor)
     {
@@ -122,19 +157,60 @@ internal static class MclslBeastItemEffects
         int pill=ActiveGrade(actor,"pill","guard"),talisman=ActiveGrade(actor,"talisman","guard");
         float reduction=Math.Max(pill==0?0:MclslBeastContent.Bonus(pill),talisman==0?0:MclslBeastContent.Bonus(talisman));
         string effect=MclslSpellCasting.DamageLaw=="physical"||!MclslSpellSystem.IsApplyingSpellDamage&&type==AttackType.Weapon?"physical_guard":"spell_guard";
-        reduction+=ArtifactBonus(actor,effect);
-        if(MclslSpellCasting.DamageLaw=="阴")reduction+=ArtifactBonus(actor,"阴_guard");
-        if(MclslSpellCasting.DotDamage)
+        bool yin=MclslSpellCasting.DamageLaw=="阴";
+        bool dot=MclslSpellCasting.DotDamage;
+        GuardArtifactSums(actor,effect,yin,dot,out float primarySum,out float yinSum,out float dotSum);
+        reduction+=Math.Min(0.4f,primarySum);
+        if(yin)reduction+=Math.Min(0.4f,yinSum);
+        if(dot)
         {
             int pc=ActiveGrade(actor,"pill","cleanse"),tc=ActiveGrade(actor,"talisman","cleanse");
-            reduction+=Math.Max(pc==0?0:MclslBeastContent.Bonus(pc),tc==0?0:0.15f+tc*0.05f)+ArtifactBonus(actor,"dot_guard");
+            reduction+=Math.Max(pc==0?0:MclslBeastContent.Bonus(pc),tc==0?0:0.15f+tc*0.05f)+Math.Min(0.4f,dotSum);
         }
         return 1-Math.Min(0.85f,reduction);
     }
     internal static bool TryAuto(Actor actor,MclslConsumableUseTrigger trigger,bool includeTalisman)
+        => TryAuto(actor,trigger,includeTalisman,null);
+    internal static bool TryAuto(Actor actor,MclslConsumableUseTrigger trigger,bool includeTalisman,MclslBagState bag)
     {
         if(!MclslActorAccessor.Alive(actor)||MclslBeastActorRegistration.IsOrdinary(actor))return false;
-        var items=MclslBagSystem.Peek(actor).Items.Where(x=>x.Count>0&&IsConsumable(x.ItemId))
+        MclslBagState source=bag??MclslBagSystem.Peek(actor);
+        if(_tryAutoScratchBusy)
+            return TryAutoAllocating(actor,source,trigger,includeTalisman);
+        _tryAutoScratchBusy=true;
+        try
+        {
+            List<MclslOwnedItem> items=TryAutoScratch;
+            items.Clear();
+            for(int i=0;i<source.Items.Count;i++)
+            {
+                MclslOwnedItem held=source.Items[i];
+                if(held!=null&&held.Count>0&&IsConsumable(held.ItemId))items.Add(held);
+            }
+            // Grade descending, then ItemId ordinal ascending — the same order the
+            // previous OrderByDescending/ThenBy produced; equal-key order is immaterial
+            // because a use resolves the oldest stack of that id regardless.
+            if(items.Count>1)items.Sort(TryAutoOrder);
+            for(int i=0;i<items.Count;i++)
+            {
+                MclslOwnedItem held=items[i];
+                var item=MclslItemCatalog.Get(held.ItemId);
+                if(item.Category=="Talisman"&&!includeTalisman)continue;
+                if(CanUse(actor,item,trigger)&&MclslItemUseSystem.TryUseBeastAutomatic(actor,item.Id,trigger))return true;
+            }
+            return false;
+        }
+        finally
+        {
+            TryAutoScratch.Clear();
+            _tryAutoScratchBusy=false;
+        }
+    }
+    // Reentrancy fallback: allocates per call like the original implementation so a
+    // nested TryAuto never corrupts the shared scratch list of the outer call.
+    private static bool TryAutoAllocating(Actor actor,MclslBagState source,MclslConsumableUseTrigger trigger,bool includeTalisman)
+    {
+        var items=source.Items.Where(x=>x!=null&&x.Count>0&&IsConsumable(x.ItemId))
             .OrderByDescending(x=>MclslItemCatalog.Get(x.ItemId).Grade).ThenBy(x=>x.ItemId,StringComparer.Ordinal).ToArray();
         foreach(var held in items)
         {

@@ -166,13 +166,5 @@ internal static class MclslNewLawPioneerSystem
         return true;
     }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
+    private static int PositiveHash(string value) => MclslStableHash.Positive23x37(value);
 }

@@ -32,26 +32,9 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
     private static readonly string[] Categories = { "丹药", "灵植", "灵物", "符箓材料", "炼器材料", "符箓", "法宝", "法术卷轴" };
     private static readonly string[] CategoryIds = { "Pill", "Plant", "SpiritObject", "TalismanMaterial", "Material", "Talisman", "Artifact", "SpellScroll" };
     private static readonly string[] BagCategories = { "法宝", "丹药", "符箓", "材料", "传承典籍", "法术" };
-    private static readonly string[] GuideTitles = { "时代修行", "势力家族", "探索资源", "技艺战斗", "交易储物", "还真档案" };
+    private static readonly MclslGuideChapter[] GuideChapters = MclslGuideCatalog.Chapters;
     private static readonly GUIContent EmptyWindowTitle = GUIContent.none;
-    private static readonly string[] GuideBodies =
-    {
-        "入口：从力量栏打开模组介绍、玄黄仙录与模组设置。操作：选中修士查看资质、灵根、境界和体质，再到玄黄仙录总览查看时代与七境人数。结果：修士按年度自行积累真元；资质影响速度，灵根在五岁判定，跳过时会补判。",
-        "入口：在玄黄仙录打开势力和修仙家族页。操作：查看家主、族人、家库、传承与城市影响，再到玄黄舆图核对城镇主家。结果：十宗、万仙盟和五老会随时代更替；家族事务每五年自动结算。",
-        "入口：从玄黄仙录的天下纪事进入玄黄舆图和探索记录。操作：按地点与资源类别查看遗迹、秘境、洞天和灵材来源，并留意修士体质与境界。结果：探索可能带回灵石、传承和材料，也可能造成伤亡；秘境最终死亡率最高40%。",
-        "入口：选中修士，打开职业、法术和人物物品界面。操作：为可研习的法术选择目标，查看研习进度、已学法术与装备条件。结果：修士会按职业品阶自动制作，研习逐年推进；已学法术在十年结算和实战施放时获得升级经验。",
-        "入口：选中修士打开乾坤袋；从力量栏打开天玄镜。操作：在乾坤袋按类别查看物品和传承，在天玄镜切换当前挂单、最新上架、成交记录及物品类别，展开挂单查看卖家与价格。结果：交易由修士按需求自动完成，使用贡献或灵石结算。",
-        "入口：等待还真自然降临，或在特质编辑器赋予修士还真，再从玄黄仙录进入还真空间。操作：确认此世宿主并保存世界；灵蕴达到80点后建立锚点，满三枚时先选替换目标。回溯时选中归途锚点，再次点击确认。结果：当前世进入前世档案，可在前世轮盘按名额选择遗产。"
-    };
-    private static readonly string[][] GuidePoints =
-    {
-        new[] { "① 从力量栏进入模组介绍和玄黄仙录，先看总览的时代与境界人数。", "② 选中修士查看资质与灵根；资质越高，常规修炼越快。", "③ 查看人物特质中的玄黄异禀，核对属性、效果与获取方式。", "④ 到修士列传追踪此人的后续经历；修行按年度自动推进。" },
-        new[] { "① 在玄黄仙录切换势力与修仙家族，按家族查家主、族人和家库。", "② 查看传承、家族纪事和城市影响；这些事务每五年结算。", "③ 在天下纪事打开玄黄舆图，按影响力辨认城镇主家。", "④ 观察时代变化：仙道纪元的十宗与新法时期的万仙盟、五老会各有事务。" },
-        new[] { "① 从天下纪事进入玄黄舆图，查看地点和势力分布。", "② 查遗迹、秘境与洞天记录，了解灵石、传承和材料的来源。", "③ 对照修士境界和体质评估探索风险；部分体质可降低风险或加速探索。", "④ 回到世界纪事查看探索所得与重大变迁。" },
-        new[] { "① 选中修士查看炼丹、炼器、制符职业与可用材料。", "② 在法术界面选可研习的目标，观察逐年累积的研习进度。", "③ 查看已学法术的经验；十年修炼结算及实战施放会推动升级。", "④ 使用丹药、符箓、法宝或卷轴前，核对品阶、装备和消耗条件。" },
-        new[] { "① 选中修士打开乾坤袋，按分类查物品、典籍及法术。", "② 从力量栏打开天玄镜，先选物品类别，再切换挂单、上架和成交。", "③ 展开物品挂单比较卖家、数量、贡献与灵石价格。", "④ 等待修士自动挂牌和购买；天玄镜用于查看交易，不需要玩家手动下单。" },
-        new[] { "① 等待还真自然降临，或在特质编辑器赋予修士还真；确认宿主后保存世界。首次绑定获得80点空间灵蕴。", "② 进入还真空间，灵蕴满80点后建立锚点；最多三枚，满额先选择替换的一枚，也可开启自动锚定。", "③ 需要手动回溯时选择归途锚点，点击回溯按钮，再次点击确认。", "④ 回溯后查看前世档案，在前世轮盘按当前名额选择实际拥有的遗产。" }
-    };
+    private const string GuideSubtitleLine = "还真一世，计较千年，岂是一人一念可证之；仙路无尽，长生未必是生！";
 
     private static MclslFeatureWindow _instance;
     private static readonly Dictionary<string, Sprite> IconCache = new(StringComparer.Ordinal);
@@ -105,10 +88,9 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
     private int _marketScreenWidth, _marketScreenHeight;
     private Vector2 _bagScroll;
     private Vector2 _guideScroll;
+    private Rect _guideSubtitleRect;
     private Rect _rect;
     private bool _pauseCaptured;
-    private float _savedTimeScale;
-    private bool _savedConfigPaused;
     private GameObject _inputBlocker;
 
     private GUIStyle _window;
@@ -159,7 +141,12 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
     private Texture2D _bagSelectedSlotTexture;
 
     internal static void ShowGuide() => Show(Page.Guide, null);
-    internal static void ShowBag(Actor actor = null) => Show(Page.Bag, actor);
+    internal static void ShowBag(Actor actor = null)
+    {
+        if(actor==null)MclslMaobaoCommands.TryGetSelectedActor(out actor);
+        if(!MclslBagSystem.Supports(actor))return;
+        Show(Page.Bag,actor);
+    }
     internal static void ShowMarket(Actor actor = null) => Show(Page.Market, actor);
 
     private static void Show(Page page, Actor actor)
@@ -177,7 +164,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         if (page == Page.Bag && _instance._actor?.data == null
             && MclslMaobaoCommands.TryGetSelectedActor(out Actor selected)) _instance._actor = selected;
         if (page == Page.Market) MclslWorldRunRepository.EnsureCurrentRun(MclslRuntime.CurrentYear());
-        float width = Mathf.Min(page == Page.Guide ? 1240f : page == Page.Market ? 1600f : 1120f, Screen.width - 28f);
+        float width = Mathf.Min(page == Page.Guide ? 1320f : page == Page.Market ? 1600f : 1120f, Screen.width - 28f);
         float height = Mathf.Min(page == Page.Market ? 932f : page == Page.Guide ? 800f : 740f, Screen.height - 28f);
         _instance._rect = new Rect((Screen.width - width) * 0.5f, (Screen.height - height) * 0.5f, width, height);
         _instance._marketScroll = Vector2.zero;
@@ -261,9 +248,15 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         // Only the part above the window needs this second pass. The artwork
         // inside the window is drawn after its rails and background below.
         if (_visible && _page == Page.Guide)
+        {
             XianLuUIRenderer.WindowTitleExpanded(_rect, "title_mod_intro",
                 "我的模拟长生路·模组介绍", 8f, _rect.width < 600f ? 32f : 42f,
                 20f, 24f, _rect.y);
+            // 诗句在窗口与所有框饰绘制完成后再画，确保显示在边框上方。
+            if (_guideSubtitleRect.width > 0f)
+                GUI.Label(new Rect(_rect.x + _guideSubtitleRect.x, _rect.y + _guideSubtitleRect.y,
+                    _guideSubtitleRect.width, _guideSubtitleRect.height), GuideSubtitleLine, _subtitle);
+        }
         GUI.color = previous;
         GUI.backgroundColor = previousBackground;
     }
@@ -289,14 +282,14 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
             // The market plate ends at the inner rails, rather than behind the outer ornament silhouette.
             Rect surface = _page == Page.Market
                 ? new Rect(_rect.width * 0.04f, _rect.height * 0.075f, _rect.width * 0.92f, _rect.height * 0.855f)
-                : new Rect(24f, 48f, Mathf.Max(0f, _rect.width - 48f), Mathf.Max(0f, _rect.height - 80f));
+                : new Rect(30f, 48f, Mathf.Max(0f, _rect.width - 60f), Mathf.Max(0f, _rect.height - 80f));
             Color old = GUI.color;
             GUI.color = MclslUiTheme.SurfaceWindow;
             GUI.DrawTexture(surface, _dimTexture);
             GUI.color = old;
-            if (_page != Page.Market)
-                XianLuUIRenderer.Frame(new Rect(0f, 0f, _rect.width, _rect.height), "frame_mod_intro");
-            else
+            // frame_mod_intro is painted in the second pass below, after the page
+            // content, so the content panel can no longer cover the rails.
+            if (_page == Page.Market)
                 XianLuUIRenderer.Frame(new Rect(0f, 0f, _rect.width, _rect.height), "frame_tianxuanjing", 0f, 0.7f);
         }
         GUIStyle oldScrollbar = GUI.skin.verticalScrollbar;
@@ -327,6 +320,10 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         {
             if (_page == Page.Market)
                 XianLuUIRenderer.Frame(new Rect(0f, 0f, _rect.width, _rect.height), "frame_tianxuanjing", 0.7f, 1f);
+            else
+                // Same ordering as the ranking window: content first, rails over
+                // it, then the title; the panel no longer clips the frame.
+                XianLuUIRenderer.Frame(new Rect(0f, 0f, _rect.width, _rect.height), "frame_mod_intro");
             XianLuUIRenderer.WindowTitleExpanded(new Rect(0f, 0f, _rect.width, _rect.height),
                 _page == Page.Market ? "title_tianxuanjing" : "title_mod_intro",
                 _page == Page.Market ? LM.Get("mclsl_xianlu_title_market") : "我的模拟长生路·模组介绍",
@@ -336,7 +333,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
                 XianLuUIStyles.ButtonSecondaryStyle)) CloseWindow();
             if (_page == Page.Guide)
             {
-                string pageNumber = (_guidePage + 1) + " / " + GuideTitles.Length;
+                string pageNumber = (_guidePage + 1) + " / " + GuideChapters.Length;
                 Rect eye = new Rect((_rect.width - 90f) * 0.5f, _rect.height - 50f, 90f, 30f);
                 GUI.Label(new Rect(eye.x + 1f, eye.y + 1f, eye.width, eye.height), pageNumber, _guidePageShadow);
                 GUI.Label(eye, pageNumber, _guidePageNumber);
@@ -353,7 +350,14 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         {
             GUILayout.Space(_page == Page.Market ? 80f : _rect.width < 600f ? 48f : 57f);
             if (_page == Page.Guide)
-                GUILayout.Label("还真一世，计较千年，岂是一人一念可证之；仙路无尽，长生未必是生！", _subtitle);
+            {
+                // 诗句占位：真正文字在窗口与全部框饰之后绘制，避免被顶部边框遮挡。
+                Color subtitleOld = GUI.color;
+                GUI.color = new Color(1f, 1f, 1f, 0f);
+                GUILayout.Label(GuideSubtitleLine, _subtitle);
+                GUI.color = subtitleOld;
+                _guideSubtitleRect = GUILayoutUtility.GetLastRect();
+            }
             return;
         }
         GUILayout.BeginHorizontal(_page == Page.Bag ? _bagPanel : _page == Page.Market ? _marketPanel : _card, GUILayout.Height(62f));
@@ -483,9 +487,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
                 Sprite icon = SpriteTextureLoader.getSprite(spell.IconPath);
                 if (icon != null) GUILayout.Label(icon.texture, GUILayout.Width(38f), GUILayout.Height(38f));
                 GUILayout.Label(MclslRealmIds.Display(MclslRealmIds.Ordered[spell.MinRealm]) + " · " + spell.Name
-                    + "　" + progress
-                    + (MySimulatedLongevityRoad.Systems.Combat.MclslBattleProfessionSystem.CanUse(_actor,spell.Id)?"":" · 异职高阶技能休眠")
-                    + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
+                    + "　" + progress + "\n耗灵力 " + spell.ManaCost + "　" + spell.Description, _small);
                 if (studyTarget == spell.Id)
                 {
                     if (GUILayout.Button("停止参悟", _bagButton, GUILayout.Width(76f), GUILayout.Height(34f)))
@@ -1418,29 +1420,17 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
 
     private void ApplyFeaturePause()
     {
-        if (_pauseCaptured)
-        {
-            EnforceFeaturePause();
-            return;
-        }
-        _savedTimeScale = Time.timeScale;
-        _savedConfigPaused = Config.paused;
+        MclslWindowPause.Acquire(this);
         _pauseCaptured = true;
-        EnforceFeaturePause();
     }
 
-    private static void EnforceFeaturePause()
-    {
-        Config.paused = true;
-        Time.timeScale = 0f;
-    }
+    private static void EnforceFeaturePause() => MclslWindowPause.Enforce();
 
     private void ReleaseFeaturePause()
     {
         if (!_pauseCaptured) return;
-        Config.paused = _savedConfigPaused;
-        Time.timeScale = _savedTimeScale < 0f ? 1f : _savedTimeScale;
         _pauseCaptured = false;
+        MclslWindowPause.Release(this);
     }
 
     internal static void ClearRuntime()
@@ -1567,7 +1557,7 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         _dimTexture = Solid(Color.white);
         _window = new GUIStyle(XianLuUIStyles.TransparentWindowStyle)
         {
-            padding = new RectOffset(64, 64, 15, 40),
+            padding = new RectOffset(30, 30, 15, 40),
             contentOffset = Vector2.zero
         };
         _title = LabelStyle(24, FontStyle.Bold, new Color(0.91f, 0.84f, 0.68f), TextAnchor.MiddleLeft);

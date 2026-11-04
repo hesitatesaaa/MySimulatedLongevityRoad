@@ -27,7 +27,14 @@ internal sealed partial class MclslRuntimeDriver : MonoBehaviour
         UnityEngine.Object.DontDestroyOnLoad(host);
     }
 
-    private void Update() => MclslRuntime.Tick();
+    private void Update()
+    {
+        long maintenanceSample = MclslPerformanceProbe.Begin();
+        try { MclslMemoryMaintenance.Tick(); }
+        finally { MclslPerformanceProbe.End("运行维护", maintenanceSample); }
+        if (MySimulatedLongevityRoad.Interop.MclslLocalizationRuntimeMarker.IsRuntimeLoaded)
+            MclslRuntime.Tick();
+    }
 
     private void OnDestroy()
     {

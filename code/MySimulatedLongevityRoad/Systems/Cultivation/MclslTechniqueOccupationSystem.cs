@@ -96,8 +96,12 @@ internal static class MclslTechniqueOccupationSystem
         double bestTie = double.MaxValue;
 
         IReadOnlyList<MclslTechniqueDefinition> pool = GetAnnualTechniquePool(year, realmIndex, aptitude);
+        int ownedCeiling = MclslTechniqueRealmLimit.OwnedTechniqueCeiling(actor);
         for (int i = 0; i < pool.Count; i++)
+        {
+            if (MclslRealmIds.Index(pool[i].MaxRealm) < ownedCeiling) continue;
             ConsiderTechnique(actor, pool[i], seed + "|pool_tie|" + i, ref best, ref bestCount, ref bestTie);
+        }
 
         if (best == null) return false;
         if (best.Id == oldId && CountFor(oldId) <= 1) return true;
@@ -177,7 +181,7 @@ internal static class MclslTechniqueOccupationSystem
             MclslWorldRunRepository.AddEvent(year, "law_conflict_hunt", MclslActorAccessor.DisplayName(resolver) + "寻同法者论生死",
                 MclslActorAccessor.DisplayName(resolver) + "久受《" + MclslActorAccessor.GetString(resolver, MclslActorDataKeys.TechniqueName, "无名功法") + "》同修所阻，遂向附近的" + MclslActorAccessor.DisplayName(rival) + "发起法争。", resolver);
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslTechniqueOccupationSystem-cs-1", "功法占据：发起同法争斗失败: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void EnsureAnnualResolutionBudget(int year)
@@ -236,10 +240,12 @@ internal static class MclslTechniqueOccupationSystem
         double tie = double.MaxValue;
         int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100);
         IReadOnlyList<MclslTechniqueDefinition> pool = GetAnnualTechniquePool(year, realmIndex, aptitude);
+        int ownedCeiling = MclslTechniqueRealmLimit.OwnedTechniqueCeiling(actor);
         for (int i = 0; i < pool.Count; i++)
         {
             MclslTechniqueDefinition candidate = pool[i];
-            if (candidate == null || candidate.Id == oldTechniqueId) continue;
+            if (candidate == null || candidate.Id == oldTechniqueId
+                || MclslRealmIds.Index(candidate.MaxRealm) < ownedCeiling) continue;
             int candidateCount = CountFor(candidate.Id);
             double candidateTie = WeightedTie(actor, candidate, MclslActorAccessor.Id(actor) + "|alternative_method|" + year);
             if (candidateCount < bestCount || (candidateCount == bestCount && candidateTie < tie))
@@ -352,7 +358,7 @@ internal static class MclslTechniqueOccupationSystem
         return best ?? baseTechnique;
     }
 
-    private static MclslTechniqueDefinition VariantDefinition(MclslTechniqueDefinition baseTechnique, int variant)
+    internal static MclslTechniqueDefinition VariantDefinition(MclslTechniqueDefinition baseTechnique, int variant)
     {
         if (baseTechnique == null || variant <= 0) return baseTechnique;
         int index = Math.Clamp(variant, 1, VariantsPerBaseTechnique - 1);

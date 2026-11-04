@@ -165,7 +165,7 @@ internal sealed class MclslFpsOverlay : MonoBehaviour
     {
         try
         {
-            string directory = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV2", "PerformanceReports");
+            string directory = Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "0.8.0", "PerformanceReports");
             Directory.CreateDirectory(directory);
             string filename = "MCLS_perf_" + DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff") + ".txt";
             File.WriteAllText(Path.Combine(directory, filename), MclslPerformanceProbe.Summary(forceRefresh: true), System.Text.Encoding.UTF8);

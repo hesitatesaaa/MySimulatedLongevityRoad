@@ -18,18 +18,32 @@ internal static partial class MclslWorldSoulSystem
         if (entity?.data == null) return false;
         string[] tags = MclslGeneratedObjectFactory.SplitTags(soul.LawTags);
         string manifestName = MclslProceduralLexicon.WorldSoulManifestName(soul.Name, tags, StableHash(soul.Id + "|manifest_name|" + year + "|" + soul.ManifestCount));
-        try { entity.data.name = manifestName; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            entity.data.name = manifestName;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #1: " + mclslEmptyCatchEx.Message);
+        }
         MclslActorAccessor.Set(entity, MclslActorDataKeys.WorldSoulEntityId, soul.Id);
         MclslActorAccessor.Set(entity, MclslActorDataKeys.WorldSoulEntityQuality, soul.Quality);
         ActorTrait marker = AssetManager.traits.get(MclslTraitRegistration.WorldSoulEntityTraitId);
-        try { if (marker != null) entity.addTrait(marker, true); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #2: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            if (marker != null) entity.addTrait(marker, true);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #2: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             entity.updateStats();
             float max = entity.getMaxHealth();
             if (max > 0f) entity.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #3: " + mclslEmptyCatchEx.Message); }
         MaintainWorldSoulEntity(entity);
 
         soul.State = "显化";
@@ -88,7 +102,7 @@ internal static partial class MclslWorldSoulSystem
                 hunter.beh_actor_target = manifest;
                 sent++;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #5: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #5: " + mclslEmptyCatchEx.Message); }
         }
 
         soul.LastHunterDispatchYear = year;
@@ -128,7 +142,7 @@ internal static partial class MclslWorldSoulSystem
                 manifest.die(false, AttackType.Other, false, false);
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #6: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #6: " + mclslEmptyCatchEx.Message); }
 
         soul.ManifestActorId = 0;
         soul.ManifestActorName = string.Empty;
@@ -149,15 +163,36 @@ internal static partial class MclslWorldSoulSystem
     private static bool IsManifestCombatOpened(Actor manifest)
     {
         if (!MclslActorAccessor.Alive(manifest)) return false;
-        try { if (manifest.attackedBy is Actor attacker && attacker != manifest && MclslActorAccessor.Alive(attacker)) return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #7: " + mclslEmptyCatchEx.Message); }
-        try { if (manifest.has_attack_target && manifest.attack_target != null) return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #8: " + mclslEmptyCatchEx.Message); }
-        try { if (manifest.beh_actor_target != null) return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #9: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            if (manifest.attackedBy is Actor attacker && attacker != manifest && MclslActorAccessor.Alive(attacker)) return true;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #7: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            if (manifest.has_attack_target && manifest.attack_target != null) return true;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #8: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            if (manifest.beh_actor_target != null) return true;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #9: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             float max = manifest.getMaxHealth();
             if (max > 0f && manifest.data.health < max) return true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #10: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #10: " + mclslEmptyCatchEx.Message); }
         return false;
     }
 
@@ -245,7 +280,7 @@ internal static partial class MclslWorldSoulSystem
                     return entity;
                 }
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #11: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldSoul-MclslWorldSoulSystem-Manifestation-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.Manifestation.cs #11: " + mclslEmptyCatchEx.Message); }
         }
         return null;
     }

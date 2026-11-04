@@ -20,22 +20,23 @@ internal static partial class MclslWorldSoulActorRegistration
     private static bool _initialized;
     private static readonly Dictionary<string, Sprite> TintedSpriteCache = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, SoulSpriteSet> SpriteSets = new(StringComparer.Ordinal);
-    private static readonly Dictionary<long, int> AttackUntilFrame = new();
+    private static readonly Dictionary<long, long> AttackUntilFrame = new();
     private static readonly Dictionary<long, int> NextPulseFrame = new();
     private static readonly Dictionary<long, int> AttackScanCursor = new();
     private static readonly Dictionary<long, int> LastSpriteX = new();
     private static readonly Dictionary<long, int> LastSpriteY = new();
-    private static readonly Dictionary<long, int> LastMovementFrame = new();
-    private static readonly Dictionary<long, int> HitStartedFrame = new();
+    private static readonly Dictionary<long, long> LastMovementFrame = new();
+    private static readonly Dictionary<long, long> HitStartedFrame = new();
+    private static long AnimationTick => (long)(MclslActorAnimationTime.Now * 60d);
     private static readonly Dictionary<long, SoulAnimationClock> AnimationClocks = new();
     private enum SoulAnimationAction : byte { Idle, Run, Attack, Hit, Death }
 
     private readonly struct SoulAnimationClock
     {
         internal readonly SoulAnimationAction Action;
-        internal readonly int StartedFrame;
+        internal readonly long StartedFrame;
 
-        internal SoulAnimationClock(SoulAnimationAction action, int startedFrame)
+        internal SoulAnimationClock(SoulAnimationAction action, long startedFrame)
         {
             Action = action;
             StartedFrame = startedFrame;
@@ -83,7 +84,6 @@ internal static partial class MclslWorldSoulActorRegistration
     internal static void Init()
     {
         if (_initialized) return;
-        _initialized = true;
         try
         {
             ActorAsset asset = AssetManager.actor_library.get(ActorAssetId);
@@ -99,8 +99,10 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体注册失败，已停止使用原生敌对单位兜底: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.registration-fallback", "[模拟长生路] 天地之魄载体注册失败，已停止使用原生敌对单位兜底: " + ex.Message);
+            throw;
         }
+        _initialized = true;
     }
 
     internal static string ActorAssetIdFor(MclslWorldSoulRecord soul)
@@ -175,7 +177,7 @@ internal static partial class MclslWorldSoulActorRegistration
             SetDataStringIfExists(subspecies.data, "天地之魄", "localized_name", "localizedName", "name_locale", "nameLocale", "customName");
             SetDataBoolIfExists(subspecies.data, true, "custom_name", "customName");
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #1: " + mclslEmptyCatchEx.Message); }
 
         for (int i = 0; i < WorldSoulSubspeciesTraitIds.Length; i++)
         {
@@ -188,7 +190,7 @@ internal static partial class MclslWorldSoulActorRegistration
                     changed = true;
                 }
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #2: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #2: " + mclslEmptyCatchEx.Message); }
         }
 
         for (int i = 0; i < WorldSoulForbiddenSubspeciesTraitIds.Length; i++)
@@ -202,12 +204,19 @@ internal static partial class MclslWorldSoulActorRegistration
                     changed = true;
                 }
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #3: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #3: " + mclslEmptyCatchEx.Message); }
         }
 
         if (changed)
         {
-            try { subspecies.forceRecalcBaseStats(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #4: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                subspecies.forceRecalcBaseStats();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #4: " + mclslEmptyCatchEx.Message);
+            }
         }
     }
 
@@ -253,7 +262,8 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体 " + definition.ActorId + " 注册失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.carrier-register", "[模拟长生路] 天地之魄载体 " + definition.ActorId + " 注册失败: " + ex.Message);
+            throw;
         }
     }
 
@@ -291,7 +301,7 @@ internal static partial class MclslWorldSoulActorRegistration
             asset.cached_sprite = asset._cached_sprite;
             asset.get_override_sprite = GetWorldSoulSprite;
             asset.has_override_sprite = true;
-            asset.base_stats["scale"] = 0.2f;
+            asset.base_stats["scale"] = 0.2f * 1.075f;
             asset.base_stats["size"] = 0.4f;
             ApplyDefaultSubspeciesTraits(asset);
             AssetManager.actor_library.loadTexturesAndSprites(asset);
@@ -306,17 +316,30 @@ internal static partial class MclslWorldSoulActorRegistration
                 asset._cached_sprite = asset._cached_sprite ?? FallbackSprite(folder);
                 asset.cached_sprite = asset._cached_sprite;
             }
+            MclslSpriteOwnership.Register(asset._cached_sprite);
+            if (string.IsNullOrEmpty(folder))
+                MclslActorPresentation.Configure(asset, asset._cached_sprite);
+            else
+                MclslActorPresentation.Configure(asset, asset._cached_sprite, MclslSoulFrameCatalog.VisibleBounds(asset._cached_sprite));
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 天地之魄载体贴图绑定失败，将使用天地之魄图标兜底: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("worldsoul.texture-fallback", "[模拟长生路] 天地之魄载体贴图绑定失败，将使用天地之魄图标兜底: " + ex.Message);
+            throw;
         }
     }
 
     private static void ApplyDefaultSubspeciesTraits(ActorAsset asset)
     {
         if (asset == null) return;
-        try { asset.default_subspecies_traits = new List<string>(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #5: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            asset.default_subspecies_traits = new List<string>();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #5: " + mclslEmptyCatchEx.Message);
+        }
         for (int i = 0; i < WorldSoulSubspeciesTraitIds.Length; i++)
         {
             string traitId = WorldSoulSubspeciesTraitIds[i];
@@ -325,20 +348,34 @@ internal static partial class MclslWorldSoulActorRegistration
                 if (AssetManager.subspecies_traits?.get(traitId) != null)
                     asset.addSubspeciesTrait(traitId);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #6: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #6: " + mclslEmptyCatchEx.Message); }
         }
     }
 
     internal static void NormalizeActor(Actor actor)
     {
         if (actor?.data == null) return;
-        try { NormalizeSubspecies(actor.subspecies); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #7: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            NormalizeSubspecies(actor.subspecies);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #7: " + mclslEmptyCatchEx.Message);
+        }
         MclslTraitGrantRouter.SuppressRouting(() =>
         {
             for (int i = 0; i < WorldSoulForbiddenSubspeciesTraitIds.Length; i++)
             {
                 string traitId = WorldSoulForbiddenSubspeciesTraitIds[i];
-                try { if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #8: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #8: " + mclslEmptyCatchEx.Message);
+                }
             }
         });
         TryClearInventory(actor);
@@ -386,14 +423,14 @@ internal static partial class MclslWorldSoulActorRegistration
                 else if (property.PropertyType == typeof(int)) property.SetValue(target, (int)value);
                 else if (property.PropertyType == typeof(double)) property.SetValue(target, (double)value);
             }
-            catch { }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-18", "天地之魄：反射写入数值成员失败: " + mclslEmptyCatchEx.Message); }
         }
     }
 
     private static Sprite WorldSoulIconSprite()
     {
-        return LoadSprite("ui/Icons/" + ActorIconId)
-            ?? LoadSprite("trait/" + ActorIconId);
+        return MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("ui/Icons/" + ActorIconId)
+            ?? MySimulatedLongevityRoad.Core.MclslSpriteLoader.TryLoad("trait/" + ActorIconId);
     }
 
     internal static bool IsWorldSoulActor(Actor actor)
@@ -436,7 +473,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 return;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #9: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #9: " + mclslEmptyCatchEx.Message); }
     }
 
     private static Sprite GetWorldSoulSprite(Actor actor)
@@ -456,7 +493,7 @@ internal static partial class MclslWorldSoulActorRegistration
             return FrameForActor(actor, set, set.Attack.Length > 0 ? set.Attack : set.Idle,
                 4, SoulAnimationAction.Attack) ?? FallbackSprite(folder);
         long actorId = ActorId(actor);
-        if (actorId > 0 && AttackUntilFrame.TryGetValue(actorId, out int attackUntil) && Time.frameCount <= attackUntil)
+        if (actorId > 0 && AttackUntilFrame.TryGetValue(actorId, out long attackUntil) && AnimationTick <= attackUntil)
             return FrameForActor(actor, set, set.Attack.Length > 0 ? set.Attack : set.Idle,
                 4, SoulAnimationAction.Attack) ?? FallbackSprite(folder);
         if (IsMovingForSprite(actor))
@@ -478,21 +515,29 @@ internal static partial class MclslWorldSoulActorRegistration
         if (set.Hit.Length == 0) return false;
         long actorId = ActorId(actor);
         if (actorId <= 0L) return false;
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         bool justHit = false;
-        try { justHit = actor.isJustAttacked(); } catch { }
+        // Sprite override path: Parallel.For may call this off the main thread.
+        try
+        {
+            justHit = actor.isJustAttacked();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            if (MclslRuntimeChanges.IsMainThread) MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-19", "天地之魄：读取受击状态失败: " + mclslEmptyCatchEx.Message);
+        }
         int duration = set.Hit.Length * 4;
-        if (justHit && (!HitStartedFrame.TryGetValue(actorId, out int previous)
+        if (justHit && (!HitStartedFrame.TryGetValue(actorId, out long previous)
             || frame - previous >= duration))
             HitStartedFrame[actorId] = frame;
-        if (!HitStartedFrame.TryGetValue(actorId, out int started)) return false;
-        int elapsed = frame - started;
+        if (!HitStartedFrame.TryGetValue(actorId, out long started)) return false;
+        long elapsed = frame - started;
         if (elapsed < 0 || elapsed >= duration)
         {
             HitStartedFrame.Remove(actorId);
             return false;
         }
-        sprite = set.Hit[Math.Min(set.Hit.Length - 1, elapsed / 4)];
+        sprite = set.Hit[(int)Math.Min(set.Hit.Length - 1, elapsed / 4)];
         AnimationClocks[actorId] = new SoulAnimationClock(SoulAnimationAction.Hit, started);
         if (set.UsesGenericFallback) sprite = TintFrame(actor, sprite);
         return sprite != null;
@@ -503,11 +548,21 @@ internal static partial class MclslWorldSoulActorRegistration
         if (set.Idle.Length == 0 || set.Breathing.Length == 0)
             return FrameForActor(actor, set, set.Idle, 8, SoulAnimationAction.Idle);
         long actorId = ActorId(actor);
+        long frame = AnimationTick;
+        long started = frame;
         if (actorId > 0L)
-            AnimationClocks[actorId] = new SoulAnimationClock(SoulAnimationAction.Idle, Time.frameCount);
+        {
+            if (!AnimationClocks.TryGetValue(actorId, out SoulAnimationClock clock)
+                || clock.Action != SoulAnimationAction.Idle || frame < clock.StartedFrame)
+            {
+                clock = new SoulAnimationClock(SoulAnimationAction.Idle, frame);
+                AnimationClocks[actorId] = clock;
+            }
+            started = clock.StartedFrame;
+        }
         int idleTicks = set.Idle.Length * 8;
         int totalTicks = idleTicks + set.Breathing.Length * 8;
-        long phase = ((long)Time.frameCount + actorId) % totalTicks;
+        long phase = (frame - started) % totalTicks;
         if (phase < 0) phase += totalTicks;
         Sprite[] frames = phase < idleTicks ? set.Idle : set.Breathing;
         int index = (int)((phase < idleTicks ? phase : phase - idleTicks) / 8);
@@ -536,7 +591,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 if (property != null && property.CanWrite && property.PropertyType == typeof(bool))
                     property.SetValue(asset, value);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #10: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #10: " + mclslEmptyCatchEx.Message); }
         }
     }
 
@@ -565,7 +620,7 @@ internal static partial class MclslWorldSoulActorRegistration
                     else if (property.PropertyType == typeof(int)) property.SetValue(asset, (int)value);
                 }
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #11: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #11: " + mclslEmptyCatchEx.Message); }
         }
     }
 
@@ -585,7 +640,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 PropertyInfo property = type.GetProperty(name, flags);
                 if (property?.CanWrite == true && property.PropertyType == typeof(string)) property.SetValue(data, value);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #12: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #12: " + mclslEmptyCatchEx.Message); }
         }
     }
 
@@ -605,7 +660,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 PropertyInfo property = type.GetProperty(name, flags);
                 if (property?.CanWrite == true && property.PropertyType == typeof(bool)) property.SetValue(data, value);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #13: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #13: " + mclslEmptyCatchEx.Message); }
         }
     }
 
@@ -621,7 +676,7 @@ internal static partial class MclslWorldSoulActorRegistration
             MethodInfo clear = equipment.GetType().GetMethod("clear", flags) ?? equipment.GetType().GetMethod("Clear", flags);
             clear?.Invoke(equipment, null);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-14", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #14: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-14", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #14: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void TrySetActorSize(ActorAsset asset)
@@ -635,21 +690,21 @@ internal static partial class MclslWorldSoulActorRegistration
             object value = Enum.Parse(field.FieldType, "S13_Human");
             field.SetValue(asset, value);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-15", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #15: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-15", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #15: " + mclslEmptyCatchEx.Message); }
     }
 
     private static bool IsMovingForSprite(Actor actor)
     {
         bool movingByActorState = false;
         try { movingByActorState = actor != null && (actor.is_moving || actor.isUsingPath()); }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { if (MclslRuntimeChanges.IsMainThread) MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-20", "天地之魄：读取移动状态失败: " + mclslEmptyCatchEx.Message); }
 
         long actorId = ActorId(actor);
         if (actorId <= 0) return movingByActorState;
 
         int x = SafeX(actor);
         int y = SafeY(actor);
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         bool hasLastX = LastSpriteX.TryGetValue(actorId, out int lastX);
         bool hasLastY = LastSpriteY.TryGetValue(actorId, out int lastY);
         bool hasLast = hasLastX && hasLastY;
@@ -660,7 +715,7 @@ internal static partial class MclslWorldSoulActorRegistration
             LastMovementFrame[actorId] = frame;
 
         return movingByActorState
-            || (LastMovementFrame.TryGetValue(actorId, out int movedFrame) && frame - movedFrame <= 12);
+            || (LastMovementFrame.TryGetValue(actorId, out long movedFrame) && frame >= movedFrame && frame - movedFrame <= 12);
     }
 
     private static Sprite FirstFrame(Sprite[] frames)
@@ -675,7 +730,7 @@ internal static partial class MclslWorldSoulActorRegistration
         int ticksPerFrame, SoulAnimationAction action, bool loop = true)
     {
         if (frames == null || frames.Length == 0) return FallbackSprite(string.Empty);
-        int frame = Time.frameCount;
+        long frame = AnimationTick;
         long actorId = ActorId(actor);
         long elapsed = frame;
         if (actorId > 0L)
@@ -688,8 +743,8 @@ internal static partial class MclslWorldSoulActorRegistration
             }
             elapsed = (long)frame - clock.StartedFrame;
         }
-        int index = (int)(elapsed / Math.Max(1, ticksPerFrame));
-        index = loop ? index % frames.Length : Math.Min(index, frames.Length - 1);
+        long step = elapsed / Math.Max(1, ticksPerFrame);
+        int index = (int)(loop ? step % frames.Length : Math.Min(step, frames.Length - 1));
         Sprite sprite = frames[index] ?? FallbackSprite(string.Empty);
         return set.UsesGenericFallback ? TintFrame(actor, sprite) : sprite;
     }
@@ -721,7 +776,7 @@ internal static partial class MclslWorldSoulActorRegistration
                 return sprite;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-16", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #16: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-16", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #16: " + mclslEmptyCatchEx.Message); }
         return null;
     }
 
@@ -731,7 +786,7 @@ internal static partial class MclslWorldSoulActorRegistration
         string soulId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulEntityId, string.Empty);
         if (string.IsNullOrWhiteSpace(soulId)) return sprite;
 
-        MclslWorldSoulRecord soul = FindWorldSoulById(soulId);
+        MclslWorldSoulRecord soul = MySimulatedLongevityRoad.Systems.MclslWorldRunRepository.FindWorldSoulById(soulId);
         Color tint = SoulTint(soulId, soul?.LawTags ?? string.Empty, soul?.Quality ?? 3);
         string cacheKey = sprite.GetInstanceID() + "|" + soulId + "|" + ColorKey(tint);
         if (TintedSpriteCache.TryGetValue(cacheKey, out Sprite cached)) return cached;
@@ -778,6 +833,7 @@ internal static partial class MclslWorldSoulActorRegistration
             Vector2 pivot = new(source.pivot.x / source.rect.width, source.pivot.y / source.rect.height);
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, width, height), pivot, source.pixelsPerUnit, 0, SpriteMeshType.FullRect);
             sprite.name = source.name + "_mclsl_tinted_" + ColorKey(tint);
+            MclslSpriteOwnership.Register(sprite);
             return sprite;
         }
         catch
@@ -858,12 +914,12 @@ internal static partial class MclslWorldSoulActorRegistration
         folder ??= string.Empty;
         if (SpriteSets.TryGetValue(folder, out SoulSpriteSet cached)) return cached;
 
-        Sprite[] idle = LoadActionFrames(folder, new[] { "idle", "Idle" }, 128);
-        Sprite[] breathing = LoadActionFrames(folder, new[] { "breathing", "Breathing" }, 128);
-        Sprite[] run = LoadActionFrames(folder, new[] { "run", "walk", "Walk" }, 128);
-        Sprite[] attack = LoadActionFrames(folder, new[] { "attack", "BasicAtk" }, 128);
-        Sprite[] hit = LoadActionFrames(folder, new[] { "hit", "Hit" }, 128);
-        Sprite[] death = LoadActionFrames(folder, new[] { "death", "Dead" }, 128);
+        Sprite[] idle = MclslSoulFrameCatalog.Load(folder, "idle");
+        Sprite[] breathing = MclslSoulFrameCatalog.Load(folder, "breathing");
+        Sprite[] run = MclslSoulFrameCatalog.Load(folder, "run");
+        Sprite[] attack = MclslSoulFrameCatalog.Load(folder, "attack");
+        Sprite[] hit = MclslSoulFrameCatalog.Load(folder, "hit");
+        Sprite[] death = MclslSoulFrameCatalog.Load(folder, "death");
         bool genericFallback = false;
         if (folder.Length > 0 && idle.Length == 0 && breathing.Length == 0
             && run.Length == 0 && attack.Length == 0 && hit.Length == 0 && death.Length == 0)
@@ -891,82 +947,7 @@ internal static partial class MclslWorldSoulActorRegistration
         return set;
     }
 
-    private static Sprite[] LoadFrames(string folder, string animation, string prefix, int count)
-    {
-        List<Sprite> frames = new();
-        string basePath = ActorPath(folder) + animation + "/";
-        for (int i = 1; i <= count; i++)
-        {
-            Sprite sprite = LoadFirstExistingSprite(
-                basePath + prefix + "_" + i.ToString("00"),
-                basePath + prefix + "_" + i,
-                basePath + i.ToString("00"),
-                basePath + i);
-            if (sprite != null) frames.Add(sprite);
-        }
-        return frames.ToArray();
-    }
 
-    private static Sprite[] LoadActionFrames(string folder, string[] actions, int count)
-    {
-        if (actions == null || actions.Length == 0) return Array.Empty<Sprite>();
-        for (int i = 0; i < actions.Length; i++)
-        {
-            Sprite[] flat = LoadFlatActionFrames(folder, actions[i], count);
-            if (flat.Length > 0) return flat;
-
-            Sprite[] legacy = LoadFrames(folder, actions[i], actions[i], count);
-            if (legacy.Length > 0) return legacy;
-        }
-        return Array.Empty<Sprite>();
-    }
-
-    private static Sprite[] LoadFlatActionFrames(string folder, string action, int count)
-    {
-        if (string.IsNullOrWhiteSpace(folder) || string.IsNullOrWhiteSpace(action)) return Array.Empty<Sprite>();
-        List<Sprite> frames = new();
-        string basePath = ActorPath(folder);
-        string lower = action.ToLowerInvariant();
-        string upper = char.ToUpperInvariant(lower[0]) + lower.Substring(1);
-        for (int i = 0; i < count; i++)
-        {
-            Sprite sprite = LoadFirstExistingSprite(
-                basePath + folder + "_" + lower + "_" + i.ToString("000"),
-                basePath + folder + "_" + lower + "_" + i.ToString("00"),
-                basePath + folder + "_" + lower + "_" + i,
-                basePath + folder + "_" + upper + "_" + i.ToString("000"),
-                basePath + folder + "_" + upper + "_" + i.ToString("00"),
-                basePath + folder + "_" + upper + "_" + i);
-            if (sprite != null) frames.Add(sprite);
-            else if (i > 0 && frames.Count > 0) break;
-        }
-        return frames.ToArray();
-    }
-
-    private static Sprite LoadFirstExistingSprite(params string[] paths)
-    {
-        for (int i = 0; i < paths.Length; i++)
-        {
-            Sprite sprite = LoadSprite(paths[i]);
-            if (sprite != null) return sprite;
-        }
-        return null;
-    }
-
-    private static Sprite LoadSprite(string path)
-    {
-        try
-        {
-            return SpriteTextureLoader.getSprite(path)
-                ?? SpriteTextureLoader.getSprite("GameResources/" + path)
-                ?? Resources.Load<Sprite>("GameResources/" + path)
-                ?? Resources.Load<Sprite>(path);
-        }
-        catch
-        {
-            return null;
-        }
-    }
 
     private static bool MclslWorldSoulActorRegistrationMarker(Actor actor)
     {
@@ -992,15 +973,7 @@ internal static partial class MclslWorldSoulActorRegistration
         catch { return 0L; }
     }
 
-    private static int StableHash(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
+    private static int StableHash(string value) => MclslStableHash.Positive23x37(value);
 
     private static string ActorPath(string folder)
     {
@@ -1016,7 +989,7 @@ internal static partial class MclslWorldSoulActorRegistration
             string soulId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulEntityId, string.Empty);
             if (!string.IsNullOrWhiteSpace(soulId))
             {
-                MclslWorldSoulRecord soul = FindWorldSoulById(soulId);
+                MclslWorldSoulRecord soul = MySimulatedLongevityRoad.Systems.MclslWorldRunRepository.FindWorldSoulById(soulId);
                 string folder = FolderForSoul(soul);
                 if (!string.IsNullOrWhiteSpace(folder)) return folder;
                 if (DefinitionsBySoulId.TryGetValue(soulId, out SoulActorDefinition fromId)) return fromId.Folder;
@@ -1026,7 +999,7 @@ internal static partial class MclslWorldSoulActorRegistration
             if (!string.IsNullOrWhiteSpace(actorAssetId) && DefinitionsByActorId.TryGetValue(actorAssetId, out SoulActorDefinition fromAsset))
                 return fromAsset.Folder;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-17", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #17: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-17", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #17: " + mclslEmptyCatchEx.Message); }
         return string.Empty;
     }
 
@@ -1054,16 +1027,6 @@ internal static partial class MclslWorldSoulActorRegistration
         return best;
     }
 
-    private static MclslWorldSoulRecord FindWorldSoulById(string soulId)
-    {
-        MclslWorldRunState run = MclslWorldRunRepository.Current;
-        if (run?.WorldSouls == null || string.IsNullOrWhiteSpace(soulId)) return null;
-        for (int i = 0; i < run.WorldSouls.Count; i++)
-        {
-            MclslWorldSoulRecord soul = run.WorldSouls[i];
-            if (soul != null && soul.Id == soulId) return soul;
-        }
-        return null;
-    }
+
 
 }

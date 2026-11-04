@@ -48,9 +48,30 @@ internal static class MclslMaobaoPlaceMode
         EnsureRegistered();
         if (_button == null || !MclslMaobaoArchiveManager.SelectActorToPlace(actorId)) return false;
         ScrollWindow.hideAllEvent();
-        try { PowerButtonSelector.instance?.unselectAll(); } catch { }
-        try { PowerButtonSelector.instance?.clickPowerButton(_button); } catch { }
-        try { PowerButtonSelector.instance?.setPower(_button); } catch { }
+        try
+        {
+            PowerButtonSelector.instance?.unselectAll();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-1", "猫宝放置：取消原按钮选择失败: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            PowerButtonSelector.instance?.clickPowerButton(_button);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-2", "猫宝放置：模拟点击按钮失败: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            PowerButtonSelector.instance?.setPower(_button);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-3", "猫宝放置：切换能力按钮失败: " + mclslEmptyCatchEx.Message);
+        }
         return true;
     }
 }

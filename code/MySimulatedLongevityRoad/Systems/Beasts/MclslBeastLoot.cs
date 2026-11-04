@@ -23,28 +23,31 @@ internal sealed class MclslBeastLootState
 }
 internal static class MclslBeastLoot
 {
-    private const string Key="mclsl.beasts.loot.v1";
+    private const string Key="mclsl.080.beasts.loot.v1";
     private static MclslBeastLootState _state=new();
     private static HashSet<long> _committed=new();
     private static int _retry;
     private static bool _locked;
-    internal static double Now=>World.world==null?0:Convert.ToDouble(World.world.getCurWorldTime());
-    internal static void Clear(){_state=new();_committed.Clear();_retry=0;_locked=false;}
+    private static MclslModuleLoadState _loadState;
+    internal static double Now=>MclslWorldContext.Clock;
+    internal static void Clear(){_state=new();_committed.Clear();_retry=0;_locked=false;_loadState.Clear();}
     internal static void Load()
     {
-        Clear();if(World.world?.map_stats?.custom_data==null)return;
-        World.world.map_stats.custom_data.get(Key,out string raw,"");if(raw.Length==0)return;
+        Clear();if(World.world?.map_stats==null)return;
+        if(World.world.map_stats.custom_data==null){_loadState.Ready();return;}
+        World.world.map_stats.custom_data.get(Key,out string raw,"");if(raw.Length==0){_loadState.Ready();return;}
         try
         {
             var state=JsonConvert.DeserializeObject<MclslBeastLootState>(raw);
             if(state?.Version!=1||state.Committed==null||state.Pending==null)throw new InvalidOperationException("掉落存档格式错误");
             _state=state;_committed=new(state.Committed);
+            _loadState.Ready();
         }
-        catch(Exception ex){_locked=true;MclslDiagnostics.Error("beast-loot-load",ex.ToString());}
+        catch(Exception ex){_locked=true;_loadState.Fault();MclslDiagnostics.Error("beast-loot-load",ex.ToString());}
     }
     internal static void Save()
     {
-        if(_locked||World.world?.map_stats==null)return;
+        if(!_loadState.CanSave||_locked||World.world?.map_stats==null)return;
         World.world.map_stats.custom_data??=new SaveCustomData();
         World.world.map_stats.custom_data.set(Key,JsonConvert.SerializeObject(_state));
     }
@@ -95,8 +98,15 @@ internal static class MclslBeastLoot
     private static int Roll(long id,string suffix)=>MclslBeastWorld.Roll(id+"|loot|"+suffix,100);
     private static bool Deliver(MclslBeastLootDelivery delivery)
     {
+        long sample=MclslPerformanceProbe.Begin();
+        try { return DeliverCore(delivery); }
+        finally { MclslPerformanceProbe.End("灵兽.掉落交付",sample); }
+    }
+    private static bool DeliverCore(MclslBeastLootDelivery delivery)
+    {
         if(!MclslActorRegistry.ResolveKnownOrWorld(delivery.RecipientId,out var actor)||!MclslActorAccessor.Alive(actor))
         { _state.Pending.Remove(delivery);return true; }
+        if(!MclslBagSystem.Supports(actor)){_state.Pending.Remove(delivery);return true;}
         if(MclslBagSystem.IsLocked(actor))return false;
         MclslBagSystem.BeginTransaction(actor);
         try
@@ -104,10 +114,22 @@ internal static class MclslBeastLoot
             var bag=MclslBagSystem.Read(actor);
             foreach(var reward in delivery.Items)
                 if(reward.Value<=0 || MclslItemCatalog.Get(reward.Key)==null)throw new InvalidOperationException("非法妖兽奖励");
-            string backup=JsonConvert.SerializeObject(bag.Items);
+            // Structural rollback copy. MclslOwnedItem has exactly five public
+            // get/set properties and no JSON hooks, so a field-by-field clone is
+            // value-identical to the previous JsonConvert round trip; Add mutates
+            // existing stacks in place (stack.Count +=), which is why the
+            // elements themselves must be copied, not just the list. Restore
+            // replaces bag.Items wholesale, matching the old deserialize assign.
+            var backup=new List<MclslOwnedItem>(bag.Items.Count);
+            for(int i=0;i<bag.Items.Count;i++)
+            {
+                MclslOwnedItem held=bag.Items[i];
+                backup.Add(held==null?null:new MclslOwnedItem{ItemId=held.ItemId,InstanceId=held.InstanceId,
+                    Count=held.Count,Durability=held.Durability,AcquiredYear=held.AcquiredYear});
+            }
             try
             { foreach(var reward in delivery.Items)MclslBagSystem.Add(bag,reward.Key,reward.Value,acquiredYear:delivery.Year);MclslBagSystem.Write(actor,bag); }
-            catch {bag.Items=JsonConvert.DeserializeObject<List<MclslOwnedItem>>(backup);throw;}
+            catch {bag.Items=backup;throw;}
             _state.Pending.Remove(delivery);
             foreach(var reward in delivery.Items)
                 MclslWorldRunRepository.AddItemAcquisitionEvent(delivery.Year,actor,reward.Key,reward.Value,"击杀妖兽");

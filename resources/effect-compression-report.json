@@ -1,0 +1,11 @@
+{
+  "files": 125,
+  "changed": 48,
+  "beforeBytes": 40351350,
+  "candidateBytes": 39842800,
+  "beforeDecodeMs": 340.06960000260733,
+  "candidateDecodeMs": 327.80990001629107,
+  "accepted": true,
+  "losslessRGBA": true,
+  "benchmark": "Pillow in-memory decode proxy, not Unity startup measurement"
+}

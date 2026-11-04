@@ -56,6 +56,8 @@ internal static class MclslSpiritualRootSystem
     }
 
     private static readonly string[] Elements = { "金", "木", "水", "火", "土", "风", "雷", "阴", "阳", "空间" };
+    // 复用一个分隔符数组，避免每次解析灵根属性时 new[] 产生临时分配（结果不变）。
+    private static readonly char[] RootAttributeSeparators = { ',', '，', '、' };
 
     internal static MclslSpiritualRootProfile Profile(Actor actor)
     {
@@ -158,7 +160,7 @@ internal static class MclslSpiritualRootSystem
                 if (!MclslTraitRegistration.HasTraitWithAlias(actor, gift.TraitId)) continue;
                 if (best == null || gift.Level > best.Level) best = gift;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslSpiritualRootSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpiritualRootSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslSpiritualRootSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpiritualRootSystem.cs #1: " + mclslEmptyCatchEx.Message); }
         }
         return best;
     }
@@ -238,7 +240,7 @@ internal static class MclslSpiritualRootSystem
         RootCache cache = actor == null ? new RootCache() : RootCaches.GetOrCreateValue(actor);
         if (cache.Attributes != null && cache.Stored == stored && cache.Primary == primary && cache.Count == count)
             return cache.Attributes;
-        string[] existing = (stored ?? string.Empty).Split(new[] { ',', '，', '、' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] existing = (stored ?? string.Empty).Split(RootAttributeSeparators, StringSplitOptions.RemoveEmptyEntries);
         cache.Stored = stored; cache.Primary = primary; cache.Count = count; cache.Display = null;
         cache.ValidStored = existing.Length == count;
         if (cache.ValidStored) return cache.Attributes = existing;
@@ -315,5 +317,10 @@ internal static class MclslSpiritualRootSystem
             foreach (char c in value ?? string.Empty) hash = hash * 31 + c;
             return hash & int.MaxValue;
         }
+    }
+    internal static MclslAptitudeGiftDefinition ResolveCultivationGift(Actor actor)
+    {
+        int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100);
+        return MclslSpiritualRootSystem.GiftForCultivation(actor) ?? MclslAptitudeGiftCatalog.ForAptitude(aptitude);
     }
 }

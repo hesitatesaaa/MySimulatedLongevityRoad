@@ -36,6 +36,8 @@ internal sealed class MclslActorFrameCache<T> where T : class
         _grace = evictionGraceSeconds;
     }
 
+    internal bool IsBudgetBlocked { get; private set; }
+
     internal long ResidentBytes { get { lock (_gate) return _bytes; } }
     internal int PendingCount { get { lock (_gate) return _pending.Count; } }
     internal void Register(string key, long bytes)
@@ -73,14 +75,19 @@ internal sealed class MclslActorFrameCache<T> where T : class
         if (double.IsNaN(unscaledNow) || double.IsInfinity(unscaledNow) || unscaledNow < _now
             || maxLoads <= 0 || double.IsNaN(maxMilliseconds) || double.IsInfinity(maxMilliseconds)
             || maxMilliseconds <= 0) throw new ArgumentException("Invalid cache pump limits/time");
-        lock (_gate) _now = unscaledNow;
-        var timer = Stopwatch.StartNew();
+        lock (_gate)
+        {
+            _now = unscaledNow;
+            IsBudgetBlocked = false;
+            if (_requests.Count == 0) return 0;
+        }
+        long started = Stopwatch.GetTimestamp();
         int count = 0;
-        while (count < maxLoads && timer.Elapsed.TotalMilliseconds < maxMilliseconds)
+        while (count < maxLoads && (Stopwatch.GetTimestamp() - started) * 1000d / Stopwatch.Frequency < maxMilliseconds)
         {
             string key;
             long size;
-            var evicted = new List<T>();
+            List<T> evicted = null;
             bool blocked;
             lock (_gate)
             {
@@ -98,15 +105,16 @@ internal sealed class MclslActorFrameCache<T> where T : class
                     Entry old = _resident[oldest];
                     _resident.Remove(oldest);
                     _bytes -= old.Bytes;
-                    evicted.Add(old.Value);
+                    (evicted ??= new List<T>()).Add(old.Value);
                 }
                 blocked = _bytes + size > _budget;
                 // Nothing cold can be released safely. Keep the request queued.
                 // Do not decode a texture and then discover it exceeds the budget.
                 if (!blocked) _requests.Dequeue();
             }
-            foreach (T value in evicted) release(value);
-            if (blocked) return count;
+            if (evicted != null)
+                foreach (T value in evicted) release(value);
+            if (blocked) { IsBudgetBlocked = true; return count; }
             T loaded = null;
             try { loaded = load(key); }
             finally
@@ -127,6 +135,28 @@ internal sealed class MclslActorFrameCache<T> where T : class
         return count;
     }
 
+    // Same ownership/grace rule as budget eviction; never touch initial poses.
+    internal int TrimCold(double now, int maximum, double idleSeconds, Action<T> release)
+    {
+        OwnerOnly();
+        var keys = new List<string>();
+        var values = new List<T>();
+        lock (_gate)
+        {
+            foreach (var pair in _resident)
+            {
+                if (keys.Count >= maximum) break;
+                if (now - pair.Value.LastRequest < Math.Max(_grace, idleSeconds)) continue;
+                keys.Add(pair.Key);
+                values.Add(pair.Value.Value);
+                _bytes -= pair.Value.Bytes;
+            }
+            foreach (string key in keys) _resident.Remove(key);
+        }
+        foreach (T value in values) release(value);
+        return values.Count;
+    }
+
     internal void Clear(Action<T> release)
     {
         OwnerOnly();
@@ -139,6 +169,7 @@ internal sealed class MclslActorFrameCache<T> where T : class
             _requests.Clear();
             _failed.Clear();
             _bytes = 0;
+            IsBudgetBlocked = false;
         }
         foreach (T value in values) release(value);
     }

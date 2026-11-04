@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Collections;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
@@ -12,23 +13,43 @@ namespace MySimulatedLongevityRoad.Systems;
 /// </summary>
 internal static class MclslActorRegistry
 {
-    private static readonly Dictionary<long, Actor> ActorsById = new();
-    private static readonly Dictionary<long, (long Attack, long Behavior)> TargetsByActor = new();
+    internal sealed class Entry
+    {
+        internal readonly Actor Actor;
+        internal long DataRevision, Attack, Behavior;
+        internal bool HasNativeStamp;
+        internal MclslRuntimeChanges.NativeStamp NativeStamp;
+        private BaseSimObject _notifiedAttack, _notifiedBehavior;
+        internal Entry(Actor actor) => Actor = actor;
+        internal bool ObserveTargets()
+        {
+            lock (this)
+            {
+                if (ReferenceEquals(_notifiedAttack, Actor.attack_target)
+                    && ReferenceEquals(_notifiedBehavior, Actor.beh_actor_target)) return false;
+                _notifiedAttack = Actor.attack_target;
+                _notifiedBehavior = Actor.beh_actor_target;
+                return true;
+            }
+        }
+    }
+    private static readonly ConcurrentDictionary<long, Entry> ActorsById = new();
+    internal static bool ResolveEntry(long id, out Entry entry) => ActorsById.TryGetValue(id, out entry);
     private static readonly Dictionary<long, MclslOrderedIdIndex<long>> Targeters = new();
     internal static void RefreshTargets(Actor actor, bool forceEligibility = false)
     {
         long id = MclslActorAccessor.Id(actor);
-        if (id <= 0 || !ActorsById.ContainsKey(id)) return;
+        if (!ActorsById.TryGetValue(id, out Entry entry)) return;
         Actor attackTarget = actor.attack_target as Actor, behaviorTarget = actor.beh_actor_target as Actor;
         long attack = MclslActorAccessor.Alive(attackTarget) ? MclslActorAccessor.Id(attackTarget) : 0;
         long behavior = MclslActorAccessor.Alive(behaviorTarget) ? MclslActorAccessor.Id(behaviorTarget) : 0;
-        TargetsByActor.TryGetValue(id, out var before);
-        if (!forceEligibility && before.Attack == attack && before.Behavior == behavior) return;
+        if (!forceEligibility && entry.Attack == attack && entry.Behavior == behavior) return;
+        if (attack > 0 || behavior > 0)
+        { Combat.MclslCareerCombat.Wake(actor); MclslBeastTalentSystem.Wake(actor); }
         if ((attack > 0 || behavior > 0) && !MclslEligibility.CanClaimWorldSoul(actor)) attack = behavior = 0;
-        if (before.Attack == attack && before.Behavior == behavior) return;
+        if (entry.Attack == attack && entry.Behavior == behavior) return;
         RemoveTargets(id);
-        if (attack == 0 && behavior == 0) return;
-        TargetsByActor[id] = (attack, behavior);
+        entry.Attack = attack; entry.Behavior = behavior;
         AddTargeter(attack, id); if (behavior != attack) AddTargeter(behavior, id);
     }
     private static void AddTargeter(long target, long id)
@@ -44,8 +65,9 @@ internal static class MclslActorRegistry
     }
     private static void RemoveTargets(long id)
     {
-        if (!TargetsByActor.TryGetValue(id, out var targets)) return;
-        RemoveTargeter(targets.Attack, id); RemoveTargeter(targets.Behavior, id); TargetsByActor.Remove(id);
+        if (!ActorsById.TryGetValue(id, out var entry)) return;
+        RemoveTargeter(entry.Attack, id); RemoveTargeter(entry.Behavior, id);
+        entry.Attack = entry.Behavior = 0;
     }
     internal static Actor FindTargeter(long target)
     {
@@ -89,7 +111,6 @@ internal static class MclslActorRegistry
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
     private static int _cleanupCursor;
-    private static int _auditCursor;
     private static long _registryRevision;
     private sealed class ActorView : IReadOnlyList<Actor>
     {
@@ -103,7 +124,7 @@ internal static class MclslActorRegistry
     }
     internal static IReadOnlyList<Actor> CreateView(IReadOnlyList<long> ids) => new ActorView(ids);
 
-    internal static int Count => ActorsById.Count;
+    internal static int Count => Ids.LiveCount;
     internal static long Revision => _registryRevision;
 
     internal static bool Register(Actor actor, out long actorId)
@@ -120,11 +141,14 @@ internal static class MclslActorRegistry
         actorId = MclslActorAccessor.Id(actor);
         if (actorId <= 0L) return false;
 
-        isNew = !ActorsById.TryGetValue(actorId, out Actor existing);
-        if (isNew || !ReferenceEquals(existing, actor))
+        isNew = !ActorsById.TryGetValue(actorId, out Entry existing);
+        if (isNew || !ReferenceEquals(existing.Actor, actor))
         {
-            ActorsById[actorId] = actor;
+            if (!isNew) RemoveTargets(actorId);
+            ActorsById[actorId] = new Entry(actor);
             Ids.Add(actorId);
+            MclslActorRelations.Refresh(actor);
+            MclslBeastPopulationIndex.Observe(actor);
             RefreshTraits(actor); RefreshIdentity(actor); RefreshResourceReferences(actor); RefreshLocation(actor); RefreshTargets(actor);
             InvalidateSnapshot();
             MclslRuntimeChanges.Publish(actor, MclslActorChange.All);
@@ -136,9 +160,9 @@ internal static class MclslActorRegistry
     internal static bool Resolve(long actorId, out Actor actor)
     {
         actor = null;
-        if (actorId <= 0L || !ActorsById.TryGetValue(actorId, out Actor known)) return false;
-        if (known?.data == null) return false;
-        actor = known;
+        if (actorId <= 0L || !ActorsById.TryGetValue(actorId, out Entry known)) return false;
+        if (known.Actor?.data == null) return false;
+        actor = known.Actor;
         return true;
     }
 
@@ -151,16 +175,36 @@ internal static class MclslActorRegistry
         return true;
     }
 
+    /// <summary>
+    /// 只读存活探测：不登记、不发布，供 UI 与巡检等纯查询使用。
+    /// 与 <see cref="ResolveKnownOrWorld"/> 的区别是绝不对注册表产生副作用。
+    /// </summary>
+    internal static bool TryPeekAlive(long actorId, out Actor actor)
+    {
+        actor = null;
+        if (actorId <= 0L) return false;
+        if (ActorsById.TryGetValue(actorId, out Entry known) && known.Actor?.data != null)
+            actor = known.Actor;
+        else
+            actor = World.world?.units?.get(actorId);
+        return actor?.data != null && actor.isAlive();
+    }
+
     internal static void Unregister(long actorId)
     {
         if (actorId <= 0L) return;
-        ActorsById.TryGetValue(actorId, out Actor removed);
+        ActorsById.TryGetValue(actorId, out Entry entry);
+        Actor removed = entry?.Actor;
         if (removed?.data != null && !MclslActorAccessor.Alive(removed))
         {
             try { MclslFamilySystem.OnDeath(removed); }
             catch (Exception ex) { MclslDiagnostics.Error("family-before-forget", "释放人物缓存前家族死亡核对失败：" + ex.Message); }
         }
-        bool existed = ActorsById.Remove(actorId);
+        if(removed!=null)Combat.MclslCareerCombat.RemoveOwner(removed);
+        MclslActorRelations.Forget(actorId);
+        MclslBeastPopulationIndex.Forget(actorId);
+        RemoveTargets(actorId);
+        bool existed = ActorsById.TryRemove(actorId, out _);
         Ids.Remove(actorId);
         RemoveSecondaryIndexes(actorId);
         MclslBagSystem.Forget(actorId);
@@ -203,9 +247,9 @@ internal static class MclslActorRegistry
             if (_cleanupCursor >= Ids.Count) _cleanupCursor = 0;
             long actorId = Ids[_cleanupCursor++];
             if (actorId == 0) continue;
-            if (ActorsById.TryGetValue(actorId, out Actor actor)
-                && actor?.data != null
-                && MclslActorAccessor.Alive(actor))
+            if (ActorsById.TryGetValue(actorId, out Entry entry)
+                && entry.Actor?.data != null
+                && MclslActorAccessor.Alive(entry.Actor))
             {
                 continue;
             }
@@ -217,27 +261,17 @@ internal static class MclslActorRegistry
         return removed;
     }
 
-    internal static void Audit(int budget, Action<Actor> observe)
-    {
-        int checks = Math.Min(budget, Ids.Count);
-        for (int i = 0; i < checks && !MclslFrameDeadline.Expired; i++)
-        {
-            if (_auditCursor >= Ids.Count) _auditCursor = 0;
-            long id = Ids[_auditCursor++];
-            if (!ActorsById.TryGetValue(id, out Actor actor)) continue;
-            observe(actor);
-        }
-    }
-
     internal static void Clear()
     {
-        TargetsByActor.Clear(); Targeters.Clear();
+        Targeters.Clear();
         TraitIds.Clear(); TraitsByActor.Clear(); IdentityIds.Clear(); IdentityByActor.Clear();
         CaveReferences.Clear(); ChangeReferences.Clear(); ResourceByActor.Clear();
         CityByActor.Clear(); CityActors.Clear(); CityOrder.Clear();
+        MclslActorRelations.Clear();
+        MclslBeastPopulationIndex.Clear();
         ActorsById.Clear();
         Ids.Clear();
-        _cleanupCursor = _auditCursor = 0;
+        _cleanupCursor = 0;
         _registryRevision = 0L;
     }
 
@@ -328,7 +362,7 @@ internal static class MclslActorRegistry
 
     private static void RemoveSecondaryIndexes(long id)
     {
-        RemoveTargets(id); Targeters.Remove(id);
+        Targeters.Remove(id);
         RemoveLocation(id);
         if (TraitsByActor.TryGetValue(id, out List<string> traits))
         { foreach (string trait in traits) RemoveBucketId(TraitIds, trait, id); TraitsByActor.Remove(id); }

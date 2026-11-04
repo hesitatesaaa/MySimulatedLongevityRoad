@@ -107,7 +107,7 @@ internal static class MclslItemUseSystem
         if (item.Id is "D006" or "D007" && !MclslItemEffectDriver.CanSchedule(actor)) return "持续恢复效果已达容量，请稍后使用；物品不会消耗。";
         if (item.Id == "D005") return "当前修为已无可用的补缺空间。";
         if (item.Id == "F007") return "当前没有可推进的修炼进度。";
-        if (item.Id == "D011" && MclslRuntime.CurrentYear() - MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.life_save_year", -1000) < 50)
+        if (item.Id == "D011" && MclslRuntime.CurrentYear() - MclslActorAccessor.GetInt(actor, "mclsl.080.actor.life_save_year", -1000) < 50)
             return "造化紫金丹的保命效果尚在五十年冷却中。";
         return "当前状态不满足使用条件。";
     }
@@ -149,9 +149,9 @@ internal static class MclslItemUseSystem
                 MclslSpellSystem.RestoreMana(actor, 0.08f);
                 break;
             case "D004":
-                if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") == 0)
+                if (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") == 0)
                 {
-                    MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.taishang_taken", 1);
+                    MclslActorAccessor.Set(actor, "mclsl.080.actor.taishang_taken", 1);
                     actor.addStatusEffect(StatusPrefix + itemId, 999999999f);
                     actor.finishStatusEffect("mclsl_item_foundation_damaged");
                     actor.updateStats();
@@ -159,8 +159,8 @@ internal static class MclslItemUseSystem
                 else actor.restoreHealthPercent(0.20f);
                 break;
             case "D005":
-                int previousYear = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_year", -1000);
-                int previousCount = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_count");
+                int previousYear = MclslActorAccessor.GetInt(actor, "mclsl.080.actor.buque_year", -1000);
+                int previousCount = MclslActorAccessor.GetInt(actor, "mclsl.080.actor.buque_count");
                 int useCount = year - previousYear <= 30 ? previousCount + 1 : 1;
                 float strength = useCount switch { 1 => 1f, 2 => 0.7f, 3 => 0.4f, _ => 0.1f };
                 string realm = MclslActorAccessor.Realm(actor);
@@ -169,12 +169,12 @@ internal static class MclslItemUseSystem
                 int current = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
                 int cap = MclslRealmProgress.NextRealmMinimum(realm, ancient);
                 if (MclslActorAccessor.GetFloat(actor, MclslActorDataKeys.CultivationProgress) >= 99f)
-                    MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_break_bonus", Math.Max(1, (int)MathF.Round(25f * strength)));
+                    MclslActorAccessor.Set(actor, "mclsl.080.actor.buque_break_bonus", Math.Max(1, (int)MathF.Round(25f * strength)));
                 int gain = Math.Max(1, (int)MathF.Round(span * 0.35f * strength));
                 MclslCultivationGrowthSystem.SetTrueEssence(actor, realm,
                     cap > 0 ? Math.Min(cap, current + gain) : current + gain, ancient, enforceRealmMinimum: true);
-                MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_year", year);
-                MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_count", useCount);
+                MclslActorAccessor.Set(actor, "mclsl.080.actor.buque_year", year);
+                MclslActorAccessor.Set(actor, "mclsl.080.actor.buque_count", useCount);
                 break;
             case "D006":
                 actor.restoreHealthPercent(0.30f);
@@ -205,7 +205,7 @@ internal static class MclslItemUseSystem
                 actor.setHealth(Math.Max(1, (int)MathF.Round(actor.getMaxHealth() * 0.80f)), true);
                 actor.finishStatusEffect("injured");
                 actor.addStatusEffect(StatusPrefix + itemId, 5f);
-                MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.life_save_year", MclslRuntime.CurrentYear());
+                MclslActorAccessor.Set(actor, "mclsl.080.actor.life_save_year", MclslRuntime.CurrentYear());
                 break;
             case "D013":
                 MclslSpellSystem.RestoreMana(actor, 0.25f);
@@ -228,7 +228,7 @@ internal static class MclslItemUseSystem
             case "D018":
                 actor.restoreHealthPercent(0.50f);
                 actor.addStatusEffect(StatusPrefix + itemId, 5f);
-                MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.taixu_life_save_year", year);
+                MclslActorAccessor.Set(actor, "mclsl.080.actor.taixu_life_save_year", year);
                 break;
             case "F020":
                 MclslSpellSystem.RestoreMana(actor, 0.15f);
@@ -299,15 +299,15 @@ internal static class MclslItemUseSystem
             MclslConsumableUseTrigger.Breakthrough, nextRealm)) return 0;
         if (!MclslBagSystem.Remove(bag, itemId)) return 0;
         MclslBagSystem.Write(actor, bag);
-        MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.break_pill", itemId);
-        MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.break_pill_year", useYear);
+        MclslActorAccessor.Set(actor, "mclsl.080.actor.break_pill", itemId);
+        MclslActorAccessor.Set(actor, "mclsl.080.actor.break_pill_year", useYear);
         return itemId switch { "D001" => 25, "D002" => 30, "D003" => 35, _ => 40 };
     }
 
     internal static float FailureSetbackFactor(Actor actor, string nextRealm, int year)
     {
-        if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.break_pill_year", -1) != year) return 1f;
-        string pill = MclslActorAccessor.GetString(actor, "mclsl.architecture.v2.actor.break_pill");
+        if (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.break_pill_year", -1) != year) return 1f;
+        string pill = MclslActorAccessor.GetString(actor, "mclsl.080.actor.break_pill");
         return (nextRealm, pill) switch
         {
             (MclslRealmIds.ZhuJi, "D001") => 0.5f,
@@ -319,12 +319,12 @@ internal static class MclslItemUseSystem
     }
 
     internal static bool ConsumedBreakthroughPill(Actor actor, string itemId, int year) =>
-        MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.break_pill_year", -1) == year
-        && MclslActorAccessor.GetString(actor, "mclsl.architecture.v2.actor.break_pill") == itemId;
+        MclslActorAccessor.GetInt(actor, "mclsl.080.actor.break_pill_year", -1) == year
+        && MclslActorAccessor.GetString(actor, "mclsl.080.actor.break_pill") == itemId;
 
     internal static void SyncPersistent(Actor actor)
     {
-        if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0
+        if (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") > 0
             && !actor.hasStatus(StatusPrefix + "D004"))
             actor.addStatusEffect(StatusPrefix + "D004", 999999999f);
     }
@@ -360,53 +360,100 @@ internal static class MclslItemUseSystem
     {
         if (!MclslActorAccessor.Alive(actor) || actor.getHealth() - incomingDamage > actor.getMaxHealth() * 0.10f) return false;
         int year = MclslRuntime.CurrentYear();
-        if (MclslBagSystem.Count(actor, "D018") > 0
-            && year - MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taixu_life_save_year", -1000) >= 50
+        // One bag snapshot replaces the two separate Count(actor,...) Peeks. The
+        // per-item count index is still consulted, so every branch result and the
+        // trigger/cooldown/consumption order stay identical to the two-Peek form.
+        MclslBagState bag = MclslBagSystem.Peek(actor);
+        if (MclslBagSystem.Count(bag, "D018") > 0
+            && year - MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taixu_life_save_year", -1000) >= 50
             && TryUseAutomatic(actor, "D018", MclslConsumableUseTrigger.Emergency, year)) return true;
-        if (year - MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.life_save_year", -1000) < 50) return false;
-        if (MclslBagSystem.Count(actor, "D011") > 0)
+        if (year - MclslActorAccessor.GetInt(actor, "mclsl.080.actor.life_save_year", -1000) < 50) return false;
+        if (MclslBagSystem.Count(bag, "D011") > 0)
             return TryUseAutomatic(actor, "D011", MclslConsumableUseTrigger.Emergency, year);
         return false;
+    }
+
+    // Presence flags collected in one pass over bag.Items so the combat auto-consume
+    // path no longer issues up to eight TryUseAutomatic probes (each an authoritative
+    // bag read + oldest-stack scan) plus a Count() per defensive talisman on every hit.
+    private struct CombatConsumablePresence
+    {
+        internal bool D010, D007, D006, D015, D019, D008, D014, D009;
+        internal int DefensiveTalismanMask;
+    }
+
+    private static CombatConsumablePresence ScanCombatConsumables(MclslBagState bag)
+    {
+        CombatConsumablePresence presence = default;
+        List<MclslOwnedItem> items = bag.Items;
+        for (int i = 0; i < items.Count; i++)
+        {
+            MclslOwnedItem owned = items[i];
+            if (owned == null || owned.Count <= 0) continue;
+            switch (owned.ItemId)
+            {
+                case "D010": presence.D010 = true; break;
+                case "D007": presence.D007 = true; break;
+                case "D006": presence.D006 = true; break;
+                case "D015": presence.D015 = true; break;
+                case "D019": presence.D019 = true; break;
+                case "D008": presence.D008 = true; break;
+                case "D014": presence.D014 = true; break;
+                case "D009": presence.D009 = true; break;
+                default:
+                    // Every defensive talisman id begins with 'F'; skip the small
+                    // comparison loop for the far more common material/pill ids.
+                    if (owned.ItemId != null && owned.ItemId.Length > 0 && owned.ItemId[0] == 'F')
+                        for (int p = 0; p < MclslConsumableInventoryPolicy.DefensiveTalismanCount; p++)
+                            if (string.Equals(owned.ItemId, MclslConsumableInventoryPolicy.DefensiveTalismanAt(p), StringComparison.Ordinal))
+                            { presence.DefensiveTalismanMask |= 1 << p; break; }
+                    break;
+            }
+        }
+        return presence;
     }
 
     internal static void TryAutoCombatConsumables(Actor actor, float incomingDamage, bool lifeSaveUsed = false)
     {
         if (!MclslActorAccessor.Alive(actor) || incomingDamage <= 0f) return;
-        if(!lifeSaveUsed)MclslBeastItemEffects.TryAuto(actor,MclslConsumableUseTrigger.Combat,false);
+        // Take one snapshot up front and lend it to the beast pass so both share a
+        // single authoritative read; the beast pass mutates this same cached bag.
         MclslBagState bag = MclslBagSystem.Peek(actor);
+        if (!lifeSaveUsed) MclslBeastItemEffects.TryAuto(actor, MclslConsumableUseTrigger.Combat, false, bag);
         if (bag.Items.Count == 0) return;
+        CombatConsumablePresence presence = ScanCombatConsumables(bag);
+        MclslPerformanceProbe.RecordCombatBagSingleScan();
         bool consumedPill = lifeSaveUsed;
         if (!consumedPill && actor.getHealth() - incomingDamage < actor.getMaxHealth() * 0.60f)
         {
             int year = MclslRuntime.CurrentYear();
-            consumedPill = TryUseAutomatic(actor, "D010", MclslConsumableUseTrigger.Combat, year)
-                || TryUseAutomatic(actor, "D007", MclslConsumableUseTrigger.Combat, year)
-                || TryUseAutomatic(actor, "D006", MclslConsumableUseTrigger.Combat, year)
-                || TryUseAutomatic(actor, "D015", MclslConsumableUseTrigger.Combat, year)
-                || TryUseAutomatic(actor, "D019", MclslConsumableUseTrigger.Combat, year);
+            consumedPill = presence.D010 && TryUseAutomatic(actor, "D010", MclslConsumableUseTrigger.Combat, year)
+                || presence.D007 && TryUseAutomatic(actor, "D007", MclslConsumableUseTrigger.Combat, year)
+                || presence.D006 && TryUseAutomatic(actor, "D006", MclslConsumableUseTrigger.Combat, year)
+                || presence.D015 && TryUseAutomatic(actor, "D015", MclslConsumableUseTrigger.Combat, year)
+                || presence.D019 && TryUseAutomatic(actor, "D019", MclslConsumableUseTrigger.Combat, year);
         }
         int currentYear = MclslRuntime.CurrentYear();
-        if (!consumedPill && actor.hasStatus("voices_in_my_head"))
+        if (!consumedPill && presence.D008 && actor.hasStatus("voices_in_my_head"))
             consumedPill = TryUseAutomatic(actor, "D008", MclslConsumableUseTrigger.Combat, currentYear);
-        if (!consumedPill && MclslConsumableInventoryPolicy.HasControlStatus(actor))
+        if (!consumedPill && presence.D014 && MclslConsumableInventoryPolicy.HasControlStatus(actor))
             consumedPill = TryUseAutomatic(actor, "D014", MclslConsumableUseTrigger.Combat, currentYear);
-        if (!consumedPill && MclslConsumableInventoryPolicy.HasCureableNegativeStatus(actor))
+        if (!consumedPill && presence.D009 && MclslConsumableInventoryPolicy.HasCureableNegativeStatus(actor))
             consumedPill = TryUseAutomatic(actor, "D009", MclslConsumableUseTrigger.Combat, currentYear);
         for (int i = 0; i < MclslConsumableInventoryPolicy.DefensiveTalismanCount; i++)
         {
+            if ((presence.DefensiveTalismanMask & (1 << i)) == 0) continue;
             string talismanId = MclslConsumableInventoryPolicy.DefensiveTalismanAt(i);
-            if (MclslBagSystem.Count(bag, talismanId) > 0)
-            {
-                if (TryUseAutomatic(actor, talismanId, MclslConsumableUseTrigger.Combat, currentYear)) break;
-            }
+            if (TryUseAutomatic(actor, talismanId, MclslConsumableUseTrigger.Combat, currentYear)) break;
         }
     }
 
     internal static void TryAutoCombatTalisman(Actor actor)
     {
         if (!MclslActorAccessor.Alive(actor)) return;
-        if(MclslBeastItemEffects.TryAuto(actor,MclslConsumableUseTrigger.Combat,true))return;
+        // Share one snapshot with the beast pass instead of reading the bag twice.
         MclslBagState bag = MclslBagSystem.Peek(actor);
+        if(MclslBeastItemEffects.TryAuto(actor,MclslConsumableUseTrigger.Combat,true,bag))return;
         if (bag?.Items == null || bag.Items.Count == 0) return;
 
         bool hasSpecialPill = false;
@@ -436,10 +483,21 @@ internal static class MclslItemUseSystem
         }
     }
 
+    internal static bool HasCultivationConsumables(Actor actor)
+    {
+        var bag = MclslBagSystem.PeekExisting(actor);
+        return bag != null
+            && (MclslBagSystem.Count(bag, "D004") > 0 || MclslBagSystem.Count(bag, "D005") > 0);
+    }
+
     internal static void TryAutoCultivationConsumables(Actor actor, int year)
     {
         if (!MclslActorAccessor.Alive(actor)) return;
-        TryUseAutomatic(actor, "D004", MclslConsumableUseTrigger.Cultivation, year);
-        TryUseAutomatic(actor, "D005", MclslConsumableUseTrigger.Cultivation, year);
+        var bag = MclslBagSystem.PeekExisting(actor);
+        if (bag == null) return;
+        if (MclslBagSystem.Count(bag, "D004") > 0)
+            TryUseAutomatic(actor, "D004", MclslConsumableUseTrigger.Cultivation, year);
+        if (MclslBagSystem.Count(bag, "D005") > 0)
+            TryUseAutomatic(actor, "D005", MclslConsumableUseTrigger.Cultivation, year);
     }
 }

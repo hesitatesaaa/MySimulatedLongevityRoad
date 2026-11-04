@@ -13,6 +13,7 @@ internal static class MclslAnnouncementSystem
     private sealed class PendingAnnouncement
     {
         internal string Text = string.Empty;
+        internal string DedupKey = string.Empty;
         internal string Color = "#D95B5B";
         internal float Duration = 8f;
         internal int EarliestFrame;
@@ -29,20 +30,22 @@ internal static class MclslAnnouncementSystem
     private static readonly Dictionary<string, float> LastShownByText = new(StringComparer.Ordinal);
     private static float _lastShown = -9999f;
 
-    internal static void Enqueue(string text, string color = "#D95B5B", float duration = 8f, int delayFrames = 0)
+    internal static void Enqueue(string text, string color = "#D95B5B", float duration = 8f, int delayFrames = 0, string eventKey = null)
     {
         string normalized = NormalizeTopText(text);
-        if (string.IsNullOrWhiteSpace(normalized) || Queue.Count >= MaxQueueSize || PendingTexts.Contains(normalized)) return;
-        if (LastShownByText.TryGetValue(normalized, out float last) && Time.unscaledTime - last < RepeatCooldownSeconds) return;
+        string key=eventKey??normalized;
+        if (string.IsNullOrWhiteSpace(normalized) || Queue.Count >= MaxQueueSize && eventKey==null || PendingTexts.Contains(key)) return;
+        if (LastShownByText.TryGetValue(key, out float last) && Time.unscaledTime - last < RepeatCooldownSeconds) return;
         Queue.Enqueue(new PendingAnnouncement
         {
             Text = normalized,
+            DedupKey = key,
             Color = string.IsNullOrWhiteSpace(color) ? "#D95B5B" : color,
             Duration = Math.Clamp(duration, 4f, 15f),
             EarliestFrame = Time.frameCount + Math.Max(0, delayFrames),
             CreatedFrame = Time.frameCount
         });
-        PendingTexts.Add(normalized);
+        PendingTexts.Add(key);
     }
 
     internal static void EnqueueGrouped(string eventType, int logicalYear, string actorName, string text,
@@ -88,14 +91,14 @@ internal static class MclslAnnouncementSystem
         PendingAnnouncement pending = Queue.Peek();
         if (pending.EarliestFrame > Time.frameCount) return;
         Queue.Dequeue();
-        PendingTexts.Remove(pending.Text);
+        PendingTexts.Remove(string.IsNullOrEmpty(pending.DedupKey)?pending.Text:pending.DedupKey);
         if (!string.IsNullOrEmpty(pending.GroupKey)) PendingGroups.Remove(pending.GroupKey);
         _lastShown = Time.unscaledTime;
         string displayText = GroupDisplayText(pending);
-        LastShownByText[displayText] = _lastShown;
+        LastShownByText[string.IsNullOrEmpty(pending.DedupKey)?displayText:pending.DedupKey] = _lastShown;
         Cleanup();
         try { WorldTip.showNow(displayText, false, "top", pending.Duration, pending.Color); }
-        catch { Debug.Log("[模拟长生路][公告] " + displayText); }
+        catch { MySimulatedLongevityRoad.Core.MclslDiagnostics.Notify("announcement.fallback", "[模拟长生路][公告] " + displayText); }
     }
 
     internal static void Clear()

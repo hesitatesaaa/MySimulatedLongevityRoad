@@ -13,12 +13,12 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return hasGift;
         if (hasGift) return true;
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age == 5
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1
             && hasGift) return true;
@@ -29,7 +29,7 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor)))
@@ -46,7 +46,7 @@ internal static class MclslNewLawEntrySystem
             BeginCultivation(actor, year, "灵根显现，开始感气");
             return true;
         }
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age == 5
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1
             && hasGift)
@@ -79,7 +79,7 @@ internal static class MclslNewLawEntrySystem
 
         long id = MclslActorAccessor.Id(actor);
         int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 0);
-        if (aptitude <= 0) aptitude = 20 + PositiveHash(id + "|apt") % 81;
+        if (aptitude <= 0) aptitude = 20 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(id + "|apt") % 81;
         int fate = Math.Max(1, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ImmortalFate, 20));
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1)
             aptitude = Math.Clamp(aptitude + aptitudeBonus, 1, 100);
@@ -95,9 +95,13 @@ internal static class MclslNewLawEntrySystem
             MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationStartYear, Math.Max(0, year));
         MclslMindSystem.EnsureMindState(actor);
         MclslTraitRegistration.SyncGiftTrait(actor, aptitude);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, technique.Id);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
-        MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+        if (MclslRealmIds.Index(technique.MaxRealm) >= MclslTechniqueRealmLimit.OwnedTechniqueCeiling(actor))
+        {
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
+            MclslTechniqueRealmLimit.EnsureFromDefinition(actor, technique);
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, technique.Id);
+        }
+        else inheritedTechnique = false;
         if (inheritedTechnique)
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential,
@@ -111,14 +115,6 @@ internal static class MclslNewLawEntrySystem
         MclslAnnualCultivationExecutor.TryApplyInitialYear(actor, year);
     }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int hash = 23; foreach (char c in value ?? string.Empty) hash = hash * 37 + c; return hash & int.MaxValue; }
-    }
 
-    private static int SafeAgeYear(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
+
 }

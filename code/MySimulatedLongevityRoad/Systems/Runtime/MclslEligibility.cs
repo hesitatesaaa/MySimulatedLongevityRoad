@@ -12,13 +12,13 @@ internal static class MclslEligibility
 
     private static readonly Dictionary<ActorAsset, bool> CivilizedAssetCache = new();
     private static readonly Dictionary<ActorAsset, bool> AssetBrainCache = new();
-    private static readonly Dictionary<Subspecies, bool> SubspeciesBrainCache = new();
+    private static readonly Dictionary<Subspecies, (bool Sapient, bool RequiredBrain)> SubspeciesBrainCache = new();
     private static readonly HashSet<string> ExplicitCivilizedSpecies = new(StringComparer.OrdinalIgnoreCase)
     {
         "unit_human", "human",
         "unit_elf", "elf",
         "unit_dwarf", "dwarf",
-        "unit_orc", "orc"
+        "unit_orc", "orc", "mclsl_xuanhuang"
     };
 
     private static readonly string[] LockedIdTokens =
@@ -48,31 +48,27 @@ internal static class MclslEligibility
         eligible = false;
         if (actor?.data == null || actor.asset == null || MclslActorAccessor.Id(actor) <= 0L) return false;
         string id = actor.asset.id ?? string.Empty;
-        if (id.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
+        if (id != "mclsl_xuanhuang" && id.StartsWith("mclsl_", StringComparison.OrdinalIgnoreCase)
             || MclslWorldSoulActorRegistration.IsWorldSoulAssetId(id)) return true;
         // Native Actor.isSapient returns false before a subspecies is attached.
         // Treat that state as pending, not as a completed negative birth roll.
         if (actor.subspecies == null) return false;
-        try { eligible = actor.isSapient(); return true; }
-        catch (Exception ex)
-        {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("physique-sapience", ex.Message);
-            return false;
-        }
+        eligible = actor.isSapient();
+        return true;
     }
 
     // Death routers call this after the native actor has already died, so this check must not depend on isAlive().
     internal static bool IsCivilizedActor(Actor actor)
     {
         if (actor?.asset == null) return false;
-        if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
-        if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached;
+        if (MclslBeastActorRegistration.IsBeast(actor)) return false;
+        if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached && BrainState(actor.subspecies).Sapient;
         string id = actor.asset.id ?? string.Empty;
         if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;
         bool result = !IsLockedAsset(actor.asset, id)
-            && (ExplicitCivilizedSpecies.Contains(id) || IsCivilizedSapient(actor));
+            && (ExplicitCivilizedSpecies.Contains(id) || !string.IsNullOrWhiteSpace(actor.asset.kingdom_id_civilization));
         CivilizedAssetCache[actor.asset] = result;
-        return result;
+        return result && BrainState(actor.subspecies).Sapient;
     }
 
     internal static bool CanClaimWorldSoul(Actor actor)
@@ -86,10 +82,15 @@ internal static class MclslEligibility
     }
 
     internal static bool HasRequiredCultivationBrain(Actor actor)
+        => actor?.asset != null && (actor.subspecies != null
+            ? BrainState(actor.subspecies).RequiredBrain : AssetHasRequiredCultivationBrain(actor.asset));
+
+    internal static bool Refresh(Subspecies subspecies)
     {
-        return actor?.asset != null
-            && (AssetHasRequiredCultivationBrain(actor.asset)
-                || SubspeciesHasRequiredCultivationBrain(actor.subspecies));
+        var next = ReadBrainState(subspecies);
+        bool changed = !SubspeciesBrainCache.TryGetValue(subspecies, out var previous) || previous != next;
+        SubspeciesBrainCache[subspecies] = next;
+        return changed;
     }
 
     internal static void Clear()
@@ -97,23 +98,6 @@ internal static class MclslEligibility
         CivilizedAssetCache.Clear();
         AssetBrainCache.Clear();
         SubspeciesBrainCache.Clear();
-    }
-
-    private static bool IsCivilizedSapient(Actor actor)
-    {
-        try
-        {
-            return actor != null
-                && actor.isSapient()
-                && !string.IsNullOrWhiteSpace(actor.asset?.kingdom_id_civilization);
-        }
-        catch (System.Exception mclslEmptyCatchEx)
-        {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Error(
-                "mclsl-eligibility-sapient",
-                "判断文明物种修炼资格失败: " + mclslEmptyCatchEx.Message);
-            return false;
-        }
     }
 
     private static bool AssetHasRequiredCultivationBrain(ActorAsset asset)
@@ -129,29 +113,17 @@ internal static class MclslEligibility
         return result;
     }
 
-    private static bool SubspeciesHasRequiredCultivationBrain(Subspecies subspecies)
+    private static (bool Sapient, bool RequiredBrain) BrainState(Subspecies subspecies)
     {
-        if (subspecies == null) return false;
-        if (SubspeciesBrainCache.TryGetValue(subspecies, out bool cached)) return cached;
-        bool result = false;
-        try
-        {
-            result =
-                (HasTraitId(subspecies.default_traits, RequiredBrainTraitPrefrontalCortex)
-                    || HasTraitId(subspecies.saved_traits, RequiredBrainTraitPrefrontalCortex))
-                && (HasTraitId(subspecies.default_traits, RequiredBrainTraitAdvancedHippocampus)
-                    || HasTraitId(subspecies.saved_traits, RequiredBrainTraitAdvancedHippocampus));
-        }
-        catch (System.Exception mclslEmptyCatchEx)
-        {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Error(
-                "mclsl-eligibility-subspecies-brain",
-                "判断亚种修炼资格失败: " + mclslEmptyCatchEx.Message);
-        }
-
-        SubspeciesBrainCache[subspecies] = result;
-        return result;
+        if (subspecies == null) return default;
+        if (!SubspeciesBrainCache.TryGetValue(subspecies, out var state))
+            SubspeciesBrainCache[subspecies] = state = ReadBrainState(subspecies);
+        return state;
     }
+
+    private static (bool Sapient, bool RequiredBrain) ReadBrainState(Subspecies subspecies)
+        => (subspecies.isSapient(), subspecies.hasTrait(RequiredBrainTraitPrefrontalCortex)
+            && subspecies.hasTrait(RequiredBrainTraitAdvancedHippocampus));
 
     private static bool HasTraitId(List<string> traits, string traitId)
     {
@@ -165,7 +137,7 @@ internal static class MclslEligibility
     private static bool IsLockedAsset(ActorAsset asset, string id)
     {
         if (asset == null) return true;
-        try { if (asset.is_boat) return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Runtime-MclslEligibility-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Runtime/MclslEligibility.cs #1: " + mclslEmptyCatchEx.Message); }
+        if (asset.is_boat) return true;
         for (int i = 0; i < LockedIdTokens.Length; i++)
             if (id.IndexOf(LockedIdTokens[i], StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;

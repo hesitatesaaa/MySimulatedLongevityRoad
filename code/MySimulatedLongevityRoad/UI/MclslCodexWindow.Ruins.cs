@@ -37,9 +37,9 @@ internal sealed partial class MclslCodexWindow
                 DrawInfoCard(ruin.Name, QualityColor(ruin.Quality), () =>
                 {
                     GUILayout.BeginHorizontal();
-                    DrawTag(Quality(ruin.Quality), QualityColor(ruin.Quality));
+                    DrawTag(MclslCodexSnapshot.Quality(ruin.Quality), QualityColor(ruin.Quality));
                     DrawTag(ruin.Category, "#CFC7B2");
-                    DrawTag(RuinStateText(ruin), IsRuinOpen(ruin) ? "#A7E08A" : "#B8B8B8");
+                    DrawTag(RuinStateText(ruin), MclslCodexSnapshot.IsRuinOpen(ruin) ? "#A7E08A" : "#B8B8B8");
                     DrawTag(MclslRuinText.DangerBand(ruin.Danger), MclslRuinText.DangerColor(ruin.Danger));
                     GUILayout.FlexibleSpace();
                     if (MclslEventLocator.CanLocate(ruin) && GUILayout.Button("定位", GUILayout.Width(62f)))
@@ -47,7 +47,7 @@ internal sealed partial class MclslCodexWindow
                     GUILayout.EndHorizontal();
                     GUILayout.BeginHorizontal();
                     DrawMiniStat("位置", ruin.NativeKingdomName + "·" + ruin.LocationName, "#CFC7B2", GUILayout.Width(260));
-                    DrawMiniStat("法则", ReplaceTags(ruin.LawTags), "#9CD7FF", GUILayout.Width(260));
+                    DrawMiniStat("法则", MclslActorArchiveText.ReplaceTags(ruin.LawTags), "#9CD7FF", GUILayout.Width(260));
                     DrawMiniStat("余藏", ruin.RemainingValue.ToString(), "#FFD37A", GUILayout.Width(120));
                     DrawMiniStat("陨落", ruin.CasualtyCount.ToString(), "#FF8877", GUILayout.Width(120));
                     GUILayout.FlexibleSpace();
@@ -86,7 +86,7 @@ internal sealed partial class MclslCodexWindow
                 {
                     GUILayout.BeginHorizontal();
                     DrawTag(string.IsNullOrWhiteSpace(lineage.LifecycleState) ? "未定" : lineage.LifecycleState, LineageColor(lineage.LifecycleState));
-                    DrawTag("《" + Blank(lineage.Name) + "》", "#FFD37A");
+                    DrawTag("《" + MclslActorArchiveText.Blank(lineage.Name) + "》", "#FFD37A");
                     DrawTag("上限 " + MclslRealmIds.Display(AncientLineageDisplayMaxRealm(lineage)), "#B7A7FF");
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
@@ -98,8 +98,8 @@ internal sealed partial class MclslCodexWindow
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
                     GUILayout.BeginHorizontal();
-                    DrawMiniStat("法则", ReplaceTags(lineage.LawTags), "#B7A7FF", GUILayout.Width(260));
-                    DrawMiniStat("创法者", Blank(lineage.FounderName), "#FFD37A", GUILayout.Width(220));
+                    DrawMiniStat("法则", MclslActorArchiveText.ReplaceTags(lineage.LawTags), "#B7A7FF", GUILayout.Width(260));
+                    DrawMiniStat("创法者", MclslActorArchiveText.Blank(lineage.FounderName), "#FFD37A", GUILayout.Width(220));
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
                     if (!string.IsNullOrWhiteSpace(lineage.LinkedRuinId))
@@ -134,7 +134,7 @@ internal sealed partial class MclslCodexWindow
                 {
                     string lineageName = _snapshot.LineageNameById.TryGetValue(record.LinkedLineageId, out string linkedLineageName) ? linkedLineageName : record.RevivedTechniqueName;
                     string sectName = _snapshot.LineageSectById.TryGetValue(record.LinkedLineageId, out string linkedSectName) ? linkedSectName : string.Empty;
-                    GUILayout.Label("承接：" + (string.IsNullOrWhiteSpace(sectName) ? "无名道统" : sectName) + "《" + Blank(lineageName) + "》");
+                    GUILayout.Label("承接：" + (string.IsNullOrWhiteSpace(sectName) ? "无名道统" : sectName) + "《" + MclslActorArchiveText.Blank(lineageName) + "》");
                 }
                 GUILayout.Label(record.Summary);
             });
@@ -246,7 +246,7 @@ internal sealed partial class MclslCodexWindow
         if (ruin == null) return "无详载。";
         string technique = string.IsNullOrWhiteSpace(ruin.SourceTechniqueName) ? "无名道法" : "《" + ruin.SourceTechniqueName + "》";
         string state = RuinStateText(ruin);
-        string laws = ReplaceTags(ruin.LawTags);
+        string laws = MclslActorArchiveText.ReplaceTags(ruin.LawTags);
         return technique + "遗韵沉于此地，状态：" + state + "；法则：" + laws + "；余藏：" + Math.Max(0, ruin.RemainingValue) + "。";
     }
 }

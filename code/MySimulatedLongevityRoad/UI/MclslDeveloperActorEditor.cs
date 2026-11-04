@@ -52,7 +52,7 @@ internal sealed class MclslDeveloperActorEditor : MonoBehaviour
     private void OnGUI()
     {
         if (!enabled || _actor?.data == null) return;
-        _window = GUI.Window(917503, _window, DrawWindow, "开发者角色编辑器 · 0.5.1");
+        _window = GUI.Window(917503, _window, DrawWindow, "开发者角色编辑器 · 0.8.1");
     }
 
     private void DrawWindow(int id)

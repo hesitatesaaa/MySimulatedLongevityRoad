@@ -25,7 +25,7 @@ internal static class MclslNativeKillStatisticsSystem
     };
     internal static void OnWorldLoaded(int year)
     {
-        ObservedKillCounts.Clear();
+        Clear();
     }
 
     internal static void Observe(Actor actor)
@@ -139,7 +139,7 @@ internal static class MclslNativeKillStatisticsSystem
             Actor direct = victim.attackedBy as Actor;
             if (direct != null && direct != victim) return direct;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-1", "击杀统计：读取 attackedBy 失败: " + mclslEmptyCatchEx.Message); }
 
         object target = victim;
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
@@ -153,7 +153,7 @@ internal static class MclslNativeKillStatisticsSystem
                 PropertyInfo property = target.GetType().GetProperty(name, flags);
                 if (property?.CanRead == true && property.GetValue(target, null) is Actor propertyActor && propertyActor != victim) return propertyActor;
             }
-            catch { }
+            catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-2", "击杀统计：反射读取击杀者字段失败: " + mclslEmptyCatchEx.Message); }
         }
         return null;
     }
@@ -198,7 +198,7 @@ internal static class MclslNativeKillStatisticsSystem
             PropertyInfo property = target.GetType().GetProperty(name, flags);
             if (property?.CanRead == true && TryConvertNumeric(property.GetValue(target, null), out value)) return true;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-3", "击杀统计：反射读取数值成员失败: " + mclslEmptyCatchEx.Message); }
         return false;
     }
 
@@ -221,7 +221,7 @@ internal static class MclslNativeKillStatisticsSystem
                 return true;
             }
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-4", "击杀统计：反射写入数值成员失败: " + mclslEmptyCatchEx.Message); }
         return false;
     }
 

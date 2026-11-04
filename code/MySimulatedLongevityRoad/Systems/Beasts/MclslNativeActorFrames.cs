@@ -12,12 +12,23 @@ namespace MySimulatedLongevityRoad.Systems;
 // queue keys; only the main runtime tick creates or releases Unity textures.
 internal static class MclslNativeActorFrames
 {
-    private const long BudgetBytes = 2L * 1024 * 1024 * 1024;
+    // A fixed 2 GB ceiling never binds: every frame decoded once is about 356 MB,
+    // so the cache would pin the whole set on machines that cannot afford it.
+    // Budget by reported VRAM instead, within bounds that still allow streaming.
+    private const long MinimumBudgetBytes = 96L * 1024 * 1024;
+    private const long MaximumBudgetBytes = 384L * 1024 * 1024;
+    private const long FallbackBudgetBytes = 192L * 1024 * 1024;
     private const long InitialBudgetBytes = 64L * 1024 * 1024;
-    private static readonly MclslActorFrameCache<Sprite> Cache = new(BudgetBytes - InitialBudgetBytes);
+    private static long BudgetBytes;
+    private static volatile MclslActorFrameCache<Sprite> Cache;
+    internal static long ResidentBytes => (Cache?.ResidentBytes ?? 0) + InitialBytes;
+    internal static long StreamingResidentBytes => Cache?.ResidentBytes ?? 0;
+    internal static long NativeBudgetBytes => BudgetBytes;
+    internal static int PendingFrameCount => Cache?.PendingCount ?? 0;
     // Asset initialization holds these current-art sprites across world loads.
     private static readonly ConcurrentDictionary<string, Sprite> Initials = new(StringComparer.Ordinal);
     private static long InitialBytes;
+    private static readonly Dictionary<string, List<string>> Groups = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, string> Files = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, MclslActorAnimationCatalog.FrameProfile> Profiles = new(StringComparer.Ordinal);
 
@@ -25,8 +36,10 @@ internal static class MclslNativeActorFrames
     {
         if (!MclslRuntimeChanges.IsMainThread)
             throw new InvalidOperationException("Native frame registration must run on the main thread");
+        EnsureCache();
         if (form?.NativeResourcePath == null)
             throw new InvalidDataException("Native resource group is missing");
+        if (Files.ContainsKey(resourcePath)) return;
         string name = Path.GetFileName(resourcePath);
         if (!form.FrameProfiles.TryGetValue(name, out var profile) || !profile.AnchorApproved)
             throw new InvalidDataException("Native frame geometry is not reviewed: " + resourcePath);
@@ -36,12 +49,16 @@ internal static class MclslNativeActorFrames
         Cache.Register(resourcePath, bytes);
         Files[resourcePath] = file;
         Profiles[resourcePath] = profile;
+        string group = resourcePath.Substring(0, resourcePath.LastIndexOf('/'));
+        if (!Groups.TryGetValue(group, out var keys)) Groups[group] = keys = new List<string>();
+        keys.Add(resourcePath);
     }
 
     internal static Sprite Initial(string resourcePath)
     {
         if (!MclslRuntimeChanges.IsMainThread)
             throw new InvalidOperationException("Initial actor sprites must load on the main thread");
+        EnsureCache();
         if (Initials.TryGetValue(resourcePath, out Sprite existing)) return existing;
         var profile = Profiles[resourcePath];
         long bytes = checked((long)profile.Width * profile.Height * 4);
@@ -55,9 +72,8 @@ internal static class MclslNativeActorFrames
         // this current-art texture; actual animation frames still load on demand.
         string mainPath = resourcePath.Substring(0, resourcePath.LastIndexOf('/'));
         var metadata = new List<Sprite>();
-        foreach (string key in Profiles.Keys)
+        foreach (string key in Groups[mainPath])
         {
-            if (!key.StartsWith(mainPath + "/", StringComparison.Ordinal)) continue;
             Sprite entry = sprite;
             if (key != resourcePath)
             {
@@ -65,6 +81,7 @@ internal static class MclslNativeActorFrames
                     new Vector2(sprite.pivot.x / sprite.rect.width, sprite.pivot.y / sprite.rect.height),
                     sprite.pixelsPerUnit, 0, SpriteMeshType.FullRect);
                 entry.name = Path.GetFileName(key);
+                MclslSpriteOwnership.Register(entry);
             }
             SpriteTextureLoader._cached_sprites[key] = entry;
             metadata.Add(entry);
@@ -74,21 +91,48 @@ internal static class MclslNativeActorFrames
     }
 
     internal static Sprite Request(string resourcePath)
-        => Initials.TryGetValue(resourcePath, out Sprite initial) ? initial : Cache.Request(resourcePath);
+        => Initials.TryGetValue(resourcePath, out Sprite initial) ? initial : Cache?.Request(resourcePath);
 
-    internal static void Tick()
+    private static void EnsureCache()
     {
-        if (Files.Count == 0) return;
-        int loaded = Cache.Pump(Time.realtimeSinceStartup, 4, 4d,
-            resource => MclslActorPixelResources.LoadNative(resource, Files[resource], Profiles[resource]), Release);
-        if (loaded == 0 && Cache.PendingCount > 0 && Cache.ResidentBytes >= BudgetBytes)
-            MclslDiagnostics.Once("native-frame-cache-full", "原生动画缓存已达到内存预算; 正等待未使用帧释放");
+        if (Cache != null) return;
+        if (!MclslRuntimeChanges.IsMainThread)
+            throw new InvalidOperationException("Native cache initialization must run on the main thread");
+        BudgetBytes = ResolveBudgetBytes();
+        Cache = new MclslActorFrameCache<Sprite>(BudgetBytes - InitialBudgetBytes);
     }
 
-    internal static void Clear() => Cache.Clear(Release);
+    // Called once on the main thread when the first frame registers. SystemInfo is
+    // main-thread only, so this must not run from a static initializer off-thread.
+    private static long ResolveBudgetBytes()
+    {
+        int reportedMb = 0;
+        try { reportedMb = SystemInfo.graphicsMemorySize; }
+        catch (Exception ex) { MclslDiagnostics.Error("native-frame-budget", "读取显存失败: " + ex.Message); }
+        if (reportedMb <= 0) return FallbackBudgetBytes;
+        long budget = reportedMb * 1024L * 1024L / 6L;
+        return Math.Min(MaximumBudgetBytes, Math.Max(MinimumBudgetBytes, budget));
+    }
+
+    internal static void Tick(double maxMilliseconds, int maxLoads)
+    {
+        if (Files.Count == 0) return;
+        int loaded = Cache.Pump(Time.realtimeSinceStartup, Math.Max(1, maxLoads), Math.Max(0.5d, maxMilliseconds),
+            resource => MclslActorPixelResources.LoadNative(resource, Files[resource], Profiles[resource]), Release);
+        if (loaded == 0 && Cache.PendingCount > 0 && Cache.IsBudgetBlocked)
+            MclslDiagnostics.Once("native-frame-cache-full", "原生动画缓存已达到显存预算; 正等待未使用帧释放");
+    }
+
+    internal static void Clear() => Cache?.Clear(Release);
+
+    internal static int TrimCold(int maximum = 16)
+        => Cache?.TrimCold(Time.realtimeSinceStartup, maximum, 60, Release) ?? 0;
 
     private static void Release(Sprite sprite)
     {
+        // Unity's destroyed objects compare equal to null but still have a managed
+        // identity, which must be removed from the ownership registry as well.
+        MclslSpriteOwnership.Unregister(sprite);
         if (sprite == null) return;
         Texture2D texture = sprite.texture;
         UnityEngine.Object.Destroy(sprite);

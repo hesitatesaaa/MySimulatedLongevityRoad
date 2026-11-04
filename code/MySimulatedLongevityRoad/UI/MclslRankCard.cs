@@ -91,7 +91,7 @@ public sealed class MclslRankCard : MonoBehaviour
 
         if (_nameText != null) _nameText.text = Short(entry.Name, 12);
         if (_rootText != null) _rootText.text = Short(entry.RootText, 4);
-        if (_powerText != null) _powerText.text = FormatPower(entry.Power);
+        if (_powerText != null) _powerText.text = MclslRankTextFormat.FormatPower(entry.Power);
         if (_realmText != null) _realmText.text = Short(entry.RealmName, 5);
         if (_extraText != null) _extraText.text = Short(entry.ExtraText, 4);
 
@@ -168,7 +168,14 @@ public sealed class MclslRankCard : MonoBehaviour
     {
         Actor target = FindAliveActorById(_actorId) ?? _actor;
         if (target?.data == null) return;
-        try { ActionLibrary.openUnitWindow(target); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankCard.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            ActionLibrary.openUnitWindow(target);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankCard.cs #1: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private void OnDisable()
@@ -183,14 +190,7 @@ public sealed class MclslRankCard : MonoBehaviour
         return MclslCultivatorCandidateIndex.Resolve(actorId, out Actor actor) ? actor : null;
     }
 
-    private static string FormatPower(double power)
-    {
-        if (power <= 0d) return "凡人";
-        if (power >= 1000000000000d) return (power / 1000000000000d).ToString("F2") + "万亿";
-        if (power >= 100000000d) return (power / 100000000d).ToString("F2") + "亿";
-        if (power >= 10000d) return (power / 10000d).ToString("F2") + "万";
-        return power.ToString("F0");
-    }
+
 
     private static string Short(string value, int length)
     {

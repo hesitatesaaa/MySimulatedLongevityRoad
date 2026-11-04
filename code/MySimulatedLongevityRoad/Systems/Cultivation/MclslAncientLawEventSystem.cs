@@ -19,7 +19,7 @@ internal static class MclslAncientLawEventSystem
     internal static void ManualTriggerSpiritualDisaster(int year)
     {
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
-        int roll = PositiveHash("manual_ancient_disaster|" + year + "|" + sequence) % 3;
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43("manual_ancient_disaster|" + year + "|" + sequence) % 3;
         if (roll == 0)
         {
             AddManualMapVisualEvent(year, "ancient_spiritual_convergence", "灵气汇聚", "山川灵机一时汇拢，近地修士吐纳有得。", "spiritual_convergence", sequence);
@@ -62,7 +62,7 @@ internal static class MclslAncientLawEventSystem
                 actor => Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 80
                     + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience) * 4
                     + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50)
-                    + PositiveHash(MclslActorAccessor.Id(actor) + "|secret_realm_score|" + year) % 50);
+                    + MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|secret_realm_score|" + year) % 50);
         }
         long sample = MclslPerformanceProbe.Begin();
         try
@@ -94,7 +94,7 @@ internal static class MclslAncientLawEventSystem
         int gate = newLawActive ? 4 + realmIndex * 2 : 5 + realmIndex * 3;
         if (!MclslDetectionGate.DeterministicRoll(actor, "ancient_event", "gate", year, gate, 10000)) return;
 
-        int eventSeed = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_event_kind|" + year);
+        int eventSeed = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_event_kind|" + year);
         int kind = NormalizeEventKindForRealm(eventSeed % 22, realmIndex, eventSeed);
         string eventKey = AncientEventKey(kind);
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "ancient_event", eventKey, year, AncientEventInterval(kind, realmIndex))) return;
@@ -106,46 +106,46 @@ internal static class MclslAncientLawEventSystem
         switch (kind)
         {
             case 0:
-                AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 4, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 4, 0, 100);
                 MclslWorldRunRepository.AddEvent(year, "ancient_root_manifest", "灵根显现", name + "灵根与《" + technique + "》相应，法脉潜质稍增。", actor);
                 break;
             case 1:
                 MclslTechniqueStageSystem.AddProgress(actor, 5);
-                AddClamped(actor, MclslActorDataKeys.RuinExperience, 1, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.RuinExperience, 1, 0, 9999);
                 MclslWorldRunRepository.AddEvent(year, "ancient_found_method", "偶得仙法", name + "游历" + place + "时得前人手札，补足《" + technique + "》一角。", actor);
                 break;
             case 2:
                 if (realmIndex >= MclslRealmIds.Index(MclslRealmIds.ZhuJi))
                 {
-                    AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 5, 0, 100);
-                    AddClamped(actor, MclslActorDataKeys.Contribution, 2 + realmIndex, 0, 999999);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 5, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 2 + realmIndex, 0, 999999);
                     MclslWorldRunRepository.AddEvent(year, "ancient_master_teaching", "仙师授法", name + "于" + kingdom + "传下《" + technique + "》口诀，附近求道者渐知此法。", actor);
                 }
                 break;
             case 3:
                 MclslTechniqueStageSystem.AddProgress(actor, 6 + realmIndex);
-                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2 + realmIndex, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 2 + realmIndex, 0, 9999);
                 MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "闭关修行，功法参悟精进");
                 MclslWorldRunRepository.AddEvent(year, "ancient_closed_cultivation", "闭关修行", name + "闭关参悟《" + technique + "》，功法参悟有所增长。", actor);
                 break;
             case 4:
-                AddClamped(actor, MclslActorDataKeys.MindState, 8, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, 8, 0, 100);
                 MclslTechniqueStageSystem.AddProgress(actor, 4);
-                AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 4, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 4, 0, 100);
                 MclslWorldRunRepository.AddEvent(year, "ancient_sudden_insight", "心境顿悟", name + "观人间兴废而顿悟，道心更定，大道感悟加深。", actor);
                 break;
             case 5:
                 ApplyProgressSetback(actor, realm, 8f);
-                AddClamped(actor, MclslActorDataKeys.MindState, -7, 0, 100);
-                AddClamped(actor, MclslActorDataKeys.AncientLawTribulation, 5, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, -7, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLawTribulation, 5, 0, 100);
                 MclslWorldRunRepository.AddEvent(year, "ancient_inner_demon", "心魔滋生", name + "久困关隘，心魔暗生，修行进度与心境皆受损。", actor);
                 break;
             case 6:
                 MclslTechniqueStageSystem.AddProgress(actor, 8);
-                AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 4, 0, 9999);
-                AddClamped(actor, MclslActorDataKeys.Contribution, 4 + realmIndex * 2, 0, 999999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.TechniqueInsight, 4, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 4 + realmIndex * 2, 0, 999999);
                 string deduction = name + "重校《" + technique + "》行气次第，使此法更契合自身根基。";
-                if (aptitude >= 70 && PositiveHash(MclslActorAccessor.Id(actor) + "|raise_technique_limit|" + year) % 100 < 16
+                if (aptitude >= 70 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|raise_technique_limit|" + year) % 100 < 16
                     && MclslTechniqueRealmLimit.TryRaiseLimit(actor, out string raisedRealm))
                     deduction += "此番推演补足高境纲要，此法可修至" + MclslRealmIds.Display(raisedRealm) + "。";
                 if (aptitude >= 82 || realmIndex >= MclslRealmIds.Index(MclslRealmIds.JinDan))
@@ -166,39 +166,39 @@ internal static class MclslAncientLawEventSystem
             case 9:
                 if (!string.IsNullOrWhiteSpace(actor.kingdom?.data?.name))
                 {
-                    AddClamped(actor, MclslActorDataKeys.Contribution, 12 + realmIndex * 7, 0, 999999);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 12 + realmIndex * 7, 0, 999999);
                     MclslWorldRunRepository.AddEvent(year, "ancient_country_immortal", "国中得仙", kingdom + "有修士" + name + "成就" + MclslRealmIds.Display(realm) + "，各方求道者渐聚其地。", actor);
                 }
                 break;
             case 10:
                 if (!string.IsNullOrWhiteSpace(actor.kingdom?.data?.name))
                 {
-                    AddClamped(actor, MclslActorDataKeys.MindState, 3, 0, 100);
-                    AddClamped(actor, MclslActorDataKeys.Contribution, 8 + realmIndex * 6, 0, 999999);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.MindState, 3, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 8 + realmIndex * 6, 0, 999999);
                     MclslWorldRunRepository.AddEvent(year, "ancient_protect_country", "仙修护国", name + "出手护持" + kingdom + "，未另立仙门，只以自身道行影响国势。", actor);
                 }
                 break;
             case 11:
-                AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 4, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 4, 0, 100);
                 MclslWorldRunRepository.AddEvent(year, "ancient_cultivators_gather", "修士云集", place + "修士往来渐密，《" + technique + "》论道次数增多，法脉声势稍盛。", actor);
                 break;
             case 12:
                 MclslTechniqueStageSystem.AddProgress(actor, 4);
-                AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 3, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLegacyPotential, 3, 0, 100);
                 MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_spiritual_convergence", "灵气汇聚", place + "一带灵气短暂汇聚，" + name + "趁机吐纳，修行稍进。", actor, "spiritual_convergence", 1);
                 break;
             case 13:
                 ApplyProgressSetback(actor, realm, 4f);
-                AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, -3, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, -3, 0, 100);
                 MclslWorldRunRepository.AddEvent(year, "ancient_spiritual_decline", "灵气衰退", place + "连年兵灾与修士聚集，使地脉灵机渐衰。", actor);
                 break;
             case 14:
-                AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 5, 0, 100);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 5, 0, 100);
                 MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_earthfire", "地火涌动", place + "地火涌动，火、土二道修士得以旁观悟道。", actor, "earthfire", 1);
                 break;
             case 15:
                 MclslTechniqueStageSystem.AddProgress(actor, 5);
-                AddClamped(actor, MclslActorDataKeys.RuinExperience, 1, 0, 9999);
+                MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.RuinExperience, 1, 0, 9999);
                 MclslWorldRunRepository.AddMapVisualEvent(year, "ancient_meteor_stone", "天降星石", "星石坠于" + place + "外，" + name + "从金石火光中得一线大道感悟。", actor, "meteor_stone", 1);
                 break;
             case 16:
@@ -219,8 +219,8 @@ internal static class MclslAncientLawEventSystem
             default:
                 if (realmIndex >= MclslRealmIds.Index(MclslRealmIds.YuanYing))
                 {
-                    AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 7, 0, 100);
-                    AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 4, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 7, 0, 100);
+                    MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 4, 0, 100);
                     MclslWorldRunRepository.AddEvent(year, "ancient_heaven_earth_resonance", "山河道痕显现", name + "遥观山河异象，自天地气机流转中得一线大道感悟。", actor);
                 }
                 break;
@@ -285,13 +285,13 @@ internal static class MclslAncientLawEventSystem
     private static void OpenAncientMethodBranch(Actor actor, int year, string name, string oldTechnique)
     {
         string[] tags = AncientLawTags(actor);
-        int nameSeed = PositiveHash(MclslActorAccessor.Id(actor) + "|method_branch|" + year);
+        int nameSeed = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|method_branch|" + year);
         string newName = MclslProceduralLexicon.TechniqueName(tags, nameSeed);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, newName);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, "spiritual_branch_" + MclslWorldRunRepository.NextProceduralSequence());
         MclslTechniqueRealmLimit.SetProceduralBranchLimit(actor, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
         MclslTechniqueStageSystem.AddProgress(actor, 10);
-        AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 8, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 8, 0, 100);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "开创新支", 14,
             string.Join(",", tags));
         MclslWorldRunRepository.AddEvent(year, "ancient_new_method_branch", "法门新开", name + "由《" + oldTechnique + "》推演出《" + newName + "》，一支新传承由此分出。", actor);
@@ -300,17 +300,17 @@ internal static class MclslAncientLawEventSystem
     private static void ResolveAncientSecretRealm(Actor actor, int year, string name, bool manual)
     {
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "ancient_secret_realm", "explore", year, manual ? 12 : 48)) return;
-        int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ancient_secret_realm|" + year) % 100;
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_secret_realm|" + year) % 100;
         if (roll < MclslAdventureSystem.SecretRealmDeathChance(actor, 85) && !actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId))
         {
             MclslAdventureSystem.CreateAncientLawRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "上古秘法"));
             MclslDeathSystem.ExecuteScriptedDeath(actor, "ancient_secret_realm", "秘境", "深入秘境后失陷于残阵与地脉裂隙", true);
             return;
         }
-        AddClamped(actor, MclslActorDataKeys.RuinExperience, 3, 0, 9999);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.RuinExperience, 3, 0, 9999);
         MclslTechniqueStageSystem.AddProgress(actor, 6);
-        AddClamped(actor, MclslActorDataKeys.Contribution, 6 + roll / 12, 0, 999999);
-        AddClamped(actor, MclslActorDataKeys.SpiritStones, 15 + roll / 3, 0, 999999);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.Contribution, 6 + roll / 12, 0, 999999);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.SpiritStones, 15 + roll / 3, 0, 999999);
         if (roll >= 72)
         {
             MclslAdventureSystem.CreateAncientSecretRealmRuin(year, actor, MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "仙道秘法"));
@@ -327,36 +327,36 @@ internal static class MclslAncientLawEventSystem
 
     private static void ResolveGoldenCoreLecture(Actor actor, int year, string name, string technique, string place)
     {
-        AddClamped(actor, MclslActorDataKeys.AncientCorePurity, 4, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientCorePurity, 4, 0, 100);
         MclslTechniqueStageSystem.AddProgress(actor, 6);
-        AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 5, 0, 100);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "金丹讲法", 18);
         MclslWorldRunRepository.AddEvent(year, "ancient_golden_core_lecture", "金丹讲法", name + "于" + place + "讲《" + technique + "》丹意，闻者各有所悟。", actor);
     }
 
     private static void ResolveNascentSoulJourney(Actor actor, int year, string name, string technique, string kingdom)
     {
-        AddClamped(actor, MclslActorDataKeys.AncientSoulStrength, 5, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 5, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.RuinExperience, 2, 0, 9999);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientSoulStrength, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.RuinExperience, 2, 0, 9999);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "元婴神游", 22);
         MclslWorldRunRepository.AddEvent(year, "ancient_nascent_soul_journey", "元婴神游", name + "元神游历" + kingdom + "山河，归后重订《" + technique + "》神魂篇。", actor);
     }
 
     private static void ResolveSoulTransformationResonance(Actor actor, int year, string name, string technique, string place)
     {
-        AddClamped(actor, MclslActorDataKeys.AncientSoulFusion, 5, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 6, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 4, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientSoulFusion, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientDaoCompatibility, 6, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 4, 0, 100);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "化神映世", 26);
         MclslWorldRunRepository.AddEvent(year, "ancient_soul_transformation_resonance", "化神映世", name + "神意映照" + place + "，使《" + technique + "》高境法义渐成定本。", actor);
     }
 
     private static void ResolveDaoIntegrationHarmony(Actor actor, int year, string name, string technique)
     {
-        AddClamped(actor, MclslActorDataKeys.AncientHarmonyIntegrity, 5, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 5, 0, 100);
-        AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 7, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientHarmonyIntegrity, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientHeavenCompatibility, 5, 0, 100);
+        MySimulatedLongevityRoad.Systems.MclslResourceSystem.AddClamped(actor, MclslActorDataKeys.AncientLineageStrength, 7, 0, 100);
         MclslTechniqueLineageSystem.MarkAncientTechniqueImprint(actor, year, "合道合鸣", 32);
         MclslWorldRunRepository.AddEvent(year, "ancient_dao_integration_harmony", "大道合鸣", name + "以自身大道校订《" + technique + "》，此法自此有合道纲目。", actor);
     }
@@ -371,7 +371,7 @@ internal static class MclslAncientLawEventSystem
         }
         MclslTechniqueDefinition technique = MclslCultivationCatalog.Technique(techniqueId);
         string[] roots = MclslSpiritualRootSystem.RootAttributes(actor);
-        if (roots.Length > 0 && PositiveHash(MclslActorAccessor.Id(actor) + "|branch_root") % 5 != 0)
+        if (roots.Length > 0 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|branch_root") % 5 != 0)
         {
             string[] preferred = new string[technique.LawPool.Length + 1];
             preferred[0] = roots[0];
@@ -386,15 +386,7 @@ internal static class MclslAncientLawEventSystem
         MclslCultivationGrowthSystem.ApplyProgressSetback(actor, realm, progress, ancientLaw: true);
     }
 
-    private static void AddClamped(Actor actor, string key, int delta, int min, int max)
-    {
-        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
-        int current = MclslActorAccessor.GetInt(actor, key, min);
-        MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
-    }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int hash = 79; foreach (char c in value ?? string.Empty) hash = hash * 43 + c; return hash & int.MaxValue; }
-    }
+
+
 }

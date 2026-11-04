@@ -5,6 +5,7 @@ using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Death;
+using MySimulatedLongevityRoad.Traits;
 using NeoModLoader.General;
 using UnityEngine;
 
@@ -61,20 +62,50 @@ internal static class MclslRankSnapshotSource
     private static MclslOrderedIdIndex<MclslRankEntry> Ordered = new((a, b) => b.Power.CompareTo(a.Power));
     internal static IReadOnlyList<MclslRankEntry> MembershipEntries => CachedEntries;
     internal static IReadOnlyList<MclslRankEntry> EntriesSnapshot(bool forceRebuild = false) => Ordered;
+    private static readonly Dictionary<long, bool> PendingUpdates = new();
+    private static readonly List<long> UpdateBatch = new();
+    private static float _nextUpdate;
+    internal static void QueueUpdate(Actor actor, bool refreshFilters)
+    {
+        long id = MclslActorAccessor.Id(actor);
+        PendingUpdates.TryGetValue(id, out bool existing);
+        PendingUpdates[id] = existing || refreshFilters;
+    }
+    internal static void TickUpdates()
+    {
+        if (PendingUpdates.Count == 0 || Time.unscaledTime < _nextUpdate) return;
+        UpdateBatch.Clear();
+        UpdateBatch.AddRange(PendingUpdates.Keys);
+        foreach (long id in UpdateBatch)
+        {
+            if (MclslFrameDeadline.Expired) break;
+            bool filters = PendingUpdates[id];
+            PendingUpdates.Remove(id);
+            if (MclslActorRegistry.Resolve(id, out Actor actor)) UpdateActor(actor, filters);
+            else Remove(id);
+        }
+        if (PendingUpdates.Count == 0) _nextUpdate = Time.unscaledTime + 1f;
+    }
     internal static void UpdateActor(Actor actor, bool refreshFilters = false)
     {
         long id = MclslActorAccessor.Id(actor);
-        if (!MclslCultivatorCandidateIndex.IsCultivator(id) || !MclslActorAccessor.Alive(actor))
+        // 共享快照同时服务玄黄榜与神兽榜：普通妖兽即使尚未进入修炼候选索引，
+        // 也必须保留在快照中，由两个榜单各自决定是否显示。
+        bool ordinaryBeast = MclslBeastActorRegistration.IsOrdinary(actor);
+        if ((!ordinaryBeast && !MclslCultivatorCandidateIndex.IsCultivator(id)) || !MclslActorAccessor.Alive(actor))
         { Remove(id); return; }
         MclslRankEntry entry = BuildEntrySafely(actor, refreshFilters || !Positions.ContainsKey(id));
         if (entry == null) return;
         Ordered.Upsert(id, entry);
         if (Positions.TryGetValue(id, out int pos)) CachedEntries[pos] = entry;
         else { Positions[id] = CachedEntries.Count; CachedEntries.Add(entry); refreshFilters = true; }
-        if (refreshFilters) UpdateFilters(actor, id);
+        // 国家/种属/特征筛选只服务玄黄榜；普通妖兽不属于其中的对象，
+        // 不应污染修士榜的筛选选项。
+        if (refreshFilters && !ordinaryBeast) UpdateFilters(actor, id);
         Revision++;
         MclslCodexPopulationIndex.Update(entry);
         MclslRankWindow.OnEntryChanged(id, entry);
+        MclslBeastRankWindow.OnEntryChanged(id, entry);
         MclslCodexWindow.OnEntryChanged(id, entry);
     }
     private static void UpdateFilters(Actor actor, long id)
@@ -127,28 +158,33 @@ internal static class MclslRankSnapshotSource
     }
     internal static void Remove(long id)
     {
+        PendingUpdates.Remove(id);
         if (!Positions.TryGetValue(id, out int pos)) return;
         int last = CachedEntries.Count - 1;
         if (pos != last)
         {
             CachedEntries[pos] = CachedEntries[last]; Positions[CachedEntries[pos].ActorId] = pos;
             MclslRankWindow.OnEntryChanged(CachedEntries[pos].ActorId, CachedEntries[pos]);
+            MclslBeastRankWindow.OnEntryChanged(CachedEntries[pos].ActorId, CachedEntries[pos]);
             MclslCodexWindow.OnEntryChanged(CachedEntries[pos].ActorId, CachedEntries[pos]);
         }
         Ordered.Remove(id);
         MclslCodexPopulationIndex.Remove(id);
         MclslRankWindow.OnEntryChanged(id, null);
+        MclslBeastRankWindow.OnEntryChanged(id, null);
         MclslCodexWindow.OnEntryChanged(id, null);
         CachedEntries.RemoveAt(last); Positions.Remove(id); RemoveFilters(id); Revision++;
     }
     internal static void Clear()
     {
+        PendingUpdates.Clear(); UpdateBatch.Clear(); _nextUpdate = 0f;
         CachedEntries.Clear(); Positions.Clear(); Filters.Clear();
         MclslCodexPopulationIndex.Clear();
         CachedKingdomChoices.Clear(); CachedAssetChoices.Clear(); CachedTraitChoices.Clear();
         KingdomUsers.Clear(); AssetUsers.Clear(); TraitUsers.Clear(); Revision++;
         Ordered.Clear();
         MclslRankWindow.ClearRuntime();
+        MclslBeastRankWindow.ClearRuntime();
         MclslCodexWindow.ClearBiographyRuntime();
         Ordered = new MclslOrderedIdIndex<MclslRankEntry>((a, b) => b.Power.CompareTo(a.Power));
     }
@@ -242,6 +278,8 @@ internal static class MclslRankSnapshotSource
         int realmIndex = string.IsNullOrWhiteSpace(view.RealmId) ? -1 : MclslRealmIds.Index(view.RealmId);
         double power = CalculatePower(actor, view, realmIndex);
         string kingdomName = KingdomName(actor);
+        bool ordinaryBeast = ReadBeastInfo(actor, out string beastSpeciesId, out string beastSpeciesName,
+            out string beastTalentName, out int beastTalentLevel);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -254,7 +292,7 @@ internal static class MclslRankSnapshotSource
             RootAttributes = view.SpiritualRootAttributes,
             NormalizedSearchText = prior != null && prior.Name == view.Name && prior.RealmName == view.RealmName
                 && prior.RootAttributes == roots && prior.KingdomName == kingdomName ? prior.NormalizedSearchText
-                : NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(roots) + NormalizeSearch(kingdomName),
+                : MclslRankTextFormat.NormalizeSearch(view.Name) + MclslRankTextFormat.NormalizeSearch(view.RealmName) + MclslRankTextFormat.NormalizeSearch(roots) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraData = ExtraValues(view),
             KingdomName = kingdomName,
             ProfessionId = ResolveProfessionId(actor),
@@ -269,7 +307,12 @@ internal static class MclslRankSnapshotSource
             SpiritStones = view.SpiritStones,
             MindState = view.MindState,
             MortalMiasma = view.MortalMiasma,
-            MortalMiasmaLimit = view.MortalMiasmaLimit
+            MortalMiasmaLimit = view.MortalMiasmaLimit,
+            IsOrdinaryBeast = ordinaryBeast,
+            SpeciesId = beastSpeciesId,
+            SpeciesName = beastSpeciesName,
+            TalentName = beastTalentName,
+            TalentLevel = beastTalentLevel
         };
     }
 
@@ -297,6 +340,8 @@ internal static class MclslRankSnapshotSource
         int taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0);
         string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
+        MclslBeastDefinition fallbackSpecies = MclslBeastActorRegistration.IsOrdinary(actor)
+            ? MclslBeastCatalog.ForAsset(actor.asset?.id) : null;
         return new MclslRankEntry
         {
             Actor = actor,
@@ -307,7 +352,7 @@ internal static class MclslRankSnapshotSource
             GiftName = rootText,
             RootText = rootText,
             RootAttributes = rootAttributes,
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(rootAttributes) + NormalizeSearch(kingdomName),
+            NormalizedSearchText = MclslRankTextFormat.NormalizeSearch(name) + MclslRankTextFormat.NormalizeSearch(realmName) + MclslRankTextFormat.NormalizeSearch(rootAttributes) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? essence + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
@@ -324,31 +369,83 @@ internal static class MclslRankSnapshotSource
             SpiritStones = Math.Max(0, MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0)),
             MindState = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 0)),
             MortalMiasma = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MortalMiasma, 0)),
-            MortalMiasmaLimit = 0
+            MortalMiasmaLimit = 0,
+            IsOrdinaryBeast = fallbackSpecies != null,
+            SpeciesId = fallbackSpecies?.Id ?? string.Empty,
+            SpeciesName = fallbackSpecies?.Name ?? string.Empty
         };
     }
 
     private static MclslRankEntry BuildMinimalEntry(Actor actor)
     {
         long actorId = 0L;
-        try { actorId = MclslActorAccessor.Id(actor); } catch { }
+        try
+        {
+            actorId = MclslActorAccessor.Id(actor);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", "榜单快照：读取人物 ID 失败: " + mclslEmptyCatchEx.Message);
+        }
         string name = "修士" + actorId;
         try
         {
             string candidate = actor?.getName();
             if (!string.IsNullOrWhiteSpace(candidate)) name = candidate.Trim();
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", "榜单快照：读取人物姓名失败: " + mclslEmptyCatchEx.Message); }
         string realm = string.Empty;
-        try { realm = MclslActorAccessor.Realm(actor); } catch { }
+        try
+        {
+            realm = MclslActorAccessor.Realm(actor);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", "榜单快照：读取境界失败: " + mclslEmptyCatchEx.Message);
+        }
         int essence = 0;
-        try { essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0); } catch { }
+        try
+        {
+            essence = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", "榜单快照：读取真元失败: " + mclslEmptyCatchEx.Message);
+        }
         float progress = 0f;
         int taishangProgress = 0;
-        try { progress = ReadRankProgress(actor, realm, essence); } catch { }
-        try { taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0); } catch { }
+        try
+        {
+            progress = ReadRankProgress(actor, realm, essence);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-5", "榜单快照：读取境界进度失败: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            taishangProgress = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TaishangProgress, 0);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-6", "榜单快照：读取太上进度失败: " + mclslEmptyCatchEx.Message);
+        }
         string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
+        bool minimalBeast = false;
+        string minimalSpeciesId = string.Empty, minimalSpeciesName = string.Empty;
+        try
+        {
+            MclslBeastDefinition minimalSpecies = MclslBeastActorRegistration.IsOrdinary(actor)
+                ? MclslBeastCatalog.ForAsset(actor.asset?.id) : null;
+            if (minimalSpecies != null)
+            {
+                minimalBeast = true;
+                minimalSpeciesId = minimalSpecies.Id;
+                minimalSpeciesName = minimalSpecies.Name;
+            }
+        }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", "榜单快照：读取妖兽种类失败: " + mclslEmptyCatchEx.Message); }
         return new MclslRankEntry
         {
             Actor = actor,
@@ -359,7 +456,7 @@ internal static class MclslRankSnapshotSource
             GiftName = "灵根",
             RootText = "未明",
             RootAttributes = "未明",
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(kingdomName),
+            NormalizedSearchText = MclslRankTextFormat.NormalizeSearch(name) + MclslRankTextFormat.NormalizeSearch(realmName) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? Math.Max(0, essence) + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
@@ -370,7 +467,10 @@ internal static class MclslRankSnapshotSource
             Power = 1d,
             RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(realm, taishangProgress),
             MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(realm, progress),
-            TrueEssence = Math.Max(0, essence)
+            TrueEssence = Math.Max(0, essence),
+            IsOrdinaryBeast = minimalBeast,
+            SpeciesId = minimalSpeciesId,
+            SpeciesName = minimalSpeciesName
         };
     }
 
@@ -446,8 +546,8 @@ internal static class MclslRankSnapshotSource
     private static double CalculatePower(Actor actor, RankValues view, int realmIndex)
     {
         if (!MclslActorAccessor.Alive(actor)) return 0d;
-        float attack = GetStatSafe(actor, "damage");
-        float health = GetStatSafe(actor, "health");
+        float attack = MclslActorAccessor.StatValue(actor, "damage");
+        float health = MclslActorAccessor.StatValue(actor, "health");
         double baseStats = Math.Max(1d, attack + health);
         double power = RealmPowerWeight(view.RealmId, realmIndex) * baseStats;
         power *= 1d + Math.Clamp(view.MindState, 0, 100) / 500d;
@@ -460,12 +560,6 @@ internal static class MclslRankSnapshotSource
         }
         if (double.IsNaN(power) || power <= 0d) return 0d;
         return Math.Min(float.MaxValue, power);
-    }
-
-    private static float GetStatSafe(Actor actor, string statId)
-    {
-        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
-        catch { return 0f; }
     }
 
     private static int RealmPowerWeight(string realmId, int realmIndex)
@@ -501,50 +595,31 @@ internal static class MclslRankSnapshotSource
         int separator = value.IndexOf('、');
         return separator < 0 ? value : value.Substring(0, separator);
     }
-    private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
 
-    private static string GetAssetDisplayName(ActorAsset asset)
+    // 普通妖兽（含元婴化形）的物种与独立本命神通，仅神兽榜读取；具名妖兽返回 false。
+    private static bool ReadBeastInfo(Actor actor, out string speciesId, out string speciesName,
+        out string talentName, out int talentLevel)
     {
-        if (asset == null) return "未知生物";
-        try
+        speciesId = string.Empty;
+        speciesName = string.Empty;
+        talentName = string.Empty;
+        talentLevel = 0;
+        if (!MclslBeastActorRegistration.IsOrdinary(actor)) return false;
+        MclslBeastDefinition species = MclslBeastCatalog.ForAsset(actor.asset?.id);
+        if (species != null)
         {
-            string name = asset.getLocalizedName();
-            if (!string.IsNullOrWhiteSpace(name)) return name;
+            speciesId = species.Id;
+            speciesName = species.Name;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankSnapshotSource.cs #1: " + mclslEmptyCatchEx.Message); }
-        try
-        {
-            string name = LM.Get(asset.name_locale);
-            if (!string.IsNullOrWhiteSpace(name)) return name;
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankSnapshotSource.cs #2: " + mclslEmptyCatchEx.Message); }
-        return "未知生物";
+        MclslBeastTalentDefinition talent = MclslBeastTalentSystem.Definition(actor);
+        if (talent != null) talentName = talent.Name;
+        talentLevel = MclslBeastTalentSystem.Level(actor);
+        return true;
     }
 
-    private static string GetTraitDisplayName(ActorTrait trait)
-    {
-        if (trait == null || string.IsNullOrWhiteSpace(trait.id)) return "未知特质";
-        if (MclslLocalizationBridge.TryResolveRuntimeKey(trait.id, out string runtimeText)) return runtimeText;
-        try
-        {
-            string localized = LM.Get("trait_" + trait.id);
-            if (!string.IsNullOrWhiteSpace(localized)
-                && !string.Equals(localized, "trait_" + trait.id, StringComparison.Ordinal)
-                && !MclslLocalizationBridge.IsRuntimeKey(localized))
-                return localized;
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankSnapshotSource.cs #3: " + mclslEmptyCatchEx.Message); }
-        try
-        {
-            string localized = LM.Get(trait.id);
-            if (!string.IsNullOrWhiteSpace(localized)
-                && !string.Equals(localized, trait.id, StringComparison.Ordinal)
-                && !MclslLocalizationBridge.IsRuntimeKey(localized))
-                return localized;
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankSnapshotSource.cs #4: " + mclslEmptyCatchEx.Message); }
-        return "未知特征";
-    }
+    private static string GetAssetDisplayName(ActorAsset asset) => MclslRankTextFormat.AssetDisplayName(asset);
+
+    private static string GetTraitDisplayName(ActorTrait trait) => MclslRankTextFormat.TraitDisplayName(trait);
 
     private static bool ShouldHideTraitFilterChoice(ActorTrait trait)
     {

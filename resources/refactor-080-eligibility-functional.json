@@ -1,0 +1,32 @@
+﻿{
+    "version":  "0.8.0",
+    "actualUnity":  true,
+    "complete":  true,
+    "passed":  true,
+    "inputSha256":  "15364c682e5694570667e48acf93b7074f41667130933e20016a11875212b9d7",
+    "scope":  "native sapience loss and restoration; current traits override templates; realm retained; event-driven cultivation membership",
+    "checks":  [
+                   "native-human-initially-qualified",
+                   "initial-cultivation-state",
+                   "initial-cultivator-index",
+                   "native-brain-removal-loses-sapience",
+                   "current-brain-overrides-asset-template",
+                   "qualification-loss-removes-cultivation-index",
+                   "qualification-loss-keeps-existing-realm",
+                   "qualification-loss-keeps-population-registration",
+                   "native-brain-restoration-requalifies",
+                   "qualification-restoration-wakes-index-without-audit",
+                   "qualification-restoration-keeps-realm"
+               ],
+    "errors":  [
+
+               ],
+    "classifiedTiles":  0,
+    "completedRegions":  0,
+    "performanceTested":  false,
+    "rawReport":  "D:\\模拟长胜路\\upstream-0.6.0\\build\\runtime-070\\20261025_131817\\result.json",
+    "rawReportSha256":  "8d2cbbdd1245e4d4923368c595c7177a48f756bb8c10648cd0028a1e062cc56e",
+    "gameAssemblySha256":  "51d275f0168be2f6ca26341ab292406714e694e0270eafcb25b999d5df6dd69f",
+    "packageAcceptance":  false,
+    "sourceMode":  "workspace C# with candidate-3 compressed resources"
+}

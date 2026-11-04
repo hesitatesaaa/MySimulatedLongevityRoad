@@ -14,8 +14,9 @@ internal static class MclslRuntimeCadence
         if (_lastUnityFrame == unityFrame) return;
         _lastUnityFrame = unityFrame;
         int currentYear = MclslRuntime.CurrentYear();
-        bool processFast = MclslScheduler.HasFastWork
-            && MclslRuntimeWorkBudget.TryBeginFastSchedulerPass();
+        // 年度工作已在本帧优先取用预算；这里不再用整帧 FrameDeadline 作为门控，
+        // 否则前面的低优先级工作一旦吃满预算，年度就会整帧不跑，积压追不动。
+        bool processFast = MclslScheduler.HasFastWork;
         if (processFast)
         {
             MclslDiagnostics.CultivationThrottle(
@@ -36,8 +37,6 @@ internal static class MclslRuntimeCadence
         MclslAncientLawEventSystem.TickManual();
         if (frameCounter > 0 && frameCounter % 30 == 0 && MclslTianxuanMarket.PendingListingCount > 0)
             MclslTianxuanMarket.PublishPendingArtifactListings(8);
-        if (frameCounter > 0 && frameCounter % 120 == 0)
-            MclslCultivatorCandidateIndex.AuditRegisteredActors();
     }
 
     internal static void InitializeAfterLoad(int currentYear)

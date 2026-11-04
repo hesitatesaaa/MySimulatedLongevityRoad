@@ -297,12 +297,12 @@ internal static class MclslGeneratedObjectFactory
         for (int attempt = 0; attempt < 256; attempt++)
         {
             int hash = PositiveHash(seed + "|" + kind + "|" + attempt + "|" + source);
-            string prefix = Pick(MclslProceduralLexicon.Prefixes, hash);
-            string nature = Pick(MclslProceduralLexicon.NatureWords, hash / 7);
-            string root1 = Pick(primaryRoots, hash / 13);
-            string root2 = Pick(secondaryRoots, hash / 23);
+            string prefix = MclslProceduralLexicon.Pick(MclslProceduralLexicon.Prefixes, hash);
+            string nature = MclslProceduralLexicon.Pick(MclslProceduralLexicon.NatureWords, hash / 7);
+            string root1 = MclslProceduralLexicon.Pick(primaryRoots, hash / 13);
+            string root2 = MclslProceduralLexicon.Pick(secondaryRoots, hash / 23);
             if (root2 == root1 && secondaryRoots.Length > 1) root2 = secondaryRoots[((hash / 23) + 1) % secondaryRoots.Length];
-            string form = Pick(forms, hash / 31);
+            string form = MclslProceduralLexicon.Pick(forms, hash / 31);
             string candidate = (hash % 8) switch
             {
                 0 => prefix + root1 + form,
@@ -333,17 +333,6 @@ internal static class MclslGeneratedObjectFactory
         }
     }
 
-    internal static void NormalizeActorRootText(Actor actor)
-    {
-        if (actor?.data == null) return;
-        if (NeedsRootTextMigration(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderEffects, string.Empty)))
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderEffects, RootText(MclslGeneratedKinds.FoundationWonder, SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderTags, string.Empty)), MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationWonderQuality, 1)));
-        if (NeedsRootTextMigration(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentEssenceEffects, string.Empty)))
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentEssenceEffects, RootText(MclslGeneratedKinds.HeavenEarthEssence, SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.NascentEssenceTags, string.Empty)), MclslActorAccessor.GetInt(actor, MclslActorDataKeys.NascentEssenceQuality, 1)));
-        if (NeedsRootTextMigration(MclslActorAccessor.GetString(actor, MclslActorDataKeys.DivineMarrowEffects, string.Empty)))
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrowEffects, RootText(MclslGeneratedKinds.WorldChangeMarrow, SplitTags(MclslActorAccessor.GetString(actor, MclslActorDataKeys.DivineMarrowTags, string.Empty)), MclslActorAccessor.GetInt(actor, MclslActorDataKeys.DivineMarrowQuality, 1)));
-    }
-
     internal static string RootText(string kind, IReadOnlyList<string> tags, int quality)
     {
         string tagText = string.Join("、", tags);
@@ -361,12 +350,6 @@ internal static class MclslGeneratedObjectFactory
             return "化神根基：" + tagText + "；髓质品质：" + qualityText + "；实际参与：祭魄适配、合道稳定、逆理方向。";
         }
         return "法则根基：" + tagText + "；品质：" + qualityText + "。";
-    }
-
-    private static bool NeedsRootTextMigration(string value)
-    {
-        if (string.IsNullOrWhiteSpace(value)) return true;
-        return value.Contains("攻击速度") || value.Contains("移动速度") || value.Contains("爆发威能") || value.Contains("后续法则权重") || value.Contains("术法威能");
     }
 
     private static string DescriptionTail(string kind, int quality)
@@ -398,7 +381,6 @@ internal static class MclslGeneratedObjectFactory
         return result.Length == 0 ? new[] { "灵" } : result;
     }
 
-    private static string Pick(string[] values, int hash) => values[(hash & int.MaxValue) % values.Length];
     private static string Collapse(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "无名玄物";

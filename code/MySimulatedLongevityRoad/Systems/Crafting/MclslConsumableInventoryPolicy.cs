@@ -64,8 +64,8 @@ internal static class MclslConsumableInventoryPolicy
         if (trigger == MclslConsumableUseTrigger.Breakthrough) return false;
 
         if (trigger != MclslConsumableUseTrigger.Manual && !IsOlderThanCurrentYear(acquiredYear, year)) return false;
-        if (item.Id == "D011" && year - MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.life_save_year", -1000) < 50) return false;
-        if (item.Id == "D018" && year - MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taixu_life_save_year", -1000) < 50) return false;
+        if (item.Id == "D011" && year - MclslActorAccessor.GetInt(actor, "mclsl.080.actor.life_save_year", -1000) < 50) return false;
+        if (item.Id == "D018" && year - MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taixu_life_save_year", -1000) < 50) return false;
 
         if (trigger == MclslConsumableUseTrigger.Manual)
         {
@@ -79,7 +79,7 @@ internal static class MclslConsumableInventoryPolicy
         if (trigger == MclslConsumableUseTrigger.Emergency) return item.Id is "D011" or "D018";
         if (trigger == MclslConsumableUseTrigger.Cultivation)
         {
-            if (item.Id == "D004") return MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") == 0;
+            if (item.Id == "D004") return MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") == 0;
             if (item.Id == "D005") return CanUseCultivationSupplement(actor);
             return false;
         }
@@ -106,50 +106,80 @@ internal static class MclslConsumableInventoryPolicy
         itemIds.Clear();
         if (!MclslActorAccessor.Alive(actor)) return;
 
+        // The realm string and its index are resolved once here and passed down:
+        // every candidate below used to re-read the realm key and re-scan the
+        // ordered realm ids for the same answer. Nothing in this method writes
+        // actor state, so the hoisted value cannot go stale inside the call.
         string realm = MclslActorAccessor.Realm(actor);
-        int gradeCap = CurrentGradeCap(actor);
-        AppendIfUseful(actor, itemIds, BreakthroughPillForRealm(realm));
-        AppendIfUseful(actor, itemIds, "D018");
-        AppendIfUseful(actor, itemIds, "D011");
-        AppendIfUseful(actor, itemIds, BestHealingPill(gradeCap));
-        if (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") == 0)
-            AppendIfUseful(actor, itemIds, "D004");
+        int realmIndex = MclslRealmIds.Index(realm);
+        int gradeCap = GradeCapForRealmIndex(realmIndex);
+        AppendIfUseful(actor, itemIds, BreakthroughPillForRealm(realm), realm, realmIndex);
+        AppendIfUseful(actor, itemIds, "D018", realm, realmIndex);
+        AppendIfUseful(actor, itemIds, "D011", realm, realmIndex);
+        AppendIfUseful(actor, itemIds, BestHealingPill(gradeCap), realm, realmIndex);
+        if (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") == 0)
+            AppendIfUseful(actor, itemIds, "D004", realm, realmIndex);
 
         for (int i = 0; i < CombatTalismanPriority.Length; i++)
         {
             int before = itemIds.Count;
-            AppendIfUseful(actor, itemIds, CombatTalismanPriority[i]);
+            AppendIfUseful(actor, itemIds, CombatTalismanPriority[i], realm, realmIndex);
             if (itemIds.Count > before) break;
         }
 
-        if (HasCureableNegativeStatus(actor)) AppendIfUseful(actor, itemIds, "D009");
-        if (actor.hasStatus("voices_in_my_head")) AppendIfUseful(actor, itemIds, "D008");
-        if (CanUseCultivationSupplement(actor)) AppendIfUseful(actor, itemIds, "D005");
-        if (HasCultivationActivity(actor))
-            AppendIfUseful(actor, itemIds, "F007");
+        if (HasCureableNegativeStatus(actor)) AppendIfUseful(actor, itemIds, "D009", realm, realmIndex);
+        if (actor.hasStatus("voices_in_my_head")) AppendIfUseful(actor, itemIds, "D008", realm, realmIndex);
+        if (CanUseCultivationSupplement(actor, realm, realmIndex)) AppendIfUseful(actor, itemIds, "D005", realm, realmIndex);
+        if (HasCultivationActivity(realmIndex))
+            AppendIfUseful(actor, itemIds, "F007", realm, realmIndex);
 
     }
 
-    internal static int ReserveCount(Actor actor, MclslItemDefinition item, List<string> plan,
+    internal static int ReserveCount(Actor actor, MclslItemDefinition item, IReadOnlyList<string> plan,
         IReadOnlyDictionary<string, int> craftReserves)
     {
         if (item == null) return 0;
         if(MclslBeastItemEffects.IsConsumable(item.Id)&&IsCurrentGradeUseful(actor,item))return PerItemReserveTarget;
         if (craftReserves != null && craftReserves.TryGetValue(item.Id, out int required)) return required;
-        if (IsBreakthroughPill(item.Id)) return plan != null && plan.Contains(item.Id) ? 1 : 0;
-        if (item.Category is "Pill" or "Talisman" && plan != null && plan.Contains(item.Id)
+        // Evaluate plan membership once; the branches below used to rescan the plan
+        // up to twice for the same item without changing any outcome.
+        bool inPlan = PlanContains(plan, item.Id);
+        if (IsBreakthroughPill(item.Id)) return inPlan ? 1 : 0;
+        if (item.Category is "Pill" or "Talisman" && inPlan
             && IsCurrentGradeUseful(actor, item))
             return IsInCombat(actor) ? 4 : PerItemReserveTarget;
         if (item.Id == "D014" && HasControlStatus(actor)) return 1;
         if (item.Id == "D016" && MclslSpellSystem.CurrentMana(actor) < MclslSpellSystem.MaxMana(actor) * 3 / 4
             && !actor.hasStatus("mclsl_item_D016")) return 1;
-        return plan != null && plan.Contains(item.Id) ? 1 : 0;
+        return inPlan ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Ordinal membership test for a read-only plan. The plan is shared through
+    /// <see cref="MclslAnnualEconomyPlan"/> and is never a mutable List here.
+    /// </summary>
+    private static bool PlanContains(IReadOnlyList<string> plan, string itemId)
+    {
+        if (plan == null || itemId == null) return false;
+        for (int i = 0; i < plan.Count; i++)
+            if (string.Equals(plan[i], itemId, StringComparison.Ordinal)) return true;
+        return false;
     }
 
     internal static bool IsCurrentGradeUseful(Actor actor, MclslItemDefinition item)
     {
         if (actor == null || item == null) return false;
-        int realmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
+        return IsCurrentGradeUseful(item, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
+    }
+
+    /// <summary>
+    /// Grade rule over an already-resolved realm index. Callers that evaluate
+    /// several candidates for the same actor pass the index they read once, so
+    /// the realm key and the ordered-realm scan are not repeated per item.
+    /// </summary>
+    internal static bool IsCurrentGradeUseful(MclslItemDefinition item, int realmIndex)
+    {
+        if (item == null) return false;
         if (realmIndex < 0) return item.Grade == 0;
         int gradeCap = Math.Clamp(realmIndex + 1, 1, 4);
         int minimumUsefulGrade = gradeCap == 1 ? 0 : Math.Max(1, gradeCap - 1);
@@ -166,48 +196,49 @@ internal static class MclslConsumableInventoryPolicy
 
     private static bool IsOlderThanCurrentYear(int acquiredYear, int year) => acquiredYear < 0 || year > acquiredYear;
 
-    private static int CurrentGradeCap(Actor actor)
-    {
-        int realmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
-        return Math.Clamp(realmIndex + 1, 1, 4);
-    }
+    private static int GradeCapForRealmIndex(int realmIndex) => Math.Clamp(realmIndex + 1, 1, 4);
 
     private static string BestHealingPill(int gradeCap) => gradeCap >= 3 ? "D007" : gradeCap >= 2 ? "D010" : "D006";
 
     private static bool CanUseCultivationSupplement(Actor actor)
     {
-        int realmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
-        if (realmIndex < 0 || realmIndex >= MclslRealmIds.Index(MclslRealmIds.HuaShen)) return false;
         string realm = MclslActorAccessor.Realm(actor);
+        return CanUseCultivationSupplement(actor, realm, MclslRealmIds.Index(realm));
+    }
+
+    private static bool CanUseCultivationSupplement(Actor actor, string realm, int realmIndex)
+    {
+        if (realmIndex < 0 || realmIndex >= MclslRealmIds.Index(MclslRealmIds.HuaShen)) return false;
         bool ancient = MySimulatedLongevityRoad.Traits.MclslTraitRegistration.UsesAncientRealmTrait(actor);
         int current = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         int cap = MclslRealmProgress.NextRealmMinimum(realm, ancient);
         if (cap <= 0 || current < cap) return true;
         return MclslActorAccessor.GetFloat(actor, MclslActorDataKeys.CultivationProgress) >= 99f
-            && MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_break_bonus") <= 0;
+            && MclslActorAccessor.GetInt(actor, "mclsl.080.actor.buque_break_bonus") <= 0;
     }
 
     private static bool HasCultivationActivity(Actor actor)
-    {
-        int realmIndex = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
-        return realmIndex >= 0 && realmIndex < MclslRealmIds.Index(MclslRealmIds.ChangSheng);
-    }
+        => HasCultivationActivity(MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
 
-    private static void AppendIfUseful(Actor actor, List<string> itemIds, string itemId)
+    private static bool HasCultivationActivity(int realmIndex)
+        => realmIndex >= 0 && realmIndex < MclslRealmIds.Index(MclslRealmIds.ChangSheng);
+
+    private static void AppendIfUseful(Actor actor, List<string> itemIds, string itemId,
+        string realm, int realmIndex)
     {
         if (string.IsNullOrEmpty(itemId) || itemIds.Contains(itemId)) return;
         MclslItemDefinition item = MclslItemCatalog.Get(itemId);
         if (item == null) return;
         bool useful = item.Id switch
         {
-            "D001" or "D002" or "D003" or "D012" => string.Equals(item.Id, BreakthroughPillForRealm(MclslActorAccessor.Realm(actor)), StringComparison.Ordinal),
+            "D001" or "D002" or "D003" or "D012" => string.Equals(item.Id, BreakthroughPillForRealm(realm), StringComparison.Ordinal),
             "D011" => true,
-            "D004" => MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") == 0,
+            "D004" => MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") == 0,
             "D008" => actor.hasStatus("voices_in_my_head"),
             "D009" => HasCureableNegativeStatus(actor),
-            "D005" => CanUseCultivationSupplement(actor),
-            "F007" => HasCultivationActivity(actor),
-            _ => IsCurrentGradeUseful(actor, item)
+            "D005" => CanUseCultivationSupplement(actor, realm, realmIndex),
+            "F007" => HasCultivationActivity(realmIndex),
+            _ => IsCurrentGradeUseful(item, realmIndex)
         };
         if (useful) itemIds.Add(itemId);
     }

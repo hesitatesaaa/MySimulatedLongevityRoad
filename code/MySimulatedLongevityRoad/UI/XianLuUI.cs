@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using MySimulatedLongevityRoad.Systems;
+using NeoModLoader.utils;
 using MySimulatedLongevityRoad.Core;
 using NeoModLoader.General;
 using UnityEngine;
@@ -11,7 +14,6 @@ namespace MySimulatedLongevityRoad.UI;
 // visible bounds below keep the artwork legible without changing the PNG files.
 internal static class XianLuUIResources
 {
-    private const string Root = "ui/XuanhuangSkin/";
     private static readonly Dictionary<string, Sprite> Sprites = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, Sprite> TrimmedTitles = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, Sprite> TrimmedFrames = new(StringComparer.Ordinal);
@@ -21,6 +23,7 @@ internal static class XianLuUIResources
         ["title_tianxuanjing"] = new Rect(0, 186, 2172, 401),
         ["title_mod_intro"] = new Rect(0, 147, 2172, 372),
         ["title_ranking"] = new Rect(0, 98, 2172, 532),
+        ["title_beast_ranking"] = new Rect(27, 40, 1936, 753),
         ["title_huanzhen_space"] = new Rect(7, 0, 2041, 768),
         ["title_character_panel"] = new Rect(29, 70, 2105, 598),
         ["title_biography"] = new Rect(34, 13, 2108, 688),
@@ -31,20 +34,12 @@ internal static class XianLuUIResources
     {
         if (string.IsNullOrWhiteSpace(name)) return null;
         if (Sprites.TryGetValue(name, out Sprite cached)) return cached;
-        Sprite result = null;
-        string path = Root + name;
-        try
-        {
-            result = SpriteTextureLoader.getSprite(path)
-                ?? SpriteTextureLoader.getSprite(path + ".png")
-                ?? Resources.Load<Sprite>(path);
-        }
-        catch (Exception exception)
-        {
-            MclslDiagnostics.Error("xianlu-image-" + name, "界面图片加载失败 " + path + ": " + exception.Message);
-        }
-        if (result == null)
-            MclslDiagnostics.Error("xianlu-image-" + name, "界面图片缺失：" + path);
+        string path = Path.Combine(MclslMod.I.GetDeclaration().FolderPath,
+            MclslLivingResources.UiSkinRoot, name + ".png");
+        // Missing optional artwork must keep the native text fallback usable.
+        if (!File.Exists(path)) return null;
+        var loaded = SpriteLoadUtils.LoadSprites(path);
+        Sprite result = loaded != null && loaded.Length > 0 ? loaded[0] : null;
         Sprites[name] = result;
         return result;
     }
@@ -87,6 +82,35 @@ internal static class XianLuUIResources
     // makes its rails reach the outside of the existing UnitWindow side panel.
     internal static Sprite FrameSprite(string name)
     {
+        if (name == "frame_beast_ranking")
+        {
+            if (TrimmedFrames.TryGetValue(name, out Sprite existing)) return existing;
+            Sprite original = Sprite(name);
+            Texture2D sourceTexture = original.texture;
+            Color32[] pixels = sourceTexture.GetPixels32();
+            int width = sourceTexture.width, height = sourceTexture.height;
+            int side = Mathf.CeilToInt(width * 16f / 720f);
+            int vertical = Mathf.CeilToInt(height * 20f / 480f);
+            // Remove only the neutral black matte outside the intended backplate;
+            // retain the colored gold/red border artwork at its original position.
+            for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
+                {
+                    if (x >= side && x < width - side && y >= vertical && y < height - vertical) continue;
+                    int i = y * width + x;
+                    Color32 pixel = pixels[i];
+                    int max = Mathf.Max(pixel.r, Mathf.Max(pixel.g, pixel.b));
+                    int min = Mathf.Min(pixel.r, Mathf.Min(pixel.g, pixel.b));
+                    if (max < 48 && max - min < 12) { pixel.a = 0; pixels[i] = pixel; }
+                }
+            Texture2D texture = new(width, height, TextureFormat.RGBA32, false)
+            { name = name + "_confined_backplate", filterMode = sourceTexture.filterMode };
+            texture.SetPixels32(pixels);
+            texture.Apply(false, true);
+            Sprite frame = UnityEngine.Sprite.Create(texture, new Rect(0f, 0f, width, height), new Vector2(0.5f, 0.5f), original.pixelsPerUnit);
+            TrimmedFrames[name] = frame;
+            return frame;
+        }
         if (name != "frame_character_panel") return Sprite(name);
         if (TrimmedFrames.TryGetValue(name, out Sprite cached)) return cached;
         Sprite source = Sprite(name);

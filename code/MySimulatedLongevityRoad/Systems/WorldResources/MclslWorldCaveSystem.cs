@@ -16,13 +16,7 @@ internal static class MclslWorldCaveSystem
         internal int Strength;
     }
 
-    private sealed class LocationSeed
-    {
-        internal string Location = "无主荒域";
-        internal string Kingdom = "无主";
-        internal int X = -1;
-        internal int Y = -1;
-    }
+
 
     private static readonly Dictionary<string, List<CaveClaim>> Claims = new(StringComparer.Ordinal);
     private static int _claimYear = -1;
@@ -384,7 +378,7 @@ internal static class MclslWorldCaveSystem
         for (int i = 0; i < technique.LawPool.Length && tags.Count < tagCount; i++)
             if (!tags.Contains(technique.LawPool[(start + i) % technique.LawPool.Length])) tags.Add(technique.LawPool[(start + i) % technique.LawPool.Length]);
         if (quality == 4 && PositiveHash(hash + "|rare") % 100 < 35 && !tags.Contains("毁灭")) tags[tags.Count - 1] = "毁灭";
-        LocationSeed location = PickLocation(hash);
+        MclslMapLocationResolver.LocationSeed location = MclslMapLocationResolver.PickLocation(hash);
         MclslWorldCaveRecord cave = MclslGeneratedObjectFactory.CreateWorldCave(year, sequence, location.Location, location.Kingdom, tags, quality, location.X, location.Y);
         run.WorldCaves.Add(cave);
         if (announce)
@@ -395,26 +389,7 @@ internal static class MclslWorldCaveSystem
         MclslWorldArchiveStore.MarkDirty();
     }
 
-    private static LocationSeed PickLocation(int hash)
-    {
-        List<LocationSeed> locations = new();
-        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
-        if (units != null)
-        {
-            HashSet<string> seen = new(StringComparer.Ordinal);
-            for (int i = 0; i < units.Count && locations.Count < 64; i++)
-            {
-                Actor actor = units[i];
-                if (actor?.city == null) continue;
-                string city = actor.city?.data?.name;
-                if (string.IsNullOrWhiteSpace(city) || !seen.Add(city)) continue;
-                string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无主" : actor.kingdom.data.name;
-                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom, X = actor.data.x, Y = actor.data.y });
-            }
-        }
-        if (locations.Count > 0) return locations[(hash & int.MaxValue) % locations.Count];
-        return new LocationSeed { Location = MclslProceduralLexicon.CaveOrigins[(hash & int.MaxValue) % MclslProceduralLexicon.CaveOrigins.Length], Kingdom = "无主" };
-    }
+
 
     private static int Compatibility(IReadOnlyList<string> laws, IReadOnlyList<string> caveTags)
     {

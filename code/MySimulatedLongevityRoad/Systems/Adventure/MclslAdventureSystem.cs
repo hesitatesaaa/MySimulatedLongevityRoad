@@ -74,14 +74,14 @@ internal static class MclslAdventureSystem
 
         int realmIndex = Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor)));
         int participationChance = Math.Clamp(7 + realmIndex * 3 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0) / 15, 5, 32);
-        if (PositiveHash(id + "|ruin_participate|" + year) % 100 >= participationChance) return;
+        if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(id + "|ruin_participate|" + year) % 100 >= participationChance) return;
         MclslSectRuinRecord ruin = PickRuinForActor(actor, year, realmIndex);
         if (ruin == null) return;
         int aptitude = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50);
         int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
         long contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0);
         int score = realmIndex * 45 + aptitude + Math.Min(70, experience) + (int)Math.Min(30, contribution / 4)
-            + PositiveHash(id + "|ruin_score|" + ruin.Id + "|" + year) % 51;
+            + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(id + "|ruin_score|" + ruin.Id + "|" + year) % 51;
         if (!RuinCandidates.TryGetValue(ruin.Id, out List<RuinCandidate> list)) RuinCandidates[ruin.Id] = list = new List<RuinCandidate>();
         list.Add(new RuinCandidate { Actor = actor, Score = score });
         CandidateActorIds.Add(id);
@@ -258,12 +258,12 @@ internal static class MclslAdventureSystem
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         if (run?.SectRuins == null) return null;
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
-        int hash = PositiveHash((run.RunId ?? string.Empty) + "|manual_ancient_ruin|" + sequence + "|" + year);
+        int hash = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53((run.RunId ?? string.Empty) + "|manual_ancient_ruin|" + sequence + "|" + year);
         MclslTechniqueDefinition technique = PickTechniqueAtLeast(hash, MclslRealmIds.JinDan);
-        int quality = 2 + PositiveHash(hash + "|quality") % 3;
+        int quality = 2 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(hash + "|quality") % 3;
         int tagCount = quality >= 3 ? 3 : 2;
         List<string> tags = new();
-        int start = PositiveHash(hash + "|tag") % technique.LawPool.Length;
+        int start = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(hash + "|tag") % technique.LawPool.Length;
         for (int i = 0; i < technique.LawPool.Length && tags.Count < tagCount; i++)
         {
             string tag = technique.LawPool[(start + i) % technique.LawPool.Length];
@@ -285,7 +285,7 @@ internal static class MclslAdventureSystem
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         if (run?.SectRuins == null) return null;
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
-        int hash = PositiveHash(MclslActorAccessor.Id(source) + "|ancient_secret_lineage|" + sequence + "|" + year);
+        int hash = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(source) + "|ancient_secret_lineage|" + sequence + "|" + year);
         MclslTechniqueDefinition technique = PromoteLegacyTechnique(MclslCultivationCatalog.Technique(MclslActorAccessor.GetString(source, MclslActorDataKeys.TechniqueId, string.Empty)), hash, MclslRealmIds.JinDan);
         int quality = Math.Clamp(2 + MclslRealmIds.Index(MclslActorAccessor.Realm(source)) / 2, 2, 4);
         MclslMapLocationResolver.ResolveActorLocation(source, hash, out int mapX, out int mapY, out string location, out string kingdom);
@@ -309,7 +309,7 @@ internal static class MclslAdventureSystem
             ruin.RemainingValue = 0;
             ruin.State = "搜尽";
             MclslWorldRunRepository.AddEvent(year, "ruin_exhausted", ruin.Name + "探索告终", "历经" + ruin.ExpeditionCount + "次探索、折损" + ruin.CasualtyCount + "名修士后，此地有价值的传承已被搜尽。");
-            int collapseRoll = PositiveHash(ruin.Id + "|collapse|" + year) % 100;
+            int collapseRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|collapse|" + year) % 100;
             if (collapseRoll < 25 + ruin.Quality * 8) MclslWorldChangeSystem.CreateFromRuinCollapse(year, ruin);
         }
         else if (ruin.Danger >= 85 && ruin.CasualtyCount >= 3) ruin.State = "封绝";
@@ -326,8 +326,8 @@ internal static class MclslAdventureSystem
         int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
         int lawCompatibility = RuinLawCompatibility(actor, ruin);
         int deathChance = SecretRealmDeathChance(actor, ruin.Danger, lawCompatibility);
-        int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_survival|" + ruin.Id + "|" + year + "|" + order) % 100;
-        int progressGain = Math.Clamp(12 + realmIndex * 8 + aptitude / 8 + PositiveHash(actor.getName() + "|ruin_progress|" + year) % 25, 10, 70);
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|ruin_survival|" + ruin.Id + "|" + year + "|" + order) % 100;
+        int progressGain = Math.Clamp(12 + realmIndex * 8 + aptitude / 8 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(actor.getName() + "|ruin_progress|" + year) % 25, 10, 70);
         progressGain = (int)Math.Ceiling(progressGain * (1d + MclslPhysiqueSystem.ExplorePercent(actor) / 100d));
         if (!actor.hasTrait(MclslTraitRegistration.HeavenFavorTraitId) && roll >= 100 - deathChance)
         {
@@ -343,12 +343,12 @@ internal static class MclslAdventureSystem
 
         ruin.ExplorationProgress += progressGain;
         int valueLossChance = MclslInverseTruthSystem.IsTruthReversed("truth_player_trace_persistence") ? 24 : 45;
-        ruin.RemainingValue = Math.Max(0, ruin.RemainingValue - (PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_value|" + year) % 100 < valueLossChance ? 1 : 0));
+        ruin.RemainingValue = Math.Max(0, ruin.RemainingValue - (MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|ruin_value|" + year) % 100 < valueLossChance ? 1 : 0));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, experience + 1 + progressGain / 15);
         MclslMaterialDiscovery.TryDiscover(actor, ruin, year, order);
+        Combat.MclslCombatCareerSystem.Offer(actor, year, "遗迹传承", 1500);
+        Combat.MclslCareerSupply.GiveOpportunitySupply(actor, year);
         string reward = GrantRuinReward(actor, ruin, year, realmIndex, out string revivedTechniqueId, out string revivedTechniqueName, out string linkedLineageId);
-        string battle=Combat.MclslBattleProfessionSystem.TryTransmission(actor,year,"ruin|"+ruin.Id);
-        if(battle.Length>0)reward+="；"+battle;
         bool ancientPath = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;
         string relation = ancientPath
@@ -374,13 +374,13 @@ internal static class MclslAdventureSystem
         revivedTechniqueId = string.Empty;
         revivedTechniqueName = string.Empty;
         linkedLineageId = string.Empty;
-        int rewardRoll = PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_reward|" + ruin.Id + "|" + year) % 100;
+        int rewardRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|ruin_reward|" + ruin.Id + "|" + year) % 100;
         int quality = Math.Clamp(ruin.Quality, 1, 4);
         bool newLawReward = MclslWorldEpochSystem.IsNewLawActive(year)
             && MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw;
         if (rewardRoll < 20)
         {
-            int amount = 8 + quality * 5 + PositiveHash(actor.getName() + "|contribution|" + year) % 16;
+            int amount = 8 + quality * 5 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(actor.getName() + "|contribution|" + year) % 16;
             if (!newLawReward)
             {
                 GrantAncientPracticeNote(actor, amount);
@@ -391,7 +391,7 @@ internal static class MclslAdventureSystem
         }
         if (rewardRoll < 36)
         {
-            int amount = 10 + quality * 9 + PositiveHash(actor.getName() + "|spirit_stones|" + year) % 24;
+            int amount = 10 + quality * 9 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(actor.getName() + "|spirit_stones|" + year) % 24;
             amount = (int)Math.Ceiling(amount * (1d + MclslPhysiqueSystem.StonesPercent(actor) / 100d));
             MclslResourceSystem.GrantRuinSpiritStones(actor, amount);
             return "搜得灵石" + amount;
@@ -403,14 +403,14 @@ internal static class MclslAdventureSystem
             MclslTechniqueDefinition technique = DiscoverRuinTechnique(actor, ruin, year, quality);
             if (technique != null)
             {
-                MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueId, technique.Id);
-                MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueName, technique.Name);
-                MclslTechniqueRealmLimit.OnTechniqueAssigned(actor, technique);
                 int completeness = Math.Clamp(80 + quality * 3, 83, 92);
-                MclslTechniqueStageSystem.SetProgress(
-                    actor,
-                    Math.Max(MclslTechniqueStageSystem.Progress(actor), completeness));
-                MclslTechniqueOccupationSystem.OnCultivationStateChanged(actor);
+                bool adopted = MclslTechniqueRealmLimit.TryAssignDiscoveredTechnique(actor, technique, completeness);
+                if (!adopted)
+                {
+                    MclslWorldRunRepository.AddEvent(year, "ruin_technique_found", "《" + technique.Name + "》自" + ruin.Name + "复现",
+                        MclslActorAccessor.DisplayName(actor) + "发现传承，因已有更高阶主修功法，保留原法与参悟进度。", actor);
+                    return "发现《" + technique.Name + "》传承；已有更高阶功法，保留原主修。功法感悟+" + insight;
+                }
                 revivedTechniqueId = technique.Id;
                 revivedTechniqueName = technique.Name;
                 linkedLineageId = MclslTechniqueLineageSystem.RecordRuinTechniqueRevival(year, actor, ruin, technique);
@@ -523,7 +523,7 @@ internal static class MclslAdventureSystem
             "踏入伪装成传承地的死关，未能破阵而出",
             "与同入遗迹的修士争夺机缘，重伤后困死其中"
         };
-        int index = PositiveHash(ruin.Id + "|death_detail|" + MclslActorAccessor.Id(actor) + "|" + year) % dangers.Length;
+        int index = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|death_detail|" + MclslActorAccessor.Id(actor) + "|" + year) % dangers.Length;
         int layer = Math.Clamp(1 + ruin.ExplorationProgress / 100, 1, ruin.Depth);
         return "深入宗门遗迹“" + ruin.Name + "”第" + layer + "重后，" + dangers[index];
     }
@@ -549,7 +549,7 @@ internal static class MclslAdventureSystem
 
     private static int NextRuinInterval(MclslWorldRunState run, int year)
     {
-        int baseInterval = 90 + PositiveHash((run?.RunId ?? string.Empty) + "|next_ruin|" + year + "|" + (run?.ProceduralSequence ?? 0)) % 91;
+        int baseInterval = 90 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53((run?.RunId ?? string.Empty) + "|next_ruin|" + year + "|" + (run?.ProceduralSequence ?? 0)) % 91;
         return MclslWorldStateModifierSystem.ScaleRuinInterval(baseInterval, year);
     }
 
@@ -557,16 +557,16 @@ internal static class MclslAdventureSystem
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
-        int hash = PositiveHash(run.RunId + "|ruin_profile|" + sequence + "|" + year);
+        int hash = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(run.RunId + "|ruin_profile|" + sequence + "|" + year);
         MclslTechniqueDefinition technique = PickTechniqueAtLeast(hash, MclslRealmIds.JinDan);
-        int qualityRoll = PositiveHash(hash + "|quality") % 100;
+        int qualityRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(hash + "|quality") % 100;
         int quality = qualityRoll < 7 ? 4 : qualityRoll < 27 ? 3 : qualityRoll < 68 ? 2 : 1;
         int tagCount = quality >= 3 ? 3 : 2;
         List<string> tags = new();
-        int start = PositiveHash(hash + "|tag") % technique.LawPool.Length;
+        int start = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(hash + "|tag") % technique.LawPool.Length;
         for (int i = 0; i < technique.LawPool.Length && tags.Count < tagCount; i++)
             if (!tags.Contains(technique.LawPool[(start + i) % technique.LawPool.Length])) tags.Add(technique.LawPool[(start + i) % technique.LawPool.Length]);
-        string category = PositiveHash(hash + "|category_kind") % 100 < 55
+        string category = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(hash + "|category_kind") % 100 < 55
             ? PickPrivateRuinCategory(hash)
             : PickSecretRealmCategory(hash);
         LocationSeed location = PickLocation(hash);
@@ -586,7 +586,7 @@ internal static class MclslAdventureSystem
         string currentId = MclslCultivationCatalog.NormalizeTechniqueId(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty));
         int currentLimit = MclslRealmIds.Index(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueMaxRealm, string.Empty));
         string[] ruinTags = MclslGeneratedObjectFactory.SplitTags(ruin.LawTags);
-        MclslTechniqueDefinition source = PromoteLegacyTechnique(FindCatalogTechnique(ruin.SourceTechniqueId), PositiveHash(ruin.Id + "|source"), MclslRealmIds.JinDan);
+        MclslTechniqueDefinition source = PromoteLegacyTechnique(FindCatalogTechnique(ruin.SourceTechniqueId), MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|source"), MclslRealmIds.JinDan);
         if (source != null && !string.Equals(source.Id, currentId, StringComparison.Ordinal))
             return source;
         int poolCount = CountRuinTechniquePool(currentId, currentLimit, quality, ruinTags, true);
@@ -594,8 +594,8 @@ internal static class MclslAdventureSystem
         if (poolCount == 0) poolCount = CountRuinTechniquePool(currentId, currentLimit, quality, ruinTags, false);
         if (poolCount == 0) return null;
         int chance = Math.Clamp(18 + quality * 8, 18, 55);
-        if (PositiveHash(MclslActorAccessor.Id(actor) + "|ruin_technique|" + ruin.Id + "|" + year) % 100 >= chance) return null;
-        int pickIndex = PositiveHash(ruin.Id + "|technique_pick|" + MclslActorAccessor.Id(actor) + "|" + year) % poolCount;
+        if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|ruin_technique|" + ruin.Id + "|" + year) % 100 >= chance) return null;
+        int pickIndex = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|technique_pick|" + MclslActorAccessor.Id(actor) + "|" + year) % poolCount;
         return PickRuinTechniqueFromPool(currentId, currentLimit, quality, ruinTags, requireLawMatch, pickIndex);
     }
 
@@ -648,12 +648,12 @@ internal static class MclslAdventureSystem
 
     private static string PickPrivateRuinCategory(int seed)
     {
-        return PrivateRuinCategories[PositiveHash(seed + "|private_ruin_category") % PrivateRuinCategories.Length];
+        return PrivateRuinCategories[MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|private_ruin_category") % PrivateRuinCategories.Length];
     }
 
     private static string PickSecretRealmCategory(int seed)
     {
-        return SecretRealmCategories[PositiveHash(seed + "|secret_realm_category") % SecretRealmCategories.Length];
+        return SecretRealmCategories[MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|secret_realm_category") % SecretRealmCategories.Length];
     }
 
     private static MclslTechniqueDefinition PickTechniqueAtLeast(int seed, string minRealm)
@@ -665,8 +665,8 @@ internal static class MclslAdventureSystem
             MclslTechniqueDefinition technique = MclslCultivationCatalog.Techniques[i];
             if (technique != null && MclslRealmIds.Index(technique.MaxRealm) >= minIndex) count++;
         }
-        if (count <= 0) return MclslCultivationCatalog.Techniques[PositiveHash(seed + "|any_technique") % MclslCultivationCatalog.Techniques.Count];
-        int pick = PositiveHash(seed + "|min_realm_technique") % count;
+        if (count <= 0) return MclslCultivationCatalog.Techniques[MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|any_technique") % MclslCultivationCatalog.Techniques.Count];
+        int pick = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|min_realm_technique") % count;
         int seen = 0;
         for (int i = 0; i < MclslCultivationCatalog.Techniques.Count; i++)
         {
@@ -699,7 +699,7 @@ internal static class MclslAdventureSystem
             if (technique != null && MclslRealmIds.Index(technique.MaxRealm) >= minIndex && HasAnyLawTag(technique.LawPool, lawPool)) count++;
         }
         if (count <= 0) return null;
-        int pick = PositiveHash(seed + "|law_match_technique") % count;
+        int pick = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(seed + "|law_match_technique") % count;
         int seen = 0;
         for (int i = 0; i < MclslCultivationCatalog.Techniques.Count; i++)
         {
@@ -728,14 +728,21 @@ internal static class MclslAdventureSystem
     {
         MclslSectRuinRecord best = null;
         int bestScore = int.MinValue;
+        // RuinExperience and the actor law tags are invariant across this selection pass.
+        // Experience is read once up front; law tags are computed lazily on the first
+        // candidate that survives the availability and danger filters, then reused.
+        // Keeping the tags lazy preserves zero allocations when no ruin is eligible.
+        int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
+        string[] actorLawTags = null;
         foreach (MclslSectRuinRecord ruin in MclslWorldRunRepository.Current.SectRuins)
         {
             if (!IsRuinAvailable(ruin)) continue;
-            int tolerance = 35 + realmIndex * 14 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0) / 3;
+            int tolerance = 35 + realmIndex * 14 + experience / 3;
             if (ruin.Danger > tolerance + 30) continue;
-            int compatibility = RuinLawCompatibility(actor, ruin);
+            if (actorLawTags == null) actorLawTags = ActorLawTags(actor);
+            int compatibility = RuinLawCompatibility(actorLawTags, ruin);
             int score = compatibility + ruin.RemainingValue * 8 + ruin.Quality * 12 - Math.Max(0, ruin.Danger - tolerance) * 2
-                + PositiveHash(MclslActorAccessor.Id(actor) + "|pick_ruin|" + ruin.Id + "|" + year) % 31;
+                + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|pick_ruin|" + ruin.Id + "|" + year) % 31;
             if (score <= bestScore) continue;
             bestScore = score;
             best = ruin;
@@ -744,8 +751,11 @@ internal static class MclslAdventureSystem
     }
 
     private static int RuinLawCompatibility(Actor actor, MclslSectRuinRecord ruin)
+        => RuinLawCompatibility(ActorLawTags(actor), ruin);
+
+    private static int RuinLawCompatibility(string[] actorLawTags, MclslSectRuinRecord ruin)
     {
-        return MclslLawInteractionCatalog.CompatibilityScore(ActorLawTags(actor), MclslGeneratedObjectFactory.SplitTags(ruin.LawTags), 12);
+        return MclslLawInteractionCatalog.CompatibilityScore(actorLawTags, MclslGeneratedObjectFactory.SplitTags(ruin.LawTags), 12);
     }
 
     private static List<RuinCandidate> PickExpedition(List<RuinCandidate> candidates, int capacity)
@@ -858,11 +868,8 @@ internal static class MclslAdventureSystem
     internal static int RuinMaxExpeditions(MclslSectRuinRecord ruin)
     {
         if (ruin == null || string.IsNullOrWhiteSpace(ruin.Id)) return 5;
-        return 5 + PositiveHash(ruin.Id + "|max_expeditions") % 6;
+        return 5 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|max_expeditions") % 6;
     }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int result = 43; foreach (char c in value ?? string.Empty) result = result * 53 + c; return result & int.MaxValue; }
-    }
+
 }

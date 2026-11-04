@@ -10,24 +10,24 @@ internal static class MclslNewLawBreakthroughSystem
     internal static void TryFoundation(Actor actor, int year, int aptitude)
     {
         int storedBonus = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationChanceBonus, 0));
-        MclslAptitudeGiftDefinition gift = Gift(actor);
+        MclslAptitudeGiftDefinition gift = MySimulatedLongevityRoad.Systems.MclslSpiritualRootSystem.ResolveCultivationGift(actor);
         int pillBonus = MclslItemUseSystem.ConsumeBreakthroughBonus(actor, MclslRealmIds.ZhuJi, year);
-        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.buque_break_bonus");
+        int buqueBonus = MclslActorAccessor.GetInt(actor, "mclsl.080.actor.buque_break_bonus");
         int chance = 8 + aptitude / 8 + storedBonus + pillBonus + buqueBonus
-            + (MclslActorAccessor.GetInt(actor, "mclsl.architecture.v2.actor.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus
+            + (MclslActorAccessor.GetInt(actor, "mclsl.080.actor.taishang_taken") > 0 ? 5 : 0) + gift.BreakthroughBonus
             + MclslMindSystem.BreakthroughAdjustment(actor)
             + MclslInverseTruthSystem.NewLawBreakthroughChanceBonus()
             + MclslWorldStateModifierSystem.BreakthroughStabilityBonus(year)
             + MclslPhysiqueSystem.BreakthroughPoints(actor);
-        int roll = PositiveHash(MclslActorAccessor.Id(actor) + "|foundation|" + year) % 100;
-        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.architecture.v2.actor.buque_break_bonus", 0);
+        int roll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|foundation|" + year) % 100;
+        if (buqueBonus > 0) MclslActorAccessor.Set(actor, "mclsl.080.actor.buque_break_bonus", 0);
         if (roll >= Math.Min(100, chance) && !MclslImmortalPathSystem.AllowsBreakthrough(actor, MclslRealmIds.ZhuJi))
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "尚未遇到合适的筑基奇物");
             return;
         }
         if (storedBonus > 0) MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationChanceBonus, 0);
-        int qualityRoll = PositiveHash(MclslActorAccessor.Id(actor) + "|foundation_quality|" + year) % 100;
+        int qualityRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|foundation_quality|" + year) % 100;
         int quality = qualityRoll < 4 ? 4 : qualityRoll < 18 ? 3 : qualityRoll < 58 ? 2 : 1;
         string techniqueId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, MclslCultivationCatalog.Techniques[0].Id);
         MclslTechniqueDefinition technique = MclslCultivationCatalog.Technique(techniqueId);
@@ -70,7 +70,7 @@ internal static class MclslNewLawBreakthroughSystem
             int compatibility = MclslLawInteractionCatalog.CompatibilityScore(desiredTags,
                 MclslGeneratedObjectFactory.SplitTags(ruin.LawTags), 10);
             int score = compatibility + ruin.Quality * 12 + ruin.RemainingValue * 6
-                + PositiveHash(MclslActorAccessor.Id(actor) + "|conversion_foundation|" + ruin.Id + "|" + year) % 17;
+                + MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|conversion_foundation|" + ruin.Id + "|" + year) % 17;
             if (score <= bestScore) continue;
             best = ruin;
             bestScore = score;
@@ -121,8 +121,8 @@ internal static class MclslNewLawBreakthroughSystem
         string grade = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FoundationWonderGrade, string.Empty);
         int completeness = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationWonderCompleteness, 0);
         int ruleStrength = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.FoundationWonderRuleStrength, 0);
-        int countRoll = PositiveHash(MclslActorAccessor.Id(actor) + "|law_count|" + year) % 100;
-        MclslAptitudeGiftDefinition gift = Gift(actor);
+        int countRoll = MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|law_count|" + year) % 100;
+        MclslAptitudeGiftDefinition gift = MySimulatedLongevityRoad.Systems.MclslSpiritualRootSystem.ResolveCultivationGift(actor);
         int insight = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TechniqueInsight, 0));
         int rootInsight = MclslSpiritualRootSystem.MultiLawInsightBonus(actor);
         int effectiveInsight = gift.InsightBonus + rootInsight;
@@ -132,7 +132,7 @@ internal static class MclslNewLawBreakthroughSystem
         lawCount += categoryLawBonus;
         lawCount = Math.Min(lawCount, pool.Count);
         List<string> laws = new();
-        int start = PositiveHash(MclslActorAccessor.Id(actor) + "|law_start|" + year) % pool.Count;
+        int start = MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|law_start|" + year) % pool.Count;
         for (int i = 0; i < pool.Count && laws.Count < lawCount; i++)
         {
             string law = pool[(start + i) % pool.Count];
@@ -184,15 +184,15 @@ internal static class MclslNewLawBreakthroughSystem
     {
         int count = quality >= 3 ? 3 : 2;
         List<string> tags = new();
-        int start = PositiveHash(MclslActorAccessor.Id(actor) + "|foundation_tag|" + year) % technique.LawPool.Length;
+        int start = MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|foundation_tag|" + year) % technique.LawPool.Length;
         for (int i = 0; i < technique.LawPool.Length && tags.Count < count; i++)
         {
             string tag = technique.LawPool[(start + i) % technique.LawPool.Length];
             if (!tags.Contains(tag)) tags.Add(tag);
         }
-        if (quality >= 3 && PositiveHash(MclslActorAccessor.Id(actor) + "|foundation_variant|" + year) % 100 < 30)
+        if (quality >= 3 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|foundation_variant|" + year) % 100 < 30)
         {
-            string variant = MclslCultivationCatalog.AllLawTags[PositiveHash(MclslActorAccessor.Id(actor) + "|foundation_rare|" + year) % MclslCultivationCatalog.AllLawTags.Length];
+            string variant = MclslCultivationCatalog.AllLawTags[MySimulatedLongevityRoad.Core.MclslStableHash.Positive23x37(MclslActorAccessor.Id(actor) + "|foundation_rare|" + year) % MclslCultivationCatalog.AllLawTags.Length];
             if (!tags.Contains(variant))
             {
                 if (tags.Count >= 3) tags[tags.Count - 1] = variant;
@@ -202,14 +202,7 @@ internal static class MclslNewLawBreakthroughSystem
         return tags.ToArray();
     }
 
-    private static MclslAptitudeGiftDefinition Gift(Actor actor)
-    {
-        int aptitude = Math.Clamp(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50), 1, 100);
-        return MclslSpiritualRootSystem.GiftForCultivation(actor) ?? MclslAptitudeGiftCatalog.ForAptitude(aptitude);
-    }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked { int hash = 23; foreach (char c in value ?? string.Empty) hash = hash * 37 + c; return hash & int.MaxValue; }
-    }
+
+
 }

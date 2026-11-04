@@ -49,15 +49,22 @@ internal static class MclslAnnualCultivationExecutor
         failureReason = string.Empty;
         if(MclslBeastActorRegistration.IsOrdinary(actor))
         {
+            // 兽类分支与修士分支同属“修行推进”阶段，单独计时便于区分开销。
+            long beastSample = MclslPerformanceProbe.Begin();
             bool pending=MclslActorAccessor.GetInt(actor,"mclsl.beast.growth_year",-1)<annualYear;
             MclslBeastCultivation.TickAnnual(actor,annualYear);
             MclslScheduler.CompleteFirstCultivation(actor);
-            return pending && MclslActorAccessor.Alive(actor);
+            bool beastAlive = MclslActorAccessor.Alive(actor);
+            MclslPerformanceProbe.End("年度角色.修行兽类", beastSample);
+            return pending && beastAlive;
         }
+        // 快照与纯规则判断是每次年度结算最前的固定开销。
+        long snapshotSample = MclslPerformanceProbe.Begin();
         MclslCultivationAnnualSnapshot snapshot =
             MclslCultivationLocalCore.BuildAnnualSnapshot(actor, annualYear);
         MclslCultivationLocalCheckResult check =
             MclslCultivationLocalCore.CheckAnnualStep(snapshot);
+        MclslPerformanceProbe.End("年度角色.修行快照", snapshotSample);
         if (!check.Passed)
         {
             failureReason = check.Reason;
@@ -65,15 +72,24 @@ internal static class MclslAnnualCultivationExecutor
             return false;
         }
 
-        if (MclslSpiritualRootSystem.HasCultivationPotential(actor))
-            _ = MclslSpiritualRootSystem.Profile(actor);
+        // 不变式：CheckAnnualStep 通过意味着 snapshot.Gift != null。而 snapshot.Gift
+        // 由 GiftForCultivation 得到，其非空或来自当前特质（GiftFromCurrentTrait 非空），
+        // 或来自 aptitude>0；两者都令 HasCultivationRootArchive(actor)==true。
+        // 因此此处 HasCultivationPotential(actor) 必为 true，无需再调用它触发一次
+        // 完整的特质目录扫描（GiftFromCurrentTrait），直接进入 Profile 即可，结果不变。
+        long rootSample = MclslPerformanceProbe.Begin();
+        MclslSpiritualRootProfile rootProfile = MclslSpiritualRootSystem.Profile(actor);
+        MclslPerformanceProbe.End("年度角色.灵根入门", rootSample);
 
+        long gainSample = MclslPerformanceProbe.Begin();
         float rawGain = CalculateRawAnnualGain(
             actor,
             snapshot.Realm,
             annualYear,
             snapshot.AncientLaw,
-            snapshot.Gift);
+            snapshot.Gift,
+            rootProfile.CountCultivationMultiplier);
+        MclslPerformanceProbe.End("年度角色.修行增长", gainSample);
         if (rawGain <= 0f)
         {
             failureReason = "年度真元计算结果为0";
@@ -82,6 +98,7 @@ internal static class MclslAnnualCultivationExecutor
         }
 
         // 先提交真元，再提交年度游标；事件、突破和 UI 均不能吞掉基础增长。
+        long writeSample = MclslPerformanceProbe.Begin();
         int beforeEssence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         float beforeRemainder = MclslActorAccessor.GetFloat(
             actor,
@@ -101,6 +118,7 @@ internal static class MclslAnnualCultivationExecutor
             actor,
             MclslActorDataKeys.TrueEssenceRemainder,
             0f);
+        MclslPerformanceProbe.End("年度角色.修行写入", writeSample);
         bool wroteCultivation = gained > 0
             || afterEssence != beforeEssence
             || Math.Abs(afterRemainder - beforeRemainder) > 0.0001f;
@@ -111,6 +129,7 @@ internal static class MclslAnnualCultivationExecutor
             return false;
         }
 
+        long finishSample = MclslPerformanceProbe.Begin();
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, annualYear);
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.CultivationStartYear, 0) <= 0)
             MclslActorAccessor.Set(actor, MclslActorDataKeys.CultivationStartYear, annualYear);
@@ -120,6 +139,7 @@ internal static class MclslAnnualCultivationExecutor
                 "感气积累真元：" + Math.Min(afterEssence, MclslRealmProgress.LianQiEntryMinimum)
                 + "/" + MclslRealmProgress.LianQiEntryMinimum);
         RefreshCultivationRuntime(actor);
+        MclslPerformanceProbe.End("年度角色.修行收尾", finishSample);
         return true;
     }
 
@@ -149,9 +169,26 @@ internal static class MclslAnnualCultivationExecutor
         bool ancientLaw,
         MclslAptitudeGiftDefinition gift)
     {
+        return CalculateRawAnnualGain(
+            actor,
+            realm,
+            year,
+            ancientLaw,
+            gift,
+            MclslSpiritualRootSystem.CountCultivationMultiplier(actor));
+    }
+
+    private static float CalculateRawAnnualGain(
+        Actor actor,
+        string realm,
+        int year,
+        bool ancientLaw,
+        MclslAptitudeGiftDefinition gift,
+        float countCultivationMultiplier)
+    {
         float gain = gift.AnnualTrueEssence
             * MclslCultivationGrowthSystem.RealmGainScale(realm)
-            * MclslSpiritualRootSystem.CountCultivationMultiplier(actor)
+            * countCultivationMultiplier
             * MclslMindSystem.CultivationMultiplier(actor);
 
         if (ancientLaw)

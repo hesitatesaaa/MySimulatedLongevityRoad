@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems.Visual;
@@ -25,6 +26,56 @@ internal static class MclslWorldSpriteRenderLayer
     private static bool _hasBackLayer;
     private static int _lastBackLayerResolveFrame = -10000;
     private static Material _backMaterial;
+    private static readonly Dictionary<BaseEffect, BorrowedState> Borrowed = new();
+
+    // The native controller owns these objects. Return every modified renderer
+    // and animator property before recycling; the next native layer probe may
+    // otherwise sample our back layer and a material destroyed on world change.
+    internal static void ReleaseActorBackEffect(BaseEffect effect)
+    {
+        if (effect == null) return;
+        if (Borrowed.TryGetValue(effect, out BorrowedState state))
+        {
+            Borrowed.Remove(effect);
+            state.Restore();
+        }
+        effect.kill();
+    }
+
+    private sealed class BorrowedState
+    {
+        private readonly SpriteRenderer Renderer;
+        private readonly int Layer, Order;
+        private readonly Material Material;
+        private readonly Sprite Sprite;
+        private readonly Color Color;
+        private readonly SpriteAnimation Animation;
+        private readonly Sprite[] Frames;
+        private readonly bool Enabled, IsOn, Looped, ReturnToPool;
+        private readonly float Interval;
+        private readonly Behaviour Animator;
+        private readonly bool AnimatorEnabled;
+        internal BorrowedState(BaseEffect effect, SpriteRenderer renderer)
+        {
+            Renderer=renderer;Layer=renderer.sortingLayerID;Order=renderer.sortingOrder;
+            Material=renderer.sharedMaterial;Sprite=renderer.sprite;Color=renderer.color;
+            Component component=effect as Component;
+            Animation=component?.GetComponent<SpriteAnimation>();
+            if(Animation!=null)
+            { Frames=Animation.frames;Enabled=Animation.enabled;IsOn=Animation.isOn;
+              Looped=Animation.looped;ReturnToPool=Animation.returnToPool;Interval=Animation.timeBetweenFrames; }
+            Animator=component?.GetComponent("SpriteAnimator") as Behaviour;
+            AnimatorEnabled=Animator!=null&&Animator.enabled;
+        }
+        internal void Restore()
+        {
+            if(Renderer!=null)
+            {Renderer.sortingLayerID=Layer;Renderer.sortingOrder=Order;Renderer.sharedMaterial=Material;Renderer.sprite=Sprite;Renderer.color=Color;}
+            if(Animation!=null)
+            {Animation.frames=Frames;Animation.timeBetweenFrames=Interval;Animation.looped=Looped;Animation.returnToPool=ReturnToPool;Animation.isOn=IsOn;Animation.enabled=Enabled;}
+            if(Animator!=null)Animator.enabled=AnimatorEnabled;
+        }
+    }
 
     internal static bool TryConfigureFrontEffect(SpriteRenderer renderer)
     {
@@ -64,11 +115,12 @@ internal static class MclslWorldSpriteRenderLayer
             }
             if (renderer == null)
             {
-                effect.kill();
+                ReleaseActorBackEffect(effect);
                 effect = null;
                 return false;
             }
 
+            Borrowed[effect] = new BorrowedState(effect, renderer);
             if (component != null)
             {
                 SpriteAnimation animation = component.GetComponent<SpriteAnimation>();
@@ -86,7 +138,14 @@ internal static class MclslWorldSpriteRenderLayer
         }
         catch
         {
-            try { effect?.kill(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #1: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                ReleaseActorBackEffect(effect);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #1: " + mclslEmptyCatchEx.Message);
+            }
             effect = null;
             renderer = null;
             return false;
@@ -114,7 +173,7 @@ internal static class MclslWorldSpriteRenderLayer
         }
         catch
         {
-            try { effect?.kill(); } catch { }
+            try { ReleaseActorBackEffect(effect); } catch { }
             effect = null;
             renderer = null;
             return false;
@@ -150,7 +209,14 @@ internal static class MclslWorldSpriteRenderLayer
             ConfigureStaticWorldSorting(renderer, relativeSortingOrder);
             renderer.enabled = true;
             gameObject.SetActive(true);
-            try { World.world?.resetRedrawTimer(); } catch { }
+            try
+            {
+                World.world?.resetRedrawTimer();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-7", "世界贴图层：重置重绘计时失败: " + mclslEmptyCatchEx.Message);
+            }
             return true;
         }
         catch
@@ -178,7 +244,7 @@ internal static class MclslWorldSpriteRenderLayer
             Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
             if (animator != null) animator.enabled = false;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-5", "世界贴图层：停用原生动画器失败: " + mclslEmptyCatchEx.Message); }
     }
 
     internal static bool TryBindLoopAnimation(BaseEffect effect, Sprite[] frames, float frameIntervalSeconds, int startFrame)
@@ -213,7 +279,14 @@ internal static class MclslWorldSpriteRenderLayer
                 renderer.enabled = true;
             }
 
-            try { World.world?.resetRedrawTimer(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #2: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                World.world?.resetRedrawTimer();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #2: " + mclslEmptyCatchEx.Message);
+            }
             return true;
         }
         catch
@@ -233,7 +306,14 @@ internal static class MclslWorldSpriteRenderLayer
 
         if (_backMaterial != null)
         {
-            try { UnityEngine.Object.Destroy(_backMaterial); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #3: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                UnityEngine.Object.Destroy(_backMaterial);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #3: " + mclslEmptyCatchEx.Message);
+            }
             _backMaterial = null;
         }
     }
@@ -273,7 +353,7 @@ internal static class MclslWorldSpriteRenderLayer
             SpriteRenderer worldRenderer = World.world?.GetComponent<SpriteRenderer>();
             if (worldRenderer != null) renderer.sortingLayerID = worldRenderer.sortingLayerID;
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-6", "世界贴图层：同步世界排序层失败: " + mclslEmptyCatchEx.Message); }
         renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
     }
 
@@ -444,7 +524,14 @@ internal static class MclslWorldSpriteRenderLayer
         }
         finally
         {
-            try { template?.kill(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #4: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                template?.kill();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #4: " + mclslEmptyCatchEx.Message);
+            }
         }
     }
 

@@ -30,6 +30,7 @@ internal static class MclslActorAnimationCatalog
         internal string NativeResourcePath;
         internal bool AnchorApproved;
         internal bool ScaleApproved;
+        internal float StandingVisibleHeight;
         internal readonly Dictionary<string, MclslAnimationClipData> Actions = new(StringComparer.Ordinal);
         internal readonly Dictionary<string, FrameProfile> FrameProfiles = new(StringComparer.Ordinal);
     }
@@ -78,8 +79,8 @@ internal static class MclslActorAnimationCatalog
 
     private static void EnsureLoaded()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/AnimationCatalog");
         if (_loaded) return;
-        _loaded = true;
         string file = Path.Combine(MySimulatedLongevityRoad.MclslMod.I.GetDeclaration().FolderPath,
             "resources", "actor-frames.manifest.json");
         if (!File.Exists(file)) return;
@@ -114,7 +115,8 @@ internal static class MclslActorAnimationCatalog
                         // validator still requires verifiedInGame, never this flag.
                         ScaleApproved = approved && ((bool?)calibration?["verifiedInGame"] == true
                             || (bool?)calibration?["previewScaleApproved"] == true),
-                        Scale = (float?)calibration?["renderScale"] ?? 0f
+                        Scale = (float?)calibration?["renderScale"] ?? 0f,
+                        StandingVisibleHeight = (float)group["standingVisibleHeight"]
                     };
                     form.NativeResourcePath = ((string)group["nativeResourcePath"])?.TrimEnd('/');
                     if (form.NativeResourcePath != null)
@@ -203,8 +205,13 @@ internal static class MclslActorAnimationCatalog
                 }
                 catch (Exception ex) { MclslDiagnostics.Error("actor-manifest-group", ex.Message); }
             }
+            _loaded = true;
         }
-        catch (Exception ex) { MclslDiagnostics.Error("actor-manifest", ex.Message); }
+        catch (Exception ex)
+        {
+            Forms.Clear();
+            MclslDiagnostics.Error("actor-manifest", ex.Message);
+        }
     }
 
     private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);

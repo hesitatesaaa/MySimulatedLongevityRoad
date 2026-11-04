@@ -67,6 +67,10 @@ internal sealed class MclslAnnualReadyQueue
         while (released < budget && !expired())
         {
             int year = OldestWaitingYear;
+            // Future years stay parked: the annual pipeline must never settle a
+            // year the world clock has not reached. The caller passes the real
+            // world year; passing the active annual year deadlocked the lane
+            // because entries older than that bound were never released.
             if (year <= 0 || year > worldYear) break;
             LinkedList<long> bucket = _waiting[year];
             long id = bucket.First.Value;
@@ -102,25 +106,14 @@ internal sealed class MclslAnnualReadyQueue
     internal void Clear() { _ready.Clear(); _waiting.Clear(); _entries.Clear(); _freeEntries.Clear(); }
 }
 
-// Keep the selected baseline policy while using the newer bounded work budget.
+// 持续回压：档位由外部（年差 + 持续超预算耗时）算好后直接设值。
+// 1=0.5x, 2=0.25x, 3=暂停(0x)，均持续生效直到档位变化。
 internal sealed class MclslAnnualSpeedPolicy
 {
     internal int Level { get; private set; }
-    private double _recoverySince = -1d;
     internal float Factor => Level switch { 1 => 0.5f, 2 => 0.25f, 3 => 0f, _ => 1f };
-    internal void Reset() { Level = 0; _recoverySince = -1d; }
-    internal void Update(int lag, double unscaledTime, bool enabled)
-    {
-        if (!enabled) { Reset(); return; }
-        int requested = lag >= 8 ? 3 : lag >= 6 ? 2 : lag >= 3 ? 1 : 0;
-        if (requested > Level) { Level = requested; _recoverySince = -1d; return; }
-        int recoverAt = Level switch { 3 => 5, 2 => 3, 1 => 1, _ => -1 };
-        if (lag > recoverAt || Level == 0) { _recoverySince = -1d; return; }
-        if (_recoverySince < 0d || unscaledTime < _recoverySince) _recoverySince = unscaledTime;
-        if (unscaledTime - _recoverySince < 2d) return;
-        Level--;
-        _recoverySince = -1d;
-    }
+    internal void Reset() { Level = 0; }
+    internal void Update(int level, bool enabled) { Level = enabled ? level : 0; }
 }
 
 internal static class MclslAnnualFrameBudget
@@ -136,7 +129,9 @@ internal static class MclslAnnualFrameBudget
     internal static long ProgressVersion { get; private set; }
     internal static void ReportProgress() { ProgressVersion++; }
     internal static double LastAvailableMs { get; private set; }
-    internal static double ForLag(int lagYears) => lagYears >= 3 ? 2.5d : 1.5d;
+    // Measured: raising these shares lowered average FPS, so the bounded budget
+    // known to fit inside the relative-overhead target stays.
+    internal static double ForLag(int lagYears) => lagYears >= 10 ? 3.5d : lagYears >= 6 ? 3.0d : lagYears >= 3 ? 2.5d : 1.5d;
     internal static double ElapsedMs => !_active ? 0d
         : Math.Max(0d, (Timestamp() - _started) * 1000d / Stopwatch.Frequency);
     internal static int RemainingOperations => !_active ? OperationLimit : Math.Max(0, OperationLimit - _operations);

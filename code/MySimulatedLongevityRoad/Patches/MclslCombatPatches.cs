@@ -12,15 +12,17 @@ internal static class MclslCombatPatches
 {
     internal static int ApplySafely(Harmony harmony)
     {
-        MethodInfo original = AccessTools.Method(typeof(Actor), "getHit");
+        MethodInfo original = AccessTools.Method(typeof(Actor), "getHit", new[] {
+            typeof(float), typeof(bool), typeof(AttackType), typeof(BaseSimObject), typeof(bool), typeof(bool), typeof(bool) });
         MethodInfo prefix = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetHit_RealmSuppression_Prefix));
         MethodInfo postfix = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetHit_KillStatistics_Postfix));
         int count = MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.getHit", original, prefix, postfix) ? 1 : 0;
-        MethodInfo attack = AccessTools.Method(typeof(Actor), "tryToAttack");
+        MethodInfo attack = AccessTools.Method(typeof(Actor), "tryToAttack", new[] {
+            typeof(BaseSimObject), typeof(bool), typeof(System.Action), typeof(UnityEngine.Vector3), typeof(Kingdom), typeof(WorldTile), typeof(float) });
         MethodInfo attackTalisman = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_TryToAttack_Talisman_Postfix));
         MethodInfo attackGuard = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_TryToAttack_Immortal_Prefix));
         if (MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.tryToAttack.consumableTalisman", attack, attackGuard, attackTalisman)) count++;
-        MethodInfo cooldown = AccessTools.Method(typeof(Actor), "getAttackCooldown");
+        MethodInfo cooldown = AccessTools.Method(typeof(Actor), "getAttackCooldown", System.Type.EmptyTypes);
         MethodInfo talisman = AccessTools.Method(typeof(MclslCombatPatches), nameof(Actor_GetAttackCooldown_Talisman_Postfix));
         if (MclslHarmonyPatchGuard.TryPatch(harmony, "Actor.getAttackCooldown.talisman", cooldown, null, talisman)) count++;
         MethodInfo force = AccessTools.Method(typeof(Actor), "addForce", new[]
@@ -33,7 +35,6 @@ internal static class MclslCombatPatches
     private static void Actor_AddForce_EarthTalisman_Prefix(Actor __instance,
         ref float __0, ref float __1, ref float __2)
     {
-        if(MclslBattleCombat.Braced(__instance)){__0*=.25f;__1*=.25f;__2*=.25f;}
         if (__instance?.hasStatus("mclsl_item_F022") != true) return;
         __0 *= 0.5f;
         __1 *= 0.5f;
@@ -42,6 +43,7 @@ internal static class MclslCombatPatches
 
     private static void Actor_GetAttackCooldown_Talisman_Postfix(Actor __instance, ref float __result)
     {
+        __result *= MclslBeastTalentSystem.AttackInterval(__instance);
         if (__instance?.hasStatus("mclsl_item_F004") == true) __result *= 0.88f;
     }
 
@@ -49,14 +51,12 @@ internal static class MclslCombatPatches
     {
         if (!__result) return;
         MclslItemUseSystem.TryAutoCombatTalisman(__instance);
-        MclslSpellSystem.TryCastCombat(__instance);
+        if (!MclslCareerCombat.TryCast(__instance)) MclslSpellSystem.TryCastCombat(__instance);
     }
 
     private static bool Actor_TryToAttack_Immortal_Prefix(Actor __instance, ref bool __result)
     {
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Native);
-        MclslBattleCombat.Observe(__instance);
-        if(MclslSpellCasting.IsBusy(__instance)||MclslBattleCombat.Controlled(__instance)){__result=false;return false;}
+        if(MclslBeastTalentSystem.Sleeping(__instance)){__result=false;return false;}
         if (!MclslImmortalActorRegistration.IsImmortal(__instance)) return true;
         __result = false;
         return false;
@@ -65,7 +65,7 @@ internal static class MclslCombatPatches
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Last)]
     [HarmonyPatch(typeof(Actor), "getHit")]
-    private static void Actor_GetHit_RealmSuppression_Prefix(
+    private static bool Actor_GetHit_RealmSuppression_Prefix(
         Actor __instance,
         ref float pDamage,
         bool pFlash,
@@ -77,8 +77,17 @@ internal static class MclslCombatPatches
         out MclslNativeKillStatisticsSystem.MclslNativeKillAttemptState __state)
     {
         __state = MclslNativeKillStatisticsSystem.CapturePotentialDivertedHit(__instance, pAttacker);
+        long combatSample = MclslPerformanceProbe.Begin();
+        MclslPerformanceProbe.RecordCombatHit();
+        try
+        {
         MclslBeastLoot.ObserveHit(__instance,pAttacker);
         pDamage*=MclslBeastItemEffects.DamageFactor(__instance,pAttackType);
+        float beforeTalent=pDamage;
+        pDamage=MclslBeastTalentSystem.BeforeDamage(__instance,pAttacker as Actor,pDamage,pAttackType);
+        // Native getHit clamps every hit to one health point. A fully consumed
+        // shield hit must stop before that clamp, while retaining postfixes.
+        if(beforeTalent>0&&pDamage<=0){MclslPerformanceProbe.RecordCombatShieldConsumed();return false;}
         if(!MclslSpellSystem.IsApplyingSpellDamage && pAttacker is Actor source && pAttackType==AttackType.Weapon)
             pDamage*=1+MclslBeastItemEffects.ArtifactBonus(source,"physical");
         bool lifeSaved = MclslItemUseSystem.TryAutoLifeSave(__instance, pDamage);
@@ -95,8 +104,9 @@ internal static class MclslCombatPatches
         }
         if (__instance.hasStatus("mclsl_item_F025")) pDamage *= 0.85f;
         MclslRealmSuppressionSystem.Apply(ref pDamage, __instance, pAttacker);
-        MclslBattleCombat.Defend(__instance,pAttacker as Actor,ref pDamage);
-        MclslBattleCombat.ObserveHit(__instance,pAttacker as Actor,pDamage);
+        return true;
+        }
+        finally { MclslPerformanceProbe.End("战斗.命中前缀", combatSample); }
     }
 
     [HarmonyPostfix]

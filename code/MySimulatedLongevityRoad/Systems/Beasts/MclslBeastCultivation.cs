@@ -7,9 +7,27 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslBeastCultivation
 {
+    internal const string TalentKey = "mclsl.beast.talent.v1";
+    internal const string TalentLevelKey = "mclsl.beast.talent.level.v1";
+
+    internal static void EnsureTalent(Actor actor)
+    {
+        if (!MclslBeastActorRegistration.IsBeast(actor)) return;
+        // Birth and promotion share the same independent talent identity.
+        if (MclslBeastActorRegistration.IsOrdinary(actor)) MclslBeastTalentSystem.Ensure(actor);
+        string talent = Talent(actor);
+        if (MclslActorAccessor.GetString(actor,TalentKey) != talent)
+            MclslActorAccessor.Set(actor,TalentKey,talent);
+        int level = Math.Max(1,MclslRealmIds.Index(MclslActorAccessor.Realm(actor))+1);
+        if (MclslActorAccessor.GetInt(actor,TalentLevelKey) != level)
+            MclslActorAccessor.Set(actor,TalentLevelKey,level);
+
+    }
+
     internal static void Ensure(Actor actor)
     {
         if (!MclslBeastActorRegistration.IsOrdinary(actor)) return;
+        EnsureTalent(actor);
         if (MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < 0)
         {
             var beast=MclslBeastCatalog.ForAsset(actor.asset.id);
@@ -25,6 +43,7 @@ internal static class MclslBeastCultivation
         float fraction=oldMaximum>0?actor.getHealth()/oldMaximum:1;
         MclslActorAccessor.Set(actor,MclslActorDataKeys.CultivationSystem,MclslCultivationSystemIds.AncientLaw);
         MclslCultivationStateTransitions.TrySetRealm(actor,realm,year,"妖兽本能修炼");
+        EnsureTalent(actor);
         MclslCultivationGrowthSystem.Reconcile(actor,realm,true);
         MclslBeastActorRegistration.ReconcileForm(actor);
         MclslActorAccessor.ApplyDisplayName(actor,realm);
@@ -66,6 +85,12 @@ internal static class MclslBeastCultivation
         }
     }
     internal static string Talent(Actor actor)
+    {
+        var independent=MclslBeastTalentSystem.Definition(actor);
+        if(independent!=null)return independent.Id;
+        return LegacyTalent(actor);
+    }
+    internal static string LegacyTalent(Actor actor)
     {
         var beast=MclslBeastCatalog.ForAsset(actor?.asset?.id);
         return beast?.Id switch

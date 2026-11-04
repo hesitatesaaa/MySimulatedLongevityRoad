@@ -8,7 +8,6 @@ using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 using MySimulatedLongevityRoad.Systems.Visual;
-using MySimulatedLongevityRoad.Systems.Combat;
 using NeoModLoader.General;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ internal sealed class MclslSpellDefinition
     internal float Power;
     internal int MaxTargets;
     internal string Description;
-    internal string IconPath => "ui/Spells/" + MclslBattleRules.Visual(Id);
+    internal string IconPath => "ui/Spells/" + Id;
 }
 
 internal static class MclslSpellSystem
@@ -53,6 +52,9 @@ internal static class MclslSpellSystem
 
     private static ConditionalWeakTable<Actor, RuntimeState> _runtime = new();
     private static readonly string[] SelfSpellPriority = { "S025", "S024", "S020", "S018", "S014", "S011", "S005", "S006", "S003", "S002" };
+    private static readonly MclslOrderedIdIndex<long> SelfCasterIds = new((a,b)=>a.CompareTo(b));
+    private static readonly IReadOnlyList<Actor> SelfCasters = MclslActorRegistry.CreateView(SelfCasterIds);
+    private static readonly HashSet<string> SelfSpellIds = new(SelfSpellPriority, StringComparer.Ordinal);
     private static int _selfScanIndex;
     private static double _lastSelfScanWorldTime = -1d;
     internal static readonly MclslSpellDefinition[] All =
@@ -82,23 +84,7 @@ internal static class MclslSpellSystem
         Spell("S023", "乾坤镇域", "空间", 5, 185, 32f, "镇域攻击至多六敌并使其迟缓。", 1.4f, 6),
         Spell("S024", "五行化生", "木", 5, 150, 28f, "五行化生，恢复生命与灵力。"),
         Spell("S025", "万灵回天", "木", 6, 250, 42f, "疗愈自身与附近至多五名友方。", 1f, 6),
-        Spell("S026", "太初寂光", "阳", 6, 280, 45f, "寂光攻击至多八敌并短暂压制。", 2f, 8),
-        Spell("C001", "掠影步", "金", 0, 16, 7f, "掠影切入敌侧，剑气随身而至。", .65f),
-        Spell("C002", "回锋诀", "金", 0, 20, 10f, "短暂架剑，挡下下一击并回斩。", .7f),
-        Spell("C003", "分光连斩", "金", 2, 65, 14f, "两次交错追击，第三斩收束；可被打断。", 1.65f),
-        Spell("C004", "天门落剑", "金", 4, 160, 38f, "剑门预告落点，巨剑下坠冲击至多五敌；会波及己方建筑。", 2.4f, 5),
-        Spell("C005", "崩山靠", "土", 0, 18, 8f, "短冲撞击并小幅击退。", .9f),
-        Spell("C006", "金罡架", "土", 0, 24, 12f, "短时减伤并抵抗击退。", 1f),
-        Spell("C007", "撼岳三叠", "土", 2, 70, 16f, "拳击、上挑与砸地，共三段；元婴起砸地波及建筑。", 1.8f, 3),
-        Spell("C008", "法相镇岳", "土", 4, 170, 40f, "法相拳影砸落，震击至多六敌；会波及己方建筑。", 2.5f, 6),
-        Spell("C009", "凝元弹", "火", 0, 18, 5f, "凝聚主法则灵弹，飞行后命中。", 1f),
-        Spell("C010", "移形护元", "水", 0, 25, 13f, "撤步拉开距离并短暂护身。", 1f),
-        Spell("C011", "五行连诀", "木", 2, 65, 15f, "衔接已学控制与输出法术，最多三段；各段均需灵力且受冷却约束。", 1f),
-        Spell("C012", "五行天轮", "金", 4, 165, 38f, "天轮分段展开，最后收束；会波及己方建筑。", 2.3f, 6),
-        Spell("C013", "灵契唤影", "木", 0, 28, 12f, "召出随主境界成长的妖兽灵契投影，持续三十秒。", 1f),
-        Spell("C014", "御灵标记", "木", 0, 14, 6f, "标记敌人，命令现存投影集火。", .3f),
-        Spell("C015", "灵契护主", "木", 2, 55, 16f, "命令投影护主，以耐久分担下一次伤害。", 1f),
-        Spell("C016", "万灵奔袭", "木", 4, 155, 36f, "灵契列阵集体冲锋；额外兽影仅演出，会波及建筑。", 2.2f, 6)
+        Spell("S026", "太初寂光", "阳", 6, 280, 45f, "寂光攻击至多八敌并短暂压制。", 2f, 8)
     };
     private static readonly Dictionary<string, MclslSpellDefinition> ById = All.ToDictionary(x => x.Id, StringComparer.Ordinal);
 
@@ -134,6 +120,7 @@ internal static class MclslSpellSystem
         MclslSpellEffect.ClearRuntime();
         MclslSpellEffectFrames.Clear();
         _runtime = new ConditionalWeakTable<Actor, RuntimeState>();
+        SelfCasterIds.Clear();
         _selfScanIndex = 0;
         _lastSelfScanWorldTime = -1d;
         MclslSpellProgression.ClearRuntime();
@@ -240,11 +227,33 @@ internal static class MclslSpellSystem
         => new(KnownCached(actor));
 
     internal static IReadOnlyList<MclslSpellDefinition> KnownView(Actor actor) => KnownCached(actor);
-    internal static void Forget(Actor actor) { if (actor != null) _runtime.Remove(actor); }
+    internal static void Forget(Actor actor)
+    {
+        if (actor == null) return;
+        SelfCasterIds.Remove(MclslActorAccessor.Id(actor));
+        _runtime.Remove(actor);
+    }
+
+    internal static void SuspendSelfCasting(long actorId) => SelfCasterIds.Remove(actorId);
+    internal static void ObserveSelfCaster(Actor actor)
+    {
+        long id = MclslActorAccessor.Id(actor);
+        if (!MclslActorAccessor.Alive(actor) || !MclslActorAccessor.IsCultivator(actor)
+            || !MclslEligibility.CanCultivate(actor) || MclslBeastActorRegistration.IsBeast(actor))
+        { SelfCasterIds.Remove(id); return; }
+        bool all = KnowsAllSpells(actor);
+        bool support = all;
+        if (!all && !string.IsNullOrEmpty(MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells)))
+            foreach (var spell in KnownCached(actor))
+                if (SelfSpellIds.Contains(spell.Id)) { support = true; break; }
+        if (support) SelfCasterIds.Upsert(id,id); else SelfCasterIds.Remove(id);
+    }
 
     private static MclslSpellDefinition[] KnownCached(Actor actor)
     {
         if (actor?.data == null) return Array.Empty<MclslSpellDefinition>();
+        if (MclslBeastActorRegistration.IsBeast(actor)) return Array.Empty<MclslSpellDefinition>();
+        if (KnowsAllSpells(actor)) return All;
         string stored = MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells, string.Empty);
         RuntimeState state = GetRuntime(actor);
         if (string.Equals(stored, state.KnownRaw, StringComparison.Ordinal)) return state.KnownSpells;
@@ -264,16 +273,21 @@ internal static class MclslSpellSystem
     internal static bool LearnFromPlayer(Actor actor, string spellId)
         => LearnCore(actor, spellId, true);
 
+    internal static bool KnowsAllSpells(Actor actor)
+        => actor?.data != null && (MclslImmortalActorRegistration.IsImmortal(actor)
+            || actor.hasTrait(MclslTraitRegistration.BaiTraitId)
+            || actor.hasTrait(MclslTraitRegistration.ChuanfaTraitId));
+
     private static bool LearnCore(Actor actor, string spellId, bool bypassLearningRealm)
     {
-        if (!MclslActorAccessor.Alive(actor) || !ById.TryGetValue(spellId, out MclslSpellDefinition spell)
+        if (!MclslActorAccessor.Alive(actor) || MclslBeastActorRegistration.IsBeast(actor)
+            || !ById.TryGetValue(spellId, out MclslSpellDefinition spell)
             || (!bypassLearningRealm && MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < spell.MinRealm)
-            || !MclslBattleProfessionSystem.CanLearn(actor, spellId) || Knows(actor, spellId)) return false;
+            || Knows(actor, spellId)) return false;
         List<MclslSpellDefinition> known = Known(actor);
         known.Add(spell);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LearnedSpells, "v1:" + string.Join(",", known.Select(x => x.Id)));
         MclslSpellProgression.OnLearned(actor, spellId);
-        MclslBattleProfessionSystem.OnLearned(actor, spellId);
         return true;
     }
 
@@ -299,8 +313,7 @@ internal static class MclslSpellSystem
 
     internal static void TryProgressAnnual(Actor actor, int year)
     {
-        if (!MclslActorAccessor.Alive(actor)) return;
-        MclslBattleProfessionSystem.ProgressAnnual(actor);
+        if (!MclslActorAccessor.Alive(actor) || MclslBeastActorRegistration.IsBeast(actor)) return;
         StudyEligibleOwnedScrolls(actor);
         MclslSpellProgression.ProgressAnnual(actor);
         if (MaxMana(actor) <= 0) return;
@@ -341,7 +354,6 @@ internal static class MclslSpellSystem
         for (int i = 0; i < All.Length; i++)
         {
             MclslSpellDefinition spell = All[i];
-            if (MclslBattleProfessionSystem.IsProfessionSpell(spell.Id)) continue;
             realmPriorities[i] = MclslSpellAcquisitionPolicy.RealmPriority(current, spell.MinRealm,
                 Array.IndexOf(knownSpells, spell) >= 0, Array.IndexOf(roots, spell.Law) >= 0,
                 Array.IndexOf(technique.LawPool, spell.Law) >= 0);
@@ -375,29 +387,26 @@ internal static class MclslSpellSystem
         double worldTime = Convert.ToDouble(World.world.getCurWorldTime());
         if (worldTime <= _lastSelfScanWorldTime) return; // No casting while the simulation is paused.
         _lastSelfScanWorldTime = worldTime;
-        IReadOnlyList<Actor> actors = MclslCultivatorCandidateIndex.GetCultivatorActorsSnapshot();
-        if (actors.Count == 0) { _selfScanIndex = 0; return; }
+        IReadOnlyList<Actor> actors = SelfCasters;
+        if (SelfCasterIds.Count == 0) { _selfScanIndex = 0; return; }
         long sample = MclslPerformanceProbe.Begin();
         try
         {
-            int count = Math.Min(MclslRuntimeWorkBudget.ScaleCount(64, 1), actors.Count);
+            int count = Math.Min(64, actors.Count);
             MclslPerformanceProbe.RecordCultivatorPollActors(count);
             for (int i = 0; i < count && !MclslFrameDeadline.Expired; i++)
             {
                 if (_selfScanIndex >= actors.Count) _selfScanIndex = 0;
                 Actor actor = actors[_selfScanIndex++];
-                if (!MclslActorAccessor.Alive(actor)
-                    || string.IsNullOrEmpty(MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells))) continue;
-                if (actor.has_attack_target) { MclslBattleCombat.Observe(actor); TryCastCombat(actor); }
-                else TryCastSelf(actor);
+                if (!MclslActorAccessor.Alive(actor) || actor.has_attack_target) continue;
+                TryCastSelf(actor);
             }
         }
-        finally { MclslPerformanceProbe.End("法术.脱战轮询", sample); }
+        finally { MclslPerformanceProbe.End("法术.脱战施法者", sample); }
     }
 
     private static bool TryCastSelf(Actor actor)
     {
-        if (MclslSpellCasting.IsBusy(actor)) return false;
         MclslSpellDefinition[] known = KnownCached(actor);
         if (known.Length == 0) return false;
         float maxHealth = actor.getMaxHealth();
@@ -406,20 +415,25 @@ internal static class MclslSpellSystem
         RuntimeState state = GetRuntime(actor);
         int mana = CurrentMana(actor);
         int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
+        // Hoisted out of the per-priority loop: KnowsAllSpells ran on every one of
+        // the ten priority ids, and MaxMana (a revision lookup) ran inside the
+        // needs switch. Both are loop-invariant for this call.
+        bool knowsAll = KnowsAllSpells(actor);
+        int maxMana = MaxMana(actor);
         foreach (string id in SelfSpellPriority)
         {
             MclslSpellDefinition spell = null;
             for (int i = 0; i < known.Length; i++)
                 if (known[i].Id == id) { spell = known[i]; break; }
-            if (spell == null || realm < spell.MinRealm || mana < spell.ManaCost
+            if (spell == null || !knowsAll && realm < spell.MinRealm || mana < spell.ManaCost
                 || state.NextCast.TryGetValue(id, out double next) && MclslSpellCasting.Now < next) continue;
             bool needed = id switch
             {
                 "S025" => healthFraction < 0.9f || HasInjuredAlly(actor),
-                "S024" => healthFraction < 0.65f || mana < MaxMana(actor) * 0.35f,
+                "S024" => healthFraction < 0.65f || mana < maxMana * 0.35f,
                 "S020" => healthFraction < 0.75f && !actor.hasStatus("mclsl_spell_mountain_guard"),
                 "S018" => healthFraction < 0.7f,
-                "S014" => mana < MaxMana(actor) * 0.35f,
+                "S014" => mana < maxMana * 0.35f,
                 "S002" => healthFraction < 0.80f,
                 "S003" => healthFraction < 0.75f && !actor.hasStatus("mclsl_spell_water_guard"),
                 "S005" => healthFraction < 0.75f && !actor.hasStatus("mclsl_spell_earth_guard"),
@@ -428,16 +442,19 @@ internal static class MclslSpellSystem
                 _ => false
             };
             if (!needed) continue;
-            if (!MclslSpellCasting.Queue(actor, actor, spell)) continue;
             CommitCast(actor, state, spell, mana);
+            ApplySelfEffect(actor, id);
             return true;
         }
         return false;
     }
 
-    internal static void ApplySelfEffect(Actor actor, string spellId)
+    private static void ApplySelfEffect(Actor actor, string spellId)
     {
-        float strength = MclslSpellProgression.Strength(actor, spellId);
+        float strength = MclslBeastActorRegistration.IsBeast(actor)
+            ? 1f+0.05f*(Math.Max(1,MclslActorAccessor.GetInt(actor,MclslBeastCultivation.TalentLevelKey,1))-1)
+            : MclslSpellProgression.Strength(actor, spellId);
+        List<Actor> supportHitTargets = null;
         switch (spellId)
         {
             case "S002": actor.restoreHealthPercent(0.18f * strength); break;
@@ -449,8 +466,20 @@ internal static class MclslSpellSystem
             case "S018": actor.restoreHealthPercent(0.20f * strength); RestoreMana(actor, 0.05f * strength); break;
             case "S020": actor.addStatusEffect("mclsl_spell_mountain_guard", 10f * strength); break;
             case "S024": actor.restoreHealthPercent(0.30f * strength); RestoreMana(actor, 0.10f * strength); break;
-            case "S025": HealNearbyAllies(actor, 0.25f * strength, 6); break;
+            case "S025": supportHitTargets = HealNearbyAllies(actor, 0.25f * strength, 6); break;
         }
+        // Numbers are already settled above. Only the staged hit visual waits for
+        // the cast stage; no gameplay, cooldown or mana timing moves with it.
+        if (!MclslSpellSupportStage.Applies(spellId)) return;
+        if (supportHitTargets == null)
+        {
+            MclslSpellEffect.Show(actor, actor, spellId, phase: "hit",
+                duration: MclslSpellSupportStage.HitSeconds, delay: MclslSpellSupportStage.CastSeconds);
+            return;
+        }
+        foreach (Actor recipient in supportHitTargets)
+            MclslSpellEffect.Show(actor, recipient, spellId, phase: "hit",
+                duration: MclslSpellSupportStage.HitSeconds, delay: MclslSpellSupportStage.CastSeconds);
     }
 
     private static void RestoreManaFlat(Actor actor, int amount)
@@ -469,18 +498,27 @@ internal static class MclslSpellSystem
         return false;
     }
 
-    private static void HealNearbyAllies(Actor actor, float fraction, int limit)
+    private static List<Actor> HealNearbyAllies(Actor actor, float fraction, int limit)
     {
-        actor.restoreHealthPercent(fraction);
-        if (actor.current_tile == null) return;
+        var targets = new List<Actor>(limit);
+        HealAndTrack(actor, fraction, targets);
+        if (actor.current_tile == null) return targets;
         int healed = 1;
         foreach (Actor candidate in Finder.getUnitsFromChunk(actor.current_tile, 1, 3f, false))
         {
             if (candidate == actor || !IsFriendly(actor, candidate) || candidate.getMaxHealth() <= 0f
                 || candidate.getHealth() >= candidate.getMaxHealth()) continue;
-            candidate.restoreHealthPercent(fraction);
+            HealAndTrack(candidate, fraction, targets);
             if (++healed >= limit) break;
         }
+        return targets;
+    }
+
+    private static void HealAndTrack(Actor actor, float fraction, List<Actor> healed)
+    {
+        float before = actor.getHealth();
+        actor.restoreHealthPercent(fraction);
+        if (actor.getHealth() > before) healed.Add(actor);
     }
 
     private static bool IsFriendly(Actor actor, Actor candidate)
@@ -489,20 +527,19 @@ internal static class MclslSpellSystem
     private static void CommitCast(Actor actor, RuntimeState state, MclslSpellDefinition spell, int mana,
         Actor target = null, WorldTile hitTile = null)
     {
-        string[] linked=spell.Id=="C011"?ReserveElementalChain(actor):Array.Empty<string>();
-        foreach(string id in linked)
-        {
-            var part=ById[id];mana-=part.ManaCost;state.NextCast[id]=MclslSpellCasting.Now+part.Cooldown;
-            MclslSpellProgression.RecordCast(actor,part,MclslRuntime.CurrentYear());
-        }
         MclslActorAccessor.Set(actor, MclslActorDataKeys.ManaCurrent, mana - spell.ManaCost);
         PersistManaTime(actor);
         state.NextCast[spell.Id] = MclslSpellCasting.Now + spell.Cooldown;
         MclslActorAccessor.Set(actor,"mclsl.spells.cooldowns.v1",Newtonsoft.Json.JsonConvert.SerializeObject(state.NextCast));
-        if(!MclslBeastActorRegistration.IsOrdinary(actor))MclslSpellProgression.RecordCast(actor, spell, MclslRuntime.CurrentYear());
+        if(!MclslBeastActorRegistration.IsBeast(actor))MclslSpellProgression.RecordCast(actor, spell, MclslRuntime.CurrentYear());
+        MclslBeastAnimation.MarkAttack(actor);
         // Visual anchoring is separate from the gameplay target. Area attacks
-        // strike around the selected enemy but play once on the caster.
-        bool shown = true; // Queue owns all four visual phases, including self spells.
+        // strike around the selected enemy but play once on the caster. The ten
+        // support spells now open on their staged cast atlas; their hit stage is
+        // played by ApplySelfEffect, which runs immediately after this call.
+        bool shown = MclslSpellSupportStage.Applies(spell.Id)
+            ? MclslSpellEffect.Show(actor,actor,spell.Id,phase:"cast",duration:MclslSpellSupportStage.CastSeconds)
+            : target != null || MclslSpellEffect.Show(actor,null,spell.Id);
         if (MclslDiagnostics.Enabled)
             MclslDiagnostics.Throttle("spell-cast-" + spell.Id, Time.frameCount, 3600,
                 "法术施放 " + spell.Id + "，修士=" + MclslActorAccessor.Id(actor)
@@ -512,42 +549,17 @@ internal static class MclslSpellSystem
     private static bool IsAreaAttack(string spellId) => spellId is
         "S010" or "S012" or "S015" or "S019" or "S022" or "S023" or "S026";
 
-    internal static string[] ReserveElementalChain(Actor actor)
-    {
-        int budget=CurrentMana(actor)-ById["C011"].ManaCost;
-        if(budget<0)return Array.Empty<string>();
-        var state=GetRuntime(actor);var result=new List<string>(3);
-        string[] order={"S016","S008","S013","S004","S007","S017","S001","S015"};
-        int realm=MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
-        bool control=false;
-        foreach(string id in order)
-        {
-            var spell=ById[id];bool bind=MclslBattleRules.IsHardControl(id)||id=="S013";
-            if(bind&&control || !Knows(actor,id) || realm<spell.MinRealm || budget<spell.ManaCost
-                || state.NextCast.TryGetValue(id,out double due)&&due>MclslSpellCasting.Now)continue;
-            result.Add(id);budget-=spell.ManaCost;if(bind)control=true;
-            if(result.Count==3)break;
-        }
-        return result.ToArray();
-    }
-    internal static float LinkedDamage(Actor actor,MclslSpellDefinition spell)
-    {
-        float value=Math.Max(1,actor.stats.get("damage"))*spell.Power*MclslSpellProgression.Strength(actor,spell.Id);
-        if(spell.Law=="火")value*=1+MclslPhysiqueSystem.FireDamagePercent(actor)/100f;
-        return value*(1+MclslBeastItemEffects.ArtifactBonus(actor,spell.Law)+MclslBeastItemEffects.ArtifactBonus(actor,"spell"));
-    }
-
     internal static void TryCastCombat(Actor actor)
     {
         if (!MclslActorAccessor.Alive(actor) || actor.attack_target is not Actor target || !MclslActorAccessor.Alive(target)) return;
-        if (!MclslCombatTargets.IsEnemy(actor,target) || MclslSpellCasting.IsBusy(actor)) return;
-        if(MclslBeastActorRegistration.IsOrdinary(actor))
+        if(MclslBeastActorRegistration.IsBeast(actor))
         {
-            TryCastBeastTalent(actor,target);
+            if(MclslBeastActorRegistration.IsOrdinary(actor))MclslBeastTalentSystem.TryCast(actor,target);
+            else TryCastBeastTalent(actor,target);
             return;
         }
         string learnedSpells = MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells, string.Empty);
-        if (string.IsNullOrWhiteSpace(learnedSpells))
+        if (!KnowsAllSpells(actor) && string.IsNullOrWhiteSpace(learnedSpells))
         {
             MclslPerformanceProbe.RecordCombatSpellFastReject();
             return;
@@ -556,22 +568,24 @@ internal static class MclslSpellSystem
         RuntimeState state = GetRuntime(actor);
         int mana = CurrentMana(actor);
         MclslSpellDefinition[] known = KnownCached(actor);
+        // Hoist the realm-independent lookups out of the per-spell loop: the old
+        // body re-ran KnowsAllSpells (three hasTrait checks) and re-parsed the
+        // realm string for every known spell on every combat attack.
+        bool knowsAll = KnowsAllSpells(actor);
+        int realmForCast = knowsAll ? int.MaxValue : MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
         if (known.Length == 0 && MclslDiagnostics.Enabled)
             MclslDiagnostics.Throttle("spell-no-known", Time.frameCount, 3600,
                 "战斗中的修士尚未学会法术，修士=" + MclslActorAccessor.Id(actor));
-        MclslSpellDefinition best = null;
-        float bestScore = 0;
         foreach (MclslSpellDefinition spell in known)
         {
             if (Array.IndexOf(SelfSpellPriority, spell.Id) >= 0) continue;
-            if (MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < spell.MinRealm || mana < spell.ManaCost
-                || !MclslBattleProfessionSystem.CanUse(actor,spell.Id)
+            if (!knowsAll && realmForCast < spell.MinRealm || mana < spell.ManaCost
                 || state.NextCast.TryGetValue(spell.Id, out double next) && MclslSpellCasting.Now < next) continue;
-            float score = MclslBattleCombat.Score(actor,target,spell,mana);
-            if (score > bestScore) { best = spell; bestScore = score; }
+            WorldTile hitTile = target.current_tile;
+            if (!MclslSpellCasting.Queue(actor, target, spell)) continue;
+            CommitCast(actor, state, spell, mana, target, hitTile);
+            return;
         }
-        if (best != null && MclslSpellCasting.Queue(actor,target,best))
-        { CommitCast(actor,state,best,mana,target,target.current_tile); return; }
         if (known.Length > 0 && MclslDiagnostics.Enabled)
         {
             int realm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
@@ -600,23 +614,20 @@ internal static class MclslSpellSystem
 
     private static void TryCastBeastTalent(Actor actor,Actor target)
     {
-        if(!TryGet(MclslBeastCultivation.Talent(actor),out var spell))return;
-        int realm=MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
-        if(spell.MinRealm>realm)spell=ById["S001"];
+        MclslBeastCultivation.EnsureTalent(actor);
+        if(!TryGet(MclslActorAccessor.GetString(actor,MclslBeastCultivation.TalentKey),out var spell))return;
         var state=GetRuntime(actor);int mana=CurrentMana(actor);
         if(mana<spell.ManaCost || state.NextCast.TryGetValue(spell.Id,out double due)&&MclslSpellCasting.Now<due)return;
         if(Array.IndexOf(SelfSpellPriority,spell.Id)>=0)
         {
             if(actor.getHealth()>=actor.getMaxHealth()*0.8f||actor.hasStatus("mclsl_spell_earth_guard"))return;
-            if(MclslSpellCasting.Queue(actor,actor,spell))CommitCast(actor,state,spell,mana);
+            CommitCast(actor,state,spell,mana);ApplySelfEffect(actor,spell.Id);
         }
-        else if(MclslSpellCasting.Queue(actor,target,spell))CommitCast(actor,state,spell,mana,target,target.current_tile);
+        else if(MclslSpellCasting.QueueTalent(actor,target,spell))CommitCast(actor,state,spell,mana,target,target.current_tile);
     }
 
     internal static void RegisterStatuses()
     {
-        Status("mclsl_battle_stagger", "S008", 1.2f, "multiplier_speed", -1f);
-        Status("mclsl_battle_slow", "S013", 2f, "multiplier_speed", -0.25f);
         Status("mclsl_spell_water_guard", "S003", 8f, "armor", 12f);
         Status("mclsl_spell_earth_guard", "S005", 10f, "armor", 20f);
         Status("mclsl_spell_wind_step", "S006", 12f, "multiplier_speed", 0.2f);
@@ -646,81 +657,48 @@ internal static class MclslSpellSystem
 internal static class MclslSpellTerrain
 {
     private const int MaxPending = 64;
-    private const string SaveKey="mclsl.battle.terrain.v1";
-    internal static int Mode=2;
-    private sealed class Task
-    {
-        public int X,Y,Index,Radius;
-        public string Spell;
-    }
-    private static readonly Queue<Task> Pending = new();
-    private static bool _locked;
+    private static readonly (int X, int Y)[] Offsets = { (0, 0), (-1, 0), (1, 0), (0, -1), (0, 1) };
+    private static readonly Queue<(MapBox World, int X, int Y, int Index, string Spell)> Pending = new();
 
-    internal static void Queue(WorldTile center, string spell,int realm=-1)
+    internal static void Queue(WorldTile center, string spell)
     {
-        if (_locked||Mode==0||center == null || Pending.Count >= MaxPending || World.world == null) return;
-        int radius=MclslBattleRules.TerrainRadius(realm);
-        if(radius==0)return;
-        Pending.Enqueue(new(){X=center.pos.x,Y=center.pos.y,Spell=spell,Radius=radius});
+        if (center == null || Pending.Count >= MaxPending || World.world == null) return;
+        Pending.Enqueue((World.world, center.pos.x, center.pos.y, 0, spell));
     }
 
     internal static void Tick()
     {
-        if(World.world==null||Config.paused)return;
-        int budget = MclslRuntimeWorkBudget.ScaleCount(8, 2);
+        int budget = 8;
         while (budget-- > 0 && Pending.Count > 0)
         {
             var task = Pending.Dequeue();
-            if(Mode==0)continue;
-            int width=task.Radius*2+1;
-            int dx=task.Index%width-task.Radius,dy=task.Index/width-task.Radius;
-            int x = task.X + dx, y = task.Y + dy;
-            if (dx*dx+dy*dy<=task.Radius*task.Radius && x >= 0 && y >= 0 && x < MapBox.width && y < MapBox.height)
+            if (!ReferenceEquals(task.World, World.world)) continue;
+            var offset = Offsets[task.Index];
+            int x = task.X + offset.X, y = task.Y + offset.Y;
+            if (x >= 0 && y >= 0 && x < MapBox.width && y < MapBox.height)
             {
                 try
                 {
-                    WorldTile tile = World.world.GetTileSimple(x, y);
+                    WorldTile tile = task.World.GetTileSimple(x, y);
                     // pDamage=true invokes the native Gaia's Covenant check.
                     if (tile != null && MapAction.checkTileDamageGaiaCovenant(tile, true))
                     {
-                        if(Mode==1){tile.setBurned(1);}
-                        else
+                        TerraformOptions options = new() { damage = 0 };
+                        if (task.Spell == "S019" || task.Spell == "S026")
                         {
-                            // damage=0 avoids a second, indiscriminate unit-damage path.
-                            // Buildings are deliberately unfiltered, including friendly buildings.
-                            TerraformOptions options = new() { damage = 0,damage_buildings=true,destroy_buildings=true,
-                                make_ruins=true,remove_roads=true,remove_trees_fully=true,add_burned=true };
-                            MapAction.decreaseTile(tile, true, options);
+                            options.set_fire = true;
+                            options.add_burned = true;
                         }
+                        MapAction.decreaseTile(tile, true, options);
                     }
                 }
                 catch (Exception ex) { MclslDiagnostics.Throttle("spell-terrain", Time.frameCount, 3600, ex.Message); }
             }
-            if (++task.Index < width*width) Pending.Enqueue(task);
+            if (++task.Index < Offsets.Length) Pending.Enqueue(task);
         }
     }
 
-    internal static void Clear(){Pending.Clear();_locked=false;}
-    internal static void Save()
-    {
-        if(_locked||World.world?.map_stats==null)return;
-        World.world.map_stats.custom_data??=new SaveCustomData();
-        World.world.map_stats.custom_data.set(SaveKey,Newtonsoft.Json.JsonConvert.SerializeObject(Pending));
-    }
-    internal static void Load()
-    {
-        Clear();if(World.world?.map_stats?.custom_data==null)return;
-        World.world.map_stats.custom_data.get(SaveKey,out string raw,"");if(raw.Length==0)return;
-        try
-        {
-            var tasks=Newtonsoft.Json.JsonConvert.DeserializeObject<List<Task>>(raw);
-            if(tasks==null||tasks.Count>MaxPending||tasks.Any(t=>t==null||t.Radius<2||t.Radius>5||t.Index<0
-                ||t.Index>=(t.Radius*2+1)*(t.Radius*2+1)||!MclslBattleRules.HeavyTerrain(t.Spell)))
-                throw new InvalidOperationException("毁地队列格式错误");
-            foreach(var task in tasks)Pending.Enqueue(task);
-        }
-        catch(Exception ex){_locked=true;MclslDiagnostics.Error("battle-terrain-load",ex.Message);}
-    }
+    internal static void Clear() => Pending.Clear();
 }
 
 
@@ -734,21 +712,18 @@ internal sealed class MclslSpellEffect : MonoBehaviour
     internal static void SetEnabled(bool enabled)
     {
         Enabled=enabled;
-        if(!enabled)foreach(var effect in Live.ToArray())if(effect!=null)effect.ReturnToPool();
+        if(!enabled)foreach(var effect in Live.ToArray())if(effect!=null&&!effect._spellId.StartsWith("BT_",StringComparison.Ordinal))effect.ReturnToPool();
+    }
+    internal static void SetTalentEnabled(bool enabled)
+    {
+        MclslBeastTalentFrames.Enabled=enabled;
+        if(!enabled)foreach(var effect in Live.ToArray())
+            if(effect!=null&&effect._spellId.StartsWith("BT_",StringComparison.Ordinal))effect.ReturnToPool();
     }
     private static int _activeCount;
-    private static int _externalCount;
-    internal static int ActiveCount => _activeCount+_externalCount;
-    internal static bool TryReserveExternal()
-    {
-        if(!Enabled||ActiveCount>=72)return false;
-        _externalCount++;return true;
-    }
-    internal static void ReleaseExternal()=>_externalCount=Math.Max(0,_externalCount-1);
     private static Camera _camera;
     private static int _nextCameraRefreshFrame;
     private SpriteRenderer _renderer;
-    private Color _tint=Color.white;
     private double _end;
     private double _born;
     private float _duration;
@@ -759,6 +734,7 @@ internal sealed class MclslSpellEffect : MonoBehaviour
     private Actor _caster;
     private Actor _target;
     private Vector3 _anchor;
+    private bool _fixedAnchor;
     private bool _active;
 
     internal static void ClearRuntime()
@@ -766,14 +742,25 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         foreach(var effect in Live.ToArray())if(effect!=null)effect.ReturnToPool();
         while(Pool.Count>0){var effect=Pool.Pop();if(effect!=null)UnityEngine.Object.Destroy(effect.gameObject);}
         Live.Clear();_activeCount=0;_camera=null;_nextCameraRefreshFrame=0;
+        MclslCareerEffectFrames.Clear();
+        MclslBeastTalentFrames.Clear();
     }
 
-    internal static bool Show(Actor caster, Actor target, string spellId, WorldTile hitTile = null, string phase = null, float duration = 0f,Color? tint=null)
+    internal static void CancelCareerCast(Actor actor,string skillId)
     {
-        if(!Enabled){ReportSuppressed("法术特效已关闭",spellId);return false;}
+        foreach(var effect in Live.ToArray())
+            if(effect._caster==actor&&effect._spellId==skillId&&effect._phase=="cast")effect.ReturnToPool();
+    }
+
+    internal static bool Show(Actor caster, Actor target, string spellId, WorldTile hitTile = null, string phase = null, float duration = 0f, float delay = 0f)
+    {
+        if(spellId.StartsWith("BT_",StringComparison.Ordinal)?!MclslBeastTalentFrames.Enabled:!Enabled)
+        {ReportSuppressed("特效已关闭",spellId);return false;}
         if (caster?.data == null) { ReportSuppressed("施法者无效", spellId); return false; }
-        if (ActiveCount >= (phase is "hit" or "area"?MaxVisibleEffects:72)) { ReportSuppressed("同屏特效达到上限", spellId); return false; }
-        if (!TryPosition(phase=="cast"?caster:target ?? caster, out Vector3 position))
+        if (_activeCount >= MaxVisibleEffects) { ReportSuppressed("同屏特效达到上限", spellId); return false; }
+        Vector3 position;
+        if(hitTile!=null && phase!="cast")position=hitTile.posV3;
+        else if (!TryPosition(phase=="cast"?caster:target ?? caster, out position))
         {
             if (hitTile == null) { ReportSuppressed("无法取得世界坐标", spellId); return false; }
             position = hitTile.posV3;
@@ -819,21 +806,25 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         }
         component.gameObject.SetActive(true);
         component._renderer.sprite = sprite;
-        component._tint=tint??Color.white;
-        component._renderer.color = component._tint;
-        component._born = MclslSpellCasting.Now;
-        component._duration = duration>0f?duration:DurationFor(spellId);
+        component._renderer.color = Color.white;
+        // Presentation runs on the fixed-speed display clock. Legacy effects show
+        // every authored frame for at least 1/24 s, keep longer authored or
+        // caller durations, then run at two-thirds speed. The ten staged support
+        // spells instead use their exact cast/hit seconds (0.24 / 0.72).
         component._frameCount = MclslSpellEffectFrames.Count(spellId,phase);
-        component._end = MclslSpellCasting.Now + component._duration;
+        component._duration = MclslSpellSupportStage.ResolveDuration(spellId, phase, component._frameCount, duration, DurationFor(spellId));
+        component._born = MclslRuntime.DisplayClock + delay;
+        component._end = component._born + component._duration;
         component._spellId = spellId;
         component._phase = phase;
         component._start = caster.current_position;
         component._caster = caster;
         component._target = target;
         component._anchor = position;
+        component._fixedAnchor = hitTile!=null && phase!="cast";
         component._active = true;
         component.transform.position = position + new Vector3(0f, 0.38f, -0.01f);
-        component.transform.localScale = Vector3.one * ScreenScale(camera);
+        component.transform.localScale = Vector3.one * ScreenScale(camera, spellId);
         component.transform.rotation = Quaternion.identity;
         _activeCount++;
         Live.Add(component);
@@ -850,19 +841,26 @@ internal sealed class MclslSpellEffect : MonoBehaviour
 
     private void Update()
     {
-        if (MclslSpellCasting.Now >= _end) { ReturnToPool(); return; }
-        if((_phase=="cast"||_phase=="area"&&MclslBattleRules.IsBeam(_spellId))
-            && !MclslActorAccessor.Alive(_caster)){ReturnToPool();return;}
-        if (!TryPosition(_phase=="cast"?_caster:_target ?? _caster, out Vector3 position)) position = _anchor;
-        float progress = Mathf.Clamp01((float)((MclslSpellCasting.Now - _born) / _duration));
+        double displayNow = MclslRuntime.DisplayClock;
+        if (displayNow >= _end) { ReturnToPool(); return; }
+        if(_spellId.StartsWith("BT_",StringComparison.Ordinal)&&(!MclslActorAccessor.Alive(_caster)
+            ||!_fixedAnchor&&_target!=null&&!MclslActorAccessor.Alive(_target))) {ReturnToPool();return;}
+        if(_phase!=null && _phase!="hit" && !MclslActorAccessor.Alive(_caster)){ReturnToPool();return;}
+        // A staged hit waits invisible until its delayed born time, so the cast
+        // atlas owns the first 0.24 s instead of the hit frame flashing early.
+        if (displayNow < _born) { _renderer.color = new Color(1f,1f,1f,0f); return; }
+        Vector3 position=_anchor;
+        if(!_fixedAnchor && TryPosition(_phase=="cast"?_caster:_target ?? _caster,out Vector3 tracked))position=tracked;
+        float progress = Mathf.Clamp01((float)((displayNow - _born) / _duration));
         _renderer.sprite = MclslSpellEffectFrames.Get(_spellId,
             Math.Min(_frameCount - 1, (int)(progress * _frameCount)),_phase);
-        float remaining = progress < 0.78f ? 1f : Mathf.Clamp01((1f - progress) / 0.22f);
-        float scale=ScreenScale(_camera);
+        float remaining = (_phase == "cast" && MclslSpellSupportStage.Applies(_spellId)) || progress < 0.78f
+            ? 1f : Mathf.Clamp01((1f - progress) / 0.22f);
+        float scale=ScreenScale(_camera,_spellId);
         // Stage atlases already animate their scale; keep ground perspective and pivots fixed.
         transform.localScale = Vector3.one * scale * (_phase==null?1.0f+0.12f*Mathf.Sin(progress*Mathf.PI):1f);
         if(_phase=="travel")position=Vector3.Lerp(_start,position,progress);
-        bool ground=_phase!="cast" && (_spellId is "S010" or "S019" or "S022" or "S023");
+        bool ground=_phase=="area" || _phase!="cast" && (_spellId is "S010" or "S019" or "S022" or "S023");
         transform.position = position + new Vector3(0f,ground?0f:0.38f,-0.01f);
         transform.rotation = Quaternion.Euler(0f,0f,_phase==null && (_spellId is "S003" or "S010" or "S012" or "S019" or "S022" or "S023")?progress*90f:0f);
         if(_phase=="travel")
@@ -887,9 +885,12 @@ internal sealed class MclslSpellEffect : MonoBehaviour
             transform.position=(casterPosition+position)*0.5f+new Vector3(0f,0.38f,-0.01f);
             transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(direction.y,direction.x)*Mathf.Rad2Deg);
             // PNG content occupies roughly 70% of its padded frame; cover both endpoints.
-            transform.localScale=new Vector3(Math.Max(0.01f,direction.magnitude)/0.7f,scale*0.25f,scale);
+            // Zooming out shortens that same visual span around its centre, so a beam
+            // shrinks like every other effect while real range, damage and hit test
+            // stay untouched.
+            transform.localScale=new Vector3(Math.Max(0.01f,direction.magnitude)/0.7f*ZoomFactor(_camera),scale*0.25f,scale);
         }
-        var color=_tint;color.a*=remaining;_renderer.color=color;
+        _renderer.color = new Color(1f, 1f, 1f, remaining);
     }
 
     private static float DurationFor(string spellId) => spellId switch
@@ -920,11 +921,42 @@ internal sealed class MclslSpellEffect : MonoBehaviour
         catch { return false; }
     }
 
-    private static float ScreenScale(Camera camera)
+    // Every spell, career skill, staged cast, zone, shield and aura visual ends up
+    // in this one render path, so the zoom response is applied here only.
+    // ScreenScale holds a nearly constant pixel size at any zoom, which is why
+    // effects used to stay huge over a whole region in the world overview. These
+    // thresholds normally reuse this baseline's own camera LOD boundaries
+    // (MclslVisibleActorRenderLane: 55 medium / 95 far). For smaller maps the
+    // camera cannot reach 95, so match the game's map-dependent maximum instead.
+    private const float ZoomBaselineCameraSize = 55f;
+    private const float ZoomOverviewCameraSize = 95f;
+    private const float ZoomOverviewFactor = 1f / 3f;
+
+    // Read live from the camera every frame, so effects that already exist follow
+    // zoom changes instead of keeping the scale they spawned with.
+    private static float ZoomFactor(Camera camera)
     {
-        if (camera == null || !camera.orthographic) return VisualScale;
+        if (camera == null || !camera.orthographic) return 1f;
+        float size = camera.orthographicSize;
+        float overviewSize = ZoomOverviewCameraSize;
+        int mapSide = Math.Max(MapBox.width, MapBox.height);
+        // MoveCamera.resetZoom sets its upper limit to floor(largest side * 1.1).
+        float mapCameraLimit = (int)(mapSide * 1.1f);
+        if (mapCameraLimit > 10f) overviewSize = Math.Min(overviewSize, mapCameraLimit);
+        float baselineSize = Math.Min(ZoomBaselineCameraSize, 10f + (overviewSize - 10f) * 0.55f);
+        if (!(size > baselineSize)) return 1f;
+        if (size >= overviewSize) return ZoomOverviewFactor;
+        float t = (size - baselineSize) / (overviewSize - baselineSize);
+        t = t * t * (3f - 2f * t);
+        return 1f + (ZoomOverviewFactor - 1f) * t;
+    }
+
+    private static float ScreenScale(Camera camera, string spellId)
+    {
+        if (camera == null || !camera.orthographic) return VisualScale * 1.35f;
         float pixelsPerWorld = Math.Max(0.01f, Screen.height / Math.Max(0.01f, 2f * camera.orthographicSize));
-        return Math.Clamp(VisualScale, 48f / pixelsPerWorld, 128f / pixelsPerWorld);
+        float zoom = ZoomFactor(camera);
+        return Math.Clamp(VisualScale, 48f / pixelsPerWorld, 128f / pixelsPerWorld) * 1.35f * zoom;
     }
 
     private void ReturnToPool()
@@ -970,7 +1002,12 @@ internal static class MclslSpellEffectFrames
 
     internal static int Count(string id,string phase=null)
     {
+        if(id.StartsWith("BT_",StringComparison.Ordinal))return phase is "hit" or "cancel"?4:8;
+        if (id.StartsWith("CP_",StringComparison.Ordinal))
+            return phase is "hit" or "cancel" ? 4 : 8;
         if (!MclslSpellSystem.TryGet(id, out MclslSpellDefinition spell)) return 0;
+        if (MclslSpellSupportStage.IsStage(id, phase))
+            return phase == "cast" ? MclslSpellSupportStage.CastFrames : MclslSpellSupportStage.HitFrames;
         if(phase is "cast" or "travel" or "area")return 8;
         if(phase=="hit")return id is "S001" or "S004" or "S007" or "S013" or "S015" or "S016"?16:24;
         return spell.MinRealm <= 1 ? 16 : spell.MinRealm <= 3 ? 20 : 24;
@@ -978,9 +1015,12 @@ internal static class MclslSpellEffectFrames
 
     internal static Sprite Get(string id, int frame,string phase=null)
     {
+        if(id.StartsWith("BT_",StringComparison.Ordinal))return MclslBeastTalentFrames.Get(id,frame,phase);
+        if (id.StartsWith("CP_",StringComparison.Ordinal)) return MclslCareerEffectFrames.Get(id,frame,phase);
         if(phase=="area")phase="travel";
         string key=phase==null?id:id+"/"+phase;
-        if(phase!=null && MissingStages.Contains(key))return Get(id,frame);
+        if(phase!=null && MissingStages.Contains(key))
+            return MclslSpellSupportStage.Applies(id) ? null : Get(id,frame);
         if (!Cache.TryGetValue(key, out Atlas atlas))
         {
             int count = Count(id,phase);
@@ -1003,8 +1043,11 @@ internal static class MclslSpellEffectFrames
                 if(phase!=null)
                 {
                     MissingStages.Add(key);
-                    MclslDiagnostics.Error("spell-stage-missing-"+key,"阶段资源缺失或尺寸错误："+path+"；预览暂用原有图集，资源验收仍待完成。");
-                    return Get(id,frame);
+                    bool support = MclslSpellSupportStage.Applies(id);
+                    MclslDiagnostics.Error("spell-stage-missing-"+key, support
+                        ? "辅助阶段资源缺失或尺寸错误："+path+"；不回落旧图集，资源验收仍待完成。"
+                        : "阶段资源缺失或尺寸错误："+path+"；预览暂用原有图集，资源验收仍待完成。");
+                    return support ? null : Get(id,frame);
                 }
                 MclslDiagnostics.Error("spell-effect-atlas-" + id,
                     "法术图集缺失或尺寸错误：" + path + "（需要 "

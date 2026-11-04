@@ -17,13 +17,7 @@ internal static class MclslWorldChangeSystem
         internal int Strength;
     }
 
-    private sealed class LocationSeed
-    {
-        internal string Location = "天地之间";
-        internal string Kingdom = "无主";
-        internal int X = -1;
-        internal int Y = -1;
-    }
+
 
     private static readonly Dictionary<string, List<ChangeClaim>> Claims = new(StringComparer.Ordinal);
     private static readonly Dictionary<string, int> NativeDeathSignals = new(StringComparer.Ordinal);
@@ -158,7 +152,7 @@ internal static class MclslWorldChangeSystem
     internal static MclslWorldChangeRecord CreateFromTimeline(int year, string originName, IReadOnlyList<string> lawTags)
     {
         if (!MclslWorldEpochSystem.IsNewLawActive(year)) return null;
-        LocationSeed location = PickLocation(PositiveHash(MclslWorldRunRepository.Current.RunId + "|timeline_change|" + year + "|" + originName));
+        MclslMapLocationResolver.LocationSeed location = MclslMapLocationResolver.PickLocation(PositiveHash(MclslWorldRunRepository.Current.RunId + "|timeline_change|" + year + "|" + originName));
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
         MclslWorldChangeRecord change = MclslGeneratedObjectFactory.CreateWorldChange(year, sequence, location.Location, location.Kingdom, lawTags, 4, originName, "timeline", location.X, location.Y);
         MclslWorldRunRepository.Current.WorldChanges.Add(change);
@@ -519,7 +513,7 @@ internal static class MclslWorldChangeSystem
         for (int i = 0; i < technique.LawPool.Length && tags.Count < tagCount; i++)
             if (!tags.Contains(technique.LawPool[(start + i) % technique.LawPool.Length])) tags.Add(technique.LawPool[(start + i) % technique.LawPool.Length]);
         if (quality == 4 && PositiveHash(hash + "|rare") % 100 < 45) tags[tags.Count - 1] = "毁灭";
-        LocationSeed location = PickLocation(hash);
+        MclslMapLocationResolver.LocationSeed location = MclslMapLocationResolver.PickLocation(hash);
         string[] origins = { "地脉骤变", "灵潮逆流", "洞天根源震荡", "天象异变", "界域交错", "山河震荡" };
         string origin = origins[hash % origins.Length];
         MclslWorldChangeRecord change = MclslGeneratedObjectFactory.CreateWorldChange(year, sequence, location.Location, location.Kingdom, tags, quality, origin, "periodic", location.X, location.Y);
@@ -578,26 +572,7 @@ internal static class MclslWorldChangeSystem
         return false;
     }
 
-    private static LocationSeed PickLocation(int hash)
-    {
-        List<LocationSeed> locations = new();
-        IReadOnlyList<Actor> units = MclslActorRegistry.CityRepresentatives;
-        if (units != null)
-        {
-            HashSet<string> seen = new(StringComparer.Ordinal);
-            for (int i = 0; i < units.Count && locations.Count < 64; i++)
-            {
-                Actor actor = units[i];
-                if (actor?.city == null) continue;
-                string city = actor.city?.data?.name;
-                if (string.IsNullOrWhiteSpace(city) || !seen.Add(city)) continue;
-                string kingdom = string.IsNullOrWhiteSpace(actor.kingdom?.data?.name) ? "无主" : actor.kingdom.data.name;
-                locations.Add(new LocationSeed { Location = city + "附近", Kingdom = kingdom, X = actor.data.x, Y = actor.data.y });
-            }
-        }
-        if (locations.Count > 0) return locations[(hash & int.MaxValue) % locations.Count];
-        return new LocationSeed { Location = MclslProceduralLexicon.CaveOrigins[(hash & int.MaxValue) % MclslProceduralLexicon.CaveOrigins.Length], Kingdom = "无主" };
-    }
+
 
     private static int Compatibility(IReadOnlyList<string> laws, IReadOnlyList<string> changeTags)
     {

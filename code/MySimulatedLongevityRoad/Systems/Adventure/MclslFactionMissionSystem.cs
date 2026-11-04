@@ -24,7 +24,7 @@ internal static class MclslFactionMissionSystem
 
     internal static string CurrentSectName(Actor actor, int year)
     {
-        if (actor?.data == null || MclslWorldEpochSystem.IsNewLawActive(year)) return string.Empty;
+        if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor) || actor?.data == null || MclslWorldEpochSystem.IsNewLawActive(year)) return string.Empty;
         string id = MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectAffiliation);
         foreach (var sect in AncientSects) if (sect.Id == id) return sect.Name;
         return DisplaySectText(MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin));
@@ -131,7 +131,7 @@ internal static class MclslFactionMissionSystem
             PositiveHash(MclslActorAccessor.Id(actor) + "|sect_type|" + year + "|" + order));
         int stones = 0;
         string exchangeSummary = string.Empty;
-        string actorName = SafeName(actor);
+        string actorName = MclslActorAccessor.SafeName(actor, "无名者");
         long actorId = MclslActorAccessor.Id(actor);
         string realmName = MclslRealmIds.Display(MclslActorAccessor.Realm(actor));
         bool failed = Fails(run, actor, year, order, sect.Id, mission.Key, mission.Name, realm, out bool died);
@@ -170,7 +170,7 @@ internal static class MclslFactionMissionSystem
         if (PositiveHash(source + "|fail") % 10000 >= failChance) return false;
         if (PositiveHash(source + "|death") % 10000 < deathChance)
             died = MclslDeathSystem.ExecuteScriptedDeath(actor, "faction_mission", faction,
-                SafeName(actor) + "执行“" + missionName + "”时失手陨落。", true);
+                MclslActorAccessor.SafeName(actor, "无名者") + "执行“" + missionName + "”时失手陨落。", true);
         return true;
     }
 
@@ -213,7 +213,7 @@ internal static class MclslFactionMissionSystem
         MclslWorldRunRepository.RegisterResourceSpend(new MclslResourceSpendRecord
         {
             Id = "spend_" + year + "_" + MclslWorldRunRepository.NextProceduralSequence(),
-            Year = year, ActorId = MclslActorAccessor.Id(actor), ActorName = SafeName(actor),
+            Year = year, ActorId = MclslActorAccessor.Id(actor), ActorName = MclslActorAccessor.SafeName(actor, "无名者"),
             RealmName = MclslRealmIds.Display(MclslActorAccessor.Realm(actor)),
             ItemName = sectName + "功法兑换", ContributionCost = 0, SpiritStoneCost = cost,
             EffectText = "换得《" + selected.Name + "》", Summary = summary
@@ -232,7 +232,7 @@ internal static class MclslFactionMissionSystem
         MclslMissionDefinition mission = MclslFactionMissionCatalog.PickNewLaw(faction, TierForRealm(realmIndex),
             PositiveHash(MclslActorAccessor.Id(actor) + "|" + faction + "|mission_type|" + year + "|" + order));
         string factionName = faction == WanXian ? "万仙盟" : "五老会";
-        string actorName = SafeName(actor);
+        string actorName = MclslActorAccessor.SafeName(actor, "无名者");
         long actorId = MclslActorAccessor.Id(actor);
         string realmName = MclslRealmIds.Display(MclslActorAccessor.Realm(actor));
         if (string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty)))
@@ -266,11 +266,11 @@ internal static class MclslFactionMissionSystem
         }
 
             (contribution, stones) = MclslResourceSystem.GrantFactionReward(actor, baseContribution, baseStones);
+            Combat.MclslCombatCareerSystem.Offer(actor, year, "宗门传承", 1000);
+            Combat.MclslCareerSupply.GiveOpportunitySupply(actor, year);
             MclslMaterialDiscovery.TryDiscoverFactionReward(actor, year,
                 faction + "|" + order + "|" + roll, highestQuality: quality >= 4);
             MclslFactionExchangeSystem.TryExchangeTechnique(actor, faction, year, roll, out exchangeSummary);
-            string battle=Combat.MclslBattleProfessionSystem.TryTransmission(actor,year,"faction|"+faction+"|"+order);
-            if(battle.Length>0)exchangeSummary+=(exchangeSummary.Length>0?"；":"")+battle;
         }
         MclslFactionMissionRecord record = new()
         {
@@ -358,7 +358,7 @@ internal static class MclslFactionMissionSystem
         return roll < allianceWeight ? WanXian : FiveElders;
     }
 
-    private static string NormalizeFaction(string faction)
+    internal static string NormalizeFaction(string faction)
     {
         return faction switch
         {
@@ -404,12 +404,6 @@ internal static class MclslFactionMissionSystem
             >= 18 => "潜伏暗流",
             _ => "蛰伏避锋"
         };
-    }
-
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名者"; }
     }
 
     private static int PositiveHash(string value)

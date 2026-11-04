@@ -1,4 +1,4 @@
-using MySimulatedLongevityRoad.Modules;
+using System.Threading;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using MySimulatedLongevityRoad.Systems.Visual;
@@ -10,85 +10,231 @@ namespace MySimulatedLongevityRoad.Core;
 internal static class MclslRuntime
 {
     private static bool _initialized;
+    private static MclslWorldInitialization _coreWorld;
+    private static bool _worldEntryCompleted;
+    private static bool _worldEntryPrepared;
+    private static bool _huanzhenWorldLoaded;
     private static int _lastFrame = -1;
     private static int _frameCounter;
     private static int _lastYear = -1;
+    // Fixed-speed presentation clock. It advances by one unscaled real second per
+    // rendered second, so animated effects keep their authored pace at any
+    // simulation speed. It freezes while the world is paused (the same API the
+    // native simulation branches on) and restarts when the world changes.
+    private static double _displayClock;
+    internal static double DisplayClock => Volatile.Read(ref _displayClock);
 
     internal static void Init()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/Runtime");
         if (_initialized) return;
-        _initialized = true;
         MclslRuntimeChanges.BindMainThread();
         MclslConfigLocalization.Init();
-        MclslModuleHub.Init();
+        MclslReincarnationProfileStore.EnsureLoaded();
+        MclslHuanzhenSystem.EnsureLoaded();
         MclslFpsOverlay.Ensure();
         MclslRuntimeDriver.Ensure();
+        _initialized = true;
     }
 
     internal static void OnWorldLoaded()
     {
+        using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/WorldEntry");
+        _coreWorld.Reset();
+        _worldEntryPrepared = false;
+        _worldEntryCompleted = false;
+        _huanzhenWorldLoaded = false;
+        try
+        {
+            if (!PrepareWorldEntry()) return;
+            int year = CurrentYear();
+            if (MclslRuntimeSettings.CoreEnabled)
+            {
+                if (!TryInitializeCoreWorld(year)) return;
+            }
+            else LoadHuanzhenWorld();
+            FinishWorldEntry(year);
+        }
+        catch (System.Exception ex) { FailWorldInitialization(ex); }
+    }
+
+    private static bool PrepareWorldEntry()
+    {
+        if (_worldEntryPrepared) return true;
+        if (World.world?.map_stats == null) return false;
         Init();
+        _displayClock = 0d;
         MclslBeastAnimation.Clear();
         MclslRuntimeDriver.Ensure();
-        int year = CurrentYear();
+        MclslWorldContext.Bind();
         MclslRuntimeChanges.Clear();
-        MclslModuleHub.OnWorldLoaded(year, MclslRuntimeSettings.CoreEnabled);
+        Systems.Combat.MclslCombatCareerSystem.Clear();
+        MclslBeastTalentSystem.Clear(); MclslBeastWorld.Clear();
+        MclslBeastLoot.Clear(); MclslSpellCasting.Clear();
+        Traits.MclslXuanhuangRegistration.EnsureWildKingdom();
+        Patches.MclslXuanhuangDirectionPatch.PrepareWorldColors();
+        _worldEntryPrepared = true;
+        return true;
+    }
+
+    private static void LoadHuanzhenWorld()
+    {
+        if (_huanzhenWorldLoaded) return;
+        MclslHuanzhenSystem.OnWorldLoaded();
+        _huanzhenWorldLoaded = true;
+    }
+
+    private static void FinishWorldEntry(int year)
+    {
+        if (_worldEntryCompleted) return;
+        MclslBeastSurfaceIndex.Resume();
+        MclslFamilySystem.InitializeAfterLoad();
         MclslMaobaoArchiveManager.OnWorldLoaded();
         MclslAnnualBackpressure.InitializeAfterLoad();
         _lastYear = year;
         _frameCounter = 0;
+        _displayClock = 0d;
+        _worldEntryCompleted = true;
+    }
+
+    /// <summary>
+    /// Waiting for a world is retryable; a partially executed initialization is
+    /// not. All required core modules must finish before the world is ready.
+    /// </summary>
+    private static bool TryInitializeCoreWorld(int year)
+    {
+        if (_coreWorld.IsReady) return true;
+        if (!_coreWorld.NeedsAttempt) return false;
+        try
+        {
+            if (!PrepareWorldEntry()) return false;
+            MclslWorldArchiveStore.Load();
+            if (MclslWorldArchiveStore.WriteLocked) { _coreWorld.Fail(); return false; }
+            if (!MclslWorldArchiveStore.CanSave || !_coreWorld.TryBegin()) return false;
+            MclslWorldStateModifierSystem.ClearCache();
+            MclslWorldRunRepository.EnsureCurrentRun(year);
+            MclslNativeHistoryBridge.EnsureRegistered();
+            Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
+            LoadHuanzhenWorld();
+            LoadCoreModules(year);
+            FinishWorldEntry(year);
+            _coreWorld.Complete();
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            FailWorldInitialization(ex);
+            return false;
+        }
+    }
+
+    private static void FailWorldInitialization(System.Exception ex)
+    {
+        _coreWorld.Fail();
+        MclslWorldArchiveStore.LockWrites();
+        MclslDiagnostics.Fatal("world.initialize", "[模拟长生路] 世界初始化失败，已停止模组业务运行及保存，请重新载入世界: " + ex);
+    }
+
+    private static void LoadCoreModules(int year)
+    {
+        Systems.Combat.MclslCareerCombat.Load();
+        MclslTimelineSystem.TickAnnual(year);
+        MclslWorldRunRepository.EnsureAnnualWorldState(year);
+        MclslRuntimeCadence.InitializeAfterLoad(year);
+        MclslWorldSoulSystem.OnWorldLoaded();
+        MclslBeastWorld.Load(); MclslBeastLoot.Load();
+        MclslBeastTalentSystem.Load(); MclslSpellCasting.Load();
+        MclslMapMarkerVisualSystem.OnWorldLoaded();
+        MclslScheduler.ScheduleAnnualWorld(year);
     }
 
     internal static void Tick()
     {
+        long preludeSample = MclslPerformanceProbe.Begin();
         MclslRuntimeChanges.BindMainThread();
         MclslDeveloperBridge.Tick();
         int unityFrame = Time.frameCount;
-        if (unityFrame == _lastFrame) return;
+        if (unityFrame == _lastFrame)
+        {
+            MclslPerformanceProbe.End("主循环计时前准备", preludeSample);
+            return;
+        }
         _lastFrame = unityFrame;
+        AdvanceDisplayClock();
         MclslActorAnimationTime.Sample();
-        MclslNativeActorFrames.Tick();
+        MclslPerformanceProbe.End("主循环计时前准备", preludeSample);
         long modFrameSample = MclslPerformanceProbe.Begin();
-        MclslFrameDeadline.Begin(3d);
+        // 方案甲：总帧预算 4ms；暂停档额外 +1ms 追积压。
+        MclslFrameDeadline.Begin(MclslAnnualBackpressure.IsPauseLevel ? 5d : 4d);
         try
         {
             MclslDeferredUiWork.Tick();
+            if (_coreWorld.Status == MclslWorldInitializationStatus.Faulted) return;
+            if (MclslRuntimeSettings.CoreEnabled && !_coreWorld.IsReady)
+            {
+                if (!TryInitializeCoreWorld(CurrentYear())) return;
+            }
             if (MclslWorldArchiveStore.WriteLocked) return;
-            MclslRuntimeWorkBudget.SampleFrame();
+            MclslFrameLoadMonitor.SampleFrame();
             MclslAnnualBackpressure.TickStatus();
-            MclslRuntimeChanges.Drain(16);
+            // 年度结算优先取用本帧预算：此前它排在变化队列/贴图流之后，
+            // 高积压时常常只剩 0.00ms，导致积压追不动、暂停无法自愈。
             if (MclslRuntimeSettings.CoreEnabled)
             {
                 _frameCounter++;
                 int year = CurrentYear();
-                if (year > _lastYear && year > 0)
+                if (year > 0)
                 {
-                    _lastYear = year;
-                    using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
-                        MclslModuleHub.TickAnnual(year, true);
+                    bool yearChanged = year > _lastYear;
+                    if (yearChanged) _lastYear = year;
+                    // 正常年变化启动下一年；暂停/低速下世界年不变，但只要“年度完成年落后且无活动年”
+                    // 也继续启动下一年追帧，从而消化积压后自动恢复。
+                    if (yearChanged || MclslScheduler.NeedsAnnualStart)
+                        using (MclslUnityProfiler.Sample("MCLS/Runtime/AnnualDispatch"))
+                            MclslScheduler.ScheduleAnnualWorld(year);
                 }
                 MclslAnnualFrameBudget.Begin(MclslAnnualFrameBudget.ForLag(MclslAnnualBackpressure.LagYears));
                 try
                 {
                     using (MclslUnityProfiler.Sample("MCLS/Runtime/PriorityAnnualWork"))
-                        MclslModuleHub.TickPriorityAnnualWork(_frameCounter, true);
+                        MclslRuntimeCadence.Tick(_frameCounter);
                 }
                 finally { MclslAnnualFrameBudget.End(); }
             }
+            MclslRuntimeChanges.Drain();
+            MclslRankSnapshotSource.TickUpdates();
+            Patches.MclslXuanhuangDirectionPatch.TickColors();
+            if (MclslBeastWorld.HasManualRequest) MclslBeastWorld.Tick();
+            if (MclslFamilySystem.HasWork) MclslFamilySystem.TickReconciliation();
+            // Native frame streaming is the only main-thread PNG decode in the
+            // loop. It now runs inside the probe scope and backs off with the
+            // same stress tiers as every other budgeted lane instead of always
+            // spending up to 4 ms outside the frame deadline.
+            MclslNativeActorFrames.Tick(
+                MclslScheduler.HasFastWork ? 0.5d : 2.5d,
+                6);
             long realtimeSample = MclslPerformanceProbe.Begin();
             using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
-                MclslModuleHub.TickRealtime(MclslRuntimeSettings.CoreEnabled);
+                MclslHuanzhenSystem.Tick();
             MclslPerformanceProbe.End("实时模块", realtimeSample);
             MclslTraitEditorEraFilter.RefreshVisibleEditors();
             MclslItemEffectDriver.Tick();
             if (!MclslRuntimeSettings.CoreEnabled) return;
+            Systems.Combat.MclslCareerCombat.Tick();
             long frameSample = MclslPerformanceProbe.Begin();
             using (MclslUnityProfiler.Sample("MCLS/Runtime/FrameModules"))
-                MclslModuleHub.TickFrame(_frameCounter, true);
+                {
+                    MclslWorldSoulSystem.TickFrame(_frameCounter);
+                    MclslBeastWorld.Tick(); MclslBeastLoot.Tick();
+                    MclslSpellCasting.Tick(); MclslBeastTalentSystem.Tick();
+                    MclslMapMarkerVisualSystem.Tick(Time.frameCount);
+                    MclslBeastDeathVisualSystem.Tick();
+                    MclslAnnouncementSystem.Tick();
+                }
             MclslPerformanceProbe.End("帧模块", frameSample);
-            MclslRuntimeChanges.Drain(32);
+            MclslRuntimeChanges.Drain();
+            MclslBeastSurfaceIndex.Tick();
             MclslBagSystem.FlushPending();
-            MclslFamilySystem.TickReconciliation();
 
         }
         finally
@@ -99,15 +245,33 @@ internal static class MclslRuntime
         }
     }
 
+    private static void AdvanceDisplayClock()
+    {
+        if (World.world == null || World.world.isPaused()) return;
+        Volatile.Write(ref _displayClock, DisplayClock + Time.unscaledDeltaTime);
+    }
+
     internal static void PrepareForSave()
     {
-        if (MclslWorldArchiveStore.WriteLocked) return;
+        // Do not load or publish a fresh repository from a save callback while
+        // the core has not initialized or initialization has faulted.
+        if (!_coreWorld.IsReady || !MclslWorldArchiveStore.CanSave || MclslWorldArchiveStore.WriteLocked) return;
+        MclslScheduler.SavePendingAnnualStates();
         MclslBagSystem.FlushForSave();
-        MclslModuleHub.PrepareForSave();
+        Systems.Combat.MclslCareerCombat.Save();
+        MclslReincarnationProfileStore.Flush();
+        MclslWorldArchiveStore.SaveNow();
+        MclslBeastWorld.Save(); MclslBeastLoot.Save();
+        MclslBeastTalentSystem.Save(); MclslSpellCasting.Save();
     }
 
     internal static void ClearWorldState()
     {
+        _coreWorld.Reset();
+        _worldEntryPrepared = false;
+        _worldEntryCompleted = false;
+        _huanzhenWorldLoaded = false;
+        MclslWorldContext.Clear();
         MclslBeastAnimation.Clear();
         MclslDiagnostics.Clear();
         MclslPerformanceProbe.SetEnabled(MclslPerformanceProbe.Enabled);
@@ -116,7 +280,8 @@ internal static class MclslRuntime
         _lastFrame = -1;
         _frameCounter = 0;
         _lastYear = -1;
-        MclslRuntimeWorkBudget.Clear();
+        _displayClock = 0d;
+        MclslFrameLoadMonitor.Clear();
         MclslRuntimeChanges.Clear();
         MclslBagSystem.ClearRuntime();
         MclslActorInfoPanel.ClearRuntime();
@@ -127,18 +292,31 @@ internal static class MclslRuntime
         MclslCodexWindow.ClearRuntime();
         MclslTianxuanMarket.ClearRuntime();
         MclslSpellSystem.ClearRuntime();
+        Systems.Combat.MclslCombatCareerSystem.Clear();
+        Patches.MclslXuanhuangDirectionPatch.Clear();
         MclslItemEffectDriver.ClearRuntime();
         MclslRecipeKnowledge.ClearRuntime();
         MclslSpiritualRootSystem.ClearRuntime();
         MySimulatedLongevityRoad.Traits.MclslImmortalActorRegistration.ClearRuntime();
         MySimulatedLongevityRoad.Data.MclslHonorificNameCatalog.ClearRuntime();
-        MclslModuleHub.Clear();
+        MclslRuntimeCadence.Clear();
+        MclslHuanzhenSystem.ClearRuntime();
+        MclslWorldSoulSystem.Clear(); MclslInverseTruthSystem.Clear();
+        MclslBeastTalentSystem.Clear(); MclslBeastWorld.Clear();
+        MclslBeastLoot.Clear(); MclslSpellCasting.Clear();
+        MclslMapMarkerVisualSystem.Clear(); MclslAnnouncementSystem.Clear();
+        MclslWorldRunRepository.ResetWorld(); MclslWorldArchiveStore.Clear();
+        MclslEligibility.Clear(); Systems.Death.MclslDeathSystem.Clear();
+        Systems.Death.MclslNativeKillStatisticsSystem.Clear();
+        MclslWorldStateModifierSystem.ClearCache();
         MclslVisibleActorRenderLane.Clear();
         MclslRealmHaloVisualSystem.Clear();
+        if (MclslDiagnostics.Enabled)
+            MclslWorldStateAudit.ReportResidual("世界清理");
     }
 
     internal static int CurrentYear()
     {
-        try { return System.Math.Max(0, World.world?.map_stats?.year ?? 0); } catch { return 0; }
+        return System.Math.Max(0, World.world?.map_stats?.year ?? 0);
     }
 }

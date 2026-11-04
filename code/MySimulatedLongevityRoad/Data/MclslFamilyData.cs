@@ -3,29 +3,48 @@ using System.Collections.Generic;
 
 namespace MySimulatedLongevityRoad.Data;
 
+internal enum MclslFamilyRuleMode { Legacy = 0, Patrilineal = 1 }
+
 internal sealed class MclslFamilyRecord
 {
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Surname { get; set; } = string.Empty;
     public long FounderActorId { get; set; }
+    public long PaternalRootActorId { get; set; }
     public long NativeFamilyId { get; set; }
     public long HeadActorId { get; set; }
     public long PreferredHeadActorId { get; set; }
     public long FocusActorId { get; set; }
+    public bool FocusIsManual { get; set; }
     public int LastSettledYear { get; set; }
     public int LastAidYear { get; set; }
+    public int LastAidAttemptYear { get; set; } = -1;
     public long SettlementDuesStones { get; set; }
     public bool Extinct { get; set; }
     public bool EstateLiquidated { get; set; }
+    public bool RemoveAfterLiquidation { get; set; }
     public int FoundedYear { get; set; }
     public int HistoryCapacity { get; set; } = 60;
-    public string MergedIntoId { get; set; } = string.Empty;
     public List<MclslFamilyMemberRecord> Members { get; set; } = new();
+    // Count of living mortal (non-cultivator) family members. Mortals are no
+    // longer stored as individual MclslFamilyMemberRecord entries; only this
+    // aggregate is kept so the overview can show 在世凡人 without recording or
+    // judging each mortal. Members now contains cultivators only.
+    public int MortalCount { get; set; }
     public List<MclslOwnedItem> Items { get; set; } = new();
     public List<string> TechniqueIds { get; set; } = new();
+    public Dictionary<string, MclslFamilyTechniqueRecord> TechniqueDetails { get; set; } = new();
     public Dictionary<long, int> CityInfluence { get; set; } = new();
     public List<string> History { get; set; } = new();
+}
+
+internal sealed class MclslFamilyTechniqueRecord
+{
+    public string Name { get; set; } = string.Empty;
+    public string MaxRealm { get; set; } = string.Empty;
+    public string SystemId { get; set; } = string.Empty;
+    public string LawTags { get; set; } = string.Empty;
 }
 
 internal sealed class MclslFamilyMemberRecord

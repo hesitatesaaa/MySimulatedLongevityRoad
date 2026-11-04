@@ -313,6 +313,6 @@ internal static class MclslMaobaoUiHelper
             if (WorldTip.instance != null) WorldTip.instance.show(text, false, "top", 3.8f);
             else WorldTip.showNow(text, false, "top", 3.8f, "#8FE3D1");
         }
-        catch { }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoWindow-cs-1", "猫宝窗口：顶部提示显示失败: " + mclslEmptyCatchEx.Message); }
     }
 }

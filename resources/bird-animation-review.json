@@ -1,0 +1,33 @@
+{
+  "revision": "20261020",
+  "records": [
+    {
+      "species": "fenghuang",
+      "frames": 14,
+      "source": "resources/bird-animation-sources/fenghuang.png",
+      "sourceSha256": "408b4cb77491bdc235ab13821435e5410ae22821da1dab2653f45ed170458dbd",
+      "review": "output/beast-optimization/fenghuang-before-after.png",
+      "idleFolded": "offline-inspected",
+      "movingWings": "offline-inspected-two-wings",
+      "bodyAnchor": "bounds-aligned; movement continuity requires Unity review",
+      "unityVerified": false
+    },
+    {
+      "species": "dafeng",
+      "frames": 14,
+      "source": "resources/bird-animation-sources/dafeng.png",
+      "sourceSha256": "0b7d9fada269b10ebf859814182b8cfef0d49772e8309aa3271924c90ebd5f00",
+      "review": "output/beast-optimization/dafeng-before-after.png",
+      "idleFolded": "offline-inspected",
+      "movingWings": "offline-inspected-two-wings",
+      "bodyAnchor": "bounds-aligned; movement continuity requires Unity review",
+      "unityVerified": false
+    }
+  ],
+  "unityVerified": false,
+  "limitations": [
+    "Attack, hit and death artwork retained.",
+    "Direction uses existing native flip; not yet observed in Unity.",
+    "Bounds alignment cannot certify body stability during state transitions."
+  ]
+}

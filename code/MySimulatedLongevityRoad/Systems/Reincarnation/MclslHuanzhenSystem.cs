@@ -24,6 +24,10 @@ internal static class MclslHuanzhenSystem
     internal const int AnchorCost = 80;
     private static MclslHuanzhenExternalState _state = new();
     private static bool _loaded;
+    private static bool _writeLocked;
+    private static string _storageFailure = string.Empty;
+    private static string _lastCommittedJson = string.Empty;
+    private static bool _preserveBackup;
     private static bool _applyingRestore;
     private static bool _rollbackQueued;
     private static int _rollbackDelayFrames;
@@ -44,8 +48,8 @@ internal static class MclslHuanzhenSystem
     private static bool _grantingNaturalArrival;
     private static MclslActorSelection _arrivalSelection;
     private static int _arrivalYear;
-    private static string StatePath => Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV1", "HuanzhenState.json");
-    private static string AnchorStorageRoot => Path.Combine(Application.persistentDataPath, "MySimulatedLongevityRoad", "ArchitectureV1", "HuanzhenAnchors");
+    private static string StatePath => Path.Combine(MclslWorldContext.StorageRoot, "HuanzhenState.json");
+    private static string AnchorStorageRoot => Path.Combine(MclslWorldContext.StorageRoot, "HuanzhenAnchors");
 
     internal static bool IsApplyingRestore => _applyingRestore;
     internal static bool IsRollbackLoadInProgress => _rollbackLoadInProgress;
@@ -57,26 +61,40 @@ internal static class MclslHuanzhenSystem
         _loaded = true;
         try
         {
-            string tempPath = StatePath + ".tmp";
-            if (!File.Exists(StatePath) && File.Exists(tempPath)) File.Move(tempPath, StatePath);
-            if (File.Exists(StatePath))
+            // Uncommitted temporary files are evidence, not a committed archive.
+            MclslArchiveReadResult result = MclslAtomicFile.Read(StatePath, json =>
             {
-                string json = File.ReadAllText(StatePath);
-                MclslHuanzhenExternalState loaded = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(json);
-                if (loaded == null || loaded.Version != MclslSaveVersions.HuanzhenExternalState)
+                MclslHuanzhenExternalState data = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(json);
+                if (data == null || data.Version != MclslSaveVersions.HuanzhenExternalState)
                     throw new InvalidDataException("还真空间格式不属于当前架构。");
+                return data;
+            }, out MclslHuanzhenExternalState loaded, out string readFailure);
+            if (result == MclslArchiveReadResult.Invalid)
+                throw new InvalidDataException("还真外部状态不可用: " + readFailure);
+            if (loaded != null)
+            {
                 _state = loaded;
-                _lastFlushedJson = json;
+                _lastFlushedJson = JsonConvert.SerializeObject(loaded, Formatting.None);
+                _preserveBackup = result == MclslArchiveReadResult.Backup;
+                if (_preserveBackup)
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.main-fallback", "[模拟长生路][还真] 主档无法读取，已恢复上一份有效备份: " + StatePath);
             }
-            if (File.Exists(tempPath)) File.Delete(tempPath);
+
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路][还真] 外部状态读取失败: " + ex.Message); }
+        catch (Exception ex)
+        {
+            _writeLocked = true;
+            _storageFailure = ex.Message;
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.external-read", "[模拟长生路][还真] 外部状态读取失败，已禁止覆盖: " + ex);
+        }
         Normalize();
+        _lastCommittedJson = JsonConvert.SerializeObject(_state, Formatting.None);
     }
 
     internal static void Tick()
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         if (_postLoadApplyQueued)
         {
             if (_postLoadApplyDelayFrames-- > 0) return;
@@ -90,11 +108,11 @@ internal static class MclslHuanzhenSystem
         bool anchorWorkloadQuiet = !MclslScheduler.HasFastWork;
         bool anchorWorkloadRecovered = Time.unscaledTime - _pendingAutomaticAnchorSince >= 20f
             && !MclslScheduler.HasAnnualCandidateBacklog
-            && MclslRuntimeWorkBudget.StressTier < MclslRuntimeStressTier.Critical
+            && MclslFrameLoadMonitor.StressTier < MclslRuntimeStressTier.Critical
             && Time.unscaledDeltaTime < 1f / 20f;
         if (_pendingAutomaticAnchor
             && (anchorWorkloadQuiet || anchorWorkloadRecovered)
-            && MclslRuntimeWorkBudget.StressTier < MclslRuntimeStressTier.Critical)
+            && MclslFrameLoadMonitor.StressTier < MclslRuntimeStressTier.Critical)
         {
             string replace = _pendingAutomaticAnchorReplacePath;
             _pendingAutomaticAnchor = false;
@@ -122,7 +140,7 @@ internal static class MclslHuanzhenSystem
         try
         {
             pending.LoadAttempts++;
-            Flush();
+            if (!Flush()) { return; }
             _rollbackLoadInProgress = true;
             MclslRuntime.ClearWorldState();
             if (World.world?.save_manager == null)
@@ -137,19 +155,20 @@ internal static class MclslHuanzhenSystem
             {
                 _rollbackQueued = true;
                 _rollbackDelayFrames = 30 * pending.LoadAttempts;
-                Flush();
+                if (!Flush()) { return; }
             }
             else
             {
                 CancelPendingRestore(pending, "读档失败：" + ex.Message);
             }
-            Debug.LogError("[模拟长生路][还真] 回载锚点失败: " + ex);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.reload-anchor", "[模拟长生路][还真] 回载锚点失败: " + ex);
         }
     }
 
     internal static void TickAnnual(int year)
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         if (!MclslRuntimeSettings.HuanzhenEnabled || _rollbackLoadInProgress || _state.PendingRestore?.Active == true) return;
         Actor host = FindLivingHost();
         if (host == null)
@@ -203,13 +222,15 @@ internal static class MclslHuanzhenSystem
         if (year <= 0 || string.IsNullOrWhiteSpace(runId)) return;
         if (!string.Equals(_state.WorldRunId, runId, StringComparison.Ordinal))
         {
-            DeleteAnchorFolders(_state.Anchors);
+            var obsoleteAnchors = _state.Anchors;
             ResetForWorldRun(runId);
+            if (!Flush()) return;
+            DeleteAnchorFolders(obsoleteAnchors);
         }
         if (_state.NextNaturalArrivalYear < 0)
         {
             _state.NextNaturalArrivalYear = year + 5 + PositiveHash(runId + "|huanzhen-arrival") % 16;
-            Flush();
+            if (!Flush()) { return; }
             return;
         }
         if (year < _state.NextNaturalArrivalYear) return;
@@ -229,7 +250,7 @@ internal static class MclslHuanzhenSystem
         if (selected == null)
         {
             _state.NextNaturalArrivalYear = year + 5;
-            Flush();
+            if (!Flush()) { return; }
             return;
         }
 
@@ -244,7 +265,7 @@ internal static class MclslHuanzhenSystem
             _state.NaturalArrivalYear = year;
             _state.NextNaturalArrivalYear = -1;
             EnsureInitialSpaceEssence(year, "还真降临", "诸界倒影凝聚为初始空间灵蕴");
-            Flush();
+            if (!Flush()) { return; }
             string name = MclslActorAccessor.DisplayName(selected);
             MclslWorldRunRepository.AddEvent(year, "huanzhen_arrival", name + "偶得还真", "诸界倒影汇聚为还真空间，择“" + name + "”为此世唯一持有者。", selected);
             MclslAnnouncementSystem.Enqueue(name + "触及诸界倒影，成为此世唯一还真持有者。", "#69E6DD", 10f, 1);
@@ -252,8 +273,8 @@ internal static class MclslHuanzhenSystem
         catch (Exception ex)
         {
             _state.NextNaturalArrivalYear = year + 5;
-            Flush();
-            Debug.LogWarning("[模拟长生路][还真] 自然降临失败: " + ex.Message);
+            if (!Flush()) { return; }
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.natural-descent", "[模拟长生路][还真] 自然降临失败: " + ex.Message);
         }
     }
 
@@ -261,11 +282,14 @@ internal static class MclslHuanzhenSystem
     {
         if (_applyingRestore || actor?.data == null) return;
         EnsureLoaded();
+        if (_writeLocked) { return; }
         _nextUniqueAuditYear = 0;
-        EnforceUniqueHost(actor);
         BindHost(actor, true);
+        if (_writeLocked) return;
+        EnforceUniqueHost(actor);
         MclslTraitRegistration.TryAutoFavoriteHuanzhenHost(actor);
         EnsureInitialSpaceEssence(MclslRuntime.CurrentYear(), "还真绑定", "首次绑定宿主获得初始空间灵蕴");
+        if (_writeLocked) return;
         string status = MclslRuntimeSettings.HuanzhenEnabled ? "还真已启用，可在还真空间中消耗80灵蕴手动建立锚点。" : "还真特质已绑定，但设置中的“启用还真”当前关闭。";
         string actorName = MclslActorAccessor.DisplayName(actor);
         if (!_grantingNaturalArrival)
@@ -275,6 +299,8 @@ internal static class MclslHuanzhenSystem
 
     internal static MclslHuanzhenDeathSnapshot CaptureDeath(Actor actor)
     {
+        EnsureLoaded();
+        if (_writeLocked) return MclslHuanzhenDeathSnapshot.Empty;
         if (!MclslRuntimeSettings.HuanzhenEnabled || actor?.data == null) return MclslHuanzhenDeathSnapshot.Empty;
         bool has;
         try { has = actor.hasTrait(MclslTraitRegistration.HuanzhenTraitId); } catch { has = false; }
@@ -290,12 +316,13 @@ internal static class MclslHuanzhenSystem
         try { dead = !actor.isAlive(); } catch { dead = false; }
         if (!dead) return;
         EnsureLoaded();
+        if (_writeLocked) { return; }
         if (_state.PendingRestore?.Active == true || _rollbackLoadInProgress) return;
         string currentRunId = MclslWorldRunRepository.Current?.RunId ?? string.Empty;
         if (string.IsNullOrWhiteSpace(currentRunId) || !string.Equals(currentRunId, _state.WorldRunId, StringComparison.Ordinal))
         {
             AddHistory(snapshot.DeathYear, -1, snapshot.ActorName, snapshot.Cultivation.RealmId, 0, "当前世界与还真绑定不一致");
-            Flush();
+            if (!Flush()) { return; }
             return;
         }
         List<MclslHuanzhenAnchorRecord> anchors = (_state.Anchors ?? new List<MclslHuanzhenAnchorRecord>())
@@ -304,7 +331,7 @@ internal static class MclslHuanzhenSystem
         if (anchors.Count == 0)
         {
             AddHistory(snapshot.DeathYear, -1, snapshot.ActorName, snapshot.Cultivation.RealmId, 0, "无可用锚点，还真未发动");
-            Flush();
+            if (!Flush()) { return; }
             MclslAnnouncementSystem.Enqueue(snapshot.ActorName + "身负还真却未留下可用锚点，此世仍告终结。", "#8FA6AE", 9f, 1);
             return;
         }
@@ -324,7 +351,7 @@ internal static class MclslHuanzhenSystem
         {
             int nearestYear = anchors.Count == 0 ? -1 : anchors.Max(x => x.Year);
             AddHistory(snapshot.DeathYear, nearestYear, snapshot.ActorName, snapshot.Cultivation.RealmId, _state.ConsecutiveLoopDeaths, rapidRepeat ? "连续死亡且无更老安全锚点，拒绝回滚" : "全部锚点过近，拒绝回滚");
-            Flush();
+            if (!Flush()) { return; }
             string reason = rapidRepeat ? "连续死亡后已无更老的安全锚点" : "死亡距现有锚点均过近";
             MclslAnnouncementSystem.Enqueue(snapshot.ActorName + reason + "，为避免还真死循环，本次还真不发动。", "#C08763", 10f, 1);
             return;
@@ -349,7 +376,7 @@ internal static class MclslHuanzhenSystem
             Cultivation = snapshot.Cultivation
         };
         _state.Anchors = anchors.Where(x => x.Year <= selected.Year).OrderByDescending(x => x.Year).Take(MaxAnchors).ToList();
-        Flush();
+        if (!Flush()) { return; }
         _rollbackQueued = true;
         _rollbackDelayFrames = 2;
         MclslAnnouncementSystem.Enqueue(snapshot.ActorName + "身死，还真发动：将由" + snapshot.DeathYear + "年回溯至" + selected.Year + "年。", "#7CCFD0", 10f, 1);
@@ -358,9 +385,10 @@ internal static class MclslHuanzhenSystem
     internal static void PrepareForNewWorld()
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         // SaveManager.loadWorld 的内部流程可能经过地图初始化入口；读档期间绝不能把已有锚点当作新世界数据删除。
         if (_anyWorldLoadInProgress || _state.PendingRestore?.Active == true) return;
-        DeleteAnchorFolders(_state.Anchors);
+        var obsoleteAnchors = _state.Anchors;
         SyncCurrentEssenceLedger();
         _state = new MclslHuanzhenExternalState { EssenceLedgers = _state.EssenceLedgers ?? new() };
         _cachedHost = null;
@@ -369,12 +397,14 @@ internal static class MclslHuanzhenSystem
         _nextUniqueAuditYear = 0;
         _storageReconciled = false;
         ClearRuntime();
-        Flush();
+        if (!Flush()) { return; }
+        DeleteAnchorFolders(obsoleteAnchors);
     }
 
     internal static void PrepareForAnyWorldLoad(string path)
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         _anyWorldLoadInProgress = true;
         if (_state.PendingRestore?.Active == true && string.Equals(ResolveAnchorSavePath(_state.PendingRestore.RelativeSavePath), SaveManager.folderPath(path ?? string.Empty), StringComparison.OrdinalIgnoreCase))
             _rollbackLoadInProgress = true;
@@ -383,6 +413,7 @@ internal static class MclslHuanzhenSystem
     internal static void OnWorldLoaded()
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         _anyWorldLoadInProgress = false;
         MclslHuanzhenPendingRestore pending = _state.PendingRestore;
         if (pending == null || !pending.Active)
@@ -455,7 +486,7 @@ internal static class MclslHuanzhenSystem
                 float max = host.getMaxHealth();
                 if (max > 0f) host.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #2: " + mclslEmptyCatchEx.Message); }
         }
         finally { _applyingRestore = false; }
 
@@ -475,10 +506,17 @@ internal static class MclslHuanzhenSystem
         pending.Active = false;
         _state.PendingRestore = new MclslHuanzhenPendingRestore();
         _rollbackLoadInProgress = false;
-        Flush();
+        if (!Flush()) { return; }
         if (!string.IsNullOrWhiteSpace(originalPath))
         {
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                SaveManager.setCurrentPath(originalPath);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message);
+            }
         }
         string hostName = MclslActorAccessor.DisplayName(host);
         string eventType = manualRestore ? "huanzhen_manual_return" : "huanzhen_return";
@@ -504,13 +542,14 @@ internal static class MclslHuanzhenSystem
             _rollbackLoadInProgress = false;
             AddHistory(_state.PendingRestore.DeathYear, _state.PendingRestore.AnchorYear, _state.PendingRestore.HostName, _state.PendingRestore.Cultivation?.RealmId, _state.PendingRestore.LoopDepth, "读档流程异常中止");
             _state.PendingRestore = new MclslHuanzhenPendingRestore();
-            Flush();
+            if (!Flush()) { return; }
         }
     }
 
     internal static string StatusText()
     {
         EnsureLoaded();
+        if (_writeLocked) { return "还真外部状态不可用：" + _storageFailure; }
         if (_state.PendingRestore?.Active == true)
             return "回载中｜第" + Math.Max(1, _state.PendingRestore.LoadAttempts) + "/" + MaxLoadAttempts + "次";
         if (!MclslRuntimeSettings.HuanzhenEnabled)
@@ -530,12 +569,14 @@ internal static class MclslHuanzhenSystem
     internal static long CurrentSpaceEssence()
     {
         EnsureLoaded();
+        if (_writeLocked) { return 0; }
         return Math.Max(0L, _state.SpaceEssenceBase);
     }
 
     private static void EnsureInitialSpaceEssence(int year, string source, string detail)
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         bool changed = false;
         long before = CurrentSpaceEssence();
         if (!_state.InitialSpaceEssenceGranted)
@@ -552,7 +593,7 @@ internal static class MclslHuanzhenSystem
             _state.NextNaturalEssenceSettlementYear = FirstNaturalEssenceYear(year);
             changed = true;
         }
-        if (changed) Flush();
+        if (changed) if (!Flush()) { return; }
     }
 
     private static int FirstNaturalEssenceYear(int year)
@@ -569,7 +610,7 @@ internal static class MclslHuanzhenSystem
         if (_state.NextNaturalEssenceSettlementYear < 0)
         {
             _state.NextNaturalEssenceSettlementYear = FirstNaturalEssenceYear(year);
-            Flush();
+            if (!Flush()) { return; }
             return;
         }
 
@@ -587,12 +628,13 @@ internal static class MclslHuanzhenSystem
             _state.SpaceEssenceUpdatedYear = year;
             AddEssenceHistory(year, "岁月沉淀", "自然增长；本次结算" + periods + "个十年", gained, balance);
         }
-        Flush();
+        if (!Flush()) { return; }
     }
 
     internal static bool SetSpaceEssenceForDeveloper(long value, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         if (!MclslDeveloperBridge.IsAvailable)
         {
             message = "开发者工具未开启。";
@@ -600,7 +642,7 @@ internal static class MclslHuanzhenSystem
         }
         _state.SpaceEssenceBase = Math.Max(0L, value);
         _state.SpaceEssenceUpdatedYear = MclslRuntime.CurrentYear();
-        Flush();
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = "空间灵蕴已修改为" + _state.SpaceEssenceBase + "。";
         return true;
     }
@@ -608,6 +650,7 @@ internal static class MclslHuanzhenSystem
     internal static void OnHostPromotion(Actor actor, string previousRealm, string newRealm, int year, string reason)
     {
         EnsureLoaded();
+        if (_writeLocked) { return; }
         if (!MclslRuntimeSettings.HuanzhenEnabled || !IsCurrentHost(actor)) return;
         int previousIndex = MclslRealmIds.Index(previousRealm);
         int newIndex = MclslRealmIds.Index(newRealm);
@@ -659,6 +702,7 @@ internal static class MclslHuanzhenSystem
     {
         if (amount <= 0 || !MclslRuntimeSettings.HuanzhenEnabled || !IsCurrentHost(host)) return;
         EnsureLoaded();
+        if (_writeLocked) { return; }
         long before = CurrentSpaceEssence();
         long balance = before > long.MaxValue - amount ? long.MaxValue : before + amount;
         long gained = balance - before;
@@ -666,7 +710,7 @@ internal static class MclslHuanzhenSystem
         _state.SpaceEssenceBase = balance;
         _state.SpaceEssenceUpdatedYear = Math.Max(0, year);
         AddEssenceHistory(year, source, detail, gained, balance);
-        Flush();
+        if (!Flush()) { return; }
         if (announce)
             MclslAnnouncementSystem.Enqueue(SafeName(host) + "因“" + source + "”获得空间灵蕴+" + gained + "。", "#69E6DD", 7f, 1);
     }
@@ -707,25 +751,27 @@ internal static class MclslHuanzhenSystem
     internal static int LegacySelectionLimit()
     {
         EnsureLoaded();
+        if (_writeLocked) { return 0; }
         return Math.Max(0, _state?.Anchors?.Count ?? 0);
     }
 
     internal static IReadOnlyList<MclslHuanzhenLegacyOption> GetLegacyOptions(MclslHuanzhenLegacyRecord legacy)
     {
         EnsureLoaded();
+        if (_writeLocked) { return Array.Empty<MclslHuanzhenLegacyOption>(); }
         List<MclslHuanzhenLegacyOption> options = new();
         MclslHuanzhenCultivationSnapshot s = legacy?.Snapshot;
         if (s == null) return options;
         AddLegacyOption(options, "cultivation", "修为根基：" + MclslRealmIds.Display(s.RealmId) + "·真元" + s.TrueEssence, !string.IsNullOrWhiteSpace(s.RealmId) || s.TrueEssence > 0);
-        AddLegacyOption(options, "technique", "功法道统：" + Blank(s.TechniqueName, s.TechniqueId), !string.IsNullOrWhiteSpace(s.TechniqueName) || !string.IsNullOrWhiteSpace(s.TechniqueId));
-        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + Blank(s.FoundationWonderName, s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
+        AddLegacyOption(options, "technique", "功法道统：" + MclslTextValue.Or(s.TechniqueName, s.TechniqueId), !string.IsNullOrWhiteSpace(s.TechniqueName) || !string.IsNullOrWhiteSpace(s.TechniqueId));
+        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + MclslTextValue.Or(s.FoundationWonderName, s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
         AddLegacyOption(options, "golden_core", "突破造物·金丹法则：" + s.GoldenCoreLaws, !string.IsNullOrWhiteSpace(s.GoldenCoreLaws));
-        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + Blank(s.NascentCaveName, s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
-        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + Blank(s.NascentEssenceName, s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
-        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + Blank(s.DivineChangeName, s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
-        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + Blank(s.DivineMarrowName, s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
-        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + Blank(s.WorldSoulName, s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
-        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + Blank(s.InverseTruthName, s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
+        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + MclslTextValue.Or(s.NascentCaveName, s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
+        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + MclslTextValue.Or(s.NascentEssenceName, s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
+        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + MclslTextValue.Or(s.DivineChangeName, s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
+        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + MclslTextValue.Or(s.DivineMarrowName, s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
+        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + MclslTextValue.Or(s.WorldSoulName, s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
+        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + MclslTextValue.Or(s.InverseTruthName, s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
         AddLegacyOption(options, "aptitude", "资质：" + s.Aptitude, s.Aptitude > 0);
         AddLegacyOption(options, "mind", "心境：心境" + s.MindState + "·淬心" + s.HeartTemperingProgress, s.MindState != 0 || s.HeartTemperingProgress != 0 || s.HeartMethodKnown != 0);
         AddLegacyOption(options, "contribution", "资源：贡献值" + s.Contribution, s.Contribution != 0);
@@ -746,6 +792,7 @@ internal static class MclslHuanzhenSystem
     internal static bool TryClaimLegacyOption(string legacyId, string optionId, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = string.Empty;
         Actor host = FindLivingHost();
         MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
@@ -754,10 +801,15 @@ internal static class MclslHuanzhenSystem
         if (option == null) { message = "前世档案中没有该具体遗产。"; return false; }
         if (option.Id.StartsWith("trait:", StringComparison.Ordinal)) return TryClaimLegacyTrait(legacyId, option.Id.Substring("trait:".Length), out message);
         if (!CanClaimLegacy(legacy, option.Id, out message)) return false;
-        if (!MclslCultivationSystem.RestoreHuanzhenLegacyOption(host, legacy.Snapshot, option.Id,
-                "huanzhen-legacy/" + legacyId + "/" + option.Id, legacy.AnchorYear, legacy.DeathYear, out message)) return false;
         legacy.ClaimedChoices.Add(option.Id);
-        Flush();
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
+        if (!MclslCultivationSystem.RestoreHuanzhenLegacyOption(host, legacy.Snapshot, option.Id,
+                "huanzhen-legacy/" + legacyId + "/" + option.Id, legacy.AnchorYear, legacy.DeathYear, out message))
+        {
+            legacy.ClaimedChoices.Remove(option.Id);
+            Flush();
+            return false;
+        }
         MclslWorldArchiveStore.SaveNow();
         return true;
     }
@@ -765,13 +817,14 @@ internal static class MclslHuanzhenSystem
     internal static bool TryReleaseLegacyOption(string legacyId, string optionId, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
         if (legacy?.ClaimedChoices == null || !legacy.ClaimedChoices.Remove(optionId ?? string.Empty))
         {
             message = "该遗产尚未占用名额。";
             return false;
         }
-        Flush();
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = "已释放该前世遗产名额；已经写入人物的数据不会回退。";
         return true;
     }
@@ -779,6 +832,7 @@ internal static class MclslHuanzhenSystem
     internal static bool TryClaimLegacyCategory(string legacyId, string category, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = string.Empty;
         Actor host = FindLivingHost();
         MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
@@ -786,9 +840,14 @@ internal static class MclslHuanzhenSystem
         if (legacy?.Snapshot == null) { message = "前世档案已经失效。"; return false; }
         string choice = "category:" + (category ?? string.Empty);
         if (!CanClaimLegacy(legacy, choice, out message)) return false;
-        if (!MclslCultivationSystem.RestoreHuanzhenLegacyCategory(host, legacy.Snapshot, category, legacy.AnchorYear, legacy.DeathYear, out message)) return false;
         legacy.ClaimedChoices.Add(choice);
-        Flush();
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
+        if (!MclslCultivationSystem.RestoreHuanzhenLegacyCategory(host, legacy.Snapshot, category, legacy.AnchorYear, legacy.DeathYear, out message))
+        {
+            legacy.ClaimedChoices.Remove(choice);
+            Flush();
+            return false;
+        }
         MclslWorldArchiveStore.SaveNow();
         return true;
     }
@@ -796,6 +855,7 @@ internal static class MclslHuanzhenSystem
     internal static bool TryClaimLegacyTrait(string legacyId, string traitId, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = string.Empty;
         Actor host = FindLivingHost();
         MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
@@ -805,13 +865,21 @@ internal static class MclslHuanzhenSystem
         if (!CanClaimLegacy(legacy, choice, out message)) return false;
         ActorTrait trait = AssetManager.traits.get(traitId);
         if (trait == null) { message = "当前环境缺少特征“" + traitId + "”。"; return false; }
+        legacy.ClaimedChoices.Add(choice);
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         try
         {
-            if (!host.hasTrait(traitId) && !host.addTrait(trait, true)) { message = "特征与当前人物冲突，未能继承。"; return false; }
+            if (!host.hasTrait(traitId) && !host.addTrait(trait, true))
+            {
+                legacy.ClaimedChoices.Remove(choice); Flush();
+                message = "特征与当前人物冲突，未能继承。"; return false;
+            }
         }
-        catch (Exception ex) { message = "继承特征失败：" + ex.Message; return false; }
-        legacy.ClaimedChoices.Add(choice);
-        Flush();
+        catch (Exception ex)
+        {
+            legacy.ClaimedChoices.Remove(choice); Flush();
+            message = "继承特征失败：" + ex.Message; return false;
+        }
         MclslWorldArchiveStore.SaveNow();
         message = "已继承前世特征：“" + TraitDisplayName(trait) + "”。";
         return true;
@@ -850,10 +918,6 @@ internal static class MclslHuanzhenSystem
         catch { return "未知特征"; }
     }
 
-    private static string Blank(string value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
-
-    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key) =>
-        snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
 
     internal static void ClearRuntime()
     {
@@ -879,14 +943,16 @@ internal static class MclslHuanzhenSystem
     {
         if (actor?.data == null) return;
         EnsureLoaded();
+        if (_writeLocked) { return; }
         string identity = EnsureIdentity(actor);
         string runId = MclslWorldRunRepository.Current?.RunId ?? string.Empty;
         bool changed = !string.Equals(_state.WorldRunId, runId, StringComparison.Ordinal)
             || (forceReset && !string.Equals(_state.HostIdentity, identity, StringComparison.Ordinal));
         bool dirty = changed;
+        List<MclslHuanzhenAnchorRecord> obsoleteAnchors = null;
         if (changed)
         {
-            DeleteAnchorFolders(_state.Anchors);
+            obsoleteAnchors = _state.Anchors;
             ResetForWorldRun(runId);
             _state.OriginalSavePath = SaveManager.currentSavePath ?? string.Empty;
             _state.HostIdentity = identity;
@@ -909,7 +975,8 @@ internal static class MclslHuanzhenSystem
         }
         _cachedHost = actor;
         MclslTraitRegistration.TryAutoFavoriteHuanzhenHost(actor);
-        if (dirty) Flush();
+        if (dirty && !Flush()) return;
+        if (obsoleteAnchors != null) DeleteAnchorFolders(obsoleteAnchors);
     }
 
     private static bool CanCreateAnchor(Actor host, int year, out string reason)
@@ -923,19 +990,20 @@ internal static class MclslHuanzhenSystem
             reason = "刚完成还真回溯，需等待至" + (_state.LastRestoreYear + MclslRuntimeSettings.HuanzhenSafetyGapYears) + "年后再锚定。";
             return false;
         }
-        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #4: " + mclslEmptyCatchEx.Message); }
         try
         {
             float max = host.getMaxHealth();
             if (max > 0f && host.data.health / max < 0.85f) { reason = "宿主伤势过重，生命恢复至85%以上才能锚定。"; return false; }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #5: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #5: " + mclslEmptyCatchEx.Message); }
         return true;
     }
 
     internal static bool TryCreateManualAnchor(string replaceRelativePath, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = string.Empty;
         if (!MclslRuntimeSettings.HuanzhenEnabled) { message = "设置中尚未启用还真。"; return false; }
         if (_state.PendingRestore?.Active == true || _rollbackLoadInProgress) { message = "还真正在回载，无法建立锚点。"; return false; }
@@ -945,6 +1013,7 @@ internal static class MclslHuanzhenSystem
         BindHost(host, false);
         PruneUnavailableAnchors();
         ReconcileAnchorStorageOnce();
+        if (_writeLocked) { message = "还真外部状态不可用：" + _storageFailure; return false; }
         int year = MclslRuntime.CurrentYear();
         if (!CanCreateAnchor(host, year, out message)) return false;
         long essence = CurrentSpaceEssence();
@@ -1000,7 +1069,13 @@ internal static class MclslHuanzhenSystem
             _state.SpaceEssenceBase = essence - AnchorCost;
             _state.SpaceEssenceUpdatedYear = year;
             AddEssenceHistory(year, replaced == null ? "建立锚点" : "替换锚点", "保存" + year + "年宿主状态", -AnchorCost, _state.SpaceEssenceBase);
-            Flush();
+            if (!Flush())
+            {
+                MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
+                // Keep the uncommitted snapshot for recovery; never delete the old anchor.
+                message = "锚点元数据保存失败，未扣费、未替换旧锚点：" + _storageFailure;
+                return false;
+            }
             if (replaced != null) DeleteAnchorFolder(replaced.RelativeSavePath);
             MclslWorldRunRepository.AddEvent(year, "huanzhen_anchor", MclslActorAccessor.DisplayName(host) + "定下还真锚点", "此锚点仅供唯一还真持有者死亡后回载；战斗中、重伤时与刚还真后的危险窗口不会建立新锚点。", host);
             message = (replaced == null ? "已建立" : "已替换") + year + "年还真锚点，消耗空间灵蕴" + AnchorCost + "点；当前剩余" + _state.SpaceEssenceBase + "点。";
@@ -1008,8 +1083,16 @@ internal static class MclslHuanzhenSystem
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路][还真] 建立锚点失败: " + ex.Message);
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message); }
+            _state = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(_lastCommittedJson) ?? new();
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.anchor", "[模拟长生路][还真] 建立锚点失败: " + ex.Message);
+            try
+            {
+                SaveManager.setCurrentPath(originalPath);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message);
+            }
             MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
             DeleteAnchorFolder(relative);
             message = "建立锚点失败：" + ex.Message;
@@ -1020,6 +1103,7 @@ internal static class MclslHuanzhenSystem
     internal static bool TryManualRestore(string relativeSavePath, out string message)
     {
         EnsureLoaded();
+        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = string.Empty;
         if (!MclslRuntimeSettings.HuanzhenEnabled) { message = "设置中尚未启用还真。"; return false; }
         if (_state.PendingRestore?.Active == true || _rollbackLoadInProgress || _rollbackQueued) { message = "还真正在回载，请勿重复发动。"; return false; }
@@ -1028,6 +1112,7 @@ internal static class MclslHuanzhenSystem
         EnforceUniqueHost(host);
         BindHost(host, false);
         PruneUnavailableAnchors();
+        if (_writeLocked) { message = "还真外部状态不可用：" + _storageFailure; return false; }
         string runId = MclslWorldRunRepository.Current?.RunId ?? string.Empty;
         if (string.IsNullOrWhiteSpace(runId) || !string.Equals(runId, _state.WorldRunId, StringComparison.Ordinal))
         { message = "当前世界与还真空间的绑定不一致，无法回溯。"; return false; }
@@ -1064,7 +1149,7 @@ internal static class MclslHuanzhenSystem
             SpaceEssenceBeforeRestore = CurrentSpaceEssence(),
             Cultivation = CaptureCultivation(host)
         };
-        Flush();
+        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         _rollbackQueued = true;
         _rollbackDelayFrames = 2;
         message = "手动还真已发动：将由" + year + "年回到" + selected.Year + "年；本次不消耗空间灵蕴。";
@@ -1076,6 +1161,7 @@ internal static class MclslHuanzhenSystem
     {
         if (!IsLivingActor(actor) || !HasHuanzhenTrait(actor)) return false;
         EnsureLoaded();
+        if (_writeLocked) { return false; }
         string identity = EnsureIdentity(actor);
         long actorId = MclslActorAccessor.Id(actor);
         return (!string.IsNullOrWhiteSpace(_state.HostIdentity) && string.Equals(_state.HostIdentity, identity, StringComparison.Ordinal))
@@ -1159,6 +1245,7 @@ internal static class MclslHuanzhenSystem
 
     private static void DeleteAnchorFolders(IEnumerable<MclslHuanzhenAnchorRecord> anchors)
     {
+        if (_writeLocked) return;
         if (anchors == null) return;
         foreach (MclslHuanzhenAnchorRecord anchor in anchors)
         {
@@ -1168,12 +1255,13 @@ internal static class MclslHuanzhenSystem
                 string folder = ResolveAnchorSavePath(anchor.RelativeSavePath);
                 if (!string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder)) Directory.Delete(folder, true);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #8: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #8: " + mclslEmptyCatchEx.Message); }
         }
     }
 
     private static void DeleteAnchorFolder(string relativePath)
     {
+        if (_writeLocked) return;
         if (string.IsNullOrWhiteSpace(relativePath)) return;
         try
         {
@@ -1185,6 +1273,7 @@ internal static class MclslHuanzhenSystem
 
     private static void PruneUnavailableAnchors()
     {
+        if (_writeLocked) return;
         if (_state.Anchors == null || _state.Anchors.Count == 0) return;
         int removed = _state.Anchors.RemoveAll(x => x == null
             || string.IsNullOrWhiteSpace(x.RelativeSavePath)
@@ -1193,11 +1282,12 @@ internal static class MclslHuanzhenSystem
             || !SaveManager.doesSaveExist(ResolveAnchorSavePath(x.RelativeSavePath)));
         if (removed <= 0) return;
         _state.LastAnchorYear = _state.Anchors.Count == 0 ? -1 : _state.Anchors.Max(x => x.Year);
-        Flush();
+        if (!Flush()) { return; }
     }
 
     private static void ReconcileAnchorStorageOnce()
     {
+        if (_writeLocked) return;
         if (_storageReconciled) return;
         _storageReconciled = true;
         try
@@ -1246,22 +1336,79 @@ internal static class MclslHuanzhenSystem
         _rollbackLoadInProgress = false;
         AddHistory(pending.DeathYear, pending.AnchorYear, pending.HostName, pending.Cultivation?.RealmId, pending.LoopDepth, reason);
         _state.PendingRestore = new MclslHuanzhenPendingRestore();
-        Flush();
-        Debug.LogWarning("[模拟长生路][还真] " + reason);
+        if (!Flush()) { return; }
+        MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.reason", "[模拟长生路][还真] " + reason);
     }
 
     private static MclslHuanzhenCultivationSnapshot CaptureCultivation(Actor a)
     {
+        if (Combat.MclslCombatCareerSystem.Applicable(a))
+            Combat.MclslCombatCareerSystem.Write(a,Combat.MclslCombatCareerSystem.Read(a));
         MclslHuanzhenCultivationSnapshot snapshot = new()
     {
-        CultivationSystemId = MclslActorAccessor.GetString(a, MclslActorDataKeys.CultivationSystem), RealmId = MclslActorAccessor.Realm(a), CultivationProgress = MclslActorAccessor.GetFloat(a, MclslActorDataKeys.CultivationProgress), TrueEssence = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TrueEssence), Aptitude = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Aptitude), MindState = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MindState), HeartTemperingProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartTemperingProgress), HeartMethodKnown = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartMethodKnown), MiasmaPoolCleansing = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MiasmaPoolCleansing), Contribution = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Contribution), RuinExperience = MclslActorAccessor.GetInt(a, MclslActorDataKeys.RuinExperience), TechniqueInsight = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TechniqueInsight),
-        TechniqueId = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueId), TechniqueName = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueName), TechniqueMaxRealm = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueMaxRealm), FoundationWonderId = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderId), FoundationWonderName = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderName), FoundationWonderQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.FoundationWonderQuality), FoundationWonderTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderTags), FoundationWonderDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderDescription), FoundationWonderOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderOrigin), FoundationWonderEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderEffects),
-        GoldenCoreLaws = MclslActorAccessor.GetString(a, MclslActorDataKeys.GoldenCoreLaws), GoldenCorePurity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCorePurity), GoldenCoreStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCoreStability), NascentCaveId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveId), NascentCaveName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveName), NascentCaveTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveTags), NascentCaveCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveCompatibility), NascentCaveIntegrity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveIntegrity),
-        NascentEssenceId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceId), NascentEssenceName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceName), NascentEssenceQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentEssenceQuality), NascentEssenceTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceTags), NascentEssenceDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceDescription), NascentEssenceEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceEffects),
-        DivineChangeId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeId), DivineChangeName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeName), DivineChangeTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeTags), DivineChangeCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineChangeCompatibility), DivineMarrowId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowId), DivineMarrowName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowName), DivineMarrowCount = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrow), DivineMarrowQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrowQuality), DivineMarrowTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowTags), DivineMarrowDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowDescription), DivineMarrowEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowEffects),
-        HuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HuaShenHonorific), HeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeDaoHonorific), ChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.ChangShengHonorific),
-        AncientHuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHuaShenHonorific), AncientHeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHeDaoHonorific), AncientChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientChangShengHonorific),
-        WorldSoulId = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulId), WorldSoulName = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulName), HeavenlyDuty = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeavenlyDuty), HarmonyLeap = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyLeap), HarmonyOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.HarmonyOrigin), HarmonyCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyCompatibility), HarmonyStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyStability), InverseTruthId = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthId), InverseTruthName = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthName), InverseTruthProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.InverseTruthProgress)
+        CultivationSystemId = MclslActorAccessor.GetString(a, MclslActorDataKeys.CultivationSystem),
+        RealmId = MclslActorAccessor.Realm(a),
+        CultivationProgress = MclslActorAccessor.GetFloat(a, MclslActorDataKeys.CultivationProgress),
+        TrueEssence = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TrueEssence),
+        Aptitude = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Aptitude),
+        MindState = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MindState),
+        HeartTemperingProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartTemperingProgress),
+        HeartMethodKnown = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartMethodKnown),
+        MiasmaPoolCleansing = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MiasmaPoolCleansing),
+        Contribution = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Contribution),
+        RuinExperience = MclslActorAccessor.GetInt(a, MclslActorDataKeys.RuinExperience),
+        TechniqueInsight = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TechniqueInsight),
+        TechniqueId = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueId),
+        TechniqueName = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueName),
+        TechniqueMaxRealm = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueMaxRealm),
+        FoundationWonderId = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderId),
+        FoundationWonderName = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderName),
+        FoundationWonderQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.FoundationWonderQuality),
+        FoundationWonderTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderTags),
+        FoundationWonderDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderDescription),
+        FoundationWonderOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderOrigin),
+        FoundationWonderEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderEffects),
+        GoldenCoreLaws = MclslActorAccessor.GetString(a, MclslActorDataKeys.GoldenCoreLaws),
+        GoldenCorePurity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCorePurity),
+        GoldenCoreStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCoreStability),
+        NascentCaveId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveId),
+        NascentCaveName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveName),
+        NascentCaveTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveTags),
+        NascentCaveCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveCompatibility),
+        NascentCaveIntegrity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveIntegrity),
+        NascentEssenceId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceId),
+        NascentEssenceName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceName),
+        NascentEssenceQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentEssenceQuality),
+        NascentEssenceTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceTags),
+        NascentEssenceDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceDescription),
+        NascentEssenceEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceEffects),
+        DivineChangeId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeId),
+        DivineChangeName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeName),
+        DivineChangeTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeTags),
+        DivineChangeCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineChangeCompatibility),
+        DivineMarrowId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowId),
+        DivineMarrowName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowName),
+        DivineMarrowCount = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrow),
+        DivineMarrowQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrowQuality),
+        DivineMarrowTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowTags),
+        DivineMarrowDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowDescription),
+        DivineMarrowEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowEffects),
+        HuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HuaShenHonorific),
+        HeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeDaoHonorific),
+        ChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.ChangShengHonorific),
+        AncientHuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHuaShenHonorific),
+        AncientHeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHeDaoHonorific),
+        AncientChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientChangShengHonorific),
+        WorldSoulId = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulId),
+        WorldSoulName = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulName),
+        HeavenlyDuty = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeavenlyDuty),
+        HarmonyLeap = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyLeap),
+        HarmonyOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.HarmonyOrigin),
+        HarmonyCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyCompatibility),
+        HarmonyStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyStability),
+        InverseTruthId = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthId),
+        InverseTruthName = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthName),
+        InverseTruthProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.InverseTruthProgress),
     };
         snapshot.Contribution = MclslActorAccessor.GetMoney(a, MclslActorDataKeys.Contribution);
         snapshot.SpiritStones = MclslActorAccessor.GetMoney(a, MclslActorDataKeys.SpiritStones);
@@ -1271,6 +1418,7 @@ internal static class MclslHuanzhenSystem
 
     private static readonly string[] SupplementalStringKeys =
     {
+        MclslCombatCareerCatalog.StateKey,
         MclslActorDataKeys.SpiritualRootPrimary, MclslActorDataKeys.SpiritualRootAttributes,
         MclslActorDataKeys.FactionAffiliation, MclslActorDataKeys.AncientLawStatus,
         MclslActorDataKeys.AncientSectAffiliation, MclslActorDataKeys.AncientSectOrigin,
@@ -1409,28 +1557,32 @@ internal static class MclslHuanzhenSystem
         snapshot.TraitIds ??= new List<string>();
     }
 
-    private static void Flush()
+    private static bool Flush()
     {
         EnsureLoaded();
+        if (_writeLocked) return false;
         try
         {
             SyncCurrentEssenceLedger();
             string json = JsonConvert.SerializeObject(_state, Formatting.None);
-            if (string.Equals(json, _lastFlushedJson, StringComparison.Ordinal)) return;
-            string dir = Path.GetDirectoryName(StatePath);
-            if (!string.IsNullOrWhiteSpace(dir)) Directory.CreateDirectory(dir);
-            string tempPath = StatePath + ".tmp";
-            File.WriteAllText(tempPath, json);
-            if (File.Exists(StatePath))
-            {
-                try { File.Replace(tempPath, StatePath, null); }
-                catch (PlatformNotSupportedException) { File.Copy(tempPath, StatePath, true); File.Delete(tempPath); }
-                catch (IOException) { File.Copy(tempPath, StatePath, true); File.Delete(tempPath); }
-            }
-            else File.Move(tempPath, StatePath);
-            _lastFlushedJson = json;
+            if (!string.Equals(json, _lastFlushedJson, StringComparison.Ordinal))
+                MclslAtomicFile.Write(StatePath, json, _preserveBackup);
+            _preserveBackup = false;
+            _lastFlushedJson = _lastCommittedJson = json;
+            return true;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路][还真] 外部状态写入失败: " + ex.Message); }
+        catch (Exception ex)
+        {
+            // No caller may acknowledge a debit/restore or delete an old anchor
+            // after persistence failed. Restore the last accepted in-memory state.
+            _state = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(_lastCommittedJson)
+                ?? new MclslHuanzhenExternalState();
+            _writeLocked = true;
+            _storageFailure = ex.GetType().Name + ": " + ex.Message;
+            ClearRuntime();
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Fatal("huanzhen.external-write", "[模拟长生路][还真] 外部状态写入失败，已暂停还真并保留已有档案: " + _storageFailure);
+            return false;
+        }
     }
 
     private static void ResetForWorldRun(string runId)
@@ -1476,14 +1628,5 @@ internal static class MclslHuanzhenSystem
 
     private static string SafeName(Actor actor) { try { return actor?.data == null ? "无名者" : MclslActorAccessor.DisplayName(actor); } catch { return "无名者"; } }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            string text = value ?? string.Empty;
-            for (int i = 0; i < text.Length; i++) hash = hash * 31 + text[i];
-            return hash & int.MaxValue;
-        }
-    }
+    private static int PositiveHash(string value) => MclslStableHash.Positive23x31(value);
 }

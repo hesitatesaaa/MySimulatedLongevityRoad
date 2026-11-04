@@ -1,0 +1,13 @@
+{
+  "targetVersion": "0.8.0",
+  "runtimeEvidence": "resources/refactor-080-functional-runtime.json",
+  "performanceEvidence": "resources/refactor-080-rendered-diagnostic.json",
+  "performanceGate": "record-and-report",
+  "performanceNote": "This scenario is limited by native engine simulation cost. Rendered FPS must be measured and published with its verdict; it is not a pass/fail gate that could only be met by changing gameplay.",
+  "requiredChecks": [
+    "real-unity-world-ready",
+    "pause-freezes-own-clock",
+    "actual-mid-cast-world-save",
+    "actual-world-reload"
+  ]
+}

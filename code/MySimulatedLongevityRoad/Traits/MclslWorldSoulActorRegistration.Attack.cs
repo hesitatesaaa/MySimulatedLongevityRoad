@@ -42,12 +42,12 @@ internal static partial class MclslWorldSoulActorRegistration
         int frame = Time.frameCount;
         if (NextPulseFrame.TryGetValue(actorId, out int nextFrame) && frame < nextFrame)
         {
-            AttackUntilFrame[actorId] = Math.Max(AttackUntilFrame.TryGetValue(actorId, out int existingUntil) ? existingUntil : 0, frame + AttackWindowFrames(set));
+            AttackUntilFrame[actorId] = Math.Max(AttackUntilFrame.TryGetValue(actorId, out long existingUntil) ? existingUntil : 0, AnimationTick + AttackWindowFrames(set));
             return;
         }
 
         NextPulseFrame[actorId] = frame + 22;
-        AttackUntilFrame[actorId] = frame + AttackWindowFrames(set);
+        AttackUntilFrame[actorId] = AnimationTick + AttackWindowFrames(set);
         ApplyAreaDamage(actor);
         QueueTerrainDamage(actor);
     }
@@ -91,7 +91,14 @@ internal static partial class MclslWorldSoulActorRegistration
     private static void DamageTarget(Actor source, Actor target, int damage)
     {
         if (target?.data == null || damage <= 0) return;
-        try { target.attackedBy = source; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            target.attackedBy = source;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #1: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             int current = target.data.health;
@@ -104,9 +111,9 @@ internal static partial class MclslWorldSoulActorRegistration
 
             target.data.health = 0;
             try { target.die(true, AttackType.Other, true, true); }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #2: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #2: " + mclslEmptyCatchEx.Message); }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
     private static int AttackWindowFrames(SoulSpriteSet set)
@@ -122,15 +129,9 @@ internal static partial class MclslWorldSoulActorRegistration
 
     private static int AttackPulseDamage(Actor actor)
     {
-        float damage = GetStatSafe(actor, "damage");
+        float damage = MclslActorAccessor.StatValue(actor, "damage");
         int quality = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.WorldSoulEntityQuality, 3);
         int pulse = damage > 0f ? Mathf.RoundToInt(damage * 0.08f) : 800 + quality * 260;
         return Math.Clamp(pulse, 450, 4500);
-    }
-
-    private static float GetStatSafe(Actor actor, string statId)
-    {
-        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
-        catch { return 0f; }
     }
 }

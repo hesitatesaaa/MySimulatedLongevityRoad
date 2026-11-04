@@ -1,0 +1,1205 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "CP_array_1A",
+      "name": "缚足阵",
+      "path": "GameResources/effects/Careers/CP_array_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "81b3d8893a814663cc6f53f1a69e0e4dce9155fe1ffc883436a69a1b3f82ec2d",
+      "previousSha256": "7529a764fecf6bccb9cab3c1b5079d8918ad9e4aa9e2169da4f132d3ed7246dc",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_array_1A.png",
+        "sourceSha256": "7b8171a9b776f3a080d6518e0fcfc6d21454b1bf79a97aa97e7e8e05efea2480",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_array_1A 缚足阵. a small gold-jade ground formation with four short upright locking runes, ACTION stationary concentric binding circle with jade links, hit short closing gold chains. STRICT: full uncropped 2:3 canvas EXACT four columns SIX rows, each effect SMALL and centered within only50% of its cell. NO fog, no background light field, no full-canvas color wash, no wide halo. Transparent background must remain alpha0 around all24 distinct effects. Clean opaque pixel shapes with tiny isolated highlights only. Every edge completely empty, including first/last row and columns. Do not reproduce any chopped fragments from old source.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_array_2A",
+      "name": "聚灵阵",
+      "path": "GameResources/effects/Careers/CP_array_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "19c9e2cea7b8fe3cbe89998e4ec1008be31e0ee4006bb11b30223c568b8b8e93",
+      "previousSha256": "137b0372a27d7dfc998e9498cd61da79ac9b5702563560e2b473c20a940abba4",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_array_2A.png",
+        "sourceSha256": "a799d3ca67c40d20cb3039fd625f0edcd7b7847d02d7e741c1af076e1dc59154",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_array_2A 聚灵阵. a jade-white inward spiral over a fine gold ground formation, ACTION stationary spirit-gathering circular pool with inward motes, hit a small rising white-jade core.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_array_3A",
+      "name": "杀伐阵",
+      "path": "GameResources/effects/Careers/CP_array_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "3cc0cc30c8669f473e8945e66c21e893f20e356b7fc335433de93e478911d69d",
+      "previousSha256": "16cc457f4fbd27e6efb0efae029b21106afb8a8e954aa96f4153e3c37b8adf38",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_array_3A.png",
+        "sourceSha256": "53a76fcfd6faa24b235026edebc0342d86e3b1d8ec84330eb733027ef160b2a8",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_array_3A 杀伐阵. a gold circular sword formation with four short jade blades, ACTION stationary ring of four light blades and central glow, hit a contained gold-jade spiked burst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_array_4A",
+      "name": "护山阵",
+      "path": "GameResources/effects/Careers/CP_array_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "2a8f54908d98d2d3388f511ce29a5848af1e0d453bd56cf4eed44cd83e347777",
+      "previousSha256": "f0e7cd4939a4d9169409878ed0804a3b2e43d0b75ba8ea4200fdda594d09a0d5",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_array_4A.png",
+        "sourceSha256": "b740678f2e521747f734cc694f21f436a135736389c250e3c911289fc846f5ba",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_array_4A 护山阵. a compact jade mountain inside a thin golden protective ground circle, ACTION stationary protective low dome with four ward pillars, hit inward jade shield ripples.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_array_5A",
+      "name": "乾坤阵",
+      "path": "GameResources/effects/Careers/CP_array_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "717e6c1fa97d63059b3b0b2e6a65150402ed286b3ed5fc0d3a40f2e1be751fc3",
+      "previousSha256": "026d2ca13ac278e5579e86a215b6c058051fdf6d8b7be43c8ce4dc5dfe09ec06",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_array_5A.png",
+        "sourceSha256": "1dce81dbc563a16eac10728fc45421d0e0163ec9c8caa66824e35a5d9aa98834",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_array_5A 乾坤阵. an ivory gold yin-yang disk inside jade-gold formation rings and four short pillars, ACTION stationary balanced domain dome, hit concentric gold wave and small central light.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_elemental_1A",
+      "name": "灵焰矢",
+      "path": "GameResources/effects/Careers/CP_elemental_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "373af3f7756a835473cc01a734cf0f5bbfd967707f4f1b393355a7512e048bf3",
+      "previousSha256": "130a8ac3662be9d8c4c8e9be4a404bdb148b6093f00dc3caa9c0160a9c4e0550",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_elemental_1A.png",
+        "sourceSha256": "9f82e400c35dfd0d995e8e01d064254c12ab30147b21c24eecaf6066544d39f7",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_elemental_1A 灵焰矢. red-orange spirit fire gathers around a small gold core, action compact rightward flame arrow, hit red-orange flame flower.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_elemental_2A",
+      "name": "寒潮缚",
+      "path": "GameResources/effects/Careers/CP_elemental_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "76798d540f9a1e38f937cb5089dd0c7818bebabfaeb721c59b7da18334bd2f0e",
+      "previousSha256": "79bc24779679c7249935492ec1438f54def7573cb83b2f8706711c5d5c4183cb",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_elemental_2A.png",
+        "sourceSha256": "7fb7b292820a322f12cfc2f642fb2a6fb1b05989e455b67447ddade0ef172410",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_elemental_2A 寒潮缚. silver icy-blue crystals and cold ripples condense, action rightward short ice lance, hit blue binding ice ring and six short crystals.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_elemental_3A",
+      "name": "雷火引",
+      "path": "GameResources/effects/Careers/CP_elemental_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 29,
+      "sha256": "dac72bf6e45cd085811286036af4274dbc08729d7b9e7eb497781fdd08b06245",
+      "previousSha256": "ee8838d48ecb3c6556b21b05bdb2845383e65c5087e9f08dd1aba614f1f9e21f",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_elemental_3A.png",
+        "sourceSha256": "b22846f3657696d84fe89b40b5b1dd7e7f990d48d7c3f43209d5206dc738dc68",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_elemental_3A 雷火引. violet lightning and orange fire currents around a white-gold core, action one compact braided lightning-fire bolt pointing right, hit a contained dual-color electrical fireburst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_elemental_4A",
+      "name": "五气障",
+      "path": "GameResources/effects/Careers/CP_elemental_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "9fc7c8e4e1b5e3ab2096ef196fb9803a198fbfaf322e211aee341efcac04a5bf",
+      "previousSha256": "79e2e4baefb3fdec2cc6ae48c4eb85593742be7fccd670497514516d3312340f",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_elemental_4A.png",
+        "sourceSha256": "13f8ad01827da83f10107de7ae6e4dd74e64ffb5f5594afb3a3d96905bb09d08",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_elemental_4A 五气障. five distinct small elemental lights (red blue green gold violet) around a white-gold core, ACTION centered protective spherical five-element barrier not projectile, hit five inward currents.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_elemental_5A",
+      "name": "归元劫",
+      "path": "GameResources/effects/Careers/CP_elemental_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "376feab6777e8cb4c45f815963a285c41d056c24ede5ce1eb9216149778773b5",
+      "previousSha256": "e64b3dc226dd739f09f8a96d80b4e945cc2f9b4e66abc79dba08cbded65404d0",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_elemental_5A.png",
+        "sourceSha256": "0261cf44e524abf294208950b11aba5f24b9cae6dc702801a01c0efa6d02049c",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_elemental_5A 归元劫. five elemental wisps converge into an ivory-gold core, action compact rightward five-color spirit bolt, hit five-color clean radial bloom.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_martial_1A",
+      "name": "震山拳",
+      "path": "GameResources/effects/Careers/CP_martial_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "38a033eb63591135e25c022c506328a9790c53738d9508a944d482c9ea969805",
+      "previousSha256": "3fcb0d203e6957aa9f6fe9a1684c40637851a9582da60a3b3f10480650e105c0",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_martial_1A.png",
+        "sourceSha256": "3207aecc3e79ddb79659ae93c22a510ef762ca9b987bd5fa11a63c110a760977",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_martial_1A 震山拳. ochre gold fist qi with small jade stone chips, action a compact rightward fist impact, hit a radial amber shock burst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_martial_2A",
+      "name": "崩岳击",
+      "path": "GameResources/effects/Careers/CP_martial_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "0c86133d440ad5a3e8341b8d54382f58450c55d973e591b3a8a73cdc33bc2213",
+      "previousSha256": "a2a8393ce9a9534fb6c27118a889646b50542b885fa9bc17815a9766111d3eea",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_martial_2A.png",
+        "sourceSha256": "cd03a07de5e19500af6442335543b7bbf9251b7142e8180ffc25c3140cfc396a",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_martial_2A 崩岳击. a heavy amber fist with stone facets, action a downward crushing fist, hit three short rising rock shards and ground ring.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_martial_3A",
+      "name": "撼地踏",
+      "path": "GameResources/effects/Careers/CP_martial_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "219e1924831fbcdfa27703884bc70037c4621b41fa567efa44941375a8a14b99",
+      "previousSha256": "7110884641f3b27fe9bf7d1e43d78846c50b8e79000de303a4f3e9769fb936df",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_martial_3A.png",
+        "sourceSha256": "498759564f83b70a8418dc4a5cc5b71b2d6f7dcf85d724e95653f1c6e73b7d31",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_martial_3A 撼地踏. ochre stone footfall rune and jade qi, ACTION a low circular ground shock ring (not projectile), hit short evenly spaced earth spikes.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_martial_4A",
+      "name": "护脉罡",
+      "path": "GameResources/effects/Careers/CP_martial_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "1ed19933418830304df3e19a9b9fbca39ec1a72a6a114b4dbec168d137245901",
+      "previousSha256": "7aa4f54a7a25a86a6d1d83f4e711bf2245dfd48a05707e238c4341ed945b6124",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_martial_4A.png",
+        "sourceSha256": "bb54730d2768f4f5eb258aeb87a612539fccedd9205466f7a62ba761e6a23236",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_martial_4A 护脉罡. amber-jade protective circular body aura with four compact stone wards, ACTION a rounded qi barrier stays centered (not projectile), hit inward restorative qi and small stable ring.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_martial_5A",
+      "name": "镇岳破",
+      "path": "GameResources/effects/Careers/CP_martial_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "3e5ec6f473a90d7d90c57b6322c39f5faa3479ea75822ee4780be2b6e133aea4",
+      "previousSha256": "ec4141ea5d4abc12710be5f7f632cb9aa5309e43cc3f76ef79d8da457d9913ae",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_martial_5A.png",
+        "sourceSha256": "bb79e63c2aedc4d7e0ac230462af4d647700de06d27aded11ca2df1b7405a23e",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_martial_5A 镇岳破. a dense golden mountain-fist sigil with jade cracks, action rightward heavy fist, hit ochre mountainlike earth spike burst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sigil_1A",
+      "name": "灵符击",
+      "path": "GameResources/effects/Careers/CP_sigil_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "f2edc312247d4c4026fc06639b96a2ef913be7cfe529be7b947a69d5bb8dde3a",
+      "previousSha256": "1f2d2a46481f7e167e9c65554dff574480599858774bf9c2885a7e61c304532a",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sigil_1A.png",
+        "sourceSha256": "4ee1aa2015ddc43aa5b2f36bd25359ce5a8b0cd0d66d9b3a0fe344286403c23e",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sigil_1A 灵符击. a single amber paper talisman edged with jade qi and abstract rune strokes, action compact rightward talisman dart, hit rectangular golden seal burst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sigil_2A",
+      "name": "封脉符",
+      "path": "GameResources/effects/Careers/CP_sigil_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "1bcc68f4d89847dcf82faafb58f7bf5e4a1447f2b436529d9714aeff45ef3b4e",
+      "previousSha256": "5df3e8782286f51b432ab5ee58428d67987fa1dfa75e0e80bdf3232ef327ba74",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sigil_2A.png",
+        "sourceSha256": "c41491f97bcb33412888da1dc392377dd7c839be1d3fba6b78f193d039e6bef2",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sigil_2A 封脉符. a narrow gold talisman with jade locking bands, action rightward gold seal with short jade trail, hit a contained jade restraint ring.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sigil_3A",
+      "name": "连爆符",
+      "path": "GameResources/effects/Careers/CP_sigil_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "fc60af2a9788f5aac5b9e1f4aff9124495f17a4cf6e1c539789d418c36a411d4",
+      "previousSha256": "e488e32255e164a16e9a06322112e095a29d75fde1288ad0e754b76a4fe8eeb5",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sigil_3A.png",
+        "sourceSha256": "3edf82c6005f9ee1424371edef7dce985af852bec0d641d40b74e4a35370bcd8",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sigil_3A 连爆符. three gold talisman fragments circulate in jade qi, action three compact rightward talisman darts, hit three connected small gold pops.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sigil_4A",
+      "name": "护命符",
+      "path": "GameResources/effects/Careers/CP_sigil_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 29,
+      "sha256": "04e8856a984138dc6ebd6d9cd6d1c1fba4420fae373bbbea0e457e521852532a",
+      "previousSha256": "b4f79f8abc13d751771c7c44268984a2d7905f6775d1677fb08aaabf7af31a6b",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sigil_4A.png",
+        "sourceSha256": "66a20222eb3b9880f0fbd1e70556aac7d89af1a6b38f9cf734d496d29d994b00",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sigil_4A 护命符. one amber talisman cradled by jade-white protective qi, ACTION a stationary curved protective seal barrier not projectile, hit inward healing gold-jade sparks. STRICT: output full uncropped 2:3 canvas exactly FOUR columns SIX rows. Each little seal is SMALL (maximum50% cell). All surrounding space is pure alpha0, no diffuse haze, gray material, sheet-wide glow, or any wisps bridging cells. Use clean opaque pixel shapes, tiny discrete highlights only. No full-cell light bloom. Keep even outer margins equal to all internal margins.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sigil_5A",
+      "name": "万符诏",
+      "path": "GameResources/effects/Careers/CP_sigil_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "24bc8e52a9aef24aa7b4ca30167779a5fcfa0eedd8d317235f4ccc440866c735",
+      "previousSha256": "8a599788b82ce5eafd83a0ed0100f112ca7e369ca9fcdcc741903bf1cb63fb3f",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sigil_5A.png",
+        "sourceSha256": "dc97a0ec778d0f3a217c5dfcd614b06569ffd662fa2d071956a866f78fd80421",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sigil_5A 万符诏. five amber talismans orbit a thin gold seal circle, action a compact rightward fan of five paper seals, hit gold seal array blossom. STRICT: full uncropped 2:3 canvas EXACT four columns SIX rows, each effect SMALL and centered within only50% of its cell. NO fog, no background light field, no full-canvas color wash, no wide halo. Transparent background must remain alpha0 around all24 distinct effects. Clean opaque pixel shapes with tiny isolated highlights only. Every edge completely empty, including first/last row and columns. Do not reproduce any chopped fragments from old source.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_spirit_1A",
+      "name": "契印击",
+      "path": "GameResources/effects/Careers/CP_spirit_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "f3d0de7b30247f8bc096608bf8eba2482411db802b801a2f6d2db4ef56ec820d",
+      "previousSha256": "d707520ea13eac595b6485b36847e3a40a8a3f06e217d172bd214c29fe20b39c",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_spirit_1A.png",
+        "sourceSha256": "ff643fb9840610b64273330c1f4a8cce7c2fd06ffef2326712386f7a8de7b64c",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only: CP_spirit_1A 契印击. First reference is the current NEW skill icon: match its exact main symbol/palette. Second reference is existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, no dirty diffuse fog. Do NOT reproduce the old animal-summoning effects. IDENTITY: a sharp mint-white contract rune and amber target seal; ACTION a short pointed contract-light stroke RIGHTWARD, HIT the seal lights and breaks into three clean jade sparks; no wolf portrait. Exact grid FOUR equal columns SIX equal rows, 24 square cells, portrait sheet aspect2:3. Frames read left to right then top to bottom. Frames0-7: eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup shrinking to a few visible sparks. Every frame is completely INDEPENDENT spatially; FIXED pivot in exact cell center, stable scale. All art including particles and glow must fit inside central60% of EACH CELL: at least20% pure transparent margin on all four sides in every cell. Compact small effects, no cropped edges, no shared wisps, no neighboring-frame fragments, no cross-cell light. Transparent actual alpha, no backdrop/checkerboard/gridlines/text/labels. No creatures or humanoid bodies. Keep near-final cancel sparks visible with solid pixels, not full-frame fog. 24 frames coherent hand-painted pixel-style animation, not duplicated static panels. Target each cell192x192 after extraction; canvas768x1152.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_spirit_2A",
+      "name": "灵息灌注",
+      "path": "GameResources/effects/Careers/CP_spirit_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "ff40b86d7bad2b2d03899aa0944f63361945cf87dcfe7663e2b582c272fcbc2f",
+      "previousSha256": "eb076f7f2aeedfb1436b2eb1bea58dadf84976d64f56474302ba9fa8b7962bc5",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_spirit_2A.png",
+        "sourceSha256": "087c40a3d019537f143828f66c1f324fe8215438cb6ae4df171b060a3c0de5e2",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only: CP_spirit_2A 灵息灌注. First reference is the current NEW skill icon: match its exact main symbol/palette. Second reference is existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, no dirty diffuse fog. Do NOT reproduce the old animal-summoning effects. IDENTITY: jade turquoise spirit currents converge inward around a gold-core spirit pearl; ACTION centered inward-flowing infusion aura, HIT warm jade inner bloom; no turtle or projectile. Exact grid FOUR equal columns SIX equal rows, 24 square cells, portrait sheet aspect2:3. Frames read left to right then top to bottom. Frames0-7: eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup shrinking to a few visible sparks. Every frame is completely INDEPENDENT spatially; FIXED pivot in exact cell center, stable scale. All art including particles and glow must fit inside central60% of EACH CELL: at least20% pure transparent margin on all four sides in every cell. Compact small effects, no cropped edges, no shared wisps, no neighboring-frame fragments, no cross-cell light. Transparent actual alpha, no backdrop/checkerboard/gridlines/text/labels. No creatures or humanoid bodies. Keep near-final cancel sparks visible with solid pixels, not full-frame fog. 24 frames coherent hand-painted pixel-style animation, not duplicated static panels. Target each cell192x192 after extraction; canvas768x1152.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_spirit_3A",
+      "name": "御灵破势",
+      "path": "GameResources/effects/Careers/CP_spirit_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "d6ca5839f54b340006d2e76a010eb4c36d226613a702f19379315b1d9e47d646",
+      "previousSha256": "68be4fa097d3ebf58f53c06336185e145fc4a30affe3068383c5b645ad89dafd",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_spirit_3A.png",
+        "sourceSha256": "c895aa6f466d63b45128656e5c15b51cfe97b3c742054c42f9a78ce4ca7265e7",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_spirit_3A 御灵破势. one abstract jade-white spirit paw or claw with a golden sharp leading edge; ACTION compact rightward spirit-claw surge, HIT a short gold-jade broken-seal impact; no literal bird. STRICT texture-art request: NO GRAY RECTANGLES, NO SMOKE, NO FOG, NO SHADOW PATCHES, NO DITHERED BACKGROUND. Each frame contains only the crisp mint and gold three-pronged spirit-claw, small golden contract chips, and a few distinct jade sparks. All pixels outside those explicit shapes are transparent alpha0. No glow spreading behind the art. Four columns six rows on full 2:3 canvas, central50% subject per cell with wide perfectly empty transparent gaps. Animated claw condenses, surges right, breaks a small seal, then dissolves to a few tiny sparks.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_spirit_4A",
+      "name": "守契回生",
+      "path": "GameResources/effects/Careers/CP_spirit_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "be2e06ecd33ed90cde42b54c57c1f9f4ce923781c3ab34cca6d2e03a7b1a1b36",
+      "previousSha256": "c709fabb1bba9154ad0980b711cd4028b419b934d9ff20bfdacacc89fcea502f",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_spirit_4A.png",
+        "sourceSha256": "efa8a57a55ca6013df52b63f11962484343be22d456971dbbe3a07a89c3b2c67",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only: CP_spirit_4A 守契回生. First reference is the current NEW skill icon: match its exact main symbol/palette. Second reference is existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, no dirty diffuse fog. Do NOT reproduce the old animal-summoning effects. IDENTITY: jade-white protective contract curves around a small green life bud; ACTION stationary rounded protective healing aura, HIT pale green inward life wisps; no deer or attack projectile. Exact grid FOUR equal columns SIX equal rows, 24 square cells, portrait sheet aspect2:3. Frames read left to right then top to bottom. Frames0-7: eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup shrinking to a few visible sparks. Every frame is completely INDEPENDENT spatially; FIXED pivot in exact cell center, stable scale. All art including particles and glow must fit inside central60% of EACH CELL: at least20% pure transparent margin on all four sides in every cell. Compact small effects, no cropped edges, no shared wisps, no neighboring-frame fragments, no cross-cell light. Transparent actual alpha, no backdrop/checkerboard/gridlines/text/labels. No creatures or humanoid bodies. Keep near-final cancel sparks visible with solid pixels, not full-frame fog. 24 frames coherent hand-painted pixel-style animation, not duplicated static panels. Target each cell192x192 after extraction; canvas768x1152.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_spirit_5A",
+      "name": "灵契共鸣",
+      "path": "GameResources/effects/Careers/CP_spirit_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "685c6280ae53b4a74d6ab047511ef3462f6cffe8fda9b5447172f08624d57bde",
+      "previousSha256": "6462a40883922db62ceead954401663daa78098e2a04aa4d8f94515285f981f7",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_spirit_5A.png",
+        "sourceSha256": "78d8fd6d238bf81cde2983b84641b19a744bcc48a737a89d40c7b08be841a8cb",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only: CP_spirit_5A 灵契共鸣. First reference is the current NEW skill icon: match its exact main symbol/palette. Second reference is existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, no dirty diffuse fog. Do NOT reproduce the old animal-summoning effects. IDENTITY: one gold cultivator-soul light linked to ONE abstract jade beast-spirit light by a curved infinity contract current; ACTION stationary two-light resonance circle, HIT one unified gold-jade pulse; NEVER multiple pets or animal swarm. Exact grid FOUR equal columns SIX equal rows, 24 square cells, portrait sheet aspect2:3. Frames read left to right then top to bottom. Frames0-7: eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup shrinking to a few visible sparks. Every frame is completely INDEPENDENT spatially; FIXED pivot in exact cell center, stable scale. All art including particles and glow must fit inside central60% of EACH CELL: at least20% pure transparent margin on all four sides in every cell. Compact small effects, no cropped edges, no shared wisps, no neighboring-frame fragments, no cross-cell light. Transparent actual alpha, no backdrop/checkerboard/gridlines/text/labels. No creatures or humanoid bodies. Keep near-final cancel sparks visible with solid pixels, not full-frame fog. 24 frames coherent hand-painted pixel-style animation, not duplicated static panels. Target each cell192x192 after extraction; canvas768x1152.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sword_1A",
+      "name": "凝锋刺",
+      "path": "GameResources/effects/Careers/CP_sword_1A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 29,
+      "sha256": "d905e01d489ff524fcae8bf104beb08b7c65fe129280958cb7d35a6adb5e495a",
+      "previousSha256": "0d0d780f9f3f2e1e1eccb1bdd46a41a5b2bb23f2d2610ab5fbc85cd3f8f81967",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sword_1A.png",
+        "sourceSha256": "d0aa1902b43eeb0d0e3a4b1d06069bff8264d7f85e91044c1efb01ea5ce07f92",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sword_1A 凝锋刺. a single slender upright gold-edged jade-white qi sword condenses, action becomes a compact pointed sword thrust facing RIGHT, hit a small sharp blade starburst.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sword_2A",
+      "name": "回锋斩",
+      "path": "GameResources/effects/Careers/CP_sword_2A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "e7ef3db249b7e0aee38ad435105e170975e9b15fd90bd24d66c57a0c46155b92",
+      "previousSha256": "bf450209d95ebec7d1b52a366a47a04b9a0c6a4cadb6f1dfecd3e45411aae4fc",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sword_2A.png",
+        "sourceSha256": "f5e073fba2b755da931aa9229d8368d3a837841d62ac0ed4a9295316ce16dbba",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sword_2A 回锋斩. two jade-white sword crescents coil around a thin golden sword, action a curved returning double slash, hit two intersecting clean arcs.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sword_3A",
+      "name": "贯虹剑",
+      "path": "GameResources/effects/Careers/CP_sword_3A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 27,
+      "sha256": "1dc1d20ca6b217fdae8b08d6492fa81f4ea6c34aee0e4dc1eaefd4aeff62e323",
+      "previousSha256": "be799984125b9a275c6fecf49e63d0d9ec465d0c86b4a2c3498bf0ee0a5f1ce2",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sword_3A.png",
+        "sourceSha256": "ab521a50938b2043999a2ad0ebc976a743c4cd00425a2bf0e7edbd383f2db2cf",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sword_3A 贯虹剑. a straight gold-white long qi blade inside a jade spiral, action a compact piercing horizontal RIGHT-pointing sword with short concentric rings, hit a narrow gold star.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sword_4A",
+      "name": "分光剑",
+      "path": "GameResources/effects/Careers/CP_sword_4A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "01ccadb4a0ed24257341f5150d609910b475523efec42359df2d4a552fcc6769",
+      "previousSha256": "9107b4583a33d376b7aa99de7f492b10f4f4eb98812d7f5d016d55d6286ee951",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sword_4A.png",
+        "sourceSha256": "d5b6f0e2bdaa615dd48aff1db7093583bf8ed5ab296f3f5b8cf5bc165253ebb5",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sword_4A 分光剑. three slender jade-white flying swords orbit a gold center, action THREE short parallel rightward blades, hit a clean three-blade blossom.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    },
+    {
+      "id": "CP_sword_5A",
+      "name": "天外一剑",
+      "path": "GameResources/effects/Careers/CP_sword_5A.png",
+      "width": 768,
+      "height": 1152,
+      "frameSize": 192,
+      "columns": 4,
+      "frames": 24,
+      "phases": {
+        "cast": [
+          0,
+          8
+        ],
+        "travelOrArea": [
+          8,
+          8
+        ],
+        "hit": [
+          16,
+          4
+        ],
+        "cancel": [
+          20,
+          4
+        ]
+      },
+      "minimumTransparentMarginPixels": 28,
+      "sha256": "e7d61177a23db97478bc7e78fa13eacef80980a6db9d6d87f06d2510c71beb73",
+      "previousSha256": "e4b5414bce746a44ed37cb30d259959bcc849c2bc05b9f4616df272910fb35a1",
+      "status": "offline-reviewed",
+      "gameVerified": false,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/contract-rework/career-effects/imagegen-originals/CP_sword_5A.png",
+        "sourceSha256": "79ec96f55d2a45085fd645fb676388532a1be31e7dfa7afd5ecb51b3a1f5efb7",
+        "prompt": "Production transparent sprite animation atlas for Chinese cultivation WorldBox. ONE spell only. First reference is its existing skill icon: preserve recognizable skill identity and appropriate colors. Second reference is clean existing SPELL STAGES art STYLE: clear silhouettes, layered pixel shading, restrained highlights, not heavy detailed fog. Third reference is the old animation as identity guide only; it contains CROPPED edges and neighboring-frame debris, DO NOT copy these defects. Exact grid FOUR equal columns SIX equal rows,24 square cells,portrait sheet aspect2:3. Read left to right top to bottom. Frames0-7:eight-frame cast buildup;8-15:eight-frame action/area loop;16-19:four-frame hit bloom/recovery;20-23:four-frame cancel breakup to a few small visible sparks. Fixed pivot at exact cell center, stable scale. All art including particles/glow confined to central60% of EVERY cell, at least20% fully transparent margin each side. Completely separate small effects; NEVER crossing cells, touching cell edges, clipped swords/trails/spikes, or stray bits from adjacent frames. Actual alpha background, no gray fog, checkerboard, text, labels, gridlines or backdrop. No humanoid figures.24 coherent progressing frames, not duplicated static panels. Target after extraction192px cells,768x1152canvas. Spell: CP_sword_5A 天外一剑. one magnificent ivory-gold heavenly sword with a restrained pale jade halo, action one compact diagonal sword strike, hit a descending sword-light pillar and small gold ring.",
+        "processing": "alpha<32 cleared; fixed full-cell pivot; one uniform scale for all24frames; no per-frame crop/recenter"
+      }
+    }
+  ]
+}

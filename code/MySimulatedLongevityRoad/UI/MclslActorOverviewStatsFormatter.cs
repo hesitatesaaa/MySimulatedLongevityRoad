@@ -16,9 +16,7 @@ internal static class MclslActorOverviewStatsFormatter
 {
     private sealed class WindowState { internal long ActorId, Revision = -1; internal bool Visible, NewLaw; }
     private static ConditionalWeakTable<UnitWindow, WindowState> States = new();
-    private sealed class IconTextBinding { internal bool Initialized; internal Text Value; }
-    private static ConditionalWeakTable<Transform, IconTextBinding> IconTextBindings = new();
-    internal static void ClearRuntime() { States = new(); IconTextBindings = new(); }
+    internal static void ClearRuntime() { States = new(); }
     internal static void OnClosed(UnitWindow window) { if (window != null) States.Remove(window); }
     private static readonly OverviewStatIcon[] Icons =
     {
@@ -35,6 +33,9 @@ internal static class MclslActorOverviewStatsFormatter
     internal static void Refresh(UnitWindow window)
     {
         if (window == null || !window.gameObject.activeInHierarchy) return;
+        // 关系栏必须在 revision 缓存与 ShouldShowOverview 早退之前维护，
+        // 这样非修士契宠也能在左侧原生属性页显示，且每秒倒计时不依赖修士档案。
+        MclslContractInfoBar.Refresh(window);
         Actor actor = window.actor;
         long id = MclslActorAccessor.Id(actor), revision = MclslRuntimeChanges.DataRevision(id);
         WindowState state = States.GetOrCreateValue(window);
@@ -66,28 +67,8 @@ internal static class MclslActorOverviewStatsFormatter
         state.ActorId = id; state.Revision = revision; state.NewLaw = newLaw; state.Visible = true;
     }
 
-    private static bool ShouldShowOverview(Actor actor)
-    {
-        if (!MclslActorAccessor.Alive(actor)) return false;
-        if (IsWorldSoulEntity(actor)) return false;
-        if (!MclslEligibility.CanCultivate(actor)) return false;
-        if (!string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return true;
-        if (MclslSpiritualRootSystem.HasCultivationPotential(actor)) return true;
-        return HasTrait(actor, MclslTraitRegistration.HuanzhenTraitId);
-    }
-
-    private static bool HasTrait(Actor actor, string traitId)
-    {
-        if (actor == null || string.IsNullOrWhiteSpace(traitId)) return false;
-        try { return actor.hasTrait(traitId); }
-        catch { return false; }
-    }
-
-    private static bool IsWorldSoulEntity(Actor actor)
-    {
-        try { return actor?.data != null && !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulEntityId, string.Empty)); }
-        catch { return false; }
-    }
+    // 与右侧修士档案共用同一显示口径：无根骨凡人连仙缘/资质图标行也不出现。
+    private static bool ShouldShowOverview(Actor actor) => MclslActorInfoPanel.HasArchiveFor(actor);
 
     private static void HideMclslOverview(UnitWindow window)
     {
@@ -109,7 +90,7 @@ internal static class MclslActorOverviewStatsFormatter
     {
         Transform content = ((Component)window).transform.Find("Background/Scroll View/Viewport/Content");
         if (content == null) return;
-        bool show = cultivation != null && !string.IsNullOrWhiteSpace(cultivation.RealmId);
+        bool show = !MclslBeastActorRegistration.IsBeast(actor) && cultivation != null && !string.IsNullOrWhiteSpace(cultivation.RealmId);
         if (!show) { HideFactionAffiliationRow(window); return; }
         MclslFamilySystem.Observe(actor);
         SetAffiliationRow(content, "MclslFamilyRow", "所属家族：", MclslFamilySystem.FamilyOf(actor)?.Name ?? "无");
@@ -437,23 +418,27 @@ internal static class MclslActorOverviewStatsFormatter
     private static void SetIconValue(UnitWindow window, string id, int value)
     {
         SetIconVisibility(window, id, true);
-        try { window.setIconValue(id, value, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            window.setIconValue(id, value, null, string.Empty, false, string.Empty, '/');
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #1: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private static void SetIconText(UnitWindow window, string id, string value)
     {
         SetIconVisibility(window, id, true);
-        try { window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message); }
         Transform icon = FindOverviewIcon(window, id);
-        if (icon == null) return;
-        IconTextBinding binding = IconTextBindings.GetOrCreateValue(icon);
-        if (!binding.Initialized)
-        {
-            Text[] texts = icon.GetComponentsInChildren<Text>(true);
-            binding.Value = texts.Length > 0 ? texts[texts.Length - 1] : null;
-            binding.Initialized = true;
-        }
-        if (binding.Value != null) binding.Value.text = value ?? string.Empty;
+        StatsIcon stats = icon.GetComponent<StatsIcon>();
+        stats.checkDestroyTween();
+        stats.enable_animation = false;
+        Color color = stats.text.color;
+        color.a = 1f;
+        stats.text.color = color;
+        stats.text.text = value;
     }
 
     private static void SetIconVisibility(UnitWindow window, string id, bool visible)

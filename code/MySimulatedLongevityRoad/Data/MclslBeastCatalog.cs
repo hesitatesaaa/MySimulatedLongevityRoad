@@ -3,42 +3,29 @@ using System.Collections.Generic;
 
 namespace MySimulatedLongevityRoad.Data;
 
-internal enum MclslBeastHabitat : byte
-{
-    DeepSea, RiverLake, Mountain, Volcano, MountainForest, ForestGrass,
-    LakeWetlandCoast, BurntForest, RidgeCoast, WetForest, OldForestRuin,
-    WildMountain, IslandCoast, GrassHill, RedMoon, CorruptBorder,
-    SeaRift, HighMountain
-}
+internal enum MclslBeastSurface : byte { Land, Water }
 
 internal sealed class MclslBeastDefinition
 {
     internal readonly string Id;
     internal readonly string Name;
     internal readonly string AnimalTemplate;
-    internal readonly MclslBeastHabitat Habitat;
-    internal readonly int ChancePerMillion;
-    internal readonly byte MinGroup;
-    internal readonly byte MaxGroup;
+    internal readonly MclslBeastSurface Surface;
     internal readonly string PopulationTrait;
     internal readonly string AssetPrefix;
     internal readonly string ResourceFolder;
 
     internal string BeastAssetId => AssetPrefix + Id;
     internal string AscendedAssetId => BeastAssetId + "_yuan";
-    internal string ConfigId => "MCLSL_config_beast_" + Id + "_chance";
 
     internal MclslBeastDefinition(string id, string name, string animalTemplate,
-        MclslBeastHabitat habitat, int chancePerMillion, byte minGroup, byte maxGroup, bool minimal,
+        MclslBeastSurface surface, bool minimal,
         string assetPrefix = "mclsl_beast_", string resourceFolder = null)
     {
         Id = id;
         Name = name;
         AnimalTemplate = animalTemplate;
-        Habitat = habitat;
-        ChancePerMillion = chancePerMillion;
-        MinGroup = minGroup;
-        MaxGroup = maxGroup;
+        Surface = surface;
         PopulationTrait = minimal ? "population_minimal" : "population_small";
         AssetPrefix = assetPrefix;
         ResourceFolder = resourceFolder ?? "actors/Beasts/" + id;
@@ -47,42 +34,39 @@ internal sealed class MclslBeastDefinition
 
 internal static class MclslBeastCatalog
 {
-    // One roll per world year and eligible species. Values are parts per million.
     internal static readonly MclslBeastDefinition[] All =
     {
-        new("kunpeng", "鲲鹏", "piranha", MclslBeastHabitat.DeepSea, 200, 1, 1, true),
-        new("qinglong", "青龙", "turtle", MclslBeastHabitat.RiverLake, 1000, 1, 1, true),
-        new("huanglong", "黄龙", "turtle", MclslBeastHabitat.Mountain, 1200, 1, 1, true),
-        new("zhuque", "朱雀", "butterfly", MclslBeastHabitat.Volcano, 800, 1, 1, true),
-        new("baihu", "白虎", "wolf", MclslBeastHabitat.MountainForest, 1800, 1, 1, true),
-        new("qilin", "麒麟", "sheep", MclslBeastHabitat.ForestGrass, 800, 1, 1, true),
-        new("moqilin", "墨麒麟", "sheep", MclslBeastHabitat.ForestGrass, 100000, 1, 1, true),
-        new("xuanwu", "玄武", "turtle", MclslBeastHabitat.LakeWetlandCoast, 1000, 1, 1, true),
-        new("fenghuang", "凤凰", "butterfly", MclslBeastHabitat.BurntForest, 400, 1, 1, true),
-        new("dafeng", "大风", "butterfly", MclslBeastHabitat.RidgeCoast, 8000, 1, 1, false),
-        new("manman", "蛮蛮", "butterfly", MclslBeastHabitat.WetForest, 12000, 1, 2, false),
-        new("xuanniao", "玄鸟", "butterfly", MclslBeastHabitat.OldForestRuin, 800, 1, 1, true),
-        new("qingluan", "青鸾", "butterfly", MclslBeastHabitat.MountainForest, 3500, 1, 1, false),
-        new("changliao", "长獠凶犬", "wolf", MclslBeastHabitat.WildMountain, 7500, 1, 2, false),
-        new("mo", "貘", "sheep", MclslBeastHabitat.WetForest, 6000, 1, 1, false),
-        new("hongmao", "红毛异兽", "wolf", MclslBeastHabitat.IslandCoast, 30000, 2, 3, false),
-        new("feiqiu", "飞球兽", "sheep", MclslBeastHabitat.GrassHill, 40000, 1, 2, false),
-        new("yingying", "阴影兽", "wolf", MclslBeastHabitat.RedMoon, 300000, 2, 3, true),
-        new("goushou", "狗首妖兽", "wolf", MclslBeastHabitat.CorruptBorder, 1500, 1, 1, true),
-        new("liejiejing", "裂解鲸", "piranha", MclslBeastHabitat.SeaRift, 500, 1, 1, true),
-        // The separate 0.01% revival event gates this conditional 100% roll.
-        new("tianshou", "兲兽", "sheep", MclslBeastHabitat.HighMountain, 1000000, 1, 1, true)
+        new("kunpeng", "鲲鹏", "piranha", MclslBeastSurface.Water, true),
+        new("qinglong", "青龙", "turtle", MclslBeastSurface.Water, true),
+        new("huanglong", "黄龙", "turtle", MclslBeastSurface.Land, true),
+        new("zhuque", "朱雀", "butterfly", MclslBeastSurface.Land, true),
+        new("baihu", "白虎", "wolf", MclslBeastSurface.Land, true),
+        new("qilin", "麒麟", "sheep", MclslBeastSurface.Land, true),
+        new("moqilin", "墨麒麟", "sheep", MclslBeastSurface.Land, true),
+        new("xuanwu", "玄武", "turtle", MclslBeastSurface.Land, true),
+        new("fenghuang", "凤凰", "butterfly", MclslBeastSurface.Land, true),
+        new("dafeng", "大风", "butterfly", MclslBeastSurface.Land, false),
+        new("manman", "蛮蛮", "butterfly", MclslBeastSurface.Land, false),
+        new("xuanniao", "玄鸟", "butterfly", MclslBeastSurface.Land, true),
+        new("qingluan", "青鸾", "butterfly", MclslBeastSurface.Land, false),
+        new("changliao", "长獠凶犬", "wolf", MclslBeastSurface.Land, false),
+        new("mo", "貘", "sheep", MclslBeastSurface.Land, false),
+        new("hongmao", "红毛异兽", "wolf", MclslBeastSurface.Land, false),
+        new("feiqiu", "飞球兽", "sheep", MclslBeastSurface.Land, false),
+        new("yingying", "阴影兽", "wolf", MclslBeastSurface.Land, true),
+        new("goushou", "狗首妖兽", "wolf", MclslBeastSurface.Land, true),
+        new("liejiejing", "裂解鲸", "piranha", MclslBeastSurface.Water, true),
+        new("tianshou", "兲兽", "sheep", MclslBeastSurface.Land, true)
     };
 
-    // Existing manual placement IDs are preserved for old saves. They are
-    // beast lineages, but never enter the annual natural-spawn catalog.
+    // Named beast lineages are manual entries.
     internal static readonly MclslBeastDefinition[] Named =
     {
-        new("diyi", "帝一", "sheep", MclslBeastHabitat.ForestGrass, 0, 1, 1, true,
+        new("diyi", "帝一", "sheep", MclslBeastSurface.Land, true,
             "mclsl_named_", "actors/Named/DiYi"),
-        new("disanmo", "帝叁貘", "sheep", MclslBeastHabitat.WetForest, 0, 1, 1, true,
+        new("disanmo", "帝叁貘", "sheep", MclslBeastSurface.Land, true,
             "mclsl_named_", "actors/Named/DiSanMo"),
-        new("qingshenlong", "青神龙", "turtle", MclslBeastHabitat.RiverLake, 0, 1, 1, true,
+        new("qingshenlong", "青神龙", "turtle", MclslBeastSurface.Water, true,
             "mclsl_named_", "actors/Named/QingShenLong")
     };
 

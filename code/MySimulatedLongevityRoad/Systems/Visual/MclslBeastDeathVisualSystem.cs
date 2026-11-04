@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MySimulatedLongevityRoad.Core;
 using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems.Visual;
@@ -28,7 +29,7 @@ internal static class MclslBeastDeathVisualSystem
             Position = new Vector3(actor.current_position.x + actor.shake_offset.x + actor.move_jump_offset.x,
                 actor.current_position.y + actor.position_height + actor.shake_offset.y + actor.move_jump_offset.y,
                 actor.position_height),
-            Scale = actor.current_scale,
+            Scale = MclslActorPresentation.HumanoidBodyScale(actor),
             Rotation = actor.current_rotation,
             Flip = actor.flip,
             Color = actor.color
@@ -84,13 +85,13 @@ internal static class MclslBeastDeathVisualSystem
         renderer.flipX = pose.Flip;
         renderer.color = pose.Color;
         if (pose.Material != null) renderer.sharedMaterial = pose.Material;
-        Active.Add(new Entry { Owner = owner, Object = obj, Renderer = renderer, Clip = clip, Start = MclslActorAnimationTime.Now });
+        Active.Add(new Entry { Owner = owner, Object = obj, Renderer = renderer, Clip = clip, Start = MclslRuntime.DisplayClock });
         return true;
     }
 
     internal static void Tick()
     {
-        double now = MclslActorAnimationTime.Now;
+        double now = MclslRuntime.DisplayClock;
         for (int i = Active.Count - 1; i >= 0; i--)
         {
             Entry entry = Active[i];

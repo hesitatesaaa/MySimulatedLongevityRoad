@@ -63,7 +63,7 @@ internal static class MclslPhysiqueSystem
     // All 17 special physiques share a 20 / 10,000 (0.2%) birth chance.
     internal const int BirthChancePerTenThousand = 20;
     internal const int BirthWeightTotal = 25; // Nine legendary tickets and eight epic traits with two tickets each.
-    private const string BirthCheckedKey = "mclsl.architecture.v2.actor.physique.birth_checked";
+    private const string BirthCheckedKey = "mclsl.080.actor.physique.birth_checked";
     private static Dictionary<string, Physique> BuildIndex()
     {
         var result = new Dictionary<string, Physique>(StringComparer.Ordinal);
@@ -76,11 +76,10 @@ internal static class MclslPhysiqueSystem
         MclslLocalizationBridge.RegisterKey("trait_group_" + MclslTraitRegistration.PhysiqueGroupId, "玄黄异禀");
         foreach (Physique entry in Definitions)
         {
-            string rarity = LegendaryIds.Contains(entry.Id) ? "传奇" : "史诗";
-            string birthProbability = IsLegendary(entry.Id) ? "0.008%" : "0.016%";
-            string acquisition = "出生时自然抽取；编辑器可手动赋予。";
-            MclslTraitRegistration.RegisterProfessionText(entry.Id, entry.Name, entry.Motto + "\n稀有度：" + rarity + "\n自然出生概率：" + birthProbability + "\n原著依据：" + entry.Basis + "\n原版属性：" + entry.Native + "\n模组效果：" + entry.Mod + "\n获取方式：" + acquisition);
-            MclslTraitRegistration.RegisterTraitInfo(entry.Id, entry.Motto, "稀有度：" + rarity + "；自然出生概率：" + birthProbability + "；原著依据：" + entry.Basis + "；原版属性：" + entry.Native + "；模组效果：" + entry.Mod + "；获取方式：" + acquisition);
+            // 体质说明只保留“作用”：不再展示稀有度、出生概率、原著依据与获取方式。
+            string effect = entry.Motto + "\n" + entry.Mod;
+            MclslTraitRegistration.RegisterProfessionText(entry.Id, entry.Name, effect);
+            MclslTraitRegistration.RegisterTraitInfo(entry.Id, entry.Motto, entry.Mod);
             MclslTraitRegistration.AddSpecial(entry.Id, "trait/" + entry.Id, true, true, 0f, 0f, 0f, 0f);
             ActorTrait trait = AssetManager.traits.get(entry.Id);
             if (trait == null) continue;
@@ -190,6 +189,85 @@ internal static class MclslPhysiqueSystem
     internal static int StonesPercent(Actor actor) => Sum(actor, p => p.Stones);
     internal static int BreakthroughPoints(Actor actor) => Sum(actor, p => p.Breakthrough);
     internal static int FireDamagePercent(Actor actor) => Sum(actor, p => p.FireDamage);
+    // 体质→战斗职业亲和：Career=-1 表示全职业；Damage 为技能伤害%，Growth 为职业成长%。
+    private readonly struct CareerAffinity
+    {
+        internal readonly int Career, Damage, Growth;
+        internal CareerAffinity(int career, int damage, int growth) { Career = career; Damage = damage; Growth = growth; }
+    }
+    private static readonly Dictionary<string, CareerAffinity[]> CareerAffinities = new(StringComparer.Ordinal)
+    {
+        ["MclslPhysiqueTreasure"]   = new[]{ new CareerAffinity(5,20,20),  new CareerAffinity(3,10,0) },
+        ["MclslPhysiqueImmortal"]   = new[]{ new CareerAffinity(2,25,25),  new CareerAffinity(-1,10,10) },
+        ["MclslPhysiqueWater"]      = new[]{ new CareerAffinity(2,20,20) },
+        ["MclslPhysiqueWeak"]       = new[]{ new CareerAffinity(-1,-15,-15) },
+        ["MclslPhysiqueArray"]      = new[]{ new CareerAffinity(4,30,25) },
+        ["MclslPhysiqueDao"]        = new[]{ new CareerAffinity(2,30,30) },
+        ["MclslPhysiqueEye"]        = new[]{ new CareerAffinity(0,25,15) },
+        ["MclslPhysiqueBone"]       = new[]{ new CareerAffinity(1,20,15),  new CareerAffinity(4,10,10) },
+        ["MclslPhysiqueFlame"]      = new[]{ new CareerAffinity(2,30,25),  new CareerAffinity(1,10,0) },
+        ["MclslPhysiqueBeastBlood"] = new[]{ new CareerAffinity(5,25,20),  new CareerAffinity(1,15,0) },
+        ["MclslPhysiqueYinYang"]    = new[]{ new CareerAffinity(-1,10,20) },
+        ["MclslPhysiqueSymbiosis"]  = new[]{ new CareerAffinity(5,15,25) },
+        ["MclslPhysiqueFurnace"]    = new[]{ new CareerAffinity(1,30,20) },
+        ["MclslPhysiqueNether"]     = new[]{ new CareerAffinity(3,25,20) },
+        ["MclslPhysiqueWar"]        = new[]{ new CareerAffinity(0,20,30),  new CareerAffinity(1,20,30) },
+        ["MclslPhysiqueForged"]     = new[]{ new CareerAffinity(-1,15,20) },
+        ["MclslPhysiqueRenewal"]    = new[]{ new CareerAffinity(4,15,20),  new CareerAffinity(1,15,0) }
+    };
+    private static int SumCareer(Actor actor, int career, Func<CareerAffinity, int> pick, int lo, int hi)
+    {
+        if (actor?.data == null) return 0;
+        int sum = 0;
+        foreach (var kv in CareerAffinities)
+        {
+            if (!actor.hasTrait(kv.Key)) continue;
+            foreach (CareerAffinity a in kv.Value)
+                if (a.Career == career || a.Career == -1) sum += pick(a);
+        }
+        return Math.Clamp(sum, lo, hi);
+    }
+    internal static int CareerDamagePercent(Actor actor, int career) => SumCareer(actor, career, a => a.Damage, -30, 60);
+    internal static int CareerGrowthPercent(Actor actor, int career) => SumCareer(actor, career, a => a.Growth, -30, 80);
+    internal static int CareerAffinityScore(Actor actor, int career)
+        => Math.Max(0, CareerDamagePercent(actor, career)) + Math.Max(0, CareerGrowthPercent(actor, career));
+    // 当前职业相对该角色体质的契合等级：主契合 / 次契合 / 无。
+    internal static string CareerAffinityRole(Actor actor, int career)
+    {
+        if (actor?.data == null) return string.Empty;
+        bool primary = false, secondary = false;
+        foreach (var kv in CareerAffinities)
+        {
+            if (!actor.hasTrait(kv.Key)) continue;
+            for (int i = 0; i < kv.Value.Length; i++)
+            {
+                int c = kv.Value[i].Career;
+                if (c == career || c == -1) { if (i == 0) primary = true; else secondary = true; }
+            }
+        }
+        return primary ? "主契合" : secondary ? "次契合" : string.Empty;
+    }
+    // 该角色各体质的“主契合/次契合职业”说明文本。
+    internal static string CareerAffinityText(Actor actor)
+    {
+        if (actor?.data == null) return string.Empty;
+        var parts = new List<string>();
+        foreach (var kv in CareerAffinities)
+        {
+            if (!actor.hasTrait(kv.Key)) continue;
+            string pname = ById.TryGetValue(kv.Key, out Physique p) ? p.Name : kv.Key;
+            for (int i = 0; i < kv.Value.Length; i++)
+            {
+                CareerAffinity a = kv.Value[i];
+                string cn = a.Career < 0 ? "全职业"
+                    : (a.Career < MclslCombatCareerCatalog.Careers.Length ? MclslCombatCareerCatalog.Careers[a.Career].Name : "?");
+                string tag = i == 0 ? "主契合" : "次契合";
+                parts.Add(pname + "·" + tag + " " + cn + " 伤害" + (a.Damage >= 0 ? "+" : "") + a.Damage
+                    + "%/成长" + (a.Growth >= 0 ? "+" : "") + a.Growth + "%");
+            }
+        }
+        return string.Join("；", parts.ToArray());
+    }
     internal static void OnGranted(Actor actor, string id, bool existing = false)
     {
         if (actor?.data == null || !IsPhysique(id) || !MclslEligibility.CanOwnSpecialPhysique(actor)) return;
@@ -204,7 +282,7 @@ internal static class MclslPhysiqueSystem
             MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50),
             allowEntry: actor.getAge() >= 6f);
         if (id != "MclslPhysiqueNether" || actor?.data == null) return;
-        const string key = "mclsl.architecture.v2.actor.physique.nether_mind_granted";
+        const string key = "mclsl.080.actor.physique.nether_mind_granted";
         if (MclslActorAccessor.GetInt(actor, key, 0) != 0) return;
         int current = MclslMindSystem.EnsureMindState(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, Math.Min(100, current + 20));

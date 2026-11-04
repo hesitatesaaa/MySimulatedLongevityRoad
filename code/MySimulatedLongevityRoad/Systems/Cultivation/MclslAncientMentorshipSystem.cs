@@ -162,8 +162,8 @@ internal static class MclslAncientMentorshipSystem
         if (!string.IsNullOrWhiteSpace(teacherTechniqueName)) MclslActorAccessor.Set(student, MclslActorDataKeys.TechniqueName, teacherTechniqueName);
         MclslTechniqueRealmLimit.SetMaxRealm(student, MclslTechniqueRealmLimit.MaxRealm(teacher));
         MclslTechniqueStageSystem.AddProgress(student, 8);
-        AddClamped(student, MclslActorDataKeys.AncientLineageStrength, 6, 0, 100);
-        AddClamped(student, MclslActorDataKeys.MindState, 2, 0, 100);
+        MclslResourceSystem.AddClamped(student, MclslActorDataKeys.AncientLineageStrength, 6, 0, 100);
+        MclslResourceSystem.AddClamped(student, MclslActorDataKeys.MindState, 2, 0, 100);
         EnsureMentorshipBooks(teacher, student, year);
     }
 
@@ -436,15 +436,15 @@ internal static class MclslAncientMentorshipSystem
         if (actorId <= 0L) return null;
         if (MclslCultivatorCandidateIndex.Resolve(actorId, out Actor indexed))
             return indexed;
-        try { return World.world?.units?.get(actorId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientMentorshipSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            return World.world?.units?.get(actorId);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslAncientMentorshipSystem.cs #1: " + mclslEmptyCatchEx.Message);
+        }
         return null;
-    }
-
-    private static void AddClamped(Actor actor, string key, int delta, int min, int max)
-    {
-        if (MclslEconomyCommands.IsCurrencyKey(key)) { MclslResourceSystem.AdjustMoney(actor, key, delta); return; }
-        int value = MclslActorAccessor.GetInt(actor, key, min);
-        MclslActorAccessor.Set(actor, key, Math.Clamp(value + delta, min, max));
     }
 
     private static string SafeName(Actor actor)

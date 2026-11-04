@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 
@@ -8,13 +7,6 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static class MclslLongevityRules
 {
     private const int MortalBaseLifespan = 80;
-    private static readonly HashSet<long> RepairingActorIds = new();
-
-    internal static void ClearRuntimeCache()
-    {
-        RepairingActorIds.Clear();
-    }
-
     internal static int RealmLifespanBonus(string realm) => RealmLifespanBonus(realm, false);
 
     internal static int RealmLifespanBonus(string realm, bool ancient)
@@ -95,24 +87,12 @@ internal static class MclslLongevityRules
         int expected = ExpectedLifespan(actor, realm);
         if (expected <= MortalBaseLifespan && !hasWeakPhysique) return;
 
-        float current = GetStatSafe(actor, "lifespan", 0f);
+        float current = actor.stats["lifespan"];
         if (hasWeakPhysique
             ? Math.Abs(current - expected) < 0.01f
             : current + 0.01f >= expected) return;
 
-        long actorId = MclslActorAccessor.Id(actor);
-        if (actorId > 0 && !RepairingActorIds.Add(actorId)) return;
-        try
-        {
-            actor.stats["lifespan"] = expected;
-        }
-        catch
-        {
-        }
-        finally
-        {
-            if (actorId > 0) RepairingActorIds.Remove(actorId);
-        }
+        actor.stats["lifespan"] = expected;
     }
 
     internal static bool TryDrainYears(Actor receiver, Actor donor, int requestedYears, out int transferred)
@@ -188,13 +168,7 @@ internal static class MclslLongevityRules
 
         string legacyTraitId = MclslTraitRegistration.LegacyTraitIdForRealm(realm);
         if (string.IsNullOrWhiteSpace(legacyTraitId)) return false;
-        try { return actor.hasTrait(legacyTraitId); }
-        catch { return false; }
+        return actor.hasTrait(legacyTraitId);
     }
 
-    private static float GetStatSafe(Actor actor, string statId, float fallback)
-    {
-        try { return actor?.stats == null ? fallback : actor.stats[statId]; }
-        catch { return fallback; }
-    }
 }

@@ -1,5 +1,9 @@
 # 项目工作约定
 
+## 默认交付压缩包
+
+后续默认交付与此前约50多MB版本相同的压缩玩家包：使用 tools/package-release.py 的 player + compress-assets 路径（PNG最多256色、大图标最长边256，保留既有元数据规则），不再默认交付100多MB的未压缩开发包。压缩只作用于包内副本，保留工作目录原素材；除非用户明确要求开发包。不为达到固定文件大小进一步降低画质或删除有效资源。
+
 ## 定时任务中文编码
 
 更新现有任务0-6-0时，必须使用 tools/automation-payload.py 导出参数，再将控制台ASCII JSON通过JSON.parse还原后传给应用的automation_update工具。不得读取未经转义的中文控制台输出后重新提交；禁止ensure_ascii=False用于此传输路径。完整提示词由UTF-8文件 resources/automation-0-6-0.prompt.md 管理，更新提示词先编辑此文件。

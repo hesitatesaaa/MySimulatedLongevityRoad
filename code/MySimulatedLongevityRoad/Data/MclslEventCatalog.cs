@@ -25,6 +25,7 @@ internal static class MclslEventCatalog
     internal const string Reincarnation = "reincarnation";
     internal const string NativeWorld = "native_world";
     internal const string AncientWorld = "ancient_world";
+    internal const string BeastTide = "beast_tide";
 
     internal static readonly MclslEventCategoryDefinition[] Categories =
     {
@@ -39,7 +40,8 @@ internal static class MclslEventCatalog
         C(Death, "修士生死", "#FF8877", "ui/Icons/SiWang"),
         C(Reincarnation, "还真逆理", "#7CCFD0", "ui/Icons/HuanZhen"),
         C(AncientWorld, "仙道纪元", "#D8C778", "trait/gifts_6"),
-        C(NativeWorld, "人间世事", "#CFC7B2", "ui/Icons/XuanHuangXianLu")
+        C(NativeWorld, "人间世事", "#CFC7B2", "ui/Icons/XuanHuangXianLu"),
+        C(BeastTide, "兽潮", "#FFB15E", "ui/Icons/TianDiZhiBian")
     };
 
     internal static MclslEventCategoryDefinition Category(string id)
@@ -52,6 +54,7 @@ internal static class MclslEventCatalog
     internal static string CategoryForType(string eventType)
     {
         string type = eventType ?? string.Empty;
+        if (type is "beast_tide" or "beast_tide_end") return BeastTide;
         if (IsLineageEvent(type)) return Lineage;
         if (type is "ancient_ruin_born" or "ancient_lineage_ruin_born") return Ruin;
         if (type.StartsWith("ancient_", StringComparison.Ordinal)
@@ -89,6 +92,7 @@ internal static class MclslEventCatalog
     internal static int ImportanceFor(string eventType, string title, string body, string realmId = null)
     {
         string type = eventType ?? string.Empty;
+        if (type is "beast_tide" or "beast_tide_end") return 4;
         if (type is "cycle_start" or "annual_settlement_failure") return 1;
         if (type.StartsWith("epoch_", StringComparison.Ordinal)
             || type is "harmony_last_hit" or "manual_harmony_soul_claimed" or "longevity_achieved" or "taishang_achieved") return 5;
@@ -128,7 +132,24 @@ internal static class MclslEventCatalog
     internal static bool ShouldMirrorToNativeHistory(int importance) => importance >= 4;
 
     internal static bool ShouldMirrorToNativeHistory(string type, int importance, bool lineageEnabled)
-        => ShouldMirrorToNativeHistory(importance) && (lineageEnabled || !IsLineageEvent(type));
+        => ShouldMirrorToNativeHistory(importance) && (lineageEnabled || !IsLineageNativeHistoryEvent(type));
+
+    /// <summary>
+    /// 由 <c>MCLSL_config_lineage_native_history</c> 控制是否写入原版历史的道统类事件。
+    /// 覆盖宗门兴衰、古法/新法功法记录/复兴/失传/兴盛、仙师授法、功法推演、偶得仙法、
+    /// 法门新开，以及道统相关 epoch 纪事；联盟成立、灾厄、轮回真相等非道统事件不在此列。
+    /// 该判定只影响未来写入，绝不删除或回补已有原版记录。
+    /// </summary>
+    internal static bool IsLineageNativeHistoryEvent(string type)
+    {
+        string eventType = type ?? string.Empty;
+        if (IsLineageEvent(eventType)) return true;
+        if (eventType is "ancient_master_teaching" or "ancient_technique_deduction"
+            or "ancient_found_method" or "ancient_new_method_branch") return true;
+        return eventType is "epoch_ancient_law_end" or "epoch_ancient_remnants"
+            or "epoch_ancient_sects_retired" or "epoch_chuanfa_dao" or "epoch_law_conflict"
+            or "epoch_new_law_era" or "epoch_new_law_pioneers" or "epoch_new_law_spread";
+    }
 
     // WorldBox 0.51 Date.getYear(time) = (int)(time / 60) + 1.
     internal static int NativeTimestampForYear(int year)
@@ -164,4 +185,9 @@ internal static class MclslEventCatalog
         Color = color,
         IconPath = icon
     };
+    internal static string EventCategory(MclslRunEventRecord record)
+    {
+        if (record == null) return MclslEventCatalog.NativeWorld;
+        return string.IsNullOrWhiteSpace(record.Category) ? MclslEventCatalog.CategoryForType(record.EventType) : record.Category;
+    }
 }

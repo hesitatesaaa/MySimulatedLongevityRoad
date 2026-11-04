@@ -168,5 +168,4 @@ internal sealed partial class MclslCodexWindow
         _instance._scroll = Vector2.zero;
     }
 
-    private static string Blank(string value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
 }

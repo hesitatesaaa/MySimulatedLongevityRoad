@@ -1,4 +1,5 @@
 using System;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 
@@ -50,15 +51,5 @@ internal static class MclslTaishangSystem
         MclslAnnouncementSystem.Enqueue(title + "。", "#D8C778", 9f, 1);
     }
 
-    private static int PositiveHash(string text)
-    {
-        unchecked
-        {
-            int hash = 23;
-            string value = text ?? string.Empty;
-            for (int i = 0; i < value.Length; i++)
-                hash = hash * 31 + value[i];
-            return hash & int.MaxValue;
-        }
-    }
+    private static int PositiveHash(string text) => MclslStableHash.Positive23x31(text);
 }

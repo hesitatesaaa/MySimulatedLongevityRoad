@@ -176,11 +176,32 @@ internal static class MclslTraitRegistration
             foreach (MclslAptitudeGiftDefinition gift in MclslAptitudeGiftCatalog.Gifts)
             {
                 if (string.Equals(gift.TraitId, keepTraitId, StringComparison.Ordinal)) continue;
-                try { if (actor.hasTrait(gift.TraitId)) actor.removeTrait(gift.TraitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (actor.hasTrait(gift.TraitId)) actor.removeTrait(gift.TraitId);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1: " + mclslEmptyCatchEx.Message);
+                }
                 string alias = TraitAliasId(gift.TraitId);
-                try { if (actor.hasTrait(alias)) actor.removeTrait(alias); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1-alias: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (actor.hasTrait(alias)) actor.removeTrait(alias);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1-alias: " + mclslEmptyCatchEx.Message);
+                }
                 string slashAlias = TraitPathAliasId(gift.TraitId);
-                try { if (actor.hasTrait(slashAlias)) actor.removeTrait(slashAlias); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-path-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1-path-alias: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (actor.hasTrait(slashAlias)) actor.removeTrait(slashAlias);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-path-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #1-path-alias: " + mclslEmptyCatchEx.Message);
+                }
             }
         });
     }
@@ -216,14 +237,12 @@ internal static class MclslTraitRegistration
     internal static void Init()
     {
         if (_initialized) return;
-        _initialized = true;
         EnsureGroup(RealmGroupId, "新法境界", "#8FD4C8");
         EnsureGroup(AncientRealmGroupId, "仙道境界", "#A6D8D1");
         EnsureGroup(GiftGroupId, "灵根品阶", "#C8D48F");
         EnsureGroup(SpecialGroupId, "长生路特殊", "#D8C778");
         EnsureGroup(PhysiqueGroupId, "玄黄异禀", "#8FCBBF");
         EnsureGroup(ProfessionGroupId, "职业", "#D3B878");
-        EnsureGroup("MclslBattleProfessions", "斗法主职", "#81CDC3");
         EnsureGroup(ImmortalPathGroupId, "仙路", "#D3A8E7");
         EnsureGroup(XuanHuangHeavenGroupId, "玄黄天道", "#E0BE6E");
 
@@ -249,14 +268,6 @@ internal static class MclslTraitRegistration
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
         MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
-        for(int i=0;i<Systems.Combat.MclslBattleProfessionSystem.Ids.Length;i++)
-        {
-            string battleId=Systems.Combat.MclslBattleProfessionSystem.Traits[i];
-            string battleName=Systems.Combat.MclslBattleProfessionSystem.Names[i];
-            AddProfession(battleId,"trait/"+battleId,battleName,"斗法主职："+battleName+"。生产职业独立，基础技能可兼修。",
-                "一主职加兼修，以法门入道，以传承与斗法精进。","主职核心技金丹起、大神通化神起；换职保留所学与冷却，原主职高阶技休眠。赋予特质仅指定主职，不赠送技能。");
-            AssetManager.traits.get(battleId).group_id="MclslBattleProfessions";
-        }
         AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。",
             "辨材炼药，以丹助修。", "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度。");
         AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。",
@@ -269,6 +280,10 @@ internal static class MclslTraitRegistration
         MclslLocalizationBridge.RegisterKey("trait_group_" + ImmortalPathGroupId, "仙路");
         MclslLocalizationBridge.RegisterKey("trait_group_" + XuanHuangHeavenGroupId, "玄黄天道");
         AddHeavenFavorTrait();
+        AddHeavenGrantAction(MclslHeavenGrantActions.PerfectionTraitId, "天赐圆满",
+            "天道垂赐，仙缘充盈，资质通明，悟性圆融，心境无瑕。点击将四项属性设为100；不自动入道或提升境界。此为一次性操作，可重复使用。", 2);
+        AddHeavenGrantAction(MclslHeavenGrantActions.DaoBookTraitId, "天授道书",
+            "天降道书，直指合道。按当前修行路线授予合道功法；已有合道及以上功法时保留原法。无修行路线者保存新法道书，不自动入道。此为一次性操作，可重复使用。", 3);
         AddSpecial(WorldSoulEntityTraitId, "trait/TianDiZhiPo", false, false, 2500f, 2500000f, 250000f, 2.35f, 240f);
         MclslLocalizationBridge.RegisterKey(BaiTraitId, "白先生");
         MclslLocalizationBridge.RegisterKey("trait_" + BaiTraitId, "白先生");
@@ -289,6 +304,7 @@ internal static class MclslTraitRegistration
         }
         MclslWorldSoulActorRegistration.Init();
         RefreshRealmTraitVisibility(MclslRuntime.CurrentYear(), true);
+        _initialized = true;
     }
 
     internal static string GiftTraitIdForAptitude(int aptitude) => MclslAptitudeGiftCatalog.ForAptitude(aptitude).TraitId;
@@ -348,7 +364,14 @@ internal static class MclslTraitRegistration
     internal static void EnsureNativeImmortal(Actor actor)
     {
         if (actor?.data == null) return;
-        try { if (actor.hasTrait(NativeImmortalTraitId)) return; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #2: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            if (actor.hasTrait(NativeImmortalTraitId)) return;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #2: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             ActorTrait immortal = AssetManager.traits.get(NativeImmortalTraitId);
@@ -360,7 +383,7 @@ internal static class MclslTraitRegistration
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("[模拟长生路] 长生不朽特质授予失败: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("trait.immortal-grant", "[模拟长生路] 长生不朽特质授予失败: " + ex.Message);
         }
     }
 
@@ -373,7 +396,7 @@ internal static class MclslTraitRegistration
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(actor.data.health, (int)Math.Min((float)int.MaxValue, max));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #3: " + mclslEmptyCatchEx.Message); }
     }
 
     private static string[] A(params string[] ids) => ids;
@@ -385,7 +408,14 @@ internal static class MclslTraitRegistration
         {
             string id = candidateIds[i];
             if (string.IsNullOrWhiteSpace(id)) continue;
-            try { if (actor.hasTrait(id)) return; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #4: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                if (actor.hasTrait(id)) return;
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #4: " + mclslEmptyCatchEx.Message);
+            }
         }
 
         for (int i = 0; i < candidateIds.Length; i++)
@@ -399,11 +429,11 @@ internal static class MclslTraitRegistration
                 actor.addTrait(trait, true);
                 return;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #5: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #5: " + mclslEmptyCatchEx.Message); }
         }
     }
 
-    internal static void SyncGiftTrait(Actor actor, int aptitude, bool allowEntry = true)
+    internal static void SyncGiftTrait(Actor actor, int aptitude, bool allowEntry = true, bool reconcileIdentity = true)
     {
         if (actor?.data == null) return;
         string target = GiftTraitIdForAptitude(aptitude);
@@ -419,7 +449,7 @@ internal static class MclslTraitRegistration
             // Annual validation is read-only when the gift is already correct.
             // Re-entering identity reconciliation here used to invalidate ranks
             // and force UI reconstruction even for an unchanged cultivator.
-            if (!MclslSpiritualRootSystem.HasCultivationPotential(actor))
+            if (reconcileIdentity && !MclslSpiritualRootSystem.HasCultivationPotential(actor))
                 MclslCultivationWake.EnsureAwake(actor, ensureEntryFromGift: allowEntry);
             return;
         }
@@ -427,15 +457,46 @@ internal static class MclslTraitRegistration
         {
             foreach (MclslAptitudeGiftDefinition gift in MclslAptitudeGiftCatalog.Gifts)
             {
-                try { if (gift.TraitId != target && actor.hasTrait(gift.TraitId)) actor.removeTrait(gift.TraitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (gift.TraitId != target && actor.hasTrait(gift.TraitId)) actor.removeTrait(gift.TraitId);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6: " + mclslEmptyCatchEx.Message);
+                }
                 string alias = TraitAliasId(gift.TraitId);
-                try { if (gift.TraitId != target && actor.hasTrait(alias)) actor.removeTrait(alias); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6-alias: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (gift.TraitId != target && actor.hasTrait(alias)) actor.removeTrait(alias);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6-alias: " + mclslEmptyCatchEx.Message);
+                }
                 string slashAlias = TraitPathAliasId(gift.TraitId);
-                try { if (gift.TraitId != target && actor.hasTrait(slashAlias)) actor.removeTrait(slashAlias); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-path-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6-path-alias: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (gift.TraitId != target && actor.hasTrait(slashAlias)) actor.removeTrait(slashAlias);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-path-alias", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #6-path-alias: " + mclslEmptyCatchEx.Message);
+                }
             }
-            try { if (!HasTraitWithAlias(actor, target)) actor.addTrait(target); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #7: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                if (!HasTraitWithAlias(actor, target)) actor.addTrait(target);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #7: " + mclslEmptyCatchEx.Message);
+            }
         });
         TryAutoCollectGift(actor, target);
+        // One-shot attribute grants must not manufacture a cultivation/root
+        // archive merely to synchronize the visible aptitude trait.
+        if (!reconcileIdentity) return;
         MclslCultivationWake.EnsureAwake(
             actor,
             ensureEntryFromGift: allowEntry,
@@ -504,8 +565,22 @@ internal static class MclslTraitRegistration
                 if (realm == bestRealm) continue;
                 string trait = TraitIdForRealm(realm);
                 string legacyTrait = LegacyTraitIdForRealm(realm);
-                try { if (HasTrait(actor, trait)) actor.removeTrait(trait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #8: " + mclslEmptyCatchEx.Message); }
-                try { if (!string.IsNullOrWhiteSpace(legacyTrait) && HasTrait(actor, legacyTrait)) actor.removeTrait(legacyTrait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #9: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (HasTrait(actor, trait)) actor.removeTrait(trait);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-8", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #8: " + mclslEmptyCatchEx.Message);
+                }
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(legacyTrait) && HasTrait(actor, legacyTrait)) actor.removeTrait(legacyTrait);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-9", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #9: " + mclslEmptyCatchEx.Message);
+                }
             }
         });
 
@@ -595,7 +670,7 @@ internal static class MclslTraitRegistration
             group.name = localeKey;
             group.color = color;
         }
-        catch (Exception ex) { Debug.LogWarning("[模拟长生路] 特质分组注册失败: " + ex.Message); }
+        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("trait.group-register", "[模拟长生路] 特质分组注册失败: " + ex.Message); }
     }
 
     internal static void SyncRealmTraitFamily(Actor actor, string realm)
@@ -610,11 +685,32 @@ internal static class MclslTraitRegistration
                 string ancientTrait = LegacyTraitIdForRealm(oldRealm);
                 bool keepNew = !useAncient && oldRealm == realm;
                 bool keepAncient = useAncient && oldRealm == realm && oldRealm != MclslRealmIds.ChangSheng;
-                try { if (!keepNew && HasTrait(actor, newTrait)) actor.removeTrait(newTrait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #10: " + mclslEmptyCatchEx.Message); }
-                try { if (!keepAncient && !string.IsNullOrWhiteSpace(ancientTrait) && HasTrait(actor, ancientTrait)) actor.removeTrait(ancientTrait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #11: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    if (!keepNew && HasTrait(actor, newTrait)) actor.removeTrait(newTrait);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-10", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #10: " + mclslEmptyCatchEx.Message);
+                }
+                try
+                {
+                    if (!keepAncient && !string.IsNullOrWhiteSpace(ancientTrait) && HasTrait(actor, ancientTrait)) actor.removeTrait(ancientTrait);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #11: " + mclslEmptyCatchEx.Message);
+                }
             }
             string target = useAncient && realm != MclslRealmIds.ChangSheng ? LegacyTraitIdForRealm(realm) : TraitIdForRealm(realm);
-            try { if (!string.IsNullOrWhiteSpace(target) && !actor.hasTrait(target)) actor.addTrait(target); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #12: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(target) && !actor.hasTrait(target)) actor.addTrait(target);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #12: " + mclslEmptyCatchEx.Message);
+            }
         });
     }
 
@@ -642,14 +738,21 @@ internal static class MclslTraitRegistration
             trait.show_in_meta_editor = visible;
             trait.can_be_given = visible;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #13: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #13: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void AddRealm(string realm, string icon, int order, float lifespan, float health, float damage, float speedMultiplier, float armor, bool ancient)
     {
         string id = ancient ? LegacyTraitIdForRealm(realm) : TraitIdForRealm(realm);
         ActorTrait trait = null;
-        try { trait = AssetManager.traits.get(id); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-14", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #14: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            trait = AssetManager.traits.get(id);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-14", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #14: " + mclslEmptyCatchEx.Message);
+        }
         bool add = trait == null;
         trait ??= new ActorTrait { id = id };
         trait.group_id = ancient ? AncientRealmGroupId : RealmGroupId;
@@ -816,7 +919,14 @@ internal static class MclslTraitRegistration
     private static void AddGift(MclslAptitudeGiftDefinition gift)
     {
         ActorTrait trait = null;
-        try { trait = AssetManager.traits.get(gift.TraitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-15", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #15: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            trait = AssetManager.traits.get(gift.TraitId);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-15", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #15: " + mclslEmptyCatchEx.Message);
+        }
         bool add = trait == null;
         trait ??= new ActorTrait { id = gift.TraitId };
         trait.group_id = GiftGroupId;
@@ -903,13 +1013,20 @@ internal static class MclslTraitRegistration
                 else if (property.PropertyType == typeof(float)) property.SetValue(target, (float)value);
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-16", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #16: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-16", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #16: " + mclslEmptyCatchEx.Message); }
     }
 
     private static void TrySetRarity(ActorTrait trait, int rarity)
     {
         if (trait == null || rarity < 0) return;
-        try { ((BaseTrait<ActorTrait>)(object)trait).rarity = (Rarity)rarity; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-17", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #17: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            ((BaseTrait<ActorTrait>)(object)trait).rarity = (Rarity)rarity;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-17", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #17: " + mclslEmptyCatchEx.Message);
+        }
         TrySet(trait, "rarity", rarity);
         TrySet(trait, "quality", rarity);
     }
@@ -930,13 +1047,20 @@ internal static class MclslTraitRegistration
             if (property != null && property.CanWrite && property.PropertyType == typeof(string))
                 property.SetValue(target, value ?? string.Empty);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-18", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #18: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-18", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #18: " + mclslEmptyCatchEx.Message); }
     }
 
     internal static void AddSpecial(string id, string icon, bool canBeGiven, bool showInEditor, float lifespan, float health, float damage, float speedMultiplier, float armor = 0f)
     {
         ActorTrait trait = null;
-        try { trait = AssetManager.traits.get(id); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-19", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #19: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            trait = AssetManager.traits.get(id);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-19", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #19: " + mclslEmptyCatchEx.Message);
+        }
         bool add = trait == null;
         trait ??= new ActorTrait { id = id };
         trait.group_id = SpecialGroupId;
@@ -985,6 +1109,17 @@ internal static class MclslTraitRegistration
             trait.group_id = ImmortalPathGroupId;
             ApplyNativeOrderingAndRarity(trait, order, rarity);
         }
+    }
+
+    private static void AddHeavenGrantAction(string id, string name, string description, int order)
+    {
+        RegisterProfessionText(id, name, description);
+        RegisterTraitInfo(id, "天敕玉印，点击即行。", description);
+        AddSpecial(id, "trait/MclslTiandaoEdict", true, true, 0f, 0f, 0f, 0f);
+        ActorTrait trait = AssetManager.traits.get(id);
+        if (trait == null) return;
+        trait.group_id = XuanHuangHeavenGroupId;
+        ApplyNativeOrderingAndRarity(trait, order, Rarity.R3_Legendary);
     }
 
     private static void AddHeavenFavorTrait()
@@ -1111,6 +1246,6 @@ internal static class MclslTraitRegistration
             BaseSystemData data = (BaseSystemData)actor.data;
             data.favorite = true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Error("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-20", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #20: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-20", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslTraitRegistration.cs #20: " + mclslEmptyCatchEx.Message); }
     }
 }
