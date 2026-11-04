@@ -1,9 +1,9 @@
 {
-  "baseCommit": "3829fdd9fd06e85353759f59699fff45cd573694",
+  "baseCommit": "960b4eae484eee3b4f428cedccd203bd953b14d4",
   "localDevelopment": true,
-  "sourceInputSha256": "d192a8f56d324eb2630ec24ab85c8b543b2572877a7b4e9f969822ade7f9732f",
-  "uncommittedChanges": false,
-  "worktreeStatusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sourceInputSha256": "15a8310b0e5f4c1cdf8b880541df24fff12b75ac9a8f09623a99ff19c82df76b",
+  "uncommittedChanges": true,
+  "worktreeStatusSha256": "c276f33813fb3cf1365a30743944e7826db7394abd66cbd10bdb20717c2e3f8a",
   "unityRetested": false,
   "files": {
     ".gitignore": {
@@ -678,25 +678,9 @@
       "bytes": 199621,
       "sha256": "124db68cb01e4e11508e0b77ae9c3bace5a6326973d727964010578ac40fd3c7"
     },
-    "GameResources/effects/Spells/S002.png": {
-      "bytes": 206584,
-      "sha256": "02eae3000610fa47f528f23390a51adee7205ed99117dc3b4b8d534f118528cc"
-    },
-    "GameResources/effects/Spells/S003.png": {
-      "bytes": 204379,
-      "sha256": "81add0032e8fc032647ab2ed9a4710f6290de0c976ab74894923e08e11ea0ad8"
-    },
     "GameResources/effects/Spells/S004.png": {
       "bytes": 198089,
       "sha256": "fd91f9a095102e833d10a31ead9be5465323d29a5cb6117ac226ac3a44281007"
-    },
-    "GameResources/effects/Spells/S005.png": {
-      "bytes": 236956,
-      "sha256": "42573462dae827851113dd7b6f4e19f94a7ad2b11153271aff28d5cd4c24bec8"
-    },
-    "GameResources/effects/Spells/S006.png": {
-      "bytes": 158172,
-      "sha256": "c792451d6e35b8e3f9cfef070cec9f2c9d07402a0821d8e6c7143742d46473cd"
     },
     "GameResources/effects/Spells/S007.png": {
       "bytes": 171469,
@@ -714,10 +698,6 @@
       "bytes": 229036,
       "sha256": "d7444581773047317073ba8d03880fade56cd541e9213d9f45551aa37189aa93"
     },
-    "GameResources/effects/Spells/S011.png": {
-      "bytes": 185734,
-      "sha256": "b2f67a61279424accc55ec643f153c62afe20ae3f6d45f0b0b351aceafea0d05"
-    },
     "GameResources/effects/Spells/S012.png": {
       "bytes": 208538,
       "sha256": "3245f06d4e541e1fe04cf865bde1aeb0fb5e74ec3adffeb6d76ea630cd7bb04f"
@@ -725,10 +705,6 @@
     "GameResources/effects/Spells/S013.png": {
       "bytes": 164259,
       "sha256": "4e81f9eb22f6396a6214c6e57a42156a65ecb9418e5f146cd26b400ff61de78e"
-    },
-    "GameResources/effects/Spells/S014.png": {
-      "bytes": 181027,
-      "sha256": "464df632ae1789a5a190bc15207966d522daa862fc99d5779fa18ac80cbdf31e"
     },
     "GameResources/effects/Spells/S015.png": {
       "bytes": 158267,
@@ -742,17 +718,9 @@
       "bytes": 233524,
       "sha256": "4ed7ed4edcc09bc982e8d0079d1172112fa8e61ae7210b312b6f84e0f28b101c"
     },
-    "GameResources/effects/Spells/S018.png": {
-      "bytes": 249603,
-      "sha256": "f4e99b3129f584ecb7cb5fedf4d0e4f713e3a33c9254c4afbde82b850c492b11"
-    },
     "GameResources/effects/Spells/S019.png": {
       "bytes": 236007,
       "sha256": "242c0e3a5bb7adb81a073e3d39de3e22d6d2082a4bf2fdff0cbe163d99cec1d8"
-    },
-    "GameResources/effects/Spells/S020.png": {
-      "bytes": 278655,
-      "sha256": "622f7d4f6e89bae5dcaf40932f549de48ddb82a44411763407313ee8e2b788b3"
     },
     "GameResources/effects/Spells/S021.png": {
       "bytes": 186947,
@@ -765,14 +733,6 @@
     "GameResources/effects/Spells/S023.png": {
       "bytes": 309355,
       "sha256": "71b0512da0330ae17993cb62fdc9941c57a615f4c127c5ae925f3ff29b0f2339"
-    },
-    "GameResources/effects/Spells/S024.png": {
-      "bytes": 252441,
-      "sha256": "0f9b894e627cc924d2d6db85029366f6bd6a9b162946263a46596d28b4969eba"
-    },
-    "GameResources/effects/Spells/S025.png": {
-      "bytes": 330865,
-      "sha256": "5f635f9c9d1623ffdd1105eb59f452938fa24941beeb3c9733f037c0f70b68b0"
     },
     "GameResources/effects/Spells/S026.png": {
       "bytes": 281146,
@@ -9443,20 +9403,20 @@
       "sha256": "76444baad9d18f1c5d7f702d5e04385a5e0a7b9a87852dadbdd99c62eb28258e"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerBattleState.cs": {
-      "bytes": 1549,
-      "sha256": "3b65a1a511993473d5339052ef6a26b50c5285a9e3c0a94bcac1b73d7ff8959f"
+      "bytes": 1454,
+      "sha256": "92d5d6736217c7bbf386c12f14d87bc74ccbfd8881f6f5f66b90cdaaf8c72ef7"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerCombat.cs": {
-      "bytes": 39165,
-      "sha256": "7285e7c1288dac99fc1cf27e2d0e73bae715ee01f41ee9086d9b36a93f7e1520"
+      "bytes": 35276,
+      "sha256": "c41f255bc209e075100b2b9d9179941c2038e0c837e2c9fe4b75d103ab384d75"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerContract.cs": {
-      "bytes": 22091,
-      "sha256": "2131950a5e225c9051cfea9053c39e7a465851c3d37bfef5e3e8f8105f2cf431"
+      "bytes": 22060,
+      "sha256": "c5f4d16be99ec614bf33f2c5e927686bf5227ea19d6a6586f86a88bc9bad804a"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerStateValidation.cs": {
-      "bytes": 4564,
-      "sha256": "732ab67726c6e3557de1c44a1660dbb929ea889e469bce0b27ceb09b313bbd6b"
+      "bytes": 4455,
+      "sha256": "2545c6f9503ce796d4c33e963887127b95464571f30ca9fc707894abc3c2e3ca"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerSupply.cs": {
       "bytes": 5025,
@@ -9507,8 +9467,8 @@
       "sha256": "069c43ef9d0a5e62ea29d25135ed454ac45c36a511b1e83a1719c17371e94bb5"
     },
     "code/MySimulatedLongevityRoad/Systems/Crafting/MclslItemEconomy.cs": {
-      "bytes": 40524,
-      "sha256": "ff6cae70e8cb9645a0b832565ad9d21ea9597c4848a18fa2c35f3e1278d1c51b"
+      "bytes": 38542,
+      "sha256": "361995e684b7db94db3b7134b47e3c199d2d1fab97f973fc96dcb04dc484cacf"
     },
     "code/MySimulatedLongevityRoad/Systems/Crafting/MclslItemUseSystem.cs": {
       "bytes": 27987,
@@ -9587,8 +9547,8 @@
       "sha256": "1dea3ffbb1b1a125da4b36bee22467019da8602d97181c66d61c8cfd6431768e"
     },
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs": {
-      "bytes": 61536,
-      "sha256": "ea0052d1182cf11a9b2866b134f26cf1979ebfc39375f7d7caeca74929534d4d"
+      "bytes": 45774,
+      "sha256": "75c3774fcbb3afdab94eb9ada3de81046303f188e5a996ee8f9605dfbfe5aaa8"
     },
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystemIds.cs": {
       "bytes": 219,
@@ -9609,10 +9569,6 @@
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslMortalFateEventSystem.cs": {
       "bytes": 5287,
       "sha256": "cd6e13c84521a04b65060a8d4138d8f8404cf02ac6b5af4bfca427cfd983aba7"
-    },
-    "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslMortalSeparationSystem.cs": {
-      "bytes": 1956,
-      "sha256": "59333e3b067b77ec3d5e7d8fc284545cbdef8199ac2313219f60d53a1bd0fe64"
     },
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslNewLawBreakthroughSystem.cs": {
       "bytes": 14051,
@@ -9659,8 +9615,8 @@
       "sha256": "f18a6ebc491512e478c752f9ada599c543142852f7482ddf7be76c15d7229013"
     },
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellSystem.cs": {
-      "bytes": 57629,
-      "sha256": "977e1f643e33756c872e884836da2def6a59361423afea1aabaaf2c9af8c1f03"
+      "bytes": 57482,
+      "sha256": "ddc9d148ff7a00edaec632fef9b9656af57df6d759e7122f45a2015800f78649"
     },
     "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpiritualRootEntrySystem.cs": {
       "bytes": 3456,
@@ -9695,8 +9651,8 @@
       "sha256": "9b10bf06e937bdf3931c04937dfab2cd261c639f4faf5b4e02650cf57b2bc594"
     },
     "code/MySimulatedLongevityRoad/Systems/Death/MclslDeathSystem.cs": {
-      "bytes": 39642,
-      "sha256": "30578092435f2a8c741e5c4b2a1288711ab5e87050bbbfa5785a74fefdb337ea"
+      "bytes": 39492,
+      "sha256": "43e881a7d0525517ddd48af42b0bcff67e1cfbc94f2320f2ccdbc9dac48ccf6a"
     },
     "code/MySimulatedLongevityRoad/Systems/Death/MclslMortalMiasmaSystem.cs": {
       "bytes": 4842,
@@ -9759,8 +9715,8 @@
       "sha256": "68f463fd78cc69aa18fe5f23dba9b22015560608917023034f2fa50b30d692e0"
     },
     "code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs": {
-      "bytes": 90358,
-      "sha256": "889b559814e41c50ebd1905b68c8e82a78a10b21977f26c1c07febe2a063d04c"
+      "bytes": 88230,
+      "sha256": "3ced14e118fb98ca66d824279877c0755e367711bd8aba0e089f6c7cf166e4c0"
     },
     "code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslMaobaoArchiveManager.cs": {
       "bytes": 14537,
@@ -9903,8 +9859,8 @@
       "sha256": "27526d98144d3f88342223183400bf9ad0ae8c3a2d7144ae67880968fd8bbf42"
     },
     "code/MySimulatedLongevityRoad/Systems/WorldResources/MclslGeneratedObjectFactory.cs": {
-      "bytes": 23748,
-      "sha256": "8d2e1f44bc7826de3efb6a3f6ad5c7091a345c606ff5640c7fd3b4511183bc34"
+      "bytes": 23411,
+      "sha256": "9f3ae1b67d1732f274cad117367fe4e7c192d9f2284ef0d622a03bcffea71684"
     },
     "code/MySimulatedLongevityRoad/Systems/WorldResources/MclslMapLocationResolver.cs": {
       "bytes": 4308,
@@ -9923,8 +9879,8 @@
       "sha256": "42a819014137577e9b2be64cf30c78dc7afc18e133d35a48686924a34c0aa356"
     },
     "code/MySimulatedLongevityRoad/Systems/WorldResources/MclslWorldCalamitySystem.cs": {
-      "bytes": 14436,
-      "sha256": "19138567ee80cf39661a87500dffb1c19dcba4eab1034cb901f1decff16cb515"
+      "bytes": 14100,
+      "sha256": "c46ba564e837a137468b88388c1d25fc6508bafbb59db328192000b8ac4e5c60"
     },
     "code/MySimulatedLongevityRoad/Systems/WorldResources/MclslWorldCaveSystem.cs": {
       "bytes": 28365,
@@ -9971,8 +9927,8 @@
       "sha256": "5a4ac991f54e10390d5236711aa62dac9440f17ac9c16e9f699afc6ba4d7344a"
     },
     "code/MySimulatedLongevityRoad/Systems/WorldSoul/MclslWorldSoulSystem.cs": {
-      "bytes": 36737,
-      "sha256": "d83f7cd65b1d89f49159f5e6ac907b0fa6a327386b4b48528ddf2438b983e703"
+      "bytes": 34941,
+      "sha256": "11bf505f5938a28a4fa6e0ab15d9a672da4b39d7ed3e2007613c05322d70ea4e"
     },
     "code/MySimulatedLongevityRoad/Traits/MclslBeastActorRegistration.cs": {
       "bytes": 13473,
@@ -10003,8 +9959,8 @@
       "sha256": "2cd6e0fb870578c2ad15a693c20a7880512d14bbed0b22b1de7559a2da255d62"
     },
     "code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs": {
-      "bytes": 48491,
-      "sha256": "9915213326585a6ac11ac8a6b700a9437d0e736e285059a07d9c24995c4dcfd8"
+      "bytes": 47503,
+      "sha256": "c59de410c86545484a870ceaf711e31737100d228a600fd0ae2392fb691b2ba9"
     },
     "code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorTypes.cs": {
       "bytes": 2878,
@@ -10059,8 +10015,8 @@
       "sha256": "50851429b6b2c5c6ffa11ec857833e2af2fdcd96dec85eb464fe7b206a749f5f"
     },
     "code/MySimulatedLongevityRoad/UI/MclslCodexSnapshot.cs": {
-      "bytes": 33397,
-      "sha256": "45bb6665cb7a1beddb9f4b916ba619ecc40cbe03f996114ca20612f3b83af156"
+      "bytes": 32038,
+      "sha256": "d50331c8795cb136a291c26191dc329a582ef64c950e553aa682f710b5928ece"
     },
     "code/MySimulatedLongevityRoad/UI/MclslCodexTabs.cs": {
       "bytes": 2723,
@@ -10115,8 +10071,8 @@
       "sha256": "f55161dc274d3c717bd6c13fcc5c22ae36772c568f4495d37816f3a9d053224a"
     },
     "code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs": {
-      "bytes": 129424,
-      "sha256": "b80160d7bf0f833d067c0d9d8a4e6eff00f0cd483a540c92d6554a20b62eb0ae"
+      "bytes": 126751,
+      "sha256": "7eabb052ef98c9ae2f726805bcfd8aa7de348b80f76ee1fac9d9943703e50299"
     },
     "code/MySimulatedLongevityRoad/UI/MclslContractInfoBar.cs": {
       "bytes": 18295,
@@ -10139,8 +10095,8 @@
       "sha256": "1729738702cd2548b2af0b8927094b8b5611e6547ea58a136cc9786101b08fd6"
     },
     "code/MySimulatedLongevityRoad/UI/MclslFeatureWindow.cs": {
-      "bytes": 87569,
-      "sha256": "b60b7d02b22454e80a2938ae56f064edc9d02b195e6dd453006ae5c40369f5d4"
+      "bytes": 86588,
+      "sha256": "7ce6a2adbd75ac5bd425e332c89afe3396d1b4930aaef8ce34887502a0b63246"
     },
     "code/MySimulatedLongevityRoad/UI/MclslFpsOverlay.cs": {
       "bytes": 8086,
@@ -16484,11 +16440,11 @@
   "compressionStats": {
     "optimizedImages": 1147,
     "metadataImagesKept": 492,
-    "imageBytesBefore": 84360772,
-    "imageBytesAfter": 69935334,
+    "imageBytesBefore": 82076356,
+    "imageBytesAfter": 67650918,
     "soulAtlas": {
       "frames": 0
     },
-    "runtimeImageDataBytesAfter": 69935334
+    "runtimeImageDataBytesAfter": 67650918
   }
 }

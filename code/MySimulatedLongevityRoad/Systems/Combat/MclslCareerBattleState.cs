@@ -17,8 +17,8 @@ internal sealed class MclslCareerSummon
 {
     public long Unit;
     public int Kind;
-    public double Expires, Pulse;
-    // 灵契师单契灵：Bound 表示终身绑定，Expires 不再生效；NextAttack / NextHeal 为隼、鹿的节拍。
+    public double Pulse;
+    // 灵契师单契灵：Bound 表示终身绑定；NextAttack / NextHeal 为隼、鹿的节拍。
     public bool Bound;
     public double NextAttack, NextHeal;
 }
@@ -36,8 +36,8 @@ internal sealed class MclslCareerBattleState
     public int Career, Sword, Rage, Elements, LastElement;
     public bool Counter, FullCycle;
     public double LastAction, NextDecision, GuardUntil, ResonanceUntil, UnloadUntil, NextPassiveEffect, NextAudio, Clock;
-    // 契约相关计时：灵息灌注到期、宠物每秒属性刷新节拍。
-    public double PetBuffUntil, NextPetUpdate;
+    // 灵息灌注到期时刻。
+    public double PetBuffUntil;
     public bool BoutHostileHit, BoutCast;
     public MclslCareerCast Cast;
     public Dictionary<long,MclslCareerMark> Marks = new();

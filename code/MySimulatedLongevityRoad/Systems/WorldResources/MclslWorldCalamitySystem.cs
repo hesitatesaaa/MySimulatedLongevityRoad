@@ -265,15 +265,6 @@ internal static class MclslWorldCalamitySystem
         };
     }
 
-    private static bool HasFired(MclslWorldRunState run, string key)
-    {
-        run.FiredHistoricalEvents ??= new();
-        for (int i = 0; i < run.FiredHistoricalEvents.Count; i++)
-            if (string.Equals(run.FiredHistoricalEvents[i], key, StringComparison.Ordinal))
-                return true;
-        return false;
-    }
-
     private static int StableHash(string value)
     {
         unchecked

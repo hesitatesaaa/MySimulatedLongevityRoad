@@ -130,7 +130,7 @@ internal static partial class MclslCareerCombat
         battle.Summons.Clear();
         if (keep != null)
         {
-            keep.Bound = true; keep.Expires = 0;
+            keep.Bound = true;
             battle.Summons.Add(keep);
         }
         state.ContractKind = keep != null ? keep.Kind
@@ -164,7 +164,7 @@ internal static partial class MclslCareerCombat
         ApplyPetBaseStats(owner, pet, kind, true);
         var summon = new MclslCareerSummon
         {
-            Unit = MclslActorAccessor.Id(pet), Kind = kind, Bound = true, Expires = 0, Pulse = Now,
+            Unit = MclslActorAccessor.Id(pet), Kind = kind, Bound = true, Pulse = Now,
             NextAttack = Now + MclslContractRules.FalconIntervalSeconds,
             NextHeal = Now + MclslContractRules.DeerIntervalSeconds,
         };

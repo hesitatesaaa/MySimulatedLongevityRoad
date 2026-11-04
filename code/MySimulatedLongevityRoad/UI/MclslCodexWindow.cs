@@ -307,10 +307,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.EndVertical();
     }
 
-    private bool IsBiographyPage() => !_standaloneHuanzhenSpace && !_standaloneMaobao
-        && _historyBookView == HistoryBiographyView
-        && CurrentTabTitle() == "玄黄史册";
-
     private void DrawCodexShortcuts()
     {
         GUILayout.BeginVertical(XianLuUIStyles.PanelStyle, GUILayout.Width(180f), GUILayout.ExpandHeight(true));
@@ -1264,27 +1260,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
     }
 
-    private void DrawFoundationWonders(MclslWorldRunState run)
-    {
-        DrawPageHeader("筑基奇物谱", "天地奇物分人之奇、地之奇、天之奇。人之奇分上中下品；地之奇重完整度与规则规模；天之奇极罕见，可支撑更高大道但极难悟解。");
-        List<MclslGeneratedItemRecord> wonders = _snapshot.FoundationWondersSorted;
-        GUILayout.BeginHorizontal();
-        DrawOverviewPill("本世奇物", wonders.Count.ToString(), "#FFD37A", GUILayout.Width(170));
-        DrawOverviewPill("天之奇", _snapshot.FoundationHeavenCount.ToString(), "#FF5A5A", GUILayout.Width(150));
-        DrawOverviewPill("地之奇", _snapshot.FoundationEarthCount.ToString(), "#9CD7FF", GUILayout.Width(150));
-        DrawOverviewPill("已炼化", _snapshot.FoundationRefinedCount.ToString(), "#9CD7FF", GUILayout.Width(170));
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        GUILayout.Space(8);
-        if (wonders.Count == 0) GUILayout.Label("本世尚未生成筑基奇物。");
-        foreach (MclslGeneratedItemRecord item in wonders)
-        {
-            string rank = MclslGeneratedObjectFactory.FoundationRankText(item);
-            string color = MclslGeneratedObjectFactory.FoundationRankColor(item.Category);
-            DrawItemCard(item.Name, rank, MclslActorArchiveText.ReplaceTags(item.LawTags), DisplayHolder(item), item.Origin, RootText(item), item.Description, color);
-        }
-    }
-
     private void DrawCaves(MclslWorldRunState run)
     {
         DrawPageHeader("元婴洞天与天地之精", "金丹圆满者按法则适配、金丹纯度协调、洞天残图、心境共同争夺；每次炼化都会消耗天地之精并损耗洞天完整度。");
@@ -1663,11 +1638,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         return snapshot?.StringState != null && snapshot.StringState.TryGetValue(key, out string value) ? value : string.Empty;
     }
 
-    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key)
-    {
-        return snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
-    }
-
     private void DrawHuanzhenLegacyColumn(MclslHuanzhenExternalState state)
     {
         GUILayout.BeginVertical(XianLuUIStyles.PanelStyle,
@@ -1823,21 +1793,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         string label = legacy.ClaimedChoices?.Contains(option.Id) == true ? "取消占位｜" + option.Label : "保留｜" + option.Label;
         return Mathf.Max(34f, _buttonStyle.CalcHeight(new GUIContent(label), Mathf.Max(20f, width)));
-    }
-
-    private void DrawLegacyTraitButton(MclslHuanzhenLegacyRecord legacy, string traitId)
-    {
-        string choice = "trait:" + traitId;
-        bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
-        bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && !claimed && MclslHuanzhenSystem.LegacySelectionLimit() > 0 && (legacy.ClaimedChoices?.Count ?? 0) < MclslHuanzhenSystem.LegacySelectionLimit();
-        string name = MclslHuanzhenSystem.TraitDisplayNameById(traitId);
-        if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
-        {
-            MclslHuanzhenSystem.TryClaimLegacyTrait(legacy.Id, traitId, out _huanzhenActionMessage);
-            BeginSnapshot();
-        }
-        GUI.enabled = oldEnabled;
     }
 
     private static void DrawResourceRules()

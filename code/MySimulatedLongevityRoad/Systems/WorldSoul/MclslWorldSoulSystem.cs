@@ -251,38 +251,6 @@ internal static partial class MclslWorldSoulSystem
         MclslWorldArchiveStore.MarkDirty();
     }
 
-    internal static void ReconcileRestoredHolder(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, int year)
-    {
-        if (actor?.data == null || snapshot == null || string.IsNullOrWhiteSpace(snapshot.WorldSoulId)) return;
-        MclslWorldSoulRecord soul = FindSoulById(snapshot.WorldSoulId);
-        if (soul == null) return;
-
-        // 锚点中的历史可能尚未发生夺魄，但还真明确保留死前修为；因此以还真者的死前魄位覆盖锚点旧状态。
-        Actor manifest = FindActor(soul.ManifestActorId);
-        if (MclslActorAccessor.Alive(manifest))
-        {
-            try
-            {
-                MclslWorldSoulActorRegistration.ForgetActorRuntime(MclslActorAccessor.Id(manifest));
-                MclslActorAccessor.Set(manifest, MclslActorDataKeys.WorldSoulEntityId, string.Empty);
-                ActorTrait marker = AssetManager.traits.get(MclslTraitRegistration.WorldSoulEntityTraitId);
-                if (marker != null && manifest.hasTrait(marker.id)) manifest.removeTrait(marker.id);
-                MclslNativeKillStatisticsSystem.DetachScriptedDeathAttacker(manifest);
-                manifest.die(true, AttackType.Other, true, true);
-            }
-            catch (Exception ex) { MclslDiagnostics.Error("world-soul-huanzhen-clear-manifest", "还真覆盖魄位时清理旧显化体失败: " + ex.Message); }
-        }
-        soul.ManifestActorId = 0;
-        soul.ManifestActorName = string.Empty;
-        soul.State = "已祭炼";
-        soul.HolderActorId = MclslActorAccessor.Id(actor);
-        soul.HolderActorName = SafeName(actor);
-        soul.HolderYear = year;
-        soul.HolderOrigin = "还真保留死前祭魄合道结果";
-        soul.NextManifestYear = 0;
-        MclslWorldArchiveStore.MarkDirty();
-    }
-
     internal static bool IsWorldSoulActor(Actor actor) => actor?.data != null && !string.IsNullOrWhiteSpace(MclslActorAccessor.GetString(actor, MclslActorDataKeys.WorldSoulEntityId, string.Empty));
 
     internal static bool TryManualManifest(string soulId)

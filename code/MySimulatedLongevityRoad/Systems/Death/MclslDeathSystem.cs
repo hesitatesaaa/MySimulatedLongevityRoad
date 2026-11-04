@@ -522,9 +522,6 @@ internal static class MclslDeathSystem
         return MclslRealmIds.Display(s.RealmId) + "修士" + name;
     }
 
-    private static string LongevityTitle(in MclslDeathSnapshot s) =>
-        DeathHonorific(s, IsAncientDeath(s) ? "古道道祖" : "无名天尊");
-
     private static string DeathHonorific(in MclslDeathSnapshot s, string fallback)
     {
         string actorName = string.IsNullOrWhiteSpace(s.ActorName) ? string.Empty : s.ActorName.Trim();

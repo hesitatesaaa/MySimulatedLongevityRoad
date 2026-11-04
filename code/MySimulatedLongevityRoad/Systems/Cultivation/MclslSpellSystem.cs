@@ -546,9 +546,6 @@ internal static class MclslSpellSystem
                 + "，灵力=" + (mana - spell.ManaCost) + "，特效=" + (shown ? "已生成" : "未生成"));
     }
 
-    private static bool IsAreaAttack(string spellId) => spellId is
-        "S010" or "S012" or "S015" or "S019" or "S022" or "S023" or "S026";
-
     internal static void TryCastCombat(Actor actor)
     {
         if (!MclslActorAccessor.Alive(actor) || actor.attack_target is not Actor target || !MclslActorAccessor.Alive(target)) return;

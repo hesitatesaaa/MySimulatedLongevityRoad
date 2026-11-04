@@ -141,12 +141,6 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
     private Texture2D _bagSelectedSlotTexture;
 
     internal static void ShowGuide() => Show(Page.Guide, null);
-    internal static void ShowBag(Actor actor = null)
-    {
-        if(actor==null)MclslMaobaoCommands.TryGetSelectedActor(out actor);
-        if(!MclslBagSystem.Supports(actor))return;
-        Show(Page.Bag,actor);
-    }
     internal static void ShowMarket(Actor actor = null) => Show(Page.Market, actor);
 
     private static void Show(Page page, Actor actor)
@@ -1669,23 +1663,4 @@ internal sealed partial class MclslFeatureWindow : MonoBehaviour
         return texture;
     }
 
-    private static Texture2D PixelPanel(Color fill, Color edge, Color highlight)
-    {
-        const int size = 12;
-        Texture2D texture = new(size, size, TextureFormat.RGBA32, false)
-        {
-            filterMode = FilterMode.Point,
-            wrapMode = TextureWrapMode.Clamp
-        };
-        Color32[] pixels = new Color32[size * size];
-        for (int y = 0; y < size; y++)
-        for (int x = 0; x < size; x++)
-        {
-            int distance = Math.Min(Math.Min(x, size - 1 - x), Math.Min(y, size - 1 - y));
-            pixels[y * size + x] = distance == 0 ? edge : distance == 1 ? highlight : fill;
-        }
-        texture.SetPixels32(pixels);
-        texture.Apply(false, true);
-        return texture;
-    }
 }

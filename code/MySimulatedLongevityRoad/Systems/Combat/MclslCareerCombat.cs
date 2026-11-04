@@ -176,34 +176,11 @@ internal static partial class MclslCareerCombat
     }
     private static Actor Resolve(long id) => MclslActorAccessor.Resolve(id);
     private static bool Enemy(Actor owner,Actor target)=>MclslCombatTargets.IsEnemy(owner,target);
-    private static bool Injured(Actor actor)=>actor.getHealth()<actor.getMaxHealth();
-    private static bool HasThreeDistinctSummonKinds(MclslCareerBattleState battle)
-    {
-        int mask=0,count=0;
-        for(int i=0;i<battle.Summons.Count;i++)
-        {
-            int bit=1<<(battle.Summons[i].Kind&31);
-            if((mask&bit)!=0)continue;
-            mask|=bit;
-            if(++count>=3)return true;
-        }
-        return false;
-    }
     // Allocation-free membership tests used on the per-decision / per-hit paths
-    // that previously built a LINQ Any() closure over the zone/summon lists.
+    // that previously built a LINQ Any() closure over the zone list.
     private static bool ZoneHasTier(MclslCareerBattleState battle,int tier)
     {
         for(int i=0;i<battle.Zones.Count;i++)if(battle.Zones[i].Tier==tier)return true;
-        return false;
-    }
-    private static bool SummonHasKind(MclslCareerBattleState battle,int kind)
-    {
-        for(int i=0;i<battle.Summons.Count;i++)if(battle.Summons[i].Kind==kind)return true;
-        return false;
-    }
-    private static bool SummonKindActive(MclslCareerBattleState battle,int kind)
-    {
-        for(int i=0;i<battle.Summons.Count;i++){var s=battle.Summons[i];if(s.Kind==kind&&s.Expires>Now)return true;}
         return false;
     }
     // Reusable scan buffers: Nearby always hands callers a fresh array copy, so the
@@ -281,7 +258,6 @@ internal static partial class MclslCareerCombat
             TickZones(owner,battle);
             if(generation!=_generation)return;
             if(ownerState.Career==5) TickSpirit(owner,battle,ownerState);
-            else TickSummons(owner,battle);
             if(generation!=_generation)return;
             if(Now>=battle.NextDecision)
             {
@@ -507,54 +483,6 @@ internal static partial class MclslCareerCombat
     private static readonly Dictionary<long,Protection> Protections=new();
     private static void AddProtection(Actor target,Actor owner,double duration)
         =>Protections[MclslActorAccessor.Id(target)]=new Protection{Owner=MclslActorAccessor.Id(owner),Until=Now+duration};
-    private static void SpawnSpirit(Actor owner,MclslCareerBattleState battle,int kind)
-    {
-        Actor spirit=World.world.units.createNewUnit("mclsl_career_spirit_"+kind,owner.current_tile,false,0,null,null,true,false,false,false);
-        if(owner.kingdom!=null)spirit.setKingdom(owner.kingdom);
-        spirit.stats["health"]=Math.Max(20,owner.getMaxHealth()*(kind==1?0.4f:0.2f));
-        spirit.stats["damage"]=Math.Max(1,owner.stats.get("damage")*(kind==1?0.15f:0.3f));
-        spirit.restoreHealthPercent(1);
-        var summon=new MclslCareerSummon { Unit=MclslActorAccessor.Id(spirit),Kind=kind,Expires=Now+(12+kind*3)*(Passive(owner,1)?1.2:1),Pulse=Now };
-        battle.Summons.Add(summon);SummonOwners[summon.Unit]=battle.Owner;
-        MclslWorldActorQuery.Track(spirit);
-    }
-    private static void TickSummons(Actor owner,MclslCareerBattleState battle)
-    {
-        for(int i=battle.Summons.Count-1;i>=0;i--)
-        {
-            var summon=battle.Summons[i];Actor unit=Resolve(summon.Unit);
-            if(!MclslActorAccessor.Alive(unit)||Now>=summon.Expires)
-            {SummonOwners.Remove(summon.Unit);if(MclslActorAccessor.Alive(unit))unit.dieAndDestroy((AttackType)11);battle.Summons.RemoveAt(i);continue;}
-            if(Now<summon.Pulse)continue;summon.Pulse=Now+1;
-            if(owner.kingdom!=null&&unit.kingdom!=owner.kingdom)unit.setKingdom(owner.kingdom);
-            if(owner.attack_target is Actor target && Enemy(owner,target))
-            {
-                unit.attack_target=target;unit.beh_actor_target=target;unit.has_attack_target=true;
-                if(summon.Kind==2&&Vector2.Distance(unit.current_position,target.current_position)<10)
-                {
-                    float factor=battle.ResonanceUntil>Now?1.3f:1;
-                    if(Passive(owner,5)&&HasThreeDistinctSummonKinds(battle))factor*=1.25f;
-                    factor*=1f+MclslPhysiqueSystem.CareerDamagePercent(owner,5)/100f;
-                    int before=target.getHealth();
-                    MclslSpellCasting.DealDamage(unit,target,owner.stats.get("damage")*0.2f*factor,"雷");
-                    if(target.getHealth()<before)HostileHit(owner);
-                }
-            }
-            if(summon.Kind==3)
-            {
-                int healLimit=3;
-                Actor[] allyUnits=Nearby(owner,unit.current_tile,4);
-                for(int ai=0;ai<allyUnits.Length && healLimit>0;ai++)
-                {
-                    Actor ally=allyUnits[ai];
-                    if(!Friendly(owner,ally)||!ally.has_attack_target||!Injured(ally))continue;
-                    healLimit--;
-                    int before=ally.getHealth();ally.restoreHealthPercent(Passive(owner,4)?0.036f:0.03f);
-                    if(ally.getHealth()>before){Touch(owner);if(Passive(owner,4))PassiveFx(owner,4,ally);}
-                }
-            }
-        }
-    }
     internal static float Incoming(Actor victim,Actor attacker,float damage)
     {
         if(_loadState.Status!=MclslModuleLoadStatus.Ready)return damage;

@@ -56,7 +56,6 @@ internal static class MclslCareerStateValidation
         b.UnloadUntil=Shift(b.UnloadUntil,shift);b.NextPassiveEffect=Shift(b.NextPassiveEffect,shift);b.NextAudio=Shift(b.NextAudio,shift);
         // 0 表示“未开始/立即”，不能被 shift 变成未来时刻。
         if(b.PetBuffUntil!=0)b.PetBuffUntil=Shift(b.PetBuffUntil,shift);
-        if(b.NextPetUpdate!=0)b.NextPetUpdate=Shift(b.NextPetUpdate,shift);
         if(b.Cast!=null)
         {
             if(b.Cast.Tier<1||b.Cast.Tier>5||b.Cast.Phase<0||b.Cast.Phase>1||b.Cast.Target<=0)
@@ -79,7 +78,7 @@ internal static class MclslCareerStateValidation
         foreach(var s in b.Summons)
         {
             if(s==null||s.Unit<=0||s.Kind<0||s.Kind>3)throw new InvalidOperationException("Invalid career summon");
-            s.Expires=Shift(s.Expires,shift);s.Pulse=Shift(s.Pulse,shift);
+            s.Pulse=Shift(s.Pulse,shift);
             if(s.NextAttack!=0)s.NextAttack=Shift(s.NextAttack,shift);
             if(s.NextHeal!=0)s.NextHeal=Shift(s.NextHeal,shift);
         }

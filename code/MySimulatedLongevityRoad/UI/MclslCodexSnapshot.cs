@@ -93,7 +93,6 @@ internal sealed class MclslCodexSnapshot
     internal readonly List<MclslActorReincarnationRecord> ReincarnationRecordsSorted = new();
     internal readonly List<MclslHuanzhenAnchorRecord> HuanzhenAnchorsSorted = new();
     internal readonly List<MclslHuanzhenHistoryRecord> HuanzhenHistoriesSorted = new();
-    internal readonly List<MclslGeneratedItemRecord> FoundationWondersSorted = new();
     internal readonly List<MclslFactionMissionRecord> WanXianRecentMissions = new();
     internal readonly Dictionary<string, List<MclslFactionMissionRecord>> AncientSectRecentMissions = new(StringComparer.Ordinal);
     internal readonly List<MclslFactionPressureRecord> WanXianRecentPressure = new();
@@ -107,9 +106,6 @@ internal sealed class MclslCodexSnapshot
     internal int ReversedPlayerTruthCount;
     internal int ReincarnationPendingCount;
     internal int ReincarnationAppliedCount;
-    internal int FoundationHeavenCount;
-    internal int FoundationEarthCount;
-    internal int FoundationRefinedCount;
 
     internal static MclslCodexSnapshot Build()
     {
@@ -416,24 +412,6 @@ internal sealed class MclslCodexSnapshot
             take: 200);
         try { while (view14.MoveNext()) yield return null; }
         finally { (view14 as IDisposable)?.Dispose(); }
-
-        yield return null;
-        List<MclslGeneratedItemRecord> generatedItems = run.GeneratedItems ?? new List<MclslGeneratedItemRecord>();
-        IEnumerator view15 = MclslBudgetedView.Sort(generatedItems,
-            snapshot.FoundationWondersSorted,
-            (a, b) => MclslBudgetedView.Compare(a.CreatedYear, b.CreatedYear, true),
-            filter: x => x != null && x.Kind == MclslGeneratedKinds.FoundationWonder,
-            take: 240);
-        try { while (view15.MoveNext()) yield return null; }
-        finally { (view15 as IDisposable)?.Dispose(); }
-        for (int i = 0; i < snapshot.FoundationWondersSorted.Count; i++)
-        {
-            if (i > 0 && (i & 31) == 0) yield return null;
-            MclslGeneratedItemRecord wonder = snapshot.FoundationWondersSorted[i];
-            if (wonder.Category == MclslGeneratedObjectFactory.FoundationHeaven) snapshot.FoundationHeavenCount++;
-            if (wonder.Category == MclslGeneratedObjectFactory.FoundationEarth) snapshot.FoundationEarthCount++;
-            if (!string.IsNullOrWhiteSpace(wonder.HolderName)) snapshot.FoundationRefinedCount++;
-        }
 
         yield return null;
         List<MclslSectRuinRecord> ruins = run.SectRuins ?? new List<MclslSectRuinRecord>();

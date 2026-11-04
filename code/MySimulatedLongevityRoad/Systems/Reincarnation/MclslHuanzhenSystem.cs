@@ -829,29 +829,6 @@ internal static class MclslHuanzhenSystem
         return true;
     }
 
-    internal static bool TryClaimLegacyCategory(string legacyId, string category, out string message)
-    {
-        EnsureLoaded();
-        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
-        message = string.Empty;
-        Actor host = FindLivingHost();
-        MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
-        if (host == null) { message = "未找到此世还真持有者。"; return false; }
-        if (legacy?.Snapshot == null) { message = "前世档案已经失效。"; return false; }
-        string choice = "category:" + (category ?? string.Empty);
-        if (!CanClaimLegacy(legacy, choice, out message)) return false;
-        legacy.ClaimedChoices.Add(choice);
-        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
-        if (!MclslCultivationSystem.RestoreHuanzhenLegacyCategory(host, legacy.Snapshot, category, legacy.AnchorYear, legacy.DeathYear, out message))
-        {
-            legacy.ClaimedChoices.Remove(choice);
-            Flush();
-            return false;
-        }
-        MclslWorldArchiveStore.SaveNow();
-        return true;
-    }
-
     internal static bool TryClaimLegacyTrait(string legacyId, string traitId, out string message)
     {
         EnsureLoaded();
@@ -1485,19 +1462,6 @@ internal static class MclslHuanzhenSystem
                 || string.Equals(id, MclslTraitRegistration.LegacyTraitIdForRealm(realm), StringComparison.Ordinal)) return true;
         }
         return false;
-    }
-
-    internal static void RestoreSupplementalState(Actor actor, MclslHuanzhenCultivationSnapshot snapshot)
-    {
-        if (actor?.data == null || snapshot == null) return;
-        foreach (string key in SupplementalStringKeys)
-            if (snapshot.StringState?.TryGetValue(key, out string text) == true) MclslActorAccessor.Set(actor, key, text ?? string.Empty);
-        foreach (string key in SupplementalIntKeys)
-            if (snapshot.IntState?.TryGetValue(key, out int number) == true) MclslActorAccessor.Set(actor, key, number);
-        if (snapshot.IntState?.ContainsKey(MclslActorDataKeys.ConvertedLifespanFloor) != true)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.ConvertedLifespanFloor, 0);
-        foreach (string key in SupplementalFloatKeys)
-            if (snapshot.FloatState?.TryGetValue(key, out float number) == true) MclslActorAccessor.Set(actor, key, number);
     }
 
     private static void AddHistory(int deathYear, int anchorYear, string name, string realm, int loopDepth, string result)

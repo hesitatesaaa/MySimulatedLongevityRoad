@@ -208,17 +208,6 @@ internal static class MclslGeneratedObjectFactory
         return "人之奇·" + resolvedGrade;
     }
 
-    internal static string FoundationRankColor(string category)
-    {
-        category = string.IsNullOrWhiteSpace(category) ? FoundationHuman : category;
-        return category switch
-        {
-            FoundationHeaven => "#FF5A5A",
-            FoundationEarth => "#9CD7FF",
-            _ => "#CFC7B2"
-        };
-    }
-
     private static void ApplyFoundationClassification(MclslGeneratedItemRecord item, int seed)
     {
         if (item == null || item.Kind != MclslGeneratedKinds.FoundationWonder) return;
