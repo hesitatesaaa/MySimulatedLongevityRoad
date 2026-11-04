@@ -325,7 +325,7 @@ def main():
             if args.compress_assets else ('-developer-local' if args.local_development else '-' + kind)
         readme = common
         if args.local_development:
-            readme += 'Local uncommitted snapshot. Not published.\n'
+            readme += 'Local-development snapshot. See the accompanying package record for acceptance scope.\n'
         if compression:
             readme += ('Package-only PNG optimization: up to 256 palette colors; actor icons larger than 256 pixels '
                        'were downscaled to a maximum side of 256. Color-profile and text-metadata PNGs remain unchanged.\n'
