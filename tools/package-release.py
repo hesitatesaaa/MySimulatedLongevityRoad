@@ -261,8 +261,6 @@ def main():
     player = player_files()
     talent_evidence = ROOT / 'resources/beast-talents-runtime.json'
     developer = files(BASE + ['resources', 'tools', 'AGENTS.md', '.gitignore', 'README.md'])
-    developer.append(('code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs',
-                      ROOT / '.dev-tools/MclslDeveloperActorEditor.cs'))
     developer.sort(key=lambda item: item[0])
     output.mkdir(parents=True)
     common = (f'MySimulatedLongevityRoad {version}\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
