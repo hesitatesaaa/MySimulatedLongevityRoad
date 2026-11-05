@@ -80,7 +80,7 @@ internal enum MclslRankFilterType
     Not
 }
 
-internal sealed class MclslRankFilterArgs
+internal struct MclslRankFilterArgs
 {
     internal string Id;
     internal string DisplayName;

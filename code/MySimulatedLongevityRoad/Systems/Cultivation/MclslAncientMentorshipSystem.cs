@@ -476,7 +476,7 @@ internal static class MclslAncientMentorshipSystem
     }
 }
 
-internal sealed class UpsertBookArgs
+internal struct UpsertBookArgs
 {
     internal MclslBagState Bag;
     internal string Id;

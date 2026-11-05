@@ -418,7 +418,7 @@ internal static class MclslFactionMissionSystem
     }
 }
 
-internal sealed class ApplyFiveEldersRewardArgs
+internal struct ApplyFiveEldersRewardArgs
 {
     internal MclslWorldRunState Run;
     internal Actor Actor;

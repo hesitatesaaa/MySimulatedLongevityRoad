@@ -291,7 +291,7 @@ internal static class MclslWorldCalamitySystem
     }
 }
 
-internal sealed class RegisterPressureArgs
+internal struct RegisterPressureArgs
 {
     internal int Year;
     internal string Factionid;
@@ -301,7 +301,7 @@ internal sealed class RegisterPressureArgs
     internal string Summary;
 }
 
-internal sealed class CreateCalamityRuinArgs
+internal struct CreateCalamityRuinArgs
 {
     internal MclslWorldRunState Run;
     internal int Year;

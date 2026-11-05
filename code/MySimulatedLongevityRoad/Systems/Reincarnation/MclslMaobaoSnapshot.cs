@@ -53,7 +53,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", mclslEmptyCatchEx, MclslGuardScope.Persistence);
         }
         try
         {
@@ -61,7 +61,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", mclslEmptyCatchEx, MclslGuardScope.Persistence);
         }
     }
 
@@ -98,7 +98,7 @@ internal static class MclslMaobaoSnapshot
                 if (value.Length > 0) result[key] = value;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", mclslEmptyCatchEx, MclslGuardScope.Persistence); }
     }
 
     private static bool ShouldCapture(string key)

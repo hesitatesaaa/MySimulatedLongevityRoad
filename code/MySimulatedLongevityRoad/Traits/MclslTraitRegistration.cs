@@ -1321,7 +1321,7 @@ internal sealed class RealmStatsRequest
     internal float ExtraStatMultiplier = 1f;
 }
 
-internal sealed class AddProfessionArgs
+internal struct AddProfessionArgs
 {
     internal string Id;
     internal string Icon;
@@ -1331,7 +1331,7 @@ internal sealed class AddProfessionArgs
     internal string Effects;
 }
 
-internal sealed class AddImmortalPathTraitArgs
+internal struct AddImmortalPathTraitArgs
 {
     internal string Id;
     internal string Icon;

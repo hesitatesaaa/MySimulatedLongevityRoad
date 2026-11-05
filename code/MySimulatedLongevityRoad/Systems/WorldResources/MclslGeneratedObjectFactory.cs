@@ -410,7 +410,7 @@ internal static class MclslGeneratedObjectFactory
     }
 }
 
-internal sealed class CreateItemArgs
+internal struct CreateItemArgs
 {
     internal string Kind;
     internal int Year;

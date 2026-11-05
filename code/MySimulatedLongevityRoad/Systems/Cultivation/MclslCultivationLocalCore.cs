@@ -3,7 +3,7 @@ using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
 
-internal sealed class MclslCultivationAnnualSnapshotArgs
+internal struct MclslCultivationAnnualSnapshotArgs
 {
     internal long ActorId;
     internal int Year;

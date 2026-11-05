@@ -425,7 +425,7 @@ internal static partial class MclslCareerCombat
     }
 }
 
-internal sealed class FalconTickArgs
+internal struct FalconTickArgs
 {
     internal Actor Owner;
     internal Actor Pet;

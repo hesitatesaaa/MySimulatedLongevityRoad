@@ -133,7 +133,7 @@ internal static class MclslBeastConfig
     }
 }
 
-internal sealed class AddSwitchArgs
+internal struct AddSwitchArgs
 {
     internal ModConfig Config;
     internal Dictionary<string, ModConfigItem> Items;
@@ -143,7 +143,7 @@ internal sealed class AddSwitchArgs
     internal bool Initial;
 }
 
-internal sealed class AddSliderArgs
+internal struct AddSliderArgs
 {
     internal ModConfig Config;
     internal Dictionary<string, ModConfigItem> Items;

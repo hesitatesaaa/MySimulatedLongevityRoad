@@ -1665,7 +1665,7 @@ internal static class MclslHuanzhenSystem
     private static int PositiveHash(string value) => MclslStableHash.Positive23x31(value);
 }
 
-internal sealed class AddSpaceEssenceArgs
+internal struct AddSpaceEssenceArgs
 {
     internal Actor Host;
     internal long Amount;

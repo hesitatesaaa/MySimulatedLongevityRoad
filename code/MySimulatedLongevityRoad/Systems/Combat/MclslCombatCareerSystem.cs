@@ -289,7 +289,7 @@ internal static partial class MclslCombatCareerSystem
     internal static void Clear() { States=new();MclslCareerCombat.Clear();MclslCareerSupply.ClearRuntime(); }
 }
 
-internal sealed class RegisterTraitArgs
+internal struct RegisterTraitArgs
 {
     internal string Id;
     internal string Name;

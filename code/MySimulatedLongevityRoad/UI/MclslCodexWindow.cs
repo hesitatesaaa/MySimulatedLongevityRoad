@@ -2457,7 +2457,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
 }
 
-internal sealed class DrawLegacyOptionButtonArgs
+internal struct DrawLegacyOptionButtonArgs
 {
     internal MclslHuanzhenLegacyRecord Legacy;
     internal MclslHuanzhenLegacyOption Option;

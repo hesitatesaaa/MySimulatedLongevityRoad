@@ -340,7 +340,7 @@ internal static class MclslMaobaoUiHelper
     }
 }
 
-internal sealed class CreateTintedButtonArgs
+internal struct CreateTintedButtonArgs
 {
     internal Transform Parent;
     internal string Name;
