@@ -25,7 +25,7 @@ internal static class MclslAnnualBackpressure
         && MclslRuntimeSettings.AnnualBackpressureEnabled && !IsBlocked ? EffectiveFactor : 1f;
     private static float EffectiveFactor => Policy.Factor;
     internal static bool IsBlocked => MclslWorldRunRepository.Current?.AnnualBatch?.WorldBlocked ?? false;
-    internal static bool IsPauseLevel => EffectiveFactor <= 0f;
+    internal static bool IsPauseLevel => EffectiveFactor <= 0.125f;
     internal static int LagYears => _worldBound ? Lag(out _, out _) : 0;
     internal static bool ShowStatus => MclslDeveloperBridge.IsAvailable && _worldBound
         && (Policy.Level > 0 || (!_patchAvailable && MclslRuntimeSettings.AnnualBackpressureEnabled));

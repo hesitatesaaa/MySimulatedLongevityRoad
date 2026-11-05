@@ -12,7 +12,6 @@
 | Systems\Cultivation\MclslAncientLawSystem.cs | 1 | 181 |
 | Systems\Cultivation\MclslAncientMentorshipSystem.cs | 1 | 445 |
 | Systems\Cultivation\MclslCultivationSystem.cs | 7 | 194, 219, 284, 341, 876, 911, 919 |
-| Systems\Cultivation\MclslMortalSeparationSystem.cs | 1 | 36 |
 | Systems\Cultivation\MclslSpiritualRootSystem.cs | 1 | 163 |
 | Systems\Cultivation\MclslTechniqueOccupationSystem.cs | 1 | 184 |
 | Systems\Death\MclslDeathSystem.cs | 3 | 129, 198, 712 |
@@ -63,7 +62,6 @@
 - `Systems\Cultivation\MclslCultivationSystem.cs:876` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-11`
 - `Systems\Cultivation\MclslCultivationSystem.cs:911` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-12`
 - `Systems\Cultivation\MclslCultivationSystem.cs:919` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-13`
-- `Systems\Cultivation\MclslMortalSeparationSystem.cs:36` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslMortalSeparationSystem-cs-1`
 - `Systems\Cultivation\MclslSpiritualRootSystem.cs:163` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslSpiritualRootSystem-cs-1`
 - `Systems\Cultivation\MclslTechniqueOccupationSystem.cs:184` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslTechniqueOccupationSystem-cs-1`
 - `Systems\Death\MclslDeathSystem.cs:129` → `empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslDeathSystem-cs-1`

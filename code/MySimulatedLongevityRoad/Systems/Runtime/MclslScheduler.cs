@@ -345,7 +345,7 @@ internal static class MclslScheduler
     private static void EnsureWorldLaneScheduled()
     {
         if (_annualStartPending || _activeAnnualYear <= 0 || MclslAnnualWorldRuntimeLane.HasPending
-            || MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked) return;
+            || MclslAnnualBackpressure.IsBlocked) return;
         MclslAnnualWorldRuntimeLane.Schedule(_activeAnnualYear, _newLawActive,
             MclslWorldRunRepository.Current.AnnualBatch.NewLawCultivationAvailable);
     }
@@ -380,7 +380,7 @@ internal static class MclslScheduler
     {
         if (!MclslRuntimeSettings.CoreEnabled) return;
         // 年度结算异常被阻塞时，先按退避尝试自愈，避免永久停摆。
-        if (MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked
+        if (MclslAnnualBackpressure.IsBlocked
             && !MclslWorldRunRepository.TryRecoverBlockedAnnual(UnityEngine.Time.unscaledTime)) return;
         if (MclslAnnualBackpressure.IsBlocked) return;
         TickFirstCultivation();
@@ -433,7 +433,7 @@ internal static class MclslScheduler
         // At most one pass over this queue per call, including delayed retries.
         int initialTurns = FirstCultivationQueue.Count;
         while (initialTurns-- > 0 && !AnnualBudgetExpired()
-            && !MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked)
+            && !MclslAnnualBackpressure.IsBlocked)
             TickFirstCultivation();
         if (!AnnualBudgetExpired()) TickCleanup();
     }
@@ -706,7 +706,7 @@ internal static class MclslScheduler
         while (AnnualActorQueue.ReadyCount > 0 && MclslAnnualFrameBudget.TryConsumeOperation())
         {
             TickFirstCultivation();
-            if (AnnualBudgetExpired() || MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked) break;
+            if (AnnualBudgetExpired() || MclslAnnualBackpressure.IsBlocked) break;
             if (!AnnualActorQueue.TryDequeue(out long actorId)) break;
             if (!AnnualActorStates.TryGetValue(actorId, out AnnualActorState state))
             {
@@ -868,7 +868,7 @@ internal static class MclslScheduler
                         break;
                     }
                 }
-                if (AnnualActorStates.ContainsKey(actorId) && !MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked)
+                if (AnnualActorStates.ContainsKey(actorId) && !MclslAnnualBackpressure.IsBlocked)
                     QueueExistingState(actorId, state);
             }
 

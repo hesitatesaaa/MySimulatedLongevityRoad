@@ -55,12 +55,14 @@ internal static class MclslContractRules
     // kind 已由契约状态校验（0..3）与召唤路径保证，这里不做静默回退。
     internal static int PetHealth(int ownerMaxHealth, int kind, bool passiveOne)
     {
+        if (!ValidKind(kind)) kind = 0;
         double ratio = HealthPercent[kind] / 100d * (passiveOne ? 1d + PassiveHealthBonus : 1d);
         return Math.Max(MinimumPetHealth, (int)Math.Round(ownerMaxHealth * ratio));
     }
 
     internal static int PetAttack(int ownerDamage, int kind)
     {
+        if (!ValidKind(kind)) kind = 0;
         return Math.Max(MinimumPetAttack, (int)Math.Round(ownerDamage * AttackPercent[kind] / 100d));
     }
 

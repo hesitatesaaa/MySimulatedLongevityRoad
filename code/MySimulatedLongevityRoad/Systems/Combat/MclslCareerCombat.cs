@@ -109,8 +109,11 @@ internal static partial class MclslCareerCombat
         var animation=PetAnimations.GetOrCreateValue(pet);
         animation.State.Select(MclslRuntime.DisplayClock,moving,0,0,out double elapsed);
         var clip=moving?pet.animation_container.walking:pet.animation_container.idle;
+        if (clip?.frames == null || clip.frames.Length == 0) return null;
         float interval=moving?pet.asset.animation_walk_speed:pet.asset.animation_idle_speed;
-        int index=pet.isAlive()?(int)(elapsed/interval)%clip.frames.Length:0;
+        if (interval <= 0.0001f) interval = 0.0001f;
+        int index=pet.isAlive()?(int)(Math.Max(0d,elapsed)/interval)%clip.frames.Length:0;
+        if (index < 0 || index >= clip.frames.Length) index = 0;
         return clip.frames[index];
     }
     private static readonly MclslOwnerRound OwnerRound = new();

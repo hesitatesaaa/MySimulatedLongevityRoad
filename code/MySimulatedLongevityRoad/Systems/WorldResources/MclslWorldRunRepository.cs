@@ -392,6 +392,7 @@ internal static partial class MclslWorldRunRepository
     internal static void ResetWorld()
     {
         _current = new();
+        NativeMirrorPending.Clear();
         InvalidateCurrentRunCaches();
         NotifyMapMarkerDataChanged();
         MclslWorldRunRuntimeIndexes.Invalidate();
@@ -628,6 +629,7 @@ internal static partial class MclslWorldRunRepository
         // 写进原版历史的消息没有 x/y，原版“定位”按钮无效。这里只登记待发，
         // 由调用方补完坐标后调用 FlushNativeMirror 真正写入，避免重复写两条。
         AppendEvent(record);
+        FlushReadyNativeMirror();
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
                 MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
         {
@@ -635,7 +637,11 @@ internal static partial class MclslWorldRunRepository
                 record.NativeLogged = MclslNativeHistoryBridge.Add(record);
             else
             {
-                if (NativeMirrorPending.Count >= MaxNativeMirrorPending) FlushAllNativeMirror(true);
+                if (NativeMirrorPending.Count >= MaxNativeMirrorPending)
+                {
+                    FlushReadyNativeMirror();
+                    if (NativeMirrorPending.Count >= MaxNativeMirrorPending) FlushAllNativeMirror(true);
+                }
                 NativeMirrorPending.Add(record);
             }
         }
@@ -660,6 +666,16 @@ internal static partial class MclslWorldRunRepository
             return;
         }
         record.NativeLogged = MclslNativeHistoryBridge.Add(record);
+    }
+
+    private static void FlushReadyNativeMirror()
+    {
+        // 每次写入事件时，先补发那些后来已补到坐标的待发记录（无坐标的继续等待/溢出处理）。
+        for (int i = NativeMirrorPending.Count - 1; i >= 0; i--)
+        {
+            MclslRunEventRecord pending = NativeMirrorPending[i];
+            if (pending != null && pending.MapX >= 0 && pending.MapY >= 0) FlushNativeMirror(pending);
+        }
     }
 
     private static void FlushAllNativeMirror(bool force)

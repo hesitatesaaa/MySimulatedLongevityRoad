@@ -111,7 +111,7 @@ internal sealed class MclslAnnualReadyQueue
 internal sealed class MclslAnnualSpeedPolicy
 {
     internal int Level { get; private set; }
-    internal float Factor => Level switch { 1 => 0.5f, 2 => 0.25f, 3 => 0.25f, _ => 1f };
+    internal float Factor => Level switch { 1 => 0.5f, 2 => 0.25f, 3 => 0.125f, _ => 1f };
     internal void Reset() { Level = 0; }
     internal void Update(int level, bool enabled) { Level = enabled ? level : 0; }
 }
