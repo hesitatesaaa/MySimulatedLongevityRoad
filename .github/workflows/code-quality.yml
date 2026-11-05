@@ -22,3 +22,18 @@ jobs:
         run: ./.tests/run.ps1 -Profile Portable
       # Game-dependent tests and Unity acceptance require a local game install.
       # The runner prints their names/reasons; they are never counted as passed.
+
+  metrics-and-ratchet:
+    name: Metrics freshness + quality ratchet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate code metrics
+        run: python tools/report-code-metrics.py
+      - name: Fail if docs/CODE-METRICS.json is stale
+        run: git diff --exit-code docs/CODE-METRICS.json
+      - name: Enforce quality ratchet
+        run: python tools/code-quality-ratchet.py
