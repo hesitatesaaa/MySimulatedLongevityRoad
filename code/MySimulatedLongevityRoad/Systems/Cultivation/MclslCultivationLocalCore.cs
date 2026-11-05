@@ -3,6 +3,19 @@ using MySimulatedLongevityRoad.Data;
 
 namespace MySimulatedLongevityRoad.Systems;
 
+internal sealed class MclslCultivationAnnualSnapshotArgs
+{
+    internal long ActorId;
+    internal int Year;
+    internal string CultivationSystem;
+    internal string Realm;
+    internal int Aptitude;
+    internal int LastCultivationYear;
+    internal bool Alive;
+    internal bool Eligible;
+    internal MclslAptitudeGiftDefinition Gift;
+}
+
 internal readonly struct MclslCultivationAnnualSnapshot
 {
     internal readonly long ActorId;
@@ -18,27 +31,18 @@ internal readonly struct MclslCultivationAnnualSnapshot
     internal readonly bool IsLongevity;
     internal readonly MclslAptitudeGiftDefinition Gift;
 
-    internal MclslCultivationAnnualSnapshot(
-        long actorId,
-        int year,
-        string cultivationSystem,
-        string realm,
-        int aptitude,
-        int lastCultivationYear,
-        bool alive,
-        bool eligible,
-        MclslAptitudeGiftDefinition gift)
+    internal MclslCultivationAnnualSnapshot(MclslCultivationAnnualSnapshotArgs a)
     {
-        ActorId = actorId;
-        Year = Math.Max(0, year);
-        CultivationSystem = cultivationSystem ?? string.Empty;
-        Realm = realm ?? string.Empty;
-        Aptitude = Math.Clamp(aptitude, 0, 100);
-        LastCultivationYear = lastCultivationYear;
-        Alive = alive;
-        Eligible = eligible;
-        Gift = gift;
-        HasCultivationGift = gift != null;
+        ActorId = a.ActorId;
+        Year = Math.Max(0, a.Year);
+        CultivationSystem = a.CultivationSystem ?? string.Empty;
+        Realm = a.Realm ?? string.Empty;
+        Aptitude = Math.Clamp(a.Aptitude, 0, 100);
+        LastCultivationYear = a.LastCultivationYear;
+        Alive = a.Alive;
+        Eligible = a.Eligible;
+        Gift = a.Gift;
+        HasCultivationGift = a.Gift != null;
         AncientLaw = string.Equals(CultivationSystem, MclslCultivationSystemIds.AncientLaw, StringComparison.Ordinal);
         IsLongevity = string.Equals(Realm, MclslRealmIds.ChangSheng, StringComparison.Ordinal);
     }
@@ -76,16 +80,18 @@ internal static class MclslCultivationLocalCore
             actor,
             year,
             MclslActorAccessor.GetInt(actor, MclslActorDataKeys.LastCultivationYear, -1));
-        return new MclslCultivationAnnualSnapshot(
-            actorId,
-            year,
-            system,
-            realm,
-            aptitude,
-            lastYear,
-            alive,
-            eligible,
-            gift);
+        return new MclslCultivationAnnualSnapshot(new MclslCultivationAnnualSnapshotArgs
+        {
+            ActorId = actorId,
+            Year = year,
+            CultivationSystem = system,
+            Realm = realm,
+            Aptitude = aptitude,
+            LastCultivationYear = lastYear,
+            Alive = alive,
+            Eligible = eligible,
+            Gift = gift
+        });
     }
 
     internal static MclslCultivationLocalCheckResult CheckAnnualStep(in MclslCultivationAnnualSnapshot snapshot)
