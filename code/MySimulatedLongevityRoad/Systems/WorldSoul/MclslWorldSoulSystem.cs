@@ -548,24 +548,7 @@ internal static partial class MclslWorldSoulSystem
     }
 
     private static Actor TryGetActorMember(object source, string[] memberNames)
-    {
-        if (source == null || memberNames == null) return null;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        Type type = source.GetType();
-        for (int i = 0; i < memberNames.Length; i++)
-        {
-            string name = memberNames[i];
-            try
-            {
-                FieldInfo field = type.GetField(name, flags);
-                if (field != null && field.GetValue(source) is Actor actor) return actor;
-                PropertyInfo property = type.GetProperty(name, flags);
-                if (property != null && property.GetValue(source, null) is Actor propertyActor) return propertyActor;
-            }
-            catch (Exception ex) { MclslDiagnostics.Error("world-soul-read-actor-member-" + name, "反射读取角色成员失败: " + ex.Message); }
-        }
-        return null;
-    }
+        => MySimulatedLongevityRoad.Core.MclslReflectionMembers.TryGetActorMember(source, memberNames, "world-soul-actor-member");
 
     private static bool CanClaimSoul(MclslWorldSoulRecord soul, long actorId)
     {

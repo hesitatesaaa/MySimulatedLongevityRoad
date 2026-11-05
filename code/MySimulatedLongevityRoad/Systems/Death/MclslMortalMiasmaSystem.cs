@@ -80,22 +80,5 @@ internal static class MclslMortalMiasmaSystem
     }
 
     private static Actor TryGetActorMember(object source, string[] memberNames)
-    {
-        if (source == null || memberNames == null) return null;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        Type type = source.GetType();
-        for (int i = 0; i < memberNames.Length; i++)
-        {
-            string name = memberNames[i];
-            try
-            {
-                FieldInfo field = type.GetField(name, flags);
-                if (field != null && field.GetValue(source) is Actor actor) return actor;
-                PropertyInfo property = type.GetProperty(name, flags);
-                if (property != null && property.GetValue(source, null) is Actor propertyActor) return propertyActor;
-            }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
-        }
-        return null;
-    }
+        => MySimulatedLongevityRoad.Core.MclslReflectionMembers.TryGetActorMember(source, memberNames, "mortal-miasma-actor-member");
 }

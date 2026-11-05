@@ -107,4 +107,19 @@ internal static class MclslReflectionMembers
         foreach (string name in names ?? Array.Empty<string>())
             if (!string.IsNullOrWhiteSpace(name)) Resolve(type, name);
     }
+
+    /// <summary>
+    /// 从任意对象按候选成员名依次取 Actor（替代各系统私有的 TryGetActorMember 反射实现）。
+    /// 命中缓存，行为与原实现一致：先字段后属性。
+    /// </summary>
+    internal static Actor TryGetActorMember(object source, string[] memberNames, string site = "actor-member")
+    {
+        if (source == null || memberNames == null) return null;
+        for (int i = 0; i < memberNames.Length; i++)
+        {
+            if (TryGet(source, memberNames[i], out object raw, site) && raw is Actor actor)
+                return actor;
+        }
+        return null;
+    }
 }
