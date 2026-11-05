@@ -82,17 +82,7 @@ internal static class MclslNamedCharacterRegistration
                 asset.default_subspecies_traits.RemoveAll(x => x.StartsWith("reproduction_", StringComparison.Ordinal));
                 asset.default_subspecies_traits.Add("reproduction_none");
                 string path = "actors/Named/" + definition.Folder + "/";
-                asset.texture_id = asset.id;
-                asset.texture_asset = new ActorTextureSubAsset(path, false);
-                asset.texture_asset.texture_path_main = path + "main";
-                Sprite first = MclslBeastAnimation.ConfigureAsset(asset, path);
-                if (first == null)
-                    throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
-                asset.cached_sprite = first;
-                asset._cached_sprite = first;
-                AssetManager.actor_library.loadTexturesAndSprites(asset);
-                asset.cached_sprite = first;
-                asset._cached_sprite = first;
+                MclslBeastAnimation.SetupActorTexture(asset, path);
                 asset.get_override_sprite = MclslBeastAnimation.GetSprite;
                 asset.has_override_sprite = true;
             }

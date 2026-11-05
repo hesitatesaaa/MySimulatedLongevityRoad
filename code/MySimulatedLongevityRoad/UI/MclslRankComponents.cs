@@ -157,3 +157,22 @@ internal sealed class MclslRankCardView : MonoBehaviour, IPointerEnterHandler, I
         return MclslUiTheme.RankTextEmphasis;
     }
 }
+
+/// <summary>通用榜 / 妖兽榜共用的滚动区（Mask+ScrollRect）初始化，消除两处逐字重复。</summary>
+internal static class MclslRankScrollSetup
+{
+    internal static ScrollRect ConfigureRankScroll(GameObject scrollObj, Color background)
+    {
+        Image bg = scrollObj.GetComponent<Image>();
+        if (bg != null) bg.color = background;
+        Mask mask = scrollObj.GetComponent<Mask>();
+        if (mask != null) mask.showMaskGraphic = true;
+        ScrollRect scroll = scrollObj.GetComponent<ScrollRect>();
+        scroll.horizontal = false;
+        scroll.vertical = true;
+        scroll.movementType = ScrollRect.MovementType.Clamped;
+        scroll.inertia = false;
+        scroll.scrollSensitivity = 22f;
+        return scroll;
+    }
+}

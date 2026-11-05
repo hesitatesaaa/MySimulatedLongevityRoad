@@ -250,17 +250,7 @@ internal static class MclslBeastActorRegistration
         asset.base_stats["offspring"] = 1f;
         string path = beast.ResourceFolder + "/" + (humanoid ? "Human" : "Beast") + "/";
         asset.base_stats["scale"] = MclslActorPixelResources.DisplayScale(path, humanoid ? 0.20f : 0.18f);
-        asset.texture_id = asset.id;
-        asset.texture_asset = new ActorTextureSubAsset(path, false);
-        asset.texture_asset.texture_path_main = path + "main";
-        Sprite first = MclslBeastAnimation.ConfigureAsset(asset, path);
-        if (first == null)
-            throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
-        asset.cached_sprite = first;
-        asset._cached_sprite = first;
-        AssetManager.actor_library.loadTexturesAndSprites(asset);
-        asset.cached_sprite = first;
-        asset._cached_sprite = first;
+        MclslBeastAnimation.SetupActorTexture(asset, path);
     }
 
     private static List<string> Copy(List<string> input)

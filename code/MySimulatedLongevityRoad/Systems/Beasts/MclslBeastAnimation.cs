@@ -174,6 +174,22 @@ internal static class MclslBeastAnimation
         return frames.Actions[(int)action].At(elapsed) ?? fallback;
     }
 
+    /// <summary>妖兽/命名角色通用的贴图装配（原两处逐字重复），返回主贴图。</summary>
+    internal static Sprite SetupActorTexture(ActorAsset asset, string path)
+    {
+        asset.texture_id = asset.id;
+        asset.texture_asset = new ActorTextureSubAsset(path, false);
+        asset.texture_asset.texture_path_main = path + "main";
+        Sprite first = ConfigureAsset(asset, path);
+        if (first == null) throw new InvalidOperationException("主贴图加载失败: " + path + "main/idle_0");
+        asset.cached_sprite = first;
+        asset._cached_sprite = first;
+        AssetManager.actor_library.loadTexturesAndSprites(asset);
+        asset.cached_sprite = first;
+        asset._cached_sprite = first;
+        return first;
+    }
+
     internal static Sprite ConfigureAsset(ActorAsset asset, string formPath, string iconSource = null)
     {
         string iconId = iconSource ?? (asset.id.EndsWith("_yuan", StringComparison.Ordinal) ? asset.id.Substring(0, asset.id.Length - 5) : asset.id);

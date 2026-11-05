@@ -531,15 +531,7 @@ internal static class MclslRankWindow
         scrollObj.transform.SetParent(parent, false);
         _scrollViewRect = SetRect(scrollObj, new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0.5f, 0.5f),
             new Vector2(0, -(RankListTop + ListHeight / 2f)), new Vector2(CenterWidth, ListHeight));
-        Image scrollBg = scrollObj.GetComponent<Image>();
-        scrollBg.color = MclslUiTheme.RankSurfaceScroll;
-        scrollObj.GetComponent<Mask>().showMaskGraphic = true;
-        _rankScroll = scrollObj.GetComponent<ScrollRect>();
-        _rankScroll.horizontal = false;
-        _rankScroll.vertical = true;
-        _rankScroll.movementType = ScrollRect.MovementType.Clamped;
-        _rankScroll.inertia = false;
-        _rankScroll.scrollSensitivity = 22f;
+        _rankScroll = MclslRankScrollSetup.ConfigureRankScroll(scrollObj, MclslUiTheme.RankSurfaceScroll);
 
         GameObject viewport = new("Viewport", typeof(RectTransform));
         viewport.transform.SetParent(scrollObj.transform, false);
