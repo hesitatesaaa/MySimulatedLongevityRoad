@@ -8,6 +8,7 @@ using MySimulatedLongevityRoad.Systems;
 static class Program {
  static int checks;
  static void Check(bool b,string message) { if(!b)throw new Exception(message); checks++; }
+ static int Plan(int level,float mul,int limit,int alive,int reserved,int tiles=65536,int wave=64) => MclslBeastRules.PlannedCount(new MclslBeastPlanRequest{Level=level,Multiplier=mul,Limit=limit,Alive=alive,Reserved=reserved,WorldTiles=tiles,WaveLimit=wave});
  static void Worker(Action a) { Exception error=null; var t=new Thread(()=>{try{a();}catch(Exception e){error=e;}});t.Start();t.Join();if(error!=null)throw error; }
  static void Drain() { int guard=0; while(MclslRuntimeChanges.Count>0) { if(++guard>100000)throw new Exception("handoff failed to drain"); MclslRuntimeChanges.Drain(); } }
  static Actor Add(long id,int region,bool natural=true) { var a=new Actor {data=new ActorData{id=id},current_tile=new WorldTile{Region=region},Source=natural?"natural":"wave:1"};MclslActorRegistry.Entries[id]=new Entry{Actor=a};MclslBeastPopulationIndex.Observe(a);return a; }
@@ -50,11 +51,11 @@ static class Program {
  Check(MclslBeastRules.Role(0,10)==2,"first spawn is the boss role");
  Check(MclslBeastRules.Role(1,10)==1,"elite quarter follows the boss");
  Check(MclslBeastRules.Role(9,10)==0,"tail of the wave is ordinary");
- Check(MclslBeastRules.PlannedCount(1,1f,512,0,0)==10,"level one plans the base count");
- Check(MclslBeastRules.PlannedCount(7,1f,512,0,0)==37,"level seven plans the base count");
- Check(MclslBeastRules.PlannedCount(1,2f,512,0,0)==20,"multiplier scales the plan");
- Check(MclslBeastRules.PlannedCount(1,1f,10,10,0)==0,"no budget yields no plan");
- Check(MclslBeastRules.PlannedCount(7,1f,512,0,0,65536,4)==4,"wave limit caps the plan");
+ Check(Plan(1,1f,512,0,0)==10,"level one plans the base count");
+ Check(Plan(7,1f,512,0,0)==37,"level seven plans the base count");
+ Check(Plan(1,2f,512,0,0)==20,"multiplier scales the plan");
+ Check(Plan(1,1f,10,10,0)==0,"no budget yields no plan");
+ Check(Plan(7,1f,512,0,0,65536,4)==4,"wave limit caps the plan");
  Console.WriteLine($"BeastPopulationTests: {checks} checks passed; warmed handoff: {allocated} bytes / 10000 cycles.");
  }
 }
