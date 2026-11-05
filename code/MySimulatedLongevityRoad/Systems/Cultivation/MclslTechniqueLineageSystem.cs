@@ -352,14 +352,14 @@ internal static class MclslTechniqueLineageSystem
 
         MclslTechniqueLineageRecord picked = null;
         int pickedScore = int.MinValue;
-        int salt = StableHash((seed ?? string.Empty) + "|inherit|" + year) & int.MaxValue;
+        int salt = MclslStableHash.Stable17x31((seed ?? string.Empty) + "|inherit|" + year) & int.MaxValue;
         for (int i = 0; i < run.TechniqueLineages.Count; i++)
         {
             MclslTechniqueLineageRecord record = run.TechniqueLineages[i];
             if (!IsUsableAncientLineage(record)) continue;
             int score = Math.Max(1, FameScore(record)) + Math.Max(0, MclslRealmIds.Index(record.MaxRealm)) * 25
                 + Math.Clamp(record.Completeness, 0, 100) / 4
-                + (StableHash(record.Id + "|" + salt) & int.MaxValue) % 97;
+                + (MclslStableHash.Stable17x31(record.Id + "|" + salt) & int.MaxValue) % 97;
             if (actor != null)
             {
                 string[] lawPool = MclslGeneratedObjectFactory.SplitTags(record.LawTags);
@@ -377,7 +377,7 @@ internal static class MclslTechniqueLineageSystem
         if (string.IsNullOrWhiteSpace(sourceTechniqueId)
             || !MclslCultivationCatalog.TryTechnique(sourceTechniqueId, out sourceTechnique))
         {
-            sourceTechnique = MclslCultivationCatalog.Techniques[(StableHash(picked.Id + "|legacy_source") & int.MaxValue) % MclslCultivationCatalog.Techniques.Count];
+            sourceTechnique = MclslCultivationCatalog.Techniques[(MclslStableHash.Stable17x31(picked.Id + "|legacy_source") & int.MaxValue) % MclslCultivationCatalog.Techniques.Count];
             sourceTechniqueId = sourceTechnique.Id;
         }
         string[] laws = MclslGeneratedObjectFactory.SplitTags(picked.LawTags);
@@ -385,7 +385,7 @@ internal static class MclslTechniqueLineageSystem
         string maxRealm = InheritedMaxRealm(picked.MaxRealm, aptitude);
         technique = new MclslTechniqueDefinition
         {
-            Id = "legacy_" + (StableHash(picked.Id) & int.MaxValue).ToString() + "__" + sourceTechniqueId,
+            Id = "legacy_" + (MclslStableHash.Stable17x31(picked.Id) & int.MaxValue).ToString() + "__" + sourceTechniqueId,
             Name = picked.Name,
             LawPool = laws,
             MaxRealm = maxRealm
@@ -399,7 +399,7 @@ internal static class MclslTechniqueLineageSystem
         if (run?.TechniqueLineages == null || !MclslWorldEpochSystem.IsNewLawActive(year)) return false;
         if (run.TechniqueLineages.Count < 2) return false;
 
-        int start = (StableHash((run.RunId ?? string.Empty) + "|all_laws_one|" + year) & int.MaxValue) % run.TechniqueLineages.Count;
+        int start = (MclslStableHash.Stable17x31((run.RunId ?? string.Empty) + "|all_laws_one|" + year) & int.MaxValue) % run.TechniqueLineages.Count;
         for (int offset = 0; offset < run.TechniqueLineages.Count; offset++)
         {
             MclslTechniqueLineageRecord primary = run.TechniqueLineages[(start + offset) % run.TechniqueLineages.Count];
@@ -801,10 +801,10 @@ internal static class MclslTechniqueLineageSystem
         // 大人口新法异法在角色修炼与法不可同修计数中保持独立；
         // 玄黄仙录的传承档案按母法汇总，避免生成上千条重复法脉档案。
         if (!string.IsNullOrWhiteSpace(id)) return MclslCultivationCatalog.BaseTechniqueId(id);
-        return "name_" + Math.Abs(StableHash(name)).ToString();
+        return "name_" + Math.Abs(MclslStableHash.Stable17x31(name)).ToString();
     }
 
-    private static MclslTechniqueLineageRecord FindLineageRecord(MclslWorldRunState run, string id)
+    internal static MclslTechniqueLineageRecord FindLineageRecord(MclslWorldRunState run, string id)
     {
         if (run?.TechniqueLineages == null || string.IsNullOrWhiteSpace(id)) return null;
         for (int i = 0; i < run.TechniqueLineages.Count; i++)
@@ -862,6 +862,4 @@ internal static class MclslTechniqueLineageSystem
             || string.Equals(value, "未知修士", StringComparison.Ordinal)
             || string.Equals(value, "无名修士", StringComparison.Ordinal);
     }
-
-    private static int StableHash(string value) => MySimulatedLongevityRoad.Core.MclslStableHash.Stable17x31(value);
 }

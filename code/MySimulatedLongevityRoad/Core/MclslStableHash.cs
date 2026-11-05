@@ -26,4 +26,8 @@ internal static class MclslStableHash
     {
         unchecked { int hash = 17; foreach (char c in value ?? string.Empty) hash = hash * 31 + c; return hash; }
     }
+    internal static int Positive23x31(string value)
+    {
+        unchecked { int hash = 23; foreach (char c in value ?? string.Empty) hash = hash * 31 + c; return hash & int.MaxValue; }
+    }
 }

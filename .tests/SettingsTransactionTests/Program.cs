@@ -29,7 +29,7 @@ static class Program
         Check(c["ConfigItems"].Values.Where(i => i.Type == ConfigItemType.SWITCH).All(i => i.BoolVal), scenario + " config switches restored");
         Check(c["ConfigItems"]["MCLSL_config_beast_wave_interval"].IntVal == 17, scenario + " config slider restored");
         Check(MclslRuntimeSettings.CoreEnabled && MclslRuntimeSettings.ShowFps && MclslFpsOverlay.Visible, scenario + " ordinary runtime unchanged");
-        Check(MclslBeastConfig.NaturalSpawnEnabled && MclslBeastWorld.Enabled && MclslBeastWorld.Interval == 17, scenario + " beast runtime unchanged");
+        Check(MclslBeastWorld.Enabled && MclslBeastWorld.Interval == 17, scenario + " beast runtime unchanged");
         Check(MclslSpellEffect.Enabled && MclslSpellEffect.TalentEnabled && MclslSpellEffect.Applies == 0, scenario + " effects untouched");
         Check(File.ReadAllText(target) == "original-file" && Directory.GetFiles(directory, "*.tmp").Length == 0, scenario + " file preserved, temporary cleaned");
     }
@@ -67,7 +67,7 @@ static class Program
             MclslSpellEffect.BeforeApply = () => Check(File.ReadAllText(target) != "original-file", "file committed before effects");
             Check(Restore(config), "existing file replacement succeeds");
             Check(!MclslRuntimeSettings.CoreEnabled && !MclslRuntimeSettings.ShowFps && !MclslFpsOverlay.Visible, "ordinary runtime applied");
-            Check(!MclslBeastConfig.NaturalSpawnEnabled && !MclslBeastWorld.Enabled && MclslBeastWorld.Interval == 5 && !MclslSpellEffect.Enabled && !MclslSpellEffect.TalentEnabled, "beast/effects applied");
+            Check(!MclslBeastWorld.Enabled && MclslBeastWorld.Interval == 5 && !MclslSpellEffect.Enabled && !MclslSpellEffect.TalentEnabled, "beast/effects applied");
             Check(config.Saves == 1 && Directory.GetFiles(directory, "*.tmp").Length == 0, "single save without migration writes");
             config = Fresh(); File.Delete(target); Check(Restore(config) && File.Exists(target), "first config commit succeeds");
             config = Fresh(); config.AddConfigItem("ConfigItems", "legacy_beast", ConfigItemType.SWITCH, true, null, "");

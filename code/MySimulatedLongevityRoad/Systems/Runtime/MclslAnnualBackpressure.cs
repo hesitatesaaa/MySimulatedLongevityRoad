@@ -24,7 +24,7 @@ internal static class MclslAnnualBackpressure
     internal static float AppliedFactor => _worldBound && _patchAvailable && MclslRuntimeSettings.CoreEnabled
         && MclslRuntimeSettings.AnnualBackpressureEnabled && !IsBlocked ? EffectiveFactor : 1f;
     private static float EffectiveFactor => Policy.Factor;
-    internal static bool IsBlocked => MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked;
+    internal static bool IsBlocked => MclslWorldRunRepository.Current?.AnnualBatch?.WorldBlocked ?? false;
     internal static bool IsPauseLevel => EffectiveFactor <= 0f;
     internal static int LagYears => _worldBound ? Lag(out _, out _) : 0;
     internal static bool ShowStatus => MclslDeveloperBridge.IsAvailable && _worldBound
@@ -119,6 +119,16 @@ internal static class MclslAnnualBackpressure
                 + " ready=" + MclslScheduler.AnnualReadyCount + " waiting=" + MclslScheduler.AnnualWaitingCount
                 + " longestWaitingYearGap=" + Math.Max(0, MclslScheduler.NewestWaitingYear - completed)
                 + " firstEssenceWaitMaxSeconds=" + _firstEssenceWaitMax.ToString("F1");
+            MclslAnnualBatchState batch = MclslWorldRunRepository.Current.AnnualBatch;
+            MetricsText += " world/active/requested/completed=" + current + "/" + batch.ActiveYear
+                + "/" + batch.LatestRequestedYear + "/" + batch.LastCompletedYear
+                + " rawYearGap=" + Math.Max(0, current - batch.LastCompletedYear)
+                + " completedCursorValid=" + (batch.LastCompletedYear > 0)
+                + " policyLag=" + lag + " level=" + Policy.Level
+                + " lagLevel=" + LevelByLag(lag) + " overrunLevel=" + LevelByOverrun(_overrunSeconds)
+                + " overrunSeconds=" + _overrunSeconds.ToString("F2")
+                + " budgetTime/ops=" + MclslAnnualFrameBudget.LastTimeExhausted + "/" + MclslAnnualFrameBudget.LastOperationsExhausted
+                + " transitionSeed/actors=" + MclslWorldEpochSystem.PendingTransitionSeedCount + "/" + MclslWorldEpochSystem.PendingTransitionActorCount;
         }
         _steps = 0; _years = 0; _rateStart = Time.unscaledTime;
     }

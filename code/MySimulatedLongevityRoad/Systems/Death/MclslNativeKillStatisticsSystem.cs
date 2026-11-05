@@ -25,7 +25,7 @@ internal static class MclslNativeKillStatisticsSystem
     };
     internal static void OnWorldLoaded(int year)
     {
-        ObservedKillCounts.Clear();
+        Clear();
     }
 
     internal static void Observe(Actor actor)

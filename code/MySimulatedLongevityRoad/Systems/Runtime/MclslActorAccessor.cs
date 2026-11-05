@@ -143,6 +143,24 @@ internal static class MclslActorAccessor
         try { return DisplayName(actor); } catch { return fallback; }
     }
 
+    /// <summary>Floor age in whole years; a null or throwing actor reads as 0.</summary>
+    internal static int Age(Actor actor)
+    {
+        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
+        catch { return 0; }
+    }
+
+    /// <summary>Clamped stat read; a missing stat or throwing actor reads as 0.</summary>
+    internal static float StatValue(Actor actor, string statId)
+    {
+        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
+        catch { return 0f; }
+    }
+
+    /// <summary>Registry lookup that yields null instead of a false-returning out parameter.</summary>
+    internal static Actor Resolve(long actorId)
+        => MclslActorRegistry.ResolveKnownOrWorld(actorId, out Actor actor) ? actor : null;
+
     internal static void ApplyDisplayName(Actor actor, string realmId)
     {
         if (actor?.data == null) return;

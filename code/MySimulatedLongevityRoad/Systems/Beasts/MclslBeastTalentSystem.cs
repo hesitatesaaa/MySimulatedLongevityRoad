@@ -54,7 +54,7 @@ internal static class MclslBeastTalentSystem
         =>MclslBeastActorRegistration.IsOrdinary(actor)?MclslBeastTalentCatalog.ForSpecies(MclslBeastCatalog.ForAsset(actor.asset.id)?.Id):null;
     internal static int Level(Actor actor)=>Math.Max(1,MclslRealmIds.Index(MclslActorAccessor.Realm(actor))+1);
     internal static float Strength(Actor actor)=>1+0.05f*(Level(actor)-1);
-    private static Actor Resolve(long id)=>MclslActorRegistry.ResolveKnownOrWorld(id,out var actor)?actor:null;
+    private static Actor Resolve(long id)=>MclslActorAccessor.Resolve(id);
     private static bool Alive(Actor actor)=>MclslActorAccessor.Alive(actor)&&actor.getHealth()>0;
     private static long Id(Actor actor)=>MclslActorAccessor.Id(actor);
     private static bool Enemy(Actor a,Actor b)=>MclslCombatTargets.IsEnemy(a,b)&&Alive(b);

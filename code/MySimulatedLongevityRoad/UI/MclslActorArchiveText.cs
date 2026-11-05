@@ -14,4 +14,7 @@ internal static class MclslActorArchiveText
         + (string.IsNullOrWhiteSpace(value) ? "无" : value) + "\n";
     internal static string Highlight(string value, string color) =>
         string.IsNullOrWhiteSpace(value) ? "无" : "<color=" + color + ">" + value + "</color>";
+    internal static string Blank(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value;
+    internal static string ReplaceTags(string value) =>
+        string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
 }

@@ -18,6 +18,8 @@ internal static class MclslActorRegistry
         internal readonly Actor Actor;
         internal long DataRevision, Attack, Behavior;
         internal bool HasNativeStamp;
+        internal byte RootPopulationState;
+        internal bool RootAgeEligible;
         internal MclslRuntimeChanges.NativeStamp NativeStamp;
         private BaseSimObject _notifiedAttack, _notifiedBehavior;
         internal Entry(Actor actor) => Actor = actor;
@@ -125,6 +127,7 @@ internal static class MclslActorRegistry
     internal static IReadOnlyList<Actor> CreateView(IReadOnlyList<long> ids) => new ActorView(ids);
 
     internal static int Count => Ids.LiveCount;
+    internal static IReadOnlyList<long> PopulationIds => Ids;
     internal static long Revision => _registryRevision;
 
     internal static bool Register(Actor actor, out long actorId)
@@ -144,7 +147,7 @@ internal static class MclslActorRegistry
         isNew = !ActorsById.TryGetValue(actorId, out Entry existing);
         if (isNew || !ReferenceEquals(existing.Actor, actor))
         {
-            if (!isNew) RemoveTargets(actorId);
+            if (!isNew) { RemoveTargets(actorId); MclslChildhoodRootSystem.ForgetPopulation(actorId); }
             ActorsById[actorId] = new Entry(actor);
             Ids.Add(actorId);
             MclslActorRelations.Refresh(actor);
@@ -203,6 +206,7 @@ internal static class MclslActorRegistry
         if(removed!=null)Combat.MclslCareerCombat.RemoveOwner(removed);
         MclslActorRelations.Forget(actorId);
         MclslBeastPopulationIndex.Forget(actorId);
+        MclslChildhoodRootSystem.ForgetPopulation(actorId);
         RemoveTargets(actorId);
         bool existed = ActorsById.TryRemove(actorId, out _);
         Ids.Remove(actorId);
@@ -269,6 +273,7 @@ internal static class MclslActorRegistry
         CityByActor.Clear(); CityActors.Clear(); CityOrder.Clear();
         MclslActorRelations.Clear();
         MclslBeastPopulationIndex.Clear();
+        MclslChildhoodRootSystem.ClearPopulation();
         ActorsById.Clear();
         Ids.Clear();
         _cleanupCursor = 0;

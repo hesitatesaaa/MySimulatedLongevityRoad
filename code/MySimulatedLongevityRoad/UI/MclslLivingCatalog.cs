@@ -14,6 +14,7 @@ namespace MySimulatedLongevityRoad.UI;
 internal static class MclslLivingCatalog
 {
     private static PowersTab _root;
+    private static PowerButton _return;
     private static readonly Dictionary<string,List<PowerButton>> Pages=new();
     internal static string CurrentPage {get;private set;}="home";
     internal static bool VanillaPreserved {get;private set;}
@@ -32,12 +33,13 @@ internal static class MclslLivingCatalog
         _root.powerButton=UnityEngine.Object.FindObjectsOfType<Button>(true).Single(b=>b.name=="Button_"+id);
         PowersTabExtension.SetLayout(_root,new List<string>{"tab"});
         Pages["home"]=new List<PowerButton>();
-        Entry("mclsl_living_beasts","妖兽","ui/Icons/TianDiZhiLi","beasts");
+        Pages["home"].Add(Button("mclsl_living_beasts","妖兽",MclslActorPixelResources.PlacementIcon("mclsl_beast_liejiejing"),()=>ShowPage("beasts")));
         Entry("mclsl_living_named","仙道人物","trait/Bai","named");
         Entry("mclsl_living_sapient","玄黄族","ui/Icons/Xuanhuang","xuanhuang");
         Populate("beasts",MclslBeastActorRegistration.AddPowers);
         Populate("named",t=>{MclslImmortalActorRegistration.AddPowers(t);MclslNamedCharacterRegistration.AddPowers(t);});
         Populate("xuanhuang",MclslXuanhuangRegistration.AddPowers);
+        _return=Button("mclsl_living_return","返回",SpriteTextureLoader.getSprite("ui/Icons/LivingReturn"),()=>ShowPage("home"));
         _root.gameObject.AddComponent<MclslLivingCatalogLifecycle>();
         ShowPage("home");
         VanillaPreserved=originals.All(p=>p.Key!=null&&p.Key.gameObject.activeSelf==p.Value)
@@ -49,12 +51,11 @@ internal static class MclslLivingCatalog
         var before=new HashSet<PowerButton>(_root.GetComponentsInChildren<PowerButton>(true));
         add(_root);
         Pages[page]=_root.GetComponentsInChildren<PowerButton>(true).Where(b=>!before.Contains(b)).ToList();
-        Pages[page].Insert(0,Button("mclsl_living_"+page+"_return","返回生灵首页","ui/icons/iconBook",()=>ShowPage("home")));
     }
-    private static PowerButton Button(string id,string label,string icon,UnityAction action)
+    private static PowerButton Button(string id,string label,Sprite icon,UnityAction action)
     {
         MclslLocalizationBridge.RegisterKey(id,label);MclslLocalizationBridge.RegisterKey(id+" Description",label);
-        var button=PowerButtonCreator.CreateSimpleButton(id,action,SpriteTextureLoader.getSprite(icon),null,default);
+        var button=PowerButtonCreator.CreateSimpleButton(id,action,icon,null,default);
         button._button=button.GetComponent<Button>();
         button._button.onClick=new Button.ButtonClickedEvent();
         button._button.onClick.AddListener(action);
@@ -63,21 +64,28 @@ internal static class MclslLivingCatalog
         return button;
     }
     private static void Entry(string id,string label,string icon,string page)
-        =>Pages["home"].Add(Button(id,label,icon,()=>ShowPage(page)));
+        =>Pages["home"].Add(Button(id,label,SpriteTextureLoader.getSprite(icon),()=>ShowPage(page)));
     internal static void ShowPage(string page)
     {
         if(_root==null||!Pages.TryGetValue(page,out var visible))return;
         CurrentPage=page;
         foreach(var pair in Pages)foreach(var button in pair.Value)button.gameObject.SetActive(pair.Key==page);
+        _return.gameObject.SetActive(page!="home");
         // Keep the native two-row power palette, including its horizontal scroll.
         for(int i=0;i<visible.Count;i++)
         {
-            visible[i].transform.localPosition=new Vector3(119.4f+(i/2)*36,i%2==0?18:-18,0);
+            int slot=i+(page=="home"?0:1);
+            visible[i].transform.localPosition=new Vector3(119.4f+(slot/2)*36,slot%2==0?18:-18,0);
             visible[i].GetComponent<RectTransform>().sizeDelta=new Vector2(32,32);
         }
-        _root._power_buttons.Clear();_root._power_buttons.AddRange(visible);
+        _return.transform.localPosition=new Vector3(119.4f,18,0);
+        _return.GetComponent<RectTransform>().sizeDelta=new Vector2(32,32);
+        _root._power_buttons.Clear();
+        if(page!="home")_root._power_buttons.Add(_return);
+        _root._power_buttons.AddRange(visible);
         _root.findNeighbours();
         if(_root.parentObj!=null)_root.setNewWidth();
+        PowerTabController.instance.scrollRect.horizontalNormalizedPosition=0f;
     }
 }
 internal sealed class MclslLivingCatalogLifecycle:MonoBehaviour

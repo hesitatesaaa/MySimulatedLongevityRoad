@@ -29,6 +29,7 @@ internal static class MclslCultivatorCandidateIndex
     internal static long Revision => _revision;
     internal static int CultivatorCount => CultivatorIds.LiveCount;
     internal static int AnnualCandidateCount => AnnualCandidateIds.LiveCount;
+    internal static bool IsAnnualCandidate(long actorId) => actorId > 0L && AnnualCandidateIds.Contains(actorId);
     internal static bool IsCultivator(long actorId) => actorId > 0L && CultivatorIds.Contains(actorId);
 
     internal static void Observe(Actor actor)

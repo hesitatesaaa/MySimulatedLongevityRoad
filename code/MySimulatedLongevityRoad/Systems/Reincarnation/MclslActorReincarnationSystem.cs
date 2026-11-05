@@ -72,7 +72,7 @@ internal static class MclslActorReincarnationSystem
         if (!MclslActorAccessor.Alive(actor) || !MclslEligibility.CanCultivate(actor)) return false;
         if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ReincarnationApplied, 0) == 1) return false;
         if (!string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return false;
-        int age = SafeAge(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age > 5) return false;
         string race = actor.asset?.id ?? string.Empty;
         return string.IsNullOrWhiteSpace(record.RaceKey) || string.IsNullOrWhiteSpace(race) || string.Equals(record.RaceKey, race, StringComparison.Ordinal);
@@ -153,12 +153,6 @@ internal static class MclslActorReincarnationSystem
             MclslRealmIds.ChangSheng => 96,
             _ => 55
         };
-    }
-
-    private static int SafeAge(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
     }
 
     private static int PositiveHash(string value)

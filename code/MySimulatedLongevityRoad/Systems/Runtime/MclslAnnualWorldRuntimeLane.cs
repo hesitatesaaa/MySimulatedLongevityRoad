@@ -26,7 +26,7 @@ internal static class MclslAnnualWorldRuntimeLane
         FactionPressure = 13,
         Family = 14,
         Complete = 16,
-        BeastSpawn = 15
+        BeastWave = 15
     }
 
     private static Stage _stage;
@@ -51,7 +51,7 @@ internal static class MclslAnnualWorldRuntimeLane
         Stage.FactionMission => "仙盟委托",
         Stage.FactionPressure => "势力施压",
         Stage.Family => "家族经营",
-        Stage.BeastSpawn => "妖兽生成",
+        Stage.BeastWave => "兽潮判定",
         Stage.Complete => "完成",
         _ => "未知"
     };
@@ -187,10 +187,11 @@ internal static class MclslAnnualWorldRuntimeLane
                 return false;
             case Stage.Family:
                 if (!MclslFamilySystem.TickAnnual(_activeYear)) return false;
-                _stage = Stage.BeastSpawn;
+                _stage = Stage.BeastWave;
                 return false;
-            case Stage.BeastSpawn:
-                if (!MclslBeastSpawnSystem.TickAnnual(_activeYear)) return false;
+            case Stage.BeastWave:
+                if (!MclslBeastSurfaceIndex.Refresh()) return false;
+                MclslBeastWorld.TickAnnual(_activeYear);
                 _stage = Stage.Complete;
                 return false;
             case Stage.Complete:
@@ -228,7 +229,7 @@ internal static class MclslAnnualWorldRuntimeLane
         Stage.FactionMission => "年度世界.仙盟委托",
         Stage.FactionPressure => "年度世界.势力施压",
         Stage.Family => "年度世界.家族经营",
-        Stage.BeastSpawn => "年度世界.妖兽生成",
+        Stage.BeastWave => "年度世界.兽潮判定",
         Stage.Complete => "年度世界.完成",
         _ => "年度世界.无"
     };
@@ -248,7 +249,7 @@ internal static class MclslAnnualWorldRuntimeLane
         Stage.FactionMission => "MCLS/AnnualWorld/FactionMission",
         Stage.FactionPressure => "MCLS/AnnualWorld/FactionPressure",
         Stage.Family => "MCLS/AnnualWorld/Family",
-        Stage.BeastSpawn => "MCLS/AnnualWorld/BeastSpawn",
+        Stage.BeastWave => "MCLS/AnnualWorld/BeastWave",
         Stage.Complete => "MCLS/AnnualWorld/Complete",
         _ => "MCLS/AnnualWorld/None"
     };

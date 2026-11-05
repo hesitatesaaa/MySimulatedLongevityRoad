@@ -17,7 +17,7 @@ namespace MySimulatedLongevityRoad.Core {
     public static class MclslRuntimeChanges { public static bool IsMainThread=true; }
     public static class MclslFrameDeadline { public static double RemainingMs=>100; }
     public static class MclslAnnualFrameBudget { public static double RemainingMs=>100; }
-    public static class MclslPerformanceProbe { public static void RecordBeastSurfaceClassified(int tiles,bool incremental){} }
+    public static class MclslPerformanceProbe { public static long Begin()=>0; public static void End(string name,long sample){} public static void RecordBeastSurfaceClassified(int tiles,bool incremental){} }
     public class MclslActorThreadHandoff<T> {
         private readonly System.Collections.Generic.Queue<(T,long)> q=new();
         public int Count=>q.Count;

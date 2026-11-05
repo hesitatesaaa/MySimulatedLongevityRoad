@@ -1,0 +1,40 @@
+{
+  "version": "0.8.7",
+  "canonicalRoot": "E:\\0.8.5\\MySimulatedLongevityRoad",
+  "oldPackageSourceRoot": "E:\\0.8.5\\github-publish",
+  "oldPackageVersion": "0.8.6",
+  "preservedSHA256": {
+    "code/MySimulatedLongevityRoad/UI/MclslUiManager.cs": "02d96a24bbebac797f35cd43b8e18f85b60f31f5778ee94e064aa3f635207406",
+    "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellSystem.cs": "8736f298a783ce564754bab784cda446f124a3583113bee9b0845e3fef1bfae9",
+    "mod.json": "3420e5e783e95b0ebf77b89ef13763ae80deef0b338f40e025a06e5f5bd7b69d",
+    "tools/test-physique-affinity.ps1": "50a5caa1dddc6ea947ec4190e5e8fe94f0586fa0741b071a41ef617c2406bf8d",
+    "tools/test-spell-support-stages.ps1": "21439e0dd9723e461afb4c41000b910b666f8dee37beffc906b7e27ffaa7db83"
+  },
+  "boatMultiplierFromPrevious": 0.8,
+  "boatMultiplierFromNative": 0.68,
+  "unchanged": [
+    "docks",
+    "other buildings",
+    "boat animation timing and pivots"
+  ],
+  "backup": "E:\\0.8.5\\MySimulatedLongevityRoad\\build\\latest-source-boat-backup-20261105-204926",
+  "oldWorkspaceMissingLocalChanges": [
+    "code/MySimulatedLongevityRoad/UI/MclslUiManager.cs",
+    "code/MySimulatedLongevityRoad/Systems/Cultivation/MclslSpellSystem.cs",
+    "mod.json",
+    "tools/test-physique-affinity.ps1",
+    "tools/test-spell-support-stages.ps1"
+  ],
+  "compile": {
+    "sources": 299,
+    "exit": 0,
+    "warnings": 0
+  },
+  "tests": {
+    "boatPetRegression": "passed",
+    "userUpdatedSpellStageRegression": "passed",
+    "userAddedPhysiqueAffinityRegression": "failed: current physique source has no ReadPhysiqueMask method; preserved unchanged, unrelated to boat edit"
+  },
+  "versionInMod": "0.8.7",
+  "sourceCommit": "f1562fd8b702e50cf629fce41984e277e86326c7"
+}

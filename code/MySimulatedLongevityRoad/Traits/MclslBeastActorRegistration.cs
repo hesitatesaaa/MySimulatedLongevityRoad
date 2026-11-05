@@ -48,12 +48,15 @@ internal static class MclslBeastActorRegistration
     internal static bool IsOrdinary(Actor actor)
         => IsBeast(actor) && actor.asset.id.StartsWith("mclsl_beast_", StringComparison.Ordinal);
 
-    // Ordinary beasts use the native animal ownership model, including a wild kingdom.
+    // Both beast forms retain native wild ownership, including named lineages.
     internal static void RestoreWildOwnership(Actor actor)
     {
-        if (!IsOrdinary(actor)) return;
+        if (!IsBeast(actor)) return;
         MclslBeastWorld.EnsureWildKingdom();
         if (actor.city != null) actor.setCity(null);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientSectAffiliation, string.Empty);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty);
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.FactionAffiliation, string.Empty);
         Kingdom wild = World.world.kingdoms_wild.get(actor.asset.kingdom_id_wild);
         if (actor.kingdom != wild) actor.setKingdom(wild);
     }
@@ -105,7 +108,7 @@ internal static class MclslBeastActorRegistration
     }
 
     internal static bool HasYuanyingWisdom(Actor actor)
-        => IsBeast(actor) && !IsOrdinary(actor) && CanTransform(actor);
+        => false;
 
     internal static bool CanTransform(Actor actor)
         => IsBeast(actor) && MclslRealmIds.Index(MclslActorAccessor.Realm(actor))
@@ -178,9 +181,7 @@ internal static class MclslBeastActorRegistration
         MclslLocalizationBridge.RegisterKey(beast.BeastAssetId, beast.Name);
         MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId, beast.Name + "·元婴");
         MclslLocalizationBridge.RegisterKey(beast.BeastAssetId + " Description", "元婴前无智慧的修炼妖兽。");
-        bool named = beast.AssetPrefix == "mclsl_named_";
-        MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId + " Description", named
-            ? "具名妖兽，元婴后保留人物规则。" : "元婴后化形，仍无智慧，不建立国家。");
+        MclslLocalizationBridge.RegisterKey(beast.AscendedAssetId + " Description", "元婴后化形，保留修炼与神通，不加入宗门、组织或国家。");
         ActorAsset template = AssetManager.actor_library.get(beast.AnimalTemplate)
             ?? AssetManager.actor_library.get("sheep");
         if (template == null || orc == null) throw new InvalidOperationException("缺少原版动物或兽人模板");
@@ -189,36 +190,14 @@ internal static class MclslBeastActorRegistration
             ?? AssetManager.actor_library.clone(beast.BeastAssetId, template.id);
         if (animal == null) throw new InvalidOperationException("无法创建兽形单位");
         ConfigureShared(animal, beast, template, false);
-        // WorldBox creates an editable subspecies for this civilization-capable
-        // lineage, while per-actor isSapient remains false below YuanYing.
-        animal.civ = true;
-        animal.auto_civ = false;
-        animal.unit_other = true;
-        animal.kingdom_id_civilization = string.Empty;
-        animal.kingdom_id_wild = template.kingdom_id_wild;
-        animal.job = template.job;
-        animal.job_kingdom = template.job_kingdom;
-        animal.job_baby = template.job_baby;
-        animal.decision_ids = Copy(template.decision_ids);
-
         ActorAsset ascended = AssetManager.actor_library.get(beast.AscendedAssetId)
             ?? AssetManager.actor_library.clone(beast.AscendedAssetId, orc.id);
         if (ascended == null) throw new InvalidOperationException("无法创建元婴化形单位");
         ConfigureShared(ascended, beast, orc, true);
-        ascended.civ = true;
-        ascended.auto_civ = true;
-        ascended.unit_other = false;
-        ascended.kingdom_id_civilization = orc.kingdom_id_civilization;
-        ascended.kingdom_id_wild = orc.kingdom_id_wild;
-        ascended.job = orc.job;
-        ascended.job_kingdom = orc.job_kingdom;
-        ascended.job_baby = orc.job_baby;
-        ascended.decision_ids = Copy(orc.decision_ids);
         ascended.architecture_id = orc.architecture_id;
         ascended.banner_id = orc.banner_id;
-        if (!named)
         {
-            ActorAsset predator=AssetManager.actor_library.get(beast.AnimalTemplate=="piranha"?"piranha":"wolf")??template;
+            ActorAsset predator=AssetManager.actor_library.get(beast.Surface == MclslBeastSurface.Water ? "piranha" : beast.AnimalTemplate == "wolf" ? "wolf" : "buffalo");
             foreach (ActorAsset form in new[] { animal, ascended })
             {
                 form.civ = false;
@@ -226,6 +205,10 @@ internal static class MclslBeastActorRegistration
                 form.unit_other = true;
                 form.kingdom_id_civilization = string.Empty;
                 form.kingdom_id_wild = "mclsl_wild_beasts";
+                form.skip_fight_logic = predator.skip_fight_logic;
+                form.default_attack = predator.default_attack;
+                form.aggression = template.aggression;
+                form.job_attacker = predator.job_attacker;
                 form.job = predator.job;
                 form.job_kingdom = predator.job_kingdom;
                 form.job_baby = predator.job_baby;
@@ -256,8 +239,7 @@ internal static class MclslBeastActorRegistration
         traits.RemoveAll(id => id.StartsWith("population_", StringComparison.Ordinal)
             || id.StartsWith("gestation_", StringComparison.Ordinal)
             || id == "high_fecundity");
-        // A shared subspecies must be eligible for the native orc civilization
-        // pipeline after metamorphosis. Actor.isSapient is gated by realm.
+        // The shared form configuration below removes civilization brain traits.
         if (!traits.Contains("prefrontal_cortex")) traits.Add("prefrontal_cortex");
         if (!traits.Contains("advanced_hippocampus")) traits.Add("advanced_hippocampus");
         if (!traits.Contains("reproduction_sexual")) traits.Add("reproduction_sexual");

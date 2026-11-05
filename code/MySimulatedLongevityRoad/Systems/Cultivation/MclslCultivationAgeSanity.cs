@@ -16,7 +16,7 @@ internal static class MclslCultivationAgeSanity
         // Empty-realm essence still has its own cap even for an adult. For an
         // existing realm, all age gates have opened by the ChangSheng threshold.
         return string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))
-            || SafeAge(actor) < MinimumAgeForRealm(MclslRealmIds.ChangSheng);
+            || MclslActorAccessor.Age(actor) < MinimumAgeForRealm(MclslRealmIds.ChangSheng);
     }
 
     internal static bool RepairImpossibleYouthCultivation(Actor actor, int year)
@@ -26,7 +26,7 @@ internal static class MclslCultivationAgeSanity
         if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
 
         long repairSample = MclslPerformanceProbe.Begin();
-        int age = SafeAge(actor);
+        int age = MclslActorAccessor.Age(actor);
         string realm = MclslActorAccessor.Realm(actor);
         bool ancientLaw = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;
@@ -107,7 +107,7 @@ internal static class MclslCultivationAgeSanity
         int requiredAge = MinimumAgeForRealm(nextRealm);
         if (requiredAge <= 0) return true;
 
-        int age = SafeAge(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age >= requiredAge) return true;
 
         reason = "年岁尚浅，至少" + requiredAge + "岁方可尝试" + MclslRealmIds.Display(nextRealm);
@@ -157,10 +157,4 @@ internal static class MclslCultivationAgeSanity
         MclslRealmIds.ChangSheng => 1600,
         _ => 0
     };
-
-    private static int SafeAge(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
 }

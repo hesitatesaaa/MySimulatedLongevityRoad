@@ -106,13 +106,13 @@ internal sealed partial class MclslCodexWindow
         if (candidate == null) return;
         GUILayout.BeginVertical(GUI.skin.box);
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<b><color=#F0D58B>第 " + rank + " 席</color>　" + Blank(candidate.Name) + "</b>", GUILayout.Width(270));
-        DrawTag(Blank(candidate.RealmName), "#9CD7FF");
+        GUILayout.Label("<b><color=#F0D58B>第 " + rank + " 席</color>　" + MclslActorArchiveText.Blank(candidate.Name) + "</b>", GUILayout.Width(270));
+        DrawTag(MclslActorArchiveText.Blank(candidate.RealmName), "#9CD7FF");
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
-        GUILayout.Label("功法：" + Blank(candidate.TechniqueName) + "｜道途：" + Blank(candidate.CultivationSystemName));
+        GUILayout.Label("功法：" + MclslActorArchiveText.Blank(candidate.TechniqueName) + "｜道途：" + MclslActorArchiveText.Blank(candidate.CultivationSystemName));
         GUILayout.BeginHorizontal();
-        GUILayout.Label("真元 " + candidate.TrueEssence + "｜归属 " + Blank(candidate.FactionName));
+        GUILayout.Label("真元 " + candidate.TrueEssence + "｜归属 " + MclslActorArchiveText.Blank(candidate.FactionName));
         GUILayout.FlexibleSpace();
         bool recorded = MclslMaobaoSystem.IsRecorded(candidate.ActorId);
         if (GUILayout.Button(recorded ? "刷新完整档案" : "刻名入宝", GUILayout.Width(116), GUILayout.Height(32)))
@@ -130,17 +130,17 @@ internal sealed partial class MclslCodexWindow
         GUILayout.BeginVertical(GUI.skin.box);
         DrawCardStripe(alive && record.SourceActorId == _maobaoFocusActorId ? "#D8C778" : alive ? "#8FE3D1" : "#777D88");
         GUILayout.BeginHorizontal();
-        GUILayout.Label("<size=21><b>" + Blank(record.Name) + "</b></size>", GUILayout.Width(250));
+        GUILayout.Label("<size=21><b>" + MclslActorArchiveText.Blank(record.Name) + "</b></size>", GUILayout.Width(250));
         DrawTag(alive ? "当世" : "档案", alive ? "#8FE3D1" : "#A8ABB3");
         string realm = MclslMaobaoArchiveManager.TryResolveSource(record, out Actor actor)
             ? MclslActorAccessor.Realm(actor) : string.Empty;
-        DrawTag(Blank(realm, "完整快照"), "#FFD37A");
+        DrawTag(MclslTextValue.Or(realm, "完整快照"), "#FFD37A");
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
-        GUILayout.Label("保存时间 " + Blank(record.SaveTime) + "｜源角色ID " + record.SourceActorId);
+        GUILayout.Label("保存时间 " + MclslActorArchiveText.Blank(record.SaveTime) + "｜源角色ID " + record.SourceActorId);
         GUILayout.Label("已保存角色数据、物品引用、特质与模组自定义档案；放置时会重新生成当前世界编号。");
         GUILayout.BeginHorizontal();
-        GUILayout.Label("保存年份 " + record.SavedYear + "｜资源 " + Blank(record.AssetId));
+        GUILayout.Label("保存年份 " + record.SavedYear + "｜资源 " + MclslActorArchiveText.Blank(record.AssetId));
         GUILayout.FlexibleSpace();
         bool canLocate = alive && record.SourceActorId > 0L;
         bool oldEnabled = GUI.enabled;
@@ -163,7 +163,7 @@ internal sealed partial class MclslCodexWindow
         GUI.enabled = oldEnabled;
         GUI.backgroundColor = new Color(0.18f, 0.45f, 0.28f, 1f);
         if (GUILayout.Button("放", GUILayout.Width(42), GUILayout.Height(32)))
-            _maobaoActionMessage = MclslMaobaoPlaceMode.Begin(record.ActorId) ? "请选择地图位置放置“" + Blank(record.Name) + "”。" : "放置模式启动失败。";
+            _maobaoActionMessage = MclslMaobaoPlaceMode.Begin(record.ActorId) ? "请选择地图位置放置“" + MclslTextValue.Or(record.Name, "无") + "”。" : "放置模式启动失败。";
         GUI.backgroundColor = new Color(0.42f, 0.25f, 0.22f, 1f);
         if (GUILayout.Button("拂去留影", GUILayout.Width(110), GUILayout.Height(32)))
             MclslMaobaoSystem.Remove(record.ActorId, out _maobaoActionMessage);

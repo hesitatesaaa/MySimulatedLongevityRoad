@@ -623,12 +623,49 @@ internal static partial class MclslWorldRunRepository
             Title = safeTitle,
             Body = safeBody
         };
+        // 坐标由调用方在 AddEventCore 返回后补写（AddEvent 的坐标重载、
+        // AddMapVisualEvent 等）。镜像到原版历史必须等坐标写完再做，否则
+        // 写进原版历史的消息没有 x/y，原版“定位”按钮无效。这里只登记待发，
+        // 由调用方补完坐标后调用 FlushNativeMirror 真正写入，避免重复写两条。
+        AppendEvent(record);
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
                 MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
-            record.NativeLogged = MclslNativeHistoryBridge.Add(record);
-        AppendEvent(record);
+        {
+            if (record.MapX >= 0 && record.MapY >= 0)
+                record.NativeLogged = MclslNativeHistoryBridge.Add(record);
+            else
+            {
+                if (NativeMirrorPending.Count >= MaxNativeMirrorPending) FlushAllNativeMirror(true);
+                NativeMirrorPending.Add(record);
+            }
+        }
         MclslWorldArchiveStore.MarkDirty();
         return record;
+    }
+
+    private const int MaxNativeMirrorPending = 64;
+    private static readonly List<MclslRunEventRecord> NativeMirrorPending = new();
+
+    internal static void FlushNativeMirror(MclslRunEventRecord record, bool force = false)
+    {
+        if (record == null) return;
+        NativeMirrorPending.Remove(record);
+        if (record.NativeLogged) return;
+        if (!MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
+                MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
+            return;
+        if (!force && (record.MapX < 0 || record.MapY < 0))
+        {
+            if (!NativeMirrorPending.Contains(record)) NativeMirrorPending.Add(record);
+            return;
+        }
+        record.NativeLogged = MclslNativeHistoryBridge.Add(record);
+    }
+
+    private static void FlushAllNativeMirror(bool force)
+    {
+        for (int i = NativeMirrorPending.Count - 1; i >= 0; i--)
+            FlushNativeMirror(NativeMirrorPending[i], force);
     }
 
     internal static void AddMaterialDiscoveryEvent(int year, string title, string body, Actor actor, string eventKey)
@@ -758,6 +795,7 @@ internal static partial class MclslWorldRunRepository
             record.LocationName = actor.city?.data?.name ?? string.Empty;
             record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
             if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
+            FlushNativeMirror(record);
             MclslWorldArchiveStore.MarkDirty();
         }
         catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
@@ -774,6 +812,7 @@ internal static partial class MclslWorldRunRepository
         record.LocationName = locationName ?? string.Empty;
         record.KingdomName = kingdomName ?? string.Empty;
         if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
+        FlushNativeMirror(record);
         MclslWorldArchiveStore.MarkDirty();
     }
 
@@ -794,6 +833,7 @@ internal static partial class MclslWorldRunRepository
             string.IsNullOrWhiteSpace(location) ? actor.city?.data?.name ?? string.Empty : location,
             string.IsNullOrWhiteSpace(kingdom) ? actor.kingdom?.data?.name ?? string.Empty : kingdom,
             visualKind, durationYears);
+        FlushNativeMirror(record);
     }
 
     internal static void AddMapVisualEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string visualKind, int durationYears)
@@ -805,6 +845,7 @@ internal static partial class MclslWorldRunRepository
         record.LocationName = locationName ?? string.Empty;
         record.KingdomName = kingdomName ?? string.Empty;
         ApplyMapVisualToEvent(record, year, mapX, mapY, locationName, kingdomName, visualKind, durationYears);
+        FlushNativeMirror(record);
     }
 
     private static void ApplyMapVisualToEvent(MclslRunEventRecord record, int year,
@@ -1013,7 +1054,11 @@ internal static partial class MclslWorldRunRepository
                 EventType = "cultivator_death",
                 Category = MclslEventCatalog.Death,
                 Title = ShortNativeDeathTitle(death),
-                Body = ShortNativeDeathBody(death)
+                Body = ShortNativeDeathBody(death),
+                // 原版历史按 unit_id 或 x/y 提供“定位”；缺坐标时按钮不可用。
+                ActorId = death.ActorId,
+                MapX = death.MapX,
+                MapY = death.MapY
             };
             record.NativeLogged = MclslNativeHistoryBridge.Add(native);
         }
@@ -1123,7 +1168,7 @@ internal static partial class MclslWorldRunRepository
             if (FindAnchor(definition.Id) != null) continue;
             int min = Math.Min(definition.EarliestYear, definition.LatestYear);
             int max = Math.Max(definition.EarliestYear, definition.LatestYear);
-            int hash = StableHash(_current.RunId + "|" + definition.Id);
+            int hash = MclslStableHash.Stable17x31(_current.RunId + "|" + definition.Id);
             int canonicalYear = min + (hash & int.MaxValue) % Math.Max(1, max - min + 1);
             int scheduledYear = ScheduleTimelineAnchorYear(canonicalYear);
             _current.TimelineAnchors.Add(new MclslTimelineAnchorState { AnchorId = definition.Id, ScheduledYear = scheduledYear });
@@ -1299,7 +1344,7 @@ internal static partial class MclslWorldRunRepository
             PlayerTruth("truth_player_reincarnation_unbroken", "轮回不灭", "本世可证逆理：身灭而识不尽。已逆后，高境修士身陨时有概率转世，以更高灵根资质重踏修行。")
         };
         MclslInverseTruthRecord[] playerTruthDefinitions = playerTruthPool
-            .OrderBy(x => StableHash(_current.RunId + "|player_truth|" + x.Id))
+            .OrderBy(x => MclslStableHash.Stable17x31(_current.RunId + "|player_truth|" + x.Id))
             .Take(5)
             .ToArray();
         MclslInverseTruthRecord[] allTruthDefinitions = canonTruthDefinitions.Concat(playerTruthDefinitions).ToArray();
@@ -1517,7 +1562,6 @@ internal static partial class MclslWorldRunRepository
         MclslWorldRunRuntimeIndexes.Invalidate();
     }
 
-    private static int StableHash(string value) => MySimulatedLongevityRoad.Core.MclslStableHash.Stable17x31(value);
     internal static MclslWorldSoulRecord FindWorldSoulById(string soulId)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;

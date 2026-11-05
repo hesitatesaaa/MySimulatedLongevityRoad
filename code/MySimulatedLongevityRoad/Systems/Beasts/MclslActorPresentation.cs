@@ -13,6 +13,8 @@ internal static class MclslActorPresentation
     private sealed class Profile
     {
         internal string SpeciesId;
+        internal float ShieldDiameter;
+        internal Vector2 ShieldCenter;
         internal string Name;
         internal float SelectionScale;
         internal Sprite[] Avatar;
@@ -30,6 +32,23 @@ internal static class MclslActorPresentation
     internal static void Configure(ActorAsset asset, Sprite first)
     {
         if (first == null) throw new InvalidOperationException("头像源图缺失：" + asset.id);
+        Configure(asset, first, VisibleBounds(first.texture, first.rect));
+    }
+
+    internal static Rect VisibleBounds(Texture2D texture, Rect rect)
+    {
+        Color32[] pixels = texture.GetPixels32();
+        int left=(int)rect.width, right=0, bottom=(int)rect.height, top=0;
+        for(int y=0;y<(int)rect.height;y++) for(int x=0;x<(int)rect.width;x++)
+        {
+            if(pixels[((int)rect.y+y)*texture.width+(int)rect.x+x].a==0)continue;
+            left=Math.Min(left,x);right=Math.Max(right,x+1);bottom=Math.Min(bottom,y);top=Math.Max(top,y+1);
+        }
+        return Rect.MinMaxRect(left,bottom,right,top);
+    }
+
+    internal static void Configure(ActorAsset asset, Sprite first, Rect body)
+    {
         MclslBeastDefinition beast = MclslBeastCatalog.ForAsset(asset.id);
         string speciesId = CanonicalSpeciesId(asset.id);
         string name = beast?.Name ?? asset.getLocalizedName();
@@ -51,6 +70,8 @@ internal static class MclslActorPresentation
             MclslSpriteOwnership.Register(profile.FeedbackIcon);
             Profiles.Add(asset.id, profile);
         }
+        profile.ShieldDiameter=1.2f*Math.Max(body.width,body.height)/first.pixelsPerUnit;
+        profile.ShieldCenter=(body.center-first.pivot)/first.pixelsPerUnit;
         profile.SpeciesId = speciesId;
         profile.Name = name;
         // Indicators use the native adult baseline, independent of the large
@@ -124,6 +145,26 @@ internal static class MclslActorPresentation
     // A mod actor therefore resolves to the adult baseline (1.0) here.
     internal static float MarkerScaleMod(Actor actor)
         => UsesVanillaMarker(actor) ? 1f : actor == null ? 1f : actor.current_scale.y / NativeAdultMarkerScale;
+
+    internal static float StatusScale(BaseSimObject unit, StatusAsset status)
+    {
+        if(status.id!="shield" || unit is not Actor actor || !Profiles.TryGetValue(actor.asset.id,out var profile))
+            return SelectionScale(unit);
+        Sprite bubble=status.sprite_list[0];
+        float diameter=Math.Max(bubble.bounds.size.x,bubble.bounds.size.y);
+        return profile.ShieldDiameter*HumanoidBodyScale(unit).y/diameter/status.scale;
+    }
+
+    internal static ref Vector3 StatusPosition(ref Vector3 position,BaseSimObject unit,StatusAsset status)
+    {
+        if(status.id=="shield" && unit is Actor actor && Profiles.TryGetValue(actor.asset.id,out var profile))
+        {
+            Vector2 center=profile.ShieldCenter*HumanoidBodyScale(unit).y;
+            position.x+=center.x;
+            position.y+=center.y;
+        }
+        return ref position;
+    }
 
     internal static void NormalizeSubspecies(Subspecies lineage)
     {

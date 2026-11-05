@@ -9,6 +9,21 @@ public sealed class ActorAsset {
     public string getLocalizedName() => Throws ? throw new Exception("native") : Name;
 }
 public sealed class ActorTrait { public string id; }
+// 0.8.7 起 MclslRankTextFormat 增加了 Unity 侧的 SetText 辅助方法；正式离线回归
+// 直接链接生产源码，因此补最小 Unity 替身。只覆盖编译所需，不做渲染验证。
+namespace UnityEngine {
+    public struct Color { public float r, g, b, a; }
+    public class Object { }
+    public class Component : Object {
+        public T GetComponent<T>() where T : Component => null;
+    }
+    public class Transform : Component {
+        public Component Find(string childName) => null;
+    }
+}
+namespace UnityEngine.UI {
+    public class Text : UnityEngine.Component { public string text; public UnityEngine.Color color; }
+}
 namespace NeoModLoader.General {
     public static class LM {
         public static Dictionary<string,string> Values = new();

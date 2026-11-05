@@ -71,6 +71,7 @@ internal static class MclslRankSnapshotSource
         PendingUpdates.TryGetValue(id, out bool existing);
         PendingUpdates[id] = existing || refreshFilters;
     }
+    internal static void RequestVisibleUpdate() => _nextUpdate = 0f;
     internal static void TickUpdates()
     {
         if (PendingUpdates.Count == 0 || Time.unscaledTime < _nextUpdate) return;
@@ -84,7 +85,7 @@ internal static class MclslRankSnapshotSource
             if (MclslActorRegistry.Resolve(id, out Actor actor)) UpdateActor(actor, filters);
             else Remove(id);
         }
-        if (PendingUpdates.Count == 0) _nextUpdate = Time.unscaledTime + 1f;
+        if (PendingUpdates.Count == 0) _nextUpdate = Time.unscaledTime + (MclslRankWindow.IsVisible || MclslBeastRankWindow.IsVisible ? 1f : 5f);
     }
     internal static void UpdateActor(Actor actor, bool refreshFilters = false)
     {
@@ -280,6 +281,7 @@ internal static class MclslRankSnapshotSource
         string kingdomName = KingdomName(actor);
         bool ordinaryBeast = ReadBeastInfo(actor, out string beastSpeciesId, out string beastSpeciesName,
             out string beastTalentName, out int beastTalentLevel);
+        CombatCareerInfo combat = ReadCombatCareer(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -292,12 +294,15 @@ internal static class MclslRankSnapshotSource
             RootAttributes = view.SpiritualRootAttributes,
             NormalizedSearchText = prior != null && prior.Name == view.Name && prior.RealmName == view.RealmName
                 && prior.RootAttributes == roots && prior.KingdomName == kingdomName ? prior.NormalizedSearchText
-                : NormalizeSearch(view.Name) + NormalizeSearch(view.RealmName) + NormalizeSearch(roots) + NormalizeSearch(kingdomName),
+                : MclslRankTextFormat.NormalizeSearch(view.Name) + MclslRankTextFormat.NormalizeSearch(view.RealmName) + MclslRankTextFormat.NormalizeSearch(roots) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraData = ExtraValues(view),
             KingdomName = kingdomName,
             ProfessionId = ResolveProfessionId(actor),
             ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
             ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
+            CombatCareer = combat.Career,
+            CombatCareerRank = combat.Rank,
+            CombatCareerExperience = combat.Experience,
             Power = power,
             RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(view.RealmId, view.TaishangProgress),
             MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(view.RealmId, view.CultivationProgress),
@@ -342,6 +347,7 @@ internal static class MclslRankSnapshotSource
         string kingdomName = KingdomName(actor);
         MclslBeastDefinition fallbackSpecies = MclslBeastActorRegistration.IsOrdinary(actor)
             ? MclslBeastCatalog.ForAsset(actor.asset?.id) : null;
+        CombatCareerInfo combat = ReadCombatCareer(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -352,7 +358,7 @@ internal static class MclslRankSnapshotSource
             GiftName = rootText,
             RootText = rootText,
             RootAttributes = rootAttributes,
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(rootAttributes) + NormalizeSearch(kingdomName),
+            NormalizedSearchText = MclslRankTextFormat.NormalizeSearch(name) + MclslRankTextFormat.NormalizeSearch(realmName) + MclslRankTextFormat.NormalizeSearch(rootAttributes) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? essence + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
@@ -360,6 +366,9 @@ internal static class MclslRankSnapshotSource
             ProfessionId = ResolveProfessionId(actor),
             ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
             ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
+            CombatCareer = combat.Career,
+            CombatCareerRank = combat.Rank,
+            CombatCareerExperience = combat.Experience,
             Power = Math.Max(1d, realmIndex + 1),
             RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(realm, taishangProgress),
             MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(realm, progress),
@@ -446,6 +455,7 @@ internal static class MclslRankSnapshotSource
             }
         }
         catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", "榜单快照：读取妖兽种类失败: " + mclslEmptyCatchEx.Message); }
+        CombatCareerInfo combat = ReadCombatCareer(actor);
         return new MclslRankEntry
         {
             Actor = actor,
@@ -456,7 +466,7 @@ internal static class MclslRankSnapshotSource
             GiftName = "灵根",
             RootText = "未明",
             RootAttributes = "未明",
-            NormalizedSearchText = NormalizeSearch(name) + NormalizeSearch(realmName) + NormalizeSearch(kingdomName),
+            NormalizedSearchText = MclslRankTextFormat.NormalizeSearch(name) + MclslRankTextFormat.NormalizeSearch(realmName) + MclslRankTextFormat.NormalizeSearch(kingdomName),
             ExtraText = string.IsNullOrWhiteSpace(realm)
                 ? Math.Max(0, essence) + "/" + MclslRealmProgress.LianQiEntryMinimum
                 : string.Empty,
@@ -464,6 +474,9 @@ internal static class MclslRankSnapshotSource
             ProfessionId = ResolveProfessionId(actor),
             ProfessionGrade = MclslProfessionSystem.GetGrade(actor),
             ProfessionExperience = Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ProfessionExperience, 0)),
+            CombatCareer = combat.Career,
+            CombatCareerRank = combat.Rank,
+            CombatCareerExperience = combat.Experience,
             Power = 1d,
             RealmIndex = MclslMinorRealmCatalog.RankRealmIndex(realm, taishangProgress),
             MinorRealmIndex = MclslMinorRealmCatalog.RankMinorIndex(realm, progress),
@@ -498,6 +511,22 @@ internal static class MclslRankSnapshotSource
         return string.IsNullOrWhiteSpace(traitProfession)
             ? MclslActorAccessor.GetString(actor, MclslActorDataKeys.Profession, string.Empty)
             : traitProfession;
+    }
+
+    // 战斗职业排序用的紧凑快照：一次读取拿到职业、阶位与熟练度，避免排序时反复查档。
+    private readonly struct CombatCareerInfo
+    {
+        internal readonly int Career, Rank, Experience;
+        internal CombatCareerInfo(int career, int rank, int experience)
+        { Career = career; Rank = rank; Experience = experience; }
+    }
+
+    private static CombatCareerInfo ReadCombatCareer(Actor actor)
+    {
+        if (actor?.data == null || !Systems.Combat.MclslCombatCareerSystem.Applicable(actor))
+            return new CombatCareerInfo(-1, 0, 0);
+        var state = Systems.Combat.MclslCombatCareerSystem.Read(actor);
+        return new CombatCareerInfo(state.Career, Math.Max(0, state.Rank), Math.Max(0, state.Experience));
     }
 
     private static void CaptureFilterChoices(
@@ -546,8 +575,8 @@ internal static class MclslRankSnapshotSource
     private static double CalculatePower(Actor actor, RankValues view, int realmIndex)
     {
         if (!MclslActorAccessor.Alive(actor)) return 0d;
-        float attack = GetStatSafe(actor, "damage");
-        float health = GetStatSafe(actor, "health");
+        float attack = MclslActorAccessor.StatValue(actor, "damage");
+        float health = MclslActorAccessor.StatValue(actor, "health");
         double baseStats = Math.Max(1d, attack + health);
         double power = RealmPowerWeight(view.RealmId, realmIndex) * baseStats;
         power *= 1d + Math.Clamp(view.MindState, 0, 100) / 500d;
@@ -560,12 +589,6 @@ internal static class MclslRankSnapshotSource
         }
         if (double.IsNaN(power) || power <= 0d) return 0d;
         return Math.Min(float.MaxValue, power);
-    }
-
-    private static float GetStatSafe(Actor actor, string statId)
-    {
-        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
-        catch { return 0f; }
     }
 
     private static int RealmPowerWeight(string realmId, int realmIndex)
@@ -601,7 +624,6 @@ internal static class MclslRankSnapshotSource
         int separator = value.IndexOf('、');
         return separator < 0 ? value : value.Substring(0, separator);
     }
-    private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
 
     // 普通妖兽（含元婴化形）的物种与独立本命神通，仅神兽榜读取；具名妖兽返回 false。
     private static bool ReadBeastInfo(Actor actor, out string speciesId, out string speciesName,

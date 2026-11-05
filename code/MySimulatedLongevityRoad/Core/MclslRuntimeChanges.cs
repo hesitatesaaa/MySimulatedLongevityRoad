@@ -11,7 +11,7 @@ namespace MySimulatedLongevityRoad.Core;
 internal enum MclslActorChange : ushort
 {
     None = 0, Data = 1, Membership = 2, Inventory = 4, Traits = 8, Native = 16,
-    Presentation = 32, NativeMetadata = 64, Targets = 128, Position = 256, All = 127
+    Presentation = 32, NativeMetadata = 64, Targets = 128, Position = 256, RootPopulation = 512, All = 639
 }
 
 /// <summary>Single bounded handoff from gameplay mutations to indexes and visible presentation.</summary>
@@ -44,11 +44,13 @@ internal static class MclslRuntimeChanges
             _health = actor.stats == null ? 0 : actor.stats["health"];
             _age = (int)actor.getAge();
         }
+        internal bool RootAgeEligible => _age >= 5;
         internal MclslActorChange ChangesSince(NativeStamp before)
         {
             MclslActorChange flags = MclslActorChange.None;
             if (!_damage.Equals(before._damage) || !_health.Equals(before._health)) flags |= MclslActorChange.Native;
             if (_age != before._age) flags |= MclslActorChange.Presentation;
+            if (_asset != before._asset) flags |= MclslActorChange.RootPopulation;
             if (_age >= 16 && before._age < 16) flags |= MclslActorChange.NativeMetadata;
             if (_name != before._name || _kingdom != before._kingdom || _kingdomName != before._kingdomName
                 || _asset != before._asset || _city != before._city || _hasTile != before._hasTile)
@@ -96,6 +98,7 @@ internal static class MclslRuntimeChanges
             flags = entry.HasNativeStamp ? next.ChangesSince(entry.NativeStamp)
                 : MclslActorChange.Native | MclslActorChange.NativeMetadata | MclslActorChange.Presentation;
             entry.NativeStamp = next; entry.HasNativeStamp = true;
+            if (next.RootAgeEligible != entry.RootAgeEligible) flags |= MclslActorChange.RootPopulation;
             if ((flags & MclslActorChange.NativeMetadata) != 0)
             { MclslActorRegistry.RefreshLocation(actor); MclslActorRegistry.RefreshTargets(actor, forceEligibility: true); }
             if ((flags & (MclslActorChange.Presentation | MclslActorChange.NativeMetadata)) != 0)
@@ -103,6 +106,8 @@ internal static class MclslRuntimeChanges
             if (flags == MclslActorChange.None) return;
             if (flags == MclslActorChange.Presentation && !MclslActorInfoPanel.HasOpenActor(actor)) return;
         }
+        if ((flags & MclslActorChange.RootPopulation) != 0)
+            MclslChildhoodRootSystem.ObservePopulation(actor);
         if ((flags & (MclslActorChange.Membership | MclslActorChange.Traits)) != 0)
             MclslActorProjectionIndex.RefreshUninitiated(actor);
         if ((flags & (MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0)
@@ -133,6 +138,7 @@ internal static class MclslRuntimeChanges
             MclslAncientMentorshipSystem.OnCultivationChanged(actor);
         if (key == MclslActorDataKeys.ImmortalFate || key == MclslActorDataKeys.MindState)
             MclslActorProjectionIndex.RefreshUninitiated(actor);
+        MclslHuanzhenSystem.NotifyLegacyEligibility(actor, key);
         MclslActorChange flags = MclslActorChange.Data;
         if (key == MclslActorDataKeys.TaishangProgress && !IsMainThread)
             flags |= MclslActorChange.Membership;
@@ -142,11 +148,14 @@ internal static class MclslRuntimeChanges
             || key == MclslActorDataKeys.Aptitude || key == MclslActorDataKeys.TechniqueId
             || key == MclslActorDataKeys.TechniqueName || key == MclslActorDataKeys.TechniqueMaxRealm)
             flags |= MclslActorChange.Membership;
+        if (key == MclslActorDataKeys.SpiritualRootPrimary || key == MclslActorDataKeys.SpiritualRootAttributes
+            || key == MclslActorDataKeys.SpiritualRootCount) flags |= MclslActorChange.RootPopulation;
         if (key == MclslActorDataKeys.QiankunBag) flags |= MclslActorChange.Inventory;
         Publish(actor, flags);
     }
     internal static void Remove(long id)
     {
+        MclslChildhoodRootSystem.ForgetPopulation(id);
         Systems.Visual.MclslRealmHaloVisualSystem.Forget(id);
         Deferred.Cancel(id);
         Pending.Cancel(id);
@@ -156,6 +165,7 @@ internal static class MclslRuntimeChanges
     }
     internal static void Drain()
     {
+        if (Count == 0 || MclslFrameDeadline.Expired) return;
         long sample = MclslPerformanceProbe.Begin();
         long deadline = Stopwatch.GetTimestamp() + Stopwatch.Frequency / 2000;
         int drained = 0;
@@ -176,11 +186,18 @@ internal static class MclslRuntimeChanges
                         {
                             if (repairStats)
                             {
-                                MclslArtifactSystem.ApplyNativeStatCaps(actor);
-                                MclslBeastWorld.ApplyRankStats(actor);
-                                MclslLongevityRules.ApplyRuntimeLifespan(actor);
+                                long repairSample = MclslPerformanceProbe.Begin();
+                                try
+                                {
+                                    MclslArtifactSystem.ApplyNativeStatCaps(actor);
+                                    MclslBeastWorld.ApplyRankStats(actor);
+                                    MclslLongevityRules.ApplyRuntimeLifespan(actor);
+                                }
+                                finally { MclslPerformanceProbe.End("变化分发.属性修复", repairSample, actorId: nativeId, flags: nativeFlags); }
                             }
-                            Publish(actor, (MclslActorChange)nativeFlags);
+                            long publishSample = MclslPerformanceProbe.Begin();
+                            try { Publish(actor, (MclslActorChange)nativeFlags); }
+                            finally { MclslPerformanceProbe.End("变化分发.原生交接", publishSample, actorId: nativeId, flags: nativeFlags); }
                         }
                         catch (Exception ex) { MclslDiagnostics.Error("runtime-worker-change", "人物并行变化交接失败: " + ex.Message); }
                     }
@@ -199,21 +216,53 @@ internal static class MclslRuntimeChanges
                         {
                             if ((flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0)
                             {
-                                Patches.MclslXuanhuangDirectionPatch.ObserveActor(actor);
-                                MclslActorRelations.Refresh(actor);
-                                MclslBeastPopulationIndex.Observe(actor);
-                                MclslFamilySystem.Observe(actor);
+                                long relationsSample = MclslPerformanceProbe.Begin();
+                                try
+                                {
+                                    Patches.MclslXuanhuangDirectionPatch.ObserveActor(actor);
+                                    MclslActorRelations.Refresh(actor);
+                                    MclslBeastPopulationIndex.Observe(actor);
+                                    MclslFamilySystem.Observe(actor);
+                                }
+                                finally { MclslPerformanceProbe.End("变化分发.成员关系", relationsSample, actorId: id, flags: flags); }
                             }
                             if ((flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits)) != 0)
-                                MclslCultivatorCandidateIndex.Observe(actor);
+                            {
+                                long candidateSample = MclslPerformanceProbe.Begin();
+                                try
+                                {
+                                    MclslCultivatorCandidateIndex.Observe(actor);
+                                    MclslWorldEpochSystem.ObserveTransitionCandidate(actor);
+                                }
+                                finally { MclslPerformanceProbe.End("变化分发.候选", candidateSample, actorId: id, flags: flags); }
+                            }
+                            if ((flags & (int)(MclslActorChange.Native | MclslActorChange.Membership | MclslActorChange.Traits)) != 0)
+                                MySimulatedLongevityRoad.Systems.Combat.MclslCareerCombat.Wake(actor);
                             if ((flags & (int)(MclslActorChange.Data | MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0)
-                                MclslActorProjectionIndex.Update(actor);
+                            {
+                                long projectionSample = MclslPerformanceProbe.Begin();
+                                try { MclslActorProjectionIndex.Update(actor); }
+                                finally { MclslPerformanceProbe.End("变化分发.投影", projectionSample, actorId: id, flags: flags); }
+                            }
                             if ((flags & (int)(MclslActorChange.Data | MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.Native | MclslActorChange.NativeMetadata)) != 0)
-                                MclslRankSnapshotSource.QueueUpdate(actor,
-                                    (flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0);
+                            {
+                                long rankSample = MclslPerformanceProbe.Begin();
+                                try
+                                {
+                                    MclslRankSnapshotSource.QueueUpdate(actor,
+                                        (flags & (int)(MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.NativeMetadata)) != 0);
+                                }
+                                finally { MclslPerformanceProbe.End("变化分发.排名", rankSample, actorId: id, flags: flags); }
+                            }
+                            MclslContractInfoBar.NotifyRelatedChange(actor);
                             // Without an open native window there is no per-actor UI
                             // work and no window list walk to perform.
-                            if (MclslActorInfoPanel.HasAnyOpenWindow) MclslActorInfoPanel.RefreshOpenForActor(actor);
+                            if (MclslActorInfoPanel.HasAnyOpenWindow)
+                            {
+                                long uiSample = MclslPerformanceProbe.Begin();
+                                try { MclslActorInfoPanel.RefreshOpenForActor(actor); }
+                                finally { MclslPerformanceProbe.End("变化分发.UI", uiSample, actorId: id, flags: flags); }
+                            }
                         }
                         catch (Exception ex) { MclslDiagnostics.Error("runtime-change", "人物变化分发失败: " + ex.Message); }
                     }

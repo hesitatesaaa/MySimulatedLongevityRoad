@@ -8,16 +8,10 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslBeastConfig
 {
-    private const string EnableId = "MCLSL_config_beast_natural_spawn";
-    internal static bool NaturalSpawnEnabled { get; private set; } = true;
-    internal const int RedMoonChancePerMillion = 10000;
-    internal const int RevivalChancePerMillion = 100;
-
     internal static void Ensure(ModConfig config)
     {
         if (config == null) return;
         Dictionary<string, ModConfigItem> items = config["ConfigItems"];
-        AddSwitch(config, items, EnableId, "妖兽自然出现", "常见妖兽每二十年对全图陆地池与海洋池各做一次40%判定（先陆地、后海洋），成功时按权重随机生成8~20只；稀有妖兽每十年极低概率判定。鲲鹏、青龙、裂解鲸在水域生成，其余在陆地生成。", true);
         AddSwitch(config,items,"MCLSL_config_beast_waves","妖兽潮","按世界境界解锁七级兽潮。",true);
         AddSwitch(config,items,"MCLSL_config_spell_effects_enabled","法术阶段特效","显示法术释放、飞行和命中特效。关闭后仍按正常时间结算。",true);
         AddSwitch(config,items,"MCLSL_config_beast_talent_effects_enabled","本命神通特效","独立显示妖兽本命神通动画；关闭只隐藏画面，不影响结算。",true);
@@ -25,8 +19,7 @@ internal static class MclslBeastConfig
         AddSlider(config,items,"MCLSL_config_beast_wave_count_percent","兽潮数量（百分比）","默认100，即一倍。",100);
         AddSlider(config,items,"MCLSL_config_beast_wave_limit","单次兽潮数量上限","按地图规模、等级及数量倍率计算后，单场最多生成的数量，默认64。",64);
         AddSlider(config,items,"MCLSL_config_beast_wave_max_level","自动兽潮最高等级","一至七级，还受世界解锁限制。",7);
-        AddSlider(config,items,"MCLSL_config_beast_auto_limit","自动妖兽总上限","自然与兽潮共享上限。",512);
-        AddSlider(config,items,"MCLSL_config_beast_natural_limit","自然妖兽上限","默认128。",128);
+        AddSlider(config,items,"MCLSL_config_beast_auto_limit","自动妖兽总上限","兽潮与历史自动生成妖兽共享存量上限。",512);
         MigrateLegacySettings(config);
         Load(config);
     }
@@ -35,12 +28,14 @@ internal static class MclslBeastConfig
     {
         if (config == null) return;
         Dictionary<string, ModConfigItem> items = config["ConfigItems"];
-        bool removedProbabilitySettings = items.Remove("MCLSL_config_beast_red_moon_chance")
+        bool removedProbabilitySettings = items.Remove("MCLSL_config_beast_natural_spawn")
+            | items.Remove("MCLSL_config_beast_natural_limit")
+            | items.Remove("MCLSL_config_beast_red_moon_chance")
             | items.Remove("MCLSL_config_beast_revival_chance");
         foreach (MclslBeastDefinition beast in MclslBeastCatalog.All)
-            removedProbabilitySettings |= items.Remove(beast.ConfigId);
+            removedProbabilitySettings |= items.Remove("MCLSL_config_beast_" + beast.Id + "_chance");
         foreach (MclslBeastDefinition beast in MclslBeastCatalog.Named)
-            removedProbabilitySettings |= items.Remove(beast.ConfigId);
+            removedProbabilitySettings |= items.Remove("MCLSL_config_beast_" + beast.Id + "_chance");
         if (removedProbabilitySettings) config.Save(null);
     }
 
@@ -48,12 +43,11 @@ internal static class MclslBeastConfig
     // disk writes, config removals, or live-effect changes.
     internal readonly struct Settings
     {
-        internal readonly bool Natural, Waves, Effects, Talents;
-        internal readonly int Interval, WaveLimit, Level, AutomaticLimit, NaturalLimit;
+        internal readonly bool Waves, Effects, Talents;
+        internal readonly int Interval, WaveLimit, Level, AutomaticLimit;
         internal readonly float Multiplier;
         internal Settings(Dictionary<string, ModConfigItem> items)
         {
-            Natural = !items.TryGetValue(EnableId, out var natural) || natural.BoolVal;
             Waves = !items.TryGetValue("MCLSL_config_beast_waves", out var waves) || waves.BoolVal;
             Effects = !items.TryGetValue("MCLSL_config_spell_effects_enabled", out var effects) || effects.BoolVal;
             Talents = !items.TryGetValue("MCLSL_config_beast_talent_effects_enabled", out var talents) || talents.BoolVal;
@@ -62,7 +56,6 @@ internal static class MclslBeastConfig
             WaveLimit = Math.Clamp(ReadChance(items, "MCLSL_config_beast_wave_limit", 64), 1, 256);
             Level = Math.Clamp(ReadChance(items, "MCLSL_config_beast_wave_max_level", 7), 1, 7);
             AutomaticLimit = Math.Clamp(ReadChance(items, "MCLSL_config_beast_auto_limit", 512), 1, 4096);
-            NaturalLimit = Math.Clamp(ReadChance(items, "MCLSL_config_beast_natural_limit", 128), 1, 4096);
         }
     }
 
@@ -75,20 +68,15 @@ internal static class MclslBeastConfig
 
     internal static void Apply(Settings settings)
     {
-        NaturalSpawnEnabled = settings.Natural;
         MclslBeastWorld.Enabled = settings.Waves;
         MclslBeastWorld.Interval = settings.Interval;
         MclslBeastWorld.CountMultiplier = settings.Multiplier;
         MclslBeastWorld.MaximumWaveCount = settings.WaveLimit;
         MclslBeastWorld.MaximumLevel = settings.Level;
         MclslBeastWorld.AutomaticLimit = settings.AutomaticLimit;
-        MclslBeastWorld.NaturalLimit = settings.NaturalLimit;
         MclslSpellEffect.SetEnabled(settings.Effects);
         MclslSpellEffect.SetTalentEnabled(settings.Talents);
     }
-
-    internal static int Chance(MclslBeastDefinition beast)
-        => beast?.ChancePerMillion ?? 0;
 
     public static void ReloadBool(bool _) => Load(MySimulatedLongevityRoad.MclslMod.GetModConfigSafe() as ModConfig);
     internal static void SetSwitch(string id,bool value)
@@ -129,7 +117,7 @@ internal static class MclslBeastConfig
         if(id=="MCLSL_config_beast_wave_interval"){item.SetIntRange(1,1000);return;}
         if(id=="MCLSL_config_beast_wave_count_percent"){item.SetIntRange(10,1000);return;}
         if(id=="MCLSL_config_beast_wave_limit"){item.SetIntRange(1,256);return;}
-        if(id is "MCLSL_config_beast_auto_limit" or "MCLSL_config_beast_natural_limit"){item.SetIntRange(1,4096);return;}
+        if(id == "MCLSL_config_beast_auto_limit"){item.SetIntRange(1,4096);return;}
         typeof(ModConfigItem).GetField("<MinIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 0);
         typeof(ModConfigItem).GetField("<MaxIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 1000000);
     }

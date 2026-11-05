@@ -116,6 +116,7 @@ internal static class MclslBagSystem
     }
     internal static void FlushPending(int budget = 8)
     {
+        if (PendingWrites.Count == 0) return;
         for (int i = 0; i < budget && !MclslFrameDeadline.Expired; i++)
         {
             if (!PendingWrites.TryTake(out long id, out _)) break;
@@ -628,8 +629,7 @@ internal static class MclslProfessionSystem
         finally { MclslPerformanceProbe.End("职业.选方", recipeSample); }
         if (item != null)
         {
-            // Resolve the ingredients once: HasRecipe and ConsumeRecipe used to
-            // resolve the same recipe twice for every successful craft.
+            // Resolve the ingredients once for the craft checks and consumption.
             MclslRecipeIngredient[] ingredients = ResolveRecipe(actor, bag, item.Id);
             if (ingredients != null)
             {
@@ -659,9 +659,11 @@ internal static class MclslProfessionSystem
         for (int i = 0; i < recipes.Count; i++)
         {
             MclslItemDefinition recipe = recipes[i];
-            if (!HasRecipe(actor, bag, recipe.Id)) continue;
-            if (!ConsumeRecipe(actor, bag, recipe.Id))
-                throw new InvalidOperationException("职业练习材料扣除未完成");
+            // Consuming the resolved array keeps the pre-check-before-consume
+            // order and the rollback copy unchanged.
+            MclslRecipeIngredient[] ingredients = ResolveRecipe(actor, bag, recipe.Id);
+            if (ingredients == null) continue;
+            ConsumeResolvedRecipe(actor, bag, ingredients);
             MclslBagSystem.Write(actor, bag);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.ProfessionLastCraftYear, year);
             int experience = MclslProfessionCraftingPolicy.ExperienceGain(GetGrade(actor), recipe.Grade);
@@ -700,14 +702,6 @@ internal static class MclslProfessionSystem
             id=>IsNativeIngredient(id)?"native:"+NativeResource(id):id);
     }
     internal static bool HasRecipe(Actor actor,MclslBagState bag,string product)=>ResolveRecipe(actor,bag,product)!=null;
-    internal static bool ConsumeRecipe(Actor actor,MclslBagState bag,string product)
-    {
-        var ingredients=ResolveRecipe(actor,bag,product);
-        if(ingredients==null)return false;
-        ConsumeResolvedRecipe(actor,bag,ingredients);
-        return true;
-    }
-
     /// <summary>
     /// Consumes already-resolved ingredients with a structural rollback copy. The
     /// previous implementation serialized the entire item list to JSON before
@@ -747,40 +741,12 @@ internal static class MclslProfessionSystem
                 actor.city.takeResource(ingredient.ItemId.Substring(7),ingredient.Count);
     }
 
-    private static bool HasIngredient(Actor actor, MclslBagState bag, string id)
-    {
-        if (!id.StartsWith("R", StringComparison.Ordinal)) return MclslBagSystem.Count(bag, id) > 0;
-        string native = NativeResource(id);
-        return !string.IsNullOrEmpty(native) && actor.city?.getResourcesAmount(native) > 0;
-    }
-
-    private static bool HasPair(Actor actor, MclslBagState bag, string first, string second)
-    {
-        if (!HasIngredient(actor, bag, first) || !HasIngredient(actor, bag, second)) return false;
-        if (first == second) return first.StartsWith("R", StringComparison.Ordinal)
-            ? actor.city?.getResourcesAmount(NativeResource(first)) >= 2
-            : MclslBagSystem.Count(bag, first) >= 2;
-        if (first.StartsWith("R", StringComparison.Ordinal) && second.StartsWith("R", StringComparison.Ordinal)
-            && NativeResource(first) == NativeResource(second))
-            return actor.city?.getResourcesAmount(NativeResource(first)) >= 2;
-        return true;
-    }
-
     private static string NativeResource(string id) => id switch
     {
         "R01" => "wood", "R02" => "stone", "R03" => "common_metals", "R04" => "common_metals",
         "R05" => "mythril", "R06" => "adamantine", "R07" => "herbs", "R08" => "berries",
         "R09" => "wheat", _ => string.Empty
     };
-
-    private static bool ConsumeIngredient(Actor actor, MclslBagState bag, string id, int count)
-    {
-        if (!HasIngredient(actor, bag, id)) return false;
-        if (!id.StartsWith("R", StringComparison.Ordinal)) return MclslBagSystem.Remove(bag, id, count);
-        string native = NativeResource(id);
-        actor.city?.takeResource(native, count);
-        return true;
-    }
 
     private static int PositiveHash(string value)
     {

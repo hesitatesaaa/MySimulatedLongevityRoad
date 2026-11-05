@@ -28,6 +28,10 @@ internal sealed class MclslRankEntry
     internal string ProfessionId = string.Empty;
     internal int ProfessionGrade;
     internal int ProfessionExperience;
+    // 战斗职业（剑修/武修/术修/符修/阵修/灵契师）：-1 表示无战斗职业。
+    internal int CombatCareer = -1;
+    internal int CombatCareerRank;
+    internal int CombatCareerExperience;
     internal double Power;
     internal int RealmIndex;
     internal int MinorRealmIndex;

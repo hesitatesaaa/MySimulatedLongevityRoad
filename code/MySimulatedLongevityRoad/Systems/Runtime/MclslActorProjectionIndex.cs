@@ -35,7 +35,8 @@ internal static class MclslActorProjectionIndex
             int missionRealm = MclslRealmIds.Index(MclslActorAccessor.Realm(actor));
             int realm = Math.Max(0, missionRealm);
             Realm = realm;
-            MissionRealm = missionRealm;
+            bool factionEligible = !MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor);
+            MissionRealm = factionEligible ? missionRealm : -1;
             MaobaoScore = realm * 10000000L + Math.Max(0, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence));
             CityId = actor.city?.data?.id ?? 0;
             KingdomId = actor.kingdom?.data?.id ?? 0;
@@ -46,8 +47,8 @@ internal static class MclslActorProjectionIndex
             IsHigh = realm >= MclslRealmIds.Index(MclslRealmIds.JinDan);
             HighTechnique = IsHigh
                 ? MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueId, string.Empty) : string.Empty;
-            MissionScore = MclslFactionMissionSystem.MissionCandidateScore(actor);
-            PressureScore = MclslFactionPressureSystem.PressureCandidateScore(actor);
+            MissionScore = factionEligible ? MclslFactionMissionSystem.MissionCandidateScore(actor) : 0;
+            PressureScore = factionEligible ? MclslFactionPressureSystem.PressureCandidateScore(actor) : 0;
             QualifiedHunter = MclslWorldSoulSystem.IsQualifiedHunter(actor);
             ManifestTarget = QualifiedHunter && actor.current_tile != null;
             ManifestScore = ManifestTarget ? MclslWorldSoulSystem.ManifestTargetScore(actor) : 0;
@@ -182,7 +183,7 @@ internal static class MclslActorProjectionIndex
             MissionTierOrders[MclslFactionMissionSystem.TierForRealm(old.MissionRealm)].Remove(id);
         if (next.MissionRealm >= 0)
             MissionTierOrders[MclslFactionMissionSystem.TierForRealm(next.MissionRealm)].Upsert(id, next);
-        PressureOrder.Upsert(id, next);
+        if (next.MissionRealm >= 0) PressureOrder.Upsert(id, next); else PressureOrder.Remove(id);
         if (next.ManifestTarget) ManifestOrder.Upsert(id, next); else ManifestOrder.Remove(id);
     }
     internal static void Remove(long id)

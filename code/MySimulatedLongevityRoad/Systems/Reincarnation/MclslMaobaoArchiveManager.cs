@@ -242,6 +242,8 @@ internal static class MclslMaobaoArchiveManager
             actor.clearOldPath();
             actor.stopMovement();
             MclslMaobaoSnapshot.MarkPlaced(actor);
+            MclslActorRegistry.Register(actor, out _, out bool isNew);
+            if (!isNew) MclslRuntimeChanges.Publish(actor, MclslActorChange.RootPopulation);
             _selectedActorId = string.Empty;
             return true;
         }

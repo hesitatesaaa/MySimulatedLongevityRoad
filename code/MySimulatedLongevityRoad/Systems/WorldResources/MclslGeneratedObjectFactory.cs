@@ -208,17 +208,6 @@ internal static class MclslGeneratedObjectFactory
         return "人之奇·" + resolvedGrade;
     }
 
-    internal static string FoundationRankColor(string category)
-    {
-        category = string.IsNullOrWhiteSpace(category) ? FoundationHuman : category;
-        return category switch
-        {
-            FoundationHeaven => "#FF5A5A",
-            FoundationEarth => "#9CD7FF",
-            _ => "#CFC7B2"
-        };
-    }
-
     private static void ApplyFoundationClassification(MclslGeneratedItemRecord item, int seed)
     {
         if (item == null || item.Kind != MclslGeneratedKinds.FoundationWonder) return;
@@ -297,12 +286,12 @@ internal static class MclslGeneratedObjectFactory
         for (int attempt = 0; attempt < 256; attempt++)
         {
             int hash = PositiveHash(seed + "|" + kind + "|" + attempt + "|" + source);
-            string prefix = Pick(MclslProceduralLexicon.Prefixes, hash);
-            string nature = Pick(MclslProceduralLexicon.NatureWords, hash / 7);
-            string root1 = Pick(primaryRoots, hash / 13);
-            string root2 = Pick(secondaryRoots, hash / 23);
+            string prefix = MclslProceduralLexicon.Pick(MclslProceduralLexicon.Prefixes, hash);
+            string nature = MclslProceduralLexicon.Pick(MclslProceduralLexicon.NatureWords, hash / 7);
+            string root1 = MclslProceduralLexicon.Pick(primaryRoots, hash / 13);
+            string root2 = MclslProceduralLexicon.Pick(secondaryRoots, hash / 23);
             if (root2 == root1 && secondaryRoots.Length > 1) root2 = secondaryRoots[((hash / 23) + 1) % secondaryRoots.Length];
-            string form = Pick(forms, hash / 31);
+            string form = MclslProceduralLexicon.Pick(forms, hash / 31);
             string candidate = (hash % 8) switch
             {
                 0 => prefix + root1 + form,
@@ -381,7 +370,6 @@ internal static class MclslGeneratedObjectFactory
         return result.Length == 0 ? new[] { "灵" } : result;
     }
 
-    private static string Pick(string[] values, int hash) => values[(hash & int.MaxValue) % values.Length];
     private static string Collapse(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "无名玄物";

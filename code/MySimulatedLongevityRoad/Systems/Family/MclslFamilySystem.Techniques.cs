@@ -115,7 +115,7 @@ internal static partial class MclslFamilySystem
         List<MclslTechniqueLineageRecord> touched = new();
         foreach (KeyValuePair<string, MclslFamilyTechniqueRecord> pair in aggregates)
         {
-            MclslTechniqueLineageRecord record = FindLineageRecord(run, pair.Key);
+            MclslTechniqueLineageRecord record = MclslTechniqueLineageSystem.FindLineageRecord(run, pair.Key);
             if (record == null)
             {
                 if (string.IsNullOrWhiteSpace(pair.Value.Name) && string.IsNullOrWhiteSpace(pair.Value.MaxRealm)) continue;
@@ -262,17 +262,6 @@ internal static partial class MclslFamilySystem
     private static MclslTechniqueDefinition StaticDefinition(string normalized)
         => string.IsNullOrWhiteSpace(normalized) ? null
             : MclslCultivationCatalog.Techniques.FirstOrDefault(x => x != null && string.Equals(x.Id, normalized, StringComparison.Ordinal));
-
-    private static MclslTechniqueLineageRecord FindLineageRecord(MclslWorldRunState run, string id)
-    {
-        if (run?.TechniqueLineages == null || string.IsNullOrWhiteSpace(id)) return null;
-        for (int i = 0; i < run.TechniqueLineages.Count; i++)
-        {
-            MclslTechniqueLineageRecord record = run.TechniqueLineages[i];
-            if (record != null && string.Equals(record.Id, id, StringComparison.Ordinal)) return record;
-        }
-        return null;
-    }
 
     private static string BuildEstateSummary(MclslFamilyTechniqueRecord detail)
     {

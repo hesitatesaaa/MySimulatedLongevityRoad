@@ -119,6 +119,14 @@ internal static partial class MclslCombatCareerSystem
             state.Cooldowns=new double[5];
         }
         state.Career=career;state.Rank=Math.Max(1,state.Rank);state.Source=source;
+        if(career==5&&state.ContractSchema<1)
+        {
+            // 灵契师首次就职：玩家授予则待选择，自然获得则四类等概率随机；已绑定的再授予不刷新。
+            state.ContractSchema=1;
+            if(state.ContractKind<0)
+                state.ContractKind=source=="玩家授予"?-1
+                    :MclslContractRules.RandomKind(Roll(MclslActorAccessor.Id(actor),0,0x5C57));
+        }
         Write(actor,state);SyncTraits(actor);MclslWorldActorQuery.Track(actor);
     }
     internal static void SyncTraits(Actor actor)

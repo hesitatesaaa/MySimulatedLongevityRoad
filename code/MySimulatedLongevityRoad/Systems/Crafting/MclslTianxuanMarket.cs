@@ -480,9 +480,9 @@ internal static class MclslTianxuanMarket
             Action = action,
             ItemId = item.Id,
             ActorId = MclslActorAccessor.Id(actor),
-            ActorName = SafeName(actor),
+            ActorName = MclslActorAccessor.SafeName(actor, "无名修士"),
             OtherActorId = MclslActorAccessor.Id(other),
-            OtherActorName = other == null ? string.Empty : SafeName(other),
+            OtherActorName = other == null ? string.Empty : MclslActorAccessor.SafeName(other, "无名修士"),
             Count = count,
             Price = unitPrice,
             Currency = currency,
@@ -497,8 +497,6 @@ internal static class MclslTianxuanMarket
         InvalidateActivitySnapshots();
         _revision++;
     }
-
-    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名修士");
 
     internal static bool TryListSurplus(Actor actor, int year)
     {
@@ -1294,7 +1292,12 @@ internal static class MclslTianxuanMarket
         IReadOnlyList<string> beastCandidates,
         Func<string, int> beastPrice)
     {
-        string breakthroughPill = MclslConsumableInventoryPolicy.BreakthroughPillForRealm(MclslActorAccessor.Realm(actor));
+        // The realm is read once here and its index reused for the artifact cap
+        // and every grade-rule candidate below; the pass only reads actor and
+        // bag state, so each later use would have read the same value.
+        string realm = MclslActorAccessor.Realm(actor);
+        int realmIndex = MclslRealmIds.Index(realm);
+        string breakthroughPill = MclslConsumableInventoryPolicy.BreakthroughPillForRealm(realm);
         AddIfMissing(desired, bag, breakthroughPill);
 
         bool injured = IsInjured(actor);
@@ -1308,7 +1311,7 @@ internal static class MclslTianxuanMarket
             }
         }
         if (injured) AddIfMissing(desired, bag, healingPill);
-        if (injured && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, MclslItemCatalog.Get("D019")))
+        if (injured && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(MclslItemCatalog.Get("D019"), realmIndex))
             AddIfMissing(desired, bag, "D019");
 
         foreach (string itemId in reservePlan)
@@ -1320,7 +1323,7 @@ internal static class MclslTianxuanMarket
             AddIfMissing(desired, bag, itemId);
         }
 
-        int artifactGradeCap = Math.Clamp(MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) + 1, 1, 4);
+        int artifactGradeCap = Math.Clamp(realmIndex + 1, 1, 4);
         // Candidate artifact ids come from the caller: the market passes its
         // per-revision listed-id cache, while family supply passes the family's
         // own artifact stock. The suitability rule is unchanged.
@@ -1334,7 +1337,10 @@ internal static class MclslTianxuanMarket
                 AddIfMissing(desired, bag, artifact.Id);
         }
 
-        if (HasLiveCombatTarget(actor))
+        // Combat presence is read once here and reused by the talisman, control
+        // and beast-candidate rules below instead of being re-queried.
+        bool liveCombat = HasLiveCombatTarget(actor);
+        if (liveCombat)
         {
             for (int i = 0; i < MclslConsumableInventoryPolicy.CombatTalismanCount; i++)
             {
@@ -1348,27 +1354,30 @@ internal static class MclslTianxuanMarket
 
         // Newly added consumables were craftable and listable, but had no AI
         // demand unless they happened to be selected by the small reserve list.
-        bool manaLow = MclslSpellSystem.CurrentMana(actor) < MclslSpellSystem.MaxMana(actor) / 2;
+        // Mana is read once for both the half and three-quarter thresholds.
+        int currentMana = MclslSpellSystem.CurrentMana(actor);
+        int maxMana = MclslSpellSystem.MaxMana(actor);
+        bool manaLow = currentMana < maxMana / 2;
         if (manaLow)
         {
             foreach (string id in ManaNeeds)
-                if (MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, MclslItemCatalog.Get(id)))
+                if (MclslConsumableInventoryPolicy.IsCurrentGradeUseful(MclslItemCatalog.Get(id), realmIndex))
                     AddIfMissing(desired, bag, id);
         }
-        if (injured && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, MclslItemCatalog.Get("D015")))
+        if (injured && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(MclslItemCatalog.Get("D015"), realmIndex))
             AddIfMissing(desired, bag, "D015");
-        if ((MclslConsumableInventoryPolicy.HasControlStatus(actor) || HasLiveCombatTarget(actor))
-            && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, MclslItemCatalog.Get("D014")))
+        if ((MclslConsumableInventoryPolicy.HasControlStatus(actor) || liveCombat)
+            && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(MclslItemCatalog.Get("D014"), realmIndex))
             AddIfMissing(desired, bag, "D014");
-        if (MclslSpellSystem.CurrentMana(actor) < MclslSpellSystem.MaxMana(actor) * 3 / 4
+        if (currentMana < maxMana * 3 / 4
             && !actor.hasStatus("mclsl_item_D016")
-            && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, MclslItemCatalog.Get("D016")))
+            && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(MclslItemCatalog.Get("D016"), realmIndex))
             AddIfMissing(desired, bag, "D016");
-        if (HasLiveCombatTarget(actor))
+        if (liveCombat)
             foreach (string id in ExtraCombatNeeds)
             {
                 MclslItemDefinition candidate = MclslItemCatalog.Get(id);
-                if (MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor, candidate)) AddIfMissing(desired, bag, id);
+                if (MclslConsumableInventoryPolicy.IsCurrentGradeUseful(candidate, realmIndex)) AddIfMissing(desired, bag, id);
             }
 
         // Keep non-combat elixirs such as cures, cultivation supplements and
@@ -1383,7 +1392,6 @@ internal static class MclslTianxuanMarket
                 continue;
             AddIfMissing(desired, bag, item.Id);
         }
-        bool liveCombat=HasLiveCombatTarget(actor);
         // Candidate beast-consumable ids come from the caller: the market passes
         // its per-revision listed-id cache and stone price, while family supply
         // passes the family's own stock with a flat price so equal grades tie
@@ -1394,7 +1402,7 @@ internal static class MclslTianxuanMarket
             {
                 var item=MclslItemCatalog.Get(definition.Id);
                 return (definition.Kind!="talisman"||liveCombat)
-                    && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(actor,item)
+                    && MclslConsumableInventoryPolicy.IsCurrentGradeUseful(item, realmIndex)
                     && MclslBeastItemEffects.CanUse(actor,item,MclslConsumableUseTrigger.Combat);
             },id=>MclslBagSystem.Count(bag,id),beastPrice))
             AddIfMissing(desired,bag,itemId);

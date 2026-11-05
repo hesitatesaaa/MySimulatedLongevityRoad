@@ -140,7 +140,7 @@ internal static partial class MclslWorldSoulSystem
 
     internal static void TickFrame(int frameCounter)
     {
-        if (_manifestFrameRemaining == 0 && frameCounter % 4 != 0) return;
+        if (_manifestFrameRemaining == 0 && frameCounter % 12 != 0) return;
         using (MclslUnityProfiler.Sample("MCLS/WorldSoul/FrameUpdate"))
         {
             if (_manifestFrameRemaining == 0) MclslWorldSoulActorRegistration.TickTerrainEffects();
@@ -248,38 +248,6 @@ internal static partial class MclslWorldSoulSystem
         soul.NextManifestYear = year + 70 + StableHash(soul.Id + "|holder_death|" + year) % 81;
         MclslWorldRunRepository.AddEvent(year, "world_soul_holder_death", "合道者" + name + "身死", "天地之魄·" + soul.Name + "复归天地。", victim);
         AnnounceWorldSoul(name + "身死，天地之魄·" + soul.Name + "复归天地。", "#D0B067", 9f);
-        MclslWorldArchiveStore.MarkDirty();
-    }
-
-    internal static void ReconcileRestoredHolder(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, int year)
-    {
-        if (actor?.data == null || snapshot == null || string.IsNullOrWhiteSpace(snapshot.WorldSoulId)) return;
-        MclslWorldSoulRecord soul = FindSoulById(snapshot.WorldSoulId);
-        if (soul == null) return;
-
-        // 锚点中的历史可能尚未发生夺魄，但还真明确保留死前修为；因此以还真者的死前魄位覆盖锚点旧状态。
-        Actor manifest = FindActor(soul.ManifestActorId);
-        if (MclslActorAccessor.Alive(manifest))
-        {
-            try
-            {
-                MclslWorldSoulActorRegistration.ForgetActorRuntime(MclslActorAccessor.Id(manifest));
-                MclslActorAccessor.Set(manifest, MclslActorDataKeys.WorldSoulEntityId, string.Empty);
-                ActorTrait marker = AssetManager.traits.get(MclslTraitRegistration.WorldSoulEntityTraitId);
-                if (marker != null && manifest.hasTrait(marker.id)) manifest.removeTrait(marker.id);
-                MclslNativeKillStatisticsSystem.DetachScriptedDeathAttacker(manifest);
-                manifest.die(true, AttackType.Other, true, true);
-            }
-            catch (Exception ex) { MclslDiagnostics.Error("world-soul-huanzhen-clear-manifest", "还真覆盖魄位时清理旧显化体失败: " + ex.Message); }
-        }
-        soul.ManifestActorId = 0;
-        soul.ManifestActorName = string.Empty;
-        soul.State = "已祭炼";
-        soul.HolderActorId = MclslActorAccessor.Id(actor);
-        soul.HolderActorName = SafeName(actor);
-        soul.HolderYear = year;
-        soul.HolderOrigin = "还真保留死前祭魄合道结果";
-        soul.NextManifestYear = 0;
         MclslWorldArchiveStore.MarkDirty();
     }
 

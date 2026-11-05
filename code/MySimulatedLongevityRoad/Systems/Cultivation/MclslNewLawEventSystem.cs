@@ -16,6 +16,7 @@ internal static class MclslNewLawEventSystem
         int rawKind = MySimulatedLongevityRoad.Core.MclslStableHash.Positive83x47(MclslActorAccessor.Id(actor) + "|new_law_event_kind|" + year);
         bool pioneerEra = MclslNewLawPioneerSystem.IsPioneerEra(year) && !MclslWorldEpochSystem.IsNewLawActive(year);
         int kind = pioneerEra ? PioneerEventKind(rawKind) : rawKind % 20;
+        if (kind is 16 or 17 && MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor)) return;
         string key = EventKey(kind);
         if (!MclslDetectionGate.TryEnterActorAttempt(actor, "new_law_event", key, year, EventInterval(kind, realmIndex))) return;
 

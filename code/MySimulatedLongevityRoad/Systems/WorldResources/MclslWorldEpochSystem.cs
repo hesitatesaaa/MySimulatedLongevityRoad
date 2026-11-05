@@ -33,6 +33,9 @@ internal static class MclslWorldEpochSystem
     private const double TransitionWorkBudgetMs = 0.45d;
     private static IReadOnlyList<Actor> _ancientQueueSeedActors = Array.Empty<Actor>();
     private static int _ancientQueueSeedCursor;
+    private static int _lastTransitionFrame = -1;
+    private static long _transitionGeneration = -1;
+    private static readonly HashSet<string> PendingTransitionMembership = new(StringComparer.Ordinal);
 
     internal static bool IsNewLawActive(int year)
     {
@@ -53,6 +56,9 @@ internal static class MclslWorldEpochSystem
         MclslWorldRunState run = MclslWorldRunRepository.Current;
         return run != null && run.ImmortalMortalMiasmaEnabled && IsNewLawActive(year);
     }
+
+    /// <summary>Ancient-law remnant label for the current epoch.</summary>
+    internal static string RemnantLabel(int year) => IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
 
     internal static int YearsUntilNewLaw(int year)
     {
@@ -213,10 +219,36 @@ internal static class MclslWorldEpochSystem
         _ancientQueueSeedCursor = 0;
     }
 
+    internal static void ObserveTransitionCandidate(Actor actor)
+    {
+        var run = MclslWorldRunRepository.Current;
+        if (run == null || !run.NewLawEnabled || run.CultivationEpoch == AncientLawEpoch
+            || !MclslActorAccessor.Alive(actor)
+            || MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw
+            || MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLawProcessed, 0) == 1) return;
+        EnsureTransitionMembership(run);
+        string id = MclslActorAccessor.Id(actor).ToString();
+        if (PendingTransitionMembership.Add(id))
+        {
+            run.PendingAncientCultivatorIds.Add(id);
+            MclslWorldArchiveStore.MarkDirty();
+        }
+    }
+
+    private static void EnsureTransitionMembership(MclslWorldRunState run)
+    {
+        if (_transitionGeneration == MclslWorldContext.Generation) return;
+        _transitionGeneration = MclslWorldContext.Generation;
+        _lastTransitionFrame = -1;
+        PendingTransitionMembership.Clear();
+        foreach (string id in run.PendingAncientCultivatorIds) PendingTransitionMembership.Add(id);
+    }
+
     internal static bool HasPendingTransitionWork => _ancientQueueSeedCursor < _ancientQueueSeedActors.Count
         || (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0) > 0;
-    internal static int PendingTransitionWorkCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor)
-        + (MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0);
+    internal static int PendingTransitionSeedCount => Math.Max(0, _ancientQueueSeedActors.Count - _ancientQueueSeedCursor);
+    internal static int PendingTransitionActorCount => MclslWorldRunRepository.Current?.PendingAncientCultivatorIds?.Count ?? 0;
+    internal static int PendingTransitionWorkCount => PendingTransitionSeedCount + PendingTransitionActorCount;
 
     /// <summary>
     /// 用数量和时间双预算消化旧法修士队列。队列数据保存在世界档案中，存档或读档
@@ -229,24 +261,27 @@ internal static class MclslWorldEpochSystem
         run.PendingAncientCultivatorIds ??= new List<string>();
         if (!HasPendingTransitionWork) return;
 
+        EnsureTransitionMembership(run);
+        if (_lastTransitionFrame == UnityEngine.Time.frameCount) return;
+        _lastTransitionFrame = UnityEngine.Time.frameCount;
         long started = Stopwatch.GetTimestamp();
-        bool annualBudget = MclslAnnualFrameBudget.Active;
-        int seedBudget = annualBudget ? int.MaxValue : TransitionSeedBudget;
-        int conversionBudget = annualBudget ? int.MaxValue : TransitionConversionBudget;
+        int seedBudget = TransitionSeedBudget;
+        int conversionBudget = TransitionConversionBudget;
         int seeded = 0;
         using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionSeedBatch"))
         {
             while (_ancientQueueSeedCursor < _ancientQueueSeedActors.Count && seeded < seedBudget
+                && !MclslFrameDeadline.Expired && !HasExceededTransitionBudget(started)
                 && MclslAnnualFrameBudget.TryConsumeOperation())
             {
                 Actor actor = _ancientQueueSeedActors[_ancientQueueSeedCursor++];
+                seeded++;
                 if (!MclslActorAccessor.Alive(actor)) continue;
                 if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw) continue;
                 if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLawProcessed, 0) == 1) continue;
                 long actorId = MclslActorAccessor.Id(actor);
-                if (actorId > 0L) run.PendingAncientCultivatorIds.Add(actorId.ToString());
-                seeded++;
-                if (!annualBudget && HasExceededTransitionBudget(started)) break;
+                if (actorId > 0L && PendingTransitionMembership.Add(actorId.ToString()))
+                    run.PendingAncientCultivatorIds.Add(actorId.ToString());
             }
         }
 
@@ -257,10 +292,10 @@ internal static class MclslWorldEpochSystem
         }
 
         if (run.PendingAncientCultivatorIds.Count > 0 && !MclslAnnualFrameBudget.Expired
-            && (annualBudget || !HasExceededTransitionBudget(started)))
+            && !MclslFrameDeadline.Expired && !HasExceededTransitionBudget(started))
         {
             using (MclslUnityProfiler.Sample("MCLS/NewLaw/TransitionConvertBatch"))
-                ProcessAncientTransitionBatch(run, MclslRuntime.CurrentYear(), conversionBudget, 0);
+                ProcessAncientTransitionBatch(run, MclslRuntime.CurrentYear(), conversionBudget, 0, started);
         }
     }
 
@@ -277,23 +312,29 @@ internal static class MclslWorldEpochSystem
     {
         _ancientQueueSeedActors = Array.Empty<Actor>();
         _ancientQueueSeedCursor = 0;
+        _lastTransitionFrame = -1;
+        _transitionGeneration = -1;
+        PendingTransitionMembership.Clear();
     }
 
-    private static void ProcessAncientTransitionBatch(MclslWorldRunState run, int year, int limit, int transitionOffset)
+    private static void ProcessAncientTransitionBatch(MclslWorldRunState run, int year, int limit, int transitionOffset, long started)
     {
         if (run == null || limit <= 0 || run.PendingAncientCultivatorIds == null) return;
         int processed = 0;
-        while (run.PendingAncientCultivatorIds.Count > 0 && processed < limit && MclslAnnualFrameBudget.TryConsumeOperation())
+        while (run.PendingAncientCultivatorIds.Count > 0 && processed < limit
+            && !MclslFrameDeadline.Expired && !HasExceededTransitionBudget(started)
+            && MclslAnnualFrameBudget.TryConsumeOperation())
         {
             int lastIndex = run.PendingAncientCultivatorIds.Count - 1;
             string raw = run.PendingAncientCultivatorIds[lastIndex];
             run.PendingAncientCultivatorIds.RemoveAt(lastIndex);
+            PendingTransitionMembership.Remove(raw);
+            processed++;
             if (!long.TryParse(raw, out long actorId)) continue;
             Actor actor = FindActor(actorId);
             if (!MclslActorAccessor.Alive(actor)) continue;
             if (MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLawProcessed, 0) == 1) continue;
             if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.AncientLaw) continue;
-            processed++;
 
             if (TryConvertLegacyAncientLongevity(actor, year)) continue;
             if (TryConvertAncientRemnant(actor, year, transitionOffset)) continue;
@@ -477,7 +518,7 @@ internal static class MclslWorldEpochSystem
 
     private static void MarkAncientRemnant(Actor actor, int year)
     {
-        string remnantLabel = IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+        string remnantLabel = RemnantLabel(year);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawProcessed, 1);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawStatus, remnantLabel);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential, Math.Max(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLegacyPotential, 0), 20 + Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 10));
@@ -525,14 +566,6 @@ internal static class MclslWorldEpochSystem
             return null;
         }
     }
-
-    private static int SafeAge(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
-
-
 
     private static bool HasExceededTransitionBudget(long startedTimestamp)
     {

@@ -9,7 +9,9 @@ BASE = ['code', 'GameResources', 'NativeActorResources', 'InterfaceResources', '
 PLAYER_INPUTS = BASE + ['resources/actor-frames.manifest.json', 'resources/world-soul-frames.manifest.json',
                        'resources/beast-talents.manifest.json', 'resources/living-resources.json',
                        'resources/0.8.0-release-policy.json', 'resources/0.8.0-architecture.md',
-                       'resources/LOCAL-DEVELOPMENT.md', 'resources/refactor-080-progress.md', 'README.md']
+                       'resources/LOCAL-DEVELOPMENT.md', 'resources/refactor-080-progress.md', 'README.md',
+                       'resources/contract-skill-icons.manifest.json', 'resources/career-effects.manifest.json',
+                       'resources/contract-rework.md']
 EVIDENCE_INPUTS = {'resources/refactor-080-progress.md'}
 PLAYER_EXCLUDED = {'code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs'}
 

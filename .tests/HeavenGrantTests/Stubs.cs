@@ -15,6 +15,15 @@ public class BaseSystemData
     public int Writes;
 }
 public sealed class ActorAsset { public string id = "human"; }
+public sealed class ActorStats
+{
+    public float this[string id]
+    {
+        get => Values.TryGetValue(id, out float v) ? v : 0f;
+        set => Values[id] = value;
+    }
+    public Dictionary<string, float> Values = new();
+}
 public sealed class Actor
 {
     public BaseSystemData data = new();
@@ -22,6 +31,10 @@ public sealed class Actor
     public object city;
     public bool Living = true;
     public HashSet<string> Traits = new();
+    public ActorStats stats = new();
+    private float _age;
+    public float getAge() => _age;
+    public void setAge(float age) => _age = age;
     public bool isAlive() => Living;
     public bool hasTrait(string id) => Traits.Contains(id);
     public void removeTrait(string id)
@@ -53,6 +66,11 @@ namespace MySimulatedLongevityRoad.Core
         internal static int Publishes;
         internal static void Publish(Actor actor, MclslActorChange flags) => Publishes++;
         internal static void OnWrite(Actor actor, string key) { }
+        internal static long DataRevision(long actorId) => 0L;
+    }
+    internal static class MclslActorRegistry
+    {
+        internal static bool ResolveKnownOrWorld(long id, out Actor actor) { actor = null; return false; }
     }
     internal static class MclslDiagnostics
     {

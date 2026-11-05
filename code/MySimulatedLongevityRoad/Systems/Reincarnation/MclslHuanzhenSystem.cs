@@ -13,11 +13,13 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslHuanzhenSystem
 {
+    private static bool _legacyPending;
+    private static bool _claimingLegacy;
     private const int MaxAnchors = 3;
     private const int MaxHistory = 40;
     private const int MaxLoadAttempts = 3;
     private const int MaxEssenceHistory = 2;
-    private const int MaxLegacies = 8;
+    private const int MaxLegacies = 1;
     private const int MaxEssenceWorldLedgers = 128;
     private const int NaturalEssenceIntervalYears = 10;
     private const int DefaultLegacyCarryLimit = 3;
@@ -105,6 +107,13 @@ internal static class MclslHuanzhenSystem
         if (_arrivalSelection != null && MclslRuntimeSettings.HuanzhenEnabled
             && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true)
             TryNaturalArrival(_arrivalYear);
+        if (_legacyPending && !MclslFrameDeadline.Expired && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true)
+        {
+            _legacyPending = false;
+            _claimingLegacy = true;
+            try { AutoClaimLegacy(); }
+            finally { _claimingLegacy = false; }
+        }
         bool anchorWorkloadQuiet = !MclslScheduler.HasFastWork;
         bool anchorWorkloadRecovered = Time.unscaledTime - _pendingAutomaticAnchorSince >= 20f
             && !MclslScheduler.HasAnnualCandidateBacklog
@@ -209,6 +218,9 @@ internal static class MclslHuanzhenSystem
         _pendingAutomaticAnchor = true;
     }
 
+    private static bool IsAutomaticHost(Actor actor) => IsLivingActor(actor)
+        && actor.isSapient() && !MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor);
+
     private static void TryNaturalArrival(int year)
     {
         if (_arrivalSelection != null)
@@ -240,14 +252,14 @@ internal static class MclslHuanzhenSystem
         {
             _arrivalYear = year;
             _arrivalSelection = new(MclslActorRegistry.Snapshot(), 1,
-                candidate => IsLivingActor(candidate) && !HasHuanzhenTrait(candidate)
+                candidate => IsAutomaticHost(candidate) && !HasHuanzhenTrait(candidate)
                     && MclslEligibility.CanCultivate(candidate) && MclslSpiritualRootSystem.HasActualSpiritualRoot(candidate),
                 candidate => -PositiveHash(runId + "|huanzhen-host|" + year + "|" + MclslActorAccessor.Id(candidate)));
         }
         if (!_arrivalSelection.Tick()) return;
         Actor selected = _arrivalSelection.Results.Count > 0 ? _arrivalSelection.Results[0] : null;
         _arrivalSelection = null; _arrivalYear = 0;
-        if (selected == null)
+        if (!IsAutomaticHost(selected))
         {
             _state.NextNaturalArrivalYear = year + 5;
             if (!Flush()) { return; }
@@ -415,6 +427,7 @@ internal static class MclslHuanzhenSystem
         EnsureLoaded();
         if (_writeLocked) { return; }
         _anyWorldLoadInProgress = false;
+        _legacyPending = true;
         MclslHuanzhenPendingRestore pending = _state.PendingRestore;
         if (pending == null || !pending.Active)
         {
@@ -734,7 +747,8 @@ internal static class MclslHuanzhenSystem
     {
         _state.Legacies ??= new List<MclslHuanzhenLegacyRecord>();
         string id = _state.WorldRunId + "|" + pending.HostIdentity + "|" + pending.DeathYear + "|" + pending.AnchorYear;
-        _state.Legacies.RemoveAll(x => x == null || string.Equals(x.Id, id, StringComparison.Ordinal));
+        _state.Legacies.Clear();
+        _legacyPending = true;
         _state.Legacies.Add(new MclslHuanzhenLegacyRecord
         {
             Id = id,
@@ -748,11 +762,45 @@ internal static class MclslHuanzhenSystem
         if (_state.Legacies.Count > MaxLegacies) _state.Legacies.RemoveRange(0, _state.Legacies.Count - MaxLegacies);
     }
 
+    internal static void NotifyLegacyEligibility(Actor actor, string key)
+    {
+        if (_claimingLegacy || _legacyPending || actor == null || _state.HostLastActorId != MclslActorAccessor.Id(actor)
+            || _state.Legacies.Count == 0 || _state.Legacies[_state.Legacies.Count - 1].ClaimedChoices.Count >= 3) return;
+        if (key == MclslActorDataKeys.Realm || key == MclslActorDataKeys.CultivationSystem
+            || key == MclslActorDataKeys.TechniqueId || key == MclslActorDataKeys.TechniqueMaxRealm
+            || key == MclslActorDataKeys.WorldSoulId || key == MclslActorDataKeys.InverseTruthId)
+            _legacyPending = true;
+    }
+
+    private static void AutoClaimLegacy()
+    {
+        if (_state.Legacies.Count == 0) return;
+        var legacy = _state.Legacies[_state.Legacies.Count - 1];
+        if (legacy.ClaimedChoices.Count >= 3 || FindLivingHost() == null) return;
+        var options = GetLegacyOptions(legacy).Where(x => !x.Id.StartsWith("trait:", StringComparison.Ordinal) || AssetManager.traits.get(x.Id.Substring(6)).type != TraitType.Negative)
+            .OrderBy(x => LegacyPriority(x.Id)).ThenByDescending(x => x.Id.StartsWith("trait:", StringComparison.Ordinal) ? (int)((BaseTrait<ActorTrait>)AssetManager.traits.get(x.Id.Substring(6))).rarity : 0).ToArray();
+        foreach (var option in options)
+        {
+            if (_writeLocked || legacy.ClaimedChoices.Count >= 3) return;
+            if (legacy.ClaimedChoices.Contains(option.Id)) continue;
+            TryClaimLegacyOption(legacy.Id, option.Id, out _);
+        }
+    }
+
+    private static int LegacyPriority(string id) => id switch
+    {
+        "cultivation" => 0, "technique" => 1, "inverse_truth" => 2, "world_soul" => 3,
+        "divine_marrow" => 4, "nascent_essence" => 5, "nascent_cave" => 6,
+        "golden_core" => 7, "foundation_wonder" => 8, "divine_change" => 9,
+        _ => id.StartsWith("trait:Mclsl", StringComparison.OrdinalIgnoreCase) ? 10
+            : id.StartsWith("trait:", StringComparison.Ordinal) ? 11 : 12
+    };
+
     internal static int LegacySelectionLimit()
     {
         EnsureLoaded();
         if (_writeLocked) { return 0; }
-        return Math.Max(0, _state?.Anchors?.Count ?? 0);
+        return 3;
     }
 
     internal static IReadOnlyList<MclslHuanzhenLegacyOption> GetLegacyOptions(MclslHuanzhenLegacyRecord legacy)
@@ -763,15 +811,15 @@ internal static class MclslHuanzhenSystem
         MclslHuanzhenCultivationSnapshot s = legacy?.Snapshot;
         if (s == null) return options;
         AddLegacyOption(options, "cultivation", "修为根基：" + MclslRealmIds.Display(s.RealmId) + "·真元" + s.TrueEssence, !string.IsNullOrWhiteSpace(s.RealmId) || s.TrueEssence > 0);
-        AddLegacyOption(options, "technique", "功法道统：" + Blank(s.TechniqueName, s.TechniqueId), !string.IsNullOrWhiteSpace(s.TechniqueName) || !string.IsNullOrWhiteSpace(s.TechniqueId));
-        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + Blank(s.FoundationWonderName, s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
+        AddLegacyOption(options, "technique", "功法道统：" + MclslTextValue.Or(s.TechniqueName, s.TechniqueId), !string.IsNullOrWhiteSpace(s.TechniqueName) || !string.IsNullOrWhiteSpace(s.TechniqueId));
+        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + MclslTextValue.Or(s.FoundationWonderName, s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
         AddLegacyOption(options, "golden_core", "突破造物·金丹法则：" + s.GoldenCoreLaws, !string.IsNullOrWhiteSpace(s.GoldenCoreLaws));
-        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + Blank(s.NascentCaveName, s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
-        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + Blank(s.NascentEssenceName, s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
-        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + Blank(s.DivineChangeName, s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
-        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + Blank(s.DivineMarrowName, s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
-        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + Blank(s.WorldSoulName, s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
-        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + Blank(s.InverseTruthName, s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
+        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + MclslTextValue.Or(s.NascentCaveName, s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
+        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + MclslTextValue.Or(s.NascentEssenceName, s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
+        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + MclslTextValue.Or(s.DivineChangeName, s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
+        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + MclslTextValue.Or(s.DivineMarrowName, s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
+        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + MclslTextValue.Or(s.WorldSoulName, s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
+        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + MclslTextValue.Or(s.InverseTruthName, s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
         AddLegacyOption(options, "aptitude", "资质：" + s.Aptitude, s.Aptitude > 0);
         AddLegacyOption(options, "mind", "心境：心境" + s.MindState + "·淬心" + s.HeartTemperingProgress, s.MindState != 0 || s.HeartTemperingProgress != 0 || s.HeartMethodKnown != 0);
         AddLegacyOption(options, "contribution", "资源：贡献值" + s.Contribution, s.Contribution != 0);
@@ -826,29 +874,6 @@ internal static class MclslHuanzhenSystem
         }
         if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
         message = "已释放该前世遗产名额；已经写入人物的数据不会回退。";
-        return true;
-    }
-
-    internal static bool TryClaimLegacyCategory(string legacyId, string category, out string message)
-    {
-        EnsureLoaded();
-        if (_writeLocked) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
-        message = string.Empty;
-        Actor host = FindLivingHost();
-        MclslHuanzhenLegacyRecord legacy = FindLegacy(legacyId);
-        if (host == null) { message = "未找到此世还真持有者。"; return false; }
-        if (legacy?.Snapshot == null) { message = "前世档案已经失效。"; return false; }
-        string choice = "category:" + (category ?? string.Empty);
-        if (!CanClaimLegacy(legacy, choice, out message)) return false;
-        legacy.ClaimedChoices.Add(choice);
-        if (!Flush()) { message = "还真外部状态不可用，操作未完成：" + _storageFailure; return false; }
-        if (!MclslCultivationSystem.RestoreHuanzhenLegacyCategory(host, legacy.Snapshot, category, legacy.AnchorYear, legacy.DeathYear, out message))
-        {
-            legacy.ClaimedChoices.Remove(choice);
-            Flush();
-            return false;
-        }
-        MclslWorldArchiveStore.SaveNow();
         return true;
     }
 
@@ -918,10 +943,6 @@ internal static class MclslHuanzhenSystem
         catch { return "未知特征"; }
     }
 
-    private static string Blank(string value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
-
-    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key) =>
-        snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
 
     internal static void ClearRuntime()
     {
@@ -937,6 +958,8 @@ internal static class MclslHuanzhenSystem
         // 回载锚点时 MapBox.clearWorld 会经过这里；必须保留“正在还真读档”状态，直到新世界 finishingUpLoading 完成。
         if (_state.PendingRestore?.Active != true) _rollbackLoadInProgress = false;
         _applyingRestore = false;
+        _legacyPending = false;
+        _claimingLegacy = false;
         _cachedHost = null;
         _arrivalSelection = null; _arrivalYear = 0;
         _lastUniqueAuditHostId = 0;
@@ -977,6 +1000,7 @@ internal static class MclslHuanzhenSystem
                 if (!string.Equals(_state.OriginalSavePath, currentPath, StringComparison.OrdinalIgnoreCase)) { _state.OriginalSavePath = currentPath; dirty = true; }
             }
         }
+        if (!ReferenceEquals(_cachedHost, actor)) _legacyPending = true;
         _cachedHost = actor;
         MclslTraitRegistration.TryAutoFavoriteHuanzhenHost(actor);
         if (dirty && !Flush()) return;
@@ -1491,19 +1515,6 @@ internal static class MclslHuanzhenSystem
         return false;
     }
 
-    internal static void RestoreSupplementalState(Actor actor, MclslHuanzhenCultivationSnapshot snapshot)
-    {
-        if (actor?.data == null || snapshot == null) return;
-        foreach (string key in SupplementalStringKeys)
-            if (snapshot.StringState?.TryGetValue(key, out string text) == true) MclslActorAccessor.Set(actor, key, text ?? string.Empty);
-        foreach (string key in SupplementalIntKeys)
-            if (snapshot.IntState?.TryGetValue(key, out int number) == true) MclslActorAccessor.Set(actor, key, number);
-        if (snapshot.IntState?.ContainsKey(MclslActorDataKeys.ConvertedLifespanFloor) != true)
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.ConvertedLifespanFloor, 0);
-        foreach (string key in SupplementalFloatKeys)
-            if (snapshot.FloatState?.TryGetValue(key, out float number) == true) MclslActorAccessor.Set(actor, key, number);
-    }
-
     private static void AddHistory(int deathYear, int anchorYear, string name, string realm, int loopDepth, string result)
     {
         _state.History ??= new List<MclslHuanzhenHistoryRecord>();
@@ -1632,14 +1643,5 @@ internal static class MclslHuanzhenSystem
 
     private static string SafeName(Actor actor) { try { return actor?.data == null ? "无名者" : MclslActorAccessor.DisplayName(actor); } catch { return "无名者"; } }
 
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            string text = value ?? string.Empty;
-            for (int i = 0; i < text.Length; i++) hash = hash * 31 + text[i];
-            return hash & int.MaxValue;
-        }
-    }
+    private static int PositiveHash(string value) => MclslStableHash.Positive23x31(value);
 }

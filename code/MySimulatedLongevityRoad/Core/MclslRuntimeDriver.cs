@@ -29,7 +29,9 @@ internal sealed partial class MclslRuntimeDriver : MonoBehaviour
 
     private void Update()
     {
-        MclslMemoryMaintenance.Tick();
+        long maintenanceSample = MclslPerformanceProbe.Begin();
+        try { MclslMemoryMaintenance.Tick(); }
+        finally { MclslPerformanceProbe.End("运行维护", maintenanceSample); }
         if (MySimulatedLongevityRoad.Interop.MclslLocalizationRuntimeMarker.IsRuntimeLoaded)
             MclslRuntime.Tick();
     }

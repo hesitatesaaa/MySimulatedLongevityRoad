@@ -64,10 +64,10 @@ namespace MySimulatedLongevityRoad.Core
 }
 namespace MySimulatedLongevityRoad.Data
 {
-    class MclslBeastDefinition { public string ConfigId; public int ChancePerMillion = 0; }
+    class MclslBeastDefinition { public string Id; public string ConfigId; public int ChancePerMillion = 0; }
     static class MclslBeastCatalog
     {
-        public static MclslBeastDefinition[] All = { new() { ConfigId = "legacy_beast" } };
+        public static MclslBeastDefinition[] All = { new() { Id = "legacy_beast", ConfigId = "legacy_beast" } };
         public static MclslBeastDefinition[] Named = Array.Empty<MclslBeastDefinition>();
     }
 }

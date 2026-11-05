@@ -11,6 +11,8 @@ namespace MySimulatedLongevityRoad.Systems;
 internal static class MclslSoulFrameCatalog
 {
     private static Dictionary<string, Dictionary<string, string[]>> _groups;
+    private static readonly Dictionary<Sprite, Rect> BodyBounds = new();
+    internal static Rect VisibleBounds(Sprite sprite) => BodyBounds[sprite];
     internal static Sprite[] Load(string folder, string action)
     {
         EnsureLoaded();
@@ -95,6 +97,14 @@ internal static class MclslSoulFrameCatalog
                     new Vector2(.5f, .5f), 1f, 0, SpriteMeshType.FullRect);
                 if (sprite == null) throw new InvalidDataException("Soul atlas sprite creation failed: " + pair.Key);
                 sprite.name = Path.GetFileName(pair.Key);
+                // Measure from the existing upload bytes; the GPU atlas deliberately has no CPU copy.
+                int left=rect[2], right=0, bottom=rect[3], top=0;
+                for(int y=0;y<rect[3];y++) for(int x=0;x<rect[2];x++)
+                {
+                    if(raw[((rect[1]+y)*width+rect[0]+x)*4+3]==0)continue;
+                    left=Math.Min(left,x);right=Math.Max(right,x+1);bottom=Math.Min(bottom,y);top=Math.Max(top,y+1);
+                }
+                BodyBounds.Add(sprite,Rect.MinMaxRect(left,bottom,right,top));
                 sprites.Add(pair.Key, sprite);
             }
         }

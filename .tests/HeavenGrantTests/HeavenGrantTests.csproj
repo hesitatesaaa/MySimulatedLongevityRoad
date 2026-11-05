@@ -6,7 +6,6 @@
     <Compile Include="$(Production)/Systems/Runtime/MclslActorAccessor.cs" />
     <Compile Include="$(Production)/Systems/Cultivation/MclslTechniqueRealmLimit.cs" />
     <Compile Include="$(Production)/Systems/Cultivation/MclslTechniqueStageSystem.cs" />
-    <Compile Include="$(Production)/Systems/Cultivation/MclslMortalSeparationSystem.cs" />
     <Compile Include="$(Production)/Systems/Cultivation/MclslCultivationSystemIds.cs" />
     <Compile Include="$(Production)/Data/MclslActorDataKeys.cs" />
     <Compile Include="$(Production)/Data/MclslCultivationCatalog.cs" />

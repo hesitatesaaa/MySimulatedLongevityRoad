@@ -140,6 +140,8 @@ internal static class MclslRuntime
         Systems.Combat.MclslCareerCombat.Load();
         MclslTimelineSystem.TickAnnual(year);
         MclslWorldRunRepository.EnsureAnnualWorldState(year);
+        // 进入世界/读档时清除上一年度遗留的“年度结算阻塞”，给新会话一次重新结算的机会。
+        MclslWorldRunRepository.ResetAnnualBlockOnLoad();
         MclslRuntimeCadence.InitializeAfterLoad(year);
         MclslWorldSoulSystem.OnWorldLoaded();
         MclslBeastWorld.Load(); MclslBeastLoot.Load();
@@ -150,13 +152,19 @@ internal static class MclslRuntime
 
     internal static void Tick()
     {
+        long preludeSample = MclslPerformanceProbe.Begin();
         MclslRuntimeChanges.BindMainThread();
         MclslDeveloperBridge.Tick();
         int unityFrame = Time.frameCount;
-        if (unityFrame == _lastFrame) return;
+        if (unityFrame == _lastFrame)
+        {
+            MclslPerformanceProbe.End("主循环计时前准备", preludeSample);
+            return;
+        }
         _lastFrame = unityFrame;
         AdvanceDisplayClock();
         MclslActorAnimationTime.Sample();
+        MclslPerformanceProbe.End("主循环计时前准备", preludeSample);
         long modFrameSample = MclslPerformanceProbe.Begin();
         // 方案甲：总帧预算 4ms；暂停档额外 +1ms 追积压。
         MclslFrameDeadline.Begin(MclslAnnualBackpressure.IsPauseLevel ? 5d : 4d);

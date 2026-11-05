@@ -206,7 +206,7 @@ internal static class MclslProceduralLexicon
         return Collapse(core + form);
     }
 
-    private static string Pick(string[] values, int hash) => values[(hash & int.MaxValue) % values.Length];
+    internal static string Pick(string[] values, int hash) => values[(hash & int.MaxValue) % values.Length];
     private static int PositiveHash(string value)
     {
         unchecked { int hash = 37; foreach (char c in value ?? string.Empty) hash = hash * 41 + c; return hash & int.MaxValue; }

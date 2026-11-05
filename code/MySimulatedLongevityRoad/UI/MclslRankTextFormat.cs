@@ -2,6 +2,8 @@ using System;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Systems;
 using NeoModLoader.General;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace MySimulatedLongevityRoad.UI;
 
@@ -75,6 +77,22 @@ internal static class MclslRankTextFormat
         }
         return UnknownTraitFallback;
     }
+    /// <summary>
+    /// Search normalization shared by the three rank surfaces. The beast rank
+    /// window, the rank snapshot source and the rank window carried identical
+    /// private copies (ASCII space and the full-width ideographic space are both
+    /// stripped, leading/trailing whitespace is trimmed first).
+    /// </summary>
+    internal static string NormalizeSearch(string value)
+        => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
+    internal static void SetText(Transform root, string childName, string value, Color color)
+    {
+        Text text = root.Find(childName)?.GetComponent<Text>();
+        if (text == null) return;
+        text.text = value ?? string.Empty;
+        text.color = color;
+    }
+
     internal static string FormatPower(double power)
     {
         if (power <= 0d) return "凡人";

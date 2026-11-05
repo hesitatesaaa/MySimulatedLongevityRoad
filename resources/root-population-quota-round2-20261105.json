@@ -1,0 +1,154 @@
+{
+  "version": "0.8.6",
+  "date": "2026-11-05",
+  "sourceCount": 299,
+  "compile": {
+    "exit": 0,
+    "warnings": 0
+  },
+  "rulesUnchanged": true,
+  "liveUnityTested": false,
+  "actualFrameTimeImprovement": null,
+  "comparison": [
+    {
+      "population": 10000,
+      "scenario": "normal",
+      "before": {
+        "Population": 10000,
+        "Scenario": "normal",
+        "MedianMs": 1.4115,
+        "AllocatedBytes": 40,
+        "RootQueries": 10000,
+        "EligibilityQueries": 20000
+      },
+      "after": {
+        "Population": 10000,
+        "Scenario": "normal",
+        "MedianMs": 1.1562,
+        "AllocatedBytes": 40,
+        "RootQueries": 10000,
+        "EligibilityQueries": 10000
+      }
+    },
+    {
+      "population": 10000,
+      "scenario": "birth-wave",
+      "before": {
+        "Population": 10000,
+        "Scenario": "birth-wave",
+        "MedianMs": 3.3962,
+        "AllocatedBytes": 648040,
+        "RootQueries": 15000,
+        "EligibilityQueries": 29000
+      },
+      "after": {
+        "Population": 10000,
+        "Scenario": "birth-wave",
+        "MedianMs": 2.0812,
+        "AllocatedBytes": 648040,
+        "RootQueries": 13000,
+        "EligibilityQueries": 13000
+      }
+    },
+    {
+      "population": 10000,
+      "scenario": "unrelated-data",
+      "before": {
+        "Population": 10000,
+        "Scenario": "unrelated-data",
+        "MedianMs": 18.4555,
+        "AllocatedBytes": 40,
+        "RootQueries": 70000,
+        "EligibilityQueries": 140000
+      },
+      "after": {
+        "Population": 10000,
+        "Scenario": "unrelated-data",
+        "MedianMs": 12.8282,
+        "AllocatedBytes": 40,
+        "RootQueries": 0,
+        "EligibilityQueries": 0
+      }
+    },
+    {
+      "population": 50000,
+      "scenario": "normal",
+      "before": {
+        "Population": 50000,
+        "Scenario": "normal",
+        "MedianMs": 13.19,
+        "AllocatedBytes": 40,
+        "RootQueries": 50000,
+        "EligibilityQueries": 100000
+      },
+      "after": {
+        "Population": 50000,
+        "Scenario": "normal",
+        "MedianMs": 6.0471,
+        "AllocatedBytes": 40,
+        "RootQueries": 50000,
+        "EligibilityQueries": 50000
+      }
+    },
+    {
+      "population": 50000,
+      "scenario": "birth-wave",
+      "before": {
+        "Population": 50000,
+        "Scenario": "birth-wave",
+        "MedianMs": 15.1678,
+        "AllocatedBytes": 3240040,
+        "RootQueries": 75000,
+        "EligibilityQueries": 145000
+      },
+      "after": {
+        "Population": 50000,
+        "Scenario": "birth-wave",
+        "MedianMs": 13.158,
+        "AllocatedBytes": 3240040,
+        "RootQueries": 65000,
+        "EligibilityQueries": 65000
+      }
+    },
+    {
+      "population": 50000,
+      "scenario": "unrelated-data",
+      "before": {
+        "Population": 50000,
+        "Scenario": "unrelated-data",
+        "MedianMs": 96.1629,
+        "AllocatedBytes": 40,
+        "RootQueries": 350000,
+        "EligibilityQueries": 700000
+      },
+      "after": {
+        "Population": 50000,
+        "Scenario": "unrelated-data",
+        "MedianMs": 60.0488,
+        "AllocatedBytes": 40,
+        "RootQueries": 0,
+        "EligibilityQueries": 0
+      }
+    }
+  ],
+  "dshReview": {
+    "worker": "root_quota_round2_review",
+    "status": "completed_and_closed",
+    "scope": "Read-only static review of 7 changed files plus related lifecycle and root grant routes; no game launched",
+    "conclusion": "No deterministic quota-result or normal-flow counting regression found in round2 changes",
+    "finding": "Existing Maobao snapshot placement restores raw custom data without immediate registration/root-state notification",
+    "resolution": "After final actor restoration, Register publishes All for new actors; existing registered actors receive RootPopulation. New and existing restore paths covered by isolated production-suffix tests. This additional fix was verified by the main agent, not re-reviewed by DSH.",
+    "limitations": [
+      "Harmony binding success still needs live game startup logs",
+      "No live game performance/save-load acceptance"
+    ]
+  },
+  "notes": [
+    "Production allocator/Publish/OnWrite/NativeStamp/trait and lifecycle hooks/overview method exercised with isolated stubs",
+    "Annual full census and stable candidate ordering retained; batch32 and shared budget unchanged",
+    "Medians over 5 runs after warmup with tiered compilation disabled and fixture collection before timing; timings are not live Unity CPU/FPS",
+    "Allocated bytes cover workload fixtures/notifications, not exact runtime retained memory",
+    "Historical comparison uses pre-change allocator and broad observer subscription under otherwise identical fake engine services",
+    "Local-development packages skip historical art provenance validators; no artwork changed"
+  ]
+}

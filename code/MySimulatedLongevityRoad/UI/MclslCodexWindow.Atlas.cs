@@ -305,6 +305,7 @@ internal sealed partial class MclslCodexWindow
 
     private static string AtlasActorAffiliation(Actor actor)
     {
+        if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor)) return string.Empty;
         if (!MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear()))
         {
             string sectId = MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectAffiliation, string.Empty);

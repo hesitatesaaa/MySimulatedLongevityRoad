@@ -49,12 +49,11 @@ internal static class MclslXuanhuangRegistration
             BuildingAsset building=AssetManager.buildings.clone(pair.Value,pair.Key);
             building.sprite_path="buildings/civ_main/"+Id+"/"+pair.Key;
             building.group=Id;building.civ_kingdom=Id;
-            // The two dedicated windmill tiers use 105% of the source building's
-            // current scale on X/Y so their base covers the grass below; the tent
-            // uses one further 120% step on top of the 115% baseline; every other
-            // dedicated building grows to 115%. Z, footprint, pivot and upgrade
-            // graph stay native; windmill frames/pivot are not cropped.
+            // Preserve the existing per-building proportions; non-dock buildings
+            // receive a further 115% visual scale on X/Y. Footprints and pivots stay native.
             float scale= pair.Key.StartsWith("windmill_")?1.05f:pair.Key=="tent_human"?1.15f*1.2f:1.15f;
+            if(pair.Key.Contains("dock"))scale*=0.85f;
+            else scale*=1.15f;
             building.scale_base=new Vector3(source.scale_base.x*scale,source.scale_base.y*scale,source.scale_base.z);
             // Four blade poses represent 22.5-degree steps; native playback owns timing.
             if(pair.Key.StartsWith("windmill_"))building.animation_speed=4f;
@@ -133,10 +132,10 @@ internal static class MclslXuanhuangRegistration
         string id=Id+"_"+source;
         var boat=AssetManager.actor_library.clone(id,source);
         boat.texture_id=id;boat.name_locale=id;
+        boat.base_stats["scale"]=AssetManager.actor_library.get(source).base_stats.get("scale")*0.85f*0.8f;
         boat.has_advanced_textures=false;boat.need_colored_sprite=false;
         boat.has_override_sprite=true;
-        boat.animation_idle=new[]{"normal"};
-        boat.animation_walk=boat.animation_idle;boat.animation_swim=boat.animation_idle;
+        boat.get_override_sprite=AssetManager.actor_library.get(source).get_override_sprite;
         string path="actors/boats/"+id;
         boat.texture_asset=new ActorTextureSubAsset(path+"/",false);
         boat.texture_asset.texture_path_main=path;

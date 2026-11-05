@@ -22,6 +22,7 @@ internal static class MclslPatches
     {
         int count = 0;
         count += MclslNativeFeedbackPatches.Apply(harmony);
+        count += TryPatchPair(harmony, "ActorAsset.getBuildingDockAsset.xuanhuang", typeof(ActorAsset), "getBuildingDockAsset", Type.EmptyTypes, postfix: nameof(XuanhuangDock_Postfix));
         count += TryPatchPair(harmony, "UnitSelectionEffect.setVisible.custom", typeof(UnitSelectionEffect), "setVisible", new[] { typeof(bool) }, postfix: nameof(UnitSelectionEffect_SetVisible_Custom_Postfix));
         foreach (string method in new[] { "drawSelectedUnits", "drawUnitsToBeSelectedBySquareTool", "drawUnitTaskIcons", "drawUnitHappinessIcons", "drawUnitBanners", "drawFavoritesGame", "drawUnitMetas", "drawMagnetUnits", "drawSocialize", "drawUnexploredAugmentationSprite" })
             count += MclslHarmonyPatchGuard.TryPatch(harmony, "QuantumSpriteLibrary." + method,
@@ -35,7 +36,7 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "ButtonEvent.locateSelectedUnit.custom", typeof(ButtonEvent), "locateSelectedUnit", Type.EmptyTypes, prefix: nameof(LocateDisplayedUnit_Prefix));
         count += MclslHarmonyPatchGuard.TryPatch(harmony,"QuantumSpriteLibrary.drawStatusEffectFor",
             AccessTools.Method(typeof(QuantumSpriteLibrary),"drawStatusEffectFor",new[]{typeof(BaseSimObject),typeof(QuantumSpriteAsset)}),
-            transpiler:AccessTools.Method(typeof(MclslPatches),nameof(SelectedUnits_Scale_Transpiler)))?1:0;
+            transpiler:AccessTools.Method(typeof(MclslPatches),nameof(StatusEffect_Scale_Transpiler)))?1:0;
         count += TryPatchPair(harmony, "DynamicActorSpriteCreatorUI.getUnitSpriteForUI.custom", typeof(DynamicActorSpriteCreatorUI), "getUnitSpriteForUI",
             new[] { typeof(ActorAsset), typeof(Sprite), typeof(AnimationContainerUnit), typeof(bool), typeof(ActorSex), typeof(int), typeof(int), typeof(ColorAsset), typeof(long), typeof(int), typeof(bool), typeof(bool), typeof(bool), typeof(bool) },
             prefix: nameof(DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix));
@@ -49,7 +50,8 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "Subspecies.getUnitSpriteForBanner", typeof(Subspecies), "getUnitSpriteForBanner", Type.EmptyTypes, prefix: nameof(Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix));
         MethodInfo simulation = AccessTools.Method(typeof(MapBox), "updateSimulation", new[] { typeof(float) });
         bool protectedSimulation = MclslHarmonyPatchGuard.TryPatch(harmony, "MapBox.updateSimulation(float)", simulation,
-            AccessTools.Method(typeof(MclslPatches), nameof(MapBox_UpdateSimulation_Prefix)), null);
+            AccessTools.Method(typeof(MclslPatches), nameof(MapBox_UpdateSimulation_Prefix)),
+            AccessTools.Method(typeof(MclslPatches), nameof(MapBox_UpdateSimulation_Postfix)));
         MclslAnnualBackpressure.SetPatchAvailable(protectedSimulation);
         if (protectedSimulation) count++;
         count += TryPatchPair(harmony, "MapBox.generateNewMap", typeof(MapBox), nameof(MapBox.generateNewMap), Type.EmptyTypes, prefix: nameof(MapBox_GenerateNewMap_Prefix));
@@ -96,7 +98,41 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "ScrollWindow.hide", typeof(ScrollWindow), nameof(ScrollWindow.hide), new[] { typeof(string), typeof(bool) }, prefix: nameof(ScrollWindow_Hide_RankRightClickGuard_Prefix));
         count += TryPatchPair(harmony, "ScrollWindow.hideAllEvent", typeof(ScrollWindow), "hideAllEvent", new[] { typeof(bool) }, prefix: nameof(ScrollWindow_HideAllEvent_RankRightClickGuard_Prefix));
         count += MclslUnitWindowLifecycle.Apply(harmony);
+        // 原版 Actor.checkCalibrateTargetPosition 会直接解引用 beh_actor_target.a.current_tile
+        // 与 tile_target；目标单位没有地图格时会抛空引用。该异常在 ActorManager 的批量
+        // 更新里抛出会中断整帧剩余单位，表现为“时间在走、世界不动”。这里做安全守卫。
+        count += TryPatchPair(harmony, "Actor.checkCalibrateTargetPosition.safe",
+            typeof(Actor), "checkCalibrateTargetPosition", Type.EmptyTypes,
+            prefix: nameof(Actor_CheckCalibrateTargetPosition_Safe_Prefix));
         return count;
+    }
+
+    /// <summary>
+    /// 守卫原版 <c>Actor.checkCalibrateTargetPosition</c>：行为目标指向的 Actor 若无
+    /// <c>current_tile</c>，或本角色 <c>tile_target</c> 为空，原方法会空引用；这里跳过
+    /// 该次校准并清理无效目标，避免每帧中断整批单位更新。
+    /// </summary>
+    private static bool Actor_CheckCalibrateTargetPosition_Safe_Prefix(Actor __instance)
+    {
+        try
+        {
+            BaseSimObject target = __instance.beh_actor_target;
+            if (target == null || !target.isActor()) return true;
+            Actor other = target.a;
+            if (other == null || other.current_tile == null)
+            {
+                __instance.beh_actor_target = null;
+                MclslDiagnostics.Probe("calibrate-target-cleared", "行为目标无地图格，已清理以避开原版空引用");
+                return false;
+            }
+            if (__instance.tile_target == null) return false;
+        }
+        catch (Exception ex)
+        {
+            MclslDiagnostics.Probe("calibrate-target-guard", "校准目标位置守卫异常，已跳过：" + ex.Message);
+            return false;
+        }
+        return true;
     }
 
     private static int TryPatchPair(Harmony harmony, string key, Type targetType, string targetName, Type[] targetArgs, string prefix = null, string postfix = null, string finalizer = null)
@@ -182,7 +218,13 @@ internal static class MclslPatches
         return __result == null;
     }
 
-    private static bool MapBox_UpdateSimulation_Prefix(ref float __0) => MclslAnnualBackpressure.Apply(ref __0);
+    private static bool MapBox_UpdateSimulation_Prefix(ref float __0, out long __state)
+    {
+        __state = MclslPerformanceProbe.Begin();
+        return MclslAnnualBackpressure.Apply(ref __0);
+    }
+    private static void MapBox_UpdateSimulation_Postfix(long __state)
+        => MclslPerformanceProbe.End("模拟总区间(含原版与补丁回调)", __state);
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(MapBox), nameof(MapBox.generateNewMap))]
@@ -240,7 +282,8 @@ internal static class MclslPatches
         if (!__result) return;
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0?.id);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0?.id) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     [HarmonyPrefix]
@@ -265,7 +308,8 @@ internal static class MclslPatches
         if (!__result) return;
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     [HarmonyPrefix]
@@ -314,7 +358,8 @@ internal static class MclslPatches
     {
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleRemovedTrait(__instance, __0);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     private static bool Actor_RemoveSpiritualRoot_Guard(Actor __instance, string __0)
@@ -413,6 +458,7 @@ internal static class MclslPatches
     private static void UnitWindow_OnDisable_Postfix(UnitWindow __instance)
     {
         TryPatch("unit-window-info-panel-disable", () => MclslActorInfoPanel.OnWindowClosed(__instance));
+        TryPatch("unit-window-contract-bar-disable", () => MclslContractInfoBar.Hide(__instance));
     }
 
     [HarmonyPostfix]
@@ -619,6 +665,33 @@ internal static class MclslPatches
         return codes;
     }
 
+    private static IEnumerable<CodeInstruction> StatusEffect_Scale_Transpiler(IEnumerable<CodeInstruction> instructions)
+    {
+        var codes=new List<CodeInstruction>(SelectedUnits_Scale_Transpiler(instructions));
+        MethodInfo selection=AccessTools.Method(typeof(MclslActorPresentation),nameof(MclslActorPresentation.SelectionScale));
+        for(int i=0;i<codes.Count;i++)
+        {
+            if(codes[i].Calls(selection))
+            {
+                codes.Insert(i,new CodeInstruction(OpCodes.Ldloc_2));
+                codes[++i].operand=AccessTools.Method(typeof(MclslActorPresentation),nameof(MclslActorPresentation.StatusScale));
+            }
+            if(codes[i].operand is MethodInfo method && method.Name=="setPosOnly")
+            {
+                codes.InsertRange(i,new[]{new CodeInstruction(OpCodes.Ldarg_0),new CodeInstruction(OpCodes.Ldloc_2),
+                    new CodeInstruction(OpCodes.Call,AccessTools.Method(typeof(MclslActorPresentation),nameof(MclslActorPresentation.StatusPosition)))});
+                i+=3;
+            }
+        }
+        return codes;
+    }
+
+    private static void XuanhuangDock_Postfix(ActorAsset __instance, ref BuildingAsset __result)
+    {
+        if (__instance.architecture_id == MclslXuanhuangRegistration.Id)
+            __result = AssetManager.buildings.get("mclsl_xuanhuang_docks_human");
+    }
+
     private static bool LocateDisplayedUnit_Prefix()
     {
         Actor actor = MclslActorInfoPanel.DisplayedModActor();
@@ -698,33 +771,25 @@ internal static class MclslPatches
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ActorManager), "precalculateRenderDataParallel")]
-    private static void ActorManager_PrecalculateRenderDataParallel_Halo_Postfix(ActorManager __instance)
-    {
-        try { MclslVisibleActorRenderLane.Apply(__instance); }
-        catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("patches.realm-halo", "[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
-    }
+    private static void ActorManager_PrecalculateRenderDataParallel_Halo_Postfix(ActorManager __instance) => ApplyRealmHalo(__instance);
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ActorManager), "precalculateRenderDataNormal")]
-    private static void ActorManager_PrecalculateRenderDataNormal_Halo_Postfix(ActorManager __instance)
+    private static void ActorManager_PrecalculateRenderDataNormal_Halo_Postfix(ActorManager __instance) => ApplyRealmHalo(__instance);
+
+    private static void ApplyRealmHalo(ActorManager manager)
     {
-        try { MclslVisibleActorRenderLane.Apply(__instance); }
+        try { MclslVisibleActorRenderLane.Apply(manager); }
         catch (Exception ex) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("patches.realm-halo", "[模拟长生路] 境界Halo渲染刷新失败: " + ex.Message); }
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(Actor), nameof(Actor.makeStunned))]
-    private static bool Actor_MakeStunned_WorldSoul_Prefix(Actor __instance, float pTime = 5f)
-    {
-        return !MclslWorldSoulActorRegistration.IsWorldSoulActor(__instance);
-    }
+    private static bool Actor_MakeStunned_WorldSoul_Prefix(Actor __instance, float pTime = 5f) => WorldSoulCanMove(__instance);
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(Actor), nameof(Actor.makeSleep))]
-    private static bool Actor_MakeSleep_WorldSoul_Prefix(Actor __instance, float pTime)
-    {
-        return !MclslWorldSoulActorRegistration.IsWorldSoulActor(__instance);
-    }
+    private static bool Actor_MakeSleep_WorldSoul_Prefix(Actor __instance, float pTime) => WorldSoulCanMove(__instance);
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(Actor), nameof(Actor.calculateForce))]
@@ -733,7 +798,7 @@ internal static class MclslPatches
         float pForceAmountDirection, float pForceHeight = 0f,
         bool pCheckCancelJobOnLand = false)
     {
-        return !MclslWorldSoulActorRegistration.IsWorldSoulActor(__instance);
+        return WorldSoulCanMove(__instance);
     }
 
     [HarmonyPrefix]
@@ -741,8 +806,10 @@ internal static class MclslPatches
     private static bool Actor_ApplyRandomForce_WorldSoul_Prefix(Actor __instance,
         float pMinHeight = 1.5f, float pMaxHeight = 2f)
     {
-        return !MclslWorldSoulActorRegistration.IsWorldSoulActor(__instance);
+        return WorldSoulCanMove(__instance);
     }
+
+    private static bool WorldSoulCanMove(Actor actor) => !MclslWorldSoulActorRegistration.IsWorldSoulActor(actor);
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(BaseSimObject), nameof(BaseSimObject.addStatusEffect),

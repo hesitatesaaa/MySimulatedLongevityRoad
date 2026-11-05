@@ -5,12 +5,12 @@ import gzip
 import io
 import json
 import re
-import struct
 import subprocess
 import sys
 import zipfile
 from pathlib import Path
 from PIL import Image
+from png_chunks import PROFILE_INFO, ancillary_chunks, insert_before_idat
 
 ROOT = Path(__file__).resolve().parents[1]
 from release_inputs import BASE, files, player_files
@@ -44,45 +44,6 @@ def archive(output, name, entries, readme, snapshot, replacements=None):
     return destination
 
 
-PROFILE_INFO = {'dpi', 'srgb', 'gamma', 'icc_profile', 'chromaticity', 'exif', 'xmp', 'XML:com.adobe.xmp'}
-
-
-def ancillary_chunks(data, selected):
-    if data[:8] != b'\x89PNG\r\n\x1a\n':
-        return []
-    chunks, offset = [], 8
-    while offset + 12 <= len(data):
-        size = struct.unpack_from('>I', data, offset)[0]
-        end = offset + size + 12
-        kind = data[offset + 4:offset + 8].decode('ascii', 'replace')
-        if end > len(data):
-            raise ValueError('Invalid PNG chunk length')
-        if kind in selected:
-            chunks.append(data[offset:end])
-        offset = end
-        if kind == 'IEND':
-            break
-    return chunks
-
-
-def insert_before_idat(data, chunks):
-    if not chunks:
-        return data
-    result, offset, inserted = bytearray(data[:8]), 8, False
-    while offset + 12 <= len(data):
-        size = struct.unpack_from('>I', data, offset)[0]
-        end = offset + size + 12
-        kind = data[offset + 4:offset + 8]
-        if kind == b'IDAT' and not inserted:
-            result.extend(b''.join(chunks))
-            inserted = True
-        result.extend(data[offset:end])
-        offset = end
-        if kind == b'IEND':
-            break
-    if not inserted:
-        raise ValueError('PNG output has no IDAT chunk')
-    return bytes(result)
 
 
 def compress_player_assets(entries):
@@ -146,6 +107,14 @@ def compress_player_assets(entries):
         if relative in replacements:
             record['SHA256'] = hashlib.sha256(replacements[relative]).hexdigest()
     replacements[living_path] = (json.dumps(living, ensure_ascii=True, indent=2) + '\n').encode('utf-8')
+    for path in ('resources/contract-skill-icons.manifest.json', 'resources/career-effects.manifest.json'):
+        records = json.loads(dict(entries)[path].read_text(encoding='utf-8-sig'))
+        for asset in records['assets']:
+            asset['workspaceSha256'] = asset['sha256']
+            source = dict(entries)[asset['path']]
+            data = replacements[asset['path']] if asset['path'] in replacements else source.read_bytes()
+            asset['sha256'] = hashlib.sha256(data).hexdigest()
+        replacements[path] = (json.dumps(records, ensure_ascii=True, indent=2) + '\n').encode('utf-8')
     return replacements, dict(optimizedImages=sum(name.endswith('.png') for name in replacements), metadataImagesKept=skipped_metadata,
                               imageBytesBefore=sum(source.stat().st_size for _, source in entries
                                   if source.suffix.lower() == '.png'),
@@ -292,8 +261,6 @@ def main():
     player = player_files()
     talent_evidence = ROOT / 'resources/beast-talents-runtime.json'
     developer = files(BASE + ['resources', 'tools', 'AGENTS.md', '.gitignore', 'README.md'])
-    developer.append(('code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs',
-                      ROOT / '.dev-tools/MclslDeveloperActorEditor.cs'))
     developer.sort(key=lambda item: item[0])
     output.mkdir(parents=True)
     common = (f'MySimulatedLongevityRoad {version}\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
@@ -358,7 +325,7 @@ def main():
             if args.compress_assets else ('-developer-local' if args.local_development else '-' + kind)
         readme = common
         if args.local_development:
-            readme += 'Local uncommitted snapshot. Not published.\n'
+            readme += 'Local-development snapshot. See the accompanying package record for acceptance scope.\n'
         if compression:
             readme += ('Package-only PNG optimization: up to 256 palette colors; actor icons larger than 256 pixels '
                        'were downscaled to a maximum side of 256. Color-profile and text-metadata PNGs remain unchanged.\n'

@@ -35,7 +35,7 @@ internal static class MclslRuntimeCadence
         }
         MclslSpellSystem.TickSelfCasting(frameCounter);
         MclslAncientLawEventSystem.TickManual();
-        if (frameCounter > 0 && frameCounter % 30 == 0 && MclslTianxuanMarket.PendingListingCount > 0)
+        if (frameCounter > 0 && frameCounter % 60 == 0 && MclslTianxuanMarket.PendingListingCount > 0)
             MclslTianxuanMarket.PublishPendingArtifactListings(8);
     }
 

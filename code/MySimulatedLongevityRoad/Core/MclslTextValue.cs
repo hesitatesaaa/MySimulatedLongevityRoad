@@ -18,6 +18,7 @@ internal static class MclslTextValue
     private static readonly UTF8Encoding Utf8 = new(false, true);
     internal static int CacheCount => Decoded.Count;
     internal static void ClearRuntime() { Decoded.Clear(); Order.Clear(); }
+    internal static string Or(string value, string fallback) => string.IsNullOrWhiteSpace(value) ? fallback : value;
     private const string Hex = "0123456789abcdef";
     internal static string Encode(string text)
     {

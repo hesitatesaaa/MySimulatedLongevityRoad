@@ -8,10 +8,10 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslBeastPopulationIndex
 {
-    private struct Entry { internal bool Natural; internal int Region; }
+    private struct Entry { internal int Region; }
     private static readonly Dictionary<long, Entry> Automatic = new();
-    private static readonly Dictionary<int, int> Regional = new(), NaturalRegional = new();
-    private static int _natural, _unlocked = 1;
+    private static readonly Dictionary<int, int> Regional = new();
+    private static int _unlocked = 1;
     private static void Adjust(Dictionary<int, int> counts, int region, int delta)
     {
         int count = counts.GetValueOrDefault(region) + delta;
@@ -32,14 +32,12 @@ internal static class MclslBeastPopulationIndex
             return;
         }
         string source = MclslActorAccessor.GetString(actor, MclslBeastWorld.SourceKey);
-        bool natural = source == "natural";
-        if (!natural && !source.StartsWith("wave:", StringComparison.Ordinal)) { Forget(id); return; }
+        if (source != "natural" && !source.StartsWith("wave:", StringComparison.Ordinal)) { Forget(id); return; }
         int region = MclslBeastSurfaceIndex.Region(actor.current_tile);
-        if (Automatic.TryGetValue(id, out var before) && before.Natural == natural && before.Region == region) return;
+        if (Automatic.TryGetValue(id, out var before) && before.Region == region) return;
         Forget(id);
-        Automatic[id] = new Entry { Natural = natural, Region = region };
+        Automatic[id] = new Entry { Region = region };
         Adjust(Regional, region, 1);
-        if (natural) { _natural++; Adjust(NaturalRegional, region, 1); }
     }
     internal static void Moved(Actor actor)
     {
@@ -55,18 +53,15 @@ internal static class MclslBeastPopulationIndex
         int region = MclslBeastSurfaceIndex.Region(actor.current_tile);
         if (region == entry.Region) return;
         Adjust(Regional, entry.Region, -1); Adjust(Regional, region, 1);
-        if (entry.Natural) { Adjust(NaturalRegional, entry.Region, -1); Adjust(NaturalRegional, region, 1); }
         entry.Region = region; Automatic[actor.data.id] = entry;
     }
-    internal static int Count(bool naturalOnly, int region)
-        => region < 0 ? naturalOnly ? _natural : Automatic.Count
-            : (naturalOnly ? NaturalRegional : Regional).GetValueOrDefault(region);
+    internal static int Count(int region)
+        => region < 0 ? Automatic.Count : Regional.GetValueOrDefault(region);
     internal static void PublishProgress() => MclslBeastWorld.State.Unlocked = Math.Max(MclslBeastWorld.State.Unlocked, _unlocked);
     internal static void Forget(long id)
     {
         if (!Automatic.TryGetValue(id, out var entry)) return;
         Automatic.Remove(id); Adjust(Regional, entry.Region, -1);
-        if (entry.Natural) { _natural--; Adjust(NaturalRegional, entry.Region, -1); }
     }
     // 惰性自校验：分摊式抽样，避免每帧全量拷贝字典键。
     // 只有走完一整轮（游标到末尾）时才重建一次快照，其余时间每帧只做 budget 次查询。
@@ -89,5 +84,5 @@ internal static class MclslBeastPopulationIndex
             if (!MclslActorRegistry.TryPeekAlive(id, out _)) Forget(id);
         }
     }
-    internal static void Clear() { Automatic.Clear(); Regional.Clear(); NaturalRegional.Clear(); _natural = 0; _unlocked = 1; ValidateQueue.Clear(); _validateCursor = 0; }
+    internal static void Clear() { Automatic.Clear(); Regional.Clear(); _unlocked = 1; ValidateQueue.Clear(); _validateCursor = 0; }
 }

@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "S001",
+      "name": "金芒剑气",
+      "path": "GameResources/ui/Spells/S001.png",
+      "sha256": "68fe4452ca669de2cbf9ac071102f0bb5ec6b1d26d34c6b3f0644a64c76be397",
+      "previousSha256": "22901bad8bca35ffafe5afd9d451a4f3400a84f62c59e1fefe67be268f2237c1",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S001.png",
+      "effectReferenceSha256": "b77379d396a4e4cc27cac977052d1c81f9e3a989035b46779d56cdac284dc7a7",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S001.png",
+        "sourceSha256": "0273d9a451201cb0ced92756fcb51af5443aa506ef29b7aa54ffd6722ccfe8b4",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S001 金芒剑气. upright gold sword of qi, ivory core, amber blade and short golden side flourishes.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S002",
+      "name": "青木回春",
+      "path": "GameResources/ui/Spells/S002.png",
+      "sha256": "c75c908fc99b7a27444fa26eb4ff15bb13b2117fa210d608deeab39b729f353b",
+      "previousSha256": "18a6a5f089d4ae6df4685716ee2fe94b73f41b3c9a53996614c623eaf24aab34",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S002.png",
+      "effectReferenceSha256": "42448d165b957141813b095309da54ca2bc68ea799e6632c4860b41e6bab8db3",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S002.png",
+        "sourceSha256": "b0e61627b57f83e1b7a28728889e904c715a131a8f717b4a0798317a9ec3eeed",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S002 青木回春. pale jade green tightly curled leafy rosette with a luminous leaf bud at center.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S003",
+      "name": "水镜护身",
+      "path": "GameResources/ui/Spells/S003.png",
+      "sha256": "81d5726e77fc64ca88a0aba377cf2f7324fedb984762c078a10a098d487f2043",
+      "previousSha256": "ecd99222dd7c93a738106ddcf6b3337283fdf189e5700b8c54bcd8a66f1d2ffb",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S003.png",
+      "effectReferenceSha256": "be5107ebc715121bc3a77099a75ff75952d4f71434cfd783cebae6cc8c0713b5",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S003.png",
+        "sourceSha256": "5666825d8b9e10c44e938370b142d9897500b711767c299ff64bdddcbea24a0d",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S003 水镜护身. round silver-blue water mirror, concentric ripples and a few droplets.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S004",
+      "name": "赤焰术",
+      "path": "GameResources/ui/Spells/S004.png",
+      "sha256": "fbab8c656e6c75ff0c1a742d082df09fcc66246f588d630457c9f488379aa101",
+      "previousSha256": "d456c9df727a9d5995baeb4cf2af06e6a55d6ca34d8dfd1cd2a03ee0bbcb2a60",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S004.png",
+      "effectReferenceSha256": "e90eda1466539d40555bb4a7f443445f4f89fecad793bf9bb6b63308f7197299",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S004.png",
+        "sourceSha256": "4b8d110436f57839bf979ed1429692594cdd280fe92a25068555606f4b1df68f",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S004 赤焰术. orange-red coiled fireball with yellow-white core and flame tail.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S005",
+      "name": "厚土壁",
+      "path": "GameResources/ui/Spells/S005.png",
+      "sha256": "99042c75f32c45a92dca9053658abeb6ee35916338c960683597f47321277ed2",
+      "previousSha256": "ce80e8c266be98a905194da68b098e161d151e99c71936341b0dfeaf66651817",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S005.png",
+      "effectReferenceSha256": "e3cd27cc5528a1480e1f661641894f43e8b944cc3d17c06e027d9e2c8f0a1ad9",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S005.png",
+        "sourceSha256": "4131ff4effe25326d6709b63dff3f9cccf7bcd51bca5c0700a5d0d968616bf04",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S005 厚土壁. ochre curved stone wall ring, uneven stone blocks with gold engraved lines.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S006",
+      "name": "御风行",
+      "path": "GameResources/ui/Spells/S006.png",
+      "sha256": "f859dea05d8fd1d1bc5986db513c11a399905bf8f29ca3b8a6b9d0dc1d946315",
+      "previousSha256": "64e09e14ff242f8bc6acaadee775750f776abde22c697c8c0ecd43b764d3f1dd",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S006.png",
+      "effectReferenceSha256": "446d9c2ed73034cf8e87343535d3c725f0a2d091c1c2988719d1b628d6ed5b6c",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S006.png",
+        "sourceSha256": "3b4df90497198757a43636bbec0d119494a9e73d2cb54ecf843bfa4336f0ec1c",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S006 御风行. two pale mint-white wind ribbons curving around an OPEN center, delicate flowing ends.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S007",
+      "name": "雷引诀",
+      "path": "GameResources/ui/Spells/S007.png",
+      "sha256": "e58e7e26c2c2a794bdc34cce642048ee0f83cff30d5fb0b8314f4d870ce70aa4",
+      "previousSha256": "73fa787c2656f86f798446497a6420d10ffb5cb7798ab4affc128e18c19f4f4c",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S007.png",
+      "effectReferenceSha256": "30e2a9e434d8be9bb7aca8b37ecdc05042fa11361d0e4fd8bdb5567d9afbac8c",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S007.png",
+        "sourceSha256": "cc841898894f14885458a590074697b66957c14b91e9967c73e1f73f9ebe1b6c",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S007 雷引诀. electric blue lightning striking down through a diamond rune and small ground ring.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S008",
+      "name": "玄阴缚",
+      "path": "GameResources/ui/Spells/S008.png",
+      "sha256": "dbfe08bb40a74d6a76fe1b50383e919e4eb30d44fb158e502340f87953e342ad",
+      "previousSha256": "87267b0e32aa841573a4b643fefe42551213edbd792853b2764655b49986cd23",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S008.png",
+      "effectReferenceSha256": "b00ad47770f2ff906781398922492b1a2673f01b91b5f5b5a563e4b29803fe65",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S008.png",
+        "sourceSha256": "39b4b750abe909ce3c82963e26bac21f52f3853180df2ecf1196ae79cebd7b00",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S008 玄阴缚. dark violet binding sigil, four hooked curling shadow arms around a purple central pearl.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S009",
+      "name": "阳华破障",
+      "path": "GameResources/ui/Spells/S009.png",
+      "sha256": "9bdf728cbf6bd22268d195f42b0baf8d66fadc6b680d4d5e39d92e1332672862",
+      "previousSha256": "60c384c49d3fc98c3a1233cb788a8eb0a3b9c7616485970a7fc7c81650749bb7",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S009.png",
+      "effectReferenceSha256": "30b575336d40f7021b261b98dea42ebcf3be1c069a5953e0e1174949bfe89f77",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S009.png",
+        "sourceSha256": "a88cde146d0e3fc817584a686289b7065da0b68843ad63e196350a666eb99bad",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S009 阳华破障. gold-white radiant sun orb with four cardinal ray points and thin circular rune.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S010",
+      "name": "五行轮转",
+      "path": "GameResources/ui/Spells/S010.png",
+      "sha256": "0da05d7ecce234be386b6a7930bfe2952dc6b7f7dae7b7f77ad8738936bb5ae4",
+      "previousSha256": "8f9b3c44490934a105d09d4a3f3a21dc673080a927b9e392dcd1bc6d89ba3f3e",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S010.png",
+      "effectReferenceSha256": "2e7cecd075ae80f07bf849dfac9a1cc62e297330baa311103afb28e5128056ff",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S010.png",
+        "sourceSha256": "439d1f4f99faf347987fc5cbcf3f2bfd63c0cdcb570c796df8578bc771835eab",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S010 五行轮转. five-element wheel with red green blue gold silver orbs circulating around a dark center.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S011",
+      "name": "咫尺遁光",
+      "path": "GameResources/ui/Spells/S011.png",
+      "sha256": "8af3e4039f7c0dfea2b49b15af8cc500803f949e269263b4e0a993ced3d39e78",
+      "previousSha256": "640bff06141e9b464ad52c780885e7a9a10c0c4214ee09729a0008327456b4d3",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S011.png",
+      "effectReferenceSha256": "acf88338cc8ebd0c41b25e0b72d9fe58255be82ec968f0f217b5cd5a557ec38b",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S011.png",
+        "sourceSha256": "730ad4298639e29a4357734f5e6b7d1b0fb8ebb193e23d638a22b766c22f6a5c",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S011 咫尺遁光. violet diamond-shaped space portal with brilliant white vertical slit and small side echoes.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S012",
+      "name": "万象归一",
+      "path": "GameResources/ui/Spells/S012.png",
+      "sha256": "082ff47356d5f526e690eed0757333d5fb81802c9b2da6d28bfecfc1f569940d",
+      "previousSha256": "26311d2bf633b4f403af097819e28d2f9f0bd4169dd174576416bbbf47e79654",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S012.png",
+      "effectReferenceSha256": "c1442202e0bb39fd5ce109c01a32e3c3f175f3b7332fc949881aafc53c9dbb99",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S012.png",
+        "sourceSha256": "b3c82ec70f6b7b13e23954a95a7df4bd680c606b68a6ece73c8df1d15fe6603b",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S012 万象归一. ivory gold and silver-blue swirling space vortex with four subtle star tips.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S013",
+      "name": "霜针诀",
+      "path": "GameResources/ui/Spells/S013.png",
+      "sha256": "63c065a0e58090ffc801bcf90ecf91897674722a229b0aca4e7f99d979d9a89d",
+      "previousSha256": "66a6c863ca3ce4482f3c09bd926351312279975df381d800dc92ee5ac9971fd3",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S013.png",
+      "effectReferenceSha256": "979b5137a531744ecd19fe30d8d2a09878ade8bb5b8682b8f2ae8da5861985ca",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S013.png",
+        "sourceSha256": "18d7d0907995548bfec0231361216b044d0c3311eb30dc50fed00e16adbade00",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S013 霜针诀. ice-blue crystalline needle cluster and angular snowflake burst.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S014",
+      "name": "纳灵术",
+      "path": "GameResources/ui/Spells/S014.png",
+      "sha256": "b0edfe5b48b989e8c36b21660fdf7091a395ca11f25b0c1bcf39916951ecdcf5",
+      "previousSha256": "673afc621cd7f1ddde01346c2959e254cc9d667ad73f9456d588d915db49a044",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S014.png",
+      "effectReferenceSha256": "d8fef6b139fed91ac4dc50ece8f2b0a94f6f59d5c8fe462edfefdc0549a8262c",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S014.png",
+        "sourceSha256": "d7609dc6ab23517b8bc5fe543ea8c9636ae2b7c5d7e9745914a9cfa78e34b75a",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S014 纳灵术. sage green inward spiral with pale luminous center and discrete incoming motes.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S015",
+      "name": "巽风刃",
+      "path": "GameResources/ui/Spells/S015.png",
+      "sha256": "be105f0968c31780bee1d14cc1a9649a460ad895c6c4e9cb87b666c98aacff1f",
+      "previousSha256": "8eda41f0a95ebc0b33b11ddec9eeb1f2c1f3d1e335d9328f26861424ea5f6967",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S015.png",
+      "effectReferenceSha256": "a97d5f929110362d322e3b1bc6a6e09970bbd5d7e41a40291cf3ab9724907890",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S015.png",
+        "sourceSha256": "9a5c6e0d0bd701970ca9f1cfa89c3edd3afe409fc83cdfbcc94f4bff0a06ed56",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S015 巽风刃. mint white sharp crescent wind blade with trailing curved ribbons.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S016",
+      "name": "青藤缚",
+      "path": "GameResources/ui/Spells/S016.png",
+      "sha256": "151fb314c02c94a1d49b2a2db6c6835a6cf9dfeb225028a2a5bb1a7d68fd105d",
+      "previousSha256": "5fb1e29ca9160cab816f6eb8fe6c09f1f15e228a75bee8a06209114431fdcf14",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S016.png",
+      "effectReferenceSha256": "337cdd8252bd47a617a10febb9d36bb3f1765d73b1191cb8b61b1ff6aca17a86",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S016.png",
+        "sourceSha256": "6e29e087446e5a0c630e4017ce384103ab8cc574aa71261e27c537ca3b72c4fc",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S016 青藤缚. green entangling vines spiraling around a central jade rune, bright thorny leaf tips.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S017",
+      "name": "紫霄破甲",
+      "path": "GameResources/ui/Spells/S017.png",
+      "sha256": "5535c5625dfd4a1eaae1c45167dc61e42c3bef3a8e03aef2971c2ac63c084cad",
+      "previousSha256": "446d8d791d5601d2c519a84797fdc349fdebab0ed08f6c9327b0a47d2cccae1f",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S017.png",
+      "effectReferenceSha256": "5ce7c18c45388862a895bca336aaae6a5aae3a32da077a12dc0c7c3607adcfb2",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S017.png",
+        "sourceSha256": "e2252fe9827b95062d175c88fdf1b759bbadb00280b67cebf003fda203a3f7be",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S017 紫霄破甲. violet lightning diamond rune with pointed purple bolts and fractured golden sparks.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S018",
+      "name": "灵泉归元",
+      "path": "GameResources/ui/Spells/S018.png",
+      "sha256": "b2bda727411ca4ff2936f0544e4779bed87038bc14e488480cd00fd39c2aed39",
+      "previousSha256": "52b24664237c368dc21bec2a35bc95bd5913a7b7c98e6929209c0b3ebbb1eff3",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S018.png",
+      "effectReferenceSha256": "f9ccc15da1dfaaa9c0906c72df739e4693e5ab7b2f2ed53fea0a0d24f3fe3584",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S018.png",
+        "sourceSha256": "23a015566a78403f26ab20db5573e6e84259e97942bc8747e3f38573a51f69ef",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S018 灵泉归元. pale aqua spirit spring fountain rising from concentric shallow water rings, clear drops.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S019",
+      "name": "离火轮",
+      "path": "GameResources/ui/Spells/S019.png",
+      "sha256": "0198c630ab2ba713555777cc8cf1a63eab53de5e95cd94fcf905d7bf117d631c",
+      "previousSha256": "c8b82e1b7be12abd7d8c063ea9ea4cc0fc6490f9a8891c75e76ed95464a1f9fb",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S019.png",
+      "effectReferenceSha256": "fa7bafe3f382125631b7fdf7e648eebe8c736d2844aeacd70afb0973a1e5e2ee",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S019.png",
+        "sourceSha256": "36397417458461e7ce563d68265dbb02c66f0ed175a326d56726c2c73de990e6",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S019 离火轮. orange red rotating ring of pointed flame blades around an open dark center.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S020",
+      "name": "山岳护体",
+      "path": "GameResources/ui/Spells/S020.png",
+      "sha256": "262cfce138e940b4467f6bc49eabad9c85d5d649306a927c9490194f48a6f48f",
+      "previousSha256": "cc9f5a0938be83513303ff0bf2ac4ff06bf3830525870a605ff43ce7a7f8ee80",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S020.png",
+      "effectReferenceSha256": "ce1700e6942ddaaf96994cf3e047d86c216699ec691da89ee8788b4b991061d1",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S020.png",
+        "sourceSha256": "7ddd246cae4c9873843b1468977513c041a10ae1231e27ae585e02bde35e9612",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S020 山岳护体. ochre golden mountain peaks enclosed inside a rounded rock-light halo.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S021",
+      "name": "太阴摄魂",
+      "path": "GameResources/ui/Spells/S021.png",
+      "sha256": "7d78630969a1584a1f9ee9d0c77fd4f7c18329ae6ca9d0a346f505eb59488866",
+      "previousSha256": "ec73186e4ba3cb6ae327a143b36ddd40030f9124ce1a301d0ae6df2a3120e142",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S021.png",
+      "effectReferenceSha256": "a0ed2658c85c72aef6f19df8feac8683a868085b7d73e2c8161eaaa31a65dc6c",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S021.png",
+        "sourceSha256": "3e3286162386ea4a83ace90b1a125500cabb6beb9e54d94af11a4bf93dc8c618",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S021 太阴摄魂. dusky violet crescent moon and curling shadow vortex with pale lavender center.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S022",
+      "name": "星移剑阵",
+      "path": "GameResources/ui/Spells/S022.png",
+      "sha256": "3d0d3a5124767875678ebf04af6e9310342a0b0d07f3b7214dbd4702da4911ee",
+      "previousSha256": "85f7b230c15253339a11a417c1bda3b245ef92d48624b8e3243d61638940a8cc",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S022.png",
+      "effectReferenceSha256": "608ef60a634e6f856c0e026e372f9d266ec2cf0017043b32df0e42074e200f06",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S022.png",
+        "sourceSha256": "076fd48859f8e26f4d0e2b763effbd157fbfec8dc37247520ad7c6b03c647487",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S022 星移剑阵. silver-blue sword formation, slender upright swords orbiting a starry circular ring.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S023",
+      "name": "乾坤镇域",
+      "path": "GameResources/ui/Spells/S023.png",
+      "sha256": "6eace5aa065278847c844f6ce79625586e9a2b2e1561c4fe4390edbaf6f89381",
+      "previousSha256": "035be1a1a3773d3db7b088e6c1917c53f0deb6849ce294299920d37360e31047",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S023.png",
+      "effectReferenceSha256": "d826068363bb51507b8f1fc88aabe8e64fbef88aaa800bd6d00c4c54ac38be83",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S023.png",
+        "sourceSha256": "b677583beed77a9e8618b5eecfcfbb1beb991e3228a1ca83e8fc6913ee6c6b81",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S023 乾坤镇域. golden circular formation domain, concentric ground runes and upright luminous pillars.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S024",
+      "name": "五行化生",
+      "path": "GameResources/ui/Spells/S024.png",
+      "sha256": "d825f551cf6bbd68e6c199dc4702d9bddb2f4c4c4c82a30f0da36bfc7ffd72b5",
+      "previousSha256": "57ab82668b97d16cd7d64a2c4af465372c951bfad1eb2d8c52330e544ab4a26d",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S024.png",
+      "effectReferenceSha256": "24aee33ae45b7fec46d5a2eec2ad021c8a2eae3a79ff004e022fef6de307c483",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S024.png",
+        "sourceSha256": "b0cdda6fcf46bdf50e51a405d77225b9d2dc5f861ca968fb5358fe07e6d57d6a",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S024 五行化生. five colored elemental currents surrounding a WHITE GREEN four pointed life blossom.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S025",
+      "name": "万灵回天",
+      "path": "GameResources/ui/Spells/S025.png",
+      "sha256": "1bfb236e3d04c0dc19ca6d3d0359017a536dc773c9f0ef74b85deab45f4fa782",
+      "previousSha256": "9c18a717a8369c5423c531fbab5c54c73218d5557b856f1e50dbf1409c30bfc5",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S025.png",
+      "effectReferenceSha256": "09a537442bc03d86717f57df6db22ed900f240acee9eb5682b801b3122efd589",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S025.png",
+        "sourceSha256": "41b88d464f1090c315b73bea573b4bcd8a4f14043f7033446cea652af826fe1b",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S025 万灵回天. jade gold blooming lotus with luminous pale yellow center and ascending green leaves.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "S026",
+      "name": "太初寂光",
+      "path": "GameResources/ui/Spells/S026.png",
+      "sha256": "08dda292ffb459e6e8204a0230762204254c2b57077b9ec567859e587f4bec4b",
+      "previousSha256": "ff786a53f4a8bb8517bd34547dd3fc48af125e8018bff27ad801e391295d4951",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": "build/icon-upgrade/effect-references/S026.png",
+      "effectReferenceSha256": "32c31bb4c530d4610c6a16c774b33202309a2398cf202bb446e438842bce7e31",
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/S026.png",
+        "sourceSha256": "cd0bf1ed4b995ca5a8c07949b8c52ac5e984c4daf3cb06aed02af28f60386374",
+        "prompt": "Create ONE transparent-background 64x64 logical-pixel icon for a Chinese cultivation WorldBox mod. First reference is the ACTUAL spell animation's cast/travel/hit keyframes: preserve their specific palette, recognizable main silhouette and magical material; simplify them into a single readable emblem, NOT three frames. Second reference is an existing career skill icon: use its crisp small pixel clusters, stepped edges, limited shaded colors and restrained highlights ONLY, do not borrow its sword motif or cyan palette. Design at true 64x64 pixel resolution then upscale nearest-neighbor for delivery. Subject fills central 80%, clear transparent margin. No frame, badge, lettering, labels, scene, checkerboard, soft fog, universal gold ornament, or added unrelated objects. Alpha background genuinely transparent. Spell identity: S026 太初寂光. ivory white primordial starburst, long fine golden rays and bright central orb.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "MclslPathChangSheng",
+      "name": "长生道种",
+      "path": "GameResources/trait/MclslPathChangSheng.png",
+      "sha256": "567fd1ef970fd7351cb36e77d3fe033d584c703a12000a383d84296484e0601c",
+      "previousSha256": "55150c94edee00c5e333210c4338ded9356321319bc6850ca1312cbb8a476b91",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": null,
+      "effectReferenceSha256": null,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/MclslPathChangSheng.png",
+        "sourceSha256": "c2a1aad8788c9c4407cb111b00adced53a2534594ec2196338dc4239318e5ebe",
+        "prompt": "Create ONE transparent 64x64 logical-pixel trait icon for Chinese cultivation WorldBox. First reference is this EXACT trait's old icon: preserve its distinctive theme and color identity, simplify into a clear emblem. Second reference is career skill pixel rendering only. 长生道种: a bright jade life seed sprouting into two curling green shoots and a small golden-green immortal lotus; enclosing subtle circular life current; keep original green/gold eternal-life identity. Crisp small pixel clusters, stepped outlines, 4-tone shading, restrained small highlights, no soft fog. Centered central80% canvas, real transparent background, no text or border. Render at64px conceptual resolution then nearest-neighbor upscale. No sword borrowed from style reference.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "MclslPathHeDao",
+      "name": "合道圣胎",
+      "path": "GameResources/trait/MclslPathHeDao.png",
+      "sha256": "a1453b9ab32ef9c5b598679e170fdad324d110186e94cfef8ee4269e4a8d195c",
+      "previousSha256": "6160d4e7fdef0b7ad73fd1aa10458db7fa7e7e0db83785681ef02b09085f2bf5",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": null,
+      "effectReferenceSha256": null,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/MclslPathHeDao.png",
+        "sourceSha256": "ecc7f2c74bbb4211e77eeab9eff85441649139c6e24fca632179b4e0cb5592dd",
+        "prompt": "Create ONE transparent 64x64 logical-pixel trait icon for Chinese cultivation WorldBox. First reference is this EXACT trait's old icon: preserve its distinctive theme and color identity, simplify into a clear emblem. Second reference is career skill pixel rendering only. 合道圣胎: an ivory-white and charcoal yin-yang dao embryo within a thin interwoven jade-gold circular rune; two balanced opposing currents unite at the core; maintain original white/black gold identity. Crisp small pixel clusters, stepped outlines, 4-tone shading, restrained small highlights, no soft fog. Centered central80% canvas, real transparent background, no text or border. Render at64px conceptual resolution then nearest-neighbor upscale. No sword borrowed from style reference.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "MclslPathHuaShen",
+      "name": "神化天资",
+      "path": "GameResources/trait/MclslPathHuaShen.png",
+      "sha256": "faf56420ac4699deed10ccd37273363de55b51e75b58a120c5044066a8e44995",
+      "previousSha256": "088f0c241fd48276dda35fe77a620be1568c1da17cc1eaaecca43c573b6168e6",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": null,
+      "effectReferenceSha256": null,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/MclslPathHuaShen.png",
+        "sourceSha256": "4d3393fa1efd3a4b0290fe9d6c10ec1fb951a84fc042379110ce11afd82aa35b",
+        "prompt": "Create ONE transparent 64x64 logical-pixel trait icon for Chinese cultivation WorldBox. First reference is this EXACT trait's old icon: preserve its distinctive theme and color identity, simplify into a clear emblem. Second reference is career skill pixel rendering only. 神化天资: a tiny luminous violet-white primordial spirit awakening inside a violet and amber lotus aura; upright central soul flame, radiant crown point; keep original purple/gold spiritual awakening identity. Crisp small pixel clusters, stepped outlines, 4-tone shading, restrained small highlights, no soft fog. Centered central80% canvas, real transparent background, no text or border. Render at64px conceptual resolution then nearest-neighbor upscale. No sword borrowed from style reference.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    },
+    {
+      "id": "MclslTiandiChuiqing",
+      "name": "天地垂青",
+      "path": "GameResources/trait/MclslTiandiChuiqing.png",
+      "sha256": "13665b65a93b3a469670fdcbc62268ae27ac69eac16981d93d20715ceae37125",
+      "previousSha256": "6d07f79d5af1fdfa78460b9b08053cf910e3deb5460bb76c394df74171edc5fc",
+      "width": 64,
+      "height": 64,
+      "status": "offline-reviewed",
+      "effectReference": null,
+      "effectReferenceSha256": null,
+      "provenance": {
+        "tool": "built-in-imagegen",
+        "source": "build/icon-upgrade/imagegen-originals/MclslTiandiChuiqing.png",
+        "sourceSha256": "df1247c3af08133ca053453ed0d651251b45fa869ae2f9d22f227dd91f8a3557",
+        "prompt": "Create ONE transparent 64x64 logical-pixel trait icon for Chinese cultivation WorldBox. First reference is this EXACT trait's old icon: preserve its distinctive theme and color identity, simplify into a clear emblem. Second reference is career skill pixel rendering only. 天地垂青: golden celestial light descends from a small auspicious cloud onto jade mountain peaks; luminous central pillar, a subtle circular heavenly blessing rune; keep original gold/jade meaning. Crisp small pixel clusters, stepped outlines, 4-tone shading, restrained small highlights, no soft fog. Centered central80% canvas, real transparent background, no text or border. Render at64px conceptual resolution then nearest-neighbor upscale. No sword borrowed from style reference.",
+        "processing": "alpha >=128; tight crop; nearest-neighbor fit 52x52; centered 64x64; 64-color quantization"
+      },
+      "gameVerified": false
+    }
+  ]
+}

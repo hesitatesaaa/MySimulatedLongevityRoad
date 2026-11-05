@@ -16,6 +16,17 @@ internal static class MclslPerformanceProbe
     private const int RecentLaneSamples = 1024;
     private const int FrameHistoryCapacity = 4096;
     private const int ContextRefreshFrames = 60;
+    private struct SlowOperation
+    {
+        internal string Lane;
+        internal int Frame, Year, AnnualYear, Stage, Step, Flags, Queue;
+        internal long ActorId, Ticks;
+    }
+    private static readonly SlowOperation[] SlowOperations = new SlowOperation[128];
+    private static int _slowCursor, _slowCount, _maximumAnnualLag;
+    private static int _sampleStartYear, _lastCompletedCycleYear;
+    private static long _annualCompletions, _nonIncreasingCompletions;
+    private static readonly long[] AnnualLagHistogram = new long[256];
 
     private sealed class SpeedFrames
     {
@@ -97,6 +108,7 @@ internal static class MclslPerformanceProbe
         internal int DiagnosticCache;
         internal int LatestRequestedYear;
         internal int OldestPendingYear;
+        internal int CompletedYear, ActiveYear, AnnualLag, Ready, Waiting, TransitionSeed, TransitionActors;
         internal string Era;
         internal string WorldStage;
         internal string TopLane;
@@ -161,8 +173,6 @@ internal static class MclslPerformanceProbe
     private static long _spriteReuses;
     private static long _spriteMainCalls;
     private static long _spriteMainCustom;
-    private static long _beastSpawnScans;
-    private static long _beastSpawnPrepared;
     private static long _beastSurfaceClassified;
     private static long _beastSurfaceIncremental;
     private static long _changeQueueDrained;
@@ -178,6 +188,12 @@ internal static class MclslPerformanceProbe
         QuantileSamples.Clear(); _quantileCursor = 0; _frameP95 = _frameP99 = 0;
         Array.Clear(FrameMilliseconds, 0, FrameMilliseconds.Length);
         Array.Clear(FrameContexts, 0, FrameContexts.Length);
+        Array.Clear(SlowOperations, 0, SlowOperations.Length);
+        Array.Clear(AnnualLagHistogram, 0, AnnualLagHistogram.Length);
+        _slowCursor = _slowCount = _maximumAnnualLag = 0;
+        _sampleStartYear = MclslRuntime.CurrentYear();
+        _lastCompletedCycleYear = 0;
+        _annualCompletions = _nonIncreasingCompletions = 0;
         _sampleStartFrame = Time.frameCount;
         _sampleStartGc0 = GC.CollectionCount(0);
         _sampleStartGc1 = GC.CollectionCount(1);
@@ -215,8 +231,6 @@ internal static class MclslPerformanceProbe
         _spriteReuses = 0L;
         _spriteMainCalls = 0L;
         _spriteMainCustom = 0L;
-        _beastSpawnScans = 0L;
-        _beastSpawnPrepared = 0L;
         _beastSurfaceClassified = 0L;
         _beastSurfaceIncremental = 0L;
         _changeQueueDrained = 0L;
@@ -289,16 +303,6 @@ internal static class MclslPerformanceProbe
         if (Enabled) _spriteMainCustom++;
     }
 
-    internal static void RecordBeastSpawnScan(int candidates)
-    {
-        if (Enabled && candidates > 0) _beastSpawnScans += candidates;
-    }
-
-    internal static void RecordBeastSpawnPrepared(int made)
-    {
-        if (Enabled && made > 0) _beastSpawnPrepared += made;
-    }
-
     internal static void RecordBeastSurfaceClassified(int tiles, bool incremental)
     {
         if (!Enabled || tiles <= 0) return;
@@ -323,6 +327,14 @@ internal static class MclslPerformanceProbe
         _archiveBackupBytes = Math.Max(0, backupBytes);
     }
 
+    internal static void RecordAnnualCompletion(int year)
+    {
+        if (!Enabled) return;
+        _annualCompletions++;
+        if (year <= _lastCompletedCycleYear) _nonIncreasingCompletions++;
+        _lastCompletedCycleYear = Math.Max(_lastCompletedCycleYear, year);
+    }
+
     internal static long Begin()
     {
         if (!Enabled) return 0;
@@ -339,7 +351,8 @@ internal static class MclslPerformanceProbe
         return token;
     }
 
-    internal static void End(string lane, long started, bool acrossFrames = false)
+    internal static void End(string lane, long started, bool acrossFrames = false,
+        long actorId = 0, int annualYear = 0, int stage = 0, int step = 0, int flags = 0)
     {
         if (!Enabled || started == 0L || string.IsNullOrWhiteSpace(lane)) return;
         if (!Samples.TryGetValue(lane, out Sample sample))
@@ -362,6 +375,17 @@ internal static class MclslPerformanceProbe
         }
         long elapsed = Math.Max(0L, Stopwatch.GetTimestamp() - started);
         sample.Add(elapsed);
+        if (!acrossFrames && elapsed >= Stopwatch.Frequency * 8 / 1000)
+        {
+            SlowOperations[_slowCursor] = new SlowOperation
+            {
+                Lane = lane, Frame = Time.frameCount, Year = MclslRuntime.CurrentYear(),
+                ActorId = actorId, AnnualYear = annualYear, Stage = stage, Step = step,
+                Flags = flags, Queue = MclslRuntimeChanges.Count, Ticks = elapsed
+            };
+            _slowCursor = (_slowCursor + 1) % SlowOperations.Length;
+            _slowCount = Math.Min(_slowCount + 1, SlowOperations.Length);
+        }
         if (string.Equals(lane, "模组每帧CPU", StringComparison.Ordinal))
             _currentFrameModTicks += elapsed;
     }
@@ -434,6 +458,13 @@ internal static class MclslPerformanceProbe
         }
 
         int year = MclslRuntime.CurrentYear();
+        MclslAnnualBatchState annualBatch = MclslWorldRunRepository.Current.AnnualBatch;
+        int annualLag = annualBatch.LastCompletedYear > 0 ? Math.Max(0, year - annualBatch.LastCompletedYear) : -1;
+        if (annualLag >= 0)
+        {
+            _maximumAnnualLag = Math.Max(_maximumAnnualLag, annualLag);
+            AnnualLagHistogram[Math.Min(AnnualLagHistogram.Length - 1, annualLag)]++;
+        }
         string era = ResolveEra(year);
         int population = ReadPopulationCount();
         FrameContexts[_frameHistoryCursor] = new FrameContext
@@ -459,6 +490,11 @@ internal static class MclslPerformanceProbe
             DiagnosticCache = MclslDiagnostics.CacheCount,
             LatestRequestedYear = _latestRequestedYear,
             OldestPendingYear = _oldestPendingYear,
+            CompletedYear = annualBatch.LastCompletedYear, ActiveYear = annualBatch.ActiveYear,
+            AnnualLag = annualLag, Ready = MclslScheduler.AnnualReadyCount,
+            Waiting = MclslScheduler.AnnualWaitingCount,
+            TransitionSeed = MclslWorldEpochSystem.PendingTransitionSeedCount,
+            TransitionActors = MclslWorldEpochSystem.PendingTransitionActorCount,
             Era = era,
             WorldStage = MclslAnnualWorldRuntimeLane.CurrentStageName,
             TopLane = topLane,
@@ -505,6 +541,19 @@ internal static class MclslPerformanceProbe
             .Append("；年度世界阶段 ").Append(MclslAnnualWorldRuntimeLane.CurrentStageName)
             .Append("；天玄镜挂单 ").Append(MclslTianxuanMarket.ActiveListingCount).Append('\n')
             ;
+        MclslAnnualBatchState annualBatch = MclslWorldRunRepository.Current.AnnualBatch;
+        Buffer.Append("世界年/活动年/请求年/完成年 ").Append(MclslRuntime.CurrentYear()).Append('/')
+            .Append(annualBatch.ActiveYear).Append('/').Append(annualBatch.LatestRequestedYear).Append('/')
+            .Append(annualBatch.LastCompletedYear).Append("；实际年差 当前/最大/P95 ")
+            .Append(annualBatch.LastCompletedYear > 0 ? Math.Max(0, MclslRuntime.CurrentYear() - annualBatch.LastCompletedYear).ToString() : "尚无完成游标").Append('/')
+            .Append(_maximumAnnualLag).Append('/').Append(AnnualLagPercentile())
+            .Append("；转换seed/角色 ").Append(MclslWorldEpochSystem.PendingTransitionSeedCount).Append('/')
+            .Append(MclslWorldEpochSystem.PendingTransitionActorCount).Append('\n');
+        Buffer.Append("计时口径：主循环区间墙钟耗时，父项包含子项；不等于全部模组CPU。外部回调、GPU、GC停顿需另行采样。完成游标为0的样本不计入年差分位。\n")
+            .Append("加载程序集MVID：").Append(typeof(MclslPerformanceProbe).Assembly.ManifestModule.ModuleVersionId).Append('\n');
+        Buffer.Append("采样世界起止年 ").Append(_sampleStartYear).Append('/').Append(MclslRuntime.CurrentYear())
+            .Append("；年度完成次数 ").Append(_annualCompletions).Append("；完成年份不递增次数 ")
+            .Append(_nonIncreasingCompletions).Append("；最高完成年份 ").Append(_lastCompletedCycleYear).Append('\n');
         Buffer.Append("天玄镜已检查挂单 ").Append(_marketOffersInspected)
             .Append("；未完成采购批次 ").Append(MclslTianxuanMarket.PendingPurchaseBatchCount).Append('\n');
         Buffer.Append("光环可见候选/合资格/实例/活动 ")
@@ -545,7 +594,6 @@ internal static class MclslPerformanceProbe
             .Append(_annualDemandNeeds).Append('/').Append(_annualDemandReused)
             .Append("\n玄黄精灵解析 计算/复用 ").Append(_spriteComputes).Append('/').Append(_spriteReuses)
             .Append("；主贴图调用/自定义 ").Append(_spriteMainCalls).Append('/').Append(_spriteMainCustom)
-            .Append("；灵兽生成候选扫描/已生成 ").Append(_beastSpawnScans).Append('/').Append(_beastSpawnPrepared)
             .Append("；地表索引处理(增量) ").Append(_beastSurfaceClassified).Append('(').Append(_beastSurfaceIncremental).Append(')')
             .Append("；变化出队/同键合并 ").Append(_changeQueueDrained).Append('/').Append(_changeQueueMerged)
             .Append("\n年度等待队列 就绪/等待/最旧年/最新年 ")
@@ -628,7 +676,35 @@ internal static class MclslPerformanceProbe
                 .Append(ToMilliseconds(Percentile(sample, 0.99)).ToString("F2")).Append(" ms\n");
         }
         AppendWorstFrames();
+        AppendSlowOperations();
         return Buffer.ToString();
+    }
+
+    private static string AnnualLagPercentile()
+    {
+        long total = 0, seen = 0;
+        foreach (long count in AnnualLagHistogram) total += count;
+        if (total == 0) return "无样本";
+        long target = (long)Math.Ceiling(total * 0.95);
+        for (int i = 0; i < AnnualLagHistogram.Length; i++)
+        {
+            seen += AnnualLagHistogram[i];
+            if (seen >= target) return i == AnnualLagHistogram.Length - 1 ? ">=255" : i.ToString();
+        }
+        return "无样本";
+    }
+
+    private static void AppendSlowOperations()
+    {
+        Buffer.Append("\n最近慢操作（>=8ms，最多128条，墙钟含子调用；无actor的项为聚合或未附上下文）\n");
+        for (int i = 0; i < _slowCount; i++)
+        {
+            SlowOperation item = SlowOperations[(_slowCursor - _slowCount + i + SlowOperations.Length) % SlowOperations.Length];
+            Buffer.Append(item.Frame).Append(" year=").Append(item.Year).Append(" actor=").Append(item.ActorId)
+                .Append(" annual=").Append(item.AnnualYear).Append(" stage/step=").Append(item.Stage).Append('/')
+                .Append(item.Step).Append(" flags=").Append(item.Flags).Append(" queue=").Append(item.Queue)
+                .Append(' ').Append(item.Lane).Append(' ').Append(ToMilliseconds(item.Ticks).ToString("F2")).Append("ms\n");
+        }
     }
 
     private static void AppendLaneTable(List<KeyValuePair<string, Sample>> ranked, bool useFramePeak)
@@ -674,6 +750,9 @@ internal static class MclslPerformanceProbe
                 .Append(" protect=").Append(sample.BackpressureFactor.ToString("F2")).Append('/')
                 .Append(sample.Population).Append(' ').Append(sample.Cultivators).Append('/')
                 .Append(sample.AnnualQueue).Append(' ').Append(sample.AnnualStates).Append(" gap=").Append(yearGap).Append('/')
+                .Append("completed=").Append(sample.CompletedYear).Append(" active=").Append(sample.ActiveYear)
+                .Append(" actualLag=").Append(sample.AnnualLag).Append(" ready/waiting=").Append(sample.Ready).Append('/').Append(sample.Waiting)
+                .Append(" seed/actors=").Append(sample.TransitionSeed).Append('/').Append(sample.TransitionActors).Append('/')
                 .Append("changes=").Append(sample.ChangeQueue).Append(" writes=").Append(sample.InventoryWrites)
                 .Append(" bags=").Append(sample.InventoryCache).Append(" ranks=").Append(sample.RankCache)
                 .Append(" projections=").Append(sample.ProjectionCache)

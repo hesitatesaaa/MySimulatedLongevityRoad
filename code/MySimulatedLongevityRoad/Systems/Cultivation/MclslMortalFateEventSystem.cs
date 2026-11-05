@@ -22,7 +22,7 @@ internal static class MclslMortalFateEventSystem
         if (!MclslActorAccessor.Alive(actor) || !MclslEligibility.CanCultivate(actor)) return;
         if (MclslActorAccessor.IsCultivator(actor)) return;
 
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age < MinAge || age > MaxAge) return;
 
         EnsureYear(year);
@@ -102,12 +102,6 @@ internal static class MclslMortalFateEventSystem
     {
         try { return actor?.city != null; }
         catch { return false; }
-    }
-
-    private static int SafeAgeYear(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
     }
 
     private static int PositiveHash(string value)

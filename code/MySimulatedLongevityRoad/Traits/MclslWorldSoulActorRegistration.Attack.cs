@@ -129,15 +129,9 @@ internal static partial class MclslWorldSoulActorRegistration
 
     private static int AttackPulseDamage(Actor actor)
     {
-        float damage = GetStatSafe(actor, "damage");
+        float damage = MclslActorAccessor.StatValue(actor, "damage");
         int quality = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.WorldSoulEntityQuality, 3);
         int pulse = damage > 0f ? Mathf.RoundToInt(damage * 0.08f) : 800 + quality * 260;
         return Math.Clamp(pulse, 450, 4500);
-    }
-
-    private static float GetStatSafe(Actor actor, string statId)
-    {
-        try { return actor?.stats == null ? 0f : Math.Max(0f, actor.stats[statId]); }
-        catch { return 0f; }
     }
 }

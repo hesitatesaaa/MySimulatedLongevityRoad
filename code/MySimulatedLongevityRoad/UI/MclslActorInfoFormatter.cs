@@ -27,10 +27,11 @@ internal static class MclslActorInfoFormatter
         AppendProfession(b, actor);
         MclslFamilySystem.Observe(actor);
         string family = MclslFamilySystem.FamilyOf(actor)?.Name;
-        string currentSect = MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear());
-        string faction = MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear())
+        bool beast = MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor);
+        string currentSect = beast ? string.Empty : MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear());
+        string faction = !beast && MclslWorldEpochSystem.IsNewLawActive(MclslRuntime.CurrentYear())
             ? FactionDisplay(cultivation.FactionAffiliation) : string.Empty;
-        string ancientOrigin = MclslFactionMissionSystem.DisplaySectText(
+        string ancientOrigin = beast ? string.Empty : MclslFactionMissionSystem.DisplaySectText(
             MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty));
         if (!string.IsNullOrWhiteSpace(family) || !string.IsNullOrWhiteSpace(currentSect)
             || !string.IsNullOrWhiteSpace(faction) && faction != "无"
@@ -56,7 +57,7 @@ internal static class MclslActorInfoFormatter
         {
             b.Append(Section("灵根"));
             b.Append(Line("品阶", Highlight(cultivation.SpiritualRootGrade, "#D8C778")));
-            b.Append(Line("属性", ReplaceTags(cultivation.SpiritualRootAttributes)));
+            b.Append(Line("属性", MclslActorArchiveText.ReplaceTags(cultivation.SpiritualRootAttributes)));
             b.Append(Line("数量", RootCountText(cultivation.SpiritualRootCountName)));
             b.Append(Line("纯度", PercentColor(cultivation.SpiritualRootPurity)));
         }
@@ -247,14 +248,14 @@ internal static class MclslActorInfoFormatter
     {
         if (string.IsNullOrWhiteSpace(name)) return;
         b.Append("\n  <color=#9CD7FF><b>" + label + "</b></color>\n");
-        b.Append("    <color=#D8CDAA>根基</color> " + Highlight(ReplaceTags(name), "#F1D17A") + "\n");
+        b.Append("    <color=#D8CDAA>根基</color> " + Highlight(MclslActorArchiveText.ReplaceTags(name), "#F1D17A") + "\n");
         if (fields == null) return;
         for (int i = 0; i < fields.Length; i++)
         {
             string fieldLabel = fields[i].Label;
             string fieldValue = fields[i].Value;
             if (string.IsNullOrWhiteSpace(fieldLabel) || string.IsNullOrWhiteSpace(fieldValue)) continue;
-            b.Append("    <color=#8FA2A8>" + fieldLabel + "</color> " + ReplaceTags(fieldValue) + "\n");
+            b.Append("    <color=#8FA2A8>" + fieldLabel + "</color> " + MclslActorArchiveText.ReplaceTags(fieldValue) + "\n");
         }
     }
 
@@ -263,7 +264,7 @@ internal static class MclslActorInfoFormatter
         if (!string.IsNullOrWhiteSpace(cultivation.WorldSoulName)) return "魄:" + cultivation.WorldSoulName;
         if (!string.IsNullOrWhiteSpace(cultivation.DivineMarrowName)) return "髓:" + cultivation.DivineMarrowName;
         if (!string.IsNullOrWhiteSpace(cultivation.NascentEssenceName)) return "精:" + cultivation.NascentEssenceName;
-        if (!string.IsNullOrWhiteSpace(cultivation.GoldenCoreLaws)) return "法:" + ReplaceTags(cultivation.GoldenCoreLaws);
+        if (!string.IsNullOrWhiteSpace(cultivation.GoldenCoreLaws)) return "法:" + MclslActorArchiveText.ReplaceTags(cultivation.GoldenCoreLaws);
         if (!string.IsNullOrWhiteSpace(cultivation.FoundationWonderName)) return "基:" + cultivation.FoundationWonderName;
         return "未成根基";
     }
@@ -271,9 +272,9 @@ internal static class MclslActorInfoFormatter
     private static void AppendStageLine(StringBuilder b, string label, string primary, string secondary, string tertiary)
     {
         if (string.IsNullOrWhiteSpace(primary)) return;
-        string text = ReplaceTags(primary);
-        if (!string.IsNullOrWhiteSpace(secondary) && secondary != "0%" && secondary != "%") text += "\n    " + ReplaceTags(secondary);
-        if (!string.IsNullOrWhiteSpace(tertiary)) text += "\n    " + ReplaceTags(tertiary);
+        string text = MclslActorArchiveText.ReplaceTags(primary);
+        if (!string.IsNullOrWhiteSpace(secondary) && secondary != "0%" && secondary != "%") text += "\n    " + MclslActorArchiveText.ReplaceTags(secondary);
+        if (!string.IsNullOrWhiteSpace(tertiary)) text += "\n    " + MclslActorArchiveText.ReplaceTags(tertiary);
         b.Append(Line(label, text));
     }
 
@@ -327,7 +328,7 @@ internal static class MclslActorInfoFormatter
 
         int tenths = (int)Math.Floor(trueEssence * 10f / requirement);
         tenths = Math.Clamp(tenths <= 0 ? 1 : tenths, 1, 10);
-        stage = ChengText(tenths);
+        stage = MclslActorCultivationQuery.ChengText(tenths);
         return true;
     }
 
@@ -335,20 +336,6 @@ internal static class MclslActorInfoFormatter
     {
         return MclslRealmProgress.LianQiEntryMinimum;
     }
-
-    private static string ChengText(int tenths) => tenths switch
-    {
-        1 => "一成",
-        2 => "二成",
-        3 => "三成",
-        4 => "四成",
-        5 => "五成",
-        6 => "六成",
-        7 => "七成",
-        8 => "八成",
-        9 => "九成",
-        _ => "十成"
-    };
 
     private static string InverseTruthStageName(int progress)
     {
@@ -359,7 +346,6 @@ internal static class MclslActorInfoFormatter
         return "寻找";
     }
 
-    private static string ReplaceTags(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
     private static string RootCountText(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value == "单灵根" ? "单灵根" : value + "（多灵根）";
     private static string FoundationWonderRank(MclslActorCultivationView cultivation) =>
         MclslGeneratedObjectFactory.FoundationRankText(cultivation.FoundationWonderCategory, cultivation.FoundationWonderGrade, cultivation.FoundationWonderCompleteness, cultivation.FoundationWonderRuleStrength, cultivation.FoundationWonderQuality);

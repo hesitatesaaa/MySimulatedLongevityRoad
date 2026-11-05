@@ -26,13 +26,19 @@ internal static partial class MclslCombatCareerSystem
             var state=raw.Length==0
                 ? new MclslCombatCareerState {Potential=Roll(MclslActorAccessor.Id(actor),0,0x621981)<4000}
                 : JsonConvert.DeserializeObject<MclslCombatCareerState>(raw);
+            state.ContractPetName??=string.Empty;
             MclslCareerStateValidation.Validate(state);
             if(raw.Length>0)
+            {
+                double now=MclslSpellCasting.Now;
                 for(int i=0;i<5;i++)
                 {
-                    state.Cooldowns[i]=MclslSpellCasting.Now+Math.Max(0,state.Cooldowns[i]-state.CooldownClock);
+                    state.Cooldowns[i]=now+Math.Max(0,state.Cooldowns[i]-state.CooldownClock);
                     MclslCareerStateValidation.Finite(state.Cooldowns[i]);
                 }
+                state.NextSummonAt=MclslContractRules.Rebase(state.NextSummonAt,state.CooldownClock,now);
+                MclslCareerStateValidation.Finite(state.NextSummonAt);
+            }
             cache.Raw=raw;cache.State=state;cache.Blocked=false;
             if(raw.Length==0)Write(actor,state);
         }

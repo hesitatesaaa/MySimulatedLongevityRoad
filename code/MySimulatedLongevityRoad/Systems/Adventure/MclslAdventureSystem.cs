@@ -728,12 +728,19 @@ internal static class MclslAdventureSystem
     {
         MclslSectRuinRecord best = null;
         int bestScore = int.MinValue;
+        // RuinExperience and the actor law tags are invariant across this selection pass.
+        // Experience is read once up front; law tags are computed lazily on the first
+        // candidate that survives the availability and danger filters, then reused.
+        // Keeping the tags lazy preserves zero allocations when no ruin is eligible.
+        int experience = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0);
+        string[] actorLawTags = null;
         foreach (MclslSectRuinRecord ruin in MclslWorldRunRepository.Current.SectRuins)
         {
             if (!IsRuinAvailable(ruin)) continue;
-            int tolerance = 35 + realmIndex * 14 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0) / 3;
+            int tolerance = 35 + realmIndex * 14 + experience / 3;
             if (ruin.Danger > tolerance + 30) continue;
-            int compatibility = RuinLawCompatibility(actor, ruin);
+            if (actorLawTags == null) actorLawTags = ActorLawTags(actor);
+            int compatibility = RuinLawCompatibility(actorLawTags, ruin);
             int score = compatibility + ruin.RemainingValue * 8 + ruin.Quality * 12 - Math.Max(0, ruin.Danger - tolerance) * 2
                 + MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|pick_ruin|" + ruin.Id + "|" + year) % 31;
             if (score <= bestScore) continue;
@@ -744,8 +751,11 @@ internal static class MclslAdventureSystem
     }
 
     private static int RuinLawCompatibility(Actor actor, MclslSectRuinRecord ruin)
+        => RuinLawCompatibility(ActorLawTags(actor), ruin);
+
+    private static int RuinLawCompatibility(string[] actorLawTags, MclslSectRuinRecord ruin)
     {
-        return MclslLawInteractionCatalog.CompatibilityScore(ActorLawTags(actor), MclslGeneratedObjectFactory.SplitTags(ruin.LawTags), 12);
+        return MclslLawInteractionCatalog.CompatibilityScore(actorLawTags, MclslGeneratedObjectFactory.SplitTags(ruin.LawTags), 12);
     }
 
     private static List<RuinCandidate> PickExpedition(List<RuinCandidate> candidates, int capacity)

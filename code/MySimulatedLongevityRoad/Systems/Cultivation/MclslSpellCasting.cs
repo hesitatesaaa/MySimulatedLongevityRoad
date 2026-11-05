@@ -27,6 +27,7 @@ internal static class MclslCombatTargets
         if(MclslBeastActorRegistration.IsBeast(caster)&&MclslBeastActorRegistration.IsBeast(target))return false;
         // 非妖兽对所有妖兽一律视为敌对
         if (!MclslBeastActorRegistration.IsBeast(caster) && MclslBeastActorRegistration.IsBeast(target)) return true;
+        if (caster.attack_target == target || target.attack_target == caster) return true;
         if (caster.kingdom!=null&&target.kingdom!=null)return caster.kingdom.isEnemy(target.kingdom);
         return caster.attack_target==target || target.attack_target==caster;
     }

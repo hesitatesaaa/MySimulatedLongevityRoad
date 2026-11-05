@@ -126,7 +126,6 @@ internal static class MclslBeastControlWindow
     {
         Section("出现规则");
         Switch("兽潮",()=>MclslBeastWorld.Enabled,v=>MclslBeastConfig.SetSwitch("MCLSL_config_beast_waves",v));
-        Switch("自然出现",()=>MclslBeastConfig.NaturalSpawnEnabled,v=>MclslBeastConfig.SetSwitch("MCLSL_config_beast_natural_spawn",v));
         Switch("法术特效",()=>MclslSpellEffect.Enabled,v=>MclslBeastConfig.SetSwitch("MCLSL_config_spell_effects_enabled",v));
         Switch("本命神通特效",()=>MclslBeastTalentFrames.Enabled,v=>MclslBeastConfig.SetSwitch("MCLSL_config_beast_talent_effects_enabled",v));
         Section("强度与数量");
@@ -136,8 +135,7 @@ internal static class MclslBeastControlWindow
         Section("生成上限");
         Number("单次兽潮上限","只",()=>MclslBeastWorld.MaximumWaveCount,v=>Set("beast_wave_limit",v),1,256);
         Number("自动妖兽总上限","只",()=>MclslBeastWorld.AutomaticLimit,v=>Set("beast_auto_limit",v),1,4096);
-        Number("自然妖兽上限","只",()=>MclslBeastWorld.NaturalLimit,v=>Set("beast_natural_limit",v),1,4096);
-        Note("自动妖兽总上限由自然出现和兽潮共享。自动等级同时受世界解锁进度限制。");
+        Note("自动妖兽总上限包含兽潮与历史自动生成妖兽。自动等级同时受世界解锁进度限制。");
     }
     private static void Set(string suffix,double value)=>MclslBeastConfig.SetInt("MCLSL_config_"+suffix,(int)Math.Round(value));
     private static void Manual()

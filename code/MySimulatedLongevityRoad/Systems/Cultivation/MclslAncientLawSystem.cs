@@ -161,7 +161,7 @@ internal static class MclslAncientLawSystem
 
 
 
-    private static string RemnantLabel(int year) => MclslWorldEpochSystem.IsStableNewLawEra(year) ? "古法遗修" : "旧法遗修";
+    private static string RemnantLabel(int year) => MclslWorldEpochSystem.RemnantLabel(year);
 
     private static void StabilizeAncientSurvival(Actor actor, string realm)
     {

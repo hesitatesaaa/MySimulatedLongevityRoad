@@ -53,6 +53,15 @@ internal static class MclslNativeHistoryBridge
                 special2 = record.Title,
                 special3 = record.EventType is "beast_tide" or "beast_tide_end" ? Sanitize(record.Body) : TrimForNative(record.Body)
             };
+            // 原版历史的“定位”按钮来自 WorldLogMessageExtensions.hasLocation/getLocation：
+            // 有存活单位时取单位当前位置，否则取 x/y（两者非 -1 且在地图边界内）。
+            // 此前只写文字、没写坐标，所以兽潮等事件在原版历史里无法定位。
+            if (record.ActorId > 0L) message.unit_id = record.ActorId;
+            if (record.MapX >= 0 && record.MapY >= 0)
+            {
+                message.x = record.MapX;
+                message.y = record.MapY;
+            }
             WorldLogMessageExtensions.add(message);
             return true;
         }

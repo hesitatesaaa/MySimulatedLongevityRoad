@@ -181,7 +181,7 @@ internal static class MclslActorCultivationQuery
             NextRealmMinimum = nextRealmMinimum,
             Contribution = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.Contribution, 0),
             SpiritStones = MclslActorAccessor.GetMoney(actor, MclslActorDataKeys.SpiritStones, 0),
-            FactionAffiliation = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty),
+            FactionAffiliation = MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor) ? string.Empty : MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty),
             LastResult = MclslActorAccessor.GetString(actor, MclslActorDataKeys.LastBreakthroughResult, "无"),
             LineageIntegrity = MclslCultivationLineage.Integrity(actor),
             LineageSummary = MclslCultivationLineage.ChainSummary(actor),
@@ -235,7 +235,7 @@ internal static class MclslActorCultivationQuery
         return MclslMinorRealmCatalog.Display(realm, progress);
     }
 
-    private static string ChengText(int tenths) => tenths switch
+    internal static string ChengText(int tenths) => tenths switch
     {
         1 => "一成",
         2 => "二成",

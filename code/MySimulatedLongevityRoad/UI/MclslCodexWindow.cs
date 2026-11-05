@@ -307,10 +307,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.EndVertical();
     }
 
-    private bool IsBiographyPage() => !_standaloneHuanzhenSpace && !_standaloneMaobao
-        && _historyBookView == HistoryBiographyView
-        && CurrentTabTitle() == "玄黄史册";
-
     private void DrawCodexShortcuts()
     {
         GUILayout.BeginVertical(XianLuUIStyles.PanelStyle, GUILayout.Width(180f), GUILayout.ExpandHeight(true));
@@ -437,6 +433,32 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         MclslWindowPause.Release(this);
     }
 
+    private (int Population, int Roots, int Percent, bool Ready, int Cultivators, int SensingQi) _rootPopulationSignature;
+    private string _rootPopulationText, _rootCultivatorText;
+
+    private void DrawRootPopulation()
+    {
+        int population = MclslChildhoodRootSystem.Population;
+        int roots = MclslChildhoodRootSystem.RootPopulation;
+        int percent = MclslRuntimeSettings.ChildhoodRootChancePercent;
+        bool ready = MclslWorldBootstrapLane.Completed;
+        var signature = (population, roots, percent, ready, _snapshot.Cultivators, _snapshot.SensingQi);
+        if (_rootPopulationText == null || !signature.Equals(_rootPopulationSignature))
+        {
+            _rootPopulationSignature = signature;
+            string ratio = population == 0 ? "0.0" : (100d * roots / population).ToString("F1");
+            _rootPopulationText = ready
+                ? "适龄智慧人口 " + population + " ／ 灵根人数 " + roots + " ／ 当前占比 " + ratio
+                    + "% ／ 目标 " + percent + "%（" + MclslChildhoodRootSystem.TargetPopulation
+                    + "人）；自然觉醒仅补缺额，特殊来源可超额，已有灵根不回收。"
+                : "灵根人口统计重建中，尚不分配自然觉醒名额。";
+            _rootCultivatorText = "正式修士（全世界，含妖兽） " + Math.Max(0, _snapshot.Cultivators - _snapshot.SensingQi)
+                + " ／ 感气 " + _snapshot.SensingQi;
+        }
+        GUILayout.Label(_rootPopulationText);
+        GUILayout.Label(_rootCultivatorText);
+    }
+
     private void DrawPage()
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current ?? new MclslWorldRunState();
@@ -449,6 +471,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             case "天下总览":
                 DrawPageHeader("玄黄总览", "本世新法修行、背景势力与天地资源的档案总览。");
+                DrawRootPopulation();
                 GUILayout.BeginHorizontal();
                 DrawOverviewPill("当前年份", _snapshot.Year.ToString(), "#CFC7B2", GUILayout.Width(170));
                 DrawOverviewPill("世界人口", _snapshot.Population.ToString(), "#9CD7FF", GUILayout.Width(170));
@@ -657,6 +680,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private void DrawAncientOverview(MclslWorldRunState run)
     {
         DrawPageHeader("仙道总览", "仙道纪元，玄黄界以灵根、功法、真元、神魂与大道感悟修行。");
+        DrawRootPopulation();
         GUILayout.BeginHorizontal();
         DrawOverviewPill("开始年份", Math.Max(0, run?.EraOriginYear ?? 0).ToString(), "#CFC7B2", GUILayout.Width(170));
         DrawOverviewPill("当前年份", _snapshot.Year.ToString(), "#CFC7B2", GUILayout.Width(170));
@@ -826,10 +850,10 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 if (lineage == null || lineage.SystemId != MclslCultivationSystemIds.AncientLaw) continue;
                 if (!AncientTeachingMaxRealmMatches(lineage)) continue;
                 shown++;
-                DrawInfoCard("《" + Blank(lineage.Name) + "》", LineageColor(lineage.LifecycleState), () =>
+                DrawInfoCard("《" + MclslActorArchiveText.Blank(lineage.Name) + "》", LineageColor(lineage.LifecycleState), () =>
                 {
                     int strength = AncientLineageStrength(lineage);
-                    string laws = ReplaceTags(lineage.LawTags);
+                    string laws = MclslActorArchiveText.ReplaceTags(lineage.LawTags);
                     string lineageTitle = AncientLineageTitle(lineage);
                     bool recovered = IsRecoveredAncientLineage(lineage);
 
@@ -1109,14 +1133,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             DrawInfoCard(soul.Name, QualityColor(soul.Quality), () =>
             {
                 GUILayout.BeginHorizontal();
-                DrawTag(Quality(soul.Quality), QualityColor(soul.Quality));
+                DrawTag(MclslCodexSnapshot.Quality(soul.Quality), QualityColor(soul.Quality));
                 DrawTag(soul.State, soul.State == "显化" ? "#FFD37A" : soul.State == "已祭炼" ? "#A7E08A" : "#B8B8B8");
-                DrawTag(ReplaceTags(soul.LawTags), "#9CD7FF");
+                DrawTag(MclslActorArchiveText.ReplaceTags(soul.LawTags), "#9CD7FF");
                 GUILayout.FlexibleSpace();
                 if (MclslEventLocator.CanLocate(soul) && GUILayout.Button("定位", GUILayout.Width(64))) MclslEventLocator.Locate(soul);
                 GUILayout.EndHorizontal();
                 GUILayout.Label("天职：" + soul.HeavenlyDuty);
-                GUILayout.Label("承接者：" + (soul.HolderActorId > 0 ? Blank(soul.HolderActorName) + "（" + soul.HolderYear + "年）" : "无"));
+                GUILayout.Label("承接者：" + (soul.HolderActorId > 0 ? MclslActorArchiveText.Blank(soul.HolderActorName) + "（" + soul.HolderYear + "年）" : "无"));
                 GUILayout.Label("履职 " + soul.DutyProgress + "%｜反噬 " + soul.DutyBacklash + "%｜显化 " + soul.ManifestCount + " 次");
                 if (soul.NextManifestYear > 0 && soul.HolderActorId <= 0) GUILayout.Label("下次最早显化：" + soul.NextManifestYear + "年");
             });
@@ -1196,20 +1220,20 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 string statusColor = string.Equals(record.Status, "已转", StringComparison.Ordinal) ? "#7CCFD0" : "#CFC7B2";
                 string yearText = record.AppliedYear > 0 ? record.AppliedYear + "年" : record.DeathYear + "年";
                 string title = string.Equals(record.Status, "已转", StringComparison.Ordinal)
-                    ? Blank(record.TargetActorName) + "承前世"
-                    : Blank(record.SourceActorName) + "识未尽";
+                    ? MclslActorArchiveText.Blank(record.TargetActorName) + "承前世"
+                    : MclslActorArchiveText.Blank(record.SourceActorName) + "识未尽";
                 DrawInfoCard(yearText + "｜" + title, statusColor, () =>
                 {
                     GUILayout.BeginHorizontal();
                     DrawTag(record.Status, statusColor);
-                    DrawTag(Blank(record.SourceRealmName), RealmTagColor(record.SourceRealmId));
+                    DrawTag(MclslActorArchiveText.Blank(record.SourceRealmName), RealmTagColor(record.SourceRealmId));
                     if (record.RootPurityFloor > 0) DrawTag("灵根底限 " + record.RootPurityFloor, "#FFD37A");
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
-                    GUILayout.Label("前世：" + Blank(record.SourceActorName)
+                    GUILayout.Label("前世：" + MclslActorArchiveText.Blank(record.SourceActorName)
                         + (string.IsNullOrWhiteSpace(record.SourceTechniqueName) ? string.Empty : "，《" + record.SourceTechniqueName + "》"));
                     if (record.TargetActorId > 0)
-                        GUILayout.Label("今生：" + Blank(record.TargetActorName));
+                        GUILayout.Label("今生：" + MclslActorArchiveText.Blank(record.TargetActorName));
                 });
             }
         });
@@ -1264,27 +1288,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
     }
 
-    private void DrawFoundationWonders(MclslWorldRunState run)
-    {
-        DrawPageHeader("筑基奇物谱", "天地奇物分人之奇、地之奇、天之奇。人之奇分上中下品；地之奇重完整度与规则规模；天之奇极罕见，可支撑更高大道但极难悟解。");
-        List<MclslGeneratedItemRecord> wonders = _snapshot.FoundationWondersSorted;
-        GUILayout.BeginHorizontal();
-        DrawOverviewPill("本世奇物", wonders.Count.ToString(), "#FFD37A", GUILayout.Width(170));
-        DrawOverviewPill("天之奇", _snapshot.FoundationHeavenCount.ToString(), "#FF5A5A", GUILayout.Width(150));
-        DrawOverviewPill("地之奇", _snapshot.FoundationEarthCount.ToString(), "#9CD7FF", GUILayout.Width(150));
-        DrawOverviewPill("已炼化", _snapshot.FoundationRefinedCount.ToString(), "#9CD7FF", GUILayout.Width(170));
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
-        GUILayout.Space(8);
-        if (wonders.Count == 0) GUILayout.Label("本世尚未生成筑基奇物。");
-        foreach (MclslGeneratedItemRecord item in wonders)
-        {
-            string rank = MclslGeneratedObjectFactory.FoundationRankText(item);
-            string color = MclslGeneratedObjectFactory.FoundationRankColor(item.Category);
-            DrawItemCard(item.Name, rank, ReplaceTags(item.LawTags), DisplayHolder(item), item.Origin, RootText(item), item.Description, color);
-        }
-    }
-
     private void DrawCaves(MclslWorldRunState run)
     {
         DrawPageHeader("元婴洞天与天地之精", "金丹圆满者按法则适配、金丹纯度协调、洞天残图、心境共同争夺；每次炼化都会消耗天地之精并损耗洞天完整度。");
@@ -1303,9 +1306,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             DrawInfoCard(cave.Name, QualityColor(cave.Quality), () =>
             {
                 GUILayout.BeginHorizontal();
-                DrawTag(Quality(cave.Quality), QualityColor(cave.Quality));
+                DrawTag(MclslCodexSnapshot.Quality(cave.Quality), QualityColor(cave.Quality));
                 DrawTag(cave.State, cave.State == "活跃" ? "#A7E08A" : cave.State == "衰退" ? "#FFD37A" : "#B8B8B8");
-                DrawTag(ReplaceTags(cave.LawTags), "#9CD7FF");
+                DrawTag(MclslActorArchiveText.ReplaceTags(cave.LawTags), "#9CD7FF");
                 GUILayout.FlexibleSpace();
                 if (MclslEventLocator.CanLocate(cave) && GUILayout.Button("定位", GUILayout.Width(64))) MclslEventLocator.Locate(cave);
                 GUILayout.EndHorizontal();
@@ -1317,7 +1320,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawPageHeader("已炼化天地之精", "");
         if (essences.Count == 0) GUILayout.Label("本世尚无人炼化天地之精。");
         foreach (MclslGeneratedItemRecord item in essences)
-            DrawItemCard(item.Name, Quality(item.Quality), ReplaceTags(item.LawTags), DisplayHolder(item), item.CreatedYear + "年", "", item.Description, QualityColor(item.Quality));
+            DrawItemCard(item.Name, MclslCodexSnapshot.Quality(item.Quality), MclslActorArchiveText.ReplaceTags(item.LawTags), DisplayHolder(item), item.CreatedYear + "年", "", item.Description, QualityColor(item.Quality));
     }
 
     private void DrawWorldChanges(MclslWorldRunState run)
@@ -1339,9 +1342,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             DrawInfoCard(change.Name, QualityColor(change.Quality), () =>
             {
                 GUILayout.BeginHorizontal();
-                DrawTag(Quality(change.Quality), QualityColor(change.Quality));
+                DrawTag(MclslCodexSnapshot.Quality(change.Quality), QualityColor(change.Quality));
                 DrawTag(change.State, change.State == "活跃" ? "#A7E08A" : change.State == "衰减" ? "#FFD37A" : "#B8B8B8");
-                DrawTag(ReplaceTags(change.LawTags), "#9CD7FF");
+                DrawTag(MclslActorArchiveText.ReplaceTags(change.LawTags), "#9CD7FF");
                 GUILayout.FlexibleSpace();
                 if (MclslEventLocator.CanLocate(change) && GUILayout.Button("定位", GUILayout.Width(64))) MclslEventLocator.Locate(change);
                 GUILayout.EndHorizontal();
@@ -1354,7 +1357,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawPageHeader("已炼化天地之髓", "");
         if (marrows.Count == 0) GUILayout.Label("本世尚无人抽得天地之髓。");
         foreach (MclslGeneratedItemRecord item in marrows)
-            DrawItemCard(item.Name, Quality(item.Quality), ReplaceTags(item.LawTags), DisplayHolder(item), item.CreatedYear + "年", RootText(item), item.Description, QualityColor(item.Quality));
+            DrawItemCard(item.Name, MclslCodexSnapshot.Quality(item.Quality), MclslActorArchiveText.ReplaceTags(item.LawTags), DisplayHolder(item), item.CreatedYear + "年", RootText(item), item.Description, QualityColor(item.Quality));
     }
 
     private void DrawDeaths(MclslWorldRunState run)
@@ -1395,15 +1398,15 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawInfoCard(death.Year + "年｜" + (string.IsNullOrWhiteSpace(death.Title) ? death.ActorName : death.Title), "#FF8877", () =>
         {
             GUILayout.BeginHorizontal();
-            DrawTag(Blank(death.RealmName), "#9CD7FF");
+            DrawTag(MclslActorArchiveText.Blank(death.RealmName), "#9CD7FF");
             DrawTag("修道 " + death.Age + "载", "#CFC7B2");
-            DrawTag(Blank(death.CauseText), "#FF8877");
+            DrawTag(MclslActorArchiveText.Blank(death.CauseText), "#FF8877");
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(GUI.skin.box);
             DrawMiniStat("地点", place, "#CFC7B2", GUILayout.Width(260));
-            DrawMiniStat("主修", Blank(death.TechniqueName), "#FFD37A", GUILayout.Width(260));
+            DrawMiniStat("主修", MclslActorArchiveText.Blank(death.TechniqueName), "#FFD37A", GUILayout.Width(260));
             if (!string.IsNullOrWhiteSpace(death.KillerName))
                 DrawMiniStat("凶手", death.KillerName, "#FF8877", GUILayout.Width(220));
             GUILayout.FlexibleSpace();
@@ -1431,7 +1434,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginHorizontal();
         int column = 0;
         DrawDeathField("筑基", death.FoundationWonderName, "#FFD37A", ref column);
-        DrawDeathField("金丹", ReplaceTags(death.GoldenCoreLaws), "#D8C778", ref column);
+        DrawDeathField("金丹", MclslActorArchiveText.ReplaceTags(death.GoldenCoreLaws), "#D8C778", ref column);
         DrawDeathField("洞天", death.NascentCaveName, "#9CD7FF", ref column);
         DrawDeathField("天地之精", death.NascentEssenceName, "#9CD7FF", ref column);
         DrawDeathField("天地之变", death.DivineChangeName, "#B7A7FF", ref column);
@@ -1477,7 +1480,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         MclslHuanzhenExternalState state = MclslHuanzhenSystem.Current;
         GUILayout.BeginHorizontal();
         DrawOverviewPill("功能状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(210));
-        DrawOverviewPill("持有者", Blank(state.HostName), "#FFD37A", GUILayout.Width(210));
+        DrawOverviewPill("持有者", MclslActorArchiveText.Blank(state.HostName), "#FFD37A", GUILayout.Width(210));
         DrawOverviewPill("避环层数", state.ConsecutiveLoopDeaths.ToString(), "#B7A7FF", GUILayout.Width(170));
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -1505,7 +1508,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         float statWidth = compactStats ? Mathf.Max(170f, (contentWidth - 16f) / 3f) : 0f;
         GUILayout.BeginHorizontal();
         DrawOverviewPill("轮回状态", MclslHuanzhenSystem.StatusText(), "#B8B8B8", GUILayout.Width(compactStats ? statWidth : 230f));
-        DrawOverviewPill("此世宿主", Blank(state.HostName), "#FFD37A", GUILayout.Width(compactStats ? statWidth : 220f));
+        DrawOverviewPill("此世宿主", MclslActorArchiveText.Blank(state.HostName), "#FFD37A", GUILayout.Width(compactStats ? statWidth : 220f));
         DrawOverviewPill("空间灵蕴", MclslHuanzhenSystem.CurrentSpaceEssence() + "点", "#69E6DD", GUILayout.Width(compactStats ? statWidth : 170f));
         if (compactStats) { GUILayout.EndHorizontal(); GUILayout.BeginHorizontal(); }
         DrawOverviewPill("锚点数量", (state.Anchors?.Count ?? 0) + "/3", "#9CD7FF", GUILayout.Width(compactStats ? statWidth : 150f));
@@ -1608,7 +1611,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             GUILayout.BeginVertical(GUI.skin.box);
             bool replacement = string.Equals(anchor.RelativeSavePath, _huanzhenReplacementAnchorPath, StringComparison.OrdinalIgnoreCase);
             bool restore = string.Equals(anchor.RelativeSavePath, _huanzhenRestoreAnchorPath, StringComparison.OrdinalIgnoreCase);
-            GUILayout.Label("<b><color=#9CD7FF>◇ " + anchor.Year + "年·" + Blank(anchor.HostName) + "</color></b>");
+            GUILayout.Label("<b><color=#9CD7FF>◇ " + anchor.Year + "年·" + MclslActorArchiveText.Blank(anchor.HostName) + "</color></b>");
             GUILayout.BeginHorizontal();
             float anchorInner = Mathf.Max(92f, HuanzhenColumnWidth() - 48f);
             float anchorButtonWidth = Mathf.Max(92f, (anchorInner - 12f) / 2f);
@@ -1647,7 +1650,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             return;
         }
         string root = SnapshotString(snapshot, MclslActorDataKeys.SpiritualRootPrimary);
-        GUILayout.Label("灵根：" + Blank(root) + "　功法：" + Blank(snapshot.TechniqueName));
+        GUILayout.Label("灵根：" + MclslActorArchiveText.Blank(root) + "　功法：" + MclslActorArchiveText.Blank(snapshot.TechniqueName));
         if (!string.IsNullOrWhiteSpace(snapshot.FoundationWonderName)) GUILayout.Label("筑基奇物：" + snapshot.FoundationWonderName + "（品质" + snapshot.FoundationWonderQuality + "）");
         if (!string.IsNullOrWhiteSpace(snapshot.GoldenCoreLaws)) GUILayout.Label("金丹法则：" + snapshot.GoldenCoreLaws + "　纯度" + snapshot.GoldenCorePurity);
         if (!string.IsNullOrWhiteSpace(snapshot.NascentCaveName)) GUILayout.Label("元婴洞天：" + snapshot.NascentCaveName + "　完整度" + snapshot.NascentCaveIntegrity);
@@ -1663,11 +1666,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         return snapshot?.StringState != null && snapshot.StringState.TryGetValue(key, out string value) ? value : string.Empty;
     }
 
-    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key)
-    {
-        return snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
-    }
-
     private void DrawHuanzhenLegacyColumn(MclslHuanzhenExternalState state)
     {
         GUILayout.BeginVertical(XianLuUIStyles.PanelStyle,
@@ -1675,8 +1673,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawCardStripe("#D8C778");
         GUILayout.Label("<size=22><b>前世轮盘</b></size>");
         int selectionLimit = MclslHuanzhenSystem.LegacySelectionLimit();
-        GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，名额由当前还真锚点数量决定。</color>");
-        GUILayout.Label("当前还真锚点：" + selectionLimit + "　可保留数量：" + selectionLimit);
+        GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，最新一次前世轮盘固定自动继承三项。</color>");
+        GUILayout.Label("自动继承名额：" + selectionLimit);
         if (state.Legacies == null || state.Legacies.Count == 0)
         {
             GUILayout.Label("尚无前世档案；第一次成功还真后，死前快照会在此凝成轮盘。 ");
@@ -1692,7 +1690,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 GUILayout.BeginVertical(GUI.skin.box);
                 DrawCardStripe(selectionLimit <= 0 || used >= selectionLimit ? "#88706C" : "#D8C778");
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("<b>" + legacy.DeathYear + "年·" + Blank(legacy.HostName) + "</b>");
+                GUILayout.Label("<b>" + legacy.DeathYear + "年·" + MclslActorArchiveText.Blank(legacy.HostName) + "</b>");
                 DrawTag(MclslRealmIds.Display(legacy.RealmId), "#FFD37A");
                 DrawTag("归于 " + legacy.AnchorYear + "年", "#9CD7FF");
                 DrawTag("已选择 " + used + "/" + selectionLimit, selectionLimit <= 0 || used >= selectionLimit ? "#FF8877" : "#A7E08A");
@@ -1752,7 +1750,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                 MclslHuanzhenEssenceRecord record = state.EssenceHistory[i];
                 if (record == null) continue;
                 GUILayout.BeginVertical(GUI.skin.box);
-                GUILayout.Label("<b><color=#77C9E8>" + record.Year + "年·" + Blank(record.Source) + "</color></b>");
+                GUILayout.Label("<b><color=#77C9E8>" + record.Year + "年·" + MclslActorArchiveText.Blank(record.Source) + "</color></b>");
                 GUILayout.BeginHorizontal();
                 DrawTag((record.Amount >= 0 ? "+" : string.Empty) + record.Amount + "灵蕴", "#69E6DD");
                 DrawTag("结余 " + record.Balance, "#FFD37A");
@@ -1779,7 +1777,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             MclslHuanzhenHistoryRecord history = _snapshot.HuanzhenHistoriesSorted[i];
             if (history == null) continue;
             GUILayout.BeginHorizontal(GUI.skin.box);
-            GUILayout.Label("<b>" + history.DeathYear + "年·" + Blank(history.HostName) + "</b>");
+            GUILayout.Label("<b>" + history.DeathYear + "年·" + MclslActorArchiveText.Blank(history.HostName) + "</b>");
             DrawTag(MclslRealmIds.Display(history.RealmId), "#9CD7FF");
             DrawTag("避环 " + history.LoopDepth, "#B7A7FF");
             DrawTag("归于 " + (history.AnchorYear < 0 ? "无锚点" : history.AnchorYear + "年"), "#FFD37A");
@@ -1795,7 +1793,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         else
         {
             foreach (MclslHuanzhenAnchorRecord anchor in _snapshot.HuanzhenAnchorsSorted)
-                DrawInfoCard(anchor.Year + "年｜" + Blank(anchor.HostName), "#9CD7FF", () =>
+                DrawInfoCard(anchor.Year + "年｜" + MclslActorArchiveText.Blank(anchor.HostName), "#9CD7FF", () =>
                 {
                     DrawTag(MclslRealmIds.Display(anchor.RealmIdAtAnchor), "#FFD37A");
                     GUILayout.Label("锚点年份：" + anchor.Year + "年");
@@ -1807,37 +1805,13 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private void DrawLegacyOptionButton(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, int limit, int used, float width, float height)
     {
         bool claimed = legacy.ClaimedChoices?.Contains(option.Id) == true;
-        bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && (claimed || (limit > 0 && used < limit));
-        string label = claimed ? "取消占位｜" + option.Label : "保留｜" + option.Label;
-        if (GUILayout.Button(label, GUILayout.Height(height), GUILayout.Width(width)))
-        {
-            if (claimed) MclslHuanzhenSystem.TryReleaseLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            else MclslHuanzhenSystem.TryClaimLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            BeginSnapshot();
-        }
-        GUI.enabled = oldEnabled;
+        GUILayout.Label((claimed ? "已自动继承｜" : "未选取｜") + option.Label, GUILayout.Height(height), GUILayout.Width(width));
     }
 
     private static float LegacyOptionHeight(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, float width)
     {
-        string label = legacy.ClaimedChoices?.Contains(option.Id) == true ? "取消占位｜" + option.Label : "保留｜" + option.Label;
+        string label = legacy.ClaimedChoices?.Contains(option.Id) == true ? "已自动继承｜" + option.Label : "未选取｜" + option.Label;
         return Mathf.Max(34f, _buttonStyle.CalcHeight(new GUIContent(label), Mathf.Max(20f, width)));
-    }
-
-    private void DrawLegacyTraitButton(MclslHuanzhenLegacyRecord legacy, string traitId)
-    {
-        string choice = "trait:" + traitId;
-        bool claimed = legacy.ClaimedChoices?.Contains(choice) == true;
-        bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && !claimed && MclslHuanzhenSystem.LegacySelectionLimit() > 0 && (legacy.ClaimedChoices?.Count ?? 0) < MclslHuanzhenSystem.LegacySelectionLimit();
-        string name = MclslHuanzhenSystem.TraitDisplayNameById(traitId);
-        if (GUILayout.Button(claimed ? "已取·" + name : name, GUILayout.Height(30), GUILayout.Width(165)))
-        {
-            MclslHuanzhenSystem.TryClaimLegacyTrait(legacy.Id, traitId, out _huanzhenActionMessage);
-            BeginSnapshot();
-        }
-        GUI.enabled = oldEnabled;
     }
 
     private static void DrawResourceRules()
@@ -1898,7 +1872,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     private static void Label(string key, string value) => Text(key + "：" + value);
     private static void Text(string value) => GUILayout.Label(value, _labelStyle ?? GUI.skin.label);
-    private static string Quality(int q) => q switch { 4 => "玄奇", 3 => "天奇", 2 => "地奇", _ => "凡奇" };
     private static string QualityColor(int q) => q switch { >= 4 => "#FF5A5A", 3 => "#FFD37A", 2 => "#9CD7FF", _ => "#CFC7B2" };
     private static string LineageColor(string state) => state switch
     {
@@ -1956,9 +1929,9 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (lineage == null) return "无名传承";
         if (!string.IsNullOrWhiteSpace(lineage.SectDisplayName)
-            && !string.Equals(lineage.SectDisplayName, Blank(lineage.Name) + "道统", StringComparison.Ordinal))
+            && !string.Equals(lineage.SectDisplayName, MclslActorArchiveText.Blank(lineage.Name) + "道统", StringComparison.Ordinal))
             return lineage.SectDisplayName;
-        string root = Blank(lineage.Name).Trim('《', '》');
+        string root = MclslActorArchiveText.Blank(lineage.Name).Trim('《', '》');
         if (string.Equals(lineage.LifecycleState, "遗府私传", StringComparison.Ordinal)) return root + "私法";
         if (string.Equals(lineage.LifecycleState, "秘境道统", StringComparison.Ordinal)) return root + "道统";
         return string.IsNullOrWhiteSpace(lineage.SectDisplayName) ? root + "道统" : lineage.SectDisplayName;
@@ -1997,7 +1970,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         string founder = BlankFounder(lineage.FounderName);
         string year = lineage.FirstSeenYear > 0 ? lineage.FirstSeenYear + "年" : "某年";
         string title = string.IsNullOrWhiteSpace(lineageTitle) ? "此脉" : lineageTitle;
-        string laws = ReplaceTags(lineage.LawTags);
+        string laws = MclslActorArchiveText.ReplaceTags(lineage.LawTags);
         if (string.Equals(founder, "未详", StringComparison.Ordinal))
             return "此法初见于" + year + "，源头未详；只知其法义多循" + laws + "而行，后由修士口耳相授。";
         return "此法由" + founder + "传出，初见于" + year + "；或得于游历，或悟自山河，后渐归入" + title + "。";
@@ -2076,18 +2049,16 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     {
         if (ruin == null) return "无";
         string title = string.IsNullOrWhiteSpace(sectName) ? "无名道统" : sectName;
-        string technique = string.IsNullOrWhiteSpace(lineageName) ? Blank(ruin.SourceTechniqueName) : lineageName;
+        string technique = string.IsNullOrWhiteSpace(lineageName) ? MclslActorArchiveText.Blank(ruin.SourceTechniqueName) : lineageName;
         string text = title + "《" + technique + "》";
         if (ruin.SourceTechniqueLostYear > 0) text += " → " + ruin.SourceTechniqueLostYear + "年断绝";
-        text += " → " + Blank(ruin.Name);
+        text += " → " + MclslActorArchiveText.Blank(ruin.Name);
         if (ruin.SourceTechniqueRevivedYear > 0) text += " → " + ruin.SourceTechniqueRevivedYear + "年复现";
         return text;
     }
 
     private static string DisplayHolder(MclslGeneratedItemRecord item) => string.IsNullOrWhiteSpace(item.HolderName) ? "无主" : item.HolderName;
     private static string RootText(MclslGeneratedItemRecord item) => item == null ? "无" : !string.IsNullOrWhiteSpace(item.AttributeText) ? item.AttributeText : MclslGeneratedObjectFactory.RootText(item.Kind, MclslGeneratedObjectFactory.SplitTags(item.LawTags), item.Quality);
-    private static string ReplaceTags(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value.Replace(",", "、");
-    private static string Blank(string value) => string.IsNullOrWhiteSpace(value) ? "无" : value;
     private static string PlayerFacingEventBody(string value)
     {
         if (string.IsNullOrWhiteSpace(value)) return "无详载。";
@@ -2119,11 +2090,6 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             .Replace("，不能攻击、祭炼或借最后一击合道", string.Empty)
             .Replace("不能祭炼夺魄", "未得承载之法");
     }
-    private static int CaveStateOrder(string state) => state switch { "活跃" => 0, "衰退" => 1, "枯竭" => 2, _ => 3 };
-    private static int WorldChangeStateOrder(string state) => state switch { "活跃" => 0, "衰减" => 1, "平息" => 2, _ => 3 };
-    private static int RuinStateOrder(string state) => state switch { "显世" => 0, "探索中" => 1, "搜尽" => 2, "崩毁" => 3, _ => 4 };
-    private static int SoulStateOrder(string state) => state switch { "显化" => 0, "已祭炼" => 1, "沉寂" => 2, "散逸" => 3, _ => 4 };
-    private static bool IsRuinOpen(MclslSectRuinRecord ruin) => ruin != null && ruin.RemainingValue > 0 && ruin.State != "搜尽" && ruin.State != "封绝";
     private static void DrawFlowRow(string title, string body, string color)
     {
         GUILayout.BeginHorizontal(GUI.skin.box);
@@ -2164,7 +2130,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         GUILayout.BeginHorizontal();
         DrawTag(mission.Year + "年", "#CFC7B2");
         DrawTag(mission.MissionName, color);
-        DrawTag(Blank(mission.ActorName), "#FFD37A");
+        DrawTag(MclslActorArchiveText.Blank(mission.ActorName), "#FFD37A");
         if (mission.ResultCode == "failed" || mission.ResultCode == "dead")
             DrawTag(mission.ResultCode == "dead" ? "任务中陨落" : "任务失败", "#FF8877");
         if (mission.ContributionReward > 0) DrawTag("贡献+" + mission.ContributionReward, "#9CD7FF");

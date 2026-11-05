@@ -86,7 +86,7 @@ internal static class MclslCareerEffectFrames
             Texture2D texture=SpriteTextureLoader.getSprite("effects/Careers/"+id).texture;
             texture.filterMode=FilterMode.Point;
             sprites=new Sprite[24];
-            int size=texture.width/4;
+            const int size=192;
             for(int i=0;i<24;i++)sprites[i]=Sprite.Create(texture,
                 new Rect(i%4*size,(5-i/4)*size,size,size),new Vector2(0.5f,0.5f),size-2*MclslLivingResources.CareerEffectPadding);
             Frames[id]=sprites;

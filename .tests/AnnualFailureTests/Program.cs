@@ -38,7 +38,7 @@ namespace MySimulatedLongevityRoad.Data
 }
 namespace MySimulatedLongevityRoad.Core
 {
-    static class MclslDiagnostics { public static int Errors, Fatals; public static bool Fail; public static void Fatal(string k, string m) => Fatals++; public static void Error(string k, string m) { Errors++; if (Fail) throw new InvalidOperationException("log injected"); } }
+    static class MclslDiagnostics { public static int Errors, Fatals; public static bool Fail; public static void Fatal(string k, string m) => Fatals++; public static void Alert(string k, string m) { } public static void Probe(string k, string m) { } public static void Error(string k, string m) { Errors++; if (Fail) throw new InvalidOperationException("log injected"); } }
 }
 namespace MySimulatedLongevityRoad.Systems
 {

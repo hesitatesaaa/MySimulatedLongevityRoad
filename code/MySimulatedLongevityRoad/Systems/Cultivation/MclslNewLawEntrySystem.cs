@@ -13,12 +13,12 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor))) return hasGift;
         if (hasGift) return true;
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age == 5
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1
             && hasGift) return true;
@@ -29,7 +29,7 @@ internal static class MclslNewLawEntrySystem
     {
         if (actor?.data == null) return false;
         if (!MclslEligibility.CanCultivate(actor)) return false;
-        if (SafeAgeYear(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
+        if (MclslActorAccessor.Age(actor) < MclslCultivationAgeSanity.SpiritualRootEntryAge) return false;
         string system = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty);
         bool hasGift = MclslSpiritualRootSystem.HasCultivationPotential(actor);
         if (system == MclslCultivationSystemIds.NewLaw && string.IsNullOrWhiteSpace(MclslActorAccessor.Realm(actor)))
@@ -46,7 +46,7 @@ internal static class MclslNewLawEntrySystem
             BeginCultivation(actor, year, "灵根显现，开始感气");
             return true;
         }
-        int age = SafeAgeYear(actor);
+        int age = MclslActorAccessor.Age(actor);
         if (age == 5
             && MclslActorAccessor.GetInt(actor, MclslActorDataKeys.ChildhoodRootChecked, 0) == 1
             && hasGift)
@@ -117,9 +117,4 @@ internal static class MclslNewLawEntrySystem
 
 
 
-    private static int SafeAgeYear(Actor actor)
-    {
-        try { return Math.Max(0, (int)Math.Floor(actor?.getAge() ?? 0f)); }
-        catch { return 0; }
-    }
 }

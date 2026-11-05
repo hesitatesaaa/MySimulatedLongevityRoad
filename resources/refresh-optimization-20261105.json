@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-05",
+  "version": "0.8.6",
+  "sourceCount": 299,
+  "compile": {
+    "exit": 0,
+    "warnings": 0
+  },
+  "actualUnity": false,
+  "cpuImprovementPercent": null,
+  "benchmark": "Not measured in a live game; do not interpret fewer checks as a measured FPS improvement.",
+  "validation": [
+    "production-method transition caps 12/6 incl invalid records, same-frame and shared timer",
+    "conversion dedup/completion/world reset",
+    "deterministic technique failure cache and revision invalidation",
+    "self scan 20 frames, health/mana wake, pause, 64 limit",
+    "legacy eligibility events and no self-trigger",
+    "contract click reactivation and duplicate handlers",
+    "contract rules and spell stage timing"
+  ],
+  "preservedExisting": [
+    "annual economy transaction/plan reuse",
+    "sect lifecycle consumes prepared lineage counts",
+    "family member/family queues are already deduplicated",
+    "existing noncombat career/beast active-set sleep",
+    "announcements already skip empty queue and pending display interval"
+  ],
+  "newBehavior": {
+    "突破条件": "年度增长及随机机会不减少；同数据版本同目标的重复失败检查复用结果",
+    "旧法转新法": "每批最多检查12个种子、取6条转换记录，双方共用0.45ms起点并同时遵守年度/总帧预算",
+    "师承与功法成长": "年度机会与书籍成长保留；未到传授年不构建传授学生列表",
+    "契灵属性与跟随战斗更新": "活动1世界时间秒；满状态脱战3秒；生命/攻击未变化时不重写属性与生命比例",
+    "脱战辅助法术轮询": "满状态稳定候选最迟3世界时间秒资格复查；施法成功允许下轮再判断；未到期辅助冷却可安排更早检查",
+    "背包写回与余额展示": "每帧最多8项且受预算限制，不增加写回延迟",
+    "境界光环和地图标记": "光环近景15帧/远景LOD30帧；压力档取较慢值；标记120帧兜底、未完成逐帧续做；动画频率不变",
+    "还真最新遗产自动领取": "每60渲染帧检查；满3项直接退出；不是固定现实1秒",
+    "人物属性与契约关系行": "展示/关系事件立即刷新；可见时3现实秒兜底；回调仅在失效后重绑",
+    "榜单数据更新": "可见时1现实秒节流，隐藏时5现实秒；未处理完队列可后续帧续做"
+  },
+  "limitations": [
+    "live CPU median/P95 and annual lag not measured",
+    "live game visuals, complete save/load and failure paths not executed",
+    "DSH bridge tools not exposed in this session; no DSH task dispatched"
+  ]
+}

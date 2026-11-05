@@ -54,7 +54,7 @@ internal sealed partial class MclslCodexWindow
             MclslHuanzhenHistoryRecord history = _snapshot.HuanzhenHistoriesSorted[i];
             if (history == null) continue;
             bool success = string.Equals(history.Result, "还真成功", StringComparison.Ordinal);
-            DrawInfoCard(history.DeathYear + "年｜" + Blank(history.HostName), success ? "#8FC2AE" : "#C08D7A", () =>
+            DrawInfoCard(history.DeathYear + "年｜" + MclslActorArchiveText.Blank(history.HostName), success ? "#8FC2AE" : "#C08D7A", () =>
             {
                 GUILayout.BeginHorizontal();
                 DrawTag(MclslRealmIds.Display(history.RealmId), "#9CBFD0");
@@ -63,7 +63,7 @@ internal sealed partial class MclslCodexWindow
                 DrawTag(success ? "回溯成功" : "未能回溯", success ? "#8FC2AE" : "#C08D7A");
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
-                GUILayout.Label(Blank(history.Result));
+                GUILayout.Label(MclslActorArchiveText.Blank(history.Result));
             });
         }
     }

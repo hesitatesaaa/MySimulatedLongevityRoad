@@ -119,7 +119,28 @@ internal static class MclslTechniqueRealmLimit
         return MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueMaxRealm, MclslRealmIds.ZhuJi);
     }
 
+    private sealed class FailedLimit
+    {
+        internal long Revision;
+        internal string Target, Reason;
+    }
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<Actor, FailedLimit> FailedLimits = new();
     internal static bool CanReach(Actor actor, string targetRealm, out string reason)
+    {
+        if (actor?.data == null || string.IsNullOrWhiteSpace(targetRealm) || targetRealm == MclslRealmIds.ChangSheng)
+        { reason = string.Empty; return true; }
+        long revision = MySimulatedLongevityRoad.Core.MclslRuntimeChanges.DataRevision(MclslActorAccessor.Id(actor));
+        var failed = FailedLimits.GetOrCreateValue(actor);
+        if (revision != 0 && failed.Target == targetRealm && failed.Revision == revision)
+        { reason = failed.Reason; return false; }
+        bool reachable = CanReachCore(actor, targetRealm, out reason);
+        failed.Target = reachable ? null : targetRealm;
+        failed.Reason = reason;
+        failed.Revision = MySimulatedLongevityRoad.Core.MclslRuntimeChanges.DataRevision(MclslActorAccessor.Id(actor));
+        return reachable;
+    }
+
+    private static bool CanReachCore(Actor actor, string targetRealm, out string reason)
     {
         reason = string.Empty;
         if (actor?.data == null || string.IsNullOrWhiteSpace(targetRealm)) return true;

@@ -304,6 +304,7 @@ namespace MySimulatedLongevityRoad.Core { static class MclslWorldRunRepository {
 public static void EnsureAnnualWorldState(params object[] args) { Boundary.Hit("MclslWorldRunRepository.EnsureAnnualWorldState"); }
 public static void EnsureCurrentRun(params object[] args) { Boundary.Hit("MclslWorldRunRepository.EnsureCurrentRun"); }
 public static void ResetWorld(params object[] args) { Boundary.Hit("MclslWorldRunRepository.ResetWorld"); }
+public static void ResetAnnualBlockOnLoad(params object[] args) { Boundary.Hit("MclslWorldRunRepository.ResetAnnualBlockOnLoad"); }
 } }
 namespace MySimulatedLongevityRoad.Core { static class MclslWorldSoulSystem {
 

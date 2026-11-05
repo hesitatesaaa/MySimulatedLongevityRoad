@@ -20,10 +20,12 @@ effects = json.loads((ROOT / 'resources/beast-spell-effects.manifest.json').read
 assert len(manifest['icons']) == 111
 assert len(manifest['recipes']) == 75
 assert len(manifest['species']) == 21
-assert len(effects['assets']) == 48
-assert len({x['spell'] for x in effects['assets']}) == 16
-assert all({x['phase'] for x in effects['assets'] if x['spell'] == spell} == {'cast', 'travel', 'hit'}
-           for spell in {x['spell'] for x in effects['assets']})
+support_spells = {'S002','S003','S005','S006','S011','S014','S018','S020','S024','S025'}
+assert len(effects['assets']) == 68
+assert len({x['spell'] for x in effects['assets']}) == 26
+for spell in {x['spell'] for x in effects['assets']}:
+    expected_phases = {'cast', 'hit'} if spell in support_spells else {'cast', 'travel', 'hit'}
+    assert {x['phase'] for x in effects['assets'] if x['spell'] == spell} == expected_phases
 paths = [x['path'] for x in manifest['icons'] + effects['assets']]
 assert len(paths) == len(set(paths))
 missing, invalid, unreviewed = [], [], []
@@ -45,7 +47,7 @@ for item in manifest['icons'] + effects['assets']:
     except (ValueError, OSError, SyntaxError) as error:
         invalid.append(item['path'])
         invalid_reasons[item['path']] = str(error)
-    if item.get('status') == 'approved' and item.get('sha256', '').lower() != hashlib.sha256(raw).hexdigest():
+    if item.get('status') in {'approved', 'offline-reviewed'} and item.get('sha256', '').lower() != hashlib.sha256(raw).hexdigest():
         invalid.append(item['path'])
         invalid_reasons[item['path']] = 'Approved file hash differs from its review record'
 duplicates = [group for group in pixel_hashes.values() if len(group) > 1]

@@ -317,7 +317,10 @@ internal static partial class MclslWorldSoulActorRegistration
                 asset.cached_sprite = asset._cached_sprite;
             }
             MclslSpriteOwnership.Register(asset._cached_sprite);
-            MclslActorPresentation.Configure(asset, asset._cached_sprite);
+            if (string.IsNullOrEmpty(folder))
+                MclslActorPresentation.Configure(asset, asset._cached_sprite);
+            else
+                MclslActorPresentation.Configure(asset, asset._cached_sprite, MclslSoulFrameCatalog.VisibleBounds(asset._cached_sprite));
         }
         catch (Exception ex)
         {
@@ -759,24 +762,6 @@ internal static partial class MclslWorldSoulActorRegistration
         return null;
     }
 
-    private static Sprite RegisteredActorSprite(Actor actor)
-    {
-        try
-        {
-            if (actor == null || !IsWorldSoulAssetId(actor.asset?.id)) return null;
-            Sprite sprite = actor?.asset?._cached_sprite ?? actor?.asset?.cached_sprite ?? actor?.asset?.getSpriteIcon();
-            if (sprite != null
-                && !string.IsNullOrWhiteSpace(sprite.name)
-                && !sprite.name.Contains("iconDemon", StringComparison.OrdinalIgnoreCase)
-                && !sprite.name.Contains("skeleton", StringComparison.OrdinalIgnoreCase))
-            {
-                return sprite;
-            }
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-cs-16", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.cs #16: " + mclslEmptyCatchEx.Message); }
-        return null;
-    }
-
     private static Sprite TintFrame(Actor actor, Sprite sprite)
     {
         if (sprite == null || actor?.data == null) return sprite;
@@ -970,15 +955,7 @@ internal static partial class MclslWorldSoulActorRegistration
         catch { return 0L; }
     }
 
-    private static int StableHash(string value)
-    {
-        unchecked
-        {
-            int hash = 23;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
+    private static int StableHash(string value) => MclslStableHash.Positive23x37(value);
 
     private static string ActorPath(string folder)
     {

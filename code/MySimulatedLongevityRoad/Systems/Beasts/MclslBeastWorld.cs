@@ -19,14 +19,8 @@ internal sealed class MclslBeastWaveState
 }
 internal sealed class MclslBeastWorldState
 {
-    public int Version=1,Unlocked=1,LastWaveYear,LastNaturalYear;
+    public int Version=1,Unlocked=1,LastWaveYear;
     public List<MclslBeastWaveState> Waves=new();
-    public List<MclslNaturalBeastSpawn> NaturalPending=new();
-}
-internal sealed class MclslNaturalBeastSpawn
-{
-    public string Species;
-    public int X,Y;
 }
 
 internal static class MclslBeastWorld
@@ -55,7 +49,7 @@ internal static class MclslBeastWorld
     internal static bool WriteLocked=>_locked;
     internal static bool HasManualRequest=>_manualRequest>0;
     internal static bool Enabled=true;
-    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,NaturalLimit=128,ManualRealm,MaximumWaveCount=64;
+    internal static int Interval=5,MaximumLevel=7,AutomaticLimit=512,ManualRealm,MaximumWaveCount=64;
     internal static float CountMultiplier=1;
     internal static readonly int[] Weights=MclslBeastRules.Weights,Counts=MclslBeastRules.Counts;
     internal static IReadOnlyList<MclslBeastWaveState> Waves=>State.Waves;
@@ -91,7 +85,6 @@ internal static class MclslBeastWorld
             var loaded=JsonConvert.DeserializeObject<MclslBeastWorldState>(saved);
             if(loaded?.Version!=1 || loaded.Waves==null) throw new InvalidOperationException("兽潮存档格式错误");
             State=loaded;
-            State.NaturalPending??=new();
             State.Unlocked=Math.Clamp(State.Unlocked,1,7);
             foreach(var wave in State.Waves)
             {
@@ -128,8 +121,8 @@ internal static class MclslBeastWorld
             ?level+"级兽潮已引动，正在分批生成。":"召潮未成功："+TriggerFailure;
     }
     internal static void ObserveProgress() => MclslBeastPopulationIndex.PublishProgress();
-    internal static int CountAutomatic(bool naturalOnly=false,int region=-1)
-        => MclslBeastPopulationIndex.Count(naturalOnly,region);
+    internal static int CountAutomatic(int region=-1)
+        => MclslBeastPopulationIndex.Count(region);
     internal static void TickAnnual(int year)
     {
         ObserveProgress();
@@ -160,7 +153,7 @@ internal static class MclslBeastWorld
         }
         if(options.Count==0)return CannotTrigger("没有符合该等级与主题的海陆生成位置。");
         var option=options[Roll(year+"|theme|"+State.Waves.Count,options.Count)];
-        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor)+State.NaturalPending.Count,
+        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor),
             MapBox.width*MapBox.height,MaximumWaveCount);
         if(count==0)return CannotTrigger("已达自动妖兽总上限，暂无生成名额。");
         var wave=new MclslBeastWaveState { Id=Guid.NewGuid().ToString("N"),Level=level,Theme=option.Theme,

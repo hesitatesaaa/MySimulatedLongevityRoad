@@ -515,145 +515,6 @@ internal static class MclslCultivationSystem
         return true;
     }
 
-    internal static void RestoreFromHuanzhen(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, int anchorYear, int deathYear)
-    {
-        if (actor?.data == null || snapshot == null) return;
-        string realm = snapshot.RealmId ?? string.Empty;
-        string restoredSystem = snapshot.CultivationSystemId ?? string.Empty;
-        if (restoredSystem == MclslCultivationSystemIds.AncientLaw
-            || restoredSystem == MclslCultivationSystemIds.NewLaw)
-            MclslCultivationStateTransitions.TrySetCultivationSystem(actor, restoredSystem);
-        if (!string.IsNullOrWhiteSpace(realm)) SetRealm(actor, realm, anchorYear, "还真回溯后恢复" + deathYear + "年身死前修为");
-        else
-        {
-            MclslCultivationStateTransitions.ClearRealm(
-                actor,
-                anchorYear,
-                "还真回溯后恢复凡人或感气状态");
-        }
-
-        int restoredEssence = snapshot.TrueEssence > 0
-            ? snapshot.TrueEssence
-            : MclslRealmProgress.EssenceAtProgress(realm,
-                MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.AncientLaw,
-                snapshot.CultivationProgress);
-        MclslCultivationGrowthSystem.SetTrueEssence(actor, realm, restoredEssence,
-            MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) == MclslCultivationSystemIds.AncientLaw,
-            enforceRealmMinimum: !string.IsNullOrWhiteSpace(realm));
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Aptitude, snapshot.Aptitude);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, snapshot.MindState);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, snapshot.HeartTemperingProgress);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, snapshot.HeartMethodKnown);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.MiasmaPoolCleansing, snapshot.MiasmaPoolCleansing);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, snapshot.RuinExperience);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.TechniqueInsight, snapshot.TechniqueInsight);
-        SetString(actor, MclslActorDataKeys.TechniqueId, snapshot.TechniqueId);
-        SetString(actor, MclslActorDataKeys.TechniqueName, snapshot.TechniqueName);
-        SetString(actor, MclslActorDataKeys.TechniqueMaxRealm, snapshot.TechniqueMaxRealm);
-        SetString(actor, MclslActorDataKeys.FoundationWonderId, snapshot.FoundationWonderId);
-        SetString(actor, MclslActorDataKeys.FoundationWonderName, snapshot.FoundationWonderName);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderQuality, snapshot.FoundationWonderQuality);
-        SetString(actor, MclslActorDataKeys.FoundationWonderTags, snapshot.FoundationWonderTags);
-        SetString(actor, MclslActorDataKeys.FoundationWonderDescription, snapshot.FoundationWonderDescription);
-        SetString(actor, MclslActorDataKeys.FoundationWonderOrigin, snapshot.FoundationWonderOrigin);
-        SetString(actor, MclslActorDataKeys.FoundationWonderEffects, snapshot.FoundationWonderEffects);
-        SetString(actor, MclslActorDataKeys.GoldenCoreLaws, snapshot.GoldenCoreLaws);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCorePurity, snapshot.GoldenCorePurity);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCoreStability, snapshot.GoldenCoreStability);
-        SetString(actor, MclslActorDataKeys.NascentCaveId, snapshot.NascentCaveId);
-        SetString(actor, MclslActorDataKeys.NascentCaveName, snapshot.NascentCaveName);
-        SetString(actor, MclslActorDataKeys.NascentCaveTags, snapshot.NascentCaveTags);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveCompatibility, snapshot.NascentCaveCompatibility);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveIntegrity, snapshot.NascentCaveIntegrity);
-        SetString(actor, MclslActorDataKeys.NascentEssenceId, snapshot.NascentEssenceId);
-        SetString(actor, MclslActorDataKeys.NascentEssenceName, snapshot.NascentEssenceName);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentEssenceQuality, snapshot.NascentEssenceQuality);
-        SetString(actor, MclslActorDataKeys.NascentEssenceTags, snapshot.NascentEssenceTags);
-        SetString(actor, MclslActorDataKeys.NascentEssenceDescription, snapshot.NascentEssenceDescription);
-        SetString(actor, MclslActorDataKeys.NascentEssenceEffects, snapshot.NascentEssenceEffects);
-        SetString(actor, MclslActorDataKeys.DivineChangeId, snapshot.DivineChangeId);
-        SetString(actor, MclslActorDataKeys.DivineChangeName, snapshot.DivineChangeName);
-        SetString(actor, MclslActorDataKeys.DivineChangeTags, snapshot.DivineChangeTags);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineChangeCompatibility, snapshot.DivineChangeCompatibility);
-        SetString(actor, MclslActorDataKeys.DivineMarrowId, snapshot.DivineMarrowId);
-        SetString(actor, MclslActorDataKeys.DivineMarrowName, snapshot.DivineMarrowName);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrow, snapshot.DivineMarrowCount);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrowQuality, snapshot.DivineMarrowQuality);
-        SetString(actor, MclslActorDataKeys.DivineMarrowTags, snapshot.DivineMarrowTags);
-        SetString(actor, MclslActorDataKeys.DivineMarrowDescription, snapshot.DivineMarrowDescription);
-        SetString(actor, MclslActorDataKeys.DivineMarrowEffects, snapshot.DivineMarrowEffects);
-        SetString(actor, MclslActorDataKeys.HuaShenHonorific, snapshot.HuaShenHonorific);
-        SetString(actor, MclslActorDataKeys.HeDaoHonorific, snapshot.HeDaoHonorific);
-        SetString(actor, MclslActorDataKeys.ChangShengHonorific, snapshot.ChangShengHonorific);
-        SetString(actor, MclslActorDataKeys.AncientHuaShenHonorific, snapshot.AncientHuaShenHonorific);
-        SetString(actor, MclslActorDataKeys.AncientHeDaoHonorific, snapshot.AncientHeDaoHonorific);
-        SetString(actor, MclslActorDataKeys.AncientChangShengHonorific, snapshot.AncientChangShengHonorific);
-        SetString(actor, MclslActorDataKeys.WorldSoulId, snapshot.WorldSoulId);
-        SetString(actor, MclslActorDataKeys.WorldSoulName, snapshot.WorldSoulName);
-        SetString(actor, MclslActorDataKeys.HeavenlyDuty, snapshot.HeavenlyDuty);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyLeap, snapshot.HarmonyLeap);
-        SetString(actor, MclslActorDataKeys.HarmonyOrigin, snapshot.HarmonyOrigin);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyCompatibility, snapshot.HarmonyCompatibility);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyStability, snapshot.HarmonyStability);
-        SetString(actor, MclslActorDataKeys.InverseTruthId, snapshot.InverseTruthId);
-        SetString(actor, MclslActorDataKeys.InverseTruthName, snapshot.InverseTruthName);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.InverseTruthProgress, snapshot.InverseTruthProgress);
-        // Version 2 snapshots preserve roots, resources, ancient-law stages and
-        // post-longevity state through an allow-listed extensible state bag.
-        MclslHuanzhenSystem.RestoreSupplementalState(actor, snapshot);
-        if(Combat.MclslCombatCareerSystem.Applicable(actor))
-            Combat.MclslCombatCareerSystem.SyncTraits(actor);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastCultivationYear, anchorYear - 1);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughYear, deathYear);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "还真保留死前境界与全部修行根基");
-        MclslActorAccessor.ApplyDisplayName(actor, realm);
-    }
-
-    internal static bool RestoreHuanzhenLegacyCategory(Actor actor, MclslHuanzhenCultivationSnapshot snapshot,
-        string category, int anchorYear, int deathYear, out string message)
-    {
-        message = string.Empty;
-        if (actor?.data == null || snapshot == null) { message = "人物或前世快照无效。"; return false; }
-        switch (category)
-        {
-            case "cultivation": RestoreLegacyCultivation(actor, snapshot, anchorYear, deathYear); message = "已继承前世修为根基。"; break;
-            case "technique": RestoreLegacyTechnique(actor, snapshot); message = "已继承前世功法道统。"; break;
-            case "treasures": RestoreLegacyTreasures(actor, snapshot); message = "已继承前世突破造物。"; break;
-            case "dao":
-                if ((!string.IsNullOrWhiteSpace(snapshot.WorldSoulId) || !string.IsNullOrWhiteSpace(snapshot.InverseTruthId))
-                    && MclslRealmIds.Index(MclslActorAccessor.Realm(actor)) < MclslRealmIds.Index(MclslRealmIds.HeDao))
-                { message = "天地道果需要合道根基；请先选择“修为根基”。"; return false; }
-                RestoreLegacyDao(actor, snapshot);
-                MclslWorldSoulSystem.ReconcileRestoredHolder(actor, snapshot, MclslRuntime.CurrentYear());
-                message = "已继承前世天地道果。";
-                break;
-            case "resources":
-                RestoreLegacyResources(actor, snapshot);
-                message = "已继承前世资源与心境。";
-                break;
-            default: message = "未知的前世遗产类别。"; return false;
-        }
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, message);
-        MclslActorAccessor.ApplyDisplayName(actor, MclslActorAccessor.Realm(actor));
-        try { actor.updateStats(); } catch (Exception ex) { MclslDiagnostics.Error("huanzhen-legacy-stats", "刷新前世遗产属性失败: " + ex.Message); }
-        MclslWorldActorQuery.MarkDirty();
-        return true;
-    }
-
-    private static void RestoreLegacyResources(Actor actor, MclslHuanzhenCultivationSnapshot snapshot)
-    {
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, snapshot.MindState);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, snapshot.HeartTemperingProgress);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, snapshot.HeartMethodKnown);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.MiasmaPoolCleansing, snapshot.MiasmaPoolCleansing);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.Contribution, snapshot.Contribution);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.SpiritStones, snapshot.SpiritStones);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, snapshot.RuinExperience);
-        CopyIntState(actor, snapshot, MclslActorDataKeys.MortalMiasma,
-            MclslActorDataKeys.FoundationChanceBonus, MclslActorDataKeys.CaveClaimBonus, MclslActorDataKeys.DivineClaimBonus);
-        CopyStringState(actor, snapshot, MclslActorDataKeys.FactionAffiliation);
-    }
-
     internal static bool RestoreHuanzhenLegacyOption(Actor actor, MclslHuanzhenCultivationSnapshot snapshot,
         string optionId, string operationId, int anchorYear, int deathYear, out string message)
     {
@@ -750,8 +611,6 @@ internal static class MclslCultivationSystem
         MclslActorAccessor.Set(actor, MclslActorDataKeys.MindState, s.MindState); MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartTemperingProgress, s.HeartTemperingProgress); MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, s.HeartMethodKnown);
     }
 
-    private static int SnapshotInt(MclslHuanzhenCultivationSnapshot snapshot, string key) => snapshot?.IntState != null && snapshot.IntState.TryGetValue(key, out int value) ? value : 0;
-
     private static void RestoreLegacyCultivation(Actor actor, MclslHuanzhenCultivationSnapshot s, int anchorYear, int deathYear)
     {
         string realm = s.RealmId ?? string.Empty;
@@ -785,33 +644,6 @@ internal static class MclslCultivationSystem
             MclslActorDataKeys.AncientSoulFusion, MclslActorDataKeys.AncientDaoCompatibility,
             MclslActorDataKeys.AncientTechniqueComprehension, MclslActorDataKeys.AncientHarmonyIntegrity,
             MclslActorDataKeys.AncientHeavenCompatibility);
-    }
-
-    private static void RestoreLegacyTreasures(Actor actor, MclslHuanzhenCultivationSnapshot s)
-    {
-        SetString(actor, MclslActorDataKeys.FoundationWonderId, s.FoundationWonderId); SetString(actor, MclslActorDataKeys.FoundationWonderName, s.FoundationWonderName);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderQuality, s.FoundationWonderQuality);
-        SetString(actor, MclslActorDataKeys.FoundationWonderTags, s.FoundationWonderTags); SetString(actor, MclslActorDataKeys.FoundationWonderDescription, s.FoundationWonderDescription);
-        SetString(actor, MclslActorDataKeys.FoundationWonderOrigin, s.FoundationWonderOrigin); SetString(actor, MclslActorDataKeys.FoundationWonderEffects, s.FoundationWonderEffects);
-        SetString(actor, MclslActorDataKeys.GoldenCoreLaws, s.GoldenCoreLaws); MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCorePurity, s.GoldenCorePurity); MclslActorAccessor.Set(actor, MclslActorDataKeys.GoldenCoreStability, s.GoldenCoreStability);
-        SetString(actor, MclslActorDataKeys.NascentCaveId, s.NascentCaveId); SetString(actor, MclslActorDataKeys.NascentCaveName, s.NascentCaveName); SetString(actor, MclslActorDataKeys.NascentCaveTags, s.NascentCaveTags);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveCompatibility, s.NascentCaveCompatibility); MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentCaveIntegrity, s.NascentCaveIntegrity);
-        SetString(actor, MclslActorDataKeys.NascentEssenceId, s.NascentEssenceId); SetString(actor, MclslActorDataKeys.NascentEssenceName, s.NascentEssenceName); MclslActorAccessor.Set(actor, MclslActorDataKeys.NascentEssenceQuality, s.NascentEssenceQuality);
-        SetString(actor, MclslActorDataKeys.NascentEssenceTags, s.NascentEssenceTags); SetString(actor, MclslActorDataKeys.NascentEssenceDescription, s.NascentEssenceDescription); SetString(actor, MclslActorDataKeys.NascentEssenceEffects, s.NascentEssenceEffects);
-        SetString(actor, MclslActorDataKeys.DivineChangeId, s.DivineChangeId); SetString(actor, MclslActorDataKeys.DivineChangeName, s.DivineChangeName); SetString(actor, MclslActorDataKeys.DivineChangeTags, s.DivineChangeTags); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineChangeCompatibility, s.DivineChangeCompatibility);
-        SetString(actor, MclslActorDataKeys.DivineMarrowId, s.DivineMarrowId); SetString(actor, MclslActorDataKeys.DivineMarrowName, s.DivineMarrowName); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrow, s.DivineMarrowCount); MclslActorAccessor.Set(actor, MclslActorDataKeys.DivineMarrowQuality, s.DivineMarrowQuality);
-        SetString(actor, MclslActorDataKeys.DivineMarrowTags, s.DivineMarrowTags); SetString(actor, MclslActorDataKeys.DivineMarrowDescription, s.DivineMarrowDescription); SetString(actor, MclslActorDataKeys.DivineMarrowEffects, s.DivineMarrowEffects);
-        CopyIntState(actor, s, MclslActorDataKeys.FoundationWonderGrade, MclslActorDataKeys.FoundationWonderCompleteness, MclslActorDataKeys.FoundationWonderRuleStrength);
-    }
-
-    private static void RestoreLegacyDao(Actor actor, MclslHuanzhenCultivationSnapshot s)
-    {
-        SetString(actor, MclslActorDataKeys.WorldSoulId, s.WorldSoulId); SetString(actor, MclslActorDataKeys.WorldSoulName, s.WorldSoulName); SetString(actor, MclslActorDataKeys.HeavenlyDuty, s.HeavenlyDuty);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyLeap, s.HarmonyLeap); SetString(actor, MclslActorDataKeys.HarmonyOrigin, s.HarmonyOrigin); MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyCompatibility, s.HarmonyCompatibility); MclslActorAccessor.Set(actor, MclslActorDataKeys.HarmonyStability, s.HarmonyStability);
-        SetString(actor, MclslActorDataKeys.InverseTruthId, s.InverseTruthId); SetString(actor, MclslActorDataKeys.InverseTruthName, s.InverseTruthName); MclslActorAccessor.Set(actor, MclslActorDataKeys.InverseTruthProgress, s.InverseTruthProgress);
-        SetString(actor, MclslActorDataKeys.HuaShenHonorific, s.HuaShenHonorific); SetString(actor, MclslActorDataKeys.HeDaoHonorific, s.HeDaoHonorific); SetString(actor, MclslActorDataKeys.ChangShengHonorific, s.ChangShengHonorific);
-        SetString(actor, MclslActorDataKeys.AncientHuaShenHonorific, s.AncientHuaShenHonorific); SetString(actor, MclslActorDataKeys.AncientHeDaoHonorific, s.AncientHeDaoHonorific); SetString(actor, MclslActorDataKeys.AncientChangShengHonorific, s.AncientChangShengHonorific);
-        CopyIntState(actor, s, MclslActorDataKeys.TaishangProgress, MclslActorDataKeys.LifespanStolenBonus, MclslActorDataKeys.LifespanDrainedPenalty, MclslActorDataKeys.HeavenlyDutyBacklash);
     }
 
     private static void CopyStringState(Actor actor, MclslHuanzhenCultivationSnapshot snapshot, params string[] keys)

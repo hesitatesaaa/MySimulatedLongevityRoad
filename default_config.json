@@ -361,14 +361,6 @@
       "Callback": "MclslConfig:RecordLowMaterialAcquisitionHistoryCallBack"
     },
     {
-      "Id": "MCLSL_config_beast_natural_spawn",
-      "Name": "妖兽自然出现",
-      "Description": "常见妖兽每20年对全图陆地池与海洋池各做一次40%判定（先陆地、后海洋），成功时按权重选一种常见种随机生成8~20只；稀有妖兽每10年按物种固定概率判定。此开关不影响兽潮和手动放置，概率不能调整。",
-      "Type": "SWITCH",
-      "BoolVal": true,
-      "Callback": "MclslBeastConfig:ReloadBool"
-    },
-    {
       "Id": "MCLSL_config_beast_waves",
       "Type": "SWITCH",
       "Callback": "MclslBeastConfig:ReloadBool",
@@ -419,14 +411,6 @@
       "Type": "INT_SLIDER",
       "Callback": "MclslBeastConfig:ReloadInt",
       "IntVal": 512,
-      "MinIntVal": 1,
-      "MaxIntVal": 4096
-    },
-    {
-      "Id": "MCLSL_config_beast_natural_limit",
-      "Type": "INT_SLIDER",
-      "Callback": "MclslBeastConfig:ReloadInt",
-      "IntVal": 128,
       "MinIntVal": 1,
       "MaxIntVal": 4096
     }

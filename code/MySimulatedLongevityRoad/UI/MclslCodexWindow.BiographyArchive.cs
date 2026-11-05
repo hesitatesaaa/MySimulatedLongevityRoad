@@ -168,7 +168,7 @@ internal sealed partial class MclslCodexWindow
                 {
                     GUILayout.Label("境界：" + MclslRealmIds.Display(MclslActorAccessor.Realm(actor)));
                     GUILayout.Label("真元：" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.TrueEssence, 0));
-                    GUILayout.Label("功法：" + Blank(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty), "未记录"));
+                    GUILayout.Label("功法：" + MclslTextValue.Or(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty), "未记录"));
                     GUILayout.Label("心境：" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.MindState, 0));
                     GUILayout.Label("资质：" + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.Aptitude, 50));
                 });
@@ -179,11 +179,14 @@ internal sealed partial class MclslCodexWindow
                 DrawInfoCard("家门与归属", "#A7E08A", () =>
                 {
                     GUILayout.Label("所属家族：" + (family?.Name ?? "无"));
-                    GUILayout.Label("当前宗门：" + Blank(MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear()), "无"));
-                    string affiliation = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty);
-                    GUILayout.Label("当前组织：" + (affiliation switch { "wanxian" => "万仙盟", "five_elders" => "五老会", _ => "无" }));
-                    GUILayout.Label("旧法宗门出身：" + Blank(MclslFactionMissionSystem.DisplaySectText(
-                        MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty)), "未记录"));
+                    if (!MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor))
+                    {
+                        GUILayout.Label("当前宗门：" + MclslTextValue.Or(MclslFactionMissionSystem.CurrentSectName(actor, MclslRuntime.CurrentYear()), "无"));
+                        string affiliation = MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty);
+                        GUILayout.Label("当前组织：" + (affiliation switch { "wanxian" => "万仙盟", "five_elders" => "五老会", _ => "无" }));
+                        GUILayout.Label("旧法宗门出身：" + MclslTextValue.Or(MclslFactionMissionSystem.DisplaySectText(
+                            MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientSectOrigin, string.Empty)), "未记录"));
+                    }
                     if (family != null && GUILayout.Button("进入家族档案", GUILayout.Width(145f), GUILayout.Height(36f)))
                     {
                         MclslCodexTab[] tabs = ActiveTabs();
@@ -213,7 +216,7 @@ internal sealed partial class MclslCodexWindow
                     DrawMiniStat("所在", actor.city?.data?.name ?? "野外", "#A7E08A", GUILayout.Width(180f));
                     GUILayout.FlexibleSpace();
                     GUILayout.EndHorizontal();
-                    GUILayout.Label("功法道统：" + Blank(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty), "未记录"));
+                    GUILayout.Label("功法道统：" + MclslTextValue.Or(MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, string.Empty), "未记录"));
                     string recent = BiographyRecentText(id);
                     if (recent.Length > 0) GUILayout.Label("近年纪事：" + recent);
                     if (MclslMaobaoSystem.IsRecorded(id)) DrawTag("猫宝已刻名", "#D8C778");

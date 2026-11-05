@@ -61,7 +61,7 @@ internal static class MclslEligibility
     internal static bool IsCivilizedActor(Actor actor)
     {
         if (actor?.asset == null) return false;
-        if (MclslBeastActorRegistration.IsOrdinary(actor)) return false;
+        if (MclslBeastActorRegistration.IsBeast(actor)) return false;
         if (CivilizedAssetCache.TryGetValue(actor.asset, out bool cached)) return cached && BrainState(actor.subspecies).Sapient;
         string id = actor.asset.id ?? string.Empty;
         if (id is MclslImmortalActorRegistration.BaiId or MclslImmortalActorRegistration.ChuanfaId) return true;

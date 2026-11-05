@@ -203,7 +203,19 @@ internal static class MclslBeastAnimation
         asset.disable_jump_animation = true;
         asset.get_override_sprite = GetSprite;
         asset.has_override_sprite = true;
-        MclslActorPresentation.Configure(asset, frames.Fallback);
+        // Native render textures release CPU pixels. Decode only the standing
+        // reference temporarily for body measurement, never on the render path.
+        var form = MclslActorAnimationCatalog.Get(formPath.TrimEnd('/'));
+        string file = MclslActorAnimationCatalog.ResolveNativeFile(form.NativeResourcePath + "/main/" + idle.Data.Names[0]);
+        Texture2D reference = new(2, 2, TextureFormat.RGBA32, false);
+        try
+        {
+            if (!ImageConversion.LoadImage(reference, System.IO.File.ReadAllBytes(file), false))
+                throw new InvalidOperationException("Standing reference decode failed: " + file);
+            MclslActorPresentation.Configure(asset, frames.Fallback,
+                MclslActorPresentation.VisibleBounds(reference, frames.Fallback.rect));
+        }
+        finally { UnityEngine.Object.Destroy(reference); }
         return frames.Fallback;
     }
 

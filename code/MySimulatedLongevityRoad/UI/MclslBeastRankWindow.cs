@@ -55,6 +55,7 @@ internal static class MclslBeastRankWindow
     private static MclslVirtualCardList _rows;
 
     private static ScrollWindow _window;
+    internal static bool IsVisible => _window != null && _window.gameObject.activeInHierarchy;
     private static RectTransform _contentRect;
     private static RectTransform _scrollViewRect;
     private static ScrollRect _rankScroll;
@@ -79,6 +80,7 @@ internal static class MclslBeastRankWindow
 
     internal static void ShowWindow()
     {
+        MclslRankSnapshotSource.RequestVisibleUpdate();
         bool created = EnsureWindow();
         if (_window == null) return;
         if (created) _needRefresh = true;
@@ -381,7 +383,7 @@ internal static class MclslBeastRankWindow
     {
         if (_window == null || !_window.gameObject.activeInHierarchy) return;
         bool included = entry != null && entry.IsOrdinaryBeast && MclslActorAccessor.Alive(entry.Actor)
-            && PassSpeciesFilter(entry) && PassRealmFilter(entry) && PassSearch(entry, NormalizeSearch(_searchQuery));
+            && PassSpeciesFilter(entry) && PassRealmFilter(entry) && PassSearch(entry, MclslRankTextFormat.NormalizeSearch(_searchQuery));
         if (_filterCursor >= 0)
         {
             if (included) NextEntries?.Upsert(id, entry); else NextEntries?.Remove(id);
@@ -446,7 +448,7 @@ internal static class MclslBeastRankWindow
         NextEntries = new MclslOrderedIdIndex<MclslRankEntry>(_compare);
         _filterCursor = 0;
         _resetPendingScroll = resetScroll;
-        _pendingQuery = NormalizeSearch(_searchQuery);
+        _pendingQuery = MclslRankTextFormat.NormalizeSearch(_searchQuery);
     }
 
     private static bool PassSpeciesFilter(MclslRankEntry entry)
@@ -467,11 +469,9 @@ internal static class MclslBeastRankWindow
     private static bool PassSearch(MclslRankEntry entry, string normalizedQuery)
     {
         if (string.IsNullOrWhiteSpace(normalizedQuery)) return true;
-        return NormalizeSearch(entry.Name).Contains(normalizedQuery, StringComparison.Ordinal)
-            || NormalizeSearch(entry.SpeciesName).Contains(normalizedQuery, StringComparison.Ordinal);
+        return MclslRankTextFormat.NormalizeSearch(entry.Name).Contains(normalizedQuery, StringComparison.Ordinal)
+            || MclslRankTextFormat.NormalizeSearch(entry.SpeciesName).Contains(normalizedQuery, StringComparison.Ordinal);
     }
-
-    private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
 
     private static void ContinueFilteredView()
     {
@@ -628,12 +628,12 @@ internal sealed class MclslBeastRankCardView : MonoBehaviour, IPointerEnterHandl
                 _ => MclslUiTheme.BeastRankRowOdd
             };
         }
-        SetText("RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
-        SetText("NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名妖兽" : item.Name, index < 3 ? RankColor(index) : MclslUiTheme.BeastRankTextPrimary);
-        SetText("SpeciesText", string.IsNullOrWhiteSpace(item.SpeciesName) ? "妖兽" : item.SpeciesName, MclslUiTheme.BeastRankTextEmphasis);
-        SetText("RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", string.Empty), MclslUiTheme.BeastRankTextPrimary);
-        SetText("PowerText", MclslRankTextFormat.FormatPower(item.Power), MclslUiTheme.BeastRankAccentGold);
-        SetText("TalentText", item.TalentLevel > 0 ? item.TalentLevel.ToString(CultureInfo.InvariantCulture) : "—", MclslUiTheme.BeastRankAccentRed);
+        MclslRankTextFormat.SetText(transform, "RankText", (index + 1).ToString(CultureInfo.InvariantCulture), RankColor(index));
+        MclslRankTextFormat.SetText(transform, "NameText", string.IsNullOrWhiteSpace(item.Name) ? "未名妖兽" : item.Name, index < 3 ? RankColor(index) : MclslUiTheme.BeastRankTextPrimary);
+        MclslRankTextFormat.SetText(transform, "SpeciesText", string.IsNullOrWhiteSpace(item.SpeciesName) ? "妖兽" : item.SpeciesName, MclslUiTheme.BeastRankTextEmphasis);
+        MclslRankTextFormat.SetText(transform, "RealmText", string.IsNullOrWhiteSpace(item.RealmName) ? "未入道" : item.RealmName.Replace("新法·", string.Empty), MclslUiTheme.BeastRankTextPrimary);
+        MclslRankTextFormat.SetText(transform, "PowerText", MclslRankTextFormat.FormatPower(item.Power), MclslUiTheme.BeastRankAccentGold);
+        MclslRankTextFormat.SetText(transform, "TalentText", item.TalentLevel > 0 ? item.TalentLevel.ToString(CultureInfo.InvariantCulture) : "—", MclslUiTheme.BeastRankAccentRed);
 
         UiUnitAvatarElement avatar = GetComponentInChildren<UiUnitAvatarElement>(true);
         if (avatar != null)
@@ -670,14 +670,6 @@ internal sealed class MclslBeastRankCardView : MonoBehaviour, IPointerEnterHandl
     {
         _actor = null;
         Tooltip.hideTooltip();
-    }
-
-    private void SetText(string childName, string value, Color color)
-    {
-        Text text = transform.Find(childName)?.GetComponent<Text>();
-        if (text == null) return;
-        text.text = value ?? string.Empty;
-        text.color = color;
     }
 
     private static Color RankColor(int rank)

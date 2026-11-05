@@ -10,12 +10,14 @@ using UnityEngine;
 
 namespace MySimulatedLongevityRoad.Systems.Combat;
 
-internal static class MclslCareerCombat
+internal static partial class MclslCareerCombat
 {
     private const string SaveKey="mclsl.080.combat_career.battle.v2";
     private static readonly Dictionary<long,MclslCareerBattleState> Battles = new();
     private static readonly Dictionary<long,long> SummonOwners = new();
     private static double Now => MclslSpellCasting.Now;
+    // 契约宠物手动结算伤害时置位，避免 SummonDamage 对同一笔伤害二次加成。
+    private static bool _directPetDamage;
     internal static void Init()
     {
         foreach(string id in new[]{"casting","slow","break","interrupt"})
@@ -25,8 +27,19 @@ internal static class MclslCareerCombat
             status.base_stats[id=="break"?"armor":"multiplier_speed"]=id=="break"?-12:id=="casting"?-1f:-0.35f;
             AssetManager.status.add(status);
         }
+        // 灵契共鸣给予主人的 +10% 伤害（契灵增伤在伤害结算里另行加算）。
+        var resonance=new StatusAsset { id="mclsl_career_resonance",duration=8,base_stats=new BaseStats(),
+            path_icon="trait/MclslCombatCareer_spirit" };
+        resonance.base_stats["multiplier_damage"]=0.10f;
+        AssetManager.status.add(resonance);
+        // 御灵破势专用的 20% 减速（原 mclsl_career_slow 为 35%，其他职业不改）。
+        var contractSlow=new StatusAsset { id="mclsl_career_contract_slow",duration=4,base_stats=new BaseStats(),
+            path_icon="trait/MclslCombatCareer_spirit" };
+        contractSlow.base_stats["multiplier_speed"]=-0.20f;
+        AssetManager.status.add(contractSlow);
         // Templates supply native animal AI; living-resources binds the authored spirits.
         string[] templates={"wolf","turtle","butterfly","sheep"};
+        var fighter=AssetManager.actor_library.get("wolf");
         for(int i=0;i<4;i++)
         {
             var asset=AssetManager.actor_library.clone("mclsl_career_spirit_"+i,templates[i]);
@@ -45,16 +58,38 @@ internal static class MclslCareerCombat
             asset.texture_asset.loadShadow();
             asset.need_colored_sprite=false;
             asset.animation_idle=new[]{"idle_0","idle_1","idle_2","idle_3"};
-            asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3"};
+            asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3","walk_4","walk_5","walk_6","walk_7"};
             asset.animation_swim=asset.animation_walk;
             asset.animation_idle_speed=0.18f;asset.animation_walk_speed=0.12f;
             asset.animation_swim_speed=0.12f;asset.animation_speed_based_on_walk_speed=false;
+            asset.disable_jump_animation=true;
+            asset.has_override_sprite=true;
+            asset.get_override_sprite=ContractPetSprite;
             // Contract spirits read at two-thirds of the authored actor size;
             // artwork, frames and combat data stay untouched.
             asset.base_stats["scale"]=2f/3f;
+            // 狼沿用原狼模板速度并额外 110%（改克隆独立 base_stats，不动共享模板）。
+            if(i==0)
+                asset.base_stats.set("multiplier_speed",asset.base_stats.get("multiplier_speed")+0.1f);
+            // 龟/鹿原模板无主动作战 AI：沿用原版狼的作战配置（job/decision/attack），
+            // 保留原生攻击节奏，避免逐帧自制 AI。隼保持无近战（手动远程结算）。
+            if(i==1||i==3)
+            {
+                asset.skip_fight_logic=fighter.skip_fight_logic;
+                asset.default_attack=fighter.default_attack;
+                asset.aggression=fighter.aggression;
+                asset.job_attacker=fighter.job_attacker;
+                asset.job=fighter.job;
+                asset.job_kingdom=fighter.job_kingdom;
+                asset.job_baby=fighter.job_baby;
+                // Vanilla initialization has already resolved and released decision_ids.
+                asset.decision_ids=fighter.decision_ids;
+                asset._cached_assets_decisions=fighter._cached_assets_decisions;
+                asset._cached_assets_decisions_counter=fighter._cached_assets_decisions_counter;
+            }
             asset.icon=asset.id;
             SpriteTextureLoader._cached_sprites["ui/Icons/"+asset.id]=
-                SpriteTextureLoader.getSprite("ui/CareerSkills/CP_spirit_"+(i+1)+"A");
+                SpriteTextureLoader.getSprite("ui/ContractPets/"+i);
             Sprite first=SpriteTextureLoader.getSprite(path+"main/idle_0");
             if(first==null)throw new InvalidOperationException("Missing spirit artwork: "+path);
             AssetManager.actor_library.loadTexturesAndSprites(asset);
@@ -62,6 +97,22 @@ internal static class MclslCareerCombat
         }
     }
     private static readonly HashSet<long> ActiveOwners = new();
+    private sealed class PetAnimation
+    {
+        internal readonly MclslActorAnimationState State=new();
+    }
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<Actor,PetAnimation> PetAnimations=new();
+    private static Sprite ContractPetSprite(Actor pet)
+    {
+        pet.checkAnimationContainer();
+        bool moving=pet.isAlive()&&pet.is_moving;
+        var animation=PetAnimations.GetOrCreateValue(pet);
+        animation.State.Select(MclslRuntime.DisplayClock,moving,0,0,out double elapsed);
+        var clip=moving?pet.animation_container.walking:pet.animation_container.idle;
+        float interval=moving?pet.asset.animation_walk_speed:pet.asset.animation_idle_speed;
+        int index=pet.isAlive()?(int)(elapsed/interval)%clip.frames.Length:0;
+        return clip.frames[index];
+    }
     private static readonly MclslOwnerRound OwnerRound = new();
     private static MclslModuleLoadState _loadState;
     private static string _loadedRaw;
@@ -69,17 +120,27 @@ internal static class MclslCareerCombat
     private static bool _loadAttempted;
     private static int _generation;
     internal static void Wake(Actor actor)
-    {if(actor?.data!=null && Battles.ContainsKey(actor.data.id))ActiveOwners.Add(actor.data.id);}
+    {
+        if(actor?.data==null || !Battles.TryGetValue(actor.data.id,out var battle))return;
+        ActiveOwners.Add(actor.data.id);
+        if(battle.Career==5)
+        {
+            var summon=BoundSummon(battle);
+            if(summon!=null)summon.Pulse=0;
+        }
+    }
     internal static void Track(Actor actor)
     {
         if(_loadState.Status!=MclslModuleLoadStatus.Ready)return;
         long id=MclslActorAccessor.Id(actor);
-        if(!Battles.ContainsKey(id))Battles[id]=new MclslCareerBattleState { Owner=id,Career=MclslCombatCareerSystem.Read(actor).Career };
-        if(actor.has_attack_target)ActiveOwners.Add(id);
+        int career=MclslCombatCareerSystem.Read(actor).Career;
+        if(!Battles.ContainsKey(id))Battles[id]=new MclslCareerBattleState { Owner=id,Career=career };
+        // 灵契师需要逐秒维持本命契灵（召唤/属性/跟随），即使当前没有攻击目标也要保持活跃。
+        if(actor.has_attack_target||career==5)ActiveOwners.Add(id);
     }
     private static MclslCareerBattleState Battle(Actor actor) { Track(actor);ActiveOwners.Add(MclslActorAccessor.Id(actor));return Battles[MclslActorAccessor.Id(actor)]; }
     private static bool Passive(Actor actor,int tier)=>MclslCombatCareerSystem.Passive(actor,tier);
-    internal static void Clear(){_generation++;Battles.Clear();ActiveOwners.Clear();OwnerRound.Clear();SummonOwners.Clear();Protections.Clear();_loadState.Clear();_loadedRaw=null;_loadAttempted=false;_loadedWorldGeneration=0;}
+    internal static void Clear(){_generation++;Battles.Clear();ActiveOwners.Clear();OwnerRound.Clear();SummonOwners.Clear();Protections.Clear();_directPetDamage=false;_loadState.Clear();_loadedRaw=null;_loadAttempted=false;_loadedWorldGeneration=0;}
     internal static void Save()
     {
         if(!_loadState.CanSave || World.world?.map_stats==null)return;
@@ -123,45 +184,30 @@ internal static class MclslCareerCombat
         if(!Battles.TryGetValue(id,out var battle))return;
         // A：存活才补结算（换职业/主动移除等），死亡不结算
         if(MclslActorAccessor.Alive(actor)&&(battle.BoutHostileHit||battle.BoutCast)) SettleBout(actor,battle);
+        // 主动结束契约（存活主人转职/失去职业等）：清理活宠前写入“已有截止与 Now+30 的较大值”，
+        // 防止反复转职立刻获得满血契灵。类型选择与冷却在 SetCareer/HandleRemoved 之间不重置。
+        if(battle.Career==5&&MclslActorAccessor.Alive(actor))
+        {
+            var contractState=MclslCombatCareerSystem.Read(actor);
+            contractState.NextSummonAt=MclslContractRules.ExtendCooldown(contractState.NextSummonAt,Now);
+            MclslCombatCareerSystem.Write(actor,contractState);
+        }
         foreach(var summon in battle.Summons)
         {
             SummonOwners.Remove(summon.Unit);
             if(MclslActorRegistry.ResolveKnownOrWorld(summon.Unit,out var unit)&&MclslActorAccessor.Alive(unit))
                 unit.dieAndDestroy((AttackType)11);
         }
-        actor.finishStatusEffect("mclsl_career_casting");Battles.Remove(id);
+        actor.finishStatusEffect("mclsl_career_casting");actor.finishStatusEffect("mclsl_career_resonance");Battles.Remove(id);
         foreach(long key in Protections.Where(p=>p.Key==id||p.Value.Owner==id).Select(p=>p.Key).ToArray()) Protections.Remove(key);
     }
-    private static Actor Resolve(long id) => MclslActorRegistry.ResolveKnownOrWorld(id,out var actor)?actor:null;
+    private static Actor Resolve(long id) => MclslActorAccessor.Resolve(id);
     private static bool Enemy(Actor owner,Actor target)=>MclslCombatTargets.IsEnemy(owner,target);
-    private static bool Injured(Actor actor)=>actor.getHealth()<actor.getMaxHealth();
-    private static bool HasThreeDistinctSummonKinds(MclslCareerBattleState battle)
-    {
-        int mask=0,count=0;
-        for(int i=0;i<battle.Summons.Count;i++)
-        {
-            int bit=1<<(battle.Summons[i].Kind&31);
-            if((mask&bit)!=0)continue;
-            mask|=bit;
-            if(++count>=3)return true;
-        }
-        return false;
-    }
     // Allocation-free membership tests used on the per-decision / per-hit paths
-    // that previously built a LINQ Any() closure over the zone/summon lists.
+    // that previously built a LINQ Any() closure over the zone list.
     private static bool ZoneHasTier(MclslCareerBattleState battle,int tier)
     {
         for(int i=0;i<battle.Zones.Count;i++)if(battle.Zones[i].Tier==tier)return true;
-        return false;
-    }
-    private static bool SummonHasKind(MclslCareerBattleState battle,int kind)
-    {
-        for(int i=0;i<battle.Summons.Count;i++)if(battle.Summons[i].Kind==kind)return true;
-        return false;
-    }
-    private static bool SummonKindActive(MclslCareerBattleState battle,int kind)
-    {
-        for(int i=0;i<battle.Summons.Count;i++){var s=battle.Summons[i];if(s.Kind==kind&&s.Expires>Now)return true;}
         return false;
     }
     // Reusable scan buffers: Nearby always hands callers a fresh array copy, so the
@@ -226,17 +272,19 @@ internal static class MclslCareerCombat
                     Battles.Remove(battle.Owner);ActiveOwners.Remove(battle.Owner);}
                 continue;
             }
+            var ownerState=MclslCombatCareerSystem.Read(owner);
+            if(ownerState.Career!=battle.Career){RemoveOwner(owner);continue;}
+            // 灵契师即使无攻击目标/无契灵也要保持活跃：需要逐秒尝试脱战召唤与契约维护。
             if(battle.Cast==null && battle.Zones.Count==0 && battle.Summons.Count==0
-                && battle.LastAction==0 && !owner.has_attack_target)
+                && battle.LastAction==0 && !owner.has_attack_target && ownerState.Career!=5)
             {ActiveOwners.Remove(battle.Owner);continue;}
-            if(MclslCombatCareerSystem.Read(owner).Career!=battle.Career){RemoveOwner(owner);continue;}
             if(battle.LastAction>0&&Now-battle.LastAction>15)
             {SettleBout(owner,battle);battle.BoutHostileHit=false;battle.BoutCast=false;battle.Marks.Clear();battle.Elements=0;battle.LastAction=0;}
             if(battle.Cast!=null) TickCast(owner,battle);
             if(generation!=_generation)return;
             TickZones(owner,battle);
             if(generation!=_generation)return;
-            TickSummons(owner,battle);
+            if(ownerState.Career==5) TickSpirit(owner,battle,ownerState);
             if(generation!=_generation)return;
             if(Now>=battle.NextDecision)
             {
@@ -252,6 +300,13 @@ internal static class MclslCareerCombat
         var state=MclslCombatCareerSystem.Read(actor);
         if(state.Career<0||!MclslActorAccessor.IsCultivator(actor))return false;
         var battle=Battle(actor);if(battle.Cast!=null)return true;
+        if(state.Career==5)
+        {
+            Actor pet=BoundPet(battle);
+            if(!actor.has_attack_target && actor.getHealth()>=actor.getMaxHealth()
+                && (pet==null||pet.getHealth()>=pet.getMaxHealth()))return false;
+            return TryCastSpirit(actor,state,battle,actor.attack_target as Actor);
+        }
         if(actor.attack_target is not Actor target||!Enemy(actor,target))return false;
         int usable=Math.Min(state.Rank,MclslRealmIds.Index(MclslActorAccessor.Realm(actor))+1);
         for(int tier=usable;tier>=1;tier--)
@@ -261,11 +316,6 @@ internal static class MclslCareerCombat
             if(skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(actor),skill.Item)<1)continue;
             if((state.Career==1||state.Career==2||state.Career==3)&&tier==4 && actor.getHealth()>actor.getMaxHealth()*0.75f)continue;
             if(state.Career==4&&ZoneHasTier(battle,tier))continue;
-            if(state.Career==5)
-            {
-                if(tier==5&&battle.Summons.Count==0)continue;
-                if(tier<5 && (SummonHasKind(battle,tier-1)||battle.Summons.Count>=Math.Min(3,(state.Rank+1)/2)))continue;
-            }
             if(Vector2.Distance(actor.current_position,target.current_position)>(state.Career==1?4:10))continue;
             battle.Cast=new MclslCareerCast { Tier=tier,Target=MclslActorAccessor.Id(target),Due=Now+skill.Preparation };
             if(skill.Preparation>0){actor.stopMovement();actor.addStatusEffect("mclsl_career_casting",skill.Preparation+0.1f);}
@@ -284,7 +334,14 @@ internal static class MclslCareerCombat
         {Interrupt(actor);return;}
         if(Now<cast.Due)return;
         Actor target=Resolve(cast.Target);
-        if(!Enemy(actor,target)){battle.Cast=null;actor.finishStatusEffect("mclsl_career_casting");return;}
+        // 灵契师 2-5 阶的受益者是契灵/主人，不要求敌对目标；其余仍须敌对目标。
+        bool benefit=battle.Career==5&&cast.Tier>=2;
+        if(benefit)
+        {
+            if(!MclslActorAccessor.Alive(target)||!HasLivingPet(battle))
+            {MclslSpellEffect.CancelCareerCast(actor,skill.Id);battle.Cast=null;actor.finishStatusEffect("mclsl_career_casting");return;}
+        }
+        else if(!Enemy(actor,target)){battle.Cast=null;actor.finishStatusEffect("mclsl_career_casting");return;}
         if(cast.Phase==0)
         {
             var state=MclslCombatCareerSystem.Read(actor);
@@ -293,7 +350,8 @@ internal static class MclslCareerCombat
                 || !MclslActorAccessor.IsCultivator(actor)
                 || MclslRealmIds.Index(MclslActorAccessor.Realm(actor))<skill.Tier-1
                 || state.Cooldowns[skill.Tier-1]>Now || mana<cost
-                || skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(actor),skill.Item)<1)
+                || skill.Item.Length>0&&MclslBagSystem.Count(MclslBagSystem.Read(actor),skill.Item)<1
+                || (battle.Career==5&&skill.Tier>=2&&!HasLivingPet(battle)))
             {
                 MclslSpellEffect.CancelCareerCast(actor,skill.Id);
                 battle.Cast=null;actor.finishStatusEffect("mclsl_career_casting");return;
@@ -306,7 +364,8 @@ internal static class MclslCareerCombat
             state.Cooldowns[skill.Tier-1]=Now+skill.Cooldown*(battle.Career==0&&skill.Tier==4&&Passive(actor,4)?0.85:1);
             actor.finishStatusEffect("mclsl_career_casting");
             cast.Phase=1;cast.Due=Now+0.2;
-            MclslSpellEffect.Show(actor,target,skill.Id,phase:skill.Career==4?"area":"travel",duration:0.2f);
+            string showPhase=skill.Career==5?(skill.Tier>=2?"area":"travel"):skill.Career==4?"area":"travel";
+            MclslSpellEffect.Show(actor,target,skill.Id,phase:showPhase,duration:0.2f);
             if(Now>=battle.NextAudio){MusicBox.playSoundVisibleOnly(actor.asset.sound_attack,actor.current_tile);battle.NextAudio=Now+0.3;}
             MclslCombatCareerSystem.Write(actor,state);
             return;
@@ -334,12 +393,7 @@ internal static class MclslCareerCombat
         }
         else if(c==5)
         {
-            if(t==5)
-            {
-                foreach(var summon in battle.Summons){summon.Expires+=8;Actor unit=Resolve(summon.Unit);if(MclslActorAccessor.Alive(unit))unit.restoreHealthPercent(0.25f);}
-                battle.ResonanceUntil=Now+8;
-            }
-            else SpawnSpirit(owner,battle,t-1);
+            ExecuteSpirit(owner,target,battle,skill);
         }
         else if(t==4 && c is 1 or 2 or 3)
         {
@@ -462,54 +516,6 @@ internal static class MclslCareerCombat
     private static readonly Dictionary<long,Protection> Protections=new();
     private static void AddProtection(Actor target,Actor owner,double duration)
         =>Protections[MclslActorAccessor.Id(target)]=new Protection{Owner=MclslActorAccessor.Id(owner),Until=Now+duration};
-    private static void SpawnSpirit(Actor owner,MclslCareerBattleState battle,int kind)
-    {
-        Actor spirit=World.world.units.createNewUnit("mclsl_career_spirit_"+kind,owner.current_tile,false,0,null,null,true,false,false,false);
-        if(owner.kingdom!=null)spirit.setKingdom(owner.kingdom);
-        spirit.stats["health"]=Math.Max(20,owner.getMaxHealth()*(kind==1?0.4f:0.2f));
-        spirit.stats["damage"]=Math.Max(1,owner.stats.get("damage")*(kind==1?0.15f:0.3f));
-        spirit.restoreHealthPercent(1);
-        var summon=new MclslCareerSummon { Unit=MclslActorAccessor.Id(spirit),Kind=kind,Expires=Now+(12+kind*3)*(Passive(owner,1)?1.2:1),Pulse=Now };
-        battle.Summons.Add(summon);SummonOwners[summon.Unit]=battle.Owner;
-        MclslWorldActorQuery.Track(spirit);
-    }
-    private static void TickSummons(Actor owner,MclslCareerBattleState battle)
-    {
-        for(int i=battle.Summons.Count-1;i>=0;i--)
-        {
-            var summon=battle.Summons[i];Actor unit=Resolve(summon.Unit);
-            if(!MclslActorAccessor.Alive(unit)||Now>=summon.Expires)
-            {SummonOwners.Remove(summon.Unit);if(MclslActorAccessor.Alive(unit))unit.dieAndDestroy((AttackType)11);battle.Summons.RemoveAt(i);continue;}
-            if(Now<summon.Pulse)continue;summon.Pulse=Now+1;
-            if(owner.kingdom!=null&&unit.kingdom!=owner.kingdom)unit.setKingdom(owner.kingdom);
-            if(owner.attack_target is Actor target && Enemy(owner,target))
-            {
-                unit.attack_target=target;unit.beh_actor_target=target;unit.has_attack_target=true;
-                if(summon.Kind==2&&Vector2.Distance(unit.current_position,target.current_position)<10)
-                {
-                    float factor=battle.ResonanceUntil>Now?1.3f:1;
-                    if(Passive(owner,5)&&HasThreeDistinctSummonKinds(battle))factor*=1.25f;
-                    factor*=1f+MclslPhysiqueSystem.CareerDamagePercent(owner,5)/100f;
-                    int before=target.getHealth();
-                    MclslSpellCasting.DealDamage(unit,target,owner.stats.get("damage")*0.2f*factor,"雷");
-                    if(target.getHealth()<before)HostileHit(owner);
-                }
-            }
-            if(summon.Kind==3)
-            {
-                int healLimit=3;
-                Actor[] allyUnits=Nearby(owner,unit.current_tile,4);
-                for(int ai=0;ai<allyUnits.Length && healLimit>0;ai++)
-                {
-                    Actor ally=allyUnits[ai];
-                    if(!Friendly(owner,ally)||!ally.has_attack_target||!Injured(ally))continue;
-                    healLimit--;
-                    int before=ally.getHealth();ally.restoreHealthPercent(Passive(owner,4)?0.036f:0.03f);
-                    if(ally.getHealth()>before){Touch(owner);if(Passive(owner,4))PassiveFx(owner,4,ally);}
-                }
-            }
-        }
-    }
     internal static float Incoming(Actor victim,Actor attacker,float damage)
     {
         if(_loadState.Status!=MclslModuleLoadStatus.Ready)return damage;
@@ -526,11 +532,19 @@ internal static class MclslCareerCombat
                 if(ownerCareer==4){Touch(owner);if(ownerPassive4)PassiveFx(owner,4,victim);}
             }
         }
+        // 契约岩龟自身减伤 15%；不再常驻为主人提供 15-25 减伤。
+        long victimId=MclslActorAccessor.Id(victim);
+        if(SummonOwners.TryGetValue(victimId,out long petOwnerId)&&Battles.TryGetValue(petOwnerId,out var petBattle))
+        {
+            var petSummon=BoundSummon(petBattle);
+            if(petSummon!=null&&petSummon.Unit==victimId&&petSummon.Kind==1)
+                damage*=1f-(float)MclslContractRules.TurtleSelfReduction;
+        }
         // Applicable already implies a valid state; read it once instead of letting
         // Career(victim) run a second Applicable+Read on this per-hit path.
         if(!MclslCombatCareerSystem.Applicable(victim)||MclslCombatCareerSystem.Read(victim).Career<0)return damage;
         var battle=Battle(victim);int career=battle.Career;
-        if(battle.GuardUntil>Now)damage*=0.7f;
+        if(battle.GuardUntil>Now)damage*=career==5?1f-(float)MclslContractRules.GuardReduction:0.7f;
         if(career==1)
         {
             if(Passive(victim,1))damage*=0.9f;
@@ -538,8 +552,13 @@ internal static class MclslCareerCombat
             if(Passive(victim,3))battle.Rage=Math.Min(5,battle.Rage+1);
             if(Passive(victim,4)&&victim.getHealth()<victim.getMaxHealth()*0.3f){damage*=0.8f;Touch(victim);PassiveFx(victim,4,victim);}
         }
-        if(career==5&&SummonKindActive(battle,1))
-        {damage*=Passive(victim,2)?0.75f:0.85f;Touch(victim);PassiveFx(victim,2,victim);}
+        if(career==5)
+        {
+            // 护主契纹：活宠距主人 6 格内时主人减伤 8%。
+            var pet=BoundPet(battle);
+            if(pet!=null&&Vector2.Distance(pet.current_position,victim.current_position)<=MclslContractRules.DeerRange)
+                damage*=1f-(float)MclslContractRules.PassiveTwoReduction;
+        }
         return damage;
     }
     internal static void EffectiveHit(Actor attacker,Actor target,int actualDamage)
@@ -557,12 +576,12 @@ internal static class MclslCareerCombat
         if(battle.Career==5)
         {
             if(spirit)mark.SpiritHit=Now;else mark.OwnerHit=Now;
-            if(Passive(attacker,3)&&mark.OwnerHit>0&&mark.SpiritHit>0
-                &&Math.Abs(mark.OwnerHit-mark.SpiritHit)<=3 &&Now>=mark.NextAssist)
+            if(Passive(attacker,3)&&MclslContractRules.AssistReady(mark.OwnerHit,mark.SpiritHit,Now,mark.NextAssist))
             {
-                mark.NextAssist=Now+3;
+                mark.NextAssist=Now+MclslContractRules.AssistCooldownSeconds;
                 HostileHit(attacker);PassiveFx(attacker,3,target);
-                MclslSpellCasting.DealDamage(attacker,target,attacker.stats.get("damage")*0.2f,"木");
+                MclslSpellCasting.DealDamage(attacker,target,
+                    Math.Max(1f,(float)(attacker.stats.get("damage")*MclslContractRules.AssistDamagePower)),"木");
             }
         }
     }
@@ -572,12 +591,13 @@ internal static class MclslCareerCombat
         if(!SummonOwners.TryGetValue(MclslActorAccessor.Id(attacker),out long ownerId))return damage;
         Actor owner=Resolve(ownerId);
         if(!MclslActorAccessor.Alive(owner))return damage;
+        if(_directPetDamage)return damage;
         var battle=Battle(owner);
         if(MclslCombatCareerSystem.Read(owner).Career!=battle.Career)return damage;
-        float factor=battle.ResonanceUntil>Now?1.3f:1f;
-        if(Passive(owner,5)&&HasThreeDistinctSummonKinds(battle))factor*=1.25f;
-        factor*=1f+MclslPhysiqueSystem.CareerDamagePercent(owner,5)/100f;
-        return Math.Max(damage,owner.stats.get("damage")*0.3f*factor);
+        // 契印 / 灵息灌注 / 灵契共鸣的契灵增伤按加算；不套用主人的 30% 伤害下限。
+        bool marked=attacker.attack_target is Actor markTarget&&IsMarked(battle,markTarget);
+        double factor=MclslContractRules.PetDamageFactor(marked,battle.PetBuffUntil>Now,battle.ResonanceUntil>Now,Passive(owner,5));
+        return (float)(damage*factor);
     }
     // 职业战斗“动作标记”：刷新本场活跃时间（不再逐次记试炼）。
     private static void Touch(Actor owner)

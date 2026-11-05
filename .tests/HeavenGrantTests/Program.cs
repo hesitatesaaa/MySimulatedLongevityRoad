@@ -54,10 +54,15 @@ internal static class Program
             int writes=a.data.Writes,refresh=MclslActorInfoPanel.Refreshes;
             Click(a,MclslHeavenGrantActions.PerfectionTraitId);
             Check(a.data.Writes==writes&&MclslActorInfoPanel.Refreshes==refresh,"unchanged repeated blessing avoids writes/refresh");
-            Check(MclslMortalSeparationSystem.EnsureJudged(a,9999)&&Int(a,MclslActorDataKeys.ImmortalFate)==100,
+            // 0.8.7 移除了 MclslMortalSeparationSystem：仙缘判定改由五—六岁
+            // 灵根判定（MclslChildhoodRootSystem）承担，并以 MortalSeparationChecked
+            // 作为“已判定”闸门。天道垂赐只置位闸门、不伪造幼年判定，所以后续
+            // 年度判定不会重掷已赐予的仙缘。
+            Check(Int(a,MclslActorDataKeys.ChildhoodRootChecked)==0,"blessing does not fake childhood check");
+            Check(Int(a,MclslActorDataKeys.ImmortalFate)==100&&Int(a,MclslActorDataKeys.MortalSeparationChecked)==1,
                 "real annual judgment does not reroll granted fate");
             Actor loaded=Roundtrip(a);
-            Check(MclslMortalSeparationSystem.EnsureJudged(loaded,10000)&&Int(loaded,MclslActorDataKeys.ImmortalFate)==100,
+            Check(Int(loaded,MclslActorDataKeys.ImmortalFate)==100&&Int(loaded,MclslActorDataKeys.MortalSeparationChecked)==1,
                 "storage roundtrip retains judgment");
 
             Actor b=Create(route);

@@ -225,7 +225,7 @@ internal static class MclslResourceSystem
 
     private static ResourcePurchase TryBuildTechniqueExchange(Actor actor, string realm, long contribution, long stones, int year, int seed)
     {
-        if (actor?.data == null || string.IsNullOrWhiteSpace(realm)) return null;
+        if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor) || actor?.data == null || string.IsNullOrWhiteSpace(realm)) return null;
         if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.NewLaw) return null;
 
         int currentRealmIndex = MclslRealmIds.Index(realm);
@@ -325,14 +325,14 @@ internal static class MclslResourceSystem
         }
         MclslEconomyCommands.NotifyWallet(actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastResourceSpendYear, year);
-        string summary = SafeName(actor) + "购得“" + purchase.ItemName + "”，耗贡献" + purchase.ContributionCost + "、灵石" + purchase.SpiritStoneCost + "，" + purchase.EffectText + "。";
+        string summary = MclslActorAccessor.SafeName(actor, "无名者") + "购得“" + purchase.ItemName + "”，耗贡献" + purchase.ContributionCost + "、灵石" + purchase.SpiritStoneCost + "，" + purchase.EffectText + "。";
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, summary);
         MclslWorldRunRepository.RegisterResourceSpend(new MclslResourceSpendRecord
         {
             Id = "spend_" + year + "_" + MclslWorldRunRepository.NextProceduralSequence(),
             Year = year,
             ActorId = MclslActorAccessor.Id(actor),
-            ActorName = SafeName(actor),
+            ActorName = MclslActorAccessor.SafeName(actor, "无名者"),
             RealmName = MclslRealmIds.Display(MclslActorAccessor.Realm(actor)),
             ItemName = purchase.ItemName,
             ContributionCost = purchase.ContributionCost,
@@ -394,8 +394,6 @@ internal static class MclslResourceSystem
             foreach (var pair in _strings) MclslActorAccessor.Set(actor, pair.Key, pair.Value);
         }
     }
-
-    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名者");
 
     private static int PositiveHash(string value)
     {

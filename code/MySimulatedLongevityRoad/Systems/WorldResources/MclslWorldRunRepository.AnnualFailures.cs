@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Data;
@@ -6,6 +7,43 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static partial class MclslWorldRunRepository
 {
+    // 年度结算一旦因异常被永久阻塞，就会出现“时间在走、世界不动”的死锁：
+    // 世界时间继续推进，但年度世界（时代、兽潮、宗门、家族……）永远不再结算。
+    // 这里给出有界自愈：异常后按指数退避重试，避免每帧重试造成卡顿；
+    // 连续失败超过上限后保持阻塞，不会无限刷。
+    private const int MaxAnnualAutoRecoverAttempts = 8;
+    private static double _annualRecoverAt;
+
+    internal static void ResetAnnualBlockOnLoad()
+    {
+        MclslAnnualBatchState batch = Current?.AnnualBatch;
+        if (batch == null) return;
+        _annualRecoverAt = 0d;
+        if (!batch.WorldBlocked && batch.WorldFailureStage == 0 && batch.WorldFailureCount == 0) return;
+        batch.WorldBlocked = false;
+        batch.WorldFailureStage = 0;
+        batch.WorldFailureCount = 0;
+        MclslWorldArchiveStore.MarkDirty();
+        MclslDiagnostics.Alert("annual-block-reset-on-load", "读档/进入世界后已清除上一年度结算阻塞状态，重新尝试结算。");
+    }
+
+    /// <summary>返回 true 表示可以继续年度结算；false 表示本轮仍应等待。now 为调用方的秒级时钟。</summary>
+    internal static bool TryRecoverBlockedAnnual(double now)
+    {
+        MclslAnnualBatchState batch = Current?.AnnualBatch;
+        if (batch == null || !batch.WorldBlocked) { _annualRecoverAt = 0d; return true; }
+        if (batch.WorldFailureCount > MaxAnnualAutoRecoverAttempts) return false;
+        if (now < _annualRecoverAt) return false;
+        int attempt = Math.Max(1, batch.WorldFailureCount);
+        double delay = Math.Min(120d, 5d * Math.Pow(2d, Math.Min(6, attempt - 1)));
+        _annualRecoverAt = now + delay;
+        batch.WorldBlocked = false;
+        MclslWorldArchiveStore.MarkDirty();
+        MclslDiagnostics.Alert("annual-auto-recover",
+            "年度结算异常后自动重试（第 " + attempt + " 次，退避 " + delay.ToString("F0") + " 秒）。");
+        return true;
+    }
+
     // One boundary owns the blocked flag, durable failure record, and revision.
     internal static void BlockAnnualSettlement(int year, string scope, string targetId,
         string step, int attempts, string error)

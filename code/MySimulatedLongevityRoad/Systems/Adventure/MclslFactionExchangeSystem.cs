@@ -13,12 +13,13 @@ internal static class MclslFactionExchangeSystem
 
     internal static bool TryExchangeTechnique(Actor actor, string factionId, int year, int seed, out string summary)
     {
+        if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor)) { summary = string.Empty; return false; }
         summary = string.Empty;
         if (actor?.data == null || !MclslWorldEpochSystem.IsNewLawActive(year)) return false;
-        factionId = NormalizeFaction(factionId);
+        factionId = MclslFactionMissionSystem.NormalizeFaction(factionId);
         if (string.IsNullOrWhiteSpace(factionId)) return false;
 
-        string affiliation = NormalizeFaction(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty));
+        string affiliation = MclslFactionMissionSystem.NormalizeFaction(MclslActorAccessor.GetString(actor, MclslActorDataKeys.FactionAffiliation, string.Empty));
         if (!string.IsNullOrWhiteSpace(affiliation) && affiliation != factionId) return false;
 
         string currentMax = MclslTechniqueRealmLimit.MaxRealm(actor);
@@ -288,16 +289,6 @@ internal static class MclslFactionExchangeSystem
     private static int FactionBias(string factionId)
     {
         return factionId == FiveElders ? 13 : 0;
-    }
-
-    private static string NormalizeFaction(string faction)
-    {
-        return faction switch
-        {
-            WanXian or "万仙盟" => WanXian,
-            FiveElders or "五老会" => FiveElders,
-            _ => string.Empty
-        };
     }
 
     private static int PositiveHash(string value)

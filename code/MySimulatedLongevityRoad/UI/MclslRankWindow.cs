@@ -114,6 +114,7 @@ internal static class MclslRankWindow
     private static string _traitFilterSignature;
 
     private static ScrollWindow _window;
+    internal static bool IsVisible => _window != null && _window.gameObject.activeInHierarchy;
     private static Transform _nativeCloseRoot;
     private static RectTransform _contentRect;
     private static RectTransform _scrollViewRect;
@@ -157,6 +158,19 @@ internal static class MclslRankWindow
             entry => FormatProfession(entry, MclslProfessionSystem.Refiner)),
         new("profession_talisman", "制符师", "trait/MclslProfessionTalisman", entry => ProfessionSortRank(entry, MclslProfessionSystem.TalismanMaker),
             entry => FormatProfession(entry, MclslProfessionSystem.TalismanMaker)),
+        // 六大战斗职业：各自一栏，选中后按该职业阶位从高到低排列，无该职业者沉底。
+        new("career_sword", "剑修", "trait/MclslCombatCareer_sword", entry => CombatCareerSortRank(entry, 0),
+            entry => FormatCombatCareer(entry, 0)),
+        new("career_martial", "武修", "trait/MclslCombatCareer_martial", entry => CombatCareerSortRank(entry, 1),
+            entry => FormatCombatCareer(entry, 1)),
+        new("career_elemental", "术修", "trait/MclslCombatCareer_elemental", entry => CombatCareerSortRank(entry, 2),
+            entry => FormatCombatCareer(entry, 2)),
+        new("career_sigil", "符修", "trait/MclslCombatCareer_sigil", entry => CombatCareerSortRank(entry, 3),
+            entry => FormatCombatCareer(entry, 3)),
+        new("career_array", "阵修", "trait/MclslCombatCareer_array", entry => CombatCareerSortRank(entry, 4),
+            entry => FormatCombatCareer(entry, 4)),
+        new("career_spirit", "灵契师", "trait/MclslCombatCareer_spirit", entry => CombatCareerSortRank(entry, 5),
+            entry => FormatCombatCareer(entry, 5)),
         new("essence", "真元", "ui/Icons/ZhenQi", entry => entry.TrueEssence, entry => entry.TrueEssence.ToString(CultureInfo.InvariantCulture)),
         new("mind", "心境", "ui/Icons/XinJing", entry => entry.MindState, entry => entry.MindState.ToString(CultureInfo.InvariantCulture)),
         new("contribution", "贡献", "ui/Icons/GongXianZhi", entry => entry.Contribution, entry => entry.Contribution.ToString(CultureInfo.InvariantCulture)),
@@ -168,6 +182,7 @@ internal static class MclslRankWindow
 
     internal static void ShowWindow()
     {
+        MclslRankSnapshotSource.RequestVisibleUpdate();
         // Wrap the whole create+show round so every grid touched while building
         // the window collapses into a single layout flush.
         BeginLayoutBatch();
@@ -657,7 +672,7 @@ internal static class MclslRankWindow
         NextEntries = new MclslOrderedIdIndex<MclslRankEntry>(_viewCompare);
         _filterCursor = 0;
         _resetPendingScroll = resetScroll;
-        _pendingQuery = NormalizeSearch(_searchQuery);
+        _pendingQuery = MclslRankTextFormat.NormalizeSearch(_searchQuery);
         _viewRevision = MclslRankSnapshotSource.Revision;
     }
     private static void RefreshPrimarySortHeader()
@@ -702,7 +717,7 @@ internal static class MclslRankWindow
         if (_window == null || !_window.gameObject.activeInHierarchy) return;
         bool included = entry != null && !entry.IsOrdinaryBeast && MclslActorAccessor.Alive(entry.Actor)
             && PassRootFilter(entry) && PassRealmFilter(entry)
-            && PassSearch(entry, NormalizeSearch(_searchQuery)) && PassActiveFilters(entry.Actor);
+            && PassSearch(entry, MclslRankTextFormat.NormalizeSearch(_searchQuery)) && PassActiveFilters(entry.Actor);
         if (_filterCursor >= 0)
         {
             if (included) NextEntries?.Upsert(id, entry); else NextEntries?.Remove(id);
@@ -783,8 +798,6 @@ internal static class MclslRankWindow
         catch { return false; }
     }
 
-    private static string NormalizeSearch(string value) => (value ?? string.Empty).Trim().Replace(" ", string.Empty).Replace("　", string.Empty);
-
     private static void RequestSortOrder()
     {
         StringBuilder signature = new();
@@ -798,6 +811,8 @@ internal static class MclslRankWindow
             keys[i] = new MclslRankSortKey(ActiveSortKeys[i].Def) { Ascending = ActiveSortKeys[i].Ascending };
         _viewCompare = (left, right) =>
         {
+            if (keys.Length > 0 && IsCareerSort(keys[0].Def.Id))
+                return CompareCombatCareer(left, right, CareerIndexForSortId(keys[0].Def.Id));
             if (keys.Length > 0 && IsProfessionSort(keys[0].Def.Id))
                 return CompareProfession(left, right, ProfessionForSortId(keys[0].Def.Id));
             for (int i = 0; i < keys.Length; i++)
@@ -850,6 +865,51 @@ internal static class MclslRankWindow
         string[] grades = { "学徒", "黄级", "玄级", "地级", "天级" };
         int grade = Math.Clamp(entry.ProfessionGrade, 0, grades.Length - 1);
         return grades[grade] + " · 熟练度 " + Math.Max(0, entry.ProfessionExperience).ToString(CultureInfo.InvariantCulture);
+    }
+
+    // ── 战斗职业排序（剑修/武修/术修/符修/阵修/灵契师） ────────────────
+    private static bool IsCareerSort(string sortId) => sortId is
+        "career_sword" or "career_martial" or "career_elemental"
+        or "career_sigil" or "career_array" or "career_spirit";
+
+    private static int CareerIndexForSortId(string sortId) => sortId switch
+    {
+        "career_sword" => 0,
+        "career_martial" => 1,
+        "career_elemental" => 2,
+        "career_sigil" => 3,
+        "career_array" => 4,
+        "career_spirit" => 5,
+        _ => -1
+    };
+
+    // 阶位 0..5 换算成 1..6，无该职业记 0 沉底；同阶用熟练度做次序。
+    private static int CombatCareerSortRank(MclslRankEntry entry, int career)
+        => entry != null && entry.CombatCareer == career ? Math.Clamp(entry.CombatCareerRank, 0, 5) + 1 : 0;
+
+    private static string FormatCombatCareer(MclslRankEntry entry, int career)
+    {
+        if (entry == null || entry.CombatCareer != career) return "无该职业";
+        string[] ranks = MclslCombatCareerCatalog.Ranks;
+        int rank = Math.Clamp(entry.CombatCareerRank, 0, ranks.Length - 1);
+        return ranks[rank] + " · 熟练度 " + Math.Max(0, entry.CombatCareerExperience).ToString(CultureInfo.InvariantCulture);
+    }
+
+    private static int CompareCombatCareer(MclslRankEntry left, MclslRankEntry right, int career)
+    {
+        int result = CombatCareerSortRank(right, career).CompareTo(CombatCareerSortRank(left, career));
+        if (result != 0) return result;
+        int leftExp = left?.CombatCareer == career ? left.CombatCareerExperience : 0;
+        int rightExp = right?.CombatCareer == career ? right.CombatCareerExperience : 0;
+        result = rightExp.CompareTo(leftExp);
+        if (result != 0) return result;
+        result = (right?.RealmIndex ?? -1).CompareTo(left?.RealmIndex ?? -1);
+        if (result != 0) return result;
+        result = (right?.MinorRealmIndex ?? -1).CompareTo(left?.MinorRealmIndex ?? -1);
+        if (result != 0) return result;
+        result = (right?.Power ?? 0d).CompareTo(left?.Power ?? 0d);
+        if (result != 0) return result;
+        return (left?.ActorId ?? 0L).CompareTo(right?.ActorId ?? 0L);
     }
 
     private static void UpdateVisibleCards()
@@ -1553,7 +1613,7 @@ internal static class MclslRankWindow
                     ActiveSortKeys.Remove(key);
                     ActiveSortKeys.Insert(0, key);
                 }
-                else if (!IsProfessionSort(sortId)) key.Toggle();
+                else if (!IsProfessionSort(sortId) && !IsCareerSort(sortId)) key.Toggle();
                 BeginLayoutBatch();
                 try
                 {
@@ -1633,7 +1693,9 @@ internal static class MclslRankWindow
         if (view.Tip != null)
         {
             view.Tip.TooltipText = view.Def.Name + (ascending ? "（升序）" : "（降序）");
-            view.Tip.TooltipDescription = IsProfessionSort(view.Id)
+            view.Tip.TooltipDescription = IsCareerSort(view.Id)
+                ? "按战斗职业阶位（宗师、大师、精通、熟练、入门、未入门）及熟练度、境界排序；无该职业者排在其后。"
+                : IsProfessionSort(view.Id)
                 ? "按品阶天、地、玄、黄及无该职业排序；同品阶按熟练度、境界和稳定ID排序。"
                 : "左键设为首排序或切换升降序，右键移除";
         }
