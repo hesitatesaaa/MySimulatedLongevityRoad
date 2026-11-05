@@ -996,17 +996,16 @@ internal static class MclslTraitRegistration
     private static void TrySet(object target, string name, int value)
     {
         if (target == null) return;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
         try
         {
-            FieldInfo field = target.GetType().GetField(name, flags);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out PropertyInfo property);
             if (field != null)
             {
                 if (field.FieldType == typeof(int)) field.SetValue(target, value);
                 else if (field.FieldType == typeof(float)) field.SetValue(target, (float)value);
                 return;
             }
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
+
             if (property != null && property.CanWrite)
             {
                 if (property.PropertyType == typeof(int)) property.SetValue(target, value);
@@ -1034,16 +1033,15 @@ internal static class MclslTraitRegistration
     private static void TrySetString(object target, string name, string value)
     {
         if (target == null) return;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
         try
         {
-            FieldInfo field = target.GetType().GetField(name, flags);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out PropertyInfo property);
             if (field != null && field.FieldType == typeof(string))
             {
                 field.SetValue(target, value ?? string.Empty);
                 return;
             }
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
+
             if (property != null && property.CanWrite && property.PropertyType == typeof(string))
                 property.SetValue(target, value ?? string.Empty);
         }

@@ -76,17 +76,16 @@ internal static class MclslMaobaoCommands
         if (actor?.data != null) return true;
         if (value == null) return false;
 
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
         string[] names = { "actor", "unit", "data" };
         for (int i = 0; i < names.Length; i++)
         {
-            FieldInfo field = value.GetType().GetField(names[i], flags);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(value.GetType(), names[i], out FieldInfo field, out PropertyInfo property);
             if (field?.GetValue(value) is Actor fieldActor && fieldActor.data != null)
             {
                 actor = fieldActor;
                 return true;
             }
-            PropertyInfo property = value.GetType().GetProperty(names[i], flags);
+
             if (property != null && property.CanRead && property.GetValue(value, null) is Actor propertyActor && propertyActor.data != null)
             {
                 actor = propertyActor;

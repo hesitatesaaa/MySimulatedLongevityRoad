@@ -135,7 +135,7 @@ internal static class MclslImmortalActorRegistration
     {
         foreach (string name in names)
         {
-            FieldInfo field = target.GetType().GetField(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out _);
             if (field?.FieldType == typeof(bool)) field.SetValue(target, value);
         }
     }

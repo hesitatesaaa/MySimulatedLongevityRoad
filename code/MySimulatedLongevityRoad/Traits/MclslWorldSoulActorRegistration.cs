@@ -670,8 +670,8 @@ internal static partial class MclslWorldSoulActorRegistration
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
         try
         {
-            object equipment = actor.GetType().GetField("equipment", flags)?.GetValue(actor)
-                ?? actor.GetType().GetProperty("equipment", flags)?.GetValue(actor);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(actor.GetType(), "equipment", out FieldInfo equipmentField, out PropertyInfo equipmentProperty);
+            object equipment = equipmentField?.GetValue(actor) ?? (equipmentProperty?.CanRead == true ? equipmentProperty.GetValue(actor, null) : null);
             if (equipment == null) return;
             MethodInfo clear = equipment.GetType().GetMethod("clear", flags) ?? equipment.GetType().GetMethod("Clear", flags);
             clear?.Invoke(equipment, null);
@@ -682,10 +682,9 @@ internal static partial class MclslWorldSoulActorRegistration
     private static void TrySetActorSize(ActorAsset asset)
     {
         if (asset == null) return;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
         try
         {
-            FieldInfo field = asset.GetType().GetField("actor_size", flags);
+            MySimulatedLongevityRoad.Core.MclslReflectionMembers.ResolveAccessor(asset.GetType(), "actor_size", out FieldInfo field, out _);
             if (field == null || !field.FieldType.IsEnum) return;
             object value = Enum.Parse(field.FieldType, "S13_Human");
             field.SetValue(asset, value);

@@ -109,6 +109,21 @@ internal static class MclslReflectionMembers
     }
 
     /// <summary>
+    /// 取缓存的 FieldInfo/PropertyInfo，供仍需检查成员类型的调用方复用（替代每次 GetField/GetProperty）。
+    /// 返回值表示至少命中一个成员。
+    /// </summary>
+    internal static bool ResolveAccessor(Type type, string name, out FieldInfo field, out PropertyInfo property)
+    {
+        field = null;
+        property = null;
+        if (type == null || string.IsNullOrWhiteSpace(name)) return false;
+        Accessor accessor = Resolve(type, name);
+        field = accessor.Field;
+        property = accessor.Property;
+        return field != null || property != null;
+    }
+
+    /// <summary>
     /// 从任意对象按候选成员名依次取 Actor（替代各系统私有的 TryGetActorMember 反射实现）。
     /// 命中缓存，行为与原实现一致：先字段后属性。
     /// </summary>

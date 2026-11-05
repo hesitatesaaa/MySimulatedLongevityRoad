@@ -142,15 +142,13 @@ internal static class MclslNativeKillStatisticsSystem
         catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
 
         object target = victim;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
         for (int i = 0; i < KillerMemberNames.Length; i++)
         {
             string name = KillerMemberNames[i];
             try
             {
-                FieldInfo field = target.GetType().GetField(name, flags);
+                MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out PropertyInfo property);
                 if (field?.GetValue(target) is Actor fieldActor && fieldActor != victim) return fieldActor;
-                PropertyInfo property = target.GetType().GetProperty(name, flags);
                 if (property?.CanRead == true && property.GetValue(target, null) is Actor propertyActor && propertyActor != victim) return propertyActor;
             }
             catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
@@ -190,12 +188,10 @@ internal static class MclslNativeKillStatisticsSystem
     {
         value = 0L;
         if (target == null || string.IsNullOrWhiteSpace(name)) return false;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
         try
         {
-            FieldInfo field = target.GetType().GetField(name, flags);
+            MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out PropertyInfo property);
             if (field != null && TryConvertNumeric(field.GetValue(target), out value)) return true;
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
             if (property?.CanRead == true && TryConvertNumeric(property.GetValue(target, null), out value)) return true;
         }
         catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
@@ -205,16 +201,14 @@ internal static class MclslNativeKillStatisticsSystem
     private static bool TryWriteNumericMember(object target, string name, long value)
     {
         if (target == null || string.IsNullOrWhiteSpace(name)) return false;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
         try
         {
-            FieldInfo field = target.GetType().GetField(name, flags);
+            MclslReflectionMembers.ResolveAccessor(target.GetType(), name, out FieldInfo field, out PropertyInfo property);
             if (field != null && TryConvertForType(value, field.FieldType, out object convertedField))
             {
                 field.SetValue(target, convertedField);
                 return true;
             }
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
             if (property?.CanWrite == true && TryConvertForType(value, property.PropertyType, out object convertedProperty))
             {
                 property.SetValue(target, convertedProperty, null);

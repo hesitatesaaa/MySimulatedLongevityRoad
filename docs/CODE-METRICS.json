@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-06T00:40:08+08:00",
+  "generatedAt": "2026-11-06T00:42:38+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 75887,
+  "totalLines": 75892,
   "linesPerTopDir": {
-    "Systems": 41347,
-    "UI": 19693,
+    "Systems": 41341,
+    "UI": 19692,
     "Data": 5072,
-    "Core": 3876,
-    "Traits": 3816,
+    "Core": 3891,
+    "Traits": 3813,
     "Patches": 1725,
     "Queries": 328,
     "Interop": 30
@@ -43,7 +43,7 @@
     },
     {
       "file": "Traits/MclslTraitRegistration.cs",
-      "lines": 1251
+      "lines": 1249
     },
     {
       "file": "Systems/Runtime/MclslScheduler.cs",
@@ -55,7 +55,7 @@
     },
     {
       "file": "Traits/MclslWorldSoulActorRegistration.cs",
-      "lines": 1014
+      "lines": 1013
     }
   ],
   "catchTotal": 443,
@@ -68,9 +68,9 @@
   "rawDebugLogOutsideDiagnostics": 0,
   "reflection": {
     "accessTools": 96,
-    "getField": 34,
-    "getProperty": 22,
-    "uncachedRuntimeLookups": 17
+    "getField": 25,
+    "getProperty": 15,
+    "uncachedRuntimeLookups": 1
   },
   "longParams6": 127,
   "longLinesOver200": 291,
