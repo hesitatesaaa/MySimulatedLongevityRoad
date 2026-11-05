@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T00:54:58+08:00",
+  "generatedAt": "2026-11-06T00:57:30+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
@@ -72,7 +72,7 @@
     "getProperty": 15,
     "uncachedRuntimeLookups": 0
   },
-  "longParams6": 124,
+  "longParams6": 114,
   "longLinesOver200": 200,
   "longLinesOver300": 21,
   "duplicateBlocks": 18,

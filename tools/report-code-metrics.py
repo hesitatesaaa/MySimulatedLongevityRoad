@@ -63,12 +63,50 @@ def count_uncached_runtime(text):
     return n
 
 
+def _split_top_params(text):
+    """Split a parameter list on commas at nesting depth 0 (ignore commas inside <> () [] {})."""
+    parts = []
+    buf = []
+    depth = 0
+    in_str = False
+    esc = False
+    for ch in text:
+        if in_str:
+            buf.append(ch)
+            if esc:
+                esc = False
+            elif ch == '\\':
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+            buf.append(ch)
+            continue
+        if ch in '<([{':
+            depth += 1
+            buf.append(ch)
+            continue
+        if ch in '>)]}':
+            depth -= 1
+            buf.append(ch)
+            continue
+        if ch == ',' and depth == 0:
+            parts.append(''.join(buf).strip())
+            buf = []
+            continue
+        buf.append(ch)
+    if buf:
+        parts.append(''.join(buf).strip())
+    return [p for p in parts if p]
+
+
 def count_long_params(text):
-    """Count method/ctor declarations with >= 6 parameters (regex heuristic)."""
+    """Count declarations with >= 6 parameters, splitting only on top-level commas."""
     total = 0
     for m in re.finditer(r'(?m)^\s*(?:internal|private|public|protected|static|sealed|override|virtual|abstract)[^\n;=]*?\b[A-Za-z_][A-Za-z0-9_]*\s*\(([^)]*)\)\s*$', text):
-        params = [x for x in m.group(1).split(',') if x.strip()]
-        if len(params) >= 6:
+        if len(_split_top_params(m.group(1))) >= 6:
             total += 1
     return total
 
