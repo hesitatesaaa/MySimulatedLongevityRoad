@@ -21,10 +21,23 @@ internal static class MclslBeastRules
         if(cursor<0||cursor>=count)throw new ArgumentOutOfRangeException(nameof(cursor));
         return cursor==0?2:cursor<=(int)Math.Ceiling((count-1)*0.25)?1:0;
     }
-    internal static int PlannedCount(int level,float multiplier,int limit,int alive,int reserved,int worldTiles=65536,int waveLimit=64)
+    internal static int PlannedCount(MclslBeastPlanRequest r)
     {
+        int level=r.Level; float multiplier=r.Multiplier; int limit=r.Limit; int alive=r.Alive; int reserved=r.Reserved;
+        int worldTiles=r.WorldTiles; int waveLimit=r.WaveLimit;
         int available=Math.Max(0,limit-alive-reserved);
         float mapScale=Math.Clamp((float)Math.Sqrt(Math.Max(1,worldTiles)/65536f),0.5f,1.5f);
         return Math.Min(Math.Min(available,Math.Clamp(waveLimit,1,256)),Math.Max(1,(int)Math.Round(Counts[Math.Clamp(level,1,7)-1]*Math.Clamp(multiplier,0.1f,10f)*mapScale)));
     }
+}
+
+internal sealed class MclslBeastPlanRequest
+{
+    internal int Level;
+    internal float Multiplier;
+    internal int Limit;
+    internal int Alive;
+    internal int Reserved;
+    internal int WorldTiles = 65536;
+    internal int WaveLimit = 64;
 }

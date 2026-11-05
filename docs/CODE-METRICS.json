@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-06T01:01:08+08:00",
+  "generatedAt": "2026-11-06T01:03:19+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 76197,
+  "totalLines": 76233,
   "linesPerTopDir": {
-    "Systems": 41454,
+    "Systems": 41477,
     "UI": 19745,
-    "Data": 5143,
+    "Data": 5156,
     "Core": 3891,
     "Traits": 3832,
     "Patches": 1774,
@@ -72,7 +72,7 @@
     "getProperty": 15,
     "uncachedRuntimeLookups": 0
   },
-  "longParams6": 114,
+  "longParams6": 111,
   "longLinesOver200": 200,
   "longLinesOver300": 21,
   "duplicateBlocks": 9,

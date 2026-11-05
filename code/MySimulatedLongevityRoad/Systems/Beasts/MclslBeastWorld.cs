@@ -153,8 +153,16 @@ internal static class MclslBeastWorld
         }
         if(options.Count==0)return CannotTrigger("没有符合该等级与主题的海陆生成位置。");
         var option=options[Roll(year+"|theme|"+State.Waves.Count,options.Count)];
-        int count=MclslBeastRules.PlannedCount(level,CountMultiplier,AutomaticLimit,CountAutomatic(),State.Waves.Sum(x=>x.Count-x.Cursor),
-            MapBox.width*MapBox.height,MaximumWaveCount);
+        int count=MclslBeastRules.PlannedCount(new MclslBeastPlanRequest
+        {
+            Level = level,
+            Multiplier = CountMultiplier,
+            Limit = AutomaticLimit,
+            Alive = CountAutomatic(),
+            Reserved = State.Waves.Sum(x=>x.Count-x.Cursor),
+            WorldTiles = MapBox.width*MapBox.height,
+            WaveLimit = MaximumWaveCount
+        });
         if(count==0)return CannotTrigger("已达自动妖兽总上限，暂无生成名额。");
         var wave=new MclslBeastWaveState { Id=Guid.NewGuid().ToString("N"),Level=level,Theme=option.Theme,
             X=option.Tile.pos.x,Y=option.Tile.pos.y,Count=count,Year=year };

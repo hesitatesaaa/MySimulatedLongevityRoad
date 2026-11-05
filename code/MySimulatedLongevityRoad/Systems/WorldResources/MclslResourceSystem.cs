@@ -121,7 +121,10 @@ internal static class MclslResourceSystem
         int willingness = 26 + realmIndex * 4 + (int)Math.Min(28, contribution / 30) + (int)Math.Min(24, stones / 45);
         if (seed % 100 >= Math.Clamp(willingness, 25, 78)) return;
 
-        ResourcePurchase purchase = PickPurchase(actor, realm, contribution, stones, year, seed);
+        ResourcePurchase purchase = PickPurchase(new ResourcePurchaseRequest
+        {
+            Actor = actor, Realm = realm, Contribution = contribution, Stones = stones, Year = year, Seed = seed
+        });
         if (purchase == null) return;
         ApplyPurchase(actor, year, purchase);
     }
@@ -151,14 +154,15 @@ internal static class MclslResourceSystem
         MclslEconomyCommands.NotifyWallet(actor);
     }
 
-    private static ResourcePurchase PickPurchase(Actor actor, string realm, long contribution, long stones, int year, int seed)
+    private static ResourcePurchase PickPurchase(ResourcePurchaseRequest r)
     {
+        Actor actor = r.Actor; string realm = r.Realm; long contribution = r.Contribution; long stones = r.Stones; int year = r.Year; int seed = r.Seed;
         bool ancientLaw = MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty)
             == MclslCultivationSystemIds.AncientLaw;
         int essence = MclslCultivationGrowthSystem.CurrentTrueEssence(actor);
         int nextRealmMinimum = MclslRealmProgress.NextRealmMinimum(realm, ancientLaw);
         float progress = MclslRealmProgress.ProgressForRealm(realm, essence, ancientLaw);
-        ResourcePurchase techniqueExchange = TryBuildTechniqueExchange(actor, realm, contribution, stones, year, seed);
+        ResourcePurchase techniqueExchange = TryBuildTechniqueExchange(r);
         if (techniqueExchange != null) return techniqueExchange;
 
         if (realm == MclslRealmIds.LianQi && progress >= 72f && CanAfford(contribution, stones, 45, 25))
@@ -223,8 +227,9 @@ internal static class MclslResourceSystem
         return null;
     }
 
-    private static ResourcePurchase TryBuildTechniqueExchange(Actor actor, string realm, long contribution, long stones, int year, int seed)
+    private static ResourcePurchase TryBuildTechniqueExchange(ResourcePurchaseRequest r)
     {
+        Actor actor = r.Actor; string realm = r.Realm; long contribution = r.Contribution; long stones = r.Stones; int year = r.Year; int seed = r.Seed;
         if (MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor) || actor?.data == null || string.IsNullOrWhiteSpace(realm)) return null;
         if (MclslActorAccessor.GetString(actor, MclslActorDataKeys.CultivationSystem, string.Empty) != MclslCultivationSystemIds.NewLaw) return null;
 
@@ -435,4 +440,14 @@ internal static class MclslResourceSystem
         int current = MclslActorAccessor.GetInt(actor, key, min);
         MclslActorAccessor.Set(actor, key, Math.Clamp(current + delta, min, max));
     }
+}
+
+internal sealed class ResourcePurchaseRequest
+{
+    internal Actor Actor;
+    internal string Realm;
+    internal long Contribution;
+    internal long Stones;
+    internal int Year;
+    internal int Seed;
 }
