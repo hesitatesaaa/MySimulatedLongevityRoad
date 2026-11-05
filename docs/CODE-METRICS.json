@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-06T00:50:25+08:00",
+  "generatedAt": "2026-11-06T00:52:25+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 76143,
+  "totalLines": 76147,
   "linesPerTopDir": {
     "Systems": 41407,
-    "UI": 19718,
+    "UI": 19722,
     "Data": 5143,
     "Core": 3891,
     "Traits": 3852,
@@ -23,7 +23,7 @@
     },
     {
       "file": "UI/MclslRankWindow.cs",
-      "lines": 2191
+      "lines": 2183
     },
     {
       "file": "UI/MclslFeatureWindow.cs",
@@ -75,7 +75,7 @@
   "longParams6": 127,
   "longLinesOver200": 200,
   "longLinesOver300": 21,
-  "duplicateBlocks": 21,
+  "duplicateBlocks": 18,
   "compileError": null,
   "compileWarning": null
 }

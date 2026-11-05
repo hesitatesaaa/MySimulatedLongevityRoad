@@ -724,15 +724,7 @@ internal static class MclslRankWindow
         }
         else
         {
-            int oldIndex = Entries.IndexOf(id);
-            if (included) Entries.Upsert(id, entry); else Entries.Remove(id);
-            int newIndex = included ? Entries.IndexOf(id) : -1;
-            if (oldIndex >= 0 || newIndex >= 0)
-            {
-                (int changedStart, int changedEnd) = MclslOrderedChangeRange.Affected(oldIndex, newIndex);
-                _rows?.MarkDirty(changedStart, changedEnd);
-                _viewDataDirty = true;
-            }
+            if (MclslRankEntryChange.Apply(Entries, _rows, id, included, entry)) _viewDataDirty = true;
         }
         _viewRevision = MclslRankSnapshotSource.Revision;
     }

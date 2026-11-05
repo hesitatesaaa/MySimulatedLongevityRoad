@@ -21,7 +21,7 @@ LIMITS = {
     'emptyCatchCode': 0,
     'longParams6': 127,          # 128→127（M3 起步）→ 目标 ≤90
     'longLinesOver200': 200,     # 373→200（M4 完成：Guard 使用 + 顶层逗号安全折行）
-    'duplicateBlocks': 21,       # 基线：21 → 目标 ≤10（M5）
+    'duplicateBlocks': 18,       # 21→18（M5-B/D 去重）→ 目标 ≤10
     'uncachedRuntimeLookups': 0, # M2：运行期未缓存 GetType().GetField/GetProperty 必须为 0
 }
 

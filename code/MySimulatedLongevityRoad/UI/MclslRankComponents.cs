@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using MySimulatedLongevityRoad.Core;
 using MySimulatedLongevityRoad.Queries;
 using MySimulatedLongevityRoad.Systems;
 using UnityEngine;
@@ -7,6 +8,25 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MySimulatedLongevityRoad.UI;
+
+/// <summary>
+/// 榜单(通用榜 / 妖兽榜)共用的“单条增删后刷新可视行”逻辑。两处原先逐字相同，
+/// 抽此处统一，避免再各写一份（含脏区间计算与视图标记）。
+/// </summary>
+internal static class MclslRankEntryChange
+{
+    internal static bool Apply(MclslOrderedIdIndex<MclslRankEntry> entries, MclslVirtualCardList rows,
+        long id, bool included, MclslRankEntry entry)
+    {
+        int oldIndex = entries.IndexOf(id);
+        if (included) entries.Upsert(id, entry); else entries.Remove(id);
+        int newIndex = included ? entries.IndexOf(id) : -1;
+        if (oldIndex < 0 && newIndex < 0) return false;
+        (int changedStart, int changedEnd) = MclslOrderedChangeRange.Affected(oldIndex, newIndex);
+        rows?.MarkDirty(changedStart, changedEnd);
+        return true;
+    }
+}
 
 internal sealed class MclslRankWindowUpdater : MonoBehaviour
 {
