@@ -1,0 +1,23 @@
+{
+  "version": "0.8.6",
+  "date": "2026-11-05",
+  "sourceCount": 299,
+  "configKey": "MCLSL_config_childhood_root_chance",
+  "defaultPercent": 10,
+  "formula": "floor(N * percent / 100)",
+  "stats": "alive, age >=5, CanCultivate, native sapient, !IsBeast; R=HasActualSpiritualRoot among N",
+  "candidate": "unchecked age5/6 only; stable world-seed/year/id hash; max32 per call plus shared annual budget",
+  "compile": {
+    "exit": 0,
+    "warnings": 0
+  },
+  "isolatedResult": "PASS quota: 0/10/100%, rounding, stable order, shortage/excess, death, specials, sapience, age5/6, no adult refill, config, shared budget, rebuild/load/world reset\n10000 population: register=5.57ms, census=2.73ms, allocation=1.84ms, harness allocation=5149832 bytes\n50000 population: register=72.82ms, census=8.15ms, allocation=9.56ms, harness allocation=24579792 bytes\n",
+  "liveUnityTested": false,
+  "actualFrameTimeImprovement": null,
+  "limitations": [
+    "No actual Unity FPS/CPU/P95 measurement",
+    "Isolated load/rebuild tests use production allocator with stubs, not a complete game save/load",
+    "Harness allocation numbers include fake actors and registry, not only the quota module",
+    "Existing art provenance validators skipped by local-development packaging; no new image assets"
+  ]
+}

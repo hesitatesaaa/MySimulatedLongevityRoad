@@ -179,11 +179,11 @@ internal static class MclslAncientMentorshipSystem
             UpdateBookProgress(actor, year);
         }
 
-        List<Actor> students = GetLiveStudents(actor);
-        if (students.Count == 0) return;
         int last = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientMentorLastTransmissionYear, 0);
         int lastRecruitYear = MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientMentorLastRecruitYear, 0);
         if (year - Math.Max(last, lastRecruitYear) < RecruitIntervalYears) return;
+        List<Actor> students = GetLiveStudents(actor);
+        if (students.Count == 0) return;
         foreach (Actor student in students)
         {
             EnsureMentorshipBooks(actor, student, year);

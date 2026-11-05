@@ -62,6 +62,9 @@ internal static partial class MclslCareerCombat
             asset.animation_swim=asset.animation_walk;
             asset.animation_idle_speed=0.18f;asset.animation_walk_speed=0.12f;
             asset.animation_swim_speed=0.12f;asset.animation_speed_based_on_walk_speed=false;
+            asset.disable_jump_animation=true;
+            asset.has_override_sprite=true;
+            asset.get_override_sprite=ContractPetSprite;
             // Contract spirits read at two-thirds of the authored actor size;
             // artwork, frames and combat data stay untouched.
             asset.base_stats["scale"]=2f/3f;
@@ -94,6 +97,22 @@ internal static partial class MclslCareerCombat
         }
     }
     private static readonly HashSet<long> ActiveOwners = new();
+    private sealed class PetAnimation
+    {
+        internal readonly MclslActorAnimationState State=new();
+    }
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<Actor,PetAnimation> PetAnimations=new();
+    private static Sprite ContractPetSprite(Actor pet)
+    {
+        pet.checkAnimationContainer();
+        bool moving=pet.isAlive()&&pet.is_moving;
+        var animation=PetAnimations.GetOrCreateValue(pet);
+        animation.State.Select(MclslRuntime.DisplayClock,moving,0,0,out double elapsed);
+        var clip=moving?pet.animation_container.walking:pet.animation_container.idle;
+        float interval=moving?pet.asset.animation_walk_speed:pet.asset.animation_idle_speed;
+        int index=pet.isAlive()?(int)(elapsed/interval)%clip.frames.Length:0;
+        return clip.frames[index];
+    }
     private static readonly MclslOwnerRound OwnerRound = new();
     private static MclslModuleLoadState _loadState;
     private static string _loadedRaw;
@@ -101,7 +120,15 @@ internal static partial class MclslCareerCombat
     private static bool _loadAttempted;
     private static int _generation;
     internal static void Wake(Actor actor)
-    {if(actor?.data!=null && Battles.ContainsKey(actor.data.id))ActiveOwners.Add(actor.data.id);}
+    {
+        if(actor?.data==null || !Battles.TryGetValue(actor.data.id,out var battle))return;
+        ActiveOwners.Add(actor.data.id);
+        if(battle.Career==5)
+        {
+            var summon=BoundSummon(battle);
+            if(summon!=null)summon.Pulse=0;
+        }
+    }
     internal static void Track(Actor actor)
     {
         if(_loadState.Status!=MclslModuleLoadStatus.Ready)return;
@@ -273,7 +300,13 @@ internal static partial class MclslCareerCombat
         var state=MclslCombatCareerSystem.Read(actor);
         if(state.Career<0||!MclslActorAccessor.IsCultivator(actor))return false;
         var battle=Battle(actor);if(battle.Cast!=null)return true;
-        if(state.Career==5)return TryCastSpirit(actor,state,battle,actor.attack_target as Actor);
+        if(state.Career==5)
+        {
+            Actor pet=BoundPet(battle);
+            if(!actor.has_attack_target && actor.getHealth()>=actor.getMaxHealth()
+                && (pet==null||pet.getHealth()>=pet.getMaxHealth()))return false;
+            return TryCastSpirit(actor,state,battle,actor.attack_target as Actor);
+        }
         if(actor.attack_target is not Actor target||!Enemy(actor,target))return false;
         int usable=Math.Min(state.Rank,MclslRealmIds.Index(MclslActorAccessor.Realm(actor))+1);
         for(int tier=usable;tier>=1;tier--)

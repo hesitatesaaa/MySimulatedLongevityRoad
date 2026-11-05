@@ -71,6 +71,7 @@ internal static class MclslRankSnapshotSource
         PendingUpdates.TryGetValue(id, out bool existing);
         PendingUpdates[id] = existing || refreshFilters;
     }
+    internal static void RequestVisibleUpdate() => _nextUpdate = 0f;
     internal static void TickUpdates()
     {
         if (PendingUpdates.Count == 0 || Time.unscaledTime < _nextUpdate) return;
@@ -84,7 +85,7 @@ internal static class MclslRankSnapshotSource
             if (MclslActorRegistry.Resolve(id, out Actor actor)) UpdateActor(actor, filters);
             else Remove(id);
         }
-        if (PendingUpdates.Count == 0) _nextUpdate = Time.unscaledTime + 1f;
+        if (PendingUpdates.Count == 0) _nextUpdate = Time.unscaledTime + (MclslRankWindow.IsVisible || MclslBeastRankWindow.IsVisible ? 1f : 5f);
     }
     internal static void UpdateActor(Actor actor, bool refreshFilters = false)
     {

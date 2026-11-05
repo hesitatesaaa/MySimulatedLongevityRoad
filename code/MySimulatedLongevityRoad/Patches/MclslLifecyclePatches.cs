@@ -29,19 +29,20 @@ internal static class MclslLifecyclePatches
             postfix: AccessTools.Method(typeof(MclslLifecyclePatches), nameof(CombatChanged)))) count++;
         return count;
     }
-    private static void RelationChanged(Actor __instance)
+    private static void RelationChanged(Actor __instance, System.Reflection.MethodBase __originalMethod)
     {
         MclslBeastActorRegistration.RestoreWildOwnership(__instance);
         MclslXuanhuangDirectionPatch.ObserveActor(__instance);
         if (__instance?.data == null || !MclslActorRegistry.Resolve(__instance.data.id, out _)) return;
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.NativeMetadata | MclslActorChange.Membership);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.NativeMetadata | MclslActorChange.Membership
+            | (__originalMethod.Name is "setAsset" or "setSubspecies" ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
     private static void SubspeciesChanged(Subspecies __instance)
     {
         if (!MclslEligibility.Refresh(__instance)) return;
         foreach (long id in MclslActorRelations.SubspeciesMembers(__instance))
             if (MclslActorRegistry.Resolve(id, out var actor))
-                MclslRuntimeChanges.Publish(actor, MclslActorChange.Membership | MclslActorChange.Traits);
+                MclslRuntimeChanges.Publish(actor, MclslActorChange.Membership | MclslActorChange.Traits | MclslActorChange.RootPopulation);
     }
     private static void CombatChanged(Actor __instance)
         => MclslRuntimeChanges.PublishTargets(__instance);

@@ -42,7 +42,8 @@ Add-Type -TypeDefinition ($source + $tests)
 $system = Get-Content $systemPath -Raw
 $wiring = [ordered]@{
     'cast stage on CommitCast'      = 'MclslSpellSupportStage\.Applies\(spell\.Id\)\s*\?\s*MclslSpellEffect\.Show\(actor,actor,spell\.Id,phase:"cast"'
-    'legacy cast path retained'     = 'target != null \|\| MclslSpellEffect\.Show\(actor,null,spell\.Id\)'
+    'stage atlas is the only spell source' = 'string path = "effects/Spells/Stages/" \+ key;'
+    'no-target cast still shows effect' = 'target != null \|\| MclslSpellEffect\.Show\(actor,null,spell\.Id\)'
     'S025 collects healed actors'   = 'supportHitTargets = HealNearbyAllies\(actor, 0\.25f \* strength, 6\)'
     'hit shown per healed actor'    = 'foreach \(Actor recipient in supportHitTargets\)'
     'self hit follows caster'       = 'MclslSpellEffect\.Show\(actor, actor, spellId, phase: "hit"'
@@ -50,11 +51,12 @@ $wiring = [ordered]@{
     'Show accepts a delay'          = 'string phase = null, float duration = 0f, float delay = 0f'
     'delayed hit stays hidden'      = 'displayNow < _born'
     'stage frame counts wired'      = 'MclslSpellSupportStage\.IsStage\(id, phase\)'
-    'missing support stage no fallback' = 'MclslSpellSupportStage\.Applies\(id\) \? null : Get\(id,frame\)'
+    'missing stage skips effect without fallback' = 'MissingStages\.Add\(key\);[\s\S]*?return null;'
 }
 foreach ($entry in $wiring.GetEnumerator()) {
     if ($system -notmatch $entry.Value) { throw ('Wiring check failed: ' + $entry.Key) }
 }
+if ($system -match 'effects/Spells/"\+id|Get\(id,frame\)') { throw 'Legacy spell atlas fallback remains' }
 foreach ($id in @('S002','S003','S005','S006','S011','S014','S018','S020','S024','S025')) {
     if ($system -notmatch ('Spell\("' + $id + '"')) { throw ('Spell catalogue missing ' + $id) }
 }

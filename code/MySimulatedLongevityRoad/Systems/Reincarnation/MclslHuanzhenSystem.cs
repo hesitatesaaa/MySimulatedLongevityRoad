@@ -13,6 +13,8 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslHuanzhenSystem
 {
+    private static bool _legacyPending;
+    private static bool _claimingLegacy;
     private const int MaxAnchors = 3;
     private const int MaxHistory = 40;
     private const int MaxLoadAttempts = 3;
@@ -105,7 +107,13 @@ internal static class MclslHuanzhenSystem
         if (_arrivalSelection != null && MclslRuntimeSettings.HuanzhenEnabled
             && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true)
             TryNaturalArrival(_arrivalYear);
-        if (Time.frameCount % 60 == 0 && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true) AutoClaimLegacy();
+        if (_legacyPending && !MclslFrameDeadline.Expired && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true)
+        {
+            _legacyPending = false;
+            _claimingLegacy = true;
+            try { AutoClaimLegacy(); }
+            finally { _claimingLegacy = false; }
+        }
         bool anchorWorkloadQuiet = !MclslScheduler.HasFastWork;
         bool anchorWorkloadRecovered = Time.unscaledTime - _pendingAutomaticAnchorSince >= 20f
             && !MclslScheduler.HasAnnualCandidateBacklog
@@ -419,6 +427,7 @@ internal static class MclslHuanzhenSystem
         EnsureLoaded();
         if (_writeLocked) { return; }
         _anyWorldLoadInProgress = false;
+        _legacyPending = true;
         MclslHuanzhenPendingRestore pending = _state.PendingRestore;
         if (pending == null || !pending.Active)
         {
@@ -739,6 +748,7 @@ internal static class MclslHuanzhenSystem
         _state.Legacies ??= new List<MclslHuanzhenLegacyRecord>();
         string id = _state.WorldRunId + "|" + pending.HostIdentity + "|" + pending.DeathYear + "|" + pending.AnchorYear;
         _state.Legacies.Clear();
+        _legacyPending = true;
         _state.Legacies.Add(new MclslHuanzhenLegacyRecord
         {
             Id = id,
@@ -750,6 +760,16 @@ internal static class MclslHuanzhenSystem
             Snapshot = pending.Cultivation ?? new MclslHuanzhenCultivationSnapshot()
         });
         if (_state.Legacies.Count > MaxLegacies) _state.Legacies.RemoveRange(0, _state.Legacies.Count - MaxLegacies);
+    }
+
+    internal static void NotifyLegacyEligibility(Actor actor, string key)
+    {
+        if (_claimingLegacy || _legacyPending || actor == null || _state.HostLastActorId != MclslActorAccessor.Id(actor)
+            || _state.Legacies.Count == 0 || _state.Legacies[_state.Legacies.Count - 1].ClaimedChoices.Count >= 3) return;
+        if (key == MclslActorDataKeys.Realm || key == MclslActorDataKeys.CultivationSystem
+            || key == MclslActorDataKeys.TechniqueId || key == MclslActorDataKeys.TechniqueMaxRealm
+            || key == MclslActorDataKeys.WorldSoulId || key == MclslActorDataKeys.InverseTruthId)
+            _legacyPending = true;
     }
 
     private static void AutoClaimLegacy()
@@ -938,6 +958,8 @@ internal static class MclslHuanzhenSystem
         // 回载锚点时 MapBox.clearWorld 会经过这里；必须保留“正在还真读档”状态，直到新世界 finishingUpLoading 完成。
         if (_state.PendingRestore?.Active != true) _rollbackLoadInProgress = false;
         _applyingRestore = false;
+        _legacyPending = false;
+        _claimingLegacy = false;
         _cachedHost = null;
         _arrivalSelection = null; _arrivalYear = 0;
         _lastUniqueAuditHostId = 0;
@@ -978,6 +1000,7 @@ internal static class MclslHuanzhenSystem
                 if (!string.Equals(_state.OriginalSavePath, currentPath, StringComparison.OrdinalIgnoreCase)) { _state.OriginalSavePath = currentPath; dirty = true; }
             }
         }
+        if (!ReferenceEquals(_cachedHost, actor)) _legacyPending = true;
         _cachedHost = actor;
         MclslTraitRegistration.TryAutoFavoriteHuanzhenHost(actor);
         if (dirty && !Flush()) return;

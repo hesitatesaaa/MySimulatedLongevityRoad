@@ -9,7 +9,7 @@ namespace MySimulatedLongevityRoad.Systems.Visual;
 
 internal static class MclslMapMarkerVisualSystem
 {
-    private const int RefreshCadenceFrames = 30;
+    private const int RefreshCadenceFrames = 120;
     private const int AnimationCadenceFrames = 4;
     private const int MaxTemporaryVisuals = 48;
     // These are target world-unit sizes, not texture stretches. The runtime
@@ -45,7 +45,8 @@ internal static class MclslMapMarkerVisualSystem
     internal static void Tick(int frame)
     {
         if (World.world == null) return;
-        if (_lastRefreshFrame < 0 || frame - _lastRefreshFrame >= RefreshCadenceFrames)
+        if (_lastRefreshFrame < 0 || _needsReconcile || frame - _lastRefreshFrame >= RefreshCadenceFrames
+            || _lastDataRevision != MclslWorldRunRepository.MapMarkerDataRevision || _lastYear != MclslRuntime.CurrentYear())
         {
             _lastRefreshFrame = frame;
             ValidateAssetsOnce();

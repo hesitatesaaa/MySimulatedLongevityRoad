@@ -40,10 +40,10 @@ internal static class MclslVisibleActorRenderLane
         // proportion before the draw pass consumes item_scale.
         MclslHeldItemRenderScale.Normalize(manager);
 
-        bool scanHalo = MclslRealmHaloVisualSystem.BeginRenderFrame(frame);
         Actor[] actors = manager.visible_units.array;
         int count = actors == null ? 0 : Math.Min(manager.visible_units.count, actors.Length);
         int lodLevel = ResolveLodLevel(frame, count);
+        bool scanHalo = MclslRealmHaloVisualSystem.BeginRenderFrame(frame, lodLevel);
         if (count <= 0)
         {
             MclslRealmHaloVisualSystem.RecordVisibleCounts(0, 0);

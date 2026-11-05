@@ -433,6 +433,32 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         MclslWindowPause.Release(this);
     }
 
+    private (int Population, int Roots, int Percent, bool Ready, int Cultivators, int SensingQi) _rootPopulationSignature;
+    private string _rootPopulationText, _rootCultivatorText;
+
+    private void DrawRootPopulation()
+    {
+        int population = MclslChildhoodRootSystem.Population;
+        int roots = MclslChildhoodRootSystem.RootPopulation;
+        int percent = MclslRuntimeSettings.ChildhoodRootChancePercent;
+        bool ready = MclslWorldBootstrapLane.Completed;
+        var signature = (population, roots, percent, ready, _snapshot.Cultivators, _snapshot.SensingQi);
+        if (_rootPopulationText == null || !signature.Equals(_rootPopulationSignature))
+        {
+            _rootPopulationSignature = signature;
+            string ratio = population == 0 ? "0.0" : (100d * roots / population).ToString("F1");
+            _rootPopulationText = ready
+                ? "适龄智慧人口 " + population + " ／ 灵根人数 " + roots + " ／ 当前占比 " + ratio
+                    + "% ／ 目标 " + percent + "%（" + MclslChildhoodRootSystem.TargetPopulation
+                    + "人）；自然觉醒仅补缺额，特殊来源可超额，已有灵根不回收。"
+                : "灵根人口统计重建中，尚不分配自然觉醒名额。";
+            _rootCultivatorText = "正式修士（全世界，含妖兽） " + Math.Max(0, _snapshot.Cultivators - _snapshot.SensingQi)
+                + " ／ 感气 " + _snapshot.SensingQi;
+        }
+        GUILayout.Label(_rootPopulationText);
+        GUILayout.Label(_rootCultivatorText);
+    }
+
     private void DrawPage()
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current ?? new MclslWorldRunState();
@@ -445,6 +471,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         {
             case "天下总览":
                 DrawPageHeader("玄黄总览", "本世新法修行、背景势力与天地资源的档案总览。");
+                DrawRootPopulation();
                 GUILayout.BeginHorizontal();
                 DrawOverviewPill("当前年份", _snapshot.Year.ToString(), "#CFC7B2", GUILayout.Width(170));
                 DrawOverviewPill("世界人口", _snapshot.Population.ToString(), "#9CD7FF", GUILayout.Width(170));
@@ -653,6 +680,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private void DrawAncientOverview(MclslWorldRunState run)
     {
         DrawPageHeader("仙道总览", "仙道纪元，玄黄界以灵根、功法、真元、神魂与大道感悟修行。");
+        DrawRootPopulation();
         GUILayout.BeginHorizontal();
         DrawOverviewPill("开始年份", Math.Max(0, run?.EraOriginYear ?? 0).ToString(), "#CFC7B2", GUILayout.Width(170));
         DrawOverviewPill("当前年份", _snapshot.Year.ToString(), "#CFC7B2", GUILayout.Width(170));

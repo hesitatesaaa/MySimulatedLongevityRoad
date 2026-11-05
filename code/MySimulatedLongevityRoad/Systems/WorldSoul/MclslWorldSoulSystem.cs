@@ -140,7 +140,7 @@ internal static partial class MclslWorldSoulSystem
 
     internal static void TickFrame(int frameCounter)
     {
-        if (_manifestFrameRemaining == 0 && frameCounter % 4 != 0) return;
+        if (_manifestFrameRemaining == 0 && frameCounter % 12 != 0) return;
         using (MclslUnityProfiler.Sample("MCLS/WorldSoul/FrameUpdate"))
         {
             if (_manifestFrameRemaining == 0) MclslWorldSoulActorRegistration.TickTerrainEffects();

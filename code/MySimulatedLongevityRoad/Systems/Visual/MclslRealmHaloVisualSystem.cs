@@ -12,7 +12,7 @@ internal static class MclslRealmHaloVisualSystem
 {
     private const float BackZOffset = -0.05f;
     private const float FrameIntervalSeconds = 0.08f;
-    private const int VisibleScanCadenceFrames = 10;
+    private const int VisibleScanCadenceFrames = 15;
     private const int CleanupQueueBudget = 12;
     private const int StaleFrameThreshold = 24;
 
@@ -53,6 +53,8 @@ internal static class MclslRealmHaloVisualSystem
             if (Qualifications.TryGetValue(id, out var previous)
                 && (!ReferenceEquals(previous.Actor, actor) || previous.Profile.Folder != profile.Folder))
                 RemoveHalo(id);
+            if (!Qualifications.TryGetValue(id, out var current) || !ReferenceEquals(current.Actor, actor)
+                || current.Profile.Folder != profile.Folder) _lastVisibleScanFrame = -1;
             Qualifications[id] = new Qualification(actor, profile);
         }
         finally { MclslPerformanceProbe.End("光环资格更新", sample); }
@@ -82,9 +84,9 @@ internal static class MclslRealmHaloVisualSystem
     private static readonly Queue<CleanupTicket> CleanupQueue = new(128);
     private static int _lastVisibleScanFrame = -1;
 
-    internal static bool BeginRenderFrame(int frame)
+    internal static bool BeginRenderFrame(int frame, int lodLevel = 0)
     {
-        int cadence = CurrentVisibleScanCadence();
+        int cadence = CurrentVisibleScanCadence(lodLevel);
         bool shouldScan = _lastVisibleScanFrame < 0
             || frame - _lastVisibleScanFrame >= cadence;
         if (shouldScan) _lastVisibleScanFrame = frame;
@@ -160,7 +162,7 @@ internal static class MclslRealmHaloVisualSystem
 
     private static void UpdateExistingEntries(int frame, int lodLevel)
     {
-        int visibleScanCadence = CurrentVisibleScanCadence();
+        int visibleScanCadence = CurrentVisibleScanCadence(lodLevel);
         int updateStride = CurrentUpdateStride(lodLevel);
         for (int i = ActiveEntries.Count - 1; i >= 0; i--)
         {
@@ -226,16 +228,17 @@ internal static class MclslRealmHaloVisualSystem
         }
     }
 
-    private static int CurrentVisibleScanCadence()
+    private static int CurrentVisibleScanCadence(int lodLevel)
     {
-        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return VisibleScanCadenceFrames;
-        return MclslFrameLoadMonitor.StressTier switch
+        int normal = lodLevel >= 2 ? 30 : VisibleScanCadenceFrames;
+        if (!MclslRuntimeSettings.AggressivePerformanceEnabled) return normal;
+        return Math.Max(normal, MclslFrameLoadMonitor.StressTier switch
         {
             MclslRuntimeStressTier.Mild => 15,
             MclslRuntimeStressTier.Severe => 20,
             MclslRuntimeStressTier.Critical => 30,
-            _ => VisibleScanCadenceFrames
-        };
+            _ => normal
+        });
     }
 
     private static int CurrentUpdateStride(int lodLevel)

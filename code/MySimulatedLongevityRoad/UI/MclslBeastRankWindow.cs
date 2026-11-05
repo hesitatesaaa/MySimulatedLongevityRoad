@@ -55,6 +55,7 @@ internal static class MclslBeastRankWindow
     private static MclslVirtualCardList _rows;
 
     private static ScrollWindow _window;
+    internal static bool IsVisible => _window != null && _window.gameObject.activeInHierarchy;
     private static RectTransform _contentRect;
     private static RectTransform _scrollViewRect;
     private static ScrollRect _rankScroll;
@@ -79,6 +80,7 @@ internal static class MclslBeastRankWindow
 
     internal static void ShowWindow()
     {
+        MclslRankSnapshotSource.RequestVisibleUpdate();
         bool created = EnsureWindow();
         if (_window == null) return;
         if (created) _needRefresh = true;

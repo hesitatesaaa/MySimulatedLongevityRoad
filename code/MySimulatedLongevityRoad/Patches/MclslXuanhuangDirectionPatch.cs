@@ -71,6 +71,47 @@ internal static class MclslXuanhuangDirectionPatch
     private static readonly ConcurrentDictionary<int,Color32> PendingColors=new();
     private static Atlas[] AtlasSources;
     private static bool _ready;
+    private static Rect? AvatarBody;
+
+    private static void KeepBoatScale(Actor __instance)
+    {
+        if(!__instance.asset.is_boat||!__instance.asset.id.StartsWith(MclslXuanhuangRegistration.Id+"_boat_",StringComparison.Ordinal))return;
+        // Recalculated actor stats can carry size modifiers; these authored boats use a fixed hull scale.
+        float scale=__instance.asset.base_stats.get("scale");
+        __instance.stats["scale"]=scale;
+        __instance.target_scale=scale;
+        __instance.setActorScale(scale);
+    }
+
+    private static void FitAvatar(UnitAvatarLoader __instance)
+    {
+        if(__instance._data.asset.id!=MclslXuanhuangRegistration.Id)return;
+        if(!AvatarBody.HasValue)
+        {
+            Rect body=default;bool first=true;
+            foreach(var group in MclslLivingResources.Groups.Where(g=>g.Path.StartsWith(ResourceRoot+"/",StringComparison.Ordinal)))
+            foreach(var frame in group.Frames.Where(f=>!f.Name.EndsWith("_head",StringComparison.Ordinal)&&!f.Name.EndsWith("_item",StringComparison.Ordinal)))
+            {
+                Sprite sprite=SpriteTextureLoader.getSprite(group.Path+"/"+frame.Name);
+                Rect visible=MclslActorPresentation.VisibleBounds(sprite.texture,sprite.rect);
+                visible.position-=sprite.pivot;
+                body=first?visible:Rect.MinMaxRect(Math.Min(body.xMin,visible.xMin),Math.Min(body.yMin,visible.yMin),Math.Max(body.xMax,visible.xMax),Math.Max(body.yMax,visible.yMax));
+                first=false;
+            }
+            AvatarBody=body;
+        }
+        Rect bounds=AvatarBody.Value;
+        // Native avatar frames span 24 pixels at 2.5x; fit the visible body, not its canvas.
+        float scale=60f*0.85f/Math.Max(bounds.width,bounds.height)*__instance.avatarSize;
+        __instance.transform.localScale=new Vector3(scale,scale,1f);
+        if(__instance._frame!=null)__instance._frame.localScale=new Vector3(2.5f/scale,2.5f/scale,1f);
+        var image=__instance._actor_image.rectTransform;
+        image.anchorMin=image.anchorMax=new Vector2(0.5f,0.5f);
+        image.anchoredPosition=-bounds.center;
+        var item=__instance._item_image.rectTransform;
+        item.anchorMin=item.anchorMax=new Vector2(0.5f,0.5f);
+        item.anchoredPosition-=bounds.center;
+    }
 
     internal static int Apply(Harmony harmony)
     {
@@ -84,6 +125,13 @@ internal static class MclslXuanhuangDirectionPatch
         count+=MclslHarmonyPatchGuard.TryPatch(harmony,"MapBox.preloadRenderedSprites.xuanhuang-colors",
             AccessTools.Method(typeof(MapBox),"preloadRenderedSprites"),
             AccessTools.Method(typeof(MclslXuanhuangDirectionPatch),nameof(BeforePreloadSprites)),null)?1:0;
+        foreach(string method in new[]{"showAnimation","showStatic"})
+            count+=MclslHarmonyPatchGuard.TryPatch(harmony,"UnitAvatarLoader."+method+".xuanhuang-fit",
+                AccessTools.Method(typeof(UnitAvatarLoader),method),null,
+                AccessTools.Method(typeof(MclslXuanhuangDirectionPatch),nameof(FitAvatar)))?1:0;
+        count+=MclslHarmonyPatchGuard.TryPatch(harmony,"Actor.updateStats.xuanhuang-boat-scale",
+            AccessTools.Method(typeof(Actor),"updateStats",Type.EmptyTypes),null,
+            AccessTools.Method(typeof(MclslXuanhuangDirectionPatch),nameof(KeepBoatScale)))?1:0;
         return count;
     }
 

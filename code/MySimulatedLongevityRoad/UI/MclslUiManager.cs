@@ -34,7 +34,7 @@ internal static class MclslUiManager
             MclslLivingCatalog.Init();
         AddButton("mclsl.codex", "玄黄仙录", "分卷查看修行道统、山河万象、人物生死与世界纪事。", MclslCodexWindow.Show, "ui/Icons/XuanHuangXianLu", "ui/icon", "ui/icons/iconBook");
         AddButton("mclsl.beast_control","妖兽与兽潮","调整自然妖兽、分级兽潮和手动放置境界。",MclslBeastControlWindow.Show,"ui/Icons/TianDiZhiBian");
-        AddButton("mclsl.guide", "模组介绍／入道指南（QQ群：1049012706）", "查看时代、灵根、职业、乾坤袋与天玄镜的入道说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
+        AddButton("mclsl.guide", "模组介绍", "查看时代、灵根、职业、乾坤袋、天玄镜、妖兽与玄黄族的说明。", MclslFeatureWindow.ShowGuide, "ui/Icons/GuideEntrance", "ui/Icons/XuanHuangXianLu");
         AddButton("mclsl.tianxuan", "天玄镜", "打开万界交易所；修士会按自身需求自动挂牌、购入与结算。", () => MclslFeatureWindow.ShowMarket(), "ui/Icons/TianxuanMirrorEntrance", "ui/Icons/GongXianZhi");
         AddButton("mclsl.artifact_rain_editor", "法宝雨编辑", "选择法宝雨可以生成的法宝。", MclslArtifactRainEditor.ShowWindow, "ui/Icons/ArtifactRain");
         AddArtifactRainPower();

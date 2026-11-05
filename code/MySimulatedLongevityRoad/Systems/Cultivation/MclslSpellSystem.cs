@@ -43,6 +43,8 @@ internal static class MclslSpellSystem
         internal double LastManaTime;
         internal float Remainder;
         internal readonly Dictionary<string, double> NextCast = new(StringComparer.Ordinal);
+        internal double NextSelfCheck;
+        internal int SelfHealth, SelfMana;
         internal bool CooldownsLoaded;
         internal string KnownRaw;
         internal MclslSpellDefinition[] KnownSpells = Array.Empty<MclslSpellDefinition>();
@@ -246,7 +248,12 @@ internal static class MclslSpellSystem
         if (!all && !string.IsNullOrEmpty(MclslActorAccessor.GetString(actor, MclslActorDataKeys.LearnedSpells)))
             foreach (var spell in KnownCached(actor))
                 if (SelfSpellIds.Contains(spell.Id)) { support = true; break; }
-        if (support) SelfCasterIds.Upsert(id,id); else SelfCasterIds.Remove(id);
+        if (support)
+        {
+            SelfCasterIds.Upsert(id,id);
+            GetRuntime(actor).NextSelfCheck = 0;
+        }
+        else SelfCasterIds.Remove(id);
     }
 
     private static MclslSpellDefinition[] KnownCached(Actor actor)
@@ -383,7 +390,7 @@ internal static class MclslSpellSystem
 
     internal static void TickSelfCasting(int frameCounter)
     {
-        if (frameCounter <= 0 || frameCounter % 10 != 0 || World.world == null) return;
+        if (frameCounter <= 0 || frameCounter % 20 != 0 || World.world == null) return;
         double worldTime = Convert.ToDouble(World.world.getCurWorldTime());
         if (worldTime <= _lastSelfScanWorldTime) return; // No casting while the simulation is paused.
         _lastSelfScanWorldTime = worldTime;
@@ -399,7 +406,13 @@ internal static class MclslSpellSystem
                 if (_selfScanIndex >= actors.Count) _selfScanIndex = 0;
                 Actor actor = actors[_selfScanIndex++];
                 if (!MclslActorAccessor.Alive(actor) || actor.has_attack_target) continue;
-                TryCastSelf(actor);
+                RuntimeState state = GetRuntime(actor);
+                int health = actor.getHealth();
+                int mana = CurrentMana(actor);
+                if (worldTime < state.NextSelfCheck && state.SelfHealth == health && state.SelfMana == mana) continue;
+                state.NextSelfCheck = worldTime + 3d;
+                state.SelfHealth = health; state.SelfMana = mana;
+                if (TryCastSelf(actor)) state.NextSelfCheck = worldTime;
             }
         }
         finally { MclslPerformanceProbe.End("法术.脱战施法者", sample); }
@@ -446,6 +459,9 @@ internal static class MclslSpellSystem
             ApplySelfEffect(actor, id);
             return true;
         }
+        foreach (var cooldown in state.NextCast)
+            if (SelfSpellIds.Contains(cooldown.Key) && cooldown.Value > MclslSpellCasting.Now)
+                state.NextSelfCheck = Math.Min(state.NextSelfCheck, cooldown.Value);
         return false;
     }
 

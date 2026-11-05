@@ -12,7 +12,7 @@ internal static class MclslConfigLocalization
         _initialized = true;
         MclslLocalizationBridge.RegisterKey("法术表", "法术表");
 
-        Register("MCLSL_config_childhood_root_chance", "幼年灵根显现概率（%）", "0—100%，默认10%；只影响尚未完成五岁或六岁补判的小人。");
+        Register("MCLSL_config_childhood_root_chance", "自然灵根目标人口占比（%）", "0—100%，默认10%；按5岁及以上可修炼智慧人口的灵根缺额分配给5—6岁新人。妖兽不计入；特殊来源可超额，已有灵根不回收。");
         Register("MCLSL_config_alchemist_chance", "炼丹师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");
         Register("MCLSL_config_refiner_chance", "炼器师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");
         Register("MCLSL_config_talisman_chance", "制符师生成概率（0.1%）", "18岁有根骨修士的一次性职业判定；100代表10.0%，默认10%。三职业互斥。");

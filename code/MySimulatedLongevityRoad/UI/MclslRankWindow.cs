@@ -114,6 +114,7 @@ internal static class MclslRankWindow
     private static string _traitFilterSignature;
 
     private static ScrollWindow _window;
+    internal static bool IsVisible => _window != null && _window.gameObject.activeInHierarchy;
     private static Transform _nativeCloseRoot;
     private static RectTransform _contentRect;
     private static RectTransform _scrollViewRect;
@@ -168,6 +169,7 @@ internal static class MclslRankWindow
 
     internal static void ShowWindow()
     {
+        MclslRankSnapshotSource.RequestVisibleUpdate();
         // Wrap the whole create+show round so every grid touched while building
         // the window collapses into a single layout flush.
         BeginLayoutBatch();

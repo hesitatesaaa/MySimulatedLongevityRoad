@@ -66,7 +66,8 @@ internal static class MclslScheduler
         || _annualStartPending
         || _annualCandidateScanPending
         || MclslAnnualWorldRuntimeLane.HasPending
-        || MclslWorldEpochSystem.HasPendingTransitionWork;
+        || MclslWorldEpochSystem.HasPendingTransitionWork
+        || MclslChildhoodRootSystem.HasPending;
     internal static bool HasAnnualActorBacklog => AnnualActorQueue.Count > 0;
     internal static bool HasAnnualCandidateBacklog => _annualStartPending || _annualCandidateScanPending;
     // 世界年已过、年度完成年仍落后、且当前没有活动年度 → 需要启动下一年追帧。
@@ -402,6 +403,12 @@ internal static class MclslScheduler
             try { TickAnnualCandidateScan(); }
             finally { MclslPerformanceProbe.End("年度候选扫描", sample); }
         }
+        if (!_annualCandidateScanPending && MclslChildhoodRootSystem.HasPending && !AnnualBudgetExpired())
+        {
+            long sample = MclslPerformanceProbe.Begin();
+            try { MclslChildhoodRootSystem.TickQuota(); }
+            finally { MclslPerformanceProbe.End("幼年灵根配额", sample); }
+        }
         int released = AnnualActorQueue.Release(MclslRuntime.CurrentYear(),
             MclslAnnualFrameBudget.RemainingOperations, AnnualBudgetExpired);
         MclslAnnualFrameBudget.ConsumeOperations(released);
@@ -652,7 +659,7 @@ internal static class MclslScheduler
 
     private static void BeginAnnualCandidateScan()
     {
-        _annualCandidateScanIds = MclslCultivatorCandidateIndex.GetAnnualCandidateIds();
+        _annualCandidateScanIds = MclslActorRegistry.PopulationIds;
         _annualCandidateScanCursor = 0;
         _annualCandidateScanPending = _annualCandidateScanIds.Count > 0;
     }
@@ -664,7 +671,9 @@ internal static class MclslScheduler
             && MclslAnnualFrameBudget.TryConsumeOperation())
         {
             long actorId = _annualCandidateScanIds[_annualCandidateScanCursor++];
-            if (MclslCultivatorCandidateIndex.Resolve(actorId, out Actor actor)
+            if (!MclslActorRegistry.Resolve(actorId, out Actor actor)) continue;
+            MclslChildhoodRootSystem.ObservePopulation(actor);
+            if (MclslCultivatorCandidateIndex.IsAnnualCandidate(actorId)
                 && ShouldQueueAnnualActor(actor, _activeAnnualYear))
                 EnqueueAnnualActorCore(actor, _activeAnnualYear);
         }
@@ -1040,7 +1049,7 @@ internal static class MclslScheduler
     {
         if (_activeAnnualYear <= 0) return;
         if (MclslWorldBootstrapLane.HasPending) return;
-        if (_annualStartPending || _annualCandidateScanPending) return;
+        if (_annualStartPending || _annualCandidateScanPending || MclslChildhoodRootSystem.HasPending) return;
         if (AnnualActorQueue.ReadyCount > 0
             || (AnnualActorQueue.OldestWaitingYear > 0 && AnnualActorQueue.OldestWaitingYear <= _activeAnnualYear)) return;
 

@@ -116,6 +116,7 @@ internal static class MclslBagSystem
     }
     internal static void FlushPending(int budget = 8)
     {
+        if (PendingWrites.Count == 0) return;
         for (int i = 0; i < budget && !MclslFrameDeadline.Expired; i++)
         {
             if (!PendingWrites.TryTake(out long id, out _)) break;

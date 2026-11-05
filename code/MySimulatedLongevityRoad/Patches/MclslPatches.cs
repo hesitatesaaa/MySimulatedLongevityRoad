@@ -248,7 +248,8 @@ internal static class MclslPatches
         if (!__result) return;
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0?.id);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0?.id) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     [HarmonyPrefix]
@@ -273,7 +274,8 @@ internal static class MclslPatches
         if (!__result) return;
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleAddedTrait(__instance, __0);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     [HarmonyPrefix]
@@ -322,7 +324,8 @@ internal static class MclslPatches
     {
         MclslTraitRegistration.InvalidateNativeRealmTraitSync(__instance);
         MclslTraitGrantRouter.HandleRemovedTrait(__instance, __0);
-        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits);
+        MclslRuntimeChanges.Publish(__instance, MclslActorChange.Traits
+            | (MclslTraitRegistration.IsGiftTrait(__0) ? MclslActorChange.RootPopulation : MclslActorChange.None));
     }
 
     private static bool Actor_RemoveSpiritualRoot_Guard(Actor __instance, string __0)

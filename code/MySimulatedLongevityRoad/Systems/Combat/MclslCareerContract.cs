@@ -89,7 +89,9 @@ internal static partial class MclslCareerCombat
             if (!MclslActorAccessor.Alive(pet)) { HandlePetLost(owner, battle, bound, pet); return; }
             if (Now >= bound.Pulse)
             {
-                bound.Pulse = Now + MclslContractRules.PetUpdateInterval;
+                bool active = owner.has_attack_target || pet.has_attack_target
+                    || owner.getHealth() < owner.getMaxHealth() || pet.getHealth() < pet.getMaxHealth();
+                bound.Pulse = Now + (active ? MclslContractRules.PetUpdateInterval : 3d);
                 UpdateBoundPet(owner, pet, battle, bound);
             }
             return;
@@ -405,6 +407,7 @@ internal static partial class MclslCareerCombat
             pet.restoreHealthPercent(1f);
             return;
         }
+        if (pet.stats.get("health") == newMax && pet.stats.get("damage") == newAtk) return;
         int oldMaximum = pet.getMaxHealth();
         double ratio = oldMaximum > 0 ? (double)pet.getHealth() / oldMaximum : 1d;
         pet.stats.set("health", newMax); pet.stats.set("damage", newAtk);
