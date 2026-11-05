@@ -771,13 +771,19 @@ internal static class MclslTraitRegistration
         trait.show_in_meta_editor = canGive;
         ApplyNativeOrderingAndRarity(trait, order, RealmRarity(order));
         trait.base_stats = new BaseStats();
-        ApplyRealmStats(trait.base_stats, order, lifespan, health, damage, speedMultiplier, armor, ancient ? 0.9f : 1f);
+        ApplyRealmStats(trait.base_stats, order, new RealmStatsRequest
+        {
+            Lifespan = lifespan, Health = health, Damage = damage, SpeedMultiplier = speedMultiplier,
+            Armor = armor, ExtraStatMultiplier = ancient ? 0.9f : 1f
+        });
         if (add) AssetManager.traits.add(trait);
     }
 
-    private static void ApplyRealmStats(BaseStats statsBlock, int order, float lifespan, float health, float damage, float speedMultiplier, float armor, float extraStatMultiplier = 1f)
+    private static void ApplyRealmStats(BaseStats statsBlock, int order, RealmStatsRequest r)
     {
         if (statsBlock == null) return;
+        float lifespan = r.Lifespan; float health = r.Health; float damage = r.Damage;
+        float speedMultiplier = r.SpeedMultiplier; float armor = r.Armor; float extraStatMultiplier = r.ExtraStatMultiplier;
         SafeSetStat(statsBlock, "lifespan", lifespan);
         SafeSetStat(statsBlock, "health", health);
         SafeSetStat(statsBlock, "damage", damage);
@@ -1246,4 +1252,14 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-20", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
+}
+
+internal sealed class RealmStatsRequest
+{
+    internal float Lifespan;
+    internal float Health;
+    internal float Damage;
+    internal float SpeedMultiplier;
+    internal float Armor;
+    internal float ExtraStatMultiplier = 1f;
 }

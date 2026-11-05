@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-06T01:03:19+08:00",
+  "generatedAt": "2026-11-06T01:06:52+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 76233,
+  "totalLines": 76272,
   "linesPerTopDir": {
-    "Systems": 41477,
+    "Systems": 41500,
     "UI": 19745,
     "Data": 5156,
     "Core": 3891,
-    "Traits": 3832,
+    "Traits": 3848,
     "Patches": 1774,
     "Queries": 328,
     "Interop": 30
@@ -43,7 +43,7 @@
     },
     {
       "file": "Traits/MclslTraitRegistration.cs",
-      "lines": 1249
+      "lines": 1265
     },
     {
       "file": "Systems/Runtime/MclslScheduler.cs",
@@ -72,7 +72,7 @@
     "getProperty": 15,
     "uncachedRuntimeLookups": 0
   },
-  "longParams6": 111,
+  "longParams6": 108,
   "longLinesOver200": 200,
   "longLinesOver300": 21,
   "duplicateBlocks": 9,

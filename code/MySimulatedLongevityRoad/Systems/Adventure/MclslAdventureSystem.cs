@@ -599,14 +599,26 @@ internal static class MclslAdventureSystem
         MclslTechniqueDefinition source = PromoteLegacyTechnique(FindCatalogTechnique(ruin.SourceTechniqueId), MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|source"), MclslRealmIds.JinDan);
         if (source != null && !string.Equals(source.Id, currentId, StringComparison.Ordinal))
             return source;
-        int poolCount = CountRuinTechniquePool(currentId, currentLimit, quality, ruinTags, true);
+        int poolCount = CountRuinTechniquePool(new RuinTechniqueQuery
+        {
+            CurrentId = currentId, CurrentLimit = currentLimit, Quality = quality,
+            RuinTags = ruinTags, RequireLawMatch = true
+        });
         bool requireLawMatch = poolCount > 0;
-        if (poolCount == 0) poolCount = CountRuinTechniquePool(currentId, currentLimit, quality, ruinTags, false);
+        if (poolCount == 0) poolCount = CountRuinTechniquePool(new RuinTechniqueQuery
+        {
+            CurrentId = currentId, CurrentLimit = currentLimit, Quality = quality,
+            RuinTags = ruinTags, RequireLawMatch = false
+        });
         if (poolCount == 0) return null;
         int chance = Math.Clamp(18 + quality * 8, 18, 55);
         if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(MclslActorAccessor.Id(actor) + "|ruin_technique|" + ruin.Id + "|" + year) % 100 >= chance) return null;
         int pickIndex = MySimulatedLongevityRoad.Core.MclslStableHash.Positive43x53(ruin.Id + "|technique_pick|" + MclslActorAccessor.Id(actor) + "|" + year) % poolCount;
-        return PickRuinTechniqueFromPool(currentId, currentLimit, quality, ruinTags, requireLawMatch, pickIndex);
+        return PickRuinTechniqueFromPool(new RuinTechniqueQuery
+        {
+            CurrentId = currentId, CurrentLimit = currentLimit, Quality = quality,
+            RuinTags = ruinTags, RequireLawMatch = requireLawMatch
+        }, pickIndex);
     }
 
     private static MclslTechniqueDefinition FindCatalogTechnique(string id)
@@ -621,29 +633,31 @@ internal static class MclslAdventureSystem
         return null;
     }
 
-    private static int CountRuinTechniquePool(string currentId, int currentLimit, int quality, IReadOnlyList<string> ruinTags, bool requireLawMatch)
+    private static int CountRuinTechniquePool(RuinTechniqueQuery q)
     {
         int count = 0;
         for (int i = 0; i < MclslCultivationCatalog.Techniques.Count; i++)
-            if (IsRuinTechniqueCandidate(MclslCultivationCatalog.Techniques[i], currentId, currentLimit, quality, ruinTags, requireLawMatch)) count++;
+            if (IsRuinTechniqueCandidate(MclslCultivationCatalog.Techniques[i], q)) count++;
         return count;
     }
 
-    private static MclslTechniqueDefinition PickRuinTechniqueFromPool(string currentId, int currentLimit, int quality, IReadOnlyList<string> ruinTags, bool requireLawMatch, int pickIndex)
+    private static MclslTechniqueDefinition PickRuinTechniqueFromPool(RuinTechniqueQuery q, int pickIndex)
     {
         int seen = 0;
         for (int i = 0; i < MclslCultivationCatalog.Techniques.Count; i++)
         {
             MclslTechniqueDefinition technique = MclslCultivationCatalog.Techniques[i];
-            if (!IsRuinTechniqueCandidate(technique, currentId, currentLimit, quality, ruinTags, requireLawMatch)) continue;
+            if (!IsRuinTechniqueCandidate(technique, q)) continue;
             if (seen == pickIndex) return technique;
             seen++;
         }
         return null;
     }
 
-    private static bool IsRuinTechniqueCandidate(MclslTechniqueDefinition technique, string currentId, int currentLimit, int quality, IReadOnlyList<string> ruinTags, bool requireLawMatch)
+    private static bool IsRuinTechniqueCandidate(MclslTechniqueDefinition technique, RuinTechniqueQuery q)
     {
+        string currentId = q.CurrentId; int currentLimit = q.CurrentLimit; int quality = q.Quality;
+        IReadOnlyList<string> ruinTags = q.RuinTags; bool requireLawMatch = q.RequireLawMatch;
         if (technique == null || technique.Id == currentId) return false;
         int maxIndex = MclslRealmIds.Index(technique.MaxRealm);
         if (maxIndex < MclslRealmIds.Index(MclslRealmIds.JinDan)) return false;
@@ -882,4 +896,13 @@ internal static class MclslAdventureSystem
     }
 
 
+}
+
+internal sealed class RuinTechniqueQuery
+{
+    internal string CurrentId;
+    internal int CurrentLimit;
+    internal int Quality;
+    internal IReadOnlyList<string> RuinTags;
+    internal bool RequireLawMatch;
 }
