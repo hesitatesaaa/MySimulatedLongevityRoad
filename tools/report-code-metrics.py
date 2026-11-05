@@ -52,6 +52,17 @@ def count(pat, text):
     return len(re.findall(pat, text))
 
 
+def count_uncached_runtime(text):
+    """Runtime (non-comment) uses of GetType().GetField/GetProperty — must stay 0."""
+    n = 0
+    for line in text.split('\n'):
+        s = line.strip()
+        if s.startswith('//') or s.startswith('*') or s.startswith('///'):
+            continue
+        n += len(re.findall(r'GetType\(\)\.Get(Field|Property)\(', line))
+    return n
+
+
 def count_long_params(text):
     """Count method/ctor declarations with >= 6 parameters (regex heuristic)."""
     total = 0
@@ -84,7 +95,7 @@ for p in cs_files:
     get_field += count(r'\.GetField\(', t)
     get_property += count(r'\.GetProperty\(', t)
     long_params6 += count_long_params(t)
-    uncached_reflection += count(r'GetType\(\)\.Get(Field|Property)\(', t)
+    uncached_reflection += count_uncached_runtime(t)
     for line in t.split('\n'):
         L = len(line)
         if L > 200:
