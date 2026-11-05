@@ -48,9 +48,11 @@ internal static class MclslAnnouncementSystem
         PendingTexts.Add(key);
     }
 
-    internal static void EnqueueGrouped(string eventType, int logicalYear, string actorName, string text,
-        string eventLabel, string color = "#D95B5B", float duration = 8f, int importance = 0)
+    internal static void EnqueueGrouped(AnnouncementGroupRequest r)
     {
+        string eventType = r.EventType; int logicalYear = r.LogicalYear; string actorName = r.ActorName;
+        string text = r.Text; string eventLabel = r.EventLabel; string color = r.Color;
+        float duration = r.Duration; int importance = r.Importance;
         if (importance > 0)
         {
             Enqueue(text, color, duration);
@@ -144,4 +146,16 @@ internal static class MclslAnnouncementSystem
         string prefix = "本年共有" + pending.Count + "名修士" + pending.EventLabel;
         return NormalizeTopText(string.IsNullOrEmpty(names) ? prefix + "。" : prefix + "：" + names + "……");
     }
+}
+
+internal sealed class AnnouncementGroupRequest
+{
+    internal string EventType;
+    internal int LogicalYear;
+    internal string ActorName;
+    internal string Text;
+    internal string EventLabel;
+    internal string Color = "#D95B5B";
+    internal float Duration = 8f;
+    internal int Importance = 0;
 }

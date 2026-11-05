@@ -19,7 +19,7 @@ METRICS = os.path.join(ROOT, 'docs', 'CODE-METRICS.json')
 LIMITS = {
     'catchExceptionUnrouted': 200,
     'emptyCatchCode': 0,
-    'longParams6': 108,          # 111→108（M3：RuinTechniqueQuery 族、RealmStatsRequest）→ ≤90
+    'longParams6': 105,          # 108→105（M3：CaptureFilterRequest/AnnouncementGroupRequest/FinishedGoodsNeedsRequest）→ ≤90
     'longLinesOver200': 200,     # 373→200（M4 完成：Guard 使用 + 顶层逗号安全折行）
     'duplicateBlocks': 9,        # 21→9（M5 完成：B/D/滚动区/贴图装配去重）✓ ≤10
     'uncachedRuntimeLookups': 0, # M2：运行期未缓存 GetType().GetField/GetProperty 必须为 0

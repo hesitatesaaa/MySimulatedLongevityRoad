@@ -216,8 +216,12 @@ internal static class MclslDeathSystem
         MclslActorReincarnationSystem.RecordFromDeath(actor, record);
         MclslWorldActorQuery.MarkDirty();
         if (ShouldShowTopDeathAnnouncement(record))
-            MclslAnnouncementSystem.EnqueueGrouped("death:" + record.CauseCode, record.Year, record.ActorName,
-                record.Announcement, "陨落", DeathColor(record.CauseCode), DeathDuration(record.CauseCode));
+            MclslAnnouncementSystem.EnqueueGrouped(new AnnouncementGroupRequest
+            {
+                EventType = "death:" + record.CauseCode, LogicalYear = record.Year, ActorName = record.ActorName,
+                Text = record.Announcement, EventLabel = "陨落",
+                Color = DeathColor(record.CauseCode), Duration = DeathDuration(record.CauseCode)
+            });
     }
 
     internal static bool ExecuteScriptedDeath(Actor actor, string causeCode, string sourceName, string detail, bool important = true)

@@ -114,7 +114,11 @@ internal static class MclslRankSnapshotSource
         RemoveFilters(id);
         KingdomScratch.Clear(); AssetScratch.Clear(); TraitScratch.Clear();
         KingdomIds.Clear(); AssetIds.Clear(); TraitIds.Clear();
-        CaptureFilterChoices(actor, KingdomScratch, AssetScratch, TraitScratch, KingdomIds, AssetIds, TraitIds);
+        CaptureFilterChoices(new CaptureFilterRequest
+        {
+            Actor = actor, KingdomChoices = KingdomScratch, AssetChoices = AssetScratch, TraitChoices = TraitScratch,
+            KingdomIds = KingdomIds, AssetIds = AssetIds, TraitIds = TraitIds
+        });
         FilterProjection projection = new();
         foreach (MclslRankKingdomFilterChoice choice in KingdomScratch)
         {
@@ -529,15 +533,11 @@ internal static class MclslRankSnapshotSource
         return new CombatCareerInfo(state.Career, Math.Max(0, state.Rank), Math.Max(0, state.Experience));
     }
 
-    private static void CaptureFilterChoices(
-        Actor actor,
-        List<MclslRankKingdomFilterChoice> kingdomChoices,
-        List<MclslRankAssetFilterChoice> assetChoices,
-        List<MclslRankTraitFilterChoice> traitChoices,
-        HashSet<long> kingdomIds,
-        HashSet<string> assetIds,
-        HashSet<string> traitIds)
+    private static void CaptureFilterChoices(CaptureFilterRequest r)
     {
+        Actor actor = r.Actor; List<MclslRankKingdomFilterChoice> kingdomChoices = r.KingdomChoices;
+        List<MclslRankAssetFilterChoice> assetChoices = r.AssetChoices; List<MclslRankTraitFilterChoice> traitChoices = r.TraitChoices;
+        HashSet<long> kingdomIds = r.KingdomIds; HashSet<string> assetIds = r.AssetIds; HashSet<string> traitIds = r.TraitIds;
         Kingdom kingdom = actor?.kingdom;
         if (kingdom?.data != null && kingdomIds.Add(kingdom.data.id))
         {
@@ -679,4 +679,15 @@ internal sealed class MclslRankTraitFilterChoice
 {
     internal string TraitId = string.Empty;
     internal string DisplayName = string.Empty;
+}
+
+internal sealed class CaptureFilterRequest
+{
+    internal Actor Actor;
+    internal List<MclslRankKingdomFilterChoice> KingdomChoices;
+    internal List<MclslRankAssetFilterChoice> AssetChoices;
+    internal List<MclslRankTraitFilterChoice> TraitChoices;
+    internal HashSet<long> KingdomIds;
+    internal HashSet<string> AssetIds;
+    internal HashSet<string> TraitIds;
 }

@@ -1058,8 +1058,11 @@ internal static class MclslTianxuanMarket
         // 材料 -> 成品/法宝/妖兽 类别边界。
         if (budgeted && MclslAnnualFrameBudget.Expired) return false;
         DesiredItemIdsScratch.Clear();
-        BuildFinishedGoodsNeeds(actor, bag, reservePlan, DesiredItemIdsScratch,
-            artifactCandidates, beastCandidates, beastPrice);
+        BuildFinishedGoodsNeeds(new FinishedGoodsNeedsRequest
+        {
+            Actor = actor, Bag = bag, ReservePlan = reservePlan, Desired = DesiredItemIdsScratch,
+            ArtifactCandidates = artifactCandidates, BeastCandidates = beastCandidates, BeastPrice = beastPrice
+        });
         // 成品/法宝/妖兽 -> 卷轴 类别边界。
         if (budgeted && MclslAnnualFrameBudget.Expired) return false;
         AddSpellScrollNeed(actor, bag, DesiredItemIdsScratch, scrollCandidates, scrollPrice);
@@ -1298,12 +1301,11 @@ internal static class MclslTianxuanMarket
         return lowest;
     }
 
-    private static void BuildFinishedGoodsNeeds(Actor actor, MclslBagState bag,
-        IReadOnlyList<string> reservePlan, List<string> desired,
-        IReadOnlyList<string> artifactCandidates,
-        IReadOnlyList<string> beastCandidates,
-        Func<string, int> beastPrice)
+    private static void BuildFinishedGoodsNeeds(FinishedGoodsNeedsRequest r)
     {
+        Actor actor = r.Actor; MclslBagState bag = r.Bag; IReadOnlyList<string> reservePlan = r.ReservePlan;
+        List<string> desired = r.Desired; IReadOnlyList<string> artifactCandidates = r.ArtifactCandidates;
+        IReadOnlyList<string> beastCandidates = r.BeastCandidates; Func<string, int> beastPrice = r.BeastPrice;
         // The realm is read once here and its index reused for the artifact cap
         // and every grade-rule candidate below; the pass only reads actor and
         // bag state, so each later use would have read the same value.
@@ -1625,4 +1627,15 @@ internal static class MclslTianxuanMarket
         return true;
     }
 
+}
+
+internal sealed class FinishedGoodsNeedsRequest
+{
+    internal Actor Actor;
+    internal MclslBagState Bag;
+    internal IReadOnlyList<string> ReservePlan;
+    internal List<string> Desired;
+    internal IReadOnlyList<string> ArtifactCandidates;
+    internal IReadOnlyList<string> BeastCandidates;
+    internal Func<string, int> BeastPrice;
 }
