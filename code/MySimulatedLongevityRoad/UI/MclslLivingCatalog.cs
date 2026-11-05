@@ -39,7 +39,7 @@ internal static class MclslLivingCatalog
         Populate("beasts",MclslBeastActorRegistration.AddPowers);
         Populate("named",t=>{MclslImmortalActorRegistration.AddPowers(t);MclslNamedCharacterRegistration.AddPowers(t);});
         Populate("xuanhuang",MclslXuanhuangRegistration.AddPowers);
-        _return=Button("mclsl_living_return","返回",SpriteTextureLoader.getSprite("ui/Icons/Xuanhuang"),()=>ShowPage("home"));
+        _return=Button("mclsl_living_return","返回",SpriteTextureLoader.getSprite("ui/Icons/LivingReturn"),()=>ShowPage("home"));
         _root.gameObject.AddComponent<MclslLivingCatalogLifecycle>();
         ShowPage("home");
         VanillaPreserved=originals.All(p=>p.Key!=null&&p.Key.gameObject.activeSelf==p.Value)

@@ -1,13 +1,13 @@
 {
-  "baseCommit": "960b4eae484eee3b4f428cedccd203bd953b14d4",
+  "baseCommit": "c4ddeed688471a0ec8d3a711a3d230dd5361384f",
   "localDevelopment": true,
   "validatorsSkipped": true,
   "uncommittedChanges": true,
   "archives": [
     {
       "name": "MySimulatedLongevityRoad-0.8.6-developer-local-compressed.zip",
-      "bytes": 73195176,
-      "sha256": "ad8a0bec92984751183ec90745ec9f23fd1d427f54ae88129505e1c64c61aafd"
+      "bytes": 72940822,
+      "sha256": "5f35f285dbde06ed39303b5738af006c4b4b99f062fee374a1efec51312631d4"
     }
   ],
   "splitRestore": "Concatenate .part001, .part002, ... in numeric order into the original .zip, then verify SHA256."

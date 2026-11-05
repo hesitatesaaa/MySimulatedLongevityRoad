@@ -17,7 +17,7 @@ internal static class MclslHuanzhenSystem
     private const int MaxHistory = 40;
     private const int MaxLoadAttempts = 3;
     private const int MaxEssenceHistory = 2;
-    private const int MaxLegacies = 8;
+    private const int MaxLegacies = 1;
     private const int MaxEssenceWorldLedgers = 128;
     private const int NaturalEssenceIntervalYears = 10;
     private const int DefaultLegacyCarryLimit = 3;
@@ -105,6 +105,7 @@ internal static class MclslHuanzhenSystem
         if (_arrivalSelection != null && MclslRuntimeSettings.HuanzhenEnabled
             && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true)
             TryNaturalArrival(_arrivalYear);
+        if (Time.frameCount % 60 == 0 && !_rollbackLoadInProgress && _state.PendingRestore?.Active != true) AutoClaimLegacy();
         bool anchorWorkloadQuiet = !MclslScheduler.HasFastWork;
         bool anchorWorkloadRecovered = Time.unscaledTime - _pendingAutomaticAnchorSince >= 20f
             && !MclslScheduler.HasAnnualCandidateBacklog
@@ -209,6 +210,9 @@ internal static class MclslHuanzhenSystem
         _pendingAutomaticAnchor = true;
     }
 
+    private static bool IsAutomaticHost(Actor actor) => IsLivingActor(actor)
+        && actor.isSapient() && !MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.IsBeast(actor);
+
     private static void TryNaturalArrival(int year)
     {
         if (_arrivalSelection != null)
@@ -240,14 +244,14 @@ internal static class MclslHuanzhenSystem
         {
             _arrivalYear = year;
             _arrivalSelection = new(MclslActorRegistry.Snapshot(), 1,
-                candidate => IsLivingActor(candidate) && !HasHuanzhenTrait(candidate)
+                candidate => IsAutomaticHost(candidate) && !HasHuanzhenTrait(candidate)
                     && MclslEligibility.CanCultivate(candidate) && MclslSpiritualRootSystem.HasActualSpiritualRoot(candidate),
                 candidate => -PositiveHash(runId + "|huanzhen-host|" + year + "|" + MclslActorAccessor.Id(candidate)));
         }
         if (!_arrivalSelection.Tick()) return;
         Actor selected = _arrivalSelection.Results.Count > 0 ? _arrivalSelection.Results[0] : null;
         _arrivalSelection = null; _arrivalYear = 0;
-        if (selected == null)
+        if (!IsAutomaticHost(selected))
         {
             _state.NextNaturalArrivalYear = year + 5;
             if (!Flush()) { return; }
@@ -734,7 +738,7 @@ internal static class MclslHuanzhenSystem
     {
         _state.Legacies ??= new List<MclslHuanzhenLegacyRecord>();
         string id = _state.WorldRunId + "|" + pending.HostIdentity + "|" + pending.DeathYear + "|" + pending.AnchorYear;
-        _state.Legacies.RemoveAll(x => x == null || string.Equals(x.Id, id, StringComparison.Ordinal));
+        _state.Legacies.Clear();
         _state.Legacies.Add(new MclslHuanzhenLegacyRecord
         {
             Id = id,
@@ -748,11 +752,35 @@ internal static class MclslHuanzhenSystem
         if (_state.Legacies.Count > MaxLegacies) _state.Legacies.RemoveRange(0, _state.Legacies.Count - MaxLegacies);
     }
 
+    private static void AutoClaimLegacy()
+    {
+        if (_state.Legacies.Count == 0) return;
+        var legacy = _state.Legacies[_state.Legacies.Count - 1];
+        if (legacy.ClaimedChoices.Count >= 3 || FindLivingHost() == null) return;
+        var options = GetLegacyOptions(legacy).Where(x => !x.Id.StartsWith("trait:", StringComparison.Ordinal) || AssetManager.traits.get(x.Id.Substring(6)).type != TraitType.Negative)
+            .OrderBy(x => LegacyPriority(x.Id)).ThenByDescending(x => x.Id.StartsWith("trait:", StringComparison.Ordinal) ? (int)((BaseTrait<ActorTrait>)AssetManager.traits.get(x.Id.Substring(6))).rarity : 0).ToArray();
+        foreach (var option in options)
+        {
+            if (_writeLocked || legacy.ClaimedChoices.Count >= 3) return;
+            if (legacy.ClaimedChoices.Contains(option.Id)) continue;
+            TryClaimLegacyOption(legacy.Id, option.Id, out _);
+        }
+    }
+
+    private static int LegacyPriority(string id) => id switch
+    {
+        "cultivation" => 0, "technique" => 1, "inverse_truth" => 2, "world_soul" => 3,
+        "divine_marrow" => 4, "nascent_essence" => 5, "nascent_cave" => 6,
+        "golden_core" => 7, "foundation_wonder" => 8, "divine_change" => 9,
+        _ => id.StartsWith("trait:Mclsl", StringComparison.OrdinalIgnoreCase) ? 10
+            : id.StartsWith("trait:", StringComparison.Ordinal) ? 11 : 12
+    };
+
     internal static int LegacySelectionLimit()
     {
         EnsureLoaded();
         if (_writeLocked) { return 0; }
-        return Math.Max(0, _state?.Anchors?.Count ?? 0);
+        return 3;
     }
 
     internal static IReadOnlyList<MclslHuanzhenLegacyOption> GetLegacyOptions(MclslHuanzhenLegacyRecord legacy)

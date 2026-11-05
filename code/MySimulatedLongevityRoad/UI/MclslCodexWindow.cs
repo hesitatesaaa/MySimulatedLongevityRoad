@@ -1645,8 +1645,8 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         DrawCardStripe("#D8C778");
         GUILayout.Label("<size=22><b>前世轮盘</b></size>");
         int selectionLimit = MclslHuanzhenSystem.LegacySelectionLimit();
-        GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，名额由当前还真锚点数量决定。</color>");
-        GUILayout.Label("当前还真锚点：" + selectionLimit + "　可保留数量：" + selectionLimit);
+        GUILayout.Label("<color=#B9B0A0>只显示前世实际拥有的具体对象；每个对象占一个保留名额，最新一次前世轮盘固定自动继承三项。</color>");
+        GUILayout.Label("自动继承名额：" + selectionLimit);
         if (state.Legacies == null || state.Legacies.Count == 0)
         {
             GUILayout.Label("尚无前世档案；第一次成功还真后，死前快照会在此凝成轮盘。 ");
@@ -1777,21 +1777,12 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
     private void DrawLegacyOptionButton(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, int limit, int used, float width, float height)
     {
         bool claimed = legacy.ClaimedChoices?.Contains(option.Id) == true;
-        bool oldEnabled = GUI.enabled;
-        GUI.enabled = oldEnabled && (claimed || (limit > 0 && used < limit));
-        string label = claimed ? "取消占位｜" + option.Label : "保留｜" + option.Label;
-        if (GUILayout.Button(label, GUILayout.Height(height), GUILayout.Width(width)))
-        {
-            if (claimed) MclslHuanzhenSystem.TryReleaseLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            else MclslHuanzhenSystem.TryClaimLegacyOption(legacy.Id, option.Id, out _huanzhenActionMessage);
-            BeginSnapshot();
-        }
-        GUI.enabled = oldEnabled;
+        GUILayout.Label((claimed ? "已自动继承｜" : "未选取｜") + option.Label, GUILayout.Height(height), GUILayout.Width(width));
     }
 
     private static float LegacyOptionHeight(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, float width)
     {
-        string label = legacy.ClaimedChoices?.Contains(option.Id) == true ? "取消占位｜" + option.Label : "保留｜" + option.Label;
+        string label = legacy.ClaimedChoices?.Contains(option.Id) == true ? "已自动继承｜" + option.Label : "未选取｜" + option.Label;
         return Mathf.Max(34f, _buttonStyle.CalcHeight(new GUIContent(label), Mathf.Max(20f, width)));
     }
 

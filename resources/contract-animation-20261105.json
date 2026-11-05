@@ -1,0 +1,84 @@
+{
+  "generator": "built-in imagegen",
+  "prompt": "Exact existing jade/gold cultivation pet reference, 4 idle and 8 walking poses, 4x3 transparent sprite sheet; fixed size and pivot; WorldBox pixel style.",
+  "records": [
+    {
+      "file": "GameResources/actors/CareerSpirits/0.png",
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a1a422-a36c-77d0-98ea-2750fe9af093\\exec-47b84b83-24f3-43fb-822b-5d5c318a20c6.png",
+      "sha256": "257087a265707b932e073ee012c08d678efe16352520c161488b5cc2d5313430",
+      "frames": 12,
+      "canvas": [
+        1024,
+        768
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "alphaCleanup": "alpha below 220 removed; nearest resize; fixed bottom pivot"
+    },
+    {
+      "file": "GameResources/actors/CareerSpirits/1.png",
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a1a422-a36c-77d0-98ea-2750fe9af093\\exec-29da7fa0-48f8-45de-8b5c-aed9501333dc.png",
+      "sha256": "78af3ce9279d5120c07160da76a712f74bd0d3555a16efcf4971b0b470e5c315",
+      "frames": 12,
+      "canvas": [
+        1024,
+        768
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "alphaCleanup": "alpha below 220 removed; nearest resize; fixed bottom pivot"
+    },
+    {
+      "file": "GameResources/actors/CareerSpirits/2.png",
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a1a422-a36c-77d0-98ea-2750fe9af093\\exec-973b5377-617a-4fc6-80e3-bf5c06086086.png",
+      "sha256": "a4a58b6d4c49b8c70c97e872a8988dc51d1cb10d5a47ee3647e9027b2eb0853f",
+      "frames": 12,
+      "canvas": [
+        1024,
+        768
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "alphaCleanup": "alpha below 220 removed; nearest resize; fixed bottom pivot"
+    },
+    {
+      "file": "GameResources/actors/CareerSpirits/3.png",
+      "source": "C:\\Users\\Arthur.lu\\.codex\\generated_images\\01a1a422-a36c-77d0-98ea-2750fe9af093\\exec-c64e3647-e393-4835-84ce-1f9961f9cd0b.png",
+      "sha256": "0d51281e178245fe7dad1b1cc971e0c47f8e35ac0ec467c52d969cc161b817ce",
+      "frames": 12,
+      "canvas": [
+        1024,
+        768
+      ],
+      "cell": [
+        256,
+        256
+      ],
+      "alphaCleanup": "alpha below 220 removed; nearest resize; fixed bottom pivot"
+    }
+  ],
+  "unityRetested": false,
+  "returnIcon": {
+    "file": "GameResources/ui/Icons/LivingReturn.png",
+    "sha256": "bc4b1d0a1e69b07d6f14e816fb4e7f1693af44bf9c52d4ac0cb5d05753894cfa",
+    "generator": "built-in imagegen",
+    "prompt": "Single transparent pixel game return icon, hooked left arrow, jade and antique gold, Chinese cultivation WorldBox style, no text."
+  },
+  "checks": {
+    "compile": {
+      "sources": 299,
+      "warnings": 0,
+      "exit": 0
+    },
+    "contractRules": "passed",
+    "autoLegacy": "priority, prerequisites, fewer options, claimed slots, repeat, negative traits, write lock, absent host passed; game persistence not exercised",
+    "frameBounds": "48 frames passed",
+    "actualUnity": false
+  }
+}

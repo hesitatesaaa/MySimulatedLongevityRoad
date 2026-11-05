@@ -104,8 +104,8 @@ internal sealed class MclslContractInfoBar : MonoBehaviour
         layout.childForceExpandWidth = true;
         layout.childForceExpandHeight = false;
         LayoutElement barLayout = root.gameObject.AddComponent<LayoutElement>();
-        barLayout.preferredHeight = 50f;
-        barLayout.minHeight = 44f;
+        barLayout.preferredHeight = 16f;
+        barLayout.minHeight = 16f;
 
         Image background = root.gameObject.AddComponent<Image>();
         background.color = new Color(0.07f, 0.16f, 0.15f, 0.45f);
@@ -121,14 +121,14 @@ internal sealed class MclslContractInfoBar : MonoBehaviour
         rowLayout.childForceExpandWidth = false;
         rowLayout.childForceExpandHeight = false;
         rowLayout.childAlignment = TextAnchor.MiddleLeft;
-        rowOne.GetComponent<LayoutElement>().preferredHeight = 26f;
+        rowOne.GetComponent<LayoutElement>().preferredHeight = 12f;
 
         _row1 = CreateText(rowOne.transform, "Title");
         _row1.fontSize = MclslUiTheme.ReadableFontSize(11);
         _row1.rectTransform.pivot = new Vector2(0.5f, 0.5f);
         LayoutElement titleLayout = _row1.gameObject.AddComponent<LayoutElement>();
         titleLayout.flexibleWidth = 1f;
-        titleLayout.preferredHeight = 24f;
+        titleLayout.preferredHeight = 12f;
 
         _row2 = CreateText(root, "Line2");
         _row2.fontSize = MclslUiTheme.ReadableFontSize(9);
@@ -241,43 +241,20 @@ internal sealed class MclslContractInfoBar : MonoBehaviour
     private void RenderTexts(MclslContractInfo contract, Actor actor)
     {
         bool isOwner = ReferenceEquals(actor, contract.Owner);
-        if (contract.NeedsChoice)
-        {
-            _choiceOwner = contract.Owner;
-            SetAvatar(null);
-            SetKindIcon(-1);
-            _row1.text = "<b>本命契灵</b> · <color=#FFD37A>待缔契</color>";
-            _row2.text = "点击选择契灵：灵狼 / 岩龟 / 雷隼 / 灵鹿";
-            _barButton.interactable = true;
-            return;
-        }
+        _choiceOwner = contract.Owner;
+        SetAvatar(null);
+        SetKindIcon(-1);
+        _row2.gameObject.SetActive(false);
         if (isOwner)
         {
-            _choiceOwner = contract.Owner;
-            if (MclslActorAccessor.Alive(contract.Pet))
-            {
-                Actor pet = contract.Pet;
-                SetAvatar(pet);
-                SetKindIcon(-1);
-                _row1.text = "<b>本命契灵</b> · " + KindName(contract.Kind) + " · " + Name(pet);
-                _row2.text = "生命 <color=#FFD37A>" + pet.getHealth() + "</color> / " + pet.getMaxHealth();
-                _barButton.interactable = true;
-                return;
-            }
-            SetAvatar(null);
-            SetKindIcon(contract.Kind);
-            _row1.text = "<b>本命契灵</b> · " + KindName(contract.Kind) + " · " + RecentName(contract);
-            _row2.text = RecoverText(contract);
-            _barButton.interactable = false;
-            return;
+            _row1.text = "契约灵宠：" + (MclslActorAccessor.Alive(contract.Pet) ? Name(contract.Pet) : "暂无");
+            _barButton.interactable = contract.NeedsChoice || MclslActorAccessor.Alive(contract.Pet);
         }
-        Actor owner = contract.Owner;
-        _choiceOwner = owner;
-        SetAvatar(owner);
-        SetKindIcon(-1);
-        _row1.text = "<b>契约主人</b> · " + Name(owner);
-        _row2.text = OwnerDetail(owner);
-        _barButton.interactable = MclslActorAccessor.Alive(owner);
+        else
+        {
+            _row1.text = "主人：" + Name(contract.Owner) + "〔" + MclslRealmIds.Display(MclslActorAccessor.Realm(contract.Owner)) + "〕";
+            _barButton.interactable = MclslActorAccessor.Alive(contract.Owner);
+        }
     }
 
     private void Update()
@@ -360,7 +337,7 @@ internal sealed class MclslContractInfoBar : MonoBehaviour
             if (_avatar.clanBanner != null) _avatar.clanBanner.gameObject.SetActive(false);
             LayoutElement layout = _avatar.gameObject.AddComponent<LayoutElement>();
             layout.preferredWidth = 26f;
-            layout.preferredHeight = 26f;
+            layout.preferredHeight = 24f;
             CanvasGroup group = _avatar.gameObject.AddComponent<CanvasGroup>();
             group.blocksRaycasts = false;
             _avatarActorId = long.MinValue;
@@ -388,7 +365,7 @@ internal sealed class MclslContractInfoBar : MonoBehaviour
             iconObject.transform.SetAsFirstSibling();
             iconObject.GetComponent<RectTransform>().sizeDelta = new Vector2(24f, 24f);
             iconObject.GetComponent<LayoutElement>().preferredWidth = 26f;
-            iconObject.GetComponent<LayoutElement>().preferredHeight = 26f;
+            iconObject.GetComponent<LayoutElement>().preferredHeight = 24f;
             _kindIcon = iconObject.GetComponent<Image>();
             _kindIcon.preserveAspect = true;
             _kindIcon.raycastTarget = false;

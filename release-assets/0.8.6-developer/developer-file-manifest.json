@@ -1,9 +1,9 @@
 {
-  "baseCommit": "960b4eae484eee3b4f428cedccd203bd953b14d4",
+  "baseCommit": "c4ddeed688471a0ec8d3a711a3d230dd5361384f",
   "localDevelopment": true,
-  "sourceInputSha256": "15a8310b0e5f4c1cdf8b880541df24fff12b75ac9a8f09623a99ff19c82df76b",
+  "sourceInputSha256": "386459fbddbf8c26209302d0c7d420789de9a63bfff032826cecc360855dbf52",
   "uncommittedChanges": true,
-  "worktreeStatusSha256": "c276f33813fb3cf1365a30743944e7826db7394abd66cbd10bdb20717c2e3f8a",
+  "worktreeStatusSha256": "577274ba29ff635fa9bacd611e884e7f574206fec425c9be6c43b9e09f61a764",
   "unityRetested": false,
   "files": {
     ".gitignore": {
@@ -27,20 +27,20 @@
       "sha256": "502782030b9676034751168b800af3949230404b36d976477ff00698abce87ab"
     },
     "GameResources/actors/CareerSpirits/0.png": {
-      "bytes": 249583,
-      "sha256": "a636a479be61ec19d0e51687aa4f13ed1aaaec45a0bee0460389918cba14cb5d"
+      "bytes": 145800,
+      "sha256": "7ac073738d31ffc42bffa7b7d41af0bcb332a0c66252c2ad6a29e49a13fdf69d"
     },
     "GameResources/actors/CareerSpirits/1.png": {
-      "bytes": 233378,
-      "sha256": "ddd94796a17c080d0646e8e965347654b38a98e6017ba0cf8e399df4413d5e09"
+      "bytes": 156496,
+      "sha256": "4230455c007656d37b028bec2f48f4a782471778dd1ab8d7a68f3a835bf47adb"
     },
     "GameResources/actors/CareerSpirits/2.png": {
-      "bytes": 172517,
-      "sha256": "0bd1b4110bfa27d53d77ead74277239f16880f0757a43af6beecd00a970bb242"
+      "bytes": 107965,
+      "sha256": "43afeaf72677273cb8e825d8f407b3412a0bfdeb894424af58ca10839b66db1f"
     },
     "GameResources/actors/CareerSpirits/3.png": {
-      "bytes": 193145,
-      "sha256": "25ef8dc6339960dd02548ba33f32ad2b5d0d3e638940fae66805f420c3bfeaf7"
+      "bytes": 171516,
+      "sha256": "932b5a0e1693383050f5f2db2939fcb2cb5bf761f12dc3da80076146fb843019"
     },
     "GameResources/actors/Xuanhuang/female_1.png": {
       "bytes": 2323,
@@ -2049,6 +2049,10 @@
     "GameResources/ui/Icons/LingShi.png": {
       "bytes": 150118,
       "sha256": "d69ae4a8d65902c8172025fd13cb182a0001d9b832deae85691121055281a706"
+    },
+    "GameResources/ui/Icons/LivingReturn.png": {
+      "bytes": 1476,
+      "sha256": "79d4332bc57b5c5964551213fd772fb72bf8b91729446ff8b12b8c5b631b0198"
     },
     "GameResources/ui/Icons/MaobaoEntrance.png": {
       "bytes": 28847,
@@ -9407,8 +9411,8 @@
       "sha256": "92d5d6736217c7bbf386c12f14d87bc74ccbfd8881f6f5f66b90cdaaf8c72ef7"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerCombat.cs": {
-      "bytes": 35276,
-      "sha256": "c41f255bc209e075100b2b9d9179941c2038e0c837e2c9fe4b75d103ab384d75"
+      "bytes": 35312,
+      "sha256": "e2f23e0a4ec87048917e33e120a280baa42d977465c13c850e7bfe019a3721b8"
     },
     "code/MySimulatedLongevityRoad/Systems/Combat/MclslCareerContract.cs": {
       "bytes": 22060,
@@ -9715,8 +9719,8 @@
       "sha256": "68f463fd78cc69aa18fe5f23dba9b22015560608917023034f2fa50b30d692e0"
     },
     "code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs": {
-      "bytes": 88230,
-      "sha256": "3ced14e118fb98ca66d824279877c0755e367711bd8aba0e089f6c7cf166e4c0"
+      "bytes": 91462,
+      "sha256": "b66989cad2436dd7e8d9df67d6841ef18b9717c069f6e16030d4b0e7ac604bb2"
     },
     "code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslMaobaoArchiveManager.cs": {
       "bytes": 14537,
@@ -9967,8 +9971,8 @@
       "sha256": "6e8f8890d625904f5053abebb729d4135fd81c6d67b5cb17a87f4d3966a0006c"
     },
     "code/MySimulatedLongevityRoad/Traits/MclslXuanhuangRegistration.cs": {
-      "bytes": 14763,
-      "sha256": "4b3cfba1103147861cc9569b37056dae4a5f0229c2634024f7d4a6c94fc1b21f"
+      "bytes": 14923,
+      "sha256": "4fd89ece839b1de44298cc61e42b6472bb4b2b8a5d1ccaf5a20607c92d9295ec"
     },
     "code/MySimulatedLongevityRoad/UI/MclslActorArchiveText.cs": {
       "bytes": 1222,
@@ -10071,12 +10075,12 @@
       "sha256": "f55161dc274d3c717bd6c13fcc5c22ae36772c568f4495d37816f3a9d053224a"
     },
     "code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs": {
-      "bytes": 126751,
-      "sha256": "7eabb052ef98c9ae2f726805bcfd8aa7de348b80f76ee1fac9d9943703e50299"
+      "bytes": 128661,
+      "sha256": "91535c22b70453f28ea0e743444e51418344cfc8bea8ee9f9adb36d481b98e71"
     },
     "code/MySimulatedLongevityRoad/UI/MclslContractInfoBar.cs": {
-      "bytes": 18295,
-      "sha256": "d9320e44fed28a67e26ce2188dcdd7c802cac760fcba5c1e98e22683f09f588b"
+      "bytes": 17832,
+      "sha256": "ad3caf8349da7832d6b2919902a015169d5ecf9593f9f7c49e60245a3bd4367f"
     },
     "code/MySimulatedLongevityRoad/UI/MclslDeferredUiWork.cs": {
       "bytes": 877,
@@ -10111,8 +10115,8 @@
       "sha256": "377ab943a9e346fdf7ce70f94c2faebe021d0c0e39b283789e18f201589e1665"
     },
     "code/MySimulatedLongevityRoad/UI/MclslLivingCatalog.cs": {
-      "bytes": 5374,
-      "sha256": "3efe5e1cf95785f9a741877de4e434af9b73c306874b624f2a3217f56b3b636d"
+      "bytes": 5471,
+      "sha256": "94602addfa1a68b5377423d51f79eba88fac91fd7fad4afa252777a4665b188a"
     },
     "code/MySimulatedLongevityRoad/UI/MclslManaBar.cs": {
       "bytes": 5476,
@@ -15978,6 +15982,14 @@
       "bytes": 610470,
       "sha256": "31b8956f24dd517a0fc3cf8fe0dea5fe943b414b2347b55a7458bf701b756b31"
     },
+    "resources/contract-animation-20261105.json": {
+      "bytes": 3094,
+      "sha256": "89ab7db2c08e177f5c3757277e07a59692bd804a18ec3ba77f6253684d56c5b4"
+    },
+    "resources/contract-huanzhen-update-20261105.md": {
+      "bytes": 1067,
+      "sha256": "94f4c1c82ec579b9e9712fcfd4f8496e7754ca22d4df213ed371d9f046d2ac37"
+    },
     "resources/contract-rework.md": {
       "bytes": 2980,
       "sha256": "d8385be4bf1e8f1248e472a5592a26176184790e15528b1550ec4146bee8b34b"
@@ -16059,8 +16071,8 @@
       "sha256": "2e6e3c25a4aa7c5ef209e6208e9cf1cc481f57b26b6cfa0adf139f75ea3f03eb"
     },
     "resources/living-resources.json": {
-      "bytes": 932972,
-      "sha256": "386bad80091c1f78bf96648d711804c584abd7737ce08e84e889dd536cf107a2"
+      "bytes": 934513,
+      "sha256": "1e97ece7732a3b49bfcc1c281bb22c5fcb6523b72fe3ffa0feb574683c651754"
     },
     "resources/local-validation.json": {
       "bytes": 37300,
@@ -16382,6 +16394,10 @@
       "bytes": 1216,
       "sha256": "88323233f27ed230ea2c39909ebae2d1f4c084fe1d036da7f2ca90162bcf2694"
     },
+    "tools/test-huanzhen-auto-legacy.ps1": {
+      "bytes": 3450,
+      "sha256": "2533446cfb94d078e715b372fa7b6f3dbeca37991604c854ea1d0be5041264d5"
+    },
     "tools/test-newlaw-performance.ps1": {
       "bytes": 1554,
       "sha256": "82358e1292102ca22a5f718e722ed0e64e0bd6cb306bd8381146b4b8bc35db33"
@@ -16438,13 +16454,13 @@
     "unityRetested": false
   },
   "compressionStats": {
-    "optimizedImages": 1147,
-    "metadataImagesKept": 492,
-    "imageBytesBefore": 82076356,
-    "imageBytesAfter": 67650918,
+    "optimizedImages": 1152,
+    "metadataImagesKept": 488,
+    "imageBytesBefore": 83425562,
+    "imageBytesAfter": 67385548,
     "soulAtlas": {
       "frames": 0
     },
-    "runtimeImageDataBytesAfter": 67650918
+    "runtimeImageDataBytesAfter": 67385548
   }
 }

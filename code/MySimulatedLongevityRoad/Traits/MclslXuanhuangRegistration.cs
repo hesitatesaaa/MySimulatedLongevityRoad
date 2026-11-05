@@ -55,6 +55,7 @@ internal static class MclslXuanhuangRegistration
             // dedicated building grows to 115%. Z, footprint, pivot and upgrade
             // graph stay native; windmill frames/pivot are not cropped.
             float scale= pair.Key.StartsWith("windmill_")?1.05f:pair.Key=="tent_human"?1.15f*1.2f:1.15f;
+            if(pair.Key.Contains("dock"))scale*=0.85f;
             building.scale_base=new Vector3(source.scale_base.x*scale,source.scale_base.y*scale,source.scale_base.z);
             // Four blade poses represent 22.5-degree steps; native playback owns timing.
             if(pair.Key.StartsWith("windmill_"))building.animation_speed=4f;
@@ -133,6 +134,7 @@ internal static class MclslXuanhuangRegistration
         string id=Id+"_"+source;
         var boat=AssetManager.actor_library.clone(id,source);
         boat.texture_id=id;boat.name_locale=id;
+        boat.base_stats["scale"]=AssetManager.actor_library.get(source).base_stats.get("scale")*0.85f;
         boat.has_advanced_textures=false;boat.need_colored_sprite=false;
         boat.has_override_sprite=true;
         boat.get_override_sprite=AssetManager.actor_library.get(source).get_override_sprite;

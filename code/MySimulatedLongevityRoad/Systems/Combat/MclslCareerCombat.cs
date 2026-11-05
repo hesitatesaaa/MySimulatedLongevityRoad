@@ -58,7 +58,7 @@ internal static partial class MclslCareerCombat
             asset.texture_asset.loadShadow();
             asset.need_colored_sprite=false;
             asset.animation_idle=new[]{"idle_0","idle_1","idle_2","idle_3"};
-            asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3"};
+            asset.animation_walk=new[]{"walk_0","walk_1","walk_2","walk_3","walk_4","walk_5","walk_6","walk_7"};
             asset.animation_swim=asset.animation_walk;
             asset.animation_idle_speed=0.18f;asset.animation_walk_speed=0.12f;
             asset.animation_swim_speed=0.12f;asset.animation_speed_based_on_walk_speed=false;

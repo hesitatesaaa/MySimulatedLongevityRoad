@@ -7463,7 +7463,7 @@
     {
      "Name": "idle_0",
      "X": 0,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7473,7 +7473,7 @@
     {
      "Name": "idle_1",
      "X": 256,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7483,7 +7483,7 @@
     {
      "Name": "idle_2",
      "X": 512,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7493,7 +7493,7 @@
     {
      "Name": "idle_3",
      "X": 768,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7503,7 +7503,7 @@
     {
      "Name": "walk_0",
      "X": 0,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7513,7 +7513,7 @@
     {
      "Name": "walk_1",
      "X": 256,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7523,7 +7523,7 @@
     {
      "Name": "walk_2",
      "X": 512,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7532,6 +7532,46 @@
     },
     {
      "Name": "walk_3",
+     "X": 768,
+     "Y": 256,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_4",
+     "X": 0,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_5",
+     "X": 256,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_6",
+     "X": 512,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_7",
      "X": 768,
      "Y": 0,
      "Width": 256,
@@ -7549,7 +7589,7 @@
     {
      "Name": "idle_0",
      "X": 0,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7559,7 +7599,7 @@
     {
      "Name": "idle_1",
      "X": 256,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7569,7 +7609,7 @@
     {
      "Name": "idle_2",
      "X": 512,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7579,7 +7619,7 @@
     {
      "Name": "idle_3",
      "X": 768,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7589,7 +7629,7 @@
     {
      "Name": "walk_0",
      "X": 0,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7599,7 +7639,7 @@
     {
      "Name": "walk_1",
      "X": 256,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7609,7 +7649,7 @@
     {
      "Name": "walk_2",
      "X": 512,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7618,6 +7658,46 @@
     },
     {
      "Name": "walk_3",
+     "X": 768,
+     "Y": 256,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_4",
+     "X": 0,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_5",
+     "X": 256,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_6",
+     "X": 512,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_7",
      "X": 768,
      "Y": 0,
      "Width": 256,
@@ -7635,7 +7715,7 @@
     {
      "Name": "idle_0",
      "X": 0,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7645,7 +7725,7 @@
     {
      "Name": "idle_1",
      "X": 256,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7655,7 +7735,7 @@
     {
      "Name": "idle_2",
      "X": 512,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7665,7 +7745,7 @@
     {
      "Name": "idle_3",
      "X": 768,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7675,7 +7755,7 @@
     {
      "Name": "walk_0",
      "X": 0,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7685,7 +7765,7 @@
     {
      "Name": "walk_1",
      "X": 256,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7695,7 +7775,7 @@
     {
      "Name": "walk_2",
      "X": 512,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7704,6 +7784,46 @@
     },
     {
      "Name": "walk_3",
+     "X": 768,
+     "Y": 256,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_4",
+     "X": 0,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_5",
+     "X": 256,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_6",
+     "X": 512,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_7",
      "X": 768,
      "Y": 0,
      "Width": 256,
@@ -7721,7 +7841,7 @@
     {
      "Name": "idle_0",
      "X": 0,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7731,7 +7851,7 @@
     {
      "Name": "idle_1",
      "X": 256,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7741,7 +7861,7 @@
     {
      "Name": "idle_2",
      "X": 512,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7751,7 +7871,7 @@
     {
      "Name": "idle_3",
      "X": 768,
-     "Y": 256,
+     "Y": 512,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7761,7 +7881,7 @@
     {
      "Name": "walk_0",
      "X": 0,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7771,7 +7891,7 @@
     {
      "Name": "walk_1",
      "X": 256,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7781,7 +7901,7 @@
     {
      "Name": "walk_2",
      "X": 512,
-     "Y": 0,
+     "Y": 256,
      "Width": 256,
      "Height": 256,
      "PivotX": 128,
@@ -7790,6 +7910,46 @@
     },
     {
      "Name": "walk_3",
+     "X": 768,
+     "Y": 256,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_4",
+     "X": 0,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_5",
+     "X": 256,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_6",
+     "X": 512,
+     "Y": 0,
+     "Width": 256,
+     "Height": 256,
+     "PivotX": 128,
+     "PivotY": 16,
+     "PixelsPerUnit": 32
+    },
+    {
+     "Name": "walk_7",
      "X": 768,
      "Y": 0,
      "Width": 256,
@@ -12390,12 +12550,17 @@
       "walk_0",
       "walk_1",
       "walk_2",
-      "walk_3"
+      "walk_3",
+      "walk_4",
+      "walk_5",
+      "walk_6",
+      "walk_7"
      ],
      "Use": "独立契灵原生静止/行走动画"
     }
    ],
-   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。"
+   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。",
+   "CurrentAnimationRecord": "resources/contract-animation-20261105.json"
   },
   {
    "File": "art-source/spirit-hd-1.png",
@@ -12419,12 +12584,17 @@
       "walk_0",
       "walk_1",
       "walk_2",
-      "walk_3"
+      "walk_3",
+      "walk_4",
+      "walk_5",
+      "walk_6",
+      "walk_7"
      ],
      "Use": "独立契灵原生静止/行走动画"
     }
    ],
-   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。"
+   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。",
+   "CurrentAnimationRecord": "resources/contract-animation-20261105.json"
   },
   {
    "File": ".dev-tools/combat-art/0.7.0/CP_spirit_2A_icon.png",
@@ -12477,12 +12647,17 @@
       "walk_0",
       "walk_1",
       "walk_2",
-      "walk_3"
+      "walk_3",
+      "walk_4",
+      "walk_5",
+      "walk_6",
+      "walk_7"
      ],
      "Use": "独立契灵原生静止/行走动画"
     }
    ],
-   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。"
+   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。",
+   "CurrentAnimationRecord": "resources/contract-animation-20261105.json"
   },
   {
    "File": "art-source/spirit-hd-3.png",
@@ -12506,12 +12681,17 @@
       "walk_0",
       "walk_1",
       "walk_2",
-      "walk_3"
+      "walk_3",
+      "walk_4",
+      "walk_5",
+      "walk_6",
+      "walk_7"
      ],
      "Use": "独立契灵原生静止/行走动画"
     }
    ],
-   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。"
+   "Prompt": "以本职业对应灵兽图标为图像输入，保持主体、玉青配色、金色契纹和像素颗粒。四列两行：四帧静止、四帧行走或飞行，完整身体朝右，统一比例脚底，真实透明背景，无文字底板。",
+   "CurrentAnimationRecord": "resources/contract-animation-20261105.json"
   }
  ],
  "Outputs": [
@@ -17839,125 +18019,25 @@
   },
   {
    "Resource": "actors/CareerSpirits/0",
-   "SHA256": "a636a479be61ec19d0e51687aa4f13ed1aaaec45a0bee0460389918cba14cb5d",
+   "SHA256": "257087a265707b932e073ee012c08d678efe16352520c161488b5cc2d5313430",
    "SourceSHA256": "c33198924dfcc8327a2668959994f0d0d8499cd143a482a9a710b0dcf0750a78",
    "Size": [
     1024,
-    512
+    768
    ],
-   "SourceRectangles": [
-    [
-     18,
-     161,
-     384,
-     505
-    ],
-    [
-     384,
-     156,
-     751,
-     505
-    ],
-    [
-     768,
-     152,
-     1145,
-     505
-    ],
-    [
-     1152,
-     157,
-     1496,
-     504
-    ],
-    [
-     17,
-     634,
-     384,
-     901
-    ],
-    [
-     390,
-     647,
-     768,
-     902
-    ],
-    [
-     768,
-     633,
-     1152,
-     905
-    ],
-    [
-     1152,
-     639,
-     1514,
-     905
-    ]
-   ],
-   "Scale": 0.14583333333333334,
-   "File": "GameResources/actors/CareerSpirits/0.png"
+   "File": "GameResources/actors/CareerSpirits/0.png",
+   "SourceRecord": "resources/contract-animation-20261105.json"
   },
   {
    "Resource": "actors/CareerSpirits/1",
-   "SHA256": "ddd94796a17c080d0646e8e965347654b38a98e6017ba0cf8e399df4413d5e09",
+   "SHA256": "78af3ce9279d5120c07160da76a712f74bd0d3555a16efcf4971b0b470e5c315",
    "SourceSHA256": "3b05afc1bb0ff06c887cddc2b9ac2b005586ae83a2516cab7abb044fea9823c7",
    "Size": [
     1024,
-    512
+    768
    ],
-   "SourceRectangles": [
-    [
-     13,
-     158,
-     384,
-     499
-    ],
-    [
-     384,
-     144,
-     768,
-     499
-    ],
-    [
-     768,
-     145,
-     1152,
-     499
-    ],
-    [
-     1171,
-     161,
-     1533,
-     499
-    ],
-    [
-     13,
-     591,
-     384,
-     917
-    ],
-    [
-     384,
-     598,
-     768,
-     917
-    ],
-    [
-     768,
-     598,
-     1152,
-     917
-    ],
-    [
-     1152,
-     598,
-     1531,
-     915
-    ]
-   ],
-   "Scale": 0.14583333333333334,
-   "File": "GameResources/actors/CareerSpirits/1.png"
+   "File": "GameResources/actors/CareerSpirits/1.png",
+   "SourceRecord": "resources/contract-animation-20261105.json"
   },
   {
    "Resource": "ui/CareerSkills/CP_spirit_2A",
@@ -17983,125 +18063,25 @@
   },
   {
    "Resource": "actors/CareerSpirits/2",
-   "SHA256": "0bd1b4110bfa27d53d77ead74277239f16880f0757a43af6beecd00a970bb242",
+   "SHA256": "a4a58b6d4c49b8c70c97e872a8988dc51d1cb10d5a47ee3647e9027b2eb0853f",
    "SourceSHA256": "85498cf3ca480bbde00afdbdab6493333881a395981820f110d2cfffd4bd2b80",
    "Size": [
     1024,
-    512
+    768
    ],
-   "SourceRectangles": [
-    [
-     14,
-     55,
-     377,
-     512
-    ],
-    [
-     392,
-     126,
-     763,
-     504
-    ],
-    [
-     772,
-     200,
-     1152,
-     507
-    ],
-    [
-     1152,
-     215,
-     1529,
-     507
-    ],
-    [
-     20,
-     536,
-     384,
-     928
-    ],
-    [
-     384,
-     605,
-     768,
-     898
-    ],
-    [
-     768,
-     676,
-     1152,
-     974
-    ],
-    [
-     1152,
-     526,
-     1528,
-     940
-    ]
-   ],
-   "Scale": 0.12253829321663019,
-   "File": "GameResources/actors/CareerSpirits/2.png"
+   "File": "GameResources/actors/CareerSpirits/2.png",
+   "SourceRecord": "resources/contract-animation-20261105.json"
   },
   {
    "Resource": "actors/CareerSpirits/3",
-   "SHA256": "25ef8dc6339960dd02548ba33f32ad2b5d0d3e638940fae66805f420c3bfeaf7",
+   "SHA256": "0d51281e178245fe7dad1b1cc971e0c47f8e35ac0ec467c52d969cc161b817ce",
    "SourceSHA256": "0269e4e4aec1da117142fb7760038fa567d52cb3b3fa953cc771670533db24f6",
    "Size": [
     1024,
-    512
+    768
    ],
-   "SourceRectangles": [
-    [
-     15,
-     16,
-     365,
-     496
-    ],
-    [
-     399,
-     13,
-     737,
-     496
-    ],
-    [
-     771,
-     12,
-     1152,
-     496
-    ],
-    [
-     1152,
-     19,
-     1522,
-     496
-    ],
-    [
-     17,
-     528,
-     382,
-     991
-    ],
-    [
-     390,
-     531,
-     765,
-     985
-    ],
-    [
-     771,
-     524,
-     1152,
-     987
-    ],
-    [
-     1152,
-     526,
-     1526,
-     986
-    ]
-   ],
-   "Scale": 0.11570247933884298,
-   "File": "GameResources/actors/CareerSpirits/3.png"
+   "File": "GameResources/actors/CareerSpirits/3.png",
+   "SourceRecord": "resources/contract-animation-20261105.json"
   },
   {
    "Resource": "ui/XuanhuangSkin/title_career_skills",
