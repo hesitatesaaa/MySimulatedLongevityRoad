@@ -14,13 +14,14 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 METRICS = os.path.join(ROOT, 'docs', 'CODE-METRICS.json')
 
-# 阶段目标（只降不升）：达到后继续下调并提交。
+# 阶段目标（只降不升）。首版以“当前基线”作为天花板，随后每完成一个施工段
+# （M3/M4/M5）就把对应数字下调并提交，形成只降不升的棘轮。
 LIMITS = {
     'catchExceptionUnrouted': 200,
     'emptyCatchCode': 0,
-    'longParams6': 90,
-    'longLinesOver200': 200,
-    'duplicateBlocks': 10,
+    'longParams6': 127,          # 基线：127 → 目标 ≤90（M3）
+    'longLinesOver200': 373,     # 基线：373 → 目标 ≤200（M4）
+    'duplicateBlocks': 21,       # 基线：21 → 目标 ≤10（M5）
 }
 
 

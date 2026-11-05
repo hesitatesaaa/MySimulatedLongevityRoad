@@ -31,9 +31,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Regenerate code metrics
-        run: python tools/report-code-metrics.py
-      - name: Fail if docs/CODE-METRICS.json is stale
-        run: git diff --exit-code docs/CODE-METRICS.json
+      - name: Verify docs/CODE-METRICS.json is up to date (ignores generatedAt)
+        run: python tools/report-code-metrics.py --check
       - name: Enforce quality ratchet
         run: python tools/code-quality-ratchet.py

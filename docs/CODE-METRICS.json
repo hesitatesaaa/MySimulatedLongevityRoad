@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-11-06T00:29:17+08:00",
+  "generatedAt": "2026-11-06T00:37:24+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 75871,
+  "totalLines": 75877,
   "linesPerTopDir": {
     "Systems": 41343,
     "UI": 19689,
     "Data": 5072,
-    "Core": 3869,
+    "Core": 3875,
     "Traits": 3815,
     "Patches": 1725,
     "Queries": 328,
@@ -63,7 +63,7 @@
   "catchExceptionUnrouted": 161,
   "guardSwallowedCalls": 152,
   "emptyCatchCode": 0,
-  "diagnosticsErrorCalls": 128,
+  "diagnosticsErrorCalls": 129,
   "diagnosticsProbeCalls": 7,
   "rawDebugLogOutsideDiagnostics": 0,
   "reflection": {

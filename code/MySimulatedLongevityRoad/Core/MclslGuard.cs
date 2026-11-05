@@ -55,6 +55,12 @@ internal static class MclslGuard
             MclslDiagnostics.Fatal("guard-" + k, "持久化异常不可忽略: " + ex);
             return;
         }
+        if (scope == MclslGuardScope.NativeUi)
+        {
+            // 原生 UI/回调边界：保持“始终可见”的错误级别，避免静默。
+            MclslDiagnostics.Error("guard-" + k, "边界异常(" + scope + "): " + (ex?.Message ?? string.Empty));
+            return;
+        }
         MclslDiagnostics.Probe("guard-" + k, "可忽略异常(" + scope + "): " + (ex?.Message ?? string.Empty));
     }
 

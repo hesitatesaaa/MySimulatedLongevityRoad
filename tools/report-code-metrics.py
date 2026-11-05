@@ -165,6 +165,25 @@ data = {
 }
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
+
+# --check: verify the committed metrics match the current tree, ignoring the
+# volatile timestamp, so CI can detect drift without failing on every run.
+if '--check' in sys.argv:
+    if not os.path.exists(OUT):
+        print('missing', OUT)
+        sys.exit(2)
+    with io.open(OUT, 'r', encoding='utf-8') as f:
+        existing = json.load(f)
+    keys = [k for k in data if k != 'generatedAt']
+    drift = [k for k in keys if existing.get(k) != data[k]]
+    if drift:
+        print('metrics drift:', ', '.join(drift))
+        for k in drift:
+            print('  %s: committed=%r current=%r' % (k, existing.get(k), data[k]))
+        sys.exit(1)
+    print('metrics up to date')
+    sys.exit(0)
+
 with io.open(OUT, 'w', encoding='utf-8', newline='\n') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
     f.write('\n')
