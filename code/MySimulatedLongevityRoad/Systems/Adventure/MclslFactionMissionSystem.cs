@@ -260,7 +260,7 @@ internal static class MclslFactionMissionSystem
             baseContribution = 8 + quality * 7 + realmIndex * 4;
             baseStones = 28 + quality * 22 + aptitude / 6 + mission.Stones;
             influenceDelta = InfluenceStep(roll / 7, quality);
-            ApplyFiveEldersReward(run, actor, realmIndex, quality, year, roll);
+            ApplyFiveEldersReward(new ApplyFiveEldersRewardArgs { Run = run, Actor = actor, Realmindex = realmIndex, Quality = quality, Year = year, Roll = roll });
             run.BackgroundFactions.FiveEldersInfluence = Math.Clamp(run.BackgroundFactions.FiveEldersInfluence + influenceDelta, 0, 100);
             run.BackgroundFactions.AllianceOrderPressure = Math.Max(0, run.BackgroundFactions.AllianceOrderPressure - 1);
         }
@@ -329,8 +329,14 @@ internal static class MclslFactionMissionSystem
         return roll % 100 < 30 + quality * 8 ? 1 : 0;
     }
 
-    private static void ApplyFiveEldersReward(MclslWorldRunState run, Actor actor, int realmIndex, int quality, int year, int roll)
+    private static void ApplyFiveEldersReward(ApplyFiveEldersRewardArgs a)
     {
+        MclslWorldRunState run = a.Run;
+        Actor actor = a.Actor;
+        int realmIndex = a.Realmindex;
+        int quality = a.Quality;
+        int year = a.Year;
+        int roll = a.Roll;
         int ruin = 1 + quality + roll % 3;
         MclslActorAccessor.Set(actor, MclslActorDataKeys.RuinExperience, MclslActorAccessor.GetInt(actor, MclslActorDataKeys.RuinExperience, 0) + ruin);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.HeartMethodKnown, 1);
@@ -410,4 +416,14 @@ internal static class MclslFactionMissionSystem
     {
         unchecked { int hash = 67; foreach (char c in value ?? string.Empty) hash = hash * 71 + c; return hash & int.MaxValue; }
     }
+}
+
+internal sealed class ApplyFiveEldersRewardArgs
+{
+    internal MclslWorldRunState Run;
+    internal Actor Actor;
+    internal int Realmindex;
+    internal int Quality;
+    internal int Year;
+    internal int Roll;
 }

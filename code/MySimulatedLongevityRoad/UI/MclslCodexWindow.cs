@@ -1711,9 +1711,25 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
                         if (secondIndex < options.Count)
                             rowHeight = Mathf.Max(rowHeight, LegacyOptionHeight(legacy, options[secondIndex], optionWidth));
                         GUILayout.BeginHorizontal();
-                        DrawLegacyOptionButton(legacy, options[optionIndex], selectionLimit, used, optionWidth, rowHeight);
+                        DrawLegacyOptionButton(new DrawLegacyOptionButtonArgs
+                        {
+                            Legacy = legacy,
+                            Option = options[optionIndex],
+                            Limit = selectionLimit,
+                            Used = used,
+                            Width = optionWidth,
+                            Height = rowHeight
+                        });
                         if (secondIndex < options.Count)
-                            DrawLegacyOptionButton(legacy, options[secondIndex], selectionLimit, used, optionWidth, rowHeight);
+                            DrawLegacyOptionButton(new DrawLegacyOptionButtonArgs
+                            {
+                                Legacy = legacy,
+                                Option = options[secondIndex],
+                                Limit = selectionLimit,
+                                Used = used,
+                                Width = optionWidth,
+                                Height = rowHeight
+                            });
                         else
                             GUILayout.FlexibleSpace();
                         GUILayout.EndHorizontal();
@@ -1802,8 +1818,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
 
     }
 
-    private void DrawLegacyOptionButton(MclslHuanzhenLegacyRecord legacy, MclslHuanzhenLegacyOption option, int limit, int used, float width, float height)
+    private void DrawLegacyOptionButton(DrawLegacyOptionButtonArgs a)
     {
+        MclslHuanzhenLegacyRecord legacy = a.Legacy;
+        MclslHuanzhenLegacyOption option = a.Option;
+        int limit = a.Limit;
+        int used = a.Used;
+        float width = a.Width;
+        float height = a.Height;
         bool claimed = legacy.ClaimedChoices?.Contains(option.Id) == true;
         GUILayout.Label((claimed ? "已自动继承｜" : "未选取｜") + option.Label, GUILayout.Height(height), GUILayout.Width(width));
     }
@@ -2433,4 +2455,14 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         return texture;
     }
 
+}
+
+internal sealed class DrawLegacyOptionButtonArgs
+{
+    internal MclslHuanzhenLegacyRecord Legacy;
+    internal MclslHuanzhenLegacyOption Option;
+    internal int Limit;
+    internal int Used;
+    internal float Width;
+    internal float Height;
 }

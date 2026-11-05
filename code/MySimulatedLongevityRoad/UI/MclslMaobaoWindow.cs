@@ -193,7 +193,15 @@ internal static class MclslMaobaoWindow
         time.color = new Color(0.72f, 0.72f, 0.72f);
         time.text = packet?.SaveTime ?? string.Empty;
 
-        Button place = CreateTintedButton(row.transform, "Place", "放", new Vector2(70f, 0f), new Vector2(20f, 20f), new Color(0.18f, 0.55f, 0.18f, 0.9f));
+        Button place = CreateTintedButton(new CreateTintedButtonArgs
+        {
+            Parent = row.transform,
+            Name = "Place",
+            Label = "放",
+            Position = new Vector2(70f, 0f),
+            Size = new Vector2(20f, 20f),
+            Tint = new Color(0.18f, 0.55f, 0.18f, 0.9f)
+        });
         place.onClick.AddListener(() =>
         {
             _pendingDeleteId = null;
@@ -201,7 +209,15 @@ internal static class MclslMaobaoWindow
             Refresh();
         });
 
-        Button delete = CreateTintedButton(row.transform, "Delete", "删", new Vector2(94f, 0f), new Vector2(20f, 20f), new Color(0.55f, 0.18f, 0.18f, 0.9f));
+        Button delete = CreateTintedButton(new CreateTintedButtonArgs
+        {
+            Parent = row.transform,
+            Name = "Delete",
+            Label = "删",
+            Position = new Vector2(94f, 0f),
+            Size = new Vector2(20f, 20f),
+            Tint = new Color(0.55f, 0.18f, 0.18f, 0.9f)
+        });
         delete.onClick.AddListener(() =>
         {
             if (_pendingDeleteId == recordId)
@@ -269,8 +285,14 @@ internal static class MclslMaobaoWindow
         return button;
     }
 
-    private static Button CreateTintedButton(Transform parent, string name, string label, Vector2 position, Vector2 size, Color tint)
+    private static Button CreateTintedButton(CreateTintedButtonArgs a)
     {
+        Transform parent = a.Parent;
+        string name = a.Name;
+        string label = a.Label;
+        Vector2 position = a.Position;
+        Vector2 size = a.Size;
+        Color tint = a.Tint;
         return CreateButton(parent, name, label, position, size, tint);
     }
 
@@ -316,4 +338,14 @@ internal static class MclslMaobaoUiHelper
         }
         catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoWindow-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
+}
+
+internal sealed class CreateTintedButtonArgs
+{
+    internal Transform Parent;
+    internal string Name;
+    internal string Label;
+    internal Vector2 Position;
+    internal Vector2 Size;
+    internal Color Tint;
 }

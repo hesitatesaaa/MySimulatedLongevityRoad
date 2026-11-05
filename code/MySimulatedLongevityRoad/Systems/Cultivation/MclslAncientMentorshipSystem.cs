@@ -203,16 +203,38 @@ internal static class MclslAncientMentorshipSystem
         string techniqueId = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueId, string.Empty);
         string techniqueName = MclslActorAccessor.GetString(teacher, MclslActorDataKeys.TechniqueName, "师传仙法");
         int recruitYear = MclslActorAccessor.GetInt(teacher, MclslActorDataKeys.AncientMentorLastRecruitYear, year);
-        bool changed = UpsertBook(bag, "formula:" + teacherId + ":" + studentId, teacher, student, techniqueId,
-            "师传法诀·" + techniqueName, recruitYear);
-        changed |= UpsertBook(bag, "insight:" + teacherId + ":" + studentId, teacher, student, techniqueId,
-            "修行心得·" + SafeName(teacher), recruitYear);
+        bool changed = UpsertBook(new UpsertBookArgs
+        {
+            Bag = bag,
+            Id = "formula:" + teacherId + ":" + studentId,
+            Teacher = teacher,
+            Student = student,
+            Techniqueid = techniqueId,
+            Name = "师传法诀·" + techniqueName,
+            Year = recruitYear
+        });
+        changed |= UpsertBook(new UpsertBookArgs
+        {
+            Bag = bag,
+            Id = "insight:" + teacherId + ":" + studentId,
+            Teacher = teacher,
+            Student = student,
+            Techniqueid = techniqueId,
+            Name = "修行心得·" + SafeName(teacher),
+            Year = recruitYear
+        });
         if (changed) MclslBagSystem.Write(student, bag);
     }
 
-    private static bool UpsertBook(MclslBagState bag, string id, Actor teacher, Actor student,
-        string techniqueId, string name, int year)
+    private static bool UpsertBook(UpsertBookArgs a)
     {
+        MclslBagState bag = a.Bag;
+        string id = a.Id;
+        Actor teacher = a.Teacher;
+        Actor student = a.Student;
+        string techniqueId = a.Techniqueid;
+        string name = a.Name;
+        int year = a.Year;
         MclslMentorshipBook book = bag.Books.FirstOrDefault(x => x.BookId == id);
         bool changed = false;
         if (book == null)
@@ -452,4 +474,15 @@ internal static class MclslAncientMentorshipSystem
         string name = actor?.getName();
         return string.IsNullOrWhiteSpace(name) ? "无名仙修" : name.Trim();
     }
+}
+
+internal sealed class UpsertBookArgs
+{
+    internal MclslBagState Bag;
+    internal string Id;
+    internal Actor Teacher;
+    internal Actor Student;
+    internal string Techniqueid;
+    internal string Name;
+    internal int Year;
 }

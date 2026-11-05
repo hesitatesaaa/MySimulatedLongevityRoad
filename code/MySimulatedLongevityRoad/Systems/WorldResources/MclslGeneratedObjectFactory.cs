@@ -15,7 +15,7 @@ internal static class MclslGeneratedObjectFactory
     {
         string origin = ActorOrigin(actor, year, "奇遇");
         int seed = StableHash(MclslWorldRunRepository.Current.RunId + "|foundation|" + MclslActorAccessor.Id(actor) + "|" + year);
-        MclslGeneratedItemRecord item = CreateItem(MclslGeneratedKinds.FoundationWonder, year, quality, lawTags, origin, seed);
+        MclslGeneratedItemRecord item = CreateItem(new CreateItemArgs { Kind = MclslGeneratedKinds.FoundationWonder, Year = year, Quality = quality, Lawtags = lawTags, Origin = origin, Seed = seed });
         ApplyFoundationClassification(item, seed);
         item.Origin = ActorOrigin(actor, year, FoundationOriginReason(item.Category));
         item.HolderActorId = MclslActorAccessor.Id(actor);
@@ -31,7 +31,7 @@ internal static class MclslGeneratedObjectFactory
         string[] tags = SplitTags(cave.LawTags);
         int quality = Math.Clamp(cave.Quality + (compatibility >= 80 ? 1 : 0), 1, 4);
         int seed = StableHash(cave.Id + "|essence|" + cave.RefinedCount + "|" + MclslActorAccessor.Id(actor) + "|" + year);
-        MclslGeneratedItemRecord item = CreateItem(MclslGeneratedKinds.HeavenEarthEssence, year, quality, tags, origin, seed);
+        MclslGeneratedItemRecord item = CreateItem(new CreateItemArgs { Kind = MclslGeneratedKinds.HeavenEarthEssence, Year = year, Quality = quality, Lawtags = tags, Origin = origin, Seed = seed });
         item.HolderActorId = MclslActorAccessor.Id(actor);
         item.HolderName = SafeDisplayName(actor);
         item.Consumed = true;
@@ -47,7 +47,7 @@ internal static class MclslGeneratedObjectFactory
         string[] tags = SplitTags(change.LawTags);
         int quality = Math.Clamp(change.Quality + (compatibility >= 85 ? 1 : 0), 1, 4);
         int seed = StableHash(change.Id + "|marrow|" + change.ExtractedCount + "|" + MclslActorAccessor.Id(actor) + "|" + year);
-        MclslGeneratedItemRecord item = CreateItem(MclslGeneratedKinds.WorldChangeMarrow, year, quality, tags, origin, seed);
+        MclslGeneratedItemRecord item = CreateItem(new CreateItemArgs { Kind = MclslGeneratedKinds.WorldChangeMarrow, Year = year, Quality = quality, Lawtags = tags, Origin = origin, Seed = seed });
         item.HolderActorId = MclslActorAccessor.Id(actor);
         item.HolderName = SafeDisplayName(actor);
         item.Consumed = true;
@@ -162,8 +162,14 @@ internal static class MclslGeneratedObjectFactory
         MclslActorAccessor.Set(actor, MclslActorDataKeys.FoundationWonderEffects, item.AttributeText);
     }
 
-    private static MclslGeneratedItemRecord CreateItem(string kind, int year, int quality, IReadOnlyList<string> lawTags, string origin, int seed)
+    private static MclslGeneratedItemRecord CreateItem(CreateItemArgs a)
     {
+        string kind = a.Kind;
+        int year = a.Year;
+        int quality = a.Quality;
+        IReadOnlyList<string> lawTags = a.Lawtags;
+        string origin = a.Origin;
+        int seed = a.Seed;
         string[] tags = NormalizeTags(lawTags);
         string name = GenerateUniqueName(kind, tags, seed, origin);
         string typeName = kind switch
@@ -402,4 +408,14 @@ internal static class MclslGeneratedObjectFactory
     {
         unchecked { int hash = 29; foreach (char c in value ?? string.Empty) hash = hash * 41 + c; return hash; }
     }
+}
+
+internal sealed class CreateItemArgs
+{
+    internal string Kind;
+    internal int Year;
+    internal int Quality;
+    internal IReadOnlyList<string> Lawtags;
+    internal string Origin;
+    internal int Seed;
 }

@@ -62,13 +62,26 @@ internal static partial class MclslCombatCareerSystem
             AssetManager.trait_groups.add(new ActorTraitGroupAsset { id=group.Item1,name=key,color="#72D4BF" });
         }
         foreach(var career in MclslCombatCareerCatalog.Careers)
-            RegisterTrait(career.Trait,career.Name,career.Icon,"MclslCombatCareers",true,
-                "主修"+career.Name+"；阶位、晋级条件与职业技能见右侧修士档案。可与生产职业并存。");
+            RegisterTrait(new RegisterTraitArgs
+            {
+                Id = career.Trait,
+                Name = career.Name,
+                Icon = career.Icon,
+                Group = "MclslCombatCareers",
+                Grantable = true,
+                Description = "主修"+career.Name+"；阶位、晋级条件与职业技能见右侧修士档案。可与生产职业并存。"
+            });
         foreach(var skill in MclslCombatCareerCatalog.Skills.Where(x=>x.Passive))
-            RegisterTrait(skill.Trait,skill.Name,skill.Icon,"MclslCombatPassives",false,skill.Description);
+            RegisterTrait(new RegisterTraitArgs { Id = skill.Trait, Name = skill.Name, Icon = skill.Icon, Group = "MclslCombatPassives", Grantable = false, Description = skill.Description });
     }
-    private static void RegisterTrait(string id,string name,string icon,string group,bool grantable,string description)
+    private static void RegisterTrait(RegisterTraitArgs a)
     {
+        string id = a.Id;
+        string name = a.Name;
+        string icon = a.Icon;
+        string group = a.Group;
+        bool grantable = a.Grantable;
+        string description = a.Description;
         MclslLocalizationBridge.RegisterKey(id,name);
         MclslLocalizationBridge.RegisterKey("trait_"+id,name);
         MclslLocalizationBridge.RegisterKey(id+" Description",description);
@@ -274,4 +287,14 @@ internal static partial class MclslCombatCareerSystem
         return b.ToString();
     }
     internal static void Clear() { States=new();MclslCareerCombat.Clear();MclslCareerSupply.ClearRuntime(); }
+}
+
+internal sealed class RegisterTraitArgs
+{
+    internal string Id;
+    internal string Name;
+    internal string Icon;
+    internal string Group;
+    internal bool Grantable;
+    internal string Description;
 }

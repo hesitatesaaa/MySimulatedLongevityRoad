@@ -12,14 +12,14 @@ internal static class MclslBeastConfig
     {
         if (config == null) return;
         Dictionary<string, ModConfigItem> items = config["ConfigItems"];
-        AddSwitch(config,items,"MCLSL_config_beast_waves","妖兽潮","按世界境界解锁七级兽潮。",true);
-        AddSwitch(config,items,"MCLSL_config_spell_effects_enabled","法术阶段特效","显示法术释放、飞行和命中特效。关闭后仍按正常时间结算。",true);
-        AddSwitch(config,items,"MCLSL_config_beast_talent_effects_enabled","本命神通特效","独立显示妖兽本命神通动画；关闭只隐藏画面，不影响结算。",true);
-        AddSlider(config,items,"MCLSL_config_beast_wave_interval","兽潮间隔（年）","默认五年。",5);
-        AddSlider(config,items,"MCLSL_config_beast_wave_count_percent","兽潮数量（百分比）","默认100，即一倍。",100);
-        AddSlider(config,items,"MCLSL_config_beast_wave_limit","单次兽潮数量上限","按地图规模、等级及数量倍率计算后，单场最多生成的数量，默认64。",64);
-        AddSlider(config,items,"MCLSL_config_beast_wave_max_level","自动兽潮最高等级","一至七级，还受世界解锁限制。",7);
-        AddSlider(config,items,"MCLSL_config_beast_auto_limit","自动妖兽总上限","兽潮与历史自动生成妖兽共享存量上限。",512);
+        AddSwitch(new AddSwitchArgs { Config = config, Items = items, Id = "MCLSL_config_beast_waves", Name = "妖兽潮", Description = "按世界境界解锁七级兽潮。", Initial = true });
+        AddSwitch(new AddSwitchArgs { Config = config, Items = items, Id = "MCLSL_config_spell_effects_enabled", Name = "法术阶段特效", Description = "显示法术释放、飞行和命中特效。关闭后仍按正常时间结算。", Initial = true });
+        AddSwitch(new AddSwitchArgs { Config = config, Items = items, Id = "MCLSL_config_beast_talent_effects_enabled", Name = "本命神通特效", Description = "独立显示妖兽本命神通动画；关闭只隐藏画面，不影响结算。", Initial = true });
+        AddSlider(new AddSliderArgs { Config = config, Items = items, Id = "MCLSL_config_beast_wave_interval", Name = "兽潮间隔（年）", Description = "默认五年。", Initial = 5 });
+        AddSlider(new AddSliderArgs { Config = config, Items = items, Id = "MCLSL_config_beast_wave_count_percent", Name = "兽潮数量（百分比）", Description = "默认100，即一倍。", Initial = 100 });
+        AddSlider(new AddSliderArgs { Config = config, Items = items, Id = "MCLSL_config_beast_wave_limit", Name = "单次兽潮数量上限", Description = "按地图规模、等级及数量倍率计算后，单场最多生成的数量，默认64。", Initial = 64 });
+        AddSlider(new AddSliderArgs { Config = config, Items = items, Id = "MCLSL_config_beast_wave_max_level", Name = "自动兽潮最高等级", Description = "一至七级，还受世界解锁限制。", Initial = 7 });
+        AddSlider(new AddSliderArgs { Config = config, Items = items, Id = "MCLSL_config_beast_auto_limit", Name = "自动妖兽总上限", Description = "兽潮与历史自动生成妖兽共享存量上限。", Initial = 512 });
         MigrateLegacySettings(config);
         Load(config);
     }
@@ -94,9 +94,14 @@ internal static class MclslBeastConfig
     private static int ReadChance(Dictionary<string, ModConfigItem> items, string id, int fallback)
         => items.TryGetValue(id, out ModConfigItem item) ? Math.Clamp(item.IntVal, 0, 1000000) : fallback;
 
-    private static void AddSwitch(ModConfig config, Dictionary<string, ModConfigItem> items,
-        string id, string name, string description, bool initial)
+    private static void AddSwitch(AddSwitchArgs a)
     {
+        ModConfig config = a.Config;
+        Dictionary<string, ModConfigItem> items = a.Items;
+        string id = a.Id;
+        string name = a.Name;
+        string description = a.Description;
+        bool initial = a.Initial;
         MclslLocalizationBridge.RegisterKey(id, name);
         MclslLocalizationBridge.RegisterKey(id + " Description", description);
         if (!items.ContainsKey(id))
@@ -104,9 +109,14 @@ internal static class MclslBeastConfig
                 "MclslBeastConfig:ReloadBool");
     }
 
-    private static void AddSlider(ModConfig config, Dictionary<string, ModConfigItem> items,
-        string id, string name, string description, int initial)
+    private static void AddSlider(AddSliderArgs a)
     {
+        ModConfig config = a.Config;
+        Dictionary<string, ModConfigItem> items = a.Items;
+        string id = a.Id;
+        string name = a.Name;
+        string description = a.Description;
+        int initial = a.Initial;
         MclslLocalizationBridge.RegisterKey(id, name);
         MclslLocalizationBridge.RegisterKey(id + " Description", description);
         if (!items.TryGetValue(id, out ModConfigItem item))
@@ -121,4 +131,24 @@ internal static class MclslBeastConfig
         typeof(ModConfigItem).GetField("<MinIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 0);
         typeof(ModConfigItem).GetField("<MaxIntVal>k__BackingField", BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(item, 1000000);
     }
+}
+
+internal sealed class AddSwitchArgs
+{
+    internal ModConfig Config;
+    internal Dictionary<string, ModConfigItem> Items;
+    internal string Id;
+    internal string Name;
+    internal string Description;
+    internal bool Initial;
+}
+
+internal sealed class AddSliderArgs
+{
+    internal ModConfig Config;
+    internal Dictionary<string, ModConfigItem> Items;
+    internal string Id;
+    internal string Name;
+    internal string Description;
+    internal int Initial;
 }

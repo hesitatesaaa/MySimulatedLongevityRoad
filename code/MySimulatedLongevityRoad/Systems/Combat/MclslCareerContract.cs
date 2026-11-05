@@ -187,7 +187,7 @@ internal static partial class MclslCareerCombat
         else if (pet.has_attack_target) pet.clearAttackTarget();
         // 距主人超过 6 格才发起跟随。
         if (Distance(owner, pet) > MclslContractRules.FollowTiles) pet.moveTo(owner.current_tile);
-        if (summon.Kind == 2) FalconTick(owner, pet, battle, summon, inCombat, enemy);
+        if (summon.Kind == 2) FalconTick(new FalconTickArgs { Owner = owner, Pet = pet, Battle = battle, Summon = summon, Incombat = inCombat, Enemy = enemy });
         if (summon.Kind == 3) DeerTick(owner, pet, battle, summon, inCombat);
     }
 
@@ -201,8 +201,14 @@ internal static partial class MclslCareerCombat
         }
     }
 
-    private static void FalconTick(Actor owner, Actor pet, MclslCareerBattleState battle, MclslCareerSummon summon, bool inCombat, Actor enemy)
+    private static void FalconTick(FalconTickArgs a)
     {
+        Actor owner = a.Owner;
+        Actor pet = a.Pet;
+        MclslCareerBattleState battle = a.Battle;
+        MclslCareerSummon summon = a.Summon;
+        bool inCombat = a.Incombat;
+        Actor enemy = a.Enemy;
         if (!inCombat || enemy == null) return;
         if (Vector2.Distance(pet.current_position, enemy.current_position) > MclslContractRules.FalconRange) return;
         if (Now < summon.NextAttack) return;
@@ -417,4 +423,14 @@ internal static partial class MclslCareerCombat
         if (newMaximum > 0 && hp > newMaximum) hp = newMaximum;
         pet.data.health = hp;
     }
+}
+
+internal sealed class FalconTickArgs
+{
+    internal Actor Owner;
+    internal Actor Pet;
+    internal MclslCareerBattleState Battle;
+    internal MclslCareerSummon Summon;
+    internal bool Incombat;
+    internal Actor Enemy;
 }

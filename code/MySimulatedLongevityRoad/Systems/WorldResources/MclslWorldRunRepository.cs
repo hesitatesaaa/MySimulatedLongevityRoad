@@ -829,10 +829,17 @@ internal static partial class MclslWorldRunRepository
         record.LocationName = actor.city?.data?.name ?? string.Empty;
         record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
         MclslMapLocationResolver.ResolveActorLocation(actor, year, out int mapX, out int mapY, out string location, out string kingdom);
-        ApplyMapVisualToEvent(record, year, mapX, mapY,
-            string.IsNullOrWhiteSpace(location) ? actor.city?.data?.name ?? string.Empty : location,
-            string.IsNullOrWhiteSpace(kingdom) ? actor.kingdom?.data?.name ?? string.Empty : kingdom,
-            visualKind, durationYears);
+        ApplyMapVisualToEvent(new ApplyMapVisualToEventArgs
+        {
+            Record = record,
+            Year = year,
+            Mapx = mapX,
+            Mapy = mapY,
+            Locationname = string.IsNullOrWhiteSpace(location) ? actor.city?.data?.name ?? string.Empty : location,
+            Kingdomname = string.IsNullOrWhiteSpace(kingdom) ? actor.kingdom?.data?.name ?? string.Empty : kingdom,
+            Visualkind = visualKind,
+            Durationyears = durationYears
+        });
         FlushNativeMirror(record);
     }
 
@@ -844,13 +851,30 @@ internal static partial class MclslWorldRunRepository
         record.MapY = mapY;
         record.LocationName = locationName ?? string.Empty;
         record.KingdomName = kingdomName ?? string.Empty;
-        ApplyMapVisualToEvent(record, year, mapX, mapY, locationName, kingdomName, visualKind, durationYears);
+        ApplyMapVisualToEvent(new ApplyMapVisualToEventArgs
+        {
+            Record = record,
+            Year = year,
+            Mapx = mapX,
+            Mapy = mapY,
+            Locationname = locationName,
+            Kingdomname = kingdomName,
+            Visualkind = visualKind,
+            Durationyears = durationYears
+        });
         FlushNativeMirror(record);
     }
 
-    private static void ApplyMapVisualToEvent(MclslRunEventRecord record, int year,
-        int mapX, int mapY, string locationName, string kingdomName, string visualKind, int durationYears)
+    private static void ApplyMapVisualToEvent(ApplyMapVisualToEventArgs a)
     {
+        MclslRunEventRecord record = a.Record;
+        int year = a.Year;
+        int mapX = a.Mapx;
+        int mapY = a.Mapy;
+        string locationName = a.Locationname;
+        string kingdomName = a.Kingdomname;
+        string visualKind = a.Visualkind;
+        int durationYears = a.Durationyears;
         if (record == null || string.IsNullOrWhiteSpace(visualKind)) return;
         record.MapX = mapX;
         record.MapY = mapY;
@@ -1573,4 +1597,16 @@ internal static partial class MclslWorldRunRepository
         }
         return null;
     }
+}
+
+internal sealed class ApplyMapVisualToEventArgs
+{
+    internal MclslRunEventRecord Record;
+    internal int Year;
+    internal int Mapx;
+    internal int Mapy;
+    internal string Locationname;
+    internal string Kingdomname;
+    internal string Visualkind;
+    internal int Durationyears;
 }

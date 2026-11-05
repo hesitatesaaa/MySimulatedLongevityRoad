@@ -680,7 +680,7 @@ internal static class MclslHuanzhenSystem
             5 => 90,
             _ => 140
         };
-        AddSpaceEssence(actor, amount, "宿主晋升", MclslRealmIds.Display(newRealm) + "突破", year, true);
+        AddSpaceEssence(new AddSpaceEssenceArgs { Host = actor, Amount = amount, Source = "宿主晋升", Detail = MclslRealmIds.Display(newRealm) + "突破", Year = year, Announce = true });
     }
 
     internal static void ObserveHostKill(Actor victim, AttackType attackType)
@@ -702,17 +702,23 @@ internal static class MclslHuanzhenSystem
         };
         string target = SafeName(victim);
         string realm = victimRealm < 0 ? "凡俗" : MclslRealmIds.Display(MclslActorAccessor.Realm(victim));
-        AddSpaceEssence(killer, amount, "杀人夺宝", "击杀" + realm + "·" + target, MclslRuntime.CurrentYear(), amount >= 25);
+        AddSpaceEssence(new AddSpaceEssenceArgs { Host = killer, Amount = amount, Source = "杀人夺宝", Detail = "击杀" + realm + "·" + target, Year = MclslRuntime.CurrentYear(), Announce = amount >= 25 });
     }
 
     internal static void OnHostFortune(Actor actor, string source, int amount, string detail)
     {
         if (!IsCurrentHost(actor)) return;
-        AddSpaceEssence(actor, Math.Max(0, amount), source, detail, MclslRuntime.CurrentYear(), amount >= 20);
+        AddSpaceEssence(new AddSpaceEssenceArgs { Host = actor, Amount = Math.Max(0, amount), Source = source, Detail = detail, Year = MclslRuntime.CurrentYear(), Announce = amount >= 20 });
     }
 
-    private static void AddSpaceEssence(Actor host, long amount, string source, string detail, int year, bool announce)
+    private static void AddSpaceEssence(AddSpaceEssenceArgs a)
     {
+        Actor host = a.Host;
+        long amount = a.Amount;
+        string source = a.Source;
+        string detail = a.Detail;
+        int year = a.Year;
+        bool announce = a.Announce;
         if (amount <= 0 || !MclslRuntimeSettings.HuanzhenEnabled || !IsCurrentHost(host)) return;
         EnsureLoaded();
         if (_writeLocked) { return; }
@@ -1657,4 +1663,14 @@ internal static class MclslHuanzhenSystem
     private static string SafeName(Actor actor) { try { return actor?.data == null ? "无名者" : MclslActorAccessor.DisplayName(actor); } catch { return "无名者"; } }
 
     private static int PositiveHash(string value) => MclslStableHash.Positive23x31(value);
+}
+
+internal sealed class AddSpaceEssenceArgs
+{
+    internal Actor Host;
+    internal long Amount;
+    internal string Source;
+    internal string Detail;
+    internal int Year;
+    internal bool Announce;
 }

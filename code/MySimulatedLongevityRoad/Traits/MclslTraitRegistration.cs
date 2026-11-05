@@ -268,15 +268,60 @@ internal static class MclslTraitRegistration
 
         AddSpecial(HuanzhenTraitId, "ui/Icons/HuanZhen", true, true, 0f, 0f, 0f, 0f);
         MclslLocalizationBridge.RegisterKey("trait_group_" + ProfessionGroupId, "职业");
-        AddProfession(AlchemistTraitId, "trait/MclslProfessionAlchemist", "炼丹师", "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。",
-            "辨材炼药，以丹助修。", "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度。");
-        AddProfession(RefinerTraitId, "trait/MclslProfessionRefiner", "炼器师", "使用原版城镇材料炼制有耐久的法宝。",
-            "百炼成器，以器载道。", "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度；重复法宝自动上架天玄镜。");
-        AddProfession(TalismanTraitId, "trait/MclslProfessionTalisman", "制符师", "使用灵符纸与灵材制作一次性符箓。",
-            "灵材为引，挥笔成符。", "每年最多成功制作一次；可制作同阶或低一阶成品，黄阶不制凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度；符箓用后消耗。");
-        AddImmortalPathTrait(PathHuaShenTraitId, "trait/MclslPathHuaShen", "神化天资", "自动获得【纯一灵根】（已有时不重复添加）；可无瓶颈突破至化神，化神前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足洞天与天地资源条件。自然出现概率为0.1%。", 1, Rarity.R2_Epic);
-        AddImmortalPathTrait(PathHeDaoTraitId, "trait/MclslPathHeDao", "合道圣胎", "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至合道，合道前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足天地之魄与归属条件；当前未配置自然出现概率。", 2, Rarity.R3_Legendary);
-        AddImmortalPathTrait(PathChangShengTraitId, "trait/MclslPathChangSheng", "长生道种", "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至长生，长生前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足世界资源、席位与长生道果条件；当前未配置自然出现概率。", 3, Rarity.R3_Legendary);
+        AddProfession(new AddProfessionArgs
+        {
+            Id = AlchemistTraitId,
+            Icon = "trait/MclslProfessionAlchemist",
+            Displayname = "炼丹师",
+            Description = "采集灵材并炼制丹药；品阶由熟练度和境界共同决定。",
+            Intro = "辨材炼药，以丹助修。",
+            Effects = "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度。"
+        });
+        AddProfession(new AddProfessionArgs
+        {
+            Id = RefinerTraitId,
+            Icon = "trait/MclslProfessionRefiner",
+            Displayname = "炼器师",
+            Description = "使用原版城镇材料炼制有耐久的法宝。",
+            Intro = "百炼成器，以器载道。",
+            Effects = "每年最多成功炼制一次；可炼制同阶或低一阶成品，黄阶不炼凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度；重复法宝自动上架天玄镜。"
+        });
+        AddProfession(new AddProfessionArgs
+        {
+            Id = TalismanTraitId,
+            Icon = "trait/MclslProfessionTalisman",
+            Displayname = "制符师",
+            Description = "使用灵符纸与灵材制作一次性符箓。",
+            Intro = "灵材为引，挥笔成符。",
+            Effects = "每年最多成功制作一次；可制作同阶或低一阶成品，黄阶不制凡阶。凡/黄/玄/地/天成品分别增加1/3/6/10/15点熟练度；符箓用后消耗。"
+        });
+        AddImmortalPathTrait(new AddImmortalPathTraitArgs
+        {
+            Id = PathHuaShenTraitId,
+            Icon = "trait/MclslPathHuaShen",
+            Displayname = "神化天资",
+            Description = "自动获得【纯一灵根】（已有时不重复添加）；可无瓶颈突破至化神，化神前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足洞天与天地资源条件。自然出现概率为0.1%。",
+            Order = 1,
+            Rarity = Rarity.R2_Epic
+        });
+        AddImmortalPathTrait(new AddImmortalPathTraitArgs
+        {
+            Id = PathHeDaoTraitId,
+            Icon = "trait/MclslPathHeDao",
+            Displayname = "合道圣胎",
+            Description = "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至合道，合道前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足天地之魄与归属条件；当前未配置自然出现概率。",
+            Order = 2,
+            Rarity = Rarity.R3_Legendary
+        });
+        AddImmortalPathTrait(new AddImmortalPathTraitArgs
+        {
+            Id = PathChangShengTraitId,
+            Icon = "trait/MclslPathChangSheng",
+            Displayname = "长生道种",
+            Description = "自动获得【天赐灵根】（已有时不重复添加）；可无瓶颈突破至长生，长生前免除中途突破瓶颈、突破必成且免于突破致死；功法境界上限随之补全。仍须满足世界资源、席位与长生道果条件；当前未配置自然出现概率。",
+            Order = 3,
+            Rarity = Rarity.R3_Legendary
+        });
         MclslLocalizationBridge.RegisterKey("trait_group_" + ImmortalPathGroupId, "仙路");
         MclslLocalizationBridge.RegisterKey("trait_group_" + XuanHuangHeavenGroupId, "玄黄天道");
         AddHeavenFavorTrait();
@@ -1090,8 +1135,14 @@ internal static class MclslTraitRegistration
         if (add) AssetManager.traits.add(trait);
     }
 
-    private static void AddProfession(string id, string icon, string displayName, string description, string intro, string effects)
+    private static void AddProfession(AddProfessionArgs a)
     {
+        string id = a.Id;
+        string icon = a.Icon;
+        string displayName = a.Displayname;
+        string description = a.Description;
+        string intro = a.Intro;
+        string effects = a.Effects;
         RegisterProfessionText(id, displayName, description);
         RegisterTraitInfo(id, intro, effects);
         AddSpecial(id, icon, true, true, 0f, 0f, 0f, 0f);
@@ -1099,8 +1150,14 @@ internal static class MclslTraitRegistration
         if (trait != null) trait.group_id = ProfessionGroupId;
     }
 
-    private static void AddImmortalPathTrait(string id, string icon, string displayName, string description, int order, Rarity rarity)
+    private static void AddImmortalPathTrait(AddImmortalPathTraitArgs a)
     {
+        string id = a.Id;
+        string icon = a.Icon;
+        string displayName = a.Displayname;
+        string description = a.Description;
+        int order = a.Order;
+        Rarity rarity = a.Rarity;
         MclslLocalizationBridge.RegisterKey(id, displayName);
         MclslLocalizationBridge.RegisterKey(id + " Description", description);
         MclslLocalizationBridge.RegisterKey("trait_" + id, displayName);
@@ -1262,4 +1319,24 @@ internal sealed class RealmStatsRequest
     internal float SpeedMultiplier;
     internal float Armor;
     internal float ExtraStatMultiplier = 1f;
+}
+
+internal sealed class AddProfessionArgs
+{
+    internal string Id;
+    internal string Icon;
+    internal string Displayname;
+    internal string Description;
+    internal string Intro;
+    internal string Effects;
+}
+
+internal sealed class AddImmortalPathTraitArgs
+{
+    internal string Id;
+    internal string Icon;
+    internal string Displayname;
+    internal string Description;
+    internal int Order;
+    internal Rarity Rarity;
 }

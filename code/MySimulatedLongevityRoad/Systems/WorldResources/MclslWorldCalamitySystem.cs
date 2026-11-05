@@ -80,7 +80,7 @@ internal static class MclslWorldCalamitySystem
         run.BackgroundFactions ??= new();
         run.BackgroundFactions.WanXianAllianceInfluence = Math.Min(100, run.BackgroundFactions.WanXianAllianceInfluence + 1);
         run.BackgroundFactions.AllianceOrderPressure = Math.Min(200, run.BackgroundFactions.AllianceOrderPressure + 2);
-        RegisterPressure(year, "wanxian_alliance", "万仙盟", "锁灵清册", 2, "锁灵余波渐深，贡献与功法兑换更受仙盟钳制。");
+        RegisterPressure(new RegisterPressureArgs { Year = year, Factionid = "wanxian_alliance", Factionname = "万仙盟", Policy = "锁灵清册", Delta = 2, Summary = "锁灵余波渐深，贡献与功法兑换更受仙盟钳制。" });
         MclslWorldRunRepository.AddEvent(year, "world_calamity_lock_spirit_pulse", "锁灵余波", "灵机受束，仙盟清册渐严。");
         return true;
     }
@@ -125,7 +125,7 @@ internal static class MclslWorldCalamitySystem
         MclslSectRuinRecord ruin = PickRuin(run, year);
         if (ruin == null)
         {
-            ruin = CreateCalamityRuin(run, year, "白雾吞界", "白雾遗府", new[] { "空间", "隐匿", "迁跃" }, 2);
+            ruin = CreateCalamityRuin(new CreateCalamityRuinArgs { Run = run, Year = year, Location = "白雾吞界", Category = "白雾遗府", Tags = new[] { "空间", "隐匿", "迁跃" }, Quality = 2 });
             if (!MclslWorldRunRepository.TryRegisterSectRuin(ruin)) return false;
         }
         else
@@ -145,7 +145,7 @@ internal static class MclslWorldCalamitySystem
         run.BackgroundFactions ??= new();
         run.BackgroundFactions.AllianceOrderPressure = Math.Min(220, run.BackgroundFactions.AllianceOrderPressure + 3);
         run.BackgroundFactions.FiveEldersSubversion = Math.Min(180, run.BackgroundFactions.FiveEldersSubversion + 1);
-        RegisterPressure(year, "world_terminal", "玄黄世局", "末法渐深", 3, "灵机日衰，诸法修行愈艰。");
+        RegisterPressure(new RegisterPressureArgs { Year = year, Factionid = "world_terminal", Factionname = "玄黄世局", Policy = "末法渐深", Delta = 3, Summary = "灵机日衰，诸法修行愈艰。" });
         MclslWorldRunRepository.AddEvent(year, "world_calamity_end_dharma_pulse", "末法渐深", "灵机日衰，诸法修行愈艰。");
         return true;
     }
@@ -155,13 +155,19 @@ internal static class MclslWorldCalamitySystem
         run.BackgroundFactions ??= new();
         run.BackgroundFactions.AllianceOrderPressure = Math.Min(240, run.BackgroundFactions.AllianceOrderPressure + 4);
         run.BackgroundFactions.FiveEldersSubversion = Math.Min(220, run.BackgroundFactions.FiveEldersSubversion + 4);
-        RegisterPressure(year, "world_terminal", "玄黄世局", "玄黄终局", 5, "天地修正加剧，万法皆受压迫。");
+        RegisterPressure(new RegisterPressureArgs { Year = year, Factionid = "world_terminal", Factionname = "玄黄世局", Policy = "玄黄终局", Delta = 5, Summary = "天地修正加剧，万法皆受压迫。" });
         MclslWorldRunRepository.AddEvent(year, "world_calamity_xuanhuang_terminal_pulse", "玄黄终局", "天地修正加剧，万法皆受压迫。");
         return true;
     }
 
-    private static void RegisterPressure(int year, string factionId, string factionName, string policy, int delta, string summary)
+    private static void RegisterPressure(RegisterPressureArgs a)
     {
+        int year = a.Year;
+        string factionId = a.Factionid;
+        string factionName = a.Factionname;
+        string policy = a.Policy;
+        int delta = a.Delta;
+        string summary = a.Summary;
         MclslWorldRunRepository.RegisterFactionPressure(new MclslFactionPressureRecord
         {
             Id = "calamity_pressure_" + year + "_" + MclslWorldRunRepository.NextProceduralSequence(),
@@ -222,9 +228,9 @@ internal static class MclslWorldCalamitySystem
         if (run?.SectRuins == null || lineage == null || !string.IsNullOrWhiteSpace(lineage.LinkedRuinId)) return;
         if (MclslRealmIds.Index(lineage.MaxRealm) < MclslRealmIds.Index(MclslRealmIds.JinDan))
             lineage.MaxRealm = MclslRealmIds.JinDan;
-        MclslSectRuinRecord ruin = CreateCalamityRuin(run, year, reason, category, MclslGeneratedObjectFactory.SplitTags(lineage.LawTags), Math.Clamp(1 + MclslRealmIds.Index(lineage.PeakRealm) / 2,
+        MclslSectRuinRecord ruin = CreateCalamityRuin(new CreateCalamityRuinArgs { Run = run, Year = year, Location = reason, Category = category, Tags = MclslGeneratedObjectFactory.SplitTags(lineage.LawTags), Quality = Math.Clamp(1 + MclslRealmIds.Index(lineage.PeakRealm) / 2,
             2,
-            4));
+            4) });
         ruin.SourceTechniqueId = lineage.Id;
         ruin.SourceTechniqueName = lineage.Name;
         ruin.LinkedLineageId = lineage.Id;
@@ -235,8 +241,14 @@ internal static class MclslWorldCalamitySystem
         lineage.LifecycleState = "遗府私传";
     }
 
-    private static MclslSectRuinRecord CreateCalamityRuin(MclslWorldRunState run, int year, string location, string category, string[] tags, int quality)
+    private static MclslSectRuinRecord CreateCalamityRuin(CreateCalamityRuinArgs a)
     {
+        MclslWorldRunState run = a.Run;
+        int year = a.Year;
+        string location = a.Location;
+        string category = a.Category;
+        string[] tags = a.Tags;
+        int quality = a.Quality;
         int sequence = MclslWorldRunRepository.NextProceduralSequence();
         MclslMapLocationResolver.TryPickValidTile(sequence + year, out int mapX, out int mapY, out string fallbackLocation, out _);
         string mapLocation = string.IsNullOrWhiteSpace(location) ? fallbackLocation : location;
@@ -277,4 +289,24 @@ internal static class MclslWorldCalamitySystem
             return hash;
         }
     }
+}
+
+internal sealed class RegisterPressureArgs
+{
+    internal int Year;
+    internal string Factionid;
+    internal string Factionname;
+    internal string Policy;
+    internal int Delta;
+    internal string Summary;
+}
+
+internal sealed class CreateCalamityRuinArgs
+{
+    internal MclslWorldRunState Run;
+    internal int Year;
+    internal string Location;
+    internal string Category;
+    internal string[] Tags;
+    internal int Quality;
 }
