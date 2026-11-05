@@ -400,10 +400,22 @@ internal static class MclslTianxuanMarket
     {
         if (_listingActivitySnapshot != null && _purchaseActivitySnapshot != null) return;
         List<MclslMarketActivity> activities = Activities;
-        _listingActivitySnapshot = activities.Where(x => x != null && x.Action == "Listed")
-            .OrderByDescending(x => x.Year).Take(MaxActivityRecords).ToArray();
-        _purchaseActivitySnapshot = activities.Where(x => x != null && x.Action == "Purchased")
-            .OrderByDescending(x => x.Year).Take(MaxActivityRecords).ToArray();
+        _listingActivitySnapshot = CollectActivity(activities, "Listed");
+        _purchaseActivitySnapshot = CollectActivity(activities, "Purchased");
+    }
+
+    // 无 LINQ 分配：筛出指定动作，按年份降序取前 MaxActivityRecords 条。
+    private static MclslMarketActivity[] CollectActivity(List<MclslMarketActivity> activities, string action)
+    {
+        List<MclslMarketActivity> matches = new(activities.Count);
+        for (int i = 0; i < activities.Count; i++)
+        {
+            MclslMarketActivity a = activities[i];
+            if (a != null && a.Action == action) matches.Add(a);
+        }
+        matches.Sort((x, y) => y.Year.CompareTo(x.Year));
+        if (matches.Count > MaxActivityRecords) matches.RemoveRange(MaxActivityRecords, matches.Count - MaxActivityRecords);
+        return matches.ToArray();
     }
 
     private static void InvalidateActivitySnapshots()
@@ -1517,6 +1529,14 @@ internal static class MclslTianxuanMarket
         samples[year] = current >= int.MaxValue - count ? int.MaxValue : current + count;
     }
 
+    private static void RemoveYearsBefore(Dictionary<int, int> map, int firstYear)
+    {
+        List<int> stale = null;
+        foreach (KeyValuePair<int, int> kv in map) if (kv.Key < firstYear) (stale ??= new List<int>()).Add(kv.Key);
+        if (stale == null) return;
+        for (int i = 0; i < stale.Count; i++) map.Remove(stale[i]);
+    }
+
     private static void UpdateMarketPrices(int year)
     {
         Dictionary<string, MclslMarketPriceState> prices = MclslWorldRunRepository.Current.MarketPrices ??= new();
@@ -1528,10 +1548,10 @@ internal static class MclslTianxuanMarket
                 prices[item.Id] = state = new MclslMarketPriceState { StonePrice = ReferenceStonePrice(item) };
             state.SupplyByYear ??= new();
             state.FundedDemandByYear ??= new();
-            foreach (int oldYear in state.SupplyByYear.Keys.Where(x => x < firstYear).ToArray()) state.SupplyByYear.Remove(oldYear);
-            foreach (int oldYear in state.FundedDemandByYear.Keys.Where(x => x < firstYear).ToArray()) state.FundedDemandByYear.Remove(oldYear);
-            long supply = state.SupplyByYear.Where(x => x.Key < year).Sum(x => (long)x.Value);
-            long demand = state.FundedDemandByYear.Where(x => x.Key < year).Sum(x => (long)x.Value);
+            RemoveYearsBefore(state.SupplyByYear, firstYear);
+            RemoveYearsBefore(state.FundedDemandByYear, firstYear);
+            long supply = 0L; foreach (KeyValuePair<int, int> kv in state.SupplyByYear) if (kv.Key < year) supply += kv.Value;
+            long demand = 0L; foreach (KeyValuePair<int, int> kv in state.FundedDemandByYear) if (kv.Key < year) demand += kv.Value;
             state.FiveYearSupply = (int)Math.Min(int.MaxValue, supply);
             state.FiveYearFundedDemand = (int)Math.Min(int.MaxValue, demand);
             state.StonePrice = MclslEconomicPolicy.AdjustMarketStonePrice(ReferenceStonePrice(item),

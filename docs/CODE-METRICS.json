@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-06T00:43:33+08:00",
+  "generatedAt": "2026-11-06T00:45:04+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 75892,
+  "totalLines": 75912,
   "linesPerTopDir": {
-    "Systems": 41341,
+    "Systems": 41361,
     "UI": 19692,
     "Data": 5072,
     "Core": 3891,
@@ -35,7 +35,7 @@
     },
     {
       "file": "Systems/Crafting/MclslTianxuanMarket.cs",
-      "lines": 1608
+      "lines": 1628
     },
     {
       "file": "Systems/WorldResources/MclslWorldRunRepository.cs",
