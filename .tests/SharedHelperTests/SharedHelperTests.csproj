@@ -6,5 +6,6 @@
     <Compile Include="../../code/MySimulatedLongevityRoad/UI/MclslRankTextFormat.cs" />
     <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslStableHash.cs" />
     <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslGuard.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslReflectionMembers.cs" />
   </ItemGroup>
 </Project>

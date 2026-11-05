@@ -150,6 +150,7 @@ public static class Program {
         int readFactory=MclslReflectionNumbers.FactoryCalls;
         Check(MclslReflectionNumbers.TryGetNumber(rn,"count",out _,"test")&&MclslReflectionNumbers.FactoryCalls==readFactory,"TryGetNumber cached per member");
         Check(!MclslReflectionNumbers.TryGetNumber(rn,"Missing",out _,"test"),"TryGetNumber missing returns false");
+        GuardReflectionTests.Run();
         Console.WriteLine("PASS shared numeric and localization behavior: "+Checks+" checks");
     }
 }
