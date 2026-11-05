@@ -4,6 +4,7 @@ using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
 using UnityEngine;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.Traits;
 
 internal static partial class MclslWorldSoulActorRegistration
@@ -97,7 +98,7 @@ internal static partial class MclslWorldSoulActorRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -111,9 +112,9 @@ internal static partial class MclslWorldSoulActorRegistration
 
             target.data.health = 0;
             try { target.die(true, AttackType.Other, true, true); }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static int AttackWindowFrames(SoulSpriteSet set)

@@ -1247,7 +1247,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             if (MclslCultivatorCandidateIndex.Resolve(truth.ChallengerActorId, out Actor actor))
                 return MclslActorAccessor.DisplayName(actor);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return "行踪不明";
     }
 
@@ -2390,7 +2390,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             rect.offsetMax = Vector2.zero;
             DontDestroyOnLoad(_overlayBlocker);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static void DestroyOverlayBlocker()
@@ -2402,7 +2402,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         _overlayBlocker = null;
     }
@@ -2426,7 +2426,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         Texture2D texture = sprite?.texture;
         IconCache[path] = texture;

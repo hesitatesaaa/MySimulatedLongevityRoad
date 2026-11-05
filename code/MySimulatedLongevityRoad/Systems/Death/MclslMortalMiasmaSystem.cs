@@ -75,7 +75,7 @@ internal static class MclslMortalMiasmaSystem
             Actor killer = victim.attackedBy as Actor;
             if (killer != null && killer != victim) return killer;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return TryGetActorMember(victim, KillerMemberNames);
     }
 

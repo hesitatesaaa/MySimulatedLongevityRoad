@@ -213,7 +213,7 @@ internal static class MclslMaobaoShortcutButton
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
         ShowButton(window);

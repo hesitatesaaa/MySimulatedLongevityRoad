@@ -442,7 +442,7 @@ internal static class MclslAncientMentorshipSystem
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientMentorshipSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         return null;
     }

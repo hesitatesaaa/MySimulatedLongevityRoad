@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using MySimulatedLongevityRoad.Data;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.Systems;
 
 /// <summary>
@@ -52,7 +53,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -60,7 +61,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
     }
 
@@ -97,7 +98,7 @@ internal static class MclslMaobaoSnapshot
                 if (value.Length > 0) result[key] = value;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static bool ShouldCapture(string key)

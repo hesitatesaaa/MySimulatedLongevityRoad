@@ -499,7 +499,7 @@ internal static class MclslHuanzhenSystem
                 float max = host.getMaxHealth();
                 if (max > 0f) host.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
         finally { _applyingRestore = false; }
 
@@ -528,7 +528,7 @@ internal static class MclslHuanzhenSystem
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.NativeUi);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", mclslEmptyCatchEx, MclslGuardScope.NativeUi);
             }
         }
         string hostName = MclslActorAccessor.DisplayName(host);
@@ -1018,13 +1018,13 @@ internal static class MclslHuanzhenSystem
             reason = "刚完成还真回溯，需等待至" + (_state.LastRestoreYear + MclslRuntimeSettings.HuanzhenSafetyGapYears) + "年后再锚定。";
             return false;
         }
-        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        try { if (host.isFighting()) { reason = "宿主正在战斗，无法建立安全锚点。"; return false; } } catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         try
         {
             float max = host.getMaxHealth();
             if (max > 0f && host.data.health / max < 0.85f) { reason = "宿主伤势过重，生命恢复至85%以上才能锚定。"; return false; }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-5", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return true;
     }
 
@@ -1119,7 +1119,7 @@ internal static class MclslHuanzhenSystem
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.NativeUi);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", mclslEmptyCatchEx, MclslGuardScope.NativeUi);
             }
             MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
             DeleteAnchorFolder(relative);
@@ -1283,7 +1283,7 @@ internal static class MclslHuanzhenSystem
                 string folder = ResolveAnchorSavePath(anchor.RelativeSavePath);
                 if (!string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder)) Directory.Delete(folder, true);
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-8", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
     }
 

@@ -29,7 +29,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-1", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-1", ex, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -38,7 +38,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-2", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-2", ex, MclslGuardScope.OptionalMember);
         }
         return UnknownAsset;
     }
@@ -57,7 +57,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-3", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-3", ex, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -69,7 +69,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-4", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-4", ex, MclslGuardScope.OptionalMember);
         }
         return UnknownTraitFallback;
     }

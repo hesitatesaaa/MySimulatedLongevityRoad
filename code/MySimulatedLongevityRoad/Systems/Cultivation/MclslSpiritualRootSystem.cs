@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Traits;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.Systems;
 
 internal readonly struct MclslSpiritualRootProfile
@@ -160,7 +161,7 @@ internal static class MclslSpiritualRootSystem
                 if (!MclslTraitRegistration.HasTraitWithAlias(actor, gift.TraitId)) continue;
                 if (best == null || gift.Level > best.Level) best = gift;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslSpiritualRootSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslSpiritualRootSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
         return best;
     }

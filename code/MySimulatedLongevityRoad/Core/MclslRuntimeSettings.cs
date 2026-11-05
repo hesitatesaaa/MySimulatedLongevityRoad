@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using NeoModLoader.api;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.Core;
 
 internal static class MclslRuntimeSettings
@@ -188,7 +189,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
         if (source is IDictionary dictionary)
@@ -225,7 +226,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
         FieldInfo field = type.GetField(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -237,7 +238,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
         return false;

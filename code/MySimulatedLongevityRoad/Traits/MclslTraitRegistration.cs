@@ -182,7 +182,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 string alias = TraitAliasId(gift.TraitId);
                 try
@@ -191,7 +191,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-alias", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-alias", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 string slashAlias = TraitPathAliasId(gift.TraitId);
                 try
@@ -200,7 +200,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-path-alias", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-1-path-alias", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             }
         });
@@ -370,7 +370,7 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -396,7 +396,7 @@ internal static class MclslTraitRegistration
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(actor.data.health, (int)Math.Min((float)int.MaxValue, max));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static string[] A(params string[] ids) => ids;
@@ -414,7 +414,7 @@ internal static class MclslTraitRegistration
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
 
@@ -429,7 +429,7 @@ internal static class MclslTraitRegistration
                 actor.addTrait(trait, true);
                 return;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-5", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-5", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
     }
 
@@ -463,7 +463,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 string alias = TraitAliasId(gift.TraitId);
                 try
@@ -472,7 +472,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-alias", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-alias", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 string slashAlias = TraitPathAliasId(gift.TraitId);
                 try
@@ -481,7 +481,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-path-alias", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-6-path-alias", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             }
             try
@@ -490,7 +490,7 @@ internal static class MclslTraitRegistration
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-7", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-7", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         });
         TryAutoCollectGift(actor, target);
@@ -571,7 +571,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-8", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-8", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 try
                 {
@@ -579,7 +579,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-9", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-9", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             }
         });
@@ -691,7 +691,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-10", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-10", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
                 try
                 {
@@ -699,7 +699,7 @@ internal static class MclslTraitRegistration
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-11", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-11", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             }
             string target = useAncient && realm != MclslRealmIds.ChangSheng ? LegacyTraitIdForRealm(realm) : TraitIdForRealm(realm);
@@ -709,7 +709,7 @@ internal static class MclslTraitRegistration
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-12", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-12", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         });
     }
@@ -738,7 +738,7 @@ internal static class MclslTraitRegistration
             trait.show_in_meta_editor = visible;
             trait.can_be_given = visible;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-13", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-13", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static void AddRealm(string realm, string icon, int order, float lifespan, float health, float damage, float speedMultiplier, float armor, bool ancient)
@@ -751,7 +751,7 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-14", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-14", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         bool add = trait == null;
         trait ??= new ActorTrait { id = id };
@@ -925,7 +925,7 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-15", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-15", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         bool add = trait == null;
         trait ??= new ActorTrait { id = gift.TraitId };
@@ -1013,7 +1013,7 @@ internal static class MclslTraitRegistration
                 else if (property.PropertyType == typeof(float)) property.SetValue(target, (float)value);
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-16", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-16", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private static void TrySetRarity(ActorTrait trait, int rarity)
@@ -1025,7 +1025,7 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-17", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-17", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         TrySet(trait, "rarity", rarity);
         TrySet(trait, "quality", rarity);
@@ -1047,7 +1047,7 @@ internal static class MclslTraitRegistration
             if (property != null && property.CanWrite && property.PropertyType == typeof(string))
                 property.SetValue(target, value ?? string.Empty);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-18", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-18", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     internal static void AddSpecial(string id, string icon, bool canBeGiven, bool showInEditor, float lifespan, float health, float damage, float speedMultiplier, float armor = 0f)
@@ -1059,7 +1059,7 @@ internal static class MclslTraitRegistration
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-19", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-19", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         bool add = trait == null;
         trait ??= new ActorTrait { id = id };
@@ -1246,6 +1246,6 @@ internal static class MclslTraitRegistration
             BaseSystemData data = (BaseSystemData)actor.data;
             data.favorite = true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-20", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslTraitRegistration-cs-20", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 }

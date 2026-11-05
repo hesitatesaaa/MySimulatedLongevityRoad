@@ -187,7 +187,7 @@ internal static class MclslArtifactSystem
             if (!float.IsNaN(current) && !float.IsInfinity(current) && current > maximum)
                 actor.stats[id] = maximum;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Crafting-MclslArtifactEquipmentSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Crafting-MclslArtifactEquipmentSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     internal static bool NeedsSuitableArtifact(Actor actor, MclslBagState bag, string preferredItemId)

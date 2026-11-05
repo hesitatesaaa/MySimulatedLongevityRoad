@@ -394,7 +394,7 @@ internal static class MclslRankSnapshotSource
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         string name = "修士" + actorId;
         try
@@ -402,7 +402,7 @@ internal static class MclslRankSnapshotSource
             string candidate = actor?.getName();
             if (!string.IsNullOrWhiteSpace(candidate)) name = candidate.Trim();
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         string realm = string.Empty;
         try
         {
@@ -410,7 +410,7 @@ internal static class MclslRankSnapshotSource
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         int essence = 0;
         try
@@ -419,7 +419,7 @@ internal static class MclslRankSnapshotSource
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         float progress = 0f;
         int taishangProgress = 0;
@@ -429,7 +429,7 @@ internal static class MclslRankSnapshotSource
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-5", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-5", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -437,7 +437,7 @@ internal static class MclslRankSnapshotSource
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-6", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-6", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         string realmName = MclslActorCultivationQuery.RealmDisplay(realm, essence, progress, taishangProgress);
         string kingdomName = KingdomName(actor);
@@ -454,7 +454,7 @@ internal static class MclslRankSnapshotSource
                 minimalSpeciesName = minimalSpecies.Name;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankSnapshotSource-cs-7", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         CombatCareerInfo combat = ReadCombatCareer(actor);
         return new MclslRankEntry
         {

@@ -178,7 +178,7 @@ internal static class MclslAncientLawSystem
                 TrySetNumber(actor.data, "nutrition", 100f);
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientLawSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslAncientLawSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     private const string ReflectionSite = "Systems/Cultivation/MclslAncientLawSystem.cs #2";

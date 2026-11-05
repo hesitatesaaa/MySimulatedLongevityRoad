@@ -107,7 +107,7 @@ internal static class MclslVisibleActorRenderLane
                 cameraSize = _cachedMainCamera.orthographicSize;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
 
         if (visibleCount > MediumVisibleCount || cameraSize >= FarCameraSize) return 2;
         if (visibleCount > NearVisibleCount || cameraSize >= MediumCameraSize) return 1;
@@ -143,7 +143,7 @@ internal static class MclslVisibleActorRenderLane
             position = actor.current_position;
             return true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
 
         try
         {
@@ -154,7 +154,7 @@ internal static class MclslVisibleActorRenderLane
                 return true;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslVisibleActorRenderLane-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return false;
     }
 }

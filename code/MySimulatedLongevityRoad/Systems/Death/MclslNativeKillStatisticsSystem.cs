@@ -139,7 +139,7 @@ internal static class MclslNativeKillStatisticsSystem
             Actor direct = victim.attackedBy as Actor;
             if (direct != null && direct != victim) return direct;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
 
         object target = victim;
         const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
@@ -153,7 +153,7 @@ internal static class MclslNativeKillStatisticsSystem
                 PropertyInfo property = target.GetType().GetProperty(name, flags);
                 if (property?.CanRead == true && property.GetValue(target, null) is Actor propertyActor && propertyActor != victim) return propertyActor;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
         return null;
     }
@@ -198,7 +198,7 @@ internal static class MclslNativeKillStatisticsSystem
             PropertyInfo property = target.GetType().GetProperty(name, flags);
             if (property?.CanRead == true && TryConvertNumeric(property.GetValue(target, null), out value)) return true;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return false;
     }
 
@@ -221,7 +221,7 @@ internal static class MclslNativeKillStatisticsSystem
                 return true;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslNativeKillStatisticsSystem-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         return false;
     }
 

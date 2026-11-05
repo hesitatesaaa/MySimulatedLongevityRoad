@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.Systems.Visual;
 
 internal static class MclslWorldSpriteRenderLayer
@@ -144,7 +145,7 @@ internal static class MclslWorldSpriteRenderLayer
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
             effect = null;
             renderer = null;
@@ -215,7 +216,7 @@ internal static class MclslWorldSpriteRenderLayer
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-7", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-7", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
             return true;
         }
@@ -244,7 +245,7 @@ internal static class MclslWorldSpriteRenderLayer
             Behaviour animator = component != null ? component.GetComponent("SpriteAnimator") as Behaviour : null;
             if (animator != null) animator.enabled = false;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-5", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-5", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 
     internal static bool TryBindLoopAnimation(BaseEffect effect, Sprite[] frames, float frameIntervalSeconds, int startFrame)
@@ -285,7 +286,7 @@ internal static class MclslWorldSpriteRenderLayer
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
             return true;
         }
@@ -312,7 +313,7 @@ internal static class MclslWorldSpriteRenderLayer
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
             _backMaterial = null;
         }
@@ -353,7 +354,7 @@ internal static class MclslWorldSpriteRenderLayer
             SpriteRenderer worldRenderer = World.world?.GetComponent<SpriteRenderer>();
             if (worldRenderer != null) renderer.sortingLayerID = worldRenderer.sortingLayerID;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-6", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-6", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         renderer.sortingOrder = Math.Min(-1, relativeSortingOrder);
     }
 
@@ -530,7 +531,7 @@ internal static class MclslWorldSpriteRenderLayer
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
             }
         }
     }

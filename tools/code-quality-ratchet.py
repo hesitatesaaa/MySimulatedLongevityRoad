@@ -20,7 +20,7 @@ LIMITS = {
     'catchExceptionUnrouted': 200,
     'emptyCatchCode': 0,
     'longParams6': 127,          # 基线：127 → 目标 ≤90（M3）
-    'longLinesOver200': 373,     # 基线：373 → 目标 ≤200（M4）
+    'longLinesOver200': 291,     # 373→291（M4 已缩短 Guard 全限定名）；目标 ≤200
     'duplicateBlocks': 21,       # 基线：21 → 目标 ≤10（M5）
 }
 

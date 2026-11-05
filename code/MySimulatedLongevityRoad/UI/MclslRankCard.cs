@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.UI;
 
 public sealed class MclslRankCard : MonoBehaviour
@@ -174,7 +175,7 @@ public sealed class MclslRankCard : MonoBehaviour
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
     }
 

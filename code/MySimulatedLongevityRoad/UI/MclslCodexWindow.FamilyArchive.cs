@@ -6,6 +6,7 @@ using MySimulatedLongevityRoad.Systems;
 using NeoModLoader.General;
 using UnityEngine;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.UI;
 
 internal sealed partial class MclslCodexWindow
@@ -225,7 +226,7 @@ internal sealed partial class MclslCodexWindow
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             if (focus?.Alive == true && GUILayout.Button("定位扶持对象", GUILayout.Height(36f))
                 && MclslActorRegistry.ResolveKnownOrWorld(focus.ActorId, out Actor supported))
@@ -235,7 +236,7 @@ internal sealed partial class MclslCodexWindow
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+                    MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
                 }
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();

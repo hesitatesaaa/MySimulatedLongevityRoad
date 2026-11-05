@@ -77,7 +77,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -85,7 +85,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         Refresh(window);
         try
@@ -94,7 +94,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
     }
 

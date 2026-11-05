@@ -346,7 +346,7 @@ internal sealed partial class MclslCodexWindow
         if (x != null && y != null)
         {
             try { position = new Vector2(Convert.ToSingle(x), Convert.ToSingle(y)); return true; }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Atlas-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+            catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Atlas-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
         }
         foreach (string member in new[] { "current_position", "position", "city_center", "center", "main_tile", "tile", "current_tile" })
         {

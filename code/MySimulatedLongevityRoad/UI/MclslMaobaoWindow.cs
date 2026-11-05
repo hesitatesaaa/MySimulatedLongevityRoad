@@ -6,6 +6,7 @@ using NeoModLoader.General;
 using UnityEngine;
 using UnityEngine.UI;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.UI;
 
 /// <summary>
@@ -313,6 +314,6 @@ internal static class MclslMaobaoUiHelper
             if (WorldTip.instance != null) WorldTip.instance.show(text, false, "top", 3.8f);
             else WorldTip.showNow(text, false, "top", 3.8f, "#8FE3D1");
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoWindow-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
+        catch (System.Exception mclslEmptyCatchEx) { MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoWindow-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember); }
     }
 }

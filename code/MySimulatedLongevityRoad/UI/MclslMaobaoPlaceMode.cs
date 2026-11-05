@@ -2,6 +2,7 @@ using NeoModLoader.General;
 using UnityEngine;
 using MySimulatedLongevityRoad.Systems;
 
+using MySimulatedLongevityRoad.Core;
 namespace MySimulatedLongevityRoad.UI;
 
 /// <summary>猫宝“放”按钮使用鬼谷时光长河同款的地图 GodPower 放置模式。</summary>
@@ -54,7 +55,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -62,7 +63,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-2", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -70,7 +71,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-3", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         return true;
     }

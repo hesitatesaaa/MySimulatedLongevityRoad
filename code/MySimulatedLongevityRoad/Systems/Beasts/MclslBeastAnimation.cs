@@ -234,7 +234,7 @@ internal static class MclslBeastAnimation
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            if (MclslRuntimeChanges.IsMainThread) MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Beasts-MclslBeastAnimation-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
+            if (MclslRuntimeChanges.IsMainThread) MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Beasts-MclslBeastAnimation-cs-1", mclslEmptyCatchEx, MclslGuardScope.OptionalMember);
         }
         if (clock.PositionKnown && (clock.X != x || clock.Y != y)) moving = true;
         if (moving) clock.LastMove = now;
