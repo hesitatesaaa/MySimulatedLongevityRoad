@@ -395,11 +395,7 @@ internal static class MclslResourceSystem
         }
     }
 
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名者"; }
-    }
+    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名者");
 
     private static int PositiveHash(string value)
     {

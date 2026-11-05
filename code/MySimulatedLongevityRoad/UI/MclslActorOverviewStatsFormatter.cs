@@ -417,13 +417,27 @@ internal static class MclslActorOverviewStatsFormatter
     private static void SetIconValue(UnitWindow window, string id, int value)
     {
         SetIconVisibility(window, id, true);
-        try { window.setIconValue(id, value, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            window.setIconValue(id, value, null, string.Empty, false, string.Empty, '/');
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #1: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private static void SetIconText(UnitWindow window, string id, string value)
     {
         SetIconVisibility(window, id, true);
-        try { window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/'); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            window.setIconValue(id, 0, null, string.Empty, false, string.Empty, '/');
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorOverviewStatsFormatter-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslActorOverviewStatsFormatter.cs #2: " + mclslEmptyCatchEx.Message);
+        }
         Transform icon = FindOverviewIcon(window, id);
         if (icon == null) return;
         IconTextBinding binding = IconTextBindings.GetOrCreateValue(icon);

@@ -91,7 +91,14 @@ internal static partial class MclslWorldSoulActorRegistration
     private static void DamageTarget(Actor source, Actor target, int damage)
     {
         if (target?.data == null || damage <= 0) return;
-        try { target.attackedBy = source; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            target.attackedBy = source;
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Traits-MclslWorldSoulActorRegistration-Attack-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Traits/MclslWorldSoulActorRegistration.Attack.cs #1: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             int current = target.data.health;

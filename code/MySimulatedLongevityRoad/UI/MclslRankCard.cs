@@ -168,7 +168,14 @@ public sealed class MclslRankCard : MonoBehaviour
     {
         Actor target = FindAliveActorById(_actorId) ?? _actor;
         if (target?.data == null) return;
-        try { ActionLibrary.openUnitWindow(target); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankCard.cs #1: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            ActionLibrary.openUnitWindow(target);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankCard-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankCard.cs #1: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private void OnDisable()

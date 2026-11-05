@@ -150,7 +150,14 @@ internal sealed partial class MclslCodexWindow
             if (MclslMaobaoArchiveManager.TryResolveSource(record, out Actor target))
             {
                 CloseWindow();
-                try { ActionLibrary.openUnitWindow(target); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Maobao-cs-1", "仙录猫宝：定位修士失败: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    ActionLibrary.openUnitWindow(target);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Maobao-cs-1", "仙录猫宝：定位修士失败: " + mclslEmptyCatchEx.Message);
+                }
             }
         }
         GUI.enabled = oldEnabled;

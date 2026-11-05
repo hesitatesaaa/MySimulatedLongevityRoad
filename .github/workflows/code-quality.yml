@@ -1,0 +1,24 @@
+name: code-quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  portable-regressions:
+    name: Portable business regressions (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Run portable production-source regressions
+        shell: pwsh
+        run: ./.tests/run.ps1 -Profile Portable
+      # Game-dependent tests and Unity acceptance require a local game install.
+      # The runner prints their names/reasons; they are never counted as passed.

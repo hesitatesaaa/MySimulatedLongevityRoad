@@ -10,7 +10,10 @@ namespace MySimulatedLongevityRoad.Core;
 internal static class MclslRuntime
 {
     private static bool _initialized;
-    private static bool _coreWorldInitialized;
+    private static MclslWorldInitialization _coreWorld;
+    private static bool _worldEntryCompleted;
+    private static bool _worldEntryPrepared;
+    private static bool _huanzhenWorldLoaded;
     private static int _lastFrame = -1;
     private static int _frameCounter;
     private static int _lastYear = -1;
@@ -37,28 +40,53 @@ internal static class MclslRuntime
     internal static void OnWorldLoaded()
     {
         using var profileScope = MclslUnityProfiler.Sample("MCLS/Load/WorldEntry");
+        _coreWorld.Reset();
+        _worldEntryPrepared = false;
+        _worldEntryCompleted = false;
+        _huanzhenWorldLoaded = false;
+        try
+        {
+            if (!PrepareWorldEntry()) return;
+            int year = CurrentYear();
+            if (MclslRuntimeSettings.CoreEnabled)
+            {
+                if (!TryInitializeCoreWorld(year)) return;
+            }
+            else LoadHuanzhenWorld();
+            FinishWorldEntry(year);
+        }
+        catch (System.Exception ex) { FailWorldInitialization(ex); }
+    }
+
+    private static bool PrepareWorldEntry()
+    {
+        if (_worldEntryPrepared) return true;
+        if (World.world?.map_stats == null) return false;
         Init();
         _displayClock = 0d;
         MclslBeastAnimation.Clear();
         MclslRuntimeDriver.Ensure();
-        int year = CurrentYear();
         MclslWorldContext.Bind();
-        _coreWorldInitialized = false;
         MclslRuntimeChanges.Clear();
         Systems.Combat.MclslCombatCareerSystem.Clear();
         MclslBeastTalentSystem.Clear(); MclslBeastWorld.Clear();
         MclslBeastLoot.Clear(); MclslSpellCasting.Clear();
         Traits.MclslXuanhuangRegistration.EnsureWildKingdom();
         Patches.MclslXuanhuangDirectionPatch.PrepareWorldColors();
-        if (MclslRuntimeSettings.CoreEnabled)
-        {
-            if (!TryInitializeCoreWorld(year)) return;
-        }
+        _worldEntryPrepared = true;
+        return true;
+    }
+
+    private static void LoadHuanzhenWorld()
+    {
+        if (_huanzhenWorldLoaded) return;
         MclslHuanzhenSystem.OnWorldLoaded();
-        if (MclslRuntimeSettings.CoreEnabled)
-        {
-            LoadCoreModules(year);
-        }
+        _huanzhenWorldLoaded = true;
+    }
+
+    private static void FinishWorldEntry(int year)
+    {
+        if (_worldEntryCompleted) return;
         MclslBeastSurfaceIndex.Resume();
         MclslFamilySystem.InitializeAfterLoad();
         MclslMaobaoArchiveManager.OnWorldLoaded();
@@ -66,23 +94,45 @@ internal static class MclslRuntime
         _lastYear = year;
         _frameCounter = 0;
         _displayClock = 0d;
+        _worldEntryCompleted = true;
     }
 
     /// <summary>
-    /// Runs the one-time core-world initialization shared by OnWorldLoaded and the
-    /// Tick fallback. Attempts at most once per world (including faults); returns
-    /// false when the archive store is write-locked so the caller can abort.
+    /// Waiting for a world is retryable; a partially executed initialization is
+    /// not. All required core modules must finish before the world is ready.
     /// </summary>
     private static bool TryInitializeCoreWorld(int year)
     {
-        _coreWorldInitialized = true;
-        MclslWorldStateModifierSystem.ClearCache();
-        MclslWorldArchiveStore.Load();
-        if (MclslWorldArchiveStore.WriteLocked) return false;
-        MclslWorldRunRepository.EnsureCurrentRun(year);
-        MclslNativeHistoryBridge.EnsureRegistered();
-        Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
-        return true;
+        if (_coreWorld.IsReady) return true;
+        if (!_coreWorld.NeedsAttempt) return false;
+        try
+        {
+            if (!PrepareWorldEntry()) return false;
+            MclslWorldArchiveStore.Load();
+            if (MclslWorldArchiveStore.WriteLocked) { _coreWorld.Fail(); return false; }
+            if (!MclslWorldArchiveStore.CanSave || !_coreWorld.TryBegin()) return false;
+            MclslWorldStateModifierSystem.ClearCache();
+            MclslWorldRunRepository.EnsureCurrentRun(year);
+            MclslNativeHistoryBridge.EnsureRegistered();
+            Systems.Death.MclslNativeKillStatisticsSystem.OnWorldLoaded(year);
+            LoadHuanzhenWorld();
+            LoadCoreModules(year);
+            FinishWorldEntry(year);
+            _coreWorld.Complete();
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            FailWorldInitialization(ex);
+            return false;
+        }
+    }
+
+    private static void FailWorldInitialization(System.Exception ex)
+    {
+        _coreWorld.Fail();
+        MclslWorldArchiveStore.LockWrites();
+        MclslDiagnostics.Fatal("world.initialize", "[模拟长生路] 世界初始化失败，已停止模组业务运行及保存，请重新载入世界: " + ex);
     }
 
     private static void LoadCoreModules(int year)
@@ -113,26 +163,16 @@ internal static class MclslRuntime
         try
         {
             MclslDeferredUiWork.Tick();
-            if(MclslRuntimeSettings.CoreEnabled && !_coreWorldInitialized && World.world?.map_stats!=null)
+            if (_coreWorld.Status == MclslWorldInitializationStatus.Faulted) return;
+            if (MclslRuntimeSettings.CoreEnabled && !_coreWorld.IsReady)
             {
-                int year = CurrentYear();
-                if (TryInitializeCoreWorld(year)) LoadCoreModules(year);
+                if (!TryInitializeCoreWorld(CurrentYear())) return;
             }
             if (MclslWorldArchiveStore.WriteLocked) return;
             MclslFrameLoadMonitor.SampleFrame();
             MclslAnnualBackpressure.TickStatus();
-            MclslRuntimeChanges.Drain();
-            MclslRankSnapshotSource.TickUpdates();
-            Patches.MclslXuanhuangDirectionPatch.TickColors();
-            if (MclslBeastWorld.HasManualRequest) MclslBeastWorld.Tick();
-            if (MclslFamilySystem.HasWork) MclslFamilySystem.TickReconciliation();
-            // Native frame streaming is the only main-thread PNG decode in the
-            // loop. It now runs inside the probe scope and backs off with the
-            // same stress tiers as every other budgeted lane instead of always
-            // spending up to 4 ms outside the frame deadline.
-            MclslNativeActorFrames.Tick(
-                MclslScheduler.HasFastWork ? 0.5d : 2.5d,
-                6);
+            // 年度结算优先取用本帧预算：此前它排在变化队列/贴图流之后，
+            // 高积压时常常只剩 0.00ms，导致积压追不动、暂停无法自愈。
             if (MclslRuntimeSettings.CoreEnabled)
             {
                 _frameCounter++;
@@ -155,6 +195,18 @@ internal static class MclslRuntime
                 }
                 finally { MclslAnnualFrameBudget.End(); }
             }
+            MclslRuntimeChanges.Drain();
+            MclslRankSnapshotSource.TickUpdates();
+            Patches.MclslXuanhuangDirectionPatch.TickColors();
+            if (MclslBeastWorld.HasManualRequest) MclslBeastWorld.Tick();
+            if (MclslFamilySystem.HasWork) MclslFamilySystem.TickReconciliation();
+            // Native frame streaming is the only main-thread PNG decode in the
+            // loop. It now runs inside the probe scope and backs off with the
+            // same stress tiers as every other budgeted lane instead of always
+            // spending up to 4 ms outside the frame deadline.
+            MclslNativeActorFrames.Tick(
+                MclslScheduler.HasFastWork ? 0.5d : 2.5d,
+                6);
             long realtimeSample = MclslPerformanceProbe.Begin();
             using (MclslUnityProfiler.Sample("MCLS/Runtime/RealtimeModules"))
                 MclslHuanzhenSystem.Tick();
@@ -195,7 +247,9 @@ internal static class MclslRuntime
 
     internal static void PrepareForSave()
     {
-        if (MclslWorldArchiveStore.WriteLocked) return;
+        // Do not load or publish a fresh repository from a save callback while
+        // the core has not initialized or initialization has faulted.
+        if (!_coreWorld.IsReady || !MclslWorldArchiveStore.CanSave || MclslWorldArchiveStore.WriteLocked) return;
         MclslScheduler.SavePendingAnnualStates();
         MclslBagSystem.FlushForSave();
         Systems.Combat.MclslCareerCombat.Save();
@@ -207,7 +261,10 @@ internal static class MclslRuntime
 
     internal static void ClearWorldState()
     {
-        _coreWorldInitialized = false;
+        _coreWorld.Reset();
+        _worldEntryPrepared = false;
+        _worldEntryCompleted = false;
+        _huanzhenWorldLoaded = false;
         MclslWorldContext.Clear();
         MclslBeastAnimation.Clear();
         MclslDiagnostics.Clear();
@@ -248,6 +305,8 @@ internal static class MclslRuntime
         MclslWorldStateModifierSystem.ClearCache();
         MclslVisibleActorRenderLane.Clear();
         MclslRealmHaloVisualSystem.Clear();
+        if (MclslDiagnostics.Enabled)
+            MclslWorldStateAudit.ReportResidual("世界清理");
     }
 
     internal static int CurrentYear()

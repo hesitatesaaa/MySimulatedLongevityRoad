@@ -863,13 +863,5 @@ internal static class MclslTechniqueLineageSystem
             || string.Equals(value, "无名修士", StringComparison.Ordinal);
     }
 
-    private static int StableHash(string value)
-    {
-        unchecked
-        {
-            int hash = 17;
-            foreach (char c in value ?? string.Empty) hash = hash * 31 + c;
-            return hash;
-        }
-    }
+    private static int StableHash(string value) => MySimulatedLongevityRoad.Core.MclslStableHash.Stable17x31(value);
 }

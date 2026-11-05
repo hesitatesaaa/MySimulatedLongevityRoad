@@ -1,5 +1,5 @@
 param(
-    [string]$GameRoot = 'D:\owl\gameversion\0_51_2_imported',
+    [string]$GameRoot = 'D:\owl\gameversion\worldbox-ab712b72f394',
     [string]$OutputDirectory = '',
     [switch]$RequireFinalAssets,
     [switch]$LocalDevelopment,

@@ -139,7 +139,7 @@ try {
         Invoke-Step 'Formal source-linked regressions' {
             $arguments = @{ WorkDirectory=$work; Projects=$TestProjects }
             if ($GameRoot) { $arguments.GameRoot=$GameRoot }
-            & (Join-Path $projectRoot 'tests/run.ps1') @arguments
+            & (Join-Path $projectRoot '.tests/run.ps1') @arguments
         }
     }
 

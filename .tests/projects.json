@@ -6,5 +6,10 @@
   "NativeFeedbackTests",
   "HeavenGrantTests",
   "BeastPopulationTests",
-  "EventArchiveTests"
+  "EventArchiveTests",
+  "AnnualYearReconcileTests",
+  "ArchivePersistenceTests",
+  "SettingsTransactionTests",
+  "RuntimeEntryTests",
+  "AnnualFailureTests"
 ]

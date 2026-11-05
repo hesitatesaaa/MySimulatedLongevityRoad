@@ -18,4 +18,12 @@ internal static class MclslStableHash
     {
         unchecked { int result = 83; foreach (char c in value ?? string.Empty) result = result * 47 + c; return result & int.MaxValue; }
     }
+    internal static int Positive31x37(string value)
+    {
+        unchecked { int result = 31; foreach (char c in value ?? string.Empty) result = result * 37 + c; return result & int.MaxValue; }
+    }
+    internal static int Stable17x31(string value)
+    {
+        unchecked { int hash = 17; foreach (char c in value ?? string.Empty) hash = hash * 31 + c; return hash; }
+    }
 }

@@ -25,7 +25,7 @@ def selected_sources(root, repository=False):
 def validate(root, repository=False):
     root = root.resolve()
     actual = selected_sources(root, repository)
-    expected = {path.resolve() for path in (root / 'code').rglob('*.cs')} | {root / 'InterestingTrait.cs'}
+    expected = {path.resolve() for path in (root / 'code').rglob('*.cs')} | {root / 'MclslMod.cs'}
     extras, missing = actual - expected, expected - actual
     if extras or missing:
         raise ValueError(json.dumps(dict(

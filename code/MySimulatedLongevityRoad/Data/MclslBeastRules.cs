@@ -10,8 +10,18 @@ internal static class MclslBeastRules
     // Fantasy GetSpawnCount: normal/elite bases 8/4, half-to-full range,
     // scale 1 + (level-1)*0.5. Use their midpoint plus one boss.
     internal static readonly int[] Counts={10,15,19,24,28,33,37};
-    // Common regional rolls occur every twenty years; rare species every ten.
-    internal const int RegionalNaturalChancePerMillion = 100000; // 10.0% per regional judgment.
+    // Common species are judged once per twenty world years as two whole-map
+    // pools: one land pool and one sea pool, land first then sea, each an
+    // independent 40% (400000 per million) roll. Rare species every ten years
+    // keep their existing multiplier.
+    internal const int CommonPoolChancePerMillion = 400000;
+    internal static readonly MclslBeastSurface[] CommonPoolOrder = { MclslBeastSurface.Land, MclslBeastSurface.Water };
+    internal static bool PercentPass(int hash,int chancePerMillion)
+        => chancePerMillion>0 && (uint)hash%1000000u<(uint)chancePerMillion;
+    // One successful pool roll spawns 8..20 beasts, capped by the remaining
+    // natural budget; roll is a uniform 0..12 from MclslBeastWorld.Roll.
+    internal static int CommonPoolAmount(int roll,int remaining)
+        => remaining<=0?0:Math.Min(remaining,8+Math.Clamp(roll,0,12));
     // Rare-species probabilities retain their existing multiplier.
     // Does not apply to waves, player placement or species-variant selection.
     internal static int NaturalChance(int chance)=>(int)(Math.Clamp((long)chance,0,1000000)*80/10000);

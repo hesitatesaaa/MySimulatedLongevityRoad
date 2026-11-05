@@ -63,7 +63,10 @@ foreach ($f in $files) {
   }
 }
 
-$out | Export-Csv "D:\模拟长胜路\_refcounts.csv" -NoTypeInformation -Encoding UTF8
+$rootDir = Split-Path -Parent $base
+$outDir = Join-Path $rootDir 'build'
+New-Item -ItemType Directory -Force -Path $outDir | Out-Null
+$out | Export-Csv (Join-Path $outDir 'refcounts.csv') -NoTypeInformation -Encoding UTF8
 "Total member rows: $($out.Count)"
 $zero = @($out | Where-Object { $_.ExternalRefs -eq 0 })
 "Zero-external members: $($zero.Count)"

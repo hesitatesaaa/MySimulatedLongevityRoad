@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-02T00:57:11+08:00",
-  "version": "0.8.4",
+  "generatedAt": "2026-11-03T20:49:06+08:00",
+  "version": "0.8.5",
   "scope": "code/MySimulatedLongevityRoad",
-  "sourceFiles": 288,
-  "totalLines": 73407,
+  "sourceFiles": 291,
+  "totalLines": 74390,
   "linesPerTopDir": {
-    "Systems": 40358,
-    "UI": 19099,
-    "Data": 5098,
-    "Traits": 3679,
-    "Core": 3206,
+    "Systems": 40768,
+    "UI": 19253,
+    "Data": 5100,
+    "Traits": 3863,
+    "Core": 3439,
     "Patches": 1609,
     "Queries": 328,
     "Interop": 30
@@ -19,7 +19,7 @@
   "largestFiles": [
     {
       "file": "UI/MclslCodexWindow.cs",
-      "lines": 2456
+      "lines": 2470
     },
     {
       "file": "UI/MclslRankWindow.cs",
@@ -30,24 +30,24 @@
       "lines": 1691
     },
     {
-      "file": "Systems/Crafting/MclslTianxuanMarket.cs",
-      "lines": 1608
+      "file": "Systems/Reincarnation/MclslHuanzhenSystem.cs",
+      "lines": 1645
     },
     {
-      "file": "Systems/Reincarnation/MclslHuanzhenSystem.cs",
-      "lines": 1576
+      "file": "Systems/Crafting/MclslTianxuanMarket.cs",
+      "lines": 1604
     },
     {
       "file": "Systems/WorldResources/MclslWorldRunRepository.cs",
-      "lines": 1507
+      "lines": 1558
     },
     {
       "file": "Traits/MclslTraitRegistration.cs",
-      "lines": 1125
+      "lines": 1251
     },
     {
       "file": "Systems/Runtime/MclslScheduler.cs",
-      "lines": 1085
+      "lines": 1132
     },
     {
       "file": "Systems/Cultivation/MclslSpellSystem.cs",
@@ -55,20 +55,20 @@
     },
     {
       "file": "Traits/MclslWorldSoulActorRegistration.cs",
-      "lines": 1002
+      "lines": 1037
     }
   ],
-  "catchTotal": 445,
+  "catchTotal": 444,
   "catchException": 305,
-  "emptyCatchCode": 157,
-  "diagnosticsErrorCalls": 131,
-  "diagnosticsProbeCalls": 157,
+  "emptyCatchCode": 156,
+  "diagnosticsErrorCalls": 133,
+  "diagnosticsProbeCalls": 151,
   "rawDebugLogOutsideDiagnostics": 0,
   "reflection": {
     "accessTools": 88,
-    "getField": 35,
-    "getProperty": 24
+    "getField": 34,
+    "getProperty": 23
   },
-  "compileError": 0,
-  "compileWarning": 16
+  "compileError": null,
+  "compileWarning": null
 }

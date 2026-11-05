@@ -1,7 +1,7 @@
 param(
-    [string]$GameRoot = 'E:\wol\gameversion\0_51_2_0.51.2',
+    [string]$GameRoot = 'D:\owl\gameversion\worldbox-ab712b72f394',
     [string]$OutputDirectory = '',
-    [int]$MaxWarnings = 16
+    [int]$MaxWarnings = 0
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot

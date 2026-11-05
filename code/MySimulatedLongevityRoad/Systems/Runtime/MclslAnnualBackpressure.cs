@@ -22,7 +22,7 @@ internal static class MclslAnnualBackpressure
     internal static string StatusText { get; private set; } = string.Empty;
     internal static string MetricsText { get; private set; } = string.Empty;
     internal static float AppliedFactor => _worldBound && _patchAvailable && MclslRuntimeSettings.CoreEnabled
-        && MclslRuntimeSettings.AnnualBackpressureEnabled ? EffectiveFactor : 1f;
+        && MclslRuntimeSettings.AnnualBackpressureEnabled && !IsBlocked ? EffectiveFactor : 1f;
     private static float EffectiveFactor => Policy.Factor;
     internal static bool IsBlocked => MclslWorldRunRepository.Current.AnnualBatch.WorldBlocked;
     internal static bool IsPauseLevel => EffectiveFactor <= 0f;
@@ -50,7 +50,10 @@ internal static class MclslAnnualBackpressure
         // A new architecture run has no completed annual cursor.
         if (completed == 0 && batch.ActiveYear == 0 && batch.LatestRequestedYear == 0)
             completed = Math.Max(0, current - 1);
-        return Math.Max(0, Math.Max(current, batch.LatestRequestedYear) - completed);
+        // Lag is measured against the world clock only. A stale "requested" year
+        // left behind by a previous, later world (anchor / save rollback) must not
+        // report a phantom backlog that keeps the world paused forever.
+        return MclslAnnualYearReconcilePolicy.LagYears(current, completed, batch.ActiveYear, batch.LatestRequestedYear);
     }
     // 年差口径
     private static int LevelByLag(int lag) => lag >= 10 ? 3 : lag >= 6 ? 2 : lag >= 3 ? 1 : 0;
@@ -59,8 +62,10 @@ internal static class MclslAnnualBackpressure
     internal static bool Apply(ref float elapsed)
     {
         // 档位统一在 TickStatus 里按“年差+耗时”算好，这里只按当前档位缩放模拟时间。
+        // 年度管线被阻塞（WorldBlocked）时绝不能再把世界时间乘成 0：那会让一个
+        // 已经停止结算的世界同时被冻住，形成只能读档才能解除的二次死锁。
         if (!(_worldBound && _patchAvailable && MclslRuntimeSettings.CoreEnabled
-              && MclslRuntimeSettings.AnnualBackpressureEnabled)) return true;
+              && MclslRuntimeSettings.AnnualBackpressureEnabled && !IsBlocked)) return true;
         elapsed *= EffectiveFactor;
         return true;
     }
@@ -74,7 +79,7 @@ internal static class MclslAnnualBackpressure
     internal static void TickStatus()
     {
         if (!_worldBound) return;
-        bool enabled = MclslRuntimeSettings.CoreEnabled && MclslRuntimeSettings.AnnualBackpressureEnabled;
+        bool enabled = MclslRuntimeSettings.CoreEnabled && MclslRuntimeSettings.AnnualBackpressureEnabled && !IsBlocked;
         int lag = Lag(out int current, out int completed);
         // 混合触发：年差 + 持续超预算耗时；耗时仅在 lag≥2 计入，且最高只到 0.25x，绝不暂停。
         bool underPressure = enabled && lag >= 2

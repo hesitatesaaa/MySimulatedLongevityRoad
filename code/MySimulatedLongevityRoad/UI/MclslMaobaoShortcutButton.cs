@@ -207,7 +207,14 @@ internal static class MclslMaobaoShortcutButton
         MclslMaobaoSystem.ToggleRecordActor(actor, out string message);
         if (!string.IsNullOrWhiteSpace(message))
         {
-            try { WorldTip.showNowTop(message); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", "猫宝快捷按钮：顶部提示显示失败: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                WorldTip.showNowTop(message);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", "猫宝快捷按钮：顶部提示显示失败: " + mclslEmptyCatchEx.Message);
+            }
         }
         ShowButton(window);
     }

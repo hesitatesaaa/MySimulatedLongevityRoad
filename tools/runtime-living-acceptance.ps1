@@ -36,11 +36,11 @@ if($WorkspaceSources) {
     if(-not $installedCode.StartsWith($install+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Unsafe source staging path'}
     Remove-Item -LiteralPath $installedCode -Recurse -Force
     Copy-Item -LiteralPath (Join-Path $project 'code') -Destination $installedCode -Recurse
-    Copy-Item -LiteralPath (Join-Path $project 'InterestingTrait.cs') -Destination (Join-Path $install 'InterestingTrait.cs')
+    Copy-Item -LiteralPath (Join-Path $project 'MclslMod.cs') -Destination (Join-Path $install 'MclslMod.cs')
     Copy-Item -LiteralPath (Join-Path $project 'mod.json') -Destination (Join-Path $install 'mod.json')
 }
 Copy-Item -LiteralPath $ProbeSource -Destination (Join-Path $install 'code/MySimulatedLongevityRoad/Core/MclslAuditAcceptance.cs')
-$entry=Join-Path $install 'InterestingTrait.cs'
+$entry=Join-Path $install 'MclslMod.cs'
 $source=[IO.File]::ReadAllText($entry)
 $anchor='MclslLocalizationRuntimeMarker.MarkLoaded();'
 if (($source.Split(@($anchor),[StringSplitOptions]::None)).Length -ne 2) { throw 'Unexpected mod entry.' }

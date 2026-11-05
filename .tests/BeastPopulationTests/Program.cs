@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MySimulatedLongevityRoad.Core;
+using MySimulatedLongevityRoad.Data;
 using MySimulatedLongevityRoad.Systems;
 static class Program {
  static int checks;
@@ -41,6 +42,20 @@ static class Program {
  long before=GC.GetAllocatedBytesForCurrentThread();for(int i=0;i<10000;i++){queue.Publish(1,a,1,false,1);queue.TryTake(out _,out _,out _,out _,out _);}long allocated=GC.GetAllocatedBytesForCurrentThread()-before;
  Check(allocated==0,"warmed handoff allocation: "+allocated);
  queue.Publish(1,a,1,false,1);queue.Cancel(1);Check(queue.Count==0,"cancel recycled node");queue.Publish(2,a,2,true,2);Check(queue.TryTake(out long id,out var source,out int flags,out bool repair,out long gen)&&id==2&&source==a&&flags==2&&repair&&gen==2,"recycled node resets metadata");
+ // --- Land/sea dual-pool common natural spawn rules ---
+ Check(MclslBeastRules.CommonPoolChancePerMillion==400000,"common pool is 40% per million");
+ Check(MclslBeastRules.CommonPoolOrder.SequenceEqual(new[]{MclslBeastSurface.Land,MclslBeastSurface.Water}),"land pool judged before sea pool");
+ Check(MclslBeastRules.CommonNaturalYear(20)&&MclslBeastRules.CommonNaturalYear(40)&&MclslBeastRules.CommonNaturalYear(60),"common judgment every twenty years");
+ Check(!MclslBeastRules.CommonNaturalYear(10)&&!MclslBeastRules.CommonNaturalYear(19)&&!MclslBeastRules.CommonNaturalYear(21),"common skips non-twenty years");
+ Check(MclslBeastRules.PercentPass(399999,400000),"below 40% passes");
+ Check(!MclslBeastRules.PercentPass(400000,400000),"exactly 40% fails");
+ Check(!MclslBeastRules.PercentPass(0,0),"zero chance never passes");
+ Check(Enumerable.Range(0,13).Select(r=>MclslBeastRules.CommonPoolAmount(r,100)).SequenceEqual(Enumerable.Range(8,13)),"pool amount is uniform 8..20");
+ Check(MclslBeastRules.CommonPoolAmount(9,3)==3,"pool amount capped by remaining budget");
+ Check(MclslBeastRules.CommonPoolAmount(4,0)==0,"no pool spawn when budget exhausted");
+ Check(MclslBeastRules.ShouldPrepareNatural(20,19,true),"first judgment prepares");
+ Check(!MclslBeastRules.ShouldPrepareNatural(20,20,true),"same year is deduped");
+ Check(!MclslBeastRules.ShouldPrepareNatural(20,5,false),"pending queue blocks new judgment");
  Console.WriteLine($"BeastPopulationTests: {checks} checks passed; warmed handoff: {allocated} bytes / 10000 cycles.");
  }
 }

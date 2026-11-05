@@ -363,7 +363,7 @@
     {
       "Id": "MCLSL_config_beast_natural_spawn",
       "Name": "妖兽自然出现",
-      "Description": "常见妖兽每32×32区块每20年以0.16%判定，稀有妖兽每10年按物种固定概率判定；自然概率约为此前2倍，最终整数取整。此开关不影响兽潮和手动放置，概率不能调整。",
+      "Description": "常见妖兽每20年对全图陆地池与海洋池各做一次40%判定（先陆地、后海洋），成功时按权重选一种常见种随机生成8~20只；稀有妖兽每10年按物种固定概率判定。此开关不影响兽潮和手动放置，概率不能调整。",
       "Type": "SWITCH",
       "BoolVal": true,
       "Callback": "MclslBeastConfig:ReloadBool"

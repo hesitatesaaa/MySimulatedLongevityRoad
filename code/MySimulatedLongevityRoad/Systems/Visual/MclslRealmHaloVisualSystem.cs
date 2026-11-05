@@ -463,7 +463,14 @@ internal static class MclslRealmHaloVisualSystem
 
     private static void DestroyEntry(HaloEntry entry)
     {
-        try { MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            MclslWorldSpriteRenderLayer.ReleaseActorBackEffect(entry?.Effect);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslRealmHaloVisualSystem-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslRealmHaloVisualSystem.cs #4: " + mclslEmptyCatchEx.Message);
+        }
         try
         {
             // Borrowed BaseEffects remain owned by the native controller's

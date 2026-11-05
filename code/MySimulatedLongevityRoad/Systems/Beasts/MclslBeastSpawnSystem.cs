@@ -62,24 +62,28 @@ internal static class MclslBeastSpawnSystem
                 MclslBeastWorld.AutomaticLimit-MclslBeastWorld.CountAutomatic()-MclslBeastWorld.State.Waves.Sum(x=>x.Count-x.Cursor));
             var common=MclslBeastRules.CommonSpecies;
             if(MclslBeastRules.CommonNaturalYear(year))
-                foreach(int region in MclslBeastSurfaceIndex.RegionIds.OrderBy(x=>x))
+                foreach(var surface in MclslBeastRules.CommonPoolOrder)
                 {
                     if(remaining<=0)break;
-                    int regionCount=MclslBeastWorld.CountAutomatic(true,region);
-                    if(regionCount>=4 || !Pass(year,"region_"+region,MclslBeastRules.RegionalNaturalChancePerMillion))continue;
+                    // One whole-map judgment per surface pool per twenty years,
+                    // land before sea. A failed roll or a pool with no eligible
+                    // common species is skipped: never relocated and never re-rolled.
+                    string poolKey="common_pool_"+surface;
+                    if(!Pass(year,poolKey,MclslBeastRules.CommonPoolChancePerMillion))continue;
                     PoolScratch.Clear();
                     foreach(var b in MclslBeastCatalog.All)
                         if(common.Contains(b.Id)
+                            && b.Surface==surface
                             && MclslBeastContent.BySpecies[b.Id].MinRealm<MclslBeastWorld.State.Unlocked
-                            && MclslBeastSurfaceIndex.Find(b,year,region)!=null && MclslBeastConfig.Chance(b)>0)
+                            && MclslBeastSurfaceIndex.Find(b,year)!=null && MclslBeastConfig.Chance(b)>0)
                             PoolScratch.Add(b);
                     if(PoolScratch.Count==0)continue;
                     MclslPerformanceProbe.RecordBeastSpawnScan(PoolScratch.Count);
                     int total=0;foreach(var b in PoolScratch)total+=MclslBeastConfig.Chance(b);if(total<=0)continue;
-                    int roll=MclslBeastWorld.Roll(region+"|species|"+year,total);
+                    int roll=MclslBeastWorld.Roll(poolKey+"|species|"+year,total);
                     var selected=PoolScratch[0];foreach(var b in PoolScratch){if(roll<MclslBeastConfig.Chance(b)){selected=b;break;}roll-=MclslBeastConfig.Chance(b);}
-                    int amount=Math.Min(Math.Min(4-regionCount,remaining),1+MclslBeastWorld.Roll(region+"|count|"+year,2));
-                    for(int i=0;i<amount;i++)Pending.Enqueue((selected,MclslBeastSurfaceIndex.Find(selected,year+i,region)));
+                    int amount=MclslBeastRules.CommonPoolAmount(MclslBeastWorld.Roll(poolKey+"|count|"+year,13),remaining);
+                    for(int i=0;i<amount;i++)Pending.Enqueue((selected,MclslBeastSurfaceIndex.Find(selected,year+i)));
                     remaining-=amount;
                 }
             foreach(var beast in MclslBeastCatalog.All)
@@ -94,9 +98,7 @@ internal static class MclslBeastSpawnSystem
                 if(beast.Id=="qilin"&&Pass(year,"moqilin_variant",MclslBeastConfig.Chance(MclslBeastCatalog.All.First(x=>x.Id=="moqilin"))))
                     selected=MclslBeastCatalog.All.First(x=>x.Id=="moqilin");
                 var tile=MclslBeastSurfaceIndex.Find(selected,year);
-                if(tile==null||MclslBeastWorld.CountAutomatic(true,MclslBeastSurfaceIndex.Region(tile))>=4)continue;
-                int queuedInRegion=Pending.Count(x=>MclslBeastSurfaceIndex.Region(x.Tile)==MclslBeastSurfaceIndex.Region(tile));
-                if(queuedInRegion+MclslBeastWorld.CountAutomatic(true,MclslBeastSurfaceIndex.Region(tile))>=4)continue;
+                if(tile==null)continue;
                 Pending.Enqueue((selected,tile));remaining--;
             }
             MclslBeastWorld.State.NaturalPending=Pending.Where(x=>x.Tile!=null).Select(x=>new MclslNaturalBeastSpawn
@@ -126,7 +128,7 @@ internal static class MclslBeastSpawnSystem
         => (SurfaceMask(tile)&(1<<(int)surface))!=0;
 
     private static bool Pass(int year, string key, int chance)
-        => chance > 0 && PositiveHash(year, key, 17) % 1000000 < chance;
+        => MclslBeastRules.PercentPass(PositiveHash(year,key,17),chance);
 
     private static int PositiveHash(int year, string key, int salt)
     {

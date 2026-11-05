@@ -43,6 +43,13 @@ internal static class MclslNamedCharacterRegistration
     internal static string FolderFor(string assetId)
         => assetId != null && ByAsset.TryGetValue(assetId, out Definition value) ? value.Folder : null;
 
+    // Form path of the humanoid originals, used by the held-item scale correction.
+    // Beast-form definitions are excluded here (they keep the native scale), and
+    // their "_yuan" ascension ids are not part of ByAsset, so they return null too.
+    internal static string HumanoidHeldItemFormPath(string assetId)
+        => assetId != null && ByAsset.TryGetValue(assetId, out Definition value) && !value.Beast
+            ? "actors/Named/" + value.Folder : null;
+
     internal static void Init()
     {
         if (_initialized || AssetManager.actor_library == null) return;

@@ -498,11 +498,7 @@ internal static class MclslTianxuanMarket
         _revision++;
     }
 
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名修士"; }
-    }
+    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名修士");
 
     internal static bool TryListSurplus(Actor actor, int year)
     {
@@ -1543,10 +1539,8 @@ internal static class MclslTianxuanMarket
         try { EnsureIndex(); }
         catch (Exception ex)
         {
-            MclslWorldRunRepository.RecordAnnualFailure(batch.MarketPruneYear, "天玄镜", string.Empty,
-                "MarketPruneIndex", 1, "未结算", ex.Message);
-            batch.WorldBlocked = true;
-            MclslWorldArchiveStore.MarkDirty();
+            MclslWorldRunRepository.BlockAnnualSettlement(batch.MarketPruneYear, "天玄镜", string.Empty,
+                "MarketPruneIndex", 1, ex.Message);
             return false;
         }
         batch.MarketPruneCursor = Math.Max(0, batch.MarketPruneCursor);
@@ -1590,10 +1584,8 @@ internal static class MclslTianxuanMarket
             }
             catch (Exception ex)
             {
-                MclslWorldRunRepository.RecordAnnualFailure(batch.MarketPruneYear, "天玄镜", id,
-                    "MarketPrune", 1, "未结算", ex.Message);
-                batch.WorldBlocked = true;
-                MclslWorldArchiveStore.MarkDirty();
+                MclslWorldRunRepository.BlockAnnualSettlement(batch.MarketPruneYear, "天玄镜", id,
+                    "MarketPrune", 1, ex.Message);
                 return false;
             }
             batch.MarketPruneCursor++;

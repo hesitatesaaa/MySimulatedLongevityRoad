@@ -185,33 +185,18 @@ internal static class MclslCultivationSystem
         TrySetNumber(data, "_level", targetLevel);
         TrySetNumber(data, "experience", Math.Max(GetNumber(data, "experience"), targetLevel * 100));
         TrySetNumber(data, "xp", Math.Max(GetNumber(data, "xp"), targetLevel * 100));
-        try { actor.updateStats(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            actor.updateStats();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #2: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private static int GetNumber(object target, string name)
-    {
-        if (target == null) return 0;
-        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
-        try
-        {
-            FieldInfo field = target.GetType().GetField(name, flags);
-            if (field != null)
-            {
-                object value = field.GetValue(target);
-                if (value is int i) return i;
-                if (value is float f) return (int)f;
-            }
-            PropertyInfo property = target.GetType().GetProperty(name, flags);
-            if (property != null)
-            {
-                object value = property.GetValue(target, null);
-                if (value is int i) return i;
-                if (value is float f) return (int)f;
-            }
-        }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #3: " + mclslEmptyCatchEx.Message); }
-        return 0;
-    }
+        => MclslReflectionNumbers.TryGetNumber(target, name, out int value, ReflectionSite) ? value : 0;
 
     private const string ReflectionSite = "Systems/Cultivation/MclslCultivationSystem.cs #4";
     private static void TrySetNumber(object target, string name, float value)
@@ -290,7 +275,14 @@ internal static class MclslCultivationSystem
             {
                 MclslTraitGrantRouter.SuppressRouting(() =>
                 {
-                    try { if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #6: " + mclslEmptyCatchEx.Message); }
+                    try
+                    {
+                        if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId);
+                    }
+                    catch (System.Exception mclslEmptyCatchEx)
+                    {
+                        MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #6: " + mclslEmptyCatchEx.Message);
+                    }
                 });
                 MclslCultivationStateTransitions.ClearRealm(actor, year, "角色不满足修炼资格");
                 return;
@@ -875,7 +867,14 @@ internal static class MclslCultivationSystem
         RemoveRealmTraitPair(actor, MclslRealmIds.ChangSheng);
         MclslTraitGrantRouter.SuppressRouting(() =>
         {
-            try { if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #11: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(traitId) && actor.hasTrait(traitId)) actor.removeTrait(traitId);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-11", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #11: " + mclslEmptyCatchEx.Message);
+            }
         });
 
         string current = MclslActorAccessor.Realm(actor);
@@ -903,8 +902,22 @@ internal static class MclslCultivationSystem
         string ancientTrait = MclslTraitRegistration.LegacyTraitIdForRealm(realm);
         MclslTraitGrantRouter.SuppressRouting(() =>
         {
-            try { if (!string.IsNullOrWhiteSpace(newTrait) && actor.hasTrait(newTrait)) actor.removeTrait(newTrait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #12: " + mclslEmptyCatchEx.Message); }
-            try { if (!string.IsNullOrWhiteSpace(ancientTrait) && actor.hasTrait(ancientTrait)) actor.removeTrait(ancientTrait); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #13: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(newTrait) && actor.hasTrait(newTrait)) actor.removeTrait(newTrait);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-12", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #12: " + mclslEmptyCatchEx.Message);
+            }
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(ancientTrait) && actor.hasTrait(ancientTrait)) actor.removeTrait(ancientTrait);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Cultivation-MclslCultivationSystem-cs-13", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Cultivation/MclslCultivationSystem.cs #13: " + mclslEmptyCatchEx.Message);
+            }
         });
     }
 

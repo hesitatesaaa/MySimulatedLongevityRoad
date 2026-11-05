@@ -509,7 +509,14 @@ internal static class MclslHuanzhenSystem
         if (!Flush()) { return; }
         if (!string.IsNullOrWhiteSpace(originalPath))
         {
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                SaveManager.setCurrentPath(originalPath);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #3: " + mclslEmptyCatchEx.Message);
+            }
         }
         string hostName = MclslActorAccessor.DisplayName(host);
         string eventType = manualRestore ? "huanzhen_manual_return" : "huanzhen_return";
@@ -1082,7 +1089,14 @@ internal static class MclslHuanzhenSystem
         {
             _state = JsonConvert.DeserializeObject<MclslHuanzhenExternalState>(_lastCommittedJson) ?? new();
             MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("huanzhen.anchor", "[模拟长生路][还真] 建立锚点失败: " + ex.Message);
-            try { SaveManager.setCurrentPath(originalPath); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                SaveManager.setCurrentPath(originalPath);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslHuanzhenSystem-cs-7", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Reincarnation/MclslHuanzhenSystem.cs #7: " + mclslEmptyCatchEx.Message);
+            }
             MclslActorAccessor.Set(host, MclslActorDataKeys.HuanzhenAnchorYear, priorAnchorYear);
             DeleteAnchorFolder(relative);
             message = "建立锚点失败：" + ex.Message;
@@ -1336,14 +1350,69 @@ internal static class MclslHuanzhenSystem
             Combat.MclslCombatCareerSystem.Write(a,Combat.MclslCombatCareerSystem.Read(a));
         MclslHuanzhenCultivationSnapshot snapshot = new()
     {
-        CultivationSystemId = MclslActorAccessor.GetString(a, MclslActorDataKeys.CultivationSystem), RealmId = MclslActorAccessor.Realm(a), CultivationProgress = MclslActorAccessor.GetFloat(a, MclslActorDataKeys.CultivationProgress), TrueEssence = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TrueEssence), Aptitude = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Aptitude), MindState = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MindState), HeartTemperingProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartTemperingProgress), HeartMethodKnown = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartMethodKnown), MiasmaPoolCleansing = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MiasmaPoolCleansing), Contribution = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Contribution), RuinExperience = MclslActorAccessor.GetInt(a, MclslActorDataKeys.RuinExperience), TechniqueInsight = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TechniqueInsight),
-        TechniqueId = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueId), TechniqueName = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueName), TechniqueMaxRealm = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueMaxRealm), FoundationWonderId = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderId), FoundationWonderName = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderName), FoundationWonderQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.FoundationWonderQuality), FoundationWonderTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderTags), FoundationWonderDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderDescription), FoundationWonderOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderOrigin), FoundationWonderEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderEffects),
-        GoldenCoreLaws = MclslActorAccessor.GetString(a, MclslActorDataKeys.GoldenCoreLaws), GoldenCorePurity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCorePurity), GoldenCoreStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCoreStability), NascentCaveId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveId), NascentCaveName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveName), NascentCaveTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveTags), NascentCaveCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveCompatibility), NascentCaveIntegrity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveIntegrity),
-        NascentEssenceId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceId), NascentEssenceName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceName), NascentEssenceQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentEssenceQuality), NascentEssenceTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceTags), NascentEssenceDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceDescription), NascentEssenceEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceEffects),
-        DivineChangeId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeId), DivineChangeName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeName), DivineChangeTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeTags), DivineChangeCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineChangeCompatibility), DivineMarrowId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowId), DivineMarrowName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowName), DivineMarrowCount = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrow), DivineMarrowQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrowQuality), DivineMarrowTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowTags), DivineMarrowDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowDescription), DivineMarrowEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowEffects),
-        HuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HuaShenHonorific), HeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeDaoHonorific), ChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.ChangShengHonorific),
-        AncientHuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHuaShenHonorific), AncientHeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHeDaoHonorific), AncientChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientChangShengHonorific),
-        WorldSoulId = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulId), WorldSoulName = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulName), HeavenlyDuty = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeavenlyDuty), HarmonyLeap = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyLeap), HarmonyOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.HarmonyOrigin), HarmonyCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyCompatibility), HarmonyStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyStability), InverseTruthId = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthId), InverseTruthName = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthName), InverseTruthProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.InverseTruthProgress)
+        CultivationSystemId = MclslActorAccessor.GetString(a, MclslActorDataKeys.CultivationSystem),
+        RealmId = MclslActorAccessor.Realm(a),
+        CultivationProgress = MclslActorAccessor.GetFloat(a, MclslActorDataKeys.CultivationProgress),
+        TrueEssence = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TrueEssence),
+        Aptitude = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Aptitude),
+        MindState = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MindState),
+        HeartTemperingProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartTemperingProgress),
+        HeartMethodKnown = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HeartMethodKnown),
+        MiasmaPoolCleansing = MclslActorAccessor.GetInt(a, MclslActorDataKeys.MiasmaPoolCleansing),
+        Contribution = MclslActorAccessor.GetInt(a, MclslActorDataKeys.Contribution),
+        RuinExperience = MclslActorAccessor.GetInt(a, MclslActorDataKeys.RuinExperience),
+        TechniqueInsight = MclslActorAccessor.GetInt(a, MclslActorDataKeys.TechniqueInsight),
+        TechniqueId = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueId),
+        TechniqueName = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueName),
+        TechniqueMaxRealm = MclslActorAccessor.GetString(a, MclslActorDataKeys.TechniqueMaxRealm),
+        FoundationWonderId = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderId),
+        FoundationWonderName = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderName),
+        FoundationWonderQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.FoundationWonderQuality),
+        FoundationWonderTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderTags),
+        FoundationWonderDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderDescription),
+        FoundationWonderOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderOrigin),
+        FoundationWonderEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.FoundationWonderEffects),
+        GoldenCoreLaws = MclslActorAccessor.GetString(a, MclslActorDataKeys.GoldenCoreLaws),
+        GoldenCorePurity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCorePurity),
+        GoldenCoreStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.GoldenCoreStability),
+        NascentCaveId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveId),
+        NascentCaveName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveName),
+        NascentCaveTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentCaveTags),
+        NascentCaveCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveCompatibility),
+        NascentCaveIntegrity = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentCaveIntegrity),
+        NascentEssenceId = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceId),
+        NascentEssenceName = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceName),
+        NascentEssenceQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.NascentEssenceQuality),
+        NascentEssenceTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceTags),
+        NascentEssenceDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceDescription),
+        NascentEssenceEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.NascentEssenceEffects),
+        DivineChangeId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeId),
+        DivineChangeName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeName),
+        DivineChangeTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineChangeTags),
+        DivineChangeCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineChangeCompatibility),
+        DivineMarrowId = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowId),
+        DivineMarrowName = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowName),
+        DivineMarrowCount = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrow),
+        DivineMarrowQuality = MclslActorAccessor.GetInt(a, MclslActorDataKeys.DivineMarrowQuality),
+        DivineMarrowTags = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowTags),
+        DivineMarrowDescription = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowDescription),
+        DivineMarrowEffects = MclslActorAccessor.GetString(a, MclslActorDataKeys.DivineMarrowEffects),
+        HuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HuaShenHonorific),
+        HeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeDaoHonorific),
+        ChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.ChangShengHonorific),
+        AncientHuaShenHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHuaShenHonorific),
+        AncientHeDaoHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientHeDaoHonorific),
+        AncientChangShengHonorific = MclslActorAccessor.GetString(a, MclslActorDataKeys.AncientChangShengHonorific),
+        WorldSoulId = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulId),
+        WorldSoulName = MclslActorAccessor.GetString(a, MclslActorDataKeys.WorldSoulName),
+        HeavenlyDuty = MclslActorAccessor.GetString(a, MclslActorDataKeys.HeavenlyDuty),
+        HarmonyLeap = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyLeap),
+        HarmonyOrigin = MclslActorAccessor.GetString(a, MclslActorDataKeys.HarmonyOrigin),
+        HarmonyCompatibility = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyCompatibility),
+        HarmonyStability = MclslActorAccessor.GetInt(a, MclslActorDataKeys.HarmonyStability),
+        InverseTruthId = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthId),
+        InverseTruthName = MclslActorAccessor.GetString(a, MclslActorDataKeys.InverseTruthName),
+        InverseTruthProgress = MclslActorAccessor.GetInt(a, MclslActorDataKeys.InverseTruthProgress),
     };
         snapshot.Contribution = MclslActorAccessor.GetMoney(a, MclslActorDataKeys.Contribution);
         snapshot.SpiritStones = MclslActorAccessor.GetMoney(a, MclslActorDataKeys.SpiritStones);

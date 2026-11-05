@@ -14,8 +14,9 @@ internal static class MclslRuntimeCadence
         if (_lastUnityFrame == unityFrame) return;
         _lastUnityFrame = unityFrame;
         int currentYear = MclslRuntime.CurrentYear();
-        bool processFast = MclslScheduler.HasFastWork
-            && !MclslFrameDeadline.Expired;
+        // 年度工作已在本帧优先取用预算；这里不再用整帧 FrameDeadline 作为门控，
+        // 否则前面的低优先级工作一旦吃满预算，年度就会整帧不跑，积压追不动。
+        bool processFast = MclslScheduler.HasFastWork;
         if (processFast)
         {
             MclslDiagnostics.CultivationThrottle(

@@ -8,7 +8,7 @@ using MySimulatedLongevityRoad.UI;
 
 namespace MySimulatedLongevityRoad.Systems;
 
-internal static class MclslWorldRunRepository
+internal static partial class MclslWorldRunRepository
 {
     private const int MaxEvents = 400;
     private const int MaxMilestones = 128;
@@ -79,9 +79,63 @@ internal static class MclslWorldRunRepository
         finally { MclslPerformanceProbe.End("档案.EnsureCurrentRun", sample); }
     }
 
+    /// <summary>
+    /// 放弃一个“比当前世界年更靠前”的年度（世界年回退后遗留的在途年份）时，
+    /// 必须清掉该年的阶段游标与临时认领表；否则重做该年时会把旧草稿当成
+    /// “已认领/已完成”，从而漏生成探索、洞天、天地变、家族等年度事件——
+    /// 那才会造成真正的事件损失。
+    /// </summary>
+    internal static void ResetAbandonedAnnualYear(MclslAnnualBatchState batch)
+    {
+        if (batch == null) return;
+        batch.WorldStage = 0;
+        batch.StartCursor = 0;
+        batch.EraSnapshotRecorded = false;
+        batch.LineageActorIds?.Clear();
+        batch.CaveClaims?.Clear();
+        batch.ChangeClaims?.Clear();
+        batch.AdventureCandidates?.Clear();
+        batch.TechniqueLineagePendingIds?.Clear();
+        batch.TechniqueLineagePendingInitialized = false;
+        batch.SectLifecycleCursor = 0;
+        batch.SectLifecycleEmitted = 0;
+        batch.MarketPruneYear = 0;
+        batch.MarketPruneCursor = 0;
+        batch.MarketPruneListingIds?.Clear();
+        batch.MarketRecycleBudgetStones = 0;
+        batch.MarketRecycleSpentStones = 0;
+        batch.InverseWork = null;
+        batch.WorldSoulYear = 0;
+        batch.WorldSoulCursor = 0;
+        batch.FamilyCursor = 0;
+        batch.FamilyMemberCursor = 0;
+        batch.FamilySettlementYear = 0;
+        batch.FamilySettlementIds?.Clear();
+        batch.ModuleBlockedYears?.Clear();
+        batch.WorldFailureStage = 0;
+        batch.WorldFailureCount = 0;
+    }
+
     private static void EnsureCurrentRunCore(int year)
     {
         if (MclslWorldArchiveStore.WriteLocked) return;
+        // 世界年回退（读旧档 / 还真锚点）后，把年度游标夹回当前世界年：
+        // 旧世界遗留的高位“请求年/活动年”会让角色永远排在“世界年+1”，
+        // 就绪队列无法释放，积压恒 ≥10，回压永久停在暂停档。
+        MclslAnnualBatchState annualBatch = _current.AnnualBatch ??= new MclslAnnualBatchState();
+        MclslAnnualYearReconcilePolicy.BatchYears clamp =
+            MclslAnnualYearReconcilePolicy.ClampBatch(annualBatch.LatestRequestedYear,
+                annualBatch.LastCompletedYear, annualBatch.ActiveYear, year);
+        if (clamp.LatestRequestedYear != annualBatch.LatestRequestedYear
+            || clamp.LastCompletedYear != annualBatch.LastCompletedYear
+            || clamp.ActiveYear != annualBatch.ActiveYear)
+        {
+            annualBatch.LatestRequestedYear = clamp.LatestRequestedYear;
+            annualBatch.LastCompletedYear = clamp.LastCompletedYear;
+            annualBatch.ActiveYear = clamp.ActiveYear;
+            if (clamp.ResetWorldStage) ResetAbandonedAnnualYear(annualBatch);
+            MclslWorldArchiveStore.MarkDirty();
+        }
         if (ReferenceEquals(_ensuredRun, _current) && _ensuredYear == year) return;
         NormalizeCurrentRun();
         MclslReincarnationProfile profile = MclslReincarnationProfileStore.Current;
@@ -534,32 +588,6 @@ internal static class MclslWorldRunRepository
         finally { MclslPerformanceProbe.End("事件记录与去重", sample); }
     }
 
-    internal static void RecordAnnualFailure(int year, string scope, string targetId,
-        string step, int attempts, string result, string error)
-    {
-        MclslAnnualBatchState batch = Current.AnnualBatch;
-        batch.FailureRecords ??= new List<MclslAnnualFailureRecord>();
-        MclslAnnualFailureRecord record = batch.FailureRecords.Find(x => x.Year == year
-            && x.Scope == scope && x.TargetId == targetId && x.Step == step);
-        if (record == null)
-        {
-            record = new MclslAnnualFailureRecord { Year = year, Scope = scope ?? string.Empty,
-                TargetId = targetId ?? string.Empty, Step = step ?? string.Empty };
-            batch.FailureRecords.Add(record);
-            if (batch.FailureRecords.Count > 512) batch.FailureRecords.RemoveAt(0);
-        }
-        record.Attempts = attempts;
-        record.Result = result ?? string.Empty;
-        record.Error = error?.Length > 300 ? error.Substring(0, 300) : error ?? string.Empty;
-        MclslWorldArchiveStore.MarkDirty();
-        if (result is "跳过" or "部分失败" or "未结算")
-        {
-            MclslDiagnostics.Error("annual-failure:" + scope + ":" + step + ":" + targetId,
-                year + " 年 " + scope + "/" + step + " 结算" + result + "：" + record.Error);
-            AddEvent(year, "annual_settlement_failure", "年度结算异常",
-                scope + "/" + step + "（" + targetId + "）" + result + "：" + record.Error);
-        }
-    }
 
     /// <summary>
     /// Returns the appended record, or <c>null</c> when the event was suppressed
@@ -632,13 +660,13 @@ internal static class MclslWorldRunRepository
                 record.MapX = actor.data.x;
                 record.MapY = actor.data.y;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", "材料发现事件坐标读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", "材料发现事件坐标读取失败: " + mclslEmptyCatchEx.Message); }
             try
             {
                 record.LocationName = actor.city?.data?.name ?? string.Empty;
                 record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", "材料发现事件归属读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", "材料发现事件归属读取失败: " + mclslEmptyCatchEx.Message); }
         }
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
                 MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
@@ -732,7 +760,7 @@ internal static class MclslWorldRunRepository
             if (!string.IsNullOrWhiteSpace(record.MapVisualKind)) NotifyMapMarkerDataChanged();
             MclslWorldArchiveStore.MarkDirty();
         }
-        catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
+        catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
     }
 
     internal static void AddEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string eventKey = null)
@@ -1489,10 +1517,7 @@ internal static class MclslWorldRunRepository
         MclslWorldRunRuntimeIndexes.Invalidate();
     }
 
-    private static int StableHash(string value)
-    {
-        unchecked { int hash = 17; foreach (char c in value ?? string.Empty) hash = hash * 31 + c; return hash; }
-    }
+    private static int StableHash(string value) => MySimulatedLongevityRoad.Core.MclslStableHash.Stable17x31(value);
     internal static MclslWorldSoulRecord FindWorldSoulById(string soulId)
     {
         MclslWorldRunState run = MclslWorldRunRepository.Current;

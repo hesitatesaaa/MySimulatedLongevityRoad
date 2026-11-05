@@ -35,6 +35,11 @@ internal static class MclslVisibleActorRenderLane
         _lastFrame = frame;
         _lastRenderData = manager.render_data;
 
+        // Native held tool/weapon transforms inherit the whole-body current_scale.
+        // Bring the mod immortals' vanilla held items back to the authored body
+        // proportion before the draw pass consumes item_scale.
+        MclslHeldItemRenderScale.Normalize(manager);
+
         bool scanHalo = MclslRealmHaloVisualSystem.BeginRenderFrame(frame);
         Actor[] actors = manager.visible_units.array;
         int count = actors == null ? 0 : Math.Min(manager.visible_units.count, actors.Length);
@@ -84,6 +89,7 @@ internal static class MclslVisibleActorRenderLane
         _lastRenderData = null;
         _cachedMainCamera = null;
         _nextCameraRefreshFrame = 0;
+        MclslHeldItemRenderScale.Clear();
     }
 
     private static int ResolveLodLevel(int frame, int visibleCount)

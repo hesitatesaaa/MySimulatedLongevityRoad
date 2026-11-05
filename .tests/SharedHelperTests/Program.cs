@@ -122,6 +122,19 @@ public static class Program {
         }
         long allocated=GC.GetAllocatedBytesForCurrentThread()-allocationBefore;
         Check(allocated==0,"shared hash allocation zero");GC.KeepAlive(hashSum);
+        // M4: shared 31x37 / 17x31 variants must reproduce the original inline algorithms.
+        Check(MclslStableHash.Positive31x37(null)==31,"shared Positive31x37 null");
+        Check(MclslStableHash.Positive31x37("abc")==1706761,"shared Positive31x37 vector");
+        Check(MclslStableHash.Stable17x31(null)==17,"shared Stable17x31 null");
+        Check(MclslStableHash.Stable17x31("abc")==602801,"shared Stable17x31 vector");
+        // M3: cached read accessor mirrors the write accessor's per-member caching.
+        MclslReflectionNumbers.ResetCacheCounters();
+        var rn=new Numbers{Count=7,Health=2.5f};
+        Check(MclslReflectionNumbers.TryGetNumber(rn,"count",out int rv1,"test")&&rv1==7,"TryGetNumber reads int");
+        Check(MclslReflectionNumbers.TryGetNumber(rn,"Health",out int rv2,"test")&&rv2==2,"TryGetNumber truncates float");
+        int readFactory=MclslReflectionNumbers.FactoryCalls;
+        Check(MclslReflectionNumbers.TryGetNumber(rn,"count",out _,"test")&&MclslReflectionNumbers.FactoryCalls==readFactory,"TryGetNumber cached per member");
+        Check(!MclslReflectionNumbers.TryGetNumber(rn,"Missing",out _,"test"),"TryGetNumber missing returns false");
         Console.WriteLine("PASS shared numeric and localization behavior: "+Checks+" checks");
     }
 }

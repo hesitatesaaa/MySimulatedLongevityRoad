@@ -216,7 +216,14 @@ internal static class MclslBeastAnimation
         bool moving = actor.is_moving;
         // Reached from the native sprite override, which Parallel.For may call
         // off the main thread; diagnostics are only emitted there.
-        try { moving |= actor.isUsingPath(); } catch (System.Exception mclslEmptyCatchEx) { if (MclslRuntimeChanges.IsMainThread) MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Beasts-MclslBeastAnimation-cs-1", "妖兽动画：读取寻路状态失败: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            moving |= actor.isUsingPath();
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            if (MclslRuntimeChanges.IsMainThread) MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Beasts-MclslBeastAnimation-cs-1", "妖兽动画：读取寻路状态失败: " + mclslEmptyCatchEx.Message);
+        }
         if (clock.PositionKnown && (clock.X != x || clock.Y != y)) moving = true;
         if (moving) clock.LastMove = now;
         clock.X = x;

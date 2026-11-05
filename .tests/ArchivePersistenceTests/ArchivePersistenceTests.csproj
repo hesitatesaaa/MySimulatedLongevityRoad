@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><LangVersion>latest</LangVersion><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslWorldInitialization.cs" />
+    <Compile Include="../../code/MySimulatedLongevityRoad/Systems/WorldResources/MclslWorldArchiveStore.cs" />
+    <!-- SDK-bundled Newtonsoft: offline test dependency only; production still uses the game's assembly. -->
+    <Reference Include="Newtonsoft.Json"><HintPath>$(MSBuildSDKsPath)/../Newtonsoft.Json.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

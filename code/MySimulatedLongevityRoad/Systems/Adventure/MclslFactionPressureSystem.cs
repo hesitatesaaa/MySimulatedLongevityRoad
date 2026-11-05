@@ -300,11 +300,7 @@ internal static class MclslFactionPressureSystem
         return year + MclslWorldStateModifierSystem.ScaleFactionPressureInterval(baseInterval, year);
     }
 
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); }
-        catch { return "无名者"; }
-    }
+    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名者");
 
     private static int PositiveHash(string value)
     {

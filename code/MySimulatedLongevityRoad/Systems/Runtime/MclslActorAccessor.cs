@@ -138,6 +138,11 @@ internal static class MclslActorAccessor
         MySimulatedLongevityRoad.Traits.MclslBeastActorRegistration.DisplayName(actor, realmId)
         ?? MclslHonorificNameCatalog.Format(actor, ResolveNameStage(actor, realmId));
 
+    internal static string SafeName(Actor actor, string fallback)
+    {
+        try { return DisplayName(actor); } catch { return fallback; }
+    }
+
     internal static void ApplyDisplayName(Actor actor, string realmId)
     {
         if (actor?.data == null) return;

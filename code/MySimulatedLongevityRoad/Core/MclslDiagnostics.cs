@@ -72,6 +72,19 @@ internal static class MclslDiagnostics
         Debug.Log("[模拟长生路][诊断][probe] " + message);
     }
 
+    /// <summary>
+    /// Lazy probe: the message factory runs only when diagnostics are enabled, so
+    /// hot-path catch blocks no longer build diagnostic strings on the disabled path.
+    /// Same one-shot-per-key semantics as <see cref="Probe"/>.
+    /// </summary>
+    internal static void ProbeLazy(string key, Func<string> messageFactory)
+    {
+        if (!Enabled || string.IsNullOrWhiteSpace(key) || messageFactory == null) return;
+        if (OnceKeys.Count >= MaxRememberedKeys && !OnceKeys.ContainsKey(key)) OnceKeys.Clear();
+        if (!OnceKeys.TryAdd(key, 0)) return;
+        Debug.Log("[模拟长生路][诊断][probe] " + messageFactory());
+    }
+
     internal static void Once(string key, string message)
     {
         if (!Enabled || string.IsNullOrWhiteSpace(key)) return;

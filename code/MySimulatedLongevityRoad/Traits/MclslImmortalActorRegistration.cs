@@ -20,6 +20,15 @@ internal static class MclslImmortalActorRegistration
     private static bool _registered;
 
     internal static bool IsImmortal(Actor actor) => actor?.asset?.id is BaiId or ChuanfaId;
+
+    // Form path of the authored body, used by the held-item scale correction.
+    internal static string FormPath(Actor actor) => actor?.asset?.id switch
+    {
+        BaiId => "actors/Immortals/Bai",
+        ChuanfaId => "actors/Immortals/Chuanfa",
+        _ => null
+    };
+
     internal static Sprite TryGetBannerSprite(Subspecies subspecies)
     {
         try

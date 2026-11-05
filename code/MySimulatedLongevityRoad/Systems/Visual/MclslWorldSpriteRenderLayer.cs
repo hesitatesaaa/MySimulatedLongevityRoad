@@ -138,7 +138,14 @@ internal static class MclslWorldSpriteRenderLayer
         }
         catch
         {
-            try { ReleaseActorBackEffect(effect); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #1: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                ReleaseActorBackEffect(effect);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #1: " + mclslEmptyCatchEx.Message);
+            }
             effect = null;
             renderer = null;
             return false;
@@ -202,7 +209,14 @@ internal static class MclslWorldSpriteRenderLayer
             ConfigureStaticWorldSorting(renderer, relativeSortingOrder);
             renderer.enabled = true;
             gameObject.SetActive(true);
-            try { World.world?.resetRedrawTimer(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-7", "世界贴图层：重置重绘计时失败: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                World.world?.resetRedrawTimer();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-7", "世界贴图层：重置重绘计时失败: " + mclslEmptyCatchEx.Message);
+            }
             return true;
         }
         catch
@@ -265,7 +279,14 @@ internal static class MclslWorldSpriteRenderLayer
                 renderer.enabled = true;
             }
 
-            try { World.world?.resetRedrawTimer(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #2: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                World.world?.resetRedrawTimer();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #2: " + mclslEmptyCatchEx.Message);
+            }
             return true;
         }
         catch
@@ -285,7 +306,14 @@ internal static class MclslWorldSpriteRenderLayer
 
         if (_backMaterial != null)
         {
-            try { UnityEngine.Object.Destroy(_backMaterial); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #3: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                UnityEngine.Object.Destroy(_backMaterial);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #3: " + mclslEmptyCatchEx.Message);
+            }
             _backMaterial = null;
         }
     }
@@ -496,7 +524,14 @@ internal static class MclslWorldSpriteRenderLayer
         }
         finally
         {
-            try { template?.kill(); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #4: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                template?.kill();
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslWorldSpriteRenderLayer-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Visual/MclslWorldSpriteRenderLayer.cs #4: " + mclslEmptyCatchEx.Message);
+            }
         }
     }
 

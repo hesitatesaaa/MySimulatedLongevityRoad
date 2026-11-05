@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKIP = {'.git', '.codex', '__pycache__', 'bin', 'obj', '.vs', 'fantasy-reference'}
-BASE = ['code', 'GameResources', 'NativeActorResources', 'InterfaceResources', 'Locales', 'InterestingTrait.cs',
+BASE = ['code', 'GameResources', 'NativeActorResources', 'InterfaceResources', 'Locales', 'MclslMod.cs',
         'default_config.json', 'mod.json', 'icon.png']
 PLAYER_INPUTS = BASE + ['resources/actor-frames.manifest.json', 'resources/world-soul-frames.manifest.json',
                        'resources/beast-talents.manifest.json', 'resources/living-resources.json',

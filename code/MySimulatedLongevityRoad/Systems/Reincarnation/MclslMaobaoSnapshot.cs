@@ -46,8 +46,22 @@ internal static class MclslMaobaoSnapshot
     internal static void MarkPlaced(Actor actor)
     {
         if (actor?.data == null) return;
-        try { actor.data.addFlag(PlacedKey); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", "猫宝快照：写入放置标记失败: " + mclslEmptyCatchEx.Message); }
-        try { actor.data.set(PlacedKey, 1); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", "猫宝快照：写入放置值失败: " + mclslEmptyCatchEx.Message); }
+        try
+        {
+            actor.data.addFlag(PlacedKey);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", "猫宝快照：写入放置标记失败: " + mclslEmptyCatchEx.Message);
+        }
+        try
+        {
+            actor.data.set(PlacedKey, 1);
+        }
+        catch (System.Exception mclslEmptyCatchEx)
+        {
+            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", "猫宝快照：写入放置值失败: " + mclslEmptyCatchEx.Message);
+        }
     }
 
     private static Dictionary<string, string> CaptureFromBaseData(BaseSystemData data)

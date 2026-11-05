@@ -219,10 +219,24 @@ internal sealed partial class MclslCodexWindow
             GUILayout.BeginHorizontal();
             if (head?.Alive == true && GUILayout.Button("定位家主", GUILayout.Height(36f))
                 && MclslActorRegistry.ResolveKnownOrWorld(head.ActorId, out Actor leader))
-                try { ActionLibrary.openUnitWindow(leader); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", "仙录家族：定位家主失败: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    ActionLibrary.openUnitWindow(leader);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", "仙录家族：定位家主失败: " + mclslEmptyCatchEx.Message);
+                }
             if (focus?.Alive == true && GUILayout.Button("定位扶持对象", GUILayout.Height(36f))
                 && MclslActorRegistry.ResolveKnownOrWorld(focus.ActorId, out Actor supported))
-                try { ActionLibrary.openUnitWindow(supported); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", "仙录家族：定位扶持对象失败: " + mclslEmptyCatchEx.Message); }
+                try
+                {
+                    ActionLibrary.openUnitWindow(supported);
+                }
+                catch (System.Exception mclslEmptyCatchEx)
+                {
+                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", "仙录家族：定位扶持对象失败: " + mclslEmptyCatchEx.Message);
+                }
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Label("扶持方式：" + (family.FocusIsManual ? "手动指定" : "自动择优"));

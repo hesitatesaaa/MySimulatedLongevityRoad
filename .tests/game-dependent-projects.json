@@ -1,0 +1,4 @@
+{
+  "RuntimeQualityTests": "Uses Newtonsoft.Json from the local game install.",
+  "NativeFeedbackTests": "Inspects native game IL using the local game, Harmony and Mono.Cecil assemblies."
+}

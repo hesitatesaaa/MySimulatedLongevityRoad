@@ -182,7 +182,14 @@ internal static class MclslRuntimeSettings
             && string.Equals(Convert.ToString(ownId), id, StringComparison.Ordinal)) return source;
         if (source is ModConfig typed)
         {
-            try { return Find(typed["ConfigItems"], id, depth + 1); } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #1: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                return Find(typed["ConfigItems"], id, depth + 1);
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #1: " + mclslEmptyCatchEx.Message);
+            }
         }
         if (source is IDictionary dictionary)
         {
@@ -212,12 +219,26 @@ internal static class MclslRuntimeSettings
         PropertyInfo property = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
         if (property?.GetMethod != null)
         {
-            try { value = property.GetValue(source); return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #2: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                value = property.GetValue(source); return true;
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #2: " + mclslEmptyCatchEx.Message);
+            }
         }
         FieldInfo field = type.GetField(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
         if (field != null)
         {
-            try { value = field.GetValue(source); return true; } catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #3: " + mclslEmptyCatchEx.Message); }
+            try
+            {
+                value = field.GetValue(source); return true;
+            }
+            catch (System.Exception mclslEmptyCatchEx)
+            {
+                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #3: " + mclslEmptyCatchEx.Message);
+            }
         }
         return false;
     }

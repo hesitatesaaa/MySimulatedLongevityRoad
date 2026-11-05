@@ -720,10 +720,7 @@ internal static class MclslDeathSystem
         try { return actor?.data != null && actor.isAlive(); } catch { return false; }
     }
 
-    private static string SafeName(Actor actor)
-    {
-        try { return MclslActorAccessor.DisplayName(actor); } catch { return "无名修士"; }
-    }
+    private static string SafeName(Actor actor) => MclslActorAccessor.SafeName(actor, "无名修士");
 
     private static int SafeAge(Actor actor)
     {

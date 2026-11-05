@@ -7,6 +7,7 @@ namespace MySimulatedLongevityRoad.Systems;
 
 internal static class MclslLivingResources
 {
+#pragma warning disable CS0649 // DTO 字段由 Newtonsoft.Json 反射赋值，编译器看不到写入
     internal sealed class Frame
     {
         public string Name;
@@ -25,6 +26,7 @@ internal static class MclslLivingResources
         public string UiSkinRoot;
         public int CareerEffectPadding;
     }
+#pragma warning restore CS0649
     internal static Group[] Groups { get; private set; }
     internal static int CareerEffectPadding { get; private set; }
     internal static string UiSkinRoot { get; private set; }

@@ -72,4 +72,33 @@ internal static class MclslReflectionNumbers
                 (messagePrefix ?? ("空 catch 捕获: code/MySimulatedLongevityRoad/" + site + ": ")) + ex.Message);
         }
     }
+
+    /// <summary>
+    /// Cached read counterpart of <see cref="TrySetNumber"/>. Repeated per-actor /
+    /// per-year numeric reads no longer re-run GetField/GetProperty. Returns false
+    /// when the member is missing or not numeric; callers fall back to their default.
+    /// </summary>
+    internal static bool TryGetNumber(object target, string name, out int value,
+        string site, string diagnosticKey = null, string messagePrefix = null)
+    {
+        value = 0;
+        if (target == null || string.IsNullOrWhiteSpace(name)) return false;
+        try
+        {
+            MemberAccessor accessor = Resolve(target.GetType(), name);
+            object raw = accessor.Field != null
+                ? accessor.Field.GetValue(target)
+                : (accessor.Property != null && accessor.Property.CanRead ? accessor.Property.GetValue(target) : null);
+            if (raw is int i) { value = i; return true; }
+            if (raw is float f) { value = (int)f; return true; }
+            if (raw is long l) { value = (int)l; return true; }
+            return false;
+        }
+        catch (Exception ex)
+        {
+            MclslDiagnostics.Error(diagnosticKey ?? ("reflection-get-number:" + site),
+                (messagePrefix ?? ("反射读取数值失败: " + site + ": ")) + ex.Message);
+            return false;
+        }
+    }
 }

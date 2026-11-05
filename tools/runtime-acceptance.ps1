@@ -10,7 +10,7 @@ if (-not $resolved.StartsWith($runtime+'\',[StringComparison]::OrdinalIgnoreCase
 if (Test-Path -LiteralPath $install) { Remove-Item -LiteralPath $install -Recurse -Force }
 Copy-Item -LiteralPath (Join-Path $runtime "$Mode-player/MySimulatedLongevityRoad") -Destination (Split-Path $install -Parent) -Recurse
 Copy-Item -LiteralPath (Join-Path $project '.dev-tools/runtime-acceptance/Probe.cs') -Destination (Join-Path $install 'code/MySimulatedLongevityRoad/Core/MclslAuditAcceptance.cs')
-$entry=Join-Path $install 'InterestingTrait.cs'
+$entry=Join-Path $install 'MclslMod.cs'
 $source=[IO.File]::ReadAllText($entry)
 $anchor='MclslLocalizationRuntimeMarker.MarkLoaded();'
 if (($source.Split(@($anchor),[StringSplitOptions]::None)).Length -ne 2) { throw 'Unexpected entry source' }

@@ -239,15 +239,7 @@ internal static class MclslCultivationCatalog
 
     private static MclslTechniqueDefinition T(string id, string name, string maxRealm, params string[] laws) => new() { Id = id, Name = name, MaxRealm = maxRealm, LawPool = laws };
 
-    private static int PositiveHash(string value)
-    {
-        unchecked
-        {
-            int hash = 31;
-            foreach (char c in value ?? string.Empty) hash = hash * 37 + c;
-            return hash & int.MaxValue;
-        }
-    }
+    private static int PositiveHash(string value) => MySimulatedLongevityRoad.Core.MclslStableHash.Positive31x37(value);
 }
 
 internal static class MclslGeneratedKinds

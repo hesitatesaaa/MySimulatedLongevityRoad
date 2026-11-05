@@ -19,7 +19,7 @@ from release_inputs import BASE, files, player_files
 def archive(output, name, entries, readme, snapshot, replacements=None):
     replacements = replacements or {}
     source_names = {relative for relative, _ in entries if relative.endswith('.cs')}
-    expected_sources = {relative for relative in source_names if relative.startswith('code/')} | {'InterestingTrait.cs'}
+    expected_sources = {relative for relative in source_names if relative.startswith('code/')} | {'MclslMod.cs'}
     if source_names != expected_sources:
         raise ValueError('Unexpected C# compilation inputs in package: ' + repr(sorted(source_names - expected_sources)))
     destination = output / name
@@ -292,6 +292,9 @@ def main():
     player = player_files()
     talent_evidence = ROOT / 'resources/beast-talents-runtime.json'
     developer = files(BASE + ['resources', 'tools', 'AGENTS.md', '.gitignore', 'README.md'])
+    developer.append(('code/MySimulatedLongevityRoad/UI/MclslDeveloperActorEditor.cs',
+                      ROOT / '.dev-tools/MclslDeveloperActorEditor.cs'))
+    developer.sort(key=lambda item: item[0])
     output.mkdir(parents=True)
     common = (f'MySimulatedLongevityRoad {version}\nBase commit: {commit}\nGame build: {declaration["targetGameBuild"]}\n'
               f'Only new worlds and current-format saves created by this {version} build are supported. '

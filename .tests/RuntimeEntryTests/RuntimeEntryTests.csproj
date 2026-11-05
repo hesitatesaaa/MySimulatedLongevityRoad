@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><LangVersion>latest</LangVersion><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
+<ItemGroup><Compile Include="*.cs" /><Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslRuntime.cs" /><Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslWorldInitialization.cs" /></ItemGroup>
+</Project>

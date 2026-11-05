@@ -113,13 +113,8 @@ internal static class MclslAnnualWorldRuntimeLane
         }
         catch (Exception ex)
         {
-            var batch = MclslWorldRunRepository.Current.AnnualBatch;
-            batch.WorldFailureStage = (byte)sampledStage;
-            batch.WorldFailureCount++;
-            batch.WorldBlocked = true;
-            MclslWorldRunRepository.RecordAnnualFailure(_activeYear, "世界", string.Empty,
-                sampledStage.ToString(), batch.WorldFailureCount, "未结算", ex.ToString());
-            MclslWorldArchiveStore.MarkDirty();
+            MclslWorldRunRepository.BlockWorldAnnualSettlement(_activeYear, (byte)sampledStage,
+                sampledStage.ToString(), ex.ToString());
             return false;
         }
         finally
