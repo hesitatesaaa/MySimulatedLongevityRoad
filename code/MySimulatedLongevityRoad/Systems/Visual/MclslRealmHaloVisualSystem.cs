@@ -357,7 +357,18 @@ internal static class MclslRealmHaloVisualSystem
             DisableNativeAnimator(effect);
 
             renderer.color = Color.white;
-            entry = new HaloEntry(actorId, actor, effect, component.gameObject, component.transform, renderer, profile, frames, position);
+            entry = new HaloEntry(new HaloEntryArgs
+            {
+                ActorId = actorId,
+                Actor = actor,
+                Effect = effect,
+                GameObject = component.gameObject,
+                Transform = component.transform,
+                Renderer = renderer,
+                Profile = profile,
+                Frames = frames,
+                Position = position
+            });
             EntriesByActorId[actorId] = entry;
             return entry;
         }
@@ -538,29 +549,33 @@ internal static class MclslRealmHaloVisualSystem
         internal int Generation { get; }
     }
 
+    private sealed class HaloEntryArgs
+    {
+        internal long ActorId;
+        internal Actor Actor;
+        internal BaseEffect Effect;
+        internal GameObject GameObject;
+        internal Transform Transform;
+        internal SpriteRenderer Renderer;
+        internal HaloProfile Profile;
+        internal Sprite[] Frames;
+        internal Vector3 Position;
+    }
+
     private sealed class HaloEntry
     {
-        internal HaloEntry(
-            long actorId,
-            Actor actor,
-            BaseEffect effect,
-            GameObject gameObject,
-            Transform transform,
-            SpriteRenderer renderer,
-            HaloProfile profile,
-            Sprite[] frames,
-            Vector3 position)
+        internal HaloEntry(HaloEntryArgs a)
         {
-            ActorId = actorId;
-            Actor = actor;
-            Effect = effect;
-            GameObject = gameObject;
-            Transform = transform;
-            Renderer = renderer;
-            Profile = profile;
-            Folder = profile.Folder;
-            BoundFrames = frames;
-            LastRenderPosition = position;
+            ActorId = a.ActorId;
+            Actor = a.Actor;
+            Effect = a.Effect;
+            GameObject = a.GameObject;
+            Transform = a.Transform;
+            Renderer = a.Renderer;
+            Profile = a.Profile;
+            Folder = a.Profile.Folder;
+            BoundFrames = a.Frames;
+            LastRenderPosition = a.Position;
             LastSeenFrame = Time.frameCount;
         }
 

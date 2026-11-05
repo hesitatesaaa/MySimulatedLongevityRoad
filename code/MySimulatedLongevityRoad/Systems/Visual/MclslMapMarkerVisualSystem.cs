@@ -150,15 +150,17 @@ internal static class MclslMapMarkerVisualSystem
             string kind = IsSecretRuin(ruin) ? "secret_realm" : "ruin";
             float alpha = string.Equals(ruin.State, "残破", StringComparison.Ordinal) ? 0.62f
                 : string.Equals(ruin.State, "探索中", StringComparison.Ordinal) ? 0.88f : 1f;
-            DesiredMarkers.Add(new MarkerDescriptor(
-                "ruin:" + ruin.Id,
-                kind,
-                ruin.MapX,
-                ruin.MapY,
-                PersistentScale,
-                new Color(1f, 1f, 1f, alpha),
-                false,
-                PersistentSortingOrder));
+            DesiredMarkers.Add(new MarkerDescriptor(new MarkerDescriptorArgs
+            {
+                Key = "ruin:" + ruin.Id,
+                Kind = kind,
+                X = ruin.MapX,
+                Y = ruin.MapY,
+                Scale = PersistentScale,
+                Color = new Color(1f, 1f, 1f, alpha),
+                Temporary = false,
+                SortingOrder = PersistentSortingOrder
+            }));
         }
     }
 
@@ -173,15 +175,17 @@ internal static class MclslMapMarkerVisualSystem
                 || record.MapVisualEndYear < year || !IsValidCoordinate(record.MapX, record.MapY)) continue;
             string kind = NormalizeVisualKind(record.MapVisualKind);
             if (string.IsNullOrWhiteSpace(kind)) continue;
-            DesiredMarkers.Add(new MarkerDescriptor(
-                EventKey(record),
-                kind,
-                record.MapX,
-                record.MapY,
-                TemporaryScale,
-                EventColor(kind),
-                true,
-                TemporarySortingOrder));
+            DesiredMarkers.Add(new MarkerDescriptor(new MarkerDescriptorArgs
+            {
+                Key = EventKey(record),
+                Kind = kind,
+                X = record.MapX,
+                Y = record.MapY,
+                Scale = TemporaryScale,
+                Color = EventColor(kind),
+                Temporary = true,
+                SortingOrder = TemporarySortingOrder
+            }));
             added++;
         }
     }
@@ -356,18 +360,30 @@ internal static class MclslMapMarkerVisualSystem
 
     private static int StablePhase(string value) => MclslStableHash.Positive23x37(value);
 
+    private sealed class MarkerDescriptorArgs
+    {
+        internal string Key;
+        internal string Kind;
+        internal int X;
+        internal int Y;
+        internal float Scale;
+        internal Color Color;
+        internal bool Temporary;
+        internal int SortingOrder;
+    }
+
     private readonly struct MarkerDescriptor
     {
-        internal MarkerDescriptor(string key, string kind, int x, int y, float scale, Color color, bool temporary, int sortingOrder)
+        internal MarkerDescriptor(MarkerDescriptorArgs a)
         {
-            Key = key;
-            Kind = kind;
-            X = x;
-            Y = y;
-            Scale = scale;
-            Color = color;
-            Temporary = temporary;
-            SortingOrder = sortingOrder;
+            Key = a.Key;
+            Kind = a.Kind;
+            X = a.X;
+            Y = a.Y;
+            Scale = a.Scale;
+            Color = a.Color;
+            Temporary = a.Temporary;
+            SortingOrder = a.SortingOrder;
         }
 
         internal string Key { get; }

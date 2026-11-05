@@ -80,6 +80,17 @@ internal enum MclslRankFilterType
     Not
 }
 
+internal sealed class MclslRankFilterArgs
+{
+    internal string Id;
+    internal string DisplayName;
+    internal Sprite Icon;
+    internal Sprite InnerIcon;
+    internal Color IconColor;
+    internal Color InnerColor;
+    internal Func<Actor, bool> FilterFunc;
+}
+
 internal sealed class MclslRankFilterSetting
 {
     internal readonly string Id;
@@ -92,15 +103,15 @@ internal sealed class MclslRankFilterSetting
     internal MclslRankFilterType Type;
     internal bool ToBeRemoved;
 
-    internal MclslRankFilterSetting(string id, string displayName, Sprite icon, Sprite innerIcon, Color iconColor, Color innerColor, Func<Actor, bool> filterFunc)
+    internal MclslRankFilterSetting(MclslRankFilterArgs a)
     {
-        Id = id ?? string.Empty;
-        DisplayName = string.IsNullOrWhiteSpace(displayName) ? Id : displayName;
-        Icon = icon;
-        InnerIcon = innerIcon;
-        IconColor = iconColor;
-        InnerColor = innerColor;
-        FilterFunc = filterFunc;
+        Id = a.Id ?? string.Empty;
+        DisplayName = string.IsNullOrWhiteSpace(a.DisplayName) ? Id : a.DisplayName;
+        Icon = a.Icon;
+        InnerIcon = a.InnerIcon;
+        IconColor = a.IconColor;
+        InnerColor = a.InnerColor;
+        FilterFunc = a.FilterFunc;
         Type = MclslRankFilterType.And;
     }
 

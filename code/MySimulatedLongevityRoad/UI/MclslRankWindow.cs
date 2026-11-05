@@ -1212,7 +1212,16 @@ internal static class MclslRankWindow
     private static void AddFilter(string id, string displayName, Sprite icon, Sprite innerIcon, Color iconColor, Color innerColor, Func<Actor, bool> filterFunc)
     {
         if (string.IsNullOrWhiteSpace(id) || filterFunc == null || ActiveFilters.Exists(filter => !filter.ToBeRemoved && string.Equals(filter.Id, id, StringComparison.Ordinal))) return;
-        ActiveFilters.Add(new MclslRankFilterSetting(id, displayName, icon, innerIcon, iconColor, innerColor, filterFunc));
+        ActiveFilters.Add(new MclslRankFilterSetting(new MclslRankFilterArgs
+        {
+            Id = id,
+            DisplayName = displayName,
+            Icon = icon,
+            InnerIcon = innerIcon,
+            IconColor = iconColor,
+            InnerColor = innerColor,
+            FilterFunc = filterFunc
+        }));
         BeginLayoutBatch();
         try
         {
