@@ -228,7 +228,9 @@ internal static class MclslAncientLawBreakthroughSystem
         {
             string dao = MclslActorAccessor.GetString(actor, MclslActorDataKeys.AncientDaoIntent, primary);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientCoreName, stageName);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientCorePurity, Math.Clamp(42 + aptitude / 3 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientFoundationStability, 50) / 5, 35, 99));
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientCorePurity, Math.Clamp(42 + aptitude / 3 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientFoundationStability, 50) / 5,
+                35,
+                99));
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientDaoIntent, dao);
             return;
         }
@@ -243,14 +245,20 @@ internal static class MclslAncientLawBreakthroughSystem
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientDivineIntent, stageName);
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientSoulFusion, Math.Clamp(45 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientSoulStrength, 50) / 3 + mind / 4, 35, 99));
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientDaoCompatibility, Math.Clamp(40 + aptitude / 4 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientCorePurity, 50) / 5, 30, 98));
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientDaoCompatibility, Math.Clamp(40 + aptitude / 4 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientCorePurity, 50) / 5,
+                30,
+                98));
             return;
         }
         if (nextRealm == MclslRealmIds.HeDao)
         {
             MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientDaoName, stageName);
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientHarmonyIntegrity, Math.Clamp(45 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientDaoCompatibility, 50) / 3 + mind / 5, 35, 96));
-            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientHeavenCompatibility, Math.Clamp(35 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientSoulFusion, 50) / 4 + aptitude / 5, 25, 92));
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientHarmonyIntegrity, Math.Clamp(45 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientDaoCompatibility, 50) / 3 + mind / 5,
+                35,
+                96));
+            MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientHeavenCompatibility, Math.Clamp(35 + MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientSoulFusion, 50) / 4 + aptitude / 5,
+                25,
+                92));
         }
     }
 

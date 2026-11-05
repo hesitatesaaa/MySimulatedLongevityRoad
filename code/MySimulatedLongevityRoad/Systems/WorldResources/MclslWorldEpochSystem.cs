@@ -521,7 +521,8 @@ internal static class MclslWorldEpochSystem
         string remnantLabel = RemnantLabel(year);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawProcessed, 1);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLawStatus, remnantLabel);
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential, Math.Max(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLegacyPotential, 0), 20 + Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 10));
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.AncientLegacyPotential, Math.Max(MclslActorAccessor.GetInt(actor, MclslActorDataKeys.AncientLegacyPotential, 0),
+            20 + Math.Max(0, MclslRealmIds.Index(MclslActorAccessor.Realm(actor))) * 10));
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, remnantLabel);
         if (MySimulatedLongevityRoad.Core.MclslStableHash.Positive83x47(MclslActorAccessor.Id(actor) + "|ancient_remnant_notice|" + year) % 100 >= 8) return;
         MclslWorldRunRepository.AddEvent(year, "ancient_remnant", MclslActorAccessor.DisplayName(actor) + "隐为" + remnantLabel, "前代道影，渐入风尘。", actor);

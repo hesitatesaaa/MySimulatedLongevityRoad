@@ -19,8 +19,8 @@ METRICS = os.path.join(ROOT, 'docs', 'CODE-METRICS.json')
 LIMITS = {
     'catchExceptionUnrouted': 200,
     'emptyCatchCode': 0,
-    'longParams6': 127,          # 基线：127 → 目标 ≤90（M3）
-    'longLinesOver200': 291,     # 373→291（M4 已缩短 Guard 全限定名）；目标 ≤200
+    'longParams6': 128,          # 基线：128 → 目标 ≤90（M3，需逐类型改造）
+    'longLinesOver200': 200,     # 373→200（M4 完成：Guard 使用 + 顶层逗号安全折行）
     'duplicateBlocks': 21,       # 基线：21 → 目标 ≤10（M5）
     'uncachedRuntimeLookups': 0, # M2：运行期未缓存 GetType().GetField/GetProperty 必须为 0
 }

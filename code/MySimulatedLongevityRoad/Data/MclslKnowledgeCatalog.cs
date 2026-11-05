@@ -56,5 +56,7 @@ internal static class MclslKnowledgeCatalog
     }
 
     private static MclslKnowledgeDefinition K(string id, string name, string description, int value) => new() { Id = id, Name = name, Description = description, TruthValue = value };
-    private static MclslTimelineAnchorDefinition A(string id, string name, string description, int min, int max, string knowledge, bool terminal = false) => new() { Id = id, Name = name, Description = description, EarliestYear = min, LatestYear = max, KnowledgeId = knowledge, Terminal = terminal };
+    private static MclslTimelineAnchorDefinition A(
+        string id, string name, string description, int min, int max, string knowledge, bool terminal = false)
+        => new() { Id = id, Name = name, Description = description, EarliestYear = min, LatestYear = max, KnowledgeId = knowledge, Terminal = terminal };
 }

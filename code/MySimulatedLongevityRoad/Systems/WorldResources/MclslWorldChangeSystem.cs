@@ -240,7 +240,8 @@ internal static class MclslWorldChangeSystem
             batch.ChangeClaims.Add(new MclslAnnualClaimRecord { Year = year, ActorId = MclslActorAccessor.Id(actor),
                 TargetId = best.Id, Compatibility = bestCompatibility, Strength = strength });
         MclslWorldArchiveStore.MarkDirty();
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在等待“" + best.Name + "”演化至可抽髓之机；" + MclslLawInteractionCatalog.Detail(laws, MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在等待“" + best.Name + "”演化至可抽髓之机；" + MclslLawInteractionCatalog.Detail(laws,
+            MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
     }
 
     internal static bool TickResolveAnnual(int year)

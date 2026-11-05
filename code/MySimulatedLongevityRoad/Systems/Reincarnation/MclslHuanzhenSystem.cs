@@ -778,7 +778,8 @@ internal static class MclslHuanzhenSystem
         var legacy = _state.Legacies[_state.Legacies.Count - 1];
         if (legacy.ClaimedChoices.Count >= 3 || FindLivingHost() == null) return;
         var options = GetLegacyOptions(legacy).Where(x => !x.Id.StartsWith("trait:", StringComparison.Ordinal) || AssetManager.traits.get(x.Id.Substring(6)).type != TraitType.Negative)
-            .OrderBy(x => LegacyPriority(x.Id)).ThenByDescending(x => x.Id.StartsWith("trait:", StringComparison.Ordinal) ? (int)((BaseTrait<ActorTrait>)AssetManager.traits.get(x.Id.Substring(6))).rarity : 0).ToArray();
+            .OrderBy(x => LegacyPriority(x.Id)).ThenByDescending(x => x.Id.StartsWith("trait:",
+                StringComparison.Ordinal) ? (int)((BaseTrait<ActorTrait>)AssetManager.traits.get(x.Id.Substring(6))).rarity : 0).ToArray();
         foreach (var option in options)
         {
             if (_writeLocked || legacy.ClaimedChoices.Count >= 3) return;
@@ -812,14 +813,21 @@ internal static class MclslHuanzhenSystem
         if (s == null) return options;
         AddLegacyOption(options, "cultivation", "修为根基：" + MclslRealmIds.Display(s.RealmId) + "·真元" + s.TrueEssence, !string.IsNullOrWhiteSpace(s.RealmId) || s.TrueEssence > 0);
         AddLegacyOption(options, "technique", "功法道统：" + MclslTextValue.Or(s.TechniqueName, s.TechniqueId), !string.IsNullOrWhiteSpace(s.TechniqueName) || !string.IsNullOrWhiteSpace(s.TechniqueId));
-        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + MclslTextValue.Or(s.FoundationWonderName, s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
+        AddLegacyOption(options, "foundation_wonder", "突破造物·筑基奇物：" + MclslTextValue.Or(s.FoundationWonderName,
+            s.FoundationWonderId), !string.IsNullOrWhiteSpace(s.FoundationWonderName) || !string.IsNullOrWhiteSpace(s.FoundationWonderId));
         AddLegacyOption(options, "golden_core", "突破造物·金丹法则：" + s.GoldenCoreLaws, !string.IsNullOrWhiteSpace(s.GoldenCoreLaws));
-        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + MclslTextValue.Or(s.NascentCaveName, s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
-        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + MclslTextValue.Or(s.NascentEssenceName, s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
-        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + MclslTextValue.Or(s.DivineChangeName, s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
-        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + MclslTextValue.Or(s.DivineMarrowName, s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
-        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + MclslTextValue.Or(s.WorldSoulName, s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
-        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + MclslTextValue.Or(s.InverseTruthName, s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
+        AddLegacyOption(options, "nascent_cave", "突破造物·元婴洞天：" + MclslTextValue.Or(s.NascentCaveName,
+            s.NascentCaveId), !string.IsNullOrWhiteSpace(s.NascentCaveName) || !string.IsNullOrWhiteSpace(s.NascentCaveId));
+        AddLegacyOption(options, "nascent_essence", "天地道果·天地之精：" + MclslTextValue.Or(s.NascentEssenceName,
+            s.NascentEssenceId), !string.IsNullOrWhiteSpace(s.NascentEssenceName) || !string.IsNullOrWhiteSpace(s.NascentEssenceId));
+        AddLegacyOption(options, "divine_change", "天地道果·神通变化：" + MclslTextValue.Or(s.DivineChangeName,
+            s.DivineChangeId), !string.IsNullOrWhiteSpace(s.DivineChangeName) || !string.IsNullOrWhiteSpace(s.DivineChangeId));
+        AddLegacyOption(options, "divine_marrow", "天地道果·天地之髓：" + MclslTextValue.Or(s.DivineMarrowName,
+            s.DivineMarrowId) + "×" + s.DivineMarrowCount, !string.IsNullOrWhiteSpace(s.DivineMarrowName) || !string.IsNullOrWhiteSpace(s.DivineMarrowId) || s.DivineMarrowCount > 0);
+        AddLegacyOption(options, "world_soul", "天地道果·天地之魄：" + MclslTextValue.Or(s.WorldSoulName,
+            s.WorldSoulId), !string.IsNullOrWhiteSpace(s.WorldSoulName) || !string.IsNullOrWhiteSpace(s.WorldSoulId));
+        AddLegacyOption(options, "inverse_truth", "天地道果·逆理：" + MclslTextValue.Or(s.InverseTruthName,
+            s.InverseTruthId) + "·进度" + s.InverseTruthProgress + "%", !string.IsNullOrWhiteSpace(s.InverseTruthName) || !string.IsNullOrWhiteSpace(s.InverseTruthId));
         AddLegacyOption(options, "aptitude", "资质：" + s.Aptitude, s.Aptitude > 0);
         AddLegacyOption(options, "mind", "心境：心境" + s.MindState + "·淬心" + s.HeartTemperingProgress, s.MindState != 0 || s.HeartTemperingProgress != 0 || s.HeartMethodKnown != 0);
         AddLegacyOption(options, "contribution", "资源：贡献值" + s.Contribution, s.Contribution != 0);
@@ -1520,7 +1528,12 @@ internal static class MclslHuanzhenSystem
         _state.History ??= new List<MclslHuanzhenHistoryRecord>();
         _state.EssenceHistory ??= new List<MclslHuanzhenEssenceRecord>();
         _state.Legacies ??= new List<MclslHuanzhenLegacyRecord>();
-        _state.History.Add(new MclslHuanzhenHistoryRecord { DeathYear = deathYear, AnchorYear = anchorYear, HostName = name ?? string.Empty, RealmId = realm ?? string.Empty, LoopDepth = loopDepth, Result = result ?? string.Empty });
+        _state.History.Add(new MclslHuanzhenHistoryRecord { DeathYear = deathYear,
+            AnchorYear = anchorYear,
+            HostName = name ?? string.Empty,
+            RealmId = realm ?? string.Empty,
+            LoopDepth = loopDepth,
+            Result = result ?? string.Empty });
         if (_state.History.Count > MaxHistory)
             _state.History.RemoveRange(0, _state.History.Count - MaxHistory);
     }

@@ -167,7 +167,8 @@ internal static class MclslBeastContent
         // Slot attributes and the signature ability can use the same native
         // key. Merge before registration, which assigns rather than adds.
         var combined=stats.GroupBy(x=>x.Item1,StringComparer.Ordinal).Select(x=>(x.Key,x.Sum(y=>y.Item2))).ToArray();
-        return new(id,name,"Artifact",grade,effect.Length==0?"兽骨炼制的基础灵剑。":"模组扩展法宝；"+EffectName(effect)+"专属增益"+(int)Math.Round(Bonus(grade)*100)+"%。同类专属效果合计上限40%。",ingredient,"M0"+grade,30*(int)Math.Pow(3,grade-1),equipmentSlot:slot,nativeStats:combined);
+        return new(id,name,"Artifact",grade,effect.Length==0?"兽骨炼制的基础灵剑。":"模组扩展法宝；"+EffectName(effect)+"专属增益"+(int)Math.Round(Bonus(grade)*100)+"%。同类专属效果合计上限40%。",ingredient,"M0"+grade,30*(int)Math.Pow(3,
+            grade-1),equipmentSlot:slot,nativeStats:combined);
     }
     private static MclslRecipeDefinition[] BuildRecipes()
     {

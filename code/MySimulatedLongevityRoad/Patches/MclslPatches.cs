@@ -42,11 +42,20 @@ internal static class MclslPatches
             prefix: nameof(DynamicActorSpriteCreatorUI_GetUnitSpriteForUI_Custom_Prefix));
         count += TryPatchPair(harmony, "UnitAvatarLoader.loadItemSprites.custom", typeof(UnitAvatarLoader), "loadItemSprites", Type.EmptyTypes, prefix: nameof(UnitAvatarLoader_LoadItemSprites_Custom_Prefix));
         count += TryPatchPair(harmony, "Image.SetNativeSize.custom", typeof(UnityEngine.UI.Image), "SetNativeSize", Type.EmptyTypes, postfix: nameof(Image_SetNativeSize_Custom_Postfix));
-        count += TryPatchPair(harmony, "ActorManager.checkNewSpecies.beast", typeof(ActorManager), "checkNewSpecies", new[] { typeof(ActorAsset), typeof(WorldTile), typeof(Actor), typeof(Actor).MakeByRefType(), typeof(bool), typeof(bool), typeof(Subspecies) }, prefix: nameof(ActorManager_CheckNewSpecies_Beast_Prefix));
-        count += TryPatchPair(harmony, "LocalizedTextManager.getText", typeof(LocalizedTextManager), nameof(LocalizedTextManager.getText), new[] { typeof(string), typeof(UnityEngine.UI.Text), typeof(bool) }, prefix: nameof(LocalizedTextManager_GetText_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_GetText_MclslFallback_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.checkNewSpecies.beast", typeof(ActorManager), "checkNewSpecies", new[] { typeof(ActorAsset),
+            typeof(WorldTile),
+            typeof(Actor),
+            typeof(Actor).MakeByRefType(),
+            typeof(bool),
+            typeof(bool),
+            typeof(Subspecies) }, prefix: nameof(ActorManager_CheckNewSpecies_Beast_Prefix));
+        count += TryPatchPair(harmony, "LocalizedTextManager.getText", typeof(LocalizedTextManager), nameof(LocalizedTextManager.getText), new[] { typeof(string),
+            typeof(UnityEngine.UI.Text),
+            typeof(bool) }, prefix: nameof(LocalizedTextManager_GetText_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_GetText_MclslFallback_Postfix));
         count += TryPatchPair(harmony, "LocalizedTextManager.stringExists", typeof(LocalizedTextManager), nameof(LocalizedTextManager.stringExists), new[] { typeof(string) }, prefix: nameof(LocalizedTextManager_StringExists_NormalizeMclslKey_Prefix), postfix: nameof(LocalizedTextManager_StringExists_MclslFallback_Postfix));
         count += TryPatchPair(harmony, "LocalizedTextManager.setLanguage", typeof(LocalizedTextManager), nameof(LocalizedTextManager.setLanguage), new[] { typeof(string) }, postfix: nameof(LocalizedTextManager_SetLanguage_RestoreMclslChinese_Postfix));
-        count += TryPatchPair(harmony, "Subspecies.generateName", typeof(Subspecies), "generateName", new[] { typeof(ActorAsset), typeof(WorldTile) }, postfix: nameof(Subspecies_GenerateName_WorldSoul_Postfix));
+        count += TryPatchPair(harmony, "Subspecies.generateName", typeof(Subspecies), "generateName", new[] { typeof(ActorAsset),
+            typeof(WorldTile) }, postfix: nameof(Subspecies_GenerateName_WorldSoul_Postfix));
         count += TryPatchPair(harmony, "Subspecies.getUnitSpriteForBanner", typeof(Subspecies), "getUnitSpriteForBanner", Type.EmptyTypes, prefix: nameof(Subspecies_GetUnitSpriteForBanner_WorldSoul_Prefix));
         MethodInfo simulation = AccessTools.Method(typeof(MapBox), "updateSimulation", new[] { typeof(float) });
         bool protectedSimulation = MclslHarmonyPatchGuard.TryPatch(harmony, "MapBox.updateSimulation(float)", simulation,
@@ -58,9 +67,12 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "MapBox.finishingUpLoading", typeof(MapBox), "finishingUpLoading", Type.EmptyTypes, postfix: nameof(MapBox_FinishingUpLoading_Postfix));
         count += TryPatchPair(harmony, "MapBox.clearWorld", typeof(MapBox), "clearWorld", Type.EmptyTypes, postfix: nameof(MapBox_ClearWorld_Postfix));
         count += TryPatchPair(harmony, "SaveManager.currentWorldToSavedMap", typeof(SaveManager), nameof(SaveManager.currentWorldToSavedMap), Type.EmptyTypes, prefix: nameof(SaveManager_CurrentWorldToSavedMap_Prefix));
-        count += TryPatchPair(harmony, "SaveManager.loadWorld", typeof(SaveManager), nameof(SaveManager.loadWorld), new[] { typeof(string), typeof(bool) }, prefix: nameof(SaveManager_LoadWorld_Prefix), finalizer: nameof(SaveManager_LoadWorld_Finalizer));
-        count += TryPatchPair(harmony, "Actor.addTrait.asset", typeof(Actor), "addTrait", new[] { typeof(ActorTrait), typeof(bool) }, prefix: nameof(Actor_AddPhysique_Guard), postfix: nameof(Actor_AddTrait_Postfix));
-        count += TryPatchPair(harmony, "Actor.addTrait.id", typeof(Actor), "addTrait", new[] { typeof(string), typeof(bool) }, prefix: nameof(Actor_AddPhysiqueById_Guard), postfix: nameof(Actor_AddTraitById_Postfix));
+        count += TryPatchPair(harmony, "SaveManager.loadWorld", typeof(SaveManager), nameof(SaveManager.loadWorld), new[] { typeof(string),
+            typeof(bool) }, prefix: nameof(SaveManager_LoadWorld_Prefix), finalizer: nameof(SaveManager_LoadWorld_Finalizer));
+        count += TryPatchPair(harmony, "Actor.addTrait.asset", typeof(Actor), "addTrait", new[] { typeof(ActorTrait),
+            typeof(bool) }, prefix: nameof(Actor_AddPhysique_Guard), postfix: nameof(Actor_AddTrait_Postfix));
+        count += TryPatchPair(harmony, "Actor.addTrait.id", typeof(Actor), "addTrait", new[] { typeof(string),
+            typeof(bool) }, prefix: nameof(Actor_AddPhysiqueById_Guard), postfix: nameof(Actor_AddTraitById_Postfix));
         count += TryPatchPair(harmony, "Actor.updateAge", typeof(Actor), "updateAge", Type.EmptyTypes, postfix: nameof(Actor_UpdateAge_RegisterPostfix));
         count += TryPatchPair(harmony, "Actor.updateStats.lifespanRepair", typeof(Actor), "updateStats", Type.EmptyTypes, prefix: nameof(Actor_UpdateStats_Prefix), postfix: nameof(Actor_UpdateStats_LifespanRepair_Postfix));
         count += TryPatchPair(harmony, "Actor.removeTrait", typeof(Actor), "removeTrait", new[] { typeof(string) }, prefix: nameof(Actor_RemoveSpiritualRoot_Guard), postfix: nameof(Actor_RemoveTrait_Postfix));
@@ -71,7 +83,10 @@ internal static class MclslPatches
         count += TryPatchPair(harmony, "Actor.clearBeh", typeof(Actor), "clearBeh", Type.EmptyTypes, postfix: nameof(Actor_TargetChanged_Postfix));
         count += TryPatchPair(harmony, "Actor.clearTasks", typeof(Actor), "clearTasks", Type.EmptyTypes, postfix: nameof(Actor_TargetChanged_Postfix));
         count += TryPatchPair(harmony, "Actor.setTask", typeof(Actor), "setTask", new[] { typeof(string), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(Actor_TargetChanged_Postfix));
-        count += TryPatchPair(harmony, "Actor.die", typeof(Actor), "die", new[] { typeof(bool), typeof(AttackType), typeof(bool), typeof(bool) }, prefix: nameof(Actor_Die_Prefix), postfix: nameof(Actor_Die_Postfix));
+        count += TryPatchPair(harmony, "Actor.die", typeof(Actor), "die", new[] { typeof(bool),
+            typeof(AttackType),
+            typeof(bool),
+            typeof(bool) }, prefix: nameof(Actor_Die_Prefix), postfix: nameof(Actor_Die_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.OnEnable", typeof(UnitWindow), "OnEnable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnEnable_Postfix));
         count += TryPatchPairOptional(harmony, "UnitWindow.OnDisable", typeof(UnitWindow), "OnDisable", Type.EmptyTypes, postfix: nameof(UnitWindow_OnDisable_Postfix));
         count += TryPatchPair(harmony, "UnitWindow.showStatsRows", typeof(UnitWindow), "showStatsRows", Type.EmptyTypes, postfix: nameof(UnitWindow_ShowStatsRows_Postfix));
@@ -81,21 +96,52 @@ internal static class MclslPatches
         count += TryPatchPairOptional(harmony, "PlayerControl.checkClickTouchInspectSelect", typeof(PlayerControl), "checkClickTouchInspectSelect", Type.EmptyTypes, postfix: nameof(PlayerControl_CheckClickTouchInspectSelect_Postfix));
         count += TryPatchPair(harmony, "UnitStatsElement.showContent.safe", typeof(UnitStatsElement), "showContent", Type.EmptyTypes, finalizer: nameof(UnitStatsElement_ShowContent_Finalizer));
         count += TryPatchPair(harmony, "Actor.calculateMainSprite", typeof(Actor), "calculateMainSprite", Type.EmptyTypes, prefix: nameof(Actor_CalculateMainSprite_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "Actor.calculateColoredSprite.fullArt", typeof(Actor), "calculateColoredSprite", new[] { typeof(Sprite), typeof(bool) }, prefix: nameof(Actor_CalculateColoredSprite_FullArt_Prefix));
-        count += TryPatchPairOptional(harmony, "DynamicSprites.getRecoloredBuilding.atlasGuard", typeof(DynamicSprites), "getRecoloredBuilding", new[] { typeof(Sprite), typeof(ColorAsset), typeof(DynamicSpritesAsset) }, prefix: nameof(DynamicSprites_GetRecoloredBuilding_AtlasGuard_Prefix));
+        count += TryPatchPair(harmony, "Actor.calculateColoredSprite.fullArt", typeof(Actor), "calculateColoredSprite", new[] { typeof(Sprite),
+            typeof(bool) }, prefix: nameof(Actor_CalculateColoredSprite_FullArt_Prefix));
+        count += TryPatchPairOptional(harmony, "DynamicSprites.getRecoloredBuilding.atlasGuard", typeof(DynamicSprites), "getRecoloredBuilding", new[] { typeof(Sprite),
+            typeof(ColorAsset),
+            typeof(DynamicSpritesAsset) }, prefix: nameof(DynamicSprites_GetRecoloredBuilding_AtlasGuard_Prefix));
         count += TryPatchPair(harmony, "Actor.isSapient.beast", typeof(Actor), "isSapient", Type.EmptyTypes, postfix: nameof(Actor_IsSapient_Beast_Postfix));
-        count += TryPatchPair(harmony, "Actor.attackTargetActions.animation", typeof(Actor), "attackTargetActions", new[] { typeof(BaseSimObject), typeof(WorldTile) }, postfix: nameof(Actor_AttackTargetActions_Animation_Postfix));
-        count += TryPatchPair(harmony, "Actor.getHit.animation", typeof(Actor), "getHit", new[] { typeof(float), typeof(bool), typeof(AttackType), typeof(BaseSimObject), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(Actor_GetHit_Animation_Postfix));
-        count += TryPatchPair(harmony, "ActorManager.createBabyActorFromData.beast", typeof(ActorManager), "createBabyActorFromData", new[] { typeof(ActorData), typeof(WorldTile), typeof(City) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
-        count += TryPatchPair(harmony, "ActorManager.createNewUnit.beast", typeof(ActorManager), "createNewUnit", new[] { typeof(string), typeof(WorldTile), typeof(bool), typeof(float), typeof(Subspecies), typeof(Subspecies), typeof(bool), typeof(bool), typeof(bool), typeof(bool) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
+        count += TryPatchPair(harmony, "Actor.attackTargetActions.animation", typeof(Actor), "attackTargetActions", new[] { typeof(BaseSimObject),
+            typeof(WorldTile) }, postfix: nameof(Actor_AttackTargetActions_Animation_Postfix));
+        count += TryPatchPair(harmony, "Actor.getHit.animation", typeof(Actor), "getHit", new[] { typeof(float),
+            typeof(bool),
+            typeof(AttackType),
+            typeof(BaseSimObject),
+            typeof(bool),
+            typeof(bool),
+            typeof(bool) }, postfix: nameof(Actor_GetHit_Animation_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.createBabyActorFromData.beast", typeof(ActorManager), "createBabyActorFromData", new[] { typeof(ActorData),
+            typeof(WorldTile),
+            typeof(City) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
+        count += TryPatchPair(harmony, "ActorManager.createNewUnit.beast", typeof(ActorManager), "createNewUnit", new[] { typeof(string),
+            typeof(WorldTile),
+            typeof(bool),
+            typeof(float),
+            typeof(Subspecies),
+            typeof(Subspecies),
+            typeof(bool),
+            typeof(bool),
+            typeof(bool),
+            typeof(bool) }, postfix: nameof(ActorManager_CreateBabyActorFromData_Beast_Postfix));
         count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataParallel", typeof(ActorManager), "precalculateRenderDataParallel", Type.EmptyTypes, prefix: nameof(ActorManager_PrecalculateRenderData_AnimationTime_Prefix), postfix: nameof(ActorManager_PrecalculateRenderDataParallel_Halo_Postfix));
         count += TryPatchPair(harmony, "ActorManager.precalculateRenderDataNormal", typeof(ActorManager), "precalculateRenderDataNormal", Type.EmptyTypes, prefix: nameof(ActorManager_PrecalculateRenderData_AnimationTime_Prefix), postfix: nameof(ActorManager_PrecalculateRenderDataNormal_Halo_Postfix));
         count += TryPatchPair(harmony, "Actor.makeStunned", typeof(Actor), nameof(Actor.makeStunned), new[] { typeof(float) }, prefix: nameof(Actor_MakeStunned_WorldSoul_Prefix));
         count += TryPatchPair(harmony, "Actor.makeSleep", typeof(Actor), nameof(Actor.makeSleep), new[] { typeof(float) }, prefix: nameof(Actor_MakeSleep_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "Actor.calculateForce", typeof(Actor), nameof(Actor.calculateForce), new[] { typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(float), typeof(bool) }, prefix: nameof(Actor_CalculateForce_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "Actor.applyRandomForce", typeof(Actor), nameof(Actor.applyRandomForce), new[] { typeof(float), typeof(float) }, prefix: nameof(Actor_ApplyRandomForce_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "BaseSimObject.addStatusEffect", typeof(BaseSimObject), nameof(BaseSimObject.addStatusEffect), new[] { typeof(StatusAsset), typeof(float), typeof(bool) }, prefix: nameof(BaseSimObject_AddStatusEffect_WorldSoul_Prefix));
-        count += TryPatchPair(harmony, "ScrollWindow.hide", typeof(ScrollWindow), nameof(ScrollWindow.hide), new[] { typeof(string), typeof(bool) }, prefix: nameof(ScrollWindow_Hide_RankRightClickGuard_Prefix));
+        count += TryPatchPair(harmony, "Actor.calculateForce", typeof(Actor), nameof(Actor.calculateForce), new[] { typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(float),
+            typeof(bool) }, prefix: nameof(Actor_CalculateForce_WorldSoul_Prefix));
+        count += TryPatchPair(harmony, "Actor.applyRandomForce", typeof(Actor), nameof(Actor.applyRandomForce), new[] { typeof(float),
+            typeof(float) }, prefix: nameof(Actor_ApplyRandomForce_WorldSoul_Prefix));
+        count += TryPatchPair(harmony, "BaseSimObject.addStatusEffect", typeof(BaseSimObject), nameof(BaseSimObject.addStatusEffect), new[] { typeof(StatusAsset),
+            typeof(float),
+            typeof(bool) }, prefix: nameof(BaseSimObject_AddStatusEffect_WorldSoul_Prefix));
+        count += TryPatchPair(harmony, "ScrollWindow.hide", typeof(ScrollWindow), nameof(ScrollWindow.hide), new[] { typeof(string),
+            typeof(bool) }, prefix: nameof(ScrollWindow_Hide_RankRightClickGuard_Prefix));
         count += TryPatchPair(harmony, "ScrollWindow.hideAllEvent", typeof(ScrollWindow), "hideAllEvent", new[] { typeof(bool) }, prefix: nameof(ScrollWindow_HideAllEvent_RankRightClickGuard_Prefix));
         count += MclslUnitWindowLifecycle.Apply(harmony);
         // 原版 Actor.checkCalibrateTargetPosition 会直接解引用 beh_actor_target.a.current_tile

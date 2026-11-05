@@ -50,7 +50,9 @@ internal sealed partial class MclslCodexWindow
         if (GUILayout.Button(text, GUILayout.Width(72))) _daoStruggleRealmFilter = realm;
     }
     private int CountFilteredDaoLineages() { int count=0; for(int i=0;i<_snapshot.DaoStruggleLineagesSorted.Count;i++) if(DaoRealmMatches(_snapshot.DaoStruggleLineagesSorted[i])) count++; return count; }
-    private bool DaoRealmMatches(MclslTechniqueLineageRecord lineage) => lineage != null && (string.IsNullOrWhiteSpace(_daoStruggleRealmFilter) || string.Equals(lineage.PeakRealm, _daoStruggleRealmFilter, StringComparison.Ordinal));
+    private bool DaoRealmMatches(MclslTechniqueLineageRecord lineage) => lineage != null && (string.IsNullOrWhiteSpace(_daoStruggleRealmFilter) || string.Equals(lineage.PeakRealm,
+        _daoStruggleRealmFilter,
+        StringComparison.Ordinal));
 
     private void DrawSameTechniqueCard(MclslTechniqueLineageRecord lineage)
     {

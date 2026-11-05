@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-11-06T00:45:04+08:00",
+  "generatedAt": "2026-11-06T00:49:14+08:00",
   "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
   "sourceFiles": 300,
-  "totalLines": 75912,
+  "totalLines": 76137,
   "linesPerTopDir": {
-    "Systems": 41361,
-    "UI": 19692,
-    "Data": 5072,
+    "Systems": 41401,
+    "UI": 19718,
+    "Data": 5143,
     "Core": 3891,
-    "Traits": 3813,
-    "Patches": 1725,
+    "Traits": 3852,
+    "Patches": 1774,
     "Queries": 328,
     "Interop": 30
   },
@@ -31,7 +31,7 @@
     },
     {
       "file": "Systems/Reincarnation/MclslHuanzhenSystem.cs",
-      "lines": 1647
+      "lines": 1660
     },
     {
       "file": "Systems/Crafting/MclslTianxuanMarket.cs",
@@ -72,9 +72,9 @@
     "getProperty": 15,
     "uncachedRuntimeLookups": 0
   },
-  "longParams6": 127,
-  "longLinesOver200": 291,
-  "longLinesOver300": 25,
+  "longParams6": 128,
+  "longLinesOver200": 200,
+  "longLinesOver300": 21,
   "duplicateBlocks": 21,
   "compileError": null,
   "compileWarning": null

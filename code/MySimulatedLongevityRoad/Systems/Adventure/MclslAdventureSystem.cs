@@ -355,7 +355,17 @@ internal static class MclslAdventureSystem
             ? "旧法气机与自身传承相互印证"
             : MclslLawInteractionCatalog.Detail(ActorLawTags(actor), MclslGeneratedObjectFactory.SplitTags(ruin.LawTags));
         string summary = MclslActorAccessor.DisplayName(actor) + "从“" + ruin.Name + "”中生还，推进探索" + progressGain + "点，" + relation + "，所得：" + reward + "。";
-        MclslWorldRunRepository.RegisterRuinExploration(BuildExplorationRecord(actor, ruin, year, true, "survived", reward, progressGain, summary, revivedTechniqueId, revivedTechniqueName, linkedLineageId));
+        MclslWorldRunRepository.RegisterRuinExploration(BuildExplorationRecord(actor,
+            ruin,
+            year,
+            true,
+            "survived",
+            reward,
+            progressGain,
+            summary,
+            revivedTechniqueId,
+            revivedTechniqueName,
+            linkedLineageId));
         MclslWorldRunRepository.AddEvent(year, "ruin_explore", MclslActorAccessor.DisplayName(actor) + "探得" + ruin.Name, "生还。所得：" + reward + "。", actor);
         MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, summary);
     }

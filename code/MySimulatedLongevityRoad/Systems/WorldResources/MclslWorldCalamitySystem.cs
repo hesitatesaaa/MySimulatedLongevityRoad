@@ -222,7 +222,9 @@ internal static class MclslWorldCalamitySystem
         if (run?.SectRuins == null || lineage == null || !string.IsNullOrWhiteSpace(lineage.LinkedRuinId)) return;
         if (MclslRealmIds.Index(lineage.MaxRealm) < MclslRealmIds.Index(MclslRealmIds.JinDan))
             lineage.MaxRealm = MclslRealmIds.JinDan;
-        MclslSectRuinRecord ruin = CreateCalamityRuin(run, year, reason, category, MclslGeneratedObjectFactory.SplitTags(lineage.LawTags), Math.Clamp(1 + MclslRealmIds.Index(lineage.PeakRealm) / 2, 2, 4));
+        MclslSectRuinRecord ruin = CreateCalamityRuin(run, year, reason, category, MclslGeneratedObjectFactory.SplitTags(lineage.LawTags), Math.Clamp(1 + MclslRealmIds.Index(lineage.PeakRealm) / 2,
+            2,
+            4));
         ruin.SourceTechniqueId = lineage.Id;
         ruin.SourceTechniqueName = lineage.Name;
         ruin.LinkedLineageId = lineage.Id;

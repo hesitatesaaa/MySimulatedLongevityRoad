@@ -435,7 +435,9 @@ internal static partial class MclslWorldSoulSystem
         MclslActorAccessor.Set(killer, MclslActorDataKeys.HarmonyStability, stability);
         string origin = HarmonyOrigin(leap, belowHarmony, compatibility, stability);
         MclslActorAccessor.Set(killer, MclslActorDataKeys.HarmonyOrigin, origin);
-        if (MclslActorAccessor.GetInt(killer, MclslActorDataKeys.Aptitude, 0) <= 0) MclslActorAccessor.Set(killer, MclslActorDataKeys.Aptitude, 20 + StableHash(MclslActorAccessor.Id(killer) + "|soul_apt") % 81);
+        if (MclslActorAccessor.GetInt(killer,
+            MclslActorDataKeys.Aptitude,
+            0) <= 0) MclslActorAccessor.Set(killer, MclslActorDataKeys.Aptitude, 20 + StableHash(MclslActorAccessor.Id(killer) + "|soul_apt") % 81);
         MclslTraitRegistration.SyncGiftTrait(killer, Math.Clamp(MclslActorAccessor.GetInt(killer, MclslActorDataKeys.Aptitude, 50), 1, 100));
         MclslMindSystem.EnsureMindState(killer);
         MclslActorAccessor.Set(killer, MclslActorDataKeys.ImmortalFate, Math.Max(80, MclslActorAccessor.GetInt(killer, MclslActorDataKeys.ImmortalFate, 0)));

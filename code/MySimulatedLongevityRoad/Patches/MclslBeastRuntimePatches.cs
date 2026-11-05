@@ -20,7 +20,10 @@ internal static class MclslBeastRuntimePatches
         harmony.Patch(AccessTools.Method(typeof(BehRestoreStats),"execute",new[]{typeof(Actor)}),
             prefix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),nameof(RestBefore)),postfix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),nameof(RestAfter)));
         foreach(string name in new[]{"regenerationEffect","regenerationEffectClan"})
-            harmony.Patch(AccessTools.Method(typeof(ActionLibrary),name),prefix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),nameof(RegenBefore)),postfix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),nameof(RegenAfter)));
+            harmony.Patch(AccessTools.Method(typeof(ActionLibrary),
+                name),prefix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),
+                nameof(RegenBefore)),postfix:new HarmonyMethod(typeof(MclslBeastRuntimePatches),
+                nameof(RegenAfter)));
     }
     private static void TileChanged(WorldTile __instance)=>MclslBeastSurfaceIndex.Invalidate(__instance);
     private static void RestBefore(Actor __0,out float __state)=>__state=__0?.getHealth()??0;

@@ -37,14 +37,38 @@ public sealed class MclslRankCard : MonoBehaviour
         bg.type = Image.Type.Sliced;
         bg.color = MclslUiTheme.RankSurfacePanel;
 
-        Text rankText = CreateText(cardObj.transform, "RankText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(-5f, 0f), new Vector2(26f, 26f), 12, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentSecondary);
+        Text rankText = CreateText(cardObj.transform, "RankText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(-5f,
+            0f), new Vector2(26f,
+            26f), 12, TextAnchor.MiddleCenter, MclslUiTheme.RankAccentSecondary);
         UiUnitAvatarElement avatarElement = CreateAvatarElement(cardObj.transform);
 
-        Text nameText = CreateText(cardObj.transform, "NameText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(64f, 12f), new Vector2(120f, 18f), 7, TextAnchor.MiddleLeft, MclslUiTheme.RankTextPrimary);
-        Text rootText = CreateText(cardObj.transform, "RootText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(175f, 12f), new Vector2(40f, 18f), 7, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentSecondary);
-        Text powerText = CreateText(cardObj.transform, "PowerText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(64f, -6f), new Vector2(75f, 18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentPrimary);
-        Text realmText = CreateText(cardObj.transform, "RealmText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(115f, -6f), new Vector2(50f, 18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankTextEmphasis);
-        Text extraText = CreateText(cardObj.transform, "ExtraText", new Vector2(0f, 0.5f), new Vector2(0f, 0.5f), new Vector2(175f, -6f), new Vector2(40f, 18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentSecondary);
+        Text nameText = CreateText(cardObj.transform, "NameText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(64f,
+            12f), new Vector2(120f,
+            18f), 7, TextAnchor.MiddleLeft, MclslUiTheme.RankTextPrimary);
+        Text rootText = CreateText(cardObj.transform, "RootText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(175f,
+            12f), new Vector2(40f,
+            18f), 7, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentSecondary);
+        Text powerText = CreateText(cardObj.transform, "PowerText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(64f,
+            -6f), new Vector2(75f,
+            18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentPrimary);
+        Text realmText = CreateText(cardObj.transform, "RealmText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(115f,
+            -6f), new Vector2(50f,
+            18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankTextEmphasis);
+        Text extraText = CreateText(cardObj.transform, "ExtraText", new Vector2(0f,
+            0.5f), new Vector2(0f,
+            0.5f), new Vector2(175f,
+            -6f), new Vector2(40f,
+            18f), 8, TextAnchor.MiddleLeft, MclslUiTheme.RankAccentSecondary);
 
         ((Selectable)cardObj.GetComponent<Button>()).targetGraphic = bg;
         MclslRankCard card = cardObj.AddComponent<MclslRankCard>();

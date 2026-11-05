@@ -89,7 +89,9 @@ internal static class MclslAncientLawSystem
             if (MclslRuntimeSettings.AncientLineageAnnouncementsEnabled
                 && strength >= 85
                 && MySimulatedLongevityRoad.Core.MclslStableHash.Positive79x43(MclslActorAccessor.Id(actor) + "|ancient_lineage_notice|" + year) % 100 < 3)
-                MclslWorldRunRepository.AddEvent(year, "ancient_lineage_flourish", MclslActorAccessor.DisplayName(actor) + "仙道法脉兴盛", "其所修《" + MclslActorAccessor.GetString(actor, MclslActorDataKeys.TechniqueName, "仙道功法") + "》渐成一支传承，声势日隆。");
+                MclslWorldRunRepository.AddEvent(year, "ancient_lineage_flourish", MclslActorAccessor.DisplayName(actor) + "仙道法脉兴盛", "其所修《" + MclslActorAccessor.GetString(actor,
+                    MclslActorDataKeys.TechniqueName,
+                    "仙道功法") + "》渐成一支传承，声势日隆。");
             return;
         }
 

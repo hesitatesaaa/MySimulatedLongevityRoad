@@ -132,7 +132,8 @@ internal static class MclslWorldCaveSystem
             batch.CaveClaims.Add(new MclslAnnualClaimRecord { Year = year, ActorId = MclslActorAccessor.Id(actor),
                 TargetId = best.Id, Compatibility = bestCompatibility, Strength = strength });
         MclslWorldArchiveStore.MarkDirty();
-        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在争夺“" + best.Name + "”的天地之精；" + MclslLawInteractionCatalog.Detail(laws, MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
+        MclslActorAccessor.Set(actor, MclslActorDataKeys.LastBreakthroughResult, "正在争夺“" + best.Name + "”的天地之精；" + MclslLawInteractionCatalog.Detail(laws,
+            MclslGeneratedObjectFactory.SplitTags(best.LawTags)));
     }
 
     internal static bool TickResolveAnnual(int year)
