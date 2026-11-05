@@ -1247,7 +1247,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             if (MclslCultivatorCandidateIndex.Resolve(truth.ChallengerActorId, out Actor actor))
                 return MclslActorAccessor.DisplayName(actor);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         return "行踪不明";
     }
 
@@ -2390,7 +2390,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
             rect.offsetMax = Vector2.zero;
             DontDestroyOnLoad(_overlayBlocker);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs #2: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     private static void DestroyOverlayBlocker()
@@ -2402,7 +2402,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs #3: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         _overlayBlocker = null;
     }
@@ -2426,7 +2426,7 @@ internal sealed partial class MclslCodexWindow : MonoBehaviour
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslCodexWindow.cs #4: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         Texture2D texture = sprite?.texture;
         IconCache[path] = texture;

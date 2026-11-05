@@ -43,8 +43,24 @@ raw_log = 0
 access_tools = 0
 get_field = 0
 get_property = 0
+long_params6 = 0
+long_lines200 = 0
+long_lines300 = 0
+uncached_reflection = 0
+guard_swallowed = 0
 def count(pat, text):
     return len(re.findall(pat, text))
+
+
+def count_long_params(text):
+    """Count method/ctor declarations with >= 6 parameters (regex heuristic)."""
+    total = 0
+    for m in re.finditer(r'(?m)^\s*(?:internal|private|public|protected|static|sealed|override|virtual|abstract)[^\n;=]*?\b[A-Za-z_][A-Za-z0-9_]*\s*\(([^)]*)\)\s*$', text):
+        params = [x for x in m.group(1).split(',') if x.strip()]
+        if len(params) >= 6:
+            total += 1
+    return total
+
 
 for p in cs_files:
     t = read(p)
@@ -58,7 +74,8 @@ for p in cs_files:
     largest.append((os.path.relpath(p, CODE).replace(os.sep, '/'), n))
     catch_total += count(r'catch\s*(\(|\{)', t)
     catch_exc += count(r'catch\s*\(\s*(System\.)?Exception', t)
-    empty_catch += t.count('empty-catch-code-')
+    empty_catch += count(r'MclslDiagnostics\.(?:Probe|Alert|Error)\(\s*"empty-catch-code-', t)
+    guard_swallowed += count(r'MclslGuard\.Swallowed\(', t)
     error_calls += count(r'MclslDiagnostics\.Error\(', t)
     probe_calls += count(r'MclslDiagnostics\.Probe\(', t)
     if os.path.basename(p) != 'MclslDiagnostics.cs':
@@ -66,6 +83,34 @@ for p in cs_files:
     access_tools += count(r'AccessTools\.', t)
     get_field += count(r'\.GetField\(', t)
     get_property += count(r'\.GetProperty\(', t)
+    long_params6 += count_long_params(t)
+    uncached_reflection += count(r'GetType\(\)\.Get(Field|Property)\(', t)
+    for line in t.split('\n'):
+        L = len(line)
+        if L > 200:
+            long_lines200 += 1
+        if L > 300:
+            long_lines300 += 1
+
+# duplicate 8-line blocks across >=2 files (cross-file duplication signal)
+import hashlib
+shingle = {}
+for p in cs_files:
+    ls = [re.sub(r'\s+', ' ', x).strip() for x in read(p).split('\n')]
+    idx = [i for i, x in enumerate(ls) if x and not x.startswith('using ') and x not in ('{', '}', '};')]
+    for a in range(len(idx) - 7):
+        pos = idx[a:a + 7 + 1]
+        if pos[-1] - pos[0] > 11:
+            continue
+        block = '\n'.join(ls[i] for i in pos)
+        if sum(1 for i in pos if ';' in ls[i] or '(' in ls[i]) < 5:
+            continue
+        if len(block) < 140:
+            continue
+        h = hashlib.md5(block.encode('utf-8')).hexdigest()
+        shingle.setdefault(h, set()).add(p)
+duplicate_blocks = sum(1 for v in shingle.values() if len(v) >= 2)
+
 
 largest.sort(key=lambda x: x[1], reverse=True)
 
@@ -99,6 +144,8 @@ data = {
     'largestFiles': [{'file': f, 'lines': n} for f, n in largest[:10]],
     'catchTotal': catch_total,
     'catchException': catch_exc,
+    'catchExceptionUnrouted': max(0, catch_exc - guard_swallowed),
+    'guardSwallowedCalls': guard_swallowed,
     'emptyCatchCode': empty_catch,
     'diagnosticsErrorCalls': error_calls,
     'diagnosticsProbeCalls': probe_calls,
@@ -107,7 +154,12 @@ data = {
         'accessTools': access_tools,
         'getField': get_field,
         'getProperty': get_property,
+        'uncachedRuntimeLookups': uncached_reflection,
     },
+    'longParams6': long_params6,
+    'longLinesOver200': long_lines200,
+    'longLinesOver300': long_lines300,
+    'duplicateBlocks': duplicate_blocks,
     'compileError': compile_error,
     'compileWarning': compile_warning,
 }
@@ -117,4 +169,4 @@ with io.open(OUT, 'w', encoding='utf-8', newline='\n') as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
     f.write('\n')
 print('wrote', OUT)
-print(json.dumps({k: data[k] for k in ('sourceFiles','totalLines','filesOver500Lines','filesOver800Lines','catchTotal','catchException','emptyCatchCode','diagnosticsErrorCalls','diagnosticsProbeCalls','rawDebugLogOutsideDiagnostics','compileError','compileWarning')}, ensure_ascii=False))
+print(json.dumps({k: data[k] for k in ('sourceFiles','totalLines','filesOver500Lines','filesOver800Lines','catchTotal','catchException','emptyCatchCode','diagnosticsErrorCalls','diagnosticsProbeCalls','rawDebugLogOutsideDiagnostics','longParams6','longLinesOver200','longLinesOver300','duplicateBlocks','compileError','compileWarning')}, ensure_ascii=False))

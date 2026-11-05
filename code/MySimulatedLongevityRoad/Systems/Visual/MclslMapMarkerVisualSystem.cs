@@ -271,7 +271,7 @@ internal static class MclslMapMarkerVisualSystem
             texture.wrapMode = TextureWrapMode.Clamp;
             texture.anisoLevel = 0;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-1", "地图标记：贴图参数设置失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     private static float GetMarkerScale(Sprite sprite, float targetWorldSize)
@@ -303,7 +303,7 @@ internal static class MclslMapMarkerVisualSystem
         {
             if (entry?.GameObject != null) UnityEngine.Object.Destroy(entry.GameObject);
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-2", "地图标记：销毁标记对象失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Visual-MclslMapMarkerVisualSystem-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     private static bool ShouldShowRuin(MclslSectRuinRecord ruin)

@@ -75,7 +75,7 @@ internal static class MclslMortalMiasmaSystem
             Actor killer = victim.attackedBy as Actor;
             if (killer != null && killer != victim) return killer;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslMortalMiasmaSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         return TryGetActorMember(victim, KillerMemberNames);
     }
 
@@ -94,7 +94,7 @@ internal static class MclslMortalMiasmaSystem
                 PropertyInfo property = type.GetProperty(name, flags);
                 if (property != null && property.GetValue(source, null) is Actor propertyActor) return propertyActor;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Death/MclslMortalMiasmaSystem.cs #2: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Death-MclslMortalMiasmaSystem-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         }
         return null;
     }

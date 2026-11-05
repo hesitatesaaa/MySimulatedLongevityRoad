@@ -278,7 +278,7 @@ internal static class MclslActorInfoPanel
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorInfoPanel-cs-1", "人物面板：隐藏旧操作栏失败: " + mclslEmptyCatchEx.Message);
+                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslActorInfoPanel-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
                 }
             }
         }

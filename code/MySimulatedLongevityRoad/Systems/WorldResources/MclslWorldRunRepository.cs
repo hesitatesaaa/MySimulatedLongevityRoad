@@ -697,13 +697,13 @@ internal static partial class MclslWorldRunRepository
                 record.MapX = actor.data.x;
                 record.MapY = actor.data.y;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", "材料发现事件坐标读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
             try
             {
                 record.LocationName = actor.city?.data?.name ?? string.Empty;
                 record.KingdomName = actor.kingdom?.data?.name ?? string.Empty;
             }
-            catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", "材料发现事件归属读取失败: " + mclslEmptyCatchEx.Message); }
+            catch (Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         }
         if (MclslEventCatalog.ShouldMirrorToNativeHistory(record.EventType,
                 MclslEventCatalog.EffectiveImportance(record), MclslRuntimeSettings.LineageNativeHistoryEnabled))
@@ -798,7 +798,7 @@ internal static partial class MclslWorldRunRepository
             FlushNativeMirror(record);
             MclslWorldArchiveStore.MarkDirty();
         }
-        catch (Exception mclslEmptyCatchEx) { MclslDiagnostics.Alert("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", "事件归属补写失败: " + mclslEmptyCatchEx.Message); }
+        catch (Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-WorldResources-MclslWorldRunRepository-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     internal static void AddEvent(int year, string type, string title, string body, int mapX, int mapY, string locationName, string kingdomName, string eventKey = null)

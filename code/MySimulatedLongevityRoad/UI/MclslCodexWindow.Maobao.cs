@@ -156,7 +156,7 @@ internal sealed partial class MclslCodexWindow
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Maobao-cs-1", "仙录猫宝：定位修士失败: " + mclslEmptyCatchEx.Message);
+                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-Maobao-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
                 }
             }
         }

@@ -213,7 +213,7 @@ internal static class MclslMaobaoShortcutButton
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", "猫宝快捷按钮：顶部提示显示失败: " + mclslEmptyCatchEx.Message);
+                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoShortcutButton-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
             }
         }
         ShowButton(window);

@@ -1972,7 +1972,7 @@ internal static class MclslRankWindow
             Sprite sprite = kingdom?.getElementBackground();
             if (sprite != null) return sprite;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #3: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         return GetSafeSprite("ui/special/backgroundKingdomElement");
     }
 
@@ -1983,7 +1983,7 @@ internal static class MclslRankWindow
             Sprite sprite = kingdom?.getElementIcon();
             if (sprite != null) return sprite;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-4", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #4: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         return GetSafeSprite("ui/icons/iconQuestionMark");
     }
 
@@ -1995,7 +1995,7 @@ internal static class MclslRankWindow
             Sprite sprite = asset.getSpriteIcon();
             if (sprite != null) return sprite;
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-5", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #5: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-5", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         try
         {
             string path = asset.getIconPath();
@@ -2005,7 +2005,7 @@ internal static class MclslRankWindow
                 if (sprite != null) return sprite;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-6", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankWindow.cs #6: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankWindow-cs-6", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         if (!string.IsNullOrWhiteSpace(asset.icon))
         {
             Sprite sprite = SpriteTextureLoader.getSprite("ui/icons/" + asset.icon);

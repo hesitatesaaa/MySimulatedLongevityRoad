@@ -54,7 +54,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-1", "猫宝放置：取消原按钮选择失败: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -62,7 +62,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-2", "猫宝放置：模拟点击按钮失败: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -70,7 +70,7 @@ internal static class MclslMaobaoPlaceMode
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-3", "猫宝放置：切换能力按钮失败: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslMaobaoPlaceMode-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         return true;
     }

@@ -7,5 +7,6 @@
     <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs" />
     <!-- Real parser from the SDK; no game binaries or NuGet download needed. -->
     <Reference Include="Newtonsoft.Json"><HintPath>$(MSBuildSDKsPath)/../Newtonsoft.Json.dll</HintPath></Reference>
+    <Compile Include="../../code/MySimulatedLongevityRoad/Core/MclslGuard.cs" />
   </ItemGroup>
 </Project>

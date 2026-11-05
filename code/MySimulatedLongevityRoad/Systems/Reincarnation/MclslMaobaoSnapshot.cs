@@ -52,7 +52,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", "猫宝快照：写入放置标记失败: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -60,7 +60,7 @@ internal static class MclslMaobaoSnapshot
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", "猫宝快照：写入放置值失败: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
     }
 
@@ -97,7 +97,7 @@ internal static class MclslMaobaoSnapshot
                 if (value.Length > 0) result[key] = value;
             }
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", "猫宝快照：从 custom_data 字典捕获失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Reincarnation-MclslMaobaoSnapshot-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     private static bool ShouldCapture(string key)

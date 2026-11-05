@@ -41,11 +41,11 @@ internal static class MclslEventLocator
                 ActionLibrary.openUnitWindow(actor);
                 return;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-1", "事件定位：按事件人物定位失败: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         }
         if (record.MapX < 0 || record.MapY < 0) return;
         try { Focus(record.MapX, record.MapY); }
-        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-2", "事件定位：按事件坐标定位失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
 
@@ -66,11 +66,11 @@ internal static class MclslEventLocator
                 ActionLibrary.openUnitWindow(actor);
                 return;
             }
-            catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-3", "事件定位：按死亡记录人物定位失败: " + mclslEmptyCatchEx.Message); }
+            catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         }
         if (record.MapX < 0 || record.MapY < 0) return;
         try { Focus(record.MapX, record.MapY); }
-        catch (System.Exception mclslEmptyCatchEx) { MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-4", "事件定位：按死亡记录坐标定位失败: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslEventLocator-cs-4", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
     }
 
     internal static bool CanLocate(MclslWorldCaveRecord record) => record != null && record.MapX >= 0 && record.MapY >= 0;

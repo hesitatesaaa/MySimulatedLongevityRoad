@@ -225,7 +225,7 @@ internal sealed partial class MclslCodexWindow
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", "仙录家族：定位家主失败: " + mclslEmptyCatchEx.Message);
+                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
                 }
             if (focus?.Alive == true && GUILayout.Button("定位扶持对象", GUILayout.Height(36f))
                 && MclslActorRegistry.ResolveKnownOrWorld(focus.ActorId, out Actor supported))
@@ -235,7 +235,7 @@ internal sealed partial class MclslCodexWindow
                 }
                 catch (System.Exception mclslEmptyCatchEx)
                 {
-                    MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", "仙录家族：定位扶持对象失败: " + mclslEmptyCatchEx.Message);
+                    MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-FamilyArchive-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
                 }
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();

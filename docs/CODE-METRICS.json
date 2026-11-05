@@ -1,45 +1,45 @@
 {
-  "generatedAt": "2026-11-03T20:49:06+08:00",
-  "version": "0.8.5",
+  "generatedAt": "2026-11-06T00:24:18+08:00",
+  "version": "0.8.7",
   "scope": "code/MySimulatedLongevityRoad",
-  "sourceFiles": 291,
-  "totalLines": 74390,
+  "sourceFiles": 300,
+  "totalLines": 75880,
   "linesPerTopDir": {
-    "Systems": 40768,
-    "UI": 19253,
-    "Data": 5100,
-    "Traits": 3863,
-    "Core": 3439,
-    "Patches": 1609,
+    "Systems": 41377,
+    "UI": 19693,
+    "Data": 5072,
+    "Core": 3840,
+    "Traits": 3815,
+    "Patches": 1725,
     "Queries": 328,
     "Interop": 30
   },
   "filesOver500Lines": 37,
-  "filesOver800Lines": 16,
+  "filesOver800Lines": 17,
   "largestFiles": [
     {
       "file": "UI/MclslCodexWindow.cs",
-      "lines": 2470
+      "lines": 2436
     },
     {
       "file": "UI/MclslRankWindow.cs",
-      "lines": 2129
+      "lines": 2191
     },
     {
       "file": "UI/MclslFeatureWindow.cs",
-      "lines": 1691
+      "lines": 1666
     },
     {
       "file": "Systems/Reincarnation/MclslHuanzhenSystem.cs",
-      "lines": 1645
+      "lines": 1647
     },
     {
       "file": "Systems/Crafting/MclslTianxuanMarket.cs",
-      "lines": 1604
+      "lines": 1608
     },
     {
       "file": "Systems/WorldResources/MclslWorldRunRepository.cs",
-      "lines": 1558
+      "lines": 1576
     },
     {
       "file": "Traits/MclslTraitRegistration.cs",
@@ -47,28 +47,33 @@
     },
     {
       "file": "Systems/Runtime/MclslScheduler.cs",
-      "lines": 1132
+      "lines": 1139
     },
     {
       "file": "Systems/Cultivation/MclslSpellSystem.cs",
-      "lines": 1045
+      "lines": 1086
     },
     {
       "file": "Traits/MclslWorldSoulActorRegistration.cs",
-      "lines": 1037
+      "lines": 1014
     }
   ],
-  "catchTotal": 444,
-  "catchException": 305,
-  "emptyCatchCode": 156,
-  "diagnosticsErrorCalls": 133,
-  "diagnosticsProbeCalls": 151,
+  "catchTotal": 445,
+  "catchException": 315,
+  "emptyCatchCode": 153,
+  "diagnosticsErrorCalls": 129,
+  "diagnosticsProbeCalls": 154,
   "rawDebugLogOutsideDiagnostics": 0,
   "reflection": {
-    "accessTools": 88,
-    "getField": 34,
-    "getProperty": 23
+    "accessTools": 96,
+    "getField": 36,
+    "getProperty": 24,
+    "uncachedRuntimeLookups": 17
   },
+  "longParams6": 127,
+  "longLinesOver200": 357,
+  "longLinesOver300": 76,
+  "duplicateBlocks": 25,
   "compileError": null,
   "compileWarning": null
 }

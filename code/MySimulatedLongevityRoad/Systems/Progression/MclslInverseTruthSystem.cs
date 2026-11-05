@@ -262,7 +262,7 @@ internal static class MclslInverseTruthSystem
             float max = actor.getMaxHealth();
             if (max > 0f) actor.data.health = Math.Max(1, (int)Math.Min((float)int.MaxValue, max));
         }
-        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Systems-Progression-MclslInverseTruthSystem-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Systems/Progression/MclslInverseTruthSystem.cs #1: " + mclslEmptyCatchEx.Message); }
+        catch (System.Exception mclslEmptyCatchEx) { MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Systems-Progression-MclslInverseTruthSystem-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember); }
         string displayName = MclslActorAccessor.DisplayName(actor, MclslRealmIds.ChangSheng);
         MclslWorldRunRepository.AddEvent(year, "longevity_achieved", displayName + "证得长生", "其以合道天职为根，完成逆理工程，令“" + truth.Name + "”在本世出现可被仙鉴承认的例外。", actor);
         MclslAnnouncementSystem.Enqueue(displayName + "逆反“" + truth.Name + "”，证得长生。", "#D8C778", 12f, 1);

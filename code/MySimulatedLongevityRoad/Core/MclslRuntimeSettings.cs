@@ -188,7 +188,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #1: " + mclslEmptyCatchEx.Message);
+                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
             }
         }
         if (source is IDictionary dictionary)
@@ -225,7 +225,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #2: " + mclslEmptyCatchEx.Message);
+                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
             }
         }
         FieldInfo field = type.GetField(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -237,7 +237,7 @@ internal static class MclslRuntimeSettings
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/Core/MclslRuntimeSettings.cs #3: " + mclslEmptyCatchEx.Message);
+                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-Core-MclslRuntimeSettings-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
             }
         }
         return false;

@@ -29,8 +29,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-1",
-                "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankTextFormat.cs #1: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-1", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -39,8 +38,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-2",
-                "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankTextFormat.cs #2: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-2", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         return UnknownAsset;
     }
@@ -59,8 +57,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-3",
-                "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankTextFormat.cs #3: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-3", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -72,8 +69,7 @@ internal static class MclslRankTextFormat
         }
         catch (Exception ex)
         {
-            MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-4",
-                "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslRankTextFormat.cs #4: " + ex.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslRankTextFormat-cs-4", ex, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         return UnknownTraitFallback;
     }

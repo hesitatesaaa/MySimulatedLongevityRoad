@@ -77,7 +77,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #1: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         try
         {
@@ -85,7 +85,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #2: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-2", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
         Refresh(window);
         try
@@ -94,7 +94,7 @@ internal static class MclslGenderToggleButton
         }
         catch (System.Exception mclslEmptyCatchEx)
         {
-            MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", "空 catch 捕获: code/MySimulatedLongevityRoad/UI/MclslGenderToggleButton.cs #3: " + mclslEmptyCatchEx.Message);
+            MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslGenderToggleButton-cs-3", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
         }
     }
 

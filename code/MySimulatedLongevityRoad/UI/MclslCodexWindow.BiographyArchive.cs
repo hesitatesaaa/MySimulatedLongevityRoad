@@ -135,7 +135,7 @@ internal sealed partial class MclslCodexWindow
             }
             catch (System.Exception mclslEmptyCatchEx)
             {
-                MySimulatedLongevityRoad.Core.MclslDiagnostics.Probe("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-BiographyArchive-cs-1", "仙录传记：打开人物窗口失败: " + mclslEmptyCatchEx.Message);
+                MySimulatedLongevityRoad.Core.MclslGuard.Swallowed("empty-catch-code-MySimulatedLongevityRoad-UI-MclslCodexWindow-BiographyArchive-cs-1", mclslEmptyCatchEx, MySimulatedLongevityRoad.Core.MclslGuardScope.OptionalMember);
             }
         GUILayout.EndHorizontal();
         GUILayout.Label("<color=#9CD7FF>" + LM.Get("mclsl_history_year_span") + " · "
