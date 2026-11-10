@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2a190b">
+  <meta name="description" content="我的模拟长生路 0.9.2 玩家版：七境修途、六大职业、21种妖兽神通、玄黄文明与还真回溯，在 WorldBox 沙盘中展开一方会自行演化的修仙世界。">
+  <meta property="og:title" content="我的模拟长生路 · 0.9.2">
+  <meta property="og:description" content="一界自成故事，众生各有仙途。查看玩家版模组内容与安装说明。">
+  <meta property="og:image" content="./assets/keyart-world.png">
+  <title>我的模拟长生路 · 修仙沙盘模组 0.9.2</title>
+  <link rel="icon" href="./assets/mark.png">
+  <link rel="preconnect" href="https://github.com">
+  <!-- 字体使用系统本地字体栈（--serif/--sans/--latin 已内置国内可用回退），不依赖 Google Fonts，保证国内直连速度 -->
+  <link rel="stylesheet" href="./showcase.css">
+  <link rel="stylesheet" href="./scroll.css">
+  <link rel="stylesheet" href="./motion.css">
+  <link rel="stylesheet" href="./celestial.css">
+  <script defer src="./catalog-data.js"></script>
+  <script defer src="./showcase.js"></script>
+  <script defer src="./scroll-motion.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="我的模拟长生路首页">
+      <span class="brand-seal"><img src="./assets/mark.png" alt=""></span>
+      <span class="brand-name">我的模拟长生路<small>WORLD BOX · CULTIVATION SANDBOX</small></span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false" aria-controls="site-nav"><span></span><span></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="模组专题">
+      <a href="#world">世界</a>
+      <a href="#path">七境</a>
+      <a href="#careers">职业</a>
+      <a href="#bestiary">万灵</a>
+      <a href="#civilization">文明</a>
+      <a href="#treasures">百宝</a>
+      <a href="#return">还真</a>
+    </nav>
+    <a class="nav-download" href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/download/v0.9.2/MySimulatedLongevityRoad-0.9.2-player.zip">获取 0.9.2 <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <div class="scroll-opening" aria-hidden="true">
+    <div class="opening-scene">
+      <div class="opening-sheet"></div>
+      <span class="opening-roll opening-roll-top"></span>
+      <span class="opening-roll opening-roll-bottom"></span>
+      <div class="opening-seal"><small>THE IMMORTAL CHRONICLE</small><b>長生仙卷</b><i>0.9.2</i></div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img class="hero-art" src="./assets/keyart-world.png" alt="为模组专题绘制的群山、玄黄城与修士概念插画" fetchpriority="high">
+      <div class="hero-shade"></div>
+      <div class="hero-grain"></div>
+      <div class="hero-motes" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="hero-content">
+        <p class="overline"><span>玩家版正式发布</span><i></i><span>WORLD BOX MOD</span><i></i><span>V 0.9.2</span></p>
+        <h1 id="hero-title">让一方天地<br><em>自己走向长生</em></h1>
+        <p class="hero-intro">修士逐年修行，宗门与家族随时代更迭；玄黄文明、山海妖兽、秘境与轮回，共同写下一部无人预知的仙录。</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/download/v0.9.2/MySimulatedLongevityRoad-0.9.2-player.zip"><span>下载玩家版</span><b>0.9.2</b><span class="button-arrow" aria-hidden="true">↓</span></a>
+          <a class="button button-outline" href="#world">先看模组内容 <span aria-hidden="true">⌄</span></a>
+        </div>
+        <div class="hero-requirements"><span>WorldBox 0.51.2 / build 115</span><span>NeoModLoader</span><span>中文模组</span></div>
+      </div>
+      <div class="hero-side-note" aria-hidden="true"><span>一界</span><i></i><span>百代</span><i></i><span>长生</span></div>
+      <div class="hero-caption">山海天地 · 概念插画</div>
+      <a class="hero-scroll" href="#world"><span>向下阅览</span><b aria-hidden="true"></b></a>
+    </section>
+
+    <div class="number-ribbon" aria-label="模组内容规模">
+      <div><strong data-count="7">07</strong><span>修行大境</span></div>
+      <div><strong data-count="6">06</strong><span>战斗职业</span></div>
+      <div><strong data-count="21">21</strong><span>妖兽神通</span></div>
+      <div><strong data-count="10">10</strong><span>修仙宗门</span></div>
+      <div><strong data-count="23">23</strong><span>玄黄建筑</span></div>
+      <div><strong data-count="3">03</strong><span>船行山海</span></div>
+      <div><strong data-count="179">179</strong><span>乾坤珍藏</span></div>
+      <div><strong data-count="82">82</strong><span>法宝</span></div>
+      <div><strong data-count="20">20</strong><span>丹药</span></div>
+      <div><strong data-count="15">15</strong><span>符箓</span></div>
+      <div><strong data-count="62">62</strong><span>材料</span></div>
+      <div><strong data-count="26">26</strong><span>法术</span></div>
+      <p>一方沙盘 · 多线并行 · 百代更迭</p>
+    </div>
+
+    <section class="section world-section" id="world" aria-labelledby="world-title">
+      <div class="section-heading">
+        <p class="section-index"><span>01</span> THE LIVING WORLD</p>
+        <div>
+          <h2 id="world-title">不只修一人之仙，<br><em>也看一界如何成史。</em></h2>
+          <p class="section-lead">《我的模拟长生路》把修仙拆成一场持续演化的沙盘。人物会成长、交往与陨落；世界会兴起势力、经历异变，也会把每一段因缘留在记录里。</p>
+        </div>
+      </div>
+      <div class="world-layout">
+        <div class="world-essay">
+          <article class="essay-row">
+            <span class="essay-no">A / 人物</span>
+            <div><h3>灵根显现，修行自启</h3><p>五岁判定灵根，修士按年积累真元。古法、新法各循条件突破；同门修士、功法与世界状态都会影响成长。</p></div>
+          </article>
+          <article class="essay-row">
+            <span class="essay-no">B / 势力</span>
+            <div><h3>宗门、家族与文明更替</h3><p>十宗与万仙盟、五老会随时代出现。家族延续传承、经营家库、影响城市；玄黄族沿用原版文明 AI 建国与发展。</p></div>
+          </article>
+          <article class="essay-row">
+            <span class="essay-no">C / 因缘</span>
+            <div><h3>每个世界都留下不同仙录</h3><p>探索、交易、兽潮、战斗、还真与天下纪事交错发生。你可以改变局势，也可以旁观这片天地自行走过漫长岁月。</p></div>
+          </article>
+          <div class="world-footnote"><span class="ornament">✳</span><span>模组运行于 WorldBox 世界内，不是独立游戏或服务器。</span></div>
+        </div>
+        <nav class="asset-board section-overview" aria-label="下方栏目概览">
+          <div class="asset-board-head"><span>沿着仙路，阅览下方内容</span><span>FOUR SCROLLS · 0.9.2</span></div>
+          <div class="asset-mosaic">
+            <a class="asset-tile asset-skill" href="#path" aria-label="查看修行与战斗栏目">
+              <span class="overview-label">01 / CULTIVATION</span>
+              <span class="tile-image"><img src="./assets/game/ui/CareerSkills/CP_sword_1A.png" alt="剑修技能图标" loading="lazy"></span>
+              <span class="overview-title">修行与战斗</span><span class="overview-copy">七大境界 · 六脉职业 · 五阶技能</span><span class="overview-action">阅览修行体系 <b>↗</b></span>
+            </a>
+            <a class="asset-tile asset-beast" href="#bestiary" aria-label="查看山海生灵栏目">
+              <span class="overview-label">02 / BESTIARY</span>
+              <span class="tile-image"><img src="./assets/game/ui/ActorIcons/mclsl_beast_qinglong.png" alt="青龙妖兽图标" loading="lazy"></span>
+              <span class="overview-title">山海与契灵</span><span class="overview-copy">二十一种妖兽 · 本命神通 · 七阶兽潮</span><span class="overview-action">踏入山海 <b>↗</b></span>
+            </a>
+            <a class="asset-tile asset-building" href="#civilization" aria-label="查看文明与航行栏目">
+              <span class="overview-label">03 / CIVILIZATION</span>
+              <span class="tile-image"><img class="xuanhuang-placement-icon" src="./assets/game/icons/xuanhuang-placement.png" alt="游戏中玄黄族放置图标" loading="lazy"></span>
+              <span class="overview-title">文明与航行</span><span class="overview-copy">玄黄族二十三类建筑 · 三种船只 · 文明演化</span><span class="overview-action">阅览文明图谱 <b>↗</b></span>
+            </a>
+            <a class="asset-tile asset-map" href="#explore" aria-label="查看秘境、百宝与轮回栏目">
+              <span class="overview-label">04 / ADVENTURE</span>
+              <span class="tile-image"><img src="./assets/game/map/markers/secret_realm.png" alt="秘境探索标记" loading="lazy"></span>
+              <span class="overview-title">探索、百宝与轮回</span><span class="overview-copy">秘境机缘 · 乾坤百宝 · 七境法术 · 还真</span><span class="overview-action">开启仙途 <b>↗</b></span>
+            </a>
+          </div>
+          <div class="asset-board-foot"><span>四卷内容概览</span><span>点击卡片，直达对应栏目</span></div>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section path-section" id="path" aria-labelledby="path-title">
+      <div class="section-heading compact-heading">
+        <p class="section-index"><span>02</span> SEVEN REALMS</p>
+        <div>
+          <h2 id="path-title">七境修途，<em>由众生自己走完。</em></h2>
+          <p class="section-lead">不是点一下就成仙：灵根、真元、境界条件与世界局势共同影响突破。达到门槛，也仍可能失败。</p>
+        </div>
+      </div>
+      <div class="realm-track" aria-label="炼气至长生七大境界">
+        <article class="realm-step"><span class="realm-number">壹</span><i class="realm-orb"></i><h3>炼气</h3><p>感气入门</p></article>
+        <article class="realm-step"><span class="realm-number">贰</span><i class="realm-orb"></i><h3>筑基</h3><p>道基渐稳</p></article>
+        <article class="realm-step"><span class="realm-number">叁</span><i class="realm-orb"></i><h3>金丹</h3><p>丹成有象</p></article>
+        <article class="realm-step"><span class="realm-number">肆</span><i class="realm-orb"></i><h3>元婴</h3><p>神魂成婴</p></article>
+        <article class="realm-step"><span class="realm-number">伍</span><i class="realm-orb"></i><h3>化神</h3><p>神识外照</p></article>
+        <article class="realm-step"><span class="realm-number">陆</span><i class="realm-orb"></i><h3>合道</h3><p>道心相合</p></article>
+        <article class="realm-step realm-last"><span class="realm-number">柒</span><i class="realm-orb"></i><h3>长生</h3><p>仙路未尽</p></article>
+      </div>
+      <div class="path-note"><span class="path-sigil">道</span><p><b>两条修行路线并行</b><span>古法与新法从感气开始共用修士名额；没有名额的灵根者会保留资质与传承，等待机会。</span></p><a href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/tag/v0.9.2" target="_blank" rel="noopener noreferrer">查看 0.9.2 名额规则 <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="career-section" id="careers" aria-labelledby="career-title">
+      <div class="career-art-wrap">
+        <img class="career-art" src="./assets/keyart-careers.png" alt="六种修仙战斗职业的专题概念插画" loading="lazy" decoding="async">
+        <div class="career-art-fade"></div>
+        <div class="career-art-label"><span>THE SIX PATHS OF COMBAT</span><b>六脉 · 各有传承</b></div>
+      </div>
+      <div class="section career-inner">
+        <div class="section-heading compact-heading">
+          <p class="section-index"><span>03</span> CULTIVATION CAREERS</p>
+          <div>
+            <h2 id="career-title">择一脉而修，<em>以五阶技能应战。</em></h2>
+            <p class="section-lead">六种战斗职业各有五阶主动与被动技能，满足条件后会在战斗中自动施放。点选职业，阅览招式与对应图标。</p>
+          </div>
+        </div>
+        <div class="career-showcase">
+          <div class="career-tabs" role="tablist" aria-label="选择战斗职业">
+            <button class="career-tab is-active" type="button" role="tab" aria-selected="true" data-career="sword"><span class="tab-glyph">剑</span><span><b>剑修</b><small>以剑入道</small></span><i>01</i></button>
+            <button class="career-tab" type="button" role="tab" aria-selected="false" data-career="martial"><span class="tab-glyph">武</span><span><b>武修</b><small>炼体强身</small></span><i>02</i></button>
+            <button class="career-tab" type="button" role="tab" aria-selected="false" data-career="elemental"><span class="tab-glyph">术</span><span><b>术修</b><small>灵力驭法</small></span><i>03</i></button>
+            <button class="career-tab" type="button" role="tab" aria-selected="false" data-career="sigil"><span class="tab-glyph">符</span><span><b>符修</b><small>符箓攻守</small></span><i>04</i></button>
+            <button class="career-tab" type="button" role="tab" aria-selected="false" data-career="array"><span class="tab-glyph">阵</span><span><b>阵修</b><small>布势成域</small></span><i>05</i></button>
+            <button class="career-tab" type="button" role="tab" aria-selected="false" data-career="spirit"><span class="tab-glyph">契</span><span><b>灵契师</b><small>与契灵同修</small></span><i>06</i></button>
+          </div>
+          <article class="career-detail" id="career-detail" role="tabpanel" aria-live="polite">
+            <div class="detail-topline"><span id="career-kicker">SWORD CULTIVATOR · ACTIVE SKILLS</span><span class="detail-rank">一阶　—　五阶</span></div>
+            <div class="detail-title"><span class="detail-seal" id="career-seal">剑</span><div><p>战斗职业 · 修行支脉</p><h3 id="career-name">剑修</h3></div></div>
+            <p class="career-description" id="career-description">以剑入道，习得五阶主动与被动技能。战斗时依据目标、灵力与冷却条件自动出招。</p>
+            <div class="skill-row" id="career-skills" aria-label="剑修五阶主动技能图标">
+              <figure><img src="./assets/game/ui/CareerSkills/CP_sword_1A.png" alt="剑修一阶技能"><figcaption>壹阶</figcaption></figure>
+              <figure><img src="./assets/game/ui/CareerSkills/CP_sword_2A.png" alt="剑修二阶技能"><figcaption>贰阶</figcaption></figure>
+              <figure><img src="./assets/game/ui/CareerSkills/CP_sword_3A.png" alt="剑修三阶技能"><figcaption>叁阶</figcaption></figure>
+              <figure><img src="./assets/game/ui/CareerSkills/CP_sword_4A.png" alt="剑修四阶技能"><figcaption>肆阶</figcaption></figure>
+              <figure><img src="./assets/game/ui/CareerSkills/CP_sword_5A.png" alt="剑修五阶技能"><figcaption>伍阶</figcaption></figure>
+            </div>
+            <div class="career-detail-foot"><span>五阶主动技能 · 招式图标一览</span><span>触发受灵力 / 冷却 / 目标条件影响</span></div>
+          </article>
+        </div>
+        <div class="contract-line contract-gallery">
+          <div class="contract-intro"><span class="eyebrow">SPIRIT PACT</span><b>灵契并非孤身作战</b><span>四位契灵，以图标见其真容</span></div>
+          <div class="contract-icons" aria-label="四种契灵图标">
+            <figure><img src="./assets/game/ui/ContractPets/0.png" alt="灵狼图标" loading="lazy"><figcaption>灵狼</figcaption></figure>
+            <figure><img src="./assets/game/ui/ContractPets/1.png" alt="岩龟图标" loading="lazy"><figcaption>岩龟</figcaption></figure>
+            <figure><img src="./assets/game/ui/ContractPets/2.png" alt="雷隼图标" loading="lazy"><figcaption>雷隼</figcaption></figure>
+            <figure><img src="./assets/game/ui/ContractPets/3.png" alt="灵鹿图标" loading="lazy"><figcaption>灵鹿</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bestiary-section" id="bestiary" aria-labelledby="bestiary-title">
+      <div class="bestiary-banner">
+        <img src="./assets/keyart-beasts.png" alt="青龙、朱雀、白虎、玄武与群兽奔涌的专题概念插画" loading="lazy" decoding="async">
+        <div class="banner-fade"></div>
+        <div class="banner-copy">
+          <p class="section-index"><span>04</span> BESTIARY · 21 BEAST TALENTS</p>
+          <h2 id="bestiary-title">山海二十一灵，<br><em>一兽一式本命神通。</em></h2>
+          <p>每种普通妖兽出生自带独立神通，兽形与元婴化形共享。兽潮分七阶；妖兽按独立人口规则成长，通过兽潮或手动放置出现。</p>
+          <div class="banner-tags"><span>21 种妖兽</span><span>21 枚独立神通图标</span><span>7 阶兽潮调控</span></div>
+        </div>
+        <span class="banner-caption">山海群灵 · 概念插画</span>
+      </div>
+      <div class="section bestiary-inner">
+        <div class="codex-heading"><div><span class="eyebrow">THE BEAST CODEX</span><h3>万灵图鉴 <small>／ 21</small></h3></div><p>选择或悬停一只妖兽，读它的本命神通。</p></div>
+        <div class="beast-grid" id="beast-grid" aria-label="21种妖兽及本命神通图鉴"></div>
+        <noscript><p class="noscript-note">开启浏览器脚本后可浏览完整妖兽图鉴与职业技能。</p></noscript>
+        <div class="tide-panel">
+          <div class="tide-title"><span class="tide-icon">潮</span><div><small>WORLD EVENT · BEAST TIDE</small><h3>兽潮七阶，随世界境界解锁</h3></div></div>
+          <div class="tide-steps" aria-label="兽潮七个等级"><span>壹</span><i></i><span>贰</span><i></i><span>叁</span><i></i><span>肆</span><i></i><span>伍</span><i></i><span>陆</span><i></i><span>柒</span></div>
+          <p>在兽潮调控中设置间隔、数量倍率、单次规模与总量上限；手动召潮可以直接请求，并在纪事中查看结果。水生妖兽在水域出现，其他种类在陆地出现。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section civilization-section" id="civilization" aria-labelledby="civilization-title">
+      <div class="section-heading">
+        <p class="section-index"><span>05</span> XUANHUANG CIVILIZATION</p>
+        <div>
+          <h2 id="civilization-title">放下一个种族，<br><em>看文明慢慢长成。</em></h2>
+          <p class="section-lead">玄黄族沿用 WorldBox 原生生活与文明 AI：繁衍、迁徙、建城、造船；其文明拥有 23 类专属建筑与三种船只。</p>
+        </div>
+      </div>
+      <div class="civilization-layout">
+        <div class="civilization-copy">
+          <div class="civilization-quote"><span>「</span><p>从一座主厅开始，<br>让城镇在时间里生长。</p></div>
+          <p>玄黄族有男女、儿童、士兵、领袖、国王与老年形态。城市会发展自己的住宅、主厅、藏书阁、集市、庙宇、矿场与风车；船只则连接迁徙、运输与渔业。</p>
+          <div class="civilization-stats"><div><strong>23</strong><span>类专属建筑</span></div><div><strong>03</strong><span>种船只资源</span></div><div><strong>AI</strong><span>沿原版文明演化</span></div></div>
+          <p class="developer-note">玩家版使用文明正常建设流程；手动摆放全部建筑的按钮属于开发者工具，不包含在玩家操作入口中。</p>
+        </div>
+        <div class="building-atlas" aria-label="玄黄族建筑素材选录">
+          <div class="atlas-topline"><span>BUILDING ATLAS</span><span>玄黄族建筑素材选录</span></div>
+          <figure class="building-feature"><span class="sprite-window sprite-hall"><img src="./assets/game/buildings/Xuanhuang/hall_human_2.png" alt="玄黄族主厅单帧建筑图" loading="lazy"></span><figcaption><span>01</span><b>主厅</b><small>文明中枢</small></figcaption></figure>
+          <div class="building-grid">
+            <figure><span class="sprite-window sprite-house"><img src="./assets/game/buildings/Xuanhuang/house_human_5.png" alt="玄黄族建成后的高阶住宅" loading="lazy"></span><figcaption>住宅</figcaption></figure>
+            <figure><span class="sprite-window sprite-library"><img src="./assets/game/buildings/Xuanhuang/library_human.png" alt="玄黄族藏书阁单帧建筑图" loading="lazy"></span><figcaption>藏书阁</figcaption></figure>
+            <figure><span class="sprite-window sprite-market"><img src="./assets/game/buildings/Xuanhuang/market_human.png" alt="玄黄族集市单帧建筑图" loading="lazy"></span><figcaption>集市</figcaption></figure>
+            <figure><span class="sprite-window sprite-temple"><img src="./assets/game/buildings/Xuanhuang/temple_human.png" alt="玄黄族庙宇单帧建筑图" loading="lazy"></span><figcaption>庙宇</figcaption></figure>
+            <figure><span class="sprite-window sprite-windmill"><img src="./assets/game/buildings/Xuanhuang/windmill_human_1.png" alt="玄黄族风车单帧建筑图" loading="lazy"></span><figcaption>风车</figcaption></figure>
+            <figure><span class="sprite-window sprite-watchtower"><img src="./assets/game/buildings/Xuanhuang/watch_tower_human.png" alt="玄黄族瞭望塔单帧建筑图" loading="lazy"></span><figcaption>瞭望塔</figcaption></figure>
+          </div>
+          <div class="boat-strip">
+            <div class="boat-strip-heading"><b>船行山海</b><small>文明水路 · 三种船只</small></div>
+            <figure><img class="boat-static-icon" src="./assets/game/icons/boat-fishing-placement.png" alt="游戏中玄黄族渔船放置图标" loading="lazy"><figcaption>渔船</figcaption></figure>
+            <figure><img class="boat-static-icon" src="./assets/game/icons/boat-trading-placement.png" alt="游戏中玄黄族商船放置图标" loading="lazy"><figcaption>商船</figcaption></figure>
+            <figure><img class="boat-static-icon" src="./assets/game/icons/boat-transport-placement.png" alt="游戏中玄黄族运输船放置图标" loading="lazy"><figcaption>运输船</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore-section" id="explore" aria-labelledby="explore-title">
+      <div class="section">
+        <div class="section-heading compact-heading">
+          <p class="section-index"><span>06</span> DISCOVERY · CRAFT · TRADE</p>
+          <div>
+            <h2 id="explore-title">遗迹、秘境、<em>与每一次取舍。</em></h2>
+            <p class="section-lead">探索能带回传承与灵材，也可能让修士负伤、甚至身陨。秘境深入的最终死亡率最高可达 40%。</p>
+          </div>
+        </div>
+        <div class="map-atlas">
+          <div class="map-atlas-heading"><span>天下舆图 · 发现标记</span><span>MAP MARKERS / 0.9.2</span></div>
+          <div class="map-marker-list">
+            <figure><span class="marker-frame"><img src="./assets/game/map/markers/ruin.png" alt="遗迹标记" loading="lazy"></span><figcaption><b>古代遗迹</b><small>遗珍 · 传承</small></figcaption></figure>
+            <figure><span class="marker-frame"><img src="./assets/game/map/markers/secret_realm.png" alt="秘境标记" loading="lazy"></span><figcaption><b>秘境</b><small>机缘 · 风险</small></figcaption></figure>
+            <figure><span class="marker-frame"><img src="./assets/game/map/markers/spiritual_convergence.png" alt="灵气汇聚标记" loading="lazy"></span><figcaption><b>灵气汇聚</b><small>洞天福地</small></figcaption></figure>
+            <figure><span class="marker-frame"><img src="./assets/game/map/markers/earthfire.png" alt="地火标记" loading="lazy"></span><figcaption><b>地火</b><small>炼制资源</small></figcaption></figure>
+            <figure><span class="marker-frame"><img src="./assets/game/map/markers/meteor_stone.png" alt="陨星石标记" loading="lazy"></span><figcaption><b>陨星石</b><small>稀有灵材</small></figcaption></figure>
+          </div>
+        </div>
+        <div class="craft-grid">
+          <article class="craft-card craft-alchemy"><span class="craft-index">01 / CRAFTING</span><div class="craft-seal">炼</div><h3>三艺循材而成</h3><p>修士依职业品阶与持有灵材自动炼制；妖兽通材与物种专材也会进入对应配方。</p><span class="craft-tag">丹 · 器 · 符 · 自动生产</span></article>
+          <article class="craft-card craft-market"><span class="craft-index">02 / MARKET</span><div class="craft-seal">市</div><h3>天玄镜自动交易</h3><p>人物按自身需求买卖物品，使用灵石或贡献。可以查看挂单、最新上架与成交记录，无需手动下单。</p><span class="craft-tag">灵石 · 贡献 · 成交纪事</span></article>
+          <article class="craft-card craft-bag"><span class="craft-index">03 / WORLD CHRONICLE</span><div class="craft-seal">史</div><h3>仙缘宝录与天下纪事</h3><p>所获机缘、人物归途与天地异变皆有记录；年月流转之后，仍可回看此界兴衰。</p><span class="craft-tag">探索 · 传承 · 纪事</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="treasure-section" id="treasures" aria-labelledby="treasure-title">
+      <div class="section treasure-inner">
+        <div class="section-heading compact-heading">
+          <p class="section-index"><span>07</span> QIANKUN INVENTORY · SPELL CODEX</p>
+          <div>
+            <h2 id="treasure-title">乾坤有藏，<br><em>百宝各循其阶。</em></h2>
+            <p class="section-lead">从凡阶灵材到天阶法宝，逐品阅览四类珍藏与对应图鉴；法术则依七境列入法术录。</p>
+          </div>
+        </div>
+        <section class="inventory-codex ice-frame" aria-labelledby="inventory-title">
+          <div class="codex-topline"><span class="eyebrow">THE QIANKUN ARCHIVE</span><span>179 件珍藏 · 四类品录</span></div>
+          <div class="codex-heading"><div><h3 id="inventory-title">乾坤百宝录</h3><p>先分丹药、法宝、符箓与材料，再依天、地、玄、黄、凡五阶细阅。</p></div><span class="codex-seal">藏</span></div>
+          <div class="kind-tabs" role="tablist" aria-label="按物品类别浏览">
+            <button type="button" role="tab" id="kind-tab-pill" aria-controls="item-catalog-content" aria-selected="true" data-kind="Pill">丹药</button>
+            <button type="button" role="tab" id="kind-tab-artifact" aria-controls="item-catalog-content" aria-selected="false" data-kind="Artifact" tabindex="-1">法宝</button>
+            <button type="button" role="tab" id="kind-tab-talisman" aria-controls="item-catalog-content" aria-selected="false" data-kind="Talisman" tabindex="-1">符箓</button>
+            <button type="button" role="tab" id="kind-tab-material" aria-controls="item-catalog-content" aria-selected="false" data-kind="Material" tabindex="-1">材料</button>
+          </div>
+          <div class="inventory-content" id="item-catalog-content" role="tabpanel" aria-live="polite" aria-labelledby="kind-tab-pill"></div>
+          <noscript><p class="noscript-note">开启浏览器脚本后可查看四类物品及其五阶图鉴。</p></noscript>
+          <p class="codex-source-note">丹药、法宝、符箓与材料，各循品阶归入此录。</p>
+        </section>
+        <section class="spell-codex ice-frame" aria-labelledby="spell-codex-title">
+          <div class="codex-topline"><span class="eyebrow">THE SEVEN REALMS</span><span>普通法术 · 26 道</span></div>
+          <div class="codex-heading"><div><h3 id="spell-codex-title">七境法术录</h3><p>从炼气吐纳到长生寂光，依施放境界归卷。</p></div><span class="codex-seal">术</span></div>
+          <div class="realm-tabs" role="tablist" aria-label="按修行境界浏览法术">
+            <button type="button" role="tab" id="spell-tab-lianqi" aria-controls="spell-catalog-content" aria-selected="true" data-realm="炼气">炼气</button>
+            <button type="button" role="tab" id="spell-tab-zhuji" aria-controls="spell-catalog-content" aria-selected="false" data-realm="筑基" tabindex="-1">筑基</button>
+            <button type="button" role="tab" id="spell-tab-jindan" aria-controls="spell-catalog-content" aria-selected="false" data-realm="金丹" tabindex="-1">金丹</button>
+            <button type="button" role="tab" id="spell-tab-yuanying" aria-controls="spell-catalog-content" aria-selected="false" data-realm="元婴" tabindex="-1">元婴</button>
+            <button type="button" role="tab" id="spell-tab-huashen" aria-controls="spell-catalog-content" aria-selected="false" data-realm="化神" tabindex="-1">化神</button>
+            <button type="button" role="tab" id="spell-tab-hedao" aria-controls="spell-catalog-content" aria-selected="false" data-realm="合道" tabindex="-1">合道</button>
+            <button type="button" role="tab" id="spell-tab-changsheng" aria-controls="spell-catalog-content" aria-selected="false" data-realm="长生" tabindex="-1">长生</button>
+          </div>
+          <div class="spell-content" id="spell-catalog-content" role="tabpanel" aria-live="polite" aria-labelledby="spell-tab-lianqi"></div>
+          <noscript><p class="noscript-note">开启浏览器脚本后可查看完整七境法术图鉴。</p></noscript>
+          <p class="codex-source-note">法术学习与施放各有条件；人物可随研习与实战逐步精进。</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="return-section" id="return" aria-labelledby="return-title">
+      <div class="return-art-wrap">
+        <img src="./assets/keyart-rebirth.png" alt="水镜映照同一灵魂三世的还真回溯概念插画" loading="lazy" decoding="async">
+        <div class="return-art-shade"></div>
+        <span class="return-caption">还真回溯 · 概念插画</span>
+      </div>
+      <div class="section return-layout">
+        <div class="return-copy">
+          <p class="section-index"><span>08</span> REBIRTH · MEMORY · HISTORY</p>
+          <h2 id="return-title">身死不是句点，<br><em>来世仍有旧因缘。</em></h2>
+          <p class="return-lead">还真不是一次普通读档：它把一位宿主的今生封存为前世，让你带着有限的遗产回到锚定的旧时空，再看一方世界如何走向新的轮回。</p>
+          <div class="anchor-sequence"><span><b>80</b><small>初次绑定灵蕴</small></span><i>→</i><span><b>3</b><small>最多时空锚点</small></span><i>→</i><span><b>∞</b><small>列传与世界纪事</small></span></div>
+          <div class="rebirth-steps">
+            <article><span>01 / 认主</span><b>选择此世宿主</b><p>等待还真自然降临，或在特质编辑器赋予还真；确认宿主后保存当前世界。</p></article>
+            <article><span>02 / 锚定</span><b>留下归途坐标</b><p>首次绑定获得 80 点空间灵蕴；每枚锚点消耗 80 点，最多保存三枚，也可开启自动锚定。</p></article>
+            <article><span>03 / 回溯</span><b>两次确认，再入旧世</b><p>选择归途锚点并再次确认，当前世界成为前世档案，宿主由此回到锚定之时。</p></article>
+            <article><span>04 / 承继</span><b>在前世轮盘择取遗产</b><p>按当前名额，从前世实际拥有之物中选择遗产；已保存的旧世仍可回看。</p></article>
+          </div>
+        </div>
+        <div class="history-stack">
+          <div class="history-heading"><span class="eyebrow">MEMORIES ACROSS LIVES</span><h3>轮回之后，旧世仍有痕</h3><p>还真重启一段旅程，也为已经走过的岁月留下卷宗。</p></div>
+          <article><span>01</span><div><b>人物列传</b><small>修行、战斗、遗产与一生归途</small></div><span class="history-mark">传</span></article>
+          <article><span>02</span><div><b>家族纪事</b><small>家主更替、传承、家库与城邦影响</small></div><span class="history-mark">族</span></article>
+          <article><span>03</span><div><b>天下纪事</b><small>时代、势力、异变与世界兴衰</small></div><span class="history-mark">世</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="download-section" id="install" aria-labelledby="download-title">
+      <div class="download-art"></div>
+      <div class="section download-layout">
+        <div class="download-copy">
+          <p class="section-index"><span>09</span> BEGIN YOUR JOURNEY</p>
+          <h2 id="download-title">山海已开，<br><em>此刻入世。</em></h2>
+          <p>下载 0.9.2 玩家版，进入一个会自行生长的修仙世界。</p>
+          <div class="install-requirements"><span>WorldBox 0.51.2 · build 115</span><span>NeoModLoader</span><span>建议新建世界并备份存档</span></div>
+        </div>
+        <div class="download-card">
+          <div class="download-card-top"><img src="./assets/mark.png" alt=""><div><small>PLAYER EDITION</small><b>我的模拟长生路</b></div><span>0.9.2</span></div>
+          <p>玩家版模组压缩包<br><small>ZIP · 58.7 MB · Windows / NeoModLoader</small></p>
+          <a class="button button-gold" href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/download/v0.9.2/MySimulatedLongevityRoad-0.9.2-player.zip">下载玩家版 <span aria-hidden="true">↓</span></a>
+          <a class="download-release-link" href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/tag/v0.9.2">查看版本说明与校验信息 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <section class="footer-column"><p class="footer-kicker">MOD INFO</p><h2>我的模拟长生路</h2><p>作者：溪上翁、kinght</p><p>玩家版 0.9.2 · WorldBox 0.51.2 / build 115</p><p>运行前置：NeoModLoader</p><a href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad" target="_blank" rel="noopener noreferrer">项目仓库 <span aria-hidden="true">↗</span></a></section>
+    <section class="footer-column"><p class="footer-kicker">CULTIVATION</p><h2>七境修途</h2><p>炼气 · 筑基 · 金丹 · 元婴<br>化神 · 合道 · 长生</p><p>剑修、武修、术修、符修、阵修、灵契师各有五阶主动与被动技能。</p></section>
+    <section class="footer-column"><p class="footer-kicker">WORLD & BEASTS</p><h2>山海生灵</h2><p>21 种妖兽各有本命神通；兽潮分七阶，随世界境界解锁。</p><p>玄黄族拥有 23 类专属建筑与三种船只，沿原版文明 AI 自行发展。</p></section>
+    <section class="footer-column footer-support"><p class="footer-kicker">REBIRTH & SUPPORT</p><h2>还真回溯 · 旧世留痕</h2><p>80 点空间灵蕴开启锚定，最多保存三枚时空坐标；回溯后可在前世轮盘择取遗产。</p><figure><img src="./assets/support-qr.png" alt="作者赞赏码"><figcaption>感谢支持《模拟长生路》</figcaption></figure><a href="https://github.com/hesitatesaaa/MySimulatedLongevityRoad/releases/tag/v0.9.2" target="_blank" rel="noopener noreferrer">查看 0.9.2 版本说明 <span aria-hidden="true">↗</span></a></section>
+  </footer>
+</body>
+</html>
